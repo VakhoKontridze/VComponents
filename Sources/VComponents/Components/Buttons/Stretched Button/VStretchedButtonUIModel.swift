@@ -68,13 +68,13 @@ public struct VStretchedButtonUIModel {
 #endif
         }()
         
-        /// Title minimum scale factor. Set to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Title text minimum scale factor. Set to `0.75`.
+        public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Spacing between icon and title. Set to `8`.
+        /// Spacing between icon and title text. Set to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
-        public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
+        public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -99,8 +99,8 @@ public struct VStretchedButtonUIModel {
         /// Border colors.
         public var border: StateColors = .clearColors
         
-        /// Title colors.
-        public var title: StateColors = .init(ColorBook.primaryWhite)
+        /// Title text colors.
+        public var titleText: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon colors.
         ///
@@ -131,11 +131,11 @@ public struct VStretchedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font.
+        /// Title text font.
         /// Set to `semibold` `callout` (`16`) on `iOS`.
         /// Set to `semibold` `16` on `macOS`.
         /// Set to `semibold` `title3` (`20`) on `watchOS`.
-        public var title: Font = GlobalUIModel.Buttons.titleFontStretchedButton
+        public var titleText: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
         
         // MARK: Initializers
         /// Initializes UI model with default values.

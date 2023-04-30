@@ -47,16 +47,16 @@ public struct VRadioButtonUIModel {
         public var bulletDimension: CGFloat = 8
         
         /// Hit box. Set to `5`.
-        public var hitBox: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing // Actual spacing is 0
+        public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
         
-        /// Spacing between radio and label. Set to `0`.
-        public var radioLabelSpacing: CGFloat = 0
+        /// Spacing between radio button and label. Set to `0`.
+        public var radioButtonAndLabelSpacing: CGFloat = 0
         
         /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
         public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
         
-        /// Title minimum scale factor. Set to `1`.
-        public var titleMinimumScaleFactor: CGFloat = 1
+        /// Title text minimum scale factor. Set to `1`.
+        public var titleTextMinimumScaleFactor: CGFloat = 1
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -88,8 +88,8 @@ public struct VRadioButtonUIModel {
             disabled: .clear
         )
         
-        /// Title colors.
-        public var title: StateColors = .init(
+        /// Title text colors.
+        public var titleText: StateColors = .init(
             off: GlobalUIModel.StatePickers.titleColor,
             on: GlobalUIModel.StatePickers.titleColor,
             pressedOff: GlobalUIModel.StatePickers.titleColor,
@@ -114,10 +114,10 @@ public struct VRadioButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font.
+        /// Title text font.
         /// Set to `subheadline` (`15`) on `iOS`.
         /// Set to `body` (`13`) on `macOS`.
-        public var title: Font = GlobalUIModel.StatePickers.font
+        public var titleText: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers
         /// Initializes UI model with default values.

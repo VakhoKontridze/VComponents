@@ -128,8 +128,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 switch headerLabel {
                 case .title(let title):
                     VText(
-                        color: uiModel.colors.headerTitle.value(for: internalState),
-                        font: uiModel.fonts.headerTitle,
+                        color: uiModel.colors.headerTitleText.value(for: internalState),
+                        font: uiModel.fonts.headerTitleText,
                         text: title
                     )
                     

@@ -53,8 +53,8 @@ public struct VAlertUIModel {
         /// Corner radius. Set to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margins applied to title, message, and content as a whole. Set to `15` leading, `15` trailing,`20` top, and `10` bottom.
-        public var titleMessageContentMargins: Margins = .init(
+        /// Additional margins applied to title text, message text, and content as a whole. Set to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        public var titleTextMessageTextAndContentMargins: Margins = .init(
             leading: GlobalUIModel.Common.containerContentMargin,
             trailing: GlobalUIModel.Common.containerContentMargin,
             top: 20,
@@ -64,8 +64,8 @@ public struct VAlertUIModel {
         /// Title text line type. Set to `singleLine`.
         public var titleTextLineType: TextLineType = .singleLine
         
-        /// Title margins. Set to `0` leading, `0` trailing, `5` top, and `3` bottom.
-        public var titleMargins: Margins = .init(
+        /// Title text margins. Set to `0` leading, `0` trailing, `5` top, and `3` bottom.
+        public var titleTextMargins: Margins = .init(
             leading: 0,
             trailing: 0,
             top: 5,
@@ -81,8 +81,8 @@ public struct VAlertUIModel {
             }
         }()
         
-        /// Title margins. Set to `0` leading, `0` trailing, `3` top, and `5` bottom.
-        public var messageMargins: Margins = .init(
+        /// Message text margins. Set to `0` leading, `0` trailing, `3` top, and `5` bottom.
+        public var messageTextMargins: Margins = .init(
             leading: 0,
             trailing: 0,
             top: 3,
@@ -193,11 +193,11 @@ public struct VAlertUIModel {
         /// Dimming view color.
         public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
         
-        /// Title color.
-        public var title: Color = ColorBook.primary
+        /// Title text color.
+        public var titleText: Color = ColorBook.primary
         
-        /// Message color.
-        public var message: Color = ColorBook.primary
+        /// Message text color.
+        public var messageText: Color = ColorBook.primary
         
         /// Primary button background colors.
         public var primaryButtonBackground: ButtonStateColors = .init(
@@ -249,11 +249,11 @@ public struct VAlertUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `bold` `headline` (`17`).
-        public var title: Font = .headline.weight(.bold)
+        /// Title text font. Set to `bold` `headline` (`17`).
+        public var titleText: Font = .headline.weight(.bold)
         
-        /// Message font. Set to `subheadline` (`15`).
-        public var message: Font = .subheadline
+        /// Message text font. Set to `subheadline` (`15`).
+        public var messageText: Font = .subheadline
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -309,11 +309,11 @@ public struct VAlertUIModel {
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleMinimumScaleFactor /= 2
+            uiModel.layout.titleTextMinimumScaleFactor /= 2
         }
         
         uiModel.colors.background = colors.primaryButtonBackground
-        uiModel.colors.title = colors.primaryButtonTitle
+        uiModel.colors.titleText = colors.primaryButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
@@ -328,11 +328,11 @@ public struct VAlertUIModel {
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleMinimumScaleFactor /= 2
+            uiModel.layout.titleTextMinimumScaleFactor /= 2
         }
         
         uiModel.colors.background = colors.secondaryButtonBackground
-        uiModel.colors.title = colors.secondaryButtonTitle
+        uiModel.colors.titleText = colors.secondaryButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
@@ -347,11 +347,11 @@ public struct VAlertUIModel {
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleMinimumScaleFactor /= 2
+            uiModel.layout.titleTextMinimumScaleFactor /= 2
         }
         
         uiModel.colors.background = colors.destructiveButtonBackground
-        uiModel.colors.title = colors.destructiveButtonTitle
+        uiModel.colors.titleText = colors.destructiveButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic

@@ -52,17 +52,17 @@ public struct VTextViewUIModel {
         /// Content margin. Set to `15`s.
         public var contentMargin: Margins = .init(GlobalUIModel.Common.containerContentMargin)
         
-        /// Header text line type. Set to `singleLine`.
-        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
+        /// Header title text line type. Set to `singleLine`.
+        public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
         
-        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
-        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
+        /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
         
         /// Spacing between header, textview, and footer. Set to `3`.
-        public var headerTextViewFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
+        public var headerTextViewAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
         
         /// Header and footer horizontal margin. Set to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
+        public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -94,18 +94,18 @@ public struct VTextViewUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Placeholder colors.
-        public var placeholder: StateColors = .init(ColorBook.primaryPressedDisabled)
+        /// Placeholder text colors.
+        public var placeholderText: StateColors = .init(ColorBook.primaryPressedDisabled)
         
-        /// Header colors.
-        public var header: StateColors = .init(
+        /// Header title text colors.
+        public var headerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             focused: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
         
-        /// Footer colors.
-        public var footer: StateColors = .init(
+        /// Footer title text colors.
+        public var footerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             focused: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
@@ -177,7 +177,7 @@ extension VTextViewUIModel.Colors {
     public static var success: Self {
         .createHighlightedColors(
             border: ColorBook.borderGreen,
-            headerFooter: GlobalUIModel.Inputs.headerFooterGreenColor
+            headerTitleTextAndFooterTitleText: GlobalUIModel.Inputs.headerTitleTextAndFooterTitleTextGreenColor
         )
     }
     
@@ -185,7 +185,7 @@ extension VTextViewUIModel.Colors {
     public static var warning: Self {
         .createHighlightedColors(
             border: ColorBook.borderYellow,
-            headerFooter: GlobalUIModel.Inputs.headerFooterYellowColor
+            headerTitleTextAndFooterTitleText: GlobalUIModel.Inputs.headerTitleTextAndFooterTitleTextYellowColor
         )
     }
     
@@ -193,24 +193,24 @@ extension VTextViewUIModel.Colors {
     public static var error: Self {
         .createHighlightedColors(
             border: ColorBook.borderRed,
-            headerFooter: GlobalUIModel.Inputs.headerFooterRedColor
+            headerTitleTextAndFooterTitleText: GlobalUIModel.Inputs.headerTitleTextAndFooterTitleTextRedColor
         )
     }
     
     private static func createHighlightedColors(
         border: Color,
-        headerFooter: Color
+        headerTitleTextAndFooterTitleText: Color
     ) -> Self {
         var colors: Self = .init()
         
         colors.border.enabled = border
         colors.border.focused = border
         
-        colors.header.enabled = headerFooter
-        colors.header.focused = headerFooter
+        colors.headerTitleText.enabled = headerTitleTextAndFooterTitleText
+        colors.headerTitleText.focused = headerTitleTextAndFooterTitleText
         
-        colors.footer.enabled = headerFooter
-        colors.footer.focused = headerFooter
+        colors.footerTitleText.enabled = headerTitleTextAndFooterTitleText
+        colors.footerTitleText.focused = headerTitleTextAndFooterTitleText
         
         return colors
     }

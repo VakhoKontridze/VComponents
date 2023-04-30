@@ -92,7 +92,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
             label: { baseButtonState in
                 let internalState: VRoundedCaptionButtonInternalState = internalState(baseButtonState)
                 
-                VStack(spacing: uiModel.layout.rectangleCaptionSpacing, content: {
+                VStack(spacing: uiModel.layout.rectangleAndCaptionSpacing, content: {
                     rectangle(internalState: internalState)
                     buttonCaption(internalState: internalState)
                 })
@@ -145,7 +145,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 titleCaptionComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.captionSpacing, content: {
+                HStack(spacing: uiModel.layout.iconCaptionAndTitleCaptionTextSpacing, content: {
                     iconCaptionComponent(internalState: internalState, icon: icon)
                     titleCaptionComponent(internalState: internalState, title: title)
                 })
@@ -164,9 +164,9 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     ) -> some View {
         VText(
             type: uiModel.layout.titleCaptionTextLineType,
-            minimumScaleFactor: uiModel.layout.titleCaptionMinimumScaleFactor,
-            color: uiModel.colors.titleCaption.value(for: internalState),
-            font: uiModel.fonts.titleCaption,
+            minimumScaleFactor: uiModel.layout.titleCaptionTextMinimumScaleFactor,
+            color: uiModel.colors.titleCaptionText.value(for: internalState),
+            font: uiModel.fonts.titleCaptionText,
             text: title
         )
     }
@@ -264,7 +264,7 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                                     var uiModel: VRoundedCaptionButtonUIModel = .init()
                                     uiModel.colors.background.enabled = uiModel.colors.background.pressed
                                     uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
-                                    uiModel.colors.titleCaption.enabled = uiModel.colors.titleCaption.pressed
+                                    uiModel.colors.titleCaptionText.enabled = uiModel.colors.titleCaptionText.pressed
                                     return uiModel
                                 }(),
                                 action: {},

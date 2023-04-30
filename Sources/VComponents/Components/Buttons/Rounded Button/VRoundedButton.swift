@@ -122,13 +122,13 @@ public struct VRoundedButton<Label>: View where Label: View {
         VText(
             minimumScaleFactor: {
                 if #available(iOS 15.0, *) {
-                    return uiModel.layout.titleMinimumScaleFactor
+                    return uiModel.layout.titleTextMinimumScaleFactor
                 } else {
-                    return uiModel.layout.titleMinimumScaleFactor/2 // Alternative to dynamic size upper limit
+                    return uiModel.layout.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
                 }
             }(),
-            color: uiModel.colors.title.value(for: internalState),
-            font: uiModel.fonts.title,
+            color: uiModel.colors.titleText.value(for: internalState),
+            font: uiModel.fonts.titleText,
             text: title
         )
     }

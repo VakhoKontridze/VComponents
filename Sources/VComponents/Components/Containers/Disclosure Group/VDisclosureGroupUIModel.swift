@@ -86,8 +86,8 @@ public struct VDisclosureGroupUIModel {
         /// Background color.
         public var background: Color = ColorBook.layer
         
-        /// Header title colors.
-        public var headerTitle: StateColors = .init(
+        /// Header title text colors.
+        public var headerTitleText: StateColors = .init(
             collapsed: ColorBook.primary,
             expanded: ColorBook.primary,
             disabled: ColorBook.primaryPressedDisabled
@@ -131,10 +131,10 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header title font.
+        /// Header title tex font.
         /// Set to `bold` `headline` (`17`) on `iOS`.
         /// Set to `bold` `headline` (`13`) on `macOS`.
-        public var headerTitle: Font = .headline.weight(.bold)
+        public var headerTitleText: Font = .headline.weight(.bold)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

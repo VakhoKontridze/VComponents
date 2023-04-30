@@ -105,9 +105,9 @@ public struct VCheckBox<Label>: View where Label: View {
                         label: {
                             VText(
                                 type: uiModel.layout.titleTextLineType,
-                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                                color: uiModel.colors.title.value(for: internalState),
-                                font: uiModel.fonts.title,
+                                minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
+                                color: uiModel.colors.titleText.value(for: internalState),
+                                font: uiModel.fonts.titleText,
                                 text: title
                             )
                         }
@@ -167,7 +167,7 @@ public struct VCheckBox<Label>: View where Label: View {
             label: {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.layout.checkBoxLabelSpacing)
+                    .frame(width: uiModel.layout.checkBoxAndLabelSpacing)
                     .foregroundColor(.clear)
             }
         )
@@ -265,7 +265,7 @@ struct VCheckBox_Previews: PreviewProvider {
                                 uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
                                 uiModel.colors.border.off = uiModel.colors.border.pressedOff
                                 uiModel.colors.checkmark.off = uiModel.colors.checkmark.pressedOff
-                                uiModel.colors.title.off = uiModel.colors.title.pressedOff
+                                uiModel.colors.titleText.off = uiModel.colors.titleText.pressedOff
                                 return uiModel
                             }(),
                             state: .constant(.off),
@@ -295,7 +295,7 @@ struct VCheckBox_Previews: PreviewProvider {
                                 uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
                                 uiModel.colors.border.on = uiModel.colors.border.pressedOn
                                 uiModel.colors.checkmark.on = uiModel.colors.checkmark.pressedOn
-                                uiModel.colors.title.on = uiModel.colors.title.pressedOn
+                                uiModel.colors.titleText.on = uiModel.colors.titleText.pressedOn
                                 return uiModel
                             }(),
                             state: .constant(.on),
@@ -325,7 +325,7 @@ struct VCheckBox_Previews: PreviewProvider {
                                 uiModel.colors.fill.indeterminate = uiModel.colors.fill.pressedIndeterminate
                                 uiModel.colors.border.indeterminate = uiModel.colors.border.pressedIndeterminate
                                 uiModel.colors.checkmark.indeterminate = uiModel.colors.checkmark.pressedIndeterminate
-                                uiModel.colors.title.indeterminate = uiModel.colors.title.pressedIndeterminate
+                                uiModel.colors.titleText.indeterminate = uiModel.colors.titleText.pressedIndeterminate
                                 return uiModel
                             }(),
                             state: .constant(.indeterminate),

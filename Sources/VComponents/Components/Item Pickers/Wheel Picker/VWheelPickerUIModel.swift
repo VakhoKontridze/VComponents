@@ -34,21 +34,21 @@ public struct VWheelPickerUIModel {
         // MARK: Properties
         /// Picker corner radius. Set to `15`.
         public var cornerRadius: CGFloat = 15
+
+        /// Row title text minimum scale factor. Set to `0.75`.
+        public var rowTitleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Header text line type. Set to `singleLine`.
-        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
+        /// Header title text line type. Set to `singleLine`.
+        public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
         
-        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
-        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
+        /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
         
         /// Spacing between header, picker, and footer. Set to `3`.
-        public var headerPickerFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
+        public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
         
         /// Header and footer horizontal margin. Set to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
-        
-        /// Title minimum scale factor. Set to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -62,20 +62,20 @@ public struct VWheelPickerUIModel {
         /// Background colors.
         public var background: StateColors = .init(ColorBook.layer)
         
-        /// Title content colors.
-        public var title: StateColors = .init(
+        /// Row title content colors.
+        public var rowTitleText: StateColors = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Header colors.
-        public var header: StateColors = .init(
+        /// Header title text colors.
+        public var headerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
         
-        /// Footer colors.
-        public var footer: StateColors = .init(
+        /// Footer title text colors.
+        public var footerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
@@ -97,14 +97,14 @@ public struct VWheelPickerUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Row font. Set to `body` (`17`).
-        public var rows: Font = .body
+        /// Row title text font. Set to `body` (`17`).
+        public var rowTitleText: Font = .body
         
-        /// Header font. Set to `footnote` (`13`).
-        public var header: Font = GlobalUIModel.Common.headerFont
+        /// Header title text font. Set to `footnote` (`13`).
+        public var headerTitleText: Font = GlobalUIModel.Common.headerTitleTextFont
         
-        /// Footer font. Set to `footnote` (`13`).
-        public var footer: Font = GlobalUIModel.Common.footerFont
+        /// Footer title text font. Set to `footnote` (`13`).
+        public var footerTitleText: Font = GlobalUIModel.Common.footerTitleTextFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.

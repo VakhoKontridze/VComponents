@@ -49,13 +49,13 @@ public struct VPlainButtonUIModel {
 #endif
         }()
         
-        /// Title minimum scale factor. Set to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Title text minimum scale factor. Set to `0.75`.
+        public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Spacing between icon and title. Set to `8`.
+        /// Spacing between icon and title text. Set to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
-        public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
+        public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
         
         /// Hit box. Set to `5`s.
         public var hitBox: HitBox = .init(5)
@@ -73,8 +73,8 @@ public struct VPlainButtonUIModel {
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
-        /// Title colors.
-        public var title: StateColors = .init(
+        /// Title text colors.
+        public var titleText: StateColors = .init(
             enabled: ColorBook.accentBlue,
             pressed: ColorBook.accentBluePressedDisabled,
             disabled: ColorBook.accentBluePressedDisabled
@@ -113,11 +113,11 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font.
+        /// Title text font.
         /// Set to `body` (`17`) on `iOS`.
         /// Set to `body` (`13`) on `macOS`.
         /// Set to `body` (`17`) on `watchOS`.
-        public var title: Font = {
+        public var titleText: Font = {
 #if os(iOS)
             return Font.body
 #elseif os(macOS)

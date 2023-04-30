@@ -102,7 +102,7 @@ public struct VTextView: View {
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: uiModel.layout.headerTextViewFooterSpacing, content: {
+        VStack(alignment: .leading, spacing: uiModel.layout.headerTextViewAndFooterSpacing, content: {
             header
             input
             footer
@@ -112,24 +112,24 @@ public struct VTextView: View {
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTextLineType,
-                color: uiModel.colors.header.value(for: internalState),
-                font: uiModel.fonts.header,
+                type: uiModel.layout.headerTitleTextLineType,
+                color: uiModel.colors.headerTitleText.value(for: internalState),
+                font: uiModel.fonts.headerTitleText,
                 text: headerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTextLineType,
-                color: uiModel.colors.footer.value(for: internalState),
-                font: uiModel.fonts.footer,
+                type: uiModel.layout.footerTitleTextLineType,
+                color: uiModel.colors.footerTitleText.value(for: internalState),
+                font: uiModel.fonts.footerTitleText,
                 text: footerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
@@ -157,8 +157,8 @@ public struct VTextView: View {
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
-                    .font(uiModel.fonts.placeholder)
+                    .foregroundColor(uiModel.colors.placeholderText.value(for: internalState))
+                    .font(uiModel.fonts.placeholderText)
             },
             axis: .vertical,
             label: EmptyView.init
@@ -275,8 +275,8 @@ struct VTextView_Previews: PreviewProvider {
                                 var uiModel: VTextViewUIModel = highlight
                                 uiModel.colors.background.enabled = uiModel.colors.background.focused
                                 uiModel.colors.text.enabled = uiModel.colors.text.focused
-                                uiModel.colors.header.enabled = uiModel.colors.header.focused
-                                uiModel.colors.footer.enabled = uiModel.colors.footer.focused
+                                uiModel.colors.headerTitleText.enabled = uiModel.colors.headerTitleText.focused
+                                uiModel.colors.footerTitleText.enabled = uiModel.colors.footerTitleText.focused
                                 return uiModel
                             }(),
                             headerTitle: headerTitle,

@@ -92,7 +92,7 @@ struct VAlert<Content>: View
                     messageView
                     contentView
                 })
-                .padding(uiModel.layout.titleMessageContentMargins)
+                .padding(uiModel.layout.titleTextMessageTextAndContentMargins)
                 .onSizeChange(perform: { titleMessageContentHeight = $0.height })
 
                 buttonsScrollView
@@ -114,11 +114,11 @@ struct VAlert<Content>: View
         if let title, !title.isEmpty {
             VText(
                 type: uiModel.layout.titleTextLineType,
-                color: uiModel.colors.title,
-                font: uiModel.fonts.title,
+                color: uiModel.colors.titleText,
+                font: uiModel.fonts.titleText,
                 text: title
             )
-            .padding(uiModel.layout.titleMargins)
+            .padding(uiModel.layout.titleTextMargins)
         }
     }
     
@@ -126,11 +126,11 @@ struct VAlert<Content>: View
         if let message, !message.isEmpty {
             VText(
                 type: uiModel.layout.messageTextLineType,
-                color: uiModel.colors.message,
-                font: uiModel.fonts.message,
+                color: uiModel.colors.messageText,
+                font: uiModel.fonts.messageText,
                 text: message
             )
-            .padding(uiModel.layout.messageMargins)
+            .padding(uiModel.layout.messageTextMargins)
         }
     }
     
@@ -502,7 +502,7 @@ struct VAlert_Previews: PreviewProvider {
                 VAlert<Never>(
                     uiModel: {
                         var uiModel: VAlertUIModel = .init()
-                        uiModel.layout.titleMessageContentMargins.top = uiModel.layout.titleMessageContentMargins.bottom
+                        uiModel.layout.titleTextMessageTextAndContentMargins.top = uiModel.layout.titleTextMessageTextAndContentMargins.bottom
                         return uiModel
                     }(),
                     onPresent: nil,

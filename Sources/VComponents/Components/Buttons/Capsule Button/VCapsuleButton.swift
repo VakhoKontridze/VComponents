@@ -98,7 +98,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 titleLabelComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
+                HStack(spacing: uiModel.layout.iconAndTitleTextSpacing, content: {
                     iconLabelComponent(internalState: internalState, icon: icon)
                     titleLabelComponent(internalState: internalState, title: title)
                 })
@@ -126,13 +126,13 @@ public struct VCapsuleButton<Label>: View where Label: View {
         VText(
             minimumScaleFactor: {
                 if #available(iOS 15.0, *) {
-                    return uiModel.layout.titleMinimumScaleFactor
+                    return uiModel.layout.titleTextMinimumScaleFactor
                 } else {
-                    return uiModel.layout.titleMinimumScaleFactor/2 // Alternative to dynamic size upper limit
+                    return uiModel.layout.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
                 }
             }(),
-            color: uiModel.colors.title.value(for: internalState),
-            font: uiModel.fonts.title,
+            color: uiModel.colors.titleText.value(for: internalState),
+            font: uiModel.fonts.titleText,
             text: title
         )
     }
@@ -238,7 +238,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
                                 uiModel: {
                                     var uiModel: VCapsuleButtonUIModel = .init()
                                     uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    uiModel.colors.titleText.enabled = uiModel.colors.titleText.pressed
                                     return uiModel
                                 }(),
                                 action: {},

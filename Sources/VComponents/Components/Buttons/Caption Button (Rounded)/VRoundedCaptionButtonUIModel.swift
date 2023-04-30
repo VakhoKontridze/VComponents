@@ -72,13 +72,13 @@ public struct VRoundedCaptionButtonUIModel {
         }()
         
         /// Spacing between rounded rectangle and caption. Set to `4`.
-        public var rectangleCaptionSpacing: CGFloat = 4
+        public var rectangleAndCaptionSpacing: CGFloat = 4
         
         /// Maximum caption width. Set to `100`.
         public var captionWidthMax: CGFloat = 100
         
-        /// Spacing between icon caption and title caption. Set to `8`.
-        public var captionSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
+        /// Spacing between icon caption and title caption text. Set to `8`.
+        public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
         
         /// Icon caption size.
         /// Set to `16x16` on `iOS`.
@@ -110,8 +110,8 @@ public struct VRoundedCaptionButtonUIModel {
 #endif
         }()
         
-        /// Title caption minimum scale factor. Set to `0.75`.
-        public var titleCaptionMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Title caption text minimum scale factor. Set to `0.75`.
+        public var titleCaptionTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -156,8 +156,8 @@ public struct VRoundedCaptionButtonUIModel {
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Title caption colors.
-        public var titleCaption: StateColors = .init(
+        /// Title caption text colors.
+        public var titleCaptionText: StateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primaryPressedDisabled,
             disabled: ColorBook.primaryPressedDisabled
@@ -196,10 +196,10 @@ public struct VRoundedCaptionButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title caption font.
+        /// Title caption text font.
         /// Set to `subheadline` (`15`) on `iOS`.
         /// Set to  `body` (`17`) on `watchOS`.
-        public var titleCaption: Font = {
+        public var titleCaptionText: Font = {
 #if os(iOS)
             return .subheadline
 #elseif os(watchOS)

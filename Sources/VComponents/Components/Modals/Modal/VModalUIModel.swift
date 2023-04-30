@@ -74,7 +74,7 @@ public struct VModalUIModel {
         }()
         
         /// Spacing between label and close button. Set to `10`.
-        public var labelCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
+        public var labelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
         /// Divider height. Set to `2` scaled to screen.
         ///
@@ -137,8 +137,8 @@ public struct VModalUIModel {
         /// Shadow offset. Set to `zero`.
         public var shadowOffset: CGPoint = .zero
         
-        /// Header title color.
-        public var headerTitle: Color = ColorBook.primary
+        /// Header title text color.
+        public var headerTitleText: Color = ColorBook.primary
         
         /// Model for customizing close button colors.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
@@ -169,8 +169,8 @@ public struct VModalUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to `bold` `headline` (`17`).
-        public var header: Font = GlobalUIModel.Modals.headerFont
+        /// Header title text font. Set to `bold` `headline` (`17`).
+        public var headerTitleText: Font = GlobalUIModel.Modals.headerTitleTextFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.

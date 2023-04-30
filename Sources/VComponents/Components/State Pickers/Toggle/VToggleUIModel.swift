@@ -66,13 +66,13 @@ public struct VToggleUIModel {
         }()
         
         /// Spacing between toggle and label. Set to `5`.
-        public var toggleLabelSpacing: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing
+        public var toggleAndLabelSpacing: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing
         
         /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
         public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
         
-        /// Title minimum scale factor. Set to `1`.
-        public var titleMinimumScaleFactor: CGFloat = 1
+        /// Title text minimum scale factor. Set to `1`.
+        public var titleTextMinimumScaleFactor: CGFloat = 1
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
@@ -102,8 +102,8 @@ public struct VToggleUIModel {
         /// Thumb colors.
         public var thumb: StateColors = .init(ColorBook.white)
         
-        /// Title colors.
-        public var title: StateColors = .init(
+        /// Title text colors.
+        public var titleText: StateColors = .init(
             off: GlobalUIModel.StatePickers.titleColor,
             on: GlobalUIModel.StatePickers.titleColor,
             pressedOff: GlobalUIModel.StatePickers.titleColor,
@@ -128,10 +128,10 @@ public struct VToggleUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font.
+        /// Title text font.
         /// Set to `subheadline` (`15`) on `iOS`.
         /// Set to `body` (`13`) on `macOS`.
-        public var title: Font = GlobalUIModel.StatePickers.font
+        public var titleText: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers
         /// Initializes UI model with default values.

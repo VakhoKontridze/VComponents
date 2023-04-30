@@ -110,7 +110,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 iconLabelComponent(internalState: internalState, icon: icon)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
+                HStack(spacing: uiModel.layout.iconAndTitleTextSpacing, content: {
                     iconLabelComponent(internalState: internalState, icon: icon)
                     titleLabelComponent(internalState: internalState, title: title)
                 })
@@ -128,9 +128,9 @@ public struct VPlainButton<Label>: View where Label: View {
         title: String
     ) -> some View {
         VText(
-            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-            color: uiModel.colors.title.value(for: internalState),
-            font: uiModel.fonts.title,
+            minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
+            color: uiModel.colors.titleText.value(for: internalState),
+            font: uiModel.fonts.titleText,
             text: title
         )
     }
@@ -216,7 +216,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             VPlainButton(
                                 uiModel: {
                                     var uiModel: VPlainButtonUIModel = .init()
-                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    uiModel.colors.titleText.enabled = uiModel.colors.titleText.pressed
                                     return uiModel
                                 }(),
                                 action: {},

@@ -141,7 +141,7 @@ VSegmentedPicker
 
 VWheelPicker
 
-- `headerMarginHorizontal` is renamed to `headerFooterMarginHorizontal` in `VWheelPickerUIModel`
+- `headerMarginHorizontal` is renamed to `HeaderTitleTextAndFooterTitleTextMarginHorizontal` in `VWheelPickerUIModel`
 
 VStepper
 

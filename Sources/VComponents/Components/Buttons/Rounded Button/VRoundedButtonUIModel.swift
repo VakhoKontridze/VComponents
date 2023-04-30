@@ -63,8 +63,8 @@ public struct VRoundedButtonUIModel {
         /// Label margins. Set to `3`s.
         public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
         
-        /// Title minimum scale factor. Set to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Title text minimum scale factor. Set to `0.75`.
+        public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Icon size.
         /// Set to `20x20` on `iOS`.
@@ -112,8 +112,8 @@ public struct VRoundedButtonUIModel {
         /// Border colors.
         public var border: StateColors = .clearColors
         
-        /// Title colors.
-        public var title: StateColors = .init(ColorBook.primaryWhite)
+        /// Title text colors.
+        public var titleText: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon colors.
         ///
@@ -144,11 +144,11 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font.
+        /// Title text font.
         /// Set to `semibold` `subheadline` (`15`) on `iOS`.
         /// Set to `body` (`13`) on `macOS`.
         /// Set to `semibold` `body` (`17`) on `watchOS`.
-        public var title: Font = {
+        public var titleText: Font = {
 #if os(iOS)
             return Font.subheadline.weight(.semibold)
 #elseif os(macOS)

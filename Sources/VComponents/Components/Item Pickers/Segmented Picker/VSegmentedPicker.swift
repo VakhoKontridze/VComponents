@@ -215,7 +215,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerFooterSpacing, content: {
+        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerAndFooterSpacing, content: {
             header
             picker
             footer
@@ -230,24 +230,24 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTextLineType,
-                color: uiModel.colors.header.value(for: internalState),
-                font: uiModel.fonts.header,
+                type: uiModel.layout.headerTitleTextLineType,
+                color: uiModel.colors.headerTitleText.value(for: internalState),
+                font: uiModel.fonts.headerTitleText,
                 text: headerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTextLineType,
-                color: uiModel.colors.footer.value(for: internalState),
-                font: uiModel.fonts.footer,
+                type: uiModel.layout.footerTitleTextLineType,
+                color: uiModel.colors.footerTitleText.value(for: internalState),
+                font: uiModel.fonts.footerTitleText,
                 text: footerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
@@ -291,9 +291,9 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                         onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
                         label: {
                             VText(
-                                minimumScaleFactor: uiModel.layout.rowTitleMinimumScaleFactor,
-                                color: uiModel.colors.rowTitle.value(for: rowInternalState(element: element)),
-                                font: uiModel.fonts.rows,
+                                minimumScaleFactor: uiModel.layout.rowTitleTextMinimumScaleFactor,
+                                color: uiModel.colors.rowTitleText.value(for: rowInternalState(element: element)),
+                                font: uiModel.fonts.rowTitleText,
                                 text: title(element)
                             )
                             .padding(uiModel.layout.indicatorMargin)
@@ -482,7 +482,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             VSegmentedPicker(
                                 uiModel: {
                                     var uiModel: VSegmentedPickerUIModel = .init()
-                                    uiModel.colors.rowTitle.selected = uiModel.colors.rowTitle.pressedSelected
+                                    uiModel.colors.rowTitleText.selected = uiModel.colors.rowTitleText.pressedSelected
                                     return uiModel
                                 }(),
                                 selection: .constant(selection),

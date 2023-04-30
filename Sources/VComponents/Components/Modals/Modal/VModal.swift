@@ -111,7 +111,7 @@ struct VModal<Content>: View
     
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelCloseButtonSpacing, content: {
+            HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelAndCloseButtonSpacing, content: {
                 Group(content: {
                     if uiModel.misc.dismissType.contains(.leadingButton) {
                         closeButton
@@ -128,8 +128,8 @@ struct VModal<Content>: View
                         
                     case .title(let title):
                         VText(
-                            color: uiModel.colors.headerTitle,
-                            font: uiModel.fonts.header,
+                            color: uiModel.colors.headerTitleText,
+                            font: uiModel.fonts.headerTitleText,
                             text: title
                         )
                         

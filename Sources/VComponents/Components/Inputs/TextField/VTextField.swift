@@ -129,7 +129,7 @@ public struct VTextField: View {
     public var body: some View {
         syncInternalStateWithState()
         
-        return VStack(alignment: .leading, spacing: uiModel.layout.headerTextFieldFooterSpacing, content: {
+        return VStack(alignment: .leading, spacing: uiModel.layout.headerTextFieldAndFooterSpacing, content: {
             header
             input
             footer
@@ -139,29 +139,29 @@ public struct VTextField: View {
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTextLineType,
-                color: uiModel.colors.header.value(for: internalState),
-                font: uiModel.fonts.header,
+                type: uiModel.layout.headerTitleTextLineType,
+                color: uiModel.colors.headerTitleText.value(for: internalState),
+                font: uiModel.fonts.headerTitleText,
                 text: headerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTextLineType,
-                color: uiModel.colors.footer.value(for: internalState),
-                font: uiModel.fonts.footer,
+                type: uiModel.layout.footerTitleTextLineType,
+                color: uiModel.colors.footerTitleText.value(for: internalState),
+                font: uiModel.fonts.footerTitleText,
                 text: footerTitle
             )
-            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
     private var input: some View {
-        HStack(spacing: uiModel.layout.contentSpacing, content: {
+        HStack(spacing: uiModel.layout.textAndButtonSpacing, content: {
             searchIcon // Only for search field
             textField
             clearButton
@@ -198,8 +198,8 @@ public struct VTextField: View {
             isSecure: uiModel.layout.contentType.isSecure && !secureFieldIsVisible,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
-                    .font(uiModel.fonts.placeholder)
+                    .foregroundColor(uiModel.colors.placeholderText.value(for: internalState))
+                    .font(uiModel.fonts.placeholderText)
             },
             text: $text
         )
@@ -380,8 +380,8 @@ struct VTextField_Previews: PreviewProvider {
                                     uiModel.layout.contentType = contentType
                                     uiModel.colors.background.enabled = uiModel.colors.background.focused
                                     uiModel.colors.text.enabled = uiModel.colors.text.focused
-                                    uiModel.colors.header.enabled = uiModel.colors.header.focused
-                                    uiModel.colors.footer.enabled = uiModel.colors.footer.focused
+                                    uiModel.colors.headerTitleText.enabled = uiModel.colors.headerTitleText.focused
+                                    uiModel.colors.footerTitleText.enabled = uiModel.colors.footerTitleText.focused
                                     return uiModel
                                 }(),
                                 headerTitle: headerTitle,

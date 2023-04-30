@@ -29,8 +29,8 @@ struct GlobalUIModel {
         static let shadowColorDisabled: Color = .init(module: "Shadow.Disabled")
         
         // MARK: Properties - Header and Footer
-        static var headerTextLineType: TextLineType { .singleLine }
-        static var headerFont: Font {
+        static var headerTitleTextLineType: TextLineType { .singleLine }
+        static var headerTitleTextFont: Font {
 #if os(iOS)
             return Font.footnote // 13
 #elseif os(macOS)
@@ -40,17 +40,17 @@ struct GlobalUIModel {
 #endif
         }
         
-        static var footerTextLineType: TextLineType = {
+        static var footerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...5)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 5)
             }
         }()
-        static var footerFont: Font { headerFont } // 13, 10
+        static var footerTitleTextFont: Font { headerTitleTextFont } // 13, 10
         
-        static var headerComponentFooterSpacing: CGFloat { 3 }
-        static var headerFooterMarginHorizontal: CGFloat { 10 }
+        static var headerComponentAndFooterSpacing: CGFloat { 3 }
+        static var headerAndFooterMarginHorizontal: CGFloat { 10 }
         
         // MARK: Properties - Divider and Separator
         static let dividerHeight: CGFloat = 2 / MultiplatformConstants.screenScale
@@ -146,9 +146,9 @@ struct GlobalUIModel {
         static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
         static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) } // Looks better
         
-        static var iconTitleSpacing: CGFloat { 8 }
+        static var iconAndTitleTextSpacing: CGFloat { 8 }
         
-        static var titleFontStretchedButton: Font = {
+        static var titleTextFontStretchedButton: Font = {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
@@ -191,7 +191,7 @@ struct GlobalUIModel {
         // MARK: Properties
         static var dimension: CGFloat { 16 }
         
-        static var statePickerLabelSpacing: CGFloat { 5 }
+        static var componentAndLabelSpacing: CGFloat { 5 }
         
         static var titleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -276,9 +276,9 @@ struct GlobalUIModel {
         
         static var layerGrayColorFocused: Color { .init(module: "Input.Layer.Gray.Focused") }
         
-        static var headerFooterGreenColor: Color { .init(module: "Input.HeaderFooter.Green") }
-        static var headerFooterYellowColor: Color { .init(module: "Input.HeaderFooter.Yellow") }
-        static var headerFooterRedColor: Color { .init(module: "Input.HeaderFooter.Red") }
+        static var headerTitleTextAndFooterTitleTextGreenColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Green") }
+        static var headerTitleTextAndFooterTitleTextYellowColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Yellow") }
+        static var headerTitleTextAndFooterTitleTextRedColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Red") }
         
         static var clearButtonLayerEnabled: Color { .init(module: "Input.ClearButton.Layer") }
         static var clearButtonLayerPressed: Color { .init(module: "Input.ClearButton.Layer.Pressed") }
@@ -300,7 +300,7 @@ struct GlobalUIModel {
         // MARK: Properties
         static var labelCloseButtonSpacing: CGFloat { 10 }
         
-        static var headerFont: Font { .headline.weight(.bold) } // 17 (iOS Only)
+        static var headerTitleTextFont: Font { .headline.weight(.bold) } // 17 (iOS Only)
         
         static var poppingAppearAnimation: BasicAnimation? { .init(curve: .linear, duration: 0.05) }
         static var poppingDisappearAnimation: BasicAnimation? { .init(curve: .easeIn, duration: 0.05) }

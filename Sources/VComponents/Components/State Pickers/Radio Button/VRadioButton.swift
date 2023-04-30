@@ -105,9 +105,9 @@ public struct VRadioButton<Label>: View where Label: View {
                         label: {
                             VText(
                                 type: uiModel.layout.titleTextLineType,
-                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                                color: uiModel.colors.title.value(for: internalState),
-                                font: uiModel.fonts.title,
+                                minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
+                                color: uiModel.colors.titleText.value(for: internalState),
+                                font: uiModel.fonts.titleText,
                                 text: title
                             )
                         }
@@ -165,7 +165,7 @@ public struct VRadioButton<Label>: View where Label: View {
             label: {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.layout.radioLabelSpacing)
+                    .frame(width: uiModel.layout.radioButtonAndLabelSpacing)
                     .foregroundColor(.clear)
             }
         )
@@ -265,7 +265,7 @@ struct VRadioButton_Previews: PreviewProvider {
                                 uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
                                 uiModel.colors.border.off = uiModel.colors.border.pressedOff
                                 uiModel.colors.bullet.off = uiModel.colors.bullet.pressedOff
-                                uiModel.colors.title.off = uiModel.colors.title.pressedOff
+                                uiModel.colors.titleText.off = uiModel.colors.titleText.pressedOff
                                 return uiModel
                             }(),
                             state: .constant(.off),
@@ -295,7 +295,7 @@ struct VRadioButton_Previews: PreviewProvider {
                                 uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
                                 uiModel.colors.border.on = uiModel.colors.border.pressedOn
                                 uiModel.colors.bullet.on = uiModel.colors.bullet.pressedOn
-                                uiModel.colors.title.on = uiModel.colors.title.pressedOn
+                                uiModel.colors.titleText.on = uiModel.colors.titleText.pressedOn
                                 return uiModel
                             }(),
                             state: .constant(.on),

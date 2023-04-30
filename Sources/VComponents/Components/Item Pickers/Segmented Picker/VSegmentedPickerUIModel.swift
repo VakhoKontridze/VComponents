@@ -81,23 +81,23 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
-        /// Row content margin. Set to `2`.
+        /// Content margin. Set to `2`.
         public var contentMargin: CGFloat = 2
+
+        /// Row title text minimum scale factor. Set to `0.75`.
+        public var rowTitleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Header text line type. Set to `singleLine`.
-        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
+        /// Header title text line type. Set to `singleLine`.
+        public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
         
-        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
-        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
+        /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
         
-        /// Spacing between header, picker, and footer. Set to `3`.
-        public var headerPickerFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
+        /// Spacing between header text, picker, and footer text. Set to `3`.
+        public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
         
         /// Header and footer horizontal margin. Set to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
-        
-        /// Row title minimum scale factor. Set to `0.75`.
-        public var rowTitleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
         
         /// Row divider size.
         /// Set to `1x19` on `iOS`, similarly to native segmented picker.
@@ -183,8 +183,8 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
-        /// Row title colors.
-        public var rowTitle: RowStateColors = .init(
+        /// Row title text colors.
+        public var rowTitleText: RowStateColors = .init(
             deselected: ColorBook.primary,
             selected: ColorBook.primary,
             pressedDeselected: ColorBook.primaryPressedDisabled,
@@ -198,14 +198,14 @@ public struct VSegmentedPickerUIModel {
             disabled: GlobalUIModel.Common.dividerDashColorDisabled
         )
         
-        /// Header colors.
-        public var header: StateColors = .init(
+        /// Header title text colors.
+        public var headerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
         
-        /// Footer colors.
-        public var footer: StateColors = .init(
+        /// Footer title text colors.
+        public var footerTitleText: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
@@ -232,10 +232,11 @@ public struct VSegmentedPickerUIModel {
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
-        /// Row font.
+        // MARK: Properties
+        /// Row title text font.
         /// Set to `medium` `13` (`footnote`) on `iOS`.
         /// Set to `13` on `macOS`.
-        public var rows: Font = {
+        public var rowTitleText: Font = {
 #if os(iOS)
             return Font.system(size: 13).weight(.medium) // Prevents scaling, similarly to native picker
 #elseif os(macOS)
@@ -244,17 +245,16 @@ public struct VSegmentedPickerUIModel {
             fatalError() // Not supported
 #endif
         }()
-        
-        // MARK: Properties
-        /// Header font.
+
+        /// Header title text font.
         /// Set to `footnote` (`13`) on `iOS`.
         /// Set to `footnote` (`10`) on `macOS`.
-        public var header: Font = GlobalUIModel.Common.headerFont
+        public var headerTitleText: Font = GlobalUIModel.Common.headerTitleTextFont
         
-        /// Footer font.
+        /// Footer title text font.
         /// Set to `footnote` (`13`) on `iOS`.
         /// Set to `footnote` (`10`) on `macOS`
-        public var footer: Font = GlobalUIModel.Common.footerFont
+        public var footerTitleText: Font = GlobalUIModel.Common.footerTitleTextFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.
