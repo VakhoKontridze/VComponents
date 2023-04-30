@@ -894,7 +894,7 @@ extension VModalUIModel.Fonts {
 }
 
 // MARK: - V Bottom Sheet
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -906,7 +906,7 @@ extension VBottomSheetUIModel.Layout {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -921,7 +921,7 @@ extension VBottomSheetUIModel.Layout.BottomSheetHeights {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -933,7 +933,7 @@ extension VBottomSheetUIModel.Colors {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -114,8 +114,8 @@ struct VBottomSheet<Content>: View
                     header
                     divider
                 })
-                    .onSizeChange(perform: { headerDividerHeight = $0.height })
-                    .safeAreaMargins(edges: uiModel.layout.headerSafeAreaEdges)
+                .onSizeChange(perform: { headerDividerHeight = $0.height })
+                .safeAreaMargins(edges: uiModel.layout.headerSafeAreaEdges)
 
                 contentView
             })
