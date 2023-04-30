@@ -9,6 +9,8 @@ import SwiftUI
 import VCore
 
 // MARK: - V Segmented Picker
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VSegmentedPicker {
     @available(*, unavailable, message: "This `init` is no longer available")
     public init(
@@ -100,6 +102,9 @@ extension VSegmentedPicker {
 }
 
 // MARK: - V Wheel Picker
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VWheelPicker {
     @available(*, unavailable, message: "This `init` is no longer available")
     public init(
@@ -231,7 +236,9 @@ extension VBottomSheetUIModel.Layout.BottomSheetHeights {
 }
 
 // MARK: - V Menu
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VMenuPickerSection {
     @available(*, unavailable, message: "This `init` is no longer available")
     public init(
