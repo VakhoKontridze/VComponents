@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Bottom Sheet
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
@@ -115,7 +115,7 @@ struct VBottomSheet<Content>: View
                     divider
                 })
                     .onSizeChange(perform: { headerDividerHeight = $0.height })
-                    .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
+                    .safeAreaMargins(edges: uiModel.layout.headerSafeAreaEdges)
 
                 contentView
             })
@@ -230,7 +230,7 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.layout.contentMargins)
         })
-        .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
+        .safeAreaMargins(edges: uiModel.layout.contentSafeAreaEdges)
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
