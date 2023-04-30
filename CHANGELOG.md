@@ -6,6 +6,11 @@ General
 
 - Build errors are fixed
 
+VBottomSheet
+
+- BottomSheet now supports `iOS` `14.0`
+- Issue with header title not being visible under some conditions is fixed
+
 ### [4.2.0(42)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.0) — *2023 04 29*
 
 General
