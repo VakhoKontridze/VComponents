@@ -44,6 +44,7 @@ extension VStretchedButtonUIModel.Fonts {
 
 // MARK: - V Loading Stretched Button
 @available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VLoadingStretchedButtonUIModel.Layout {
     @available(*, deprecated, renamed: "titleTextMinimumScaleFactor")
     public var titleMinimumScaleFactor: CGFloat {
@@ -65,6 +66,7 @@ extension VLoadingStretchedButtonUIModel.Layout {
 }
 
 @available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VLoadingStretchedButtonUIModel.Colors {
     @available(*, deprecated, renamed: "titleText")
     public var title: StateColors {
@@ -74,6 +76,7 @@ extension VLoadingStretchedButtonUIModel.Colors {
 }
 
 @available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VLoadingStretchedButtonUIModel.Fonts {
     @available(*, deprecated, renamed: "titleText")
     public var title: Font {
@@ -333,6 +336,8 @@ extension VRoundedButtonUIModel.Fonts {
 }
 
 // MARK: - V Segmented Picker
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VSegmentedPicker {
     @available(*, unavailable, message: "This `init` is no longer available")
     public init(
@@ -946,7 +951,9 @@ extension VBottomSheetUIModel.Fonts {
 }
 
 // MARK: - V Menu
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VMenuPickerSection {
     @available(*, unavailable, message: "This `init` is no longer available")
     public init(
