@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.2.1(43)
+
+General
+
+- Build errors are fixed
+
 ### [4.2.0(42)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.0) — *2023 04 29*
 
 General
