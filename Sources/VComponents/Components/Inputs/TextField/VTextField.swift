@@ -129,11 +129,15 @@ public struct VTextField: View {
     public var body: some View {
         syncInternalStateWithState()
         
-        return VStack(alignment: .leading, spacing: uiModel.layout.headerTextFieldAndFooterSpacing, content: {
-            header
-            input
-            footer
-        })
+        return VStack(
+            alignment: .leading,
+            spacing: uiModel.layout.headerTextFieldAndFooterSpacing,
+            content: {
+                header
+                input
+                footer
+            }
+        )
     }
     
     @ViewBuilder private var header: some View {

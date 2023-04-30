@@ -215,11 +215,15 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerAndFooterSpacing, content: {
-            header
-            picker
-            footer
-        })
+        VStack(
+            alignment: .leading,
+            spacing: uiModel.layout.headerPickerAndFooterSpacing,
+            content: {
+                header
+                picker
+                footer
+            }
+        )
         .applyIf(uiModel.animations.appliesSelectionAnimation, transform: {
             $0
                 .animation(uiModel.animations.selection, value: internalState)

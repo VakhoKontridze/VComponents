@@ -91,14 +91,18 @@ public struct VListRow<Content>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            if uiModel.layout.separatorType.contains(.top) { separator }
-            
-            content()
-                .padding(uiModel.layout.margins)
-            
-            if uiModel.layout.separatorType.contains(.bottom) { separator }
-        })
+        VStack(
+            alignment: .leading,
+            spacing: 0,
+            content: {
+                if uiModel.layout.separatorType.contains(.top) { separator }
+                
+                content()
+                    .padding(uiModel.layout.margins)
+                
+                if uiModel.layout.separatorType.contains(.bottom) { separator }
+            }
+        )
         .listRowInsets(EdgeInsets())
         .listRowBackground(uiModel.colors.background)
         .applyModifier({

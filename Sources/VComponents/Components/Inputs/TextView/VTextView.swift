@@ -102,11 +102,15 @@ public struct VTextView: View {
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: uiModel.layout.headerTextViewAndFooterSpacing, content: {
-            header
-            input
-            footer
-        })
+        VStack(
+            alignment: .leading,
+            spacing: uiModel.layout.headerTextViewAndFooterSpacing,
+            content: {
+                header
+                input
+                footer
+            }
+        )
     }
     
     @ViewBuilder private var header: some View {

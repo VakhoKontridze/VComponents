@@ -189,11 +189,15 @@ public struct VWheelPicker<Data, ID, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerAndFooterSpacing, content: {
-            header
-            picker
-            footer
-        })
+        VStack(
+            alignment: .leading,
+            spacing: uiModel.layout.headerPickerAndFooterSpacing,
+            content: {
+                header
+                picker
+                footer
+            }
+        )
     }
     
     @ViewBuilder private var header: some View {

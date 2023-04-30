@@ -157,43 +157,47 @@ struct VBottomSheet<Content>: View
     
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelAndCloseButtonSpacing, content: {
-                Group(content: {
-                    if uiModel.misc.dismissType.contains(.leadingButton) {
-                        closeButton
-                    } else if uiModel.misc.dismissType.contains(.trailingButton) {
-                        closeButtonCompensator
-                    }
-                })
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Group(content: {
-                    switch headerLabel {
-                    case .empty:
-                        EmptyView()
-                        
-                    case .title(let title):
-                        VText(
-                            color: uiModel.colors.headerTitleText,
-                            font: uiModel.fonts.headerTitleText,
-                            text: title
-                        )
-                        
-                    case .label(let label):
-                        label()
-                    }
-                })
-                .layoutPriority(1)
-                
-                Group(content: {
-                    if uiModel.misc.dismissType.contains(.trailingButton) {
-                        closeButton
-                    } else if uiModel.misc.dismissType.contains(.leadingButton) {
-                        closeButtonCompensator
-                    }
-                })
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            })
+            HStack(
+                alignment: uiModel.layout.headerAlignment,
+                spacing: uiModel.layout.labelAndCloseButtonSpacing,
+                content: {
+                    Group(content: {
+                        if uiModel.misc.dismissType.contains(.leadingButton) {
+                            closeButton
+                        } else if uiModel.misc.dismissType.contains(.trailingButton) {
+                            closeButtonCompensator
+                        }
+                    })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Group(content: {
+                        switch headerLabel {
+                        case .empty:
+                            EmptyView()
+                            
+                        case .title(let title):
+                            VText(
+                                color: uiModel.colors.headerTitleText,
+                                font: uiModel.fonts.headerTitleText,
+                                text: title
+                            )
+                            
+                        case .label(let label):
+                            label()
+                        }
+                    })
+                    .layoutPriority(1)
+                    
+                    Group(content: {
+                        if uiModel.misc.dismissType.contains(.trailingButton) {
+                            closeButton
+                        } else if uiModel.misc.dismissType.contains(.leadingButton) {
+                            closeButtonCompensator
+                        }
+                    })
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            )
             .padding(uiModel.layout.headerMargins)
         }
     }
