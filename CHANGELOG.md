@@ -1,5 +1,16 @@
 # Change Log
 
+### [4.2.1(43)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.1) — *2023 05 01*
+
+VBottomSheet
+
+- BottomSheet now supports `iOS` `14.0`
+- Issue with header title not being visible under some conditions is fixed
+
+Other
+
+- Compilation errors are fixed
+
 ### [4.2.0(42)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.0) — *2023 04 29*
 
 General

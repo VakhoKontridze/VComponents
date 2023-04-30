@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Bottom Sheet Header Label
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -38,7 +38,7 @@ enum VBottomSheetHeaderLabel<Label>: Equatable where Label: View {
 }
 
 // MARK: - V Bottom Sheet Header Label Extension
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -67,7 +67,7 @@ extension View {
 }
 
 // MARK: - V Bottom Sheet Header Label Preference Key
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

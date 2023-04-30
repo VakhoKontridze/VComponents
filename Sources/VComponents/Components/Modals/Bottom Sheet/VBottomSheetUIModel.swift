@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -418,7 +418,7 @@ public struct VBottomSheetUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
