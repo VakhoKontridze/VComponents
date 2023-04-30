@@ -71,8 +71,18 @@ public struct VRoundedCaptionButtonUIModel {
 #endif
         }()
         
-        /// Spacing between rounded rectangle and caption. Set to `7`.
-        public var rectangleAndCaptionSpacing: CGFloat = 7
+        /// Spacing between rounded rectangle and caption.
+        /// Set to `7` on `iOS`.
+        /// Set to `3` on `watchOS`.
+        public var rectangleAndCaptionSpacing: CGFloat = {
+#if os(iOS)
+            return 7
+#elseif os(watchOS)
+            return 3
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Maximum caption width. Set to `100`.
         public var captionWidthMax: CGFloat = 100
