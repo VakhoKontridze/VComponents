@@ -972,7 +972,7 @@ extension VMenuPickerSection {
     public init<SelectionValue>(
         title: String? = nil,
         selection: Binding<SelectionValue>,
-        content: @escaping (SelectionValue) -> VMenuRowProtocol
+        content: @escaping (SelectionValue) -> VMenuPickerRowProtocol
     )
         where
             Data == Array<SelectionValue>,
@@ -986,6 +986,117 @@ extension VMenuPickerSection {
             id: \.hashValue,
             content: content
         )
+    }
+}
+
+@available(*, deprecated, renamed: "VMenuExpandingRow")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public typealias VMenuTitleRow = VMenuRow
+
+@available(*, deprecated, message: "Use ")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
+public struct VMenuTitleIconRow: VMenuGroupRowProtocol {
+    private var isEnabled: Bool = true
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
+    private let icon: Image
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        icon: Image
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = icon
+    }
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        assetIcon: String,
+        bundle: Bundle? = nil
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = Image(assetIcon, bundle: bundle)
+    }
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        systemIcon: String
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = Image(systemName: systemIcon)
+    }
+
+    public func makeBody() -> AnyView {
+        .init(
+            Button(
+                role: role,
+                action: action,
+                label: {
+                    Text(title)
+                    icon
+                }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, renamed: "VMenuExpandingRow")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public typealias VMenuSubMenuRow = VMenuExpandingRow
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(watchOS 7, *)@available(watchOS, unavailable)
+extension VMenuPickerSection {
+    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
+    public init(
+        title: String? = nil,
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
+    ) {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
+    public init(
+        title: String? = nil,
+        selection: Binding<Data.Element>,
+        data: Data,
+        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        fatalError()
     }
 }
 
@@ -1430,7 +1541,7 @@ public protocol VConfirmationDialogButtonConvertible {
 
 @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButtonProtocol {
+extension Array: VConfirmationDialogButtonConvertible where Element == any VConfirmationDialogButtonProtocol {
     public func toButtons() -> [any VConfirmationDialogButtonProtocol] { self }
 }
 

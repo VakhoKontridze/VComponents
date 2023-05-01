@@ -14,14 +14,14 @@ import SwiftUI
 struct VContextMenuContentView: View {
     // MARK: Properties
     private let sections: () -> [any VMenuSectionProtocol]
-    
+
     // MARK: Initializers
     init(
         @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     ) {
         self.sections = sections
     }
-    
+
     // MARK: Body
     var body: some View {
         ForEach(
@@ -50,7 +50,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
-    
+
     // Previews
     static var previews: some View {
         Group(content: {
@@ -61,7 +61,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
-    
+
     // Data
     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue
@@ -71,30 +71,30 @@ struct VContextMenuContentView_Previews: PreviewProvider {
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String { .init(describing: self).capitalized }
     }
-    
+
     // Previews (Scenes)
     private struct Preview: View { // Didn't bother with pseudoRTL
         @State private var selection: RGBColor = .red
-        
+
         var body: some View {
             PreviewContainer(content: {
                 Text("Lorem ipsum")
                     .vContextMenu(
                         sections: {
                             VMenuGroupSection(title: "Section 1", rows: {
-                                VMenuTitleRow(action: { print("1.1") }, title: "One")
-                                VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
+                                VMenuRow(action: { print("1.1") }, title: "One")
+                                VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
                             })
 
                             VMenuGroupSection(title: "Section 2", rows: {
-                                VMenuTitleRow(action: { print("2.1") }, title: "One")
+                                VMenuRow(action: { print("2.1") }, title: "One")
 
-                                VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
+                                VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
 
-                                VMenuSubMenuRow(title: "Three...", sections: {
+                                VMenuExpandingRow(title: "Three...", sections: {
                                     VMenuGroupSection(rows: {
-                                        VMenuTitleRow(action: { print("2.3.1") }, title: "One")
-                                        VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+                                        VMenuRow(action: { print("2.3.1") }, title: "One")
+                                        VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
                                     })
                                 })
                             })

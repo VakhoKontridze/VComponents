@@ -68,7 +68,7 @@ public struct VAlertButton: VAlertButtonProtocol {
         case cancel
     }
 
-    // MARK: Body
+    // MARK: Button Protocol
     public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void

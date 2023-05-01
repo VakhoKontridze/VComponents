@@ -24,19 +24,19 @@ import SwiftUI
 ///     var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
 ///             VMenuGroupSection(title: "Section 1", rows: {
-///                 VMenuTitleRow(action: { print("1.1") }, title: "One")
-///                 VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
+///                 VMenuRow(action: { print("1.1") }, title: "One")
+///                 VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
 ///             })
 ///
 ///             VMenuGroupSection(title: "Section 2", rows: {
-///                 VMenuTitleRow(action: { print("2.1") }, title: "One")
+///                 VMenuRow(action: { print("2.1") }, title: "One")
 ///
-///                 VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
+///                 VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
 ///
-///                 VMenuSubMenuRow(title: "Three...", sections: {
+///                 VMenuExpandingRow(title: "Three...", sections: {
 ///                     VMenuGroupSection(rows: {
-///                         VMenuTitleRow(action: { print("2.3.1") }, title: "One")
-///                         VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+///                         VMenuRow(action: { print("2.3.1") }, title: "One")
+///                         VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
 ///                     })
 ///                 })
 ///             })
@@ -95,7 +95,7 @@ public struct VMenu<Label>: View where Label: View {
         uiModel: VMenuUIModel = .init(),
         primaryAction: (() -> Void)? = nil,
         title: String,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
+        @VMenuGroupRowBuilder rows: @escaping () -> [any VMenuGroupRowProtocol]
     )
         where Label == Never
     {
@@ -110,7 +110,7 @@ public struct VMenu<Label>: View where Label: View {
         uiModel: VMenuUIModel = .init(),
         primaryAction: (() -> Void)? = nil,
         @ViewBuilder label: @escaping (VMenuInternalState) -> Label,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
+        @VMenuGroupRowBuilder rows: @escaping () -> [any VMenuGroupRowProtocol]
     ) {
         self.uiModel = uiModel
         self.primaryAction = primaryAction
@@ -211,19 +211,19 @@ struct VMenu_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VMenu(title: "Lorem Ipsum", sections: {
                     VMenuGroupSection(title: "Section 1", rows: {
-                        VMenuTitleRow(action: { print("1.1") }, title: "One")
-                        VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
+                        VMenuRow(action: { print("1.1") }, title: "One")
+                        VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
                     })
                     
                     VMenuGroupSection(title: "Section 2", rows: {
-                        VMenuTitleRow(action: { print("2.1") }, title: "One")
+                        VMenuRow(action: { print("2.1") }, title: "One")
                         
-                        VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
+                        VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
                         
-                        VMenuSubMenuRow(title: "Three...", sections: {
+                        VMenuExpandingRow(title: "Three...", sections: {
                             VMenuGroupSection(rows: {
-                                VMenuTitleRow(action: { print("2.3.1") }, title: "One")
-                                VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+                                VMenuRow(action: { print("2.3.1") }, title: "One")
+                                VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
                             })
                         })
                     })

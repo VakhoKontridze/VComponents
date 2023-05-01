@@ -22,14 +22,6 @@ public protocol VAlertButtonConvertible {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension VAlertButton: VAlertButtonConvertible {
-    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
-}
-
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { self }
 }

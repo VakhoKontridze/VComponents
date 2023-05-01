@@ -10,6 +10,14 @@ VConfirmationDialog
 
 - ConfirmationDialog is deprecated, and is replaced with `ConfirmationDialog` from [VCore](https://github.com/VakhoKontridze/VCore)
 
+VMenu
+
+- Menu API is overhauled
+
+VContextMenu
+
+- ContextMenu API is overhauled
+
 ### [4.2.2(44)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.2) — *2023 05 01*
 
 Other
