@@ -127,11 +127,10 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             Group(content: {
                 switch headerLabel {
                 case .title(let title):
-                    VText(
-                        color: uiModel.colors.headerTitleText.value(for: internalState),
-                        font: uiModel.fonts.headerTitleText,
-                        text: title
-                    )
+                    Text(title)
+                        .lineLimit(1)
+                        .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
+                        .font(uiModel.fonts.headerTitleText)
                     
                 case .label(let label):
                     label(internalState)

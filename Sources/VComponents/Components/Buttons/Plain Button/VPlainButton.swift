@@ -127,12 +127,11 @@ public struct VPlainButton<Label>: View where Label: View {
         internalState: VPlainButtonInternalState,
         title: String
     ) -> some View {
-        VText(
-            minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
-            color: uiModel.colors.titleText.value(for: internalState),
-            font: uiModel.fonts.titleText,
-            text: title
-        )
+        Text(title)
+            .lineLimit(1)
+            .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
+            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
+            .font(uiModel.fonts.titleText)
     }
     
     private func iconLabelComponent(

@@ -202,25 +202,25 @@ public struct VWheelPicker<Data, ID, Content>: View
     
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
-            VText(
-                type: uiModel.layout.headerTitleTextLineType,
-                color: uiModel.colors.headerTitleText.value(for: internalState),
-                font: uiModel.fonts.headerTitleText,
-                text: headerTitle
-            )
-            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+            Text(headerTitle)
+                .multilineTextAlignment(uiModel.layout.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.layout.headerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
+                .font(uiModel.fonts.headerTitleText)
+
+                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
-    
+
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
-            VText(
-                type: uiModel.layout.footerTitleTextLineType,
-                color: uiModel.colors.footerTitleText.value(for: internalState),
-                font: uiModel.fonts.footerTitleText,
-                text: footerTitle
-            )
-            .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+            Text(footerTitle)
+                .multilineTextAlignment(uiModel.layout.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.layout.footerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.colors.footerTitleText.value(for: internalState))
+                .font(uiModel.fonts.footerTitleText)
+
+                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
         }
     }
     
@@ -244,12 +244,11 @@ public struct VWheelPicker<Data, ID, Content>: View
         switch content {
         case .title(let title):
             ForEach(data, id: id, content: { element in
-                VText(
-                    minimumScaleFactor: uiModel.layout.rowTitleTextMinimumScaleFactor,
-                    color: uiModel.colors.rowTitleText.value(for: internalState),
-                    font: uiModel.fonts.rowTitleText,
-                    text: title(element)
-                )
+                Text(title(element))
+                    .lineLimit(1)
+                    .minimumScaleFactor(uiModel.layout.rowTitleTextMinimumScaleFactor)
+                    .foregroundColor(uiModel.colors.rowTitleText.value(for: internalState))
+                    .font(uiModel.fonts.rowTitleText)
             })
             
         case .content(let content):

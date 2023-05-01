@@ -123,18 +123,17 @@ public struct VCapsuleButton<Label>: View where Label: View {
         internalState: VCapsuleButtonInternalState,
         title: String
     ) -> some View {
-        VText(
-            minimumScaleFactor: {
+        Text(title)
+            .lineLimit(1)
+            .minimumScaleFactor({
                 if #available(iOS 15.0, *) {
                     return uiModel.layout.titleTextMinimumScaleFactor
                 } else {
                     return uiModel.layout.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
                 }
-            }(),
-            color: uiModel.colors.titleText.value(for: internalState),
-            font: uiModel.fonts.titleText,
-            text: title
-        )
+            }())
+            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
+            .font(uiModel.fonts.titleText)
     }
     
     private func iconLabelComponent(

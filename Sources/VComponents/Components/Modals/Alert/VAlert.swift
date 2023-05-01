@@ -111,25 +111,25 @@ struct VAlert<Content>: View
     
     @ViewBuilder private var titleView: some View {
         if let title, !title.isEmpty {
-            VText(
-                type: uiModel.layout.titleTextLineType,
-                color: uiModel.colors.titleText,
-                font: uiModel.fonts.titleText,
-                text: title
-            )
-            .padding(uiModel.layout.titleTextMargins)
+            Text(title)
+                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.colors.titleText)
+                .font(uiModel.fonts.titleText)
+
+                .padding(uiModel.layout.titleTextMargins)
         }
     }
     
     @ViewBuilder private var messageView: some View {
         if let message, !message.isEmpty {
-            VText(
-                type: uiModel.layout.messageTextLineType,
-                color: uiModel.colors.messageText,
-                font: uiModel.fonts.messageText,
-                text: message
-            )
-            .padding(uiModel.layout.messageTextMargins)
+            Text(message)
+                .multilineTextAlignment(uiModel.layout.messageTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.layout.messageTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.colors.messageText)
+                .font(uiModel.fonts.messageText)
+
+                .padding(uiModel.layout.messageTextMargins)
         }
     }
     

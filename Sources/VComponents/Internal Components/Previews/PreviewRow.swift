@@ -36,11 +36,12 @@ struct PreviewRow<Content>: View where Content: View {
                 spacing: 0,
                 content: {
                     Text(title)
-                        .frame(width: 75, alignment: .leading)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                         .foregroundColor(ColorBook.secondary)
                         .font(.caption)
+
+                        .frame(width: 75, alignment: .leading)
                     
                     Spacer()
                     

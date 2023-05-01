@@ -64,45 +64,45 @@ struct VToast: View {
     }
     
     private var contentView: some View {
-        VText(
-            type: uiModel.layout.textLineType.toVCoreTextLineType,
-            color: uiModel.colors.text,
-            font: uiModel.fonts.text,
-            text: text
-        )
-        .padding(uiModel.layout.textMargins)
-        .applyModifier({ view in
-            switch uiModel.layout.widthType {
-            case .wrapped:
-                view
-                
-            case .stretched(let alignment, _):
-                view
-                    .frame(
-                        maxWidth: .infinity,
-                        alignment: alignment.toAlignment
-                    )
-                
-            case .fixedPoint(let width, let alignment):
-                view
-                    .frame(
-                        width: width,
-                        alignment: alignment.toAlignment
-                    )
-                
-            case .fixedFraction(let ratio, let alignment):
-                view
-                    .frame(
-                        width: MultiplatformConstants.screenSize.width * ratio,
-                        alignment: alignment.toAlignment
-                    )
-            }
-        })
-        .cornerRadius(cornerRadius)
-        .background(background)
-        .onSizeChange(perform: { height = $0.height })
-        .padding(.horizontal, uiModel.layout.widthType.marginHor)
-        .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
+        Text(text)
+            .multilineTextAlignment(uiModel.layout.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: uiModel.layout.textLineType.toVCoreTextLineType.textLineLimitType)
+            .foregroundColor(uiModel.colors.text)
+            .font(uiModel.fonts.text)
+
+            .padding(uiModel.layout.textMargins)
+            .applyModifier({ view in
+                switch uiModel.layout.widthType {
+                case .wrapped:
+                    view
+
+                case .stretched(let alignment, _):
+                    view
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: alignment.toAlignment
+                        )
+
+                case .fixedPoint(let width, let alignment):
+                    view
+                        .frame(
+                            width: width,
+                            alignment: alignment.toAlignment
+                        )
+
+                case .fixedFraction(let ratio, let alignment):
+                    view
+                        .frame(
+                            width: MultiplatformConstants.screenSize.width * ratio,
+                            alignment: alignment.toAlignment
+                        )
+                }
+            })
+            .cornerRadius(cornerRadius)
+            .background(background)
+            .onSizeChange(perform: { height = $0.height })
+            .padding(.horizontal, uiModel.layout.widthType.marginHor)
+            .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
     private var background: some View {

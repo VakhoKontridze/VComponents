@@ -129,11 +129,10 @@ struct VModal<Content>: View
                             EmptyView()
 
                         case .title(let title):
-                            VText(
-                                color: uiModel.colors.headerTitleText,
-                                font: uiModel.fonts.headerTitleText,
-                                text: title
-                            )
+                            Text(title)
+                                .lineLimit(1)
+                                .foregroundColor(uiModel.colors.headerTitleText)
+                                .font(uiModel.fonts.headerTitleText)
 
                         case .label(let label):
                             label()

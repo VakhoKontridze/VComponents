@@ -103,13 +103,12 @@ public struct VRadioButton<Label>: View where Label: View {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
-                            VText(
-                                type: uiModel.layout.titleTextLineType,
-                                minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
-                                color: uiModel.colors.titleText.value(for: internalState),
-                                font: uiModel.fonts.titleText,
-                                text: title
-                            )
+                            Text(title)
+                                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
+                                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
+                                .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
+                                .foregroundColor(uiModel.colors.titleText.value(for: internalState))
+                                .font(uiModel.fonts.titleText)
                         }
                     )
                     .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
@@ -226,7 +225,7 @@ struct VRadioButton_Previews: PreviewProvider {
     
     // Data
     private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-    
+
     // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VRadioButtonState = .off

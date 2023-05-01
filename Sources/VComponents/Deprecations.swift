@@ -1913,3 +1913,41 @@ extension VMenuUIModel.Colors {
         set { titleText = newValue }
     }
 }
+
+// MARK: - V Text
+@available(*, deprecated, message: "Use native `Text` instead.")
+public struct VText: View {
+    private let textLineType: TextLineType
+    private let truncatingMode: Text.TruncationMode
+    private let minimumScaleFactor: CGFloat
+    private let color: Color
+    private let font: Font
+    private let text: String
+
+    public init(
+        type textLineType: TextLineType = .singleLine,
+        truncatingMode: Text.TruncationMode = .tail,
+        minimumScaleFactor: CGFloat = 0,
+        color: Color,
+        font: Font,
+        text: String
+    ) {
+        self.textLineType = textLineType
+        self.truncatingMode = truncatingMode
+        self.minimumScaleFactor = minimumScaleFactor
+        self.color = color
+        self.font = font
+        self.text = text
+    }
+
+    public var body: some View {
+        Text(text)
+            .multilineTextAlignment(textLineType.textAlignment ?? .leading)
+            .lineLimit(type: textLineType.textLineLimitType)
+            .minimumScaleFactor(minimumScaleFactor)
+            .foregroundColor(color)
+            .font(font)
+    }
+}
+
+//.truncationMode(truncatingMode)

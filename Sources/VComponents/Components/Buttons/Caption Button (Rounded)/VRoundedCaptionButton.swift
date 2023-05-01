@@ -162,13 +162,12 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         internalState: VRoundedCaptionButtonInternalState,
         title: String
     ) -> some View {
-        VText(
-            type: uiModel.layout.titleCaptionTextLineType,
-            minimumScaleFactor: uiModel.layout.titleCaptionTextMinimumScaleFactor,
-            color: uiModel.colors.titleCaptionText.value(for: internalState),
-            font: uiModel.fonts.titleCaptionText,
-            text: title
-        )
+        Text(title)
+            .multilineTextAlignment(uiModel.layout.titleCaptionTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: uiModel.layout.titleCaptionTextLineType.textLineLimitType)
+            .minimumScaleFactor(uiModel.layout.titleCaptionTextMinimumScaleFactor)
+            .foregroundColor(uiModel.colors.titleCaptionText.value(for: internalState))
+            .font(uiModel.fonts.titleCaptionText)
     }
     
     private func iconCaptionComponent(
