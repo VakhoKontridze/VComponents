@@ -317,6 +317,7 @@ struct VTextField_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -464,6 +465,25 @@ struct VTextField_Previews: PreviewProvider {
                     )
                 }
             )
+        }
+    }
+
+    private struct OutOfBoundsContentPreventionPreview: View {
+        @State private var text: String = VTextField_Previews.text
+
+        var body: some View {
+            PreviewContainer(content: {
+                VTextField(
+                    uiModel: {
+                        var uiModel: VTextFieldUIModel = .search
+                        uiModel.layout.searchIconDimension = 100
+                        uiModel.fonts.text = .system(size: 100)
+                        return uiModel
+                    }(),
+                    text: $text
+                )
+                .padding()
+            })
         }
     }
 }

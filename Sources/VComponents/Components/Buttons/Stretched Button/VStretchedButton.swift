@@ -181,6 +181,7 @@ struct VStretchedButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .colorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
@@ -301,5 +302,23 @@ struct VStretchedButton_Previews: PreviewProvider {
             )
         }
     }
-}
 
+    private struct OutOfBoundsContentPreventionPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VStretchedButton(
+                    uiModel: {
+                        var uiModel: VStretchedButtonUIModel = .init()
+                        uiModel.layout.iconSize = CGSize(dimension: 100)
+                        uiModel.colors.icon = VStretchedButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        return uiModel
+                    }(),
+                    action: {},
+                    icon: Image(systemName: "swift"),
+                    title: title
+                )
+                .padding()
+            })
+        }
+    }
+}

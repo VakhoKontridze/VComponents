@@ -192,6 +192,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -199,6 +200,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
     }
     
     // Data
+    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
@@ -207,7 +209,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VCapsuleButton(
                     action: { print("Clicked") },
-                    icon: Image(systemName: "swift"),
+                    icon: icon,
                     title: title
                 )
             })
@@ -274,6 +276,24 @@ struct VCapsuleButton_Previews: PreviewProvider {
 #endif
                 }
             )
+        }
+    }
+
+    private struct OutOfBoundsContentPreventionPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VCapsuleButton(
+                    uiModel: {
+                        var uiModel: VCapsuleButtonUIModel = .init()
+                        uiModel.layout.iconSize = CGSize(dimension: 100)
+                        uiModel.colors.icon = VCapsuleButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        return uiModel
+                    }(),
+                    action: {},
+                    icon: icon,
+                    title: title
+                )
+            })
         }
     }
 }

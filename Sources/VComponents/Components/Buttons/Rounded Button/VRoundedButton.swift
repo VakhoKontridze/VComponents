@@ -188,6 +188,7 @@ struct VRoundedButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -255,6 +256,23 @@ struct VRoundedButton_Previews: PreviewProvider {
                     )
                 }
             )
+        }
+    }
+
+    private struct OutOfBoundsContentPreventionPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VRoundedButton(
+                    uiModel: {
+                        var uiModel: VRoundedButtonUIModel = .init()
+                        uiModel.layout.iconSize = CGSize(dimension: 100)
+                        uiModel.colors.icon = VRoundedButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        return uiModel
+                    }(),
+                    action: {},
+                    icon: icon
+                )
+            })
         }
     }
 }

@@ -219,6 +219,7 @@ struct VCheckBox_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -395,6 +396,23 @@ struct VCheckBox_Previews: PreviewProvider {
                     )
                 })
 #endif
+            })
+        }
+    }
+
+    private struct OutOfBoundsContentPreventionPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VCheckBox(
+                    uiModel: {
+                        var uiModel: VCheckBoxUIModel = .init()
+                        uiModel.layout.iconDimension = 100
+                        uiModel.colors.checkmark = VCheckBoxUIModel.Colors.StateColors(ColorBook.accentRed)
+                        return uiModel
+                    }(),
+                    state: .constant(.on),
+                    title: title
+                )
             })
         }
     }
