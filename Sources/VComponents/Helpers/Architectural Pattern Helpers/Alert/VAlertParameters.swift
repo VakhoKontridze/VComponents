@@ -48,14 +48,14 @@ public struct VAlertParameters: Identifiable {
     public var message: String?
     
     /// Buttons.
-    public var buttons: () -> [VAlertButton]
+    public var buttons: () -> [any VAlertButtonProtocol]
     
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
     public init(
         title: String,
         message: String?,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) {
         self.title = title
         self.message = message

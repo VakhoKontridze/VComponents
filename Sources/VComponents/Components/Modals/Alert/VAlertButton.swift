@@ -33,7 +33,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VAlertButton {
+public struct VAlertButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
     /*private*/ let role: Role
@@ -69,7 +69,7 @@ public struct VAlertButton {
     }
 
     // MARK: Body
-    func makeBody(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {

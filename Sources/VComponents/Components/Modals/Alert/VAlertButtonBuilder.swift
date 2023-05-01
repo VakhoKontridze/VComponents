@@ -36,7 +36,7 @@ import Foundation
 @resultBuilder public struct VAlertButtonBuilder {
     // MARK: Properties
     public typealias Component = any VAlertButtonConvertible
-    public typealias Result = [VAlertButton]
+    public typealias Result = [any VAlertButtonProtocol]
     
     // MARK: Build Blocks
     public static func buildBlock() -> Result {
@@ -75,17 +75,19 @@ import Foundation
     // If there are multiple `VAlertCancelButton`s, only the last one will be kept.
     // `VAlertCancelButton` will be moved to the end of the stack.
     // If there are no buttons, `VAlertOKButton` will be added.
-    static func process(_ buttons: [VAlertButton]) -> [VAlertButton] {
-        var result: [VAlertButton] = []
-        
+    static func process(_ buttons: [any VAlertButtonProtocol]) -> [any VAlertButtonProtocol] {
+        var result: [any VAlertButtonProtocol] = []
+
         for button in buttons {
-            if button.role == .cancel { result.removeAll(where: { $0.role == .cancel }) }
+            if (button as? VAlertButton)?.role == .cancel {
+                result.removeAll(where: { ($0 as? VAlertButton)?.role == .cancel })
+            }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0.role == .cancel }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { ($0 as? VAlertButton)?.role == .cancel }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
-        
+
         if result.isEmpty {
             result.append(VAlertButton(
                 role: .secondary,
@@ -93,7 +95,7 @@ import Foundation
                 title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
             ))
         }
-        
+
         return result
     }
 }

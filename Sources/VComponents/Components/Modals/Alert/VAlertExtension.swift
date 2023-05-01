@@ -51,7 +51,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: String?,
         message: String?,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
             .presentationHost(
@@ -114,7 +114,7 @@ extension View {
         title: String?,
         message: String?,
         @ViewBuilder content: @escaping () -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
             .presentationHost(
@@ -182,7 +182,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
@@ -271,7 +271,7 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @ViewBuilder content: @escaping (Item) -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
@@ -375,7 +375,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -471,7 +471,7 @@ extension View {
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
         @ViewBuilder content: @escaping (T) -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -569,7 +569,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (E) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButtonProtocol]
     ) -> some View
         where E: Error
     {

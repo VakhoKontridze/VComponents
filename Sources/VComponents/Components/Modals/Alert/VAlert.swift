@@ -29,7 +29,7 @@ struct VAlert<Content>: View
     private let title: String?
     private let message: String?
     private let content: VAlertContent<Content>
-    private let buttons: [VAlertButton]
+    private let buttons: [any VAlertButtonProtocol]
     
     @State private var isInternallyPresented: Bool = false
 
@@ -45,7 +45,7 @@ struct VAlert<Content>: View
         title: String?,
         message: String?,
         content: VAlertContent<Content>,
-        buttons: [VAlertButton]
+        buttons: [any VAlertButtonProtocol]
     ) {
         self.uiModel = uiModel
         self.presentHandler = presentHandler
@@ -191,7 +191,7 @@ struct VAlert<Content>: View
     }
     
     private func buttonContent(reversesOrder: Bool = false) -> some View {
-        let buttons: [VAlertButton] = self.buttons.reversed(if: reversesOrder)
+        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
             buttons[i].makeBody(

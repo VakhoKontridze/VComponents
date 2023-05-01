@@ -1014,29 +1014,6 @@ extension VSideBarUIModel.Layout {
 }
 
 // MARK: - V Alert
-@available(*, deprecated)
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public protocol VAlertButtonProtocol: VAlertButtonConvertible {
-    typealias Body = AnyView
-
-    func makeBody(
-        uiModel: VAlertUIModel,
-        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
-    ) -> Body
-}
-
-@available(*, deprecated)
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension VAlertButtonProtocol {
-    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
-}
-
 @available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -1053,13 +1030,6 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
     ) {
         self.action = action
         self.title = title
-    }
-
-    public func toButtons() -> [VAlertButton] {
-        [
-            VAlertButton(role: .primary, action: action, title: title)
-                .disabled(!isEnabled)
-        ]
     }
 
     public func makeBody(
@@ -1101,13 +1071,6 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
         self.title = title
     }
 
-    public func toButtons() -> [VAlertButton] {
-        [
-            VAlertButton(role: .secondary, action: action, title: title)
-                .disabled(!isEnabled)
-        ]
-    }
-
     public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
@@ -1145,13 +1108,6 @@ public struct VAlertOKButton: VAlertButtonProtocol {
     ) {
         self.action = action
         self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
-    }
-
-    public func toButtons() -> [VAlertButton] {
-        [
-            VAlertButton(role: .secondary, action: action, title: title)
-                .disabled(!isEnabled)
-        ]
     }
 
     public func makeBody(
@@ -1193,13 +1149,6 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
         self.title = title
     }
 
-    public func toButtons() -> [VAlertButton] {
-        [
-            VAlertButton(role: .destructive, action: action, title: title)
-                .disabled(!isEnabled)
-        ]
-    }
-
     public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
@@ -1237,13 +1186,6 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
     ) {
         self.action = action
         self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle
-    }
-
-    public func toButtons() -> [VAlertButton] {
-        [
-            VAlertButton(role: .secondary, action: action, title: title)
-                .disabled(!isEnabled)
-        ]
     }
 
     public func makeBody(

@@ -8,14 +8,14 @@
 import SwiftUI
 
 // MARK: - V Alert Button Convertible
-/// Type that allows for conversion to `VAlertButton`.
+/// Type that allows for conversion to `VAlertButtonProtocol`.
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VAlertButtonConvertible {
-    /// Converts self to `VAlertButton` `Array`.
-    func toButtons() -> [VAlertButton]
+    /// Converts self to `VAlertButtonProtocol` `Array`.
+    func toButtons() -> [any VAlertButtonProtocol]
 }
 
 @available(iOS 14.0, *)
@@ -23,15 +23,15 @@ public protocol VAlertButtonConvertible {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VAlertButton: VAlertButtonConvertible {
-    public func toButtons() -> [VAlertButton] { [self] }
+    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
 }
 
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension Array: VAlertButtonConvertible where Element == VAlertButton {
-    public func toButtons() -> [VAlertButton] { self }
+extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtocol {
+    public func toButtons() -> [any VAlertButtonProtocol] { self }
 }
 
 @available(iOS 14.0, *)
@@ -39,5 +39,5 @@ extension Array: VAlertButtonConvertible where Element == VAlertButton {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension EmptyView: VAlertButtonConvertible {
-    public func toButtons() -> [VAlertButton] { [] }
+    public func toButtons() -> [any VAlertButtonProtocol] { [] }
 }
