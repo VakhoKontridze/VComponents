@@ -106,7 +106,6 @@ struct VAlert<Content>: View
             maxHeight: alertSize
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
-        .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
         .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
     }
     

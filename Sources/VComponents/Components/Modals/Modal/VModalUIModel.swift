@@ -190,9 +190,6 @@ public struct VModalUIModel {
         /// Scale effect during appear and disappear. Set to `1.01`.
         public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
         
-        /// Opacity level during appear and disappear. Set to `0.5`.
-        public var opacity: Double = GlobalUIModel.Modals.poppingAnimationOpacity
-        
         /// Blur during appear and disappear. Set to `3`.
         public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
         

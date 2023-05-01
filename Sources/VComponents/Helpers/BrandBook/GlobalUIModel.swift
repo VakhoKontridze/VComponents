@@ -305,7 +305,6 @@ struct GlobalUIModel {
         static var poppingAppearAnimation: BasicAnimation? { .init(curve: .linear, duration: 0.05) }
         static var poppingDisappearAnimation: BasicAnimation? { .init(curve: .easeIn, duration: 0.05) }
         static var poppingAnimationScaleEffect: CGFloat { 1.01 }
-        static var poppingAnimationOpacity: CGFloat { 0.5 }
         static var poppingAnimationBlur: CGFloat { 3 }
         
         static var slidingAppearAnimation: BasicAnimation? { .init(curve: .easeInOut, duration: 0.3) }

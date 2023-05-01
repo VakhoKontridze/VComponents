@@ -898,6 +898,18 @@ extension VModalUIModel.Fonts {
     }
 }
 
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VModalUIModel.Animations {
+    @available(*, deprecated, message: "Property no longer has an effect since it messed with animation")
+    public var opacity: Double {
+        get { 0.5 }
+        set {}
+    }
+}
+
 // MARK: - V Bottom Sheet
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -1233,6 +1245,18 @@ extension VAlertUIModel.Fonts {
     public var message: Font {
         get { messageText }
         set { messageText = newValue }
+    }
+}
+
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VAlertUIModel.Animations {
+    @available(*, deprecated, message: "Property no longer has an effect since it messed with animation")
+    public var opacity: Double {
+        get { 0.5 }
+        set {}
     }
 }
 
