@@ -12,8 +12,13 @@ import VCore
 extension View {
     /// Presents `VContinuousSpinner` when `VSpinnerParameters` is non-`nil`.
     ///
-    /// Done in the style of `View.progressView(parameters:)` from `VCore`.
-    /// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Progress%20View/ProgressViewExtension.swift) .
+    ///     @State private var parameters: VSpinnerParameters = .init()
+    ///
+    ///     var body: some View {
+    ///         content
+    ///             .vContinuousSpinner(parameters: parameters)
+    ///     }
+    ///
     @ViewBuilder public func vContinuousSpinner(
         uiModel: VContinuousSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
@@ -31,8 +36,13 @@ extension View {
     
     /// Presents `VDashedSpinner` when `VSpinnerParameters` is non-`nil`.
     ///
-    /// Done in the style of `View.progressView(parameters:)` from `VCore`.
-    /// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Progress%20View/ProgressViewExtension.swift) .
+    ///     @State private var parameters: VSpinnerParameters = .init()
+    ///
+    ///     var body: some View {
+    ///         content
+    ///             .vDashedSpinner(parameters: parameters)
+    ///     }
+    ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     @ViewBuilder public func vDashedSpinner(
         uiModel: VDashedSpinnerUIModel = .init(),
