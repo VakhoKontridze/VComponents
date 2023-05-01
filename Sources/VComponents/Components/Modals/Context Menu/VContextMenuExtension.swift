@@ -27,19 +27,12 @@ extension View {
     ///         Text("Lorem Ipsum")
     ///             .vContextMenu(sections: {
     ///                 VMenuGroupSection(title: "Section 1", rows: {
-    ///                     VMenuRow(action: { print("1.1") }, title: "One")
-    ///                     VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///                 })
-    ///
-    ///                 VMenuGroupSection(title: "Section 2", rows: {
-    ///                     VMenuRow(action: { print("2.1") }, title: "One")
-    ///
-    ///                     VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///
+    ///                     VMenuRow(action: { print("1") }, title: "One")
+    ///                     VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
     ///                     VMenuExpandingRow(title: "Three...", sections: {
     ///                         VMenuGroupSection(rows: {
-    ///                             VMenuRow(action: { print("2.3.1") }, title: "One")
-    ///                             VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
+    ///                             VMenuRow(action: { print("3.1") }, title: "One")
+    ///                             VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
     ///                         })
     ///                     })
     ///                 })
@@ -79,19 +72,12 @@ extension View {
     ///             .vContextMenu(
     ///                 sections: {
     ///                     VMenuGroupSection(title: "Section 1", rows: {
-    ///                         VMenuRow(action: { print("1.1") }, title: "One")
-    ///                         VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///                     })
-    ///
-    ///                     VMenuGroupSection(title: "Section 2", rows: {
-    ///                         VMenuRow(action: { print("2.1") }, title: "One")
-    ///
-    ///                         VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///
+    ///                         VMenuRow(action: { print("1") }, title: "One")
+    ///                         VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
     ///                         VMenuExpandingRow(title: "Three...", sections: {
     ///                             VMenuGroupSection(rows: {
-    ///                                 VMenuRow(action: { print("2.3.1") }, title: "One")
-    ///                                 VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
+    ///                                 VMenuRow(action: { print("3.1") }, title: "One")
+    ///                                 VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
     ///                             })
     ///                         })
     ///                     })

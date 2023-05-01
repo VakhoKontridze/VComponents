@@ -24,19 +24,12 @@ import SwiftUI
 ///     var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
 ///             VMenuGroupSection(title: "Section 1", rows: {
-///                 VMenuRow(action: { print("1.1") }, title: "One")
-///                 VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
-///             })
-///
-///             VMenuGroupSection(title: "Section 2", rows: {
-///                 VMenuRow(action: { print("2.1") }, title: "One")
-///
-///                 VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
-///
+///                 VMenuRow(action: { print("1") }, title: "One")
+///                 VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
 ///                 VMenuExpandingRow(title: "Three...", sections: {
 ///                     VMenuGroupSection(rows: {
-///                         VMenuRow(action: { print("2.3.1") }, title: "One")
-///                         VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
+///                         VMenuRow(action: { print("3.1") }, title: "One")
+///                         VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
 ///                     })
 ///                 })
 ///             })
@@ -211,19 +204,12 @@ struct VMenu_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VMenu(title: "Lorem Ipsum", sections: {
                     VMenuGroupSection(title: "Section 1", rows: {
-                        VMenuRow(action: { print("1.1") }, title: "One")
-                        VMenuRow(action: { print("1.2") }, title: "Two", icon: Image(systemName: "swift"))
-                    })
-                    
-                    VMenuGroupSection(title: "Section 2", rows: {
-                        VMenuRow(action: { print("2.1") }, title: "One")
-                        
-                        VMenuRow(action: { print("2.2") }, title: "Two", icon: Image(systemName: "swift"))
-                        
+                        VMenuRow(action: { print("1") }, title: "One")
+                        VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
                         VMenuExpandingRow(title: "Three...", sections: {
                             VMenuGroupSection(rows: {
-                                VMenuRow(action: { print("2.3.1") }, title: "One")
-                                VMenuRow(action: { print("2.3.2") }, title: "Two", icon: Image(systemName: "swift"))
+                                VMenuRow(action: { print("3.1") }, title: "One")
+                                VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
                             })
                         })
                     })
