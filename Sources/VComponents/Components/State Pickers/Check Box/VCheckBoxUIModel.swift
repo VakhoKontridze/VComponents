@@ -47,7 +47,7 @@ public struct VCheckBoxUIModel {
         public var borderWidth: CGFloat = 1
         
         /// Checkmark icon dimension. Set to `9.`
-        public var iconDimension: CGFloat = 9
+        public var checkmarkIconDimension: CGFloat = 9
         
         /// Hit box. Set to `5`.
         public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0

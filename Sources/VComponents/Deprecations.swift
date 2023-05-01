@@ -237,6 +237,12 @@ extension VToggleUIModel.Fonts {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VCheckBoxUIModel.Layout {
+    @available(*, deprecated, renamed: "checkmarkIconDimension")
+    public var iconDimension: CGFloat {
+        get { checkmarkIconDimension }
+        set { checkmarkIconDimension = newValue }
+    }
+
     @available(*, deprecated, renamed: "titleTextMinimumScaleFactor")
     public var titleMinimumScaleFactor: CGFloat {
         get { titleTextMinimumScaleFactor }

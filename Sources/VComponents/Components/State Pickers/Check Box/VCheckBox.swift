@@ -151,7 +151,7 @@ public struct VCheckBox<Label>: View where Label: View {
                         checkMarkIcon
                             .resizable()
                             .scaledToFit()
-                            .frame(dimension: uiModel.layout.iconDimension)
+                            .frame(dimension: uiModel.layout.checkmarkIconDimension)
                             .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
                     }
                 })
@@ -406,7 +406,7 @@ struct VCheckBox_Previews: PreviewProvider {
                 VCheckBox(
                     uiModel: {
                         var uiModel: VCheckBoxUIModel = .init()
-                        uiModel.layout.iconDimension = 100
+                        uiModel.layout.checkmarkIconDimension = 100
                         uiModel.colors.checkmark = VCheckBoxUIModel.Colors.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
