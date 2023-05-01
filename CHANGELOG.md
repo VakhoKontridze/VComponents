@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.3.0(45)
+
+VConfirmationDialog
+
+- ConfirmationDialog is deprecated, and is replaced with `ConfirmationDialog` from [VCore](https://github.com/VakhoKontridze/VCore)
+
 ### [4.2.2(44)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.2) — *2023 05 01*
 
 Other

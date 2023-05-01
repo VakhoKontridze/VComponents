@@ -34,12 +34,6 @@ public protocol VComponentsLocalizationProvider {
     
     /// Localized value for `VAlertCancelButton`.
     var vAlertCancelButtonTitle: String { get }
-    
-    /// Localized value for `VConfirmationDialogOKButton`.
-    var vConfirmationDialogOKButtonTitle: String { get }
-    
-    /// Localized value for `VConfirmationDialogCancelButton`.
-    var vConfirmationDialogCancelButtonTitle: String { get }
 }
 
 // MARK: - Default VComponents Localization Provider
@@ -53,7 +47,4 @@ public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationPro
     public var vAlertErrorTitle: String { "Something Went Wrong" }
     public var vAlertOKButtonTitle: String { "Ok" }
     public var vAlertCancelButtonTitle: String { "Cancel" }
-    
-    public var vConfirmationDialogOKButtonTitle: String { "Ok" }
-    public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
 }

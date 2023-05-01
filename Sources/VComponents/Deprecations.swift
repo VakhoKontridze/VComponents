@@ -1079,3 +1079,409 @@ extension VAlertUIModel.Fonts {
         set { messageText = newValue }
     }
 }
+
+// MARK: - V Confirmation Dialog
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public protocol VConfirmationDialogButtonProtocol: VConfirmationDialogButtonConvertible {
+    typealias Body = AnyView
+
+    func makeBody() -> Body
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension VConfirmationDialogButtonProtocol {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { [self] }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+
+    public func makeBody() -> AnyView {
+        .init(
+            Button(
+                title,
+                role: nil,
+                action: { action?() }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
+    private var isEnabled: Bool = true
+    private let title: String
+    private let action: (() -> Void)?
+
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+
+    public func makeBody() -> AnyView {
+        .init(
+            Button(
+                title,
+                role: nil,
+                action: { action?() }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+
+    public func makeBody() -> AnyView {
+        AnyView(
+            Button(
+                title,
+                role: .destructive,
+                action: { action?() }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
+    }
+
+    public func makeBody() -> AnyView {
+        .init(
+            Button(
+                title,
+                role: .cancel,
+                action: { action?() }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public protocol VConfirmationDialogButtonConvertible {
+    func toButtons() -> [any VConfirmationDialogButtonProtocol]
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButtonProtocol {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { self }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EmptyView: VConfirmationDialogButtonConvertible {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { [] }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@resultBuilder public struct VConfirmationDialogButtonBuilder {
+    public typealias Component = any VConfirmationDialogButtonConvertible
+    public typealias Result = [any VConfirmationDialogButtonProtocol]
+
+    public static func buildBlock() -> Result {
+        []
+    }
+
+    public static func buildBlock(_ components: Component...) -> Result {
+        components.flatMap { $0.toButtons() }
+    }
+
+    public static func buildOptional(_ component: Component?) -> Result {
+        component?.toButtons() ?? []
+    }
+
+    public static func buildEither(first component: Component) -> Result {
+        component.toButtons()
+    }
+
+    public static func buildEither(second component: Component) -> Result {
+        component.toButtons()
+    }
+
+    public static func buildArray(_ components: [Component]) -> Result {
+        components.flatMap { $0.toButtons() }
+    }
+
+    public static func buildLimitedAvailability(_ component: Component) -> Result {
+        component.toButtons()
+    }
+
+    public static func buildFinalResult(_ component: Component) -> Result {
+        component.toButtons()
+    }
+
+    static func process(_ buttons: [any VConfirmationDialogButtonProtocol]) -> [any VConfirmationDialogButtonProtocol] {
+        var result: [any VConfirmationDialogButtonProtocol] = []
+
+        for button in buttons {
+            if button is VConfirmationDialogCancelButton { result.removeAll(where: { $0 is VConfirmationDialogCancelButton }) }
+            result.append(button)
+        }
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0 is VConfirmationDialogCancelButton }) {
+            result.append(result.remove(at: cancelButtonIndex))
+        }
+
+        if result.isEmpty {
+            result.append(VConfirmationDialogCancelButton(
+                action: nil,
+                title: VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+            ))
+        }
+
+        return result
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+struct VConfirmationDialogContentView: View {
+    let buttons: [any VConfirmationDialogButtonProtocol]
+
+    init(button: [any VConfirmationDialogButtonProtocol]) {
+        self.buttons = VConfirmationDialogButtonBuilder.process(button)
+    }
+
+    var body: some View {
+        ForEach(buttons.indices, id: \.self, content: { i in
+            buttons[i].makeBody()
+        })
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension View {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    public func vConfirmationDialog(
+        isPresented: Binding<Bool>,
+        title: String?,
+        message: String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
+    ) -> some View {
+        self
+            .confirmationDialog(
+                title ?? "",
+                isPresented: isPresented,
+                titleVisibility: .vConfirmationDialog(title: title, message: message),
+                actions: { VConfirmationDialogContentView(button: buttons()) },
+                message: {
+                    if let message {
+                        Text(message)
+                    }
+                }
+            )
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension View {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    public func vConfirmationDialog<Item>(
+        item: Binding<Item?>,
+        title: @escaping (Item) -> String?,
+        message: @escaping (Item) -> String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping (Item) -> [any VConfirmationDialogButtonProtocol]
+    ) -> some View
+        where Item: Identifiable
+    {
+        self
+            .confirmationDialog(
+                item.wrappedValue.flatMap { title($0) } ?? "",
+                isPresented: Binding(
+                    get: { item.wrappedValue != nil },
+                    set: { if !$0 { item.wrappedValue = nil } }
+                ),
+                titleVisibility: .vConfirmationDialog(
+                    title: item.wrappedValue.flatMap { title($0) },
+                    message: item.wrappedValue.flatMap { message($0) }
+                ),
+                actions: {
+                    if let item = item.wrappedValue {
+                        VConfirmationDialogContentView(button: buttons(item))
+                    }
+                },
+                message: {
+                    if let item = item.wrappedValue, let message = message(item) {
+                        Text(message)
+                    }
+                }
+            )
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension View {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    public func vConfirmationDialog<T>(
+        isPresented: Binding<Bool>,
+        presenting data: T?,
+        title: @escaping (T) -> String?,
+        message: @escaping (T) -> String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping (T) -> [any VConfirmationDialogButtonProtocol]
+    ) -> some View {
+        self
+            .confirmationDialog(
+                data.flatMap { title($0) } ?? "",
+                isPresented: Binding(
+                    get: { isPresented.wrappedValue && data != nil },
+                    set: { if !$0 { isPresented.wrappedValue = false } }
+                ),
+                titleVisibility: .vConfirmationDialog(
+                    title: data.flatMap { title($0) },
+                    message: data.flatMap { message($0) }
+                ),
+                actions: {
+                    if let data {
+                        VConfirmationDialogContentView(button: buttons(data))
+                    }
+                },
+                message: {
+                    if let data, let message = message(data) {
+                        Text(message)
+                    }
+                }
+            )
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension Visibility {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    fileprivate static func vConfirmationDialog(title: String?, message: String?) -> Self {
+        switch (title, message) {
+        case (nil, nil): return .hidden
+        case (nil, _?): return .visible
+        case (_?, nil): return .visible
+        case (_?, _?): return .visible
+        }
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension View {
+    public func vConfirmationDialog(
+        parameters: Binding<VConfirmationDialogParameters?>
+    ) -> some View {
+        self.vConfirmationDialog(
+            item: parameters,
+            title: { $0.title },
+            message: { $0.message },
+            actions: { $0.buttons() }
+        )
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct VConfirmationDialogParameters: Identifiable {
+    public let id: UUID = .init()
+    public var title: String?
+    public var message: String?
+
+    public var buttons: () -> [any VConfirmationDialogButtonProtocol]
+
+    public init(
+        title: String?,
+        message: String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
+    ) {
+        self.title = title
+        self.message = message
+        self.buttons = buttons
+    }
+}
+
+@available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@MainActor public protocol VConfirmationDialogPresentable: ObservableObject {
+    var vConfirmationDialogParameters: VConfirmationDialogParameters? { get set }
+}
+
+extension VComponentsLocalizationProvider {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    var vConfirmationDialogOKButtonTitle: String { "Ok" }
+
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
+}
+
+extension DefaultVComponentsLocalizationProvider {
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    public var vConfirmationDialogOKButtonTitle: String { "Ok" }
+
+    @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
+    public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
+}
