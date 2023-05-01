@@ -53,11 +53,11 @@ public struct VAlertUIModel {
         /// Corner radius. Set to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margins applied to title text, message text, and content as a whole. Set to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        /// Additional margins applied to title text, message text, and content as a whole. Set to `15` leading, `15` trailing,`15` top, and `10` bottom.
         public var titleTextMessageTextAndContentMargins: Margins = .init(
             leading: GlobalUIModel.Common.containerContentMargin,
             trailing: GlobalUIModel.Common.containerContentMargin,
-            top: 20,
+            top: GlobalUIModel.Common.containerContentMargin,
             bottom: 10
         )
         
@@ -103,12 +103,12 @@ public struct VAlertUIModel {
         /// Button corner radius. Set to `10`.
         public var buttonCornerRadius: CGFloat = 10
         
-        /// Button margins. Set to `15` leading, `15` trailing, `15` top, and `20` bottom.
+        /// Button margins. Set to `15` leading, `15` trailing, `10` top, and `15` bottom.
         public var buttonMargins: Margins = .init(
             leading: GlobalUIModel.Common.containerContentMargin,
             trailing: GlobalUIModel.Common.containerContentMargin,
             top: 10,
-            bottom: 20
+            bottom: GlobalUIModel.Common.containerContentMargin
         )
         
         /// Spacing between horizontal buttons.  Set to `10`.

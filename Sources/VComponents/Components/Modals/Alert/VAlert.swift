@@ -499,11 +499,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert<Never>(
-                    uiModel: {
-                        var uiModel: VAlertUIModel = .init()
-                        uiModel.layout.titleTextMessageTextAndContentMargins.top = uiModel.layout.titleTextMessageTextAndContentMargins.bottom
-                        return uiModel
-                    }(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: nil,
