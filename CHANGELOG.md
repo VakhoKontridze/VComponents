@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.2.3(45)
+### [4.2.3(45)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.3) — *2023 05 01*
 
 General
 
