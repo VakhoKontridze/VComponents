@@ -44,6 +44,9 @@ public struct VToastUIModel {
         
         /// Text line type. Set to `default`.
         public var textLineType: TextLineType = .default
+
+        /// Text minimum scale factor. Set to `0.75`.
+        public var textMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Text margins. Set to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(

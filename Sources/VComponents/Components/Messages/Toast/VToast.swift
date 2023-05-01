@@ -67,6 +67,7 @@ struct VToast: View {
         Text(text)
             .multilineTextAlignment(uiModel.layout.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
             .lineLimit(type: uiModel.layout.textLineType.toVCoreTextLineType.textLineLimitType)
+            .minimumScaleFactor(uiModel.layout.textMinimumScaleFactor)
             .foregroundColor(uiModel.colors.text)
             .font(uiModel.fonts.text)
 
