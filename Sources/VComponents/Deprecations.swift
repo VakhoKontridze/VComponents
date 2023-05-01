@@ -1896,3 +1896,14 @@ extension VMenuPickerSection {
         )
     }
 }
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VMenuUIModel.Colors {
+    @available(*, deprecated, renamed: "titleText")
+    public var label: StateColors {
+        get { titleText }
+        set { titleText = newValue }
+    }
+}

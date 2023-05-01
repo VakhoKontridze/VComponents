@@ -26,7 +26,7 @@ import SwiftUI
 ///             VMenuGroupSection(headerTitle: "Section 1", rows: {
 ///                 VMenuRow(action: { print("1") }, title: "One")
 ///                 VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
-///                 VMenuExpandingRow(headerTitle: "Three...", sections: {
+///                 VMenuExpandingRow(title: "Three...", sections: {
 ///                     VMenuGroupSection(rows: {
 ///                         VMenuRow(action: { print("3.1") }, title: "One")
 ///                         VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
@@ -68,6 +68,21 @@ public struct VMenu<Label>: View where Label: View {
         self.label = .title(title: title)
         self.sections = sections
     }
+
+    /// Initializes `VMenu` with icon and sections.
+    public init(
+        uiModel: VMenuUIModel = .init(),
+        primaryAction: (() -> Void)? = nil,
+        icon: Image,
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self.primaryAction = primaryAction
+        self.label = .icon(icon: icon)
+        self.sections = sections
+    }
     
     /// Initializes `VMenu` with label and sections.
     public init(
@@ -95,6 +110,21 @@ public struct VMenu<Label>: View where Label: View {
         self.uiModel = uiModel
         self.primaryAction = primaryAction
         self.label = .title(title: title)
+        self.sections = { [VMenuGroupSection(rows: rows)] }
+    }
+
+    /// Initializes `VMenu` with icon and rows.
+    public init(
+        uiModel: VMenuUIModel = .init(),
+        primaryAction: (() -> Void)? = nil,
+        icon: Image,
+        @VMenuGroupRowBuilder rows: @escaping () -> [any VMenuGroupRowProtocol]
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self.primaryAction = primaryAction
+        self.label = .icon(icon: icon)
         self.sections = { [VMenuGroupSection(rows: rows)] }
     }
     
@@ -149,15 +179,42 @@ public struct VMenu<Label>: View where Label: View {
         )
     }
     
-    @ViewBuilder private func menuLabel() -> some View {
-        switch label {
-        case .title(let title):
-            Text(title)
-                .foregroundColor(uiModel.colors.label.value(for: internalState))
-            
-        case .content(let label):
-            label(internalState)
-        }
+    private func menuLabel() -> some View {
+        Group(content: {
+            switch label {
+            case .title(let title):
+                titleLabelComponent(title: title)
+
+            case .icon(let icon):
+                iconLabelComponent(icon: icon)
+
+            case .content(let label):
+                label(internalState)
+            }
+        })
+        .padding(uiModel.layout.hitBox)
+    }
+
+    private func titleLabelComponent(
+        title: String
+    ) -> some View {
+        VText(
+            minimumScaleFactor: uiModel.layout.titleTextMinimumScaleFactor,
+            color: uiModel.colors.titleText.value(for: internalState),
+            font: uiModel.fonts.titleText,
+            text: title
+        )
+    }
+
+    private func iconLabelComponent(
+        icon: Image
+    ) -> some View {
+        icon
+            .resizable()
+            .scaledToFit()
+            .frame(size: uiModel.layout.iconSize)
+            .foregroundColor(uiModel.colors.icon.value(for: internalState))
+            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
 }
 

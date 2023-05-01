@@ -13,5 +13,6 @@ import SwiftUI
 @available(watchOS, unavailable)
 enum VMenuLabel<Content> where Content: View {
     case title(title: String)
+    case icon(icon: Image)
     case content(content: (VMenuInternalState) -> Content)
 }
