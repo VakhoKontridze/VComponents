@@ -29,7 +29,7 @@ struct VAlert<Content>: View
     private let title: String?
     private let message: String?
     private let content: VAlertContent<Content>
-    private let buttons: [any VAlertButtonProtocol]
+    private let buttons: [VAlertButton]
     
     @State private var isInternallyPresented: Bool = false
 
@@ -45,7 +45,7 @@ struct VAlert<Content>: View
         title: String?,
         message: String?,
         content: VAlertContent<Content>,
-        buttons: [any VAlertButtonProtocol]
+        buttons: [VAlertButton]
     ) {
         self.uiModel = uiModel
         self.presentHandler = presentHandler
@@ -191,7 +191,7 @@ struct VAlert<Content>: View
     }
     
     private func buttonContent(reversesOrder: Bool = false) -> some View {
-        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
+        let buttons: [VAlertButton] = self.buttons.reversed(if: reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
             buttons[i].makeBody(
@@ -308,8 +308,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -327,8 +327,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .empty,
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -362,7 +362,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertSecondaryButton(action: {}, title: "Ok"),
+                        VAlertButton(role: .secondary, action: {}, title: "Ok"),
                     ]
                 )
             })
@@ -380,10 +380,10 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: {}, title: "Option A"),
-                        VAlertSecondaryButton(action: {}, title: "Option B"),
-                        VAlertDestructiveButton(action: {}, title: "Delete"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: {}, title: "Option A"),
+                        VAlertButton(role: .secondary, action: {}, title: "Option B"),
+                        VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -410,9 +410,9 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: {}, title: "Option A"),
-                        VAlertDestructiveButton(action: {}, title: "Delete"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: {}, title: "Option A"),
+                        VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -430,9 +430,9 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: {}, title: "Option A").disabled(true),
-                        VAlertDestructiveButton(action: {}, title: "Delete").disabled(true),
-                        VAlertCancelButton(action: nil).disabled(true)
+                        VAlertButton(role: .primary, action: {}, title: "Option A").disabled(true),
+                        VAlertButton(role: .destructive, action: {}, title: "Delete").disabled(true),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel").disabled(true)
                     ]
                 )
             })
@@ -450,8 +450,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -469,8 +469,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -488,8 +488,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .content(content: content),
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })
@@ -511,8 +511,8 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .empty,
                     buttons: [
-                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                        VAlertCancelButton(action: nil)
+                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
             })

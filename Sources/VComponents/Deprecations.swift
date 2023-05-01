@@ -1014,6 +1014,259 @@ extension VSideBarUIModel.Layout {
 }
 
 // MARK: - V Alert
+@available(*, deprecated)
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public protocol VAlertButtonProtocol: VAlertButtonConvertible {
+    typealias Body = AnyView
+
+    func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> Body
+}
+
+@available(*, deprecated)
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VAlertButtonProtocol {
+    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
+}
+
+@available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct VAlertPrimaryButton: VAlertButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+
+    public func toButtons() -> [VAlertButton] {
+        [
+            VAlertButton(role: .primary, action: action, title: title)
+                .disabled(!isEnabled)
+        ]
+    }
+
+    public func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VStretchedButton(
+                uiModel: uiModel.primaryButtonSubUIModel,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct VAlertSecondaryButton: VAlertButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+
+    public func toButtons() -> [VAlertButton] {
+        [
+            VAlertButton(role: .secondary, action: action, title: title)
+                .disabled(!isEnabled)
+        ]
+    }
+
+    public func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VStretchedButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct VAlertOKButton: VAlertButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
+    }
+
+    public func toButtons() -> [VAlertButton] {
+        [
+            VAlertButton(role: .secondary, action: action, title: title)
+                .disabled(!isEnabled)
+        ]
+    }
+
+    public func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VStretchedButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct VAlertDestructiveButton: VAlertButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+
+    public func toButtons() -> [VAlertButton] {
+        [
+            VAlertButton(role: .destructive, action: action, title: title)
+                .disabled(!isEnabled)
+        ]
+    }
+
+    public func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VStretchedButton(
+                uiModel: uiModel.destructiveButtonSubUIModel,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, message: "Use `VAlertButton` with `role` instead")
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct VAlertCancelButton: VAlertButtonProtocol {
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle
+    }
+
+    public func toButtons() -> [VAlertButton] {
+        [
+            VAlertButton(role: .secondary, action: action, title: title)
+                .disabled(!isEnabled)
+        ]
+    }
+
+    public func makeBody(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VStretchedButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

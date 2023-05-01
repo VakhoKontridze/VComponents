@@ -15,8 +15,25 @@ import SwiftUI
 extension View {
     /// Presents `VAlert` when `VAlertParameters` is non-`nil`.
     ///
-    /// Done in the style of `View.alert(parameters:)` from `VCore`.
-    /// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Alert/AlertExtension.swift) .
+    ///     @State private var isPresented: Bool = false
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { isPresented = true },
+    ///             title: "Present"
+    ///         )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             title: "Lorem Ipsum",
+    ///             message: "Lorem ipsum dolor sit amet",
+    ///             actions: {
+    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///             }
+    ///         )
+    ///     }
+    ///     
     public func vAlert(
         id: String,
         uiModel: VAlertUIModel = .init(),

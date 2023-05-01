@@ -10,11 +10,28 @@ import SwiftUI
 // MARK: - V Alert Parameters
 /// Parameters for presenting a `VAlert`.
 ///
-/// Done in the style of `VAlertParameters` from `VCore`.
-/// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Alert/AlertParameters.swift) .
-///
 /// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in`Presenter`.
 /// in `MVVM` architecture, parameters are stored in `ViewModel.`
+///
+///     @State private var isPresented: Bool = false
+///
+///     var body: some View {
+///         VPlainButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///         .vAlert(
+///             id: "some_alert",
+///             isPresented: $isPresented,
+///             title: "Lorem Ipsum",
+///             message: "Lorem ipsum dolor sit amet",
+///             actions: {
+///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+///             }
+///         )
+///     }
+///     
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -31,14 +48,14 @@ public struct VAlertParameters: Identifiable {
     public var message: String?
     
     /// Buttons.
-    public var buttons: () -> [any VAlertButtonProtocol]
+    public var buttons: () -> [VAlertButton]
     
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
     public init(
         title: String,
         message: String?,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [VAlertButton]
     ) {
         self.title = title
         self.message = message
@@ -55,7 +72,11 @@ public struct VAlertParameters: Identifiable {
             title: title,
             message: message,
             actions: {
-                VAlertCancelButton(action: completion)
+                VAlertButton(
+                    role: .cancel,
+                    action: completion,
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle
+                )
             }
         )
     }
@@ -69,7 +90,11 @@ public struct VAlertParameters: Identifiable {
             title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,
             message: error.localizedDescription,
             actions: {
-                VAlertOKButton(action: completion)
+                VAlertButton(
+                    role: .secondary,
+                    action: completion,
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
+                )
             }
         )
     }

@@ -10,9 +10,6 @@ import SwiftUI
 // MARK: - V Alert Presentable
 /// Protocol for presenting a `VAlert`.
 ///
-/// Done in the style of `AlertPresentable` from `VCore`.
-/// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Alert/AlertPresentable.swift) .
-///
 /// In `MVP`, `VIP`, and `VIPER` architectures, this protocol is conformed to by a `Presenter`.
 /// in `MVVM` architecture, this protocol is conformed to by a `ViewModel.`
 ///
@@ -31,7 +28,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
-///     final class Presenter: ObservableObject, VAlertPresentable {
+///     @MainActor final class Presenter: ObservableObject, VAlertPresentable {
 ///         @Published var vAlertParameters: VAlertParameters?
 ///
 ///         func didTapButton() {
@@ -39,8 +36,8 @@ import SwiftUI
 ///                 title: "Lorem Ipsum",
 ///                 message: "Lorem ipsum dolor sit amet",
 ///                 actions: {
-///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-///                     VAlertCancelButton(action: { print("Cancelled") })
+///                     VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+///                     VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
 ///                 }
 ///             )
 ///         }
