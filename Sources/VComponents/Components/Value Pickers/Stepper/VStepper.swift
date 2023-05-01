@@ -72,6 +72,7 @@ public struct VStepper: View {
             buttons
         })
         .frame(size: uiModel.layout.size)
+        .cornerRadius(uiModel.layout.cornerRadius)
     }
     
     private var background: some View {
@@ -95,7 +96,7 @@ public struct VStepper: View {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                         .foregroundColor(uiModel.colors.buttonBackground.value(for: buttonInternalState(button)))
-                    
+
                     button.icon
                         .resizable()
                         .scaledToFit()

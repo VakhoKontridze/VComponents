@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.2.3(45)
+
+General
+
+- Issue with large icons going out of bounds in several components is fixed 
+
 ### [4.2.2(44)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.2) — *2023 05 01*
 
 Other

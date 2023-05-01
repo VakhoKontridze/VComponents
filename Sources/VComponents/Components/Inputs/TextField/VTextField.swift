@@ -169,7 +169,7 @@ public struct VTextField: View {
         })
         .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
         .frame(height: uiModel.layout.height)
-        .clipped() // Just in case font is too big
+        .clipped() // Prevents large content from going out of bounds
         .background(background)
     }
     
@@ -306,7 +306,7 @@ struct VTextField_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
-    private static var contentType: VTextFieldUIModel.Layout.ContentType { .standard }
+    private static var contentType: VTextFieldUIModel.Layout.ContentType { .search }
     
     // Previews
     static var previews: some View {
