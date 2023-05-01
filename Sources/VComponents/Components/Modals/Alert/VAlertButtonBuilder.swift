@@ -9,26 +9,6 @@ import Foundation
 
 // MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
-///
-///     @State private var isPresented: Bool = false
-///
-///     var body: some View {
-///         VPlainButton(
-///             action: { isPresented = true },
-///             title: "Present"
-///         )
-///         .vAlert(
-///             id: "some_alert",
-///             isPresented: $isPresented,
-///             title: "Lorem Ipsum",
-///             message: "Lorem ipsum dolor sit amet",
-///             actions: {
-///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-///             }
-///         )
-///     }
-///
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
