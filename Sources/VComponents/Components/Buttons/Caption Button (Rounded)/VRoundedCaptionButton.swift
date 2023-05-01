@@ -112,8 +112,8 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 .foregroundColor(uiModel.colors.icon.value(for: internalState))
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
-        .cornerRadius(uiModel.layout.cornerRadius)
         .frame(size: uiModel.layout.roundedRectangleSize)
+        .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
         .background(rectangleBackground(internalState: internalState))
         .overlay(roundedRectangleBorder(internalState: internalState))
     }

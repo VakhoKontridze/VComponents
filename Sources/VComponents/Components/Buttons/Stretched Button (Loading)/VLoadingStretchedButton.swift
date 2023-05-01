@@ -99,6 +99,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.layout.height)
+                    .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
             }
@@ -133,7 +134,6 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
         .padding(uiModel.layout.labelMargins)
-        .cornerRadius(uiModel.layout.cornerRadius)
     }
     
     private func titleLabelComponent(

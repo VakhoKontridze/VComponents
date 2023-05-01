@@ -82,6 +82,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.layout.height)
+                    .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
                     .padding(uiModel.layout.hitBox)
@@ -109,7 +110,6 @@ public struct VCapsuleButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
         .padding(uiModel.layout.labelMargins)
-        .cornerRadius(uiModel.layout.cornerRadius)
         .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.accessibility3))
