@@ -2,6 +2,10 @@
 
 ### 4.3.0(45)
 
+VAlert
+
+- Alert API is overhauled
+
 VConfirmationDialog
 
 - ConfirmationDialog is deprecated, and is replaced with `ConfirmationDialog` from [VCore](https://github.com/VakhoKontridze/VCore)
