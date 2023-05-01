@@ -29,7 +29,7 @@ struct VContextMenuContentView: View {
             id: \.offset,
             content: { (_, section) in
                 TitledSection(
-                    title: section.title,
+                    headerTitle: section.headerTitle,
                     content: { section.makeBody() }
                 )
             }
@@ -81,7 +81,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                 Text("Lorem ipsum")
                     .vContextMenu(
                         sections: {
-                            VMenuGroupSection(title: "Section 1", rows: {
+                            VMenuGroupSection(headerTitle: "Section 1", rows: {
                                 VMenuRow(action: { print("1") }, title: "One")
                                 VMenuRow(action: { print("1") }, title: "Two", icon: Image(systemName: "swift"))
                                 VMenuExpandingRow(title: "Three...", sections: {

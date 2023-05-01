@@ -950,156 +950,6 @@ extension VBottomSheetUIModel.Fonts {
     }
 }
 
-// MARK: - V Menu
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension VMenuPickerSection {
-    @available(*, unavailable, message: "This `init` is no longer available")
-    public init(
-        title: String? = nil,
-        selectedIndex: Binding<Int>,
-        rowTitles: [String]
-    )
-        where
-            Data: RandomAccessCollection,
-            Data.Index == Int
-    {
-        fatalError()
-    }
-
-    @available(*, deprecated, message: "Use `init` with `id`")
-    public init<SelectionValue>(
-        title: String? = nil,
-        selection: Binding<SelectionValue>,
-        content: @escaping (SelectionValue) -> VMenuPickerRowProtocol
-    )
-        where
-            Data == Array<SelectionValue>,
-            SelectionValue: CaseIterable,
-            ID == Int
-    {
-        self.init(
-            title: title,
-            selection: selection,
-            data: Array(SelectionValue.allCases),
-            id: \.hashValue,
-            content: content
-        )
-    }
-}
-
-@available(*, deprecated, renamed: "VMenuExpandingRow")
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public typealias VMenuTitleRow = VMenuRow
-
-@available(*, deprecated, message: "Use ")
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 15.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
-public struct VMenuTitleIconRow: VMenuGroupRowProtocol {
-    private var isEnabled: Bool = true
-    private let action: () -> Void
-    private let role: ButtonRole?
-    private let title: String
-    private let icon: Image
-
-    public init(
-        action: @escaping () -> Void,
-        role: ButtonRole? = nil,
-        title: String,
-        icon: Image
-    ) {
-        self.action = action
-        self.role = role
-        self.title = title
-        self.icon = icon
-    }
-
-    public init(
-        action: @escaping () -> Void,
-        role: ButtonRole? = nil,
-        title: String,
-        assetIcon: String,
-        bundle: Bundle? = nil
-    ) {
-        self.action = action
-        self.role = role
-        self.title = title
-        self.icon = Image(assetIcon, bundle: bundle)
-    }
-
-    public init(
-        action: @escaping () -> Void,
-        role: ButtonRole? = nil,
-        title: String,
-        systemIcon: String
-    ) {
-        self.action = action
-        self.role = role
-        self.title = title
-        self.icon = Image(systemName: systemIcon)
-    }
-
-    public func makeBody() -> AnyView {
-        .init(
-            Button(
-                role: role,
-                action: action,
-                label: {
-                    Text(title)
-                    icon
-                }
-            )
-            .disabled(!isEnabled)
-        )
-    }
-
-    public func disabled(_ disabled: Bool) -> Self {
-        var button = self
-        button.isEnabled = !disabled
-        return button
-    }
-}
-
-@available(*, deprecated, renamed: "VMenuExpandingRow")
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-public typealias VMenuSubMenuRow = VMenuExpandingRow
-
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
-@available(watchOS 7, *)@available(watchOS, unavailable)
-extension VMenuPickerSection {
-    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
-    public init(
-        title: String? = nil,
-        selection: Binding<Data.Element>,
-        data: Data,
-        id: KeyPath<Data.Element, ID>,
-        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
-    ) {
-        fatalError()
-    }
-
-    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
-    public init(
-        title: String? = nil,
-        selection: Binding<Data.Element>,
-        data: Data,
-        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
-    )
-        where
-            Data.Element: Identifiable,
-            ID == Data.Element.ID
-    {
-        fatalError()
-    }
-}
-
 // MARK: - V Side Bar
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
@@ -1790,4 +1640,235 @@ extension DefaultVComponentsLocalizationProvider {
 
     @available(*, deprecated, message: "VConfirmationDialog is obsolete. Use `ConfirmationDialog` from `VCore` instead")
     public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
+}
+
+// MARK: - V Menu
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VMenuPickerSection {
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        title: String? = nil,
+        selectedIndex: Binding<Int>,
+        rowTitles: [String]
+    )
+        where
+            Data: RandomAccessCollection,
+            Data.Index == Int
+    {
+        fatalError()
+    }
+
+    @available(*, deprecated, message: "Use `init` with `id`")
+    public init<SelectionValue>(
+        title: String? = nil,
+        selection: Binding<SelectionValue>,
+        content: @escaping (SelectionValue) -> VMenuPickerRowProtocol
+    )
+        where
+            Data == Array<SelectionValue>,
+            SelectionValue: CaseIterable,
+            ID == Int
+    {
+        self.init(
+            title: title,
+            selection: selection,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            content: content
+        )
+    }
+}
+
+@available(*, deprecated, renamed: "VMenuExpandingRow")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public typealias VMenuTitleRow = VMenuRow
+
+@available(*, deprecated, message: "Use ")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
+public struct VMenuTitleIconRow: VMenuGroupRowProtocol {
+    private var isEnabled: Bool = true
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
+    private let icon: Image
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        icon: Image
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = icon
+    }
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        assetIcon: String,
+        bundle: Bundle? = nil
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = Image(assetIcon, bundle: bundle)
+    }
+
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        systemIcon: String
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = Image(systemName: systemIcon)
+    }
+
+    public func makeBody() -> AnyView {
+        .init(
+            Button(
+                role: role,
+                action: action,
+                label: {
+                    Text(title)
+                    icon
+                }
+            )
+            .disabled(!isEnabled)
+        )
+    }
+
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+@available(*, deprecated, renamed: "VMenuExpandingRow")
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public typealias VMenuSubMenuRow = VMenuExpandingRow
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(watchOS 7, *)@available(watchOS, unavailable)
+extension VMenuPickerSection {
+    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
+    public init(
+        title: String? = nil,
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
+    ) {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "Use init with `VMenuPickerRow` instead")
+    public init(
+        title: String? = nil,
+        selection: Binding<Data.Element>,
+        data: Data,
+        content: @escaping (Data.Element) -> VMenuGroupRowProtocol
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        fatalError()
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VMenuSectionProtocol {
+    @available(*, deprecated, renamed: "headerTitle")
+    var title: String? { headerTitle }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VMenuGroupSection {
+    @available(*, deprecated, message: "Use init with `headerTitle`")
+    public init(
+        title: String?,
+        @VMenuGroupRowBuilder rows: @escaping () -> [any VMenuGroupRowProtocol]
+    ) {
+        self.init(
+            headerTitle: title,
+            rows: rows
+        )
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VMenuPickerSection {
+    @available(*, deprecated, message: "Use init with `headerTitle`")
+    public init(
+        title: String?,
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        content: @escaping (Data.Element) -> VMenuPickerRowProtocol
+    ) {
+        self.init(
+            headerTitle: title,
+            selection: selection,
+            data: data,
+            id: id,
+            rows: content
+        )
+    }
+
+    @available(*, deprecated, message: "Use init with `headerTitle`")
+    public init(
+        title: String?,
+        selection: Binding<Data.Element>,
+        data: Data,
+        content: @escaping (Data.Element) -> VMenuPickerRowProtocol
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        self.init(
+            headerTitle: title,
+            selection: selection,
+            data: data,
+            rows: content
+        )
+    }
+
+    @available(*, deprecated, message: "Use init with `headerTitle`")
+    public init<T>(
+        title: String?,
+        selection: Binding<T>
+    )
+        where
+            Data == Array<T>,
+            T: Identifiable & CaseIterable & StringRepresentable,
+            ID == T.ID
+    {
+        self.init(
+            headerTitle: title,
+            selection: selection
+        )
+    }
 }

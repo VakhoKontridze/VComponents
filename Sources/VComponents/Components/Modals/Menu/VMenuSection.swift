@@ -15,21 +15,21 @@ import VCore
 @available(watchOS, unavailable)
 public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Properties
-    public var title: String?
+    public var headerTitle: String?
     private let rows: () -> [any VMenuGroupRowProtocol]
     
     // MARK: Initializers
     /// Initializes `VMenuGroupSection` with rows.
     public init(
-        title: String? = nil,
+        headerTitle: String? = nil,
         @VMenuGroupRowBuilder rows: @escaping () -> [any VMenuGroupRowProtocol]
     ) {
-        self.title = title
+        self.headerTitle = headerTitle
         self.rows = rows
     }
     
     // MARK: Section Protocol
-    //public var title: String?
+    //public var headerTitle: String?
     
     public func makeBody() -> AnyView {
         .init(
@@ -54,7 +54,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
         ID: Hashable
 {
     // MARK: Properties
-    public var title: String?
+    public var headerTitle: String?
 
     @Binding private var selection: Data.Element
 
@@ -65,13 +65,13 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` with selection, data, id, and row content.
     public init(
-        title: String? = nil,
+        headerTitle: String? = nil,
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        content: @escaping (Data.Element) -> VMenuPickerRowProtocol
+        rows content: @escaping (Data.Element) -> VMenuPickerRowProtocol
     ) {
-        self.title = title
+        self.headerTitle = headerTitle
         self._selection = selection
         self.data = data
         self.id = id
@@ -81,16 +81,16 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     // MARK: Initializers - Identifiable
     /// Initializes `VMenuPickerSection` with selection, data, and row content.
     public init(
-        title: String? = nil,
+        headerTitle: String? = nil,
         selection: Binding<Data.Element>,
         data: Data,
-        content: @escaping (Data.Element) -> VMenuPickerRowProtocol
+        rows content: @escaping (Data.Element) -> VMenuPickerRowProtocol
     )
         where
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
-        self.title = title
+        self.headerTitle = headerTitle
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -100,7 +100,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     // MARK: Initializers - String Representable
     /// Initializes `VSegmentedPicker` with `StringRepresentable` API.
     public init<T>(
-        title: String? = nil,
+        headerTitle: String? = nil,
         selection: Binding<T>
     )
         where
@@ -108,7 +108,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
             T: Identifiable & CaseIterable & StringRepresentable,
             ID == T.ID
     {
-        self.title = title
+        self.headerTitle = headerTitle
         self._selection = selection
         self.data = Array(T.allCases)
         self.id = \.id
@@ -116,7 +116,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     }
     
     // MARK: Section Protocol
-    //public var title: String?
+    //public var headerTitle: String?
     
     public func makeBody() -> AnyView {
         .init(

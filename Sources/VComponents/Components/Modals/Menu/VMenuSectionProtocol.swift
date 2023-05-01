@@ -13,8 +13,8 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
-    /// Section title.
-    var title: String? { get }
+    /// Section header title.
+    var headerTitle: String? { get }
 
     /// Section body type.
     typealias Body = AnyView

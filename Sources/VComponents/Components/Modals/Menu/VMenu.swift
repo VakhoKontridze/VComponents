@@ -23,10 +23,10 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
-///             VMenuGroupSection(title: "Section 1", rows: {
+///             VMenuGroupSection(headerTitle: "Section 1", rows: {
 ///                 VMenuRow(action: { print("1") }, title: "One")
 ///                 VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
-///                 VMenuExpandingRow(title: "Three...", sections: {
+///                 VMenuExpandingRow(headerTitle: "Three...", sections: {
 ///                     VMenuGroupSection(rows: {
 ///                         VMenuRow(action: { print("3.1") }, title: "One")
 ///                         VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
@@ -142,7 +142,7 @@ public struct VMenu<Label>: View where Label: View {
             id: \.offset,
             content: { (_, section) in
                 TitledSection(
-                    title: section.title,
+                    headerTitle: section.headerTitle,
                     content: { section.makeBody() }
                 )
             }
@@ -203,7 +203,7 @@ struct VMenu_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VMenu(title: "Lorem Ipsum", sections: {
-                    VMenuGroupSection(title: "Section 1", rows: {
+                    VMenuGroupSection(headerTitle: "Section 1", rows: {
                         VMenuRow(action: { print("1") }, title: "One")
                         VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
                         VMenuExpandingRow(title: "Three...", sections: {

@@ -26,10 +26,10 @@ extension View {
     ///     var body: some View {
     ///         Text("Lorem Ipsum")
     ///             .vContextMenu(sections: {
-    ///                 VMenuGroupSection(title: "Section 1", rows: {
+    ///                 VMenuGroupSection(headerTitle: "Section 1", rows: {
     ///                     VMenuRow(action: { print("1") }, title: "One")
     ///                     VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///                     VMenuExpandingRow(title: "Three...", sections: {
+    ///                     VMenuExpandingRow(headerTitle: "Three...", sections: {
     ///                         VMenuGroupSection(rows: {
     ///                             VMenuRow(action: { print("3.1") }, title: "One")
     ///                             VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
@@ -71,7 +71,7 @@ extension View {
     ///         Text("Lorem Ipsum")
     ///             .vContextMenu(
     ///                 sections: {
-    ///                     VMenuGroupSection(title: "Section 1", rows: {
+    ///                     VMenuGroupSection(headerTitle: "Section 1", rows: {
     ///                         VMenuRow(action: { print("1") }, title: "One")
     ///                         VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
     ///                         VMenuExpandingRow(title: "Three...", sections: {
