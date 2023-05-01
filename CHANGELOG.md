@@ -2,6 +2,10 @@
 
 ### 4.3.0(45)
 
+VPlainButton
+
+- `iconSize` is changed to `18` to `iOS` and `macOS`
+
 VAlert
 
 - Alert API is overhauled
