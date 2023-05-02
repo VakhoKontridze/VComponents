@@ -217,6 +217,8 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
     
     // Data
     private static var icon: Image { .init(systemName: "swift") }
+    private static var iconCaption: Image { .init(systemName: "swift") }
+
     private static var titleCaption: String {
 #if os(watchOS)
         return "Lorem".pseudoRTL(languageDirection)
@@ -224,6 +226,7 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
         return "Lorem Ipsum".pseudoRTL(languageDirection)
 #endif
     }
+    private static var titleCaptionShort: String { "Lorem".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {
@@ -233,6 +236,13 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     icon: icon,
                     titleCaption: titleCaption
+                )
+
+                VRoundedCaptionButton(
+                    action: { print("Clicked") },
+                    icon: icon,
+                    iconCaption: iconCaption,
+                    titleCaption: titleCaptionShort
                 )
             })
         }

@@ -208,6 +208,11 @@ struct VCapsuleButton_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VCapsuleButton(
                     action: { print("Clicked") },
+                    title: title
+                )
+
+                VCapsuleButton(
+                    action: { print("Clicked") },
                     icon: icon,
                     title: title
                 )

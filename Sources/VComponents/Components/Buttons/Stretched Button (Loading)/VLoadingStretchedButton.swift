@@ -226,25 +226,45 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
-    
+    private static var icon: Image { .init(systemName: "swift") }
+    private static var title: String {
+#if os(watchOS)
+        return "Lorem".pseudoRTL(languageDirection)
+#else
+        "Lorem Ipsum".pseudoRTL(languageDirection)
+#endif
+    }
+
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VLoadingStretchedButton(
-                    isLoading: false,
-                    action: { print("Clicked") },
-                    title: title
-                )
+                Group(content: {
+                    VLoadingStretchedButton(
+                        isLoading: false,
+                        action: { print("Clicked") },
+                        title: title
+                    )
+
+                    VLoadingStretchedButton(
+                        isLoading: false,
+                        action: { print("Clicked") },
+                        icon: icon,
+                        title: title
+                    )
+                })
                 .applyModifier({
-#if os(macOS)
-                    $0.frame(width: 250)
-#else
+#if os(iOS)
                     $0
+#elseif os(macOS)
+                    $0.frame(width: 250)
+#elseif os(watchOS)
+                    $0.frame(width: 100)
+#else
+                    fatalError() // Not supported
 #endif
                 })
-                .padding()
+                .padding(.horizontal)
             })
         }
     }

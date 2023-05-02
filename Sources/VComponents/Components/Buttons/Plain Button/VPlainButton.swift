@@ -184,10 +184,28 @@ struct VPlainButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VPlainButton(
-                    action: { print("Clicked") },
-                    title: title
-                )
+                VStack(content: {
+                    VPlainButton(
+                        action: { print("Clicked") },
+                        title: title
+                    )
+
+                    VPlainButton(
+                        action: { print("Clicked") },
+                        icon: Image(systemName: "swift")
+                    )
+
+                    VPlainButton(
+                        uiModel: {
+                            var uiModel: VPlainButtonUIModel = .init()
+                            uiModel.layout.iconSize = CGSize(dimension: 18)
+                            return uiModel
+                        }(),
+                        action: { print("Clicked") },
+                        icon: Image(systemName: "swift"),
+                        title: title
+                    )
+                })
             })
         }
     }

@@ -35,8 +35,8 @@ public struct VMenuUIModel {
         /// Title text minimum scale factor. Set to `0.75`.
         public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
 
-        /// Icon size. Set to `18x18`.
-        public var iconSize: CGSize = .init(dimension: 18)
+        /// Icon size. Set to `24x24`.
+        public var iconSize: CGSize = .init(dimension: 24)
 
         /// Hit box. Set to `5`s.
         public var hitBox: HitBox = .init(5)

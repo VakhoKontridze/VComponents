@@ -195,12 +195,18 @@ struct VRoundedButton_Previews: PreviewProvider {
     }
     
     // Data
+    private static var title: String { "ABC".pseudoRTL(languageDirection) }
     private static var icon: Image { .init(systemName: "swift") }
     
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
+                VRoundedButton(
+                    action: { print("Clicked") },
+                    title: title
+                )
+
                 VRoundedButton(
                     action: { print("Clicked") },
                     icon: icon

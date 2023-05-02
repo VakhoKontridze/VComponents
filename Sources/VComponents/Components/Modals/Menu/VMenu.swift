@@ -243,6 +243,9 @@ struct VMenu_Previews: PreviewProvider {
     }
     
     // Data
+    private static var icon: Image { .init(systemName: "swift") }
+    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+
     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue
 
@@ -258,21 +261,31 @@ struct VMenu_Previews: PreviewProvider {
         
         var body: some View {
             PreviewContainer(content: {
-                VMenu(title: "Lorem Ipsum", sections: {
-                    VMenuGroupSection(headerTitle: "Section 1", rows: {
-                        VMenuRow(action: { print("1") }, title: "One")
-                        VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
-                        VMenuExpandingRow(title: "Three...", sections: {
-                            VMenuGroupSection(rows: {
-                                VMenuRow(action: { print("3.1") }, title: "One")
-                                VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
-                            })
-                        })
+                VMenu(
+                    title: title,
+                    sections: menuSections
+                )
+
+                VMenu(
+                    icon: icon,
+                    sections: menuSections
+                )
+            })
+        }
+
+        @VMenuSectionBuilder func menuSections() -> [any VMenuSectionProtocol] {
+            VMenuGroupSection(headerTitle: "Section 1", rows: {
+                VMenuRow(action: { print("1") }, title: "One")
+                VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
+                VMenuExpandingRow(title: "Three...", sections: {
+                    VMenuGroupSection(rows: {
+                        VMenuRow(action: { print("3.1") }, title: "One")
+                        VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
                     })
-                    
-                    VMenuPickerSection(selection: $selection)
                 })
             })
+
+            VMenuPickerSection(selection: $selection)
         }
     }
 }

@@ -188,6 +188,7 @@ struct VStretchedButton_Previews: PreviewProvider {
     }
     
     // Data
+    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String {
 #if os(watchOS)
         return "Lorem".pseudoRTL(languageDirection)
@@ -200,10 +201,18 @@ struct VStretchedButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VStretchedButton(
-                    action: { print("Clicked") },
-                    title: title
-                )
+                Group(content: {
+                    VStretchedButton(
+                        action: { print("Clicked") },
+                        title: title
+                    )
+
+                    VStretchedButton(
+                        action: { print("Clicked") },
+                        icon: icon,
+                        title: title
+                    )
+                })
                 .applyModifier({
 #if os(iOS)
                     $0
@@ -215,7 +224,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                     fatalError() // Not supported
 #endif
                 })
-                .padding()
+                .padding(.horizontal)
             })
         }
     }

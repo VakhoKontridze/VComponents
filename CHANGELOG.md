@@ -4,7 +4,7 @@
 
 VPlainButton
 
-- `iconSize` is changed to `18` to `iOS` and `macOS`
+- `iconSize` is changed to `24`
 
 VAlert
 
