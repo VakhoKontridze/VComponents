@@ -233,13 +233,13 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VRoundedCaptionButton(
-                    action: { print("Clicked") },
+                    action: {},
                     icon: icon,
                     titleCaption: titleCaption
                 )
 
                 VRoundedCaptionButton(
-                    action: { print("Clicked") },
+                    action: {},
                     icon: icon,
                     iconCaption: iconCaption,
                     titleCaption: titleCaptionShort

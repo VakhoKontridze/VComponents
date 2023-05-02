@@ -82,12 +82,12 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                     .vContextMenu(
                         sections: {
                             VMenuGroupSection(headerTitle: "Section 1", rows: {
-                                VMenuRow(action: { print("1") }, title: "One")
-                                VMenuRow(action: { print("1") }, title: "Two", icon: Image(systemName: "swift"))
+                                VMenuRow(action: {}, title: "One")
+                                VMenuRow(action: {}, title: "Two", icon: Image(systemName: "swift"))
                                 VMenuExpandingRow(title: "Three...", sections: {
                                     VMenuGroupSection(rows: {
-                                        VMenuRow(action: { print("3.1") }, title: "One")
-                                        VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
+                                        VMenuRow(action: {}, title: "One")
+                                        VMenuRow(action: {}, title: "Two", icon: Image(systemName: "swift"))
                                     })
                                 })
                             })

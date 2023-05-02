@@ -242,13 +242,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                 Group(content: {
                     VLoadingStretchedButton(
                         isLoading: false,
-                        action: { print("Clicked") },
+                        action: {},
                         title: title
                     )
 
                     VLoadingStretchedButton(
                         isLoading: false,
-                        action: { print("Clicked") },
+                        action: {},
                         icon: icon,
                         title: title
                     )

@@ -203,12 +203,12 @@ struct VRoundedButton_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VRoundedButton(
-                    action: { print("Clicked") },
+                    action: {},
                     title: title
                 )
 
                 VRoundedButton(
-                    action: { print("Clicked") },
+                    action: {},
                     icon: icon
                 )
             })

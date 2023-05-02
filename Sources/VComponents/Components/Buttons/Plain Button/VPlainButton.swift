@@ -186,12 +186,12 @@ struct VPlainButton_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VStack(content: {
                     VPlainButton(
-                        action: { print("Clicked") },
+                        action: {},
                         title: title
                     )
 
                     VPlainButton(
-                        action: { print("Clicked") },
+                        action: {},
                         icon: Image(systemName: "swift")
                     )
 
@@ -201,7 +201,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             uiModel.layout.iconSize = CGSize(dimension: 18)
                             return uiModel
                         }(),
-                        action: { print("Clicked") },
+                        action: {},
                         icon: Image(systemName: "swift"),
                         title: title
                     )

@@ -203,12 +203,12 @@ struct VStretchedButton_Previews: PreviewProvider {
             PreviewContainer(content: {
                 Group(content: {
                     VStretchedButton(
-                        action: { print("Clicked") },
+                        action: {},
                         title: title
                     )
 
                     VStretchedButton(
-                        action: { print("Clicked") },
+                        action: {},
                         icon: icon,
                         title: title
                     )

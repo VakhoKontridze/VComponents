@@ -307,7 +307,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
@@ -326,7 +326,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .empty,
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
@@ -449,7 +449,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
@@ -468,7 +468,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .content(content: content),
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
@@ -487,7 +487,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .content(content: content),
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )
@@ -506,7 +506,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: nil,
                     content: .empty,
                     buttons: [
-                        VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
                         VAlertButton(role: .cancel, action: nil, title: "Cancel")
                     ]
                 )

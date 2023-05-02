@@ -207,12 +207,12 @@ struct VCapsuleButton_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VCapsuleButton(
-                    action: { print("Clicked") },
+                    action: {},
                     title: title
                 )
 
                 VCapsuleButton(
-                    action: { print("Clicked") },
+                    action: {},
                     icon: icon,
                     title: title
                 )

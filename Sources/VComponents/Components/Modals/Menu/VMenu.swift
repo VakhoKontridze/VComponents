@@ -275,12 +275,12 @@ struct VMenu_Previews: PreviewProvider {
 
         @VMenuSectionBuilder func menuSections() -> [any VMenuSectionProtocol] {
             VMenuGroupSection(headerTitle: "Section 1", rows: {
-                VMenuRow(action: { print("1") }, title: "One")
-                VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
+                VMenuRow(action: {}, title: "One")
+                VMenuRow(action: {}, title: "Two", icon: Image(systemName: "swift"))
                 VMenuExpandingRow(title: "Three...", sections: {
                     VMenuGroupSection(rows: {
-                        VMenuRow(action: { print("3.1") }, title: "One")
-                        VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
+                        VMenuRow(action: {}, title: "One")
+                        VMenuRow(action: {}, title: "Two", icon: Image(systemName: "swift"))
                     })
                 })
             })
