@@ -35,10 +35,10 @@ public struct VTextViewUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Textfield min height. Set to `50`.
+        /// Textview min height. Set to `50`.
         public var minHeight: CGFloat = GlobalUIModel.Inputs.height
         
-        /// Textfield corner radius. Set to `12`.
+        /// Textview corner radius. Set to `12`.
         public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
         
         /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
