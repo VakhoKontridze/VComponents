@@ -37,7 +37,6 @@ extension View {
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
-    ///
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -96,7 +95,6 @@ extension View {
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
-    ///
     public func vToast<Item>(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -172,7 +170,6 @@ extension View {
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
-    ///
     public func vToast<T>(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -246,7 +243,6 @@ extension View {
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
-    ///
     public func vToast<E>(
         id: String,
         uiModel: VToastUIModel = .init(),
