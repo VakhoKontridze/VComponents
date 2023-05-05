@@ -274,8 +274,8 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     private var indicator: some View {
         RoundedRectangle(cornerRadius: uiModel.layout.indicatorCornerRadius)
-            .padding(uiModel.layout.indicatorMargin)
             .frame(width: rowWidth)
+            .padding(uiModel.layout.indicatorMargin)
             .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
             .offset(x: rowWidth * CGFloat(selectedIndexInt))
             .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))
@@ -300,9 +300,9 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                                 .foregroundColor(uiModel.colors.rowTitleText.value(for: rowInternalState(element: element)))
                                 .font(uiModel.fonts.rowTitleText)
 
+                                .frame(maxWidth: .infinity)
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
-                                .frame(maxWidth: .infinity)
                                 .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
@@ -319,9 +319,9 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                         onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
                         label: {
                             content(rowInternalState(element: element), element)
+                                .frame(maxWidth: .infinity)
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
-                                .frame(maxWidth: .infinity)
                                 .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
                             
                                 .onSizeChange(perform: { rowWidth = $0.width })

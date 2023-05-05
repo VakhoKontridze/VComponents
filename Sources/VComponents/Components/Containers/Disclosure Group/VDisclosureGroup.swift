@@ -162,8 +162,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     private var contentView: some View {
         content()
-            .padding(uiModel.layout.contentMargins)
             .frame(maxWidth: .infinity)
+            .padding(uiModel.layout.contentMargins)
     }
     
     // MARK: Actions

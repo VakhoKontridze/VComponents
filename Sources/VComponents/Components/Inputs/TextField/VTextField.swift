@@ -171,8 +171,8 @@ public struct VTextField: View {
             clearButton
             visibilityButton // Only for secure field
         })
-        .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
         .frame(height: uiModel.layout.height)
+        .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
         .clipped() // Prevents large content from going out of bounds
         .background(background)
     }

@@ -141,8 +141,8 @@ public struct VTextView: View {
         Group(content: {
             textField
         })
-        .padding(uiModel.layout.contentMargin)
         .frame(minHeight: uiModel.layout.minHeight)
+        .padding(uiModel.layout.contentMargin)
         .background(background)
     }
     
