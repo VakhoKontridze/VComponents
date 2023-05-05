@@ -72,18 +72,18 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Modals
 
 <p>
-    <img tag="VModal" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562724-89709ed5-0997-46ef-9de1-0802c2cfc8d8.jpg">
-    <img tag="VBottomSheet" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562707-ece3819b-3cfe-4f1a-b492-de1e929982e0.jpg">
-    <img tag="VSideBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562728-7e1e88cd-cb99-4f9f-abf7-e83fc96494cf.jpg">
-    <img tag="VAlert" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562697-93fb57eb-6e15-4fc9-bc0a-d495955f02b2.jpg">
-    <img tag="VMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562722-13bc695d-6672-401c-b511-383469ed0b9d.jpg">
-    <img tag="VContextMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
+    <img tag="VModal" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562724-89709ed5-0997-46ef-9de1-0802c2cfc8d8.jpg">
+    <img tag="VBottomSheet" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562707-ece3819b-3cfe-4f1a-b492-de1e929982e0.jpg">
+    <img tag="VSideBar" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562728-7e1e88cd-cb99-4f9f-abf7-e83fc96494cf.jpg">
+    <img tag="VAlert" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562697-93fb57eb-6e15-4fc9-bc0a-d495955f02b2.jpg">
+    <img tag="VMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562722-13bc695d-6672-401c-b511-383469ed0b9d.jpg">
+    <img tag="VContextMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
 <p/>
 
 #### Messages
 
 <p>
-    <img tag="VToast" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562732-ded73082-8dd8-4778-a187-5fa367fe9b74.jpg">
+    <img tag="VToast" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562732-ded73082-8dd8-4778-a187-5fa367fe9b74.jpg">
 <p/>
 
 #### Indicators
