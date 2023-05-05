@@ -18,90 +18,90 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Buttons
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779300-dc408524-ac16-4469-ba4f-195a05076154.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779495-84b0e553-16af-4b51-82c4-6f15247c9d31.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779544-7ee698d6-36d9-4715-bb3d-0082ee7ab016.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779610-01ee42e6-3912-4316-acfb-e99d75bb0f3f.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377506-ea0f07d5-79f6-45a1-9b10-e929d3caadff.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779755-b15a2fc4-d811-4c96-888e-5b437495a484.png">
+    <img tag="VStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779300-dc408524-ac16-4469-ba4f-195a05076154.png">
+    <img tag="VLoadingStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779495-84b0e553-16af-4b51-82c4-6f15247c9d31.png">
+    <img tag="VCapsuleButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779544-7ee698d6-36d9-4715-bb3d-0082ee7ab016.png">
+    <img tag="VRoundedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779610-01ee42e6-3912-4316-acfb-e99d75bb0f3f.png">
+    <img tag="VRoundedCaptionButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377506-ea0f07d5-79f6-45a1-9b10-e929d3caadff.png">
+    <img tag="VPlainButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779755-b15a2fc4-d811-4c96-888e-5b437495a484.png">
 <p/>
 
 #### State Pickers
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779957-94c56311-167d-4087-a702-2c406ca9923d.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780007-237b86c4-e9b2-4a65-9584-0a0fff4367af.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780063-bb06c5cc-86e2-4f79-a01f-2351e01280ff.png">
+    <img tag="VToggle" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779957-94c56311-167d-4087-a702-2c406ca9923d.png">
+    <img tag="VCheckBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780007-237b86c4-e9b2-4a65-9584-0a0fff4367af.png">
+    <img tag="VRadioButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780063-bb06c5cc-86e2-4f79-a01f-2351e01280ff.png">
 <p/>
 
 #### Item Pickers
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780284-aaacf102-e492-4146-8aa0-ddc4e8e47650.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780344-9c49918b-5ef8-4e26-940e-5fbcef3ea657.png">
+    <img tag="VSegmentedPicker" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780284-aaacf102-e492-4146-8aa0-ddc4e8e47650.png">
+    <img tag="VWheelPicker" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780344-9c49918b-5ef8-4e26-940e-5fbcef3ea657.png">
 <p/>
 
 #### Value Pickers
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780455-aa9ef2a0-aa27-4315-8f96-54804048b2bb.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780537-a50527e1-a3f1-40c9-94b2-4f89bb63c847.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780595-53c6ee12-1914-4b33-b2e4-8c2fc087c396.png">
+    <img tag="VStepper" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780455-aa9ef2a0-aa27-4315-8f96-54804048b2bb.png">
+    <img tag="VSlider" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780537-a50527e1-a3f1-40c9-94b2-4f89bb63c847.png">
+    <img tag="VRangeSlider" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780595-53c6ee12-1914-4b33-b2e4-8c2fc087c396.png">
 <p/>
 
 #### Inputs
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780686-891530b1-c9b2-4988-b3ee-0f101166bfbf.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782956-6050c117-b699-4887-86e5-03ed8eb4eb0c.png">
+    <img tag="VTextField" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780686-891530b1-c9b2-4988-b3ee-0f101166bfbf.png">
+    <img tag="VTextView" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782956-6050c117-b699-4887-86e5-03ed8eb4eb0c.png">
 <p/>
 
 #### Containers
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236555677-bfab5fa3-c609-452c-b216-9841a7572337.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780974-03273059-5039-4412-9be4-07369808ba91.png">
+    <img tag="VGroupBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236555677-bfab5fa3-c609-452c-b216-9841a7572337.png">
+    <img tag="VDisclosureGroup" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780974-03273059-5039-4412-9be4-07369808ba91.png">
 <p/>
 
 #### Lists
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781281-c75c219c-ac6d-4ad2-bcff-e8774687fed4.png">
+    <img tag="VListRow" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781281-c75c219c-ac6d-4ad2-bcff-e8774687fed4.png">
 <p/>
 
 #### Modals
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587704-43250eff-6562-4de1-b8d4-e53db4d405d0.mp4">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377014-0fb09a5a-5199-4ba2-a71a-6d29f6804459.mp4">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587709-5d22a962-30f3-45b2-afa5-61317afe5963.mp4">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781879-befcedb5-d182-4611-9d89-1ff0c117457d.mp4">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782027-583f42eb-f0a1-457f-a7f2-30e99be0aa27.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782028-be042565-d89d-49fc-ba1d-6babdc140b37.mp4">
+    <img tag="VModal" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587704-43250eff-6562-4de1-b8d4-e53db4d405d0.mp4">
+    <img tag="VBottomSheet" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377014-0fb09a5a-5199-4ba2-a71a-6d29f6804459.mp4">
+    <img tag="VSideBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587709-5d22a962-30f3-45b2-afa5-61317afe5963.mp4">
+    <img tag="VAlert" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781879-befcedb5-d182-4611-9d89-1ff0c117457d.mp4">
+    <img tag="VMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782027-583f42eb-f0a1-457f-a7f2-30e99be0aa27.png">
+    <img tag="VContextMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782028-be042565-d89d-49fc-ba1d-6babdc140b37.mp4">
 <p/>
 
 #### Messages
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782129-22f4c6ff-7116-41fa-ae5a-0e8cd32c6039.mp4">
+    <img tag="VToast" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782129-22f4c6ff-7116-41fa-ae5a-0e8cd32c6039.mp4">
 <p/>
 
 #### Indicators
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587684-db5652bc-c20f-44d0-9b26-ae2298903608.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587698-df51dcbc-3370-49e2-9f41-0e2615b96c4d.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782392-7867a1c3-4408-4f14-bd2c-d2119b387b01.png">
+    <img tag="VContinuousSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
+    <img tag="VDashedSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
+    <img tag="VProgressBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
+    <img tag="VPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587684-db5652bc-c20f-44d0-9b26-ae2298903608.png">
+    <img tag="VCompactPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587698-df51dcbc-3370-49e2-9f41-0e2615b96c4d.png">
+    <img tag="VAutomaticPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782392-7867a1c3-4408-4f14-bd2c-d2119b387b01.png">
 <p/>
 
 #### Misc
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782559-e42d5352-30c1-46e4-8461-7e0402111d68.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782558-4275425e-62db-4d3e-9fd4-10855e073be3.png">
+    <img tag="VWrappingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782559-e42d5352-30c1-46e4-8461-7e0402111d68.png">
+    <img tag="VBouncingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782558-4275425e-62db-4d3e-9fd4-10855e073be3.png">
 <p/>
 
 ## Guidelines
