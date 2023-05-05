@@ -199,8 +199,8 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
     
-    var sheetSubUIModel: VSheetUIModel {
-        var uiModel: VSheetUIModel = .init()
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
         
         uiModel.layout.roundedCorners = .allCorners
         uiModel.layout.cornerRadius = uiModel.layout.cornerRadius

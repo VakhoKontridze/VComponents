@@ -213,8 +213,8 @@ public struct VSideBarUIModel {
     }
     
     // MARK: Sub UI Models
-    var sheetSubUIModel: VSheetUIModel {
-        var uiModel: VSheetUIModel = .init()
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
         
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages

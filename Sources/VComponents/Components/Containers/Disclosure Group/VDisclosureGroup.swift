@@ -99,7 +99,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
             PlainDisclosureGroup(
                 uiModel: uiModel.plainDisclosureGroupSubUIModel,
                 isExpanded: Binding(

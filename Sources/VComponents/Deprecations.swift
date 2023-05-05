@@ -818,8 +818,14 @@ extension VTextViewUIModel.Colors {
     }
 }
 
-// MARK: - V Sheet
-extension VSheetUIModel.Layout {
+// MARK: - V Group Box
+@available(*, deprecated, renamed: "VGroupBox")
+public typealias VSheet = VGroupBox
+
+@available(*, deprecated, renamed: "VGroupBox")
+public typealias VSheetUIModel = VGroupBoxUIModel
+
+extension VGroupBoxUIModel.Layout {
     @available(*, deprecated, message: "Use `contentMargins` instead")
     public var contentMargin: CGFloat {
         get { (contentMargins.horizontalAverage + contentMargins.verticalAverage)/2 }
@@ -1711,13 +1717,13 @@ extension VMenuPickerSection {
     }
 }
 
-@available(*, deprecated, renamed: "VMenuExpandingRow")
+@available(*, deprecated, renamed: "VMenuRow")
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public typealias VMenuTitleRow = VMenuRow
 
-@available(*, deprecated, message: "Use ")
+@available(*, deprecated, renamed: "VMenuRow")
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 15.0, *)@available(tvOS, unavailable)
 @available(watchOS 8.0, *)@available(watchOS, unavailable)

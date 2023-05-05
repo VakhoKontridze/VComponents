@@ -89,7 +89,7 @@ struct VBottomSheet<Content>: View
     
     private var bottomSheet: some View {
         ZStack(content: {
-            VSheet(uiModel: uiModel.sheetSubUIModel)
+            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fix issue of safe areas and/or landscape
@@ -120,7 +120,7 @@ struct VBottomSheet<Content>: View
                 contentView
             })
             .frame(maxHeight: .infinity, alignment: .top)
-            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VSheet`
+            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
             .applyIf(!uiModel.misc.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fix issue of safe areas and/or landscape

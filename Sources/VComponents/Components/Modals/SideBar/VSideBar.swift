@@ -69,7 +69,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private var sideBar: some View {
         ZStack(content: {
-            VSheet(uiModel: uiModel.sheetSubUIModel)
+            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
                 .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(

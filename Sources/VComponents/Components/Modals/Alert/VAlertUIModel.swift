@@ -149,7 +149,7 @@ public struct VAlertUIModel {
             public var width: CGFloat
             
             // MARK: Initializers
-            /// Initializes `BottomSheetSize`.
+            /// Initializes `AlertSize`.
             public init(
                 width: CGFloat
             ) {
@@ -287,8 +287,8 @@ public struct VAlertUIModel {
     }
     
     // MARK: Sub UI Models
-    var sheetSubUIModel: VSheetUIModel {
-        var uiModel: VSheetUIModel = .init()
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
         
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages

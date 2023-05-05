@@ -1,5 +1,5 @@
 //
-//  VSheetUIModel.swift
+//  VGroupBoxUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/22/20.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Sheet UI Model
+// MARK: - V Group Box UI Model
 /// Model that describes UI.
-public struct VSheetUIModel {
+public struct VGroupBoxUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()

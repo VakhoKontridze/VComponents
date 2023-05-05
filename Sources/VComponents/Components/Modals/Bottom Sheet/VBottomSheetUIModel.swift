@@ -392,8 +392,8 @@ public struct VBottomSheetUIModel {
     }
     
     // MARK: Sub UI Models
-    var sheetSubUIModel: VSheetUIModel {
-        var uiModel: VSheetUIModel = .init()
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
         
         uiModel.layout.roundedCorners = .topCorners
         uiModel.layout.cornerRadius = layout.cornerRadius

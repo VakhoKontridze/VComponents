@@ -75,7 +75,7 @@ struct VModal<Content>: View
 
     private var modal: some View {
         ZStack(content: {
-            VSheet(uiModel: uiModel.sheetSubUIModel)
+            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
                 .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
@@ -89,7 +89,7 @@ struct VModal<Content>: View
                 divider
                 contentView
             })
-            .cornerRadius( // Fixes issue of content-clipping, as it's not in `VSheet`
+            .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
                 uiModel.layout.cornerRadius,
                 corners: uiModel.layout.roundedCorners
                     .withReversedLeftAndRightCorners(

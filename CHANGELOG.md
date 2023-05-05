@@ -6,21 +6,25 @@ VPlainButton
 
 - `iconSize` is changed to `24`
 
+VSheet
+
+- `VSheet` is renamed to `VGroupBox`
+
 VAlert
 
-- Alert API is overhauled
+- API is overhauled
 
 VConfirmationDialog
 
-- ConfirmationDialog is deprecated, and is replaced with `ConfirmationDialog` from [VCore](https://github.com/VakhoKontridze/VCore)
+- Component is deprecated, and is replaced with `ConfirmationDialog` from [VCore](https://github.com/VakhoKontridze/VCore)
 
 VMenu
 
-- Menu API is overhauled
+- API is overhauled
 
 VContextMenu
 
-- ContextMenu API is overhauled
+- API is overhauled
 
 ### [4.2.3(45)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.3) — *2023 05 01*
 
