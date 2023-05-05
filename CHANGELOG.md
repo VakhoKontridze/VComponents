@@ -8,7 +8,7 @@ VPlainButton
 
 VSheet
 
-- `VSheet` is renamed to `VGroupBox`
+- Component is renamed to `VGroupBox`
 
 VAlert
 
