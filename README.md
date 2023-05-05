@@ -60,7 +60,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 <p>
     <img tag="VGroupBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236555677-bfab5fa3-c609-452c-b216-9841a7572337.png">
-    <img tag="VDisclosureGroup" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780974-03273059-5039-4412-9be4-07369808ba91.png">
+    <img tag="VDisclosureGroup" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562719-5ccb94b2-00b5-43c1-974e-8a2d6f8b59fe.png">
 <p/>
 
 #### Lists
@@ -72,18 +72,18 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Modals
 
 <p>
-    <img tag="VModal" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587704-43250eff-6562-4de1-b8d4-e53db4d405d0.mp4">
-    <img tag="VBottomSheet" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377014-0fb09a5a-5199-4ba2-a71a-6d29f6804459.mp4">
-    <img tag="VSideBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587709-5d22a962-30f3-45b2-afa5-61317afe5963.mp4">
-    <img tag="VAlert" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781879-befcedb5-d182-4611-9d89-1ff0c117457d.mp4">
-    <img tag="VMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782027-583f42eb-f0a1-457f-a7f2-30e99be0aa27.png">
-    <img tag="VContextMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782028-be042565-d89d-49fc-ba1d-6babdc140b37.mp4">
+    <img tag="VModal" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562724-89709ed5-0997-46ef-9de1-0802c2cfc8d8.jpg">
+    <img tag="VBottomSheet" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562707-ece3819b-3cfe-4f1a-b492-de1e929982e0.jpg">
+    <img tag="VSideBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562728-7e1e88cd-cb99-4f9f-abf7-e83fc96494cf.jpg">
+    <img tag="VAlert" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562697-93fb57eb-6e15-4fc9-bc0a-d495955f02b2.jpg">
+    <img tag="VMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562722-13bc695d-6672-401c-b511-383469ed0b9d.jpg">
+    <img tag="VContextMenu" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
 <p/>
 
 #### Messages
 
 <p>
-    <img tag="VToast" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782129-22f4c6ff-7116-41fa-ae5a-0e8cd32c6039.mp4">
+    <img tag="VToast" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562732-ded73082-8dd8-4778-a187-5fa367fe9b74.jpg">
 <p/>
 
 #### Indicators
