@@ -22,7 +22,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VLoadingStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779495-84b0e553-16af-4b51-82c4-6f15247c9d31.png">
     <img tag="VCapsuleButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779544-7ee698d6-36d9-4715-bb3d-0082ee7ab016.png">
     <img tag="VRoundedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779610-01ee42e6-3912-4316-acfb-e99d75bb0f3f.png">
-    <img tag="VRoundedCaptionButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/235377506-ea0f07d5-79f6-45a1-9b10-e929d3caadff.png">
+    <img tag="VRoundedCaptionButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236642711-e80277e8-ec5c-44ac-bdf2-f661c6f0a4b9.png">
     <img tag="VPlainButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779755-b15a2fc4-d811-4c96-888e-5b437495a484.png">
 <p/>
 
