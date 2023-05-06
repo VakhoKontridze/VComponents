@@ -178,11 +178,70 @@ var body: some View {
 }
 ```
 
+#### Static Factory-Initialized UI Models
+
+Often times you'll find pre-designed `static` factory-initialized UI models for each component. It's worth exploring their UI model files before using the component and re-designing these instances yourself.
+
+Standard `VBottomSheet` can be initialized without even worrying about UI model.
+
+```swift
+@State private var isPresented: Bool = false
+
+var body: some View {
+    VPlainButton(
+        action: { isPresented = true },
+        title: "Present"
+    )
+    .vBottomSheet(
+        id: "some_bottom_sheet",
+        isPresented: $isPresented,
+        content: {
+            id: "bottom_sheet",
+            isPresented: $isPresented,
+            content: {
+                ColorBook.accentBlue
+                    .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+            }
+        }
+    )
+}
+```
+
+However, if you wish to use scrollable view as a content, `scrollableContent` instance is already defined under `VBottomSheetUIModel` for you. It takes care of most details, such as auto-resizing the content and safe area margins.
+
+```swift
+@State private var isPresented: Bool = false
+
+var body: some View {
+    VPlainButton(
+        action: { isPresented = true },
+        title: "Present"
+    )
+    .vBottomSheet(
+        id: "some_bottom_sheet",
+        uiModel: .scrollableContent,
+        isPresented: $isPresented,
+        content: {
+            List(content: {
+                ForEach(0..<20, content: { num in
+                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
+                })
+            })
+            .vListStyle()
+            .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+        }
+    )
+}
+```
+
 #### Animations
 
 VComponents approaches animations as bound to components and their UI models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom UI model.
 
-For instance, by default, `VToggle` uses `easeIn` animation with duration `0.1` to state change. This applies to both toggle press, as well as external modification of state:
+For instance, by default, `VToggle` uses `easeIn` animation with duration `0.1` to state change. This applies to both toggle press, as well as external modification of state.
 
 ```swift
 @State private var isOn: Bool = false
@@ -247,7 +306,7 @@ var body: some View {
 }
 ```
 
-In some cases, the difference between these two may be significant. For instance, we can set the flag to `false`, and mutate state with an external animation:
+In some cases, the difference between these two may be significant. For instance, we can set the flag to `false`, and mutate state with an external animation.
 
 ```swift
 @State private var isOn: Bool = false

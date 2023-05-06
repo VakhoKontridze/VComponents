@@ -33,16 +33,8 @@ extension View {
     ///             id: "some_side_bar",
     ///             isPresented: $isPresented,
     ///             content: {
-    ///                 List(content: {
-    ///                     ForEach(0..<20, content: { num in
-    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         })
-    ///                     })
-    ///                 })
-    ///                 .vListStyle()
-    ///            }
+    ///                 ColorBook.accentBlue
+    ///             }
     ///         )
     ///     }
     ///
@@ -98,18 +90,10 @@ extension View {
     ///         .vSideBar(
     ///             id: "some_side_bar",
     ///             item: $sideBarItem,
-    ///             content: { item in
-    ///                 List(content: {
-    ///                     ForEach(0..<20, content: { num in
-    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         })
-    ///                     })
-    ///                 })
-    ///                 .vListStyle()
-    ///              }
-    ///          )
+    ///             content: {
+    ///                 ColorBook.accentBlue
+    ///             }
+    ///         )
     ///     }
     ///
     public func vSideBar<Item>(
