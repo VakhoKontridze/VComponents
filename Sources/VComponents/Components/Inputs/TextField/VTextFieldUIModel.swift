@@ -68,7 +68,7 @@ public struct VTextFieldUIModel {
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.size = .init(dimension: 22)
+            uiModel.size = CGSize(dimension: 22)
             uiModel.iconSize = CGSize(dimension: 8)
             uiModel.hitBox = .zero
             
@@ -198,7 +198,7 @@ public struct VTextFieldUIModel {
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
-            uiModel.background = .init(
+            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Inputs.clearButtonLayerEnabled,
                 pressed: GlobalUIModel.Inputs.clearButtonLayerPressed,
                 disabled: GlobalUIModel.Inputs.clearButtonLayerDisabled

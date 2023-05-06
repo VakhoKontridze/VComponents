@@ -80,7 +80,7 @@ public struct VBottomSheetUIModel {
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.size = .init(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+            uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
             uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             

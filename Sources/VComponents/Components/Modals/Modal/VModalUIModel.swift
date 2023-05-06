@@ -66,7 +66,7 @@ public struct VModalUIModel {
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.size = .init(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+            uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
             uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             
@@ -292,7 +292,7 @@ extension VModalUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(GlobalUIModel.Common.containerCornerRadius)
+        uiModel.layout.contentMargins = Layout.Margins(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }

@@ -237,7 +237,7 @@ extension VSideBarUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(GlobalUIModel.Common.containerCornerRadius)
+        uiModel.layout.contentMargins = Layout.Margins(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }

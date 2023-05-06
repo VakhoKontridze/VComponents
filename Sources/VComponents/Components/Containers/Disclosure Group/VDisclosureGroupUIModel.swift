@@ -48,7 +48,7 @@ public struct VDisclosureGroupUIModel {
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.size = .init(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+            uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
             uiModel.cornerRadius = 16
             uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
