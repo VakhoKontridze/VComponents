@@ -182,6 +182,11 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
+            .shadow(
+                color: uiModel.colors.shadow.value(for: internalState),
+                radius: uiModel.colors.shadowRadius,
+                offset: uiModel.colors.shadowOffset
+            )
     }
     
     @ViewBuilder private func border(
@@ -218,6 +223,8 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            BorderPreview().previewDisplayName("Border")
+            ShadowPreview().previewDisplayName("Shadow")
             OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .colorScheme(colorScheme)
@@ -354,6 +361,55 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                         .disabled(true)
                     }
                 )
+            })
+        }
+    }
+
+    private struct BorderPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VLoadingStretchedButton(
+                    uiModel: {
+                        var uiModel: VLoadingStretchedButtonUIModel = .init()
+                        uiModel.layout.borderWidth = 2
+                        uiModel.colors.border = VLoadingStretchedButtonUIModel.Colors.StateColors(
+                            enabled: uiModel.colors.background.enabled.darken(by: 0.3),
+                            pressed: uiModel.colors.background.enabled.darken(by: 0.3),
+                            loading: .clear,
+                            disabled: .clear
+                        )
+                        return uiModel
+                    }(),
+                    isLoading: false,
+                    action: {},
+                    title: title
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    private struct ShadowPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VLoadingStretchedButton(
+                    uiModel: {
+                        var uiModel: VLoadingStretchedButtonUIModel = .init()
+                        uiModel.colors.shadow = VLoadingStretchedButtonUIModel.Colors.StateColors(
+                            enabled: GlobalUIModel.Common.shadowColorEnabled,
+                            pressed: GlobalUIModel.Common.shadowColorEnabled,
+                            loading: GlobalUIModel.Common.shadowColorDisabled,
+                            disabled: GlobalUIModel.Common.shadowColorDisabled
+                        )
+                        uiModel.colors.shadowRadius = 3
+                        uiModel.colors.shadowOffset = CGPoint(x: 0, y: 3)
+                        return uiModel
+                    }(),
+                    isLoading: false,
+                    action: {},
+                    title: title
+                )
+                .padding(.horizontal)
             })
         }
     }

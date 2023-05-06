@@ -209,6 +209,7 @@ struct VSlider_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            BorderPreview().previewDisplayName("Border")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -226,7 +227,7 @@ struct VSlider_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VSlider(value: $value)
-                    .padding()
+                    .padding(.horizontal)
             })
         }
     }
@@ -269,6 +270,28 @@ struct VSlider_Previews: PreviewProvider {
                             .disabled(true)
                     }
                 )
+            })
+        }
+    }
+
+    private struct BorderPreview: View {
+        @State private var value: Double = VSlider_Previews.value
+
+        var body: some View {
+            PreviewContainer(content: {
+                VSlider(
+                    uiModel: {
+                        var uiModel: VSliderUIModel = .init()
+                        uiModel.layout.borderWidth = 1
+                        uiModel.colors.border = VSliderUIModel.Colors.StateColors(
+                            enabled: uiModel.colors.track.enabled.darken(by: 0.3),
+                            disabled: .clear
+                        )
+                        return uiModel
+                    }(),
+                    value: $value
+                )
+                .padding(.horizontal)
             })
         }
     }

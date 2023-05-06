@@ -315,6 +315,7 @@ struct VRangeSlider_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            BorderPreview().previewDisplayName("Border")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -339,6 +340,32 @@ struct VRangeSlider_Previews: PreviewProvider {
                     valueLow: $valueLow,
                     valueHigh: $valueHigh
                 )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    private struct BorderPreview: View {
+        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
+        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
+
+        var body: some View {
+            PreviewContainer(content: {
+                VRangeSlider(
+                    uiModel: {
+                        var uiModel: VRangeSliderUIModel = .init()
+                        uiModel.layout.borderWidth = 1
+                        uiModel.colors.border = VRangeSliderUIModel.Colors.StateColors(
+                            enabled: uiModel.colors.track.enabled.darken(by: 0.3),
+                            disabled: .clear
+                        )
+                        return uiModel
+                    }(),
+                    difference: difference,
+                    valueLow: $valueLow,
+                    valueHigh: $valueHigh
+                )
+                .padding(.horizontal)
             })
         }
     }

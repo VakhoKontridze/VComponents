@@ -2,6 +2,26 @@
 
 ### 4.3.0(46)
 
+VStretchedButton
+
+- Component now supports shadows
+
+VLoadingStretchedButton
+
+- Component now supports shadows
+
+VCapsuleButton
+
+- Component now supports shadows
+
+VRoundedButton
+
+- Component now supports shadows
+
+VRoundedCaptionButton
+
+- Component now supports shadows
+
 VPlainButton
 
 - `iconSize` is changed to `24`

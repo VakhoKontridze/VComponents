@@ -110,6 +110,7 @@ struct VProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
+            BorderPreview().previewDisplayName("Border")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -125,6 +126,26 @@ struct VProgressBar_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VProgressBar(value: value)
                     .padding()
+            })
+            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+        }
+    }
+
+    private struct BorderPreview: View {
+        @State private var value: Double = 0
+
+        var body: some View {
+            PreviewContainer(content: {
+                VProgressBar(
+                    uiModel: {
+                        var uiModel: VProgressBarUIModel = .init()
+                        uiModel.layout.borderWidth = 1
+                        uiModel.colors.border = uiModel.colors.track.darken(by: 0.3)
+                        return uiModel
+                    }(),
+                    value: value
+                )
+                .padding()
             })
             .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }

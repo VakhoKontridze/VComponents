@@ -100,6 +100,15 @@ public struct VLoadingStretchedButtonUIModel {
             loading: ColorBook.controlLayerBlueDisabled,
             disabled: ColorBook.controlLayerBlueDisabled
         )
+
+        /// Shadow colors.
+        public var shadow: StateColors = .clearColors
+
+        /// Shadow radius. Set to `0`.
+        public var shadowRadius: CGFloat = 0
+
+        /// Shadow offset. Set to `zero`.
+        public var shadowOffset: CGPoint = .zero
         
         /// Border colors.
         public var border: StateColors = .clearColors

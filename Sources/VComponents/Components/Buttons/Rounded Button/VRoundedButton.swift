@@ -150,6 +150,11 @@ public struct VRoundedButton<Label>: View where Label: View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
+            .shadow(
+                color: uiModel.colors.shadow.value(for: internalState),
+                radius: uiModel.colors.shadowRadius,
+                offset: uiModel.colors.shadowOffset
+            )
     }
     
     @ViewBuilder private func border(
@@ -187,6 +192,8 @@ struct VRoundedButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            BorderPreview().previewDisplayName("Border")
+            ShadowPreview().previewDisplayName("Shadow")
             OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -261,6 +268,49 @@ struct VRoundedButton_Previews: PreviewProvider {
                     )
                 }
             )
+        }
+    }
+
+    private struct BorderPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VRoundedButton(
+                    uiModel: {
+                        var uiModel: VRoundedButtonUIModel = .init()
+                        uiModel.layout.borderWidth = 2
+                        uiModel.colors.border = VRoundedButtonUIModel.Colors.StateColors(
+                            enabled: uiModel.colors.background.enabled.darken(by: 0.3),
+                            pressed: uiModel.colors.background.enabled.darken(by: 0.3),
+                            disabled: .clear
+                        )
+                        return uiModel
+                    }(),
+                    action: {},
+                    icon: icon
+                )
+            })
+        }
+    }
+
+    private struct ShadowPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VRoundedButton(
+                    uiModel: {
+                        var uiModel: VRoundedButtonUIModel = .init()
+                        uiModel.colors.shadow = VRoundedButtonUIModel.Colors.StateColors(
+                            enabled: GlobalUIModel.Common.shadowColorEnabled,
+                            pressed: GlobalUIModel.Common.shadowColorEnabled,
+                            disabled: GlobalUIModel.Common.shadowColorDisabled
+                        )
+                        uiModel.colors.shadowRadius = 3
+                        uiModel.colors.shadowOffset = CGPoint(x: 0, y: 3)
+                        return uiModel
+                    }(),
+                    action: {},
+                    icon: icon
+                )
+            })
         }
     }
 

@@ -146,6 +146,18 @@ public struct VRoundedCaptionButtonUIModel {
             pressed: ColorBook.controlLayerBlueTransparentPressed,
             disabled: ColorBook.controlLayerBlueTransparentDisabled
         )
+
+        /// Shadow colors.
+        ///
+        /// By default, `background` of button is transparent.
+        /// And applying shadow directly without making it opaque is not recommended.
+        public var shadow: StateColors = .clearColors
+
+        /// Shadow radius. Set to `0`.
+        public var shadowRadius: CGFloat = 0
+
+        /// Shadow offset. Set to `zero`.
+        public var shadowOffset: CGPoint = .zero
         
         /// Border colors.
         public var border: StateColors = .clearColors
