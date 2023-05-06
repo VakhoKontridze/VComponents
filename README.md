@@ -152,7 +152,7 @@ var body: some View {
 }
 ```
 
-Alternately, you can create static instances of UI models for reusability.
+Alternately, you can create `static` instances of UI models for reusability.
 
 ```swift
 extension VPlainButtonUIModel {
@@ -223,9 +223,9 @@ var body: some View {
         isPresented: $isPresented,
         content: {
             List(content: {
-                ForEach(0..<20, content: { num in
-                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                        Text(String(num))
+                ForEach(0..<20, content: { number in
+                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+                        Text(String(number))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     })
                 })

@@ -570,9 +570,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                     onDismiss: nil,
                     content: {
                         List(content: {
-                            ForEach(0..<20, content: { num in
-                                VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                    Text(String(num))
+                            ForEach(0..<20, content: { number in
+                                VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+                                    Text(String(number))
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                 })
                             })
