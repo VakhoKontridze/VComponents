@@ -49,10 +49,10 @@ public struct ColorBook {
     public static var primaryWhitePressedDisabled: Color { whitePressedDisabled }
     
     // MARK: Properties - Text (Secondary)
-    /// Secondary text color. Set to `(60, 60, 67, 60)` `(235, 235, 345, 60)` like `UIColor.secondaryLabel`.
+    /// Secondary text color. Set to `(60, 60, 67, 60)` `(235, 235, 245, 60)` like `UIColor.secondaryLabel`.
     public static let secondary: Color = .init(module: "Text.Secondary")
     
-    /// Secondary text color. Set to `(60, 60, 67, 20)` `(235, 235, 345, 20)`.
+    /// Secondary text color. Set to `(60, 60, 67, 20)` `(235, 235, 245, 20)`.
     public static let secondaryPressedDisabled: Color = .init(module: "Text.Secondary.PressedDisabled")
     
     // MARK: Properties - Accent
