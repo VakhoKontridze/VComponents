@@ -342,6 +342,8 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 ## Compatibility
 
+#### Platform and Version Support
+
 Package provides limited `macOS`, `tvOS`, and `watchOS` support.
 
 Versions with different majors are not directly compatible. When a new major is released, deprecated symbols are removed.
@@ -430,6 +432,8 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
 
 </table>
+
+For additional info, refer to the [CHANGELOG](https://github.com/VakhoKontridze/VComponents/blob/main/CHANGELOG.md).
 
 ## Contact
 
