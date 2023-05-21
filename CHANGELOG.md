@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.4.0(47)
+
+VRoundedButton
+
+- `iconSize` is changed to `24x24` on `iOS` and to `26x26` on `watchOS`
+
 ### [4.3.0(46)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.0) — *2023 05 06*
 
 VStretchedButton

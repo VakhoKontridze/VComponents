@@ -67,16 +67,16 @@ public struct VRoundedButtonUIModel {
         public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Icon size.
-        /// Set to `20x20` on `iOS`.
+        /// Set to `24x24` on `iOS`.
         /// Set to `14x14` on `macOS`.
-        /// Set to `24x24` `watchOS`.
+        /// Set to `26x26` `watchOS`.
         public var iconSize: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 20)
+            return CGSize(dimension: 24)
 #elseif os(macOS)
             return CGSize(dimension: 14)
 #elseif os(watchOS)
-            return CGSize(dimension: 24)
+            return CGSize(dimension: 26)
 #else
             fatalError() // Not supported
 #endif
