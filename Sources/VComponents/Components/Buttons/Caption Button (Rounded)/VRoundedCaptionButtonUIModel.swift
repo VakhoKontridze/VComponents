@@ -61,15 +61,7 @@ public struct VRoundedCaptionButtonUIModel {
         /// Icon size.
         /// Set to `24x24` on `iOS`.
         /// Set to `26x26` on `watchOS`.
-        public var iconSize: CGSize = {
-#if os(iOS)
-            return CGSize(dimension: 24)
-#elseif os(watchOS)
-            return CGSize(dimension: 26)
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRoundedButton
         
         /// Spacing between rounded rectangle and caption.
         /// Set to `7` on `iOS`.

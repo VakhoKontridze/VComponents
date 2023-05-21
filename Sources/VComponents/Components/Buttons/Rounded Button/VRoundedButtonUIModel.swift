@@ -36,7 +36,7 @@ public struct VRoundedButtonUIModel {
         /// Button dimension.
         /// Set to `56x56` on `iOS`.
         /// Set to `28x28` on `macOS`.
-        /// Set to `65x56` on `watchOS`.
+        /// Set to `64x56` on `watchOS`.
         public var size: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
         
         /// Corner radius.
@@ -70,17 +70,7 @@ public struct VRoundedButtonUIModel {
         /// Set to `24x24` on `iOS`.
         /// Set to `14x14` on `macOS`.
         /// Set to `26x26` `watchOS`.
-        public var iconSize: CGSize = {
-#if os(iOS)
-            return CGSize(dimension: 24)
-#elseif os(macOS)
-            return CGSize(dimension: 14)
-#elseif os(watchOS)
-            return CGSize(dimension: 26)
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRoundedButton
         
         /// Hit box. Set to `zero`.
         public var hitBox: HitBox = .zero

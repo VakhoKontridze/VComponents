@@ -138,6 +138,18 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
+        static var iconSizeRoundedButton: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 24)
+#elseif os(macOS)
+            return CGSize(dimension: 14)
+#elseif os(watchOS)
+            return CGSize(dimension: 26)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
         static var labelMarginsRoundedButton: EdgeInsets_HorizontalVertical { .init(3) }
