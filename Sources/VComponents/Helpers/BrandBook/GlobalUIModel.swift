@@ -338,8 +338,8 @@ struct GlobalUIModel {
         private init() {}
     }
     
-    // MARK: Indicators
-    struct Indicators {
+    // MARK: Indicators (Determinate)
+    struct DeterminateIndicators {
         // MARK: Properties
         static var pageIndicatorDotDimension: CGFloat {
 #if os(iOS)

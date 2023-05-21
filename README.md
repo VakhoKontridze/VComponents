@@ -86,15 +86,20 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VToast" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236565657-4a78011d-f995-43c7-95e4-0cecd1ea5998.jpg">
 <p/>
 
-#### Indicators
+#### Indicators (Determinate)
 
 <p>
-    <img tag="VContinuousSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
-    <img tag="VDashedSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
     <img tag="VProgressBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
     <img tag="VPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587684-db5652bc-c20f-44d0-9b26-ae2298903608.png">
     <img tag="VCompactPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587698-df51dcbc-3370-49e2-9f41-0e2615b96c4d.png">
     <img tag="VAutomaticPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782392-7867a1c3-4408-4f14-bd2c-d2119b387b01.png">
+<p/>
+
+#### Indicators (Indeterminate)
+
+<p>
+    <img tag="VContinuousSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
+    <img tag="VDashedSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
 <p/>
 
 #### Misc
