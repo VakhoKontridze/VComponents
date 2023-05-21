@@ -326,13 +326,13 @@ struct GlobalUIModel {
         private init() {}
     }
     
-    // MARK: Messages
-    struct Messages {
+    // MARK: Notifications
+    struct Notifications {
         // MARK: Properties
         static var layerGray: Color { ColorBook.layerGray }
-        static var layerGreen: Color { .init(module: "Message.Layer.Green") }
-        static var layerYellow: Color { .init(module: "Message.Layer.Yellow") }
-        static var layerRed: Color { .init(module: "Message.Layer.Red") }
+        static var layerGreen: Color { .init(module: "Notification.Layer.Green") }
+        static var layerYellow: Color { .init(module: "Notification.Layer.Yellow") }
+        static var layerRed: Color { .init(module: "Notification.Layer.Red") }
         
         // MARK: Initializers
         private init() {}

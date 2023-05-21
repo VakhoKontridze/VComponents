@@ -189,7 +189,7 @@ public struct VToastUIModel {
         public var colorScheme: ColorScheme? = nil
         
         /// Background color.
-        public var background: Color = GlobalUIModel.Messages.layerGray
+        public var background: Color = GlobalUIModel.Notifications.layerGray
         
         /// Shadow color.
         public var shadow: Color = .clear
@@ -299,7 +299,7 @@ extension VToastUIModel.Colors {
     public static var success: Self {
         var uiModel: Self = .init()
         
-        uiModel.background = GlobalUIModel.Messages.layerGreen
+        uiModel.background = GlobalUIModel.Notifications.layerGreen
         
         return uiModel
     }
@@ -308,7 +308,7 @@ extension VToastUIModel.Colors {
     public static var warning: Self {
         var uiModel: Self = .init()
         
-        uiModel.background = GlobalUIModel.Messages.layerYellow
+        uiModel.background = GlobalUIModel.Notifications.layerYellow
         
         return uiModel
     }
@@ -317,7 +317,7 @@ extension VToastUIModel.Colors {
     public static var error: Self {
         var uiModel: Self = .init()
         
-        uiModel.background = GlobalUIModel.Messages.layerRed
+        uiModel.background = GlobalUIModel.Notifications.layerRed
         
         return uiModel
     }

@@ -80,7 +80,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VContextMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
 <p/>
 
-#### Messages
+#### Notifications
 
 <p>
     <img tag="VToast" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236565657-4a78011d-f995-43c7-95e4-0cecd1ea5998.jpg">
