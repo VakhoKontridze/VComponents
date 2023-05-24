@@ -155,7 +155,7 @@ public struct VCapsuleButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title text font.
-        /// Set to  `semibold` `subheadline` (`15`) on `iOS`.
+        /// Set to `semibold` `subheadline` (`15`) on `iOS`.
         /// Set to `semibold` `body` (`13`) on `macOS`.
         /// Set to `semibold` `body` (`17`) on `watchOS`.
         public var titleText: Font = {
@@ -179,7 +179,7 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if button animates state change. Defaults to `true`.
+        /// Indicates if button animates state change. Set to `true`.
         public var animatesStateChange: Bool = true
         
         /// Ratio to which label scales down on press.

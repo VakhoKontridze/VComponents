@@ -97,7 +97,7 @@ public struct VAlertUIModel {
             bottom: 0
         )
         
-        /// Button height. Set to  `40`.
+        /// Button height. Set to `40`.
         public var buttonHeight: CGFloat = 40
         
         /// Button corner radius. Set to `10`.

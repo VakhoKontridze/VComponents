@@ -145,7 +145,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if `stateChange` animation is applied. Defaults to `true`.
+        /// Indicates if `stateChange` animation is applied. Set to `true`.
         ///
         /// Changing this property conditionally will cause view state to be reset.
         ///

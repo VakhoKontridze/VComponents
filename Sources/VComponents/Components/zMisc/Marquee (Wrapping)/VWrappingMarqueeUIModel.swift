@@ -31,7 +31,7 @@ public struct VWrappingMarqueeUIModel {
         /// Scroll direction. Set to `leftToRight`.
         public var scrollDirection: LayoutDirection = .leftToRight
         
-        /// Spacing between wrapped content. Set to  `20`.
+        /// Spacing between wrapped content. Set to `20`.
         ///
         /// If you set `inset` to non-`0` value or use `VWrappingMarqueeUIModel.insettedGradient`,
         /// it's better to set `spacing` to `0`.
@@ -57,7 +57,7 @@ public struct VWrappingMarqueeUIModel {
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
-        /// Width of fading gradient. Set to  `0`.
+        /// Width of fading gradient. Set to `0`.
         ///
         /// To hide gradient, set to `0`.
         ///
@@ -109,7 +109,7 @@ public struct VWrappingMarqueeUIModel {
             case velocity(CGFloat)
             
             // MARK: Initializers
-            /// Default value. Set to `velocity` of  `20`.
+            /// Default value. Set to `velocity` of `20`.
             public static var `default`: Self { .velocity(20) }
             
             // MARK: Helpers

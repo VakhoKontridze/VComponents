@@ -155,7 +155,7 @@ public struct VStretchedButtonUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if button animates state change. Defaults to `true`.
+        /// Indicates if button animates state change. Set to `true`.
         public var animatesStateChange: Bool = true
         
         /// Ratio to which label scales down on press.

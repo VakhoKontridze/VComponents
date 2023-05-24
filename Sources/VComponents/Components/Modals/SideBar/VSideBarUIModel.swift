@@ -44,7 +44,7 @@ public struct VSideBarUIModel {
         
         /// Side bar sizes. Set to `default`.
         /// Set to `0.75x1` screen ratios in portrait.
-        /// Set to`0.5x1` screen ratios in landscape.
+        /// Set to `0.5x1` screen ratios in landscape.
         public var sizes: Sizes = .init(
             portrait: .fraction(CGSize(width: 0.75, height: 1)),
             landscape: .fraction(CGSize(width: 0.5, height: 1))
@@ -186,7 +186,7 @@ public struct VSideBarUIModel {
         public init() {}
         
         // MARK: Dismiss Type
-        /// Dismiss type, such as  `backTap, or `dragBack`.
+        /// Dismiss type, such as `backTap, or `dragBack`.
         public struct DismissType: OptionSet {
             // MARK: Options
             /// Back tap.
@@ -292,7 +292,7 @@ extension VSideBarUIModel {
     /// `presentationEdge` is set to `top`.
     ///
     /// `sizes` are set to `0.75x1` screen ratios in portrait.
-    /// And to`0.5x1` screen ratios in landscape.
+    /// And to `0.5x1` screen ratios in landscape.
     ///
     /// `roundedCorners` is set to `bottomCorners`.
     ///
@@ -321,7 +321,7 @@ extension VSideBarUIModel {
     /// `presentationEdge` is set to `bottom`.
     ///
     /// `sizes` are set to `0.75x1` screen ratios in portrait.
-    /// And to`0.5x1` screen ratios in landscape.
+    /// And to `0.5x1` screen ratios in landscape.
     ///
     /// `roundedCorners` is set to `topCorners`.
     ///

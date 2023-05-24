@@ -104,7 +104,7 @@ public struct VToastUIModel {
             }
             
             // MARK: Initializers
-            /// Default value. Set to `wrapped` with  `20` `margin`.
+            /// Default value. Set to `wrapped` with `20` `margin`.
             public static var `default`: Self { .wrapped(margin: 20) }
         }
         

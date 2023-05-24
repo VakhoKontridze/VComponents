@@ -41,7 +41,7 @@ public struct VDisclosureGroupUIModel {
         /// Disclosure group corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Header margins. Set to `15` horizontal and  `10` vertical.
+        /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
         /// Model for customizing chevron button layout. `size` is set to `30x30`, `cornerRadius` is set to `16`, iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
@@ -61,7 +61,7 @@ public struct VDisclosureGroupUIModel {
         /// To hide divider, set to `0`.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
         
-        /// Divider margins. Set to `15` horizontal and  `0` vertical.
+        /// Divider margins. Set to `15` horizontal and `0` vertical.
         public var dividerMargins: Margins = .init(
             horizontal: GlobalUIModel.Common.containerContentMargin,
             vertical: 0
@@ -145,7 +145,7 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if `expandCollapse` animation is applied. Defaults to `true`.
+        /// Indicates if `expandCollapse` animation is applied. Set to `true`.
         ///
         /// Changing this property conditionally will cause view state to be reset.
         ///

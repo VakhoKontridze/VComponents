@@ -119,7 +119,7 @@ public struct VPageIndicatorUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if `transition` animation is applied. Defaults to `true`.
+        /// Indicates if `transition` animation is applied. Set to `true`.
         ///
         /// Changing this property conditionally will cause view state to be reset.
         ///

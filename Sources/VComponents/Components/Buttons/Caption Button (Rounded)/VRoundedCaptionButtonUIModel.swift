@@ -212,7 +212,7 @@ public struct VRoundedCaptionButtonUIModel {
         // MARK: Properties
         /// Title caption text font.
         /// Set to `subheadline` (`15`) on `iOS`.
-        /// Set to  `body` (`17`) on `watchOS`.
+        /// Set to `body` (`17`) on `watchOS`.
         public var titleCaptionText: Font = {
 #if os(iOS)
             return .subheadline
@@ -232,7 +232,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Indicates if button animates state change. Defaults to `true`.
+        /// Indicates if button animates state change. Set to `true`.
         public var animatesStateChange: Bool = true
         
         /// Ratio to which label scales down on press.
