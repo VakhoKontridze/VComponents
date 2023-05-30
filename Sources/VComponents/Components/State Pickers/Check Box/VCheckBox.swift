@@ -146,8 +146,8 @@ public struct VCheckBox<Label>: View where Label: View {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                         .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                     
-                    if let checkMarkIcon {
-                        checkMarkIcon
+                    if let checkmarkIcon {
+                        checkmarkIcon
                             .resizable()
                             .scaledToFit()
                             .frame(dimension: uiModel.layout.checkmarkIconDimension)
@@ -192,11 +192,11 @@ public struct VCheckBox<Label>: View where Label: View {
     }
     
     // MARK: Icon
-    private var checkMarkIcon: Image? {
+    private var checkmarkIcon: Image? {
         switch internalState {
         case .off, .pressedOff: return nil
-        case .on, .pressedOn: return ImageBook.checkBoxCheckMarkOn
-        case .indeterminate, .pressedIndeterminate: return ImageBook.checkBoxCheckMarkIndeterminate
+        case .on, .pressedOn: return ImageBook.checkBoxCheckmarkOn
+        case .indeterminate, .pressedIndeterminate: return ImageBook.checkBoxCheckmarkIndeterminate
         case .disabled: return nil
         }
     }

@@ -14,10 +14,10 @@ import SwiftUI
 public struct ImageBook {
     // MARK: Properties
     /// Checkmark for `on` state in `VCheckBox`.
-    public static var checkBoxCheckMarkOn: Image = .init(module: "CheckMark.On").template // Mirrored for RTL languages
+    public static var checkBoxCheckmarkOn: Image = .init(module: "Checkmark.On").template // Mirrored for RTL languages
     
     /// Checkmark for `indeterminate` state in `VCheckBox`.
-    public static var checkBoxCheckMarkIndeterminate: Image = .init(module: "CheckMark.Indeterminate").template
+    public static var checkBoxCheckmarkIndeterminate: Image = .init(module: "Checkmark.Indeterminate").template
     
     /// Decrement icon for `VStepper`.
     public static var stepperDecrement: Image = .init(module: "Minus").template

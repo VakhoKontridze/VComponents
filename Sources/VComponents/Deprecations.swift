@@ -1956,4 +1956,17 @@ public struct VText: View {
     }
 }
 
-//.truncationMode(truncatingMode)
+// MARK: - Image Book
+extension ImageBook {
+    @available(*, deprecated, renamed: "checkBoxCheckmarkOn")
+    public static var checkBoxCheckMarkOn: Image {
+        get { checkBoxCheckmarkOn }
+        set { checkBoxCheckmarkOn = newValue }
+    }
+
+    @available(*, deprecated, renamed: "checkBoxCheckmarkIndeterminate")
+    public static var checkBoxCheckMarkIndeterminate: Image {
+        get { checkBoxCheckmarkIndeterminate }
+        set { checkBoxCheckmarkIndeterminate = newValue }
+    }
+}
