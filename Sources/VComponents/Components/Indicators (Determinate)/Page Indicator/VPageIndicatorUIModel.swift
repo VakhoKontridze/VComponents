@@ -49,14 +49,14 @@ public struct VPageIndicatorUIModel {
         /// Set to `8` on `watchOS`.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
-        public var dotWidth: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotWidth: CGFloat? = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
         
         /// Dot height, but width for vertical layouts.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        public var dotHeight: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotHeight: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
         
         /// Border width. Set to `0.`
         ///
@@ -64,14 +64,14 @@ public struct VPageIndicatorUIModel {
         public var dotBorderWidth: CGFloat = 0
         
         /// Unselected dot scale. Set to `0.85`.
-        public var unselectedDotScale: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
+        public var unselectedDotScale: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorStandardUnselectedDotScale
         
         /// Dot spacing.
         /// Set to `5` on `iOS`.
         /// Set to `5` on `macOS`.
         /// Set to `10` on `tvOS`.
         /// Set to `3` on `watchOS`.
-        public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
+        public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
         
         // MARK: Initializers
         /// Initializes UI model with default values.
