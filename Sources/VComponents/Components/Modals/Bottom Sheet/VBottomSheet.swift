@@ -220,7 +220,7 @@ struct VBottomSheet<Content>: View
 
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
+            .frame(width: uiModel.closeButtonSubUIModel.size.width)
     }
     
     private var contentView: some View {

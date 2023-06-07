@@ -14,6 +14,14 @@ import VCore
 @available(tvOS, unavailable)
 public struct VRoundedCaptionButtonUIModel {
     // MARK: Properties - General
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        uiModel.animations.animatesStateChange = animatesStateChange
+
+        return uiModel
+    }
+
     /// Spacing between rounded rectangle and caption.
     /// Set to `7` on `iOS`.
     /// Set to `3` on `watchOS`.
@@ -226,13 +234,4 @@ public struct VRoundedCaptionButtonUIModel {
     // MARK: State Opacities
     /// Model that contains opacities for component states.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
-    
-    // MARK: Sub UI Models
-    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
-        var uiModel: SwiftUIBaseButtonUIModel = .init()
-        
-        uiModel.animations.animatesStateChange = animatesStateChange
-        
-        return uiModel
-    }
 }

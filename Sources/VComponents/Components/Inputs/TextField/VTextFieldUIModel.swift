@@ -64,17 +64,6 @@ public struct VTextFieldUIModel {
         /// Search icon dimension. Set to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Model for customizing clear button layout. `size` is set to `22x22`, `iconSize` is set to `8x8`, and `hitBox` is set to `zero`.
-        public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
-            var uiModel: VRoundedButtonUIModel.Layout = .init()
-            
-            uiModel.size = CGSize(dimension: 22)
-            uiModel.iconSize = CGSize(dimension: 8)
-            uiModel.hitBox = .zero
-            
-            return uiModel
-        }()
-        
         /// Header title text line type. Set to `singleLine`.
         public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
         
@@ -184,20 +173,6 @@ public struct VTextFieldUIModel {
             disabled: GlobalUIModel.Inputs.searchIconDisabled
         )
         
-        /// Model for customizing clear button colors.
-        public var clearButtonSubUIModel: VRoundedButtonUIModel.Colors = {
-            var uiModel: VRoundedButtonUIModel.Colors = .init()
-            
-            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
-                enabled: GlobalUIModel.Inputs.clearButtonLayerEnabled,
-                pressed: GlobalUIModel.Inputs.clearButtonLayerPressed,
-                disabled: GlobalUIModel.Inputs.clearButtonLayerDisabled
-            )
-            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Inputs.clearButtonIcon)
-            
-            return uiModel
-        }()
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -234,18 +209,7 @@ public struct VTextFieldUIModel {
         // MARK: Properties
         /// Clear button appear and disappear animation. Set to `nil`.
         public var clearButton: Animation? = nil
-        
-        /// Model for customizing clear button animations. `haptic` is set to `nil`.
-        public var clearButtonSubUIModel: VRoundedButtonUIModel.Animations = {
-            var uiModel: VRoundedButtonUIModel.Animations = .init()
-            
-#if os(iOS)
-            uiModel.haptic = nil
-#endif
-            
-            return uiModel
-        }()
-        
+
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -285,8 +249,11 @@ public struct VTextFieldUIModel {
     }
     
     // MARK: Sub UI Models
-    /// Model for customizing visibility button layout.
-    /// `iconSize` is set to `20x20`, `iconColors` are changed, `hitBox` is set to `zero`, and `haptic` is set to `nil`.
+    /// Model for customizing visibility button.
+    /// `iconSize` is set to `20x20`,
+    /// `iconColors` are changed,
+    /// `hitBox` is set to `zero`,
+    /// `haptic` is set to `nil`.
     public var visibilityButtonSubUIModel: VPlainButtonUIModel = {
         var uiModel: VPlainButtonUIModel = .init()
 
@@ -306,17 +273,35 @@ public struct VTextFieldUIModel {
         return uiModel
     }()
 
-    var clearButtonSubUIModel: VRoundedButtonUIModel {
+    /// Model for customizing clear button.
+    /// `size` is set to `22x22`,
+    /// `backgroundColors` are changed,
+    /// `iconSize` is set to `8x8`,
+    /// `iconColors` are changed,
+    /// `hitBox` is set to `zero`,
+    /// `haptic` is set to `nil`.
+    public var clearButtonSubUIModel: VRoundedButtonUIModel = {
         var uiModel: VRoundedButtonUIModel = .init()
-        
-        uiModel.layout = layout.clearButtonSubUIModel
-        
-        uiModel.colors = colors.clearButtonSubUIModel
-        
-        uiModel.animations = animations.clearButtonSubUIModel
-        
+
+        uiModel.size = CGSize(dimension: 22)
+
+        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
+            enabled: GlobalUIModel.Inputs.clearButtonLayerEnabled,
+            pressed: GlobalUIModel.Inputs.clearButtonLayerPressed,
+            disabled: GlobalUIModel.Inputs.clearButtonLayerDisabled
+        )
+
+        uiModel.iconSize = CGSize(dimension: 8)
+        uiModel.iconColors = VRoundedButtonUIModel.StateColors(GlobalUIModel.Inputs.clearButtonIcon)
+
+        uiModel.hitBox = .zero
+
+#if os(iOS)
+        uiModel.haptic = nil
+#endif
+
         return uiModel
-    }
+    }()
 }
 
 // MARK: - Factory (Content Types)

@@ -62,17 +62,6 @@ public struct VModalUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `size` is set to `30x30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
-            var uiModel: VRoundedButtonUIModel.Layout = .init()
-            
-            uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
-            uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
-            uiModel.hitBox = .zero
-            
-            return uiModel
-        }()
-        
         /// Spacing between label and close button. Set to `10`.
         public var labelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
@@ -140,20 +129,6 @@ public struct VModalUIModel {
         /// Header title text color.
         public var headerTitleText: Color = ColorBook.primary
         
-        /// Model for customizing close button colors.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
-            var uiModel: VRoundedButtonUIModel.Colors = .init()
-            
-            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
-                enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
-                pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-                disabled: .clear // Doesn't matter
-            )
-            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
-            
-            return uiModel
-        }()
-        
         /// Divider color.
         public var divider: Color = GlobalUIModel.Common.dividerColor
         
@@ -192,18 +167,7 @@ public struct VModalUIModel {
         
         /// Blur during appear and disappear. Set to `3`.
         public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
-        
-        /// Model for customizing close button animations. `haptic` is se to `nil`.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Animations = {
-            var uiModel: VRoundedButtonUIModel.Animations = .init()
-            
-#if os(iOS)
-            uiModel.haptic = nil
-#endif
-            
-            return uiModel
-        }()
-        
+
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -269,17 +233,35 @@ public struct VModalUIModel {
         return uiModel
     }
     
-    var closeButtonSubUIModel: VRoundedButtonUIModel {
+    /// Model for customizing close button.
+    /// `size` is set to `30x30`,
+    /// `backgroundColors` are changed,
+    /// `iconSize` is set to `12x12`,
+    /// `iconColors` are changed,
+    /// `hitBox` is set to `zero`,
+    /// `haptic` is set to `nil`.
+    public var closeButtonSubUIModel: VRoundedButtonUIModel = {
         var uiModel: VRoundedButtonUIModel = .init()
-        
-        uiModel.layout = layout.closeButtonSubUIModel
-        
-        uiModel.colors = colors.closeButtonSubUIModel
-        
-        uiModel.animations = animations.closeButtonSubUIModel
-        
+
+        uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+
+        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
+            enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
+            pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
+            disabled: .clear // Doesn't matter
+        )
+
+        uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+        uiModel.iconColors = VRoundedButtonUIModel.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
+
+        uiModel.hitBox = .zero
+
+#if os(iOS)
+        uiModel.haptic = nil
+#endif
+
         return uiModel
-    }
+    }()
 }
 
 // MARK: - Factory

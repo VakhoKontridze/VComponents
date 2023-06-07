@@ -13,6 +13,14 @@ import VCore
 @available(tvOS, unavailable)
 public struct VPlainButtonUIModel {
     // MARK: Properties - Label
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        uiModel.animations.animatesStateChange = animatesStateChange
+
+        return uiModel
+    }
+
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
@@ -74,7 +82,7 @@ public struct VPlainButtonUIModel {
 #endif
     }()
 
-    // MARK: Properties - HitBox
+    // MARK: Properties - Hit Box
     /// Hit box. Set to `5`s.
     public var hitBox: HitBox = .init(5)
 
@@ -106,13 +114,4 @@ public struct VPlainButtonUIModel {
     // MARK: State Opacities
     /// Model that contains opacities for component states.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
-    
-    // MARK: Sub UI Models
-    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
-        var uiModel: SwiftUIBaseButtonUIModel = .init()
-        
-        uiModel.animations.animatesStateChange = animatesStateChange
-        
-        return uiModel
-    }
 }

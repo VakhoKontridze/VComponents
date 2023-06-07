@@ -44,18 +44,6 @@ public struct VDisclosureGroupUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing chevron button layout. `size` is set to `30x30`, `cornerRadius` is set to `16`, iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
-        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
-            var uiModel: VRoundedButtonUIModel.Layout = .init()
-            
-            uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
-            uiModel.cornerRadius = 16
-            uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
-            uiModel.hitBox = .zero
-            
-            return uiModel
-        }()
-        
         /// Divider height. Set to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
@@ -95,24 +83,6 @@ public struct VDisclosureGroupUIModel {
         
         /// Divider color.
         public var divider: Color = GlobalUIModel.Common.dividerColor
-        
-        /// Model for customizing chevron button colors.
-        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Colors = {
-            var uiModel: VRoundedButtonUIModel.Colors = .init()
-            
-            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
-                enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
-                pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-                disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
-            )
-            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(
-                enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
-                pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
-                disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled
-            )
-            
-            return uiModel
-        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -160,17 +130,6 @@ public struct VDisclosureGroupUIModel {
         /// Expand and collapse animation. Set to `default`.
         public var expandCollapse: Animation? = .default
         
-        /// Model for customizing chevron button animations. `haptic` is set to `nil`.
-        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Animations = {
-            var uiModel: VRoundedButtonUIModel.Animations = .init()
-            
-#if os(iOS)
-            uiModel.haptic = nil
-#endif
-            
-            return uiModel
-        }()
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -211,17 +170,41 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
     
-    var chevronButtonSubUIModel: VRoundedButtonUIModel {
+    /// Model for customizing chevron button.
+    /// `size` is set to `30x30`,
+    /// `cornerRadius` is set to `16`,
+    /// `backgroundColors` are changed,
+    /// `iconSize` is set to `12x12`,
+    /// `iconColors` are changed,
+    /// `hitBox` is set to `zero`,
+    /// `haptic` is set to `nil`.
+    public var chevronButtonSubUIModel: VRoundedButtonUIModel = {
         var uiModel: VRoundedButtonUIModel = .init()
-        
-        uiModel.layout = layout.chevronButtonSubUIModel
-        
-        uiModel.colors = colors.chevronButtonSubUIModel
-        
-        uiModel.animations = animations.chevronButtonSubUIModel
-        
+
+        uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+        uiModel.cornerRadius = 16
+
+        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
+            enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
+            pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
+            disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
+        )
+
+        uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+        uiModel.iconColors = VRoundedButtonUIModel.StateColors(
+            enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
+            pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
+            disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled
+        )
+
+        uiModel.hitBox = .zero
+
+#if os(iOS)
+        uiModel.haptic = nil
+#endif
+
         return uiModel
-    }
+    }()
 }
 
 // MARK: - Factory

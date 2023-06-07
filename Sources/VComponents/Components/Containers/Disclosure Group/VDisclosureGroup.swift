@@ -274,8 +274,8 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                         VDisclosureGroup(
                             uiModel: {
                                 var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.colors.chevronButtonSubUIModel.background.enabled = uiModel.colors.chevronButtonSubUIModel.background.pressed
-                                uiModel.colors.chevronButtonSubUIModel.icon.enabled = uiModel.colors.chevronButtonSubUIModel.icon.pressed
+                                uiModel.chevronButtonSubUIModel.backgroundColors.enabled = uiModel.chevronButtonSubUIModel.backgroundColors.pressed
+                                uiModel.chevronButtonSubUIModel.iconColors.enabled = uiModel.chevronButtonSubUIModel.iconColors.pressed
                                 return uiModel
                             }(),
                             state: .constant(.collapsed),
@@ -292,8 +292,8 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                         VDisclosureGroup(
                             uiModel: { // Needed for some reason
                                 var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.colors.chevronButtonSubUIModel.background.enabled = uiModel.colors.chevronButtonSubUIModel.background.disabled
-                                uiModel.colors.chevronButtonSubUIModel.icon.enabled = uiModel.colors.chevronButtonSubUIModel.icon.disabled
+                                uiModel.chevronButtonSubUIModel.backgroundColors.enabled = uiModel.chevronButtonSubUIModel.backgroundColors.disabled
+                                uiModel.chevronButtonSubUIModel.iconColors.enabled = uiModel.chevronButtonSubUIModel.iconColors.disabled
                                 return uiModel
                             }(),
                             state: .constant(.expanded),

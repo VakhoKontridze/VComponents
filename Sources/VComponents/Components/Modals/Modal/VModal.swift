@@ -164,7 +164,7 @@ struct VModal<Content>: View
 
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
+            .frame(width: uiModel.closeButtonSubUIModel.size.width)
     }
     
     @ViewBuilder private var divider: some View {

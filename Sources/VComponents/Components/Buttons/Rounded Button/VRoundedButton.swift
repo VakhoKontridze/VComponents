@@ -80,11 +80,11 @@ public struct VRoundedButton<Label>: View where Label: View {
                 let internalState: VRoundedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
-                    .frame(size: uiModel.layout.size)
-                    .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
+                    .frame(size: uiModel.size)
+                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from going out of bounds
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
-                    .padding(uiModel.layout.hitBox)
+                    .padding(uiModel.hitBox)
             }
         )
     }
@@ -104,8 +104,8 @@ public struct VRoundedButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-        .padding(uiModel.layout.labelMargins)
+        .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
+        .padding(uiModel.labelMargins)
         .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.accessibility3))
@@ -123,13 +123,13 @@ public struct VRoundedButton<Label>: View where Label: View {
             .lineLimit(1)
             .minimumScaleFactor({
                 if #available(iOS 15.0, *) {
-                    return uiModel.layout.titleTextMinimumScaleFactor
+                    return uiModel.titleTextMinimumScaleFactor
                 } else {
-                    return uiModel.layout.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
+                    return uiModel.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
                 }
             }())
-            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-            .font(uiModel.fonts.titleText)
+            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .font(uiModel.titleTextFont)
     }
     
     private func iconLabelComponent(
@@ -139,40 +139,40 @@ public struct VRoundedButton<Label>: View where Label: View {
         icon
             .resizable()
             .scaledToFit()
-            .frame(size: uiModel.layout.iconSize)
-            .foregroundColor(uiModel.colors.icon.value(for: internalState))
-            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+            .frame(size: uiModel.iconSize)
+            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
     private func background(
         internalState: VRoundedButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
-            .foregroundColor(uiModel.colors.background.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
+            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
             .shadow(
-                color: uiModel.colors.shadow.value(for: internalState),
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
+                color: uiModel.shadowColors.value(for: internalState),
+                radius: uiModel.shadowRadius,
+                offset: uiModel.shadowOffset
             )
     }
     
     @ViewBuilder private func border(
         internalState: VRoundedButtonInternalState
     ) -> some View {
-        if uiModel.layout.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
         }
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
@@ -245,8 +245,8 @@ struct VRoundedButton_Previews: PreviewProvider {
                             VRoundedButton(
                                 uiModel: {
                                     var uiModel: VRoundedButtonUIModel = .init()
-                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                    uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
+                                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
+                                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
                                     return uiModel
                                 }(),
                                 action: {},
@@ -277,10 +277,10 @@ struct VRoundedButton_Previews: PreviewProvider {
                 VRoundedButton(
                     uiModel: {
                         var uiModel: VRoundedButtonUIModel = .init()
-                        uiModel.layout.borderWidth = 2
-                        uiModel.colors.border = VRoundedButtonUIModel.Colors.StateColors(
-                            enabled: uiModel.colors.background.enabled.darken(by: 0.3),
-                            pressed: uiModel.colors.background.enabled.darken(by: 0.3),
+                        uiModel.borderWidth = 2
+                        uiModel.borderColors = VRoundedButtonUIModel.StateColors(
+                            enabled: uiModel.backgroundColors.enabled.darken(by: 0.3),
+                            pressed: uiModel.backgroundColors.enabled.darken(by: 0.3),
                             disabled: .clear
                         )
                         return uiModel
@@ -298,13 +298,13 @@ struct VRoundedButton_Previews: PreviewProvider {
                 VRoundedButton(
                     uiModel: {
                         var uiModel: VRoundedButtonUIModel = .init()
-                        uiModel.colors.shadow = VRoundedButtonUIModel.Colors.StateColors(
+                        uiModel.shadowColors = VRoundedButtonUIModel.StateColors(
                             enabled: GlobalUIModel.Common.shadowColorEnabled,
                             pressed: GlobalUIModel.Common.shadowColorEnabled,
                             disabled: GlobalUIModel.Common.shadowColorDisabled
                         )
-                        uiModel.colors.shadowRadius = 3
-                        uiModel.colors.shadowOffset = CGPoint(x: 0, y: 3)
+                        uiModel.shadowRadius = 3
+                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
                         return uiModel
                     }(),
                     action: {},
@@ -320,8 +320,8 @@ struct VRoundedButton_Previews: PreviewProvider {
                 VRoundedButton(
                     uiModel: {
                         var uiModel: VRoundedButtonUIModel = .init()
-                        uiModel.layout.iconSize = CGSize(dimension: 100)
-                        uiModel.colors.icon = VRoundedButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        uiModel.iconSize = CGSize(dimension: 100)
+                        uiModel.iconColors = VRoundedButtonUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     action: {},

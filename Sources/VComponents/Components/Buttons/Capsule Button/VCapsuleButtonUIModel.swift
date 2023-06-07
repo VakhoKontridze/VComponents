@@ -13,6 +13,14 @@ import VCore
 @available(tvOS, unavailable)
 public struct VCapsuleButtonUIModel {
     // MARK: Properties - General
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        uiModel.animations.animatesStateChange = animatesStateChange
+
+        return uiModel
+    }
+
     /// Height.
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.
@@ -122,7 +130,7 @@ public struct VCapsuleButtonUIModel {
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
 
-    // MARK: Properties - HitBox
+    // MARK: Properties - Hit Box
     /// Hit box. Set to `zero`.
     public var hitBox: HitBox = .zero
 
@@ -168,13 +176,4 @@ public struct VCapsuleButtonUIModel {
     // MARK: State Opacities
     /// Model that contains opacities for component states.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
-    
-    // MARK: Sub UI Models
-    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
-        var uiModel: SwiftUIBaseButtonUIModel = .init()
-        
-        uiModel.animations.animatesStateChange = animatesStateChange
-        
-        return uiModel
-    }
 }
