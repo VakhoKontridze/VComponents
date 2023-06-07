@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.4.0(47)
+### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
 
 VRoundedButton
 
