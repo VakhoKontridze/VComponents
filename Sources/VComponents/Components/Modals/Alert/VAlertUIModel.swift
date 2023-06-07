@@ -303,17 +303,18 @@ public struct VAlertUIModel {
     var primaryButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
         
-        uiModel.layout.height = layout.buttonHeight
-        uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.height = layout.buttonHeight
+        uiModel.cornerRadius = layout.buttonCornerRadius
+
+        uiModel.backgroundColors = colors.primaryButtonBackground
+
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleTextMinimumScaleFactor /= 2
+            uiModel.titleTextMinimumScaleFactor /= 2
         }
-        
-        uiModel.colors.background = colors.primaryButtonBackground
-        uiModel.colors.titleText = colors.primaryButtonTitle
+        uiModel.titleTextColors = colors.primaryButtonTitle
         
 #if os(iOS)
-        uiModel.animations.haptic = animations.buttonHaptic
+        uiModel.haptic = animations.buttonHaptic
 #endif
         
         return uiModel
@@ -322,17 +323,18 @@ public struct VAlertUIModel {
     var secondaryButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
         
-        uiModel.layout.height = layout.buttonHeight
-        uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.height = layout.buttonHeight
+        uiModel.cornerRadius = layout.buttonCornerRadius
+
+        uiModel.backgroundColors = colors.secondaryButtonBackground
+
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleTextMinimumScaleFactor /= 2
+            uiModel.titleTextMinimumScaleFactor /= 2
         }
-        
-        uiModel.colors.background = colors.secondaryButtonBackground
-        uiModel.colors.titleText = colors.secondaryButtonTitle
+        uiModel.titleTextColors = colors.secondaryButtonTitle
         
 #if os(iOS)
-        uiModel.animations.haptic = animations.buttonHaptic
+        uiModel.haptic = animations.buttonHaptic
 #endif
         
         return uiModel
@@ -341,17 +343,18 @@ public struct VAlertUIModel {
     var destructiveButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
         
-        uiModel.layout.height = layout.buttonHeight
-        uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.height = layout.buttonHeight
+        uiModel.cornerRadius = layout.buttonCornerRadius
+
+        uiModel.backgroundColors = colors.destructiveButtonBackground
+
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.layout.titleTextMinimumScaleFactor /= 2
+            uiModel.titleTextMinimumScaleFactor /= 2
         }
-        
-        uiModel.colors.background = colors.destructiveButtonBackground
-        uiModel.colors.titleText = colors.destructiveButtonTitle
+        uiModel.titleTextColors = colors.destructiveButtonTitle
         
 #if os(iOS)
-        uiModel.animations.haptic = animations.buttonHaptic
+        uiModel.haptic = animations.buttonHaptic
 #endif
         
         return uiModel
