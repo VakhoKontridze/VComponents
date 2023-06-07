@@ -32,6 +32,11 @@ public struct VLoadingStretchedButtonUIModel {
     /// Set to `12` on `macOS`.
     public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
 
+    /// Spacing between label and spinner. Set to `20`.
+    ///
+    /// Only visible when state is set to `loading`.
+    public var labelAndSpinnerSpacing: CGFloat = 20
+
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
@@ -55,12 +60,6 @@ public struct VLoadingStretchedButtonUIModel {
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors
-
-    // MARK: Properties - Content
-    /// Spacing between label and spinner. Set to `20`.
-    ///
-    /// Only visible when state is set to `loading`.
-    public var labelAndSpinnerSpacing: CGFloat = 20
 
     // MARK: Properties - Label
     /// Ratio to which label scales down on press.

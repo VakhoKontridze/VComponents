@@ -109,10 +109,10 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }
             )
         })
-        .applyIf(uiModel.animations.appliesExpandCollapseAnimation, transform: {
+        .applyIf(uiModel.appliesExpandCollapseAnimation, transform: {
             $0
-                .animation(uiModel.animations.expandCollapse, value: isEnabled)
-                .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
+                .animation(uiModel.expandCollapseAnimation, value: isEnabled)
+                .animation(uiModel.expandCollapseAnimation, value: state) // +withAnimation
         })
     }
     
@@ -123,8 +123,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
-                        .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
-                        .font(uiModel.fonts.headerTitleText)
+                        .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                        .font(uiModel.headerTitleTextFont)
                     
                 case .label(let label):
                     label(internalState)
@@ -142,33 +142,33 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             )
             .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
         })
-        .padding(uiModel.layout.headerMargins)
+        .padding(uiModel.headerMargins)
     }
     
     @ViewBuilder private var divider: some View {
-        if uiModel.layout.dividerHeight > 0 {
+        if uiModel.dividerHeight > 0 {
             Rectangle()
-                .frame(height: uiModel.layout.dividerHeight)
-                .padding(uiModel.layout.dividerMargins)
-                .foregroundColor(uiModel.colors.divider)
+                .frame(height: uiModel.dividerHeight)
+                .padding(uiModel.dividerMargins)
+                .foregroundColor(uiModel.dividerColor)
         }
     }
     
     private var contentView: some View {
         content()
             .frame(maxWidth: .infinity)
-            .padding(uiModel.layout.contentMargins)
+            .padding(uiModel.contentMargins)
     }
     
     // MARK: Actions
     private func expandCollapse() {
         // Not affected by animation flag
-        withAnimation(uiModel.animations.expandCollapse, { state.setNextState() })
+        withAnimation(uiModel.expandCollapseAnimation, { state.setNextState() })
     }
     
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
-            uiModel.misc.expandsAndCollapsesOnHeaderTap,
+            uiModel.expandsAndCollapsesOnHeaderTap,
             isExpanded ^^ (internalState == .expanded)
         else {
             return
