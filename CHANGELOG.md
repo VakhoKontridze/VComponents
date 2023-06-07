@@ -1,5 +1,17 @@
 # Change Log
 
+### 5.0.0(48)
+
+VRoundedCaptionButton
+
+- `roundedRectangleSize` is renamed to `rectangleSize`
+- `cornerRadius` is renamed to `rectangleCornerRadius`
+- `background` is renamed to `rectangleColors`
+- `backgroundPressedScale` is renamed to `rectanglePressedScale`
+- `borderWidth` is renamed to `rectangleBorderWidth`
+- `borderColors` is renamed to `rectangleBorderColors`
+- `labelPressedScale` is renamed to `iconPressedScale`
+
 ### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
 
 VRoundedButton

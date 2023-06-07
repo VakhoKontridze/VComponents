@@ -92,7 +92,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
             label: { baseButtonState in
                 let internalState: VRoundedCaptionButtonInternalState = internalState(baseButtonState)
                 
-                VStack(spacing: uiModel.layout.rectangleAndCaptionSpacing, content: {
+                VStack(spacing: uiModel.rectangleAndCaptionSpacing, content: {
                     rectangle(internalState: internalState)
                     buttonCaption(internalState: internalState)
                 })
@@ -107,13 +107,13 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
             icon
                 .resizable()
                 .scaledToFit()
-                .frame(size: uiModel.layout.iconSize)
-                .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-                .foregroundColor(uiModel.colors.icon.value(for: internalState))
-                .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+                .frame(size: uiModel.iconSize)
+                .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
+                .foregroundColor(uiModel.iconColors.value(for: internalState))
+                .opacity(uiModel.iconOpacities.value(for: internalState))
         })
-        .frame(size: uiModel.layout.roundedRectangleSize)
-        .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
+        .frame(size: uiModel.rectangleSize)
+        .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from going out of bounds
         .background(rectangleBackground(internalState: internalState))
         .overlay(roundedRectangleBorder(internalState: internalState))
     }
@@ -121,23 +121,23 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     private func rectangleBackground(
         internalState: VRoundedCaptionButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
-            .foregroundColor(uiModel.colors.background.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
+            .foregroundColor(uiModel.rectangleColors.value(for: internalState))
             .shadow(
-                color: uiModel.colors.shadow.value(for: internalState),
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
+                color: uiModel.shadowColors.value(for: internalState),
+                radius: uiModel.shadowRadius,
+                offset: uiModel.shadowOffset
             )
     }
     
     @ViewBuilder private func roundedRectangleBorder(
         internalState: VRoundedCaptionButtonInternalState
     ) -> some View {
-        if uiModel.layout.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
+        if uiModel.rectangleBorderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
+                .strokeBorder(uiModel.rectangleBorderColors.value(for: internalState), lineWidth: uiModel.rectangleBorderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
         }
     }
     
@@ -150,7 +150,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 titleCaptionComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.iconCaptionAndTitleCaptionTextSpacing, content: {
+                HStack(spacing: uiModel.iconCaptionAndTitleCaptionTextSpacing, content: {
                     iconCaptionComponent(internalState: internalState, icon: icon)
                     titleCaptionComponent(internalState: internalState, title: title)
                 })
@@ -159,8 +159,8 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 caption(internalState)
             }
         })
-        .frame(maxWidth: uiModel.layout.captionWidthMax)
-        .scaleEffect(internalState == .pressed ? uiModel.animations.captionPressedScale : 1)
+        .frame(maxWidth: uiModel.captionWidthMax)
+        .scaleEffect(internalState == .pressed ? uiModel.captionPressedScale : 1)
     }
     
     private func titleCaptionComponent(
@@ -168,11 +168,11 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         title: String
     ) -> some View {
         Text(title)
-            .multilineTextAlignment(uiModel.layout.titleCaptionTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.layout.titleCaptionTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.layout.titleCaptionTextMinimumScaleFactor)
-            .foregroundColor(uiModel.colors.titleCaptionText.value(for: internalState))
-            .font(uiModel.fonts.titleCaptionText)
+            .multilineTextAlignment(uiModel.titleCaptionTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: uiModel.titleCaptionTextLineType.textLineLimitType)
+            .minimumScaleFactor(uiModel.titleCaptionTextMinimumScaleFactor)
+            .foregroundColor(uiModel.titleCaptionTextColors.value(for: internalState))
+            .font(uiModel.titleCaptionTextFont)
     }
     
     private func iconCaptionComponent(
@@ -182,17 +182,17 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         icon
             .resizable()
             .scaledToFit()
-            .frame(size: uiModel.layout.iconCaptionSize)
-            .foregroundColor(uiModel.colors.iconCaption.value(for: internalState))
-            .opacity(uiModel.colors.iconCaptionOpacities.value(for: internalState))
+            .frame(size: uiModel.iconCaptionSize)
+            .foregroundColor(uiModel.iconCaptionColors.value(for: internalState))
+            .opacity(uiModel.iconCaptionOpacities.value(for: internalState))
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
@@ -215,7 +215,7 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             BorderPreview().previewDisplayName("Border")
             ShadowPreview().previewDisplayName("Shadow")
-            OutOfBoundsContentPreventionPreview().previewDevice("Large Content")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -279,9 +279,9 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                             VRoundedCaptionButton(
                                 uiModel: {
                                     var uiModel: VRoundedCaptionButtonUIModel = .init()
-                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                    uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
-                                    uiModel.colors.titleCaptionText.enabled = uiModel.colors.titleCaptionText.pressed
+                                    uiModel.rectangleColors.enabled = uiModel.rectangleColors.pressed
+                                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
+                                    uiModel.titleCaptionTextColors.enabled = uiModel.titleCaptionTextColors.pressed
                                     return uiModel
                                 }(),
                                 action: {},
@@ -314,10 +314,10 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                 VRoundedCaptionButton(
                     uiModel: {
                         var uiModel: VRoundedCaptionButtonUIModel = .init()
-                        uiModel.layout.borderWidth = 2
-                        uiModel.colors.border = VRoundedButtonUIModel.Colors.StateColors(
-                            enabled: uiModel.colors.background.enabled.darken(by: 0.3),
-                            pressed: uiModel.colors.background.enabled.darken(by: 0.3),
+                        uiModel.rectangleBorderWidth = 2
+                        uiModel.rectangleBorderColors = VRoundedCaptionButtonUIModel.StateColors(
+                            enabled: uiModel.rectangleColors.enabled.darken(by: 0.3),
+                            pressed: uiModel.rectangleColors.enabled.darken(by: 0.3),
                             disabled: .clear
                         )
                         return uiModel
@@ -336,23 +336,23 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                 VRoundedCaptionButton(
                     uiModel: {
                         var uiModel: VRoundedCaptionButtonUIModel = .init()
-                        uiModel.colors.background = VRoundedCaptionButtonUIModel.Colors.StateColors(
+                        uiModel.rectangleColors = VRoundedCaptionButtonUIModel.StateColors(
                             enabled: ColorBook.controlLayerBlue,
                             pressed: ColorBook.controlLayerBluePressed,
                             disabled: ColorBook.controlLayerBlueDisabled
                         )
-                        uiModel.colors.icon = VRoundedCaptionButtonUIModel.Colors.StateColors(
+                        uiModel.iconColors = VRoundedCaptionButtonUIModel.StateColors(
                             enabled: ColorBook.primaryWhite,
                             pressed: ColorBook.primaryWhitePressedDisabled,
                             disabled: ColorBook.primaryWhitePressedDisabled
                         )
-                        uiModel.colors.shadow = VRoundedButtonUIModel.Colors.StateColors(
+                        uiModel.shadowColors = VRoundedCaptionButtonUIModel.StateColors(
                             enabled: GlobalUIModel.Common.shadowColorEnabled,
                             pressed: GlobalUIModel.Common.shadowColorEnabled,
                             disabled: GlobalUIModel.Common.shadowColorDisabled
                         )
-                        uiModel.colors.shadowRadius = 3
-                        uiModel.colors.shadowOffset = CGPoint(x: 0, y: 3)
+                        uiModel.shadowRadius = 3
+                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
                         return uiModel
                     }(),
                     action: {},
@@ -369,8 +369,8 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                 VRoundedCaptionButton(
                     uiModel: {
                         var uiModel: VRoundedCaptionButtonUIModel = .init()
-                        uiModel.layout.iconSize = CGSize(dimension: 100)
-                        uiModel.colors.icon = VRoundedCaptionButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        uiModel.iconSize = CGSize(dimension: 100)
+                        uiModel.iconColors = VRoundedCaptionButtonUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     action: {},
