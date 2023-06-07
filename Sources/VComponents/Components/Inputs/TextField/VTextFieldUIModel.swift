@@ -75,16 +75,6 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button layout. `iconSize` is set to `20x20` and `hitBox` is set to `zero`.
-        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
-            var uiModel: VPlainButtonUIModel.Layout = .init()
-            
-            uiModel.iconSize = CGSize(dimension: 20)
-            uiModel.hitBox = .zero
-            
-            return uiModel
-        }()
-        
         /// Header title text line type. Set to `singleLine`.
         public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
         
@@ -208,19 +198,6 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button colors.
-        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Colors = {
-            var uiModel: VPlainButtonUIModel.Colors = .init()
-            
-            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(
-                enabled: GlobalUIModel.Inputs.visibilityButtonEnabled,
-                pressed: GlobalUIModel.Inputs.visibilityButtonPressedDisabled,
-                disabled: GlobalUIModel.Inputs.visibilityButtonPressedDisabled
-            )
-            
-            return uiModel
-        }()
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -269,17 +246,6 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button animations. `haptic` is set to `nil`.
-        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Animations = {
-            var uiModel: VPlainButtonUIModel.Animations = .init()
-            
-#if os(iOS)
-            uiModel.haptic = nil
-#endif
-            
-            return uiModel
-        }()
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -319,6 +285,27 @@ public struct VTextFieldUIModel {
     }
     
     // MARK: Sub UI Models
+    /// Model for customizing visibility button layout.
+    /// `iconSize` is set to `20x20`, `iconColors` are changed, `hitBox` is set to `zero`, and `haptic` is set to `nil`.
+    public var visibilityButtonSubUIModel: VPlainButtonUIModel = {
+        var uiModel: VPlainButtonUIModel = .init()
+
+        uiModel.iconSize = CGSize(dimension: 20)
+        uiModel.iconColors = VPlainButtonUIModel.StateColors(
+            enabled: GlobalUIModel.Inputs.visibilityButtonEnabled,
+            pressed: GlobalUIModel.Inputs.visibilityButtonPressedDisabled,
+            disabled: GlobalUIModel.Inputs.visibilityButtonPressedDisabled
+        )
+
+        uiModel.hitBox = .zero
+
+#if os(iOS)
+        uiModel.haptic = nil
+#endif
+
+        return uiModel
+    }()
+
     var clearButtonSubUIModel: VRoundedButtonUIModel {
         var uiModel: VRoundedButtonUIModel = .init()
         
@@ -327,18 +314,6 @@ public struct VTextFieldUIModel {
         uiModel.colors = colors.clearButtonSubUIModel
         
         uiModel.animations = animations.clearButtonSubUIModel
-        
-        return uiModel
-    }
-    
-    var visibilityButtonSubUIModel: VPlainButtonUIModel {
-        var uiModel: VPlainButtonUIModel = .init()
-        
-        uiModel.layout = layout.visibilityButtonSubUIModel
-        
-        uiModel.colors = colors.visibilityButtonSubUIModel
-        
-        uiModel.animations = animations.visibilityButtonSubUIModel
         
         return uiModel
     }

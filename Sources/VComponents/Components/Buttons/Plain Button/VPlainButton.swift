@@ -110,7 +110,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 iconLabelComponent(internalState: internalState, icon: icon)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.iconAndTitleTextSpacing, content: {
+                HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
                     iconLabelComponent(internalState: internalState, icon: icon)
                     titleLabelComponent(internalState: internalState, title: title)
                 })
@@ -119,8 +119,8 @@ public struct VPlainButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-        .padding(uiModel.layout.hitBox)
+        .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
+        .padding(uiModel.hitBox)
     }
     
     private func titleLabelComponent(
@@ -129,9 +129,9 @@ public struct VPlainButton<Label>: View where Label: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
-            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-            .font(uiModel.fonts.titleText)
+            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .font(uiModel.titleTextFont)
     }
     
     private func iconLabelComponent(
@@ -141,17 +141,17 @@ public struct VPlainButton<Label>: View where Label: View {
         icon
             .resizable()
             .scaledToFit()
-            .frame(size: uiModel.layout.iconSize)
-            .foregroundColor(uiModel.colors.icon.value(for: internalState))
-            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+            .frame(size: uiModel.iconSize)
+            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
@@ -198,7 +198,7 @@ struct VPlainButton_Previews: PreviewProvider {
                     VPlainButton(
                         uiModel: {
                             var uiModel: VPlainButtonUIModel = .init()
-                            uiModel.layout.iconSize = CGSize(dimension: 18)
+                            uiModel.iconSize = CGSize(dimension: 18)
                             return uiModel
                         }(),
                         action: {},
@@ -233,7 +233,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             VPlainButton(
                                 uiModel: {
                                     var uiModel: VPlainButtonUIModel = .init()
-                                    uiModel.colors.titleText.enabled = uiModel.colors.titleText.pressed
+                                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
                                     return uiModel
                                 }(),
                                 action: {},

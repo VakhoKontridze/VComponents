@@ -13,6 +13,20 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 public struct VRoundedCaptionButtonUIModel {
+    // MARK: Properties - General
+    /// Spacing between rounded rectangle and caption.
+    /// Set to `7` on `iOS`.
+    /// Set to `3` on `watchOS`.
+    public var rectangleAndCaptionSpacing: CGFloat = {
+#if os(iOS)
+        return 7
+#elseif os(watchOS)
+        return 3
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
     // MARK: Properties - Background (Rectangle)
     /// Rectangle size.
     /// Set to `56x56` on `iOS`.
@@ -74,8 +88,8 @@ public struct VRoundedCaptionButtonUIModel {
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
 
-//    /// Icon margins. Set to `3`s.
-//    public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton // ???
+    /// Icon margins. Set to `3`s.
+    public var iconMargins: IconMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
 
     /// Ratio to which icon scales down on press.
     /// Set to `1` on `iOS`.
@@ -87,6 +101,16 @@ public struct VRoundedCaptionButtonUIModel {
     /// Maximum caption width. Set to `100`.
     public var captionWidthMax: CGFloat = 100
 
+    /// Ratio to which caption scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var captionPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+
+    /// Spacing between icon caption and title caption text. Set to `8`.
+    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+
+    // MARK: Properties - Caption - Icon
     /// Icon caption size.
     /// Set to `16x16` on `iOS`.
     /// Set to `18x18` on `watchOS`
@@ -116,6 +140,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// In order to use vector images, set this to `1`s.
     public var iconCaptionOpacities: StateOpacities = .init(1)
 
+    // MARK: Properties - Caption - Text
     /// Title caption text line type.
     /// Set to `multiline` with `center` alignment and `1...2` lines on `iOS`.
     /// Set to `singleLine` on `watchOS`.
@@ -156,15 +181,6 @@ public struct VRoundedCaptionButtonUIModel {
 #endif
     }()
 
-    /// Ratio to which caption scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
-    public var captionPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
-    /// Spacing between icon caption and title caption text. Set to `8`.
-    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
-
     // MARK: Properties - Shadow
     /// Shadow colors.
     ///
@@ -190,20 +206,6 @@ public struct VRoundedCaptionButtonUIModel {
     /// Haptic feedback type. Set to `nil`.
     public var haptic: WKHapticType? = nil
 #endif
-
-    // MARK: Properties - Misc
-    /// Spacing between rounded rectangle and caption.
-    /// Set to `7` on `iOS`.
-    /// Set to `3` on `watchOS`.
-    public var rectangleAndCaptionSpacing: CGFloat = {
-#if os(iOS)
-        return 7
-#elseif os(watchOS)
-        return 3
-#else
-        fatalError() // Not supported
-#endif
-    }()
     
     // MARK: Initializers
     /// Initializes UI model with default values.
@@ -211,7 +213,7 @@ public struct VRoundedCaptionButtonUIModel {
 
     // MARK: Label Margins
     /// Model that contains `horizontal` and `vertical` margins.
-    public typealias LabelMargins = EdgeInsets_HorizontalVertical
+    public typealias IconMargins = EdgeInsets_HorizontalVertical
 
     // MARK: Hit Box
     /// Model that contains `horizontal` and `vertical` hit boxes.

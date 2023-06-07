@@ -109,6 +109,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 .scaledToFit()
                 .frame(size: uiModel.iconSize)
                 .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
+                .padding(uiModel.iconMargins)
                 .foregroundColor(uiModel.iconColors.value(for: internalState))
                 .opacity(uiModel.iconOpacities.value(for: internalState))
         })

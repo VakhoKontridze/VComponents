@@ -56,6 +56,21 @@ public struct VCapsuleButtonUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
+    /// Ratio to which label scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+
+    /// Spacing between icon and title text. Set to `8`.
+    ///
+    /// Applicable only if icon `init` with icon and title is used.
+    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+
+    /// Label margins. Set to `15` horizontal and `3` vertical.
+    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
+
+    // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
     public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
 
@@ -78,6 +93,7 @@ public struct VCapsuleButtonUIModel {
 #endif
     }()
 
+    // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `16x16` on `iOS`.
     /// Set to `16x16` on `macOS`.
@@ -105,20 +121,6 @@ public struct VCapsuleButtonUIModel {
     /// Applied to all images. But should be used for bitmap images.
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
-
-    /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
-    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
-    /// Spacing between icon and title text. Set to `8`.
-    ///
-    /// Applicable only if icon `init` with icon and title is used.
-    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
-
-    /// Label margins. Set to `15` horizontal and `3` vertical.
-    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
     // MARK: Properties - HitBox
     /// Hit box. Set to `zero`.

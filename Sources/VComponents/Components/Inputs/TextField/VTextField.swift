@@ -408,7 +408,7 @@ struct VTextField_Previews: PreviewProvider {
                                     uiModel.layout.contentType = contentType
                                     uiModel.colors.clearButtonSubUIModel.background.enabled = uiModel.colors.clearButtonSubUIModel.background.pressed
                                     uiModel.colors.clearButtonSubUIModel.icon.enabled = uiModel.colors.clearButtonSubUIModel.icon.pressed
-                                    uiModel.colors.visibilityButtonSubUIModel.icon.enabled = uiModel.colors.visibilityButtonSubUIModel.icon.pressed
+                                    uiModel.visibilityButtonSubUIModel.iconColors.enabled = uiModel.visibilityButtonSubUIModel.iconColors.pressed
                                     return uiModel
                                 }(),
                                 headerTitle: headerTitle,
