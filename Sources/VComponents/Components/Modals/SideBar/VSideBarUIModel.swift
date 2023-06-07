@@ -216,12 +216,13 @@ public struct VSideBarUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
         
-        uiModel.layout.roundedCorners = layout.roundedCorners
-        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
-        uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargins = .zero
+        uiModel.roundedCorners = layout.roundedCorners
+        uiModel.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
+        uiModel.cornerRadius = layout.cornerRadius
         
-        uiModel.colors.background = colors.background
+        uiModel.backgroundColor = colors.background
+
+        uiModel.contentMargins = .zero
         
         return uiModel
     }

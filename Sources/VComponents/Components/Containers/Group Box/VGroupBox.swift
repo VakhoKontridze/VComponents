@@ -59,17 +59,17 @@ public struct VGroupBox<Content>: View where Content: View {
         contentView
             .background(background)
             .cornerRadius(
-                uiModel.layout.cornerRadius,
-                corners: uiModel.layout.roundedCorners
+                uiModel.cornerRadius,
+                corners: uiModel.roundedCorners
                     .withReversedLeftAndRightCorners(
-                        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages &&
+                        uiModel.reversesLeftAndRightCornersForRTLLanguages &&
                         layoutDirection == .rightToLeft
                     )
             )
     }
     
     private var background: some View {
-        uiModel.colors.background
+        uiModel.backgroundColor
     }
     
     private var contentView: some View {
@@ -82,7 +82,7 @@ public struct VGroupBox<Content>: View where Content: View {
                 content()
             }
         })
-        .padding(uiModel.layout.contentMargins)
+        .padding(uiModel.contentMargins)
     }
 }
 

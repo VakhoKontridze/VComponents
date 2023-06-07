@@ -359,11 +359,12 @@ public struct VBottomSheetUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
         
-        uiModel.layout.roundedCorners = .topCorners
-        uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargins = .zero
+        uiModel.roundedCorners = .topCorners
+        uiModel.cornerRadius = layout.cornerRadius
         
-        uiModel.colors.background = colors.background
+        uiModel.backgroundColor = colors.background
+
+        uiModel.contentMargins = .zero
         
         return uiModel
     }

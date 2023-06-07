@@ -32,11 +32,12 @@ public struct VDisclosureGroupUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
-        uiModel.layout.roundedCorners = .allCorners
-        uiModel.layout.cornerRadius = uiModel.layout.cornerRadius
-        uiModel.layout.contentMargins = .zero
+        uiModel.roundedCorners = .allCorners
+        uiModel.cornerRadius = cornerRadius
 
-        uiModel.colors.background = backgroundColor
+        uiModel.backgroundColor = backgroundColor
+
+        uiModel.contentMargins = .zero
 
         return uiModel
     }
