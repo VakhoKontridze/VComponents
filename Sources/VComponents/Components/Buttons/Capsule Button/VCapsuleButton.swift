@@ -81,11 +81,11 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 let internalState: VCapsuleButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
-                    .frame(height: uiModel.layout.height)
-                    .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
+                    .frame(height: uiModel.height)
+                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from going out of bounds
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
-                    .padding(uiModel.layout.hitBox)
+                    .padding(uiModel.hitBox)
             }
         )
     }
@@ -99,7 +99,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 titleLabelComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.iconAndTitleTextSpacing, content: {
+                HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
                     iconLabelComponent(internalState: internalState, icon: icon)
                     titleLabelComponent(internalState: internalState, title: title)
                 })
@@ -108,8 +108,8 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-        .padding(uiModel.layout.labelMargins)
+        .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
+        .padding(uiModel.labelMargins)
         .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.accessibility3))
@@ -127,13 +127,13 @@ public struct VCapsuleButton<Label>: View where Label: View {
             .lineLimit(1)
             .minimumScaleFactor({
                 if #available(iOS 15.0, *) {
-                    return uiModel.layout.titleTextMinimumScaleFactor
+                    return uiModel.titleTextMinimumScaleFactor
                 } else {
-                    return uiModel.layout.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
+                    return uiModel.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
                 }
             }())
-            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-            .font(uiModel.fonts.titleText)
+            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .font(uiModel.titleTextFont)
     }
     
     private func iconLabelComponent(
@@ -143,40 +143,40 @@ public struct VCapsuleButton<Label>: View where Label: View {
         icon
             .resizable()
             .scaledToFit()
-            .frame(size: uiModel.layout.iconSize)
-            .foregroundColor(uiModel.colors.icon.value(for: internalState))
-            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+            .frame(size: uiModel.iconSize)
+            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
     private func background(
         internalState: VCapsuleButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
-            .foregroundColor(uiModel.colors.background.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
+            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
             .shadow(
-                color: uiModel.colors.shadow.value(for: internalState),
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
+                color: uiModel.shadowColors.value(for: internalState),
+                radius: uiModel.shadowRadius,
+                offset: uiModel.shadowOffset
             )
     }
     
     @ViewBuilder private func border(
         internalState: VCapsuleButtonInternalState
     ) -> some View {
-        if uiModel.layout.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
         }
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
@@ -250,8 +250,8 @@ struct VCapsuleButton_Previews: PreviewProvider {
                             VCapsuleButton(
                                 uiModel: {
                                     var uiModel: VCapsuleButtonUIModel = .init()
-                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                    uiModel.colors.titleText.enabled = uiModel.colors.titleText.pressed
+                                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
+                                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
                                     return uiModel
                                 }(),
                                 action: {},
@@ -296,10 +296,10 @@ struct VCapsuleButton_Previews: PreviewProvider {
                 VCapsuleButton(
                     uiModel: {
                         var uiModel: VCapsuleButtonUIModel = .init()
-                        uiModel.layout.borderWidth = 2
-                        uiModel.colors.border = VCapsuleButtonUIModel.Colors.StateColors(
-                            enabled: uiModel.colors.background.enabled.darken(by: 0.3),
-                            pressed: uiModel.colors.background.enabled.darken(by: 0.3),
+                        uiModel.borderWidth = 2
+                        uiModel.borderColors = VCapsuleButtonUIModel.StateColors(
+                            enabled: uiModel.backgroundColors.enabled.darken(by: 0.3),
+                            pressed: uiModel.backgroundColors.enabled.darken(by: 0.3),
                             disabled: .clear
                         )
                         return uiModel
@@ -317,13 +317,13 @@ struct VCapsuleButton_Previews: PreviewProvider {
                 VCapsuleButton(
                     uiModel: {
                         var uiModel: VCapsuleButtonUIModel = .init()
-                        uiModel.colors.shadow = VCapsuleButtonUIModel.Colors.StateColors(
+                        uiModel.shadowColors = VCapsuleButtonUIModel.StateColors(
                             enabled: GlobalUIModel.Common.shadowColorEnabled,
                             pressed: GlobalUIModel.Common.shadowColorEnabled,
                             disabled: GlobalUIModel.Common.shadowColorDisabled
                         )
-                        uiModel.colors.shadowRadius = 3
-                        uiModel.colors.shadowOffset = CGPoint(x: 0, y: 3)
+                        uiModel.shadowRadius = 3
+                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
                         return uiModel
                     }(),
                     action: {},
@@ -339,8 +339,8 @@ struct VCapsuleButton_Previews: PreviewProvider {
                 VCapsuleButton(
                     uiModel: {
                         var uiModel: VCapsuleButtonUIModel = .init()
-                        uiModel.layout.iconSize = CGSize(dimension: 100)
-                        uiModel.colors.icon = VCapsuleButtonUIModel.Colors.StateColors(ColorBook.accentRed)
+                        uiModel.iconSize = CGSize(dimension: 100)
+                        uiModel.iconColors = VCapsuleButtonUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     action: {},
