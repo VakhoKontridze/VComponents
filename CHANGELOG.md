@@ -4,6 +4,7 @@
 
 VRoundedCaptionButton
 
+- `iconMargins` that had no effect previously, now apply to icon
 - `roundedRectangleSize` is renamed to `rectangleSize`
 - `cornerRadius` is renamed to `rectangleCornerRadius`
 - `background` is renamed to `rectangleColors`
