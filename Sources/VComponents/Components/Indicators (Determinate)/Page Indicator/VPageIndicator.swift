@@ -40,8 +40,8 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotWidth = 15
-///                 uiModel.layout.dotHeight = 15
+///                 uiModel.dotWidth = 15
+///                 uiModel.dotHeight = 15
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -67,8 +67,8 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotWidth = nil
-///                 uiModel.layout.dotHeight = 5
+///                 uiModel.dotWidth = nil
+///                 uiModel.dotHeight = 5
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -131,17 +131,17 @@ public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         let range: [Int] = (0..<total)
-            .reversedArray(if: uiModel.layout.direction.isReversed)
+            .reversedArray(if: uiModel.direction.isReversed)
         
         return HVStack(
-            spacing: uiModel.layout.spacing,
-            isHorizontal: uiModel.layout.direction.isHorizontal,
+            spacing: uiModel.spacing,
+            isHorizontal: uiModel.direction.isHorizontal,
             content: {
                 ForEach(range, id: \.self, content: dotContentView)
             }
         )
-        .applyIf(uiModel.animations.appliesTransitionAnimation, transform: {
-            $0.animation(uiModel.animations.transition, value: current)
+        .applyIf(uiModel.appliesTransitionAnimation, transform: {
+            $0.animation(uiModel.transitionAnimation, value: current)
         })
     }
     
@@ -151,23 +151,23 @@ public struct VPageIndicator<Content>: View where Content: View {
             case .empty:
                 ZStack(content: {
                     Circle()
-                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                        .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
                     
                     Circle()
-                        .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
-                        .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
+                        .strokeBorder(lineWidth: uiModel.dotBorderWidth)
+                        .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
                 })
                 
             case .content(let content):
                 content()
-                    .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                    .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
             }
         })
         .frame(
-            width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
-            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
+            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
+            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
         )
-        .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
+        .scaleEffect(current == i ? 1 : uiModel.unselectedDotScale)
     }
 }
 
@@ -223,7 +223,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                         VPageIndicator(
                             uiModel: {
                                 var uiModel: VPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .leftToRight
+                                uiModel.direction = .leftToRight
                                 return uiModel
                             }(),
                             total: total,
@@ -239,7 +239,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                         VPageIndicator(
                             uiModel: {
                                 var uiModel: VPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .rightToLeft
+                                uiModel.direction = .rightToLeft
                                 return uiModel
                             }(),
                             total: total,
@@ -256,7 +256,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                             VPageIndicator(
                                 uiModel: {
                                     var uiModel: VPageIndicatorUIModel = .init()
-                                    uiModel.layout.direction = .topToBottom
+                                    uiModel.direction = .topToBottom
                                     return uiModel
                                 }(),
                                 total: total,
@@ -272,7 +272,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                             VPageIndicator(
                                 uiModel: {
                                     var uiModel: VPageIndicatorUIModel = .init()
-                                    uiModel.layout.direction = .bottomToTop
+                                    uiModel.direction = .bottomToTop
                                     return uiModel
                                 }(),
                                 total: total,
@@ -294,9 +294,9 @@ struct VPageIndicator_Previews: PreviewProvider {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
-                        uiModel.layout.direction = .leftToRight
-                        uiModel.layout.dotWidth = nil
-                        uiModel.layout.dotHeight = 5
+                        uiModel.direction = .leftToRight
+                        uiModel.dotWidth = nil
+                        uiModel.dotHeight = 5
                         return uiModel
                     }(),
                     total: total,

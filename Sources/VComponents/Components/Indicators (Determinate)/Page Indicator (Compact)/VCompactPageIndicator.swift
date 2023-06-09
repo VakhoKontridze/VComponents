@@ -65,10 +65,10 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private let uiModel: VCompactPageIndicatorUIModel
     
     private let total: Int
-    private var visible: Int { uiModel.layout.visibleDots }
-    private var center: Int { uiModel.layout.centerDots }
-    private var side: Int { uiModel.layout.sideDots }
-    private var middle: Int { uiModel.layout.middleDots }
+    private var visible: Int { uiModel.visibleDots }
+    private var center: Int { uiModel.centerDots }
+    private var side: Int { uiModel.sideDots }
+    private var middle: Int { uiModel.middleDots }
     private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
@@ -150,22 +150,22 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private var compactBody: some View {
         frame
             .applyIf(
-                uiModel.layout.direction.isHorizontal,
+                uiModel.direction.isHorizontal,
                 ifTransform: { $0.overlay(dotsHorizontal) },
                 elseTransform: { $0.overlay(dotsVertical) }
             )
             .clipped()
-            .applyIf(uiModel.animations.appliesTransitionAnimation, transform: {
-                $0.animation(uiModel.animations.transition, value: current)
+            .applyIf(uiModel.appliesTransitionAnimation, transform: {
+                $0.animation(uiModel.transitionAnimation, value: current)
             })
     }
     
     private var frame: some View {
         let size: CGSize = .init(
             width: visibleWidth,
-            height: uiModel.layout.dotHeight
+            height: uiModel.dotHeight
         )
-            .withReversedDimensions(uiModel.layout.direction.isVertical)
+            .withReversedDimensions(uiModel.direction.isVertical)
         
         return Color.clear
             .frame(size: size)
@@ -173,7 +173,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     private var dotsHorizontal: some View {
         HStack(
-            spacing: uiModel.layout.spacing,
+            spacing: uiModel.spacing,
             content: dots
         )
         .offset(x: offset)
@@ -181,7 +181,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     private var dotsVertical: some View {
         VStack(
-            spacing: uiModel.layout.spacing,
+            spacing: uiModel.spacing,
             content: dots
         )
         .offset(y: offset)
@@ -189,7 +189,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     private func dots() -> some View {
         let range: [Int] = (0..<total)
-            .reversedArray(if: uiModel.layout.direction.isReversed)
+            .reversedArray(if: uiModel.direction.isReversed)
         
         return ForEach(range, id: \.self, content: dotContentView)
     }
@@ -200,36 +200,36 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             case .empty:
                 ZStack(content: {
                     Circle()
-                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                        .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
                     
                     Circle()
-                        .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
-                        .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
+                        .strokeBorder(lineWidth: uiModel.dotBorderWidth)
+                        .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
                 })
                 
             case .content(let content):
                 content()
-                    .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                    .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
             }
         })
         .frame(
-            width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
-            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
+            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
+            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
         )
         .scaleEffect(scale(at: i))
     }
     
     // MARK: Dimension on Main Axis
     private var visibleWidth: CGFloat {
-        let dots: CGFloat = CGFloat(visible) * uiModel.layout.dotWidth
-        let spacings: CGFloat = CGFloat(visible - 1) * uiModel.layout.spacing
+        let dots: CGFloat = CGFloat(visible) * uiModel.dotWidth
+        let spacings: CGFloat = CGFloat(visible - 1) * uiModel.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
     private var totalWidth: CGFloat {
-        let dots: CGFloat = CGFloat(total) * uiModel.layout.dotWidth
-        let spacings: CGFloat = CGFloat(total - 1) * uiModel.layout.spacing
+        let dots: CGFloat = CGFloat(total) * uiModel.dotWidth
+        let spacings: CGFloat = CGFloat(total - 1) * uiModel.spacing
         let total: CGFloat = dots + spacings
         return total
     }
@@ -244,7 +244,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 return rawOffset
                 
             case .center:
-                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.layout.dotWidth + uiModel.layout.spacing)
+                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.dotWidth + uiModel.spacing)
                 return rawOffset + incrementalOffset
                 
             case .end:
@@ -253,7 +253,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         }()
         
         return directionalOffset
-            .withOppositeSign(if: uiModel.layout.direction.isReversed)
+            .withOppositeSign(if: uiModel.direction.isReversed)
     }
     
     // MARK: Animation Scale
@@ -303,7 +303,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func startEdgeEndSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / CGFloat(side)
+        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side)
         let incrementalScale: CGFloat = CGFloat(index + 1) * scaleStep
         return 1 - incrementalScale
     }
@@ -340,8 +340,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / CGFloat(side)
-        let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + CGFloat(index) * scaleStep
+        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side)
+        let incrementalScale: CGFloat = uiModel.edgeDotScale + CGFloat(index) * scaleStep
         return incrementalScale
     }
     
@@ -364,15 +364,15 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VCompactPageIndicatorUIModel) {
-        guard uiModel.layout.visibleDots.isOdd else {
+        guard uiModel.visibleDots.isOdd else {
             VCoreFatalError("`VCompactPageIndicator`'s `visible` count must be odd", module: "VComponents")
         }
         
-        guard uiModel.layout.centerDots.isOdd else {
+        guard uiModel.centerDots.isOdd else {
             VCoreFatalError("`VCompactPageIndicator`'s `center` count must be odd", module: "VComponents")
         }
         
-        guard uiModel.layout.visibleDots > uiModel.layout.centerDots else {
+        guard uiModel.visibleDots > uiModel.centerDots else {
             VCoreFatalError("`VCompactPageIndicator`'s `visible` must be greater than `center`", module: "VComponents")
         }
     }
@@ -436,7 +436,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                         VCompactPageIndicator(
                             uiModel: {
                                 var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .leftToRight
+                                uiModel.direction = .leftToRight
                                 return uiModel
                             }(),
                             total: total,
@@ -452,7 +452,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                         VCompactPageIndicator(
                             uiModel: {
                                 var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .rightToLeft
+                                uiModel.direction = .rightToLeft
                                 return uiModel
                             }(),
                             total: total,
@@ -469,7 +469,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                             VCompactPageIndicator(
                                 uiModel: {
                                     var uiModel: VCompactPageIndicatorUIModel = .init()
-                                    uiModel.layout.direction = .topToBottom
+                                    uiModel.direction = .topToBottom
                                     return uiModel
                                 }(),
                                 total: total,
@@ -485,7 +485,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                             VCompactPageIndicator(
                                 uiModel: {
                                     var uiModel: VCompactPageIndicatorUIModel = .init()
-                                    uiModel.layout.direction = .bottomToTop
+                                    uiModel.direction = .bottomToTop
                                     return uiModel
                                 }(),
                                 total: total,

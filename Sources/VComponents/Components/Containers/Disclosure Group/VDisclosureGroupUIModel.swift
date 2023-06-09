@@ -121,7 +121,7 @@ public struct VDisclosureGroupUIModel {
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if `expandCollapse` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.

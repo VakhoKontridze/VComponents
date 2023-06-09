@@ -35,7 +35,7 @@ public struct VRoundedCaptionButtonUIModel {
 #endif
     }()
 
-    // MARK: Properties - Background (Rectangle)
+    // MARK: Properties - Rectangle Background
     /// Rectangle size.
     /// Set to `56x56` on `iOS`.
     /// Set to `64x56` on `watchOS`.
@@ -65,7 +65,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// Set to `0.98` on `watchOS`.
     public var rectanglePressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
 
-    // MARK: Properties - Border (Rectangle)
+    // MARK: Properties - Rectangle Border
     /// Rectangle border width. Set to `0`.
     ///
     /// To hide border, set to `0`.
@@ -202,7 +202,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
     public var animatesStateChange: Bool = true
 

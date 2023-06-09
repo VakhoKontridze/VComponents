@@ -86,7 +86,7 @@ public struct VPlainButtonUIModel {
     /// Hit box. Set to `5`s.
     public var hitBox: HitBox = .init(5)
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
     public var animatesStateChange: Bool = true
 

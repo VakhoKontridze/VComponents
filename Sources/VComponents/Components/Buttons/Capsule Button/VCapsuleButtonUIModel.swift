@@ -38,7 +38,7 @@ public struct VCapsuleButtonUIModel {
     }()
 
     /// Corner radius. Set to half of `height`.
-    public var cornerRadius: CGFloat { height / 2 }
+    public var cornerRadius: CGFloat { height/2 }
 
     // MARK: Properties - Background
     /// Background colors.
@@ -144,7 +144,7 @@ public struct VCapsuleButtonUIModel {
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
     public var animatesStateChange: Bool = true
 

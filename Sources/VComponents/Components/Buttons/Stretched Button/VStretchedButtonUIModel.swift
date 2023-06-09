@@ -123,7 +123,7 @@ public struct VStretchedButtonUIModel {
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
     public var animatesStateChange: Bool = true
 

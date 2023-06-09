@@ -341,17 +341,6 @@ struct GlobalUIModel {
     // MARK: Indicators (Determinate)
     struct DeterminateIndicators {
         // MARK: Properties
-        static var pageIndicatorDotDimension: CGFloat {
-#if os(iOS)
-            return 10
-#elseif os(macOS)
-            return 10
-#elseif os(tvOS)
-            return 20
-#elseif os(watchOS)
-            return 8
-#endif
-        }
         static var pageIndicatorSpacing: CGFloat {
 #if os(iOS)
             return 5
@@ -363,12 +352,27 @@ struct GlobalUIModel {
             return 3
 #endif
         }
-        
+
+        static var pageIndicatorDotDimension: CGFloat {
+#if os(iOS)
+            return 10
+#elseif os(macOS)
+            return 10
+#elseif os(tvOS)
+            return 20
+#elseif os(watchOS)
+            return 8
+#endif
+        }
         static var pageIndicatorStandardUnselectedDotScale: CGFloat { 0.85 }
+        static var pageIndicatorDotColor: Color { .init(module: "PageIndicator.Dot") }
+        static var pageIndicatorSelectedDotColor: Color { ColorBook.accentBlue }
         
         static var pageIndicatorCompactVisibleDots: Int { 7 }
         static var pageIndicatorCompactCenterDots: Int { 3 }
         static var pageIndicatorCompactEdgeDotScale: CGFloat { 0.5 }
+
+        static var pageIndicatorTransitionAnimation: Animation? { .linear(duration: 0.15) }
         
         // MARK: Initializers
         private init() {}

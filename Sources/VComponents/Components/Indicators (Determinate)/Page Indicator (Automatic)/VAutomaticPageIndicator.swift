@@ -100,7 +100,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         switch total {
-        case ...uiModel.layout.standardDotLimit:
+        case ...uiModel.standardDotLimit:
             VPageIndicator(
                 uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,

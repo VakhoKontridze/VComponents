@@ -132,7 +132,7 @@ public struct VRoundedButtonUIModel {
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - State Changes
+    // MARK: Properties - Transitions
     /// Indicates if button animates state change. Set to `true`.
     public var animatesStateChange: Bool = true
 
