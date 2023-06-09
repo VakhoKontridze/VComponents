@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.3.2(48)
+### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 05 10*
 
 VSegmentedPicker
 
