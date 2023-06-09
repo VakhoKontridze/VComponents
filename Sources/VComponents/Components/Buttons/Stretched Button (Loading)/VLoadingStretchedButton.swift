@@ -164,7 +164,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     ) -> some View {
         if internalState == .loading {
             Spacer()
-                .frame(width: uiModel.spinnerSubUIModel.layout.dimension)
+                .frame(width: uiModel.spinnerSubUIModel.dimension)
         }
     }
     

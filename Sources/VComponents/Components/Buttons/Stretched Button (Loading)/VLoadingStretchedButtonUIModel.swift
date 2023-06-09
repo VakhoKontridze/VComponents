@@ -120,7 +120,7 @@ public struct VLoadingStretchedButtonUIModel {
     public var spinnerSubUIModel: VContinuousSpinnerUIModel = {
         var uiModel: VContinuousSpinnerUIModel = .init()
 
-        uiModel.colors.spinner = ColorBook.primaryWhite
+        uiModel.color = ColorBook.primaryWhite
 
         return uiModel
     }()

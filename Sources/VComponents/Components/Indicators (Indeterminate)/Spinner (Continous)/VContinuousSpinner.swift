@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Continuous Spinner
 /// Indicator component that indicates activity.
@@ -33,16 +34,16 @@ public struct VContinuousSpinner: View {
     // MARK: Body
     public var body: some View {
         Circle()
-            .trim(from: 0, to: uiModel.layout.length)
+            .trim(from: 0, to: uiModel.length)
             .stroke(
-                uiModel.colors.spinner,
-                style: StrokeStyle(lineWidth: uiModel.layout.thickness, lineCap: .round)
+                uiModel.color,
+                style: StrokeStyle(lineWidth: uiModel.thickness, lineCap: .round)
             )
-            .frame(width: uiModel.layout.dimension, height: uiModel.layout.dimension)
+            .frame(width: uiModel.dimension, height: uiModel.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear(perform: {
                 DispatchQueue.main.async(execute: {
-                    withAnimation(uiModel.animations.spinning.repeatForever(autoreverses: false), {
+                    withAnimation(uiModel.animation.repeatForever(autoreverses: false), {
                         isAnimating.toggle()
                     })
                 })
