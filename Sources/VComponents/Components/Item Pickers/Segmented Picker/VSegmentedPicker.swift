@@ -477,25 +477,6 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                         }
                     )
                     
-                    // Color is also applied to other rows.
-                    // Scale effect cannot be shown.
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Pressed (Row)",
-                        content: {
-                            VSegmentedPicker(
-                                uiModel: {
-                                    var uiModel: VSegmentedPickerUIModel = .init()
-                                    uiModel.colors.rowTitleText.selected = uiModel.colors.rowTitleText.pressedSelected
-                                    return uiModel
-                                }(),
-                                selection: .constant(selection),
-                                headerTitle: headerTitle,
-                                footerTitle: footerTitle
-                            )
-                        }
-                    )
-                    
                     PreviewRow(
                         axis: .vertical,
                         title: "Disabled",
