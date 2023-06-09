@@ -59,7 +59,7 @@ public struct VProgressBarUIModel {
     /// Border color.
     public var borderColor: Color = .clear
 
-    // MARK: Properties - State Change
+    // MARK: Properties - Transition
     /// Indicates if `progress` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.

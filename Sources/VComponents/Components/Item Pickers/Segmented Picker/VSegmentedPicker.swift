@@ -217,41 +217,41 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.layout.headerPickerAndFooterSpacing,
+            spacing: uiModel.headerPickerAndFooterSpacing,
             content: {
                 header
                 picker
                 footer
             }
         )
-        .applyIf(uiModel.animations.appliesSelectionAnimation, transform: {
+        .applyIf(uiModel.appliesSelectionAnimation, transform: {
             $0
-                .animation(uiModel.animations.selection, value: internalState)
-                .animation(uiModel.animations.selection, value: selection)
+                .animation(uiModel.selectionAnimation, value: internalState)
+                .animation(uiModel.selectionAnimation, value: selection)
         })
     }
     
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.layout.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
-                .font(uiModel.fonts.headerTitleText)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
 
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.layout.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.footerTitleText.value(for: internalState))
-                .font(uiModel.fonts.footerTitleText)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
     
@@ -262,27 +262,27 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             rows
             dividers
         })
-        .frame(height: uiModel.layout.height)
-        .cornerRadius(uiModel.layout.cornerRadius)
+        .frame(height: uiModel.height)
+        .cornerRadius(uiModel.cornerRadius)
     }
     
     private var pickerBackground: some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-            .background(uiModel.colors.background.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+            .background(uiModel.backgroundColors.value(for: internalState))
     }
     
     private var indicator: some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.indicatorCornerRadius)
+        RoundedRectangle(cornerRadius: uiModel.indicatorCornerRadius)
             .frame(width: rowWidth)
-            .padding(uiModel.layout.indicatorMargin)
+            .padding(uiModel.indicatorMargin)
             .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
             .offset(x: rowWidth * CGFloat(selectedIndexInt))
-            .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))
+            .foregroundColor(uiModel.indicatorColors.value(for: indicatorInternalState))
             .shadow(
-                color: uiModel.colors.indicatorShadow.value(for: indicatorInternalState),
-                radius: uiModel.colors.indicatorShadowRadius,
-                offset: uiModel.colors.indicatorShadowOffset
+                color: uiModel.indicatorShadowColors.value(for: indicatorInternalState),
+                radius: uiModel.indicatorShadowRadius,
+                offset: uiModel.indicatorShadowOffset
             )
     }
     
@@ -296,13 +296,13 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                         label: {
                             Text(title(element))
                                 .lineLimit(1)
-                                .minimumScaleFactor(uiModel.layout.rowTitleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.colors.rowTitleText.value(for: rowInternalState(element: element)))
-                                .font(uiModel.fonts.rowTitleText)
+                                .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
+                                .foregroundColor(uiModel.rowTitleTextColors.value(for: rowInternalState(element: element)))
+                                .font(uiModel.rowTitleTextFont)
 
                                 .frame(maxWidth: .infinity)
-                                .padding(uiModel.layout.indicatorMargin)
-                                .padding(uiModel.layout.contentMargin)
+                                .padding(uiModel.indicatorMargin)
+                                .padding(uiModel.contentMargin)
                                 .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
@@ -320,8 +320,8 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                         label: {
                             content(rowInternalState(element: element), element)
                                 .frame(maxWidth: .infinity)
-                                .padding(uiModel.layout.indicatorMargin)
-                                .padding(uiModel.layout.contentMargin)
+                                .padding(uiModel.indicatorMargin)
+                                .padding(uiModel.contentMargin)
                                 .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
                             
                                 .onSizeChange(perform: { rowWidth = $0.width })
@@ -340,8 +340,8 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                 
                 if i <= data.count-2 {
                     Rectangle()
-                        .frame(size: uiModel.layout.dividerSize)
-                        .foregroundColor(uiModel.colors.divider.value(for: internalState))
+                        .frame(size: uiModel.dividerSize)
+                        .foregroundColor(uiModel.dividerColors.value(for: internalState))
                         .opacity(dividerOpacity(for: i))
                 }
             })
@@ -352,7 +352,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     private func stateChangeHandler(element: Data.Element, gestureState: GestureBaseButtonGestureState) {
         // Doesn't work as modifier
         // Not affected by animation flag
-        withAnimation(uiModel.animations.indicatorPress, {
+        withAnimation(uiModel.indicatorPressAnimation, {
             pressedValue = gestureState.isPressed ? element : nil
         })
         
@@ -372,7 +372,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     // MARK: State Indication
     private var indicatorScale: CGFloat {
         switch selection {
-        case pressedValue: return uiModel.animations.indicatorPressedScale
+        case pressedValue: return uiModel.indicatorPressedScale
         case _: return 1
         }
     }
@@ -387,7 +387,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     public var rowContentScale: CGFloat {
         switch selection {
-        case pressedValue: return uiModel.animations.rowContentPressedScale
+        case pressedValue: return uiModel.rowContentPressedScale
         case _: return 1
         }
     }
@@ -486,7 +486,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             VSegmentedPicker(
                                 uiModel: {
                                     var uiModel: VSegmentedPickerUIModel = .init()
-                                    uiModel.colors.rowTitleText.selected = uiModel.colors.rowTitleText.pressedSelected
+                                    uiModel.rowTitleTextColors.selected = uiModel.rowTitleTextColors.pressedSelected
                                     return uiModel
                                 }(),
                                 selection: .constant(selection),
