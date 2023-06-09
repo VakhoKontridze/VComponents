@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(48)
+### 5.0.0(49)
 
 VRoundedCaptionButton
 
@@ -16,6 +16,12 @@ VRoundedCaptionButton
 VTextView
 
 - `contentMargin` is renamed to `contentMargins`
+
+### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 05 10*
+
+VSegmentedPicker
+
+- Issue with all rows scaling down on press is fixed
 
 ### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
 
