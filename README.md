@@ -376,58 +376,78 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>
-        4.0<br/><i><sup>(4.0.0 - 4.x.x)</sup></i>
+        5.0<br><i><sup>(5.0.0 - 5.x.x)</sup></i>
+    </td>
+    <td>2023 XX XX</td>
+    <td>
+        5.8
+    </td>
+    <td>
+        iOS 13.0<br>
+        macOS 10.15<br>
+        tvOS 13.0<br>
+        watchOS 6.0
+    </td>
+    <td>4.10.0 - 4.x.x</td>
+    <td>
+        API changes.<br>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+        4.0<br><i><sup>(4.0.0 - 4.3.2)</sup></i>
     </td>
     <td>2023 04 09</td>
     <td>
         5.8
     </td>
     <td>
-        iOS 13.0<br/>
-        macOS 10.15<br/>
-        tvOS 13.0<br/>
+        iOS 13.0<br>
+        macOS 10.15<br>
+        tvOS 13.0<br>
         watchOS 6.0
     </td>
     <td>4.7.0 - 4.x.x</td>
     <td>
-        iOS 13.0 support.<br/>
-        Multiplatform support.<br/
+        iOS 13.0 support.<br>
+        Multiplatform support.<br>
         >RTL language support.
     </td>
   </tr>
   
   <tr>
     <td>
-        3.0<br/><i><sup>(3.0.0 - 3.2.3)</sup></i>
+        3.0<br><i><sup>(3.0.0 - 3.2.3)</sup></i>
     </td>
     <td>2022 10 02</td>
     <td>5.7</td>
     <td>iOS 16.0</td>
     <td>4.1.0 - 4.x.x</td>
     <td>
-        New SwiftUI API.<br/>
+        New SwiftUI API.<br>
         API changes.
     </td>
   </tr>
     
   <tr>
     <td>
-        2.0<br/><i><sup>(2.0.0 - 2.3.4)</sup></i>
+        2.0<br><i><sup>(2.0.0 - 2.3.4)</sup></i>
     </td>
     <td>2022 05 26</td>
     <td>5.6</td>
     <td>iOS 15.0</td>
     <td>3.2.0 - 3.x.x</td>
     <td>
-        New SwiftUI API.<br/>
-        API changes.<br/>
+        New SwiftUI API.<br>
+        API changes.<br>
         SPM support.
     </td>
   </tr>
     
   <tr>
     <td>
-        1.0<br/><i><sup>(1.0.0 - 1.6.0)</sup></i>
+        1.0<br><i><sup>(1.0.0 - 1.6.0)</sup></i>
     </td>
     <td>2021 02 07</td>
     <td>5.3</td>
