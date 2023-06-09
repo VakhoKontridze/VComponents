@@ -412,7 +412,7 @@ Versions with different majors are not directly compatible. When a new major is 
     <td>
         iOS 13.0 support.<br>
         Multiplatform support.<br>
-        >RTL language support.
+        RTL language support.
     </td>
   </tr>
   
