@@ -33,7 +33,7 @@ import VCore
 ///         VTextView(
 ///             uiModel: {
 ///                 var uiModel: VTextViewUIModel = .init()
-///                 uiModel.layout.textLineType = .multiLine(
+///                 uiModel.textLineType = .multiLine(
 ///                     alignment: .leading,
 ///                     lineLimit: 7,
 ///                     reservesSpace: true
@@ -73,17 +73,17 @@ import VCore
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
-    
+
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
     private var internalState: VTextViewInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
-    
+
     private let headerTitle: String?
     private let footerTitle: String?
-    
+
     private let placeholder: String?
     @Binding private var text: String
-    
+
     // MARK: Initializers
     /// Initializes `VTextView` with text.
     public init(
@@ -99,12 +99,12 @@ public struct VTextView: View {
         self.placeholder = placeholder
         self._text = text
     }
-    
+
     // MARK: Body
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.layout.headerTextViewAndFooterSpacing,
+            spacing: uiModel.headerTextViewAndFooterSpacing,
             content: {
                 header
                 input
@@ -112,92 +112,92 @@ public struct VTextView: View {
             }
         )
     }
-    
+
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.layout.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
-                .font(uiModel.fonts.headerTitleText)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
 
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.layout.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.footerTitleText.value(for: internalState))
-                .font(uiModel.fonts.footerTitleText)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
-    
+
     private var input: some View {
         Group(content: {
             textField
         })
-        .frame(minHeight: uiModel.layout.minHeight)
-        .padding(uiModel.layout.contentMargin)
+        .frame(minHeight: uiModel.minHeight)
+        .padding(uiModel.contentMargins)
         .background(background)
     }
-    
+
     private var background: some View {
         ZStack(content: {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .foregroundColor(uiModel.colors.background.value(for: internalState))
-            
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         })
     }
-    
+
     private var textField: some View {
         TextField(
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.colors.placeholderText.value(for: internalState))
-                    .font(uiModel.fonts.placeholderText)
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState))
+                    .font(uiModel.placeholderTextFont)
             },
             axis: .vertical,
             label: EmptyView.init
         )
         .textFieldStyle(.plain)
-        
+
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .multilineTextAlignment(uiModel.layout.textLineType.textAlignment ?? .leading)
-        .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
-        .foregroundColor(uiModel.colors.text.value(for: internalState))
-        .font(uiModel.fonts.text)
+        .multilineTextAlignment(uiModel.textLineType.textAlignment ?? .leading)
+        .lineLimit(type: uiModel.textLineType.textLineLimitType)
+        .foregroundColor(uiModel.textColors.value(for: internalState))
+        .font(uiModel.textFont)
         .applyModifier({
 #if os(iOS)
-            $0.keyboardType(uiModel.misc.keyboardType)
+            $0.keyboardType(uiModel.keyboardType)
 #else
             $0
 #endif
         })
         .applyModifier({
 #if os(iOS)
-            $0.textContentType(uiModel.misc.textContentType)
+            $0.textContentType(uiModel.textContentType)
 #else
             $0
 #endif
         })
-        .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
+        .disableAutocorrection(uiModel.autocorrection.map { !$0 })
         .applyModifier({
 #if os(iOS)
-            $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
+            $0.textInputAutocapitalization(uiModel.autocapitalization)
 #else
             $0
 #endif
         })
-        .submitLabel(uiModel.misc.submitButton)
+        .submitLabel(uiModel.submitButton)
     }
 }
 
@@ -213,7 +213,7 @@ struct VTextView_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextViewUIModel { .init() }
-    
+
     // Previews
     static var previews: some View {
         Group(content: {
@@ -224,23 +224,23 @@ struct VTextView_Previews: PreviewProvider {
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
-    
+
     // Data
     private static var headerTitle: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
     private static var placeholder: String { "Lorem ipsum".pseudoRTL(languageDirection) }
     private static var text: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
-    
+
     // Previews (Scenes)
     private struct Preview: View {
         @State private var text: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-        
+
         var body: some View {
             PreviewContainer(content: {
                 VTextView(
                     uiModel: {
                         var uiModel: VTextViewUIModel = highlight
-                        uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 7, reservesSpace: true)
+                        uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 7, reservesSpace: true)
                         return uiModel
                     }(),
                     headerTitle: headerTitle,
@@ -252,7 +252,7 @@ struct VTextView_Previews: PreviewProvider {
             })
         }
     }
-    
+
     private struct StatesPreview: View {
         var body: some View {
             PreviewContainer(content: {
@@ -269,7 +269,7 @@ struct VTextView_Previews: PreviewProvider {
                         )
                     }
                 )
-                
+
                 PreviewRow(
                     axis: .vertical,
                     title: "Focused",
@@ -277,10 +277,10 @@ struct VTextView_Previews: PreviewProvider {
                         VTextView(
                             uiModel: {
                                 var uiModel: VTextViewUIModel = highlight
-                                uiModel.colors.background.enabled = uiModel.colors.background.focused
-                                uiModel.colors.text.enabled = uiModel.colors.text.focused
-                                uiModel.colors.headerTitleText.enabled = uiModel.colors.headerTitleText.focused
-                                uiModel.colors.footerTitleText.enabled = uiModel.colors.footerTitleText.focused
+                                uiModel.backgroundColors.enabled = uiModel.backgroundColors.focused
+                                uiModel.textColors.enabled = uiModel.textColors.focused
+                                uiModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
+                                uiModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
                                 return uiModel
                             }(),
                             headerTitle: headerTitle,
@@ -290,7 +290,7 @@ struct VTextView_Previews: PreviewProvider {
                         )
                     }
                 )
-                
+
                 PreviewRow(
                     axis: .vertical,
                     title: "Disabled",

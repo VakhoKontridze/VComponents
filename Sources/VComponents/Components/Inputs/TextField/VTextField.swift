@@ -131,7 +131,7 @@ public struct VTextField: View {
         
         return VStack(
             alignment: .leading,
-            spacing: uiModel.layout.headerTextFieldAndFooterSpacing,
+            spacing: uiModel.headerTextFieldAndFooterSpacing,
             content: {
                 header
                 input
@@ -143,67 +143,67 @@ public struct VTextField: View {
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.layout.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
-                .font(uiModel.fonts.headerTitleText)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.layout.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.footerTitleText.value(for: internalState))
-                .font(uiModel.fonts.footerTitleText)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
     
     private var input: some View {
-        HStack(spacing: uiModel.layout.textAndButtonSpacing, content: {
+        HStack(spacing: uiModel.textAndButtonSpacing, content: {
             searchIcon // Only for search field
             textField
             clearButton
             visibilityButton // Only for secure field
         })
-        .frame(height: uiModel.layout.height)
-        .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
+        .frame(height: uiModel.height)
+        .padding(.horizontal, uiModel.contentMarginHorizontal)
         .clipped() // Prevents large content from going out of bounds
         .background(background)
     }
     
     private var background: some View {
         ZStack(content: {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .foregroundColor(uiModel.colors.background.value(for: internalState))
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .foregroundColor(uiModel.backgroundColors.value(for: internalState))
             
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         })
     }
     
     @ViewBuilder private var searchIcon: some View {
-        if uiModel.layout.contentType.isSearch {
+        if uiModel.contentType.isSearch {
             ImageBook.textFieldSearch
                 .resizable()
                 .scaledToFit()
-                .frame(dimension: uiModel.layout.searchIconDimension)
-                .foregroundColor(uiModel.colors.searchIcon.value(for: internalState))
+                .frame(dimension: uiModel.searchIconDimension)
+                .foregroundColor(uiModel.searchIconColors.value(for: internalState))
         }
     }
     
     private var textField: some View {
         SecurableTextField(
-            isSecure: uiModel.layout.contentType.isSecure && !secureFieldIsVisible,
+            isSecure: uiModel.contentType.isSecure && !secureFieldIsVisible,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.colors.placeholderText.value(for: internalState))
-                    .font(uiModel.fonts.placeholderText)
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState))
+                    .font(uiModel.placeholderTextFont)
             },
             text: $text
         )
@@ -213,39 +213,39 @@ public struct VTextField: View {
         
         .onChange(of: text, perform: textChanged)
 
-        .multilineTextAlignment(uiModel.layout.textAlignment)
+        .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
-        .foregroundColor(uiModel.colors.text.value(for: internalState))
-        .font(uiModel.fonts.text)
+        .foregroundColor(uiModel.textColors.value(for: internalState))
+        .font(uiModel.textFont)
         .applyModifier({
 #if os(iOS)
-            $0.keyboardType(uiModel.misc.keyboardType)
+            $0.keyboardType(uiModel.keyboardType)
 #else
             $0
 #endif
         })
         .applyModifier({
 #if os(iOS)
-            $0.textContentType(uiModel.misc.textContentType)
+            $0.textContentType(uiModel.textContentType)
 #else
             $0
 #endif
         })
-        .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
+        .disableAutocorrection(uiModel.autocorrection.map { !$0 })
         .applyModifier({
 #if os(iOS)
-            $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
+            $0.textInputAutocapitalization(uiModel.autocapitalization)
 #else
             $0
 #endif
         })
-        .submitLabel(uiModel.misc.submitButton)
+        .submitLabel(uiModel.submitButton)
     }
     
     private var clearButton: some View {
         let isVisible: Bool = // Keyboard animation breaks offset when using conditional instead of opacity
-            !uiModel.layout.contentType.isSecure &&
-            uiModel.misc.hasClearButton &&
+            !uiModel.contentType.isSecure &&
+            uiModel.hasClearButton &&
             internalState == .focused &&
             textIsNonEmpty
         
@@ -259,7 +259,7 @@ public struct VTextField: View {
     }
     
     @ViewBuilder private var visibilityButton: some View {
-        if uiModel.layout.contentType.isSecure {
+        if uiModel.contentType.isSecure {
             VPlainButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
@@ -275,7 +275,7 @@ public struct VTextField: View {
         })
         
         DispatchQueue.main.async(execute: {
-            if secureFieldIsVisible && !uiModel.layout.contentType.isSecure { secureFieldIsVisible = false }
+            if secureFieldIsVisible && !uiModel.contentType.isSecure { secureFieldIsVisible = false }
         })
     }
     
@@ -290,12 +290,12 @@ public struct VTextField: View {
     
     // MARK: Actions
     private func textChanged(_ text: String) {
-        withAnimation(uiModel.animations.clearButton, { textIsNonEmpty = !text.isEmpty })
+        withAnimation(uiModel.clearButtonAppearDisappearAnimation, { textIsNonEmpty = !text.isEmpty })
     }
     
     private func didTapClearButton() {
         text = ""
-        withAnimation(uiModel.animations.clearButton, { textIsNonEmpty = false })
+        withAnimation(uiModel.clearButtonAppearDisappearAnimation, { textIsNonEmpty = false })
     }
 }
 
@@ -311,7 +311,7 @@ struct VTextField_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
-    private static var contentType: VTextFieldUIModel.Layout.ContentType { .search }
+    private static var contentType: VTextFieldUIModel.ContentType { .standard }
     
     // Previews
     static var previews: some View {
@@ -340,7 +340,7 @@ struct VTextField_Previews: PreviewProvider {
                 VTextField(
                     uiModel: {
                         var uiModel: VTextFieldUIModel = highlight
-                        uiModel.layout.contentType = contentType
+                        uiModel.contentType = contentType
                         return uiModel
                     }(),
                     headerTitle: headerTitle,
@@ -365,7 +365,7 @@ struct VTextField_Previews: PreviewProvider {
                             VTextField(
                                 uiModel: {
                                     var uiModel: VTextFieldUIModel = highlight
-                                    uiModel.layout.contentType = contentType
+                                    uiModel.contentType = contentType
                                     return uiModel
                                 }(),
                                 headerTitle: headerTitle,
@@ -383,11 +383,11 @@ struct VTextField_Previews: PreviewProvider {
                             VTextField(
                                 uiModel: {
                                     var uiModel: VTextFieldUIModel = highlight
-                                    uiModel.layout.contentType = contentType
-                                    uiModel.colors.background.enabled = uiModel.colors.background.focused
-                                    uiModel.colors.text.enabled = uiModel.colors.text.focused
-                                    uiModel.colors.headerTitleText.enabled = uiModel.colors.headerTitleText.focused
-                                    uiModel.colors.footerTitleText.enabled = uiModel.colors.footerTitleText.focused
+                                    uiModel.contentType = contentType
+                                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.focused
+                                    uiModel.textColors.enabled = uiModel.textColors.focused
+                                    uiModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
+                                    uiModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
                                     return uiModel
                                 }(),
                                 headerTitle: headerTitle,
@@ -405,7 +405,7 @@ struct VTextField_Previews: PreviewProvider {
                             VTextField(
                                 uiModel: {
                                     var uiModel: VTextFieldUIModel = highlight
-                                    uiModel.layout.contentType = contentType
+                                    uiModel.contentType = contentType
                                     uiModel.clearButtonSubUIModel.backgroundColors.enabled = uiModel.clearButtonSubUIModel.backgroundColors.pressed
                                     uiModel.clearButtonSubUIModel.iconColors.enabled = uiModel.clearButtonSubUIModel.iconColors.pressed
                                     uiModel.visibilityButtonSubUIModel.iconColors.enabled = uiModel.visibilityButtonSubUIModel.iconColors.pressed
@@ -426,7 +426,7 @@ struct VTextField_Previews: PreviewProvider {
                             VTextField(
                                 uiModel: {
                                     var uiModel: VTextFieldUIModel = highlight
-                                    uiModel.layout.contentType = contentType
+                                    uiModel.contentType = contentType
                                     return uiModel
                                 }(),
                                 headerTitle: headerTitle,
@@ -477,8 +477,8 @@ struct VTextField_Previews: PreviewProvider {
                 VTextField(
                     uiModel: {
                         var uiModel: VTextFieldUIModel = .search
-                        uiModel.layout.searchIconDimension = 100
-                        uiModel.fonts.text = .system(size: 100)
+                        uiModel.searchIconDimension = 100
+                        uiModel.textFont = .system(size: 100)
                         return uiModel
                     }(),
                     text: $text

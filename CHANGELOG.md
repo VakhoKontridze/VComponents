@@ -13,6 +13,10 @@ VRoundedCaptionButton
 - `borderColors` is renamed to `rectangleBorderColors`
 - `labelPressedScale` is renamed to `iconPressedScale`
 
+VTextView
+
+- `contentMargin` is renamed to `contentMargins`
+
 ### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
 
 VRoundedButton
