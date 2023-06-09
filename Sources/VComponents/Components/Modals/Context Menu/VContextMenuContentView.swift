@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Menu Content View
 @available(iOS 15.0, macOS 12.0, *)

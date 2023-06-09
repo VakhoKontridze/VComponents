@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V List Row
 /// `View` in container that presents rows of data arranged in a single column.
