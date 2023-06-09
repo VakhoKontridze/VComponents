@@ -51,47 +51,47 @@ public struct VProgressBar: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.layout.direction.alignment, content: {
+        ZStack(alignment: uiModel.direction.alignment, content: {
             track
             progress
             border
         })
-        .cornerRadius(uiModel.layout.cornerRadius)
+        .cornerRadius(uiModel.cornerRadius)
         .frame(
-            width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
-            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+            width: uiModel.direction.isHorizontal ? nil : uiModel.height,
+            height: uiModel.direction.isHorizontal ? uiModel.height : nil
         )
         .onSizeChange(perform: { progressBarSize = $0 })
-        .applyIf(uiModel.animations.appliesProgressAnimation, transform: {
-            $0.animation(uiModel.animations.progress, value: value)
+        .applyIf(uiModel.appliesProgressAnimation, transform: {
+            $0.animation(uiModel.progressAnimation, value: value)
         })
     }
     
     private var track: some View {
         Rectangle()
-            .foregroundColor(uiModel.colors.track)
+            .foregroundColor(uiModel.trackColor)
     }
     
     private var progress: some View {
         Rectangle()
             .frame(
-                width: uiModel.layout.direction.isHorizontal ? progressWidth : nil,
-                height: uiModel.layout.direction.isHorizontal ? nil : progressWidth
+                width: uiModel.direction.isHorizontal ? progressWidth : nil,
+                height: uiModel.direction.isHorizontal ? nil : progressWidth
             )
-            .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
-            .foregroundColor(uiModel.colors.progress)
+            .cornerRadius(uiModel.cornerRadius, corners: uiModel.progressViewRoundedCorners)
+            .foregroundColor(uiModel.progressColor)
     }
     
     @ViewBuilder private var border: some View {
-        if uiModel.layout.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border, lineWidth: uiModel.layout.borderWidth)
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)
         }
     }
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let width: CGFloat = progressBarSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
+        let width: CGFloat = progressBarSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         return value * width
     }
@@ -139,8 +139,8 @@ struct VProgressBar_Previews: PreviewProvider {
                 VProgressBar(
                     uiModel: {
                         var uiModel: VProgressBarUIModel = .init()
-                        uiModel.layout.borderWidth = 1
-                        uiModel.colors.border = uiModel.colors.track.darken(by: 0.3)
+                        uiModel.borderWidth = 1
+                        uiModel.borderColor = uiModel.trackColor.darken(by: 0.3)
                         return uiModel
                     }(),
                     value: value
@@ -173,7 +173,7 @@ struct VProgressBar_Previews: PreviewProvider {
                         VProgressBar(
                             uiModel: {
                                 var uiModel: VProgressBarUIModel = .init()
-                                uiModel.layout.direction = .leftToRight
+                                uiModel.direction = .leftToRight
                                 return uiModel
                             }(),
                             value: value
@@ -189,7 +189,7 @@ struct VProgressBar_Previews: PreviewProvider {
                         VProgressBar(
                             uiModel: {
                                 var uiModel: VProgressBarUIModel = .init()
-                                uiModel.layout.direction = .rightToLeft
+                                uiModel.direction = .rightToLeft
                                 return uiModel
                             }(),
                             value: value
@@ -206,7 +206,7 @@ struct VProgressBar_Previews: PreviewProvider {
                             VProgressBar(
                                 uiModel: {
                                     var uiModel: VProgressBarUIModel = .init()
-                                    uiModel.layout.direction = .topToBottom
+                                    uiModel.direction = .topToBottom
                                     return uiModel
                                 }(),
                                 value: value
@@ -222,7 +222,7 @@ struct VProgressBar_Previews: PreviewProvider {
                             VProgressBar(
                                 uiModel: {
                                     var uiModel: VProgressBarUIModel = .init()
-                                    uiModel.layout.direction = .bottomToTop
+                                    uiModel.direction = .bottomToTop
                                     return uiModel
                                 }(),
                                 value: value
