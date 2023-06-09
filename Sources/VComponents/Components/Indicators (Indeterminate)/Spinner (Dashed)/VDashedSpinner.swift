@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Dashed Spinner
 /// Indicator component that indicates activity.
@@ -32,7 +33,7 @@ public struct VDashedSpinner: View {
     // MARK: Body
     public var body: some View {
         ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: uiModel.colors.spinner))
+            .progressViewStyle(CircularProgressViewStyle(tint: uiModel.color))
     }
 }
 
