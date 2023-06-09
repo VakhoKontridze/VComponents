@@ -303,7 +303,10 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                                 .frame(maxWidth: .infinity)
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
-                                .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
+                                .scaleEffect(
+                                    rowContentScale(element: element),
+                                    anchor: rowContentScaleAnchor(element: element)
+                                )
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
@@ -322,7 +325,10 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                                 .frame(maxWidth: .infinity)
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
-                                .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(element: element))
+                                .scaleEffect(
+                                    rowContentScale(element: element),
+                                    anchor: rowContentScaleAnchor(element: element)
+                                )
                             
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
@@ -385,9 +391,9 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         }
     }
     
-    public var rowContentScale: CGFloat {
-        switch selection {
-        case pressedValue: return uiModel.animations.rowContentPressedScale
+    public func rowContentScale(element: Data.Element) -> CGFloat {
+        switch pressedValue {
+        case element: return uiModel.animations.rowContentPressedScale
         case _: return 1
         }
     }

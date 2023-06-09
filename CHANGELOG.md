@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.3.2(48)
+
+VSegmentedPicker
+
+- Issue with all rows scaling down on press is fixed
+
 ### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
 
 VRoundedButton
