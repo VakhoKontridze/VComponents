@@ -16,10 +16,10 @@ import VCore
 @available(watchOS, unavailable)
 public struct VTextViewUIModel {
     // MARK: Properties - General
-    /// Minimum height. Set to `50`.
+    /// Textview minimum height. Set to `50`.
     public var minHeight: CGFloat = GlobalUIModel.Inputs.height
 
-    /// Corner radius. Set to `12`.
+    /// Textview orner radius. Set to `12`.
     public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
     /// Spacing between header, textview, and footer. Set to `3`.
@@ -91,7 +91,7 @@ public struct VTextViewUIModel {
     /// Footer title text font. Set to `footnote` (`13`).
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
 
-    // MARK: Properties - Content
+    // MARK: Properties - TextView Content
     /// Content margins. Set to `15`s.
     public var contentMargins: Margins = .init(GlobalUIModel.Common.containerContentMargin)
 

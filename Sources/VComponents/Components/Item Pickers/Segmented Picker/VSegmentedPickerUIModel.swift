@@ -103,7 +103,7 @@ public struct VSegmentedPickerUIModel {
     /// Set to `footnote` (`10`) on `macOS`
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
 
-    // MARK: Properties - Content
+    // MARK: Properties - Picker Content
     /// Content margin. Set to `2`.
     public var contentMargin: CGFloat = 2
 

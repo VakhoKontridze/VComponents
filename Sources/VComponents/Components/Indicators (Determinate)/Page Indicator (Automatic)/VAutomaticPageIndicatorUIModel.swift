@@ -15,17 +15,16 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
-    // MARK: Properties - Layout
-    /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
-    public var standardDotLimit: Int = 10
-
-    // MARK: Properties - Content
     /// Dot spacing.
     /// Set to `5` on `iOS`.
     /// Set to `5` on `macOS`.
     /// Set to `10` on `tvOS`.
     /// Set to `3` on `watchOS`.
     public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
+
+    // MARK: Properties - Layout
+    /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
+    public var standardDotLimit: Int = 10
 
     // MARK: Properties - Dot
     /// Dot height, but width for vertical layouts.

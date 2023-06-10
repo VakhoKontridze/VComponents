@@ -16,10 +16,10 @@ import VCore
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VTextFieldUIModel {
     // MARK: Properties - General
-    /// Height. Set to `50`.
+    /// Textfield height. Set to `50`.
     public var height: CGFloat = GlobalUIModel.Inputs.height
 
-    /// Corner radius. Set to `12`.
+    /// Textfield corner radius. Set to `12`.
     public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
     /// Spacing between header, textfield, and footer. Set to `3`.
@@ -91,7 +91,7 @@ public struct VTextFieldUIModel {
     /// Footer title text font. Set to `footnote` (`13`).
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
 
-    // MARK: Properties - Content
+    // MARK: Properties - TextField Content
     /// Content type. Set to `default`.
     public var contentType: ContentType = .default
 

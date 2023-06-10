@@ -15,6 +15,13 @@ public struct VCompactPageIndicatorUIModel {
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
+    /// Dot spacing.
+    /// Set to `5` on `iOS`.
+    /// Set to `5` on `macOS`.
+    /// Set to `10` on `tvOS`.
+    /// Set to `3` on `watchOS`.
+    public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
+
     // MARK: Properties - Layout
     /// Number of visible dots. Set to `7`.
     ///
@@ -31,14 +38,6 @@ public struct VCompactPageIndicatorUIModel {
 
     /// Number of middle dots. Set to half of `visibleDots.`
     public var middleDots: Int { visibleDots / 2 }
-
-    // MARK: Properties - Content
-    /// Dot spacing.
-    /// Set to `5` on `iOS`.
-    /// Set to `5` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `3` on `watchOS`.
-    public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
 
     // MARK: Properties - Dot
     /// Dot width, but height for vertical layouts.

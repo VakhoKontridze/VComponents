@@ -191,7 +191,7 @@ public struct VWheelPicker<Data, ID, Content>: View
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.layout.headerPickerAndFooterSpacing,
+            spacing: uiModel.headerPickerAndFooterSpacing,
             content: {
                 header
                 picker
@@ -203,24 +203,24 @@ public struct VWheelPicker<Data, ID, Content>: View
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.layout.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.headerTitleText.value(for: internalState))
-                .font(uiModel.fonts.headerTitleText)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
 
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.layout.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.footerTitleText.value(for: internalState))
-                .font(uiModel.fonts.footerTitleText)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
 
-                .padding(.horizontal, uiModel.layout.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
         }
     }
     
@@ -236,8 +236,8 @@ public struct VWheelPicker<Data, ID, Content>: View
     }
 
     private var background: some View {
-        uiModel.colors.background.value(for: internalState)
-            .cornerRadius(uiModel.layout.cornerRadius)
+        uiModel.backgroundColors.value(for: internalState)
+            .cornerRadius(uiModel.cornerRadius)
     }
     
     @ViewBuilder private func rows() -> some View {
@@ -246,9 +246,9 @@ public struct VWheelPicker<Data, ID, Content>: View
             ForEach(data, id: id, content: { element in
                 Text(title(element))
                     .lineLimit(1)
-                    .minimumScaleFactor(uiModel.layout.rowTitleTextMinimumScaleFactor)
-                    .foregroundColor(uiModel.colors.rowTitleText.value(for: internalState))
-                    .font(uiModel.fonts.rowTitleText)
+                    .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
+                    .foregroundColor(uiModel.rowTitleTextColors.value(for: internalState))
+                    .font(uiModel.rowTitleTextFont)
             })
             
         case .content(let content):

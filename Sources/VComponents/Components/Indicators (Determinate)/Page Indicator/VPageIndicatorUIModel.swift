@@ -15,7 +15,6 @@ public struct VPageIndicatorUIModel {
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
-    // MARK: Properties - Content
     /// Dot spacing.
     /// Set to `5` on `iOS`.
     /// Set to `5` on `macOS`.
@@ -49,7 +48,7 @@ public struct VPageIndicatorUIModel {
     /// Selected dot color.
     public var selectedDotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorSelectedDotColor
 
-    // MARK: Properties - Dor Border
+    // MARK: Properties - Dot Border
     /// Border width. Set to `0.`
     ///
     /// To hide border, set to `0`.
