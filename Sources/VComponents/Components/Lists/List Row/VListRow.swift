@@ -96,16 +96,16 @@ public struct VListRow<Content>: View
             alignment: .leading,
             spacing: 0,
             content: {
-                if uiModel.layout.separatorType.contains(.top) { separator }
+                if uiModel.separatorType.contains(.top) { separator }
                 
                 content()
-                    .padding(uiModel.layout.margins)
+                    .padding(uiModel.margins)
                 
-                if uiModel.layout.separatorType.contains(.bottom) { separator }
+                if uiModel.separatorType.contains(.bottom) { separator }
             }
         )
         .listRowInsets(EdgeInsets())
-        .listRowBackground(uiModel.colors.background)
+        .listRowBackground(uiModel.backgroundColor)
         .applyModifier({
 #if os(iOS) || os(macOS)
             $0.listRowSeparator(.hidden)
@@ -116,10 +116,10 @@ public struct VListRow<Content>: View
     }
     
     private var separator: some View {
-        uiModel.colors.separator
+        uiModel.separatorColor
             .frame(maxWidth: .infinity)
-            .frame(height: uiModel.layout.separatorHeight)
-            .padding(uiModel.layout.separatorMargins)
+            .frame(height: uiModel.separatorHeight)
+            .padding(uiModel.separatorMargins)
     }
 }
 
@@ -178,11 +178,7 @@ struct VListRow_Previews: PreviewProvider {
                             List(content: {
                                 ForEach(titles, id: \.self, content: { title in
                                     VListRow(
-                                        uiModel: {
-                                            var uiModel: VListRowUIModel = .init()
-                                            uiModel.layout.separatorType = .none
-                                            return uiModel
-                                        }(),
+                                        uiModel: .noSeparators(),
                                         content: { Text(title) }
                                     )
                                 })
