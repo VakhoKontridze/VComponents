@@ -1,18 +1,18 @@
 # Change Log
 
-### 4.3.3(49)
+### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
 
 VListRow
 
 - Issue with `VListRow.rowEnclosingSeparators(isFirst:)` not inserting first and last separators is fixed
 
-### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 05 10*
+### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 06 10*
 
 VSegmentedPicker
 
 - Issue with all rows scaling down on press is fixed
 
-### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 05 07*
+### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 06 07*
 
 VRoundedButton
 
