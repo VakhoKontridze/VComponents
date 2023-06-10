@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(49)
+### 5.0.0(50)
 
 VRoundedCaptionButton
 
@@ -16,6 +16,12 @@ VRoundedCaptionButton
 VTextView
 
 - `contentMargin` is renamed to `contentMargins`
+
+### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
+
+VListRow
+
+- Issue with `VListRow.rowEnclosingSeparators(isFirst:)` not inserting first and last separators is fixed
 
 ### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 06 10*
 
