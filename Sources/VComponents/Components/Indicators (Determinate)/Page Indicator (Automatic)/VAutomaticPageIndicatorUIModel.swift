@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Automatic Page Indicator UI Model
 /// Model that describes UI.
 public struct VAutomaticPageIndicatorUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
@@ -22,7 +22,6 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Set to `3` on `watchOS`.
     public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
 
-    // MARK: Properties - Layout
     /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
     public var standardDotLimit: Int = 10
 

@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 public struct VStretchedButtonUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -21,12 +21,14 @@ public struct VStretchedButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `48` on `iOS`.
     /// Set to `40` on `macOS`.
     /// Set to `64` on `watchOS`.
     public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
 
+    // MARK: Properties - Corners
     /// Corner radius.
     /// Set to `14` on `iOS`.
     /// Set to `12` on `macOS`.

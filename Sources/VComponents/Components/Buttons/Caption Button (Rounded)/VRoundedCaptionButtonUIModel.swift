@@ -13,7 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 public struct VRoundedCaptionButtonUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -22,6 +22,7 @@ public struct VRoundedCaptionButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Global Layout
     /// Spacing between rounded rectangle and caption.
     /// Set to `7` on `iOS`.
     /// Set to `3` on `watchOS`.

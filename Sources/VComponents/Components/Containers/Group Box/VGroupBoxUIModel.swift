@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Group Box UI Model
 /// Model that describes UI.
 public struct VGroupBoxUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Corners
     /// Rounded corners. Set to to `allCorners`.
     public var roundedCorners: RectCorner = .allCorners
 

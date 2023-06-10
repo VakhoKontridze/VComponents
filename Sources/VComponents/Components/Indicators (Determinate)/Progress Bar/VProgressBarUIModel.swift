@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Progress Bar UI Model
 /// Model that describes UI.
 public struct VProgressBarUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
@@ -22,6 +22,7 @@ public struct VProgressBarUIModel {
     /// Set to `5` on `watchOS`.
     public var height: CGFloat = GlobalUIModel.Common.barHeight
 
+    // MARK: Properties - Corners
     /// Progress bar corner radius.
     /// Set to `5` on `iOS`.
     /// Set to `5` on `macOS`.

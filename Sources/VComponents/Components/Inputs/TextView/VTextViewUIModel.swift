@@ -15,12 +15,9 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VTextViewUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Textview minimum height. Set to `50`.
     public var minHeight: CGFloat = GlobalUIModel.Inputs.height
-
-    /// Textview orner radius. Set to `12`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
     /// Spacing between header, textview, and footer. Set to `3`.
     public var headerTextViewAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
@@ -45,6 +42,10 @@ public struct VTextViewUIModel {
     /// Auto capitalization type. Set to `nil`.
     public var autocapitalization: TextInputAutocapitalization? = nil
 #endif
+
+    // MARK: Properties - Corners
+    /// Textview orner radius. Set to `12`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
     // MARK: Properties - Background
     /// Background colors.

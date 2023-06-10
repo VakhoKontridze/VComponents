@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 public struct VRoundedButtonUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -21,12 +21,14 @@ public struct VRoundedButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Global Layout
     /// Size.
     /// Set to `56x56` on `iOS`.
     /// Set to `28x28` on `macOS`.
     /// Set to `64x56` on `watchOS`.
     public var size: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
 
+    // MARK: Properties - Corners
     /// Corner radius.
     /// Set to `16` on `iOS`.
     /// Set to `6` on `macOS`.

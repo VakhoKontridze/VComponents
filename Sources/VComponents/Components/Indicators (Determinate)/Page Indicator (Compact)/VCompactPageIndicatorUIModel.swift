@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Compact Page Indicator UI Model
 /// Model that describes UI.
 public struct VCompactPageIndicatorUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
@@ -22,7 +22,6 @@ public struct VCompactPageIndicatorUIModel {
     /// Set to `3` on `watchOS`.
     public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
 
-    // MARK: Properties - Layout
     /// Number of visible dots. Set to `7`.
     ///
     /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.

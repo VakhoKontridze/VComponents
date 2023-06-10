@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VDisclosureGroupUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()
 
@@ -25,6 +25,7 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Corners
     /// Corner radius. Set to `15`.
     public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
 

@@ -15,18 +15,15 @@ import VCore
 @available(tvOS 15.0, *)@available(tvOS, unavailable)
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VTextFieldUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Textfield height. Set to `50`.
     public var height: CGFloat = GlobalUIModel.Inputs.height
 
-    /// Textfield corner radius. Set to `12`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
+    /// Header and footer horizontal margin. Set to `10`.
+    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     /// Spacing between header, textfield, and footer. Set to `3`.
     public var headerTextFieldAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
-
-    /// Header and footer horizontal margin. Set to `10`.
-    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
 #if os(iOS)
     /// Keyboard type. Set to `default`.
@@ -45,6 +42,10 @@ public struct VTextFieldUIModel {
     /// Auto capitalization type. Set to `nil`.
     public var autocapitalization: TextInputAutocapitalization? = nil
 #endif
+
+    // MARK: Properties - Corners
+    /// Textfield corner radius. Set to `12`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
     // MARK: Properties - Background
     /// Background colors.

@@ -14,15 +14,16 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VWheelPickerUIModel {
-    // MARK: Properties - General
-    /// Picker corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = 15
-
+    // MARK: Properties - Global Layout
     /// Spacing between header, picker, and footer. Set to `3`.
     public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
     /// Header and footer horizontal margin. Set to `10`.
     public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
+    // MARK: Properties - Corners
+    /// Picker corner radius. Set to `15`.
+    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background colors.

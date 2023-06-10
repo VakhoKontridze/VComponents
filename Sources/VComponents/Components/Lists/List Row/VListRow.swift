@@ -139,7 +139,7 @@ struct VListRow_Previews: PreviewProvider {
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
-            SeparatorsPreview().previewDisplayName("Separator")
+            SeparatorsPreview().previewDisplayName("Separators")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })

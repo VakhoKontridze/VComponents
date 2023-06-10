@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 public struct VCapsuleButtonUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -21,6 +21,7 @@ public struct VCapsuleButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.
@@ -37,6 +38,7 @@ public struct VCapsuleButtonUIModel {
 #endif
     }()
 
+    // MARK: Properties - Corners
     /// Corner radius. Set to half of `height`.
     public var cornerRadius: CGFloat { height/2 }
 

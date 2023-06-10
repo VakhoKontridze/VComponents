@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VLoadingStretchedButtonUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -22,20 +22,22 @@ public struct VLoadingStretchedButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `48` on `iOS`.
     /// Set to `40` on `macOS`.
     public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
 
-    /// Corner radius.
-    /// Set to `14` on `iOS`.
-    /// Set to `12` on `macOS`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
-
     /// Spacing between label and spinner. Set to `20`.
     ///
     /// Only visible when state is set to `loading`.
     public var labelAndSpinnerSpacing: CGFloat = 20
+
+    // MARK: Properties - Corners
+    /// Corner radius.
+    /// Set to `14` on `iOS`.
+    /// Set to `12` on `macOS`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
 
     // MARK: Properties - Background
     /// Background colors.

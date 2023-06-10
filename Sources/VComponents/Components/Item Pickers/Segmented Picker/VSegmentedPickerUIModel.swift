@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VSegmentedPickerUIModel {
-    // MARK: Properties - General
+    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `31` on `iOS`, similarly to native segmented picker.
     /// Set to `22` on `macOS`, similarly to native segmented picker.
@@ -27,14 +27,15 @@ public struct VSegmentedPickerUIModel {
 #endif
     }()
 
-    /// Corner radius. Set to `7`, similarly to native segmented picker.
-    public var cornerRadius: CGFloat = 7
-
     /// Spacing between header text, picker, and footer text. Set to `3`.
     public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
     /// Header and footer horizontal margin. Set to `10`.
     public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
+    // MARK: Properties - Corners
+    /// Corner radius. Set to `7`, similarly to native segmented picker.
+    public var cornerRadius: CGFloat = 7
 
     // MARK: Properties - Background
     /// Border width.
