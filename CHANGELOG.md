@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.3.3(49)
+
+VListRow
+
+- Issue with `VListRow.rowEnclosingSeparators(isFirst:)` not inserting first and last separators is fixed
+
 ### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 05 10*
 
 VSegmentedPicker

@@ -253,7 +253,7 @@ struct VListRow_Previews: PreviewProvider {
                             List(content: {
                                 ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
                                     VListRow(
-                                        uiModel: .noFirstAndLastSeparators(isFirst: i == 0),
+                                        uiModel: .rowEnclosingSeparators(isFirst: i == 0),
                                         content: { Text(title) }
                                     )
                                 })

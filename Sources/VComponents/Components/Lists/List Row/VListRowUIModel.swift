@@ -168,7 +168,7 @@ extension VListRowUIModel {
     public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.separatorType = .noFirstAndLastSeparators(isFirst: isFirst)
+        uiModel.layout.separatorType = .rowEnclosingSeparators(isFirst: isFirst)
         
         return uiModel
     }
