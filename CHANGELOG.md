@@ -17,6 +17,14 @@ VTextView
 
 - `contentMargin` is renamed to `contentMargins`
 
+VModal
+
+- `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+VBottomSheet
+
+- `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
 ### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
 
 VListRow

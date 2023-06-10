@@ -112,7 +112,7 @@ struct VModal<Content>: View
         if hasHeader {
             HStack(
                 alignment: uiModel.layout.headerAlignment,
-                spacing: uiModel.layout.labelAndCloseButtonSpacing,
+                spacing: uiModel.layout.headerLabelAndCloseButtonSpacing,
                 content: {
                     Group(content: {
                         if uiModel.misc.dismissType.contains(.leadingButton) {

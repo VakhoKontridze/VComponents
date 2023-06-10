@@ -20,7 +20,7 @@ enum VBottomSheetSnapAction {
     // MARK: Initializers
     // Velocity is always non-zero, and exceeds the threshold.
     static func dragEndedHighVelocitySnapAction(
-        heights: VBottomSheetUIModel.Layout.BottomSheetHeights,
+        heights: VBottomSheetUIModel.BottomSheetHeights,
         offset: CGFloat,
         velocity: CGFloat
     ) -> VBottomSheetSnapAction {
@@ -38,7 +38,7 @@ enum VBottomSheetSnapAction {
     }
     
     static func dragEndedSnapAction(
-        heights: VBottomSheetUIModel.Layout.BottomSheetHeights,
+        heights: VBottomSheetUIModel.BottomSheetHeights,
         canPullDownToDismiss: Bool,
         pullDownDismissDistance: CGFloat,
         
@@ -98,7 +98,7 @@ private enum VBottomSheetRegion {
     
     // MARK: Initializers
     init(
-        heights: VBottomSheetUIModel.Layout.BottomSheetHeights,
+        heights: VBottomSheetUIModel.BottomSheetHeights,
         offset: CGFloat
     ) {
         if offset >= heights.maxOffset && offset <= heights.idealOffset {

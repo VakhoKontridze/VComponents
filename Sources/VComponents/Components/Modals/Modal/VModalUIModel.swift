@@ -62,8 +62,8 @@ public struct VModalUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Spacing between label and close button. Set to `10`.
-        public var labelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
+        /// Spacing between header label and close button. Set to `10`.
+        public var headerLabelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
         /// Divider height. Set to `2` scaled to screen.
         ///

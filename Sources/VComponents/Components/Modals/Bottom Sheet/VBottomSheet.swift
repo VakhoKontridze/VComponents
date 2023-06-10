@@ -29,12 +29,12 @@ struct VBottomSheet<Content>: View
     @State private var headerLabel: VBottomSheetHeaderLabel<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
-    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
+    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.dismissType.hasButton }
     private var hasGrabber: Bool {
-        uiModel.layout.grabberSize.height > 0 &&
-        (uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable)
+        uiModel.grabberSize.height > 0 &&
+        (uiModel.dismissType.contains(.pullDown) || uiModel.sizes._current.size.heights.isResizable)
     }
-    private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
+    private var hasDivider: Bool { hasHeader && uiModel.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
@@ -58,7 +58,7 @@ struct VBottomSheet<Content>: View
         self.dismissHandler = dismissHandler
         self.content = content
         
-        _offset = State(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
+        _offset = State(initialValue: uiModel.sizes._current.size.heights.idealOffset)
     }
     
     // MARK: Body
@@ -67,7 +67,7 @@ struct VBottomSheet<Content>: View
             dimmingView
             bottomSheet
         })
-        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
+        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -80,22 +80,22 @@ struct VBottomSheet<Content>: View
     }
     
     private var dimmingView: some View {
-        uiModel.colors.dimmingView
+        uiModel.dimmingViewColor
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
     }
     
     private var bottomSheet: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .applyIf(!uiModel.misc.contentIsDraggable, transform: {
+                .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fix issue of safe areas and/or landscape
-                            maxHeight: uiModel.layout.sizes._current.size.heights.max
+                            maxHeight: uiModel.sizes._current.size.heights.max
                         )
-                        .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
+                        .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -103,9 +103,9 @@ struct VBottomSheet<Content>: View
                         )
                 })
                 .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    offset: uiModel.colors.shadowOffset
+                    color: uiModel.shadowColor,
+                    radius: uiModel.shadowRadius,
+                    offset: uiModel.shadowOffset
                 )
                     
             VStack(spacing: 0, content: {
@@ -115,27 +115,27 @@ struct VBottomSheet<Content>: View
                     divider
                 })
                 .onSizeChange(perform: { headerDividerHeight = $0.height })
-                .safeAreaMargins(edges: uiModel.layout.headerSafeAreaEdges)
+                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges)
 
                 contentView
             })
             .frame(maxHeight: .infinity, alignment: .top)
-            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
-            .applyIf(!uiModel.misc.contentIsDraggable, transform: {
+            .cornerRadius(uiModel.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
+            .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fix issue of safe areas and/or landscape
-                        maxHeight: uiModel.layout.sizes._current.size.heights.max
+                        maxHeight: uiModel.sizes._current.size.heights.max
                     )
-                    .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
+                    .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
             })
         })
-        .frame(width: uiModel.layout.sizes._current.size.width)
-        .applyIf(uiModel.misc.contentIsDraggable, transform: {
+        .frame(width: uiModel.sizes._current.size.width)
+        .applyIf(uiModel.contentIsDraggable, transform: {
             $0
                 .frame( // Max dimension fix issue of safe areas and/or landscape
-                    maxHeight: uiModel.layout.sizes._current.size.heights.max
+                    maxHeight: uiModel.sizes._current.size.heights.max
                 )
-                .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
+                .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
@@ -143,28 +143,28 @@ struct VBottomSheet<Content>: View
                 )
         })
         .ignoresSafeArea(.container, edges: .all)
-        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdges)
     }
     
     @ViewBuilder private var grabber: some View {
         if hasGrabber {
-            RoundedRectangle(cornerRadius: uiModel.layout.grabberCornerRadius)
-                .frame(size: uiModel.layout.grabberSize)
-                .padding(uiModel.layout.grabberMargins)
-                .foregroundColor(uiModel.colors.grabber)
+            RoundedRectangle(cornerRadius: uiModel.grabberCornerRadius)
+                .frame(size: uiModel.grabberSize)
+                .padding(uiModel.grabberMargins)
+                .foregroundColor(uiModel.grabberColor)
         }
     }
     
     @ViewBuilder private var header: some View {
         if hasHeader {
             HStack(
-                alignment: uiModel.layout.headerAlignment,
-                spacing: uiModel.layout.labelAndCloseButtonSpacing,
+                alignment: uiModel.headerAlignment,
+                spacing: uiModel.headerLabelAndCloseButtonSpacing,
                 content: {
                     Group(content: {
-                        if uiModel.misc.dismissType.contains(.leadingButton) {
+                        if uiModel.dismissType.contains(.leadingButton) {
                             closeButton
-                        } else if uiModel.misc.dismissType.contains(.trailingButton) {
+                        } else if uiModel.dismissType.contains(.trailingButton) {
                             closeButtonCompensator
                         }
                     })
@@ -178,8 +178,8 @@ struct VBottomSheet<Content>: View
                         case .title(let title):
                             Text(title)
                                 .lineLimit(1)
-                                .foregroundColor(uiModel.colors.headerTitleText)
-                                .font(uiModel.fonts.headerTitleText)
+                                .foregroundColor(uiModel.headerTitleTextColor)
+                                .font(uiModel.headerTitleTextFont)
                             
                         case .label(let label):
                             label()
@@ -188,25 +188,25 @@ struct VBottomSheet<Content>: View
                     .layoutPriority(1)
                     
                     Group(content: {
-                        if uiModel.misc.dismissType.contains(.trailingButton) {
+                        if uiModel.dismissType.contains(.trailingButton) {
                             closeButton
-                        } else if uiModel.misc.dismissType.contains(.leadingButton) {
+                        } else if uiModel.dismissType.contains(.leadingButton) {
                             closeButtonCompensator
                         }
                     })
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             )
-            .padding(uiModel.layout.headerMargins)
+            .padding(uiModel.headerMargins)
         }
     }
     
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: uiModel.layout.dividerHeight)
-                .padding(uiModel.layout.dividerMargins)
-                .foregroundColor(uiModel.colors.divider)
+                .frame(height: uiModel.dividerHeight)
+                .padding(uiModel.dividerMargins)
+                .foregroundColor(uiModel.dividerColor)
         }
     }
 
@@ -225,18 +225,18 @@ struct VBottomSheet<Content>: View
     
     private var contentView: some View {
         ZStack(content: {
-            if !uiModel.misc.contentIsDraggable {
+            if !uiModel.contentIsDraggable {
                 Color.clear
                     .contentShape(Rectangle())
             }
             
             content()
-                .padding(uiModel.layout.contentMargins)
+                .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.layout.contentSafeAreaEdges)
+        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges)
         .frame(maxWidth: .infinity)
         .applyIf(
-            uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
+            uiModel.autoresizesContent && uiModel.sizes._current.size.heights.isResizable,
             ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
@@ -245,7 +245,7 @@ struct VBottomSheet<Content>: View
     // MARK: Animation
     private func animateIn() {
         withBasicAnimation(
-            uiModel.animations.appear,
+            uiModel.appearAnimation,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -255,7 +255,7 @@ struct VBottomSheet<Content>: View
     
     private func animateOut() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -266,7 +266,7 @@ struct VBottomSheet<Content>: View
     
     private func animateOutFromDrag() {
         withBasicAnimation(
-            uiModel.animations.pullDownDismiss,
+            uiModel.pullDownDismissAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -277,7 +277,7 @@ struct VBottomSheet<Content>: View
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -299,14 +299,14 @@ struct VBottomSheet<Content>: View
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
                 switch newOffset {
-                case ...uiModel.layout.sizes._current.size.heights.maxOffset:
-                    return uiModel.layout.sizes._current.size.heights.maxOffset
+                case ...uiModel.sizes._current.size.heights.maxOffset:
+                    return uiModel.sizes._current.size.heights.maxOffset
                     
-                case uiModel.layout.sizes._current.size.heights.minOffset...:
-                    if uiModel.misc.dismissType.contains(.pullDown) {
+                case uiModel.sizes._current.size.heights.minOffset...:
+                    if uiModel.dismissType.contains(.pullDown) {
                         return newOffset
                     } else {
-                        return uiModel.layout.sizes._current.size.heights.minOffset
+                        return uiModel.sizes._current.size.heights.minOffset
                     }
                     
                 default:
@@ -325,16 +325,16 @@ struct VBottomSheet<Content>: View
         
         let velocityExceedsNextAreaSnapThreshold: Bool =
             abs(dragValue.velocity(inRelationTo: previousDragValue).height) >=
-            abs(uiModel.layout.velocityToSnapToNextHeight)
+            abs(uiModel.velocityToSnapToNextHeight)
         
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
             guard let offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                heights: uiModel.layout.sizes._current.size.heights,
-                canPullDownToDismiss: uiModel.misc.dismissType.contains(.pullDown),
-                pullDownDismissDistance: uiModel.layout.pullDownDismissDistance,
+                heights: uiModel.sizes._current.size.heights,
+                canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
+                pullDownDismissDistance: uiModel.pullDownDismissDistance,
                 offset: offset,
                 offsetBeforeDrag: offsetBeforeDrag,
                 translation: dragValue.translation.height
@@ -342,7 +342,7 @@ struct VBottomSheet<Content>: View
             
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                heights: uiModel.layout.sizes._current.size.heights,
+                heights: uiModel.sizes._current.size.heights,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
             ))
@@ -352,22 +352,22 @@ struct VBottomSheet<Content>: View
     private func animateOffsetOrPullDismissFromSnapAction(_ snapAction: VBottomSheetSnapAction) {
         switch snapAction {
         case .dismiss: animateOutFromDrag()
-        case .snap(let newOffset): withAnimation(uiModel.animations.heightSnap, { offset = newOffset })
+        case .snap(let newOffset): withAnimation(uiModel.heightSnapAnimation, { offset = newOffset })
         }
     }
     
     // MARK: Orientation
     private func resetHeightFromOrientationChange() {
-        offset = uiModel.layout.sizes._current.size.heights.idealOffset
+        offset = uiModel.sizes._current.size.heights.idealOffset
     }
     
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
-        guard uiModel.layout.sizes._current.size.heights.min <= uiModel.layout.sizes._current.size.heights.ideal else {
+        guard uiModel.sizes._current.size.heights.min <= uiModel.sizes._current.size.heights.ideal else {
             VCoreFatalError("`VBottomSheet`'s `min` height must be less than or equal to `ideal` height", module: "VComponents")
         }
         
-        guard uiModel.layout.sizes._current.size.heights.ideal <= uiModel.layout.sizes._current.size.heights.max else {
+        guard uiModel.sizes._current.size.heights.ideal <= uiModel.sizes._current.size.heights.max else {
             VCoreFatalError("`VBottomSheet`'s `ideal` height must be less than or equal to `max` height", module: "VComponents")
         }
     }
@@ -420,7 +420,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -437,17 +437,17 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 1,
                                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
                             )),
-                            landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 0.7,
                                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
                             ))
                         )
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -464,17 +464,17 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 1,
                                 heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
                             )),
-                            landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 0.7,
                                 heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
                             ))
                         )
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -491,17 +491,17 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 1,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.9)
+                                heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
                             )),
-                            landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 0.7,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.9)
+                                heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
                             ))
                         )
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -518,17 +518,17 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 1,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.2)
+                                heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
                             )),
-                            landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
                                 width: 0.7,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.2)
+                                heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
                             ))
                         )
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -545,7 +545,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .insettedContent
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -563,7 +563,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .scrollableContent
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -592,8 +592,8 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .fullSizedContent
-                        uiModel.misc.contentIsDraggable = true
-                        uiModel.animations.appear = nil
+                        uiModel.contentIsDraggable = true
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -610,8 +610,8 @@ struct VBottomSheet_Previews: PreviewProvider {
                 VBottomSheet(
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .onlyGrabber
-                        uiModel.misc.contentIsDraggable = true
-                        uiModel.animations.appear = nil
+                        uiModel.contentIsDraggable = true
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
