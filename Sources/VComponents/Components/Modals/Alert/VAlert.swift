@@ -62,7 +62,7 @@ struct VAlert<Content>: View
             dimmingView
             alert
         })
-        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
+        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -71,19 +71,19 @@ struct VAlert<Content>: View
     }
     
     private var dimmingView: some View {
-        uiModel.colors.dimmingView
+        uiModel.dimmingViewColor
             .ignoresSafeArea()
     }
     
     private var alert: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    offset: uiModel.colors.shadowOffset
+                    color: uiModel.shadowColor,
+                    radius: uiModel.shadowRadius,
+                    offset: uiModel.shadowOffset
                 )
 
             VStack(spacing: 0, content: {
@@ -92,44 +92,44 @@ struct VAlert<Content>: View
                     messageView
                     contentView
                 })
-                .padding(uiModel.layout.titleTextMessageTextAndContentMargins)
+                .padding(uiModel.titleTextMessageTextAndContentMargins)
                 .onSizeChange(perform: { titleMessageContentHeight = $0.height })
 
                 buttonsScrollView
             })
-            .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContent)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContent)
+            .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
+            .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
             .onSizeChange(perform: { alertSize = $0.height })
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.layout.sizes._current.size.width,
+            maxWidth: uiModel.sizes._current.size.width,
             maxHeight: alertSize
         )
-        .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
-        .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+        .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
+        .blur(radius: isInternallyPresented ? 0 : uiModel.blur)
     }
     
     @ViewBuilder private var titleView: some View {
         if let title, !title.isEmpty {
             Text(title)
-                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.titleText)
-                .font(uiModel.fonts.titleText)
+                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.titleTextColor)
+                .font(uiModel.titleTextFont)
 
-                .padding(uiModel.layout.titleTextMargins)
+                .padding(uiModel.titleTextMargins)
         }
     }
     
     @ViewBuilder private var messageView: some View {
         if let message, !message.isEmpty {
             Text(message)
-                .multilineTextAlignment(uiModel.layout.messageTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.layout.messageTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.colors.messageText)
-                .font(uiModel.fonts.messageText)
+                .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
+                .foregroundColor(uiModel.messageTextColor)
+                .font(uiModel.messageTextFont)
 
-                .padding(uiModel.layout.messageTextMargins)
+                .padding(uiModel.messageTextMargins)
         }
     }
     
@@ -141,7 +141,7 @@ struct VAlert<Content>: View
                 
             case .content(let content):
                 content()
-                    .padding(uiModel.layout.contentMargins)
+                    .padding(uiModel.contentMargins)
             }
         })
     }
@@ -164,13 +164,13 @@ struct VAlert<Content>: View
                 
             case 2:
                 HStack(
-                    spacing: uiModel.layout.horizontalButtonSpacing,
+                    spacing: uiModel.horizontalButtonSpacing,
                     content: { buttonContent(reversesOrder: true) } // Cancel button is last
                 )
                 
             case 3...:
                 VStack(
-                    spacing: uiModel.layout.verticalButtonSpacing,
+                    spacing: uiModel.verticalButtonSpacing,
                     content: { buttonContent() }
                 )
                 
@@ -178,7 +178,7 @@ struct VAlert<Content>: View
                 fatalError()
             }
         })
-        .padding(uiModel.layout.buttonMargins)
+        .padding(uiModel.buttonMargins)
         .onSizeChange(perform: { buttonsStackHeight = $0.height })
         .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
@@ -203,7 +203,7 @@ struct VAlert<Content>: View
     // MARK: Animations
     private func animateIn() {
         withBasicAnimation(
-            uiModel.animations.appear,
+            uiModel.appearAnimation,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -213,7 +213,7 @@ struct VAlert<Content>: View
     
     private func animateOut(completion: (() -> Void)?) {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -224,7 +224,7 @@ struct VAlert<Content>: View
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -292,7 +292,11 @@ struct VAlert_Previews: PreviewProvider {
     private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     
     @ViewBuilder private static func content() -> some View {
-        VTextField(text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection)))
+        TextField( // `VTextField` causes preview crash
+            "",
+            text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection))
+        )
+        .textFieldStyle(.roundedBorder)
     }
     
     // Previews (Scenes)
@@ -395,12 +399,12 @@ struct VAlert_Previews: PreviewProvider {
                 VAlert(
                     uiModel: {
                         var uiModel: VAlertUIModel = .init()
-                        uiModel.colors.primaryButtonBackground.enabled = uiModel.colors.primaryButtonBackground.pressed
-                        uiModel.colors.primaryButtonTitle.enabled = uiModel.colors.primaryButtonTitle.pressed
-                        uiModel.colors.secondaryButtonBackground.enabled = uiModel.colors.secondaryButtonBackground.pressed
-                        uiModel.colors.secondaryButtonTitle.enabled = uiModel.colors.secondaryButtonTitle.pressed
-                        uiModel.colors.destructiveButtonBackground.enabled = uiModel.colors.destructiveButtonBackground.pressed
-                        uiModel.colors.destructiveButtonTitle.enabled = uiModel.colors.destructiveButtonTitle.pressed
+                        uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
+                        uiModel.primaryButtonTitleColors.enabled = uiModel.primaryButtonTitleColors.pressed
+                        uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
+                        uiModel.secondaryButtonTitleColors.enabled = uiModel.secondaryButtonTitleColors.pressed
+                        uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
+                        uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
                         return uiModel
                     }(),
                     onPresent: nil,
