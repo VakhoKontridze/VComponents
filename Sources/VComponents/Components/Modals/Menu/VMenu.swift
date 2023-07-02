@@ -193,7 +193,7 @@ public struct VMenu<Label>: View where Label: View {
                 label(internalState)
             }
         })
-        .padding(uiModel.layout.hitBox)
+        .padding(uiModel.hitBox)
     }
 
     private func titleLabelComponent(
@@ -201,9 +201,9 @@ public struct VMenu<Label>: View where Label: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
-            .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-            .font(uiModel.fonts.titleText)
+            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .font(uiModel.titleTextFont)
     }
 
     private func iconLabelComponent(
@@ -212,9 +212,9 @@ public struct VMenu<Label>: View where Label: View {
         icon
             .resizable()
             .scaledToFit()
-            .frame(size: uiModel.layout.iconSize)
-            .foregroundColor(uiModel.colors.icon.value(for: internalState))
-            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+            .frame(size: uiModel.iconSize)
+            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
 }
 
