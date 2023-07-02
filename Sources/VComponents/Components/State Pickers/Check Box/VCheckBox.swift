@@ -104,14 +104,14 @@ public struct VCheckBox<Label>: View where Label: View {
                         onStateChange: stateChangeHandler,
                         label: {
                             Text(title)
-                                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
-                                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
-                                .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-                                .font(uiModel.fonts.titleText)
+                                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .font(uiModel.titleTextFont)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -126,12 +126,12 @@ public struct VCheckBox<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-        .applyIf(uiModel.animations.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.animations.stateChange, value: internalState)
+        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+            $0.animation(uiModel.stateChangeAnimation, value: internalState)
         })
     }
     
@@ -140,23 +140,23 @@ public struct VCheckBox<Label>: View where Label: View {
             onStateChange: stateChangeHandler,
             label: {
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                        .foregroundColor(uiModel.fillColors.value(for: internalState))
                     
-                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                        .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
                     
                     if let checkmarkIcon {
                         checkmarkIcon
                             .resizable()
                             .scaledToFit()
-                            .frame(dimension: uiModel.layout.checkmarkIconDimension)
-                            .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
+                            .frame(dimension: uiModel.checkmarkIconDimension)
+                            .foregroundColor(uiModel.checkmarkColors.value(for: internalState))
                     }
                 })
-                .frame(dimension: uiModel.layout.dimension)
-                .cornerRadius(uiModel.layout.cornerRadius) // Prevents large content from going out of bounds
-                .padding(uiModel.layout.hitBox)
+                .frame(dimension: uiModel.dimension)
+                .cornerRadius(uiModel.cornerRadius) // Prevents large content from going out of bounds
+                .padding(uiModel.hitBox)
             }
         )
     }
@@ -167,11 +167,11 @@ public struct VCheckBox<Label>: View where Label: View {
             label: {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.layout.checkBoxAndLabelSpacing)
+                    .frame(width: uiModel.checkBoxAndLabelSpacing)
                     .foregroundColor(.clear)
             }
         )
-        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
     
     // MARK: Actions
@@ -187,7 +187,7 @@ public struct VCheckBox<Label>: View where Label: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
     
@@ -263,10 +263,10 @@ struct VCheckBox_Previews: PreviewProvider {
                         VCheckBox(
                             uiModel: {
                                 var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
-                                uiModel.colors.border.off = uiModel.colors.border.pressedOff
-                                uiModel.colors.checkmark.off = uiModel.colors.checkmark.pressedOff
-                                uiModel.colors.titleText.off = uiModel.colors.titleText.pressedOff
+                                uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                                uiModel.borderColors.off = uiModel.borderColors.pressedOff
+                                uiModel.checkmarkColors.off = uiModel.checkmarkColors.pressedOff
+                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                                 return uiModel
                             }(),
                             state: .constant(.off),
@@ -293,10 +293,10 @@ struct VCheckBox_Previews: PreviewProvider {
                         VCheckBox(
                             uiModel: {
                                 var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
-                                uiModel.colors.border.on = uiModel.colors.border.pressedOn
-                                uiModel.colors.checkmark.on = uiModel.colors.checkmark.pressedOn
-                                uiModel.colors.titleText.on = uiModel.colors.titleText.pressedOn
+                                uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                                uiModel.borderColors.on = uiModel.borderColors.pressedOn
+                                uiModel.checkmarkColors.on = uiModel.checkmarkColors.pressedOn
+                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                                 return uiModel
                             }(),
                             state: .constant(.on),
@@ -323,10 +323,10 @@ struct VCheckBox_Previews: PreviewProvider {
                         VCheckBox(
                             uiModel: {
                                 var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.colors.fill.indeterminate = uiModel.colors.fill.pressedIndeterminate
-                                uiModel.colors.border.indeterminate = uiModel.colors.border.pressedIndeterminate
-                                uiModel.colors.checkmark.indeterminate = uiModel.colors.checkmark.pressedIndeterminate
-                                uiModel.colors.titleText.indeterminate = uiModel.colors.titleText.pressedIndeterminate
+                                uiModel.fillColors.indeterminate = uiModel.fillColors.pressedIndeterminate
+                                uiModel.borderColors.indeterminate = uiModel.borderColors.pressedIndeterminate
+                                uiModel.checkmarkColors.indeterminate = uiModel.checkmarkColors.pressedIndeterminate
+                                uiModel.titleTextColors.indeterminate = uiModel.titleTextColors.pressedIndeterminate
                                 return uiModel
                             }(),
                             state: .constant(.indeterminate),
@@ -405,8 +405,8 @@ struct VCheckBox_Previews: PreviewProvider {
                 VCheckBox(
                     uiModel: {
                         var uiModel: VCheckBoxUIModel = .init()
-                        uiModel.layout.checkmarkIconDimension = 100
-                        uiModel.colors.checkmark = VCheckBoxUIModel.Colors.StateColors(ColorBook.accentRed)
+                        uiModel.checkmarkIconDimension = 100
+                        uiModel.checkmarkColors = VCheckBoxUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     state: .constant(.on),
