@@ -113,13 +113,11 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 #### UI Models
 
-Components are not meant to be customized like you would a native `SwiftUI` component.
+Components in this library are not designed for customization in the same manner as conventional SwiftUI components.
 
-Instead, UI model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
+Rather than directly modifying the components, you are encouraged to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, the properties within the UI models have their own default values as well.
 
-UI Models are `struct`s with default values. They break down into 5 models: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
-
-For instance, changing foreground color of `VPlainButton` can be done by passing an UI model.
+For instance, if you wish to alter the foreground color of a `VPlainButton`, you can customize and pass an UI model.
 
 Not Preferred:
 
@@ -185,9 +183,9 @@ var body: some View {
 
 #### Static Factory-Initialized UI Models
 
-Often times you'll find pre-designed `static` factory-initialized UI models for each component. It's worth exploring their UI model files before using the component and re-designing these instances yourself.
+Frequently, you will discover pre-configured static factory-initialized UI models associated with each component. It's highly recommended to investigate these UI model files prior to using them and defining them yourself.
 
-Standard `VBottomSheet` can be initialized without even worrying about UI model.
+For instance, for most uses, a standard `VBottomSheet` can be instantiated without an explicit UI model, making it convenient to integrate into your SwiftUI projects.
 
 ```swift
 @State private var isPresented: Bool = false
@@ -212,7 +210,7 @@ var body: some View {
 }
 ```
 
-However, if you wish to use scrollable view as a content, `scrollableContent` instance is already defined under `VBottomSheetUIModel` for you. It takes care of most details, such as auto-resizing the content and safe area margins.
+However, if you wish to use scrollable view as a content, `scrollableContent` instance is already defined under `VBottomSheetUIModel`. It takes care of most intricate details, including features like auto-resizing of content and proper management of safe area margins.
 
 ```swift
 @State private var isPresented: Bool = false
@@ -244,9 +242,7 @@ var body: some View {
 
 #### Animations
 
-VComponents approaches animations as bound to components and their UI models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom UI model.
-
-For instance, by default, `VToggle` uses `easeIn` animation with duration `0.1` to state change. This applies to both toggle press, as well as external modification of state.
+`VComponents` adopts an unique approach to animations, associating them directly with the components and their UI models, rather than with the state. This implies that if you wish to modify a component's state with an animation, you'll need to supply a custom UI model.
 
 ```swift
 @State private var isOn: Bool = false
@@ -263,7 +259,7 @@ var body: some View {
 }
 ```
 
-If you wish to completely cancel animations, you have two options. First, is to set `stateChange` animation to `nil`, which still applies a `nil` animation. Second, is to set `appliesStateChangeAnimation` to `false`, which doesn't apply `stateChange` animation at all.
+As an example, by default, the `VToggle` uses an `easeIn` animation with a duration of `0.1` to handle state changes. This applies uniformly to both a press on the toggle and any external modifications of the state. Thus, the use of a custom UI model becomes essential to modify these default animation.
 
 ```swift
 @State private var isOn: Bool = false
@@ -273,7 +269,34 @@ var body: some View {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
-                uiModel.animations.stateChange = nil
+                uiModel.animations.stateChangeAnimation = .easeIn(duration: 1)
+                return uiModel
+            }(),
+            isOn: $isOn
+        )
+        
+        VPlainButton(
+            action: { isOn.toggle() },
+            title: "Toggle"
+        )
+    })
+}
+
+If you wish to completely cancel animations, there are two options available to you.
+
+The first option involves setting the `stateChangeAnimation` to `nil`. While this does not completely remove animation, it essentially applies a `nil` animation.
+
+The second option involves setting `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes.
+
+```swift
+@State private var isOn: Bool = false
+
+var body: some View {
+    VStack(content: {
+        VToggle(
+            uiModel: {
+                var uiModel: VToggleUIModel = .init()
+                uiModel.animations.stateChangeAnimation = nil
                 return uiModel
             }(),
             isOn: $isOn
@@ -311,7 +334,7 @@ var body: some View {
 }
 ```
 
-In some cases, the difference between these two may be significant. For instance, we can set the flag to `false`, and mutate state with an external animation.
+Choose the option that best suits your application's needs and user experience. In certain scenarios, the distinction between these two options can be substantial. For example, we could set the `appliesStateChangeAnimation` flag to false and subsequently mutate the state with an external animation.
 
 ```swift
 @State private var isOn: Bool = false
@@ -329,7 +352,7 @@ var body: some View {
         
         VPlainButton(
             action: { 
-                withAnimation(.linear(duration: 1), {
+                withAnimation(.easeInOut(duration: 1), {
                     isOn.toggle()
                 })
             },
