@@ -75,9 +75,9 @@ public struct VRadioButtonUIModel {
     /// Set to `body` (`13`) on `macOS`.
     public var titleTextFont: Font = GlobalUIModel.StatePickers.font
 
-    // MARK: Properties - Hitbox
-    /// Hit box. Set to `5`.
-    public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
+    // MARK: Properties - Hit Box
+    /// Hit box. Set to `5`s.
+    public var hitBox: HitBox = .init(GlobalUIModel.StatePickers.componentAndLabelSpacing) // Actual spacing is 0
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.
@@ -102,6 +102,9 @@ public struct VRadioButtonUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
+
+    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
+    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

@@ -2,6 +2,14 @@
 
 ### 5.0.0(50)
 
+VCapsuleButton
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+
+VRoundedButton
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+
 VRoundedCaptionButton
 
 - `iconMargins` that had no effect previously, now apply to icon
@@ -12,6 +20,18 @@ VRoundedCaptionButton
 - `borderWidth` is renamed to `rectangleBorderWidth`
 - `borderColors` is renamed to `rectangleBorderColors`
 - `labelPressedScale` is renamed to `iconPressedScale`
+
+VPlainButton
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+
+VCheckBox
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+
+VRadioButton
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
 VStepper
 
@@ -25,6 +45,10 @@ VTextView
 VModal
 
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+VMenu
+
+- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
 VBottomSheet
 

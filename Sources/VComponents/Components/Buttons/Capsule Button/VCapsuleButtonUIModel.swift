@@ -168,8 +168,8 @@ public struct VCapsuleButtonUIModel {
     public typealias LabelMargins = EdgeInsets_HorizontalVertical
 
     // MARK: Hit Box
-    /// Model that contains `horizontal` and `vertical` hit boxes.
-    public typealias HitBox = EdgeInsets_HorizontalVertical
+    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
+    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

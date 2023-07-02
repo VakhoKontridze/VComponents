@@ -93,7 +93,7 @@ public struct VCheckBoxUIModel {
     /// Set to `body` (`13`) on `macOS`.
     public var titleTextFont: Font = GlobalUIModel.StatePickers.font
 
-    // MARK: Properties - Hitbox
+    // MARK: Properties - Hit Box
     /// Hit box. Set to `5`.
     public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
 
@@ -120,6 +120,9 @@ public struct VCheckBoxUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
+
+    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
+    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.
