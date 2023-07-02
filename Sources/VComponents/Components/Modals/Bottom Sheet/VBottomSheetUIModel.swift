@@ -167,7 +167,7 @@ public struct VBottomSheetUIModel {
     /// Keyboard edges ignored by modal. Set to `[]`.
     public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
-    // MARK: Properties - Dismissing
+    // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.
     public var dismissType: DismissType = .default
 

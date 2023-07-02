@@ -30,8 +30,8 @@ struct VModal<Content>: View
     @State private var headerLabel: VModalHeaderLabel<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
-    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
-    private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
+    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.dismissType.hasButton }
+    private var hasDivider: Bool { hasHeader && uiModel.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
@@ -54,7 +54,7 @@ struct VModal<Content>: View
             dimmingView
             modal
         })
-        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
+        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -66,22 +66,22 @@ struct VModal<Content>: View
     }
     
     private var dimmingView: some View {
-        uiModel.colors.dimmingView
+        uiModel.dimmingViewColor
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
     }
 
     private var modal: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    offset: uiModel.colors.shadowOffset
+                    color: uiModel.shadowColor,
+                    radius: uiModel.shadowRadius,
+                    offset: uiModel.shadowOffset
                 )
 
             VStack(spacing: 0, content: {
@@ -90,34 +90,34 @@ struct VModal<Content>: View
                 contentView
             })
             .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
-                uiModel.layout.cornerRadius,
-                corners: uiModel.layout.roundedCorners
+                uiModel.cornerRadius,
+                corners: uiModel.roundedCorners
                     .withReversedLeftAndRightCorners(
-                        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages &&
+                        uiModel.reversesLeftAndRightCornersForRTLLanguages &&
                         layoutDirection == .rightToLeft
                     )
             )
-            .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContent)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContent)
+            .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
+            .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.layout.sizes._current.size.width,
-            maxHeight: uiModel.layout.sizes._current.size.height
+            maxWidth: uiModel.sizes._current.size.width,
+            maxHeight: uiModel.sizes._current.size.height
         )
-        .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
-        .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+        .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
+        .blur(radius: isInternallyPresented ? 0 : uiModel.blur)
     }
     
     @ViewBuilder private var header: some View {
         if hasHeader {
             HStack(
-                alignment: uiModel.layout.headerAlignment,
-                spacing: uiModel.layout.headerLabelAndCloseButtonSpacing,
+                alignment: uiModel.headerAlignment,
+                spacing: uiModel.headerLabelAndCloseButtonSpacing,
                 content: {
                     Group(content: {
-                        if uiModel.misc.dismissType.contains(.leadingButton) {
+                        if uiModel.dismissType.contains(.leadingButton) {
                             closeButton
-                        } else if uiModel.misc.dismissType.contains(.trailingButton) {
+                        } else if uiModel.dismissType.contains(.trailingButton) {
                             closeButtonCompensator
                         }
                     })
@@ -131,8 +131,8 @@ struct VModal<Content>: View
                         case .title(let title):
                             Text(title)
                                 .lineLimit(1)
-                                .foregroundColor(uiModel.colors.headerTitleText)
-                                .font(uiModel.fonts.headerTitleText)
+                                .foregroundColor(uiModel.headerTitleTextColor)
+                                .font(uiModel.headerTitleTextFont)
 
                         case .label(let label):
                             label()
@@ -141,16 +141,16 @@ struct VModal<Content>: View
                     .layoutPriority(1)
 
                     Group(content: {
-                        if uiModel.misc.dismissType.contains(.trailingButton) {
+                        if uiModel.dismissType.contains(.trailingButton) {
                             closeButton
-                        } else if uiModel.misc.dismissType.contains(.leadingButton) {
+                        } else if uiModel.dismissType.contains(.leadingButton) {
                             closeButtonCompensator
                         }
                     })
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             )
-            .padding(uiModel.layout.headerMargins)
+            .padding(uiModel.headerMargins)
         }
     }
 
@@ -170,22 +170,22 @@ struct VModal<Content>: View
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: uiModel.layout.dividerHeight)
-                .padding(uiModel.layout.dividerMargins)
-                .foregroundColor(uiModel.colors.divider)
+                .frame(height: uiModel.dividerHeight)
+                .padding(uiModel.dividerMargins)
+                .foregroundColor(uiModel.dividerColor)
         }
     }
     
     private var contentView: some View {
         content()
-            .padding(uiModel.layout.contentMargins)
+            .padding(uiModel.contentMargins)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: Animations
     private func animateIn() {
         withBasicAnimation(
-            uiModel.animations.appear,
+            uiModel.appearAnimation,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -195,7 +195,7 @@ struct VModal<Content>: View
     
     private func animateOut() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -206,7 +206,7 @@ struct VModal<Content>: View
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -255,7 +255,7 @@ struct VModal_Previews: PreviewProvider {
                 VModal(
                     uiModel: {
                         var uiModel: VModalUIModel = .init()
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -272,7 +272,7 @@ struct VModal_Previews: PreviewProvider {
                 VModal(
                     uiModel: {
                         var uiModel: VModalUIModel = .insettedContent
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -289,7 +289,7 @@ struct VModal_Previews: PreviewProvider {
                 VModal(
                     uiModel: {
                         var uiModel: VModalUIModel = .fullSizedContent
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
