@@ -33,7 +33,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    private var isDynamic: Bool { (contentSize.width + 2*uiModel.layout.inset) > containerWidth }
+    private var isDynamic: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
@@ -81,38 +81,38 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     }
     
     @ViewBuilder private var gradient: some View {
-        if isDynamic && uiModel.colors.gradientWidth > 0 {
+        if isDynamic && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(
                     colors: [
-                        uiModel.colors.gradientColorContainerEdge,
-                        uiModel.colors.gradientColorContentEdge
+                        uiModel.gradientColorContainerEdge,
+                        uiModel.gradientColorContentEdge
                     ],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.gradientWidth)
                 
                 Spacer()
                 
                 LinearGradient(
                     colors: [
-                        uiModel.colors.gradientColorContentEdge,
-                        uiModel.colors.gradientColorContainerEdge
+                        uiModel.gradientColorContentEdge,
+                        uiModel.gradientColorContainerEdge
                     ],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.gradientWidth)
             })
         }
     }
     
     // MARK: Offsets
     private var offsetDynamic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
         
-        switch (uiModel.layout.scrollDirection, isAnimating) {
+        switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
         case (.leftToRight, true): return -offset
         case (.rightToLeft, false): return -offset
@@ -122,9 +122,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     }
     
     private var offsetStatic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
         
-        switch uiModel.layout.alignmentStationary {
+        switch uiModel.alignmentStationary {
         case .leading: return offset
         case .center: return 0
         case .trailing: return -offset
@@ -135,17 +135,17 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     // MARK: Animation
     private var animation: Animation {
         let width: CGFloat =
-            (contentSize.width + 2*uiModel.layout.inset) -
+            (contentSize.width + 2*uiModel.inset) -
             containerWidth
         
         return BasicAnimation(
-            curve: uiModel.animations.curve,
-            duration: uiModel.animations.durationType.duration(width: width)
+            curve: uiModel.animationCurve,
+            duration: uiModel.animationDurationType.duration(width: width)
         )
         .toSwiftUIAnimation
-        .delay(uiModel.animations.delay)
+        .delay(uiModel.animationDelay)
         .repeatForever(autoreverses: true)
-        .delay(uiModel.animations.initialDelay)
+        .delay(uiModel.animationInitialDelay)
     }
 }
 
@@ -252,7 +252,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
                         VBouncingMarquee(
                             uiModel: {
                                 var uiModel: VBouncingMarqueeUIModel = .init()
-                                uiModel.layout.scrollDirection = .leftToRight
+                                uiModel.scrollDirection = .leftToRight
                                 return uiModel
                             }(),
                             content: contentLarge
@@ -268,7 +268,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
                         VBouncingMarquee(
                             uiModel: {
                                 var uiModel: VBouncingMarqueeUIModel = .init()
-                                uiModel.layout.scrollDirection = .rightToLeft
+                                uiModel.scrollDirection = .rightToLeft
                                 return uiModel
                             }(),
                             content: contentLarge

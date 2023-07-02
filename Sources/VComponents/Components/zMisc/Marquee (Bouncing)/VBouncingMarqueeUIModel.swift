@@ -11,50 +11,57 @@ import VCore
 // MARK: - V Bouncing Marquee UI Model
 /// Model that describes UI.
 public struct VBouncingMarqueeUIModel {
-    // MARK: Properties
-    /// Model that contains layout properties.
-    public var layout: Layout = .init()
-    
-    /// Model that contains color properties.
-    public var colors: Colors = .init()
-    
-    /// Model that contains animation properties.
-    public var animations: Animations = .init()
+    // MARK: Properties - Global Layout
+    /// Scroll direction. Set to `leftToRight`.
+    public var scrollDirection: LayoutDirection = .leftToRight
+
+    /// Content inset. Set to `0`.
+    ///
+    /// Ideal for text content.
+    /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
+    ///
+    /// For best result, should be greater than or equal to `gradientWidth`.
+    public var inset: CGFloat = 0
+
+    /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
+    public var alignmentStationary: HorizontalAlignment = .leading
+
+    // MARK: Properties - Gradient
+    /// Width of fading gradient. Set to `0`.
+    ///
+    /// To hide gradient, set to `0`.
+    ///
+    /// Ideal for text content.
+    /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
+    ///
+    /// For best result, should be less than or equal to `inset`.
+    public var gradientWidth: CGFloat = 0
+
+    /// Gradient color at the edge of the container.
+    public var gradientColorContainerEdge: Color = ColorBook.layer
+
+    /// Gradient color at the edge of the content.
+    public var gradientColorContentEdge: Color = ColorBook.layer.opacity(0.01)
+
+    // MARK: Properties - Transition
+    /// Animation curve. Set to `linear`.
+    public var animationCurve: BasicAnimation.AnimationCurve = .linear
+
+    /// Animation duration type. Set to `default`.
+    public var animationDurationType: DurationType = .default
+
+    /// Animation delay. Set to `1` second.
+    public var animationDelay: Double = 1
+
+    /// Initial animation delay. Set to `1` second.
+    public var animationInitialDelay: Double = 1
     
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-    
-    // MARK: Layout
-    /// Model that contains layout properties.
-    public struct Layout {
-        // MARK: Properties
-        /// Scroll direction. Set to `leftToRight`.
-        public var scrollDirection: LayoutDirection = .leftToRight
-        
-        /// Content inset. Set to `0`.
-        ///
-        /// Ideal for text content.
-        /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
-        ///
-        /// For best result, should be greater than or equal to `gradientWidth`.
-        public var inset: CGFloat = 0
-        
-        /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
-        public var alignmentStationary: HorizontalAlignment = .leading
-        
-        // MARK: Initializers
-        /// Initializes UI model with default values.
-        public init() {}
-    }
-    
-    // MARK: Colors
-    /// Model that contains color properties.
-    public typealias Colors = VWrappingMarqueeUIModel.Colors
-    
-    // MARK: Animations
-    /// Model that contains animation properties.
-    public typealias Animations = VWrappingMarqueeUIModel.Animations
+
+    /// Enum that represents animation duration, such as `duration` or `velocity`.
+    public typealias DurationType = VWrappingMarqueeUIModel.DurationType
 }
 
 // MARK: - Factory
@@ -65,9 +72,9 @@ extension VBouncingMarqueeUIModel {
     public static var insettedGradient: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.inset = 20
+        uiModel.inset = 20
         
-        uiModel.colors.gradientWidth = 20
+        uiModel.gradientWidth = 20
         
         return uiModel
     }
