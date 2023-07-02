@@ -45,11 +45,11 @@ struct VToast: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: uiModel.layout.presentationEdge.alignment, content: {
+        ZStack(alignment: uiModel.presentationEdge.alignment, content: {
             dimmingView
             contentView
         })
-        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
+        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onAppear(perform: animateOutAfterLifecycle)
         .onChange(
@@ -65,15 +65,15 @@ struct VToast: View {
     
     private var contentView: some View {
         Text(text)
-            .multilineTextAlignment(uiModel.layout.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.layout.textLineType.toVCoreTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.layout.textMinimumScaleFactor)
-            .foregroundColor(uiModel.colors.text)
-            .font(uiModel.fonts.text)
+            .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
+            .minimumScaleFactor(uiModel.textMinimumScaleFactor)
+            .foregroundColor(uiModel.textColor)
+            .font(uiModel.textFont)
 
-            .padding(uiModel.layout.textMargins)
+            .padding(uiModel.textMargins)
             .applyModifier({ view in
-                switch uiModel.layout.widthType {
+                switch uiModel.widthType {
                 case .wrapped:
                     view
 
@@ -102,38 +102,38 @@ struct VToast: View {
             .cornerRadius(cornerRadius)
             .background(background)
             .onSizeChange(perform: { height = $0.height })
-            .padding(.horizontal, uiModel.layout.widthType.marginHor)
+            .padding(.horizontal, uiModel.widthType.marginHor)
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
     private var background: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .foregroundColor(uiModel.colors.background)
+            .foregroundColor(uiModel.backgroundColor)
             .shadow(
-                color: uiModel.colors.shadow,
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
+                color: uiModel.shadowColor,
+                radius: uiModel.shadowRadius,
+                offset: uiModel.shadowOffset
             )
     }
     
     // MARK: Offsets
     private var initialOffset: CGFloat {
-        switch uiModel.layout.presentationEdge {
+        switch uiModel.presentationEdge {
         case .top: return -(MultiplatformConstants.safeAreaInsets.top + height)
         case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + 100
         }
     }
     
     private var presentedOffset: CGFloat {
-        switch uiModel.layout.presentationEdge {
-        case .top: return uiModel.layout.presentationEdgeSafeAreaInset
-        case .bottom: return -uiModel.layout.presentationEdgeSafeAreaInset
+        switch uiModel.presentationEdge {
+        case .top: return uiModel.presentationEdgeSafeAreaInset
+        case .bottom: return -uiModel.presentationEdgeSafeAreaInset
         }
     }
     
     // MARK: Corner Radius
     private var cornerRadius: CGFloat {
-        switch uiModel.layout.cornerRadiusType {
+        switch uiModel.cornerRadiusType {
         case .capsule: return height / 2
         case .rounded(let cornerRadius): return cornerRadius
         }
@@ -148,7 +148,7 @@ struct VToast: View {
         // Other option was to calculate it using `UILabel`.
         DispatchQueue.main.async(execute: {
             withBasicAnimation(
-                uiModel.animations.appear,
+                uiModel.appearAnimation,
                 body: { isInternallyPresented = true },
                 completion: {
                     DispatchQueue.main.async(execute: { presentHandler?() })
@@ -159,7 +159,7 @@ struct VToast: View {
     
     private func animateOut() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -170,14 +170,14 @@ struct VToast: View {
     
     private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + uiModel.animations.duration,
+            deadline: .now() + uiModel.duration,
             execute: animateOut
         )
     }
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -189,7 +189,7 @@ struct VToast: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playNotification(uiModel.animations.haptic)
+        HapticManager.shared.playNotification(uiModel.haptic)
 #endif
     }
 }
@@ -223,8 +223,8 @@ struct VToast_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlights: VToastUIModel { .init() }
-    private static var widthType: VToastUIModel.Layout.WidthType { .default }
-    private static var presentationEdge: VToastUIModel.Layout.PresentationEdge { .default }
+    private static var widthType: VToastUIModel.WidthType { .default }
+    private static var presentationEdge: VToastUIModel.PresentationEdge { .default }
 
     // Previews
     static var previews: some View {
@@ -249,10 +249,10 @@ struct VToast_Previews: PreviewProvider {
                 VToast(
                     uiModel: {
                         var uiModel: VToastUIModel = highlights
-                        uiModel.layout.widthType = widthType
-                        uiModel.layout.presentationEdge = presentationEdge
-                        uiModel.animations.appear = nil
-                        uiModel.animations.duration = .infinity
+                        uiModel.widthType = widthType
+                        uiModel.presentationEdge = presentationEdge
+                        uiModel.appearAnimation = nil
+                        uiModel.duration = .infinity
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -269,11 +269,11 @@ struct VToast_Previews: PreviewProvider {
                 VToast(
                     uiModel: {
                         var uiModel: VToastUIModel = highlights
-                        uiModel.layout.widthType = widthType
-                        uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                        uiModel.layout.presentationEdge = presentationEdge
-                        uiModel.animations.appear = nil
-                        uiModel.animations.duration = .infinity
+                        uiModel.widthType = widthType
+                        uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                        uiModel.presentationEdge = presentationEdge
+                        uiModel.appearAnimation = nil
+                        uiModel.duration = .infinity
                         return uiModel
                     }(),
                     onPresent: nil,
