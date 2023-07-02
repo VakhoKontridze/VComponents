@@ -17,7 +17,7 @@ public struct VLoadingStretchedButtonUIModel {
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
-        uiModel.animations.animatesStateChange = animatesStateChange
+        uiModel.animatesStateChange = animatesStateChange
 
         return uiModel
     }
