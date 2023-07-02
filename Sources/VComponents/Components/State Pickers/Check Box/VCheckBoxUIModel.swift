@@ -97,6 +97,7 @@ public struct VCheckBoxUIModel {
     /// Hit box. Set to `5`.
     public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
 
+    // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -123,8 +124,4 @@ public struct VCheckBoxUIModel {
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_OffOnIndeterminatePressedDisabled<Color>
-
-    // MARK: State Opacities
-    /// Model that contains opacities for component states.
-    public typealias StateOpacities = GenericStateModel_OffOnIndeterminatePressedDisabled<CGFloat>
 }

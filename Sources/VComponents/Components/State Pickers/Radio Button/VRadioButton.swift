@@ -104,14 +104,14 @@ public struct VRadioButton<Label>: View where Label: View {
                         onStateChange: stateChangeHandler,
                         label: {
                             Text(title)
-                                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
-                                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
-                                .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-                                .font(uiModel.fonts.titleText)
+                                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .font(uiModel.titleTextFont)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -126,12 +126,12 @@ public struct VRadioButton<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-        .applyIf(uiModel.animations.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.animations.stateChange, value: internalState)
+        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+            $0.animation(uiModel.stateChangeAnimation, value: internalState)
         })
     }
     
@@ -141,19 +141,19 @@ public struct VRadioButton<Label>: View where Label: View {
             label: {
                 ZStack(content: {
                     Circle()
-                        .frame(dimension: uiModel.layout.dimension)
-                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
+                        .frame(dimension: uiModel.dimension)
+                        .foregroundColor(uiModel.fillColors.value(for: internalState))
                     
                     Circle()
-                        .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-                        .frame(dimension: uiModel.layout.dimension)
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                        .frame(dimension: uiModel.dimension)
                     
                     Circle()
-                        .frame(dimension: uiModel.layout.bulletDimension)
-                        .foregroundColor(uiModel.colors.bullet.value(for: internalState))
+                        .frame(dimension: uiModel.bulletDimension)
+                        .foregroundColor(uiModel.bulletColors.value(for: internalState))
                 })
-                .frame(dimension: uiModel.layout.dimension)
-                .padding(uiModel.layout.hitBox)
+                .frame(dimension: uiModel.dimension)
+                .padding(uiModel.hitBox)
             }
         )
     }
@@ -164,11 +164,11 @@ public struct VRadioButton<Label>: View where Label: View {
             label: {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.layout.radioButtonAndLabelSpacing)
+                    .frame(width: uiModel.radioButtonAndLabelSpacing)
                     .foregroundColor(.clear)
             }
         )
-        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
     
     // MARK: Actions
@@ -184,7 +184,7 @@ public struct VRadioButton<Label>: View where Label: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
@@ -261,10 +261,10 @@ struct VRadioButton_Previews: PreviewProvider {
                         VRadioButton(
                             uiModel: {
                                 var uiModel: VRadioButtonUIModel = .init()
-                                uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
-                                uiModel.colors.border.off = uiModel.colors.border.pressedOff
-                                uiModel.colors.bullet.off = uiModel.colors.bullet.pressedOff
-                                uiModel.colors.titleText.off = uiModel.colors.titleText.pressedOff
+                                uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                                uiModel.borderColors.off = uiModel.borderColors.pressedOff
+                                uiModel.bulletColors.off = uiModel.bulletColors.pressedOff
+                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                                 return uiModel
                             }(),
                             state: .constant(.off),
@@ -291,10 +291,10 @@ struct VRadioButton_Previews: PreviewProvider {
                         VRadioButton(
                             uiModel: {
                                 var uiModel: VRadioButtonUIModel = .init()
-                                uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
-                                uiModel.colors.border.on = uiModel.colors.border.pressedOn
-                                uiModel.colors.bullet.on = uiModel.colors.bullet.pressedOn
-                                uiModel.colors.titleText.on = uiModel.colors.titleText.pressedOn
+                                uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                                uiModel.borderColors.on = uiModel.borderColors.pressedOn
+                                uiModel.bulletColors.on = uiModel.bulletColors.pressedOn
+                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                                 return uiModel
                             }(),
                             state: .constant(.on),
