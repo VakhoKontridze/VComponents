@@ -33,7 +33,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    private var isDynamic: Bool { (contentSize.width + 2*uiModel.layout.inset) > containerWidth }
+    private var isDynamic: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
@@ -91,38 +91,38 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     @ViewBuilder private var gradient: some View {
-        if isDynamic && uiModel.colors.gradientWidth > 0 {
+        if isDynamic && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(
                     colors: [
-                        uiModel.colors.gradientColorContainerEdge,
-                        uiModel.colors.gradientColorContentEdge
+                        uiModel.gradientColorContainerEdge,
+                        uiModel.gradientColorContentEdge
                     ],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.gradientWidth)
                 
                 Spacer()
                 
                 LinearGradient(
                     colors: [
-                        uiModel.colors.gradientColorContentEdge,
-                        uiModel.colors.gradientColorContainerEdge
+                        uiModel.gradientColorContentEdge,
+                        uiModel.gradientColorContainerEdge
                     ],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.gradientWidth)
             })
         }
     }
     
     // MARK: Offsets
     private var offsetDynamic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
         
-        switch uiModel.layout.scrollDirection {
+        switch uiModel.scrollDirection {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
         @unknown default: return offset
@@ -130,9 +130,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetDynamicFirst: CGFloat {
-        let offset: CGFloat = -(contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2)
+        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.spacing/2)
         
-        switch (uiModel.layout.scrollDirection, isAnimating) {
+        switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return 0
         case (.leftToRight, true): return offset
         case (.rightToLeft, false): return offset
@@ -142,9 +142,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetDynamicSecond: CGFloat {
-        let offset: CGFloat = contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2
+        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.spacing/2
         
-        switch (uiModel.layout.scrollDirection, isAnimating) {
+        switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
         case (.leftToRight, true): return 0
         case (.rightToLeft, false): return 0
@@ -154,9 +154,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetStatic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
         
-        switch uiModel.layout.alignmentStationary {
+        switch uiModel.alignmentStationary {
         case .leading: return offset
         case .center: return 0
         case .trailing: return -offset
@@ -168,17 +168,17 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var animation: Animation {
         let width: CGFloat = // Not dependent on container width
             contentSize.width +
-            uiModel.layout.inset +
-            uiModel.layout.spacing/2
+            uiModel.inset +
+            uiModel.spacing/2
         
         return BasicAnimation(
-            curve: uiModel.animations.curve,
-            duration: uiModel.animations.durationType.duration(width: width)
+            curve: uiModel.animationCurve,
+            duration: uiModel.animationDurationType.duration(width: width)
         )
         .toSwiftUIAnimation
-        .delay(uiModel.animations.delay)
+        .delay(uiModel.animationDelay)
         .repeatForever(autoreverses: false)
-        .delay(uiModel.animations.initialDelay)
+        .delay(uiModel.animationInitialDelay)
     }
     
     private let resettingAnimation: Animation = .linear(duration: 0)
@@ -288,7 +288,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
                         VWrappingMarquee(
                             uiModel: {
                                 var uiModel: VWrappingMarqueeUIModel = .init()
-                                uiModel.layout.scrollDirection = .leftToRight
+                                uiModel.scrollDirection = .leftToRight
                                 return uiModel
                             }(),
                             content: contentLarge
@@ -304,7 +304,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
                         VWrappingMarquee(
                             uiModel: {
                                 var uiModel: VWrappingMarqueeUIModel = .init()
-                                uiModel.layout.scrollDirection = .rightToLeft
+                                uiModel.scrollDirection = .rightToLeft
                                 return uiModel
                             }(),
                             content: contentLarge
