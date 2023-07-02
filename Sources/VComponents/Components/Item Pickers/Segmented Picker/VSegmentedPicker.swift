@@ -379,7 +379,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     private var indicatorScale: CGFloat {
         switch selection {
         case pressedValue: return uiModel.indicatorPressedScale
-        case _: return 1
+        default: return 1
         }
     }
     
@@ -394,7 +394,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     public func rowContentScale(element: Data.Element) -> CGFloat {
         switch pressedValue {
         case element: return uiModel.rowContentPressedScale
-        case _: return 1
+        default: return 1
         }
     }
     

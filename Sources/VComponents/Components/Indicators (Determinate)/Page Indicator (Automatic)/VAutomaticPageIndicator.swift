@@ -40,8 +40,8 @@ import VCore
 ///         VAutomaticPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotWidth = 15
-///                 uiModel.layout.dotHeight = 15
+///                 uiModel.dotWidth = 15
+///                 uiModel.dotHeight = 15
 ///                 return uiModel
 ///             }(),
 ///             total: total,

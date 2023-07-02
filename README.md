@@ -139,7 +139,7 @@ Preferred:
 let uiModel: VPlainButtonUIModel = {
     var UIModel: VPlainButtonUIModel = .init()
     
-    uiModel.colors.title = VPlainButtonUIModel.Colors.StateColors(
+    uiModel.titleColors = VPlainButtonUIModel.StateColors(
         enabled: Color.black,
         pressed: Color.gray,
         disabled: Color.gray
@@ -164,7 +164,7 @@ extension VPlainButtonUIModel {
     static let someUIModel: VPlainButtonUIModel = {
         var uiModel: VPlainButtonUIModel = .init()
         
-        uiModel.colors.title = VPlainButtonUIModel.Colors.StateColors(
+        uiModel.titleColors = VPlainButtonUIModel.StateColors(
             enabled: Color.black,
             pressed: Color.gray,
             disabled: Color.gray

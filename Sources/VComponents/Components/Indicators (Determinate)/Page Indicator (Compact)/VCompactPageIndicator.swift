@@ -40,8 +40,8 @@ import VCore
 ///         VCompactPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VCompactPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotWidth = 15
-///                 uiModel.layout.dotHeight = 15
+///                 uiModel.dotWidth = 15
+///                 uiModel.dotHeight = 15
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -135,7 +135,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 dotContent: dotContent
             )
             
-        case _:
+        default:
             compactBody
         }
     }

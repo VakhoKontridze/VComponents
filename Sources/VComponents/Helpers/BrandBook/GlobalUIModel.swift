@@ -160,7 +160,7 @@ struct GlobalUIModel {
         
         static var iconAndTitleTextSpacing: CGFloat { 8 }
         
-        static var titleTextFontStretchedButton: Font = {
+        static var titleTextFontStretchedButtonFont: Font = {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
