@@ -71,13 +71,13 @@ public struct VStepper: View {
             background
             buttons
         })
-        .frame(size: uiModel.layout.size)
-        .cornerRadius(uiModel.layout.cornerRadius)
+        .frame(size: uiModel.size)
+        .cornerRadius(uiModel.cornerRadius)
     }
     
     private var background: some View {
-        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .foregroundColor(uiModel.colors.background.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
     }
     
     private var buttons: some View {
@@ -94,14 +94,14 @@ public struct VStepper: View {
             onStateChange: { stateChangeHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                        .foregroundColor(uiModel.colors.buttonBackground.value(for: buttonInternalState(button)))
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                        .foregroundColor(uiModel.buttonBackgroundColors.value(for: buttonInternalState(button)))
 
                     button.icon
                         .resizable()
                         .scaledToFit()
-                        .frame(dimension: uiModel.layout.iconDimension)
-                        .foregroundColor(uiModel.colors.buttonIcon.value(for: buttonInternalState(button)))
+                        .frame(dimension: uiModel.buttonIconDimension)
+                        .foregroundColor(uiModel.buttonIconColors.value(for: buttonInternalState(button)))
                 })
                 .frame(maxWidth: .infinity)
             }
@@ -111,8 +111,8 @@ public struct VStepper: View {
     
     private var divider: some View {
         Rectangle()
-            .frame(size: uiModel.layout.divider)
-            .foregroundColor(uiModel.colors.divider.value(for: internalState))
+            .frame(size: uiModel.dividerSize)
+            .foregroundColor(uiModel.dividerColors.value(for: internalState))
     }
     
     // MARK: Actions
@@ -165,7 +165,7 @@ public struct VStepper: View {
     private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
         
-        longPressSchedulerTimer = .scheduledTimer(withTimeInterval: uiModel.misc.intervalToStartLongPressIncrement, repeats: false, block: { _ in
+        longPressSchedulerTimer = .scheduledTimer(withTimeInterval: uiModel.intervalToStartLongPressIncrement, repeats: false, block: { _ in
             if longPressIncrementTimeElapsed == 0 { playHapticLongPressEffect() }
             scheduleLongPressIncrementTimer()
         })
@@ -188,7 +188,7 @@ public struct VStepper: View {
         longPressIncrementTimerIncremental = nil
         
         let interval: TimeInterval = {
-            let adjustedStep: Int = .init(pow(Double(uiModel.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
+            let adjustedStep: Int = .init(pow(Double(uiModel.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
             let interval: TimeInterval = 1 / Double(adjustedStep)
             return interval
         }()
@@ -220,13 +220,13 @@ public struct VStepper: View {
     // MARK: Haptics
     private func playHapticPressEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.hapticPress)
+        HapticManager.shared.playImpact(uiModel.hapticPress)
 #endif
     }
     
     private func playHapticLongPressEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.hapticLongPress)
+        HapticManager.shared.playImpact(uiModel.hapticLongPress)
 #endif
     }
     
@@ -307,8 +307,8 @@ struct VStepper_Previews: PreviewProvider {
                         VStepper(
                             uiModel: {
                                 var uiModel: VStepperUIModel = .init()
-                                uiModel.colors.buttonBackground.enabled = uiModel.colors.buttonBackground.pressed
-                                uiModel.colors.buttonIcon.enabled = uiModel.colors.buttonIcon.pressed
+                                uiModel.buttonBackgroundColors.enabled = uiModel.buttonBackgroundColors.pressed
+                                uiModel.buttonIconColors.enabled = uiModel.buttonIconColors.pressed
                                 return uiModel
                             }(),
                             range: range,

@@ -13,6 +13,11 @@ VRoundedCaptionButton
 - `borderColors` is renamed to `rectangleBorderColors`
 - `labelPressedScale` is renamed to `iconPressedScale`
 
+VStepper
+
+- `iconDimension` is renamed to `buttonIconDimension`
+- `divider` is renamed to `dividerSize`
+
 VTextView
 
 - `contentMargin` is renamed to `contentMargins`
