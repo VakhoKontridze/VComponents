@@ -19,9 +19,6 @@ public struct VTextFieldUIModel {
     /// Textfield height. Set to `50`.
     public var height: CGFloat = GlobalUIModel.Inputs.height
 
-    /// Header and footer horizontal margin. Set to `10`.
-    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
-
     /// Spacing between header, textfield, and footer. Set to `3`.
     public var headerTextFieldAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
@@ -78,6 +75,9 @@ public struct VTextFieldUIModel {
     /// Header title text font. Set to `footnote` (`13`).
     public var headerTitleTextFont: Font = GlobalUIModel.Common.headerTitleTextFont
 
+    /// Header footer horizontal margin. Set to `10`.
+    public var headerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
     // MARK: Properties - Footer
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
@@ -91,6 +91,9 @@ public struct VTextFieldUIModel {
 
     /// Footer title text font. Set to `footnote` (`13`).
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
+
+    /// Footer horizontal margin. Set to `10`.
+    public var footerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     // MARK: Properties - TextField Content
     /// Content type. Set to `default`.

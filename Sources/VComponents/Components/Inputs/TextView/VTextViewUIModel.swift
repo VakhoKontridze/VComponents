@@ -22,9 +22,6 @@ public struct VTextViewUIModel {
     /// Spacing between header, textview, and footer. Set to `3`.
     public var headerTextViewAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
-    /// Header and footer horizontal margin. Set to `10`.
-    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
-
 #if os(iOS)
     /// Keyboard type. Set to `default`.
     public var keyboardType: UIKeyboardType = .default
@@ -78,6 +75,9 @@ public struct VTextViewUIModel {
     /// Header title text font. Set to `footnote` (`13`).
     public var headerTitleTextFont: Font = GlobalUIModel.Common.headerTitleTextFont
 
+    /// Header footer horizontal margin. Set to `10`.
+    public var headerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
     // MARK: Properties - Footer
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
@@ -91,6 +91,9 @@ public struct VTextViewUIModel {
 
     /// Footer title text font. Set to `footnote` (`13`).
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
+
+    /// Footer horizontal margin. Set to `10`.
+    public var footerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     // MARK: Properties - TextView Content
     /// Content margins. Set to `15`s.

@@ -30,9 +30,6 @@ public struct VSegmentedPickerUIModel {
     /// Spacing between header text, picker, and footer text. Set to `3`.
     public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
-    /// Header and footer horizontal margin. Set to `10`.
-    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
-
     // MARK: Properties - Corners
     /// Corner radius. Set to `7`, similarly to native segmented picker.
     public var cornerRadius: CGFloat = 7
@@ -89,6 +86,9 @@ public struct VSegmentedPickerUIModel {
     /// Set to `footnote` (`10`) on `macOS`.
     public var headerTitleTextFont: Font = GlobalUIModel.Common.headerTitleTextFont
 
+    /// Header footer horizontal margin. Set to `10`.
+    public var headerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
     // MARK: Properties - Footer
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
@@ -103,6 +103,9 @@ public struct VSegmentedPickerUIModel {
     /// Set to `footnote` (`13`) on `iOS`.
     /// Set to `footnote` (`10`) on `macOS`
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
+
+    /// Footer horizontal margin. Set to `10`.
+    public var footerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     // MARK: Properties - Picker Content
     /// Content margin. Set to `2`.

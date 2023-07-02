@@ -2,6 +2,10 @@
 
 ### 5.0.0(50)
 
+General
+
+- UIModels are re-structured and no longer depend on sub UI models
+
 VCapsuleButton
 
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
@@ -35,13 +39,26 @@ VRadioButton
 - `hiBox` is renamed to `radioButtonHitBox`
 - `radioButtonHitBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
+VSegmentedPicker
+
+- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
+
+VWheelPicker
+
+- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
+
 VStepper
 
 - `iconDimension` is renamed to `buttonIconDimension`
 - `divider` is renamed to `dividerSize`
 
+VTextField
+
+- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
+
 VTextView
 
+- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 - `contentMargin` is renamed to `contentMargins`
 
 VModal

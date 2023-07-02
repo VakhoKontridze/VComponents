@@ -18,9 +18,6 @@ public struct VWheelPickerUIModel {
     /// Spacing between header, picker, and footer. Set to `3`.
     public var headerPickerAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
-    /// Header and footer horizontal margin. Set to `10`.
-    public var headerAndFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
-
     // MARK: Properties - Corners
     /// Picker corner radius. Set to `15`.
     public var cornerRadius: CGFloat = 15
@@ -44,6 +41,9 @@ public struct VWheelPickerUIModel {
     /// Set to `footnote` (`10`) on `macOS`.
     public var headerTitleTextFont: Font = GlobalUIModel.Common.headerTitleTextFont
 
+    /// Header footer horizontal margin. Set to `10`.
+    public var headerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
+
     // MARK: Properties - Footer
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
@@ -56,6 +56,9 @@ public struct VWheelPickerUIModel {
 
     /// Footer title text font. Set to `footnote` (`13`).
     public var footerTitleTextFont: Font = GlobalUIModel.Common.footerTitleTextFont
+
+    /// Footer horizontal margin. Set to `10`.
+    public var footerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     // MARK: Properties - Rows
     /// Row title text minimum scale factor. Set to `0.75`.

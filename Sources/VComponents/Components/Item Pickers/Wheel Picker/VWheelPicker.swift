@@ -208,7 +208,7 @@ public struct VWheelPicker<Data, ID, Content>: View
                 .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.headerMarginHorizontal)
         }
     }
 
@@ -220,7 +220,7 @@ public struct VWheelPicker<Data, ID, Content>: View
                 .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
 
-                .padding(.horizontal, uiModel.headerAndFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.footerMarginHorizontal)
         }
     }
     
