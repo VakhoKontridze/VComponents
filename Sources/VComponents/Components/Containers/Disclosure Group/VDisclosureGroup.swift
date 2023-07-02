@@ -138,7 +138,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             VRoundedButton(
                 uiModel: uiModel.chevronButtonSubUIModel,
                 action: expandCollapse,
-                icon: ImageBook.chevronUp
+                icon: ImageBook.chevronUp.renderingMode(.template)
             )
             .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
         })

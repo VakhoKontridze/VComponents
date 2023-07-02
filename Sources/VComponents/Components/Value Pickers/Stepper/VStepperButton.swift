@@ -19,8 +19,13 @@ enum VStepperButton {
     // MARK: Properties
     var icon: Image {
         switch self {
-        case .minus: return ImageBook.stepperDecrement
-        case .plus: return ImageBook.stepperIncrement
+        case .minus:
+            return ImageBook.stepperDecrement
+                .renderingMode(.template)
+
+        case .plus:
+            return ImageBook.stepperIncrement
+                .renderingMode(.template)
         }
     }
 }

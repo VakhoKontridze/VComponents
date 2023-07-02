@@ -194,10 +194,19 @@ public struct VCheckBox<Label>: View where Label: View {
     // MARK: Icon
     private var checkmarkIcon: Image? {
         switch internalState {
-        case .off, .pressedOff: return nil
-        case .on, .pressedOn: return ImageBook.checkBoxCheckmarkOn
-        case .indeterminate, .pressedIndeterminate: return ImageBook.checkBoxCheckmarkIndeterminate
-        case .disabled: return nil
+        case .off, .pressedOff:
+            return nil
+
+        case .on, .pressedOn:
+            return ImageBook.checkBoxCheckmarkOn
+                .renderingMode(.template)
+
+        case .indeterminate, .pressedIndeterminate:
+            return ImageBook.checkBoxCheckmarkIndeterminate
+                .renderingMode(.template)
+
+        case .disabled:
+            return nil
         }
     }
 }

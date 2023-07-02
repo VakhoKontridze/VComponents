@@ -158,7 +158,7 @@ struct VModal<Content>: View
         VRoundedButton(
             uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut,
-            icon: ImageBook.xMark
+            icon: ImageBook.xMark.renderingMode(.template)
         )
     }
 

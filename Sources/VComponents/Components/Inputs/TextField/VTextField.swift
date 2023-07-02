@@ -190,6 +190,7 @@ public struct VTextField: View {
     @ViewBuilder private var searchIcon: some View {
         if uiModel.contentType.isSearch {
             ImageBook.textFieldSearch
+                .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
                 .frame(dimension: uiModel.searchIconDimension)
@@ -252,10 +253,10 @@ public struct VTextField: View {
         return VRoundedButton(
             uiModel: uiModel.clearButtonSubUIModel,
             action: didTapClearButton,
-            icon: ImageBook.xMark
+            icon: ImageBook.xMark.renderingMode(.template)
         )
-            .opacity(isVisible ? 1 : 0)
-            .allowsHitTesting(isVisible)
+        .opacity(isVisible ? 1 : 0)
+        .allowsHitTesting(isVisible)
     }
     
     @ViewBuilder private var visibilityButton: some View {
@@ -283,8 +284,10 @@ public struct VTextField: View {
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
             return ImageBook.textFieldVisibilityOn
+                .renderingMode(.template)
         } else {
             return ImageBook.textFieldVisibilityOff
+                .renderingMode(.template)
         }
     }
     
