@@ -35,6 +35,13 @@ public struct VSegmentedPickerUIModel {
     public var cornerRadius: CGFloat = 7
 
     // MARK: Properties - Background
+    /// Background colors.
+    public var backgroundColors: StateColors = .init(
+        enabled: ColorBook.layerGray,
+        disabled: ColorBook.layerGrayDisabled
+    )
+
+    // MARK: Properties - Border
     /// Border width.
     /// Set to `0` on `iOS`.
     /// Set to `1` scaled to screen on `macOS`.
@@ -50,13 +57,6 @@ public struct VSegmentedPickerUIModel {
 #endif
     }()
 
-    /// Background colors.
-    public var backgroundColors: StateColors = .init(
-        enabled: ColorBook.layerGray,
-        disabled: ColorBook.layerGrayDisabled
-    )
-
-    // MARK: Properties - Border
     /// Border colors.
     public var borderColors: StateColors = {
 #if os(iOS)
