@@ -281,6 +281,7 @@ var body: some View {
         )
     })
 }
+```
 
 If you wish to completely cancel animations, there are two options available to you.
 
