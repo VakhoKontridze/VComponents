@@ -45,13 +45,13 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ZStack(
-            alignment: uiModel.layout.presentationEdge.alignment,
+            alignment: uiModel.presentationEdge.alignment,
             content: {
                 dimmingView
                 sideBar
             }
         )
-        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
+        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -60,32 +60,32 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private var dimmingView: some View {
-        uiModel.colors.dimmingView
+        uiModel.dimmingViewColor
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
     }
     
     private var sideBar: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    offset: uiModel.colors.shadowOffset
+                    color: uiModel.shadowColor,
+                    radius: uiModel.shadowRadius,
+                    offset: uiModel.shadowOffset
                 )
             
             content()
-                .padding(uiModel.layout.contentMargins)
-                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContent)
-                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContent)
+                .padding(uiModel.contentMargins)
+                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
+                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.layout.sizes._current.size.width,
-            maxHeight: uiModel.layout.sizes._current.size.height
+            maxWidth: uiModel.sizes._current.size.width,
+            maxHeight: uiModel.sizes._current.size.height
         )
         .offset(isInternallyPresented ? .zero : initialOffset)
         .gesture(
@@ -97,7 +97,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Actions
     private func animateIn() {
         withBasicAnimation(
-            uiModel.animations.appear,
+            uiModel.appearAnimation,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -107,7 +107,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private func animateOut() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -118,7 +118,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private func animateOutFromDrag() {
         withBasicAnimation(
-            uiModel.animations.dragBackDismiss,
+            uiModel.dragBackDismissAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -129,7 +129,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            uiModel.animations.disappear,
+            uiModel.disappearAnimation,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -141,7 +141,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.misc.dismissType.contains(.dragBack),
+            uiModel.dismissType.contains(.dragBack),
             isDraggedInCorrectDirection(dragValue),
             didExceedDragBackDismissDistance(dragValue)
         else {
@@ -154,20 +154,20 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Presentation Edge Offsets
     private var initialOffset: CGSize {
         let x: CGFloat = {
-            switch uiModel.layout.presentationEdge {
-            case .leading: return -(uiModel.layout.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.leading)
-            case .trailing: return uiModel.layout.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.trailing
+            switch uiModel.presentationEdge {
+            case .leading: return -(uiModel.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.leading)
+            case .trailing: return uiModel.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.trailing
             case .top: return 0
             case .bottom: return 0
             }
         }()
         
         let y: CGFloat = {
-            switch uiModel.layout.presentationEdge {
+            switch uiModel.presentationEdge {
             case .leading: return 0
             case .trailing: return 0
-            case .top: return -(uiModel.layout.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.top)
-            case .bottom: return uiModel.layout.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.bottom
+            case .top: return -(uiModel.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.top)
+            case .bottom: return uiModel.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.bottom
             }
         }()
         
@@ -176,7 +176,7 @@ struct VSideBar<Content>: View where Content: View {
     
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.layout.presentationEdge {
+        switch uiModel.presentationEdge {
         case .leading:
             switch layoutDirection {
             case .leftToRight: return dragValue.translation.width <= 0
@@ -200,9 +200,9 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.layout.presentationEdge {
-        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance
-        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.layout.dragBackDismissDistance
+        switch uiModel.presentationEdge {
+        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance
+        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance
         }
     }
 }
@@ -245,7 +245,7 @@ struct VSideBar_Previews: PreviewProvider {
                 VSideBar(
                     uiModel: {
                         var uiModel: VSideBarUIModel = presentationEdge
-                        uiModel.animations.appear = nil
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,
@@ -262,8 +262,8 @@ struct VSideBar_Previews: PreviewProvider {
                 VSideBar(
                     uiModel: {
                         var uiModel: VSideBarUIModel = presentationEdge
-                        uiModel.layout.contentMargins = VSideBarUIModel.insettedContent.layout.contentMargins
-                        uiModel.animations.appear = nil
+                        uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
+                        uiModel.appearAnimation = nil
                         return uiModel
                     }(),
                     onPresent: nil,

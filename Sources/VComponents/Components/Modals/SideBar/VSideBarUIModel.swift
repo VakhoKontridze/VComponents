@@ -15,216 +15,176 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VSideBarUIModel {
-    // MARK: Properties
-    /// Model that contains layout properties.
-    public var layout: Layout = .init()
-    
-    /// Model that contains color properties.
-    public var colors: Colors = .init()
-    
-    /// Model that contains animation properties.
-    public var animations: Animations = .init()
-    
-    /// Model that contains misc properties.
-    public var misc: Misc = .init()
+    // MARK: Properties - Global
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
+
+    // MARK: Properties - Global Layout
+    /// Edge from which side bar appears, and to which it disappears. Set to `default`.
+    ///
+    /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
+    /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
+    public var presentationEdge: PresentationEdge = .default
+
+    /// Side bar sizes. Set to `default`.
+    /// Set to `0.75x1` screen ratios in portrait.
+    /// Set to `0.5x1` screen ratios in landscape.
+    public var sizes: Sizes = .init(
+        portrait: .fraction(CGSize(width: 0.75, height: 1)),
+        landscape: .fraction(CGSize(width: 0.5, height: 1))
+    )
+
+    // MARK: Properties - Corners
+    /// Rounded corners. Set to `rightCorners`.
+    public var roundedCorners: RectCorner = .rightCorners
+
+    /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
+    public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
+
+    /// Corner radius. Set to `15`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
+
+    // MARK: Properties - Background
+    /// Background color.
+    public var backgroundColor: Color = ColorBook.layer
+
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
+
+        uiModel.roundedCorners = roundedCorners
+        uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
+        uiModel.cornerRadius = cornerRadius
+
+        uiModel.backgroundColor = backgroundColor
+
+        uiModel.contentMargins = .zero
+
+        return uiModel
+    }
+
+    // MARK: Properties - Content
+    /// Content margins. Set to `zero`.
+    public var contentMargins: Margins = .zero
+
+    // MARK: Properties - Safe Area
+    /// Container edges ignored by modal container. Set to `all`.
+    ///
+    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+    public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
+
+    /// Keyboard edges ignored by modal container. Set to `all`.
+    ///
+    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+    public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
+
+    /// Container edges ignored by modal content. Set to `[]`.
+    public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
+
+    /// Keyboard edges ignored by modal content. Set to `[]`.
+    public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
+
+    // MARK: Properties - Dimming View
+    /// Dimming view color.
+    public var dimmingViewColor: Color = GlobalUIModel.Common.dimmingViewColor
+
+    // MARK: Properties - Shadow
+    /// Shadow color.
+    public var shadowColor: Color = .clear
+
+    /// Shadow radius. Set to `0`.
+    public var shadowRadius: CGFloat = 0
+
+    /// Shadow offset. Set to `zero`.
+    public var shadowOffset: CGPoint = .zero
+
+    // MARK: Properties - Dismiss Type
+    /// Method of dismissing side bar. Set to `default`.
+    public var dismissType: DismissType = .default
+
+    /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
+    public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
+
+    var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
+
+    // MARK: Properties - Transition
+    /// Appear animation.  Set to `easeInOut` with duration `0.3`.
+    public var appearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
+
+    /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
+    public var disappearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
+
+    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
+    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
     
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-    
-    // MARK: Layout
-    /// Model that contains layout properties.
-    public struct Layout {
+
+    // MARK: Presentation Edge
+    /// Enum that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
+    public enum PresentationEdge: Int, CaseIterable {
+        // MARK: Cases
+        /// Presentation form leading edge.
+        case leading
+
+        /// Presentation form trailing edge.
+        case trailing
+
+        /// Presentation form top edge.
+        case top
+
+        /// Presentation form bottom edge.
+        case bottom
+
         // MARK: Properties
-        /// Edge from which side bar appears, and to which it disappears. Set to `default`.
-        ///
-        /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
-        /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
-        public var presentationEdge: PresentationEdge = .default
-        
-        /// Side bar sizes. Set to `default`.
-        /// Set to `0.75x1` screen ratios in portrait.
-        /// Set to `0.5x1` screen ratios in landscape.
-        public var sizes: Sizes = .init(
-            portrait: .fraction(CGSize(width: 0.75, height: 1)),
-            landscape: .fraction(CGSize(width: 0.5, height: 1))
-        )
-        
-        /// Rounded corners. Set to `rightCorners`.
-        public var roundedCorners: RectCorner = .rightCorners
-        
-        /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
-        public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
-        
-        /// Corner radius. Set to `15`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
-        
-        /// Content margins. Set to `zero`.
-        public var contentMargins: Margins = .zero
-
-        /// Container edges ignored by modal container. Set to `all`.
-        ///
-        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-        public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
-
-        /// Keyboard edges ignored by modal container. Set to `all`.
-        ///
-        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-        public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
-
-        /// Container edges ignored by modal content. Set to `[]`.
-        public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
-
-        /// Keyboard edges ignored by modal content. Set to `[]`.
-        public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
-        
-        /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
-        public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
-        
-        var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
-        
-        // MARK: Initializers
-        /// Initializes UI model with default values.
-        public init() {}
-        
-        // MARK: Presentation Edge
-        /// Enum that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
-        public enum PresentationEdge: Int, CaseIterable {
-            // MARK: Cases
-            /// Presentation form leading edge.
-            case leading
-            
-            /// Presentation form trailing edge.
-            case trailing
-            
-            /// Presentation form top edge.
-            case top
-            
-            /// Presentation form bottom edge.
-            case bottom
-
-            // MARK: Properties
-            var alignment: Alignment {
-                switch self {
-                case .leading: return .leading
-                case .trailing: return .trailing
-                case .top: return .top
-                case .bottom: return .bottom
-                }
-            }
-            
-            // MARK: Initializers
-            /// Default value. Set to `leading`.
-            public static var `default`: Self { .leading }
-        }
-        
-        // MARK: Sizes
-        /// Model that represents modal sizes.
-        public typealias Sizes = ModalSizes<CGSize>
-        
-        // MARK: Margins
-        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
-    }
-    
-    // MARK: Colors
-    /// Model that contains color properties.
-    public struct Colors {
-        // MARK: Properties
-        /// Color scheme. Set to `nil`.
-        ///
-        /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-        public var colorScheme: ColorScheme? = nil
-        
-        /// Background color.
-        public var background: Color = ColorBook.layer
-        
-        /// Shadow color.
-        public var shadow: Color = .clear
-        
-        /// Shadow radius. Set to `0`.
-        public var shadowRadius: CGFloat = 0
-        
-        /// Shadow offset. Set to `zero`.
-        public var shadowOffset: CGPoint = .zero
-        
-        /// Dimming view color.
-        public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
-        
-        // MARK: Initializers
-        /// Initializes UI model with default values.
-        public init() {}
-    }
-    
-    // MARK: Animations
-    /// Model that contains animation properties.
-    public struct Animations {
-        // MARK: Properties
-        /// Appear animation.  Set to `easeInOut` with duration `0.3`.
-        public var appear: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
-        
-        /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
-        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
-        
-        /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
-        public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
-        
-        // MARK: Initializers
-        /// Initializes UI model with default values.
-        public init() {}
-    }
-    
-    // MARK: Misc
-    /// Model that contains misc properties.
-    public struct Misc {
-        // MARK: Properties
-        /// Method of dismissing side bar. Set to `default`.
-        public var dismissType: DismissType = .default
-        
-        // MARK: Initializers
-        /// Initializes UI model with default values.
-        public init() {}
-        
-        // MARK: Dismiss Type
-        /// Dismiss type, such as `backTap, or `dragBack`.
-        public struct DismissType: OptionSet {
-            // MARK: Options
-            /// Back tap.
-            public static let backTap: Self = .init(rawValue: 1 << 0)
-            
-            /// Drag-back.
-            public static let dragBack: Self = .init(rawValue: 1 << 1)
-            
-            // MARK: Options Initializers
-            /// All.
-            public static var all: DismissType { [.backTap, .dragBack] }
-            
-            /// Default value. Set to `all.`
-            public static var `default`: DismissType { .all }
-            
-            // MARK: Properties
-            public let rawValue: Int
-            
-            // MARK: Initializers
-            public init(rawValue: Int) {
-                self.rawValue = rawValue
+        var alignment: Alignment {
+            switch self {
+            case .leading: return .leading
+            case .trailing: return .trailing
+            case .top: return .top
+            case .bottom: return .bottom
             }
         }
-    }
-    
-    // MARK: Sub UI Models
-    var groupBoxSubUIModel: VGroupBoxUIModel {
-        var uiModel: VGroupBoxUIModel = .init()
-        
-        uiModel.roundedCorners = layout.roundedCorners
-        uiModel.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
-        uiModel.cornerRadius = layout.cornerRadius
-        
-        uiModel.backgroundColor = colors.background
 
-        uiModel.contentMargins = .zero
-        
-        return uiModel
+        // MARK: Initializers
+        /// Default value. Set to `leading`.
+        public static var `default`: Self { .leading }
+    }
+
+    // MARK: Sizes
+    /// Model that represents modal sizes.
+    public typealias Sizes = ModalSizes<CGSize>
+
+    // MARK: Margins
+    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
+    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
+
+    // MARK: Dismiss Type
+    /// Dismiss type, such as `backTap, or `dragBack`.
+    public struct DismissType: OptionSet {
+        // MARK: Options
+        /// Back tap.
+        public static let backTap: Self = .init(rawValue: 1 << 0)
+
+        /// Drag-back.
+        public static let dragBack: Self = .init(rawValue: 1 << 1)
+
+        // MARK: Options Initializers
+        /// All.
+        public static var all: DismissType { [.backTap, .dragBack] }
+
+        /// Default value. Set to `all.`
+        public static var `default`: DismissType { .all }
+
+        // MARK: Properties
+        public let rawValue: Int
+
+        // MARK: Initializers
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
+        }
     }
 }
 
@@ -238,7 +198,7 @@ extension VSideBarUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = Layout.Margins(GlobalUIModel.Common.containerCornerRadius)
+        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }
@@ -249,7 +209,7 @@ extension VSideBarUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension VSideBarUIModel.Layout.PresentationEdge {
+extension VSideBarUIModel.PresentationEdge {
     /// UI model for the presentation edge.
     public var uiModel: VSideBarUIModel {
         switch self {
@@ -281,9 +241,9 @@ extension VSideBarUIModel {
     public static var trailing: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.presentationEdge = .trailing
+        uiModel.presentationEdge = .trailing
         
-        uiModel.layout.roundedCorners = .leftCorners
+        uiModel.roundedCorners = .leftCorners
         
         return uiModel
     }
@@ -303,16 +263,16 @@ extension VSideBarUIModel {
     public static var top: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.presentationEdge = .top
+        uiModel.presentationEdge = .top
         
-        uiModel.layout.sizes = Layout.Sizes(
+        uiModel.sizes = Sizes(
             portrait: .fraction(CGSize(width: 1, height: 0.5)),
             landscape: .fraction(CGSize(width: 1, height: 0.75))
         )
         
-        uiModel.layout.roundedCorners = .bottomCorners
+        uiModel.roundedCorners = .bottomCorners
         
-        uiModel.layout.contentMargins.bottom = 25
+        uiModel.contentMargins.bottom = 25
         
         return uiModel
     }
@@ -332,16 +292,16 @@ extension VSideBarUIModel {
     public static var bottom: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.presentationEdge = .bottom
+        uiModel.presentationEdge = .bottom
         
-        uiModel.layout.sizes = Layout.Sizes(
+        uiModel.sizes = Sizes(
             portrait: .fraction(CGSize(width: 1, height: 0.5)),
             landscape: .fraction(CGSize(width: 1, height: 0.75))
         )
         
-        uiModel.layout.roundedCorners = .topCorners
+        uiModel.roundedCorners = .topCorners
         
-        uiModel.layout.contentMargins.top = 25
+        uiModel.contentMargins.top = 25
         
         return uiModel
     }
