@@ -114,7 +114,7 @@ public struct VLoadingStretchedButtonUIModel {
     /// Title text font.
     /// Set to `semibold` `callout` (`16`) on `iOS`.
     /// Set to `semibold` `16` on `macOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButtonFont
 
     // MARK: Properties - Spinner
     /// Model for customizing spinner.

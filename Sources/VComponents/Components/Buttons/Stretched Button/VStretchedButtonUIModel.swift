@@ -113,7 +113,7 @@ public struct VStretchedButtonUIModel {
     /// Set to `semibold` `callout` (`16`) on `iOS`.
     /// Set to `semibold` `16` on `macOS`.
     /// Set to `semibold` `title3` (`20`) on `watchOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButtonFont
 
     // MARK: Properties - Shadow
     /// Shadow colors.
