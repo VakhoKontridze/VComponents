@@ -104,14 +104,14 @@ public struct VToggle<Label>: View where Label: View {
                         onStateChange: stateChangeHandler,
                         label: {
                             Text(title)
-                                .multilineTextAlignment(uiModel.layout.titleTextLineType.textAlignment ?? .leading)
-                                .lineLimit(type: uiModel.layout.titleTextLineType.textLineLimitType)
-                                .minimumScaleFactor(uiModel.layout.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.colors.titleText.value(for: internalState))
-                                .font(uiModel.fonts.titleText)
+                                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .font(uiModel.titleTextFont)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -126,12 +126,12 @@ public struct VToggle<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-        .applyIf(uiModel.animations.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.animations.stateChange, value: internalState)
+        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+            $0.animation(uiModel.stateChangeAnimation, value: internalState)
         })
     }
     
@@ -140,15 +140,15 @@ public struct VToggle<Label>: View where Label: View {
             onStateChange: stateChangeHandler,
             label: {
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                        .foregroundColor(uiModel.fillColors.value(for: internalState))
                     
                     Circle()
-                        .frame(dimension: uiModel.layout.thumbDimension)
-                        .foregroundColor(uiModel.colors.thumb.value(for: internalState))
+                        .frame(dimension: uiModel.thumbDimension)
+                        .foregroundColor(uiModel.thumbColors.value(for: internalState))
                         .offset(x: thumbOffset)
                 })
-                .frame(size: uiModel.layout.size)
+                .frame(size: uiModel.size)
             }
         )
     }
@@ -159,11 +159,11 @@ public struct VToggle<Label>: View where Label: View {
             label: {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.layout.toggleAndLabelSpacing)
+                    .frame(width: uiModel.toggleAndLabelSpacing)
                     .foregroundColor(.clear)
             }
         )
-        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
     
     // MARK: Actions
@@ -179,13 +179,13 @@ public struct VToggle<Label>: View where Label: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.animations.haptic)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
     
     // MARK: Thumb Position
     private var thumbOffset: CGFloat {
-        let offset: CGFloat = uiModel.layout.animationOffset
+        let offset: CGFloat = uiModel.thumbOffset
         
         switch internalState {
         case .off: return -offset
@@ -257,9 +257,9 @@ struct VToggle_Previews: PreviewProvider {
                         VToggle(
                             uiModel: {
                                 var uiModel: VToggleUIModel = .init()
-                                uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
-                                uiModel.colors.thumb.off = uiModel.colors.thumb.pressedOff
-                                uiModel.colors.titleText.off = uiModel.colors.titleText.pressedOff
+                                uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                                uiModel.thumbColors.off = uiModel.thumbColors.pressedOff
+                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                                 return uiModel
                             }(),
                             state: .constant(.off),
@@ -286,9 +286,9 @@ struct VToggle_Previews: PreviewProvider {
                         VToggle(
                             uiModel: {
                                 var uiModel: VToggleUIModel = .init()
-                                uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
-                                uiModel.colors.thumb.on = uiModel.colors.thumb.pressedOn
-                                uiModel.colors.titleText.on = uiModel.colors.titleText.pressedOn
+                                uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                                uiModel.thumbColors.on = uiModel.thumbColors.pressedOn
+                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                                 return uiModel
                             }(),
                             state: .constant(.on),
