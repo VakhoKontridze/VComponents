@@ -156,7 +156,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 })
                 .frame(dimension: uiModel.dimension)
                 .cornerRadius(uiModel.cornerRadius) // Prevents large content from going out of bounds
-                .padding(uiModel.hitBox)
+                .padding(uiModel.checkboxHitBox)
             }
         )
     }

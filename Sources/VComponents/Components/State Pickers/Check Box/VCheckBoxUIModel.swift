@@ -94,8 +94,8 @@ public struct VCheckBoxUIModel {
     public var titleTextFont: Font = GlobalUIModel.StatePickers.font
 
     // MARK: Properties - Hit Box
-    /// Hit box. Set to `5`.
-    public var hitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
+    /// Checkbox hit box. Set to `5`.
+    public var checkboxHitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.

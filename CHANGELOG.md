@@ -27,11 +27,13 @@ VPlainButton
 
 VCheckBox
 
-- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+- `hiBox` is renamed to `checkBoxHitBox`
+- `checkBoxHitBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
 VRadioButton
 
-- `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+- `hiBox` is renamed to `radioButtonHitBox`
+- `radioButtonHitBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
 VStepper
 

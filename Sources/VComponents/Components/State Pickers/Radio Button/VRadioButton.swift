@@ -153,7 +153,7 @@ public struct VRadioButton<Label>: View where Label: View {
                         .foregroundColor(uiModel.bulletColors.value(for: internalState))
                 })
                 .frame(dimension: uiModel.dimension)
-                .padding(uiModel.hitBox)
+                .padding(uiModel.radioButtonHitBox)
             }
         )
     }

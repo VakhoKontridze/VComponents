@@ -76,8 +76,8 @@ public struct VRadioButtonUIModel {
     public var titleTextFont: Font = GlobalUIModel.StatePickers.font
 
     // MARK: Properties - Hit Box
-    /// Hit box. Set to `5`s.
-    public var hitBox: HitBox = .init(GlobalUIModel.StatePickers.componentAndLabelSpacing) // Actual spacing is 0
+    /// Radio button hit box. Set to `5`s.
+    public var radioButtonHitBox: HitBox = .init(GlobalUIModel.StatePickers.componentAndLabelSpacing) // Actual spacing is 0
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.
