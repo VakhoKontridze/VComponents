@@ -1,5 +1,11 @@
 # Change Log
 
+4.3.4(50)
+
+General
+
+- `VCore` is updated to `4.11.0`
+
 ### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
 
 VListRow

@@ -192,9 +192,9 @@ public struct VDisclosureGroupUIModel {
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()
         
-        uiModel.colors.background = colors.background
+        uiModel.backgroundColor = colors.background
         
-        uiModel.animations.expandCollapse = animations.expandCollapse
+        uiModel.expandCollapseAnimation = animations.expandCollapse
         
         return uiModel
     }
