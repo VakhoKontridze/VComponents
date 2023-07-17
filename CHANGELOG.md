@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(50)
+### 5.0.0(51)
 
 General
 
@@ -72,6 +72,12 @@ VMenu
 VBottomSheet
 
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+### [4.3.4(50)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.4) — *2023 07 17*
+
+General
+
+- [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.11.0`
 
 ### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
 
@@ -211,11 +217,11 @@ VSheet
 
 - Default value of `roundedCorner` is fixed to be `allCorners` again in `VSheetUIModel`
 
-### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 15*
+### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
 
 General
 
-- `VCore` is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
+- [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
 
 ### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
 
@@ -370,7 +376,7 @@ Helpers - Architectural Pattern Helpers
 
 Other
 
-- `VCore` is updated to support `4.7.0` and up
+- [VCore](https://github.com/VakhoKontridze/VCore) is updated to support `4.7.0` and up
 
 ### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
 
