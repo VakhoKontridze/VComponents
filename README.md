@@ -412,7 +412,7 @@ Versions with different majors are not directly compatible. When a new major is 
         tvOS 13.0<br>
         watchOS 6.0
     </td>
-    <td>4.10.0 - 4.x.x</td>
+    <td>4.x.x - 4.x.x</td>
     <td>
         API changes.<br>
     </td>
