@@ -51,7 +51,6 @@ struct VToast: View {
         })
         .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
-        .onAppear(perform: animateOutAfterLifecycle)
         .onChange(
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
@@ -151,6 +150,7 @@ struct VToast: View {
                 uiModel.animations.appear,
                 body: { isInternallyPresented = true },
                 completion: {
+                    animateOutAfterLifecycle()
                     DispatchQueue.main.async(execute: { presentHandler?() })
                 }
             )
