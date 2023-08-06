@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.3.5(51)
+### [4.3.5(51)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.5) — *2023 08 06*
 
 VToast
 
