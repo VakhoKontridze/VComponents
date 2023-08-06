@@ -13,14 +13,12 @@ import VCore
 ///
 /// UI Model, range, step, and onChange callbacks can be passed as parameters.
 ///
-///     @State private var valueLow: Double = 0.3
-///     @State private var valueHigh: Double = 0.8
+///     @State private var value: ClosedRange<Double> = 0.3...0.8
 ///
 ///     var body: some View {
 ///         VRangeSlider(
 ///             difference: 0.1,
-///             valueLow: $valueLow,
-///             valueHigh: $valueHigh
+///             value: $value
 ///         )
 ///     }
 ///
@@ -44,12 +42,10 @@ public struct VRangeSlider: View {
     private let step: Double?
 
     // MARK: Properties - Values
-    @Binding private var valueLow: Double
-    @Binding private var valueHigh: Double
+    @Binding private var value: ClosedRange<Double>
 
-    // MARK: Properties - Actions
-    private let actionLow: ((Bool) -> Void)?
-    private let actionHigh: ((Bool) -> Void)?
+    // MARK: Properties - Action
+    private let action: ((Bool) -> Void)?
 
     // MARK: Properties - Sizes
     @State private var sliderSize: CGSize = .zero
@@ -61,18 +57,15 @@ public struct VRangeSlider: View {
         range: ClosedRange<V> = 0...1,
         difference: V,
         step: V? = nil,
-        valueLow: Binding<V>,
-        valueHigh: Binding<V>,
-        onChangeLow actionLow: ((Bool) -> Void)? = nil,
-        onChangeHigh actionHigh: ((Bool) -> Void)? = nil
+        value: Binding<ClosedRange<V>>,
+        onChange action: ((Bool) -> Void)? = nil
     )
         where
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
         Self.assertValues(
-            valueLow: valueLow.wrappedValue,
-            valueHigh: valueHigh.wrappedValue,
+            value: value.wrappedValue,
             difference: difference
         )
         
@@ -82,17 +75,19 @@ public struct VRangeSlider: View {
         self.difference = Double(difference)
         self.step = step.map { .init($0) }
 
-        self._valueLow = Binding(
-            get: { Double(valueLow.wrappedValue.clamped(to: range, step: step)) },
-            set: { valueLow.wrappedValue = V($0) }
-        )
-        self._valueHigh = Binding(
-            get: { Double(valueHigh.wrappedValue.clamped(to: range, step: step)) },
-            set: { valueHigh.wrappedValue = V($0) }
+        self._value = Binding(
+            get: {
+                ClosedRange(
+                    lower: Double(value.wrappedValue.lowerBound.clamped(to: range, step: step)),
+                    upper: Double(value.wrappedValue.upperBound.clamped(to: range, step: step))
+                )
+            },
+            set: {
+                value.wrappedValue = V($0.lowerBound)...V($0.upperBound)
+            }
         )
 
-        self.actionLow = actionLow
-        self.actionHigh = actionHigh
+        self.action = action
     }
     
     // MARK: Body
@@ -118,9 +113,7 @@ public struct VRangeSlider: View {
             uiModel.thumbDimension / 2
         )
         .applyIf(uiModel.appliesProgressAnimation, transform: {
-            $0
-                .animation(uiModel.progressAnimation, value: valueLow)
-                .animation(uiModel.progressAnimation, value: valueHigh)
+            $0.animation(uiModel.progressAnimation, value: value)
         })
     }
     
@@ -172,7 +165,7 @@ public struct VRangeSlider: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged({ dragChanged(dragValue: $0, thumb: thumb) })
-                    .onEnded({ dragEnded(dragValue: $0, thumb: thumb) })
+                    .onEnded({ dragEnded(dragValue: $0) })
             )
         }
     }
@@ -202,13 +195,13 @@ public struct VRangeSlider: View {
             case .low:
                 return rawValue.clamped(
                     min: range.lowerBound,
-                    max: Swift.min((valueHigh - difference).roundedDownWithStep(step), range.upperBound),
+                    max: Swift.min((value.upperBound - difference).roundedDownWithStep(step), range.upperBound),
                     step: step
                 )
                 
             case .high:
                 return rawValue.clamped(
-                    min: Swift.max((valueLow + difference).roundedUpWithStep(step), range.lowerBound),
+                    min: Swift.max((value.lowerBound + difference).roundedUpWithStep(step), range.lowerBound),
                     max: range.upperBound,
                     step: step
                 )
@@ -220,34 +213,28 @@ public struct VRangeSlider: View {
         case .high: setValueHigh(to: valueFixed)
         }
         
-        switch thumb {
-        case .low: actionLow?(true)
-        case .high: actionHigh?(true)
-        }
+        action?(true)
     }
     
-    private func dragEnded(dragValue: DragGesture.Value, thumb: Thumb) {
-        switch thumb {
-        case .low: actionLow?(false)
-        case .high: actionHigh?(false)
-        }
+    private func dragEnded(dragValue: DragGesture.Value) {
+        action?(false)
     }
     
     // MARK: Actions
     private func setValueLow(to value: Double) {
-        self.valueLow = value
+        self.value = value...self.value.upperBound
     }
     
     private func setValueHigh(to value: Double) {
-        self.valueHigh = value
+        self.value = self.value.lowerBound...value
     }
     
     // MARK: Progress Width
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return valueLow - self.range.lowerBound
-            case .high: return valueHigh - self.range.lowerBound
+            case .low: return self.value.lowerBound - self.range.lowerBound
+            case .high: return self.value.upperBound - self.range.lowerBound
             }
         }()
         let range: CGFloat = range.upperBound - range.lowerBound
@@ -273,8 +260,7 @@ public struct VRangeSlider: View {
     
     // MARK: Assertion
     private static func assertValues<V>(
-        valueLow: V,
-        valueHigh: V,
+        value: ClosedRange<V>,
         difference: V
     )
         where
@@ -282,8 +268,8 @@ public struct VRangeSlider: View {
             V.Stride: BinaryFloatingPoint
     {
         assert(
-            valueHigh - valueLow >= difference - .ulpOfOne,
-            "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
+            value.boundRange >= difference - .ulpOfOne,
+            "Difference between `VRangeSlider`'s `value.upperBound` and `value.lowerBound` must be greater than or equal to `difference`"
         )
     }
 }
@@ -317,7 +303,7 @@ struct VRangeSlider_Previews: PreviewProvider {
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
-    
+
     // Previews
     static var previews: some View {
         Group(content: {
@@ -330,23 +316,20 @@ struct VRangeSlider_Previews: PreviewProvider {
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
-    
+
     // Data
     private static var difference: Double { 0.1 }
-    private static var valueLow: Double { 0.1 }
-    private static var valueHigh: Double { 0.8 }
-    
+    private static var value: ClosedRange<Double> { 0.1...0.8 }
+
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
-        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
-        
+        @State private var value: ClosedRange = VRangeSlider_Previews.value
+
         var body: some View {
             PreviewContainer(content: {
                 VRangeSlider(
                     difference: difference,
-                    valueLow: $valueLow,
-                    valueHigh: $valueHigh
+                    value: $value
                 )
                 .padding(.horizontal)
             })
@@ -354,8 +337,7 @@ struct VRangeSlider_Previews: PreviewProvider {
     }
 
     private struct BorderPreview: View {
-        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
-        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
+        @State private var value: ClosedRange = VRangeSlider_Previews.value
 
         var body: some View {
             PreviewContainer(content: {
@@ -370,14 +352,13 @@ struct VRangeSlider_Previews: PreviewProvider {
                         return uiModel
                     }(),
                     difference: difference,
-                    valueLow: $valueLow,
-                    valueHigh: $valueHigh
+                    value: $value
                 )
                 .padding(.horizontal)
             })
         }
     }
-    
+
     private struct StatesPreview: View {
         var body: some View {
             PreviewContainer(content: {
@@ -387,20 +368,18 @@ struct VRangeSlider_Previews: PreviewProvider {
                     content: {
                         VRangeSlider(
                             difference: difference,
-                            valueLow: .constant(valueLow),
-                            valueHigh: .constant(valueHigh)
+                            value: .constant(value)
                         )
                     }
                 )
-                
+
                 PreviewRow(
                     axis: .vertical,
                     title: "Disabled",
                     content: {
                         VRangeSlider(
                             difference: difference,
-                            valueLow: .constant(valueLow),
-                            valueHigh: .constant(valueHigh)
+                            value: .constant(value)
                         )
                         .disabled(true)
                     }
@@ -408,7 +387,7 @@ struct VRangeSlider_Previews: PreviewProvider {
             })
         }
     }
-    
+
     private struct LayoutDirectionsPreview: View {
         private let dimension: CGFloat = {
 #if os(iOS)
@@ -419,10 +398,9 @@ struct VRangeSlider_Previews: PreviewProvider {
             fatalError() // Not supported
 #endif
         }()
-        
-        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
-        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
-        
+
+        @State private var value: ClosedRange = VRangeSlider_Previews.value
+
         var body: some View {
             PreviewContainer(
                 embeddedInScrollViewOnPlatforms: [.macOS],
@@ -438,13 +416,12 @@ struct VRangeSlider_Previews: PreviewProvider {
                                     return uiModel
                                 }(),
                                 difference: difference,
-                                valueLow: $valueLow,
-                                valueHigh: $valueHigh
+                                value: $value
                             )
                             .frame(width: dimension)
                         }
                     )
-                    
+
                     PreviewRow(
                         axis: .vertical,
                         title: "Right-to-Left",
@@ -456,13 +433,12 @@ struct VRangeSlider_Previews: PreviewProvider {
                                     return uiModel
                                 }(),
                                 difference: difference,
-                                valueLow: $valueLow,
-                                valueHigh: $valueHigh
+                                value: $value
                             )
                             .frame(width: dimension)
                         }
                     )
-                    
+
                     HStack(content: {
                         PreviewRow(
                             axis: .vertical,
@@ -475,13 +451,12 @@ struct VRangeSlider_Previews: PreviewProvider {
                                         return uiModel
                                     }(),
                                     difference: difference,
-                                    valueLow: $valueLow,
-                                    valueHigh: $valueHigh
+                                    value: $value
                                 )
                                 .frame(height: dimension)
                             }
                         )
-                        
+
                         PreviewRow(
                             axis: .vertical,
                             title: "Bottom-to-Top",
@@ -493,8 +468,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                                         return uiModel
                                     }(),
                                     difference: difference,
-                                    valueLow: $valueLow,
-                                    valueHigh: $valueHigh
+                                    value: $value
                                 )
                                 .frame(height: dimension)
                             }
