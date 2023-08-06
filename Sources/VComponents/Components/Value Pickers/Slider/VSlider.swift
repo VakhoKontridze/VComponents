@@ -93,11 +93,14 @@ public struct VSlider: View {
             thumb
         })
         .getSize({ sliderSize = $0 })
-        .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged(dragChanged)
-                .onEnded(dragEnded)
-        )
+        .applyIf(uiModel.bodyIsDraggable, transform: {
+            $0
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged(dragChanged)
+                        .onEnded(dragEnded)
+                )
+        })
         .padding(
             uiModel.direction.isHorizontal ? .horizontal : .vertical,
             uiModel.thumbDimension / 2
@@ -155,7 +158,18 @@ public struct VSlider: View {
                 maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
                 alignment: uiModel.direction.alignment
             )
-            .allowsHitTesting(false)
+            .applyIf(
+                uiModel.bodyIsDraggable,
+                ifTransform: { $0.allowsHitTesting(false) },
+                elseTransform: {
+                    $0
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged(dragChanged)
+                                .onEnded(dragEnded)
+                        )
+                }
+            )
         }
     }
     
@@ -221,6 +235,7 @@ struct VSlider_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
             BorderPreview().previewDisplayName("Border")
+            DraggableBodyPreview().previewDisplayName("Draggable Body")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -298,6 +313,24 @@ struct VSlider_Previews: PreviewProvider {
                             enabled: uiModel.trackColors.enabled.darken(by: 0.3),
                             disabled: .clear
                         )
+                        return uiModel
+                    }(),
+                    value: $value
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    private struct DraggableBodyPreview: View {
+        @State private var value: Double = VSlider_Previews.value
+
+        var body: some View {
+            PreviewContainer(content: {
+                VSlider(
+                    uiModel: {
+                        var uiModel: VSliderUIModel = .init()
+                        uiModel.bodyIsDraggable = true
                         return uiModel
                     }(),
                     value: $value

@@ -52,6 +52,10 @@ VStepper
 - `iconDimension` is renamed to `buttonIconDimension`
 - `divider` is renamed to `dividerSize`
 
+VSlider
+
+- `isBodyDraggable` is added, and default value is set to `false`, changing the default behavior of the slider
+
 VTextField
 
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
