@@ -284,9 +284,11 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             .foregroundColor(uiModel.backgroundColors.value(for: internalState))
     }
 
-    private var pickerBorder: some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth.toPoints(scale: displayScale))
+    @ViewBuilder private var pickerBorder: some View {
+        if uiModel.borderWidth.toPoints(scale: displayScale) > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth.toPoints(scale: displayScale))
+        }
     }
     
     private var indicator: some View {

@@ -183,17 +183,20 @@ public struct VTextField: View {
         .frame(height: uiModel.height)
         .padding(.horizontal, uiModel.contentMarginHorizontal)
         .clipped() // Prevents large content from going out of bounds
+        .background(backgroundBorder)
         .background(background)
     }
     
     private var background: some View {
-        ZStack(content: {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .foregroundColor(uiModel.backgroundColors.value(for: internalState))
-            
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+    }
+
+    @ViewBuilder private var backgroundBorder: some View {
+        if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-        })
+        }
     }
     
     @ViewBuilder private var searchIcon: some View {

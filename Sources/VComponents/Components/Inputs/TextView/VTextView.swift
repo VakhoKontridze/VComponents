@@ -151,17 +151,20 @@ public struct VTextView: View {
         })
         .frame(minHeight: uiModel.minHeight)
         .padding(uiModel.contentMargins)
+        .background(backgroundBorder)
         .background(background)
     }
 
     private var background: some View {
-        ZStack(content: {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+    }
 
+    @ViewBuilder private var backgroundBorder: some View {
+        if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-        })
+        }
     }
 
     private var textField: some View {

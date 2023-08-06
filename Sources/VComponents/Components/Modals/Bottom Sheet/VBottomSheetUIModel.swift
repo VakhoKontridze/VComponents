@@ -421,7 +421,7 @@ extension VBottomSheetUIModel {
     public static var fullSizedContent: Self {
         var uiModel: Self = .onlyGrabber
         
-        uiModel.grabberSize.height = .zero
+        uiModel.grabberSize.height = 0
         
         return uiModel
     }

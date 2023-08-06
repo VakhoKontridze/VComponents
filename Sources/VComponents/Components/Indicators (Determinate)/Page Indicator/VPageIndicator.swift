@@ -153,9 +153,11 @@ public struct VPageIndicator<Content>: View where Content: View {
                     Circle()
                         .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
                     
-                    Circle()
-                        .strokeBorder(lineWidth: uiModel.dotBorderWidth)
-                        .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
+                    if uiModel.dotBorderWidth > 0 {
+                        Circle()
+                            .strokeBorder(lineWidth: uiModel.dotBorderWidth)
+                            .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
+                    }
                 })
                 
             case .content(let content):
