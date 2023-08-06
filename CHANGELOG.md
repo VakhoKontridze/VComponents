@@ -1,10 +1,10 @@
 # Change Log
 
-### 4.3.6(52)
+### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 
 VAlert
 
-- Issue of title and message not wrapping to multiple lines if xied
+- Issue of title and message not wrapping to multiple lines is fixed
 
 ### [4.3.5(51)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.5) — *2023 08 06*
 
