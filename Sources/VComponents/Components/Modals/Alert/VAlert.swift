@@ -117,6 +117,8 @@ struct VAlert<Content>: View
                 .foregroundColor(uiModel.colors.titleText)
                 .font(uiModel.fonts.titleText)
 
+                .fixedSize(horizontal: false, vertical: true)
+
                 .padding(uiModel.layout.titleTextMargins)
         }
     }
@@ -128,6 +130,8 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.layout.messageTextLineType.textLineLimitType)
                 .foregroundColor(uiModel.colors.messageText)
                 .font(uiModel.fonts.messageText)
+
+                .fixedSize(horizontal: false, vertical: true)
 
                 .padding(uiModel.layout.messageTextMargins)
         }
@@ -290,7 +294,7 @@ struct VAlert_Previews: PreviewProvider {
     // Data
     private static var title: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
     private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
-    
+
     @ViewBuilder private static func content() -> some View {
         VTextField(text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection)))
     }
