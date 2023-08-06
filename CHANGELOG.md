@@ -72,10 +72,12 @@ VTextView
 VModal
 
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+- `blur` is removed
 
 VAlert
 
 - `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
+- `blur` is removed
 
 VMenu
 

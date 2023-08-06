@@ -291,9 +291,6 @@ public struct VAlertUIModel {
     /// Scale effect during appear and disappear. Set to `1.01`.
     public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
 
-    /// Blur during appear and disappear. Set to `3`.
-    public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
-
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}

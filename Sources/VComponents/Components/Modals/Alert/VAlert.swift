@@ -120,7 +120,6 @@ struct VAlert<Content>: View
             maxHeight: alertSize
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
-        .blur(radius: isInternallyPresented ? 0 : uiModel.blur)
     }
     
     @ViewBuilder private var titleView: some View {

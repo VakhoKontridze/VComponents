@@ -127,7 +127,6 @@ struct VModal<Content>: View
             maxHeight: currentSize.height
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
-        .blur(radius: isInternallyPresented ? 0 : uiModel.blur)
     }
     
     @ViewBuilder private var header: some View {
