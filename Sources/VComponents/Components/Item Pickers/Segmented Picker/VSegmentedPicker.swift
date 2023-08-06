@@ -57,18 +57,25 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         ID: Hashable,
         Content: View
 {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VSegmentedPickerUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var pressedValue: Data.Element?
-    private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
+    private var internalState: VSegmentedPickerInternalState {
+        .init(isEnabled: isEnabled)
+    }
+
+    // MARK: Properties - State - Indicator
     private var indicatorInternalState: VSegmentedPickerSelectionIndicatorInternalState {
         .init(
             isEnabled: isEnabled, // `isEnabled` check is required
             isPressed: pressedValue == selection
         )
     }
+
+    // MARK: Properties - State - Row
     private func rowInternalState(element: Data.Element) -> VSegmentedPickerRowInternalState {
         .init(
             isEnabled: isEnabled && !disabledValues.contains(element), // `isEnabled` check is required
@@ -76,22 +83,27 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             isPressed: pressedValue == element
         )
     }
-    
+
+    // MARK: Properties - Selection
     @Binding private var selection: Data.Element
     private var selectedIndex: Data.Index { data.firstIndex(of: selection)! } // Force-unwrap
     private var selectedIndexInt: Int { data.distance(from: data.startIndex, to: selectedIndex) }
-    
+
+    // MARK: Properties - Header & Footer
     private let headerTitle: String?
     private let footerTitle: String?
+
+    // MARK: Properties - Data Source
     private let disabledValues: Set<Data.Element>
-
     private let data: Data
-
     private let id: KeyPath<Data.Element, ID>
-
     private let content: VSegmentedPickerContent<Data.Element, Content>
-    
+
+    // MARK: Properties - Sizes
     @State private var rowWidth: CGFloat = 0
+
+    // MARK: Properties - Misc
+    @Environment(\.displayScale) private var displayScale: CGFloat
     
     // MARK: Initializers
     /// Initializes `VSegmentedPicker` with selection, data, id, and row title.
@@ -274,7 +286,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
 
     private var pickerBorder: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth.toPoints(scale: displayScale))
     }
     
     private var indicator: some View {
@@ -313,7 +325,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                                     anchor: rowContentScaleAnchor(element: element)
                                 )
 
-                                .onSizeChange(perform: { rowWidth = $0.width })
+                                .getSize({ rowWidth = $0.width })
                         }
                     )
                     .disabled(disabledValues.contains(element))
@@ -335,7 +347,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
                                     anchor: rowContentScaleAnchor(element: element)
                                 )
                             
-                                .onSizeChange(perform: { rowWidth = $0.width })
+                                .getSize({ rowWidth = $0.width })
                         }
                     )
                     .disabled(disabledValues.contains(element))

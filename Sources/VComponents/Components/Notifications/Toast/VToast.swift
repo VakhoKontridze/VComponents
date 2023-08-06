@@ -14,20 +14,27 @@ import VCore
 @available(tvOS 14.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VToast: View {
-    // MARK: Properties
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
-    
+    // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
-    
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    // MARK: Properties - Presentation API
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @State private var isInternallyPresented: Bool = false
+
+    // MARK: Properties - Handlers
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
-    
+
+    // MARK: Properties - Text
     private let text: String
     
-    @State private var isInternallyPresented: Bool = false
-    
+    // MARK: Properties - Sizes
     @State private var height: CGFloat = 0
     
     // MARK: Initializers
@@ -50,6 +57,9 @@ struct VToast: View {
             contentView
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+
+        ._getInterfaceOrientation({ interfaceOrientation = $0 })
+
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -93,14 +103,14 @@ struct VToast: View {
                 case .fixedFraction(let ratio, let alignment):
                     view
                         .frame(
-                            width: MultiplatformConstants.screenSize.width * ratio,
+                            width: screenSize.width * ratio,
                             alignment: alignment.toAlignment
                         )
                 }
             })
             .cornerRadius(cornerRadius)
             .background(background)
-            .onSizeChange(perform: { height = $0.height })
+            .getSize({ height = $0.height })
             .padding(.horizontal, uiModel.widthType.marginHor)
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
@@ -118,8 +128,8 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: return -(MultiplatformConstants.safeAreaInsets.top + height)
-        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + height
+        case .top: return -(safeAreaInsets.top + height)
+        case .bottom: return safeAreaInsets.bottom + height
         }
     }
     
@@ -246,19 +256,21 @@ struct VToast_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VToast(
-                    uiModel: {
-                        var uiModel: VToastUIModel = highlights
-                        uiModel.widthType = widthType
-                        uiModel.presentationEdge = presentationEdge
-                        uiModel.appearAnimation = nil
-                        uiModel.duration = .infinity
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    text: text
-                )
+                PresentationHostGeometryReader(content: {
+                    VToast(
+                        uiModel: {
+                            var uiModel: VToastUIModel = highlights
+                            uiModel.widthType = widthType
+                            uiModel.presentationEdge = presentationEdge
+                            uiModel.appearAnimation = nil
+                            uiModel.duration = .infinity
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        text: text
+                    )
+                })
             })
         }
     }
@@ -266,20 +278,22 @@ struct VToast_Previews: PreviewProvider {
     private struct MultiLineTextPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VToast(
-                    uiModel: {
-                        var uiModel: VToastUIModel = highlights
-                        uiModel.widthType = widthType
-                        uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                        uiModel.presentationEdge = presentationEdge
-                        uiModel.appearAnimation = nil
-                        uiModel.duration = .infinity
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    text: textLong
-                )
+                PresentationHostGeometryReader(content: {
+                    VToast(
+                        uiModel: {
+                            var uiModel: VToastUIModel = highlights
+                            uiModel.widthType = widthType
+                            uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                            uiModel.presentationEdge = presentationEdge
+                            uiModel.appearAnimation = nil
+                            uiModel.duration = .infinity
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        text: textLong
+                    )
+                })
             })
         }
     }

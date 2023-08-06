@@ -43,15 +43,22 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenu<Label>: View where Label: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VMenuUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private var internalState: VMenuInternalState { .init(isEnabled: isEnabled) }
-    
+    private var internalState: VMenuInternalState {
+        .init(isEnabled: isEnabled)
+    }
+
+    // MARK: Properties - Action
     private let primaryAction: (() -> Void)?
-    
+
+    // MARK: Properties - Label
     private let label: VMenuLabel<Label>
+
+    // MARK: Properties - Sections
     private let sections: () -> [any VMenuSectionProtocol]
     
     // MARK: Initializers - Sections

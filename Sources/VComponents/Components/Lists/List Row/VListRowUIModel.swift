@@ -28,8 +28,8 @@ public struct VListRowUIModel {
     /// Separator type. Set to `default`.
     public var separatorType: SeparatorType = .default
 
-    /// Separator height. Set to `1` scaled to screen.
-    public var separatorHeight: CGFloat = GlobalUIModel.Common.separatorHeight
+    /// Separator height. Set to `1` pixel.
+    public var separatorHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.separatorHeightPx)
 
     /// Separator color.
     public var separatorColor: Color = GlobalUIModel.Common.separatorColor

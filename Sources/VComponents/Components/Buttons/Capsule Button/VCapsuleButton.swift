@@ -26,8 +26,13 @@ import VCore
 public struct VCapsuleButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VCapsuleButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
+
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState {
+        baseButtonState
+    }
+
     private let action: () -> Void
+
     private let label: VCapsuleButtonLabel<Label>
     
     // MARK: Initializers

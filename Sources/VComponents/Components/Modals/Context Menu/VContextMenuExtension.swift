@@ -87,7 +87,7 @@ extension View {
     ///                 preview: {
     ///                     ZStack(content: {
     ///                         Color.blue
-    ///                             .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
+    ///                             .frame(width: 300, height: 100)
     ///
     ///                         Text("Selection: \(selection.stringRepresentation)")
     ///                             .foregroundColor(.white)

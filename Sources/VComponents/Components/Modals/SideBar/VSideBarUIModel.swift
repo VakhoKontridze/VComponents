@@ -106,7 +106,7 @@ public struct VSideBarUIModel {
     /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
     public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
 
-    var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
+    func dragBackDismissDistance(size: CGSize) -> CGFloat { dragBackDismissDistanceWidthRatio * size.width }
 
     // MARK: Properties - Transition
     /// Appear animation.  Set to `easeInOut` with duration `0.3`.

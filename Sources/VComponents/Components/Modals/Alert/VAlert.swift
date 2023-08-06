@@ -16,23 +16,34 @@ import VCore
 struct VAlert<Content>: View
     where Content: View
 {
-    // MARK: Properties
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
-    
+    // MARK: Properties - UI Model
     private let uiModel: VAlertUIModel
-    
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+
+    private var currentSize: VAlertUIModel.AlertSize {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    }
+
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    // MARK: Properties - Presentation API
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @State private var isInternallyPresented: Bool = false
+
+    // MARK: Properties - Handlers
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
-    
+
+    // MARK: Properties - Text, Content, and Buttons
     private let title: String?
     private let message: String?
     private let content: VAlertContent<Content>
     private let buttons: [any VAlertButtonProtocol]
-    
-    @State private var isInternallyPresented: Bool = false
 
+    // MARK: Properties - Sizes
     @State private var alertSize: CGFloat = 0
     @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0
@@ -63,6 +74,9 @@ struct VAlert<Content>: View
             alert
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+
+        ._getInterfaceOrientation({ interfaceOrientation = $0 })
+
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -93,16 +107,16 @@ struct VAlert<Content>: View
                     contentView
                 })
                 .padding(uiModel.titleTextMessageTextAndContentMargins)
-                .onSizeChange(perform: { titleMessageContentHeight = $0.height })
+                .getSize({ titleMessageContentHeight = $0.height })
 
                 buttonsScrollView
             })
             .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
             .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
-            .onSizeChange(perform: { alertSize = $0.height })
+            .getSize({ alertSize = $0.height })
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.sizes._current.size.width,
+            maxWidth: currentSize.width,
             maxHeight: alertSize
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
@@ -179,7 +193,7 @@ struct VAlert<Content>: View
             }
         })
         .padding(uiModel.buttonMargins)
-        .onSizeChange(perform: { buttonsStackHeight = $0.height })
+        .getSize({ buttonsStackHeight = $0.height })
         .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.xxxLarge))
@@ -236,9 +250,9 @@ struct VAlert<Content>: View
     // MARK: Size that Fits
     private var isButtonContentLargerThanContainer: Bool {
         let safeAreaHeight: CGFloat =
-            MultiplatformConstants.screenSize.height -
-            MultiplatformConstants.safeAreaInsets.top -
-            MultiplatformConstants.safeAreaInsets.bottom
+            screenSize.height -
+            safeAreaInsets.top -
+            safeAreaInsets.bottom
 
         let alertHeight: CGFloat =
             titleMessageContentHeight +
@@ -303,18 +317,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -322,18 +338,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct NoContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert<Never>(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .empty,
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert<Never>(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .empty,
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -341,15 +359,17 @@ struct VAlert_Previews: PreviewProvider {
     private struct NoButtonPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: []
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: []
+                    )
+                })
             })
         }
     }
@@ -357,17 +377,19 @@ struct VAlert_Previews: PreviewProvider {
     private struct SingleButtonPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .secondary, action: {}, title: "Ok"),
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .secondary, action: {}, title: "Ok"),
+                        ]
+                    )
+                })
             })
         }
     }
@@ -375,20 +397,22 @@ struct VAlert_Previews: PreviewProvider {
     private struct ManyButtonsPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Option A"),
-                        VAlertButton(role: .secondary, action: {}, title: "Option B"),
-                        VAlertButton(role: .destructive, action: {}, title: "Delete"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Option A"),
+                            VAlertButton(role: .secondary, action: {}, title: "Option B"),
+                            VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -396,28 +420,30 @@ struct VAlert_Previews: PreviewProvider {
     private struct ButtonStatesPreview_Pressed: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: {
-                        var uiModel: VAlertUIModel = .init()
-                        uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
-                        uiModel.primaryButtonTitleColors.enabled = uiModel.primaryButtonTitleColors.pressed
-                        uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
-                        uiModel.secondaryButtonTitleColors.enabled = uiModel.secondaryButtonTitleColors.pressed
-                        uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
-                        uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Option A"),
-                        VAlertButton(role: .destructive, action: {}, title: "Delete"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
+                            uiModel.primaryButtonTitleColors.enabled = uiModel.primaryButtonTitleColors.pressed
+                            uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
+                            uiModel.secondaryButtonTitleColors.enabled = uiModel.secondaryButtonTitleColors.pressed
+                            uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
+                            uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Option A"),
+                            VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -425,19 +451,21 @@ struct VAlert_Previews: PreviewProvider {
     private struct ButtonStatesPreview_Disabled: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Option A").disabled(true),
-                        VAlertButton(role: .destructive, action: {}, title: "Delete").disabled(true),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel").disabled(true)
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Option A").disabled(true),
+                            VAlertButton(role: .destructive, action: {}, title: "Delete").disabled(true),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel").disabled(true)
+                        ]
+                    )
+                })
             })
         }
     }
@@ -445,18 +473,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct NoTitlePreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: nil,
-                    message: message,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: nil,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -464,18 +494,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct NoMessagePreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: title,
-                    message: nil,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: title,
+                        message: nil,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -483,18 +515,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct NoTitleNoMessagePreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: nil,
-                    message: nil,
-                    content: .content(content: content),
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: nil,
+                        message: nil,
+                        content: .content(content: content),
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }
@@ -502,18 +536,20 @@ struct VAlert_Previews: PreviewProvider {
     private struct OnlyButtonsPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VAlert<Never>(
-                    uiModel: VAlertUIModel(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    title: nil,
-                    message: nil,
-                    content: .empty,
-                    buttons: [
-                        VAlertButton(role: .primary, action: {}, title: "Confirm"),
-                        VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                    ]
-                )
+                PresentationHostGeometryReader(content: {
+                    VAlert<Never>(
+                        uiModel: VAlertUIModel(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        title: nil,
+                        message: nil,
+                        content: .empty,
+                        buttons: [
+                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        ]
+                    )
+                })
             })
         }
     }

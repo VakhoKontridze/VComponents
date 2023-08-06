@@ -28,10 +28,11 @@ import VCore
 ///     }
 ///
 public struct VGroupBox<Content>: View where Content: View {
-    // MARK: Properties
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    
+    // MARK: Properties - UI Model
     private let uiModel: VGroupBoxUIModel
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+
+    // MARK: Properties - Content
     private let content: VGroupBoxContent<Content>
     
     // MARK: Initializers

@@ -11,17 +11,21 @@ import SwiftUI
 /// Measurement that allows screen relative sizes to be converted to points.
 public protocol ScreenRelativeSizeMeasurement {
     /// Converts screen relative measurement to points.
-    static func relativeMeasurementToPoints(_ measurement: Self) -> Self
+    static func relativeMeasurementToPoints(
+        _ measurement: Self,
+        in screenSize: CGSize
+    ) -> Self
 }
 
 // MARK: - CGSize
 extension CGSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
-        _ measurement: CGSize
+        _ measurement: CGSize,
+        in screenSize: CGSize
     ) -> CGSize {
         .init(
-            width: MultiplatformConstants.screenSize.width * measurement.width,
-            height: MultiplatformConstants.screenSize.height * measurement.height
+            width: screenSize.width * measurement.width,
+            height: screenSize.height * measurement.height
         )
     }
 }

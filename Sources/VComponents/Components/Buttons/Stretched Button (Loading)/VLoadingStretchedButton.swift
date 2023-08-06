@@ -28,17 +28,24 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VLoadingStretchedButton<Label>: View where Label: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VLoadingStretchedButtonUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private let isLoading: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VLoadingStretchedButtonInternalState {
-        .init(isEnabled: isEnabled, isPressed: baseButtonState == .pressed, isLoading: isLoading)
+        .init(
+            isEnabled: isEnabled,
+            isPressed: baseButtonState == .pressed,
+            isLoading: isLoading
+        )
     }
-    
+
+    // MARK: Properties - Action
     private let action: () -> Void
-    
+
+    // MARK: Properties - Label
     private let label: VLoadingStretchedButtonLabel<Label>
     
     // MARK: Initializers

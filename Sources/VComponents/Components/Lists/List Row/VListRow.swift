@@ -76,8 +76,11 @@ import VCore
 public struct VListRow<Content>: View
     where Content: View
 {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VListRowUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    // MARK: Properties - Content
     private let content: () -> Content
     
     // MARK: Initializers
@@ -118,7 +121,7 @@ public struct VListRow<Content>: View
     private var separator: some View {
         uiModel.separatorColor
             .frame(maxWidth: .infinity)
-            .frame(height: uiModel.separatorHeight)
+            .frame(height: uiModel.separatorHeight.toPoints(scale: displayScale))
             .padding(uiModel.separatorMargins)
     }
 }

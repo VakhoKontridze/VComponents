@@ -74,7 +74,11 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private let dotContent: VPageIndicatorDotContent<Content>
     
     private var region: Region {
-        .init(current: current, total: total, middle: middle)
+        .init(
+            current: current,
+            total: total,
+            middle: middle
+        )
     }
     
     // MARK: Initializers

@@ -75,14 +75,14 @@ public struct VSliderUIModel {
     // MARK: Properties - Thumb Border
     /// Thumb border widths.
     /// Set to `0` on `iOS`.
-    /// Set to `1` scaled to screen on `macOS`.
+    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var thumbBorderWidth: CGFloat = {
+    public var thumbBorderWidth: PointPixelMeasurement = {
 #if os(iOS)
-        return 0
+        return .points(0)
 #elseif os(macOS)
-        return 1/MultiplatformConstants.screenScale
+        return .pixels(1)
 #else
         fatalError() // Not supported
 #endif

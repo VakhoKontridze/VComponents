@@ -40,14 +40,22 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VToggle<Label>: View where Label: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VToggleUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
     @Binding private var state: VToggleState
-    private var internalState: VToggleInternalState { .init(isEnabled: isEnabled, isOn: state == .on, isPressed: isPressed) }
-    
+    private var internalState: VToggleInternalState {
+        .init(
+            isEnabled: isEnabled,
+            isOn: state == .on,
+            isPressed: isPressed
+        )
+    }
+
+    // MARK: Properties - Label
     private let label: VToggleLabel<Label>
     
     // MARK: Initializers

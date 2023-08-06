@@ -71,16 +71,24 @@ import VCore
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextView: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VTextViewUIModel
 
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
-    private var internalState: VTextViewInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
+    private var internalState: VTextViewInternalState {
+        .init(
+            isEnabled: isEnabled,
+            isFocused: isFocused
+        )
+    }
 
+    // MARK: Properties - Header & Footer
     private let headerTitle: String?
     private let footerTitle: String?
 
+    // MARK: Properties - Texts
     private let placeholder: String?
     @Binding private var text: String
 

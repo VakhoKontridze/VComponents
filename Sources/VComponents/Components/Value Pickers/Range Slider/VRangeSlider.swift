@@ -27,25 +27,32 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRangeSlider: View {
-    // MARK: Properties
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    
+    // MARK: Properties - UI Model
     private let uiModel: VRangeSliderUIModel
-    
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    // MARK: State
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    private var internalState: VRangeSliderInternalState {
+        .init(isEnabled: isEnabled)
+    }
+
+    // MARK: Properties - Value Range
     private let min, max: Double
     private var range: ClosedRange<Double> { min...max }
     private let difference: Double
     private let step: Double?
-    
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    private var internalState: VRangeSliderInternalState { .init(isEnabled: isEnabled) }
-    
+
+    // MARK: Properties - Values
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
-    
+
+    // MARK: Properties - Actions
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
-    
+
+    // MARK: Properties - Sizes
     @State private var sliderSize: CGSize = .zero
     
     // MARK: Initializers
@@ -104,7 +111,7 @@ public struct VRangeSlider: View {
             thumb(.low)
             thumb(.high)
         })
-        .onSizeChange(perform: { sliderSize = $0 })
+        .getSize({ sliderSize = $0 })
         .padding(
             uiModel.direction.isHorizontal ? .horizontal : .vertical,
             uiModel.thumbDimension / 2
@@ -148,7 +155,7 @@ public struct VRangeSlider: View {
                         )
                     
                     RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-                        .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth)
+                        .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
                 })
                 .frame(dimension: uiModel.thumbDimension)
                 .offset(

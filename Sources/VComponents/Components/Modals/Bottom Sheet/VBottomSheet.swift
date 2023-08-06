@@ -16,34 +16,63 @@ import VCore
 struct VBottomSheet<Content>: View
     where Content: View
 {
-    // MARK: Properties
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
-    
+    // MARK: Properties - UI Model
     private let uiModel: VBottomSheetUIModel
-    
-    private let presentHandler: (() -> Void)?
-    private let dismissHandler: (() -> Void)?
-    
-    @State private var headerLabel: VBottomSheetHeaderLabel<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
-    private let content: () -> Content
-    
-    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.dismissType.hasButton }
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+
+    private var currentSize: VBottomSheetUIModel.BottomSheetSize {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    }
+
+    private var hasHeader: Bool {
+        headerLabel.hasLabel ||
+        uiModel.dismissType.hasButton
+    }
+
     private var hasGrabber: Bool {
         uiModel.grabberSize.height > 0 &&
-        (uiModel.dismissType.contains(.pullDown) || uiModel.sizes._current.size.heights.isResizable)
+        (uiModel.dismissType.contains(.pullDown) || currentSize.heights.isResizable)
     }
-    private var hasDivider: Bool { hasHeader && uiModel.dividerHeight > 0 }
-    
+
+    private var hasDivider: Bool {
+        hasHeader &&
+        uiModel.dividerHeight.toPoints(scale: displayScale) > 0
+    }
+
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    // MARK: Properties - Presentation API
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @State private var isInternallyPresented: Bool = false
-    
-    @State private var headerDividerHeight: CGFloat = 0
-    @State private var offset: CGFloat
-    @State private var offsetBeforeDrag: CGFloat? // Used for adding to translation
-    @State private var currentDragValue: DragGesture.Value? // Used for storing "last" value for writing in `previousDragValue`. Equals to `dragValue` in methods.
-    @State private var previousDragValue: DragGesture.Value? // Used for calculating velocity
-    
+
+    // MARK: Properties - Handlers
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
+
+    // MARK: Properties - Label
+    @State private var headerLabel: VBottomSheetHeaderLabel<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
+
+    // MARK: Properties - Content
+    private let content: () -> Content
+
+    // MARK: Properties - Sizes
+    @State private var grabberHeaderAndDividerHeight: CGFloat = 0
+
+    // MARK: Properties - Sizes - Offset
+    // If `nil`, will be set from body render.
+    @State private var _offset: CGFloat?
+    private var offset: CGFloat { _offset ?? getResetedHeight() }
+
+    @State private var offsetBeforeDrag: CGFloat?
+
+    @State private var currentDragValue: DragGesture.Value?
+    @State private var previousDragValue: DragGesture.Value?
+
     // MARK: Initializers
     init(
         uiModel: VBottomSheetUIModel,
@@ -57,26 +86,30 @@ struct VBottomSheet<Content>: View
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.content = content
-        
-        _offset = State(initialValue: uiModel.sizes._current.size.heights.idealOffset)
     }
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .top, content: {
+        syncOffsetWithProperStateIfNeeded()
+
+        return ZStack(alignment: .top, content: {
             dimmingView
             bottomSheet
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+
+        ._getInterfaceOrientation({
+            interfaceOrientation = $0
+            resetHeightFromOrientationChange()
+        })
+
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
         )
-        .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { _ in resetHeightFromOrientationChange() })
-        .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: {
-            headerLabel = $0
-        })
+
+        .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: { headerLabel = $0 })
     }
     
     private var dimmingView: some View {
@@ -93,9 +126,9 @@ struct VBottomSheet<Content>: View
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fix issue of safe areas and/or landscape
-                            maxHeight: uiModel.sizes._current.size.heights.max
+                            maxHeight: currentSize.heights.max
                         )
-                        .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
+                        .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -114,8 +147,8 @@ struct VBottomSheet<Content>: View
                     header
                     divider
                 })
-                .onSizeChange(perform: { headerDividerHeight = $0.height })
-                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges)
+                .getSize({ grabberHeaderAndDividerHeight = $0.height })
+                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets: safeAreaInsets)
 
                 contentView
             })
@@ -124,18 +157,18 @@ struct VBottomSheet<Content>: View
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fix issue of safe areas and/or landscape
-                        maxHeight: uiModel.sizes._current.size.heights.max
+                        maxHeight: currentSize.heights.max
                     )
-                    .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
+                    .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
             })
         })
-        .frame(width: uiModel.sizes._current.size.width)
+        .frame(width: currentSize.width)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
                 .frame( // Max dimension fix issue of safe areas and/or landscape
-                    maxHeight: uiModel.sizes._current.size.heights.max
+                    maxHeight: currentSize.heights.max
                 )
-                .offset(y: isInternallyPresented ? offset : uiModel.sizes._current.size.heights.hiddenOffset)
+                .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
@@ -204,7 +237,7 @@ struct VBottomSheet<Content>: View
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: uiModel.dividerHeight)
+                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
                 .padding(uiModel.dividerMargins)
                 .foregroundColor(uiModel.dividerColor)
         }
@@ -233,11 +266,11 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges)
+        .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets: safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
-            uiModel.autoresizesContent && uiModel.sizes._current.size.heights.isResizable,
-            ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
+            uiModel.autoresizesContent && currentSize.heights.isResizable,
+            ifTransform: { $0.frame(height: screenSize.height - offset - grabberHeaderAndDividerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
     }
@@ -297,16 +330,16 @@ struct VBottomSheet<Content>: View
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
         
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
-            offset = {
+            _offset = {
                 switch newOffset {
-                case ...uiModel.sizes._current.size.heights.maxOffset:
-                    return uiModel.sizes._current.size.heights.maxOffset
+                case ...currentSize.heights.maxOffset(in: screenSize.height):
+                    return currentSize.heights.maxOffset(in: screenSize.height)
                     
-                case uiModel.sizes._current.size.heights.minOffset...:
+                case currentSize.heights.minOffset(in: screenSize.height)...:
                     if uiModel.dismissType.contains(.pullDown) {
                         return newOffset
                     } else {
-                        return uiModel.sizes._current.size.heights.minOffset
+                        return currentSize.heights.minOffset(in: screenSize.height)
                     }
                     
                 default:
@@ -332,9 +365,10 @@ struct VBottomSheet<Content>: View
             guard let offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                heights: uiModel.sizes._current.size.heights,
+                screenHeight: screenSize.height,
+                heights: currentSize.heights,
                 canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
-                pullDownDismissDistance: uiModel.pullDownDismissDistance,
+                pullDownDismissDistance: uiModel.pullDownDismissDistance(size: currentSize),
                 offset: offset,
                 offsetBeforeDrag: offsetBeforeDrag,
                 translation: dragValue.translation.height
@@ -342,33 +376,53 @@ struct VBottomSheet<Content>: View
             
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                heights: uiModel.sizes._current.size.heights,
+                screenHeight: screenSize.height,
+                heights: currentSize.heights,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
             ))
         }
     }
     
-    private func animateOffsetOrPullDismissFromSnapAction(_ snapAction: VBottomSheetSnapAction) {
+    private func animateOffsetOrPullDismissFromSnapAction(
+        _ snapAction: VBottomSheetSnapAction
+    ) {
         switch snapAction {
         case .dismiss: animateOutFromDrag()
-        case .snap(let newOffset): withAnimation(uiModel.heightSnapAnimation, { offset = newOffset })
+        case .snap(let newOffset): withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
         }
     }
     
     // MARK: Orientation
+    private func syncOffsetWithProperStateIfNeeded() {
+        DispatchQueue.main.async(execute: {
+            if _offset == nil { resetHeightFromOrientationChange() }
+        })
+    }
+
     private func resetHeightFromOrientationChange() {
-        offset = uiModel.sizes._current.size.heights.idealOffset
+        _offset = getResetedHeight()
+    }
+
+    private func getResetedHeight() -> CGFloat {
+        currentSize.heights.idealOffset(in: screenSize.height)
     }
     
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
-        guard uiModel.sizes._current.size.heights.min <= uiModel.sizes._current.size.heights.ideal else {
-            VCoreFatalError("`VBottomSheet`'s `min` height must be less than or equal to `ideal` height", module: "VComponents")
-        }
-        
-        guard uiModel.sizes._current.size.heights.ideal <= uiModel.sizes._current.size.heights.max else {
-            VCoreFatalError("`VBottomSheet`'s `ideal` height must be less than or equal to `max` height", module: "VComponents")
+        let sizes: [VBottomSheetUIModel.BottomSheetSize] = [
+            uiModel.sizes.portrait.size(in: CGSize(dimension: 1)),
+            uiModel.sizes.landscape.size(in: CGSize(dimension: 1))
+        ]
+
+        for size in sizes {
+            guard size.heights.min <= size.heights.ideal else {
+                VCoreFatalError("`VBottomSheet`'s `min` height must be less than or equal to `ideal` height", module: "VComponents")
+            }
+
+            guard size.heights.ideal <= size.heights.max else {
+                VCoreFatalError("`VBottomSheet`'s `ideal` height must be less than or equal to `max` height", module: "VComponents")
+            }
         }
     }
 }
@@ -417,16 +471,19 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -434,26 +491,29 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct FixedHeightMinIdealPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 1,
-                                heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
-                            )),
-                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 0.7,
-                                heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
-                            ))
-                        )
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 1,
+                                    heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
+                                )),
+                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 0.7,
+                                    heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
+                                ))
+                            )
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -461,26 +521,29 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct FixedHeightIdealMaxPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 1,
-                                heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
-                            )),
-                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 0.7,
-                                heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
-                            ))
-                        )
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 1,
+                                    heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
+                                )),
+                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 0.7,
+                                    heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
+                                ))
+                            )
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -488,26 +551,29 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct FixedHeightMinIdealMaxLargePreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 1,
-                                heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
-                            )),
-                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 0.7,
-                                heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
-                            ))
-                        )
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 1,
+                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
+                                )),
+                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 0.7,
+                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
+                                ))
+                            )
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -515,26 +581,29 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct FixedHeightMinIdealMaxSmallPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
-                            portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 1,
-                                heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
-                            )),
-                            landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                width: 0.7,
-                                heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
-                            ))
-                        )
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 1,
+                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
+                                )),
+                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
+                                    width: 0.7,
+                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
+                                ))
+                            )
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -542,16 +611,19 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct InsettedContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .insettedContent
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .insettedContent
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -560,27 +632,30 @@ struct VBottomSheet_Previews: PreviewProvider {
         var body: some View {
 #if os(iOS)
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .scrollableContent
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: {
-                        List(content: {
-                            ForEach(0..<20, content: { number in
-                                VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-                                    Text(String(number))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .scrollableContent
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: {
+                            List(content: {
+                                ForEach(0..<20, content: { number in
+                                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+                                        Text(String(number))
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    })
                                 })
                             })
-                        })
-                        .vListStyle()
-                        .vBottomSheetHeaderTitle(headerTitle)
-                    }
-                )
+                            .vListStyle()
+                            .vBottomSheetHeaderTitle(headerTitle)
+                        }
+                    )
+                })
+                .ignoresSafeArea()
             })
 #endif
         }
@@ -589,17 +664,20 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct FullSizedContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .fullSizedContent
-                        uiModel.contentIsDraggable = true
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: { ColorBook.accentBlue }
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .fullSizedContent
+                            uiModel.contentIsDraggable = true
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: { ColorBook.accentBlue }
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }
@@ -607,17 +685,20 @@ struct VBottomSheet_Previews: PreviewProvider {
     private struct OnlyGrabberPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VBottomSheet(
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .onlyGrabber
-                        uiModel.contentIsDraggable = true
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: { ColorBook.accentBlue }
-                )
+                PresentationHostGeometryReader(content: {
+                    VBottomSheet(
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .onlyGrabber
+                            uiModel.contentIsDraggable = true
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: { ColorBook.accentBlue }
+                    )
+                })
+                .ignoresSafeArea()
             })
         }
     }

@@ -27,28 +27,45 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VStepper: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VStepperUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VStepperInternalState { .init(isEnabled: isEnabled) }
+
+    // MARK: Properties - State - Button
     @State private var pressedButton: VStepperButton?
+
+    private func buttonIsEnabled(_ button: VStepperButton) -> Bool {
+        switch (internalState, button) {
+        case (.disabled, _): return false
+        case (.enabled, .minus): return !(value <= range.lowerBound)
+        case (.enabled, .plus): return !(value >= range.upperBound)
+        }
+    }
+
     private func buttonInternalState(_ button: VStepperButton) -> VStepperButtonInternalState {
         .init(
             isEnabled: buttonIsEnabled(button),
             isPressed: pressedButton == button
         )
     }
-    
+
+    // MARK: Properties - Value Range
     private let range: ClosedRange<Int>
     private let step: Int
-    
+
+    // MARK: Properties - Value
     @Binding private var value: Int
-    
+
+    // MARK: Properties - Long Press
     @State private var longPressSchedulerTimer: Timer?
+
     @State private var longPressIncrementTimer: Timer?
     @State private var longPressIncrementTimerIncremental: Timer?
     @State private var longPressIncrementTimeElapsed: TimeInterval = 0
+
     @State private var shouldSkipIncrementBecauseOfLongPressIncrementFinish: Bool = false
     
     // MARK: Initializers
@@ -228,15 +245,6 @@ public struct VStepper: View {
 #if os(iOS)
         HapticManager.shared.playImpact(uiModel.hapticLongPress)
 #endif
-    }
-    
-    // MARK: Helpers
-    private func buttonIsEnabled(_ button: VStepperButton) -> Bool {
-        switch (internalState, button) {
-        case (.disabled, _): return false
-        case (.enabled, .minus): return !(value <= range.lowerBound)
-        case (.enabled, .plus): return !(value >= range.upperBound)
-        }
     }
 }
 

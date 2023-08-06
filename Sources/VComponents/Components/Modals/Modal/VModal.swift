@@ -16,25 +16,45 @@ import VCore
 struct VModal<Content>: View
     where Content: View
 {
-    // MARK: Properties
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
-    
+    // MARK: Properties - UI Model
     private let uiModel: VModalUIModel
-    
+
+    private var currentSize: CGSize {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    }
+
+    private var hasHeader: Bool {
+        headerLabel.hasLabel ||
+        uiModel.dismissType.hasButton
+    }
+
+    private var hasDivider: Bool {
+        hasHeader &&
+        uiModel.dividerHeight.toPoints(scale: displayScale) > 0
+    }
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    // MARK: Properties - Presentation API
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @State private var isInternallyPresented: Bool = false
+
+    // MARK: Properties - Handles
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
-    
+
+    // MARK: Properties - Label
     @State private var headerLabel: VModalHeaderLabel<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
+
+    // MARK: Properties - Content
     private let content: () -> Content
-    
-    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.dismissType.hasButton }
-    private var hasDivider: Bool { hasHeader && uiModel.dividerHeight > 0 }
-    
-    @State private var isInternallyPresented: Bool = false
-    
+
     // MARK: Initializers
     init(
         uiModel: VModalUIModel,
@@ -55,14 +75,16 @@ struct VModal<Content>: View
             modal
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+
+        ._getInterfaceOrientation({ interfaceOrientation = $0 })
+
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
         )
-        .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: {
-            headerLabel = $0
-        })
+
+        .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: { headerLabel = $0 })
     }
     
     private var dimmingView: some View {
@@ -101,8 +123,8 @@ struct VModal<Content>: View
             .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.sizes._current.size.width,
-            maxHeight: uiModel.sizes._current.size.height
+            maxWidth: currentSize.width,
+            maxHeight: currentSize.height
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
         .blur(radius: isInternallyPresented ? 0 : uiModel.blur)
@@ -170,7 +192,7 @@ struct VModal<Content>: View
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: uiModel.dividerHeight)
+                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
                 .padding(uiModel.dividerMargins)
                 .foregroundColor(uiModel.dividerColor)
         }
@@ -252,16 +274,18 @@ struct VModal_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VModal(
-                    uiModel: {
-                        var uiModel: VModalUIModel = .init()
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VModal(
+                        uiModel: {
+                            var uiModel: VModalUIModel = .init()
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
             })
         }
     }
@@ -269,16 +293,18 @@ struct VModal_Previews: PreviewProvider {
     private struct InsettedContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VModal(
-                    uiModel: {
-                        var uiModel: VModalUIModel = .insettedContent
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VModal(
+                        uiModel: {
+                            var uiModel: VModalUIModel = .insettedContent
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
             })
         }
     }
@@ -286,16 +312,18 @@ struct VModal_Previews: PreviewProvider {
     private struct FullSizedContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VModal(
-                    uiModel: {
-                        var uiModel: VModalUIModel = .fullSizedContent
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: { ColorBook.accentBlue }
-                )
+                PresentationHostGeometryReader(content: {
+                    VModal(
+                        uiModel: {
+                            var uiModel: VModalUIModel = .fullSizedContent
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: { ColorBook.accentBlue }
+                    )
+                })
             })
         }
     }

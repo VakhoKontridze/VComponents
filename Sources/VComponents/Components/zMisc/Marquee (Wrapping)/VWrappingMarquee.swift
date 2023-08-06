@@ -27,14 +27,18 @@ import VCore
 ///     }
 ///
 public struct VWrappingMarquee<Content>: View where Content: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VWrappingMarqueeUIModel
+
+    // MARK: Properties - Content
     private let content: () -> Content
-    
+
+    // MARK: Properties - Sizes
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
     private var isDynamic: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
-    
+
+    // MARK: Properties - Flags
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
     
@@ -52,7 +56,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .onSizeChange(perform: { containerWidth = $0.width })
+            .getSize({ containerWidth = $0.width })
             .overlay(marqueeContentView)
             .overlay(gradient)
             .clipped()
@@ -87,7 +91,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var contentView: some View {
         content()
             .fixedSize()
-            .onSizeChange(perform: { contentSize = $0 })
+            .getSize({ contentSize = $0 })
     }
     
     @ViewBuilder private var gradient: some View {

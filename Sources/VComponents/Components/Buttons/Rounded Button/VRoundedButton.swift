@@ -26,8 +26,13 @@ import VCore
 public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedButtonInternalState { baseButtonState }
+
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedButtonInternalState {
+        baseButtonState
+    }
+
     private let action: () -> Void
+
     private let label: VRoundedButtonLabel<Label>
     
     // MARK: Initializers

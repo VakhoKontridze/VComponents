@@ -104,10 +104,10 @@ public struct VDisclosureGroupUIModel {
     }()
 
     // MARK: Properties - Divider
-    /// Divider height. Set to `2` scaled to screen.
+    /// Divider height. Set to `2`pixels.
     ///
     /// To hide divider, set to `0`.
-    public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
+    public var dividerHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.dividerHeightPx)
 
     /// Divider color.
     public var dividerColor: Color = GlobalUIModel.Common.dividerColor

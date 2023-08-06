@@ -40,14 +40,22 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VRadioButton<Label>: View where Label: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VRadioButtonUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
     @Binding private var state: VRadioButtonState
-    private var internalState: VRadioButtonInternalState { .init(isEnabled: isEnabled, isOn: state == .on, isPressed: isPressed) }
-    
+    private var internalState: VRadioButtonInternalState {
+        .init(
+            isEnabled: isEnabled,
+            isOn: state == .on,
+            isPressed: isPressed
+        )
+    }
+
+    // MARK: Properties - Label
     private let label: VRadioButtonLabel<Label>
     
     // MARK: Initializers

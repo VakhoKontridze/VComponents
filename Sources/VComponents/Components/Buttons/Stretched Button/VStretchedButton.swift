@@ -28,8 +28,13 @@ import VCore
 public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState { baseButtonState }
+
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState {
+        baseButtonState
+    }
+
     private let action: () -> Void
+
     private let label: VStretchedButtonLabel<Label>
     
     // MARK: Initializers

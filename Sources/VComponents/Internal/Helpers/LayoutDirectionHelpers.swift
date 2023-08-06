@@ -33,7 +33,10 @@ extension CGPoint {
 }
 
 extension Double {
-    func invertedFromMax(_ max: Double, if condition: Bool) -> Double {
+    func invertedFromMax(
+        _ max: Double,
+        if condition: Bool
+    ) -> Double {
         if condition {
             return max - self
         } else {

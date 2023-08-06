@@ -26,8 +26,13 @@ import VCore
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState { baseButtonState }
+
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState {
+        baseButtonState
+    }
+
     private let action: () -> Void
+
     private let label: VPlainButtonLabel<Label>
     
     // MARK: Initializers

@@ -98,7 +98,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                         preview: {
                             ZStack(content: {
                                 Color.blue
-                                    .frame(width: MultiplatformConstants.screenSize.width * 0.9, height: 100)
+                                    .frame(width: 300, height: 100)
 
                                 Text("Selection: \(selection.stringRepresentation)")
                                     .foregroundColor(ColorBook.primaryWhite)

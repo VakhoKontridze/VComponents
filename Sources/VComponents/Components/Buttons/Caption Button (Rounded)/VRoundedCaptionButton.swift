@@ -29,11 +29,14 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     // MARK: Properties
     private let uiModel: VRoundedCaptionButtonUIModel
     
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedCaptionButtonInternalState { baseButtonState }
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedCaptionButtonInternalState {
+        baseButtonState
+    }
     
     private let action: () -> Void
     
     private let icon: Image
+
     private let caption: VRoundedCaptionButtonCaption<CaptionLabel>
     
     // MARK: Initializers

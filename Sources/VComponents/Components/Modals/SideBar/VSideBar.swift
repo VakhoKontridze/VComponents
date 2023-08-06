@@ -14,21 +14,32 @@ import VCore
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VSideBar<Content>: View where Content: View {
-    // MARK: Properties
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
-    
+    // MARK: Properties - UI Model
     private let uiModel: VSideBarUIModel
-    
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+
+    private var currentSize: CGSize {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    }
+
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
+    // MARK: Properties - Presentation API
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @State private var isInternallyPresented: Bool = false
+
+    // MARK: Properties - Handlers
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
-    
+
+    // MARK: Properties - Content
     private let content: () -> Content
-    
-    @State private var isInternallyPresented: Bool = false
-    
+
     // MARK: Initializers
     init(
         uiModel: VSideBarUIModel,
@@ -52,6 +63,9 @@ struct VSideBar<Content>: View where Content: View {
             }
         )
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+
+        ._getInterfaceOrientation({ interfaceOrientation = $0 })
+
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -84,8 +98,8 @@ struct VSideBar<Content>: View where Content: View {
                 .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.sizes._current.size.width,
-            maxHeight: uiModel.sizes._current.size.height
+            maxWidth: currentSize.width,
+            maxHeight: currentSize.height
         )
         .offset(isInternallyPresented ? .zero : initialOffset)
         .gesture(
@@ -155,8 +169,8 @@ struct VSideBar<Content>: View where Content: View {
     private var initialOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.presentationEdge {
-            case .leading: return -(uiModel.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.leading)
-            case .trailing: return uiModel.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.trailing
+            case .leading: return -(currentSize.width + safeAreaInsets.leading)
+            case .trailing: return currentSize.width + safeAreaInsets.trailing
             case .top: return 0
             case .bottom: return 0
             }
@@ -166,8 +180,8 @@ struct VSideBar<Content>: View where Content: View {
             switch uiModel.presentationEdge {
             case .leading: return 0
             case .trailing: return 0
-            case .top: return -(uiModel.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.top)
-            case .bottom: return uiModel.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.bottom
+            case .top: return -(currentSize.height + safeAreaInsets.top)
+            case .bottom: return currentSize.height + safeAreaInsets.bottom
             }
         }()
         
@@ -201,8 +215,8 @@ struct VSideBar<Content>: View where Content: View {
     
     private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.presentationEdge {
-        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance
-        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance
+        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(size: currentSize)
+        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(size: currentSize)
         }
     }
 }
@@ -242,16 +256,18 @@ struct VSideBar_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VSideBar(
-                    uiModel: {
-                        var uiModel: VSideBarUIModel = presentationEdge
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VSideBar(
+                        uiModel: {
+                            var uiModel: VSideBarUIModel = presentationEdge
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
             })
         }
     }
@@ -259,17 +275,19 @@ struct VSideBar_Previews: PreviewProvider {
     private struct InsettedContentPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VSideBar(
-                    uiModel: {
-                        var uiModel: VSideBarUIModel = presentationEdge
-                        uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
-                        uiModel.appearAnimation = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
+                PresentationHostGeometryReader(content: {
+                    VSideBar(
+                        uiModel: {
+                            var uiModel: VSideBarUIModel = presentationEdge
+                            uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
+                            uiModel.appearAnimation = nil
+                            return uiModel
+                        }(),
+                        onPresent: nil,
+                        onDismiss: nil,
+                        content: content
+                    )
+                })
             })
         }
     }

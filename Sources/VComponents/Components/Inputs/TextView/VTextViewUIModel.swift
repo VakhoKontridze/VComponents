@@ -11,9 +11,9 @@ import VCore
 // MARK: - V Text View UI Model
 /// Model that describes UI.
 @available(iOS 16.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 12.0, *)@available(macOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VTextViewUIModel {
     // MARK: Properties - Global Layout
     /// Textview minimum height. Set to `50`.

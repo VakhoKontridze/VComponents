@@ -44,14 +44,14 @@ public struct VSegmentedPickerUIModel {
     // MARK: Properties - Border
     /// Border width.
     /// Set to `0` on `iOS`.
-    /// Set to `1` scaled to screen on `macOS`.
+    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = {
+    public var borderWidth: PointPixelMeasurement = {
 #if os(iOS)
-        return 0
+        return .points(0)
 #elseif os(macOS)
-        return 1/MultiplatformConstants.screenScale
+        return .pixels(1)
 #else
         fatalError() // Not supported
 #endif

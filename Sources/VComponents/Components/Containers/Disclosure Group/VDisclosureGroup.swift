@@ -51,15 +51,24 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         HeaderLabel: View,
         Content: View
 {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VDisclosureGroupUIModel
-    
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VDisclosureGroupState
-    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, isExpanded: state == .expanded) }
-    
+    private var internalState: VDisclosureGroupInternalState {
+        .init(
+            isEnabled: isEnabled,
+            isExpanded: state == .expanded
+        )
+    }
+
+    // MARK: Properties - Header
     private let headerLabel: VDisclosureGroupHeaderLabel<HeaderLabel>
-    
+
+    // MARK: Properties - Content
     private let content: () -> Content
     
     // MARK: Initializers
@@ -146,9 +155,9 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     }
     
     @ViewBuilder private var divider: some View {
-        if uiModel.dividerHeight > 0 {
+        if uiModel.dividerHeight.toPoints(scale: displayScale) > 0 {
             Rectangle()
-                .frame(height: uiModel.dividerHeight)
+                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
                 .padding(uiModel.dividerMargins)
                 .foregroundColor(uiModel.dividerColor)
         }

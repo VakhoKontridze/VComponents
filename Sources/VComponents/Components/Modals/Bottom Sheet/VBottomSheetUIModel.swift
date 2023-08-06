@@ -123,10 +123,10 @@ public struct VBottomSheetUIModel {
     }()
 
     // MARK: Properties - Divider
-    /// Divider height. Set to `2` scaled to screen.
+    /// Divider height. Set to `2` pixels.
     ///
     /// To hide divider, set to `0`, and remove header.
-    public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
+    public var dividerHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.dividerHeightPx)
 
     /// Divider color.
     public var dividerColor: Color = GlobalUIModel.Common.dividerColor
@@ -177,7 +177,7 @@ public struct VBottomSheetUIModel {
     /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Set to `0.1`.
     public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
 
-    var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes._current.size.heights.min }
+    func pullDownDismissDistance(size: BottomSheetSize) -> CGFloat { pullDownDismissDistanceMinHeightRatio * size.heights.min }
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
@@ -235,13 +235,16 @@ public struct VBottomSheetUIModel {
         }
 
         // MARK: Screen Relative Size Measurement
-        public static func relativeMeasurementToPoints(_ measurement: Self) -> Self {
+        public static func relativeMeasurementToPoints(
+            _ measurement: Self,
+            in screenSize: CGSize
+        ) -> Self {
             .init(
-                width: MultiplatformConstants.screenSize.width * measurement.width,
+                width: screenSize.width * measurement.width,
                 heights: BottomSheetHeights(
-                    min: MultiplatformConstants.screenSize.height * measurement.heights.min,
-                    ideal: MultiplatformConstants.screenSize.height * measurement.heights.ideal,
-                    max: MultiplatformConstants.screenSize.height * measurement.heights.max
+                    min: screenSize.height * measurement.heights.min,
+                    ideal: screenSize.height * measurement.heights.ideal,
+                    max: screenSize.height * measurement.heights.max
                 )
             )
         }
@@ -272,13 +275,13 @@ public struct VBottomSheetUIModel {
             ideal == max
         }
 
-        var minOffset: CGFloat { MultiplatformConstants.screenSize.height - min }
+        func minOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - min }
 
-        var idealOffset: CGFloat { MultiplatformConstants.screenSize.height - ideal }
+        func idealOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - ideal }
 
-        var maxOffset: CGFloat { MultiplatformConstants.screenSize.height - max }
+        func maxOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - max }
 
-        var hiddenOffset: CGFloat { MultiplatformConstants.screenSize.height }
+        func hiddenOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight }
 
         // MARK: Initializers
         /// Initializes `Height` with values.

@@ -93,19 +93,28 @@ import VCore
 @available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextField: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VTextFieldUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
-    private var internalState: VTextFieldInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
-    
+    private var internalState: VTextFieldInternalState {
+        .init(
+            isEnabled: isEnabled,
+            isFocused: isFocused
+        )
+    }
+
+    // MARK: Properties - Header & Footer
     private let headerTitle: String?
     private let footerTitle: String?
-    
+
+    // MARK: Properties - Texts
     private let placeholder: String?
     @Binding private var text: String
-    
+
+    // MARK: Properties - Flags
     @State private var textIsNonEmpty: Bool = false
     @State private var secureFieldIsVisible: Bool = false
     

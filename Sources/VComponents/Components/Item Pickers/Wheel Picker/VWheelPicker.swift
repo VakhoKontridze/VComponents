@@ -58,23 +58,28 @@ public struct VWheelPicker<Data, ID, Content>: View
         ID: Hashable,
         Content: View
 {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VWheelPickerUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private var internalState: VWheelPickerInternalState { .init(isEnabled: isEnabled) }
-    
+    private var internalState: VWheelPickerInternalState {
+        .init(isEnabled: isEnabled)
+    }
+
+    // MARK: Properties - Selection
     @Binding private var selection: Data.Element
-    
+
+    // MARK: Properties - Header & Footer
     private let headerTitle: String?
     private let footerTitle: String?
 
+    // MARK: Properties - Data Source
     private let data: Data
-
     private let id: KeyPath<Data.Element, ID>
-
     private let content: VWheelPickerContent<Data.Element, Content>
-    
+
+    // MARK: Properties - Sizes
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers

@@ -10,9 +10,9 @@ import VCore
 
 // MARK: - Bool
 @available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 11.0, *)@available(macOS, unavailable)
+@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(watchOS 7.0, *)@available(watchOS, unavailable)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
@@ -61,12 +61,15 @@ extension View {
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    VBottomSheet<_>(
-                        uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        content: content
-                    )
+                    PresentationHostGeometryReader(content: {
+                        VBottomSheet<_>(
+                            uiModel: uiModel,
+                            onPresent: presentHandler,
+                            onDismiss: dismissHandler,
+                            content: content
+                        )
+                    })
+                    .ignoresSafeArea()
                 }
             )
     }
@@ -74,9 +77,9 @@ extension View {
 
 // MARK: - Item
 @available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 11.0, *)@available(macOS, unavailable)
+@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(watchOS 7.0, *)@available(watchOS, unavailable)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
@@ -133,16 +136,19 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    VBottomSheet<_>(
-                        uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                content(item)
+                    PresentationHostGeometryReader(content: {
+                        VBottomSheet<_>(
+                            uiModel: uiModel,
+                            onPresent: presentHandler,
+                            onDismiss: dismissHandler,
+                            content: {
+                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                    content(item)
+                                }
                             }
-                        }
-                    )
+                        )
+                    })
+                    .ignoresSafeArea()
                 }
             )
     }

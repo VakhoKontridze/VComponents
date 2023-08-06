@@ -40,14 +40,22 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VCheckBox<Label>: View where Label: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VCheckBoxUIModel
-    
+
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
     @Binding private var state: VCheckBoxState
-    private var internalState: VCheckBoxInternalState { .init(isEnabled: isEnabled, state: state, isPressed: isPressed) }
-    
+    private var internalState: VCheckBoxInternalState {
+        .init(
+            isEnabled: isEnabled,
+            state: state,
+            isPressed: isPressed
+        )
+    }
+
+    // MARK: Properties - Label
     private let label: VCheckBoxLabel<Label>
     
     // MARK: Initializers

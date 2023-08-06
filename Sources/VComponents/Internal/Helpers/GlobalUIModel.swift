@@ -53,10 +53,10 @@ struct GlobalUIModel {
         static var headerAndFooterMarginHorizontal: CGFloat { 10 }
         
         // MARK: Properties - Divider and Separator
-        static let dividerHeight: CGFloat = 2 / MultiplatformConstants.screenScale
+        static let dividerHeightPx: Int = 2
         static let dividerColor: Color = .init(module: "Divider")
         
-        static let separatorHeight: CGFloat = 1 / MultiplatformConstants.screenScale
+        static let separatorHeightPx: Int = 1
         static var separatorColor: Color { dividerColor }
         
         static var dividerDashColorEnabled: Color { .init(module: "DividerDash") }
@@ -321,7 +321,7 @@ struct GlobalUIModel {
         
         static var slidingAppearAnimation: BasicAnimation? { .init(curve: .easeInOut, duration: 0.3) }
         static var slidingDisappearAnimation: BasicAnimation? { .init(curve: .easeInOut, duration: 0.3) }
-        
+
         // MARK: Initializers
         private init() {}
     }

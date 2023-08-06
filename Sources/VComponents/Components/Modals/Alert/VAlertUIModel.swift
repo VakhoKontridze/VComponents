@@ -312,9 +312,12 @@ public struct VAlertUIModel {
         }
 
         // MARK: Screen Relative Size Measurement
-        public static func relativeMeasurementToPoints(_ measurement: Self) -> Self {
+        public static func relativeMeasurementToPoints(
+            _ measurement: Self,
+            in screenSize: CGSize
+        ) -> Self {
             .init(
-                width: MultiplatformConstants.screenSize.width * measurement.width
+                width: screenSize.width * measurement.width
             )
         }
     }
