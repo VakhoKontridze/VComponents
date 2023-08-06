@@ -131,6 +131,8 @@ struct VAlert<Content>: View
                 .foregroundColor(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
 
+                .fixedSize(horizontal: false, vertical: true)
+
                 .padding(uiModel.titleTextMargins)
         }
     }
@@ -142,6 +144,8 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
                 .foregroundColor(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
+
+                .fixedSize(horizontal: false, vertical: true)
 
                 .padding(uiModel.messageTextMargins)
         }
@@ -304,7 +308,7 @@ struct VAlert_Previews: PreviewProvider {
     // Data
     private static var title: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
     private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
-    
+
     @ViewBuilder private static func content() -> some View {
         TextField( // `VTextField` causes preview crash
             "",
