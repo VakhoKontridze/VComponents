@@ -39,8 +39,7 @@ public struct VRangeSlider: View {
     }
 
     // MARK: Properties - Value Range
-    private let min, max: Double
-    private var range: ClosedRange<Double> { min...max }
+    private let range: ClosedRange<Double>
     private let difference: Double
     private let step: Double?
 
@@ -78,10 +77,11 @@ public struct VRangeSlider: View {
         )
         
         self.uiModel = uiModel
-        self.min = Double(range.lowerBound)
-        self.max = Double(range.upperBound)
+
+        self.range = Double(range.lowerBound)...Double(range.upperBound)
         self.difference = Double(difference)
         self.step = step.map { .init($0) }
+
         self._valueLow = Binding(
             get: { Double(valueLow.wrappedValue.clamped(to: range, step: step)) },
             set: { valueLow.wrappedValue = V($0) }
@@ -90,6 +90,7 @@ public struct VRangeSlider: View {
             get: { Double(valueHigh.wrappedValue.clamped(to: range, step: step)) },
             set: { valueHigh.wrappedValue = V($0) }
         )
+
         self.actionLow = actionLow
         self.actionHigh = actionHigh
     }
@@ -186,12 +187,12 @@ public struct VRangeSlider: View {
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let range: Double = max - min
+            let range: Double = range.boundRange
             let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
             
-            return (min + (value / width) * range)
+            return (self.range.lowerBound + (value / width) * range)
                 .invertedFromMax(
-                    max,
+                    self.range.upperBound,
                     if: layoutDirection == .rightToLeft || uiModel.direction.isReversed
                 )
         }()
@@ -200,15 +201,15 @@ public struct VRangeSlider: View {
             switch thumb {
             case .low:
                 return rawValue.clamped(
-                    min: min,
-                    max: Swift.min((valueHigh - difference).roundedDownWithStep(step), max),
+                    min: range.lowerBound,
+                    max: Swift.min((valueHigh - difference).roundedDownWithStep(step), range.upperBound),
                     step: step
                 )
                 
             case .high:
                 return rawValue.clamped(
-                    min: Swift.max((valueLow + difference).roundedUpWithStep(step), min),
-                    max: max,
+                    min: Swift.max((valueLow + difference).roundedUpWithStep(step), range.lowerBound),
+                    max: range.upperBound,
                     step: step
                 )
             }
@@ -245,11 +246,11 @@ public struct VRangeSlider: View {
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return valueLow - min
-            case .high: return valueHigh - min
+            case .low: return valueLow - self.range.lowerBound
+            case .high: return valueHigh - self.range.lowerBound
             }
         }()
-        let range: CGFloat = max - min
+        let range: CGFloat = range.upperBound - range.lowerBound
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         switch thumb {

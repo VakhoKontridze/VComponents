@@ -35,8 +35,7 @@ public struct VSlider: View {
     }
 
     // MARK: Properties - Value Range
-    private let min, max: Double
-    private var range: ClosedRange<Double> { min...max }
+    private let range: ClosedRange<Double>
     private let step: Double?
     
     // MARK: Properties - Value
@@ -62,13 +61,18 @@ public struct VSlider: View {
             V.Stride: BinaryFloatingPoint
     {
         self.uiModel = uiModel
-        self.min = Double(range.lowerBound)
-        self.max = Double(range.upperBound)
+
+        self.range = ClosedRange(
+            lower: Double(range.lowerBound),
+            upper: Double(range.upperBound)
+        )
         self.step = step.map { Double($0) }
+
         self._value = Binding(
             get: { Double(value.wrappedValue.clamped(to: range, step: step)) },
             set: { value.wrappedValue = V($0) }
         )
+
         self.action = action
     }
     
@@ -159,17 +163,17 @@ public struct VSlider: View {
     private func dragChanged(dragValue: DragGesture.Value) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let range: Double = max - min
+            let range: Double = range.boundRange
             let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
             
-            return ((value / width) * range + min)
+            return ((value / width) * range + self.range.lowerBound)
                 .invertedFromMax(
-                    max,
+                    self.range.upperBound,
                     if: layoutDirection == .rightToLeft || uiModel.direction.isReversed
                 )
         }()
         
-        let valueFixed: Double = rawValue.clamped(min: min, max: max, step: step)
+        let valueFixed: Double = rawValue.clamped(to: range, step: step)
         
         setValue(to: valueFixed)
         
@@ -187,8 +191,8 @@ public struct VSlider: View {
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let value: CGFloat = value - min
-        let range: CGFloat = max - min
+        let value: CGFloat = value - range.lowerBound
+        let range: CGFloat = range.boundRange
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         return (value / range) * width
