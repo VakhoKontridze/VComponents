@@ -72,7 +72,7 @@ public struct VSegmentedPickerUIModel {
     }()
 
     // MARK: Properties - Header
-    /// Header title text line type. Set to `singleLine`.
+    /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
     public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
 
     /// Header title text colors.

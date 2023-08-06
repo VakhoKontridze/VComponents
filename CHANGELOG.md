@@ -41,10 +41,12 @@ VRadioButton
 
 VSegmentedPicker
 
+- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 
 VWheelPicker
 
+- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 
 VStepper
@@ -58,16 +60,22 @@ VSlider
 
 VTextField
 
+- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 
 VTextView
 
+- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 - `contentMargin` is renamed to `contentMargins`
 
 VModal
 
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+VAlert
+
+- `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
 
 VMenu
 

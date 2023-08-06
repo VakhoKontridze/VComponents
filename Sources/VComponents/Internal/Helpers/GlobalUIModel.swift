@@ -29,7 +29,13 @@ struct GlobalUIModel {
         static let shadowColorDisabled: Color = .init(module: "Shadow.Disabled")
         
         // MARK: Properties - Header and Footer
-        static var headerTitleTextLineType: TextLineType { .singleLine }
+        static var headerTitleTextLineType: TextLineType {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                return .multiLine(alignment: .leading, lineLimit: 1...2)
+            } else {
+                return .multiLine(alignment: .leading, lineLimit: 2)
+            }
+        }
         static var headerTitleTextFont: Font {
 #if os(iOS)
             return Font.footnote // 13
