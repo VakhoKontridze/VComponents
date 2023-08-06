@@ -120,7 +120,7 @@ struct VToast: View {
     private var initialOffset: CGFloat {
         switch uiModel.layout.presentationEdge {
         case .top: return -(MultiplatformConstants.safeAreaInsets.top + height)
-        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + 100
+        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + height
         }
     }
     
