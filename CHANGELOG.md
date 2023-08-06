@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(51)
+### 5.0.0(52)
 
 General
 
@@ -72,6 +72,13 @@ VMenu
 VBottomSheet
 
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+### [4.3.5(51)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.5) — *2023 08 06*
+
+VToast
+
+- Issue with lifecycle duration not respecting appear animation duration is fixed
+- Issue with hidden offset is fixed
 
 ### [4.3.4(50)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.4) — *2023 07 17*
 

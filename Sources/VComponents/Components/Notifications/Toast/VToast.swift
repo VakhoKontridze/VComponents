@@ -51,7 +51,6 @@ struct VToast: View {
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
-        .onAppear(perform: animateOutAfterLifecycle)
         .onChange(
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
@@ -120,7 +119,7 @@ struct VToast: View {
     private var initialOffset: CGFloat {
         switch uiModel.presentationEdge {
         case .top: return -(MultiplatformConstants.safeAreaInsets.top + height)
-        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + 100
+        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + height
         }
     }
     
@@ -151,6 +150,7 @@ struct VToast: View {
                 uiModel.appearAnimation,
                 body: { isInternallyPresented = true },
                 completion: {
+                    animateOutAfterLifecycle()
                     DispatchQueue.main.async(execute: { presentHandler?() })
                 }
             )
