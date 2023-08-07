@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-import VCore
 
 #if os(watchOS)
 import WatchKit
 #endif
+
+import VCore
 
 // MARK: - Global UI Model
 struct GlobalUIModel {
@@ -20,23 +21,23 @@ struct GlobalUIModel {
     // MARK: Common
     struct Common {
         // MARK: Properties - Container
-        static var containerCornerRadius: CGFloat { 15 }
-        static var containerContentMargin: CGFloat { 15 }
-        static var containerHeaderMargins: EdgeInsets_LeadingTrailingTopBottom { .init(horizontal: containerContentMargin, vertical: 10) }
+        static let containerCornerRadius: CGFloat = 15
+        static let containerContentMargin: CGFloat = 15
+        static let containerHeaderMargins: EdgeInsets_LeadingTrailingTopBottom = .init(horizontal: containerContentMargin, vertical: 10)
         
         // MARK: Properties - Shadow
         static let shadowColorEnabled: Color = .init(module: "Shadow")
         static let shadowColorDisabled: Color = .init(module: "Shadow.Disabled")
         
         // MARK: Properties - Header and Footer
-        static var headerTitleTextLineType: TextLineType {
+        static let headerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...2)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 2)
             }
-        }
-        static var headerTitleTextFont: Font {
+        }()
+        static let headerTitleTextFont: Font = {
 #if os(iOS)
             return Font.footnote // 13
 #elseif os(macOS)
@@ -44,46 +45,46 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
-        static var footerTitleTextLineType: TextLineType = {
+        static let footerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...5)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 5)
             }
         }()
-        static var footerTitleTextFont: Font { headerTitleTextFont } // 13, 10
+        static let footerTitleTextFont: Font = headerTitleTextFont // 13, 10
         
-        static var headerComponentAndFooterSpacing: CGFloat { 3 }
-        static var headerAndFooterMarginHorizontal: CGFloat { 10 }
+        static let headerComponentAndFooterSpacing: CGFloat = 3
+        static let headerAndFooterMarginHorizontal: CGFloat = 10
         
         // MARK: Properties - Divider and Separator
         static let dividerHeightPx: Int = 2
         static let dividerColor: Color = .init(module: "Divider")
         
         static let separatorHeightPx: Int = 1
-        static var separatorColor: Color { dividerColor }
+        static let separatorColor: Color = dividerColor
         
-        static var dividerDashColorEnabled: Color { .init(module: "DividerDash") }
-        static var dividerDashColorDisabled: Color { .init(module: "DividerDash.Disabled") }
+        static let dividerDashColorEnabled: Color = .init(module: "DividerDash")
+        static let dividerDashColorDisabled: Color = .init(module: "DividerDash.Disabled")
         
         // MARK: Properties - Circular Button
-        static var circularButtonGrayDimension: CGFloat { 30 }
-        static var circularButtonGrayIconDimension: CGFloat { 12 }
+        static let circularButtonGrayDimension: CGFloat = 30
+        static let circularButtonGrayIconDimension: CGFloat = 12
         
-        static var circularButtonLayerColorEnabled: Color { .init(module: "CircularButton.Layer") }
-        static var circularButtonLayerColorPressed: Color { .init(module: "CircularButton.Layer.Pressed") }
-        static var circularButtonLayerColorDisabled: Color { .init(module: "CircularButton.Layer.Disabled") }
+        static let circularButtonLayerColorEnabled: Color = .init(module: "CircularButton.Layer")
+        static let circularButtonLayerColorPressed: Color = .init(module: "CircularButton.Layer.Pressed")
+        static let circularButtonLayerColorDisabled: Color = .init(module: "CircularButton.Layer.Disabled")
         
-        static var circularButtonIconGrayColor: Color { .init(module: "CircularButton.Icon.Gray") }
+        static let circularButtonIconGrayColor: Color = .init(module: "CircularButton.Icon.Gray")
         
-        static var circularButtonIconPrimaryColorEnabled: Color { ColorBook.primary }
-        static var circularButtonIconPrimaryColorPressed: Color { ColorBook.primary } // Looks better
-        static var circularButtonIconPrimaryColorDisabled: Color { ColorBook.primaryPressedDisabled }
+        static let circularButtonIconPrimaryColorEnabled: Color = ColorBook.primary
+        static let circularButtonIconPrimaryColorPressed: Color = ColorBook.primary // Looks better
+        static let circularButtonIconPrimaryColorDisabled: Color = ColorBook.primaryPressedDisabled
         
         // MARK: Properties - Bar
-        static var barHeight: CGFloat {
+        static let barHeight: CGFloat = {
 #if os(iOS)
             return 10
 #elseif os(macOS)
@@ -93,15 +94,15 @@ struct GlobalUIModel {
 #elseif os(watchOS)
             return 5
 #endif
-        }
-        static var barCornerRadius: CGFloat { barHeight/2 }
+        }()
+        static let barCornerRadius: CGFloat = barHeight/2
         
         // MARK: Properties - Misc
-        static var minimumScaleFactor: CGFloat { 0.75 }
+        static let minimumScaleFactor: CGFloat = 0.75
         
         static let dimmingViewColor: Color = .init(module: "DimmingView")
         
-        static var grabberColor: Color { .init(module: "Grabber") }
+        static let grabberColor: Color = .init(module: "Grabber")
         
         // MARK: Initializers
         private init() {}
@@ -110,7 +111,7 @@ struct GlobalUIModel {
     // MARK: Buttons
     struct Buttons {
         // MARK: Properties
-        static var heightStretchedButton: CGFloat = {
+        static let heightStretchedButton: CGFloat = {
 #if os(iOS)
             return 48
 #elseif os(macOS)
@@ -121,7 +122,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static var sizeRoundedButton: CGSize {
+        static let sizeRoundedButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 56)
 #elseif os(macOS)
@@ -131,9 +132,9 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
-        static var cornerRadiusStretchedButton: CGFloat = {
+        static let cornerRadiusStretchedButton: CGFloat = {
 #if os(iOS)
             return 14
 #elseif os(macOS)
@@ -145,7 +146,7 @@ struct GlobalUIModel {
 #endif
         }()
 
-        static var iconSizeRoundedButton: CGSize = {
+        static let iconSizeRoundedButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 24)
 #elseif os(macOS)
@@ -157,16 +158,16 @@ struct GlobalUIModel {
 #endif
         }()
         
-        static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
-        static var labelMarginsRoundedButton: EdgeInsets_HorizontalVertical { .init(3) }
+        static let labelMargins: EdgeInsets_HorizontalVertical = .init(horizontal: 15, vertical: 3)
+        static let labelMarginsRoundedButton: EdgeInsets_HorizontalVertical = .init(3)
         
-        static var transparentLayerLabelEnabled: Color { ColorBook.controlLayerBlue }
-        static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
-        static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) } // Looks better
+        static let transparentLayerLabelEnabled: Color = ColorBook.controlLayerBlue
+        static let transparentLayerLabelPressed: Color = ColorBook.controlLayerBluePressed
+        static let transparentLayerLabelDisabled: Color = ColorBook.controlLayerBlueDisabled.opacity(0.5) // Looks better
         
-        static var iconAndTitleTextSpacing: CGFloat { 8 }
+        static let iconAndTitleTextSpacing: CGFloat = 8
         
-        static var titleTextFontStretchedButtonFont: Font = {
+        static let titleTextFontStretchedButtonFont: Font = {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
@@ -182,7 +183,7 @@ struct GlobalUIModel {
 #endif
         }()
         
-        static var pressedScale: CGFloat = {
+        static let pressedScale: CGFloat = {
 #if os(iOS)
             return 1
 #elseif os(macOS)
@@ -195,9 +196,9 @@ struct GlobalUIModel {
         }()
         
 #if os(iOS)
-        static var hapticStretchedButtonIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
+        static let hapticStretchedButtonIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
 #elseif os(watchOS)
-        static var hapticStretchedButtonWatchOS: WKHapticType? = .click
+        static let hapticStretchedButtonWatchOS: WKHapticType? = .click
 #endif
         
         // MARK: Initializers
@@ -207,18 +208,18 @@ struct GlobalUIModel {
     // MARK: State Pickers
     struct StatePickers {
         // MARK: Properties
-        static var dimension: CGFloat { 16 }
+        static let dimension: CGFloat = 16
         
-        static var componentAndLabelSpacing: CGFloat { 5 }
+        static let componentAndLabelSpacing: CGFloat = 5
         
-        static var titleTextLineType: TextLineType = {
+        static let titleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...2)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 2)
             }
         }()
-        static var font: Font {
+        static let font: Font = {
 #if os(iOS)
             return Font.subheadline // 15
 #elseif os(macOS)
@@ -226,9 +227,9 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
-        static var titleColor: Color {
+        static let titleColor: Color = {
 #if os(iOS)
             return ColorBook.primary
 #elseif os(macOS)
@@ -236,9 +237,9 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
-        static var titleColorDisabled: Color {
+        static let titleColorDisabled: Color = {
 #if os(iOS)
             return ColorBook.primaryPressedDisabled
 #elseif os(macOS)
@@ -246,12 +247,12 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
-        static var stateChangeAnimation: Animation { .easeIn(duration: 0.1) }
+        static let stateChangeAnimation: Animation = .easeIn(duration: 0.1)
         
 #if os(iOS)
-        static var hapticIOS: UIImpactFeedbackGenerator.FeedbackStyle? { .light }
+        static let hapticIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #endif
         
         // MARK: Initializers
@@ -261,9 +262,9 @@ struct GlobalUIModel {
     // MARK: Value Pickers
     struct ValuePickers {
         // MARK: Properties
-        static var sliderThumbDimension: CGFloat { 20 }
-        static var sliderThumbCornerRadius: CGFloat { 10 }
-        static var sliderThumbShadowRadius: CGFloat {
+        static let sliderThumbDimension: CGFloat = 20
+        static let sliderThumbCornerRadius: CGFloat = 10
+        static let sliderThumbShadowRadius: CGFloat = {
 #if os(iOS)
             return 2
 #elseif os(macOS)
@@ -271,8 +272,8 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
-        static var sliderThumbShadowOffset: CGPoint {
+        }()
+        static let sliderThumbShadowOffset: CGPoint = {
 #if os(iOS)
             return CGPoint(x: 0, y: 2)
 #elseif os(macOS)
@@ -280,7 +281,7 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
-        }
+        }()
         
         // MARK: Initializers
         private init() {}
@@ -289,25 +290,25 @@ struct GlobalUIModel {
     // MARK: Inputs
     struct Inputs {
         // MARK: Properties
-        static var height: CGFloat { 50 }
-        static var cornerRadius: CGFloat { 12 }
+        static let height: CGFloat = 50
+        static let cornerRadius: CGFloat = 12
         
-        static var layerGrayColorFocused: Color { .init(module: "Input.Layer.Gray.Focused") }
+        static let layerGrayColorFocused: Color = .init(module: "Input.Layer.Gray.Focused")
         
-        static var headerTitleTextAndFooterTitleTextGreenColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Green") }
-        static var headerTitleTextAndFooterTitleTextYellowColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Yellow") }
-        static var headerTitleTextAndFooterTitleTextRedColor: Color { .init(module: "Input.HeaderTitleTextAndFooterTitleText.Red") }
+        static let headerTitleTextAndFooterTitleTextGreenColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Green")
+        static let headerTitleTextAndFooterTitleTextYellowColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Yellow")
+        static let headerTitleTextAndFooterTitleTextRedColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Red")
         
-        static var clearButtonLayerEnabled: Color { .init(module: "Input.ClearButton.Layer") }
-        static var clearButtonLayerPressed: Color { .init(module: "Input.ClearButton.Layer.Pressed") }
-        static var clearButtonLayerDisabled: Color { .init(module: "Input.ClearButton.Layer.Disabled") }
-        static var clearButtonIcon: Color { .init(module: "Input.ClearButton.Icon") }
+        static let clearButtonLayerEnabled: Color = .init(module: "Input.ClearButton.Layer")
+        static let clearButtonLayerPressed: Color = .init(module: "Input.ClearButton.Layer.Pressed")
+        static let clearButtonLayerDisabled: Color = .init(module: "Input.ClearButton.Layer.Disabled")
+        static let clearButtonIcon: Color = .init(module: "Input.ClearButton.Icon")
         
-        static var visibilityButtonEnabled: Color { .init(module: "Input.VisibilityButton.Icon") }
-        static var visibilityButtonPressedDisabled: Color { ColorBook.primaryPressedDisabled }
+        static let visibilityButtonEnabled: Color = .init(module: "Input.VisibilityButton.Icon")
+        static let visibilityButtonPressedDisabled: Color = ColorBook.primaryPressedDisabled
         
-        static var searchIconEnabledFocused: Color { .init(module: "Input.SearchIcon") }
-        static var searchIconDisabled: Color { ColorBook.primaryPressedDisabled }
+        static let searchIconEnabledFocused: Color = .init(module: "Input.SearchIcon")
+        static let searchIconDisabled: Color = ColorBook.primaryPressedDisabled
         
         // MARK: Initializers
         private init() {}
@@ -316,16 +317,16 @@ struct GlobalUIModel {
     // MARK: Modals
     struct Modals {
         // MARK: Properties
-        static var labelCloseButtonSpacing: CGFloat { 10 }
+        static let labelCloseButtonSpacing: CGFloat = 10
         
-        static var headerTitleTextFont: Font { .headline.weight(.bold) } // 17 (iOS Only)
+        static let headerTitleTextFont: Font = .headline.weight(.bold) // 17 (iOS Only)
         
-        static var poppingAppearAnimation: BasicAnimation? { .init(curve: .linear, duration: 0.05) }
-        static var poppingDisappearAnimation: BasicAnimation? { .init(curve: .easeIn, duration: 0.05) }
-        static var poppingAnimationScaleEffect: CGFloat { 1.01 }
+        static let poppingAppearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+        static let poppingDisappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+        static let poppingAnimationScaleEffect: CGFloat = 1.01
         
-        static var slidingAppearAnimation: BasicAnimation? { .init(curve: .easeInOut, duration: 0.3) }
-        static var slidingDisappearAnimation: BasicAnimation? { .init(curve: .easeInOut, duration: 0.3) }
+        static let slidingAppearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+        static let slidingDisappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
         // MARK: Initializers
         private init() {}
@@ -334,10 +335,10 @@ struct GlobalUIModel {
     // MARK: Notifications
     struct Notifications {
         // MARK: Properties
-        static var layerGray: Color { ColorBook.layerGray }
-        static var layerGreen: Color { .init(module: "Notification.Layer.Green") }
-        static var layerYellow: Color { .init(module: "Notification.Layer.Yellow") }
-        static var layerRed: Color { .init(module: "Notification.Layer.Red") }
+        static let layerGray: Color = ColorBook.layerGray
+        static let layerGreen: Color = .init(module: "Notification.Layer.Green")
+        static let layerYellow: Color = .init(module: "Notification.Layer.Yellow")
+        static let layerRed: Color = .init(module: "Notification.Layer.Red")
         
         // MARK: Initializers
         private init() {}
@@ -346,7 +347,7 @@ struct GlobalUIModel {
     // MARK: Indicators (Determinate)
     struct DeterminateIndicators {
         // MARK: Properties
-        static var pageIndicatorSpacing: CGFloat {
+        static let pageIndicatorSpacing: CGFloat = {
 #if os(iOS)
             return 5
 #elseif os(macOS)
@@ -356,9 +357,9 @@ struct GlobalUIModel {
 #elseif os(watchOS)
             return 3
 #endif
-        }
+        }()
 
-        static var pageIndicatorDotDimension: CGFloat {
+        static let pageIndicatorDotDimension: CGFloat = {
 #if os(iOS)
             return 10
 #elseif os(macOS)
@@ -368,16 +369,16 @@ struct GlobalUIModel {
 #elseif os(watchOS)
             return 8
 #endif
-        }
-        static var pageIndicatorStandardUnselectedDotScale: CGFloat { 0.85 }
-        static var pageIndicatorDotColor: Color { .init(module: "PageIndicator.Dot") }
-        static var pageIndicatorSelectedDotColor: Color { ColorBook.accentBlue }
+        }()
+        static let pageIndicatorStandardUnselectedDotScale: CGFloat = 0.85
+        static let pageIndicatorDotColor: Color = .init(module: "PageIndicator.Dot")
+        static let pageIndicatorSelectedDotColor: Color = ColorBook.accentBlue
         
-        static var pageIndicatorCompactVisibleDots: Int { 7 }
-        static var pageIndicatorCompactCenterDots: Int { 3 }
-        static var pageIndicatorCompactEdgeDotScale: CGFloat { 0.5 }
+        static let pageIndicatorCompactVisibleDots: Int = 7
+        static let pageIndicatorCompactCenterDots: Int = 3
+        static let pageIndicatorCompactEdgeDotScale: CGFloat = 0.5
 
-        static var pageIndicatorTransitionAnimation: Animation? { .linear(duration: 0.15) }
+        static let pageIndicatorTransitionAnimation: Animation? = .linear(duration: 0.15)
         
         // MARK: Initializers
         private init() {}
