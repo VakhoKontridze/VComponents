@@ -13,14 +13,14 @@ import SwiftUI
 extension View {
     @ViewBuilder func safeAreaMargins(
         edges: Edge.Set = .all,
-        safeAreaInsets: EdgeInsets
+        _ insets: EdgeInsets
     ) -> some View {
 #if canImport(UIKit) && !os(watchOS)
         self
-            .padding(.leading, edges.contains(.leading) ? safeAreaInsets.leading : 0)
-            .padding(.trailing, edges.contains(.trailing) ? safeAreaInsets.trailing : 0)
-            .padding(.top, edges.contains(.top) ? safeAreaInsets.top : 0)
-            .padding(.bottom, edges.contains(.bottom) ? safeAreaInsets.bottom : 0)
+            .padding(.leading, edges.contains(.leading) ? insets.leading : 0)
+            .padding(.trailing, edges.contains(.trailing) ? insets.trailing : 0)
+            .padding(.top, edges.contains(.top) ? insets.top : 0)
+            .padding(.bottom, edges.contains(.bottom) ? insets.bottom : 0)
 #endif
     }
 }

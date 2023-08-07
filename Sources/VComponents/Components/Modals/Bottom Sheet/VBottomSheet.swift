@@ -148,7 +148,7 @@ struct VBottomSheet<Content>: View
                     divider
                 })
                 .getSize({ grabberHeaderAndDividerHeight = $0.height })
-                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets: safeAreaInsets)
+                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets)
 
                 contentView
             })
@@ -266,7 +266,7 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets: safeAreaInsets)
+        .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentSize.heights.isResizable,
