@@ -125,7 +125,7 @@ struct VBottomSheet<Content>: View
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
-                        .frame( // Max dimension fix issue of safe areas and/or landscape
+                        .frame( // Max dimension fixes issue of safe areas and/or landscape
                             maxHeight: currentSize.heights.max
                         )
                         .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
@@ -156,7 +156,7 @@ struct VBottomSheet<Content>: View
             .cornerRadius(uiModel.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
-                    .frame( // Max dimension fix issue of safe areas and/or landscape
+                    .frame( // Max dimension fixes issue of safe areas and/or landscape
                         maxHeight: currentSize.heights.max
                     )
                     .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
@@ -165,7 +165,7 @@ struct VBottomSheet<Content>: View
         .frame(width: currentSize.width)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
-                .frame( // Max dimension fix issue of safe areas and/or landscape
+                .frame( // Max dimension fixes issue of safe areas and/or landscape
                     maxHeight: currentSize.heights.max
                 )
                 .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))

@@ -97,7 +97,7 @@ struct VSideBar<Content>: View where Content: View {
                 .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
                 .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
-        .frame( // Max dimension fix issue of safe areas and/or landscape
+        .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentSize.width,
             maxHeight: currentSize.height
         )

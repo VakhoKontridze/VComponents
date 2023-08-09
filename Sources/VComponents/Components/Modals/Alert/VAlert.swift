@@ -115,7 +115,7 @@ struct VAlert<Content>: View
             .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
             .getSize({ alertSize = $0.height })
         })
-        .frame( // Max dimension fix issue of safe areas and/or landscape
+        .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentSize.width,
             maxHeight: alertSize
         )
