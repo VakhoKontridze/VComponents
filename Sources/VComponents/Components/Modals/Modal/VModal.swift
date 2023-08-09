@@ -271,58 +271,48 @@ struct VModal_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VModal(
-                        uiModel: {
-                            var uiModel: VModalUIModel = .init()
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vModal(
+                        id: "preview",
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
             })
         }
     }
     
     private struct InsettedContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VModal(
-                        uiModel: {
-                            var uiModel: VModalUIModel = .insettedContent
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vModal(
+                        id: "preview",
+                        uiModel: .insettedContent,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
             })
         }
     }
     
     private struct FullSizedContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VModal(
-                        uiModel: {
-                            var uiModel: VModalUIModel = .fullSizedContent
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vModal(
+                        id: "preview",
+                        uiModel: .fullSizedContent,
+                        isPresented: $isPresented,
                         content: { ColorBook.accentBlue }
                     )
-                })
             })
         }
     }

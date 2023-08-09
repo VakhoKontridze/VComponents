@@ -51,14 +51,12 @@ extension View {
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VSideBar(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: content
-                        )
-                    })
+                    VSideBar(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: content
+                    )
                 }
             )
     }
@@ -115,18 +113,16 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VSideBar(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    content(item)
-                                }
+                    VSideBar(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                content(item)
                             }
-                        )
-                    })
+                        }
+                    )
                 }
             )
     }

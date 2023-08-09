@@ -58,17 +58,15 @@ extension View {
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert<Never>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: title,
-                            message: message,
-                            content: .empty,
-                            buttons: buttons()
-                        )
-                    })
+                    VAlert<Never>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: title,
+                        message: message,
+                        content: .empty,
+                        buttons: buttons()
+                    )
                 }
             )
     }
@@ -123,17 +121,15 @@ extension View {
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: title,
-                            message: message,
-                            content: .content(content: content),
-                            buttons: buttons()
-                        )
-                    })
+                    VAlert(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: title,
+                        message: message,
+                        content: .content(content: content),
+                        buttons: buttons()
+                    )
                 }
             )
     }
@@ -197,35 +193,33 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert<Never>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return title(item)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return message(item)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: .empty,
-                            buttons: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return buttons(item)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Never>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return title(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return message(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return buttons(item)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -268,7 +262,7 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vAlert<Item>(
+    public func vAlert<Item, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
@@ -276,10 +270,12 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
-        @ViewBuilder content: @escaping (Item) -> some View,
+        @ViewBuilder content: @escaping (Item) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
-        where Item: Identifiable
+        where
+            Item: Identifiable,
+            Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -288,41 +284,39 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return title(item)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return message(item)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return .content(content: { content(item) })
-                                } else {
-                                    return .empty
-                                }
-                            }(),
-                            buttons: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return buttons(item)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Content>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return title(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return message(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return .content(content: { content(item) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return buttons(item)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -393,35 +387,33 @@ extension View {
                 isPresented: isPresented,
                 presenting: data,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert<Never>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return title(data)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return message(data)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: .empty,
-                            buttons: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return buttons(data)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Never>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return title(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return message(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return buttons(data)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -471,7 +463,7 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vAlert<T>(
+    public func vAlert<T, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -480,9 +472,12 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
-        @ViewBuilder content: @escaping (T) -> some View,
+        @ViewBuilder content: @escaping (T) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
-    ) -> some View {
+    ) -> some View
+        where
+            Content: View
+    {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
         return self
@@ -491,41 +486,39 @@ extension View {
                 isPresented: isPresented,
                 presenting: data,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return title(data)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return message(data)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return .content(content: { content(data) })
-                                } else {
-                                    return .empty
-                                }
-                            }(),
-                            buttons: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return buttons(data)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Content>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return title(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return message(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return .content(content: { content(data) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return buttons(data)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -593,35 +586,33 @@ extension View {
                 isPresented: isPresented,
                 error: error,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert<Never>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return title(error)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return message(error)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: .empty,
-                            buttons: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return buttons(error)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Never>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return title(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return message(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return buttons(error)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -662,7 +653,7 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vAlert<E>(
+    public func vAlert<E, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -671,10 +662,12 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
-        @ViewBuilder content: @escaping (E) -> some View,
+        @ViewBuilder content: @escaping (E) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (E) -> [VAlertButton]
     ) -> some View
-        where E: Error
+        where
+            E: Error,
+            Content: View
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -684,41 +677,39 @@ extension View {
                 isPresented: isPresented,
                 error: error,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VAlert(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            title: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return title(error)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            message: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return message(error)
-                                } else {
-                                    return ""
-                                }
-                            }(),
-                            content: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return .content(content: { content(error) })
-                                } else {
-                                    return .empty
-                                }
-                            }(),
-                            buttons: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return buttons(error)
-                                } else {
-                                    return []
-                                }
-                            }()
-                        )
-                    })
+                    VAlert<Content>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return title(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return message(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return .content(content: { content(error) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return buttons(error)
+                            } else {
+                                return []
+                            }
+                        }()
+                    )
                 }
             )
     }

@@ -52,14 +52,12 @@ extension View {
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VModal<_>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: content
-                        )
-                    })
+                    VModal<_>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: content
+                    )
                 }
             )
     }
@@ -117,18 +115,16 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VModal<_>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    content(item)
-                                }
+                    VModal<_>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                content(item)
                             }
-                        )
-                    })
+                        }
+                    )
                 }
             )
     }

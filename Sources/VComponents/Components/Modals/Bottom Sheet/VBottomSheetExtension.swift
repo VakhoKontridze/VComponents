@@ -59,17 +59,15 @@ extension View {
         self
             .presentationHost(
                 id: id,
+                uiModel: .bottomSheet,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VBottomSheet<_>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: content
-                        )
-                    })
-                    .ignoresSafeArea()
+                    VBottomSheet<_>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: content
+                    )
                 }
             )
     }
@@ -134,22 +132,32 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: .bottomSheet,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VBottomSheet<_>(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            content: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    content(item)
-                                }
+                    VBottomSheet<_>(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                content(item)
                             }
-                        )
-                    })
-                    .ignoresSafeArea()
+                        }
+                    )
                 }
             )
     }
+}
+
+// MARK: - Presentation Host UI Model
+extension PresentationHostUIModel {
+    fileprivate static let bottomSheet: Self = {
+        var uiModel: Self = .init()
+
+        uiModel.ignoredContainerSafeAreaEdgesByHost = .all
+        uiModel.ignoredKeyboardSafeAreaEdgesByHost = .all
+
+        return uiModel
+    }()
 }

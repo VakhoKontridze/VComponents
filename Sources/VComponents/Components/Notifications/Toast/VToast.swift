@@ -254,46 +254,46 @@ struct VToast_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VToast(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vToast(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = highlights
                             uiModel.widthType = widthType
                             uiModel.presentationEdge = presentationEdge
-                            uiModel.appearAnimation = nil
                             uiModel.duration = .infinity
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         text: text
                     )
-                })
             })
         }
     }
     
     private struct MultiLineTextPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VToast(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vToast(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = highlights
                             uiModel.widthType = widthType
                             uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
                             uiModel.presentationEdge = presentationEdge
-                            uiModel.appearAnimation = nil
                             uiModel.duration = .infinity
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         text: textLong
                     )
-                })
             })
         }
     }

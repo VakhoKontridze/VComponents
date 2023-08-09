@@ -48,17 +48,15 @@ extension View {
         self
             .presentationHost(
                 id: id,
-                allowsHitTests: false,
+                uiModel: .toast,
                 isPresented: isPresented,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VToast(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            text: text
-                        )
-                    })
+                    VToast(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        text: text
+                    )
                 }
             )
     }
@@ -112,23 +110,21 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                allowsHitTests: false,
+                uiModel: .toast,
                 item: item,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VToast(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            text: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                    return text(item)
-                                } else {
-                                    return ""
-                                }
-                            }()
-                        )
-                    })
+                    VToast(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        text: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                return text(item)
+                            } else {
+                                return ""
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -188,24 +184,22 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                allowsHitTests: false,
+                uiModel: .toast,
                 isPresented: isPresented,
                 presenting: data,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VToast(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            text: {
-                                if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                    return text(data)
-                                } else {
-                                    return ""
-                                }
-                            }()
-                        )
-                    })
+                    VToast(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        text: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
+                                return text(data)
+                            } else {
+                                return ""
+                            }
+                        }()
+                    )
                 }
             )
     }
@@ -265,25 +259,34 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                allowsHitTests: false,
+                uiModel: .toast,
                 isPresented: isPresented,
                 error: error,
                 content: {
-                    PresentationHostGeometryReader(content: {
-                        VToast(
-                            uiModel: uiModel,
-                            onPresent: presentHandler,
-                            onDismiss: dismissHandler,
-                            text: {
-                                if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                    return text(error)
-                                } else {
-                                    return ""
-                                }
-                            }()
-                        )
-                    })
+                    VToast(
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        text: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                                return text(error)
+                            } else {
+                                return ""
+                            }
+                        }()
+                    )
                 }
             )
     }
+}
+
+// MARK: - Presentation Host UI Model
+extension PresentationHostUIModel {
+    fileprivate static let toast: Self = {
+        var uiModel: Self = .init()
+
+        uiModel.allowsHitTests = false
+
+        return uiModel
+    }()
 }

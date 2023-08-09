@@ -469,30 +469,28 @@ struct VBottomSheet_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct FixedHeightMinIdealPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
@@ -505,24 +503,23 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
                                 ))
                             )
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct FixedHeightIdealMaxPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
@@ -535,24 +532,23 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
                                 ))
                             )
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct FixedHeightMinIdealMaxLargePreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
@@ -565,24 +561,23 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
                                 ))
                             )
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct FixedHeightMinIdealMaxSmallPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
@@ -595,52 +590,42 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
                                 ))
                             )
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct InsettedContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .insettedContent
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: .insettedContent,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct ScrollableContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
 #if os(iOS)
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .scrollableContent
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: .scrollableContent,
+                        isPresented: $isPresented,
                         content: {
                             List(content: {
                                 ForEach(0..<20, content: { number in
@@ -654,51 +639,43 @@ struct VBottomSheet_Previews: PreviewProvider {
                             .vBottomSheetHeaderTitle(headerTitle)
                         }
                     )
-                })
-                .ignoresSafeArea()
             })
 #endif
         }
     }
     
     private struct FullSizedContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .fullSizedContent
                             uiModel.contentIsDraggable = true
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: { ColorBook.accentBlue }
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }
     
     private struct OnlyGrabberPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VBottomSheet(
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .onlyGrabber
-                            uiModel.contentIsDraggable = true
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: .onlyGrabber,
+                        isPresented: $isPresented,
                         content: { ColorBook.accentBlue }
                     )
-                })
-                .ignoresSafeArea()
             })
         }
     }

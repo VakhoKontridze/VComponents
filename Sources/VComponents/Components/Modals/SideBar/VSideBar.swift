@@ -254,40 +254,37 @@ struct VSideBar_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VSideBar(
-                        uiModel: {
-                            var uiModel: VSideBarUIModel = presentationEdge
-                            uiModel.appearAnimation = nil
-                            return uiModel
-                        }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vSideBar(
+                        id: "preview",
+                        uiModel: presentationEdge,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
             })
         }
     }
     
     private struct InsettedContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VSideBar(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vSideBar(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VSideBarUIModel = presentationEdge
                             uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
-                            uiModel.appearAnimation = nil
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         content: content
                     )
-                })
             })
         }
     }

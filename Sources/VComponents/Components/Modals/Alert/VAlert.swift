@@ -318,113 +318,115 @@ struct VAlert_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct NoContentPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert<Never>(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .empty,
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct NoButtonPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: []
+                        content: content,
+                        actions: {}
                     )
-                })
             })
         }
     }
     
     private struct SingleButtonPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .secondary, action: {}, title: "Ok"),
-                        ]
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .secondary, action: nil, title: "Ok")
+                        }
                     )
-                })
             })
         }
     }
     
     private struct ManyButtonsPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Option A"),
-                            VAlertButton(role: .secondary, action: {}, title: "Option B"),
-                            VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Option A")
+                            VAlertButton(role: .secondary, action: nil, title: "Option B")
+                            VAlertButton(role: .destructive, action: nil, title: "Delete")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct ButtonStatesPreview_Pressed: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
                         uiModel: {
                             var uiModel: VAlertUIModel = .init()
                             uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
@@ -435,124 +437,121 @@ struct VAlert_Previews: PreviewProvider {
                             uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
                             return uiModel
                         }(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Option A"),
-                            VAlertButton(role: .destructive, action: {}, title: "Delete"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Option A")
+                            VAlertButton(role: .destructive, action: nil, title: "Delete")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct ButtonStatesPreview_Disabled: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Option A").disabled(true),
-                            VAlertButton(role: .destructive, action: {}, title: "Delete").disabled(true),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Option A").disabled(true)
+                            VAlertButton(role: .destructive, action: nil, title: "Delete").disabled(true)
                             VAlertButton(role: .cancel, action: nil, title: "Cancel").disabled(true)
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct NoTitlePreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: nil,
                         message: message,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct NoMessagePreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: title,
                         message: nil,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct NoTitleNoMessagePreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: nil,
                         message: nil,
-                        content: .content(content: content),
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        content: content,
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
     
     private struct OnlyButtonsPreview: View {
+        @State private var isPresented: Bool = false
+
         var body: some View {
             PreviewContainer(content: {
-                PresentationHostGeometryReader(content: {
-                    VAlert<Never>(
-                        uiModel: VAlertUIModel(),
-                        onPresent: nil,
-                        onDismiss: nil,
+                ModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
                         title: nil,
                         message: nil,
-                        content: .empty,
-                        buttons: [
-                            VAlertButton(role: .primary, action: {}, title: "Confirm"),
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        ]
+                        }
                     )
-                })
             })
         }
     }
