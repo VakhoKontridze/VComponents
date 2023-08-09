@@ -71,6 +71,7 @@ VTextView
 
 VModal
 
+- Issue with header shifting down when content is empty is fixed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - `blur` is removed
 

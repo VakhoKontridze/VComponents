@@ -111,6 +111,7 @@ struct VModal<Content>: View
                 divider
                 contentView
             })
+            .frame(maxHeight: .infinity, alignment: .top) // Keeps headers at the top when content is empty
             .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
                 uiModel.cornerRadius,
                 corners: uiModel.roundedCorners
