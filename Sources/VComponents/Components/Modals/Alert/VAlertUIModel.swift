@@ -254,12 +254,12 @@ public struct VAlertUIModel {
     /// Container edges ignored by modal container. Set to `[]`.
     ///
     /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = []
+    public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
 
     /// Keyboard edges ignored by modal container. Set to `[]`.
     ///
     /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = []
+    public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
 
     /// Container edges ignored by modal content. Set to `[]`.
     public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []

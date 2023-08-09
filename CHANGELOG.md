@@ -79,6 +79,7 @@ VAlert
 
 - `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
 - `blur` is removed
+- `ignoredContainerSafeAreaEdgesByContainer` and `ignoredKeyboardSafeAreaEdgesByContainer` are set to `all`
 
 VMenu
 
