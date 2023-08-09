@@ -105,7 +105,7 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vAlert(
+    public func vAlert<Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -113,15 +113,17 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: String?,
         message: String?,
-        @ViewBuilder content: @escaping () -> some View,
+        @ViewBuilder content: @escaping () -> Content,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
-    ) -> some View {
+    ) -> some View
+        where Content: View
+    {
         self
             .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    VAlert(
+                    VAlert<Content>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -475,8 +477,7 @@ extension View {
         @ViewBuilder content: @escaping (T) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View
-        where
-            Content: View
+        where Content: View
     {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         

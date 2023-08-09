@@ -48,21 +48,23 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vBottomSheet(
+    public func vBottomSheet<Content>(
         id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> some View
-    ) -> some View {
+        @ViewBuilder content: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
         self
             .presentationHost(
                 id: id,
                 uiModel: .bottomSheet,
                 isPresented: isPresented,
                 content: {
-                    VBottomSheet<_>(
+                    VBottomSheet<Content>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -117,15 +119,17 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vBottomSheet<Item>(
+    public func vBottomSheet<Item, Content>(
         id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> some View
+        @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Item: Identifiable
+        where
+            Item: Identifiable,
+            Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -135,7 +139,7 @@ extension View {
                 uiModel: .bottomSheet,
                 item: item,
                 content: {
-                    VBottomSheet<_>(
+                    VBottomSheet<Content?>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,

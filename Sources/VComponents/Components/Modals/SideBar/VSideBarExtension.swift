@@ -38,20 +38,22 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vSideBar(
+    public func vSideBar<Content>(
         id: String,
         uiModel: VSideBarUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> some View
-    ) -> some View {
+        @ViewBuilder content: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
         self
             .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    VSideBar(
+                    VSideBar<Content>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -96,15 +98,17 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vSideBar<Item>(
+    public func vSideBar<Item, Content>(
         id: String,
         uiModel: VSideBarUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> some View
+        @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Item: Identifiable
+        where
+            Item: Identifiable,
+            Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -113,7 +117,7 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    VSideBar(
+                    VSideBar<Content?>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,

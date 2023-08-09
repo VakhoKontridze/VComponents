@@ -39,20 +39,22 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vModal(
+    public func vModal<Content>(
         id: String,
         uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> some View
-    ) -> some View {
+        @ViewBuilder content: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
         self
             .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
-                    VModal<_>(
+                    VModal<Content>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -98,15 +100,17 @@ extension View {
     ///         )
     ///     }
     ///
-    public func vModal<Item>(
+    public func vModal<Item, Content>(
         id: String,
         uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> some View
+        @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Item: Identifiable
+        where
+            Item: Identifiable,
+            Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
@@ -115,7 +119,7 @@ extension View {
                 id: id,
                 item: item,
                 content: {
-                    VModal<_>(
+                    VModal<Content?>(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
