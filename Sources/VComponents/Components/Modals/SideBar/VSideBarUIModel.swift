@@ -21,6 +21,15 @@ public struct VSideBarUIModel {
     /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
+    var presentationHostUIModel: PresentationHostUIModel {
+        var uiModel: PresentationHostUIModel = .init()
+
+        uiModel.handlesKeyboardResponsiveness = handlesKeyboardResponsiveness
+        uiModel.focusedViewKeyboardSafeAreInset = focusedViewKeyboardSafeAreInset
+
+        return uiModel
+    }
+
     // MARK: Properties - Global Layout
     /// Edge from which side bar appears, and to which it disappears. Set to `default`.
     ///
@@ -69,21 +78,16 @@ public struct VSideBarUIModel {
     public var contentMargins: Margins = .zero
 
     // MARK: Properties - Safe Area
-    /// Container edges ignored by modal container. Set to `all`.
+    /// Indicates if modal handles keyboard responsiveness. Set to `true`.
     ///
-    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
+    /// Changing this property after modal is presented may cause unintended behaviors.
+    public var handlesKeyboardResponsiveness: Bool = true
 
-    /// Keyboard edges ignored by modal container. Set to `all`.
-    ///
-    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
+    /// Keyboard safe area inset on focused view. Set to `20`.
+    public var focusedViewKeyboardSafeAreInset: CGFloat = 20
 
-    /// Container edges ignored by modal content. Set to `[]`.
-    public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
-
-    /// Keyboard edges ignored by modal content. Set to `[]`.
-    public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
+    /// Edges on which content has safe area edges. Set to `.all`.
+    public var contentSafeAreaEdges: Edge.Set = .all
 
     // MARK: Properties - Dimming View
     /// Dimming view color.

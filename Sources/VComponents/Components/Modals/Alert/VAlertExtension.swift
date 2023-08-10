@@ -56,6 +56,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VAlert<Never>(
@@ -121,6 +122,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VAlert<Content>(
@@ -193,6 +195,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VAlert<Never>(
@@ -284,6 +287,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VAlert<Content>(
@@ -386,6 +390,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 presenting: data,
                 content: {
@@ -484,6 +489,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 presenting: data,
                 content: {
@@ -584,6 +590,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 error: error,
                 content: {
@@ -675,6 +682,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 error: error,
                 content: {

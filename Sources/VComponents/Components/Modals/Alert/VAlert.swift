@@ -86,14 +86,11 @@ struct VAlert<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .ignoresSafeArea()
     }
     
     private var alert: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
                     color: uiModel.shadowColor,
                     radius: uiModel.shadowRadius,
@@ -111,14 +108,13 @@ struct VAlert<Content>: View
 
                 buttonsScrollView
             })
-            .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
-            .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
             .getSize({ alertSize = $0.height })
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentSize.width,
             maxHeight: alertSize
         )
+        .safeAreaMargins(edges: .vertical, safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
     }
     
@@ -161,6 +157,7 @@ struct VAlert<Content>: View
                     .padding(uiModel.contentMargins)
             }
         })
+        .clipped() // Prevents flickering issues with keyboard handling system
     }
     
     @ViewBuilder private var buttonsScrollView: some View {
@@ -318,7 +315,7 @@ struct VAlert_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -339,7 +336,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct NoContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -359,7 +356,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct NoButtonPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -377,7 +374,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct SingleButtonPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -397,7 +394,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct ManyButtonsPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -420,7 +417,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct ButtonStatesPreview_Pressed: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -452,7 +449,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct ButtonStatesPreview_Disabled: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -474,7 +471,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct NoTitlePreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -495,7 +492,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct NoMessagePreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -516,7 +513,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct NoTitleNoMessagePreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -537,7 +534,7 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     private struct OnlyButtonsPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {

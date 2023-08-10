@@ -48,7 +48,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
-                uiModel: .toast,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VToast(
@@ -110,7 +110,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                uiModel: .toast,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VToast(
@@ -184,7 +184,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                uiModel: .toast,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 presenting: data,
                 content: {
@@ -259,7 +259,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                uiModel: .toast,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 error: error,
                 content: {
@@ -278,15 +278,4 @@ extension View {
                 }
             )
     }
-}
-
-// MARK: - Presentation Host UI Model
-extension PresentationHostUIModel {
-    fileprivate static let toast: Self = {
-        var uiModel: Self = .init()
-
-        uiModel.allowsHitTests = false
-
-        return uiModel
-    }()
 }

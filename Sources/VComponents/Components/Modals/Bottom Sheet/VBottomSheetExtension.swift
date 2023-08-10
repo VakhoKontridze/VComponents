@@ -61,7 +61,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
-                uiModel: .bottomSheet,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Content>(
@@ -136,7 +136,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
-                uiModel: .bottomSheet,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VBottomSheet<Content?>(
@@ -152,16 +152,4 @@ extension View {
                 }
             )
     }
-}
-
-// MARK: - Presentation Host UI Model
-extension PresentationHostUIModel {
-    fileprivate static let bottomSheet: Self = {
-        var uiModel: Self = .init()
-
-        uiModel.ignoredContainerSafeAreaEdgesByHost = .all
-        uiModel.ignoredKeyboardSafeAreaEdgesByHost = .all
-
-        return uiModel
-    }()
 }

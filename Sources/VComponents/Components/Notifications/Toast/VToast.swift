@@ -69,7 +69,6 @@ struct VToast: View {
 
     private var dimmingView: some View {
         Color.clear
-            .ignoresSafeArea()
     }
     
     private var contentView: some View {
@@ -135,8 +134,8 @@ struct VToast: View {
     
     private var presentedOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: return uiModel.presentationEdgeSafeAreaInset
-        case .bottom: return -uiModel.presentationEdgeSafeAreaInset
+        case .top: return safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
+        case .bottom: return -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
         }
     }
     
@@ -254,7 +253,7 @@ struct VToast_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -276,7 +275,7 @@ struct VToast_Previews: PreviewProvider {
     }
     
     private struct MultiLineTextPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {

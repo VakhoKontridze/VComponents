@@ -75,7 +75,6 @@ struct VSideBar<Content>: View where Content: View {
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
@@ -84,8 +83,6 @@ struct VSideBar<Content>: View where Content: View {
     private var sideBar: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
                     color: uiModel.shadowColor,
                     radius: uiModel.shadowRadius,
@@ -93,9 +90,8 @@ struct VSideBar<Content>: View where Content: View {
                 )
             
             content()
+                .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, safeAreaInsets)
                 .padding(uiModel.contentMargins)
-                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
-                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentSize.width,
@@ -254,7 +250,7 @@ struct VSideBar_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -270,7 +266,7 @@ struct VSideBar_Previews: PreviewProvider {
     }
     
     private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {

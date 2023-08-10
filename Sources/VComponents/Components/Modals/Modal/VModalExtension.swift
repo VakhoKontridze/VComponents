@@ -52,6 +52,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VModal<Content>(
@@ -117,6 +118,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VModal<Content?>(

@@ -51,6 +51,7 @@ extension View {
         self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
                 content: {
                     VSideBar<Content>(
@@ -115,6 +116,7 @@ extension View {
         return self
             .presentationHost(
                 id: id,
+                uiModel: uiModel.presentationHostUIModel,
                 item: item,
                 content: {
                     VSideBar<Content?>(

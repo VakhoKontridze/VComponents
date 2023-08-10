@@ -21,6 +21,15 @@ public struct VBottomSheetUIModel {
     /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
+    var presentationHostUIModel: PresentationHostUIModel {
+        var uiModel: PresentationHostUIModel = .init()
+
+        uiModel.handlesKeyboardResponsiveness = handlesKeyboardResponsiveness
+        uiModel.focusedViewKeyboardSafeAreInset = focusedViewKeyboardSafeAreInset
+
+        return uiModel
+    }
+
     // MARK: Properties - Global Layout
     /// Bottom sheet sizes.
     /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
@@ -142,8 +151,6 @@ public struct VBottomSheetUIModel {
     ///
     /// Can be used for scrollable content.
     /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
-    ///
-    /// Has no effect on fixed bottom sheet.
     public var autoresizesContent: Bool = false
 
     /// Indicates if bottom sheet can be resized by dragging outside the header. Set to `false`.
@@ -154,18 +161,18 @@ public struct VBottomSheetUIModel {
     public var contentIsDraggable: Bool = false
 
     // MARK: Properties - Safe Area
-    /// Edges on which header has safe area edges. Set to `[]`.
+    /// Indicates if modal handles keyboard responsiveness. Set to `true`.
     ///
-    /// Can be used for full-sized modal, to prevent header from leaving safe area.
-    public var headerSafeAreaEdges: Edge.Set = []
+    /// Changing this property after modal is presented may cause unintended behaviors.
+    public var handlesKeyboardResponsiveness: Bool = true
+
+    /// Keyboard safe area inset on focused view. Set to `20`.
+    public var focusedViewKeyboardSafeAreInset: CGFloat = 20
 
     /// Edges on which content has safe area edges. Set to `[]`.
     ///
     /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
     public var contentSafeAreaEdges: Edge.Set = []
-
-    /// Keyboard edges ignored by modal. Set to `[]`.
-    public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.

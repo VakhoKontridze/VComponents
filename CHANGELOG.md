@@ -71,23 +71,28 @@ VTextView
 
 VModal
 
+- Keyboard handling is improved
 - Issue with header shifting down when content is empty is fixed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - `blur` is removed
+
+VBottomSheet
+
+- Keyboard handling is improved
+- `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+
+VSideBar
+
+- Keyboard handling is improved
 
 VAlert
 
 - `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
 - `blur` is removed
-- `ignoredContainerSafeAreaEdgesByContainer` and `ignoredKeyboardSafeAreaEdgesByContainer` are set to `all`
 
 VMenu
 
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
-
-VBottomSheet
-
-- `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 
 ### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 

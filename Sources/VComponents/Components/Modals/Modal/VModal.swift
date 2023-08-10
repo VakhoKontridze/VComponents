@@ -89,7 +89,6 @@ struct VModal<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
@@ -98,8 +97,6 @@ struct VModal<Content>: View
     private var modal: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContainer)
-                .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
                     color: uiModel.shadowColor,
                     radius: uiModel.shadowRadius,
@@ -120,8 +117,6 @@ struct VModal<Content>: View
                         layoutDirection == .rightToLeft
                     )
             )
-            .ignoresSafeArea(.container, edges: uiModel.ignoredContainerSafeAreaEdgesByContent)
-            .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentSize.width,
@@ -272,7 +267,7 @@ struct VModal_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -287,7 +282,7 @@ struct VModal_Previews: PreviewProvider {
     }
     
     private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -303,7 +298,7 @@ struct VModal_Previews: PreviewProvider {
     }
     
     private struct FullSizedContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {

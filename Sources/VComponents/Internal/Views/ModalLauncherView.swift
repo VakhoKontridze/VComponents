@@ -22,8 +22,6 @@ struct ModalLauncherView: View {
     // MARK: Body
     var body: some View {
         Color.clear
-            .onAppear(perform: { DispatchQueue.main.async(execute: { isPresented = true }) })
-
             .contentShape(Rectangle())
             .onTapGesture(perform: { isPresented = true })
     }

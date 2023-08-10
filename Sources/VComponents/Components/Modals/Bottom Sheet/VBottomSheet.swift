@@ -114,7 +114,6 @@ struct VBottomSheet<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if uiModel.dismissType.contains(.backTap) { animateOut() }
             })
@@ -148,7 +147,6 @@ struct VBottomSheet<Content>: View
                     divider
                 })
                 .getSize({ grabberHeaderAndDividerHeight = $0.height })
-                .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets)
 
                 contentView
             })
@@ -175,8 +173,6 @@ struct VBottomSheet<Content>: View
                         .onEnded(dragEnded)
                 )
         })
-        .ignoresSafeArea(.container, edges: .all)
-        .ignoresSafeArea(.keyboard, edges: uiModel.ignoredKeyboardSafeAreaEdges)
     }
     
     @ViewBuilder private var grabber: some View {
@@ -266,7 +262,7 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.headerSafeAreaEdges, safeAreaInsets)
+        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentSize.heights.isResizable,
@@ -469,7 +465,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -484,7 +480,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct FixedHeightMinIdealPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -513,7 +509,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct FixedHeightIdealMaxPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -542,7 +538,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct FixedHeightMinIdealMaxLargePreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -571,7 +567,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct FixedHeightMinIdealMaxSmallPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -600,7 +596,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -616,7 +612,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct ScrollableContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
 #if os(iOS)
@@ -645,7 +641,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct FullSizedContentPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
@@ -665,7 +661,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     private struct OnlyGrabberPreview: View {
-        @State private var isPresented: Bool = false
+        @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {

@@ -21,6 +21,14 @@ public struct VToastUIModel {
     /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
+    var presentationHostUIModel: PresentationHostUIModel {
+        var uiModel: PresentationHostUIModel = .init()
+
+        uiModel.allowsHitTests = false
+
+        return uiModel
+    }
+
     // MARK: Properties - Global Layout
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default

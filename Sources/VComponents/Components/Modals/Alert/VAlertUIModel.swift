@@ -21,6 +21,15 @@ public struct VAlertUIModel {
     /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
+    var presentationHostUIModel: PresentationHostUIModel {
+        var uiModel: PresentationHostUIModel = .init()
+
+        uiModel.handlesKeyboardResponsiveness = handlesKeyboardResponsiveness
+        uiModel.focusedViewKeyboardSafeAreInset = focusedViewKeyboardSafeAreInset
+
+        return uiModel
+    }
+
     // MARK: Properties - Global Layout
     /// Alert sizes.
     /// Set to `0.75` ratio of screen width in portrait.
@@ -251,21 +260,13 @@ public struct VAlertUIModel {
     }
 
     // MARK: Properties - Safe Area
-    /// Container edges ignored by modal container. Set to `[]`.
+    /// Indicates if modal handles keyboard responsiveness. Set to `true`.
     ///
-    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
+    /// Changing this property after modal is presented may cause unintended behaviors.
+    public var handlesKeyboardResponsiveness: Bool = true
 
-    /// Keyboard edges ignored by modal container. Set to `[]`.
-    ///
-    /// Setting this property to `all` may cause container to ignore explicit `sizes`.
-    public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
-
-    /// Container edges ignored by modal content. Set to `[]`.
-    public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
-
-    /// Keyboard edges ignored by modal content. Set to `[]`.
-    public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
+    /// Keyboard safe area inset on focused view. Set to `20`.
+    public var focusedViewKeyboardSafeAreInset: CGFloat = 20
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
