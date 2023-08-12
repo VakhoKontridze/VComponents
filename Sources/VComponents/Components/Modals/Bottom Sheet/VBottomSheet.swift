@@ -114,6 +114,7 @@ struct VBottomSheet<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
+            .contentShape(Rectangle())
             .onTapGesture(perform: {
                 if uiModel.dismissType.contains(.backTap) { animateOut() }
             })

@@ -69,6 +69,7 @@ struct VToast: View {
 
     private var dimmingView: some View {
         Color.clear
+            .contentShape(Rectangle())
     }
     
     private var contentView: some View {

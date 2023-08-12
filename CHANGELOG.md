@@ -75,20 +75,24 @@ VModal
 - Issue with header shifting down when content is empty is fixed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - `blur` is removed
+- Dimming view now detects gestures even when clear
 
 VBottomSheet
 
 - Keyboard handling is improved
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
+- Dimming view now detects gestures even when clear
 
 VSideBar
 
 - Keyboard handling is improved
+- Dimming view now detects gestures even when clear
 
 VAlert
 
 - `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
 - `blur` is removed
+- Dimming view now detects gestures even when clear
 
 VMenu
 
