@@ -27,14 +27,14 @@ struct VBottomSheet<Content>: View
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
     }
 
-    private var hasHeader: Bool {
-        headerLabel.hasLabel ||
-        uiModel.dismissType.hasButton
-    }
-
     private var hasGrabber: Bool {
         uiModel.grabberSize.height > 0 &&
         (uiModel.dismissType.contains(.pullDown) || currentSize.heights.isResizable)
+    }
+
+    private var hasHeader: Bool {
+        headerLabel.hasLabel ||
+        uiModel.dismissType.hasButton
     }
 
     private var hasDivider: Bool {
