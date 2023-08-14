@@ -36,7 +36,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     // MARK: Properties - Sizes
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    private var isDynamic: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
+    private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
 
     // MARK: Properties - Flags
     @State private var isAnimating: Bool = Self.isAnimatingDefault
@@ -63,20 +63,20 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     @ViewBuilder private var marqueeContentView: some View {
-        if isDynamic {
+        if isAnimatable {
             Group(content: {
                 contentView
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
                     .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
+                        DispatchQueue.main.async(execute: { isAnimating = isAnimatable })
                     })
                 
                 contentView
                     .offset(x: offsetDynamicSecond)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
                     .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
+                        DispatchQueue.main.async(execute: { isAnimating = isAnimatable })
                     })
             })
             .offset(x: offsetDynamic)
@@ -95,7 +95,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     @ViewBuilder private var gradient: some View {
-        if isDynamic && uiModel.gradientWidth > 0 {
+        if isAnimatable && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(
                     colors: [
