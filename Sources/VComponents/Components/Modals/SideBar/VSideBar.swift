@@ -91,7 +91,7 @@ struct VSideBar<Content>: View where Content: View {
                 )
             
             content()
-                .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, safeAreaInsets)
+                .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
                 .padding(uiModel.contentMargins)
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
