@@ -263,7 +263,7 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, safeAreaInsets)
+        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentSize.heights.isResizable,

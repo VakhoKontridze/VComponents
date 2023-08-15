@@ -115,7 +115,7 @@ struct VAlert<Content>: View
             maxWidth: currentSize.width,
             maxHeight: alertSize
         )
-        .safeAreaMargins(edges: .vertical, safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
+        .safeAreaMargins(edges: .vertical, insets: safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
     }
     
