@@ -276,7 +276,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             dividers
         })
         .frame(height: uiModel.height)
-        .cornerRadius(uiModel.cornerRadius)
+        .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
     }
     
     private var pickerBackground: some View {

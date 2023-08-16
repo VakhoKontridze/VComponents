@@ -138,18 +138,10 @@ public struct VRangeSlider: View {
     
     @ViewBuilder private func thumb(_ thumb: Thumb) -> some View {
         if uiModel.thumbDimension > 0 {
-            Group(content: {
+            Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-                        .foregroundColor(uiModel.thumbColors.value(for: internalState))
-                        .shadow(
-                            color: uiModel.thumbShadowColors.value(for: internalState),
-                            radius: uiModel.thumbShadowRadius,
-                            offset: uiModel.thumbShadowOffset // No need to reverse coordinates on shadow
-                        )
-                    
-                    RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-                        .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
+                    thumbBackground
+                    thumbBorder
                 })
                 .frame(dimension: uiModel.thumbDimension)
                 .offset(
@@ -168,6 +160,21 @@ public struct VRangeSlider: View {
                     .onEnded({ dragEnded(dragValue: $0) })
             )
         }
+    }
+
+    private var thumbBackground: some View {
+        RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
+            .foregroundColor(uiModel.thumbColors.value(for: internalState))
+            .shadow(
+                color: uiModel.thumbShadowColors.value(for: internalState),
+                radius: uiModel.thumbShadowRadius,
+                offset: uiModel.thumbShadowOffset // No need to reverse coordinates on shadow
+            )
+    }
+
+    private var thumbBorder: some View {
+        RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
+            .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
     }
     
     // MARK: Thumb

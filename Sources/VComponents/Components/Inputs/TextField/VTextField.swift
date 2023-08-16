@@ -182,9 +182,9 @@ public struct VTextField: View {
         })
         .frame(height: uiModel.height)
         .padding(.horizontal, uiModel.contentMarginHorizontal)
-        .clipped() // Prevents large content from going out of bounds
-        .background(backgroundBorder)
-        .background(background)
+        .clipped() // Prevents large content from overflowing
+        .background(backgroundBorder) // Has own rounding
+        .background(background) // Has own rounding
     }
     
     private var background: some View {

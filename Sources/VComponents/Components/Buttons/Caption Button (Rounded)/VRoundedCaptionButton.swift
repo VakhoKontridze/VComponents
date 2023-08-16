@@ -106,7 +106,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     private func rectangle(
         internalState: VRoundedCaptionButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group(content: { // `Group` is used for adding multiple frames
             icon
                 .resizable()
                 .scaledToFit()
@@ -117,9 +117,9 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 .opacity(uiModel.iconOpacities.value(for: internalState))
         })
         .frame(size: uiModel.rectangleSize)
-        .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from going out of bounds
-        .background(rectangleBackground(internalState: internalState))
-        .overlay(roundedRectangleBorder(internalState: internalState))
+        .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from overflowing
+        .background(rectangleBackground(internalState: internalState)) // Has own rounding
+        .overlay(roundedRectangleBorder(internalState: internalState)) // Has own rounding
     }
     
     private func rectangleBackground(

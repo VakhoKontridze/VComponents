@@ -146,13 +146,12 @@ public struct VTextView: View {
     }
 
     private var input: some View {
-        Group(content: {
-            textField
-        })
-        .frame(minHeight: uiModel.minHeight)
-        .padding(uiModel.contentMargins)
-        .background(backgroundBorder)
-        .background(background)
+        textField
+            .frame(minHeight: uiModel.minHeight)
+            .padding(uiModel.contentMargins)
+            .clipped() // Prevents large content from overflowing
+            .background(backgroundBorder) // Has own rounding
+            .background(background) // Has own rounding
     }
 
     private var background: some View {

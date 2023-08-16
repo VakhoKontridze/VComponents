@@ -106,9 +106,9 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.height)
-                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from going out of bounds
-                    .background(background(internalState: internalState))
-                    .overlay(border(internalState: internalState))
+                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
+                    .background(background(internalState: internalState)) // Has own rounding
+                    .overlay(border(internalState: internalState)) // Has own rounding
             }
         )
         .disabled(isLoading)

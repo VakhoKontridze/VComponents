@@ -77,7 +77,7 @@ public struct VGroupBox<Content>: View where Content: View {
         Group(content: {
             switch content {
             case .empty:
-                Color.clear
+                Color.clear // `EmptyView` cannot be used as it doesn't render
                 
             case .content(let content):
                 content()
