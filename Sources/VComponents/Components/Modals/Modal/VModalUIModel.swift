@@ -24,8 +24,7 @@ public struct VModalUIModel {
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
-        uiModel.handlesKeyboardResponsiveness = handlesKeyboardResponsiveness
-        uiModel.focusedViewKeyboardSafeAreInset = focusedViewKeyboardSafeAreInset
+        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
 
         return uiModel
     }
@@ -131,14 +130,14 @@ public struct VModalUIModel {
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
 
-    // MARK: Properties - Safe Area
-    /// Indicates if modal handles keyboard responsiveness. Set to `true`.
+    // MARK: Properties - Keyboard Responsiveness
+    /// Keyboard responsiveness strategy. Set to `default`.
     ///
     /// Changing this property after modal is presented may cause unintended behaviors.
-    public var handlesKeyboardResponsiveness: Bool = true
+    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy? = .default
 
-    /// Keyboard safe area inset on focused view. Set to `20`.
-    public var focusedViewKeyboardSafeAreInset: CGFloat = 20
+    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.

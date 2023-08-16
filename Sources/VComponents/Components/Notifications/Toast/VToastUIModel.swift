@@ -25,6 +25,7 @@ public struct VToastUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
         uiModel.allowsHitTests = false
+        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
 
         return uiModel
     }
@@ -65,6 +66,12 @@ public struct VToastUIModel {
         horizontal: 20,
         vertical: 12
     )
+
+    // MARK: Properties - Keyboard Responsiveness
+    /// Keyboard responsiveness strategy. Set to `nil`.
+    ///
+    /// Changing this property after modal is presented may cause unintended behaviors.
+    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy?
 
     // MARK: Properties - Shadow
     /// Shadow color.

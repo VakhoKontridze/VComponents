@@ -210,7 +210,7 @@ var body: some View {
 }
 ```
 
-However, if you wish to use scrollable view as a content, `scrollableContent` instance is already defined under `VBottomSheetUIModel`. It takes care of most intricate details, including features like auto-resizing of content and proper management of safe area margins.
+However, if you wish to use scrollable view as a content, use the following configuration:
 
 ```swift
 @State private var isPresented: Bool = false
@@ -222,15 +222,23 @@ var body: some View {
     )
     .vBottomSheet(
         id: "some_bottom_sheet",
-        uiModel: .scrollableContent,
+        uiModel: {
+            var uiModel: VBottomSheetUIModel = .init()
+            uiModel.autoresizesContent = true
+            return uiModel
+        }(),
         isPresented: $isPresented,
         content: {
-            List(content: {
-                ForEach(0..<20, content: { number in
-                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-                        Text(String(number))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            ScrollView(content: {
+                VStack(spacing: 0, content: {
+                    ForEach(0..<20, content: { number in
+                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+                            Text(String(number))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
                     })
+                    
+                    Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
                 })
             })
             .vListStyle()

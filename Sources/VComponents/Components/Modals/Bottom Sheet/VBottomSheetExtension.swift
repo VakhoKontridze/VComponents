@@ -31,15 +31,23 @@ extension View {
     ///         )
     ///         .vBottomSheet(
     ///             id: "some_bottom_sheet",
-    ///             uiModel: .scrollableContent,
+    ///             uiModel: {
+    ///                 var uiModel: VBottomSheetUIModel = .init()
+    ///                 uiModel.autoresizesContent = true
+    ///                 return uiModel
+    ///             }(),
     ///             isPresented: $isPresented,
     ///             content: {
-    ///                 List(content: {
-    ///                     ForEach(0..<20, content: { number in
-    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-    ///                             Text(String(number))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                 ScrollView(content: {
+    ///                     VStack(spacing: 0, content: {
+    ///                         ForEach(0..<20, content: { number in
+    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+    ///                                 Text(String(number))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
     ///                         })
+    ///
+    ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
     ///                 })
     ///                 .vListStyle()
@@ -102,15 +110,23 @@ extension View {
     ///         )
     ///         .vBottomSheet(
     ///             id: "some_bottom_sheet",
-    ///             uiModel: .scrollableContent,
+    ///             uiModel: {
+    ///                 var uiModel: VBottomSheetUIModel = .init()
+    ///                 uiModel.autoresizesContent = true
+    ///                 return uiModel
+    ///             }(),
     ///             item: $bottomSheetItem,
     ///             content: { item in
-    ///                 List(content: {
-    ///                     ForEach(0..<20, content: { number in
-    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-    ///                             Text(String(number))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                 ScrollView(content: {
+    ///                     VStack(spacing: 0, content: {
+    ///                         ForEach(0..<20, content: { number in
+    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+    ///                                 Text(String(number))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
     ///                         })
+    ///
+    ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
     ///                 })
     ///                 .vListStyle()

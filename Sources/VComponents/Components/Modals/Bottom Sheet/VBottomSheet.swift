@@ -98,8 +98,16 @@ struct VBottomSheet<Content>: View
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
-        ._getInterfaceOrientation({
-            interfaceOrientation = $0
+        ._getInterfaceOrientation({ newValue in
+            if
+                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                newValue != interfaceOrientation
+            {
+                UIApplication.shared.sendResignFirstResponderAction()
+            }
+
+            interfaceOrientation = newValue
+
             resetHeightFromOrientationChange()
         })
 
@@ -621,15 +629,23 @@ struct VBottomSheet_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
-                        uiModel: .scrollableContent,
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.autoresizesContent = true
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: {
-                            List(content: {
-                                ForEach(0..<20, content: { number in
-                                    VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-                                        Text(String(number))
-                                            .frame(maxWidth: .infinity, alignment: .leading)
+                            ScrollView(content: {
+                                VStack(spacing: 0, content: {
+                                    ForEach(0..<20, content: { number in
+                                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
+                                            Text(String(number))
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                        })
                                     })
+
+                                    Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
                                 })
                             })
                             .vListStyle()

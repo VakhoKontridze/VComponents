@@ -24,8 +24,7 @@ public struct VBottomSheetUIModel {
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
-        uiModel.handlesKeyboardResponsiveness = handlesKeyboardResponsiveness
-        uiModel.focusedViewKeyboardSafeAreInset = focusedViewKeyboardSafeAreInset
+        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
 
         return uiModel
     }
@@ -160,15 +159,16 @@ public struct VBottomSheetUIModel {
     /// Has no effect on fixed bottom sheet.
     public var contentIsDraggable: Bool = false
 
-    // MARK: Properties - Safe Area
-    /// Indicates if modal handles keyboard responsiveness. Set to `true`.
+    // MARK: Properties - Keyboard Responsiveness
+    /// Keyboard responsiveness strategy. Set to `default`.
     ///
     /// Changing this property after modal is presented may cause unintended behaviors.
-    public var handlesKeyboardResponsiveness: Bool = true
+    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy? = .default
 
-    /// Keyboard safe area inset on focused view. Set to `20`.
-    public var focusedViewKeyboardSafeAreInset: CGFloat = 20
+    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
+    // MARK: Properties - Safe Area
     /// Edges on which content has safe area edges. Set to `[]`.
     ///
     /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
@@ -377,16 +377,6 @@ extension VBottomSheetUIModel {
         return uiModel
     }
     
-    /// `VBottomSheetUIModel` that autoresizes content and inserts bottom safe area for scrollable content.
-    public static var scrollableContent: Self {
-        var uiModel: Self = .init()
-        
-        uiModel.autoresizesContent = true
-        uiModel.contentSafeAreaEdges.insert(.bottom)
-        
-        return uiModel
-    }
-    
     /// `VBottomSheetUIModel` that hides only leaves grabber.
     ///
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
@@ -396,25 +386,6 @@ extension VBottomSheetUIModel {
         var uiModel: Self = .init()
         
         uiModel.grabberMargins = VerticalMargins(15)
-        
-        uiModel.dismissType.remove(.leadingButton)
-        uiModel.dismissType.remove(.trailingButton)
-        
-        return uiModel
-    }
-    
-    /// `VBottomSheetUIModel` that only leaves grabber, autoresizes content, and inserts bottom safe area for scrollable content.
-    ///
-    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
-    ///
-    /// It's recommended that you do not use header title or label with this configuration.
-    public static var scrollableContentOnlyGrabber: Self {
-        var uiModel: Self = .init()
-        
-        uiModel.grabberMargins = VerticalMargins(15)
-
-        uiModel.autoresizesContent = true
-        uiModel.contentSafeAreaEdges.insert(.bottom)
         
         uiModel.dismissType.remove(.leadingButton)
         uiModel.dismissType.remove(.trailingButton)

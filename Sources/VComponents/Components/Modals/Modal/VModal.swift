@@ -76,7 +76,16 @@ struct VModal<Content>: View
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
-        ._getInterfaceOrientation({ interfaceOrientation = $0 })
+        ._getInterfaceOrientation({ newValue in
+            if
+                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                newValue != interfaceOrientation
+            {
+                UIApplication.shared.sendResignFirstResponderAction()
+            }
+
+            interfaceOrientation = newValue
+        })
 
         .onAppear(perform: animateIn)
         .onChange(
