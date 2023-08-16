@@ -19,8 +19,11 @@ struct VModal<Content>: View
     // MARK: Properties - UI Model
     private let uiModel: VModalUIModel
 
-    private var currentSize: CGSize {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    private var currentWidth: CGFloat {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: screenSize.width)
+    }
+    private var currentHeight: CGFloat {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: screenSize.height)
     }
 
     private var hasHeader: Bool {
@@ -129,8 +132,8 @@ struct VModal<Content>: View
             )
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentSize.width,
-            maxHeight: currentSize.height
+            maxWidth: currentWidth,
+            maxHeight: currentHeight
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
     }

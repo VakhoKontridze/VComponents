@@ -33,9 +33,9 @@ public struct VAlertUIModel {
     /// Alert sizes.
     /// Set to `0.75` ratio of screen width in portrait.
     /// Set to `0.5` ratio of screen width in landscape.
-    public var sizes: Sizes = .init(
-        portrait: .fraction(AlertSize(width: 0.75)),
-        landscape: .fraction(AlertSize(width: 0.5))
+    public var widths: Widths = .init(
+        portrait: .fraction(0.75),
+        landscape: .fraction(0.5)
     )
 
     /// Additional margins applied to title text, message text, and content as a whole. Set to `15` leading, `15` trailing,`15` top, and `10` bottom.
@@ -295,35 +295,13 @@ public struct VAlertUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Sizes
-    /// Model that represents modal sizes.
-    public typealias Sizes = ModalSizes<AlertSize>
+    // MARK: Widths
+    /// Model that represents alert widths.
+    public typealias Widths = ModalComponentSizes<Width>
 
-    // MARK: Alert Size
-    /// Alert size.
-    public struct AlertSize: Equatable, ScreenRelativeSizeMeasurement {
-        // MARK: Properties
-        /// Width.
-        public var width: CGFloat
-
-        // MARK: Initializers
-        /// Initializes `AlertSize`.
-        public init(
-            width: CGFloat
-        ) {
-            self.width = width
-        }
-
-        // MARK: Screen Relative Size Measurement
-        public static func relativeMeasurementToPoints(
-            _ measurement: Self,
-            in screenSize: CGSize
-        ) -> Self {
-            .init(
-                width: screenSize.width * measurement.width
-            )
-        }
-    }
+    // MARK: Width
+    /// Model that represents alert width.
+    public typealias Width = SingleDimensionModalComponentSize
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.

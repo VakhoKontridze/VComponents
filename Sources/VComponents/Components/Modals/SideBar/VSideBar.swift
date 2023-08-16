@@ -21,8 +21,11 @@ struct VSideBar<Content>: View where Content: View {
     @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    private var currentSize: CGSize {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    private var currentWidth: CGFloat {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: screenSize.width)
+    }
+    private var currentHeight: CGFloat {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: screenSize.height)
     }
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
@@ -100,12 +103,12 @@ struct VSideBar<Content>: View where Content: View {
                 )
             
             content()
-                .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
                 .padding(uiModel.contentMargins)
+                .safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentSize.width,
-            maxHeight: currentSize.height
+            maxWidth: currentWidth,
+            maxHeight: currentHeight
         )
         .offset(isInternallyPresented ? .zero : initialOffset)
         .gesture(
@@ -175,8 +178,8 @@ struct VSideBar<Content>: View where Content: View {
     private var initialOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.presentationEdge {
-            case .leading: return -(currentSize.width + safeAreaInsets.leading)
-            case .trailing: return currentSize.width + safeAreaInsets.trailing
+            case .leading: return -(currentWidth + safeAreaInsets.leading)
+            case .trailing: return currentWidth + safeAreaInsets.trailing
             case .top: return 0
             case .bottom: return 0
             }
@@ -186,8 +189,8 @@ struct VSideBar<Content>: View where Content: View {
             switch uiModel.presentationEdge {
             case .leading: return 0
             case .trailing: return 0
-            case .top: return -(currentSize.height + safeAreaInsets.top)
-            case .bottom: return currentSize.height + safeAreaInsets.bottom
+            case .top: return -(currentHeight + safeAreaInsets.top)
+            case .bottom: return currentHeight + safeAreaInsets.bottom
             }
         }()
         
@@ -221,8 +224,8 @@ struct VSideBar<Content>: View where Content: View {
     
     private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.presentationEdge {
-        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(size: currentSize)
-        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(size: currentSize)
+        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(in: currentWidth)
+        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(in: currentHeight)
         }
     }
 }

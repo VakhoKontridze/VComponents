@@ -72,6 +72,7 @@ VTextView
 VModal
 
 - Keyboard handling is improved
+- Size configuration is improved to support fractions and points separately for width and height
 - Issue with header shifting down when content is empty is fixed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - `blur` is removed
@@ -80,16 +81,19 @@ VModal
 VBottomSheet
 
 - Keyboard handling is improved
+- Size configuration is improved to support fractions and points separately for width and heights
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - Dimming view now detects gestures even when clear
 
 VSideBar
 
 - Keyboard handling is improved
+- Size configuration is improved to support fractions and points separately for width and height
 - Dimming view now detects gestures even when clear
 
 VAlert
 
+- Size configuration is improved
 - `titleTextLineType` is changed to `multiline` with `center` alignment and `1...2` lines
 - `blur` is removed
 - Dimming view now detects gestures even when clear

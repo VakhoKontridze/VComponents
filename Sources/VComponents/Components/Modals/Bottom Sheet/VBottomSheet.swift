@@ -23,13 +23,16 @@ struct VBottomSheet<Content>: View
     @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    private var currentSize: VBottomSheetUIModel.BottomSheetSize {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    private var currentWidth: CGFloat {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: screenSize.width)
+    }
+    private var currentHeightsObject: VBottomSheetUIModel.Heights {
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
     }
 
     private var hasGrabber: Bool {
         uiModel.grabberSize.height > 0 &&
-        (uiModel.dismissType.contains(.pullDown) || currentSize.heights.isResizable)
+        (uiModel.dismissType.contains(.pullDown) || currentHeightsObject.isResizable)
     }
 
     private var hasHeader: Bool {
@@ -134,9 +137,9 @@ struct VBottomSheet<Content>: View
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fixes issue of safe areas and/or landscape
-                            maxHeight: currentSize.heights.max
+                            maxHeight: currentHeightsObject.max.points(in: screenSize.height)
                         )
-                        .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
+                        .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -164,18 +167,18 @@ struct VBottomSheet<Content>: View
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
-                        maxHeight: currentSize.heights.max
+                        maxHeight: currentHeightsObject.max.points(in: screenSize.height)
                     )
-                    .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
+                    .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
             })
         })
-        .frame(width: currentSize.width)
+        .frame(width: currentWidth)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
                 .frame( // Max dimension fixes issue of safe areas and/or landscape
-                    maxHeight: currentSize.heights.max
+                    maxHeight: currentHeightsObject.max.points(in: screenSize.height)
                 )
-                .offset(y: isInternallyPresented ? offset : currentSize.heights.hiddenOffset(in: screenSize.height))
+                .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
@@ -271,10 +274,10 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
+        .safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
-            uiModel.autoresizesContent && currentSize.heights.isResizable,
+            uiModel.autoresizesContent && currentHeightsObject.isResizable,
             ifTransform: { $0.frame(height: screenSize.height - offset - grabberHeaderAndDividerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
@@ -337,14 +340,14 @@ struct VBottomSheet<Content>: View
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             _offset = {
                 switch newOffset {
-                case ...currentSize.heights.maxOffset(in: screenSize.height):
-                    return currentSize.heights.maxOffset(in: screenSize.height)
+                case ...currentHeightsObject.maxOffset(in: screenSize.height):
+                    return currentHeightsObject.maxOffset(in: screenSize.height)
                     
-                case currentSize.heights.minOffset(in: screenSize.height)...:
+                case currentHeightsObject.minOffset(in: screenSize.height)...:
                     if uiModel.dismissType.contains(.pullDown) {
                         return newOffset
                     } else {
-                        return currentSize.heights.minOffset(in: screenSize.height)
+                        return currentHeightsObject.minOffset(in: screenSize.height)
                     }
                     
                 default:
@@ -371,9 +374,9 @@ struct VBottomSheet<Content>: View
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
                 screenHeight: screenSize.height,
-                heights: currentSize.heights,
+                heights: currentHeightsObject,
                 canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
-                pullDownDismissDistance: uiModel.pullDownDismissDistance(size: currentSize),
+                pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: screenSize.height),
                 offset: offset,
                 offsetBeforeDrag: offsetBeforeDrag,
                 translation: dragValue.translation.height
@@ -382,7 +385,7 @@ struct VBottomSheet<Content>: View
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
                 screenHeight: screenSize.height,
-                heights: currentSize.heights,
+                heights: currentHeightsObject,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
             ))
@@ -410,22 +413,22 @@ struct VBottomSheet<Content>: View
     }
 
     private func getResetedHeight() -> CGFloat {
-        currentSize.heights.idealOffset(in: screenSize.height)
+        currentHeightsObject.idealOffset(in: screenSize.height)
     }
     
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
-        let sizes: [VBottomSheetUIModel.BottomSheetSize] = [
-            uiModel.sizes.portrait.size(in: CGSize(dimension: 1)),
-            uiModel.sizes.landscape.size(in: CGSize(dimension: 1))
+        let heightsGroup: [VBottomSheetUIModel.Heights] = [
+            uiModel.sizes.portrait.heights,
+            uiModel.sizes.landscape.heights
         ]
 
-        for size in sizes {
-            guard size.heights.min <= size.heights.ideal else {
+        for heights in heightsGroup {
+            guard heights.min.value <= heights.ideal.value else {
                 VCoreFatalError("`VBottomSheet`'s `min` height must be less than or equal to `ideal` height", module: "VComponents")
             }
 
-            guard size.heights.ideal <= size.heights.max else {
+            guard heights.ideal.value <= heights.max.value else {
                 VCoreFatalError("`VBottomSheet`'s `ideal` height must be less than or equal to `max` height", module: "VComponents")
             }
         }
@@ -499,14 +502,14 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 1,
-                                    heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
-                                )),
-                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 0.7,
-                                    heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
-                                ))
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+                                )
                             )
                             return uiModel
                         }(),
@@ -528,14 +531,14 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 1,
-                                    heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
-                                )),
-                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 0.7,
-                                    heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
-                                ))
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fractions(min: 0.6, ideal: 0.9, max: 0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fractions(min: 0.6, ideal: 0.9, max: 0.9)
+                                )
                             )
                             return uiModel
                         }(),
@@ -557,14 +560,14 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 1,
-                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
-                                )),
-                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 0.7,
-                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.9)
-                                ))
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(0.9)
+                                )
                             )
                             return uiModel
                         }(),
@@ -586,14 +589,14 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 1,
-                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
-                                )),
-                                landscape: .fraction(VBottomSheetUIModel.BottomSheetSize(
-                                    width: 0.7,
-                                    heights: VBottomSheetUIModel.BottomSheetHeights(0.2)
-                                ))
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(0.2)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(0.2)
+                                )
                             )
                             return uiModel
                         }(),

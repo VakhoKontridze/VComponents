@@ -34,8 +34,14 @@ public struct VModalUIModel {
     /// Set to `0.9x0.6` screen ratios in portrait.
     /// Set to reverse in landscape.
     public var sizes: Sizes = .init(
-        portrait: .fraction(CGSize(width: 0.9, height: 0.6)),
-        landscape: .fraction(CGSize(width: 0.6, height: 0.9))
+        portrait: Size(
+            width: .fraction(0.9),
+            height: .fraction(0.6)
+        ),
+        landscape: Size(
+            width: .fraction(0.6),
+            height: .fraction(0.9)
+        )
     )
 
     // MARK: Properties - Corners
@@ -173,7 +179,11 @@ public struct VModalUIModel {
 
     // MARK: Sizes
     /// Model that represents modal sizes.
-    public typealias Sizes = ModalSizes<CGSize>
+    public typealias Sizes = ModalComponentSizes<Size>
+
+    // MARK: Size
+    /// Model that represents modal size.
+    public typealias Size = StandardModalComponentSize
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.

@@ -40,8 +40,14 @@ public struct VSideBarUIModel {
     /// Set to `0.75x1` screen ratios in portrait.
     /// Set to `0.5x1` screen ratios in landscape.
     public var sizes: Sizes = .init(
-        portrait: .fraction(CGSize(width: 0.75, height: 1)),
-        landscape: .fraction(CGSize(width: 0.5, height: 1))
+        portrait: Size(
+            width: .fraction(0.75),
+            height: .fraction(1)
+        ),
+        landscape: Size(
+            width: .fraction(0.5),
+            height: .fraction(1)
+        )
     )
 
     // MARK: Properties - Corners
@@ -76,6 +82,9 @@ public struct VSideBarUIModel {
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
 
+    /// Edges on which content has safe area margins. Set to `.all`.
+    public var contentSafeAreaMargins: Edge.Set = []
+
     // MARK: Properties - Keyboard Responsiveness
     /// Keyboard responsiveness strategy. Set to `default`.
     ///
@@ -84,10 +93,6 @@ public struct VSideBarUIModel {
 
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
-
-    // MARK: Properties - Safe Area
-    /// Edges on which content has safe area edges. Set to `.all`.
-    public var contentSafeAreaEdges: Edge.Set = .all
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
@@ -110,7 +115,7 @@ public struct VSideBarUIModel {
     /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
     public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
 
-    func dragBackDismissDistance(size: CGSize) -> CGFloat { dragBackDismissDistanceWidthRatio * size.width }
+    func dragBackDismissDistance(in screenDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * screenDimension }
 
     // MARK: Properties - Transition
     /// Appear animation.  Set to `easeInOut` with duration `0.3`.
@@ -158,8 +163,12 @@ public struct VSideBarUIModel {
     }
 
     // MARK: Sizes
-    /// Model that represents modal sizes.
-    public typealias Sizes = ModalSizes<CGSize>
+    /// Model that represents side bar sizes.
+    public typealias Sizes = ModalComponentSizes<Size>
+
+    // MARK: Size
+    /// Model that represents side bar size.
+    public typealias Size = StandardModalComponentSize
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
@@ -213,22 +222,6 @@ extension VSideBarUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension VSideBarUIModel.PresentationEdge {
-    /// UI model for the presentation edge.
-    public var uiModel: VSideBarUIModel {
-        switch self {
-        case .leading: return .leading
-        case .trailing: return .trailing
-        case .top: return .top
-        case .bottom: return .bottom
-        }
-    }
-}
-
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that presents side bar from leading edge.
     ///
@@ -260,23 +253,23 @@ extension VSideBarUIModel {
     /// And to `0.5x1` screen ratios in landscape.
     ///
     /// `roundedCorners` is set to `bottomCorners`.
-    ///
-    /// `contentMargins.bottom` is set to `25`.
-    /// This is because, corner radius is applied to container, and not content.
-    /// If you wish for `contentMargins.bottom` to be `0`, then make sure to apply corner radius to content itself.
     public static var top: Self {
         var uiModel: Self = .init()
         
         uiModel.presentationEdge = .top
-        
+
         uiModel.sizes = Sizes(
-            portrait: .fraction(CGSize(width: 1, height: 0.5)),
-            landscape: .fraction(CGSize(width: 1, height: 0.75))
+            portrait: Size(
+                width: .fraction(1),
+                height: .fraction(0.5)
+            ),
+            landscape: Size(
+                width: .fraction(1),
+                height: .fraction(0.75)
+            )
         )
         
         uiModel.roundedCorners = .bottomCorners
-        
-        uiModel.contentMargins.bottom = 25
         
         return uiModel
     }
@@ -289,23 +282,23 @@ extension VSideBarUIModel {
     /// And to `0.5x1` screen ratios in landscape.
     ///
     /// `roundedCorners` is set to `topCorners`.
-    ///
-    /// `contentMargins.top` is set to `25`.
-    /// This is because, corner radius is applied to container, and not content.
-    /// If you wish for `contentMargins.top` to be `0`, then make sure to apply corner radius to content itself.
     public static var bottom: Self {
         var uiModel: Self = .init()
         
         uiModel.presentationEdge = .bottom
         
         uiModel.sizes = Sizes(
-            portrait: .fraction(CGSize(width: 1, height: 0.5)),
-            landscape: .fraction(CGSize(width: 1, height: 0.75))
+            portrait: Size(
+                width: .fraction(1),
+                height: .fraction(0.5)
+            ),
+            landscape: Size(
+                width: .fraction(1),
+                height: .fraction(0.75)
+            )
         )
         
         uiModel.roundedCorners = .topCorners
-        
-        uiModel.contentMargins.top = 25
         
         return uiModel
     }

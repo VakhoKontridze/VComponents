@@ -34,14 +34,14 @@ public struct VBottomSheetUIModel {
     /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
     /// Set to `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
     public var sizes: Sizes = .init(
-        portrait: .fraction(BottomSheetSize(
-            width: 1,
-            heights: BottomSheetHeights(min: 0.6, ideal: 0.6, max: 0.9)
-        )),
-        landscape: .fraction(BottomSheetSize(
-            width: 0.7,
-            heights: BottomSheetHeights(0.9)
-        ))
+        portrait: Size(
+            width: .fraction(1),
+            heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+        ),
+        landscape: Size(
+            width: .fraction(0.7),
+            heights: .fraction(0.9)
+        )
     )
 
     // MARK: Properties - Corners
@@ -146,6 +146,9 @@ public struct VBottomSheetUIModel {
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
 
+    /// Edges on which content has safe area margins. Set to `[]`.
+    public var contentSafeAreaMargins: Edge.Set = []
+
     /// Indicates if sheet resizes content based on its visible frame. Set to `false`.
     ///
     /// Can be used for scrollable content.
@@ -168,12 +171,6 @@ public struct VBottomSheetUIModel {
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
-    // MARK: Properties - Safe Area
-    /// Edges on which content has safe area edges. Set to `[]`.
-    ///
-    /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
-    public var contentSafeAreaEdges: Edge.Set = []
-
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.
     public var dismissType: DismissType = .default
@@ -184,7 +181,12 @@ public struct VBottomSheetUIModel {
     /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Set to `0.1`.
     public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
 
-    func pullDownDismissDistance(size: BottomSheetSize) -> CGFloat { pullDownDismissDistanceMinHeightRatio * size.heights.min }
+    func pullDownDismissDistance(
+        heights: Heights,
+        in screenHeight: CGFloat
+    ) -> CGFloat {
+        pullDownDismissDistanceMinHeightRatio * heights.min.points(in: screenHeight)
+    }
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
@@ -218,97 +220,120 @@ public struct VBottomSheetUIModel {
     public init() {}
 
     // MARK: Sizes
-    /// Model that represents modal sizes.
-    public typealias Sizes = ModalSizes<BottomSheetSize>
+    /// Model that represents bottom sheet sizes.
+    public typealias Sizes = ModalComponentSizes<Size>
 
-    // MARK: Bottom Sheet Size
-    /// Bottom sheet size.
-    public struct BottomSheetSize: Equatable, ScreenRelativeSizeMeasurement {
+    // MARK: Size
+    /// Model that represents bottom sheet size.
+    public struct Size {
         // MARK: Properties
         /// Width.
-        public var width: CGFloat
+        public var width: ModalComponentDimension
 
         /// Heights.
-        public var heights: BottomSheetHeights
+        public var heights: Heights
 
         // MARK: Initializers
         /// Initializes `BottomSheetSize`.
         public init(
-            width: CGFloat,
-            heights: BottomSheetHeights
+            width: ModalComponentDimension,
+            heights: Heights
         ) {
             self.width = width
             self.heights = heights
         }
-
-        // MARK: Screen Relative Size Measurement
-        public static func relativeMeasurementToPoints(
-            _ measurement: Self,
-            in screenSize: CGSize
-        ) -> Self {
-            .init(
-                width: screenSize.width * measurement.width,
-                heights: BottomSheetHeights(
-                    min: screenSize.height * measurement.heights.min,
-                    ideal: screenSize.height * measurement.heights.ideal,
-                    max: screenSize.height * measurement.heights.max
-                )
-            )
-        }
     }
 
-    // MARK: Bottom Sheet Heights
-    /// Bottom sheet heights.
-    public struct BottomSheetHeights: Equatable {
+    // MARK: Heights
+    /// Model that represents bottom sheet heights.
+    public struct Heights { // Values mustn't be variable to ensure that all are the same `case`s
         // MARK: Properties
         /// Minimum height.
-        public var min: CGFloat
+        public let min: ModalComponentDimension
 
         /// Ideal height.
-        public var ideal: CGFloat
+        public let ideal: ModalComponentDimension
 
         /// Maximum height.
-        public var max: CGFloat
+        public let max: ModalComponentDimension
 
         /// Indicates if model allows resizing.
         public var isResizable: Bool {
-            min != ideal ||
-            ideal != max
+            min.value != ideal.value ||
+            ideal.value != max.value
         }
 
         /// Indicates if model suggests fully fixed height.
         public var isFixed: Bool {
-            min == ideal &&
-            ideal == max
+            min.value == ideal.value &&
+            ideal.value == max.value
         }
 
-        func minOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - min }
+        func minOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - min.points(in: screenHeight) }
 
-        func idealOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - ideal }
+        func idealOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - ideal.points(in: screenHeight) }
 
-        func maxOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - max }
+        func maxOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - max.points(in: screenHeight) }
 
         func hiddenOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight }
 
         // MARK: Initializers
-        /// Initializes `Height` with values.
-        public init(
-            min: CGFloat,
-            ideal: CGFloat,
-            max: CGFloat
+        private init(
+            min: ModalComponentDimension,
+            ideal: ModalComponentDimension,
+            max: ModalComponentDimension
         ) {
             self.min = min
             self.ideal = ideal
             self.max = max
         }
 
-        /// Initializes `Height` with value.
-        public init(
+        /// Initializes `Heights` with point values.
+        public static func points(
+            min: CGFloat,
+            ideal: CGFloat,
+            max: CGFloat
+        ) -> Self {
+            self.init(
+                min: .point(min),
+                ideal: .point(ideal),
+                max: .point(max)
+            )
+        }
+
+        /// Initializes `Heights` with point value.
+        public static func points(
             _ value: CGFloat
-        ) {
-            self.min = value
-            self.ideal = value
-            self.max = value
+        ) -> Self {
+            self.init(
+                min: .point(value),
+                ideal: .point(value),
+                max: .point(value)
+            )
+        }
+
+        /// Initializes `Heights` with point values.
+        public static func fractions(
+            min: CGFloat,
+            ideal: CGFloat,
+            max: CGFloat
+        ) -> Self {
+            self.init(
+                min: .fraction(min),
+                ideal: .fraction(ideal),
+                max: .fraction(max)
+            )
+        }
+
+        /// Initializes `Heights` with fraction value.
+        public static func fraction(
+            _ value: CGFloat
+        ) -> Self {
+            self.init(
+                min: .fraction(value),
+                ideal: .fraction(value),
+                max: .fraction(value)
+            )
         }
     }
 

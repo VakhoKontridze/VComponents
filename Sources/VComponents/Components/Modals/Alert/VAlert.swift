@@ -23,8 +23,8 @@ struct VAlert<Content>: View
     @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    private var currentSize: VAlertUIModel.AlertSize {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).size(in: screenSize)
+    private var currentWidth: CGFloat {
+        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).points(in: screenSize.width)
     }
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -44,7 +44,7 @@ struct VAlert<Content>: View
     private let buttons: [any VAlertButtonProtocol]
 
     // MARK: Properties - Sizes
-    @State private var alertSize: CGFloat = 0
+    @State private var alertHeight: CGFloat = 0
     @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0
     
@@ -118,11 +118,11 @@ struct VAlert<Content>: View
 
                 buttonsScrollView
             })
-            .getSize({ alertSize = $0.height })
+            .getSize({ alertHeight = $0.height })
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentSize.width,
-            maxHeight: alertSize
+            maxWidth: currentWidth,
+            maxHeight: alertHeight
         )
         .safeAreaMargins(edges: .vertical, insets: safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
