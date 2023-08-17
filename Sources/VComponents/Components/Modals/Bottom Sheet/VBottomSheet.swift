@@ -20,11 +20,11 @@ struct VBottomSheet<Content>: View
     private let uiModel: VBottomSheetUIModel
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: screenSize.width)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
@@ -122,9 +122,9 @@ struct VBottomSheet<Content>: View
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fixes issue of safe areas and/or landscape
-                            maxHeight: currentHeightsObject.max.points(in: screenSize.height)
+                            maxHeight: currentHeightsObject.max.points(in: containerSize.height)
                         )
-                        .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
+                        .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -150,18 +150,18 @@ struct VBottomSheet<Content>: View
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
-                        maxHeight: currentHeightsObject.max.points(in: screenSize.height)
+                        maxHeight: currentHeightsObject.max.points(in: containerSize.height)
                     )
-                    .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
+                    .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
             })
         })
         .frame(width: currentWidth)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
                 .frame( // Max dimension fixes issue of safe areas and/or landscape
-                    maxHeight: currentHeightsObject.max.points(in: screenSize.height)
+                    maxHeight: currentHeightsObject.max.points(in: containerSize.height)
                 )
-                .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: screenSize.height))
+                .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
@@ -193,7 +193,7 @@ struct VBottomSheet<Content>: View
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable,
-            ifTransform: { $0.frame(height: screenSize.height - offset - headerHeight) },
+            ifTransform: { $0.frame(height: containerSize.height - offset - headerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
     }
@@ -255,14 +255,14 @@ struct VBottomSheet<Content>: View
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             _offset = {
                 switch newOffset {
-                case ...currentHeightsObject.maxOffset(in: screenSize.height):
-                    return currentHeightsObject.maxOffset(in: screenSize.height)
+                case ...currentHeightsObject.maxOffset(in: containerSize.height):
+                    return currentHeightsObject.maxOffset(in: containerSize.height)
                     
-                case currentHeightsObject.minOffset(in: screenSize.height)...:
+                case currentHeightsObject.minOffset(in: containerSize.height)...:
                     if uiModel.dismissType.contains(.pullDown) {
                         return newOffset
                     } else {
-                        return currentHeightsObject.minOffset(in: screenSize.height)
+                        return currentHeightsObject.minOffset(in: containerSize.height)
                     }
                     
                 default:
@@ -288,10 +288,10 @@ struct VBottomSheet<Content>: View
             guard let offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                screenHeight: screenSize.height,
+                containerHeight: containerSize.height,
                 heights: currentHeightsObject,
                 canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
-                pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: screenSize.height),
+                pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: containerSize.height),
                 offset: offset,
                 offsetBeforeDrag: offsetBeforeDrag,
                 translation: dragValue.translation.height
@@ -299,7 +299,7 @@ struct VBottomSheet<Content>: View
             
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                screenHeight: screenSize.height,
+                containerHeight: containerSize.height,
                 heights: currentHeightsObject,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
@@ -332,7 +332,7 @@ struct VBottomSheet<Content>: View
     private func getResetedHeight(
         from heights: VBottomSheetUIModel.Heights
     ) -> CGFloat {
-        heights.idealOffset(in: screenSize.height)
+        heights.idealOffset(in: containerSize.height)
     }
     
     // MARK: Assertion

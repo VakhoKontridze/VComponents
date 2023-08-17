@@ -20,8 +20,6 @@ extension View {
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -73,8 +71,6 @@ extension View {
     /// Modal component that presents toast, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     struct ToastItem: Identifiable {
     ///         let id: UUID = .init()
@@ -141,8 +137,6 @@ extension View {
     /// Modal component that presents toast, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// For the toast to appear, both `isPresented` must be true and `data` must not be nil.
     /// The `data` should not change after the presentation occurs.
@@ -216,8 +210,6 @@ extension View {
     /// Modal component that presents toast, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// For the toast to appear, both `isPresented` must be true and `error` must not be nil.
     /// The `error` should not change after the presentation occurs.

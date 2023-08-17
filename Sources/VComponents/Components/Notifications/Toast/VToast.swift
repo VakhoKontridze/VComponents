@@ -18,7 +18,7 @@ struct VToast: View {
     private let uiModel: VToastUIModel
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -103,7 +103,7 @@ struct VToast: View {
                 case .fixedFraction(let ratio, let alignment):
                     view
                         .frame(
-                            width: screenSize.width * ratio,
+                            width: containerSize.width * ratio,
                             alignment: alignment.toAlignment
                         )
                 }

@@ -37,8 +37,8 @@ public struct VSideBarUIModel {
     public var presentationEdge: PresentationEdge = .default
 
     /// Side bar sizes. Set to `default`.
-    /// Set to `0.75x1` screen ratios in portrait.
-    /// Set to `0.5x1` screen ratios in landscape.
+    /// Set to `0.75x1` container ratios in portrait.
+    /// Set to `0.5x1` container ratios in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(0.75),
@@ -115,7 +115,7 @@ public struct VSideBarUIModel {
     /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
     public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
 
-    func dragBackDismissDistance(in screenDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * screenDimension }
+    func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
 
     // MARK: Properties - Transition
     /// Appear animation.  Set to `easeInOut` with duration `0.3`.
@@ -249,8 +249,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `top`.
     ///
-    /// `sizes` are set to `0.75x1` screen ratios in portrait.
-    /// And to `0.5x1` screen ratios in landscape.
+    /// `sizes` are set to `0.75x1` container ratios in portrait.
+    /// And to `0.5x1` container ratios in landscape.
     ///
     /// `roundedCorners` is set to `bottomCorners`.
     public static var top: Self {
@@ -278,8 +278,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `bottom`.
     ///
-    /// `sizes` are set to `0.75x1` screen ratios in portrait.
-    /// And to `0.5x1` screen ratios in landscape.
+    /// `sizes` are set to `0.75x1` container ratios in portrait.
+    /// And to `0.5x1` container ratios in landscape.
     ///
     /// `roundedCorners` is set to `topCorners`.
     public static var bottom: Self {

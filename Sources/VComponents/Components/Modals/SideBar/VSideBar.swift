@@ -18,14 +18,14 @@ struct VSideBar<Content>: View where Content: View {
     private let uiModel: VSideBarUIModel
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: screenSize.width)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: screenSize.height)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: containerSize.height)
     }
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection

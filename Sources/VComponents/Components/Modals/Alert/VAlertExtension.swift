@@ -22,8 +22,6 @@ extension View {
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -79,8 +77,6 @@ extension View {
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -152,8 +148,6 @@ extension View {
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     struct AlertItem: Identifiable {
     ///         let id: UUID = .init()
@@ -236,8 +230,6 @@ extension View {
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     struct AlertItem: Identifiable {
     ///         let id: UUID = .init()
@@ -342,8 +334,6 @@ extension View {
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
     /// The `data` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
@@ -432,8 +422,6 @@ extension View {
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
     /// The `data` should not change after the presentation occurs.
@@ -545,8 +533,6 @@ extension View {
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
@@ -632,8 +618,6 @@ extension View {
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
     /// The `error` should not change after the presentation occurs.

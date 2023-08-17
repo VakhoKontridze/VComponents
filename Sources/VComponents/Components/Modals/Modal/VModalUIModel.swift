@@ -31,7 +31,7 @@ public struct VModalUIModel {
 
     // MARK: Properties - Global Layout
     /// Modal sizes.
-    /// Set to `0.9x0.6` screen ratios in portrait.
+    /// Set to `0.9x0.6` container ratios in portrait.
     /// Set to reverse in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(

@@ -20,8 +20,6 @@ extension View {
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -76,8 +74,6 @@ extension View {
     /// Side bar component that draws a from edge with background, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     struct SideBarItem: Identifiable {
     ///         let id: UUID = .init()

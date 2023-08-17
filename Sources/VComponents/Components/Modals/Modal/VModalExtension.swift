@@ -20,8 +20,6 @@ extension View {
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -74,8 +72,6 @@ extension View {
     /// Modal component that draws a background, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     struct ModalItem: Identifiable {
     ///         let id: UUID = .init()

@@ -16,11 +16,9 @@ import VCore
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
-    /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
+    /// Modal component that draws a background, and hosts pull-up content on the bottom of the container.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -89,12 +87,10 @@ extension View {
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
-    /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
+    /// Modal component that draws a background, and hosts pull-up content on the bottom of the container.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
+    /// 
     ///     struct BottomSheetItem: Identifiable {
     ///         let id: UUID = .init()
     ///     }

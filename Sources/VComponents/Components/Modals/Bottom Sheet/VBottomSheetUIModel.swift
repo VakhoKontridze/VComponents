@@ -31,8 +31,8 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Global Layout
     /// Bottom sheet sizes.
-    /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
-    /// Set to `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
+    /// Set to `1` ratio of container width, and `0.6`, `0.6`, and `0.9` ratios of container height in portrait.
+    /// Set to `0.7` ratio of container width and `0.9` ratio of container height in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(1),
@@ -121,9 +121,9 @@ public struct VBottomSheetUIModel {
 
     func pullDownDismissDistance(
         heights: Heights,
-        in screenHeight: CGFloat
+        in containerHeight: CGFloat
     ) -> CGFloat {
-        pullDownDismissDistanceMinHeightRatio * heights.min.points(in: screenHeight)
+        pullDownDismissDistanceMinHeightRatio * heights.min.points(in: containerHeight)
     }
 
     // MARK: Properties - Dimming View
@@ -207,13 +207,13 @@ public struct VBottomSheetUIModel {
             ideal.value == max.value
         }
 
-        func minOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - min.points(in: screenHeight) }
+        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.points(in: containerHeight) }
 
-        func idealOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - ideal.points(in: screenHeight) }
+        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.points(in: containerHeight) }
 
-        func maxOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight - max.points(in: screenHeight) }
+        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.points(in: containerHeight) }
 
-        func hiddenOffset(in screenHeight: CGFloat) -> CGFloat { screenHeight }
+        func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
         // MARK: Initializers
         private init(

@@ -109,7 +109,7 @@ public struct VToastUIModel {
         // MARK: Cases
         /// Toast only takes required width, and container wraps it's content.
         ///
-        /// Margin can be specified to space out toast from the edges of the screen.
+        /// Margin can be specified to space out toast from the edges of the container.
         case wrapped(margin: CGFloat)
 
         /// Toast stretches to full width with an alignment.
@@ -117,7 +117,7 @@ public struct VToastUIModel {
         /// Alignment may not be sufficient to affect multi-line text contents.
         /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
         ///
-        /// Margin can be specified to space out toast from the edges of the screen.
+        /// Margin can be specified to space out toast from the edges of the container.
         case stretched(alignment: HorizontalAlignment, margin: CGFloat)
 
         /// Toast takes specified width with an alignment.
@@ -126,7 +126,7 @@ public struct VToastUIModel {
         /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
         case fixedPoint(width: CGFloat, alignment: HorizontalAlignment)
 
-        /// Toast takes specified width relative to screen ratio, with an alignment.
+        /// Toast takes specified width relative to container ratio, with an alignment.
         ///
         /// Alignment may not be sufficient to affect multi-line text contents.
         /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.

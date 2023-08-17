@@ -20,11 +20,11 @@ struct VAlert<Content>: View
     private let uiModel: VAlertUIModel
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
+    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).points(in: screenSize.width)
+        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).points(in: containerSize.width)
     }
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -260,7 +260,7 @@ struct VAlert<Content>: View
     // MARK: Size that Fits
     private var isButtonContentLargerThanContainer: Bool {
         let safeAreaHeight: CGFloat =
-            screenSize.height -
+            containerSize.height -
             safeAreaInsets.top -
             safeAreaInsets.bottom
 
