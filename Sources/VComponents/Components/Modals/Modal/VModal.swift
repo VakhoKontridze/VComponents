@@ -26,16 +26,6 @@ struct VModal<Content>: View
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: screenSize.height)
     }
 
-    private var hasHeader: Bool {
-        headerLabel.hasLabel ||
-        uiModel.dismissType.hasButton
-    }
-
-    private var hasDivider: Bool {
-        hasHeader &&
-        uiModel.dividerHeight.toPoints(scale: displayScale) > 0
-    }
-
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
     @Environment(\.presentationHostGeometryReaderSize) private var screenSize: CGSize
 
@@ -51,9 +41,6 @@ struct VModal<Content>: View
     // MARK: Properties - Handles
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
-
-    // MARK: Properties - Label
-    @State private var headerLabel: VModalHeaderLabel<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -95,8 +82,6 @@ struct VModal<Content>: View
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
         )
-
-        .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: { headerLabel = $0 })
     }
     
     private var dimmingView: some View {
@@ -116,100 +101,23 @@ struct VModal<Content>: View
                     offset: uiModel.shadowOffset
                 )
 
-            VStack(spacing: 0, content: {
-                header
-                divider
-                contentView
-            })
-            .frame(maxHeight: .infinity, alignment: .top) // Keeps headers at the top when content is empty
-            .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
-                uiModel.cornerRadius,
-                corners: uiModel.roundedCorners
-                    .withReversedLeftAndRightCorners(
-                        uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                        layoutDirection == .rightToLeft
-                    )
-            )
+            content()
+                .padding(uiModel.contentMargins)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
+                    uiModel.cornerRadius,
+                    corners: uiModel.roundedCorners
+                        .withReversedLeftAndRightCorners(
+                            uiModel.reversesLeftAndRightCornersForRTLLanguages &&
+                            layoutDirection == .rightToLeft
+                        )
+                )
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentWidth,
             maxHeight: currentHeight
         )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
-    }
-    
-    @ViewBuilder private var header: some View {
-        if hasHeader {
-            HStack(
-                alignment: uiModel.headerAlignment,
-                spacing: uiModel.headerLabelAndCloseButtonSpacing,
-                content: {
-                    Group(content: {
-                        if uiModel.dismissType.contains(.leadingButton) {
-                            closeButton
-                        } else if uiModel.dismissType.contains(.trailingButton) {
-                            closeButtonCompensator
-                        }
-                    })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Group(content: {
-                        switch headerLabel {
-                        case .empty:
-                            EmptyView()
-
-                        case .title(let title):
-                            Text(title)
-                                .lineLimit(1)
-                                .foregroundColor(uiModel.headerTitleTextColor)
-                                .font(uiModel.headerTitleTextFont)
-
-                        case .label(let label):
-                            label()
-                        }
-                    })
-                    .layoutPriority(1)
-
-                    Group(content: {
-                        if uiModel.dismissType.contains(.trailingButton) {
-                            closeButton
-                        } else if uiModel.dismissType.contains(.leadingButton) {
-                            closeButtonCompensator
-                        }
-                    })
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-            )
-            .padding(uiModel.headerMargins)
-        }
-    }
-
-    private var closeButton: some View {
-        VRoundedButton(
-            uiModel: uiModel.closeButtonSubUIModel,
-            action: animateOut,
-            icon: ImageBook.xMark.renderingMode(.template)
-        )
-    }
-
-    private var closeButtonCompensator: some View {
-        Spacer()
-            .frame(width: uiModel.closeButtonSubUIModel.size.width)
-    }
-    
-    @ViewBuilder private var divider: some View {
-        if hasDivider {
-            Rectangle()
-                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
-                .padding(uiModel.dividerMargins)
-                .foregroundColor(uiModel.dividerColor)
-        }
-    }
-    
-    private var contentView: some View {
-        content()
-            .padding(uiModel.contentMargins)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: Animations
@@ -264,7 +172,7 @@ struct VModal_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
-            FullSizedContentPreview().previewDisplayName("Full-Sized Content")
+            WrappedContentPreview().previewDisplayName("Wrapped Content")
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
@@ -275,7 +183,6 @@ struct VModal_Previews: PreviewProvider {
     // Data
     private static func content() -> some View {
         ColorBook.accentBlue
-            .vModalHeaderTitle("Lorem Ipsum".pseudoRTL(languageDirection))
     }
     
     // Previews (Scenes)
@@ -288,7 +195,10 @@ struct VModal_Previews: PreviewProvider {
                     .vModal(
                         id: "preview",
                         isPresented: $isPresented,
-                        content: content
+                        content: {
+                            content()
+                                .onTapGesture(perform: { isPresented = false })
+                        }
                     )
             })
         }
@@ -304,23 +214,44 @@ struct VModal_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: .insettedContent,
                         isPresented: $isPresented,
-                        content: content
+                        content: {
+                            content()
+                                .onTapGesture(perform: { isPresented = false })
+                        }
                     )
             })
         }
     }
-    
-    private struct FullSizedContentPreview: View {
+
+    private struct WrappedContentPreview: View {
         @State private var isPresented: Bool = true
+        @State private var contentHeight: CGFloat?
 
         var body: some View {
             PreviewContainer(content: {
                 ModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
-                        uiModel: .fullSizedContent,
+                        uiModel: {
+                            var uiModel: VModalUIModel = .init()
+
+                            uiModel.contentMargins = VModalUIModel.Margins(15)
+
+                            if let contentHeight {
+                                let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
+
+                                uiModel.sizes.portrait.height = .point(height)
+                                uiModel.sizes.landscape.height = .point(height)
+                            }
+
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: {
+                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                                .getSize({ contentHeight = $0.height })
+                                .onTapGesture(perform: { isPresented = false })
+                        }
                     )
             })
         }

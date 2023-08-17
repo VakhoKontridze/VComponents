@@ -50,8 +50,6 @@ extension View {
     ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
     ///                 })
-    ///                 .vListStyle()
-    ///                 .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
     ///             }
     ///         )
     ///     }
@@ -129,8 +127,6 @@ extension View {
     ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
     ///                 })
-    ///                 .vListStyle()
-    ///                 .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
     ///             }
     ///         )
     ///     }

@@ -32,10 +32,7 @@ extension View {
     ///         .vModal(
     ///             id: "some_modal",
     ///             isPresented: $isPresented,
-    ///             content: {
-    ///                 ColorBook.accentBlue
-    ///                     .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///             }
+    ///             content: { ColorBook.accentBlue }
     ///         )
     ///     }
     ///
@@ -94,10 +91,7 @@ extension View {
     ///         .vModal(
     ///             id: "some_modal",
     ///             item: $modalItem,
-    ///             content: { item in
-    ///                 ColorBook.accentBlue
-    ///                     .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///             }
+    ///             content: { item in ColorBook.accentBlue }
     ///         )
     ///     }
     ///

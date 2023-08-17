@@ -72,66 +72,6 @@ public struct VModalUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Header
-    /// Header alignment. Set to `center`.
-    public var headerAlignment: VerticalAlignment = .center
-
-    /// Header margins. Set to `15` horizontal and `10` vertical.
-    public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
-
-    /// Spacing between header label and close button. Set to `10`.
-    public var headerLabelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
-
-    // MARK: Properties - Header - Title
-    /// Header title text color.
-    public var headerTitleTextColor: Color = ColorBook.primary
-
-    /// Header title text font. Set to `bold` `headline` (`17`).
-    public var headerTitleTextFont: Font = GlobalUIModel.Modals.headerTitleTextFont
-
-    // MARK: Properties - Header - Close Button
-    /// Model for customizing close button.
-    /// `size` is set to `30x30`,
-    /// `backgroundColors` are changed,
-    /// `iconSize` is set to `12x12`,
-    /// `iconColors` are changed,
-    /// `hitBox` is set to `zero`,
-    /// `haptic` is set to `nil`.
-    public var closeButtonSubUIModel: VRoundedButtonUIModel = {
-        var uiModel: VRoundedButtonUIModel = .init()
-
-        uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
-
-        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
-            enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
-            pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-            disabled: .clear // Doesn't matter
-        )
-
-        uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
-        uiModel.iconColors = VRoundedButtonUIModel.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
-
-        uiModel.hitBox = .zero
-
-#if os(iOS)
-        uiModel.haptic = nil
-#endif
-
-        return uiModel
-    }()
-
-    // MARK: Properties - Divider
-    /// Divider height. Set to `2` pixels.
-    ///
-    /// To hide divider, set to `0`, and remove header.
-    public var dividerHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.dividerHeightPx)
-
-    /// Divider color.
-    public var dividerColor: Color = GlobalUIModel.Common.dividerColor
-
-    /// Divider margins. Set to `zero`.
-    public var dividerMargins: Margins = .zero
-
     // MARK: Properties - Content
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
@@ -190,29 +130,18 @@ public struct VModalUIModel {
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Dismiss Type
-    /// Dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`.
+    /// Dismiss type, such as `backTap`.
     public struct DismissType: OptionSet {
         // MARK: Options
-        /// Leading.
-        public static let leadingButton: Self = .init(rawValue: 1 << 0)
-
-        /// Trailing.
-        public static let trailingButton: Self = .init(rawValue: 1 << 1)
-
         /// Back-tap.
         public static let backTap: Self = .init(rawValue: 1 << 2)
 
         // MARK: Options Initializers
         /// All.
-        public static var all: Self { [.leadingButton, .trailingButton, .backTap] }
+        public static var all: Self { [.backTap] }
 
-        /// Default value. Set to `trailingButton`.
-        public static var `default`: Self { .trailingButton }
-
-        /// Indicates if dismiss type includes a button.
-        public var hasButton: Bool {
-            [.leadingButton, .trailingButton].contains(where: { contains($0) })
-        }
+        /// Default value. Set to `[]`.
+        public static var `default`: Self { [] }
 
         // MARK: Properties
         public let rawValue: Int
@@ -221,6 +150,18 @@ public struct VModalUIModel {
         public init(rawValue: Int) {
             self.rawValue = rawValue
         }
+    }
+
+    // MARK: Methods
+    /// Calculates modal height that wraps content.
+    ///
+    /// It's important to ensure that large content doesn't overflow beyond the container edges.
+    /// Use `ScrollView` or `List` whenever appropriate.
+    public func contentWrappingHeight(
+        contentHeight: CGFloat
+    ) -> CGFloat {
+        contentMargins.verticalSum +
+        contentHeight
     }
 }
 
@@ -235,18 +176,6 @@ extension VModalUIModel {
         var uiModel: Self = .init()
         
         uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
-        
-        return uiModel
-    }
-    
-    /// `VModalUIModel` that stretches content to full size.
-    ///
-    /// It's recommended that you do not use header title or label with this configuration.
-    public static var fullSizedContent: Self {
-        var uiModel: Self = .init()
-        
-        uiModel.dismissType.remove(.leadingButton)
-        uiModel.dismissType.remove(.trailingButton)
         
         return uiModel
     }

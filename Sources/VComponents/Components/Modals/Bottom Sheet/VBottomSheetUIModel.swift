@@ -77,70 +77,8 @@ public struct VBottomSheetUIModel {
     /// Grabber color.
     public var grabberColor: Color = GlobalUIModel.Common.grabberColor
 
-    /// Grabber margins. Set to `10` top  and `0` bottom.
-    public var grabberMargins: VerticalMargins = .init(
-        top: 10,
-        bottom: 0
-    )
-
-    // MARK: Properties - Header
-    /// Header alignment. Set to `center`.
-    public var headerAlignment: VerticalAlignment = .center
-
-    /// Header title text color.
-    public var headerTitleTextColor: Color = ColorBook.primary
-
-    /// Header title text font. Set to `bold` `headline` (`17`).
-    public var headerTitleTextFont: Font = GlobalUIModel.Modals.headerTitleTextFont
-
-    /// Header margins. Set to `15` horizontal and `10` vertical.
-    public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
-
-    /// Spacing between header label and close button. Set to `10`.
-    public var headerLabelAndCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
-
-    // MARK: Properties - Close Button
-    /// Model for customizing close button.
-    /// `size` is set to `30x30`,
-    /// `backgroundColors` are changed,
-    /// `iconSize` is set to `12x12`,
-    /// `iconColors` are changed,
-    /// `hitBox` is set to `zero`,
-    /// `haptic` is set to `nil`.
-    public var closeButtonSubUIModel: VRoundedButtonUIModel = {
-        var uiModel: VRoundedButtonUIModel = .init()
-
-        uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
-
-        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
-            enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
-            pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-            disabled: .clear // Doesn't matter
-        )
-
-        uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
-        uiModel.iconColors = VRoundedButtonUIModel.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
-
-        uiModel.hitBox = .zero
-
-#if os(iOS)
-        uiModel.haptic = nil
-#endif
-
-        return uiModel
-    }()
-
-    // MARK: Properties - Divider
-    /// Divider height. Set to `2` pixels.
-    ///
-    /// To hide divider, set to `0`, and remove header.
-    public var dividerHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.dividerHeightPx)
-
-    /// Divider color.
-    public var dividerColor: Color = GlobalUIModel.Common.dividerColor
-
-    /// Divider margins. Set to `zero`.
-    public var dividerMargins: Margins = .zero
+    /// Grabber margins. Set to `15`s.
+    public var grabberMargins: VerticalMargins = .init(15)
 
     // MARK: Properties - Content
     /// Content margins. Set to `zero`.
@@ -225,7 +163,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Size
     /// Model that represents bottom sheet size.
-    public struct Size {
+    public struct Size: Equatable {
         // MARK: Properties
         /// Width.
         public var width: ModalComponentDimension
@@ -246,7 +184,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Heights
     /// Model that represents bottom sheet heights.
-    public struct Heights { // Values mustn't be variable to ensure that all are the same `case`s
+    public struct Heights: Equatable { // Values mustn't be variable to ensure that all are the same `case`s
         // MARK: Properties
         /// Minimum height.
         public let min: ModalComponentDimension
@@ -350,15 +288,9 @@ public struct VBottomSheetUIModel {
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
 
     // MARK: Dismiss Type
-    /// Dismiss type, such as `leadingButton`, `trailingButton`, `backTap`, or `pullDown`.
+    /// Dismiss type, such as `backTap`, or `pullDown`.
     public struct DismissType: OptionSet {
         // MARK: Options
-        /// Leading.
-        public static let leadingButton: Self = .init(rawValue: 1 << 0)
-
-        /// Trailing.
-        public static let trailingButton: Self = .init(rawValue: 1 << 1)
-
         /// Back-tap.
         public static let backTap: Self = .init(rawValue: 1 << 2)
 
@@ -366,24 +298,47 @@ public struct VBottomSheetUIModel {
         public static let pullDown: Self = .init(rawValue: 1 << 3)
 
         // MARK: Options Initializers
-        /// Default value. Set to `trailingButton` and `.pullDown`.
-        public static var `default`: Self { [.trailingButton, .pullDown] }
+        /// Default value. Set to  `pullDown`.
+        public static var `default`: Self { .pullDown }
 
         /// All.
-        public static var all: Self { [.leadingButton, .trailingButton, .backTap, .pullDown] }
+        public static var all: Self { [.backTap, .pullDown] }
 
         // MARK: Properties
         public let rawValue: Int
-
-        /// Indicates if dismiss type inclues a button.
-        public var hasButton: Bool {
-            [.leadingButton, .trailingButton].contains(where: { contains($0) })
-        }
 
         // MARK: Initializers
         public init(rawValue: Int) {
             self.rawValue = rawValue
         }
+    }
+
+    // MARK: Methods
+    /// Calculates bottom sheet height that wraps content.
+    ///
+    /// It's important to ensure that large content doesn't overflow beyond the container edges.
+    /// Use `ScrollView` or `List` whenever appropriate.
+    public func contentWrappingHeight(
+        contentHeight: CGFloat,
+        safeAreaInsets: EdgeInsets
+    ) -> CGFloat {
+        let grabberHeight: CGFloat = {
+            guard grabberSize.height > 0 else { return 0 }
+            return grabberSize.height + grabberMargins.verticalSum
+        }()
+
+        let contentSafeAreaMarginsVerticalSum: CGFloat = {
+            var result: CGFloat = 0
+            if contentSafeAreaMargins.contains(.top) { result += safeAreaInsets.top }
+            if contentSafeAreaMargins.contains(.bottom) { result += safeAreaInsets.bottom }
+            return result
+        }()
+
+        return
+            grabberHeight +
+            contentMargins.verticalSum +
+            contentSafeAreaMarginsVerticalSum +
+            contentHeight
     }
 }
 
@@ -401,31 +356,13 @@ extension VBottomSheetUIModel {
         
         return uiModel
     }
-    
-    /// `VBottomSheetUIModel` that hides only leaves grabber.
-    ///
-    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
-    ///
-    /// It's recommended that you do not use header title or label with this configuration.
-    public static var onlyGrabber: Self {
+
+    /// `VBottomSheetUIModel` that hides grabber.
+    public static var noGrabber: Self {
         var uiModel: Self = .init()
-        
-        uiModel.grabberMargins = VerticalMargins(15)
-        
-        uiModel.dismissType.remove(.leadingButton)
-        uiModel.dismissType.remove(.trailingButton)
-        
-        return uiModel
-    }
-    
-    /// `VBottomSheetUIModel` that stretches content to full size.
-    ///
-    /// It's recommended that you do not use header title or label with this configuration.
-    public static var fullSizedContent: Self {
-        var uiModel: Self = .onlyGrabber
-        
+
         uiModel.grabberSize.height = 0
-        
+
         return uiModel
     }
 }

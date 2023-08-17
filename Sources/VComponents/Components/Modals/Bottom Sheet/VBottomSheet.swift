@@ -30,21 +30,6 @@ struct VBottomSheet<Content>: View
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
     }
 
-    private var hasGrabber: Bool {
-        uiModel.grabberSize.height > 0 &&
-        (uiModel.dismissType.contains(.pullDown) || currentHeightsObject.isResizable)
-    }
-
-    private var hasHeader: Bool {
-        headerLabel.hasLabel ||
-        uiModel.dismissType.hasButton
-    }
-
-    private var hasDivider: Bool {
-        hasHeader &&
-        uiModel.dividerHeight.toPoints(scale: displayScale) > 0
-    }
-
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -57,19 +42,16 @@ struct VBottomSheet<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
 
-    // MARK: Properties - Label
-    @State private var headerLabel: VBottomSheetHeaderLabel<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
-
     // MARK: Properties - Content
     private let content: () -> Content
 
     // MARK: Properties - Sizes
-    @State private var grabberHeaderAndDividerHeight: CGFloat = 0
+    @State private var headerHeight: CGFloat = 0
 
     // MARK: Properties - Sizes - Offset
     // If `nil`, will be set from body render.
     @State private var _offset: CGFloat?
-    private var offset: CGFloat { _offset ?? getResetedHeight() }
+    private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }
 
     @State private var offsetBeforeDrag: CGFloat?
 
@@ -111,16 +93,19 @@ struct VBottomSheet<Content>: View
 
             interfaceOrientation = newValue
 
-            resetHeightFromOrientationChange()
+            resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
         })
+
+        .onChange(
+            of: uiModel.sizes,
+            perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(_interfaceOrientation: interfaceOrientation).heights) }
+        )
 
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
             perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
         )
-
-        .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: { headerLabel = $0 })
     }
     
     private var dimmingView: some View {
@@ -155,10 +140,8 @@ struct VBottomSheet<Content>: View
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
                     grabber
-                    header
-                    divider
                 })
-                .getSize({ grabberHeaderAndDividerHeight = $0.height })
+                .getSize({ headerHeight = $0.height })
 
                 contentView
             })
@@ -188,80 +171,12 @@ struct VBottomSheet<Content>: View
     }
     
     @ViewBuilder private var grabber: some View {
-        if hasGrabber {
+        if uiModel.grabberSize.height > 0 {
             RoundedRectangle(cornerRadius: uiModel.grabberCornerRadius)
                 .frame(size: uiModel.grabberSize)
                 .padding(uiModel.grabberMargins)
                 .foregroundColor(uiModel.grabberColor)
         }
-    }
-    
-    @ViewBuilder private var header: some View {
-        if hasHeader {
-            HStack(
-                alignment: uiModel.headerAlignment,
-                spacing: uiModel.headerLabelAndCloseButtonSpacing,
-                content: {
-                    Group(content: {
-                        if uiModel.dismissType.contains(.leadingButton) {
-                            closeButton
-                        } else if uiModel.dismissType.contains(.trailingButton) {
-                            closeButtonCompensator
-                        }
-                    })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Group(content: {
-                        switch headerLabel {
-                        case .empty:
-                            EmptyView()
-                            
-                        case .title(let title):
-                            Text(title)
-                                .lineLimit(1)
-                                .foregroundColor(uiModel.headerTitleTextColor)
-                                .font(uiModel.headerTitleTextFont)
-                            
-                        case .label(let label):
-                            label()
-                        }
-                    })
-                    .layoutPriority(1)
-                    
-                    Group(content: {
-                        if uiModel.dismissType.contains(.trailingButton) {
-                            closeButton
-                        } else if uiModel.dismissType.contains(.leadingButton) {
-                            closeButtonCompensator
-                        }
-                    })
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-            )
-            .padding(uiModel.headerMargins)
-        }
-    }
-    
-    @ViewBuilder private var divider: some View {
-        if hasDivider {
-            Rectangle()
-                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
-                .padding(uiModel.dividerMargins)
-                .foregroundColor(uiModel.dividerColor)
-        }
-    }
-
-    private var closeButton: some View {
-        VRoundedButton(
-            uiModel: uiModel.closeButtonSubUIModel,
-            action: animateOut,
-            icon: ImageBook.xMark.renderingMode(.template)
-        )
-    }
-
-    private var closeButtonCompensator: some View {
-        Spacer()
-            .frame(width: uiModel.closeButtonSubUIModel.size.width)
     }
     
     private var contentView: some View {
@@ -278,7 +193,7 @@ struct VBottomSheet<Content>: View
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable,
-            ifTransform: { $0.frame(height: screenSize.height - offset - grabberHeaderAndDividerHeight) },
+            ifTransform: { $0.frame(height: screenSize.height - offset - headerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
     }
@@ -404,16 +319,20 @@ struct VBottomSheet<Content>: View
     // MARK: Orientation
     private func syncOffsetWithProperStateIfNeeded() {
         DispatchQueue.main.async(execute: {
-            if _offset == nil { resetHeightFromOrientationChange() }
+            if _offset == nil { resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject) }
         })
     }
 
-    private func resetHeightFromOrientationChange() {
-        _offset = getResetedHeight()
+    private func resetHeightFromEnvironmentOrUIModelChange(
+        from heights: VBottomSheetUIModel.Heights
+    ) {
+        _offset = getResetedHeight(from: heights)
     }
 
-    private func getResetedHeight() -> CGFloat {
-        currentHeightsObject.idealOffset(in: screenSize.height)
+    private func getResetedHeight(
+        from heights: VBottomSheetUIModel.Heights
+    ) -> CGFloat {
+        heights.idealOffset(in: screenSize.height)
     }
     
     // MARK: Assertion
@@ -458,8 +377,8 @@ struct VBottomSheet_Previews: PreviewProvider {
             FixedHeightMinIdealMaxSmallPreview().previewDisplayName("Fixed Height (Small)")
             InsettedContentPreview().previewDisplayName("Insetted Content")
             ScrollableContentPreview().previewDisplayName("Scrollable Content")
-            OnlyGrabberPreview().previewDisplayName("Only Grabber")
-            FullSizedContentPreview().previewDisplayName("Full-Sized Content")
+            NoGrabberPreview().previewDisplayName("No Grabber")
+            WrappedContentPreview().previewDisplayName("Wrapped Content")
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
@@ -472,7 +391,6 @@ struct VBottomSheet_Previews: PreviewProvider {
     
     private static func content() -> some View {
         ColorBook.accentBlue
-            .vBottomSheetHeaderTitle(headerTitle)
     }
     
     // Previews (Scenes)
@@ -651,8 +569,6 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
                                 })
                             })
-                            .vListStyle()
-                            .vBottomSheetHeaderTitle(headerTitle)
                         }
                     )
             })
@@ -660,7 +576,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         }
     }
     
-    private struct FullSizedContentPreview: View {
+    private struct NoGrabberPreview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -669,7 +585,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
-                            var uiModel: VBottomSheetUIModel = .fullSizedContent
+                            var uiModel: VBottomSheetUIModel = .noGrabber
                             uiModel.contentIsDraggable = true
                             return uiModel
                         }(),
@@ -679,18 +595,58 @@ struct VBottomSheet_Previews: PreviewProvider {
             })
         }
     }
-    
-    private struct OnlyGrabberPreview: View {
+
+    private struct WrappedContentPreview: View {
+        @State private var safeAreaInsets: EdgeInsets = .init()
+
         @State private var isPresented: Bool = true
+        @State private var contentHeight: CGFloat?
+
+        @State private var count: Int = 1
 
         var body: some View {
             PreviewContainer(content: {
                 ModalLauncherView(isPresented: $isPresented)
+                    .getSafeAreaInsets({ safeAreaInsets = $0 })
                     .vBottomSheet(
                         id: "preview",
-                        uiModel: .onlyGrabber,
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.contentMargins = VBottomSheetUIModel.Margins(
+                                leading: 15,
+                                trailing: 15,
+                                top: 5,
+                                bottom: max(15, safeAreaInsets.bottom)
+                            )
+
+                            if let contentHeight {
+                                let height: CGFloat = uiModel.contentWrappingHeight(
+                                    contentHeight: contentHeight,
+                                    safeAreaInsets: safeAreaInsets
+                                )
+
+                                uiModel.sizes.portrait.heights = .points(height)
+                                uiModel.sizes.portrait.heights = .points(height)
+                            }
+
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: {
+                            VStack(spacing: 20, content: {
+                                ForEach(0..<count, id: \.self, content: { _ in
+                                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                                })
+
+                                Button(
+                                    "Toggle",
+                                    action: { count = count == 1 ? 2 : 1 }
+                                )
+                            })
+                            .fixedSize(horizontal: false, vertical: true)
+                            .getSize({ contentHeight = $0.height })
+                        }
                     )
             })
         }

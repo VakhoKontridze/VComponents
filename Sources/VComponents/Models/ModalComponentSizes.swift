@@ -58,9 +58,11 @@ public struct ModalComponentSizes<ModalSize> {
     }
 }
 
+extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
+
 // MARK: - Standard Modal Component Size
 /// Model that represents standard modal component size with width and height.
-public struct StandardModalComponentSize {
+public struct StandardModalComponentSize: Equatable {
     // MARK: Properties
     /// Width.
     public var width: ModalComponentDimension
@@ -85,7 +87,7 @@ public typealias SingleDimensionModalComponentSize = ModalComponentDimension
 
 // MARK: - Modal Component Dimension
 /// Enum that represents modal component dimension, either in points or fractions.
-public enum ModalComponentDimension {
+public enum ModalComponentDimension: Equatable {
     // MARK: Cases
     /// Point measurement.
     case point(CGFloat)

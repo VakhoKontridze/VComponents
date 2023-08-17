@@ -73,7 +73,7 @@ VModal
 
 - Keyboard handling is improved
 - Size configuration is improved to support fractions and points separately for width and height
-- Issue with header shifting down when content is empty is fixed
+- Headers are removed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - `blur` is removed
 - Dimming view now detects gestures even when clear
@@ -82,6 +82,7 @@ VBottomSheet
 
 - Keyboard handling is improved
 - Size configuration is improved to support fractions and points separately for width and heights
+- Headers are removed
 - `labelAndCloseButtonSpacing` is renamed to `headerLabelAndCloseButtonSpacing`
 - Dimming view now detects gestures even when clear
 

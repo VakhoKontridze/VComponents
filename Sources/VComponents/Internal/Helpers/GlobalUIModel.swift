@@ -77,8 +77,6 @@ struct GlobalUIModel {
         static let circularButtonLayerColorPressed: Color = .init(module: "CircularButton.Layer.Pressed")
         static let circularButtonLayerColorDisabled: Color = .init(module: "CircularButton.Layer.Disabled")
         
-        static let circularButtonIconGrayColor: Color = .init(module: "CircularButton.Icon.Gray")
-        
         static let circularButtonIconPrimaryColorEnabled: Color = ColorBook.primary
         static let circularButtonIconPrimaryColorPressed: Color = ColorBook.primary // Looks better
         static let circularButtonIconPrimaryColorDisabled: Color = ColorBook.primaryPressedDisabled
@@ -316,11 +314,7 @@ struct GlobalUIModel {
     
     // MARK: Modals
     struct Modals {
-        // MARK: Properties
-        static let labelCloseButtonSpacing: CGFloat = 10
-        
-        static let headerTitleTextFont: Font = .headline.weight(.bold) // 17 (iOS Only)
-        
+        // MARK: Properties        
         static let poppingAppearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
         static let poppingDisappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
         static let poppingAnimationScaleEffect: CGFloat = 1.01
