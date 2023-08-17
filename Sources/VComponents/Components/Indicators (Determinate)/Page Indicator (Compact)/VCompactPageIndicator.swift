@@ -145,7 +145,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     // There's something weird going on with animations here.
-    // Ideally, I would combine `dotsHorizontal` and `dotsVertical` into on property,
+    // Ideally, I would combine `dotsHorizontal` and `dotsVertical` into one property,
     // and get rid of `dots()`, since `ForEach` would be declared internally.
     // There, I would rely on `AnyLayout`, or at least, `HVStack` to conditionally change direction.
     // But unlike `VPageIndicator`, they don't work. Animation breaks and some dots disappear.
