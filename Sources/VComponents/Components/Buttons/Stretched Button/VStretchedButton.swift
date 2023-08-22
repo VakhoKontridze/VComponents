@@ -84,6 +84,7 @@ public struct VStretchedButton<Label>: View where Label: View {
                 let internalState: VStretchedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
+                    .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
                     .background(background(internalState: internalState)) // Has own rounding

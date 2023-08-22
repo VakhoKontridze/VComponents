@@ -95,6 +95,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
+                    .contentShape(Rectangle()) // Registers gestures even when clear
             }
         )
     }

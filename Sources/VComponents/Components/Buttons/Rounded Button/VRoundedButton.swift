@@ -81,6 +81,7 @@ public struct VRoundedButton<Label>: View where Label: View {
                 let internalState: VRoundedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
+                    .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(size: uiModel.size)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
                     .background(background(internalState: internalState)) // Has own rounding

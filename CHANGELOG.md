@@ -4,6 +4,7 @@
 
 General
 
+- Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 
 VCapsuleButton

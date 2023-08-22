@@ -95,6 +95,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                     rectangle(internalState: internalState)
                     buttonCaption(internalState: internalState)
                 })
+                .contentShape(Rectangle()) // Registers gestures even when clear
             }
         )
     }
