@@ -50,7 +50,7 @@ extension View {
     ///         .vSideBar(
     ///             id: "some_side_bar",
     ///             uiModel: {
-    ///                 var uiModel: VSideBarUIModel = .init()
+    ///                 var uiModel: VSideBarUIModel = .leading
     ///
     ///                 uiModel.contentSafeAreaMargins = {
     ///                     if interfaceOrientation.isLandscape {
