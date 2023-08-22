@@ -72,9 +72,9 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Modals
 
 <p>
-    <img tag="VModal" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562724-89709ed5-0997-46ef-9de1-0802c2cfc8d8.jpg">
-    <img tag="VBottomSheet" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562707-ece3819b-3cfe-4f1a-b492-de1e929982e0.jpg">
-    <img tag="VSideBar" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562728-7e1e88cd-cb99-4f9f-abf7-e83fc96494cf.jpg">
+    <img tag="VModal" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a55253dc-876a-41b1-9d9a-5ad41ba9d2ad">
+    <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cf383c00-5ba0-40d5-a845-6b22844a7026">
+    <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cf504bfe-7c12-443e-b6cf-17a625a00cad">
     <img tag="VAlert" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562697-93fb57eb-6e15-4fc9-bc0a-d495955f02b2.jpg">
     <img tag="VMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562722-13bc695d-6672-401c-b511-383469ed0b9d.jpg">
     <img tag="VContextMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
