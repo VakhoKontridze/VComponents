@@ -14,6 +14,10 @@ import SwiftUI
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///
+    /// Modal component that presents menu of actions, and hosts preview.
+    ///
+    /// Optionally, preview can be presented with methods that have `preview` argument.
+    ///
     ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
     ///         case red, green, blue
     ///
@@ -58,44 +62,7 @@ extension View {
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///
-    ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
-    ///         case red, green, blue
-    ///
-    ///         var id: Int { rawValue }
-    ///         var stringRepresentation: String { .init(describing: self).capitalized }
-    ///     }
-    ///
-    ///     @State private var selection: RGBColor = .red
-    ///
-    ///     var body: some View {
-    ///         Text("Lorem Ipsum")
-    ///             .vContextMenu(
-    ///                 sections: {
-    ///                     VMenuGroupSection(headerTitle: "Section 1", rows: {
-    ///                         VMenuRow(action: { print("1") }, title: "One")
-    ///                         VMenuRow(action: { print("2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///                         VMenuExpandingRow(title: "Three...", sections: {
-    ///                             VMenuGroupSection(rows: {
-    ///                                 VMenuRow(action: { print("3.1") }, title: "One")
-    ///                                 VMenuRow(action: { print("3.2") }, title: "Two", icon: Image(systemName: "swift"))
-    ///                             })
-    ///                         })
-    ///                     })
-    ///
-    ///                     VMenuPickerSection(selection: $selection)
-    ///                 },
-    ///                 preview: {
-    ///                     ZStack(content: {
-    ///                         Color.blue
-    ///                             .frame(width: 300, height: 100)
-    ///
-    ///                         Text("Selection: \(selection.stringRepresentation)")
-    ///                             .foregroundColor(.white)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vContextMenu(sections:)`.
     public func vContextMenu<PreviewContent>(
         @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol],
         preview: () -> PreviewContent

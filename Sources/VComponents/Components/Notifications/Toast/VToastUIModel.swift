@@ -104,7 +104,7 @@ public struct VToastUIModel {
     public init() {}
 
     // MARK: Width Type
-    /// Enum that represents width type, such as `wrapped`, `stretched`, `fixedPoint`, or `fixedFraction`.
+    /// Enumeration that represents width type, such as `wrapped`, `stretched`, `fixedPoint`, or `fixedFraction`.
     public enum WidthType {
         // MARK: Cases
         /// Toast only takes required width, and container wraps it's content.
@@ -148,7 +148,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Corner Radius Type
-    /// Enum that represents corner radius, such as `capsule` or `rounded`.
+    /// Enumeration that represents corner radius, such as `capsule` or `rounded`.
     public enum CornerRadiusType {
         // MARK: Cases
         /// Capsule.
@@ -165,7 +165,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Text Line Type
-    /// Enum that represents text line, such as `singleLine` or `multiLine`.
+    /// Enumeration that represents text line, such as `singleLine` or `multiLine`.
     public enum TextLineType {
         // MARK: Cases
         /// Single-line.
@@ -195,7 +195,7 @@ public struct VToastUIModel {
     public typealias Margins = EdgeInsets_HorizontalVertical
 
     // MARK: Presentation Edge
-    /// Enum that represents presentation edge, such as `top` or `bottom`.
+    /// Enumeration that represents presentation edge, such as `top` or `bottom`.
     public enum PresentationEdge: Int, CaseIterable {
         // MARK: Cases
         /// Presentation from top.

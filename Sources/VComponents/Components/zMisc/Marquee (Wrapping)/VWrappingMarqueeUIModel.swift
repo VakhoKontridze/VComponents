@@ -18,7 +18,7 @@ public struct VWrappingMarqueeUIModel {
 
     /// Spacing between wrapped content. Set to `20`.
     ///
-    /// If you set `inset` to non-`0` value or use `VWrappingMarqueeUIModel.insettedGradient`,
+    /// If `inset` is set to non-`0` value or `VWrappingMarqueeUIModel.insettedGradient` is used,
     /// it's better to set `spacing` to `0`.
     public var spacing: CGFloat = 20
 
@@ -68,7 +68,7 @@ public struct VWrappingMarqueeUIModel {
     public init() {}
 
     // MARK: Duration Type
-    /// Enum that represents animation duration, such as `duration` or `velocity`.
+    /// Enumeration that represents animation duration, such as `duration` or `velocity`.
     public enum DurationType {
         // MARK: Cases
         /// Duration.

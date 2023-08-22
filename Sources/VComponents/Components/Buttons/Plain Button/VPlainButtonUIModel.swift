@@ -36,7 +36,7 @@ public struct VPlainButtonUIModel {
     /// Icon size. Set to `24x24`.
     ///
     /// This icon size is calibrated for `init` with icon.
-    /// If you wish to use `init` with icon and title, scale it down a bit.
+    /// For `init` with icon and title, this property should be scaled down.
     public var iconSize: CGSize = .init(dimension: 24)
 
     /// Icon colors.

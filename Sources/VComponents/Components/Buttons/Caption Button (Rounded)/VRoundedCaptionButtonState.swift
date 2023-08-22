@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - V Rounded Caption Button Internal State
-/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
+/// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 public typealias VRoundedCaptionButtonInternalState = GenericState_EnabledPressedDisabled

@@ -16,9 +16,7 @@ import VCore
 extension View {
     /// Presents toast when `Bool` is `true`.
     ///
-    /// Modal component that presents toast, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
+    /// Modal component that presents toast.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -34,7 +32,9 @@ extension View {
     ///         )
     ///     }
     ///
-    /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
+    /// Width can be configured via `widthType` in UI model.
+    ///
+    /// Highlights cab be applied using `success`, `warning`, and `error` instances of `VToastUIModel`.
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -68,29 +68,7 @@ extension View {
 extension View {
     /// Presents toast using the item as data source for content.
     ///
-    /// Modal component that presents toast, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    ///     struct ToastItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State private var toastItem: ToastItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { toastItem = ToastItem() },
-    ///             title: "Present"
-    ///         )
-    ///         .vToast(
-    ///             id: "some_toast",
-    ///             item: $toastItem,
-    ///             text: { item in "Lorem ipsum dolor sit amet" }
-    ///         )
-    ///     }
-    ///
-    /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
+    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<Item>(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -134,36 +112,7 @@ extension View {
 extension View {
     /// Presents toast when `Bool` is `true` using data to produce content.
     ///
-    /// Modal component that presents toast, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// For the toast to appear, both `isPresented` must be true and `data` must not be nil.
-    /// The `data` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     struct ToastData {}
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var toastData: ToastData?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 toastData = ToastData()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vToast(
-    ///             id: "some_toast",
-    ///             isPresented: $isPresented,
-    ///             presenting: toastData,
-    ///             text: { data in "Lorem ipsum dolor sit amet" }
-    ///         )
-    ///     }
-    ///
-    /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
+    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<T>(
         id: String,
         uiModel: VToastUIModel = .init(),
@@ -207,34 +156,7 @@ extension View {
 extension View {
     /// Presents toast when `Bool` is `true` using `Error`
     ///
-    /// Modal component that presents toast, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// For the toast to appear, both `isPresented` must be true and `error` must not be nil.
-    /// The `error` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var toastError: Error?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 toastError = SomeError()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vToast(
-    ///             id: "some_toast",
-    ///             isPresented: $isPresented,
-    ///             error: toastError,
-    ///             text: { error in "Lorem ipsum dolor sit amet" }
-    ///         )
-    ///     }
-    ///
-    /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
+    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<E>(
         id: String,
         uiModel: VToastUIModel = .init(),

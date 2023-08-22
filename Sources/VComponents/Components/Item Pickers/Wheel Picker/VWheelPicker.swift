@@ -13,8 +13,6 @@ import VCore
 ///
 /// Best suited for `5`+ items.
 ///
-/// UI Model, header, and footer can be passed as parameters.
-///
 ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
 ///         case red, green, blue
 ///
@@ -32,7 +30,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// If you make selection conform to `CaseIterable` and `StringRepresentable`, you cal use the following API:
+/// If selections conforms to `CaseIterable` and `StringRepresentable`, shorthand API can be used.
 ///
 ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
 ///         case red, green, blue

@@ -60,7 +60,7 @@ public struct VBouncingMarqueeUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    /// Enum that represents animation duration, such as `duration` or `velocity`.
+    /// Enumeration that represents animation duration, such as `duration` or `velocity`.
     public typealias DurationType = VWrappingMarqueeUIModel.DurationType
 }
 

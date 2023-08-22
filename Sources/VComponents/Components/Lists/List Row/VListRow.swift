@@ -9,14 +9,12 @@ import SwiftUI
 import VCore
 
 // MARK: - V List Row
-/// `View` in container that presents rows of data arranged in a single column.
+/// Row component in container that presents rows of data arranged in a single column.
 ///
 /// Component is designed to be used within `List` and `ScrollView`.
 /// When creating a `List`, `.vListStyle()` modifier must be applied.
 ///
-/// UI Model can be passed as parameter.
-///
-/// Default `List` can be created as:
+/// ListRow can be placed in `List` to manage dividers.
 ///
 ///     List(content: {
 ///         ForEach(titles, id: \.self, content: { title in
@@ -27,7 +25,7 @@ import VCore
 ///     })
 ///     .vListStyle()
 ///
-/// Default `ScrollView` can be created as:
+/// ListRow can be placed in `ScrollView` for additional customization.
 ///
 ///     ScrollView(content: {
 ///         LazyVStack(spacing: 0, content: {
@@ -39,7 +37,7 @@ import VCore
 ///         })
 ///     })
 ///
-/// "Static list" can be created as:
+/// Static, non-scrollable list layout can be created by wrapping ListRow in vertical stacks.
 ///
 ///     LazyVStack(spacing: 0, content: {
 ///         ForEach(titles, id: \.self, content: { title in
@@ -49,22 +47,11 @@ import VCore
 ///         })
 ///     })
 ///
-/// Separators can be removed in the following way:
+/// Separators can be customized or removed entirely via UI model.
 ///
 ///     List(content: {
 ///         ForEach(titles, id: \.self, content: { title in
-///             VListRow(uiModel: .none, content: {
-///                 Text(title)
-///             })
-///         })
-///     })
-///     .vListStyle()
-///
-/// `iOS` `15`-like enclosed `List` can be created as:
-///
-///     List(content: {
-///         ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
-///             VListRow(uiModel: .rowEnclosingSeparators(isFirst: i == 0), content: {
+///             VListRow(uiModel: .noSeparators(), content: {
 ///                 Text(title)
 ///             })
 ///         })

@@ -19,7 +19,7 @@ typealias VSegmentedPickerInternalState = GenericState_EnabledDisabled
 typealias VSegmentedPickerSelectionIndicatorInternalState = GenericState_EnabledPressedDisabled
 
 // MARK: - V Segmented Picker Row State
-/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
+/// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public typealias VSegmentedPickerRowInternalState = GenericState_DeselectedSelectedPressedDisabled

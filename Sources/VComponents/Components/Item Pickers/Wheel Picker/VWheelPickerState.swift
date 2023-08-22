@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - V Wheel Picker State
-/// Enum that represents state, such as `enabled`, or `disabled`.
+/// Enumeration that represents state, such as `enabled`, or `disabled`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

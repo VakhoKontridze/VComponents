@@ -11,9 +11,7 @@ import VCore
 // MARK: - V Stepper
 /// Value picker component that selects value from a bounded linear range of values.
 ///
-/// UI Model, step, and state can be passed as parameters.
-///
-///     @State private var value: Double = 0.5
+///     @State private var value: Double = 5
 ///
 ///     var body: some View {
 ///         VStepper(

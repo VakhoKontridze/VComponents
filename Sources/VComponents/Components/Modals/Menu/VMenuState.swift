@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - V Menu Internal State
-/// Enum that represents state, such as `enabled` or `disabled`.
+/// Enumeration that represents state, such as `enabled` or `disabled`.
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

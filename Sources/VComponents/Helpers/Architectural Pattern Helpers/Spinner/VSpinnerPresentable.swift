@@ -11,7 +11,7 @@ import SwiftUI
 /// Protocol for presenting a `VSpinner`.
 ///
 /// In `MVP`, `VIP`, and `VIPER` architectures, this protocol is conformed to by a `Presenter`.
-/// in `MVVM` architecture, this protocol is conformed to by a `ViewModel.`
+/// in `MVVM` architecture, this protocol is conformed to by a `ViewModel`.
 ///
 ///     struct ContentView: View {
 ///         @StateObject private var presenter: Presenter = .init()

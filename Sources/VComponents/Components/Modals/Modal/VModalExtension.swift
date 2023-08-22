@@ -18,8 +18,6 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -34,6 +32,42 @@ extension View {
     ///         )
     ///     }
     ///
+    /// Modal can also wrap it's content by reading geometry size.
+    /// Although, the possibility of smaller screen sizes should be considered.
+    ///
+    ///     @State private var isPresented: Bool = false
+    ///     @State private var contentHeight: CGFloat?
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { isPresented = true },
+    ///             title: "Present"
+    ///         )
+    ///         .vModal(
+    ///             id: "some_modal",
+    ///             uiModel: {
+    ///                 var uiModel: VModalUIModel = .init()
+    ///
+    ///                 uiModel.contentMargins = VModalUIModel.Margins(15)
+    ///
+    ///                 if let contentHeight {
+    ///                     let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
+    ///
+    ///                     uiModel.sizes.portrait.height = .point(height)
+    ///                     uiModel.sizes.landscape.height = .point(height)
+    ///                 }
+    ///
+    ///                 return uiModel
+    ///             }(),
+    ///             isPresented: $isPresented,
+    ///             content: {
+    ///                 Text("...")
+    ///                     .getSize({ contentHeight = $0.height })
+    ///                     .onTapGesture(perform: { isPresented = false })
+    ///             }
+    ///         )
+    ///     }
+    ///     
     public func vModal<Content>(
         id: String,
         uiModel: VModalUIModel = .init(),
@@ -69,28 +103,7 @@ extension View {
 extension View {
     /// Presents modal using the item as data source for content.
     ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    ///     struct ModalItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State private var modalItem: ModalItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { modalItem = ModalItem() },
-    ///             title: "Present"
-    ///         )
-    ///         .vModal(
-    ///             id: "some_modal",
-    ///             item: $modalItem,
-    ///             content: { item in ColorBook.accentBlue }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vModal(id:isPresented:content:)`.
     public func vModal<Item, Content>(
         id: String,
         uiModel: VModalUIModel = .init(),

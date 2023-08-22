@@ -14,14 +14,14 @@ import VCore
 @available(watchOS, unavailable)
 public struct VCheckBoxUIModel {
     // MARK: Properties - Global Layout
-    /// Checkbox dimension. Set to `16.`
+    /// Checkbox dimension. Set to `16`.
     public var dimension: CGFloat = GlobalUIModel.StatePickers.dimension
 
     /// Spacing between checkbox and label. Set to `0`.
     public var checkBoxAndLabelSpacing: CGFloat = 0
 
     // MARK: Properties - Corners
-    /// Checkbox corner radius. Set to `5.`
+    /// Checkbox corner radius. Set to `5`.
     public var cornerRadius: CGFloat = 4
 
     // MARK: Properties - Fill
@@ -37,7 +37,7 @@ public struct VCheckBoxUIModel {
     )
 
     // MARK: Properties - Border
-    /// Checkbox border width. Set to `1.`
+    /// Checkbox border width. Set to `1`.
     public var borderWidth: CGFloat = 1
 
     /// Border colors.
@@ -52,7 +52,7 @@ public struct VCheckBoxUIModel {
     )
 
     // MARK: Properties - Checkmark
-    /// Checkmark icon dimension. Set to `9.`
+    /// Checkmark icon dimension. Set to `9`.
     public var checkmarkIconDimension: CGFloat = 9
 
     /// Checkmark icon colors.

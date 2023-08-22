@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
 ///
-/// Unlike native menu, this components doesn't take reverse row order.
-///
 ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
 ///         case red, green, blue
 ///
@@ -39,6 +37,7 @@ import VCore
 ///         })
 ///     }
 ///
+/// Unlike native menu, menu doesn't reverse actions.
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

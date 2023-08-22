@@ -18,8 +18,6 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the container.
     ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -31,7 +29,7 @@ extension View {
     ///             id: "some_bottom_sheet",
     ///             uiModel: {
     ///                 var uiModel: VBottomSheetUIModel = .init()
-    ///                 uiModel.autoresizesContent = true
+    ///                 uiModel.autoresizesContent = true // For scrollable views
     ///                 return uiModel
     ///             }(),
     ///             isPresented: $isPresented,
@@ -48,6 +46,54 @@ extension View {
     ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
     ///                 })
+    ///             }
+    ///         )
+    ///     }
+    ///
+    /// Bottom sheet can also wrap it's content by reading geometry size.
+    /// Although, the possibility of smaller screen sizes should be considered.
+    ///
+    ///     @State private var safeAreaInsets: EdgeInsets = .init()
+    ///
+    ///     @State private var isPresented: Bool = true
+    ///     @State private var contentHeight: CGFloat?
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { isPresented = true },
+    ///             title: "Present"
+    ///         )
+    ///         .getSafeAreaInsets({ safeAreaInsets = $0 })
+    ///
+    ///         .vBottomSheet(
+    ///             id: "preview",
+    ///             uiModel: {
+    ///                 var uiModel: VBottomSheetUIModel = .init()
+    ///
+    ///                 uiModel.contentMargins = VBottomSheetUIModel.Margins(
+    ///                     leading: 15,
+    ///                     trailing: 15,
+    ///                     top: 5,
+    ///                     bottom: max(15, safeAreaInsets.bottom)
+    ///                 )
+    ///
+    ///                 if let contentHeight {
+    ///                     let height: CGFloat = uiModel.contentWrappingHeight(
+    ///                         contentHeight: contentHeight,
+    ///                         safeAreaInsets: safeAreaInsets
+    ///                     )
+    ///
+    ///                     uiModel.sizes.portrait.heights = .points(height)
+    ///                     uiModel.sizes.portrait.heights = .points(height)
+    ///                 }
+    ///
+    ///                 return uiModel
+    ///             }(),
+    ///             isPresented: $isPresented,
+    ///             content: {
+    ///                 Text("...")
+    ///                     .fixedSize(horizontal: false, vertical: true)
+    ///                     .getSize({ contentHeight = $0.height })
     ///             }
     ///         )
     ///     }
@@ -87,46 +133,7 @@ extension View {
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
-    /// Modal component that draws a background, and hosts pull-up content on the bottom of the container.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    /// 
-    ///     struct BottomSheetItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State private var bottomSheetItem: BottomSheetItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { bottomSheetItem = BottomSheetItem() },
-    ///             title: "Present"
-    ///         )
-    ///         .vBottomSheet(
-    ///             id: "some_bottom_sheet",
-    ///             uiModel: {
-    ///                 var uiModel: VBottomSheetUIModel = .init()
-    ///                 uiModel.autoresizesContent = true
-    ///                 return uiModel
-    ///             }(),
-    ///             item: $bottomSheetItem,
-    ///             content: { item in
-    ///                 ScrollView(content: {
-    ///                     VStack(spacing: 0, content: {
-    ///                         ForEach(0..<20, content: { number in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-    ///                                 Text(String(number))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
-    ///                         })
-    ///
-    ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
-    ///                     })
-    ///                 })
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vBottomSheet(id:isPresented:content:)`.
     public func vBottomSheet<Item, Content>(
         id: String,
         uiModel: VBottomSheetUIModel = .init(),

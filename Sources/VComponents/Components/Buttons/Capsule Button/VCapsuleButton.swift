@@ -9,11 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Capsule Button
-/// Small colored button component that performs action when triggered.
-///
-/// Component can be initialized with title, icon and title, and label.
-///
-/// UI Model can be passed as parameter.
+/// Colored button component that wraps content and performs action when triggered.
 ///
 ///     var body: some View {
 ///         VCapsuleButton(

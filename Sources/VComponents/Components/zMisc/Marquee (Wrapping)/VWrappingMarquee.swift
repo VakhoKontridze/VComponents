@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Wrapping Marquee
 /// Container that automatically scrolls and wraps it's content edge-to-edge.
 ///
-/// UI model can be passed as parameter.
-///
 ///     var body: some View {
 ///         VWrappingMarquee(
 ///             uiModel: .insettedGradient,
@@ -21,7 +19,7 @@ import VCore
 ///                     Image(systemName: "swift")
 ///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
 ///                 })
-///                 .drawingGroup() // For Images
+///                 .drawingGroup() // For `Image`
 ///             }
 ///         )
 ///     }
@@ -177,10 +175,10 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         
         return BasicAnimation(
             curve: uiModel.animationCurve,
-            duration: uiModel.animationDurationType.duration(width: width)
+            duration: uiModel.animationDurationType.duration(width: width),
+            delay: uiModel.animationDelay
         )
         .toSwiftUIAnimation
-        .delay(uiModel.animationDelay)
         .repeatForever(autoreverses: false)
         .delay(uiModel.animationInitialDelay)
     }

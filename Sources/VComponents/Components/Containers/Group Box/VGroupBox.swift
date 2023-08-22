@@ -9,18 +9,17 @@ import SwiftUI
 import VCore
 
 // MARK: - V Group Box
-/// Container component that draws a background and hosts content.
+/// Container component that draws background and hosts content.
 ///
-/// UI Model can be passed as parameter.
-///
-/// If content is passed during `init`, `VGroupBox` would resize according to the size of the content. If content is not passed, `VGroupBox` would expand to occupy maximum space.
+/// If content is passed during `init`, `VGroupBox` would resize according to the size of the content.
+/// If content is not passed, `VGroupBox` would expand to occupy maximum space.
 ///
 ///     var body: some View {
 ///         ZStack(content: {
 ///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VGroupBox(content: {
-///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
+///                 Text("...")
 ///                     .multilineTextAlignment(.center)
 ///             })
 ///             .padding()

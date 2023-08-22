@@ -16,11 +16,12 @@ import VCore
 extension View {
     /// Presents alert when `Bool` is `true`.
     ///
-    /// Modal component that presents alert, and hosts content.
+    /// Modal component that presents alert with actions, and hosts content.
     ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
+    /// Alert can have one, two, or many buttons.
+    /// Two buttons are stacked horizontally, while more are stacked vertically.
     ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
+    /// Optionally, content can be presented with methods that have `content` argument.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -72,36 +73,7 @@ extension View {
     
     /// Presents alert when `Bool` is `true`.
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///
-    ///     @State private var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             title: "Lorem Ipsum",
-    ///             message: "Lorem ipsum dolor sit amet",
-    ///             content: { VTextField(text: $text) },
-    ///             actions: {
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                     .disabled(text.isEmpty)
-    ///
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -143,35 +115,7 @@ extension View {
 extension View {
     /// Presents alert using the item as data source for content.
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    ///     struct AlertItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State private var alertItem: AlertItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { alertItem = AlertItem() },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             item: $alertItem,
-    ///             title: { item in "Lorem Ipsum" },
-    ///             message: { item in "Lorem ipsum dolor sit amet" },
-    ///             actions: { item in
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -225,40 +169,7 @@ extension View {
     
     /// Presents alert using the item as data source for content.
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    ///     struct AlertItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State private var alertItem: AlertItem?
-    ///
-    ///     @State private var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { alertItem = AlertItem() },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             item: $alertItem,
-    ///             title: { item in "Lorem Ipsum" },
-    ///             message: { item in "Lorem ipsum dolor sit amet" },
-    ///             content: { item in VTextField(text: $text) },
-    ///             actions: { item in
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                     .disabled(text.isEmpty)
-    ///
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -328,42 +239,7 @@ extension View {
 extension View {
     /// Presents alert when `Bool` is `true` using data to produce content.
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
-    /// The `data` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     struct AlertData {}
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var alertData: AlertData?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 alertData = AlertData()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             presenting: $alertData,
-    ///             title: { data in "Lorem Ipsum" },
-    ///             message: { data in "Lorem ipsum dolor sit amet" },
-    ///             actions: { data in
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<T>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -417,47 +293,7 @@ extension View {
     
     /// Presents alert when `Bool` is `true` using data to produce content.
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
-    /// The `data` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     struct AlertData {}
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var alertData: AlertData?
-    ///
-    ///     @State private var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 alertData = AlertData()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             presenting: $alertData,
-    ///             title: { data in "Lorem Ipsum" },
-    ///             message: { data in "Lorem ipsum dolor sit amet" },
-    ///             content: { data in VTextField(text: $text) },
-    ///             actions: { data in
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                     .disabled(text.isEmpty)
-    ///
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<T, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -527,37 +363,7 @@ extension View {
 extension View {
     /// Presents alert when `Bool` is `true` using `Error`
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
-    /// The `error` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var alertError: Error?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 alertError = SomeError()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             presenting: $alertError,
-    ///             title: { error in "Lorem Ipsum" },
-    ///             message: { error in "Lorem ipsum dolor sit amet" },
-    ///             actions: { error in }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E>(
         id: String,
         uiModel: VAlertUIModel = .init(),
@@ -613,38 +419,7 @@ extension View {
     
     /// Presents alert when `Bool` is `true` using `Error`
     ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// UI Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
-    /// The `error` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var alertError: Error?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: {
-    ///                 isPresented = true
-    ///                 alertError = SomeError()
-    ///             },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             presenting: $alertError,
-    ///             title: { error in "Lorem Ipsum" },
-    ///             message: { error in "Lorem ipsum dolor sit amet" },
-    ///             content: { error in Image("Error") },
-    ///             actions: { error in }
-    ///         )
-    ///     }
-    ///
+    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E, Content>(
         id: String,
         uiModel: VAlertUIModel = .init(),

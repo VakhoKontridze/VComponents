@@ -9,13 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Radio Button
-/// State picker component that toggles between off, on, or disabled states, and displays label.
-///
-/// Component can be initialized without label, with title, or label.
-///
-/// UI Model can be passed as parameter.
-///
-/// `Bool` can also be passed as state.
+/// State picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VRadioButtonState = .on
 ///
@@ -26,7 +20,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// Component can be also initialized with `Bool`:
+/// Component can be also initialized with `Bool`.
 ///
 ///     @State private var isOn: Bool = true
 ///

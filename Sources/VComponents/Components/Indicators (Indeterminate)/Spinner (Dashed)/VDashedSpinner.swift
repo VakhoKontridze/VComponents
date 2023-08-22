@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Dashed Spinner
 /// Indicator component that indicates activity.
 ///
-/// UI model can be passed as parameter.
-///
 ///     var body: some View {
 ///         VDashedSpinner()
 ///     }

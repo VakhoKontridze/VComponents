@@ -86,7 +86,7 @@ public struct StandardModalComponentSize: Equatable {
 public typealias SingleDimensionModalComponentSize = ModalComponentDimension
 
 // MARK: - Modal Component Dimension
-/// Enum that represents modal component dimension, either in points or fractions.
+/// Enumeration that represents modal component dimension, either in points or fractions.
 public enum ModalComponentDimension: Equatable {
     // MARK: Cases
     /// Point measurement.

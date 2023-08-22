@@ -9,6 +9,6 @@ import Foundation
 import VCore
 
 // MARK: - V Stretched Button Internal State
-/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
+/// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 public typealias VStretchedButtonInternalState = GenericState_EnabledPressedDisabled

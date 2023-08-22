@@ -9,9 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Automatic Page Indicator
-/// Indicator component that indicates selection in page control in standard or compact fashion.
-///
-/// UI model can be passed as parameter.
+/// Indicator component that indicates selection in page control in standard or compact configuration.
 ///
 ///     private let total: Int = 10
 ///     @State private var current: Int = 4
@@ -23,7 +21,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// You can change direction by modifying `direction` in UI models, or passing `vertical` instance:
+/// Direction can be changed via `direction` in UI models, or passing `vertical` instance.
 ///
 ///     var body: some View {
 ///         VAutomaticPageIndicator(
@@ -33,8 +31,8 @@ import VCore
 ///         )
 ///     }
 ///
-/// You can fully customize dot by passing a `dot` parameter. For instance, we can get a "bullet" shape.
-/// `.frame()` modifier shouldn't be applied to the dot itself.
+/// Dots can be fully customized. For instance, we can get a "bullet" shape.
+/// `frame()` modifier shouldn't be applied to the dot itself.
 ///
 ///     var body: some View {
 ///         VAutomaticPageIndicator(

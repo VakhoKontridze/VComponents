@@ -35,7 +35,7 @@ public struct VCompactPageIndicatorUIModel {
     /// Number of side dots. Set to half of difference between `visibleDots` and `centerDots`.
     public var sideDots: Int { (visibleDots - centerDots) / 2 }
 
-    /// Number of middle dots. Set to half of `visibleDots.`
+    /// Number of middle dots. Set to half of `visibleDots`.
     public var middleDots: Int { visibleDots / 2 }
 
     // MARK: Properties - Dot
@@ -65,7 +65,7 @@ public struct VCompactPageIndicatorUIModel {
     public var selectedDotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorSelectedDotColor
 
     // MARK: Properties - Dot Border
-    /// Border width. Set to `0.`
+    /// Border width. Set to `0`.
     ///
     /// To hide border, set to `0`.
     public var dotBorderWidth: CGFloat = 0

@@ -249,6 +249,7 @@ struct VSideBar_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
+            SafeAreaPreview().previewDisplayName("Safe Area")
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
@@ -289,6 +290,36 @@ struct VSideBar_Previews: PreviewProvider {
                         uiModel: {
                             var uiModel: VSideBarUIModel = presentationEdge
                             uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: content
+                    )
+            })
+        }
+    }
+
+    private struct SafeAreaPreview: View {
+        @State private var isPresented: Bool = true
+        @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .getInterfaceOrientation({ interfaceOrientation = $0 })
+                    .vSideBar(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VSideBarUIModel = .init() // No `presentationEdge`
+
+                            uiModel.contentSafeAreaMargins = {
+                                if interfaceOrientation.isLandscape {
+                                    return .leading
+                                } else {
+                                    return .vertical
+                                }
+                            }()
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,

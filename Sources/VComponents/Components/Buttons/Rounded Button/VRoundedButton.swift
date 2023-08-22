@@ -9,11 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rounded Button
-/// Rounded colored button component that performs action when triggered.
-///
-/// Component can be initialized with title, icon, and label.
-///
-/// UI Model can be passed as parameter.
+/// Rounded, colored button component that performs action when triggered.
 ///
 ///     var body: some View {
 ///         VRoundedButton(

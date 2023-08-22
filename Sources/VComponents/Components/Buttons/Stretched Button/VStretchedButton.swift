@@ -9,11 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Stretched Button
-/// Large colored button component that performs action when triggered.
-///
-/// Component can be initialized with title, icon and title, and label.
-///
-/// UI Model can be passed as parameter.
+/// Large colored button component that stretches horizontally and performs action when triggered.
 ///
 ///     var body: some View {
 ///         VStretchedButton(
@@ -23,7 +19,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// On `macOS` and `watchOS`, you would typically provide an explicit width.
+/// On `macOS` and `watchOS`, an explicit width should be provided.
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties

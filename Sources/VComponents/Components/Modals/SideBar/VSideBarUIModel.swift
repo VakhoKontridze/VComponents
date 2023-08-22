@@ -82,7 +82,7 @@ public struct VSideBarUIModel {
     /// Content margins. Set to `zero`.
     public var contentMargins: Margins = .zero
 
-    /// Edges on which content has safe area margins. Set to `.all`.
+    /// Edges on which content has safe area margins. Set to `[]`.
     public var contentSafeAreaMargins: Edge.Set = []
 
     // MARK: Properties - Keyboard Responsiveness
@@ -132,7 +132,7 @@ public struct VSideBarUIModel {
     public init() {}
 
     // MARK: Presentation Edge
-    /// Enum that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
+    /// Enumeration that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
     public enum PresentationEdge: Int, CaseIterable {
         // MARK: Cases
         /// Presentation form leading edge.
@@ -188,7 +188,7 @@ public struct VSideBarUIModel {
         /// All.
         public static var all: DismissType { [.backTap, .dragBack] }
 
-        /// Default value. Set to `all.`
+        /// Default value. Set to `all`.
         public static var `default`: DismissType { .all }
 
         // MARK: Properties

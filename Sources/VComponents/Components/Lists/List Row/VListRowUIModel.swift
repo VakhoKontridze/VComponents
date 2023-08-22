@@ -50,7 +50,7 @@ public struct VListRowUIModel {
     public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
 
     // MARK: Separator Type
-    /// Enum that represents separator type, such as `top` or `bottom`.
+    /// Enumeration that represents separator type, such as `top` or `bottom`.
     public struct SeparatorType: OptionSet {
         // MARK: Options
         /// Separator at the top of the row.

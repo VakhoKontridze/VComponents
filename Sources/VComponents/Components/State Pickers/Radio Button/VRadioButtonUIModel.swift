@@ -14,7 +14,7 @@ import VCore
 @available(watchOS, unavailable)
 public struct VRadioButtonUIModel {
     // MARK: Properties - Global Layout
-    /// Radio button dimension. Set to `16.`
+    /// Radio button dimension. Set to `16`.
     public var dimension: CGFloat = GlobalUIModel.StatePickers.dimension
 
     /// Spacing between radio button and label. Set to `0`.
@@ -25,7 +25,7 @@ public struct VRadioButtonUIModel {
     public var fillColors: StateColors = .init(ColorBook.layer)
 
     // MARK: Properties - Border
-    /// Radio button corner radius. Set to `1.`
+    /// Radio button corner radius. Set to `1`.
     public var borderWidth: CGFloat = 1
 
     /// Border colors.

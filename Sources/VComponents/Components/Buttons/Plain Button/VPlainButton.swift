@@ -11,10 +11,6 @@ import VCore
 // MARK: - V Plain Button
 /// Plain button component that performs action when triggered.
 ///
-/// Component can be initialized with title, icon, icon and title, and label.
-///
-/// UI Model can be passed as parameter.
-///
 ///     var body: some View {
 ///         VPlain(
 ///             action: { print("Clicked") },

@@ -9,18 +9,16 @@ import SwiftUI
 import VCore
 
 // MARK: - V Disclosure Group
-/// Expandable container component that draws a background, and hosts content.
+/// Expandable container component that draws background, and hosts content.
 ///
-/// UI Model and layout can be passed as parameters.
-///
-///     @State private var isExpanded: Bool = true
+///     @State private var state: VDisclosureGroupState = .expanded
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
 ///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
-///                 isExpanded: $isExpanded,
+///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum",
 ///                 content: {
 ///                     ColorBook.accentBlue
@@ -31,7 +29,7 @@ import VCore
 ///         })
 ///     }
 ///
-/// Component can be also initialized with `Bool`:
+/// Component can be also initialized with `Bool`.
 ///
 ///     @State private var isExpanded: Bool = true
 ///
@@ -41,7 +39,6 @@ import VCore
 ///             ...
 ///         )
 ///     }
-///
 ///
 @available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)

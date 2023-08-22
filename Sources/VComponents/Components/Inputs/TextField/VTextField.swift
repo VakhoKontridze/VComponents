@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Text Field
 /// Input component that displays an editable text interface.
 ///
-/// UI Model, placeholder, header, and footer can be passed as parameters.
-///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
@@ -25,7 +23,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// Textfield can also be focused externally by passing state:
+/// Textfield can be focused externally by applied `focused(_:) modifier`.
 ///
 ///     @FocusState private var isFocused: Bool
 ///     @State private var text: String = ""
@@ -42,7 +40,7 @@ import VCore
 ///             })
 ///     }
 ///
-/// Editing states can be observed by using `onChange` `View` modifiers.
+/// Editing states can be observed by using `onChange(of:perform:)` modifiers.
 ///
 ///     @FocusState private var isFocused: Bool
 ///     @State private var text: String = "Lorem ipsum"
@@ -63,7 +61,7 @@ import VCore
 ///             .onSubmit({ print("Submitted") })
 ///     }
 ///
-/// `Secure` textfield:
+/// TextField can be configured as secure by passing UI model.
 ///
 ///     @State private var text: String = ""
 ///
@@ -75,7 +73,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// `Search` textfield:
+/// TextField can be configured as search by passing UI model.
 ///
 ///     @State private var text: String = ""
 ///
@@ -87,7 +85,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
+/// Highlights cab be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines

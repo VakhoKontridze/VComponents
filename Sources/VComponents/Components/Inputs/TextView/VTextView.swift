@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Text View
 /// Input component that displays an editable multiline text interface.
 ///
-/// UI Model, line limit type, placeholder, header, and footer can be passed as parameters.
-///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
@@ -25,7 +23,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// To change height, change `textLineType`:
+/// Height can be changed via `textLineType` in UI model.
 ///
 ///     @State private var text: String = ""
 ///
@@ -48,7 +46,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// Textview can also be focused externally by passing state:
+/// TextView can be focused externally by applied `focused(_:) modifier`.
 ///
 ///     @FocusState private var isFocused: Bool
 ///     @State private var text: String = ""
@@ -65,7 +63,7 @@ import VCore
 ///             })
 ///     }
 ///
-/// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
+/// Highlights cab be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines

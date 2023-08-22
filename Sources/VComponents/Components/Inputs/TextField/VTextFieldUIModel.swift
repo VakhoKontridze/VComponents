@@ -208,7 +208,7 @@ public struct VTextFieldUIModel {
     public init() {}
 
     // MARK: Content Type
-    /// Enum that represents content type, such as `standard`, `secure`, or `search`.
+    /// Enumeration that represents content type, such as `standard`, `secure`, or `search`.
     public enum ContentType: Int, CaseIterable {
         // MARK: Cases
         /// Standard type.

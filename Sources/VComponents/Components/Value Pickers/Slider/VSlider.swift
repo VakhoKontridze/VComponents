@@ -11,8 +11,6 @@ import VCore
 // MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values.
 ///
-/// UI Model, range, step, and onChange callback can be passed as parameters.
-///
 ///     @State private var value: Double = 0.5
 ///
 ///     var body: some View {

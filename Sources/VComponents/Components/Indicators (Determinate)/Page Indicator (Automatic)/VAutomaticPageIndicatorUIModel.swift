@@ -40,7 +40,7 @@ public struct VAutomaticPageIndicatorUIModel {
     public var selectedDotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorSelectedDotColor
 
     // MARK: Properties - Dot Border
-    /// Border width. Set to `0.`
+    /// Border width. Set to `0`.
     ///
     /// To hide border, set to `0`.
     public var dotBorderWidth: CGFloat = 0
