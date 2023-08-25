@@ -1,5 +1,5 @@
 //
-//  VToggleButton.swift
+//  VWrappedToggleButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.08.23.
@@ -8,13 +8,13 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toggle Button
+// MARK: - V Wrapped Toggle Button
 /// Colored state picker component that toggles between `off` and `on` states, and displays label.
 ///
-///     @State private var state: VToggleButtonState = .on
+///     @State private var state: VWrappedToggleButtonState = .on
 ///
 ///     var body: some View {
-///         VToggleButton(
+///         VWrappedToggleButton(
 ///             state: $state,
 ///             title: "Lorem Ipsum"
 ///         )
@@ -25,7 +25,7 @@ import VCore
 ///     @State private var isOn: Bool = true
 ///
 ///     var body: some View {
-///         VToggleButton(
+///         VWrappedToggleButton(
 ///             state: Binding(isOn: $isOn),
 ///             title: "Lorem Ipsum"
 ///         )
@@ -33,15 +33,15 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
-public struct VToggleButton<Label>: View where Label: View {
+public struct VWrappedToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
-    private let uiModel: VToggleButtonUIModel
+    private let uiModel: VWrappedToggleButtonUIModel
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
-    @Binding private var state: VToggleButtonState
-    private var internalState: VToggleButtonInternalState {
+    @Binding private var state: VWrappedToggleButtonState
+    private var internalState: VWrappedToggleButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,
@@ -50,13 +50,13 @@ public struct VToggleButton<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VToggleButtonLabel<Label>
+    private let label: VWrappedToggleButtonLabel<Label>
 
     // MARK: Initializers
-    /// Initializes `VToggleButton` with state and title.
+    /// Initializes `VWrappedToggleButton` with state and title.
     public init(
-        uiModel: VToggleButtonUIModel = .init(),
-        state: Binding<VToggleButtonState>,
+        uiModel: VWrappedToggleButtonUIModel = .init(),
+        state: Binding<VWrappedToggleButtonState>,
         title: String
     )
         where Label == Never
@@ -66,10 +66,10 @@ public struct VToggleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
 
-    /// Initializes `VToggleButton` with state, icon, and title.
+    /// Initializes `VWrappedToggleButton` with state, icon, and title.
     public init(
-        uiModel: VToggleButtonUIModel = .init(),
-        state: Binding<VToggleButtonState>,
+        uiModel: VWrappedToggleButtonUIModel = .init(),
+        state: Binding<VWrappedToggleButtonState>,
         icon: Image,
         title: String
     )
@@ -80,11 +80,11 @@ public struct VToggleButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
 
-    /// Initializes `VToggleButton` with state and label.
+    /// Initializes `VWrappedToggleButton` with state and label.
     public init(
-        uiModel: VToggleButtonUIModel = .init(),
-        state: Binding<VToggleButtonState>,
-        @ViewBuilder label: @escaping (VToggleButtonInternalState) -> Label
+        uiModel: VWrappedToggleButtonUIModel = .init(),
+        state: Binding<VWrappedToggleButtonState>,
+        @ViewBuilder label: @escaping (VWrappedToggleButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = state
@@ -202,7 +202,7 @@ public struct VToggleButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
-extension VToggleButtonInternalState {
+extension VWrappedToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {
         case .off: return false
@@ -219,7 +219,7 @@ extension VToggleButtonInternalState {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct VToggleButton_Previews: PreviewProvider {
+struct VWrappedToggleButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
@@ -242,16 +242,16 @@ struct VToggleButton_Previews: PreviewProvider {
 
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var state: VToggleButtonState = .on
+        @State private var state: VWrappedToggleButtonState = .on
 
         var body: some View {
             PreviewContainer(content: {
-                VToggleButton(
+                VWrappedToggleButton(
                     state: $state,
                     title: title
                 )
 
-                VToggleButton(
+                VWrappedToggleButton(
                     state: $state,
                     icon: icon,
                     title: title
@@ -267,7 +267,7 @@ struct VToggleButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Off",
                     content: {
-                        VToggleButton(
+                        VWrappedToggleButton(
                             state: .constant(.off),
                             title: title
                         )
@@ -278,9 +278,9 @@ struct VToggleButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Pressed Off",
                     content: {
-                        VToggleButton(
+                        VWrappedToggleButton(
                             uiModel: {
-                                var uiModel: VToggleButtonUIModel = .init()
+                                var uiModel: VWrappedToggleButtonUIModel = .init()
                                 uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
                                 uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                                 return uiModel
@@ -295,7 +295,7 @@ struct VToggleButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "On",
                     content: {
-                        VToggleButton(
+                        VWrappedToggleButton(
                             state: .constant(.on),
                             title: title
                         )
@@ -306,9 +306,9 @@ struct VToggleButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Pressed On",
                     content: {
-                        VToggleButton(
+                        VWrappedToggleButton(
                             uiModel: {
-                                var uiModel: VToggleButtonUIModel = .init()
+                                var uiModel: VWrappedToggleButtonUIModel = .init()
                                 uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
                                 uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                                 return uiModel
@@ -323,7 +323,7 @@ struct VToggleButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Disabled",
                     content: {
-                        VToggleButton(
+                        VWrappedToggleButton(
                             state: .constant(.off),
                             title: title
                         )

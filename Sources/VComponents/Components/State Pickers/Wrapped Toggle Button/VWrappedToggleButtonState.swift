@@ -1,5 +1,5 @@
 //
-//  VToggleButtonState.swift
+//  VWrappedToggleButtonState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.08.23.
@@ -8,14 +8,14 @@
 import Foundation
 import VCore
 
-// MARK: - V Toggle Button State
+// MARK: - V Wrapped Toggle Button State
 /// Enumeration that represents state, such as `off` or `on`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public typealias VToggleButtonState = GenericState_OffOn
+public typealias VWrappedToggleButtonState = GenericState_OffOn
 
-// MARK: - V Toggle Button Internal State
+// MARK: - V Wrapped Toggle Button Internal State
 /// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public typealias VToggleButtonInternalState = GenericState_OffOnPressedDisabled
+public typealias VWrappedToggleButtonInternalState = GenericState_OffOnPressedDisabled

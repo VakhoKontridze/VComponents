@@ -75,20 +75,20 @@ public struct VDisclosureGroupUIModel {
     /// `iconColors` are changed,
     /// `hitBox` is set to `zero`,
     /// `haptic` is set to `nil`.
-    public var chevronButtonSubUIModel: VRoundedButtonUIModel = {
-        var uiModel: VRoundedButtonUIModel = .init()
+    public var chevronButtonSubUIModel: VRectangularButtonUIModel = {
+        var uiModel: VRectangularButtonUIModel = .init()
 
         uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
         uiModel.cornerRadius = 16
 
-        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
+        uiModel.backgroundColors = VRectangularButtonUIModel.StateColors(
             enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
             pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
             disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
         )
 
         uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
-        uiModel.iconColors = VRoundedButtonUIModel.StateColors(
+        uiModel.iconColors = VRectangularButtonUIModel.StateColors(
             enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
             pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
             disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled

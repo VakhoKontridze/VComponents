@@ -141,7 +141,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             
             Spacer()
             
-            VRoundedButton(
+            VRectangularButton(
                 uiModel: uiModel.chevronButtonSubUIModel,
                 action: expandCollapse,
                 icon: ImageBook.chevronUp.renderingMode(.template)

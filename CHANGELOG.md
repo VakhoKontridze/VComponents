@@ -7,16 +7,20 @@ General
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 
-VCapsuleButton
+VWrappedButton
 
+- Component is renamed to `VWrappedButton`
+- `cornerRadius` can now be changed to be anything other than half of height
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
-VRoundedButton
+VRectangularButton
 
+- Component is renamed to `VRectangularButton`
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
-VRoundedCaptionButton
+VRectangularCaptionButton
 
+- Component is renamed to `VRectangularCaptionButton`
 - `iconMargins` that had no effect previously, now apply to icon
 - `roundedRectangleSize` is renamed to `rectangleSize`
 - `cornerRadius` is renamed to `rectangleCornerRadius`
@@ -40,7 +44,7 @@ VRadioButton
 - `hiBox` is renamed to `radioButtonHitBox`
 - `radioButtonHitBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
-VToggleButton
+VWrappedToggleButton
 
 - A new state-picker component is added that resembles `VCapsuleButton`
 

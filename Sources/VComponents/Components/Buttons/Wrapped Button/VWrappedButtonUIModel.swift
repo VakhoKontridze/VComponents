@@ -1,5 +1,5 @@
 //
-//  VCapsuleButtonUIModel.swift
+//  VWrappedButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Capsule Button UI Model
+// MARK: - V Wrapped Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-public struct VCapsuleButtonUIModel {
+public struct VWrappedButtonUIModel {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
@@ -26,11 +26,13 @@ public struct VCapsuleButtonUIModel {
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.
     /// Set to `48` on `watchOS`.
-    public var height: CGFloat = GlobalUIModel.Buttons.heightCapsuleButton
+    public var height: CGFloat = GlobalUIModel.Buttons.heightWrappedButton
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to half of `height`.
-    public var cornerRadius: CGFloat { height/2 }
+    /// Corner radius.
+    /// Set to `16` on `iOS`.
+    /// Set to `16` on `macOS`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusWrappedButton
 
     // MARK: Properties - Background
     /// Background colors.
@@ -81,14 +83,14 @@ public struct VCapsuleButtonUIModel {
     /// Set to `semibold` `subheadline` (`15`) on `iOS`.
     /// Set to `semibold` `body` (`13`) on `macOS`.
     /// Set to `semibold` `body` (`17`) on `watchOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontCapsuleButton
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontWrappedButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `16x16` on `iOS`.
     /// Set to `16x16` on `macOS`.
     /// Set to `18x18` on `watchOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeCapsuleButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeWrappedButton
 
     /// Icon colors.
     ///

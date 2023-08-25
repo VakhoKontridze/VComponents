@@ -1,5 +1,5 @@
 //
-//  VRoundedCaptionButtonUIModel.swift
+//  VRectangularCaptionButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Caption Button UI Model
+// MARK: - V Rectangular Caption Button UI Model
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-public struct VRoundedCaptionButtonUIModel {
+public struct VRectangularCaptionButtonUIModel {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
@@ -23,7 +23,7 @@ public struct VRoundedCaptionButtonUIModel {
     }
 
     // MARK: Properties - Global Layout
-    /// Spacing between rounded rectangle and caption.
+    /// Spacing between rectangle and caption.
     /// Set to `7` on `iOS`.
     /// Set to `3` on `watchOS`.
     public var rectangleAndCaptionSpacing: CGFloat = {
@@ -40,7 +40,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// Rectangle size.
     /// Set to `56x56` on `iOS`.
     /// Set to `64x56` on `watchOS`.
-    public var rectangleSize: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
+    public var rectangleSize: CGSize = GlobalUIModel.Buttons.sizeRectButton
 
     /// Rectangle corner radius. Set to `24`.
     public var rectangleCornerRadius: CGFloat = {
@@ -79,7 +79,7 @@ public struct VRoundedCaptionButtonUIModel {
     /// Icon size.
     /// Set to `24x24` on `iOS`.
     /// Set to `26x26` on `watchOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRoundedButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRectButton
 
     /// Icon colors.
     ///
@@ -98,7 +98,7 @@ public struct VRoundedCaptionButtonUIModel {
     public var iconOpacities: StateOpacities = .init(1)
 
     /// Icon margins. Set to `3`s.
-    public var iconMargins: IconMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
+    public var iconMargins: IconMargins = GlobalUIModel.Buttons.labelMarginsRectButton
 
     /// Ratio to which icon scales down on press.
     /// Set to `1` on `iOS`.

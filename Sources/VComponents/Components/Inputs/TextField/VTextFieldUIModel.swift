@@ -137,19 +137,19 @@ public struct VTextFieldUIModel {
     /// `iconColors` are changed,
     /// `hitBox` is set to `zero`,
     /// `haptic` is set to `nil`.
-    public var clearButtonSubUIModel: VRoundedButtonUIModel = {
-        var uiModel: VRoundedButtonUIModel = .init()
+    public var clearButtonSubUIModel: VRectangularButtonUIModel = {
+        var uiModel: VRectangularButtonUIModel = .init()
 
         uiModel.size = CGSize(dimension: 22)
 
-        uiModel.backgroundColors = VRoundedButtonUIModel.StateColors(
+        uiModel.backgroundColors = VRectangularButtonUIModel.StateColors(
             enabled: GlobalUIModel.Inputs.clearButtonLayerEnabled,
             pressed: GlobalUIModel.Inputs.clearButtonLayerPressed,
             disabled: GlobalUIModel.Inputs.clearButtonLayerDisabled
         )
 
         uiModel.iconSize = CGSize(dimension: 8)
-        uiModel.iconColors = VRoundedButtonUIModel.StateColors(GlobalUIModel.Inputs.clearButtonIcon)
+        uiModel.iconColors = VRectangularButtonUIModel.StateColors(GlobalUIModel.Inputs.clearButtonIcon)
 
         uiModel.hitBox = .zero
 

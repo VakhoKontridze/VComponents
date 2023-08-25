@@ -1,5 +1,5 @@
 //
-//  VRoundedCaptionButton.swift
+//  VRectangularCaptionButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Caption Button
-/// Rounded, colored, captioned button component that performs action when triggered.
+// MARK: - V Rectangular Caption Button
+/// Rectangular colored button component with caption that performs action when triggered.
 ///
 ///     var body: some View {
-///         VRoundedCaptionButton(
+///         VRectangularCaptionButton(
 ///             action: { print("Clicked") },
 ///             icon: Image(systemName: "swift"),
 ///             titleCaption: "Lorem Ipsum"
@@ -21,11 +21,11 @@ import VCore
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View {
+public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: View {
     // MARK: Properties
-    private let uiModel: VRoundedCaptionButtonUIModel
+    private let uiModel: VRectangularCaptionButtonUIModel
     
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedCaptionButtonInternalState {
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularCaptionButtonInternalState {
         baseButtonState
     }
     
@@ -33,12 +33,12 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     
     private let icon: Image
 
-    private let caption: VRoundedCaptionButtonCaption<CaptionLabel>
+    private let caption: VRectangularCaptionButtonCaption<CaptionLabel>
     
     // MARK: Initializers
-    /// Initializes `VRoundedCaptionButton` with action, icon, and title caption.
+    /// Initializes `VRectangularCaptionButton` with action, icon, and title caption.
     public init(
-        uiModel: VRoundedCaptionButtonUIModel = .init(),
+        uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         titleCaption: String
@@ -51,9 +51,9 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         self.caption = .title(title: titleCaption)
     }
     
-    /// Initializes `VRoundedCaptionButton` with action, icon, icon caption, and title caption.
+    /// Initializes `VRectangularCaptionButton` with action, icon, icon caption, and title caption.
     public init(
-        uiModel: VRoundedCaptionButtonUIModel = .init(),
+        uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         iconCaption: Image,
@@ -67,12 +67,12 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         self.caption = .iconTitle(icon: iconCaption, title: titleCaption)
     }
     
-    /// Initializes `VRoundedCaptionButton` with action, icon, and caption.
+    /// Initializes `VRectangularCaptionButton` with action, icon, and caption.
     public init(
-        uiModel: VRoundedCaptionButtonUIModel = .init(),
+        uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        @ViewBuilder caption: @escaping (VRoundedCaptionButtonInternalState) -> CaptionLabel
+        @ViewBuilder caption: @escaping (VRectangularCaptionButtonInternalState) -> CaptionLabel
     ) {
         self.uiModel = uiModel
         self.action = action
@@ -89,7 +89,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
                 action()
             },
             label: { baseButtonState in
-                let internalState: VRoundedCaptionButtonInternalState = internalState(baseButtonState)
+                let internalState: VRectangularCaptionButtonInternalState = internalState(baseButtonState)
                 
                 VStack(spacing: uiModel.rectangleAndCaptionSpacing, content: {
                     rectangle(internalState: internalState)
@@ -101,7 +101,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     }
     
     private func rectangle(
-        internalState: VRoundedCaptionButtonInternalState
+        internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Group(content: { // `Group` is used for adding multiple frames
             icon
@@ -116,11 +116,11 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         .frame(size: uiModel.rectangleSize)
         .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from overflowing
         .background(rectangleBackground(internalState: internalState)) // Has own rounding
-        .overlay(roundedRectangleBorder(internalState: internalState)) // Has own rounding
+        .overlay(rectangleBorder(internalState: internalState)) // Has own rounding
     }
     
     private func rectangleBackground(
-        internalState: VRoundedCaptionButtonInternalState
+        internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
@@ -132,8 +132,8 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
             )
     }
     
-    @ViewBuilder private func roundedRectangleBorder(
-        internalState: VRoundedCaptionButtonInternalState
+    @ViewBuilder private func rectangleBorder(
+        internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         if uiModel.rectangleBorderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
@@ -143,7 +143,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     }
     
     private func buttonCaption(
-        internalState: VRoundedCaptionButtonInternalState
+        internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Group(content: {
             switch caption {
@@ -165,7 +165,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     }
     
     private func titleCaptionComponent(
-        internalState: VRoundedCaptionButtonInternalState,
+        internalState: VRectangularCaptionButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
@@ -177,7 +177,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     }
     
     private func iconCaptionComponent(
-        internalState: VRoundedCaptionButtonInternalState,
+        internalState: VRectangularCaptionButtonInternalState,
         icon: Image
     ) -> some View {
         icon
@@ -203,7 +203,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-struct VRoundedCaptionButton_Previews: PreviewProvider {
+struct VRectangularCaptionButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
@@ -240,13 +240,13 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VRoundedCaptionButton(
+                VRectangularCaptionButton(
                     action: {},
                     icon: icon,
                     titleCaption: titleCaption
                 )
 
-                VRoundedCaptionButton(
+                VRectangularCaptionButton(
                     action: {},
                     icon: icon,
                     iconCaption: iconCaption,
@@ -265,7 +265,7 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                         axis: .horizontal,
                         title: "Enabled",
                         content: {
-                            VRoundedCaptionButton(
+                            VRectangularCaptionButton(
                                 action: {},
                                 icon: icon,
                                 titleCaption: titleCaption
@@ -277,9 +277,9 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                         axis: .horizontal,
                         title: "Pressed",
                         content: {
-                            VRoundedCaptionButton(
+                            VRectangularCaptionButton(
                                 uiModel: {
-                                    var uiModel: VRoundedCaptionButtonUIModel = .init()
+                                    var uiModel: VRectangularCaptionButtonUIModel = .init()
                                     uiModel.rectangleColors.enabled = uiModel.rectangleColors.pressed
                                     uiModel.iconColors.enabled = uiModel.iconColors.pressed
                                     uiModel.titleCaptionTextColors.enabled = uiModel.titleCaptionTextColors.pressed
@@ -296,7 +296,7 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
                         axis: .horizontal,
                         title: "Disabled",
                         content: {
-                            VRoundedCaptionButton(
+                            VRectangularCaptionButton(
                                 action: {},
                                 icon: icon,
                                 titleCaption: titleCaption
@@ -312,11 +312,11 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
     private struct BorderPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VRoundedCaptionButton(
+                VRectangularCaptionButton(
                     uiModel: {
-                        var uiModel: VRoundedCaptionButtonUIModel = .init()
+                        var uiModel: VRectangularCaptionButtonUIModel = .init()
                         uiModel.rectangleBorderWidth = 2
-                        uiModel.rectangleBorderColors = VRoundedCaptionButtonUIModel.StateColors(
+                        uiModel.rectangleBorderColors = VRectangularCaptionButtonUIModel.StateColors(
                             enabled: uiModel.rectangleColors.enabled.darken(by: 0.3),
                             pressed: uiModel.rectangleColors.enabled.darken(by: 0.3),
                             disabled: .clear
@@ -334,20 +334,20 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
     private struct ShadowPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VRoundedCaptionButton(
+                VRectangularCaptionButton(
                     uiModel: {
-                        var uiModel: VRoundedCaptionButtonUIModel = .init()
-                        uiModel.rectangleColors = VRoundedCaptionButtonUIModel.StateColors(
+                        var uiModel: VRectangularCaptionButtonUIModel = .init()
+                        uiModel.rectangleColors = VRectangularCaptionButtonUIModel.StateColors(
                             enabled: ColorBook.controlLayerBlue,
                             pressed: ColorBook.controlLayerBluePressed,
                             disabled: ColorBook.controlLayerBlueDisabled
                         )
-                        uiModel.iconColors = VRoundedCaptionButtonUIModel.StateColors(
+                        uiModel.iconColors = VRectangularCaptionButtonUIModel.StateColors(
                             enabled: ColorBook.primaryWhite,
                             pressed: ColorBook.primaryWhitePressedDisabled,
                             disabled: ColorBook.primaryWhitePressedDisabled
                         )
-                        uiModel.shadowColors = VRoundedCaptionButtonUIModel.StateColors(
+                        uiModel.shadowColors = VRectangularCaptionButtonUIModel.StateColors(
                             enabled: GlobalUIModel.Common.shadowColorEnabled,
                             pressed: GlobalUIModel.Common.shadowColorEnabled,
                             disabled: GlobalUIModel.Common.shadowColorDisabled
@@ -367,11 +367,11 @@ struct VRoundedCaptionButton_Previews: PreviewProvider {
     private struct OutOfBoundsContentPreventionPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VRoundedCaptionButton(
+                VRectangularCaptionButton(
                     uiModel: {
-                        var uiModel: VRoundedCaptionButtonUIModel = .init()
+                        var uiModel: VRectangularCaptionButtonUIModel = .init()
                         uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VRoundedCaptionButtonUIModel.StateColors(ColorBook.accentRed)
+                        uiModel.iconColors = VRectangularCaptionButtonUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     action: {},

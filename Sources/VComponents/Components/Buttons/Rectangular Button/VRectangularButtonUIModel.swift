@@ -1,5 +1,5 @@
 //
-//  VRoundedButtonUIModel.swift
+//  VRectangularButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Button UI Model
+// MARK: - V Rectangular Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-public struct VRoundedButtonUIModel {
+public struct VRectangularButtonUIModel {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
@@ -26,7 +26,7 @@ public struct VRoundedButtonUIModel {
     /// Set to `56x56` on `iOS`.
     /// Set to `28x28` on `macOS`.
     /// Set to `64x56` on `watchOS`.
-    public var size: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
+    public var size: CGSize = GlobalUIModel.Buttons.sizeRectButton
 
     // MARK: Properties - Corners
     /// Corner radius.
@@ -70,7 +70,7 @@ public struct VRoundedButtonUIModel {
 
     // MARK: Properties - Label
     /// Label margins. Set to `3`s.
-    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
+    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRectButton
 
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
@@ -106,7 +106,7 @@ public struct VRoundedButtonUIModel {
     /// Set to `24x24` on `iOS`.
     /// Set to `14x14` on `macOS`.
     /// Set to `26x26` `watchOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRoundedButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRectButton
 
     /// Icon colors.
     ///

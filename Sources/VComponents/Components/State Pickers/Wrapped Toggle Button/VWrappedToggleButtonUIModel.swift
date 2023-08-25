@@ -1,5 +1,5 @@
 //
-//  VToggleButtonUIModel.swift
+//  VWrappedToggleButtonUIModel.swift
 //  VComponent
 //
 //  Created by Vakhtang Kontridze on 25.08.23.
@@ -8,20 +8,22 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toggle Button UI Model
+// MARK: - V Wrapped Toggle Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VToggleButtonUIModel {
+public struct VWrappedToggleButtonUIModel {
     // MARK: Properties - Global Layout
     /// Height.
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.
-    public var height: CGFloat = GlobalUIModel.Buttons.heightCapsuleButton
+    public var height: CGFloat = GlobalUIModel.Buttons.heightWrappedButton
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to half of `height`.
-    public var cornerRadius: CGFloat { height/2 }
+    /// Corner radius.
+    /// Set to `16` on `iOS`.
+    /// Set to `16` on `macOS`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusWrappedButton
 
     // MARK: Properties - Background
     /// Background colors.
@@ -78,13 +80,13 @@ public struct VToggleButtonUIModel {
     /// Title text font.
     /// Set to `semibold` `subheadline` (`15`) on `iOS`.
     /// Set to `semibold` `body` (`13`) on `macOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontCapsuleButton
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontWrappedButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `16x16` on `iOS`.
     /// Set to `16x16` on `macOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeCapsuleButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeWrappedButton
 
     /// Icon colors.
     ///

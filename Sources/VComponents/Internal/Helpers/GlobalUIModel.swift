@@ -120,7 +120,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static let heightCapsuleButton: CGFloat = {
+        static let heightWrappedButton: CGFloat = {
 #if os(iOS)
             return 32
 #elseif os(macOS)
@@ -131,7 +131,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static let sizeRoundedButton: CGSize = {
+        static let sizeRectButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 56)
 #elseif os(macOS)
@@ -154,9 +154,10 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+        static let cornerRadiusWrappedButton: CGFloat = heightWrappedButton/2
         
         static let labelMargins: EdgeInsets_HorizontalVertical = .init(horizontal: 15, vertical: 3)
-        static let labelMarginsRoundedButton: EdgeInsets_HorizontalVertical = .init(3)
+        static let labelMarginsRectButton: EdgeInsets_HorizontalVertical = .init(3)
         
         static let transparentLayerLabelEnabled: Color = ColorBook.controlLayerBlue
         static let transparentLayerLabelPressed: Color = ColorBook.controlLayerBluePressed
@@ -179,7 +180,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static let titleTextFontCapsuleButton: Font = {
+        static let titleTextFontWrappedButton: Font = {
 #if os(iOS)
             return Font.subheadline.weight(.semibold)
 #elseif os(macOS)
@@ -202,7 +203,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static let iconSizeCapsuleButton: CGSize = {
+        static let iconSizeWrappedButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 16)
 #elseif os(macOS)
@@ -213,7 +214,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        static let iconSizeRoundedButton: CGSize = {
+        static let iconSizeRectButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 24)
 #elseif os(macOS)

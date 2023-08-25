@@ -1,5 +1,5 @@
 //
-//  VCapsuleButton.swift
+//  VWrappedButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,33 +8,33 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Capsule Button
+// MARK: - V Wrapped Button
 /// Colored button component that wraps content and performs action when triggered.
 ///
 ///     var body: some View {
-///         VCapsuleButton(
+///         VWrappedButton(
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VCapsuleButton<Label>: View where Label: View {
+public struct VWrappedButton<Label>: View where Label: View {
     // MARK: Properties
-    private let uiModel: VCapsuleButtonUIModel
+    private let uiModel: VWrappedButtonUIModel
 
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState {
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VWrappedButtonInternalState {
         baseButtonState
     }
 
     private let action: () -> Void
 
-    private let label: VCapsuleButtonLabel<Label>
+    private let label: VWrappedButtonLabel<Label>
     
     // MARK: Initializers
-    /// Initializes `VCapsuleButton` with action and title.
+    /// Initializes `VWrappedButton` with action and title.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VWrappedButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
@@ -45,9 +45,9 @@ public struct VCapsuleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes `VCapsuleButton` with action, icon, and title.
+    /// Initializes `VWrappedButton` with action, icon, and title.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VWrappedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         title: String
@@ -59,11 +59,11 @@ public struct VCapsuleButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes `VCapsuleButton` with action and label.
+    /// Initializes `VWrappedButton` with action and label.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VWrappedButtonUIModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VCapsuleButtonInternalState) -> Label
+        @ViewBuilder label: @escaping (VWrappedButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self.action = action
@@ -79,7 +79,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 action()
             },
             label: { baseButtonState in
-                let internalState: VCapsuleButtonInternalState = internalState(baseButtonState)
+                let internalState: VWrappedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
@@ -93,7 +93,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func buttonLabel(
-        internalState: VCapsuleButtonInternalState
+        internalState: VWrappedButtonInternalState
     ) -> some View {
         Group(content: {
             switch label {
@@ -122,7 +122,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func titleLabelComponent(
-        internalState: VCapsuleButtonInternalState,
+        internalState: VWrappedButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
@@ -139,7 +139,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func iconLabelComponent(
-        internalState: VCapsuleButtonInternalState,
+        internalState: VWrappedButtonInternalState,
         icon: Image
     ) -> some View {
         icon
@@ -151,7 +151,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func background(
-        internalState: VCapsuleButtonInternalState
+        internalState: VWrappedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
@@ -164,7 +164,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     @ViewBuilder private func border(
-        internalState: VCapsuleButtonInternalState
+        internalState: VWrappedButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
@@ -187,7 +187,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
 // Developmental only
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-struct VCapsuleButton_Previews: PreviewProvider {
+struct VWrappedButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
@@ -215,12 +215,12 @@ struct VCapsuleButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VCapsuleButton(
+                VWrappedButton(
                     action: {},
                     title: title
                 )
 
-                VCapsuleButton(
+                VWrappedButton(
                     action: {},
                     icon: icon,
                     title: title
@@ -238,7 +238,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
                         axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
                         title: "Enabled",
                         content: {
-                            VCapsuleButton(
+                            VWrappedButton(
                                 action: {},
                                 title: title
                             )
@@ -249,9 +249,9 @@ struct VCapsuleButton_Previews: PreviewProvider {
                         axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
                         title: "Pressed",
                         content: {
-                            VCapsuleButton(
+                            VWrappedButton(
                                 uiModel: {
-                                    var uiModel: VCapsuleButtonUIModel = .init()
+                                    var uiModel: VWrappedButtonUIModel = .init()
                                     uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
                                     uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
                                     return uiModel
@@ -266,7 +266,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
                         axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
                         title: "Disabled",
                         content: {
-                            VCapsuleButton(
+                            VWrappedButton(
                                 action: {},
                                 title: title
                             )
@@ -295,11 +295,11 @@ struct VCapsuleButton_Previews: PreviewProvider {
     private struct BorderPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VCapsuleButton(
+                VWrappedButton(
                     uiModel: {
-                        var uiModel: VCapsuleButtonUIModel = .init()
+                        var uiModel: VWrappedButtonUIModel = .init()
                         uiModel.borderWidth = 2
-                        uiModel.borderColors = VCapsuleButtonUIModel.StateColors(
+                        uiModel.borderColors = VWrappedButtonUIModel.StateColors(
                             enabled: uiModel.backgroundColors.enabled.darken(by: 0.3),
                             pressed: uiModel.backgroundColors.enabled.darken(by: 0.3),
                             disabled: .clear
@@ -316,10 +316,10 @@ struct VCapsuleButton_Previews: PreviewProvider {
     private struct ShadowPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VCapsuleButton(
+                VWrappedButton(
                     uiModel: {
-                        var uiModel: VCapsuleButtonUIModel = .init()
-                        uiModel.shadowColors = VCapsuleButtonUIModel.StateColors(
+                        var uiModel: VWrappedButtonUIModel = .init()
+                        uiModel.shadowColors = VWrappedButtonUIModel.StateColors(
                             enabled: GlobalUIModel.Common.shadowColorEnabled,
                             pressed: GlobalUIModel.Common.shadowColorEnabled,
                             disabled: GlobalUIModel.Common.shadowColorDisabled
@@ -338,11 +338,11 @@ struct VCapsuleButton_Previews: PreviewProvider {
     private struct OutOfBoundsContentPreventionPreview: View {
         var body: some View {
             PreviewContainer(content: {
-                VCapsuleButton(
+                VWrappedButton(
                     uiModel: {
-                        var uiModel: VCapsuleButtonUIModel = .init()
+                        var uiModel: VWrappedButtonUIModel = .init()
                         uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VCapsuleButtonUIModel.StateColors(ColorBook.accentRed)
+                        uiModel.iconColors = VWrappedButtonUIModel.StateColors(ColorBook.accentRed)
                         return uiModel
                     }(),
                     action: {},

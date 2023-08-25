@@ -260,7 +260,7 @@ public struct VTextField: View {
             internalState == .focused &&
             textIsNonEmpty
         
-        return VRoundedButton(
+        return VRectangularButton(
             uiModel: uiModel.clearButtonSubUIModel,
             action: didTapClearButton,
             icon: ImageBook.xMark.renderingMode(.template)

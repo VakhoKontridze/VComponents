@@ -20,9 +20,9 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 <p>
     <img tag="VStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779300-dc408524-ac16-4469-ba4f-195a05076154.png">
     <img tag="VLoadingStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779495-84b0e553-16af-4b51-82c4-6f15247c9d31.png">
-    <img tag="VCapsuleButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779544-7ee698d6-36d9-4715-bb3d-0082ee7ab016.png">
-    <img tag="VRoundedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a597d67e-e2c2-49a3-b8bb-27786f016de4">
-    <img tag="VRoundedCaptionButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236642711-e80277e8-ec5c-44ac-bdf2-f661c6f0a4b9.png">
+    <img tag="VWrappedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4267254e-6e97-439b-afd8-ed511b65dcfe">
+    <img tag="VRectangularButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/fd56ac97-6e5e-4e11-8e86-1566d656e31b">
+    <img tag="VRectangularCaptionButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/b785e73e-5bc5-4c79-a381-b9886ce037d0">
     <img tag="VPlainButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779755-b15a2fc4-d811-4c96-888e-5b437495a484.png">
 <p/>
 
@@ -32,7 +32,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VToggle" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779957-94c56311-167d-4087-a702-2c406ca9923d.png">
     <img tag="VCheckBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780007-237b86c4-e9b2-4a65-9584-0a0fff4367af.png">
     <img tag="VRadioButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780063-bb06c5cc-86e2-4f79-a01f-2351e01280ff.png">
-    <img tag="VToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/29016da2-6f2b-4964-bce4-f1751528630a">
+    <img tag="VWrappedToggleButton" width="350" align="top" src="https://github-production-user-asset-6210df.s3.amazonaws.com/57289621/263371199-ca8d816e-7a9c-46ee-b427-d06cddf26c30.png">
     <img tag="VStretchedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/f7c33200-2ec1-4f83-9027-cf0e4b26331a">
 <p/>
 
