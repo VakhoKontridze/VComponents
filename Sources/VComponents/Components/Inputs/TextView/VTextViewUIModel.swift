@@ -113,7 +113,7 @@ public struct VTextViewUIModel {
     /// Text font. Set to `body` (`17`).
     public var textFont: Font = .body
 
-    // MARK: Properties - Placeholder
+    // MARK: Properties - Placeholder Text
     /// Placeholder text colors.
     public var placeholderTextColors: StateColors = .init(ColorBook.primaryPressedDisabled)
 

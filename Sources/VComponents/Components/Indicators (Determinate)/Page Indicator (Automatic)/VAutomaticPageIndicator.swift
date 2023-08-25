@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Automatic Page Indicator
-/// Indicator component that indicates selection in page control in standard or compact configuration.
+/// Component that indicates selection in page control in standard or compact configuration.
 ///
 ///     private let total: Int = 10
 ///     @State private var current: Int = 4

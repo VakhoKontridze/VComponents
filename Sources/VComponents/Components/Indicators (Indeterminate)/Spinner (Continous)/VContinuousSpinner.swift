@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Continuous Spinner
-/// Indicator component that indicates activity.
+/// Component that indicates activity.
 ///
 ///     var body: some View {
 ///         VContinuousSpinner()

@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Progress Bar
-/// Indicator component that indicates progress towards the completion of a task.
+/// Component that indicates progress towards the completion of a task.
 ///
 ///     @State private var progress: Double = 0.5
 ///
