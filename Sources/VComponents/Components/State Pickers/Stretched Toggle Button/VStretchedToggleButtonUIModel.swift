@@ -78,15 +78,15 @@ public struct VStretchedToggleButtonUIModel {
     )
 
     /// Title text font.
-    /// Set to `semibold` `subheadline` (`15`) on `iOS`.
-    /// Set to `semibold` `body` (`13`) on `macOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontCapsuleButton
+    /// Set to `semibold` `callout` (`16`) on `iOS`.
+    /// Set to `semibold` `16` on `macOS`.
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
-    /// Set to `16x16` on `iOS`.
+    /// Set to `18x18` on `iOS`.
     /// Set to `16x16` on `macOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeCapsuleButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeStretchedButton
 
     /// Icon colors.
     ///
