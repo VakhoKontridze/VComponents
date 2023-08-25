@@ -78,19 +78,23 @@ public struct VLoadingStretchedButtonUIModel {
     /// Label margins. Set to `15` horizontal and `3` vertical.
     public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
+    // MARK: Properties - Label - Text
+    /// Title text minimum scale factor. Set to `0.75`.
+    public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+
+    /// Title text colors.
+    public var titleTextColors: StateColors = .init(ColorBook.primaryWhite)
+
+    /// Title text font.
+    /// Set to `semibold` `callout` (`16`) on `iOS`.
+    /// Set to `semibold` `16` on `macOS`.
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `18x18` on `iOS`.
     /// Set to `16x16` on `macOS`.
-    public var iconSize: CGSize = {
-#if os(iOS)
-        return CGSize(dimension: 18)
-#elseif os(macOS)
-        return CGSize(dimension: 16)
-#else
-        fatalError() // Not supported
-#endif
-    }()
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeStretchedButton
 
     /// Icon colors.
     ///
@@ -103,18 +107,6 @@ public struct VLoadingStretchedButtonUIModel {
     /// Applied to all images. But should be used for bitmap images.
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
-
-    // MARK: Properties - Label - Text
-    /// Title text minimum scale factor. Set to `0.75`.
-    public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
-
-    /// Title text colors.
-    public var titleTextColors: StateColors = .init(ColorBook.primaryWhite)
-
-    /// Title text font.
-    /// Set to `semibold` `callout` (`16`) on `iOS`.
-    /// Set to `semibold` `16` on `macOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButtonFont
 
     // MARK: Properties - Spinner
     /// Model for customizing spinner.

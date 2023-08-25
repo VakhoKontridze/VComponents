@@ -1,49 +1,43 @@
 //
-//  VCapsuleButtonUIModel.swift
+//  VStretchedToggleButtonUIModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 25.08.23.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - V Capsule Button UI Model
+// MARK: - V Stretched Toggle Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-public struct VCapsuleButtonUIModel {
-    // MARK: Properties - Global
-    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
-        var uiModel: SwiftUIBaseButtonUIModel = .init()
-
-        uiModel.animatesStateChange = animatesStateChange
-
-        return uiModel
-    }
-
+@available(watchOS, unavailable)
+public struct VStretchedToggleButtonUIModel {
     // MARK: Properties - Global Layout
     /// Height.
-    /// Set to `32` on `iOS`.
-    /// Set to `32` on `macOS`.
-    /// Set to `48` on `watchOS`.
-    public var height: CGFloat = GlobalUIModel.Buttons.heightCapsuleButton
+    /// Set to `48` on `iOS`.
+    /// Set to `40` on `macOS`.
+    public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to half of `height`.
-    public var cornerRadius: CGFloat { height/2 }
+    /// Corner radius.
+    /// Set to `14` on `iOS`.
+    /// Set to `12` on `macOS`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
 
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: ColorBook.controlLayerBlue,
-        pressed: ColorBook.controlLayerBluePressed,
-        disabled: ColorBook.controlLayerBlueDisabled
+        off: ColorBook.layerGray,
+        on: ColorBook.controlLayerBlue,
+        pressedOff: ColorBook.layerGrayPressed,
+        pressedOn: ColorBook.controlLayerBluePressed,
+        disabled: ColorBook.layerGrayDisabled
     )
 
     /// Ratio to which background scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
 
     // MARK: Properties - Border
@@ -75,36 +69,42 @@ public struct VCapsuleButtonUIModel {
     public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
 
     /// Title text colors.
-    public var titleTextColors: StateColors = .init(ColorBook.primaryWhite)
+    public var titleTextColors: StateColors = .init(
+        off: ColorBook.primaryBlack,
+        on: ColorBook.primaryWhite,
+        pressedOff: ColorBook.primaryBlack,
+        pressedOn: ColorBook.primaryWhite,
+        disabled: ColorBook.primaryBlackPressedDisabled
+    )
 
     /// Title text font.
     /// Set to `semibold` `subheadline` (`15`) on `iOS`.
     /// Set to `semibold` `body` (`13`) on `macOS`.
-    /// Set to `semibold` `body` (`17`) on `watchOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontCapsuleButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `16x16` on `iOS`.
     /// Set to `16x16` on `macOS`.
-    /// Set to `18x18` on `watchOS`.
     public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeCapsuleButton
 
     /// Icon colors.
     ///
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(ColorBook.primaryWhite)
+    public var iconColors: StateColors = .init(
+        off: ColorBook.primaryBlack,
+        on: ColorBook.primaryWhite,
+        pressedOff: ColorBook.primaryBlack,
+        pressedOn: ColorBook.primaryWhite,
+        disabled: ColorBook.primaryBlackPressedDisabled
+    )
 
     /// Icon opacities. Set to `1`s.
     ///
     /// Applied to all images. But should be used for bitmap images.
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
-
-    // MARK: Properties - Hit Box
-    /// Hit box. Set to `zero`.
-    public var hitBox: HitBox = .zero
 
     // MARK: Properties - Shadow
     /// Shadow colors.
@@ -117,16 +117,23 @@ public struct VCapsuleButtonUIModel {
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Transition
-    /// Indicates if button animates state change. Set to `true`.
-    public var animatesStateChange: Bool = true
+    /// Indicates if `stateChange` animation is applied. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    ///
+    /// If  animation is set to `nil`, a `nil` animation is still applied.
+    /// If this property is set to `false`, then no animation is applied.
+    ///
+    /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+    public var appliesStateChangeAnimation: Bool = true
+
+    /// State change animation. Set to `easeIn` with duration `0.1`.
+    public var stateChangeAnimation: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `nil`.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
-#elseif os(watchOS)
-    /// Haptic feedback type. Set to `nil`.
-    public var haptic: WKHapticType? = nil
+    /// Haptic feedback style. Set to `light`.
+    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.StatePickers.hapticIOS
 #endif
 
     // MARK: Initializers
@@ -137,15 +144,11 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias LabelMargins = EdgeInsets_HorizontalVertical
 
-    // MARK: Hit Box
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
-    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
-
     // MARK: State Colors
     /// Model that contains colors for component states.
-    public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
+    public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
 
     // MARK: State Opacities
     /// Model that contains opacities for component states.
-    public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
+    public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
 }

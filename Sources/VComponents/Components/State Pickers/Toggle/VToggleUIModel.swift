@@ -106,7 +106,7 @@ public struct VToggleUIModel {
     /// State change animation. Set to `easeIn` with duration `0.1`.
     public var stateChangeAnimation: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
 
-    // MARK: Properties - haptic
+    // MARK: Properties - Haptic
 #if os(iOS)
     /// Haptic feedback style. Set to `light`.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.StatePickers.hapticIOS

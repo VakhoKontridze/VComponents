@@ -32,6 +32,8 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VToggle" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779957-94c56311-167d-4087-a702-2c406ca9923d.png">
     <img tag="VCheckBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780007-237b86c4-e9b2-4a65-9584-0a0fff4367af.png">
     <img tag="VRadioButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780063-bb06c5cc-86e2-4f79-a01f-2351e01280ff.png">
+    <img tag="VToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/29016da2-6f2b-4964-bce4-f1751528630a">
+    <img tag="VStretchedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/444ecf55-ea42-4767-9d03-25176b98de4c">
 <p/>
 
 #### Item Pickers

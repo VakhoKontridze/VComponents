@@ -107,7 +107,7 @@ struct GlobalUIModel {
     }
     
     // MARK: Buttons
-    struct Buttons {
+    struct Buttons { // Also used for button-like components
         // MARK: Properties
         static let heightStretchedButton: CGFloat = {
 #if os(iOS)
@@ -116,6 +116,17 @@ struct GlobalUIModel {
             return 40
 #elseif os(watchOS)
             return 64
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        static let heightCapsuleButton: CGFloat = {
+#if os(iOS)
+            return 32
+#elseif os(macOS)
+            return 32
+#elseif os(watchOS)
+            return 48
 #else
             fatalError() // Not supported
 #endif
@@ -143,18 +154,6 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-
-        static let iconSizeRoundedButton: CGSize = {
-#if os(iOS)
-            return CGSize(dimension: 24)
-#elseif os(macOS)
-            return CGSize(dimension: 14)
-#elseif os(watchOS)
-            return CGSize(dimension: 26)
-#else
-            fatalError() // Not supported
-#endif
-        }()
         
         static let labelMargins: EdgeInsets_HorizontalVertical = .init(horizontal: 15, vertical: 3)
         static let labelMarginsRoundedButton: EdgeInsets_HorizontalVertical = .init(3)
@@ -165,7 +164,7 @@ struct GlobalUIModel {
         
         static let iconAndTitleTextSpacing: CGFloat = 8
         
-        static let titleTextFontStretchedButtonFont: Font = {
+        static let titleTextFontStretchedButton: Font = {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
@@ -176,6 +175,51 @@ struct GlobalUIModel {
             } else {
                 return Font.system(size: 20)
             }
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        static let titleTextFontCapsuleButton: Font = {
+#if os(iOS)
+            return Font.subheadline.weight(.semibold)
+#elseif os(macOS)
+            return Font.body.weight(.semibold)
+#elseif os(watchOS)
+            return Font.body.weight(.semibold)
+#else
+            fatalError() // Not supported
+#endif
+        }()
+
+        static let iconSizeStretchedButton: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 18)
+#elseif os(macOS)
+            return CGSize(dimension: 16)
+#elseif os(watchOS)
+            return CGSize(dimension: 22)
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        static let iconSizeCapsuleButton: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 16)
+#elseif os(macOS)
+            return CGSize(dimension: 16)
+#elseif os(watchOS)
+            return CGSize(dimension: 18)
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        static let iconSizeRoundedButton: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 24)
+#elseif os(macOS)
+            return CGSize(dimension: 14)
+#elseif os(watchOS)
+            return CGSize(dimension: 26)
 #else
             fatalError() // Not supported
 #endif

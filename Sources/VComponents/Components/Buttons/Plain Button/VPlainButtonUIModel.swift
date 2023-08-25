@@ -32,29 +32,6 @@ public struct VPlainButtonUIModel {
     /// Applicable only if icon `init` with icon and title is used.
     public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
-    // MARK: Properties - Label - Icon
-    /// Icon size. Set to `24x24`.
-    ///
-    /// This icon size is calibrated for `init` with icon.
-    /// For `init` with icon and title, this property should be scaled down.
-    public var iconSize: CGSize = .init(dimension: 24)
-
-    /// Icon colors.
-    ///
-    /// Applied to all images. But should be used for vector images.
-    /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(
-        enabled: ColorBook.accentBlue,
-        pressed: ColorBook.accentBluePressedDisabled,
-        disabled: ColorBook.accentBluePressedDisabled
-    )
-
-    /// Icon opacities. Set to `1`s.
-    ///
-    /// Applied to all images. But should be used for bitmap images.
-    /// In order to use vector images, set this to `1`s.
-    public var iconOpacities: StateOpacities = .init(1)
-
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
     public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
@@ -81,6 +58,29 @@ public struct VPlainButtonUIModel {
         fatalError() // Not supported
 #endif
     }()
+
+    // MARK: Properties - Label - Icon
+    /// Icon size. Set to `24x24`.
+    ///
+    /// This icon size is calibrated for `init` with icon.
+    /// For `init` with icon and title, this property should be scaled down.
+    public var iconSize: CGSize = .init(dimension: 24)
+
+    /// Icon colors.
+    ///
+    /// Applied to all images. But should be used for vector images.
+    /// In order to use bitmap images, set this to `clear`.
+    public var iconColors: StateColors = .init(
+        enabled: ColorBook.accentBlue,
+        pressed: ColorBook.accentBluePressedDisabled,
+        disabled: ColorBook.accentBluePressedDisabled
+    )
+
+    /// Icon opacities. Set to `1`s.
+    ///
+    /// Applied to all images. But should be used for bitmap images.
+    /// In order to use vector images, set this to `1`s.
+    public var iconOpacities: StateOpacities = .init(1)
 
     // MARK: Properties - Hit Box
     /// Hit box. Set to `5`s.

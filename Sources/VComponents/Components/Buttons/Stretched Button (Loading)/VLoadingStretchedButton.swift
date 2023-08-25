@@ -17,7 +17,7 @@ import VCore
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
-///         .padding()
+///         .padding(.horizontal)
 ///     }
 ///
 /// On `macOS` and `watchOS`, an explicit width should be provided.
@@ -433,7 +433,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     icon: Image(systemName: "swift"),
                     title: title
                 )
-                .padding()
+                .padding(.horizontal)
             })
         }
     }

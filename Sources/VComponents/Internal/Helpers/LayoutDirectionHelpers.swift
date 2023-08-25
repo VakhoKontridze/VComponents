@@ -1,6 +1,6 @@
 //
 //  LayoutDirectionHelpers.swift
-//  VCore
+//  VComponents
 //
 //  Created by Vakhtang Kontridze on 02.04.23.
 //
