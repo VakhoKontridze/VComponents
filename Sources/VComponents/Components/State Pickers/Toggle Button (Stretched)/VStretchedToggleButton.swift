@@ -1,5 +1,5 @@
 //
-//  VWrappedToggleButton.swift
+//  VStretchedToggleButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.08.23.
@@ -8,16 +8,17 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped Toggle Button
-/// Colored state picker component that toggles between `off` and `on` states, and displays label.
+// MARK: - V Stretched Toggle Button
+/// Stretched state picker component that toggles between `off` and `on` states, and displays label.
 ///
-///     @State private var state: VWrappedToggleButtonState = .on
+///     @State private var state: VStretchedToggleButtonState = .on
 ///
 ///     var body: some View {
-///         VWrappedToggleButton(
+///         VStretchedToggleButton(
 ///             state: $state,
 ///             title: "Lorem Ipsum"
 ///         )
+///         .padding()
 ///     }
 ///
 /// Component can be also initialized with `Bool`.
@@ -25,23 +26,24 @@ import VCore
 ///     @State private var isOn: Bool = true
 ///
 ///     var body: some View {
-///         VWrappedToggleButton(
+///         VStretchedToggleButton(
 ///             state: Binding(isOn: $isOn),
 ///             title: "Lorem Ipsum"
 ///         )
+///         .padding()
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
-public struct VWrappedToggleButton<Label>: View where Label: View {
+public struct VStretchedToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
-    private let uiModel: VWrappedToggleButtonUIModel
+    private let uiModel: VStretchedToggleButtonUIModel
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
-    @Binding private var state: VWrappedToggleButtonState
-    private var internalState: VWrappedToggleButtonInternalState {
+    @Binding private var state: VStretchedToggleButtonState
+    private var internalState: VStretchedToggleButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,
@@ -50,13 +52,13 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VWrappedToggleButtonLabel<Label>
+    private let label: VStretchedToggleButtonLabel<Label>
 
     // MARK: Initializers
-    /// Initializes `VWrappedToggleButton` with state and title.
+    /// Initializes `VStretchedToggleButton` with state and title.
     public init(
-        uiModel: VWrappedToggleButtonUIModel = .init(),
-        state: Binding<VWrappedToggleButtonState>,
+        uiModel: VStretchedToggleButtonUIModel = .init(),
+        state: Binding<VStretchedToggleButtonState>,
         title: String
     )
         where Label == Never
@@ -66,10 +68,10 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
 
-    /// Initializes `VWrappedToggleButton` with state, icon, and title.
+    /// Initializes `VStretchedToggleButton` with state, icon, and title.
     public init(
-        uiModel: VWrappedToggleButtonUIModel = .init(),
-        state: Binding<VWrappedToggleButtonState>,
+        uiModel: VStretchedToggleButtonUIModel = .init(),
+        state: Binding<VStretchedToggleButtonState>,
         icon: Image,
         title: String
     )
@@ -80,11 +82,11 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
 
-    /// Initializes `VWrappedToggleButton` with state and label.
+    /// Initializes `VStretchedToggleButton` with state and label.
     public init(
-        uiModel: VWrappedToggleButtonUIModel = .init(),
-        state: Binding<VWrappedToggleButtonState>,
-        @ViewBuilder label: @escaping (VWrappedToggleButtonInternalState) -> Label
+        uiModel: VStretchedToggleButtonUIModel = .init(),
+        state: Binding<VStretchedToggleButtonState>,
+        @ViewBuilder label: @escaping (VStretchedToggleButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = state
@@ -102,7 +104,6 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
                     .background(background) // Has own rounding
                     .overlay(border) // Has own rounding
-                    .padding(uiModel.hitBox)
             }
         )
         .applyIf(uiModel.appliesStateChangeAnimation, transform: {
@@ -126,15 +127,9 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
+        .frame(maxWidth: .infinity)
         .scaleEffect(internalState.isPressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
-        .applyModifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.dynamicTypeSize(...(.accessibility3))
-            } else {
-                $0
-            }
-        })
     }
 
     private func titleLabelComponent(
@@ -202,7 +197,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
-extension VWrappedToggleButtonInternalState {
+extension VStretchedToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {
         case .off: return false
@@ -219,7 +214,7 @@ extension VWrappedToggleButtonInternalState {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct VWrappedToggleButton_Previews: PreviewProvider {
+struct VStretchedToggleButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
@@ -230,6 +225,9 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            BorderPreview().previewDisplayName("Border")
+            ShadowPreview().previewDisplayName("Shadow")
+            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -237,25 +235,27 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
     }
 
     // Data
-    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
+    private static var icon: Image { .init(systemName: "swift") }
 
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var state: VWrappedToggleButtonState = .on
+        @State private var state: VStretchedToggleButtonState = .on
 
         var body: some View {
             PreviewContainer(content: {
-                VWrappedToggleButton(
+                VStretchedToggleButton(
                     state: $state,
                     title: title
                 )
+                .padding(.horizontal)
 
-                VWrappedToggleButton(
+                VStretchedToggleButton(
                     state: $state,
                     icon: icon,
                     title: title
                 )
+                .padding(.horizontal)
             })
         }
     }
@@ -264,10 +264,10 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 PreviewRow(
-                    axis: .horizontal,
+                    axis: .vertical,
                     title: "Off",
                     content: {
-                        VWrappedToggleButton(
+                        VStretchedToggleButton(
                             state: .constant(.off),
                             title: title
                         )
@@ -275,12 +275,12 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
                 )
 
                 PreviewRow(
-                    axis: .horizontal,
+                    axis: .vertical,
                     title: "Pressed Off",
                     content: {
-                        VWrappedToggleButton(
+                        VStretchedToggleButton(
                             uiModel: {
-                                var uiModel: VWrappedToggleButtonUIModel = .init()
+                                var uiModel: VStretchedToggleButtonUIModel = .init()
                                 uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
                                 uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                                 return uiModel
@@ -292,10 +292,10 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
                 )
 
                 PreviewRow(
-                    axis: .horizontal,
+                    axis: .vertical,
                     title: "On",
                     content: {
-                        VWrappedToggleButton(
+                        VStretchedToggleButton(
                             state: .constant(.on),
                             title: title
                         )
@@ -303,12 +303,12 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
                 )
 
                 PreviewRow(
-                    axis: .horizontal,
+                    axis: .vertical,
                     title: "Pressed On",
                     content: {
-                        VWrappedToggleButton(
+                        VStretchedToggleButton(
                             uiModel: {
-                                var uiModel: VWrappedToggleButtonUIModel = .init()
+                                var uiModel: VStretchedToggleButtonUIModel = .init()
                                 uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
                                 uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                                 return uiModel
@@ -320,16 +320,90 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
                 )
 
                 PreviewRow(
-                    axis: .horizontal,
+                    axis: .vertical,
                     title: "Disabled",
                     content: {
-                        VWrappedToggleButton(
+                        VStretchedToggleButton(
                             state: .constant(.off),
                             title: title
                         )
                         .disabled(true)
                     }
                 )
+            })
+        }
+    }
+
+    private struct BorderPreview: View {
+        @State private var state: VStretchedToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VStretchedToggleButton(
+                    uiModel: {
+                        var uiModel: VStretchedToggleButtonUIModel = .init()
+                        uiModel.borderWidth = 2
+                        uiModel.borderColors = VStretchedToggleButtonUIModel.StateColors(
+                            off: uiModel.backgroundColors.off.darken(by: 0.3),
+                            on: uiModel.backgroundColors.on.darken(by: 0.3),
+                            pressedOff: uiModel.backgroundColors.pressedOff.darken(by: 0.3),
+                            pressedOn: uiModel.backgroundColors.pressedOn.darken(by: 0.3),
+                            disabled: .clear
+                        )
+                        return uiModel
+                    }(),
+                    state: $state,
+                    title: title
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    private struct ShadowPreview: View {
+        @State private var state: VStretchedToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VStretchedToggleButton(
+                    uiModel: {
+                        var uiModel: VStretchedToggleButtonUIModel = .init()
+                        uiModel.shadowColors = VStretchedToggleButtonUIModel.StateColors(
+                            off: GlobalUIModel.Common.shadowColorEnabled,
+                            on: GlobalUIModel.Common.shadowColorEnabled,
+                            pressedOff: GlobalUIModel.Common.shadowColorEnabled,
+                            pressedOn: GlobalUIModel.Common.shadowColorEnabled,
+                            disabled: GlobalUIModel.Common.shadowColorDisabled
+                        )
+                        uiModel.shadowRadius = 3
+                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
+                        return uiModel
+                    }(),
+                    state: $state,
+                    title: title
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    private struct OutOfBoundsContentPreventionPreview: View {
+        @State private var state: VStretchedToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VStretchedToggleButton(
+                    uiModel: {
+                        var uiModel: VStretchedToggleButtonUIModel = .init()
+                        uiModel.iconSize = CGSize(dimension: 100)
+                        uiModel.iconColors = VStretchedToggleButtonUIModel.StateColors(ColorBook.accentRed)
+                        return uiModel
+                    }(),
+                    state: $state,
+                    icon: icon,
+                    title: title
+                )
+                .padding(.horizontal)
             })
         }
     }

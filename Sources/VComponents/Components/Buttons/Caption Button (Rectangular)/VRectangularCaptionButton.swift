@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rectangular Caption Button
-/// Rectangular colored button component with caption that performs action when triggered.
+/// Rectangular captioned button component that performs action when triggered.
 ///
 ///     var body: some View {
 ///         VRectangularCaptionButton(
@@ -225,6 +225,7 @@ struct VRectangularCaptionButton_Previews: PreviewProvider {
     
     // Data
     private static var icon: Image { .init(systemName: "swift") }
+    
     private static var iconCaption: Image { .init(systemName: "swift") }
 
     private static var titleCaption: String {

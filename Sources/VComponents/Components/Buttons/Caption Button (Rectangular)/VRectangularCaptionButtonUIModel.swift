@@ -110,14 +110,14 @@ public struct VRectangularCaptionButtonUIModel {
     /// Maximum caption width. Set to `100`.
     public var captionWidthMax: CGFloat = 100
 
+    /// Spacing between icon caption and title caption text. Set to `8`.
+    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+
     /// Ratio to which caption scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
     public var captionPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
-    /// Spacing between icon caption and title caption text. Set to `8`.
-    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
     // MARK: Properties - Caption - Icon
     /// Icon caption size.

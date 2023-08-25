@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Wrapped Button
-/// Colored button component that wraps content and performs action when triggered.
+/// Wrapped button component and performs action when triggered.
 ///
 ///     var body: some View {
 ///         VWrappedButton(
@@ -208,8 +208,8 @@ struct VWrappedButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+    private static var icon: Image { .init(systemName: "swift") }
     
     // Previews (Scenes)
     private struct Preview: View {

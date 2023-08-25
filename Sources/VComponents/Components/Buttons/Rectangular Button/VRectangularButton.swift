@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rectangular Button
-/// Rectangular colored button component that performs action when triggered.
+/// Rectangular button component that performs action when triggered.
 ///
 ///     var body: some View {
 ///         VRectangularButton(

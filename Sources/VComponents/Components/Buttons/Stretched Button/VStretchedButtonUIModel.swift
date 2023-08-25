@@ -59,19 +59,19 @@ public struct VStretchedButtonUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
-    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    /// Label margins. Set to `15` horizontal and `3` vertical.
+    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
     /// Spacing between icon and title text. Set to `8`.
     ///
     /// Applicable only if icon `init` with icon and title is used.
     public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
-    /// Label margins. Set to `15` horizontal and `3` vertical.
-    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
+    /// Ratio to which label scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.

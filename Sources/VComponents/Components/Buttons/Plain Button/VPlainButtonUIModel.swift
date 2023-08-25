@@ -21,16 +21,16 @@ public struct VPlainButtonUIModel {
         return uiModel
     }
 
+    /// Spacing between icon and title text. Set to `8`.
+    ///
+    /// Applicable only if icon `init` with icon and title is used.
+    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
     public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
-    /// Spacing between icon and title text. Set to `8`.
-    ///
-    /// Applicable only if icon `init` with icon and title is used.
-    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.

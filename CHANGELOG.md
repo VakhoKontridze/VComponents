@@ -44,13 +44,17 @@ VRadioButton
 - `hiBox` is renamed to `radioButtonHitBox`
 - `radioButtonHitBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
+VStretchedToggleButton
+
+- A new state-picker component is added that resembles `VStretchedButton`
+
 VWrappedToggleButton
 
 - A new state-picker component is added that resembles `VCapsuleButton`
 
-VStretchedToggleButton
+VRectangularToggleButton
 
-- A new state-picker component is added that resembles `VStretchedButton`
+- A new state-picker component is added that resembles `VRectangularButton`
 
 VSegmentedPicker
 

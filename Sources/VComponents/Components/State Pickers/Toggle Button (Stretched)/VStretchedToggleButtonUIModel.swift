@@ -1,6 +1,6 @@
 //
-//  VWrappedToggleButtonUIModel.swift
-//  VComponent
+//  VStretchedToggleButtonUIModel.swift
+//  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.08.23.
 //
@@ -8,22 +8,22 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped Toggle Button UI Model
+// MARK: - V Stretched Toggle Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VWrappedToggleButtonUIModel {
+public struct VStretchedToggleButtonUIModel {
     // MARK: Properties - Global Layout
     /// Height.
-    /// Set to `32` on `iOS`.
-    /// Set to `32` on `macOS`.
-    public var height: CGFloat = GlobalUIModel.Buttons.heightWrappedButton
+    /// Set to `48` on `iOS`.
+    /// Set to `40` on `macOS`.
+    public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
 
     // MARK: Properties - Corners
     /// Corner radius.
-    /// Set to `16` on `iOS`.
-    /// Set to `16` on `macOS`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusWrappedButton
+    /// Set to `14` on `iOS`.
+    /// Set to `12` on `macOS`.
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
 
     // MARK: Properties - Background
     /// Background colors.
@@ -50,19 +50,19 @@ public struct VWrappedToggleButtonUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
-    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    /// Label margins. Set to `15` horizontal and `3` vertical.
+    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
     /// Spacing between icon and title text. Set to `8`.
     ///
     /// Applicable only if icon `init` with icon and title is used.
     public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
-    /// Label margins. Set to `15` horizontal and `3` vertical.
-    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
+    /// Ratio to which label scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
@@ -78,15 +78,15 @@ public struct VWrappedToggleButtonUIModel {
     )
 
     /// Title text font.
-    /// Set to `semibold` `subheadline` (`15`) on `iOS`.
-    /// Set to `semibold` `body` (`13`) on `macOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontWrappedButton
+    /// Set to `semibold` `callout` (`16`) on `iOS`.
+    /// Set to `semibold` `16` on `macOS`.
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
-    /// Set to `16x16` on `iOS`.
+    /// Set to `18x18` on `iOS`.
     /// Set to `16x16` on `macOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeWrappedButton
+    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeStretchedButton
 
     /// Icon colors.
     ///
@@ -105,10 +105,6 @@ public struct VWrappedToggleButtonUIModel {
     /// Applied to all images. But should be used for bitmap images.
     /// In order to use vector images, set this to `1`s.
     public var iconOpacities: StateOpacities = .init(1)
-
-    // MARK: Properties - Hit Box
-    /// Hit box. Set to `zero`.
-    public var hitBox: HitBox = .zero
 
     // MARK: Properties - Shadow
     /// Shadow colors.
@@ -147,10 +143,6 @@ public struct VWrappedToggleButtonUIModel {
     // MARK: Label Margins
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias LabelMargins = EdgeInsets_HorizontalVertical
-
-    // MARK: Hit Box
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
-    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

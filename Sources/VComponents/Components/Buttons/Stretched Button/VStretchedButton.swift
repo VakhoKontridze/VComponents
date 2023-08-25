@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Stretched Button
-/// Large colored button component that stretches horizontally and performs action when triggered.
+/// Stretched button component that performs action when triggered.
 ///
 ///     var body: some View {
 ///         VStretchedButton(
@@ -197,7 +197,6 @@ struct VStretchedButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String {
 #if os(watchOS)
         return "Lorem".pseudoRTL(languageDirection)
@@ -205,6 +204,7 @@ struct VStretchedButton_Previews: PreviewProvider {
         "Lorem Ipsum".pseudoRTL(languageDirection)
 #endif
     }
+    private static var icon: Image { .init(systemName: "swift") }
     
     // Previews (Scenes)
     private struct Preview: View {

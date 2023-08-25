@@ -250,8 +250,8 @@ struct VMenu_Previews: PreviewProvider {
     }
     
     // Data
-    private static var icon: Image { .init(systemName: "swift") }
     private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+    private static var icon: Image { .init(systemName: "swift") }
 
     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue

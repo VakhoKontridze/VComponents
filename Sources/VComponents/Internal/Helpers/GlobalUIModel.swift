@@ -155,6 +155,17 @@ struct GlobalUIModel {
 #endif
         }()
         static let cornerRadiusWrappedButton: CGFloat = heightWrappedButton/2
+        static let cornerRadiusRectangularButton: CGFloat = {
+#if os(iOS)
+            return 16
+#elseif os(macOS)
+            return 6
+#elseif os(watchOS)
+            return 16
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         static let labelMargins: EdgeInsets_HorizontalVertical = .init(horizontal: 15, vertical: 3)
         static let labelMarginsRectButton: EdgeInsets_HorizontalVertical = .init(3)
@@ -185,6 +196,17 @@ struct GlobalUIModel {
             return Font.subheadline.weight(.semibold)
 #elseif os(macOS)
             return Font.body.weight(.semibold)
+#elseif os(watchOS)
+            return Font.body.weight(.semibold)
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        static let titleTextRectangularButton: Font = {
+#if os(iOS)
+            return Font.subheadline.weight(.semibold)
+#elseif os(macOS)
+            return Font.body
 #elseif os(watchOS)
             return Font.body.weight(.semibold)
 #else

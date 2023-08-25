@@ -33,17 +33,7 @@ public struct VRectangularButtonUIModel {
     /// Set to `16` on `iOS`.
     /// Set to `6` on `macOS`.
     /// Set to `16` on `watchOS`.
-    public var cornerRadius: CGFloat = {
-#if os(iOS)
-        return 16
-#elseif os(macOS)
-        return 6
-#elseif os(watchOS)
-        return 16
-#else
-        fatalError() // Not supported
-#endif
-    }()
+    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusRectangularButton
 
     // MARK: Properties - Background
     /// Background colors.
@@ -89,17 +79,7 @@ public struct VRectangularButtonUIModel {
     /// Set to `semibold` `subheadline` (`15`) on `iOS`.
     /// Set to `body` (`13`) on `macOS`.
     /// Set to `semibold` `body` (`17`) on `watchOS`.
-    public var titleTextFont: Font = {
-#if os(iOS)
-        return Font.subheadline.weight(.semibold)
-#elseif os(macOS)
-        return Font.body
-#elseif os(watchOS)
-        return Font.body.weight(.semibold)
-#else
-        fatalError() // Not supported
-#endif
-    }()
+    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextRectangularButton
 
     // MARK: Properties - Label - Icon
     /// Icon size.
