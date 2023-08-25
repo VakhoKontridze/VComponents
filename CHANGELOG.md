@@ -104,6 +104,10 @@ VMenu
 
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
+VRollingCounter
+
+- A new component is added that highlights change in a floating-number
+
 ### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 
 VAlert

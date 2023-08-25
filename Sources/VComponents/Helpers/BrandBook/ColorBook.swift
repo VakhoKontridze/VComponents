@@ -56,17 +56,23 @@ public struct ColorBook {
     public static let secondaryPressedDisabled: Color = .init(module: "Text.Secondary.PressedDisabled")
     
     // MARK: Properties - Accent
+    /// Red accent color. Set to `(255, 59, 48)` and `(255, 69, 68)` like `UIColor.systemRed`.
+    public static let accentRed: Color = .init(module: "Accent.Red")
+
+    /// Red accent color for pressed and disabled states. Set to `(255, 59, 48, 30)` and `(255, 69, 68, 30)`.
+    public static let accentRedPressedDisabled: Color = .init(module: "Accent.Red.PressedDisabled")
+
+    /// Green accent color. Set to `(52, 199, 89)` and `(48, 209, 88)` like `UIColor.systemGreen`.
+    public static let accentGreen: Color = .init(module: "Accent.Green")
+
+    /// Green accent color for pressed and disabled states. Set to `(52, 199, 89, 30)` and `(48, 209, 88, 30)`.
+    public static let accentGreenPressedDisabled: Color = .init(module: "Accent.Green.PressedDisabled")
+
     /// Blue accent color. Set to `(0, 122, 255)` and `(10, 132, 255)` like `UIColor.systemBlue`.
     public static let accentBlue: Color = .init(module: "Accent.Blue")
     
     /// Blue accent color for pressed and disabled states. Set to `(0, 122, 255, 30)` and `(10, 132, 255, 30)`.
     public static let accentBluePressedDisabled: Color = .init(module: "Accent.Blue.PressedDisabled")
-    
-    /// Red accent color. Set to `(255, 59, 48)` and `(255, 69, 68)` like `UIColor.systemRed`.
-    public static let accentRed: Color = .init(module: "Accent.Red")
-    
-    /// Red accent color for pressed and disabled states. Set to `(255, 59, 48, 30)` and `(255, 69, 68, 30)`.
-    public static let accentRedPressedDisabled: Color = .init(module: "Accent.Red.PressedDisabled")
     
     // MARK: Properties - Canvas
     /// Canvas color. Set to `(247, 247, 247)` and `(0, 0, 0)`.

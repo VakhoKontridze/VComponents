@@ -105,6 +105,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Misc
 
 <p>
+    <img tag="VRollingCounter" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/45760672-a84e-470f-8662-ce2abb8fbf0e">
     <img tag="VWrappingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782559-e42d5352-30c1-46e4-8461-7e0402111d68.png">
     <img tag="VBouncingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782558-4275425e-62db-4d3e-9fd4-10855e073be3.png">
 <p/>
