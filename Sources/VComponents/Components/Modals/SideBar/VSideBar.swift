@@ -72,7 +72,9 @@ struct VSideBar<Content>: View where Content: View {
                 uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                 newValue != interfaceOrientation
             {
+#if canImport(UIKit) && !os(watchOS)
                 UIApplication.shared.sendResignFirstResponderAction()
+#endif
             }
 
             interfaceOrientation = newValue
@@ -249,7 +251,9 @@ struct VSideBar_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
+#if os(iOS)
             SafeAreaPreview().previewDisplayName("Safe Area")
+#endif
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
@@ -299,6 +303,7 @@ struct VSideBar_Previews: PreviewProvider {
         }
     }
 
+#if os(iOS)
     private struct SafeAreaPreview: View {
         @State private var isPresented: Bool = true
         @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
@@ -328,4 +333,5 @@ struct VSideBar_Previews: PreviewProvider {
             })
         }
     }
+#endif
 }

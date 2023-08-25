@@ -80,7 +80,9 @@ struct VAlert<Content>: View
                 uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                 newValue != interfaceOrientation
             {
+#if canImport(UIKit) && !os(watchOS)
                 UIApplication.shared.sendResignFirstResponderAction()
+#endif
             }
 
             interfaceOrientation = newValue

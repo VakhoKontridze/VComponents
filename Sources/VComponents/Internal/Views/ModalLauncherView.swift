@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - Modal Launcher View
+@available(tvOS 16.0, *)
 struct ModalLauncherView: View {
     // MARK: Properties
     @Binding private var isPresented: Bool

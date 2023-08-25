@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    func _getInterfaceOrientation(
+    @ViewBuilder func _getInterfaceOrientation(
         _ action: @escaping (_InterfaceOrientation) -> Void
     ) -> some View {
 #if os(iOS) || targetEnvironment(macCatalyst)
