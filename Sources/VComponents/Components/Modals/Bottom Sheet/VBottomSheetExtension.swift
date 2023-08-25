@@ -98,6 +98,86 @@ extension View {
     ///         )
     ///     }
     ///
+    /// Bottom sheet can also wrap navigation system.
+    ///
+    ///     @State private var isPresented: Bool = false
+    ///     @State private var modalDidAppear: Bool = false
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { isPresented = true },
+    ///             title: "Present"
+    ///         )
+    ///         .vBottomSheet(
+    ///             id: "test",
+    ///             uiModel: {
+    ///                 var uiModel: VBottomSheetUIModel = .noGrabber
+    ///                 uiModel.sizes.portrait.heights = .fraction(0.6)
+    ///                 return uiModel
+    ///             }(),
+    ///             isPresented: $isPresented,
+    ///             onPresent: { modalDidAppear = true },
+    ///             onDismiss: { modalDidAppear = false },
+    ///             content: {
+    ///                 NavigationStack(root: {
+    ///                     HomeView(isPresented: $isPresented)
+    ///                         // Disables possible `NavigationStack` animations
+    ///                         .transaction({
+    ///                             if !modalDidAppear { $0.animation = nil }
+    ///                         })
+    ///                 })
+    ///                 // Resets `NavigationStack` frame that may prevent incorrect subview gesture regions
+    ///                 .id(modalDidAppear)
+    ///             }
+    ///         )
+    ///     }
+    ///
+    ///     struct HomeView: View {
+    ///         @Binding private var isPresented: Bool
+    ///
+    ///         init(isPresented: Binding<Bool>) {
+    ///             self._isPresented = isPresented
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             NavigationLink(
+    ///                 "To Destination",
+    ///                 destination: { DestinationView(isPresented: $isPresented) }
+    ///             )
+    ///             .inlineNavigationTitle("Home")
+    ///             .toolbar(content: {
+    ///                 VPlainButton(
+    ///                     action: { isPresented = false },
+    ///                     title: "Dismiss"
+    ///                 )
+    ///             })
+    ///         }
+    ///     }
+    ///
+    ///     struct DestinationView: View {
+    ///         @Environment(\.dismiss) private var dismissAction: DismissAction
+    ///
+    ///         @Binding private var isPresented: Bool
+    ///
+    ///         init(isPresented: Binding<Bool>) {
+    ///             self._isPresented = isPresented
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             VPlainButton(
+    ///                 action: { dismissAction.callAsFunction() },
+    ///                 title: "To Home"
+    ///             )
+    ///             .inlineNavigationTitle("Destination")
+    ///             .toolbar(content: {
+    ///                 VPlainButton(
+    ///                     action: { isPresented = false },
+    ///                     title: "Dismiss"
+    ///                 )
+    ///             })
+    ///         }
+    ///     }
+    ///
     public func vBottomSheet<Content>(
         id: String,
         uiModel: VBottomSheetUIModel = .init(),
