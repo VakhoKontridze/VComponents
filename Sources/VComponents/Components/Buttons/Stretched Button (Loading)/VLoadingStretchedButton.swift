@@ -250,31 +250,21 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                Group(content: {
-                    VLoadingStretchedButton(
-                        isLoading: false,
-                        action: {},
-                        title: title
-                    )
+                VLoadingStretchedButton(
+                    isLoading: false,
+                    action: {},
+                    title: title
+                )
+                .modifier(StretchedButtonWidthModifier())
+                .padding(.horizontal)
 
-                    VLoadingStretchedButton(
-                        isLoading: false,
-                        action: {},
-                        icon: icon,
-                        title: title
-                    )
-                })
-                .applyModifier({
-#if os(iOS)
-                    $0
-#elseif os(macOS)
-                    $0.frame(width: 250)
-#elseif os(watchOS)
-                    $0.frame(width: 100)
-#else
-                    fatalError() // Not supported
-#endif
-                })
+                VLoadingStretchedButton(
+                    isLoading: false,
+                    action: {},
+                    icon: icon,
+                    title: title
+                )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -292,13 +282,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .applyModifier({
-#if os(macOS)
-                            $0.frame(width: 250)
-#else
-                            $0
-#endif
-                        })
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
                 
@@ -317,13 +301,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .applyModifier({
-#if os(macOS)
-                            $0.frame(width: 250)
-#else
-                            $0
-#endif
-                        })
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
                 
@@ -336,13 +314,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .applyModifier({
-#if os(macOS)
-                            $0.frame(width: 250)
-#else
-                            $0
-#endif
-                        })
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
                 
@@ -355,13 +327,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .applyModifier({
-#if os(macOS)
-                            $0.frame(width: 250)
-#else
-                            $0
-#endif
-                        })
+                        .modifier(StretchedButtonWidthModifier())
                         .disabled(true)
                     }
                 )
@@ -388,6 +354,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     action: {},
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -413,6 +380,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     action: {},
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -433,8 +401,12 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     icon: Image(systemName: "swift"),
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
     }
+
+    // Helpers
+    typealias StretchedButtonWidthModifier = VStretchedButton_Previews.StretchedButtonWidthModifier
 }

@@ -210,29 +210,19 @@ struct VStretchedButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                Group(content: {
-                    VStretchedButton(
-                        action: {},
-                        title: title
-                    )
+                VStretchedButton(
+                    action: {},
+                    title: title
+                )
+                .modifier(StretchedButtonWidthModifier())
+                .padding(.horizontal)
 
-                    VStretchedButton(
-                        action: {},
-                        icon: icon,
-                        title: title
-                    )
-                })
-                .applyModifier({
-#if os(iOS)
-                    $0
-#elseif os(macOS)
-                    $0.frame(width: 250)
-#elseif os(watchOS)
-                    $0.frame(width: 100)
-#else
-                    fatalError() // Not supported
-#endif
-                })
+                VStretchedButton(
+                    action: {},
+                    icon: icon,
+                    title: title
+                )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -251,17 +241,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .applyModifier({
-#if os(iOS)
-                                $0
-#elseif os(macOS)
-                                $0.frame(width: 250)
-#elseif os(watchOS)
-                                $0.frame(width: 100)
-#else
-                                fatalError() // Not supported
-#endif
-                            })
+                            .modifier(StretchedButtonWidthModifier())
                         }
                     )
                     
@@ -279,17 +259,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .applyModifier({
-#if os(iOS)
-                                $0
-#elseif os(macOS)
-                                $0.frame(width: 250)
-#elseif os(watchOS)
-                                $0.frame(width: 100)
-#else
-                                fatalError() // Not supported
-#endif
-                            })
+                            .modifier(StretchedButtonWidthModifier())
                         }
                     )
                     
@@ -301,17 +271,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .applyModifier({
-#if os(iOS)
-                                $0
-#elseif os(macOS)
-                                $0.frame(width: 250)
-#elseif os(watchOS)
-                                $0.frame(width: 100)
-#else
-                                fatalError() // Not supported
-#endif
-                            })
+                            .modifier(StretchedButtonWidthModifier())
                             .disabled(true)
                         }
                     )
@@ -337,6 +297,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                     action: {},
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -360,6 +321,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                     action: {},
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -379,8 +341,27 @@ struct VStretchedButton_Previews: PreviewProvider {
                     icon: Image(systemName: "swift"),
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
+        }
+    }
+
+    // Helpers
+    struct StretchedButtonWidthModifier: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .applyModifier({
+    #if os(iOS)
+                    $0
+    #elseif os(macOS)
+                    $0.frame(width: 250)
+    #elseif os(watchOS)
+                    $0.frame(width: 100)
+    #else
+                    fatalError() // Not supported
+    #endif
+                })
         }
     }
 }

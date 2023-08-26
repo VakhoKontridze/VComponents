@@ -248,6 +248,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                     state: $state,
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
 
                 VStretchedToggleButton(
@@ -255,6 +256,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                     icon: icon,
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -271,6 +273,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
 
@@ -288,6 +291,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
 
@@ -299,6 +303,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                             state: .constant(.on),
                             title: title
                         )
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
 
@@ -316,6 +321,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                             state: .constant(.on),
                             title: title
                         )
+                        .modifier(StretchedButtonWidthModifier())
                     }
                 )
 
@@ -327,6 +333,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
+                        .modifier(StretchedButtonWidthModifier())
                         .disabled(true)
                     }
                 )
@@ -355,6 +362,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                     state: $state,
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -382,6 +390,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                     state: $state,
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
@@ -403,8 +412,12 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                     icon: icon,
                     title: title
                 )
+                .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
             })
         }
     }
+
+    // Helpers
+    typealias StretchedButtonWidthModifier = VStretchedButton_Previews.StretchedButtonWidthModifier
 }
