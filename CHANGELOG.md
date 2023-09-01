@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(53)
+### 5.0.0(54)
 
 General
 
@@ -55,7 +55,6 @@ VWrappedToggleButton
 VRectangularToggleButton
 
 - A new state-picker component is added that resembles `VRectangularButton`
-
 VSegmentedPicker
 
 - `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
@@ -123,6 +122,10 @@ VMenu
 VRollingCounter
 
 - A new component is added that highlights change in a floating-number
+
+### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
+
+VSegmentedPicker
 
 ### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 
