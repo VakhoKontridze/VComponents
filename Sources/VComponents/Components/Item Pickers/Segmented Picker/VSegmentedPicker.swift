@@ -274,8 +274,8 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     private var indicator: some View {
         RoundedRectangle(cornerRadius: uiModel.layout.indicatorCornerRadius)
-            .frame(width: rowWidth)
             .padding(uiModel.layout.indicatorMargin)
+            .frame(width: rowWidth) // Must be applied after `padding(_:)`
             .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
             .offset(x: rowWidth * CGFloat(selectedIndexInt))
             .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))

@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.3.7(53)
+
+VSegmentedPicker
+
+- Issue with indicator position on last row is fixed
+
 ### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 
 VAlert
