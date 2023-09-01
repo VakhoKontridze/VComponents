@@ -202,6 +202,8 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VWrappedToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {

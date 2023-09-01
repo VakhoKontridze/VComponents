@@ -197,6 +197,8 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VStretchedToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {

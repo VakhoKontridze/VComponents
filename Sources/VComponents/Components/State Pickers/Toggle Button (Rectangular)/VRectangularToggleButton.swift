@@ -198,6 +198,8 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VRectangularToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {
