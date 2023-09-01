@@ -43,7 +43,7 @@ struct VAlert<Content>: View
     private let content: VAlertContent<Content>
     private let buttons: [any VAlertButtonProtocol]
 
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var alertHeight: CGFloat = 0
     @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0

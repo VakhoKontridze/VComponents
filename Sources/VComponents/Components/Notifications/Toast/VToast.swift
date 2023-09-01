@@ -34,7 +34,7 @@ struct VToast: View {
     // MARK: Properties - Text
     private let text: String
     
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var height: CGFloat = 0
     
     // MARK: Initializers

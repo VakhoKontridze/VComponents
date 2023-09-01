@@ -45,10 +45,9 @@ struct VBottomSheet<Content>: View
     // MARK: Properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var headerHeight: CGFloat = 0
 
-    // MARK: Properties - Sizes - Offset
     // If `nil`, will be set from body render.
     @State private var _offset: CGFloat?
     private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }

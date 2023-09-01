@@ -31,7 +31,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     // MARK: properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
     private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }

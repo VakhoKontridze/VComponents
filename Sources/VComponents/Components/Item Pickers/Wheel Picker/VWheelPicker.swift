@@ -77,7 +77,7 @@ public struct VWheelPicker<Data, ID, Content>: View
     private let id: KeyPath<Data.Element, ID>
     private let content: VWheelPickerContent<Data.Element, Content>
 
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers

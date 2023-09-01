@@ -45,7 +45,7 @@ public struct VRangeSlider: View {
     // MARK: Properties - Action
     private let action: ((Bool) -> Void)?
 
-    // MARK: Properties - Sizes
+    // MARK: Properties - Frame
     @State private var sliderSize: CGSize = .zero
     
     // MARK: Initializers
