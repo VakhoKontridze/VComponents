@@ -243,22 +243,22 @@ public struct VWheelPicker<Data, ID, Content>: View
             .cornerRadius(uiModel.cornerRadius)
     }
     
-    @ViewBuilder private func rows() -> some View {
-        switch content {
-        case .title(let title):
-            ForEach(data, id: id, content: { element in
-                Text(title(element))
-                    .lineLimit(1)
-                    .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
-                    .foregroundColor(uiModel.rowTitleTextColors.value(for: internalState))
-                    .font(uiModel.rowTitleTextFont)
+    private func rows() -> some View {
+        ForEach(data, id: id, content: { element in
+            Group(content: {
+                switch content {
+                case .title(let title):
+                    Text(title(element))
+                        .lineLimit(1)
+                        .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
+                        .foregroundColor(uiModel.rowTitleTextColors.value(for: internalState))
+                        .font(uiModel.rowTitleTextFont)
+
+                case .content(let content):
+                    content(internalState, element)
+                }
             })
-            
-        case .content(let content):
-            ForEach(data, id: id, content: { element in
-                content(internalState, element)
-            })
-        }
+        })
     }
 }
 

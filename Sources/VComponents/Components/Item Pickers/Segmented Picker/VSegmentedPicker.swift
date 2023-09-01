@@ -303,57 +303,39 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             )
     }
     
-    @ViewBuilder private var rows: some View {
-        switch content {
-        case .title(let title):
-            HStack(spacing: 0, content: {
-                ForEach(data, id: id, content: { element in
-                    SwiftUIGestureBaseButton(
-                        onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
-                        label: {
-                            Text(title(element))
-                                .lineLimit(1)
-                                .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.rowTitleTextColors.value(for: rowInternalState(element: element)))
-                                .font(uiModel.rowTitleTextFont)
+    private var rows: some View {
+        HStack(spacing: 0, content: {
+            ForEach(data, id: id, content: { element in
+                SwiftUIGestureBaseButton(
+                    onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
+                    label: {
+                        Group(content: {
+                            switch content {
+                            case .title(let title):
+                                Text(title(element))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(uiModel.rowTitleTextMinimumScaleFactor)
+                                    .foregroundColor(uiModel.rowTitleTextColors.value(for: rowInternalState(element: element)))
+                                    .font(uiModel.rowTitleTextFont)
 
-                                .frame(maxWidth: .infinity)
-                                .padding(uiModel.indicatorMargin)
-                                .padding(uiModel.contentMargin)
-                                .scaleEffect(
-                                    rowContentScale(element: element),
-                                    anchor: rowContentScaleAnchor(element: element)
-                                )
+                            case .content(let content):
+                                content(rowInternalState(element: element), element)
+                            }
+                        })
+                        .frame(maxWidth: .infinity)
+                        .padding(uiModel.indicatorMargin)
+                        .padding(uiModel.contentMargin)
+                        .scaleEffect(
+                            rowContentScale(element: element),
+                            anchor: rowContentScaleAnchor(element: element)
+                        )
 
-                                .getSize({ rowWidth = $0.width })
-                        }
-                    )
-                    .disabled(disabledValues.contains(element))
-                })
+                        .getSize({ rowWidth = $0.width })
+                    }
+                )
+                .disabled(disabledValues.contains(element))
             })
-            
-        case .content(let content):
-            HStack(spacing: 0, content: {
-                ForEach(data, id: id, content: { element in
-                    SwiftUIGestureBaseButton(
-                        onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
-                        label: {
-                            content(rowInternalState(element: element), element)
-                                .frame(maxWidth: .infinity)
-                                .padding(uiModel.indicatorMargin)
-                                .padding(uiModel.contentMargin)
-                                .scaleEffect(
-                                    rowContentScale(element: element),
-                                    anchor: rowContentScaleAnchor(element: element)
-                                )
-                            
-                                .getSize({ rowWidth = $0.width })
-                        }
-                    )
-                    .disabled(disabledValues.contains(element))
-                })
-            })
-        }
+        })
     }
     
     private var dividers: some View {
