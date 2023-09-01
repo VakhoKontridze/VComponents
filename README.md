@@ -422,7 +422,7 @@ Versions with different majors are not directly compatible. When a new major is 
         tvOS 13.0<br>
         watchOS 6.0
     </td>
-    <td>4.x.x - 4.x.x</td>
+    <td>5.x.x - 5.x.x</td>
     <td>
         API changes.<br>
     </td>
@@ -430,7 +430,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>
-        4.0<br><i><sup>(4.0.0 - 4.3.6)</sup></i>
+        4.0<br><i><sup>(4.0.0 - 4.3.7)</sup></i>
     </td>
     <td>2023 04 09</td>
     <td>
