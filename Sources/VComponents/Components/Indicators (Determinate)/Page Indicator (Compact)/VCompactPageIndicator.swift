@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Compact Page Indicator
-/// Component that indicates selection in page control in compact fashion.
+/// Indicator component that represents selection in page control in compact fashion.
 ///
 ///     private let total: Int = 10
 ///     @State private var current: Int = 4
@@ -149,7 +149,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     // But unlike `VPageIndicator`, they don't work. Animation breaks and some dots disappear.
     // Even wrapping them with if-else with `ViewBuilder`, or `Group` doesn't help it.
     // The only solution I found is to write conditional outside body that defines `HStack`/`VStack`.
-    private var compactBody: some View {
+    private var compactBody: some View { // TODO: Refactor when `iOS` `16.0` is supported
         frame
             .applyIf(
                 uiModel.direction.isHorizontal,
@@ -223,22 +223,20 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         .scaleEffect(scale(at: i))
     }
     
-    // MARK: Dimension on Main Axis
+    // MARK: Widths
     private var visibleWidth: CGFloat {
         let dots: CGFloat = CGFloat(visible) * uiModel.dotWidth
         let spacings: CGFloat = CGFloat(visible - 1) * uiModel.spacing
-        let total: CGFloat = dots + spacings
-        return total
+        return dots + spacings
     }
     
     private var totalWidth: CGFloat {
         let dots: CGFloat = CGFloat(total) * uiModel.dotWidth
         let spacings: CGFloat = CGFloat(total - 1) * uiModel.spacing
-        let total: CGFloat = dots + spacings
-        return total
+        return dots + spacings
     }
     
-    // MARK: Animation Offset
+    // MARK: Offset
     private var offset: CGFloat {
         let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
         
@@ -260,7 +258,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             .withOppositeSign(if: uiModel.direction.isReversed)
     }
     
-    // MARK: Animation Scale
+    // MARK: Scale
     private func scale(at index: Int) -> CGFloat {
         switch region {
         case .start:

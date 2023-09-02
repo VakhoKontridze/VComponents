@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Loading Stretched Button
-/// Stretched button component that performs action when triggered.
+/// Stretched button component that indicates loading activity, and performs action when triggered.
 ///
 ///     var body: some View {
 ///         VLoadingStretchedButton(

@@ -14,9 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents alert when `Bool` is `true`.
-    ///
-    /// Modal component that presents alert with actions, and hosts content.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// Alert can have one, two, or many buttons.
     /// Two buttons are stacked horizontally, while more are stacked vertically.
@@ -71,7 +69,7 @@ extension View {
             )
     }
     
-    /// Presents alert when `Bool` is `true`.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Content>(
@@ -113,7 +111,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents alert using the item as data source for content.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item>(
@@ -167,7 +165,7 @@ extension View {
             )
     }
     
-    /// Presents alert using the item as data source for content.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item, Content>(
@@ -237,7 +235,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents alert when `Bool` is `true` using data to produce content.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<T>(
@@ -291,7 +289,7 @@ extension View {
             )
     }
     
-    /// Presents alert when `Bool` is `true` using data to produce content.
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<T, Content>(
@@ -361,7 +359,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents alert when `Bool` is `true` using `Error`
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E>(
@@ -417,7 +415,7 @@ extension View {
             )
     }
     
-    /// Presents alert when `Bool` is `true` using `Error`
+    /// Modal component that presents alert with actions and hosts content.
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E, Content>(

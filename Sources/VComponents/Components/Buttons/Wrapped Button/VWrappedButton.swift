@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Wrapped Button
-/// Wrapped button component and performs action when triggered.
+/// Wrapped button component that performs action when triggered.
 ///
 ///     var body: some View {
 ///         VWrappedButton(

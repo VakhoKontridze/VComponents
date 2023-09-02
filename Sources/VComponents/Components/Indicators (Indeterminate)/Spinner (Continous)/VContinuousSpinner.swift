@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Continuous Spinner
-/// Component that indicates activity.
+/// Indicator component that represents indefinite activity.
 ///
 ///     var body: some View {
 ///         VContinuousSpinner()
@@ -41,9 +41,10 @@ public struct VContinuousSpinner: View {
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear(perform: {
                 DispatchQueue.main.async(execute: {
-                    withAnimation(uiModel.animation.repeatForever(autoreverses: false), {
-                        isAnimating.toggle()
-                    })
+                    withAnimation(
+                        uiModel.animation.repeatForever(autoreverses: false),
+                        { isAnimating.toggle() }
+                    )
                 })
             })
             .environment(\.layoutDirection, .leftToRight) // Like native `ProgressView`, forces LTR

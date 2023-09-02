@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Bouncing Marquee
-/// Container that automatically scrolls and bounces it's content edge-to-edge.
+/// Container component that automatically scrolls and bounces it's content edge-to-edge.
 ///
 ///     var body: some View {
 ///         VBouncingMarquee(

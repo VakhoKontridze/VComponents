@@ -14,8 +14,6 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents toast when `Bool` is `true`.
-    ///
     /// Modal component that presents toast.
     ///
     ///     @State private var isPresented: Bool = false
@@ -66,7 +64,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents toast using the item as data source for content.
+    /// Modal component that presents toast.
     ///
     /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<Item>(
@@ -110,7 +108,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents toast when `Bool` is `true` using data to produce content.
+    /// Modal component that presents toast.
     ///
     /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<T>(
@@ -154,7 +152,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents toast when `Bool` is `true` using `Error`
+    /// Modal component that presents toast.
     ///
     /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<E>(

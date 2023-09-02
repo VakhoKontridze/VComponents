@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Automatic Page Indicator
-/// Component that indicates selection in page control in standard or compact configuration.
+/// Indicator component that represents selection in page control in standard or compact configuration.
 ///
 ///     private let total: Int = 10
 ///     @State private var current: Int = 4
@@ -97,23 +97,25 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
     
     // MARK: Body
     public var body: some View {
-        switch total {
-        case ...uiModel.standardDotLimit:
-            VPageIndicator(
-                uiModel: uiModel.standardPageIndicatorSubUIModel,
-                total: total,
-                current: current,
-                dotContent: dotContent
-            )
-            
-        default:
-            VCompactPageIndicator(
-                uiModel: uiModel.compactPageIndicatorSubUIModel,
-                total: total,
-                current: current,
-                dotContent: dotContent
-            )
-        }
+        Group(content: {
+            switch total {
+            case ...uiModel.standardDotLimit:
+                VPageIndicator(
+                    uiModel: uiModel.standardPageIndicatorSubUIModel,
+                    total: total,
+                    current: current,
+                    dotContent: dotContent
+                )
+
+            default:
+                VCompactPageIndicator(
+                    uiModel: uiModel.compactPageIndicatorSubUIModel,
+                    total: total,
+                    current: current,
+                    dotContent: dotContent
+                )
+            }
+        })
     }
 }
 

@@ -133,7 +133,7 @@ public struct VToastUIModel {
         case fixedFraction(ratio: CGFloat, alignment: HorizontalAlignment)
 
         // MARK: Properties
-        var marginHor: CGFloat {
+        var marginHorizontal: CGFloat {
             switch self {
             case .wrapped(let margin): return margin
             case .stretched(_, let margin): return margin

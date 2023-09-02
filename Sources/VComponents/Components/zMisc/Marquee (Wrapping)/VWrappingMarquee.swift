@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Wrapping Marquee
-/// Container that automatically scrolls and wraps it's content edge-to-edge.
+/// Container component that automatically scrolls and wraps it's content edge-to-edge.
 ///
 ///     var body: some View {
 ///         VWrappingMarquee(

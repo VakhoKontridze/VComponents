@@ -90,28 +90,28 @@ struct VToast: View {
                     view
                         .frame(
                             maxWidth: .infinity,
-                            alignment: alignment.toAlignment
+                            alignment: Alignment(horizontal: alignment, vertical: .center)
                         )
 
                 case .fixedPoint(let width, let alignment):
                     view
                         .frame(
                             width: width,
-                            alignment: alignment.toAlignment
+                            alignment: Alignment(horizontal: alignment, vertical: .center)
                         )
 
                 case .fixedFraction(let ratio, let alignment):
                     view
                         .frame(
                             width: containerSize.width * ratio,
-                            alignment: alignment.toAlignment
+                            alignment: Alignment(horizontal: alignment, vertical: .center)
                         )
                 }
             })
             .cornerRadius(cornerRadius) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
             .background(background)
             .getSize({ height = $0.height })
-            .padding(.horizontal, uiModel.widthType.marginHor)
+            .padding(.horizontal, uiModel.widthType.marginHorizontal)
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
@@ -201,22 +201,6 @@ struct VToast: View {
 #if os(iOS)
         HapticManager.shared.playNotification(uiModel.haptic)
 #endif
-    }
-}
-
-// MARK: - Helpers
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension HorizontalAlignment {
-    fileprivate var toAlignment: Alignment {
-        switch self {
-        case .leading: return .leading
-        case .center: return .center
-        case .trailing: return .trailing
-        default: fatalError()
-        }
     }
 }
 

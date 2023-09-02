@@ -258,8 +258,7 @@ struct VMenu_Previews: PreviewProvider {
 
         var id: Int { rawValue }
 
-        var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
-        private var _stringRepresentation: String { .init(describing: self).capitalized }
+        var stringRepresentation: String { .init(describing: self).capitalized.pseudoRTL(languageDirection) }
     }
     
     // Previews (Scenes)

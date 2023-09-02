@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Disclosure Group
-/// Expandable container component that draws background, and hosts content.
+/// Expandable container component that hosts content.
 ///
 ///     @State private var state: VDisclosureGroupState = .expanded
 ///

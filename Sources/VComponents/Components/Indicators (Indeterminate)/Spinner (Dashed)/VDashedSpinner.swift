@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Dashed Spinner
-/// Component that indicates activity.
+/// Indicator component that represents indefinite activity.
 ///
 ///     var body: some View {
 ///         VDashedSpinner()

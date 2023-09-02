@@ -12,8 +12,6 @@ import SwiftUI
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents context menu when `View` is long-pressed.
-    ///
     /// Modal component that presents menu of actions, and hosts preview.
     ///
     /// Optionally, preview can be presented with methods that have `preview` argument.
@@ -60,7 +58,7 @@ extension View {
 @available(tvOS 16.0, *)@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents context menu when `View` is long-pressed.
+    /// Modal component that presents menu of actions, and hosts preview.
     ///
     /// For additional info, refer to `View.vContextMenu(sections:)`.
     public func vContextMenu<PreviewContent>(

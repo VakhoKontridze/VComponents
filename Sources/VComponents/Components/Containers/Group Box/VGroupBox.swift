@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Group Box
-/// Container component that draws background and hosts content.
+/// Container component that hosts content.
 ///
 /// If content is passed during `init`, `VGroupBox` would resize according to the size of the content.
 /// If content is not passed, `VGroupBox` would expand to occupy maximum space.

@@ -14,9 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents modal when boolean is `true`.
-    ///
-    /// Modal component that draws a background, and hosts content.
+    /// Modal component that hosts slide-able content on the edge of the container.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -174,7 +172,7 @@ extension View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
-    /// Presents modal using the item as data source for content.
+    /// Modal component that hosts slide-able content on the edge of the container.
     ///
     /// For additional info, refer to `View.vModal(id:isPresented:content:)`.
     public func vModal<Item, Content>(

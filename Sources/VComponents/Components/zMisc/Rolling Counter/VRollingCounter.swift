@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rolling Counter
-/// Component that highlights change in a floating-point number.
+/// Text component that highlights change in a floating-point number.
 ///
 ///     @State private var value: Double = 10_000
 ///
@@ -138,7 +138,7 @@ public struct VRollingCounter: View {
         }
     }
 
-    // MARK: Methods
+    // MARK: Actions
     private func didChangeValue(to newValue: Double) {
         let oldValue: Double = VRollingCounterFactory.value(
             components: components,

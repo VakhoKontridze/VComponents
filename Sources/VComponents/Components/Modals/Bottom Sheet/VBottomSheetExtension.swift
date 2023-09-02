@@ -14,9 +14,7 @@ import VCore
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7.0, *)@available(watchOS, unavailable)
 extension View {
-    /// Presents bottom sheet when `Bool` is `true`.
-    ///
-    /// Modal component that draws a background, and hosts pull-up content on the bottom of the container.
+    /// Modal component hosts pull-up content on the bottom of the container.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -211,7 +209,7 @@ extension View {
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7.0, *)@available(watchOS, unavailable)
 extension View {
-    /// Presents bottom sheet when `Bool` is `true`.
+    /// Modal component hosts pull-up content on the bottom of the container.
     ///
     /// For additional info, refer to `View.vBottomSheet(id:isPresented:content:)`.
     public func vBottomSheet<Item, Content>(

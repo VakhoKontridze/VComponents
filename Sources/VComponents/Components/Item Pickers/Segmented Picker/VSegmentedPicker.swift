@@ -30,22 +30,6 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// If selections conforms to `CaseIterable` and `StringRepresentable`, shorthand API can be used.
-///
-///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
-///         case red, green, blue
-///
-///         var id: Int { rawValue }
-///         var stringRepresentation: String { .init(describing: self).capitalized }
-///     }
-///
-///     @State private var selection: RGBColor = .red
-///
-///     var body: some View {
-///         VSegmentedPicker(selection: $selection)
-///             .padding()
-///     }
-///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 @available(watchOS, unavailable)
 public struct VSegmentedPicker<Data, ID, Content>: View
