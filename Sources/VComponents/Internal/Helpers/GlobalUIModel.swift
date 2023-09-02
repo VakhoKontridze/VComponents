@@ -108,7 +108,7 @@ struct GlobalUIModel {
     
     // MARK: Buttons
     struct Buttons { // Also used for button-like components
-        // MARK: Properties
+        // MARK: Properties - Sizes
         static let heightStretchedButton: CGFloat = {
 #if os(iOS)
             return 48
@@ -120,6 +120,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let heightWrappedButton: CGFloat = {
 #if os(iOS)
             return 32
@@ -131,6 +132,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let sizeRectButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 56)
@@ -142,7 +144,8 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        
+
+        // MARK: Properties - Corner Radius
         static let cornerRadiusStretchedButton: CGFloat = {
 #if os(iOS)
             return 14
@@ -154,7 +157,9 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let cornerRadiusWrappedButton: CGFloat = heightWrappedButton/2
+
         static let cornerRadiusRectangularButton: CGFloat = {
 #if os(iOS)
             return 16
@@ -166,16 +171,20 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        
+
+        // MARK: Properties - Margins
         static let labelMargins: EdgeInsets_HorizontalVertical = .init(horizontal: 15, vertical: 3)
         static let labelMarginsRectButton: EdgeInsets_HorizontalVertical = .init(3)
-        
+
+        // MARK: Properties - Colors
         static let transparentLayerLabelEnabled: Color = ColorBook.controlLayerBlue
         static let transparentLayerLabelPressed: Color = ColorBook.controlLayerBluePressed
         static let transparentLayerLabelDisabled: Color = ColorBook.controlLayerBlueDisabled.opacity(0.5) // Looks better
-        
+
+        // MARK: Properties - Label
         static let iconAndTitleTextSpacing: CGFloat = 8
-        
+
+        // MARK: Properties - Label - Text - Fonts
         static let titleTextFontStretchedButton: Font = {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
@@ -191,6 +200,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let titleTextFontWrappedButton: Font = {
 #if os(iOS)
             return Font.subheadline.weight(.semibold)
@@ -202,6 +212,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let titleTextRectangularButton: Font = {
 #if os(iOS)
             return Font.subheadline.weight(.semibold)
@@ -214,6 +225,7 @@ struct GlobalUIModel {
 #endif
         }()
 
+        // MARK: Properties - Label - Icon
         static let iconSizeStretchedButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 18)
@@ -225,6 +237,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let iconSizeWrappedButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 16)
@@ -236,6 +249,7 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
+
         static let iconSizeRectButton: CGSize = {
 #if os(iOS)
             return CGSize(dimension: 24)
@@ -259,7 +273,8 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        
+
+        // MARK: Properties - Haptics
 #if os(iOS)
         static let hapticStretchedButtonIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
 #elseif os(watchOS)
@@ -378,14 +393,45 @@ struct GlobalUIModel {
         // MARK: Initializers
         private init() {}
     }
+
+    // MARK: Containers
+    struct Containers {
+        // MARK: Properties - Pager Tab View
+        static let pagerTabViewTabBarAndTabViewSpacing: CGFloat = 0
+
+        static let pagerTabViewTabBarAlignment: VerticalAlignment = .top
+
+        static let pagerTabViewTabItemMargin: CGFloat = 10
+
+        static let pagerTabViewTabItemTextColorEnabled: Color = ColorBook.primary
+        static let pagerTabViewTabItemTextColorPressed: Color = ColorBook.primaryPressedDisabled
+        static let pagerTabViewTabItemTextColorDisabled: Color = ColorBook.primaryPressedDisabled
+        static let pagerTabViewTabItemTextFont: Font = .body
+
+        static let pagerTabViewTabIndicatorStripAlignment: VerticalAlignment = .bottom
+
+        static let pagerTabViewTabIndicatorTrackHeight: CGFloat = 2
+        static let pagerTabViewTabIndicatorTrackColor: Color = .clear
+
+        static let pagerTabViewSelectedTabIndicatorHeight: CGFloat = 2
+        static let pagerTabViewSelectedTabIndicatorCornerRadius: CGFloat = 0
+        static let pagerTabViewSelectedTabIndicatorColor: Color = ColorBook.accentBlue
+        static let pagerTabViewSelectedTabIndicatorAnimation: Animation? = .default
+
+        static let pagerTabViewBackgroundColor: Color = ColorBook.layer
+
+        // MARK: Initializers
+        private init() {}
+    }
     
     // MARK: Modals
     struct Modals {
-        // MARK: Properties        
+        // MARK: Properties - Popping
         static let poppingAppearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
         static let poppingDisappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
         static let poppingAnimationScaleEffect: CGFloat = 1.01
-        
+
+        // MARK: Properties - Sliding
         static let slidingAppearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
         static let slidingDisappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
@@ -407,7 +453,7 @@ struct GlobalUIModel {
     
     // MARK: Indicators (Determinate)
     struct DeterminateIndicators {
-        // MARK: Properties
+        // MARK: Properties - Page Indicator
         static let pageIndicatorSpacing: CGFloat = {
 #if os(iOS)
             return 5

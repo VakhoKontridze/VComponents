@@ -64,6 +64,9 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 <p>
     <img tag="VGroupBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236555677-bfab5fa3-c609-452c-b216-9841a7572337.png">
     <img tag="VDisclosureGroup" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562719-5ccb94b2-00b5-43c1-974e-8a2d6f8b59fe.png">
+    <img tag="VStretchedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/87e25e8a-9a2b-489c-85e5-daacdd881810">
+    <img tag="VWrappedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/34ef4d4d-523d-41da-9de9-890067f3fa1e">
+    <img tag="VDynamicPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/2ab7fe62-da41-4dfb-9c8c-a2a40035e459">
 <p/>
 
 #### Lists

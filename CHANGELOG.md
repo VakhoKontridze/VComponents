@@ -85,6 +85,18 @@ VTextView
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 - `contentMargin` is renamed to `contentMargins`
 
+VStretchedIndicatorStaticPagerTabView
+
+- A new container component is added that presents children in `TabView` with custom header
+
+VWrappedIndicatorStaticPagerTabView
+
+- A new container component is added that presents children in `TabView` with custom header
+
+VDynamicPagerTabView
+
+- A new container component is added that presents children in `TabView` with custom header
+
 VModal
 
 - Keyboard handling is improved
