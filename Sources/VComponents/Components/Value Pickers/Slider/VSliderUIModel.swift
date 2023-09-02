@@ -25,10 +25,20 @@ public struct VSliderUIModel {
     public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
 
     // MARK: Properties - Body
-    /// Indicates if body is draggable. Set to `false`.
+    /// Indicates if body is draggable.
+    /// Set to `false` on `iOS`.
+    /// Set to `true` on `macOS`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var bodyIsDraggable: Bool = false
+    public var bodyIsDraggable: Bool = {
+#if os(iOS)
+        return false
+#elseif os(macOS)
+        return true
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Track
     /// Slider track colors.
