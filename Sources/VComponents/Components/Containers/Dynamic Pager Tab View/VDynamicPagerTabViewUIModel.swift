@@ -60,6 +60,9 @@ public struct VDynamicPagerTabViewUIModel {
     public var tabIndicatorTrackColor: Color = GlobalUIModel.Containers.pagerTabViewTabIndicatorTrackColor
 
     // MARK: Properties - Tab Indicator Strip - Indicator
+    /// Tab selection indicator width type. Set to `default`.
+    public var tabSelectionIndicatorWidthType: TabSelectionIndicatorWidthType = .default
+
     /// Selected tab indicator height. Set to `2`.
     public var selectedTabIndicatorHeight: CGFloat = GlobalUIModel.Containers.pagerTabViewSelectedTabIndicatorHeight
 
@@ -86,6 +89,29 @@ public struct VDynamicPagerTabViewUIModel {
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
+
+    // MARK: Tab Selection Indicator Width Type
+    /// Enumeration that represents tab selection indicator width type, such as `wrapped` or `stretched`.
+    public enum TabSelectionIndicatorWidthType {
+        // MARK: Cases
+        /// Selection indicator stretches to the width of the label of tab item.
+        case wrapped
+
+        /// Selection indicator stretches to full width of the tab item, including the margins.
+        case stretched
+
+        // MARK: Properties
+        var padsSelectionIndicator: Bool {
+            switch self {
+            case .wrapped: return true
+            case .stretched: return false
+            }
+        }
+
+        // MARK: Initializers
+        /// Default value. Set to `wrapped`.
+        public static var `default`: Self { .wrapped }
+    }
 
     // MARK: Tab Item State Colors
     /// Model that contains colors for component states.

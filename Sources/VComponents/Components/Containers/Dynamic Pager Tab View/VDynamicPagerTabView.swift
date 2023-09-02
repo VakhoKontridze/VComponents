@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Static Pager Tab View (Stretched Indicator)
+// MARK: - V Dynamic Pager Tab View
 /// Container component that switches between child views and is attributed with dynamic pager with rectangular indicator.
 ///
 /// Best suited for `5`+ items.
@@ -205,7 +205,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                                         }
                                     )
 
-                                    tabIndicatorStripSection(element)
+                                    tabIndicatorStripSlice(element)
                                 })
                                 .padding(.bottom, tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
                                 .id(element)
@@ -219,11 +219,11 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         })
     }
 
-    private func tabIndicatorStripSection(
+    private func tabIndicatorStripSlice(
         _ element: Data.Element
     ) -> some View {
         ZStack(content: {
-            tabIndicatorTrackSection
+            tabIndicatorTrackSlice
             selectedTabIndicator(element)
         })
         .frame(
@@ -253,14 +253,14 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                 label(tabItemInternalState, element)
             }
         })
-        .padding(uiModel.tabItemMargins)
-        .padding(.leading, data.firstIndex(of: element) == data.startIndex ? uiModel.tabBarMarginHorizontal : 0)
-        .padding(.trailing, data.lastIndex(of: element) == data.index(before: data.endIndex) ? uiModel.tabBarMarginHorizontal : 0)
         .fixedSize(horizontal: true, vertical: false)
+        .padding(uiModel.tabItemMargins)
+        .padding(.leading, isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0)
+        .padding(.trailing, isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0)
         .contentShape(Rectangle())
     }
 
-    private var tabIndicatorTrackSection: some View {
+    private var tabIndicatorTrackSlice: some View {
         Rectangle()
             .frame(height: uiModel.tabIndicatorTrackHeight)
             .foregroundColor(uiModel.tabIndicatorTrackColor)
@@ -276,6 +276,17 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
             }
         })
         .frame(height: uiModel.selectedTabIndicatorHeight)
+        .padding(
+            .leading, uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+            uiModel.tabItemMargins.leading + (isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+            0
+        )
+        .padding(
+            .trailing,
+            uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+            uiModel.tabItemMargins.trailing + (isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+            0
+        )
         .foregroundColor(uiModel.selectedTabIndicatorColor)
         .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
     }
@@ -319,6 +330,15 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
             }
         )
     }
+
+    // MARK: Helpers
+    private func isFirstElement(_ element: Data.Element) -> Bool {
+        data.firstIndex(of: element) == data.startIndex
+    }
+
+    private func isLastElement(_ element: Data.Element) -> Bool {
+        data.lastIndex(of: element) == data.index(before: data.endIndex)
+    }
 }
 
 // MARK: - Preview
@@ -332,6 +352,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
+    private static var tabSelectionIndicatorWidthType: VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType { .default }
 
     // Previews
     static var previews: some View {
@@ -370,6 +391,11 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
         var body: some View {
             PreviewContainer(hasLayer: false, content: {
                 VDynamicPagerTabView(
+                    uiModel: {
+                        var uiModel: VDynamicPagerTabViewUIModel = .init()
+                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
+                        return uiModel
+                    }(),
                     selection: $selection,
                     data: WeekDay.allCases,
                     tabItemTitle: { $0.tabItemTitle },
@@ -388,8 +414,12 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                 VDynamicPagerTabView(
                     uiModel: {
                         var uiModel: VDynamicPagerTabViewUIModel = .init()
+
+                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
+
                         uiModel.headerBackgroundColor = ColorBook.layerGray.opacity(0.5)
                         uiModel.tabItemMargins.top *= 1.5
+
                         return uiModel
                     }(),
                     selection: $selection,
@@ -417,9 +447,13 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                 VDynamicPagerTabView(
                     uiModel: {
                         var uiModel: VDynamicPagerTabViewUIModel = .init()
+
+                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
+
                         uiModel.tabIndicatorTrackHeight = 1
                         uiModel.tabIndicatorTrackColor = ColorBook.layerGray
                         uiModel.selectedTabIndicatorHeight = 3
+
                         return uiModel
                     }(),
                     selection: $selection,
