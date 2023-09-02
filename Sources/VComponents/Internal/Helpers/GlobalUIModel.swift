@@ -451,8 +451,8 @@ struct GlobalUIModel {
         private init() {}
     }
     
-    // MARK: Indicators (Determinate)
-    struct DeterminateIndicators {
+    // MARK: Indicators (Definite)
+    struct DefiniteIndicators {
         // MARK: Properties - Page Indicator
         static let pageIndicatorSpacing: CGFloat = {
 #if os(iOS)

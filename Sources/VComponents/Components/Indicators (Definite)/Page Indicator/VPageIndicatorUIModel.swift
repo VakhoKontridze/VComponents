@@ -20,7 +20,7 @@ public struct VPageIndicatorUIModel {
     /// Set to `5` on `macOS`.
     /// Set to `10` on `tvOS`.
     /// Set to `3` on `watchOS`.
-    public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
+    public var spacing: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorSpacing
 
     // MARK: Properties - Dot
     /// Dot width, but height for vertical layouts.
@@ -30,23 +30,23 @@ public struct VPageIndicatorUIModel {
     /// Set to `8` on `watchOS`.
     ///
     /// Set to `nil`, to make dot stretch to take available space.
-    public var dotWidth: CGFloat? = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
+    public var dotWidth: CGFloat? = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
 
     /// Dot height, but width for vertical layouts.
     /// Set to `10` on `iOS`.
     /// Set to `10` on `macOS`.
     /// Set to `20` on `tvOS`.
     /// Set to `8` on `watchOS`.
-    public var dotHeight: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
+    public var dotHeight: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
 
     /// Unselected dot scale. Set to `0.85`.
-    public var unselectedDotScale: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorStandardUnselectedDotScale
+    public var unselectedDotScale: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorStandardUnselectedDotScale
 
     /// Dot color.
-    public var dotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorDotColor
+    public var dotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorDotColor
 
     /// Selected dot color.
-    public var selectedDotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorSelectedDotColor
+    public var selectedDotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorSelectedDotColor
 
     // MARK: Properties - Dot Border
     /// Border width. Set to `0`.
@@ -72,7 +72,7 @@ public struct VPageIndicatorUIModel {
     public var appliesTransitionAnimation: Bool = true
 
     /// Transition animation. Set to `linear` with duration `0.15`.
-    public var transitionAnimation: Animation? = GlobalUIModel.DeterminateIndicators.pageIndicatorTransitionAnimation
+    public var transitionAnimation: Animation? = GlobalUIModel.DefiniteIndicators.pageIndicatorTransitionAnimation
     
     // MARK: Initializers
     /// Initializes UI model with default values.

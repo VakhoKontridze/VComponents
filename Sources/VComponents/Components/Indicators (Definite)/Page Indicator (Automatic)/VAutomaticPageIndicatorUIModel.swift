@@ -20,7 +20,7 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Set to `5` on `macOS`.
     /// Set to `10` on `tvOS`.
     /// Set to `3` on `watchOS`.
-    public var spacing: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorSpacing
+    public var spacing: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorSpacing
 
     /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
     public var standardDotLimit: Int = 10
@@ -31,13 +31,13 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Set to `10` on `macOS`.
     /// Set to `20` on `tvOS`.
     /// Set to `8` on `watchOS`.
-    public var dotHeight: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
+    public var dotHeight: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
 
     /// Dot color.
-    public var dotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorDotColor
+    public var dotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorDotColor
 
     /// Selected dot color.
-    public var selectedDotColor: Color = GlobalUIModel.DeterminateIndicators.pageIndicatorSelectedDotColor
+    public var selectedDotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorSelectedDotColor
 
     // MARK: Properties - Dot Border
     /// Border width. Set to `0`.
@@ -63,7 +63,7 @@ public struct VAutomaticPageIndicatorUIModel {
     public var appliesTransitionAnimation: Bool = true
 
     /// Transition animation. Set to `linear` with duration `0.15`.
-    public var transitionAnimation: Animation? = GlobalUIModel.DeterminateIndicators.pageIndicatorTransitionAnimation
+    public var transitionAnimation: Animation? = GlobalUIModel.DefiniteIndicators.pageIndicatorTransitionAnimation
 
     // MARK: Properties - Standard Layout
     /// Dot width, but height for vertical layouts, when switching to `standard` configuration.
@@ -73,10 +73,10 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Set to `8` on `watchOS`.
     ///
     /// Set to `nil`, to make dot stretch to take available space.
-    public var dotWidthForStandardConfiguration: CGFloat? = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
+    public var dotWidthForStandardConfiguration: CGFloat? = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
 
     /// Unselected dot scale when switching to `standard` configuration. Set to `0.85`.
-    public var unselectedDotScaleForStandardConfiguration: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorStandardUnselectedDotScale
+    public var unselectedDotScaleForStandardConfiguration: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorStandardUnselectedDotScale
 
     var standardPageIndicatorSubUIModel: VPageIndicatorUIModel {
         .init(
@@ -99,24 +99,24 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Number of visible dots when switching to `compact` configuration. Set to `7`.
     ///
     /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
-    public var visibleDotsForCompactConfiguration: Int = GlobalUIModel.DeterminateIndicators.pageIndicatorCompactVisibleDots
+    public var visibleDotsForCompactConfiguration: Int = GlobalUIModel.DefiniteIndicators.pageIndicatorCompactVisibleDots
 
     /// Number of center dots when switching to `compact` configuration. Set to `3`.
     ///
     /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
-    public var centerDotsForCompactConfiguration: Int = GlobalUIModel.DeterminateIndicators.pageIndicatorCompactCenterDots
+    public var centerDotsForCompactConfiguration: Int = GlobalUIModel.DefiniteIndicators.pageIndicatorCompactCenterDots
 
     /// Dot width, but height for vertical layouts, when switching to `compact` configuration.
     /// Set to `10` on `iOS`.
     /// Set to `10` on `macOS`.
     /// Set to `20` on `tvOS`.
     /// Set to `8` on `watchOS`.
-    public var dotWidthForCompactConfiguration: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorDotDimension
+    public var dotWidthForCompactConfiguration: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
 
     /// Scale of dot at the edge when switching to `compact` configuration. Set to `0.5`.
     ///
     /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
-    public var edgeDotScaleForCompactConfiguration: CGFloat = GlobalUIModel.DeterminateIndicators.pageIndicatorCompactEdgeDotScale
+    public var edgeDotScaleForCompactConfiguration: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorCompactEdgeDotScale
 
     var compactPageIndicatorSubUIModel: VCompactPageIndicatorUIModel {
         .init(
