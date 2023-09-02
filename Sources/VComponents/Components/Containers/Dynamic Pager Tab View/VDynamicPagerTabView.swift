@@ -310,24 +310,26 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         guard !didPositionSelectionIndicatorInitially else { return }
         didPositionSelectionIndicatorInitially = true
 
-        proxy.scrollTo(
-            selection,
-            anchor: uiModel.selectedTabIndicatorScrollAnchor
-        )
+        _positionSelectedTabIndicator(selection, in: proxy)
     }
 
     private func positionSelectedTabIndicator(
         _ newElement: Data.Element,
         in proxy: ScrollViewProxy
     ) {
-        withAnimation( // Needed alongside `animation(_:value:)`
+        withAnimation( // Needed alongside `animation(_:value:)` to maintain proper `ScrollView` offset
             uiModel.selectedTabIndicatorAnimation,
-            {
-                proxy.scrollTo(
-                    newElement,
-                    anchor: uiModel.selectedTabIndicatorScrollAnchor
-                )
-            }
+            { _positionSelectedTabIndicator(newElement, in: proxy) }
+        )
+    }
+
+    private func _positionSelectedTabIndicator(
+        _ newElement: Data.Element,
+        in proxy: ScrollViewProxy
+    ) {
+        proxy.scrollTo(
+            newElement,
+            anchor: uiModel.selectedTabIndicatorScrollAnchor
         )
     }
 
