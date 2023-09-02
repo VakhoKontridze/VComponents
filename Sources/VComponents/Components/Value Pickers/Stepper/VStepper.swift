@@ -112,7 +112,7 @@ public struct VStepper: View {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .foregroundColor(uiModel.buttonBackgroundColors.value(for: buttonInternalState(button)))
 
-                    button.icon
+                    buttonIcon(button)
                         .resizable()
                         .scaledToFit()
                         .frame(dimension: uiModel.buttonIconDimension)
@@ -128,6 +128,17 @@ public struct VStepper: View {
         Rectangle()
             .frame(size: uiModel.dividerSize)
             .foregroundColor(uiModel.dividerColors.value(for: internalState))
+    }
+
+    // MARK: Button Icon
+    private func buttonIcon(_ button: VStepperButton) -> Image {
+        switch button {
+        case .minus:
+            return uiModel.buttonIconMinus.renderingMode(.template)
+            
+        case .plus:
+            return uiModel.buttonIconPlus.renderingMode(.template)
+        }
     }
     
     // MARK: Actions

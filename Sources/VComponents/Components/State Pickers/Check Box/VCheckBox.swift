@@ -175,6 +175,23 @@ public struct VCheckBox<Label>: View where Label: View {
         )
         .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
+
+    // MARK: Checkmark Icon
+    private var checkmarkIcon: Image? {
+        switch internalState {
+        case .off, .pressedOff:
+            return nil
+
+        case .on, .pressedOn:
+            return uiModel.checkmarkIconOn.renderingMode(.template)
+
+        case .indeterminate, .pressedIndeterminate:
+            return uiModel.checkmarkIconIndeterminate.renderingMode(.template)
+
+        case .disabled:
+            return nil
+        }
+    }
     
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
@@ -191,25 +208,6 @@ public struct VCheckBox<Label>: View where Label: View {
 #if os(iOS)
         HapticManager.shared.playImpact(uiModel.haptic)
 #endif
-    }
-    
-    // MARK: Icon
-    private var checkmarkIcon: Image? {
-        switch internalState {
-        case .off, .pressedOff:
-            return nil
-
-        case .on, .pressedOn:
-            return ImageBook.checkBoxCheckmarkOn
-                .renderingMode(.template)
-
-        case .indeterminate, .pressedIndeterminate:
-            return ImageBook.checkBoxCheckmarkIndeterminate
-                .renderingMode(.template)
-
-        case .disabled:
-            return nil
-        }
     }
 }
 

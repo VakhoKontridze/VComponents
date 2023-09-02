@@ -87,10 +87,10 @@ public struct ColorBook {
     public static let layerGray: Color = .init(module: "Layer.Gray")
     
     /// Gray layer color for pressed state. `(220, 220, 220)` and `(80, 80, 80)`.
-    internal static let layerGrayPressed: Color = .init(module: "Layer.Gray.Pressed")
+    public static let layerGrayPressed: Color = .init(module: "Layer.Gray.Pressed")
     
     /// Gray layer color and disabled state. `(245, 245, 245)` and `(50, 50, 50)`.
-    internal static let layerGrayDisabled: Color = .init(module: "Layer.Gray.Disabled")
+    public static let layerGrayDisabled: Color = .init(module: "Layer.Gray.Disabled")
     
     /// Green layer color. `(235, 250, 240)` and `(130, 190, 140)`.
     public static let layerGreen: Color = .init(module: "Layer.Green")
@@ -145,7 +145,7 @@ public struct ColorBook {
 
 // MARK: - Helpers
 extension Color {
-    init(module name: String) {
+    /*fileprivate*/ init(module name: String) {
         self.init(name, bundle: .module)
     }
 }

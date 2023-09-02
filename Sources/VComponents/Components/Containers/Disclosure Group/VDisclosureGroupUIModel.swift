@@ -66,8 +66,11 @@ public struct VDisclosureGroupUIModel {
     /// Set to `bold` `headline` (`13`) on `macOS`.
     public var headerTitleTextFont: Font = .headline.weight(.bold)
 
-    // MARK: Properties - Chevron Button
-    /// Model for customizing chevron button.
+    // MARK: Properties - Disclosure Button
+    /// Disclosure button icon.
+    public var disclosureButtonIcon: Image = ImageBook.chevronUp
+
+    /// Model for customizing disclosure button.
     /// `size` is set to `30x30`,
     /// `cornerRadius` is set to `16`,
     /// `backgroundColors` are changed,
@@ -75,7 +78,7 @@ public struct VDisclosureGroupUIModel {
     /// `iconColors` are changed,
     /// `hitBox` is set to `zero`,
     /// `haptic` is set to `nil`.
-    public var chevronButtonSubUIModel: VRectangularButtonUIModel = {
+    public var disclosureButtonSubUIModel: VRectangularButtonUIModel = {
         var uiModel: VRectangularButtonUIModel = .init()
 
         uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
@@ -102,6 +105,13 @@ public struct VDisclosureGroupUIModel {
 
         return uiModel
     }()
+
+    /// Disclosure button angles in radians.
+    public var disclosureButtonAngles: StateAngles = .init(
+        collapsed: CGFloat.pi/2,
+        expanded: CGFloat.pi,
+        disabled: CGFloat.pi/2
+    )
 
     // MARK: Properties - Divider
     /// Divider height. Set to `2`pixels.
@@ -153,6 +163,10 @@ public struct VDisclosureGroupUIModel {
     // MARK: State Opacities
     /// Model that contains opacities for component states.
     public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
+
+    // MARK: State Angles
+    /// Model that contains angles for component states.
+    public typealias StateAngles = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
 }
 
 // MARK: - Factory

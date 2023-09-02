@@ -130,6 +130,9 @@ public struct VTextFieldUIModel {
     /// Indicates if textfield has clear button. Set to `true`.
     public var hasClearButton: Bool = true
 
+    /// Clear button icon.
+    public var clearButtonIcon: Image = ImageBook.xMark
+
     /// Model for customizing clear button.
     /// `size` is set to `22x22`,
     /// `backgroundColors` are changed,
@@ -164,6 +167,12 @@ public struct VTextFieldUIModel {
     public var clearButtonAppearDisappearAnimation: Animation? = nil
 
     // MARK: Properties - Secure
+    /// Visibility button icon (off).
+    public var visibilityOffButtonIcon: Image = ImageBook.visibilityOff
+
+    /// Visibility button icon (on).
+    public var visibilityOnButtonIcon: Image = ImageBook.visibilityOn
+
     /// Model for customizing visibility button.
     /// `iconSize` is set to `20x20`,
     /// `iconColors` are changed,
@@ -189,6 +198,9 @@ public struct VTextFieldUIModel {
     }()
 
     // MARK: Properties - Search
+    /// Search button icon.
+    public var searchButtonIcon: Image = ImageBook.magnifyGlass
+
     /// Search icon dimension. Set to `15`.
     public var searchIconDimension: CGFloat = 15
 

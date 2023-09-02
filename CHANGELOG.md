@@ -6,6 +6,7 @@ General
 
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
+- `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
 VWrappedButton
 
@@ -55,6 +56,7 @@ VWrappedToggleButton
 VRectangularToggleButton
 
 - A new state-picker component is added that resembles `VRectangularButton`
+
 VSegmentedPicker
 
 - `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
@@ -84,6 +86,10 @@ VTextView
 - `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 - `contentMargin` is renamed to `contentMargins`
+
+VDisclosureGroup
+
+- Disclosure button angles can now be customized for different states
 
 VStretchedIndicatorStaticPagerTabView
 

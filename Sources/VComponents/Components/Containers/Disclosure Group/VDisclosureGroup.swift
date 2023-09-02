@@ -142,11 +142,11 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             Spacer()
             
             VRectangularButton(
-                uiModel: uiModel.chevronButtonSubUIModel,
+                uiModel: uiModel.disclosureButtonSubUIModel,
                 action: expandCollapse,
-                icon: ImageBook.chevronUp.renderingMode(.template)
+                icon: uiModel.disclosureButtonIcon.renderingMode(.template)
             )
-            .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
+            .rotationEffect(Angle(radians: uiModel.disclosureButtonAngles.value(for: internalState)))
         })
         .padding(uiModel.headerMargins)
     }
@@ -181,21 +181,6 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         }
         
         expandCollapse()
-    }
-}
-
-// MARK: - Helpers
-@available(iOS 14.0, macOS 11.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension VDisclosureGroupInternalState {
-    /// `rotationEffect(:_)` above auto-supports RTL languages.
-    fileprivate var chevronButtonDirection: ChevronDirection {
-        switch self {
-        case .collapsed: return .right
-        case .expanded: return .down
-        case .disabled: return .right
-        }
     }
 }
 
@@ -280,8 +265,8 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                         VDisclosureGroup(
                             uiModel: {
                                 var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.chevronButtonSubUIModel.backgroundColors.enabled = uiModel.chevronButtonSubUIModel.backgroundColors.pressed
-                                uiModel.chevronButtonSubUIModel.iconColors.enabled = uiModel.chevronButtonSubUIModel.iconColors.pressed
+                                uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
+                                uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.pressed
                                 return uiModel
                             }(),
                             state: .constant(.collapsed),
@@ -298,8 +283,8 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                         VDisclosureGroup(
                             uiModel: { // Needed for some reason
                                 var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.chevronButtonSubUIModel.backgroundColors.enabled = uiModel.chevronButtonSubUIModel.backgroundColors.disabled
-                                uiModel.chevronButtonSubUIModel.iconColors.enabled = uiModel.chevronButtonSubUIModel.iconColors.disabled
+                                uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
+                                uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.disabled
                                 return uiModel
                             }(),
                             state: .constant(.expanded),

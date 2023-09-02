@@ -199,7 +199,7 @@ public struct VTextField: View {
     
     @ViewBuilder private var searchIcon: some View {
         if uiModel.contentType.isSearch {
-            ImageBook.textFieldSearch
+            uiModel.searchButtonIcon
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
@@ -263,7 +263,7 @@ public struct VTextField: View {
         return VRectangularButton(
             uiModel: uiModel.clearButtonSubUIModel,
             action: didTapClearButton,
-            icon: ImageBook.xMark.renderingMode(.template)
+            icon: uiModel.clearButtonIcon.renderingMode(.template)
         )
         .opacity(isVisible ? 1 : 0)
         .allowsHitTesting(isVisible)
@@ -293,11 +293,9 @@ public struct VTextField: View {
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
-            return ImageBook.textFieldVisibilityOn
-                .renderingMode(.template)
+            return uiModel.visibilityOnButtonIcon.renderingMode(.template)
         } else {
-            return ImageBook.textFieldVisibilityOff
-                .renderingMode(.template)
+            return uiModel.visibilityOffButtonIcon.renderingMode(.template)
         }
     }
     
@@ -324,7 +322,7 @@ struct VTextField_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
-    private static var contentType: VTextFieldUIModel.ContentType { .standard }
+    private static var contentType: VTextFieldUIModel.ContentType { .search }
     
     // Previews
     static var previews: some View {

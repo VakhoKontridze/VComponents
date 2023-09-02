@@ -32,15 +32,22 @@ extension CGPoint {
     }
 }
 
-extension Double {
+extension BinaryFloatingPoint {
     func invertedFromMax(
-        _ max: Double,
+        _ max: Self,
         if condition: Bool
-    ) -> Double {
+    ) -> Self {
         if condition {
             return max - self
         } else {
             return self
         }
+    }
+
+    mutating func invertFromMax(
+        _ max: Self,
+        if condition: Bool
+    ) {
+        self = self.invertedFromMax(max, if: condition)
     }
 }

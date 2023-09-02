@@ -12,20 +12,6 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 enum VStepperButton {
-    // MARK: Cases
     case minus
     case plus
-    
-    // MARK: Properties
-    var icon: Image {
-        switch self {
-        case .minus:
-            return ImageBook.stepperDecrement
-                .renderingMode(.template)
-
-        case .plus:
-            return ImageBook.stepperIncrement
-                .renderingMode(.template)
-        }
-    }
 }

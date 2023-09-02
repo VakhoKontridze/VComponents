@@ -52,6 +52,12 @@ public struct VCheckBoxUIModel {
     )
 
     // MARK: Properties - Checkmark
+    /// Checkmark icon (on).
+    public var checkmarkIconOn: Image = ImageBook.checkmarkOn
+
+    /// Checkmark icon (indeterminate).
+    public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate
+
     /// Checkmark icon dimension. Set to `9`.
     public var checkmarkIconDimension: CGFloat = 9
 

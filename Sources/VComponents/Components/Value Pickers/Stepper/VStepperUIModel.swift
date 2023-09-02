@@ -38,6 +38,12 @@ public struct VStepperUIModel {
     )
 
     // MARK: Properties - Button Icon
+    /// Minus button icon.
+    public var buttonIconMinus: Image = ImageBook.minus
+
+    /// Plus button icon.
+    public var buttonIconPlus: Image = ImageBook.plus
+
     /// Plus and minus button icon dimensions. Set to `14`.
     public var buttonIconDimension: CGFloat = 14
 
