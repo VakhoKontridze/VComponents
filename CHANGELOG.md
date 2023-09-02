@@ -72,7 +72,7 @@ VStepper
 
 VSlider
 
-- `isBodyDraggable` is added, and default value is set to `false`, changing the default behavior of the slider
+- `isBodyDraggable` is added, and default value is set to `false` for `iOS`, changing the default behavior of the slider
 
 VTextField
 
