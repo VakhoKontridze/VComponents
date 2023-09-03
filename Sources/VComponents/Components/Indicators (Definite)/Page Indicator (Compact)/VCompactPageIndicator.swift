@@ -128,18 +128,19 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     // MARK: Body
     public var body: some View {
-        switch total {
-        case ...visible:
-            VPageIndicator(
-                uiModel: uiModel.standardPageIndicatorSubUIModel,
-                total: total,
-                current: current,
-                dotContent: dotContent
-            )
-            
-        default:
-            compactBody
-        }
+        Group(content: {
+            if total > visible {
+                compactBody
+                
+            } else {
+                VPageIndicator(
+                    uiModel: .init(),//uiModel.standardPageIndicatorSubUIModel,
+                    total: total,
+                    current: current,
+                    dotContent: dotContent
+                )
+            }
+        })
     }
     
     // There's something weird going on with animations here.
