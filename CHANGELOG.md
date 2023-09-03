@@ -141,6 +141,10 @@ VMenu
 
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
+VAutomaticPageIndicator
+
+- Page indicator is removed due to it being obsoleted by `ViewThatFits`
+
 VRollingCounter
 
 - A new component is added that highlights change in a floating-number

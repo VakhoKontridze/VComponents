@@ -123,42 +123,6 @@ public struct VCompactPageIndicatorUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
-    init(
-        direction: LayoutDirectionOmni,
-        visibleDots: Int,
-        centerDots: Int,
-        spacing: CGFloat,
-        dotWidth: CGFloat,
-        dotHeight: CGFloat,
-        edgeDotScale: CGFloat,
-        dotColor: Color,
-        selectedDotColor: Color,
-        dotBorderWidth: CGFloat,
-        dotBorderColor: Color,
-        selectedDotBorderColor: Color,
-        appliesTransitionAnimation: Bool,
-        transitionAnimation: Animation?,
-        dotWidthForStandardConfiguration: CGFloat?,
-        unselectedDotScaleForStandardConfiguration: CGFloat
-    ) {
-        self.direction = direction
-        self.visibleDots = visibleDots
-        self.centerDots = centerDots
-        self.spacing = spacing
-        self.dotWidth = dotWidth
-        self.dotHeight = dotHeight
-        self.edgeDotScale = edgeDotScale
-        self.dotColor = dotColor
-        self.selectedDotColor = selectedDotColor
-        self.dotBorderWidth = dotBorderWidth
-        self.dotBorderColor = dotBorderColor
-        self.selectedDotBorderColor = selectedDotBorderColor
-        self.appliesTransitionAnimation = appliesTransitionAnimation
-        self.transitionAnimation = transitionAnimation
-        self.dotWidthForStandardConfiguration = dotWidthForStandardConfiguration
-        self.unselectedDotScaleForStandardConfiguration = unselectedDotScaleForStandardConfiguration
-    }
 }
 
 // MARK: - Factory

@@ -31,6 +31,22 @@ import VCore
 ///         )
 ///     }
 ///
+/// Page indicator can dynamically switch to `VCompactPageIndicator` using `ViewThatFits`.
+///
+///     var body: some View {
+///         ViewThatFits(in: .horizontal, content: {
+///             VPageIndicator(
+///                 total: total,
+///                 current: current
+///             )
+///
+///             VCompactPageIndicator(
+///                 total: total,
+///                 current: current
+///             )
+///         })
+///     }
+///
 /// Dots can be fully customized. For instance, we can get a "bullet" shape.
 /// `frame()` modifier shouldn't be applied to the dot itself.
 ///
