@@ -11,9 +11,9 @@ import VCore
 // MARK: - V Static Pager Tab View UI Model (Wrapped Indicator)
 /// Model that describes UI.
 @available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VWrappedIndicatorStaticPagerTabViewUIModel {
     // MARK: Properties - Global Layout
     /// Spacing between tab bar and tab view. Set to `0`.

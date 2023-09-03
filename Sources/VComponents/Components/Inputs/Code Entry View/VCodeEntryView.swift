@@ -40,9 +40,9 @@ import VCore
 /// Component may cause issues when rendered in `SwiftUI` previews.
 /// When running is simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
 @available(iOS 15.0, *)
-@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VCodeEntryView: View {
     // MARK: Properties
     private let uiModel: VCodeEntryViewUIModel
