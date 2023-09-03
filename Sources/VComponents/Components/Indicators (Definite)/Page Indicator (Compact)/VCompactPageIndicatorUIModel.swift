@@ -58,6 +58,15 @@ public struct VCompactPageIndicatorUIModel {
     /// If there are `7` visible dots, and `3` center dots, resulting dot scales would be `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
     public var edgeDotScale: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorCompactEdgeDotScale
 
+    /// Dot corner radii.
+    /// Set to `4`s on `iOS`.
+    /// Set to `4`s on `macOS`.
+    /// Set to `5`s on `tvOS`.
+    /// Set to `2`s on `watchOS`.
+    ///
+    /// Applicable on when `init` without dot content is used.
+    public var dotCornerRadii: DotStateDimensions = .init(GlobalUIModel.DefiniteIndicators.pageIndicatorDotCornerRadius)
+
     /// Dot colors.
     public var dotColors: DotStateColors = .init(
         deselected: GlobalUIModel.DefiniteIndicators.pageIndicatorDeselectedDotColor,
@@ -68,9 +77,13 @@ public struct VCompactPageIndicatorUIModel {
     /// Dot border widths. Set to `0`s.
     ///
     /// To hide border, set to `0`s.
+    ///
+    /// Applicable on when `init` without dot content is used.
     public var dotBorderWidths: DotStateDimensions = .zero
 
     /// Dot border colors.
+    ///
+    /// Applicable on when `init` without dot content is used.
     public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition
@@ -96,6 +109,7 @@ public struct VCompactPageIndicatorUIModel {
             dotHeights: VPageIndicatorUIModel.DotStateDimensions(dotHeight),
             dotColors: dotColors,
             dotBorderWidths: dotBorderWidths,
+            dotCornerRadii: dotCornerRadii,
             dotBorderColors: dotBorderColors,
             appliesTransitionAnimation: appliesTransitionAnimation,
             transitionAnimation: transitionAnimation

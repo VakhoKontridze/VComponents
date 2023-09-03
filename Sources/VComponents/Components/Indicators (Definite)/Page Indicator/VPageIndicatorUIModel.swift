@@ -39,6 +39,15 @@ public struct VPageIndicatorUIModel {
     /// Set to `4`s on `watchOS`.
     public var dotHeights: DotStateDimensions = .init(GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension)
 
+    /// Dot corner radii.
+    /// Set to `4`s on `iOS`.
+    /// Set to `4`s on `macOS`.
+    /// Set to `5`s on `tvOS`.
+    /// Set to `2`s on `watchOS`.
+    ///
+    /// Applicable on when `init` without dot content is used.
+    public var dotCornerRadii: DotStateDimensions = .init(GlobalUIModel.DefiniteIndicators.pageIndicatorDotCornerRadius)
+
     /// Dot colors.
     public var dotColors: DotStateColors = .init(
         deselected: GlobalUIModel.DefiniteIndicators.pageIndicatorDeselectedDotColor,
@@ -49,9 +58,13 @@ public struct VPageIndicatorUIModel {
     /// Dot border widths. Set to `0`s.
     ///
     /// To hide border, set to `0`s.
+    ///
+    /// Applicable on when `init` without dot content is used.
     public var dotBorderWidths: DotStateDimensions = .zero
 
     /// Dot border colors.
+    ///
+    /// Applicable on when `init` without dot content is used.
     public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition
@@ -79,6 +92,7 @@ public struct VPageIndicatorUIModel {
         dotHeights: DotStateDimensions,
         dotColors: DotStateColors,
         dotBorderWidths: DotStateDimensions,
+        dotCornerRadii: DotStateDimensions,
         dotBorderColors: DotStateColors,
         appliesTransitionAnimation: Bool,
         transitionAnimation: Animation?
@@ -89,6 +103,7 @@ public struct VPageIndicatorUIModel {
         self.dotHeights = dotHeights
         self.dotColors = dotColors
         self.dotBorderWidths = dotBorderWidths
+        self.dotCornerRadii = dotCornerRadii
         self.dotBorderColors = dotBorderColors
         self.appliesTransitionAnimation = appliesTransitionAnimation
         self.transitionAnimation = transitionAnimation

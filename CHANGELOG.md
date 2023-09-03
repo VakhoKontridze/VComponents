@@ -144,6 +144,11 @@ VMenu
 VPageIndicator
 
 - API is overhauled to support different widths and heights for deselected and selected dots
+- Page indicator now support custom corner radii
+
+VCompactPageIndicator
+
+- Page indicator now support custom corner radii
 
 VAutomaticPageIndicator
 

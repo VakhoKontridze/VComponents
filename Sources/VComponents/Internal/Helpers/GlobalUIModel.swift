@@ -477,6 +477,9 @@ struct GlobalUIModel {
             return 4
 #endif
         }()
+
+        static let pageIndicatorDotCornerRadius: CGFloat = pageIndicatorDotDimension/2
+
         static let pageIndicatorDeselectedDotColor: Color = .init(module: "PageIndicator.DeselectedDot")
         static let pageIndicatorSelectedDotColor: Color = ColorBook.accentBlue
         

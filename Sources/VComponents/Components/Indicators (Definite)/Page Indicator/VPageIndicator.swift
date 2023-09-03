@@ -92,7 +92,7 @@ import VCore
 ///             total: total,
 ///             current: current,
 ///             dot: { (internalState, _) in
-///                 RoundedRectangle(cornerRadius: 2.5)
+///                 RoundedRectangle(cornerRadius: 2)
 ///                     .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }
 ///         )
@@ -182,11 +182,11 @@ public struct VPageIndicator<Content>: View where Content: View {
             switch dotContent {
             case .empty:
                 ZStack(content: {
-                    Capsule()
+                    RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundColor(uiModel.dotColors.value(for: internalState))
                     
                     if uiModel.dotBorderWidths.value(for: internalState) > 0 {
-                        Capsule()
+                        RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                             .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
                             .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
                     }
@@ -335,7 +335,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
-                        uiModel.dotWidths.selected? *= 2
+                        uiModel.dotWidths.selected? *= 3
                         return uiModel
                     }(),
                     total: total,
@@ -397,7 +397,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                     total: total,
                     current: current,
                     dot: { (internalState, _) in
-                        RoundedRectangle(cornerRadius: 2.5)
+                        RoundedRectangle(cornerRadius: 2)
                             .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
                     }
                 )
