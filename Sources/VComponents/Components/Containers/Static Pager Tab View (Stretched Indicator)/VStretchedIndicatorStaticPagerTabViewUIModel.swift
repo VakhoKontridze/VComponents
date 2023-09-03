@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Static Pager Tab View UI Model (Stretched Indicator)
+// MARK: - V Stretched-Indicator Static Pager Tab View UI Model
 /// Model that describes UI.
 @available(iOS 14.0, *)
 @available(macOS, unavailable)

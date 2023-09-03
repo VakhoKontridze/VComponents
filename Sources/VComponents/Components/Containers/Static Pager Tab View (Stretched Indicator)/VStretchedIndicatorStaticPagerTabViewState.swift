@@ -8,7 +8,7 @@
 import Foundation
 import VCore
 
-// MARK: - V Static Pager Tab View Tab Item Internal State (Stretched Indicator)
+// MARK: - V Stretched-Indicator Static Pager Tab View Tab Item Internal State
 /// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(iOS 14.0, *)
 @available(macOS, unavailable)

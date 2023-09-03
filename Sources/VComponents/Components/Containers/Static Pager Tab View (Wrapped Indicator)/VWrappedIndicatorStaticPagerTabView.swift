@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Static Pager Tab View (Wrapped Indicator)
+// MARK: - V Wrapped-Indicator Static Pager Tab View
 /// Container component that switches between child views and is attributed with static pager with wrapped rectangular indicator.
 ///
 /// Best suited for `2` – `5` items.

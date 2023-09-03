@@ -55,7 +55,7 @@ public struct VWrappedToggleButtonUIModel {
 
     /// Spacing between icon and title text. Set to `8`.
     ///
-    /// Applicable only if icon `init` with icon and title is used.
+    /// Applicable only if `init` with icon and title is used.
     public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 
     /// Ratio to which label scales down on press.

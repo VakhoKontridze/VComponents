@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - V Static Pager Tab View Tab Item Label (Stretched Indicator)
+// MARK: - V Stretched-Indicator Static Pager Tab View Tab Item Label
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
