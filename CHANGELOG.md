@@ -1,5 +1,15 @@
 # Change Log
 
+### 4.3.8(54)
+
+VPageIndicator
+
+- Backing `Circle` is changed to `Capsule` to support different width and heights
+
+VCompactPageIndicator
+
+- Backing `Circle` is changed to `Capsule` to support different width and heights
+
 ### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
 
 VSegmentedPicker

@@ -150,10 +150,10 @@ public struct VPageIndicator<Content>: View where Content: View {
             switch dotContent {
             case .empty:
                 ZStack(content: {
-                    Circle()
+                    Capsule()
                         .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
                     
-                    Circle()
+                    Capsule()
                         .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
                         .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
                 })
