@@ -456,29 +456,28 @@ struct GlobalUIModel {
         // MARK: Properties - Page Indicator
         static let pageIndicatorSpacing: CGFloat = {
 #if os(iOS)
-            return 5
+            return 8
 #elseif os(macOS)
-            return 5
+            return 8
 #elseif os(tvOS)
             return 10
 #elseif os(watchOS)
-            return 3
+            return 4
 #endif
         }()
 
         static let pageIndicatorDotDimension: CGFloat = {
 #if os(iOS)
-            return 10
-#elseif os(macOS)
-            return 10
-#elseif os(tvOS)
-            return 20
-#elseif os(watchOS)
             return 8
+#elseif os(macOS)
+            return 8
+#elseif os(tvOS)
+            return 10
+#elseif os(watchOS)
+            return 4
 #endif
         }()
-        static let pageIndicatorStandardUnselectedDotScale: CGFloat = 0.85
-        static let pageIndicatorDotColor: Color = .init(module: "PageIndicator.Dot")
+        static let pageIndicatorDeselectedDotColor: Color = .init(module: "PageIndicator.DeselectedDot")
         static let pageIndicatorSelectedDotColor: Color = ColorBook.accentBlue
         
         static let pageIndicatorCompactVisibleDots: Int = 7

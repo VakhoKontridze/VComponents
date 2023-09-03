@@ -31,7 +31,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// Page indicator can dynamically switch to `VCompactPageIndicator` using `ViewThatFits`.
+/// Component can dynamically switch to `VCompactPageIndicator` using `ViewThatFits`.
 ///
 ///     var body: some View {
 ///         ViewThatFits(in: .horizontal, content: {
@@ -50,17 +50,19 @@ import VCore
 /// Dots can be fully customized. For instance, we can get a "bullet" shape.
 /// `frame()` modifier shouldn't be applied to the dot itself.
 ///
+///     private let pageIndicatorUIModel: VPageIndicatorUIModel = {
+///         var uiModel: VPageIndicatorUIModel = .init()
+///         uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(16)
+///         uiModel.dotHeights = VPageIndicatorUIModel.DotStateDimensions(16)
+///         return uiModel
+///     }()
+///
 ///     var body: some View {
 ///         VPageIndicator(
-///             uiModel: {
-///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.dotWidth = 15
-///                 uiModel.dotHeight = 15
-///                 return uiModel
-///             }(),
+///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: {
+///             dot: { (internalState, _) in
 ///                 ZStack(content: {
 ///                     Circle()
 ///                         .stroke(lineWidth: 1)
@@ -69,36 +71,50 @@ import VCore
 ///                     Circle()
 ///                         .padding(3)
 ///                 })
+///                 .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }
 ///         )
-///         .padding()
 ///     }
 ///
 /// Component can be stretched on its primary axis by removing primary dimension.
 /// Standard circular shape doesn't support stretching.
 ///
+///     private let pageIndicatorUIModel: VPageIndicatorUIModel = {
+///         var uiModel: VPageIndicatorUIModel = .init()
+///         uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(nil)
+///         uiModel.dotHeights = VPageIndicatorUIModel.DotStateDimensions(4)
+///         return uiModel
+///     }()
+///
 ///     var body: some View {
 ///         VPageIndicator(
-///             uiModel: {
-///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.dotWidth = nil
-///                 uiModel.dotHeight = 5
-///                 return uiModel
-///             }(),
+///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: { RoundedRectangle(cornerRadius: 2.5) }
+///             dot: { (internalState, _) in
+///                 RoundedRectangle(cornerRadius: 2.5)
+///                     .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+///             }
 ///         )
 ///         .padding()
 ///     }
 ///
 public struct VPageIndicator<Content>: View where Content: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VPageIndicatorUIModel
-    
+
+    // MARK: Properties - State
+    private func dotInternalState(i: Int) -> VPageIndicatorDotInternalState {
+        .init(
+            isSelected: i == current
+        )
+    }
+
+    // MARK: Properties - Data
     private let total: Int
     private let current: Int
-    
+
+    // MARK: Properties - Content
     private let dotContent: VPageIndicatorDotContent<Content>
     
     // MARK: Initializers
@@ -121,7 +137,7 @@ public struct VPageIndicator<Content>: View where Content: View {
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
         current: Int,
-        @ViewBuilder dot: @escaping () -> Content
+        @ViewBuilder dot: @escaping (VPageIndicatorDotInternalState, Int) -> Content
     ) {
         self.uiModel = uiModel
         self.total = total
@@ -160,30 +176,37 @@ public struct VPageIndicator<Content>: View where Content: View {
     }
     
     private func dotContentView(i: Int) -> some View {
-        Group(content: {
+        let internalState: VPageIndicatorDotInternalState = dotInternalState(i: i)
+
+        return Group(content: {
             switch dotContent {
             case .empty:
                 ZStack(content: {
                     Capsule()
-                        .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
+                        .foregroundColor(uiModel.dotColors.value(for: internalState))
                     
-                    if uiModel.dotBorderWidth > 0 {
+                    if uiModel.dotBorderWidths.value(for: internalState) > 0 {
                         Capsule()
-                            .strokeBorder(lineWidth: uiModel.dotBorderWidth)
-                            .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
+                            .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
+                            .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
                     }
                 })
                 
             case .content(let content):
-                content()
-                    .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
+                content(internalState, i)
             }
         })
         .frame(
-            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
-            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
+            width:
+                uiModel.direction.isHorizontal ?
+                uiModel.dotWidths.value(for: internalState) :
+                uiModel.dotHeights.value(for: internalState)
+            ,
+            height:
+                uiModel.direction.isHorizontal ?
+                uiModel.dotHeights.value(for: internalState) :
+                uiModel.dotWidths.value(for: internalState)
         )
-        .scaleEffect(current == i ? 1 : uiModel.unselectedDotScale)
     }
 }
 
@@ -201,6 +224,8 @@ struct VPageIndicator_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+            DifferentSizesPreview().previewDisplayName("Different Sizes")
+            CustomContentPreview().previewDisplayName("Custom Content")
             StretchedPreview().previewDisplayName("Stretched")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -301,23 +326,80 @@ struct VPageIndicator_Previews: PreviewProvider {
             .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
-    
-    private struct StretchedPreview: View {
+
+    private struct DifferentSizesPreview: View {
         @State private var current: Int = VPageIndicator_Previews.current
-        
+
         var body: some View {
             PreviewContainer(content: {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
-                        uiModel.direction = .leftToRight
-                        uiModel.dotWidth = nil
-                        uiModel.dotHeight = 5
+                        uiModel.dotWidths.selected? *= 2
                         return uiModel
                     }(),
                     total: total,
+                    current: current
+                )
+                .onReceiveOfTimerIncrement($current, to: total-1)
+            })
+        }
+    }
+
+    private struct CustomContentPreview: View {
+        private let pageIndicatorUIModel: VPageIndicatorUIModel = {
+            var uiModel: VPageIndicatorUIModel = .init()
+            uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(16)
+            uiModel.dotHeights = VPageIndicatorUIModel.DotStateDimensions(16)
+            return uiModel
+        }()
+
+        @State private var current: Int = VPageIndicator_Previews.current
+
+        var body: some View {
+            PreviewContainer(content: {
+                VPageIndicator(
+                    uiModel: pageIndicatorUIModel,
+                    total: total,
                     current: current,
-                    dot: { RoundedRectangle(cornerRadius: 2.5) }
+                    dot: { (internalState, _) in
+                        ZStack(content: {
+                            Circle()
+                                .stroke(lineWidth: 1)
+                                .padding(1)
+
+                            Circle()
+                                .padding(3)
+                        })
+                        .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+                    }
+                )
+                .onReceiveOfTimerIncrement($current, to: total-1)
+            })
+        }
+    }
+    
+    private struct StretchedPreview: View {
+        @State private var current: Int = VPageIndicator_Previews.current
+
+        private let pageIndicatorUIModel: VPageIndicatorUIModel = {
+            var uiModel: VPageIndicatorUIModel = .init()
+            uiModel.direction = .leftToRight
+            uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(nil)
+            uiModel.dotHeights = VPageIndicatorUIModel.DotStateDimensions(4)
+            return uiModel
+        }()
+
+        var body: some View {
+            PreviewContainer(content: {
+                VPageIndicator(
+                    uiModel: pageIndicatorUIModel,
+                    total: total,
+                    current: current,
+                    dot: { (internalState, _) in
+                        RoundedRectangle(cornerRadius: 2.5)
+                            .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+                    }
                 )
                 .padding()
             })

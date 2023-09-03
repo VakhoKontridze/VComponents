@@ -141,6 +141,10 @@ VMenu
 
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
 
+VPageIndicator
+
+- API is overhauled to support different widths and heights for deselected and selected dots
+
 VAutomaticPageIndicator
 
 - Page indicator is removed due to it being obsoleted by `ViewThatFits`

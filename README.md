@@ -97,8 +97,8 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 <p>
     <img tag="VProgressBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
-    <img tag="VPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587684-db5652bc-c20f-44d0-9b26-ae2298903608.png">
-    <img tag="VCompactPageIndicator" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587698-df51dcbc-3370-49e2-9f41-0e2615b96c4d.png">
+    <img tag="VPageIndicator" width="350" align="top" src="(https://github.com/VakhoKontridze/VComponents/assets/57289621/4617b7e9-8148-4e22-beaf-15ab0363b1d9">
+    <img tag="VCompactPageIndicator" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/ea68cb60-9c21-4f94-9f57-c76a474b30ad">
 <p/>
 
 #### Indicators (Indefinite)

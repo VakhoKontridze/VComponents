@@ -16,49 +16,43 @@ public struct VPageIndicatorUIModel {
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Dot spacing.
-    /// Set to `5` on `iOS`.
-    /// Set to `5` on `macOS`.
+    /// Set to `8` on `iOS`.
+    /// Set to `8` on `macOS`.
     /// Set to `10` on `tvOS`.
-    /// Set to `3` on `watchOS`.
+    /// Set to `4` on `watchOS`.
     public var spacing: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorSpacing
 
     // MARK: Properties - Dot
-    /// Dot width, but height for vertical layouts.
-    /// Set to `10` on `iOS`.
-    /// Set to `10` on `macOS`.
-    /// Set to `20` on `tvOS`.
-    /// Set to `8` on `watchOS`.
+    /// Dot widths, but heights for vertical layout.
+    /// Set to `8`s on `iOS`.
+    /// Set to `8`s on `macOS`.
+    /// Set to `10`s on `tvOS`.
+    /// Set to `4`s on `watchOS`.
     ///
-    /// Set to `nil`, to make dot stretch to take available space.
-    public var dotWidth: CGFloat? = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
+    /// Set to `nil`s, to make dot stretch to take available space.
+    public var dotWidths: DotStateOptionalDimensions = .init(GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension)
 
-    /// Dot height, but width for vertical layouts.
-    /// Set to `10` on `iOS`.
-    /// Set to `10` on `macOS`.
-    /// Set to `20` on `tvOS`.
-    /// Set to `8` on `watchOS`.
-    public var dotHeight: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension
+    /// Dot heights, but widths for vertical layout.
+    /// Set to `8`s on `iOS`.
+    /// Set to `8`s on `macOS`.
+    /// Set to `10`s on `tvOS`.
+    /// Set to `4`s on `watchOS`.
+    public var dotHeights: DotStateDimensions = .init(GlobalUIModel.DefiniteIndicators.pageIndicatorDotDimension)
 
-    /// Unselected dot scale. Set to `0.85`.
-    public var unselectedDotScale: CGFloat = GlobalUIModel.DefiniteIndicators.pageIndicatorStandardUnselectedDotScale
-
-    /// Dot color.
-    public var dotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorDotColor
-
-    /// Selected dot color.
-    public var selectedDotColor: Color = GlobalUIModel.DefiniteIndicators.pageIndicatorSelectedDotColor
+    /// Dot colors.
+    public var dotColors: DotStateColors = .init(
+        deselected: GlobalUIModel.DefiniteIndicators.pageIndicatorDeselectedDotColor,
+        selected: GlobalUIModel.DefiniteIndicators.pageIndicatorSelectedDotColor
+    )
 
     // MARK: Properties - Dot Border
-    /// Border width. Set to `0`.
+    /// Dot border widths. Set to `0`s.
     ///
-    /// To hide border, set to `0`.
-    public var dotBorderWidth: CGFloat = 0
+    /// To hide border, set to `0`s.
+    public var dotBorderWidths: DotStateDimensions = .zero
 
-    /// Dot border color.
-    public var dotBorderColor: Color = .clear
-
-    /// Selected dot border color.
-    public var selectedDotBorderColor: Color = .clear
+    /// Dot border colors.
+    public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition
     /// Indicates if `transition` animation is applied. Set to `true`.
@@ -81,30 +75,36 @@ public struct VPageIndicatorUIModel {
     init(
         direction: LayoutDirectionOmni,
         spacing: CGFloat,
-        dotWidth: CGFloat?,
-        dotHeight: CGFloat,
-        unselectedDotScale: CGFloat,
-        dotColor: Color,
-        selectedDotColor: Color,
-        dotBorderWidth: CGFloat,
-        dotBorderColor: Color,
-        selectedDotBorderColor: Color,
+        dotWidths: DotStateOptionalDimensions,
+        dotHeights: DotStateDimensions,
+        dotColors: DotStateColors,
+        dotBorderWidths: DotStateDimensions,
+        dotBorderColors: DotStateColors,
         appliesTransitionAnimation: Bool,
         transitionAnimation: Animation?
     ) {
         self.direction = direction
         self.spacing = spacing
-        self.dotWidth = dotWidth
-        self.dotHeight = dotHeight
-        self.unselectedDotScale = unselectedDotScale
-        self.dotColor = dotColor
-        self.selectedDotColor = selectedDotColor
-        self.dotBorderWidth = dotBorderWidth
-        self.dotBorderColor = dotBorderColor
-        self.selectedDotBorderColor = selectedDotBorderColor
+        self.dotWidths = dotWidths
+        self.dotHeights = dotHeights
+        self.dotColors = dotColors
+        self.dotBorderWidths = dotBorderWidths
+        self.dotBorderColors = dotBorderColors
         self.appliesTransitionAnimation = appliesTransitionAnimation
         self.transitionAnimation = transitionAnimation
     }
+
+    // MARK: Dot State Dimensions
+    /// Model that contains dimensions  for component states.
+    public typealias DotStateDimensions = GenericStateModel_DeselectedSelected<CGFloat>
+
+    // MARK: Dot State Optional Dimensions
+    /// Model that contains dimensions  for component states.
+    public typealias DotStateOptionalDimensions = GenericStateModel_DeselectedSelected<CGFloat?>
+
+    // MARK: Dot State Colors
+    /// Model that contains colors for component states.
+    public typealias DotStateColors = GenericStateModel_DeselectedSelected<Color>
 }
 
 // MARK: - Factory

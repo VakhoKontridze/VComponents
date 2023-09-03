@@ -34,17 +34,19 @@ import VCore
 /// Dots can be fully customized. For instance, we can get a "bullet" shape.
 /// `frame()` modifier shouldn't be applied to the dot itself.
 ///
+///     private let pageIndicatorUIModel: VCompactPageIndicatorUIModel = {
+///         var uiModel: VCompactPageIndicatorUIModel = .init()
+///         uiModel.dotWidth *= 2
+///         uiModel.dotHeight *= 2
+///         return uiModel
+///     }()
+///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             uiModel: {
-///                 var uiModel: VCompactPageIndicatorUIModel = .init()
-///                 uiModel.dotWidth = 15
-///                 uiModel.dotHeight = 15
-///                 return uiModel
-///             }(),
+///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: {
+///             dot: { (internalState, _) in
 ///                 ZStack(content: {
 ///                     Circle()
 ///                         .stroke(lineWidth: 1)
@@ -53,6 +55,7 @@ import VCore
 ///                     Circle()
 ///                         .padding(3)
 ///                 })
+///                 .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }
 ///         )
 ///         .padding()
@@ -61,16 +64,26 @@ import VCore
 public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Properties
     private let uiModel: VCompactPageIndicatorUIModel
-    
+
+    // MARK: Properties - State
+    private func dotInternalState(i: Int) -> VCompactPageIndicatorDotInternalState {
+        .init(
+            isSelected: i == current
+        )
+    }
+
+    // MARK: Properties - Data
     private let total: Int
     private var visible: Int { uiModel.visibleDots }
     private var center: Int { uiModel.centerDots }
     private var side: Int { uiModel.sideDots }
     private var middle: Int { uiModel.middleDots }
     private let current: Int
-    
-    private let dotContent: VPageIndicatorDotContent<Content>
-    
+
+    // MARK: Properties - Content
+    private let dotContent: VCompactPageIndicatorDotContent<Content>
+
+    // MARK: Frame
     private var region: Region {
         .init(
             current: current,
@@ -101,7 +114,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,
         current: Int,
-        @ViewBuilder dot: @escaping () -> Content
+        @ViewBuilder dot: @escaping (VCompactPageIndicatorDotInternalState, Int) -> Content
     ) {
         Self.assertUIModel(uiModel)
         
@@ -111,33 +124,25 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.dotContent = .content(content: dot)
     }
     
-    // MARK: Initializers - Internal
-    init(
-        uiModel: VCompactPageIndicatorUIModel,
-        total: Int,
-        current: Int,
-        dotContent: VPageIndicatorDotContent<Content>
-    ) {
-        Self.assertUIModel(uiModel)
-        
-        self.uiModel = uiModel
-        self.total = total
-        self.current = current
-        self.dotContent = dotContent
-    }
-    
     // MARK: Body
     public var body: some View {
+        // `VPageIndicator` is needed, because if total number of dots are not more that visible,
+        // `0`-sizes dots would offset the page indicator.
         Group(content: {
             if total > visible {
                 compactBody
                 
             } else {
-                VPageIndicator(
-                    uiModel: .init(),//uiModel.standardPageIndicatorSubUIModel,
+                VPageIndicator<Content>(
+                    uiModel: uiModel.standardPageIndicatorSubUIModel,
                     total: total,
                     current: current,
-                    dotContent: dotContent
+                    dotContent: {
+                        switch dotContent {
+                        case .empty: return .empty
+                        case .content(let content): return .content(content: content)
+                        }
+                    }()
                 )
             }
         })
@@ -198,23 +203,24 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func dotContentView(i: Int) -> some View {
-        Group(content: {
+        let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(i: i)
+
+        return Group(content: {
             switch dotContent {
             case .empty:
                 ZStack(content: {
                     Capsule()
-                        .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
+                        .foregroundColor(uiModel.dotColors.value(for: internalState))
                     
-                    if uiModel.dotBorderWidth > 0 {
+                    if uiModel.dotBorderWidths.value(for: internalState) > 0 {
                         Capsule()
-                            .strokeBorder(lineWidth: uiModel.dotBorderWidth)
-                            .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
+                            .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
+                            .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
                     }
                 })
                 
             case .content(let content):
-                content()
-                    .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
+                content(internalState, i)
             }
         })
         .frame(
@@ -402,6 +408,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+            CustomContentPreview().previewDisplayName("Custom Content")
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
@@ -499,6 +506,39 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                 })
             })
             .onReceiveOfTimerIncrement($current, to: total-1)
+        }
+    }
+
+    private struct CustomContentPreview: View {
+        private let pageIndicatorUIModel: VCompactPageIndicatorUIModel = {
+            var uiModel: VCompactPageIndicatorUIModel = .init()
+            uiModel.dotWidth *= 2
+            uiModel.dotHeight *= 2
+            return uiModel
+        }()
+
+        @State private var current: Int = VCompactPageIndicator_Previews.current
+
+        var body: some View {
+            PreviewContainer(content: {
+                VCompactPageIndicator(
+                    uiModel: pageIndicatorUIModel,
+                    total: total,
+                    current: current,
+                    dot: { (internalState, _) in
+                        ZStack(content: {
+                            Circle()
+                                .stroke(lineWidth: 1)
+                                .padding(1)
+
+                            Circle()
+                                .padding(3)
+                        })
+                        .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+                    }
+                )
+                .onReceiveOfTimerIncrement($current, to: total-1)
+            })
         }
     }
 }
