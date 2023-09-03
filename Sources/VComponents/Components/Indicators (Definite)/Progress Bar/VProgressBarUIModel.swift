@@ -15,7 +15,7 @@ public struct VProgressBarUIModel {
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
-    /// Progress bar height, but width for vertical layouts.
+    /// Progress bar height, but width for vertical layout.
     /// Set to `10` on `iOS`.
     /// Set to `10` on `macOS`.
     /// Set to `10` on `tvOS`.

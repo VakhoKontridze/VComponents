@@ -17,7 +17,7 @@ public struct VRangeSliderUIModel {
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
-    /// Slider height, but width for vertical layouts. Set to `10`.
+    /// Slider height, but width for vertical layout. Set to `10`.
     public var height: CGFloat = GlobalUIModel.Common.barHeight
 
     // MARK: Properties - Corners
