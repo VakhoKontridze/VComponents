@@ -111,7 +111,7 @@ public struct VCompactPageIndicatorUIModel {
             dotHeight: dotHeight,
             unselectedDotScale: unselectedDotScaleForStandardConfiguration,
             dotColor: dotColor,
-            selectedDotColor: selectedDotBorderColor,
+            selectedDotColor: selectedDotColor,
             dotBorderWidth: dotBorderWidth,
             dotBorderColor: dotBorderColor,
             selectedDotBorderColor: selectedDotBorderColor,
