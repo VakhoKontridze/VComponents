@@ -32,7 +32,7 @@ extension View {
     ///
     /// Width can be configured via `widthType` in UI model.
     ///
-    /// Highlights cab be applied using `success`, `warning`, and `error` instances of `VToastUIModel`.
+    /// Highlights can be applied using `success`, `warning`, and `error` instances of `VToastUIModel`.
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),

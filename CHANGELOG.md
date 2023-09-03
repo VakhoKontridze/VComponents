@@ -87,6 +87,10 @@ VTextView
 - `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
 - `contentMargin` is renamed to `contentMargins`
 
+VCodeEntryView
+
+- A new input component is added that allows for the entry of a code, such as PIN
+
 VDisclosureGroup
 
 - Disclosure button angles can now be customized for different states

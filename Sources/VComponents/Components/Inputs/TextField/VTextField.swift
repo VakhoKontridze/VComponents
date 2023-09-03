@@ -85,7 +85,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// Highlights cab be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
+/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
@@ -242,7 +242,7 @@ public struct VTextField: View {
             $0
 #endif
         })
-        .disableAutocorrection(uiModel.autocorrection.map { !$0 })
+        .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
         .applyModifier({
 #if os(iOS)
             $0.textInputAutocapitalization(uiModel.autocapitalization)
@@ -396,6 +396,7 @@ struct VTextField_Previews: PreviewProvider {
                                     var uiModel: VTextFieldUIModel = highlight
                                     uiModel.contentType = contentType
                                     uiModel.backgroundColors.enabled = uiModel.backgroundColors.focused
+                                    uiModel.borderColors.enabled = uiModel.borderColors.focused
                                     uiModel.textColors.enabled = uiModel.textColors.focused
                                     uiModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
                                     uiModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused

@@ -469,7 +469,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                     // Scale effect cannot be shown.
                     PreviewRow(
                         axis: .vertical,
-                        title: "Pressed (Row)",
+                        title: "Pressed (Row) (*)",
                         content: {
                             VSegmentedPicker(
                                 uiModel: {

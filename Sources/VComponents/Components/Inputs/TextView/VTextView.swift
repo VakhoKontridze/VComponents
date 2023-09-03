@@ -63,7 +63,7 @@ import VCore
 ///             })
 ///     }
 ///
-/// Highlights cab be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
+/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
@@ -197,7 +197,7 @@ public struct VTextView: View {
             $0
 #endif
         })
-        .disableAutocorrection(uiModel.autocorrection.map { !$0 })
+        .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
         .applyModifier({
 #if os(iOS)
             $0.textInputAutocapitalization(uiModel.autocapitalization)
@@ -286,6 +286,7 @@ struct VTextView_Previews: PreviewProvider {
                             uiModel: {
                                 var uiModel: VTextViewUIModel = highlight
                                 uiModel.backgroundColors.enabled = uiModel.backgroundColors.focused
+                                uiModel.borderColors.enabled = uiModel.borderColors.focused
                                 uiModel.textColors.enabled = uiModel.textColors.focused
                                 uiModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
                                 uiModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused

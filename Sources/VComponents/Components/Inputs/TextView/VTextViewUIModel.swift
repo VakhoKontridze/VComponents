@@ -32,8 +32,8 @@ public struct VTextViewUIModel {
     public var textContentType: UITextContentType? = nil
 #endif
 
-    /// Auto correct type. Set to `nil`.
-    public var autocorrection: Bool? = nil
+    /// Indicates if auto correction is enabled. Set to `nil`.
+    public var isAutocorrectionEnabled: Bool? = nil
 
 #if os(iOS)
     /// Auto capitalization type. Set to `nil`.
