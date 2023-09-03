@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(54)
+### 5.0.0(55)
 
 General
 
@@ -148,6 +148,16 @@ VAutomaticPageIndicator
 VRollingCounter
 
 - A new component is added that highlights change in a floating-number
+
+### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 03*
+
+VPageIndicator
+
+- Backing `Circle` is changed to `Capsule` to support different width and height
+
+VCompactPageIndicator
+
+- Backing `Circle` is changed to `Capsule` to support different width and height
 
 ### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
 

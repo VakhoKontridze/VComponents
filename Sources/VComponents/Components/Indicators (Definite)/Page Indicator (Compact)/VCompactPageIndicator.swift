@@ -202,11 +202,11 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             switch dotContent {
             case .empty:
                 ZStack(content: {
-                    Circle()
+                    Capsule()
                         .foregroundColor(current == i ? uiModel.selectedDotColor : uiModel.dotColor)
                     
                     if uiModel.dotBorderWidth > 0 {
-                        Circle()
+                        Capsule()
                             .strokeBorder(lineWidth: uiModel.dotBorderWidth)
                             .foregroundColor(current == i ? uiModel.selectedDotBorderColor : uiModel.dotBorderColor)
                     }

@@ -433,7 +433,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>
-        4.0<br><i><sup>(4.0.0 - 4.3.7)</sup></i>
+        4.0<br><i><sup>(4.0.0 - 4.3.8)</sup></i>
     </td>
     <td>2023 04 09</td>
     <td>
