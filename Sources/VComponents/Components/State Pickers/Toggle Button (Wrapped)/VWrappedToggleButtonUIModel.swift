@@ -70,11 +70,11 @@ public struct VWrappedToggleButtonUIModel {
 
     /// Title text colors.
     public var titleTextColors: StateColors = .init(
-        off: ColorBook.primaryBlack,
+        off: ColorBook.primary,
         on: ColorBook.primaryWhite,
-        pressedOff: ColorBook.primaryBlack,
+        pressedOff: ColorBook.primary,
         pressedOn: ColorBook.primaryWhite,
-        disabled: ColorBook.primaryBlackPressedDisabled
+        disabled: ColorBook.primaryPressedDisabled
     )
 
     /// Title text font.
@@ -93,11 +93,11 @@ public struct VWrappedToggleButtonUIModel {
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
     public var iconColors: StateColors = .init(
-        off: ColorBook.primaryBlack,
+        off: ColorBook.primary,
         on: ColorBook.primaryWhite,
-        pressedOff: ColorBook.primaryBlack,
+        pressedOff: ColorBook.primary,
         pressedOn: ColorBook.primaryWhite,
-        disabled: ColorBook.primaryBlackPressedDisabled
+        disabled: ColorBook.primaryPressedDisabled
     )
 
     /// Icon opacities. Set to `1`s.
