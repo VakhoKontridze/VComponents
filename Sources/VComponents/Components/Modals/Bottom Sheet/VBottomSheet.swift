@@ -403,6 +403,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: content
                     )
@@ -420,6 +425,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
@@ -430,6 +438,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
                                 )
                             )
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -449,6 +458,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
@@ -459,6 +471,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .fractions(min: 0.6, ideal: 0.9, max: 0.9)
                                 )
                             )
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -478,6 +491,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
@@ -488,6 +504,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .fraction(0.9)
                                 )
                             )
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -507,6 +524,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
@@ -517,6 +537,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .fraction(0.2)
                                 )
                             )
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -534,7 +555,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
-                        uiModel: .insettedContent,
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .insettedContent
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: content
                     )
@@ -553,7 +578,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.autoresizesContent = true
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -587,7 +616,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .noGrabber
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
+
                             uiModel.contentIsDraggable = true
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -613,6 +646,8 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
 
                             uiModel.contentMargins = VBottomSheetUIModel.Margins(
                                 leading: 15,

@@ -247,9 +247,12 @@ struct VToast_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = highlights
+
+                            uiModel.colorScheme = VToast_Previews.colorScheme
                             uiModel.widthType = widthType
                             uiModel.presentationEdge = presentationEdge
                             uiModel.duration = .infinity
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -269,10 +272,13 @@ struct VToast_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = highlights
+
+                            uiModel.colorScheme = VToast_Previews.colorScheme
                             uiModel.widthType = widthType
                             uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
                             uiModel.presentationEdge = presentationEdge
                             uiModel.duration = .infinity
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,

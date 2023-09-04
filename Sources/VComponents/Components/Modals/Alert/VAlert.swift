@@ -334,6 +334,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -355,6 +360,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -375,6 +385,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -393,6 +408,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -413,6 +433,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -438,12 +463,18 @@ struct VAlert_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VAlertUIModel = .init()
+
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+
                             uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
                             uiModel.primaryButtonTitleColors.enabled = uiModel.primaryButtonTitleColors.pressed
+
                             uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
                             uiModel.secondaryButtonTitleColors.enabled = uiModel.secondaryButtonTitleColors.pressed
+
                             uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
                             uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -468,6 +499,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: message,
@@ -490,6 +526,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: nil,
                         message: message,
@@ -511,6 +552,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: title,
                         message: nil,
@@ -532,6 +578,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: nil,
                         message: nil,
@@ -553,6 +604,11 @@ struct VAlert_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            uiModel.colorScheme = VAlert_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         title: nil,
                         message: nil,

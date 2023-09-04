@@ -275,7 +275,11 @@ struct VSideBar_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vSideBar(
                         id: "preview",
-                        uiModel: presentationEdge,
+                        uiModel: {
+                            var uiModel: VSideBarUIModel = presentationEdge
+                            uiModel.colorScheme = VSideBar_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: content
                     )
@@ -293,7 +297,11 @@ struct VSideBar_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VSideBarUIModel = presentationEdge
+
+                            uiModel.colorScheme = VSideBar_Previews.colorScheme
+
                             uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
+                            
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -316,6 +324,8 @@ struct VSideBar_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VSideBarUIModel = .init() // No `presentationEdge`
+
+                            uiModel.colorScheme = VSideBar_Previews.colorScheme
 
                             uiModel.contentSafeAreaMargins = {
                                 if interfaceOrientation.isLandscape {

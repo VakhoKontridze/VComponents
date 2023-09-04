@@ -196,6 +196,11 @@ struct VModal_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VModalUIModel = .init()
+                            uiModel.colorScheme = VModal_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: {
                             content()
@@ -214,7 +219,11 @@ struct VModal_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
-                        uiModel: .insettedContent,
+                        uiModel: {
+                            var uiModel: VModalUIModel = .insettedContent
+                            uiModel.colorScheme = VModal_Previews.colorScheme
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: {
                             content()
@@ -236,6 +245,8 @@ struct VModal_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VModalUIModel = .init()
+
+                            uiModel.colorScheme = VModal_Previews.colorScheme
 
                             uiModel.contentMargins = VModalUIModel.Margins(15)
 
