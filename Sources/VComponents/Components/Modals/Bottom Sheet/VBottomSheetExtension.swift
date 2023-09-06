@@ -109,7 +109,7 @@ extension View {
     ///         .vBottomSheet(
     ///             id: "test",
     ///             uiModel: {
-    ///                 var uiModel: VBottomSheetUIModel = .noGrabber
+    ///                 var uiModel: VBottomSheetUIModel = .noDragIndicator
     ///                 uiModel.sizes.portrait.heights = .fraction(0.6)
     ///                 return uiModel
     ///             }(),

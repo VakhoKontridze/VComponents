@@ -140,7 +140,7 @@ struct VBottomSheet<Content>: View
                     
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
-                    grabber
+                    dragIndicator
                 })
                 .getSize({ headerHeight = $0.height })
 
@@ -171,12 +171,12 @@ struct VBottomSheet<Content>: View
         })
     }
     
-    @ViewBuilder private var grabber: some View {
-        if uiModel.grabberSize.height > 0 {
-            RoundedRectangle(cornerRadius: uiModel.grabberCornerRadius)
-                .frame(size: uiModel.grabberSize)
-                .padding(uiModel.grabberMargins)
-                .foregroundColor(uiModel.grabberColor)
+    @ViewBuilder private var dragIndicator: some View {
+        if uiModel.dragIndicatorSize.height > 0 {
+            RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
+                .frame(size: uiModel.dragIndicatorSize)
+                .padding(uiModel.dragIndicatorMargins)
+                .foregroundColor(uiModel.dragIndicatorColor)
         }
     }
     
@@ -378,7 +378,7 @@ struct VBottomSheet_Previews: PreviewProvider {
             FixedHeightMinIdealMaxSmallPreview().previewDisplayName("Fixed Height (Small)")
             InsettedContentPreview().previewDisplayName("Insetted Content")
             ScrollableContentPreview().previewDisplayName("Scrollable Content")
-            NoGrabberPreview().previewDisplayName("No Grabber")
+            NoDragIndicatorPreview().previewDisplayName("No Drag Indicator")
             WrappedContentPreview().previewDisplayName("Wrapped Content")
         })
         .previewInterfaceOrientation(interfaceOrientation)
@@ -606,7 +606,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         }
     }
     
-    private struct NoGrabberPreview: View {
+    private struct NoDragIndicatorPreview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -615,7 +615,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
-                            var uiModel: VBottomSheetUIModel = .noGrabber
+                            var uiModel: VBottomSheetUIModel = .noDragIndicator
 
                             uiModel.colorScheme = VBottomSheet_Previews.colorScheme
 

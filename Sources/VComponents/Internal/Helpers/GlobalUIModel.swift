@@ -100,7 +100,7 @@ struct GlobalUIModel {
         
         static let dimmingViewColor: Color = .init(module: "DimmingView")
         
-        static let grabberColor: Color = .init(module: "Grabber")
+        static let dragIndicatorColor: Color = .init(module: "DragIndicator")
         
         // MARK: Initializers
         private init() {}

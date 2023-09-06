@@ -65,20 +65,20 @@ public struct VBottomSheetUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Grabber
-    /// Grabber indicator size. Set to `50x4`.
+    // MARK: Properties - Drag Indicator
+    /// Drag indicator size. Set to `50x4`.
     ///
-    /// To hide grabber, set to `zero`.
-    public var grabberSize: CGSize = .init(width: 50, height: 4)
+    /// To hide drag indicator, set to `zero`.
+    public var dragIndicatorSize: CGSize = .init(width: 50, height: 4)
 
-    /// Grabber corner radius. Set to `2`.
-    public var grabberCornerRadius: CGFloat = 2
+    /// Drag indicator corner radius. Set to `2`.
+    public var dragIndicatorCornerRadius: CGFloat = 2
 
-    /// Grabber color.
-    public var grabberColor: Color = GlobalUIModel.Common.grabberColor
+    /// Drag indicator color.
+    public var dragIndicatorColor: Color = GlobalUIModel.Common.dragIndicatorColor
 
-    /// Grabber margins. Set to `15`s.
-    public var grabberMargins: VerticalMargins = .init(15)
+    /// Drag indicator margins. Set to `15`s.
+    public var dragIndicatorMargins: VerticalMargins = .init(15)
 
     // MARK: Properties - Content
     /// Content margins. Set to `zero`.
@@ -322,9 +322,9 @@ public struct VBottomSheetUIModel {
         contentHeight: CGFloat,
         safeAreaInsets: EdgeInsets
     ) -> CGFloat {
-        let grabberHeight: CGFloat = {
-            guard grabberSize.height > 0 else { return 0 }
-            return grabberSize.height + grabberMargins.verticalSum
+        let dragIndicatorHeight: CGFloat = {
+            guard dragIndicatorSize.height > 0 else { return 0 }
+            return dragIndicatorSize.height + dragIndicatorMargins.verticalSum
         }()
 
         let contentSafeAreaMarginsVerticalSum: CGFloat = {
@@ -335,7 +335,7 @@ public struct VBottomSheetUIModel {
         }()
 
         return
-            grabberHeight +
+            dragIndicatorHeight +
             contentMargins.verticalSum +
             contentSafeAreaMarginsVerticalSum +
             contentHeight
@@ -357,11 +357,11 @@ extension VBottomSheetUIModel {
         return uiModel
     }
 
-    /// `VBottomSheetUIModel` that hides grabber.
-    public static var noGrabber: Self {
+    /// `VBottomSheetUIModel` that hides drag indicator.
+    public static var noDragIndicator: Self {
         var uiModel: Self = .init()
 
-        uiModel.grabberSize.height = 0
+        uiModel.dragIndicatorSize.height = 0
 
         return uiModel
     }
