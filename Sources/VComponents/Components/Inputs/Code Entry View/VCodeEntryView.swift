@@ -113,7 +113,6 @@ public struct VCodeEntryView: View {
 
             // Blocks hit testing for gestures, to ensure that highlighting doesn't occur,
             // and that menu isn't opened
-            .textSelection(.disabled)
             .blocksHitTesting()
 
             .focused($isFocused)
