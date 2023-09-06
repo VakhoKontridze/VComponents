@@ -24,7 +24,7 @@ struct VBottomSheet<Content>: View
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: containerSize.width)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
@@ -123,7 +123,7 @@ struct VBottomSheet<Content>: View
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
                         .frame( // Max dimension fixes issue of safe areas and/or landscape
-                            maxHeight: currentHeightsObject.max.points(in: containerSize.height)
+                            maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                         )
                         .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
@@ -151,7 +151,7 @@ struct VBottomSheet<Content>: View
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
-                        maxHeight: currentHeightsObject.max.points(in: containerSize.height)
+                        maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                     )
                     .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
             })
@@ -160,7 +160,7 @@ struct VBottomSheet<Content>: View
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
                 .frame( // Max dimension fixes issue of safe areas and/or landscape
-                    maxHeight: currentHeightsObject.max.points(in: containerSize.height)
+                    maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                 )
                 .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 .gesture(
@@ -431,11 +431,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
-                                    heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
                                 ),
                                 landscape: VBottomSheetUIModel.Size(
                                     width: .fraction(0.7),
-                                    heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
                                 )
                             )
 
@@ -464,11 +464,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
                                     width: .fraction(1),
-                                    heights: .fractions(min: 0.6, ideal: 0.9, max: 0.9)
+                                    heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                                 ),
                                 landscape: VBottomSheetUIModel.Size(
                                     width: .fraction(0.7),
-                                    heights: .fractions(min: 0.6, ideal: 0.9, max: 0.9)
+                                    heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                                 )
                             )
 
@@ -662,8 +662,8 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     safeAreaInsets: safeAreaInsets
                                 )
 
-                                uiModel.sizes.portrait.heights = .points(height)
-                                uiModel.sizes.portrait.heights = .points(height)
+                                uiModel.sizes.portrait.heights = .absolute(height)
+                                uiModel.sizes.portrait.heights = .absolute(height)
                             }
 
                             return uiModel

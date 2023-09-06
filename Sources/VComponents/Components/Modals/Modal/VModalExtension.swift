@@ -51,8 +51,8 @@ extension View {
     ///                 if let contentHeight {
     ///                     let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
     ///
-    ///                     uiModel.sizes.portrait.height = .point(height)
-    ///                     uiModel.sizes.landscape.height = .point(height)
+    ///                     uiModel.sizes.portrait.height = .absolute(height)
+    ///                     uiModel.sizes.landscape.height = .absolute(height)
     ///                 }
     ///
     ///                 return uiModel

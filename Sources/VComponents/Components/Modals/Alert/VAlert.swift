@@ -24,7 +24,7 @@ struct VAlert<Content>: View
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).points(in: containerSize.width)
+        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).toAbsolute(in: containerSize.width)
     }
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme

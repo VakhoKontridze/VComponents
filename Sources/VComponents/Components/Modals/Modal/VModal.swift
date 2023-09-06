@@ -20,10 +20,10 @@ struct VModal<Content>: View
     private let uiModel: VModalUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: containerSize.width)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: containerSize.height)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
@@ -253,8 +253,8 @@ struct VModal_Previews: PreviewProvider {
                             if let contentHeight {
                                 let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
 
-                                uiModel.sizes.portrait.height = .point(height)
-                                uiModel.sizes.landscape.height = .point(height)
+                                uiModel.sizes.portrait.height = .absolute(height)
+                                uiModel.sizes.landscape.height = .absolute(height)
                             }
 
                             return uiModel

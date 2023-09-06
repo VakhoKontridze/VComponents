@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rolling Counter
-/// Text component that highlights change in a floating-point number.
+/// Text component that highlights change in a floating-absolute number.
 ///
 ///     @State private var value: Double = 10_000
 ///

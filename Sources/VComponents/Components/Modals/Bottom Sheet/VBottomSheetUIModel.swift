@@ -36,7 +36,7 @@ public struct VBottomSheetUIModel {
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(1),
-            heights: .fractions(min: 0.6, ideal: 0.6, max: 0.9)
+            heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
         ),
         landscape: Size(
             width: .fraction(0.7),
@@ -123,7 +123,7 @@ public struct VBottomSheetUIModel {
         heights: Heights,
         in containerHeight: CGFloat
     ) -> CGFloat {
-        pullDownDismissDistanceMinHeightRatio * heights.min.points(in: containerHeight)
+        pullDownDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
     }
 
     // MARK: Properties - Dimming View
@@ -207,11 +207,11 @@ public struct VBottomSheetUIModel {
             ideal.value == max.value
         }
 
-        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.points(in: containerHeight) }
+        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.toAbsolute(in: containerHeight) }
 
-        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.points(in: containerHeight) }
+        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.toAbsolute(in: containerHeight) }
 
-        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.points(in: containerHeight) }
+        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.toAbsolute(in: containerHeight) }
 
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
@@ -226,32 +226,32 @@ public struct VBottomSheetUIModel {
             self.max = max
         }
 
-        /// Initializes `Heights` with point values.
-        public static func points(
+        /// Initializes `Heights` with absolute values.
+        public static func absolute(
             min: CGFloat,
             ideal: CGFloat,
             max: CGFloat
         ) -> Self {
             self.init(
-                min: .point(min),
-                ideal: .point(ideal),
-                max: .point(max)
+                min: .absolute(min),
+                ideal: .absolute(ideal),
+                max: .absolute(max)
             )
         }
 
-        /// Initializes `Heights` with point value.
-        public static func points(
+        /// Initializes `Heights` with absolute value.
+        public static func absolute(
             _ value: CGFloat
         ) -> Self {
             self.init(
-                min: .point(value),
-                ideal: .point(value),
-                max: .point(value)
+                min: .absolute(value),
+                ideal: .absolute(value),
+                max: .absolute(value)
             )
         }
 
         /// Initializes `Heights` with point values.
-        public static func fractions(
+        public static func fraction(
             min: CGFloat,
             ideal: CGFloat,
             max: CGFloat

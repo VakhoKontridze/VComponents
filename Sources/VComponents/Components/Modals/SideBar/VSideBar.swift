@@ -22,10 +22,10 @@ struct VSideBar<Content>: View where Content: View {
     @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.points(in: containerSize.width)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.points(in: containerSize.height)
+        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection

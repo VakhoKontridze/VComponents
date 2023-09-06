@@ -92,8 +92,8 @@ public typealias SingleDimensionModalComponentSize = ModalComponentDimension
 /// Enumeration that represents modal component dimension, either in points or fractions.
 public enum ModalComponentDimension: Equatable {
     // MARK: Cases
-    /// Point measurement.
-    case point(CGFloat)
+    /// Absolute measurement.
+    case absolute(CGFloat)
 
     /// Fraction measurement.
     case fraction(CGFloat)
@@ -101,17 +101,17 @@ public enum ModalComponentDimension: Equatable {
     // MARK: Properties
     var value: CGFloat {
         switch self {
-        case .point(let dimension): return dimension
+        case .absolute(let dimension): return dimension
         case .fraction(let fraction): return fraction
         }
     }
 
-    /// Converts `ModalComponentDimension` to points.
-    public func points(
+    /// Converts `ModalComponentDimension` to absolute dimension.
+    public func toAbsolute(
         in containerDimension: CGFloat
     ) -> CGFloat {
         switch self {
-        case .point(let dimension): return dimension
+        case .absolute(let dimension): return dimension
         case .fraction(let fraction): return fraction * containerDimension
         }
     }
