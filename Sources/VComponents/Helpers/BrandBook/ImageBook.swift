@@ -16,7 +16,7 @@ struct ImageBook {
     static let minus: Image = .init(module: "Minus")
     static let plus: Image = .init(module: "Plus")
 
-    static let magnifyGlass: Image = .init(module: "MagnifyGlass") // Doesn't mirror, like `UISearchBar/.searchable(text:)`
+    static let magnifyGlass: Image = .init(module: "MagnifyGlass") // Doesn't mirror, like `UISearchBar.searchable(text:)`
 
     static let visibilityOff: Image = .init(module: "Visibility.Off") // Mirrored for RTL languages
     static let visibilityOn: Image = .init(module: "Visibility.On")

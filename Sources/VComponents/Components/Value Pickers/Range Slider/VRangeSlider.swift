@@ -274,7 +274,7 @@ public struct VRangeSlider: View {
     {
         assert(
             value.boundRange >= difference - .ulpOfOne,
-            "Difference between `VRangeSlider`'s `value.upperBound` and `value.lowerBound` must be greater than or equal to `difference`"
+            "Difference between 'VRangeSlider''s 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference'"
         )
     }
 }

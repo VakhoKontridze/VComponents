@@ -374,15 +374,15 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VCompactPageIndicatorUIModel) {
         guard uiModel.visibleDots.isOdd else {
-            VCoreFatalError("`VCompactPageIndicator`'s `visible` count must be odd", module: "VComponents")
+            VCoreFatalError("'VCompactPageIndicator''s 'visible' count must be odd", module: "VComponents")
         }
         
         guard uiModel.centerDots.isOdd else {
-            VCoreFatalError("`VCompactPageIndicator`'s `center` count must be odd", module: "VComponents")
+            VCoreFatalError("'VCompactPageIndicator''s 'center' count must be odd", module: "VComponents")
         }
         
         guard uiModel.visibleDots > uiModel.centerDots else {
-            VCoreFatalError("`VCompactPageIndicator`'s `visible` must be greater than `center`", module: "VComponents")
+            VCoreFatalError("'VCompactPageIndicator''s 'visible' must be greater than 'center'", module: "VComponents")
         }
     }
 }
