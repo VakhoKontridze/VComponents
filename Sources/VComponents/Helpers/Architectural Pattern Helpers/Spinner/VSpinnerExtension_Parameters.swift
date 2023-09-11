@@ -23,15 +23,13 @@ extension View {
         uiModel: VContinuousSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
-        switch parameters {
-        case nil:
-            self
-            
-        case let parameters?:
-            self
-                .blocksHitTesting(!parameters.isInteractionEnabled)
-                .overlay(VContinuousSpinner(uiModel: uiModel))
-        }
+        self
+            .blocksHitTesting(parameters?.isInteractionEnabled == false)
+            .overlay(Group(content: {
+                if parameters != nil {
+                    VContinuousSpinner(uiModel: uiModel)
+                }
+            }))
     }
     
     /// Presents `VDashedSpinner` when `VSpinnerParameters` is non-`nil`.
@@ -48,14 +46,12 @@ extension View {
         uiModel: VDashedSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
-        switch parameters {
-        case nil:
-            self
-            
-        case let parameters?:
-            self
-                .blocksHitTesting(!parameters.isInteractionEnabled)
-                .overlay(VDashedSpinner(uiModel: uiModel))
-        }
+        self
+            .blocksHitTesting(parameters?.isInteractionEnabled == false)
+            .overlay(Group(content: {
+                if parameters != nil {
+                    VDashedSpinner(uiModel: uiModel)
+                }
+            }))
     }
 }
