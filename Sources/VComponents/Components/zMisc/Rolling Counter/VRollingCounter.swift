@@ -204,9 +204,9 @@ extension AnyTransition {
         guard let edge else { return nil }
 
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            return .push(from: edge)
+            return AnyTransition.push(from: edge)
         } else {
-            return .move(edge: edge).combined(with: .opacity)
+            return AnyTransition.move(edge: edge).combined(with: .opacity)
         }
     }
 }

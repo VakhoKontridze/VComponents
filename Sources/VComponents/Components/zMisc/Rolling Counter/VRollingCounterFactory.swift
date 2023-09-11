@@ -79,8 +79,8 @@ struct VRollingCounterFactory {
         let firstChangedIndex: Int = oldString
             .enumerated()
             .first(where: { (i, char) in char != newString[i] })?
-            .offset
-            ?? newString.count - 1
+            .offset ??
+            newString.count - 1
 
         var components: [any VRollingCounterComponentProtocol] = []
         var hasPassedDecimalSeparator = false

@@ -35,10 +35,13 @@ extension View {
     ///                 ScrollView(content: {
     ///                     VStack(spacing: 0, content: {
     ///                         ForEach(0..<20, content: { number in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: number == 0), content: {
-    ///                                 Text(String(number))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///                             VListRow(
+    ///                                 uiModel: .noFirstAndLastSeparators(isFirst: number == 0),
+    ///                                 content: {
+    ///                                     Text(String(number))
+    ///                                         .frame(maxWidth: .infinity, alignment: .leading)
+    ///                                 }
+    ///                             )
     ///                         })
     ///
     ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)

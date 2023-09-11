@@ -51,9 +51,10 @@ import VCore
 ///
 ///     List(content: {
 ///         ForEach(titles, id: \.self, content: { title in
-///             VListRow(uiModel: .noSeparators(), content: {
-///                 Text(title)
-///             })
+///             VListRow(
+///                 uiModel: .noSeparators(),
+///                 content: { Text(title) }
+///             )
 ///         })
 ///     })
 ///     .vListStyle()
@@ -145,9 +146,10 @@ struct VListRow_Previews: PreviewProvider {
             PreviewContainer(content: {
                 List(content: {
                     ForEach(titles, id: \.self, content: { title in
-                        VListRow(uiModel: .noFirstSeparator(), content: {
-                            Text(title)
-                        })
+                        VListRow(
+                            uiModel: .noFirstSeparator(),
+                            content: { Text(title) }
+                        )
                     })
                 })
                 .vListStyle()
