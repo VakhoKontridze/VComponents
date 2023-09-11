@@ -19,7 +19,7 @@ extension View {
     ///             .vContinuousSpinner(parameters: parameters)
     ///     }
     ///
-    @ViewBuilder public func vContinuousSpinner(
+    public func vContinuousSpinner(
         uiModel: VContinuousSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
@@ -42,7 +42,7 @@ extension View {
     ///     }
     ///
     @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-    @ViewBuilder public func vDashedSpinner(
+    public func vDashedSpinner(
         uiModel: VDashedSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
