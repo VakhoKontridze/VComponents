@@ -10,9 +10,6 @@ import SwiftUI
 // MARK: - V Spinner Parameters
 /// Parameters for presenting an `VSpinner`.
 ///
-/// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in `Presenter`.
-/// in `MVVM` architecture, parameters are stored in`ViewModel`.
-///
 ///     @State private var parameters: VSpinnerParameters = .init()
 ///
 ///     var body: some View {

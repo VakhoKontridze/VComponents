@@ -10,9 +10,6 @@ import SwiftUI
 // MARK: - V Alert Parameters
 /// Parameters for presenting a `VAlert`.
 ///
-/// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in`Presenter`.
-/// in `MVVM` architecture, parameters are stored in `ViewModel`.
-///
 ///     @State private var isPresented: Bool = false
 ///
 ///     var body: some View {

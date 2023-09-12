@@ -168,6 +168,11 @@ VCompactPageIndicator
 
 - Backing `Circle` is changed to `Capsule` to support different width and height
 
+Helpers - Architectural Pattern Helpers
+
+- `VAlertPresentable` is removed
+- `VSpinnerPresentable` is removed
+
 ### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
 
 VSegmentedPicker
