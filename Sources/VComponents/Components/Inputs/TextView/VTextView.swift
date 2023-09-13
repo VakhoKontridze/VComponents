@@ -148,8 +148,8 @@ public struct VTextView: View {
             .frame(minHeight: uiModel.minHeight)
             .padding(uiModel.contentMargins)
             .clipped() // Prevents large content from overflowing
-            .background(backgroundBorder) // Has own rounding
-            .background(background) // Has own rounding
+            .background(content: { backgroundBorder }) // Has own rounding
+            .background(content: { background }) // Has own rounding
     }
 
     private var background: some View {
@@ -230,7 +230,7 @@ struct VTextView_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Data

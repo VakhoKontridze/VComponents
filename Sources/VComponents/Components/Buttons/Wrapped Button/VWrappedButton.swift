@@ -85,8 +85,8 @@ public struct VWrappedButton<Label>: View where Label: View {
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
-                    .background(background(internalState: internalState)) // Has own rounding
-                    .overlay(border(internalState: internalState)) // Has own rounding
+                    .background(content: { background(internalState: internalState) }) // Has own rounding
+                    .overlay(content: { border(internalState: internalState) }) // Has own rounding
                     .padding(uiModel.hitBox)
             }
         )
@@ -112,13 +112,6 @@ public struct VWrappedButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
-        .applyModifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.dynamicTypeSize(...(.accessibility3))
-            } else {
-                $0
-            }
-        })
     }
     
     private func titleLabelComponent(
@@ -127,15 +120,10 @@ public struct VWrappedButton<Label>: View where Label: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor({
-                if #available(iOS 15.0, *) {
-                    return uiModel.titleTextMinimumScaleFactor
-                } else {
-                    return uiModel.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
-                }
-            }())
+            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundColor(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
+            .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
     
     private func iconLabelComponent(
@@ -204,7 +192,7 @@ struct VWrappedButton_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data
@@ -283,7 +271,7 @@ struct VWrappedButton_Previews: PreviewProvider {
                         title: "Enabled",
                         content: {
                             Button(title, action: {})
-                                .background(Color.gray)
+                                .background(content: { Color.gray })
                         }
                     )
 #endif

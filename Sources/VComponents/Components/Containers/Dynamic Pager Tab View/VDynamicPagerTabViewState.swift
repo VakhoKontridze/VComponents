@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Dynamic Pager Tab View Tab Item Internal State
 /// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

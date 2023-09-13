@@ -40,10 +40,9 @@ import VCore
 ///         .padding()
 ///     }
 ///
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable) // No `PageTabViewStyle` support
-@available(tvOS 14.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // No `PageTabViewStyle` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
@@ -180,7 +179,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
             tabBar
             tabIndicatorStrip
         })
-        .background(uiModel.headerBackgroundColor)
+        .background(content: { uiModel.headerBackgroundColor })
 
         .clipped() // Prevents bouncing tab indicator from overflowing
         .drawingGroup() // Prevents clipped tab indicator from disappearing
@@ -280,7 +279,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                 })
             })
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .background(uiModel.tabViewBackgroundColor)
+            .background(content: { uiModel.tabViewBackgroundColor })
         })
     }
 
@@ -336,7 +335,7 @@ struct VStretchedIndicatorStaticPagerTabView_Previews: PreviewProvider {
             CustomTabBarPreview().previewDisplayName("Custom Tab Bar")
             CustomTabIndicatorPreview().previewDisplayName("Custom Tab Indicator")
         })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
     }

@@ -220,7 +220,7 @@ public struct VWheelPicker<Data, ID, Content>: View
         )
         .pickerStyle(.wheel)
         .labelsHidden()
-        .background(background)
+        .background(content: { background })
     }
 
     private var background: some View {
@@ -267,7 +267,7 @@ struct VWheelPicker_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

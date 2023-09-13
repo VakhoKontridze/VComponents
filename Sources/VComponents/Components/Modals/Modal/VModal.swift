@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Modal
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
-@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VModal<Content>: View
     where Content: View
 {
@@ -179,7 +178,7 @@ struct VModal_Previews: PreviewProvider {
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

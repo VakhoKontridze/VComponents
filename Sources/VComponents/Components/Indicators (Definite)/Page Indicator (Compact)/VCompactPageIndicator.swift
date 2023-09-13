@@ -155,12 +155,12 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     // But unlike `VPageIndicator`, they don't work. Animation breaks and some dots disappear.
     // Even wrapping them with if-else with `ViewBuilder`, or `Group` doesn't help it.
     // The only solution I found is to write conditional outside body that defines `HStack`/`VStack`.
-    private var compactBody: some View { // TODO: Refactor when `iOS` `16.0` is supported
+    private var compactBody: some View { // TODO: iOS 16.0 - Refactor with `AnyLayout`
         frame
             .applyIf(
                 uiModel.direction.isHorizontal,
-                ifTransform: { $0.overlay(dotsHorizontal) },
-                elseTransform: { $0.overlay(dotsVertical) }
+                ifTransform: { $0.overlay(content: { dotsHorizontal }) },
+                elseTransform: { $0.overlay(content: { dotsVertical }) }
             )
             .clipped()
             .applyIf(uiModel.appliesTransitionAnimation, transform: {
@@ -412,7 +412,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

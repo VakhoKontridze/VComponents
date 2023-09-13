@@ -9,7 +9,6 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -167,7 +166,6 @@ extension View {
 }
 
 // MARK: - Item
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

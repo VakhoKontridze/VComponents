@@ -82,6 +82,8 @@ public struct VWrappedToggleButtonUIModel {
     /// Set to `semibold` `body` (`13`) on `macOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontWrappedButton
 
+    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `16x16` on `iOS`.

@@ -57,7 +57,7 @@ public struct VGroupBox<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         contentView
-            .background(background)
+            .background(content: { background })
             .cornerRadius(
                 uiModel.cornerRadius,
                 corners: uiModel.roundedCorners
@@ -102,7 +102,7 @@ struct VGroupBox_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Previews (Scenes)

@@ -59,7 +59,7 @@ import VCore
 ///     })
 ///     .vListStyle()
 ///
-@available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
+@available(macOS 13.0, *)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VListRow<Content>: View
     where Content: View
@@ -134,7 +134,7 @@ struct VListRow_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

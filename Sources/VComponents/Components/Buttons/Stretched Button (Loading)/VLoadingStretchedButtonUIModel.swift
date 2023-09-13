@@ -90,6 +90,8 @@ public struct VLoadingStretchedButtonUIModel {
     /// Set to `semibold` `16` on `macOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
 
+    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `18x18` on `iOS`.

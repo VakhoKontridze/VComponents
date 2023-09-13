@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Alert
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
-@available(tvOS 14.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
-@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VAlert<Content>: View
     where Content: View
 {
@@ -206,13 +205,6 @@ struct VAlert<Content>: View
         })
         .padding(uiModel.buttonMargins)
         .getSize({ buttonsStackHeight = $0.height })
-        .applyModifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.dynamicTypeSize(...(.xxxLarge))
-            } else {
-                $0
-            }
-        })
     }
     
     private func buttonContent(reversesOrder: Bool = false) -> some View {
@@ -310,7 +302,7 @@ struct VAlert_Previews: PreviewProvider {
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

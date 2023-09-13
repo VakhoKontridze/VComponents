@@ -9,7 +9,6 @@ import Foundation
 
 // MARK: - V Menu Section Builder
 /// Custom parameter attribute that constructs views from closures.
-@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @resultBuilder public struct VMenuSectionBuilder {

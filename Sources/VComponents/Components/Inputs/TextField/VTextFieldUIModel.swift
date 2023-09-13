@@ -10,10 +10,9 @@ import VCore
 
 // MARK: - V Text Field UI Model
 /// Model that describes UI.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)@available(macOS, unavailable)
-@available(tvOS 15.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VTextFieldUIModel {
     // MARK: Properties - Global Layout
     /// Textfield height. Set to `50`.
@@ -272,7 +271,6 @@ public struct VTextFieldUIModel {
 }
 
 // MARK: - Factory (Content Types)
-@available(iOS 15.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -297,7 +295,6 @@ extension VTextFieldUIModel {
 }
 
 // MARK: - Factory (Highlights)
-@available(iOS 15.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -333,7 +330,6 @@ extension VTextFieldUIModel {
     }
 }
 
-@available(iOS 15.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

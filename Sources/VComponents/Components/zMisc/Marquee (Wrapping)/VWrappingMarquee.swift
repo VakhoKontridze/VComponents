@@ -55,8 +55,8 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         Color.clear
             .frame(height: contentSize.height)
             .getSize({ containerWidth = $0.width })
-            .overlay(marqueeContentView)
-            .overlay(gradient)
+            .overlay(content: { marqueeContentView })
+            .overlay(content: { gradient })
             .clipped()
     }
     
@@ -204,7 +204,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

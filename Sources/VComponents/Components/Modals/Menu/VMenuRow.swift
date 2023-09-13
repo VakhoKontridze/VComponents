@@ -9,9 +9,8 @@ import SwiftUI
 
 // MARK: - V Menu Row
 /// `VMenu` row.
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 15.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VMenuRow: VMenuGroupRowProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -60,7 +59,6 @@ public struct VMenuRow: VMenuGroupRowProtocol {
 
 // MARK: - V Menu Expanding Row
 /// `VMenu` row that expands into submenu.
-@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenuExpandingRow: VMenuGroupRowProtocol { // TODO: Add disabling when custom component is added
@@ -95,9 +93,8 @@ public struct VMenuExpandingRow: VMenuGroupRowProtocol { // TODO: Add disabling 
 
 // MARK: - V Menu Picker Row
 /// `VMenu` picker row.
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 15.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VMenuPickerRow: VMenuPickerRowProtocol { // TODO: Add disabling when custom component is added
     // MARK: Properties
     private let title: String

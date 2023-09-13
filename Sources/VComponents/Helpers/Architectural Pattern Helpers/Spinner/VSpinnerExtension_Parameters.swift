@@ -25,11 +25,11 @@ extension View {
     ) -> some View {
         self
             .blocksHitTesting(parameters?.isInteractionEnabled == false)
-            .overlay(Group(content: {
+            .overlay(content: {
                 if parameters != nil {
                     VContinuousSpinner(uiModel: uiModel)
                 }
-            }))
+            })
     }
     
     /// Presents `VDashedSpinner` when `VSpinnerParameters` is non-`nil`.
@@ -41,17 +41,16 @@ extension View {
     ///             .vDashedSpinner(parameters: parameters)
     ///     }
     ///
-    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     public func vDashedSpinner(
         uiModel: VDashedSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
         self
             .blocksHitTesting(parameters?.isInteractionEnabled == false)
-            .overlay(Group(content: {
+            .overlay(content: {
                 if parameters != nil {
                     VDashedSpinner(uiModel: uiModel)
                 }
-            }))
+            })
     }
 }

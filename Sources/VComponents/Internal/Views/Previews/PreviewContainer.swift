@@ -40,7 +40,7 @@ struct PreviewContainer<Content>: View where Content: View {
     var body: some View {
         ZStack(content: {
             ColorBook.canvas
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea()
             
             if hasLayer { ColorBook.layer }
             

@@ -99,8 +99,8 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(size: uiModel.size)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
-                    .background(background) // Has own rounding
-                    .overlay(border) // Has own rounding
+                    .background(content: { background }) // Has own rounding
+                    .overlay(content: { border }) // Has own rounding
                     .padding(uiModel.hitBox)
             }
         )
@@ -124,13 +124,6 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState.isPressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
-        .applyModifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.dynamicTypeSize(...(.accessibility3))
-            } else {
-                $0
-            }
-        })
     }
 
     private func titleLabelComponent(
@@ -138,15 +131,10 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor({
-                if #available(iOS 15.0, *) {
-                    return uiModel.titleTextMinimumScaleFactor
-                } else {
-                    return uiModel.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
-                }
-            }())
+            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundColor(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
+            .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
 
     private func iconLabelComponent(
@@ -234,7 +222,7 @@ struct VRectangularToggleButton_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Data

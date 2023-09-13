@@ -81,6 +81,8 @@ public struct VRectangularButtonUIModel {
     /// Set to `semibold` `body` (`17`) on `watchOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextRectangularButton
 
+    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `24x24` on `iOS`.

@@ -82,6 +82,8 @@ public struct VRectangularToggleButtonUIModel {
     /// Set to `body` (`13`) on `macOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextRectangularButton
 
+    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `24x24` on `iOS`.

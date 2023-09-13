@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
-@available(watchOS 7.0, *)@available(watchOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Modal component hosts pull-up content on the bottom of the container.
     ///
@@ -207,10 +206,9 @@ extension View {
 }
 
 // MARK: - Item
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
-@available(watchOS 7.0, *)@available(watchOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Modal component hosts pull-up content on the bottom of the container.
     ///

@@ -115,8 +115,8 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         })
         .frame(size: uiModel.rectangleSize)
         .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from overflowing
-        .background(rectangleBackground(internalState: internalState)) // Has own rounding
-        .overlay(rectangleBorder(internalState: internalState)) // Has own rounding
+        .background(content: { rectangleBackground(internalState: internalState) }) // Has own rounding
+        .overlay(content: { rectangleBorder(internalState: internalState) }) // Has own rounding
     }
     
     private func rectangleBackground(
@@ -220,7 +220,7 @@ struct VRectangularCaptionButton_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

@@ -40,7 +40,6 @@ import VCore
 ///         )
 ///     }
 ///
-@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VDisclosureGroup<HeaderLabel, Content>: View
@@ -204,7 +203,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

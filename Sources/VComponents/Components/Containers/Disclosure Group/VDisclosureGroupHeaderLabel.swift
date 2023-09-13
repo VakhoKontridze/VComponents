@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Disclosure Group Header Label
-@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 enum VDisclosureGroupHeaderLabel<Label> where Label: View {

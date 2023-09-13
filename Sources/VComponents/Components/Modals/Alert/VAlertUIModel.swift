@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Alert UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -176,9 +175,6 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = primaryButtonBackgroundColors
 
-        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.titleTextMinimumScaleFactor /= 2
-        }
         uiModel.titleTextColors = primaryButtonTitleColors
 
 #if os(iOS)
@@ -211,9 +207,6 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = secondaryButtonBackgroundColors
 
-        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.titleTextMinimumScaleFactor /= 2
-        }
         uiModel.titleTextColors = secondaryButtonTitleColors
 
 #if os(iOS)
@@ -246,9 +239,6 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = destructiveButtonBackgroundColors
 
-        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
-            uiModel.titleTextMinimumScaleFactor /= 2
-        }
         uiModel.titleTextColors = destructiveButtonTitleColors
 
 #if os(iOS)

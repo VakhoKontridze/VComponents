@@ -87,8 +87,8 @@ public struct VStretchedButton<Label>: View where Label: View {
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
-                    .background(background(internalState: internalState)) // Has own rounding
-                    .overlay(border(internalState: internalState)) // Has own rounding
+                    .background(content: { background(internalState: internalState) }) // Has own rounding
+                    .overlay(content: { border(internalState: internalState) }) // Has own rounding
             }
         )
     }
@@ -125,6 +125,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundColor(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
+            .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
     
     private func iconLabelComponent(
@@ -191,7 +192,7 @@ struct VStretchedButton_Previews: PreviewProvider {
             ShadowPreview().previewDisplayName("Shadow")
             OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
     }

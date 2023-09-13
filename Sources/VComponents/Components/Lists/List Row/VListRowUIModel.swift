@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V List Row UI Model
 /// Model that describes UI.
-@available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
+@available(macOS 13.0, *)
 @available(watchOS, unavailable)
 public struct VListRowUIModel {
     // MARK: Properties - Background
@@ -103,7 +103,7 @@ public struct VListRowUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
+@available(macOS 13.0, *)
 @available(watchOS, unavailable)
 extension VListRowUIModel {
     /// `VListRowUIModel` that displays no separators.

@@ -86,10 +86,9 @@ import VCore
 ///     }
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextField: View {
     // MARK: Properties - UI Model
     private let uiModel: VTextFieldUIModel
@@ -181,8 +180,8 @@ public struct VTextField: View {
         .frame(height: uiModel.height)
         .padding(.horizontal, uiModel.contentMarginHorizontal)
         .clipped() // Prevents large content from overflowing
-        .background(backgroundBorder) // Has own rounding
-        .background(background) // Has own rounding
+        .background(content: { backgroundBorder }) // Has own rounding
+        .background(content: { background }) // Has own rounding
     }
     
     private var background: some View {
@@ -333,7 +332,7 @@ struct VTextField_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

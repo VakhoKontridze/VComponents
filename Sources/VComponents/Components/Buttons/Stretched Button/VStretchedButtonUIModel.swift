@@ -86,6 +86,8 @@ public struct VStretchedButtonUIModel {
     /// Set to `semibold` `title3` (`20`) on `watchOS`.
     public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontStretchedButton
 
+    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+
     // MARK: Properties - Label - Icon
     /// Icon size.
     /// Set to `18x18` on `iOS`.

@@ -15,7 +15,6 @@ import VCore
 ///         VDashedSpinner()
 ///     }
 ///
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct VDashedSpinner: View {
     // MARK: Properties
     private let uiModel: VDashedSpinnerUIModel
@@ -51,7 +50,7 @@ struct VDashedSpinner_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Previews (Scenes)

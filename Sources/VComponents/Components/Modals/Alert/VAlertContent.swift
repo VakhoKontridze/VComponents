@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Alert Content
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

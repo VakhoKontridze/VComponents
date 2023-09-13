@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Menu Group Section
 /// Grouped container view that adds hierarchy to `VMenuGroupRowProtocol`s.
-@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenuGroupSection: VMenuSectionProtocol {
@@ -44,9 +43,8 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 
 // MARK: - V Menu Picker Section
 /// Container view with picker that adds hierarchy to `VMenuPickerRowProtocol`s.
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
-@available(watchOS 7, *)@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     where
         Data: RandomAccessCollection,

@@ -102,8 +102,8 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
-                    .background(background) // Has own rounding
-                    .overlay(border) // Has own rounding
+                    .background(content: { background }) // Has own rounding
+                    .overlay(content: { border }) // Has own rounding
             }
         )
         .applyIf(uiModel.appliesStateChangeAnimation, transform: {
@@ -137,15 +137,10 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor({
-                if #available(iOS 15.0, *) {
-                    return uiModel.titleTextMinimumScaleFactor
-                } else {
-                    return uiModel.titleTextMinimumScaleFactor/2 // Alternative to dynamic size upper limit
-                }
-            }())
+            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundColor(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
+            .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
 
     private func iconLabelComponent(
@@ -233,7 +228,7 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Data

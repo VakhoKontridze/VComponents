@@ -9,7 +9,6 @@ import SwiftUI
 import VCore
 
 // MARK: - V Menu Content View
-@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VContextMenuContentView: View {
@@ -60,7 +59,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Data

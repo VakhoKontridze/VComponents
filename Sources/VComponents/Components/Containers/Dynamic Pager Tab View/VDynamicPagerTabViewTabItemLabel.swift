@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Dynamic Pager Tab View Tab Item Label
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

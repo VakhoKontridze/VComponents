@@ -38,10 +38,9 @@ import VCore
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewUIModel`.
 ///
 /// When running in `SwiftUI` previews or simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VCodeEntryView: View {
     // MARK: Properties
     private let uiModel: VCodeEntryViewUIModel
@@ -167,8 +166,8 @@ public struct VCodeEntryView: View {
 
             .frame(size: uiModel.characterBackgroundSize)
             .clipped() // Prevents large content from overflowing
-            .background(characterBackgroundBorder(internalState)) // Has own rounding
-            .background(characterBackground(internalState)) // Has own rounding
+            .background(content: { characterBackgroundBorder(internalState) }) // Has own rounding
+            .background(content: { characterBackground(internalState) }) // Has own rounding
     }
 
     private func characterBackground(
@@ -238,7 +237,7 @@ struct VCodeEntryView_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Previews (Scenes)

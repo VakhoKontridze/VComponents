@@ -8,8 +8,7 @@
 import SwiftUI
 
 // MARK: - Standard Menu
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
     /// Modal component that presents menu of actions, and hosts preview.

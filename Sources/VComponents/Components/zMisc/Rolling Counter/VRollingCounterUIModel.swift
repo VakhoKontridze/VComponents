@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - Rolling Counter
 /// Model that describes UI.
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct VRollingCounterUIModel {
     // MARK: Properties - Global Layout
     /// Spacing between the components. Set to `0`.
@@ -35,7 +34,7 @@ public struct VRollingCounterUIModel {
     public var digitTextOffsetY: CGFloat = 0
 
     /// Digit text rolling edge. Set to `top`.
-    public var digitTextRollEdge: RollingEdge? = .top
+    public var digitTextRollEdge: VerticalEdge? = .top
 
     // MARK: Properties - Fraction Digits
     /// Indicates of counter has fraction digits. Set to `true`.
@@ -64,7 +63,7 @@ public struct VRollingCounterUIModel {
     public var fractionDigitTextOffsetY: CGFloat = 0
 
     /// Fraction digit text rolling edge. Set to `top`.
-    public var fractionDigitTextRollEdge: RollingEdge? = .top
+    public var fractionDigitTextRollEdge: VerticalEdge? = .top
 
     // MARK: Properties - Grouping Separator
     /// Indicates if counter has grouping separator. Set to `true`.
@@ -139,23 +138,4 @@ public struct VRollingCounterUIModel {
 
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
-
-    // MARK: Rolling Edge
-    /// Enumeration that represents rolling edge, such as `top` or `bottom`.
-    public enum RollingEdge: Int, CaseIterable { // TODO: Switch to `VerticalEdge` when `iOS` `15.0` is supported
-        // MARK: Cases
-        /// Rolling from top edge.
-        case top
-
-        /// Rolling from bottom edge.
-        case bottom
-
-        // MARK: Properties
-        var toEdge: Edge {
-            switch self {
-            case .top: return .top
-            case .bottom: return .bottom
-            }
-        }
-    }
 }

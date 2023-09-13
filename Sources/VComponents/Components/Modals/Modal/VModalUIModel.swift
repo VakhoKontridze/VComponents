@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Modal UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -166,7 +165,6 @@ public struct VModalUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

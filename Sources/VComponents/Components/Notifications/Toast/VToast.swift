@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Toast
-@available(iOS 14.0, *)
-@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
-@available(tvOS 14.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
-@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
@@ -109,7 +108,7 @@ struct VToast: View {
                 }
             })
             .cornerRadius(cornerRadius) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
-            .background(background)
+            .background(content: { background })
             .getSize({ height = $0.height })
             .padding(.horizontal, uiModel.widthType.marginHorizontal)
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
@@ -229,7 +228,7 @@ struct VToast_Previews: PreviewProvider {
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
     
     // Data

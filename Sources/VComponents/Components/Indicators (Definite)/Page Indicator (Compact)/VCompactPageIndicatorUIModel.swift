@@ -13,6 +13,8 @@ import VCore
 public struct VCompactPageIndicatorUIModel {
     // MARK: Properties - Global Layout
     /// Direction. Set to `leftToRight`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Dot spacing.

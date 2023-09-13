@@ -423,10 +423,10 @@ Versions with different majors are not directly compatible. When a new major is 
         5.8
     </td>
     <td>
-        iOS 13.0<br>
-        macOS 10.15<br>
-        tvOS 13.0<br>
-        watchOS 6.0
+        iOS 15.0<br>
+        macOS 12.0<br>
+        tvOS 15.0<br>
+        watchOS 8.0
     </td>
     <td>5.x.x - 5.x.x</td>
     <td>

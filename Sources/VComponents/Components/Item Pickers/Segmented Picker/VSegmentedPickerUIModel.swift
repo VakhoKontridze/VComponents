@@ -129,7 +129,7 @@ public struct VSegmentedPickerUIModel {
     /// Set to `13` on `macOS`.
     public var rowTitleTextFont: Font = {
 #if os(iOS)
-        return Font.system(size: 13).weight(.medium) // Prevents scaling, similarly to native picker
+        return Font.system(size: 13, weight: .medium) // Prevents scaling, similarly to native picker
 #elseif os(macOS)
         return Font.system(size: 13) // No dynamic type on `macOS`
 #else

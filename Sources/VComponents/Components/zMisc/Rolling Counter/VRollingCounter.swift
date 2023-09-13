@@ -45,7 +45,6 @@ import VCore
 ///         .onAppear(perform: ...)
 ///     }
 ///        
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct VRollingCounter: View {
     // MARK: Properties
     private let uiModel: VRollingCounterUIModel
@@ -107,7 +106,7 @@ public struct VRollingCounter: View {
                 .font(uiModel.digitTextFont)
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
-                .transition(.rollingEdge(edge: uiModel.digitTextRollEdge?.toEdge) ?? .identity)
+                .transition(.rollingEdge(edge: (uiModel.digitTextRollEdge).map { Edge(verticalEdge: $0) }) ?? .identity)
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
@@ -115,7 +114,7 @@ public struct VRollingCounter: View {
                 .font(uiModel.fractionDigitTextFont)
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
-                .transition(.rollingEdge(edge: uiModel.fractionDigitTextRollEdge?.toEdge) ?? .identity)
+                .transition(.rollingEdge(edge: (uiModel.fractionDigitTextRollEdge).map { Edge(verticalEdge: $0) }) ?? .identity)
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
@@ -199,6 +198,15 @@ public struct VRollingCounter: View {
 }
 
 // MARK: - Helpers
+extension Edge {
+    fileprivate init(verticalEdge: VerticalEdge) {
+        switch verticalEdge {
+        case .top: self = .top
+        case .bottom: self = .bottom
+        }
+    }
+}
+
 extension AnyTransition {
     fileprivate static func rollingEdge(edge: Edge?) -> AnyTransition? {
         guard let edge else { return nil }
@@ -227,7 +235,7 @@ struct VRollingCounter_Previews: PreviewProvider {
         })
         .environment(\.layoutDirection, languageDirection)
         .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .colorScheme(colorScheme)
+        .preferredColorScheme(colorScheme)
     }
 
     // Data

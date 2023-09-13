@@ -8,7 +8,6 @@
 import Foundation
 
 // MARK: - V Rolling Counter Component (Digit)
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VRollingCounterDigitComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -31,7 +30,6 @@ struct VRollingCounterDigitComponent: VRollingCounterComponentProtocol {
 }
 
 // MARK: - V Rolling Counter Component (Fraction Digit)
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VRollingCounterFractionDigitComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -54,7 +52,6 @@ struct VRollingCounterFractionDigitComponent: VRollingCounterComponentProtocol {
 }
 
 // MARK: - V Rolling Counter Component (Grouping Separator)
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VRollingCounterGroupingSeparatorComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -77,7 +74,6 @@ struct VRollingCounterGroupingSeparatorComponent: VRollingCounterComponentProtoc
 }
 
 // MARK: - V Rolling Counter Component (Decimal Separator)
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VRollingCounterDecimalSeparatorComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String

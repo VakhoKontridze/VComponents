@@ -9,7 +9,6 @@ import Foundation
 
 // MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

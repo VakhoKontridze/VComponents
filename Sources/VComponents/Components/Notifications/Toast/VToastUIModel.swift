@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Toast UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -219,7 +218,6 @@ public struct VToastUIModel {
 }
 
 // MARK: - Factory (Highlights)
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -264,7 +262,6 @@ extension VToastUIModel {
     }
 }
 
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

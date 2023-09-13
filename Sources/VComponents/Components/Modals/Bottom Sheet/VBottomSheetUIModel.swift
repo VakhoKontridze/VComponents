@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -89,11 +88,15 @@ public struct VBottomSheetUIModel {
 
     /// Indicates if sheet resizes content based on its visible frame. Set to `false`.
     ///
+    /// Changing this property conditionally will cause view state to be reset.
+    ///
     /// Can be used for scrollable content.
     /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
     public var autoresizesContent: Bool = false
 
     /// Indicates if bottom sheet can be resized by dragging outside the header. Set to `false`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     ///
     /// Setting to `true` may cause issues with scrollable views.
     ///
@@ -343,7 +346,6 @@ public struct VBottomSheetUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

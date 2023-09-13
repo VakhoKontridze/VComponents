@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Stretched-Indicator Static Pager Tab View UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

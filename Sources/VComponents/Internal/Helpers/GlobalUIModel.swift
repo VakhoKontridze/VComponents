@@ -189,13 +189,9 @@ struct GlobalUIModel {
 #if os(iOS)
             return Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
-            return Font.system(size: 16).weight(.semibold) // No dynamic type on `macOS` anyway
+            return Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS` anyway
 #elseif os(watchOS)
-            if #available(watchOS 7.0, *) {
-                return Font.title3.weight(.semibold) // 20
-            } else {
-                return Font.system(size: 20)
-            }
+            return Font.title3.weight(.semibold) // 20
 #else
             fatalError() // Not supported
 #endif

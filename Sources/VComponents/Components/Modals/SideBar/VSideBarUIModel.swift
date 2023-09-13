@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Side Bar UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -202,7 +201,6 @@ public struct VSideBarUIModel {
 }
 
 // MARK: - Factory (Misc)
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -218,7 +216,6 @@ extension VSideBarUIModel {
 }
 
 // MARK: - Factory (Presentation Edge)
-@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

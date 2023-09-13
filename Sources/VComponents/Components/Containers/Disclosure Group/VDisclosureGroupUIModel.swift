@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Disclosure Group UI Model
 /// Model that describes UI.
-@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VDisclosureGroupUIModel {
@@ -170,7 +169,6 @@ public struct VDisclosureGroupUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VDisclosureGroupUIModel {
