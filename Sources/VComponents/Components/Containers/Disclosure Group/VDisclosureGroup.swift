@@ -15,13 +15,13 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
-///             ColorBook.canvas.ignoresSafeArea()
+///             VComponentsColorBook.secondaryBackground.ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
 ///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum",
 ///                 content: {
-///                     ColorBook.accentBlue
+///                     VComponentsColorBook.accentBlue
 ///                         .frame(height: 150)
 ///                 }
 ///             )

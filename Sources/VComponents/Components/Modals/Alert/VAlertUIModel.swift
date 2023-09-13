@@ -57,7 +57,7 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.layer
+    public var backgroundColor: Color = ColorBook.background
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
@@ -187,9 +187,9 @@ public struct VAlertUIModel {
     // MARK: Properties - Button - Secondary
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
-        enabled: ColorBook.layer,
+        enabled: ColorBook.background,
         pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-        disabled: ColorBook.layer
+        disabled: ColorBook.background
     )
 
     /// Secondary button title colors.
@@ -219,9 +219,9 @@ public struct VAlertUIModel {
     // MARK: Properties - Button - Destructive
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
-        enabled: ColorBook.layer,
+        enabled: ColorBook.background,
         pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-        disabled: ColorBook.layer
+        disabled: ColorBook.background
     )
 
     /// Destructive button title colors.

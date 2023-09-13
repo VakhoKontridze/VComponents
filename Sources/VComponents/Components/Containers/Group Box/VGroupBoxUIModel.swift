@@ -23,7 +23,7 @@ public struct VGroupBoxUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.layer
+    public var backgroundColor: Color = ColorBook.background
 
     // MARK: Properties - Content
     /// Content margins. Set to `15`s.

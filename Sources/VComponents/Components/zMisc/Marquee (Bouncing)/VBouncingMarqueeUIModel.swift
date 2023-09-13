@@ -38,10 +38,10 @@ public struct VBouncingMarqueeUIModel {
     public var gradientWidth: CGFloat = 0
 
     /// Gradient color at the edge of the container.
-    public var gradientColorContainerEdge: Color = ColorBook.layer
+    public var gradientColorContainerEdge: Color = ColorBook.background
 
     /// Gradient color at the edge of the content.
-    public var gradientColorContentEdge: Color = ColorBook.layer.opacity(0.01)
+    public var gradientColorContentEdge: Color = ColorBook.background.opacity(0.01)
 
     // MARK: Properties - Transition
     /// Animation curve. Set to `linear`.

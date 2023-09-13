@@ -39,10 +39,10 @@ struct PreviewContainer<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            ColorBook.canvas
+            ColorBook.secondaryBackground
                 .ignoresSafeArea()
             
-            if hasLayer { ColorBook.layer }
+            if hasLayer { ColorBook.background }
             
             Group(content: {
                 if embeddedInScrollView {

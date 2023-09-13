@@ -49,7 +49,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.layer
+    public var backgroundColor: Color = ColorBook.background
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()

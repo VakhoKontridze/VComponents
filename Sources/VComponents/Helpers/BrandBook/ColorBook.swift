@@ -25,6 +25,13 @@ public struct VComponentsColorBook {
     
     /// White color for pressed and disabled states. Set to `(255, 255, 255, 30)`.
     public static let whitePressedDisabled: Color = .init(module: "White.PressedDisabled")
+
+    // MARK: Properties - Background
+    /// Background color. Set to `(254, 254, 254)` and `(28, 28, 28)`, like `UIColor.systemBackground`.
+    public static let background: Color = .init(module: "Background")
+
+    /// Secondary background color. Set to `(247, 247, 247)` and `(0, 0, 0)`.
+    public static let secondaryBackground: Color = .init(module: "SecondaryBackground")
     
     // MARK: Properties - Text (Primary)
     /// Primary text color. Set to `(0, 0, 0)` and `(255, 255, 255`).
@@ -52,7 +59,7 @@ public struct VComponentsColorBook {
     public static var primaryWhitePressedDisabled: Color { whitePressedDisabled }
     
     // MARK: Properties - Text (Secondary)
-    /// Secondary text color. Set to `(60, 60, 67, 60)` `(235, 235, 245, 60)` like `UIColor.secondaryLabel`.
+    /// Secondary text color. Set to `(60, 60, 67, 60)` `(235, 235, 245, 60)`, like `UIColor.secondaryLabel`.
     public static let secondary: Color = .init(module: "Text.Secondary")
     
     /// Secondary text color. Set to `(60, 60, 67, 20)` `(235, 235, 245, 20)`.
@@ -65,27 +72,19 @@ public struct VComponentsColorBook {
     /// Red accent color for pressed and disabled states. Set to `(255, 59, 48, 30)` and `(255, 69, 68, 30)`.
     public static let accentRedPressedDisabled: Color = .init(module: "Accent.Red.PressedDisabled")
 
-    /// Green accent color. Set to `(52, 199, 89)` and `(48, 209, 88)` like `UIColor.systemGreen`.
+    /// Green accent color. Set to `(52, 199, 89)` and `(48, 209, 88)`, like `UIColor.systemGreen`.
     public static let accentGreen: Color = .init(module: "Accent.Green")
 
     /// Green accent color for pressed and disabled states. Set to `(52, 199, 89, 30)` and `(48, 209, 88, 30)`.
     public static let accentGreenPressedDisabled: Color = .init(module: "Accent.Green.PressedDisabled")
 
-    /// Blue accent color. Set to `(0, 122, 255)` and `(10, 132, 255)` like `UIColor.systemBlue`.
+    /// Blue accent color. Set to `(0, 122, 255)` and `(10, 132, 255)`, like `UIColor.systemBlue`.
     public static let accentBlue: Color = .init(module: "Accent.Blue")
     
     /// Blue accent color for pressed and disabled states. Set to `(0, 122, 255, 30)` and `(10, 132, 255, 30)`.
     public static let accentBluePressedDisabled: Color = .init(module: "Accent.Blue.PressedDisabled")
     
-    // MARK: Properties - Canvas
-    /// Canvas color. Set to `(247, 247, 247)` and `(0, 0, 0)`.
-    public static let canvas: Color = .init(module: "Canvas")
-    
     // MARK: Properties - Layer
-    /// Primary layer color. Set to `(254, 254, 254)` and `(28, 28, 28)`.
-    public static var layer: Color { layerPrimary }
-    private static let layerPrimary: Color = .init(module: "Layer.Primary")
-    
     /// Gray layer color. `(235, 235, 235)` and `(60, 60, 60)`.
     public static let layerGray: Color = .init(module: "Layer.Gray")
     

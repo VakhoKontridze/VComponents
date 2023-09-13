@@ -16,7 +16,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(content: {
-///             ColorBook.canvas.ignoresSafeArea()
+///             VComponentsColorBook.secondaryBackground.ignoresSafeArea()
 ///
 ///             VGroupBox(content: {
 ///                 Text("...")

@@ -22,7 +22,7 @@ public struct VRadioButtonUIModel {
 
     // MARK: Properties - Fill
     /// Fill colors.
-    public var fillColors: StateColors = .init(ColorBook.layer)
+    public var fillColors: StateColors = .init(ColorBook.background)
 
     // MARK: Properties - Border
     /// Radio button corner radius. Set to `1`.

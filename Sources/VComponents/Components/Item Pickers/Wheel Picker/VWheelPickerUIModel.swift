@@ -24,7 +24,7 @@ public struct VWheelPickerUIModel {
 
     // MARK: Properties - Background
     /// Background colors.
-    public var backgroundColors: StateColors = .init(ColorBook.layer)
+    public var backgroundColors: StateColors = .init(ColorBook.background)
 
     // MARK: Properties - Header
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.

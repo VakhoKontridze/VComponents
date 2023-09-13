@@ -414,7 +414,7 @@ struct GlobalUIModel {
         static let pagerTabViewSelectedTabIndicatorColor: Color = ColorBook.accentBlue
         static let pagerTabViewSelectedTabIndicatorAnimation: Animation? = .default
 
-        static let pagerTabViewBackgroundColor: Color = ColorBook.layer
+        static let pagerTabViewBackgroundColor: Color = ColorBook.background
 
         // MARK: Initializers
         private init() {}

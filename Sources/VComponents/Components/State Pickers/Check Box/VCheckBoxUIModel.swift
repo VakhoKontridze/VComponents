@@ -27,13 +27,13 @@ public struct VCheckBoxUIModel {
     // MARK: Properties - Fill
     /// Fill colors.
     public var fillColors: StateColors = .init(
-        off: ColorBook.layer,
+        off: ColorBook.background,
         on: ColorBook.controlLayerBlue,
         indeterminate: ColorBook.controlLayerBlue,
-        pressedOff: ColorBook.layer,
+        pressedOff: ColorBook.background,
         pressedOn: ColorBook.controlLayerBluePressed,
         pressedIndeterminate: ColorBook.controlLayerBluePressed,
-        disabled: ColorBook.layer
+        disabled: ColorBook.background
     )
 
     // MARK: Properties - Border

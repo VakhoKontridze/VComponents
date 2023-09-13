@@ -7,6 +7,8 @@ General
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 - `ColorBook` is renamed to `VComponentsColorBook` to avoid issues with name-shadowing
+- `ColorBook.canvas` is renamed to `ColorBook.secondaryBackground`
+- `ColorBook.layer` is renamed to `ColorBook.background`
 - `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
 VWrappedButton

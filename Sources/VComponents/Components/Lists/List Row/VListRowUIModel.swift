@@ -15,7 +15,7 @@ import VCore
 public struct VListRowUIModel {
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.layer
+    public var backgroundColor: Color = ColorBook.background
 
     // MARK: Properties - Content
     /// Margins. Set to `15` horizontal and `9` vertical.

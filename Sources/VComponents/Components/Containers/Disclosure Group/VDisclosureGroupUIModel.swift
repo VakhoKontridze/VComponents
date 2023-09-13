@@ -43,7 +43,7 @@ public struct VDisclosureGroupUIModel {
     }
 
     /// Background color.
-    public var backgroundColor: Color = ColorBook.layer
+    public var backgroundColor: Color = ColorBook.background
 
     // MARK: Properties - Header
     /// Header margins. Set to `15` horizontal and `10` vertical.
