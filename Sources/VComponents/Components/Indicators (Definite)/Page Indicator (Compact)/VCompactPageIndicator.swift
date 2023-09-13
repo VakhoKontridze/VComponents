@@ -179,6 +179,34 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         })
     }
 
+    private func dotContentView(i: Int) -> some View {
+        let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(i: i)
+
+        return Group(content: {
+            switch dotContent {
+            case .empty:
+                ZStack(content: {
+                    RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
+                        .foregroundColor(uiModel.dotColors.value(for: internalState))
+
+                    if uiModel.dotBorderWidths.value(for: internalState) > 0 {
+                        RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
+                            .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
+                            .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
+                    }
+                })
+
+            case .content(let content):
+                content(internalState, i)
+            }
+        })
+        .frame(
+            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
+            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
+        )
+        .scaleEffect(scale(at: i))
+    }
+
     private var compactBodyFallback: some View {
         frameFallback
             .applyIf(
@@ -224,34 +252,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             .reversedArray(if: uiModel.direction.isReversed)
 
         return ForEach(range, id: \.self, content: dotContentView)
-    }
-    
-    private func dotContentView(i: Int) -> some View {
-        let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(i: i)
-
-        return Group(content: {
-            switch dotContent {
-            case .empty:
-                ZStack(content: {
-                    RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                        .foregroundColor(uiModel.dotColors.value(for: internalState))
-                    
-                    if uiModel.dotBorderWidths.value(for: internalState) > 0 {
-                        RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                            .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
-                            .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
-                    }
-                })
-                
-            case .content(let content):
-                content(internalState, i)
-            }
-        })
-        .frame(
-            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
-            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
-        )
-        .scaleEffect(scale(at: i))
     }
     
     // MARK: Widths
