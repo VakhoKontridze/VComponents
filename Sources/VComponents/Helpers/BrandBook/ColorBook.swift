@@ -8,8 +8,11 @@
 import SwiftUI
 
 // MARK: - Color Book
+typealias ColorBook = VComponentsColorBook
+
+// MARK: - VComponents Color Book
 /// Contains fundamental colors used throughout the library.
-public struct ColorBook {
+public struct VComponentsColorBook {
     // MARK: Properties - Basic
     /// Black color. Set to `(0, 0, 0)`.
     public static let black: Color = .init(module: "Black")
