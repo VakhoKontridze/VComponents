@@ -430,6 +430,7 @@ Versions with different majors are not directly compatible. When a new major is 
     </td>
     <td>5.x.x - 5.x.x</td>
     <td>
+        New SDK.<br>
         API changes.<br>
     </td>
   </tr>
@@ -465,7 +466,7 @@ Versions with different majors are not directly compatible. When a new major is 
     <td>iOS 16.0</td>
     <td>4.1.0 - 4.x.x</td>
     <td>
-        New SwiftUI API.<br>
+        New SDK.<br>
         API changes.
     </td>
   </tr>
@@ -479,7 +480,7 @@ Versions with different majors are not directly compatible. When a new major is 
     <td>iOS 15.0</td>
     <td>3.2.0 - 3.x.x</td>
     <td>
-        New SwiftUI API.<br>
+        New SDK.<br>
         API changes.<br>
         SPM support.
     </td>
