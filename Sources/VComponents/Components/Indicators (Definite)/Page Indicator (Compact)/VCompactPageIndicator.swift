@@ -147,58 +147,82 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             }
         })
     }
-    
-    // There's something weird going on with animations here.
-    // Ideally, I would combine `dotsHorizontal` and `dotsVertical` into one property,
-    // and get rid of `dots()`, since `ForEach` would be declared internally.
-    // There, I would rely on `AnyLayout`, or at least, `HVStack` to conditionally change direction.
-    // But unlike `VPageIndicator`, they don't work. Animation breaks and some dots disappear.
-    // Even wrapping them with if-else with `ViewBuilder`, or `Group` doesn't help it.
-    // The only solution I found is to write conditional outside body that defines `HStack`/`VStack`.
-    private var compactBody: some View { // TODO: iOS 16.0 - Refactor with `AnyLayout`
-        frame
+
+    private var compactBody: some View {
+        let size: CGSize = .init(
+            width: visibleWidth,
+            height: uiModel.dotHeight
+        )
+            .withReversedDimensions(uiModel.direction.isVertical)
+
+        let range: [Int] = (0..<total)
+            .reversedArray(if: uiModel.direction.isReversed)
+
+        return Group(content: {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                uiModel.direction
+                    .stackLayout(spacing: uiModel.spacing)
+                    .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
+                    .frame(size: size)
+                    .offset(
+                        x: uiModel.direction.isHorizontal ? offset : 0,
+                        y: uiModel.direction.isHorizontal ? 0 : offset
+                    )
+                    .clipped()
+                    .applyIf(uiModel.appliesTransitionAnimation, transform: {
+                        $0.animation(uiModel.transitionAnimation, value: current)
+                    })
+
+            } else {
+                compactBodyFallback
+            }
+        })
+    }
+
+    private var compactBodyFallback: some View {
+        frameFallback
             .applyIf(
                 uiModel.direction.isHorizontal,
-                ifTransform: { $0.overlay(content: { dotsHorizontal }) },
-                elseTransform: { $0.overlay(content: { dotsVertical }) }
+                ifTransform: { $0.overlay(content: { dotsHorizontalFallback }) },
+                elseTransform: { $0.overlay(content: { dotsVerticalFallback }) }
             )
             .clipped()
             .applyIf(uiModel.appliesTransitionAnimation, transform: {
                 $0.animation(uiModel.transitionAnimation, value: current)
             })
     }
-    
-    private var frame: some View {
+
+    private var frameFallback: some View {
         let size: CGSize = .init(
             width: visibleWidth,
             height: uiModel.dotHeight
         )
             .withReversedDimensions(uiModel.direction.isVertical)
-        
+
         return Color.clear
             .frame(size: size)
     }
-    
-    private var dotsHorizontal: some View {
+
+    private var dotsHorizontalFallback: some View {
         HStack(
             spacing: uiModel.spacing,
-            content: dots
+            content: dotsFallback
         )
         .offset(x: offset)
     }
-    
-    private var dotsVertical: some View {
+
+    private var dotsVerticalFallback: some View {
         VStack(
             spacing: uiModel.spacing,
-            content: dots
+            content: dotsFallback
         )
         .offset(y: offset)
     }
-    
-    private func dots() -> some View {
+
+    private func dotsFallback() -> some View {
         let range: [Int] = (0..<total)
             .reversedArray(if: uiModel.direction.isReversed)
-        
+
         return ForEach(range, id: \.self, content: dotContentView)
     }
     

@@ -91,8 +91,6 @@ public struct VCompactPageIndicatorUIModel {
     // MARK: Properties - Transition
     /// Indicates if `transition` animation is applied. Set to `true`.
     ///
-    /// Changing this property conditionally will cause view state to be reset.
-    ///
     /// If  animation is set to `nil`, a `nil` animation is still applied.
     /// If this property is set to `false`, then no animation is applied.
     ///
