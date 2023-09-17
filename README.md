@@ -37,13 +37,6 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VRectangularToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a4d3dee1-7966-4b4c-ab5e-dac9a8cb3cd1">
 <p/>
 
-#### Item Pickers
-
-<p>
-    <img tag="VSegmentedPicker" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780284-aaacf102-e492-4146-8aa0-ddc4e8e47650.png">
-    <img tag="VWheelPicker" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780344-9c49918b-5ef8-4e26-940e-5fbcef3ea657.png">
-<p/>
-
 #### Value Pickers
 
 <p>

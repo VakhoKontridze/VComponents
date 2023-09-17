@@ -62,13 +62,11 @@ VRectangularToggleButton
 
 VSegmentedPicker
 
-- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
-- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
+- `VSegmentedPicker` is removed
 
 VWheelPicker
 
-- `headerTitleTextLineType` is changed to `multiline` with `leading` alignment and `1...2` lines
-- `headerAndFooterMarginHorizontal` is split to `headerMarginHorizontal` and `footerMarginHorizontal`
+- `VWheelPicker` is removed
 
 VStepper
 
