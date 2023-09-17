@@ -31,8 +31,7 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `View.onTouchInteraction(perform:)` support.
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VToggleUIModel

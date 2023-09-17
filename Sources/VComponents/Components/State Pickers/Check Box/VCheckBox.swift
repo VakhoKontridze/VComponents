@@ -31,8 +31,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(tvOS, unavailable) // No `SwiftUIGestureBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIGestureBaseButton` support
 public struct VCheckBox<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VCheckBoxUIModel

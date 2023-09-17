@@ -40,8 +40,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(tvOS, unavailable) // No `PlainDisclosureGroup` support
+@available(watchOS, unavailable) // No `PlainDisclosureGroup` support
 public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,

@@ -38,8 +38,8 @@ import VCore
 ///     }
 ///
 /// Unlike native menu, menu doesn't reverse actions.
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(tvOS, unavailable) // No `Menu` support
+@available(watchOS, unavailable) // No `Menu` support
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VMenuUIModel
