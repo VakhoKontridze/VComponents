@@ -393,7 +393,7 @@ struct VStretchedIndicatorStaticPagerTabView_Previews: PreviewProvider {
                 )
                 .applyModifier({
 #if canImport(UIKit)
-                    $0.cornerRadius(20, uiCorners: .topCorners)
+                    $0.cornerRadius(20, corners: .topCorners)
 #else
                     $0
 #endif

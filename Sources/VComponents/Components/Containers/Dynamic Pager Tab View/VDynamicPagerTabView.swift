@@ -430,7 +430,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                 )
                 .applyModifier({
 #if canImport(UIKit)
-                    $0.cornerRadius(20, uiCorners: .topCorners)
+                    $0.cornerRadius(20, corners: .topCorners)
 #else
                     $0
 #endif
