@@ -413,7 +413,7 @@ Versions with different majors are not directly compatible. When a new major is 
     </td>
     <td>2023 XX XX</td>
     <td>
-        5.8
+        5.9
     </td>
     <td>
         iOS 15.0<br>
