@@ -84,7 +84,7 @@ public struct VWrappedButton<Label>: View where Label: View {
                 buttonLabel(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
+                    .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { background(internalState: internalState) }) // Has own rounding
                     .overlay(content: { border(internalState: internalState) }) // Has own rounding
                     .padding(uiModel.hitBox)

@@ -99,7 +99,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
                 toggleLabel
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
+                    .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { background }) // Has own rounding
                     .overlay(content: { border }) // Has own rounding
                     .padding(uiModel.hitBox)

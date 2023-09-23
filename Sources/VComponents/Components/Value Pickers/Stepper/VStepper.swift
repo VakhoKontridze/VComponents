@@ -87,7 +87,7 @@ public struct VStepper: View {
             buttons
         })
         .frame(size: uiModel.size)
-        .cornerRadius(uiModel.cornerRadius)
+        .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius))
     }
     
     private var background: some View {

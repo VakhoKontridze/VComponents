@@ -107,7 +107,7 @@ struct VToast: View {
                         )
                 }
             })
-            .cornerRadius(cornerRadius) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
             .background(content: { background })
             .getSize({ height = $0.height })
             .padding(.horizontal, uiModel.widthType.marginHorizontal)

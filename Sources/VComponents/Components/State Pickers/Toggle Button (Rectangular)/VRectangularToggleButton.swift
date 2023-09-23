@@ -98,7 +98,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
                 toggleLabel
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(size: uiModel.size)
-                    .cornerRadius(uiModel.cornerRadius) // Prevents large content from overflowing
+                    .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { background }) // Has own rounding
                     .overlay(content: { border }) // Has own rounding
                     .padding(uiModel.hitBox)

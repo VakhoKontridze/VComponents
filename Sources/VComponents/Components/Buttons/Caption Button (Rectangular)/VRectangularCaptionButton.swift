@@ -114,7 +114,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                 .opacity(uiModel.iconOpacities.value(for: internalState))
         })
         .frame(size: uiModel.rectangleSize)
-        .cornerRadius(uiModel.rectangleCornerRadius) // Prevents large content from overflowing
+        .clipShape(RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)) // Prevents large content from overflowing
         .background(content: { rectangleBackground(internalState: internalState) }) // Has own rounding
         .overlay(content: { rectangleBorder(internalState: internalState) }) // Has own rounding
     }
