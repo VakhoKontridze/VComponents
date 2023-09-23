@@ -53,9 +53,6 @@ struct VBottomSheet<Content>: View
 
     @State private var offsetBeforeDrag: CGFloat?
 
-    @State private var currentDragValue: DragGesture.Value?
-    @State private var previousDragValue: DragGesture.Value?
-
     // MARK: Initializers
     init(
         uiModel: VBottomSheetUIModel,
@@ -247,9 +244,6 @@ struct VBottomSheet<Content>: View
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
         guard let offsetBeforeDrag else { fatalError() }
         
-        previousDragValue = currentDragValue
-        currentDragValue = dragValue
-        
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
         
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
@@ -273,14 +267,10 @@ struct VBottomSheet<Content>: View
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
-        defer {
-            offsetBeforeDrag = nil
-            previousDragValue = nil
-            currentDragValue = nil
-        }
-        
+        defer { offsetBeforeDrag = nil }
+
         let velocityExceedsNextAreaSnapThreshold: Bool =
-            abs(dragValue.velocity(inRelationTo: previousDragValue).height) >=
+            abs(dragValue.velocity.height) >=
             abs(uiModel.velocityToSnapToNextHeight)
         
         switch velocityExceedsNextAreaSnapThreshold {
@@ -302,7 +292,7 @@ struct VBottomSheet<Content>: View
                 containerHeight: containerSize.height,
                 heights: currentHeightsObject,
                 offset: offset,
-                velocity: dragValue.velocity(inRelationTo: previousDragValue).height
+                velocity: dragValue.velocity.height
             ))
         }
     }
