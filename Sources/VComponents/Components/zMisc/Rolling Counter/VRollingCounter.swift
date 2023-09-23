@@ -151,40 +151,65 @@ public struct VRollingCounter: View {
             numberFormatter: numberFormatter
         )
 
-        withAnimation(uiModel.rollingAnimation?.toSwiftUIAnimation, {
-            components = newComponents
-        })
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                uiModel.highlightAnimation?.toSwiftUIAnimation,
+                {
+                    components = newComponents
 
-        withAnimation(uiModel.highlightAnimation?.toSwiftUIAnimation, {
-            highlightedColor = {
-                if newValue > oldValue {
-                    return uiModel.incrementHighlightColor
-                } else if newValue < oldValue {
-                    return uiModel.decrementHighlightColor
-                } else {
-                    return .clear
+                    highlightedColor = {
+                        if newValue > oldValue {
+                            return uiModel.incrementHighlightColor
+                        } else if newValue < oldValue {
+                            return uiModel.decrementHighlightColor
+                        } else {
+                            return .clear
+                        }
+                    }()
+                },
+                completion: {
+                    withAnimation(
+                        uiModel.dehighlightAnimation?.toSwiftUIAnimation,
+                        {
+                            highlightedColor = .clear
+
+                            for i in components.indices {
+                                components[i].isHighlighted = false
+                            }
+                        }
+                    )
                 }
-            }()
-        })
+            )
 
-        DispatchQueue.main.asyncAfter(
-            deadline:
-                .now() +
-                max(
-                    (uiModel.rollingAnimation?.duration ?? 0),
-                    (uiModel.highlightAnimation?.duration ?? 0)
-                )
-            ,
-            execute: {
-                withAnimation(uiModel.dehighlightAnimation?.toSwiftUIAnimation, {
-                    highlightedColor = .clear
+        } else {
+            withBasicAnimation(
+                uiModel.highlightAnimation,
+                body: {
+                    components = newComponents
 
-                    for i in components.indices {
-                        components[i].isHighlighted = false
-                    }
-                })
-            }
-        )
+                    highlightedColor = {
+                        if newValue > oldValue {
+                            return uiModel.incrementHighlightColor
+                        } else if newValue < oldValue {
+                            return uiModel.decrementHighlightColor
+                        } else {
+                            return .clear
+                        }
+                    }()
+                },
+                completion: {
+                    withAnimation(
+                        uiModel.dehighlightAnimation?.toSwiftUIAnimation, {
+                            highlightedColor = .clear
+
+                            for i in components.indices {
+                                components[i].isHighlighted = false
+                            }
+                        }
+                    )
+                }
+            )
+        }
     }
 
     // MARK: Helpers

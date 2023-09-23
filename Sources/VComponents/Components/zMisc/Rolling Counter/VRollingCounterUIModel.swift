@@ -123,10 +123,7 @@ public struct VRollingCounterUIModel {
     public var decrementHighlightColor: Color? = ColorBook.accentRed
 
     // MARK: Properties - Transition
-    /// Rolling animation. Set to `easeOut` with duration `0.25`.
-    public var rollingAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.25)
-
-    /// Highlight animation. Set to `easeOut` with duration `0.25`.
+    /// Highlight and rolling animation. Set to `easeOut` with duration `0.25`.
     public var highlightAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.25)
 
     /// Dehighlight animation. Set to `easeOut` with duration `0.25`.

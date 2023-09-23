@@ -123,35 +123,68 @@ struct VModal<Content>: View
     
     // MARK: Animations
     private func animateIn() {
-        withBasicAnimation(
-            uiModel.appearAnimation,
-            body: { isInternallyPresented = true },
-            completion: {
-                DispatchQueue.main.async(execute: { presentHandler?() })
-            }
-        )
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                uiModel.appearAnimation?.toSwiftUIAnimation,
+                { isInternallyPresented = true },
+                completion: { presentHandler?() }
+            )
+
+        } else {
+            withBasicAnimation(
+                uiModel.appearAnimation,
+                body: { isInternallyPresented = true },
+                completion: {
+                    DispatchQueue.main.async(execute: { presentHandler?() })
+                }
+            )
+        }
     }
     
     private func animateOut() {
-        withBasicAnimation(
-            uiModel.disappearAnimation,
-            body: { isInternallyPresented = false },
-            completion: {
-                presentationMode.dismiss()
-                DispatchQueue.main.async(execute: { dismissHandler?() })
-            }
-        )
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                uiModel.disappearAnimation?.toSwiftUIAnimation,
+                { isInternallyPresented = false },
+                completion: {
+                    presentationMode.dismiss()
+                    dismissHandler?()
+                }
+            )
+
+        } else {
+            withBasicAnimation(
+                uiModel.disappearAnimation,
+                body: { isInternallyPresented = false },
+                completion: {
+                    presentationMode.dismiss()
+                    DispatchQueue.main.async(execute: { dismissHandler?() })
+                }
+            )
+        }
     }
     
     private func animateOutFromExternalDismiss() {
-        withBasicAnimation(
-            uiModel.disappearAnimation,
-            body: { isInternallyPresented = false },
-            completion: {
-                presentationMode.externalDismissCompletion()
-                DispatchQueue.main.async(execute: { dismissHandler?() })
-            }
-        )
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                uiModel.disappearAnimation?.toSwiftUIAnimation,
+                { isInternallyPresented = false },
+                completion: {
+                    presentationMode.externalDismissCompletion()
+                    dismissHandler?()
+                }
+            )
+
+        } else {
+            withBasicAnimation(
+                uiModel.disappearAnimation,
+                body: { isInternallyPresented = false },
+                completion: {
+                    presentationMode.externalDismissCompletion()
+                    DispatchQueue.main.async(execute: { dismissHandler?() })
+                }
+            )
+        }
     }
 }
 
