@@ -112,7 +112,7 @@ public struct VTextField: View {
     @Binding private var text: String
 
     // MARK: Properties - Flags
-    @State private var textIsNonEmpty: Bool = false
+    @State private var clearButtonCanBecomeVisible: Bool = false
     @State private var secureFieldIsVisible: Bool = false
     
     // MARK: Initializers
@@ -133,9 +133,7 @@ public struct VTextField: View {
     
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return VStack(
+        VStack(
             alignment: .leading,
             spacing: uiModel.headerTextFieldAndFooterSpacing,
             content: {
@@ -144,6 +142,11 @@ public struct VTextField: View {
                 footer
             }
         )
+        .onChange(of: uiModel.contentType, perform: {
+            if !$0.isSecure {
+                secureFieldIsVisible = false
+            }
+        })
     }
     
     @ViewBuilder private var header: some View {
@@ -220,8 +223,21 @@ public struct VTextField: View {
         .textFieldStyle(.plain)
         
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
-        
-        .onChange(of: text, perform: textChanged)
+
+        .applyModifier({
+            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                $0
+                    .onChange(
+                        of: text,
+                        initial: true,
+                        { (_, newValue) in setClearButtonVisibility(newValue) }
+                    )
+            } else {
+                $0
+                    .onChange(of: text, perform: setClearButtonVisibility)
+                    .onAppear(perform: { setClearButtonVisibility(text) })
+            }
+        })
 
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
@@ -257,7 +273,7 @@ public struct VTextField: View {
             !uiModel.contentType.isSecure &&
             uiModel.hasClearButton &&
             internalState == .focused &&
-            textIsNonEmpty
+            clearButtonCanBecomeVisible
         
         return VRectangularButton(
             uiModel: uiModel.clearButtonSubUIModel,
@@ -278,17 +294,6 @@ public struct VTextField: View {
         }
     }
     
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            textChanged(text)
-        })
-        
-        DispatchQueue.main.async(execute: {
-            if secureFieldIsVisible && !uiModel.contentType.isSecure { secureFieldIsVisible = false }
-        })
-    }
-    
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
@@ -299,13 +304,14 @@ public struct VTextField: View {
     }
     
     // MARK: Actions
-    private func textChanged(_ text: String) {
-        withAnimation(uiModel.clearButtonAppearDisappearAnimation, { textIsNonEmpty = !text.isEmpty })
-    }
-    
     private func didTapClearButton() {
         text = ""
-        withAnimation(uiModel.clearButtonAppearDisappearAnimation, { textIsNonEmpty = false })
+    }
+
+    private func setClearButtonVisibility(_ text: String) {
+        withAnimation(uiModel.clearButtonAppearDisappearAnimation, {
+            clearButtonCanBecomeVisible = !text.isEmpty
+        })
     }
 }
 
@@ -321,8 +327,8 @@ struct VTextField_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
-    private static var contentType: VTextFieldUIModel.ContentType { .search }
-    
+    private static var contentType: VTextFieldUIModel.ContentType { .standard }
+
     // Previews
     static var previews: some View {
         Group(content: {

@@ -280,7 +280,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                     title: "Disabled",
                     content: {
                         VDisclosureGroup(
-                            uiModel: { // Needed for some reason
+                            uiModel: {
                                 var uiModel: VDisclosureGroupUIModel = .init()
                                 uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
                                 uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.disabled

@@ -70,9 +70,7 @@ struct VBottomSheet<Content>: View
     
     // MARK: Body
     var body: some View {
-        syncOffsetWithProperStateIfNeeded()
-
-        return ZStack(alignment: .top, content: {
+        ZStack(alignment: .top, content: {
             dimmingView
             bottomSheet
         })
@@ -307,12 +305,6 @@ struct VBottomSheet<Content>: View
     }
     
     // MARK: Orientation
-    private func syncOffsetWithProperStateIfNeeded() {
-        DispatchQueue.main.async(execute: {
-            if _offset == nil { resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject) }
-        })
-    }
-
     private func resetHeightFromEnvironmentOrUIModelChange(
         from heights: VBottomSheetUIModel.Heights
     ) {
