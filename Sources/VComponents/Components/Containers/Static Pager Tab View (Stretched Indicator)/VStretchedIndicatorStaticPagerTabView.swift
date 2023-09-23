@@ -217,7 +217,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                 Text(title(element))
                     .lineLimit(1)
                     .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
-                    .foregroundColor(uiModel.tabItemTextColors.value(for: tabItemInternalState))
+                    .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
                     .font(uiModel.tabItemTextFont)
 
             case .label(let label):
@@ -245,7 +245,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
     private var tabIndicatorTrack: some View {
         Rectangle()
             .frame(height: uiModel.tabIndicatorTrackHeight)
-            .foregroundColor(uiModel.tabIndicatorTrackColor)
+            .foregroundStyle(uiModel.tabIndicatorTrackColor)
     }
 
     private var selectedTabIndicator: some View {
@@ -255,7 +255,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
             .offset(x: selectedTabIndicatorOffset)
 
-            .foregroundColor(uiModel.selectedTabIndicatorColor)
+            .foregroundStyle(uiModel.selectedTabIndicatorColor)
 
             .animation(enablesSelectedTabIndicatorAnimations ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorWidth)
             .animation(enablesSelectedTabIndicatorAnimations ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorOffset)
@@ -422,7 +422,7 @@ struct VStretchedIndicatorStaticPagerTabView_Previews: PreviewProvider {
                     tabItemTitle: { $0.tabItemTitle },
                     content: {
                         Text($0.tabItemTitle)
-                            .foregroundColor($0.color)
+                            .foregroundStyle($0.color)
                     }
                 )
                 .padding()

@@ -55,7 +55,7 @@ import VCore
 ///                     Circle()
 ///                         .padding(3)
 ///                 })
-///                 .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+///                 .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }
 ///         )
 ///         .padding()
@@ -187,12 +187,12 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             case .empty:
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                        .foregroundColor(uiModel.dotColors.value(for: internalState))
+                        .foregroundStyle(uiModel.dotColors.value(for: internalState))
 
                     if uiModel.dotBorderWidths.value(for: internalState) > 0 {
                         RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                             .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
-                            .foregroundColor(uiModel.dotBorderColors.value(for: internalState))
+                            .foregroundStyle(uiModel.dotBorderColors.value(for: internalState))
                     }
                 })
 
@@ -558,7 +558,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                             Circle()
                                 .padding(3)
                         })
-                        .foregroundColor(pageIndicatorUIModel.dotColors.value(for: internalState))
+                        .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
                     }
                 )
                 .onReceiveOfTimerIncrement($current, to: total-1)

@@ -108,7 +108,7 @@ public struct VToggle<Label>: View where Label: View {
                                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                                 .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                                 .font(uiModel.titleTextFont)
                         }
                     )
@@ -142,11 +142,11 @@ public struct VToggle<Label>: View where Label: View {
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .foregroundColor(uiModel.fillColors.value(for: internalState))
+                        .foregroundStyle(uiModel.fillColors.value(for: internalState))
                     
                     Circle()
                         .frame(dimension: uiModel.thumbDimension)
-                        .foregroundColor(uiModel.thumbColors.value(for: internalState))
+                        .foregroundStyle(uiModel.thumbColors.value(for: internalState))
                         .offset(x: thumbOffset)
                 })
                 .frame(size: uiModel.size)
@@ -161,7 +161,7 @@ public struct VToggle<Label>: View where Label: View {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(width: uiModel.toggleAndLabelSpacing)
-                    .foregroundColor(.clear)
+                    .foregroundStyle(.clear)
             }
         )
         .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`

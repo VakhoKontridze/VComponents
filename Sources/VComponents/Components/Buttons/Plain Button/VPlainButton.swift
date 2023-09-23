@@ -132,7 +132,7 @@ public struct VPlainButton<Label>: View where Label: View {
         Text(title)
             .lineLimit(1)
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
     }
     
@@ -144,7 +144,7 @@ public struct VPlainButton<Label>: View where Label: View {
             .resizable()
             .scaledToFit()
             .frame(size: uiModel.iconSize)
-            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .foregroundStyle(uiModel.iconColors.value(for: internalState))
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
@@ -267,7 +267,7 @@ struct VPlainButton_Previews: PreviewProvider {
                                 action: {}
                             )
                             .buttonStyle(.plain)
-                            .foregroundColor(ColorBook.accentBlue)
+                            .foregroundStyle(ColorBook.accentBlue)
                         }
                     )
                     
@@ -283,7 +283,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             .disabled(true)
                             .applyModifier({
 #if os(watchOS)
-                                $0.foregroundColor(ColorBook.controlLayerBlue)
+                                $0.foregroundStyle(ColorBook.controlLayerBlue)
 #else
                                 $0
 #endif

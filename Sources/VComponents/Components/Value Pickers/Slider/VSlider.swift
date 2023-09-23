@@ -110,7 +110,7 @@ public struct VSlider: View {
     
     private var track: some View {
         Rectangle()
-            .foregroundColor(uiModel.trackColors.value(for: internalState))
+            .foregroundStyle(uiModel.trackColors.value(for: internalState))
     }
     
     private var progress: some View {
@@ -120,7 +120,7 @@ public struct VSlider: View {
                 height: uiModel.direction.isHorizontal ? nil : progressWidth
             )
             .cornerRadius(uiModel.cornerRadius, corners: uiModel.progressViewRoundedCorners)
-            .foregroundColor(uiModel.progressColors.value(for: internalState))
+            .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
     @ViewBuilder private var border: some View {
@@ -165,7 +165,7 @@ public struct VSlider: View {
 
     private var thumbBackground: some View {
         RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-            .foregroundColor(uiModel.thumbColors.value(for: internalState))
+            .foregroundStyle(uiModel.thumbColors.value(for: internalState))
             .shadow(
                 color: uiModel.thumbShadowColors.value(for: internalState),
                 radius: uiModel.thumbShadowRadius,

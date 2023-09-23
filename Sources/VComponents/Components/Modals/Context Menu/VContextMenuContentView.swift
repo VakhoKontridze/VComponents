@@ -99,7 +99,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                                     .frame(width: 300, height: 100)
 
                                 Text("Selection: \(selection.stringRepresentation)")
-                                    .foregroundColor(ColorBook.primaryWhite)
+                                    .foregroundStyle(ColorBook.primaryWhite)
                             })
                         }
                     )

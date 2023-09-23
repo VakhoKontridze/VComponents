@@ -117,14 +117,14 @@ public struct VRangeSlider: View {
     
     private var track: some View {
         Rectangle()
-            .foregroundColor( uiModel.trackColors.value(for: internalState))
+            .foregroundStyle( uiModel.trackColors.value(for: internalState))
     }
     
     private var progress: some View {
         Rectangle()
             .padding(uiModel.direction.edgeSet, progressWidth(.low))
             .padding(uiModel.direction.reversed().edgeSet, progressWidth(.high))
-            .foregroundColor(uiModel.progressColors.value(for: internalState))
+            .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
     @ViewBuilder private var border: some View {
@@ -162,7 +162,7 @@ public struct VRangeSlider: View {
 
     private var thumbBackground: some View {
         RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-            .foregroundColor(uiModel.thumbColors.value(for: internalState))
+            .foregroundStyle(uiModel.thumbColors.value(for: internalState))
             .shadow(
                 color: uiModel.thumbShadowColors.value(for: internalState),
                 radius: uiModel.thumbShadowRadius,

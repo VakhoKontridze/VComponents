@@ -92,7 +92,7 @@ public struct VStepper: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
     }
     
     private var buttons: some View {
@@ -110,13 +110,13 @@ public struct VStepper: View {
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .foregroundColor(uiModel.buttonBackgroundColors.value(for: buttonInternalState(button)))
+                        .foregroundStyle(uiModel.buttonBackgroundColors.value(for: buttonInternalState(button)))
 
                     buttonIcon(button)
                         .resizable()
                         .scaledToFit()
                         .frame(dimension: uiModel.buttonIconDimension)
-                        .foregroundColor(uiModel.buttonIconColors.value(for: buttonInternalState(button)))
+                        .foregroundStyle(uiModel.buttonIconColors.value(for: buttonInternalState(button)))
                 })
                 .frame(maxWidth: .infinity)
             }
@@ -127,7 +127,7 @@ public struct VStepper: View {
     private var divider: some View {
         Rectangle()
             .frame(size: uiModel.dividerSize)
-            .foregroundColor(uiModel.dividerColors.value(for: internalState))
+            .foregroundStyle(uiModel.dividerColors.value(for: internalState))
     }
 
     // MARK: Button Icon

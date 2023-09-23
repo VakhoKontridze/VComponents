@@ -109,7 +109,7 @@ public struct VCheckBox<Label>: View where Label: View {
                                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                                 .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                                 .font(uiModel.titleTextFont)
                         }
                     )
@@ -143,7 +143,7 @@ public struct VCheckBox<Label>: View where Label: View {
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .foregroundColor(uiModel.fillColors.value(for: internalState))
+                        .foregroundStyle(uiModel.fillColors.value(for: internalState))
                     
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
@@ -153,7 +153,7 @@ public struct VCheckBox<Label>: View where Label: View {
                             .resizable()
                             .scaledToFit()
                             .frame(dimension: uiModel.checkmarkIconDimension)
-                            .foregroundColor(uiModel.checkmarkColors.value(for: internalState))
+                            .foregroundStyle(uiModel.checkmarkColors.value(for: internalState))
                     }
                 })
                 .frame(dimension: uiModel.dimension)
@@ -170,7 +170,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(width: uiModel.checkBoxAndLabelSpacing)
-                    .foregroundColor(.clear)
+                    .foregroundStyle(.clear)
             }
         )
         .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`

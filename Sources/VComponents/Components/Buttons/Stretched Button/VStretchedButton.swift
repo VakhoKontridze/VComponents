@@ -123,7 +123,7 @@ public struct VStretchedButton<Label>: View where Label: View {
         Text(title)
             .lineLimit(1)
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
             .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
@@ -136,7 +136,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             .resizable()
             .scaledToFit()
             .frame(size: uiModel.iconSize)
-            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .foregroundStyle(uiModel.iconColors.value(for: internalState))
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
@@ -145,7 +145,7 @@ public struct VStretchedButton<Label>: View where Label: View {
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
-            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
             .shadow(
                 color: uiModel.shadowColors.value(for: internalState),
                 radius: uiModel.shadowRadius,

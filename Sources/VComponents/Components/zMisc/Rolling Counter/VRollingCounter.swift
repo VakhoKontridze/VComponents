@@ -102,7 +102,7 @@ public struct VRollingCounter: View {
         switch component {
         case let digit as VRollingCounterDigitComponent:
             Text(digit.stringRepresentation)
-                .foregroundColor(textColor(digit.isHighlighted, defaultValue: uiModel.digitTextColor))
+                .foregroundStyle(textColor(digit.isHighlighted, defaultValue: uiModel.digitTextColor))
                 .font(uiModel.digitTextFont)
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
@@ -110,7 +110,7 @@ public struct VRollingCounter: View {
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
-                .foregroundColor(textColor(fractionDigit.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
+                .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.fractionDigitTextFont)
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
@@ -118,7 +118,7 @@ public struct VRollingCounter: View {
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
-                .foregroundColor(textColor(groupingSeparator.isHighlighted, defaultValue: uiModel.groupingSeparatorTextColor))
+                .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: uiModel.groupingSeparatorTextColor))
                 .font(uiModel.groupingSeparatorTextFont)
                 .padding(uiModel.groupingSeparatorTextMargins)
                 .offset(y: uiModel.groupingSeparatorTextOffsetY)
@@ -126,7 +126,7 @@ public struct VRollingCounter: View {
 
         case let decimalSeparator as VRollingCounterDecimalSeparatorComponent:
             Text(decimalSeparator.stringRepresentation)
-                .foregroundColor(textColor(decimalSeparator.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
+                .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.decimalSeparatorTextFont)
                 .padding(uiModel.decimalSeparatorTextMargins)
                 .offset(y: uiModel.decimalSeparatorTextOffsetY)
@@ -262,7 +262,7 @@ struct VRollingCounter_Previews: PreviewProvider {
                     .padding(.top, 20)
                     .applyModifier({
 #if os(watchOS)
-                        $0.foregroundColor(ColorBook.accentBlue)
+                        $0.foregroundStyle(ColorBook.accentBlue)
 #else
                         $0
 #endif

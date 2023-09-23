@@ -124,7 +124,7 @@ public struct VTextView: View {
             Text(headerTitle)
                 .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
 
                 .padding(.horizontal, uiModel.headerMarginHorizontal)
@@ -136,7 +136,7 @@ public struct VTextView: View {
             Text(footerTitle)
                 .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
 
                 .padding(.horizontal, uiModel.footerMarginHorizontal)
@@ -154,7 +154,7 @@ public struct VTextView: View {
 
     private var background: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
     }
 
     @ViewBuilder private var backgroundBorder: some View {
@@ -169,7 +169,7 @@ public struct VTextView: View {
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState))
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
             },
             axis: .vertical,
@@ -181,7 +181,7 @@ public struct VTextView: View {
 
         .multilineTextAlignment(uiModel.textLineType.textAlignment ?? .leading)
         .lineLimit(type: uiModel.textLineType.textLineLimitType)
-        .foregroundColor(uiModel.textColors.value(for: internalState))
+        .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
         .applyModifier({
 #if os(iOS)

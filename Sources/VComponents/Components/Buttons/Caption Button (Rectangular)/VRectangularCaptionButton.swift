@@ -110,7 +110,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                 .frame(size: uiModel.iconSize)
                 .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
                 .padding(uiModel.iconMargins)
-                .foregroundColor(uiModel.iconColors.value(for: internalState))
+                .foregroundStyle(uiModel.iconColors.value(for: internalState))
                 .opacity(uiModel.iconOpacities.value(for: internalState))
         })
         .frame(size: uiModel.rectangleSize)
@@ -124,7 +124,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
-            .foregroundColor(uiModel.rectangleColors.value(for: internalState))
+            .foregroundStyle(uiModel.rectangleColors.value(for: internalState))
             .shadow(
                 color: uiModel.shadowColors.value(for: internalState),
                 radius: uiModel.shadowRadius,
@@ -172,7 +172,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .multilineTextAlignment(uiModel.titleCaptionTextLineType.textAlignment ?? .leading)
             .lineLimit(type: uiModel.titleCaptionTextLineType.textLineLimitType)
             .minimumScaleFactor(uiModel.titleCaptionTextMinimumScaleFactor)
-            .foregroundColor(uiModel.titleCaptionTextColors.value(for: internalState))
+            .foregroundStyle(uiModel.titleCaptionTextColors.value(for: internalState))
             .font(uiModel.titleCaptionTextFont)
     }
     
@@ -184,7 +184,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .resizable()
             .scaledToFit()
             .frame(size: uiModel.iconCaptionSize)
-            .foregroundColor(uiModel.iconCaptionColors.value(for: internalState))
+            .foregroundStyle(uiModel.iconCaptionColors.value(for: internalState))
             .opacity(uiModel.iconCaptionOpacities.value(for: internalState))
     }
     

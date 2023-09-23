@@ -27,7 +27,7 @@ struct PreviewSectionHeader: View {
                 .applyModifier({
 #if os(watchOS)
                     $0
-                        .foregroundColor(ColorBook.primary)
+                        .foregroundStyle(ColorBook.primary)
 #else
                     $0
 #endif

@@ -105,7 +105,7 @@ public struct VCodeEntryView: View {
             .offset(x: uiModel.characterBackgroundSize.width/2, y: -uiModel.characterBackgroundSize.height/4)
 
             // Makes text invisible
-            .foregroundColor(.clear)
+            .foregroundStyle(.clear)
             // Makes highlighting invisible. Although, invisible highlight still maintains gray color,
             // it is only ever an issue on previews and simulators where `mac` keyboard can act as an input.
             .tint(.clear)
@@ -160,7 +160,7 @@ public struct VCodeEntryView: View {
 
         return Text(character(at: index))
             .lineLimit(1)
-            .foregroundColor(isPopulated ? uiModel.textColors.value(for: internalState) : uiModel.placeholderTextColors.value(for: internalState))
+            .foregroundStyle(isPopulated ? uiModel.textColors.value(for: internalState) : uiModel.placeholderTextColors.value(for: internalState))
             .font(isPopulated ? uiModel.textFont : uiModel.placeholderTextFont)
             .multilineTextAlignment(.center)
 
@@ -174,7 +174,7 @@ public struct VCodeEntryView: View {
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
-            .foregroundColor(uiModel.characterBackgroundColors.value(for: internalState))
+            .foregroundStyle(uiModel.characterBackgroundColors.value(for: internalState))
     }
 
     @ViewBuilder private func characterBackgroundBorder(

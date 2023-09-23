@@ -67,7 +67,7 @@ public struct VProgressBar: View {
     
     private var track: some View {
         Rectangle()
-            .foregroundColor(uiModel.trackColor)
+            .foregroundStyle(uiModel.trackColor)
     }
     
     private var progress: some View {
@@ -77,7 +77,7 @@ public struct VProgressBar: View {
                 height: uiModel.direction.isHorizontal ? nil : progressWidth
             )
             .cornerRadius(uiModel.cornerRadius, corners: uiModel.progressViewRoundedCorners)
-            .foregroundColor(uiModel.progressColor)
+            .foregroundStyle(uiModel.progressColor)
     }
     
     @ViewBuilder private var border: some View {

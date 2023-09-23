@@ -172,7 +172,7 @@ struct VBottomSheet<Content>: View
             RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
                 .frame(size: uiModel.dragIndicatorSize)
                 .padding(uiModel.dragIndicatorMargins)
-                .foregroundColor(uiModel.dragIndicatorColor)
+                .foregroundStyle(uiModel.dragIndicatorColor)
         }
     }
     

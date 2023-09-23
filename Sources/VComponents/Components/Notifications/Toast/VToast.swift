@@ -76,7 +76,7 @@ struct VToast: View {
             .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
             .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
             .minimumScaleFactor(uiModel.textMinimumScaleFactor)
-            .foregroundColor(uiModel.textColor)
+            .foregroundStyle(uiModel.textColor)
             .font(uiModel.textFont)
 
             .padding(uiModel.textMargins)
@@ -116,7 +116,7 @@ struct VToast: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .foregroundColor(uiModel.backgroundColor)
+            .foregroundStyle(uiModel.backgroundColor)
             .shadow(
                 color: uiModel.shadowColor,
                 radius: uiModel.shadowRadius,

@@ -109,7 +109,7 @@ public struct VRadioButton<Label>: View where Label: View {
                                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                                 .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                                .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+                                .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                                 .font(uiModel.titleTextFont)
                         }
                     )
@@ -144,7 +144,7 @@ public struct VRadioButton<Label>: View where Label: View {
                 ZStack(content: {
                     Circle()
                         .frame(dimension: uiModel.dimension)
-                        .foregroundColor(uiModel.fillColors.value(for: internalState))
+                        .foregroundStyle(uiModel.fillColors.value(for: internalState))
                     
                     Circle()
                         .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
@@ -152,7 +152,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     Circle()
                         .frame(dimension: uiModel.bulletDimension)
-                        .foregroundColor(uiModel.bulletColors.value(for: internalState))
+                        .foregroundStyle(uiModel.bulletColors.value(for: internalState))
                 })
                 .frame(dimension: uiModel.dimension)
                 .padding(uiModel.radioButtonHitBox)
@@ -167,7 +167,7 @@ public struct VRadioButton<Label>: View where Label: View {
                 Rectangle()
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(width: uiModel.radioButtonAndLabelSpacing)
-                    .foregroundColor(.clear)
+                    .foregroundStyle(.clear)
             }
         )
         .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`

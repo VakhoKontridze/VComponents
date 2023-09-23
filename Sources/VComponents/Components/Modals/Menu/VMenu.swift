@@ -207,7 +207,7 @@ public struct VMenu<Label>: View where Label: View {
         Text(title)
             .lineLimit(1)
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundColor(uiModel.titleTextColors.value(for: internalState))
+            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
     }
 
@@ -218,7 +218,7 @@ public struct VMenu<Label>: View where Label: View {
             .resizable()
             .scaledToFit()
             .frame(size: uiModel.iconSize)
-            .foregroundColor(uiModel.iconColors.value(for: internalState))
+            .foregroundStyle(uiModel.iconColors.value(for: internalState))
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
 }

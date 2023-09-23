@@ -128,7 +128,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
-                        .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                        .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                         .font(uiModel.headerTitleTextFont)
                     
                 case .label(let label):
@@ -155,7 +155,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             Rectangle()
                 .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
                 .padding(uiModel.dividerMargins)
-                .foregroundColor(uiModel.dividerColor)
+                .foregroundStyle(uiModel.dividerColor)
         }
     }
     

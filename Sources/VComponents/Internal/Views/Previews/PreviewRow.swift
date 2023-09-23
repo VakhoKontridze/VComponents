@@ -38,7 +38,7 @@ struct PreviewRow<Content>: View where Content: View {
                     Text(title)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
-                        .foregroundColor(ColorBook.secondary)
+                        .foregroundStyle(ColorBook.secondary)
                         .font(.caption)
 
                         .frame(width: 75, alignment: .leading)
@@ -60,7 +60,7 @@ struct PreviewRow<Content>: View where Content: View {
                     
                     Text(title)
                         .lineLimit(1)
-                        .foregroundColor(ColorBook.secondary)
+                        .foregroundStyle(ColorBook.secondary)
                         .font(.caption)
                 }
             )

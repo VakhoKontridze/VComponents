@@ -245,7 +245,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                 Text(title(element))
                     .lineLimit(1)
                     .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
-                    .foregroundColor(uiModel.tabItemTextColors.value(for: tabItemInternalState))
+                    .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
                     .font(uiModel.tabItemTextFont)
 
             case .label(let label):
@@ -262,7 +262,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     private var tabIndicatorTrackSlice: some View {
         Rectangle()
             .frame(height: uiModel.tabIndicatorTrackHeight)
-            .foregroundColor(uiModel.tabIndicatorTrackColor)
+            .foregroundStyle(uiModel.tabIndicatorTrackColor)
     }
 
     private func selectedTabIndicator(
@@ -286,7 +286,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
             uiModel.tabItemMargins.trailing + (isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
             0
         )
-        .foregroundColor(uiModel.selectedTabIndicatorColor)
+        .foregroundStyle(uiModel.selectedTabIndicatorColor)
         .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
     }
 
@@ -462,7 +462,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                     tabItemTitle: { $0.tabItemTitle },
                     content: {
                         Text($0.tabItemTitle)
-                            .foregroundColor($0.color)
+                            .foregroundStyle($0.color)
                     }
                 )
                 .padding()

@@ -134,7 +134,7 @@ struct VAlert<Content>: View
             Text(title)
                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.titleTextColor)
+                .foregroundStyle(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
 
                 .fixedSize(horizontal: false, vertical: true)
@@ -148,7 +148,7 @@ struct VAlert<Content>: View
             Text(message)
                 .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.messageTextColor)
+                .foregroundStyle(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
 
                 .fixedSize(horizontal: false, vertical: true)

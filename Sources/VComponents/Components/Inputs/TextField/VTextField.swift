@@ -151,7 +151,7 @@ public struct VTextField: View {
             Text(headerTitle)
                 .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.headerTitleTextColors.value(for: internalState))
+                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
 
                 .padding(.horizontal, uiModel.headerMarginHorizontal)
@@ -163,7 +163,7 @@ public struct VTextField: View {
             Text(footerTitle)
                 .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundColor(uiModel.footerTitleTextColors.value(for: internalState))
+                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
 
                 .padding(.horizontal, uiModel.footerMarginHorizontal)
@@ -186,7 +186,7 @@ public struct VTextField: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .foregroundColor(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
     }
 
     @ViewBuilder private var backgroundBorder: some View {
@@ -203,7 +203,7 @@ public struct VTextField: View {
                 .resizable()
                 .scaledToFit()
                 .frame(dimension: uiModel.searchIconDimension)
-                .foregroundColor(uiModel.searchIconColors.value(for: internalState))
+                .foregroundStyle(uiModel.searchIconColors.value(for: internalState))
         }
     }
     
@@ -212,7 +212,7 @@ public struct VTextField: View {
             isSecure: uiModel.contentType.isSecure && !secureFieldIsVisible,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState))
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
             },
             text: $text
@@ -225,7 +225,7 @@ public struct VTextField: View {
 
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
-        .foregroundColor(uiModel.textColors.value(for: internalState))
+        .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
         .applyModifier({
 #if os(iOS)
