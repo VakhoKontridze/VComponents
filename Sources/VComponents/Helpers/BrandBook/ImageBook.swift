@@ -10,28 +10,21 @@ import SwiftUI
 // MARK: - Image Book
 struct ImageBook {
     // MARK: Properties
-    static let checkmarkOn: Image = .init(module: "Checkmark.On") // Mirrored for RTL languages
-    static let checkmarkIndeterminate: Image = .init(module: "Checkmark.Indeterminate")
+    static let checkmarkOn: Image = .init(.checkmarkOn) // Mirrored for RTL languages
+    static let checkmarkIndeterminate: Image = .init(.checkmarkIndeterminate)
 
-    static let minus: Image = .init(module: "Minus")
-    static let plus: Image = .init(module: "Plus")
+    static let minus: Image = .init(.minus)
+    static let plus: Image = .init(.plus)
 
-    static let magnifyGlass: Image = .init(module: "MagnifyGlass") // Doesn't mirror, like `UISearchBar.searchable(text:)`
+    static let magnifyGlass: Image = .init(.magnifyGlass) // Doesn't mirror, like `UISearchBar.searchable(text:)`
 
-    static let visibilityOff: Image = .init(module: "Visibility.Off") // Mirrored for RTL languages
-    static let visibilityOn: Image = .init(module: "Visibility.On")
+    static let visibilityOff: Image = .init(.visibilityOff) // Mirrored for RTL languages
+    static let visibilityOn: Image = .init(.visibilityOn)
 
-    static let xMark: Image = .init(module: "XMark")
+    static let xMark: Image = .init(.xMark)
 
-    static let chevronUp: Image = .init(module: "Chevron.Up")
-    
+    static let chevronUp: Image = .init(.chevronUp)
+
     // MARK: Initializers
     private init() {}
-}
-
-// MARK: - Helpers
-extension Image {
-    fileprivate init(module name: String) {
-        self.init(name, bundle: .module)
-    }
 }

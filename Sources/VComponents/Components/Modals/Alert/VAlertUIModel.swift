@@ -186,16 +186,16 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Button - Secondary
     /// Secondary button background colors.
-    public var secondaryButtonBackgroundColors: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
-        enabled: ColorBook.background,
-        pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-        disabled: ColorBook.background
+    public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
+        enabled: Color.clear,
+        pressed: ColorBook._alertLayerColoredButtonBackgroundPressed,
+        disabled: Color.clear
     )
 
     /// Secondary button title colors.
     public var secondaryButtonTitleColors: ButtonStateColors = .init(
         enabled: ColorBook.accentBlue,
-        pressed: ColorBook.accentBlue, // Looks better
+        pressed: ColorBook.accentBlue,
         disabled: ColorBook.accentBluePressedDisabled
     )
 
@@ -218,16 +218,16 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Button - Destructive
     /// Destructive button background colors.
-    public var destructiveButtonBackgroundColors: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
-        enabled: ColorBook.background,
-        pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-        disabled: ColorBook.background
+    public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
+        enabled: Color.clear,
+        pressed: ColorBook._alertLayerColoredButtonBackgroundPressed,
+        disabled: Color.clear
     )
 
     /// Destructive button title colors.
     public var destructiveButtonTitleColors: ButtonStateColors = .init(
         enabled: ColorBook.accentRed,
-        pressed: ColorBook.accentRed, // Looks better
+        pressed: ColorBook.accentRed,
         disabled: ColorBook.accentRedPressedDisabled
     )
 

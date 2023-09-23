@@ -26,9 +26,9 @@ struct GlobalUIModel {
         static let containerHeaderMargins: EdgeInsets_LeadingTrailingTopBottom = .init(horizontal: containerContentMargin, vertical: 10)
         
         // MARK: Properties - Shadow
-        static let shadowColorEnabled: Color = .init(module: "Shadow")
-        static let shadowColorDisabled: Color = .init(module: "Shadow.Disabled")
-        
+        static let shadowColorEnabled: Color = ColorBook._shadow
+        static let shadowColorDisabled: Color = ColorBook._shadowDisabled
+
         // MARK: Properties - Header and Footer
         static let headerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -61,24 +61,24 @@ struct GlobalUIModel {
         
         // MARK: Properties - Divider and Separator
         static let dividerHeightPx: Int = 2
-        static let dividerColor: Color = .init(module: "Divider")
-        
+        static let dividerColor: Color = ColorBook._divider
+
         static let separatorHeightPx: Int = 1
         static let separatorColor: Color = dividerColor
         
-        static let dividerDashColorEnabled: Color = .init(module: "DividerDash")
-        static let dividerDashColorDisabled: Color = .init(module: "DividerDash.Disabled")
-        
+        static let dividerDashColorEnabled: Color = ColorBook._dividerDash
+        static let dividerDashColorDisabled: Color = ColorBook._dividerDashDisabled
+
         // MARK: Properties - Circular Button
         static let circularButtonGrayDimension: CGFloat = 30
         static let circularButtonGrayIconDimension: CGFloat = 12
         
-        static let circularButtonLayerColorEnabled: Color = .init(module: "CircularButton.Layer")
-        static let circularButtonLayerColorPressed: Color = .init(module: "CircularButton.Layer.Pressed")
-        static let circularButtonLayerColorDisabled: Color = .init(module: "CircularButton.Layer.Disabled")
-        
+        static let circularButtonLayerColorEnabled: Color = ColorBook._circularButtonLayer
+        static let circularButtonLayerColorPressed: Color = ColorBook._circularButtonLayerPressed
+        static let circularButtonLayerColorDisabled: Color = ColorBook._circularButtonLayerDisabled
+
         static let circularButtonIconPrimaryColorEnabled: Color = ColorBook.primary
-        static let circularButtonIconPrimaryColorPressed: Color = ColorBook.primary // Looks better
+        static let circularButtonIconPrimaryColorPressed: Color = ColorBook.primary
         static let circularButtonIconPrimaryColorDisabled: Color = ColorBook.primaryPressedDisabled
         
         // MARK: Properties - Bar
@@ -98,10 +98,10 @@ struct GlobalUIModel {
         // MARK: Properties - Misc
         static let minimumScaleFactor: CGFloat = 0.75
         
-        static let dimmingViewColor: Color = .init(module: "DimmingView")
-        
-        static let dragIndicatorColor: Color = .init(module: "DragIndicator")
-        
+        static let dimmingViewColor: Color = ColorBook._dimmingView
+
+        static let dragIndicatorColor: Color = ColorBook._dragIndicator
+
         // MARK: Initializers
         private init() {}
     }
@@ -179,7 +179,7 @@ struct GlobalUIModel {
         // MARK: Properties - Colors
         static let transparentLayerLabelEnabled: Color = ColorBook.controlLayerBlue
         static let transparentLayerLabelPressed: Color = ColorBook.controlLayerBluePressed
-        static let transparentLayerLabelDisabled: Color = ColorBook.controlLayerBlueDisabled.opacity(0.5) // Looks better
+        static let transparentLayerLabelDisabled: Color = ColorBook.controlLayerBlueDisabled.opacity(0.5)
 
         // MARK: Properties - Label
         static let iconAndTitleTextSpacing: CGFloat = 8
@@ -369,21 +369,21 @@ struct GlobalUIModel {
         static let height: CGFloat = 50
         static let cornerRadius: CGFloat = 12
         
-        static let layerGrayColorFocused: Color = .init(module: "Input.Layer.Gray.Focused")
+        static let layerGrayColorFocused: Color = ColorBook._inputLayerGrayFocused
+
+        static let headerTitleTextAndFooterTitleTextGreenColor: Color = ColorBook._inputHeaderTitleTextAndFooterTitleTextGreen
+        static let headerTitleTextAndFooterTitleTextYellowColor: Color = ColorBook._inputHeaderTitleTextAndFooterTitleTextYellow
+        static let headerTitleTextAndFooterTitleTextRedColor: Color = ColorBook._inputHeaderTitleTextAndFooterTitleTextRed
         
-        static let headerTitleTextAndFooterTitleTextGreenColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Green")
-        static let headerTitleTextAndFooterTitleTextYellowColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Yellow")
-        static let headerTitleTextAndFooterTitleTextRedColor: Color = .init(module: "Input.HeaderTitleTextAndFooterTitleText.Red")
+        static let clearButtonLayerEnabled: Color = ColorBook._inputClearButtonLayer
+        static let clearButtonLayerPressed: Color = ColorBook._inputClearButtonLayerPressed
+        static let clearButtonLayerDisabled: Color = ColorBook._inputClearButtonLayerDisabled
+        static let clearButtonIcon: Color = ColorBook._inputClearButtonIcon
         
-        static let clearButtonLayerEnabled: Color = .init(module: "Input.ClearButton.Layer")
-        static let clearButtonLayerPressed: Color = .init(module: "Input.ClearButton.Layer.Pressed")
-        static let clearButtonLayerDisabled: Color = .init(module: "Input.ClearButton.Layer.Disabled")
-        static let clearButtonIcon: Color = .init(module: "Input.ClearButton.Icon")
-        
-        static let visibilityButtonEnabled: Color = .init(module: "Input.VisibilityButton.Icon")
+        static let visibilityButtonEnabled: Color = ColorBook._inputVisibilityButtonIcon
         static let visibilityButtonPressedDisabled: Color = ColorBook.primaryPressedDisabled
         
-        static let searchIconEnabledFocused: Color = .init(module: "Input.SearchIcon")
+        static let searchIconEnabledFocused: Color = ColorBook._inputSearchIcon
         static let searchIconDisabled: Color = ColorBook.primaryPressedDisabled
         
         // MARK: Initializers
@@ -439,10 +439,10 @@ struct GlobalUIModel {
     struct Notifications {
         // MARK: Properties
         static let layerGray: Color = ColorBook.layerGray
-        static let layerGreen: Color = .init(module: "Notification.Layer.Green")
-        static let layerYellow: Color = .init(module: "Notification.Layer.Yellow")
-        static let layerRed: Color = .init(module: "Notification.Layer.Red")
-        
+        static let layerGreen: Color = ColorBook._notificationLayerGreen
+        static let layerYellow: Color = ColorBook._notificationLayerYellow
+        static let layerRed: Color = ColorBook._notificationLayerRed
+
         // MARK: Initializers
         private init() {}
     }
@@ -476,7 +476,7 @@ struct GlobalUIModel {
 
         static let pageIndicatorDotCornerRadius: CGFloat = pageIndicatorDotDimension/2
 
-        static let pageIndicatorDeselectedDotColor: Color = .init(module: "PageIndicator.DeselectedDot")
+        static let pageIndicatorDeselectedDotColor: Color = ColorBook._pageIndicatorDeselectedDot
         static let pageIndicatorSelectedDotColor: Color = ColorBook.accentBlue
         
         static let pageIndicatorCompactVisibleDots: Int = 7

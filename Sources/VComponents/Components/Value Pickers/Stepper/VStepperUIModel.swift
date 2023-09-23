@@ -33,7 +33,7 @@ public struct VStepperUIModel {
     /// Plus and minus button background colors.
     public var buttonBackgroundColors: ButtonStateColors = .init(
         enabled: .clear,
-        pressed: Color(module: "Stepper.Button.Background.Pressed"),
+        pressed: ColorBook._stepperButtonBackgroundPressed,
         disabled: .clear
     )
 
@@ -50,7 +50,7 @@ public struct VStepperUIModel {
     /// Plus and minus button icon colors.
     public var buttonIconColors: ButtonStateColors = .init(
         enabled: ColorBook.primary,
-        pressed: ColorBook.primary, // Looks better
+        pressed: ColorBook.primary,
         disabled: ColorBook.primaryPressedDisabled
     )
 
