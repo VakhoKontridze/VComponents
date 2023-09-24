@@ -160,7 +160,7 @@ public struct VPlainButton<Label>: View where Label: View {
 
 // MARK: - Preview
 // Developmental only
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 struct VPlainButton_Previews: PreviewProvider {
     // Configuration

@@ -206,7 +206,7 @@ extension VWrappedToggleButtonInternalState {
 
 // MARK: - Preview
 // Developmental only
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VWrappedToggleButton_Previews: PreviewProvider {

@@ -153,7 +153,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 
 // MARK: - Preview
 // Developmental only
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
