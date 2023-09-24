@@ -238,25 +238,25 @@ public struct VTextFieldUIModel {
         // MARK: Properties
         var isStandard: Bool {
             switch self {
-            case .standard: return true
-            case .secure: return false
-            case .search: return false
+            case .standard: true
+            case .secure: false
+            case .search: false
             }
         }
 
         var isSecure: Bool {
             switch self {
-            case .standard: return false
-            case .secure: return true
-            case .search: return false
+            case .standard: false
+            case .secure: true
+            case .search: false
             }
         }
 
         var isSearch: Bool {
             switch self {
-            case .standard: return false
-            case .secure: return false
-            case .search: return true
+            case .standard: false
+            case .secure: false
+            case .search: true
             }
         }
 

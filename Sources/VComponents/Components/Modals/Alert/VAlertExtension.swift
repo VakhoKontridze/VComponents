@@ -138,24 +138,24 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return title(item)
+                                title(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return message(item)
+                                message(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
-                        content: .empty,
+                        content: VAlertContent.empty,
                         buttons: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return buttons(item)
+                                buttons(item)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )
@@ -195,30 +195,30 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return title(item)
+                                title(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return message(item)
+                                message(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         content: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return .content(content: { content(item) })
+                                VAlertContent.content(content: { content(item) })
                             } else {
-                                return .empty
+                                VAlertContent.empty
                             }
                         }(),
                         buttons: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return buttons(item)
+                                buttons(item)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )
@@ -261,24 +261,24 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return title(data)
+                                title(data)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return message(data)
+                                message(data)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         content: .empty,
                         buttons: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return buttons(data)
+                                buttons(data)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )
@@ -318,30 +318,30 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return title(data)
+                                title(data)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return message(data)
+                                message(data)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         content: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return .content(content: { content(data) })
+                                VAlertContent.content(content: { content(data) })
                             } else {
-                                return .empty
+                                VAlertContent.empty
                             }
                         }(),
                         buttons: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return buttons(data)
+                                buttons(data)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )
@@ -386,24 +386,24 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return title(error)
+                                title(error)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return message(error)
+                                message(error)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
-                        content: .empty,
+                        content: VAlertContent.empty,
                         buttons: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return buttons(error)
+                                buttons(error)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )
@@ -445,30 +445,30 @@ extension View {
                         onDismiss: dismissHandler,
                         title: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return title(error)
+                                title(error)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         message: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return message(error)
+                                message(error)
                             } else {
-                                return ""
+                                ""
                             }
                         }(),
                         content: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return .content(content: { content(error) })
+                                VAlertContent.content(content: { content(error) })
                             } else {
-                                return .empty
+                                VAlertContent.empty
                             }
                         }(),
                         buttons: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return buttons(error)
+                                buttons(error)
                             } else {
-                                return []
+                                []
                             }
                         }()
                     )

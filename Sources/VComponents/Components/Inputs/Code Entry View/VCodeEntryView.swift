@@ -52,9 +52,9 @@ public struct VCodeEntryView: View {
         .init(
             isEnabled: isEnabled,
             isFocused: isFocused && {
-                if text.count == index { return true }
-                else if text.count == uiModel.length && text.count == index + 1 { return true }
-                else { return false }
+                if text.count == index { true }
+                else if text.count == uiModel.length && text.count == index + 1 { true }
+                else { false }
             }()
         )
     }

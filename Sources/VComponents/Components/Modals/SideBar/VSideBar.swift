@@ -224,19 +224,19 @@ struct VSideBar<Content>: View where Content: View {
     private var initialOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.presentationEdge {
-            case .leading: return -(currentWidth + safeAreaInsets.leading)
-            case .trailing: return currentWidth + safeAreaInsets.trailing
-            case .top: return 0
-            case .bottom: return 0
+            case .leading: -(currentWidth + safeAreaInsets.leading)
+            case .trailing: currentWidth + safeAreaInsets.trailing
+            case .top: 0
+            case .bottom: 0
             }
         }()
         
         let y: CGFloat = {
             switch uiModel.presentationEdge {
-            case .leading: return 0
-            case .trailing: return 0
-            case .top: return -(currentHeight + safeAreaInsets.top)
-            case .bottom: return currentHeight + safeAreaInsets.bottom
+            case .leading: 0
+            case .trailing: 0
+            case .top: -(currentHeight + safeAreaInsets.top)
+            case .bottom: currentHeight + safeAreaInsets.bottom
             }
         }()
         
@@ -270,8 +270,8 @@ struct VSideBar<Content>: View where Content: View {
     
     private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.presentationEdge {
-        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(in: currentWidth)
-        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(in: currentHeight)
+        case .leading, .trailing: abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(in: currentWidth)
+        case .top, .bottom: abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(in: currentHeight)
         }
     }
 }

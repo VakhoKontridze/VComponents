@@ -21,9 +21,9 @@ import VCore
 ///         var tabItemTitle: String { .init(describing: self).capitalized }
 ///         var color: Color {
 ///             switch rawValue.remainderReportingOverflow(dividingBy: 3).0 {
-///             case 0: return Color.red
-///             case 1: return Color.green
-///             case 2: return Color.blue
+///             case 0: Color.red
+///             case 1: Color.green
+///             case 2: Color.blue
 ///             default: fatalError()
 ///             }
 ///         }
@@ -376,9 +376,9 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
         var tabItemTitle: String { .init(describing: self).capitalized.pseudoRTL(languageDirection) }
         var color: Color {
             switch rawValue.remainderReportingOverflow(dividingBy: 3).0 {
-            case 0: return Color.red
-            case 1: return Color.green
-            case 2: return Color.blue
+            case 0: Color.red
+            case 1: Color.green
+            case 2: Color.blue
             default: fatalError()
             }
         }

@@ -21,9 +21,9 @@ import VCore
 ///         var tabItemTitle: String { .init(describing: self).capitalized }
 ///         var color: Color {
 ///             switch self {
-///             case .red: return Color.red
-///             case .green: return Color.green
-///             case .blue: return Color.blue
+///             case .red: Color.red
+///             case .green: Color.green
+///             case .blue: Color.blue
 ///             }
 ///         }
 ///     }
@@ -349,9 +349,9 @@ struct VStretchedIndicatorStaticPagerTabView_Previews: PreviewProvider {
         var tabItemTitle: String { .init(describing: self).capitalized.pseudoRTL(languageDirection) }
         var color: Color {
             switch self {
-            case .red: return Color.red
-            case .green: return Color.green
-            case .blue: return Color.blue
+            case .red: Color.red
+            case .green: Color.green
+            case .blue: Color.blue
             }
         }
     }

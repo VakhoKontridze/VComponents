@@ -18,13 +18,13 @@ public struct VContinuousSpinnerUIModel {
     /// Set to `15` on `watchOS`.
     public var dimension: CGFloat = {
 #if os(iOS)
-        return 15
+        15
 #elseif os(macOS)
-        return 25
+        25
 #elseif os(tvOS)
-        return 30
+        30
 #elseif os(watchOS)
-        return 15
+        15
 #endif
     }()
 
@@ -38,13 +38,13 @@ public struct VContinuousSpinnerUIModel {
     /// Set to `2` on `watchOS`.
     public var thickness: CGFloat = {
 #if os(iOS)
-        return 2
+        2
 #elseif os(macOS)
-        return 3
+        3
 #elseif os(tvOS)
-        return 4
+        4
 #elseif os(watchOS)
-        return 2
+        2
 #endif
     }()
 

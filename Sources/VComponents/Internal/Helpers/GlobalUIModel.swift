@@ -32,16 +32,16 @@ struct GlobalUIModel {
         // MARK: Properties - Header and Footer
         static let headerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                return .multiLine(alignment: .leading, lineLimit: 1...2)
+                .multiLine(alignment: .leading, lineLimit: 1...2)
             } else {
-                return .multiLine(alignment: .leading, lineLimit: 2)
+                .multiLine(alignment: .leading, lineLimit: 2)
             }
         }()
         static let headerTitleTextFont: Font = {
 #if os(iOS)
-            return Font.footnote // 13
+            Font.footnote // 13
 #elseif os(macOS)
-            return Font.footnote // 10
+            Font.footnote // 10
 #else
             fatalError() // Not supported
 #endif
@@ -49,9 +49,9 @@ struct GlobalUIModel {
         
         static let footerTitleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                return .multiLine(alignment: .leading, lineLimit: 1...5)
+                .multiLine(alignment: .leading, lineLimit: 1...5)
             } else {
-                return .multiLine(alignment: .leading, lineLimit: 5)
+                .multiLine(alignment: .leading, lineLimit: 5)
             }
         }()
         static let footerTitleTextFont: Font = headerTitleTextFont // 13, 10
@@ -84,13 +84,13 @@ struct GlobalUIModel {
         // MARK: Properties - Bar
         static let barHeight: CGFloat = {
 #if os(iOS)
-            return 10
+            10
 #elseif os(macOS)
-            return 10
+            10
 #elseif os(tvOS)
-            return 10
+            10
 #elseif os(watchOS)
-            return 5
+            5
 #endif
         }()
         static let barCornerRadius: CGFloat = barHeight/2
@@ -111,11 +111,11 @@ struct GlobalUIModel {
         // MARK: Properties - Sizes
         static let heightStretchedButton: CGFloat = {
 #if os(iOS)
-            return 48
+            48
 #elseif os(macOS)
-            return 40
+            40
 #elseif os(watchOS)
-            return 64
+            64
 #else
             fatalError() // Not supported
 #endif
@@ -123,11 +123,11 @@ struct GlobalUIModel {
 
         static let heightWrappedButton: CGFloat = {
 #if os(iOS)
-            return 32
+            32
 #elseif os(macOS)
-            return 32
+            32
 #elseif os(watchOS)
-            return 48
+            48
 #else
             fatalError() // Not supported
 #endif
@@ -135,11 +135,11 @@ struct GlobalUIModel {
 
         static let sizeRectButton: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 56)
+            CGSize(dimension: 56)
 #elseif os(macOS)
-            return CGSize(dimension: 28)
+            CGSize(dimension: 28)
 #elseif os(watchOS)
-            return CGSize(width: 64, height: 56)
+            CGSize(width: 64, height: 56)
 #else
             fatalError() // Not supported
 #endif
@@ -148,11 +148,11 @@ struct GlobalUIModel {
         // MARK: Properties - Corner Radius
         static let cornerRadiusStretchedButton: CGFloat = {
 #if os(iOS)
-            return 14
+            14
 #elseif os(macOS)
-            return 12
+            12
 #elseif os(watchOS)
-            return 32
+            32
 #else
             fatalError() // Not supported
 #endif
@@ -162,11 +162,11 @@ struct GlobalUIModel {
 
         static let cornerRadiusRectangularButton: CGFloat = {
 #if os(iOS)
-            return 16
+            16
 #elseif os(macOS)
-            return 6
+            6
 #elseif os(watchOS)
-            return 16
+            16
 #else
             fatalError() // Not supported
 #endif
@@ -187,11 +187,11 @@ struct GlobalUIModel {
         // MARK: Properties - Label - Text - Fonts
         static let titleTextFontStretchedButton: Font = {
 #if os(iOS)
-            return Font.callout.weight(.semibold) // 16
+            Font.callout.weight(.semibold) // 16
 #elseif os(macOS)
-            return Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS` anyway
+            Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS` anyway
 #elseif os(watchOS)
-            return Font.title3.weight(.semibold) // 20
+            Font.title3.weight(.semibold) // 20
 #else
             fatalError() // Not supported
 #endif
@@ -199,11 +199,11 @@ struct GlobalUIModel {
 
         static let titleTextFontWrappedButton: Font = {
 #if os(iOS)
-            return Font.subheadline.weight(.semibold)
+            Font.subheadline.weight(.semibold)
 #elseif os(macOS)
-            return Font.body.weight(.semibold)
+            Font.body.weight(.semibold)
 #elseif os(watchOS)
-            return Font.body.weight(.semibold)
+            Font.body.weight(.semibold)
 #else
             fatalError() // Not supported
 #endif
@@ -211,11 +211,11 @@ struct GlobalUIModel {
 
         static let titleTextRectangularButton: Font = {
 #if os(iOS)
-            return Font.subheadline.weight(.semibold)
+            Font.subheadline.weight(.semibold)
 #elseif os(macOS)
-            return Font.body
+            Font.body
 #elseif os(watchOS)
-            return Font.body.weight(.semibold)
+            Font.body.weight(.semibold)
 #else
             fatalError() // Not supported
 #endif
@@ -224,11 +224,11 @@ struct GlobalUIModel {
         // MARK: Properties - Label - Icon
         static let iconSizeStretchedButton: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 18)
+            CGSize(dimension: 18)
 #elseif os(macOS)
-            return CGSize(dimension: 16)
+            CGSize(dimension: 16)
 #elseif os(watchOS)
-            return CGSize(dimension: 22)
+            CGSize(dimension: 22)
 #else
             fatalError() // Not supported
 #endif
@@ -236,11 +236,11 @@ struct GlobalUIModel {
 
         static let iconSizeWrappedButton: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 16)
+            CGSize(dimension: 16)
 #elseif os(macOS)
-            return CGSize(dimension: 16)
+            CGSize(dimension: 16)
 #elseif os(watchOS)
-            return CGSize(dimension: 18)
+            CGSize(dimension: 18)
 #else
             fatalError() // Not supported
 #endif
@@ -248,11 +248,11 @@ struct GlobalUIModel {
 
         static let iconSizeRectButton: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 24)
+            CGSize(dimension: 24)
 #elseif os(macOS)
-            return CGSize(dimension: 14)
+            CGSize(dimension: 14)
 #elseif os(watchOS)
-            return CGSize(dimension: 26)
+            CGSize(dimension: 26)
 #else
             fatalError() // Not supported
 #endif
@@ -260,11 +260,11 @@ struct GlobalUIModel {
         
         static let pressedScale: CGFloat = {
 #if os(iOS)
-            return 1
+            1
 #elseif os(macOS)
-            return 1
+            1
 #elseif os(watchOS)
-            return 0.98
+            0.98
 #else
             fatalError() // Not supported
 #endif
@@ -290,16 +290,16 @@ struct GlobalUIModel {
         
         static let titleTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                return .multiLine(alignment: .leading, lineLimit: 1...2)
+                .multiLine(alignment: .leading, lineLimit: 1...2)
             } else {
-                return .multiLine(alignment: .leading, lineLimit: 2)
+                .multiLine(alignment: .leading, lineLimit: 2)
             }
         }()
         static let font: Font = {
 #if os(iOS)
-            return Font.subheadline // 15
+            Font.subheadline // 15
 #elseif os(macOS)
-            return Font.body // 13
+            Font.body // 13
 #else
             fatalError() // Not supported
 #endif
@@ -307,9 +307,9 @@ struct GlobalUIModel {
         
         static let titleColor: Color = {
 #if os(iOS)
-            return ColorBook.primary
+            ColorBook.primary
 #elseif os(macOS)
-            return ColorBook.primary.opacity(0.85) // Similar to `NSColor.controlTextColor`
+            ColorBook.primary.opacity(0.85) // Similar to `NSColor.controlTextColor`
 #else
             fatalError() // Not supported
 #endif
@@ -317,9 +317,9 @@ struct GlobalUIModel {
         
         static let titleColorDisabled: Color = {
 #if os(iOS)
-            return ColorBook.primaryPressedDisabled
+            ColorBook.primaryPressedDisabled
 #elseif os(macOS)
-            return ColorBook.primaryPressedDisabled.opacity(0.85) // Similar to `NSColor.controlTextColor`
+            ColorBook.primaryPressedDisabled.opacity(0.85) // Similar to `NSColor.controlTextColor`
 #else
             fatalError() // Not supported
 #endif
@@ -342,18 +342,18 @@ struct GlobalUIModel {
         static let sliderThumbCornerRadius: CGFloat = 10
         static let sliderThumbShadowRadius: CGFloat = {
 #if os(iOS)
-            return 2
+            2
 #elseif os(macOS)
-            return 1
+            1
 #else
             fatalError() // Not supported
 #endif
         }()
         static let sliderThumbShadowOffset: CGPoint = {
 #if os(iOS)
-            return CGPoint(x: 0, y: 2)
+            CGPoint(x: 0, y: 2)
 #elseif os(macOS)
-            return CGPoint(x: 0, y: 1)
+            CGPoint(x: 0, y: 1)
 #else
             fatalError() // Not supported
 #endif
@@ -452,25 +452,25 @@ struct GlobalUIModel {
         // MARK: Properties - Page Indicator
         static let pageIndicatorSpacing: CGFloat = {
 #if os(iOS)
-            return 8
+            8
 #elseif os(macOS)
-            return 8
+            8
 #elseif os(tvOS)
-            return 10
+            10
 #elseif os(watchOS)
-            return 4
+            4
 #endif
         }()
 
         static let pageIndicatorDotDimension: CGFloat = {
 #if os(iOS)
-            return 8
+            8
 #elseif os(macOS)
-            return 8
+            8
 #elseif os(tvOS)
-            return 10
+            10
 #elseif os(watchOS)
-            return 4
+            4
 #endif
         }()
 

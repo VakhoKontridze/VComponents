@@ -49,11 +49,11 @@ public struct VPlainButtonUIModel {
     /// Set to `body` (`17`) on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
-        return Font.body
+        Font.body
 #elseif os(macOS)
-        return Font.body
+        Font.body
 #elseif os(watchOS)
-        return Font.body
+        Font.body
 #else
         fatalError() // Not supported
 #endif

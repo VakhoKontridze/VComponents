@@ -13,9 +13,9 @@ extension CGSize {
         isWidth: Bool
     ) -> CGFloat {
         if isWidth {
-            return width
+            width
         } else {
-            return height
+            height
         }
     }
 }
@@ -25,9 +25,9 @@ extension CGPoint {
         isX: Bool
     ) -> CGFloat {
         if isX {
-            return x
+            x
         } else {
-            return y
+            y
         }
     }
 }
@@ -38,9 +38,9 @@ extension BinaryFloatingPoint {
         if condition: Bool
     ) -> Self {
         if condition {
-            return max - self
+            max - self
         } else {
-            return self
+            self
         }
     }
 

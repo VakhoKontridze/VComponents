@@ -28,9 +28,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Set to `3` on `watchOS`.
     public var rectangleAndCaptionSpacing: CGFloat = {
 #if os(iOS)
-        return 7
+        7
 #elseif os(watchOS)
-        return 3
+        3
 #else
         fatalError() // Not supported
 #endif
@@ -45,9 +45,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Rectangle corner radius. Set to `24`.
     public var rectangleCornerRadius: CGFloat = {
 #if os(iOS)
-        return 24
+        24
 #elseif os(watchOS)
-        return 24
+        24
 #else
         fatalError() // Not supported
 #endif
@@ -125,9 +125,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Set to `18x18` on `watchOS`
     public var iconCaptionSize: CGSize = {
 #if os(iOS)
-        return CGSize(dimension: 16)
+        CGSize(dimension: 16)
 #elseif os(watchOS)
-        return CGSize(dimension: 18)
+        CGSize(dimension: 18)
 #else
         fatalError() // Not supported
 #endif
@@ -156,12 +156,12 @@ public struct VRectangularCaptionButtonUIModel {
     public var titleCaptionTextLineType: TextLineType = {
 #if os(iOS)
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            return .multiLine(alignment: .center, lineLimit: 1...2)
+            .multiLine(alignment: .center, lineLimit: 1...2)
         } else {
-            return .multiLine(alignment: .center, lineLimit: 2)
+            .multiLine(alignment: .center, lineLimit: 2)
         }
 #elseif os(watchOS)
-        return .singleLine
+        .singleLine
 #else
         fatalError() // Not supported
 #endif
@@ -182,9 +182,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Set to `body` (`17`) on `watchOS`.
     public var titleCaptionTextFont: Font = {
 #if os(iOS)
-        return .subheadline
+        .subheadline
 #elseif os(watchOS)
-        return Font.body
+        Font.body
 #else
         fatalError() // Not supported
 #endif

@@ -53,9 +53,9 @@ extension View {
     ///
     ///                 uiModel.contentSafeAreaMargins = {
     ///                     if interfaceOrientation.isLandscape {
-    ///                         return .leading
+    ///                         .leading
     ///                     } else {
-    ///                         return .vertical
+    ///                         .vertical
     ///                     }
     ///                 }()
     ///

@@ -67,9 +67,9 @@ public struct VRangeSliderUIModel {
     /// To hide border, set to `0`.
     public var thumbBorderWidth: PointPixelMeasurement = {
 #if os(iOS)
-        return .points(0)
+        .points(0)
 #elseif os(macOS)
-        return .pixels(1)
+        .pixels(1)
 #else
         fatalError() // Not supported
 #endif
@@ -78,9 +78,9 @@ public struct VRangeSliderUIModel {
     /// Thumb border colors.
     public var thumbBorderColors: StateColors = {
 #if os(iOS)
-        return .clearColors
+        StateColors.clearColors
 #elseif os(macOS)
-        return StateColors(
+        StateColors(
             enabled: ColorBook.borderGray,
             disabled: ColorBook.borderGrayDisabled
         )

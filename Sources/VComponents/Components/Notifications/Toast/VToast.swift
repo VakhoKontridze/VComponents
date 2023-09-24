@@ -127,23 +127,23 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: return -(safeAreaInsets.top + height)
-        case .bottom: return safeAreaInsets.bottom + height
+        case .top: -(safeAreaInsets.top + height)
+        case .bottom: safeAreaInsets.bottom + height
         }
     }
     
     private var presentedOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: return safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
-        case .bottom: return -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
+        case .top: safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
+        case .bottom: -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
         }
     }
     
     // MARK: Corner Radius
     private var cornerRadius: CGFloat {
         switch uiModel.cornerRadiusType {
-        case .capsule: return height / 2
-        case .rounded(let cornerRadius): return cornerRadius
+        case .capsule: height / 2
+        case .rounded(let cornerRadius): cornerRadius
         }
     }
     

@@ -134,10 +134,10 @@ public struct VToastUIModel {
         // MARK: Properties
         var marginHorizontal: CGFloat {
             switch self {
-            case .wrapped(let margin): return margin
-            case .stretched(_, let margin): return margin
-            case .fixedPoint: return 0
-            case .fixedFraction: return 0
+            case .wrapped(let margin): margin
+            case .stretched(_, let margin): margin
+            case .fixedPoint: 0
+            case .fixedFraction: 0
             }
         }
 
@@ -206,8 +206,8 @@ public struct VToastUIModel {
         // MARK: Properties
         var alignment: Alignment {
             switch self {
-            case .top: return .top
-            case .bottom: return .bottom
+            case .top: .top
+            case .bottom: .bottom
             }
         }
 

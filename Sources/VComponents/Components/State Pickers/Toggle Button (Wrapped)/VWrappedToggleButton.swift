@@ -195,11 +195,11 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 extension VWrappedToggleButtonInternalState {
     fileprivate var isPressed: Bool {
         switch self {
-        case .off: return false
-        case .on: return false
-        case .pressedOff: return true
-        case .pressedOn: return true
-        case .disabled: return false
+        case .off: false
+        case .on: false
+        case .pressedOff: true
+        case .pressedOn: true
+        case .disabled: false
         }
     }
 }

@@ -84,8 +84,8 @@ public struct VWrappingMarqueeUIModel {
         // MARK: Helpers
         func duration(width: CGFloat) -> Double {
             switch self {
-            case .velocity(let velocity): return width / velocity
-            case .duration(let duration): return duration
+            case .velocity(let velocity): width / velocity
+            case .duration(let duration): duration
             }
         }
     }

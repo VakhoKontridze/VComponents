@@ -102,8 +102,8 @@ public struct VDynamicPagerTabViewUIModel {
         // MARK: Properties
         var padsSelectionIndicator: Bool {
             switch self {
-            case .wrapped: return true
-            case .stretched: return false
+            case .wrapped: true
+            case .stretched: false
             }
         }
 

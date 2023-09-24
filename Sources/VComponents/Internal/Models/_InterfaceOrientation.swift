@@ -30,9 +30,9 @@ enum _InterfaceOrientation {
     static func initFromSystemInfo() -> Self {
 #if os(iOS) || targetEnvironment(macCatalyst)
         if UIDevice.current.orientation.isLandscape {
-            return .landscape
+            .landscape
         } else {
-            return .portrait
+            .portrait
         }
 #else
         fatalError() // Not supported

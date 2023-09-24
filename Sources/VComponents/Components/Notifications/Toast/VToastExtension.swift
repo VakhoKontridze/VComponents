@@ -89,9 +89,9 @@ extension View {
                         onDismiss: dismissHandler,
                         text: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return text(item)
+                                text(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }()
                     )
@@ -177,9 +177,9 @@ extension View {
                         onDismiss: dismissHandler,
                         text: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return text(error)
+                                text(error)
                             } else {
-                                return ""
+                                ""
                             }
                         }()
                     )

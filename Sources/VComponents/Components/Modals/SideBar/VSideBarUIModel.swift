@@ -149,10 +149,10 @@ public struct VSideBarUIModel {
         // MARK: Properties
         var alignment: Alignment {
             switch self {
-            case .leading: return .leading
-            case .trailing: return .trailing
-            case .top: return .top
-            case .bottom: return .bottom
+            case .leading: .leading
+            case .trailing: .trailing
+            case .top: .top
+            case .bottom: .bottom
             }
         }
 

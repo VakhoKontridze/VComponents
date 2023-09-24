@@ -152,9 +152,9 @@ struct VProgressBar_Previews: PreviewProvider {
     private struct LayoutDirectionsPreview: View {
         private let dimension: CGFloat = {
 #if os(iOS)
-            return 250
+            250
 #elseif os(macOS)
-            return 300
+            300
 #else
             fatalError() // Not supported
 #endif

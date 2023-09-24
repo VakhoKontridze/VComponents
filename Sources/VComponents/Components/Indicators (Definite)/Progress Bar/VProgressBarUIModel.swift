@@ -37,9 +37,9 @@ public struct VProgressBarUIModel {
 
     var progressViewRoundedCorners: RectCorner {
         if roundsProgressViewRightEdge {
-            return .allCorners
+            .allCorners
         } else {
-            return []
+            []
         }
     }
 

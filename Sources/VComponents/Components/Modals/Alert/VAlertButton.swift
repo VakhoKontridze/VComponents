@@ -56,10 +56,10 @@ public struct VAlertButton: VAlertButtonProtocol {
             VStretchedButton(
                 uiModel: {
                     switch role {
-                    case .primary: return uiModel.primaryButtonSubUIModel
-                    case .secondary: return uiModel.secondaryButtonSubUIModel
-                    case .destructive: return uiModel.destructiveButtonSubUIModel
-                    case .cancel: return uiModel.secondaryButtonSubUIModel
+                    case .primary: uiModel.primaryButtonSubUIModel
+                    case .secondary: uiModel.secondaryButtonSubUIModel
+                    case .destructive: uiModel.destructiveButtonSubUIModel
+                    case .cancel: uiModel.secondaryButtonSubUIModel
                     }
                 }(),
                 action: { animateOut(/*completion: */action) },

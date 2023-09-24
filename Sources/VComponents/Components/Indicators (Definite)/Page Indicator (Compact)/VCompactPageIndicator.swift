@@ -139,8 +139,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                     current: current,
                     dotContent: {
                         switch dotContent {
-                        case .empty: return .empty
-                        case .content(let content): return .content(content: content)
+                        case .empty: VPageIndicatorDotContent.empty
+                        case .content(let content): VPageIndicatorDotContent.content(content: content)
                         }
                     }()
                 )
@@ -351,9 +351,9 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private func centerIndexAbsolute(at index: Int) -> Int? {
         // (0 1 2 3 4 5 6) -> (0 1 _ _ _ 1 0)
         switch index {
-        case 0..<side: return index
-        case visible-side..<visible: return visible - index - 1
-        default: return nil
+        case 0..<side: index
+        case visible-side..<visible: visible - index - 1
+        default: nil
         }
     }
     

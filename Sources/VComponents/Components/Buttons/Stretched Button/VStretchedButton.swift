@@ -200,7 +200,7 @@ struct VStretchedButton_Previews: PreviewProvider {
     // Data
     private static var title: String {
 #if os(watchOS)
-        return "Lorem".pseudoRTL(languageDirection)
+        "Lorem".pseudoRTL(languageDirection)
 #else
         "Lorem Ipsum".pseudoRTL(languageDirection)
 #endif

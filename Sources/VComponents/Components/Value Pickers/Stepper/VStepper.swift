@@ -37,9 +37,9 @@ public struct VStepper: View {
 
     private func buttonIsEnabled(_ button: VStepperButton) -> Bool {
         switch (internalState, button) {
-        case (.disabled, _): return false
-        case (.enabled, .minus): return !(value <= range.lowerBound)
-        case (.enabled, .plus): return !(value >= range.upperBound)
+        case (.disabled, _): false
+        case (.enabled, .minus): !(value <= range.lowerBound)
+        case (.enabled, .plus): !(value >= range.upperBound)
         }
     }
 

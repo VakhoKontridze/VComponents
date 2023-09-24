@@ -77,9 +77,9 @@ public struct VAlertUIModel {
     /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.
     public var titleTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            return .multiLine(alignment: .center, lineLimit: 1...2)
+            .multiLine(alignment: .center, lineLimit: 1...2)
         } else {
-            return .multiLine(alignment: .center, lineLimit: 2)
+            .multiLine(alignment: .center, lineLimit: 2)
         }
     }()
 
@@ -101,9 +101,9 @@ public struct VAlertUIModel {
     /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
     public var messageTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            return .multiLine(alignment: .center, lineLimit: 1...5)
+            .multiLine(alignment: .center, lineLimit: 1...5)
         } else {
-            return .multiLine(alignment: .center, lineLimit: 5)
+            .multiLine(alignment: .center, lineLimit: 5)
         }
     }()
 

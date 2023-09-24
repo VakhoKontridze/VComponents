@@ -238,8 +238,8 @@ public struct VRangeSlider: View {
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return self.value.lowerBound - self.range.lowerBound
-            case .high: return self.value.upperBound - self.range.lowerBound
+            case .low: self.value.lowerBound - self.range.lowerBound
+            case .high: self.value.upperBound - self.range.lowerBound
             }
         }()
         let range: CGFloat = range.upperBound - range.lowerBound
@@ -396,9 +396,9 @@ struct VRangeSlider_Previews: PreviewProvider {
     private struct LayoutDirectionsPreview: View {
         private let dimension: CGFloat = {
 #if os(iOS)
-            return 250
+            250
 #elseif os(macOS)
-            return 300
+            300
 #else
             fatalError() // Not supported
 #endif

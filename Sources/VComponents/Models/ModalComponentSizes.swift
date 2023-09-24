@@ -42,9 +42,9 @@ public struct ModalComponentSizes<ModalSize> {
         isPortrait: Bool
     ) -> ModalSize {
         if isPortrait {
-            return portrait
+            portrait
         } else {
-            return landscape
+            landscape
         }
     }
 
@@ -55,8 +55,8 @@ public struct ModalComponentSizes<ModalSize> {
         _interfaceOrientation interfaceOrientation: _InterfaceOrientation
     ) -> ModalSize {
         switch interfaceOrientation {
-        case .portrait: return portrait
-        case .landscape: return landscape
+        case .portrait: portrait
+        case .landscape: landscape
         }
     }
 }
@@ -101,8 +101,8 @@ public enum ModalComponentDimension: Equatable {
     // MARK: Properties
     var value: CGFloat {
         switch self {
-        case .absolute(let dimension): return dimension
-        case .fraction(let fraction): return fraction
+        case .absolute(let dimension): dimension
+        case .fraction(let fraction): fraction
         }
     }
 
@@ -111,8 +111,8 @@ public enum ModalComponentDimension: Equatable {
         in containerDimension: CGFloat
     ) -> CGFloat {
         switch self {
-        case .absolute(let dimension): return dimension
-        case .fraction(let fraction): return fraction * containerDimension
+        case .absolute(let dimension): dimension
+        case .fraction(let fraction): fraction * containerDimension
         }
     }
 }

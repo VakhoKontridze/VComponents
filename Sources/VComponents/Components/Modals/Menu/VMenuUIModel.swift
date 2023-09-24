@@ -28,9 +28,9 @@ public struct VMenuUIModel {
     /// Set to `body` (`13`) on `macOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
-        return Font.body
+        Font.body
 #elseif os(macOS)
-        return Font.body
+        Font.body
 #else
         fatalError() // Not supported
 #endif

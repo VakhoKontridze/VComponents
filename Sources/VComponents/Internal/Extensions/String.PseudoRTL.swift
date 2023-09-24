@@ -13,9 +13,9 @@ extension String {
         _ layoutDirection: LayoutDirection
     ) -> Self {
         if layoutDirection == .rightToLeft {
-            return String(self.reversed())
+            String(self.reversed())
         } else {
-            return self
+            self
         }
     }
 }

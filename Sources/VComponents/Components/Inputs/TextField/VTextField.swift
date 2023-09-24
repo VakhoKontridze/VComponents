@@ -297,9 +297,9 @@ public struct VTextField: View {
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
-            return uiModel.visibilityOnButtonIcon.renderingMode(.template)
+            uiModel.visibilityOnButtonIcon.renderingMode(.template)
         } else {
-            return uiModel.visibilityOffButtonIcon.renderingMode(.template)
+            uiModel.visibilityOffButtonIcon.renderingMode(.template)
         }
     }
     

@@ -72,17 +72,17 @@ struct PreviewContainer<Content>: View where Content: View {
 
 // MARK: - Helpers
 extension PreviewPlatform {
-    static var currentDevice: Self {
+    static let currentDevice: Self = {
 #if os(iOS)
-        return .iOS
+        .iOS
 #elseif os(macOS)
-        return .macOS
+        .macOS
 #elseif os(tvOS)
-        return .tvOS
+        .tvOS
 #elseif os(watchOS)
-        return .watchOS
+        .watchOS
 #endif
-    }
+    }()
 }
 
 extension Axis {

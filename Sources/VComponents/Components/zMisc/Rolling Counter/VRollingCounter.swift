@@ -159,11 +159,11 @@ public struct VRollingCounter: View {
 
                     highlightedColor = {
                         if newValue > oldValue {
-                            return uiModel.incrementHighlightColor
+                            uiModel.incrementHighlightColor
                         } else if newValue < oldValue {
-                            return uiModel.decrementHighlightColor
+                            uiModel.decrementHighlightColor
                         } else {
-                            return .clear
+                            Color.clear
                         }
                     }()
                 },
@@ -189,11 +189,11 @@ public struct VRollingCounter: View {
 
                     highlightedColor = {
                         if newValue > oldValue {
-                            return uiModel.incrementHighlightColor
+                            uiModel.incrementHighlightColor
                         } else if newValue < oldValue {
-                            return uiModel.decrementHighlightColor
+                            uiModel.decrementHighlightColor
                         } else {
-                            return .clear
+                            Color.clear
                         }
                     }()
                 },
