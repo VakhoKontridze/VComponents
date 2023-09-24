@@ -92,7 +92,11 @@ extension View {
     ///             content: {
     ///                 Text("...")
     ///                     .fixedSize(horizontal: false, vertical: true)
-    ///                     .getSize({ contentHeight = $0.height })
+    ///                     .getSize({ size in
+    ///                         DispatchQueue.main.async(execute: {
+    ///                             contentHeight = size.height
+    ///                         })
+    ///                     })
     ///             }
     ///         )
     ///     }
