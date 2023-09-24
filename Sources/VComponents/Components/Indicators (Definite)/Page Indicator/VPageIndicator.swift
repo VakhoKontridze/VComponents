@@ -161,7 +161,7 @@ public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         let range: [Int] = (0..<total)
-            .reversedArray(if: uiModel.direction.isReversed)
+            .reversedArray(uiModel.direction.isReversed)
 
         return Group(content: {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {

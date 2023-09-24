@@ -49,7 +49,7 @@ public struct VProgressBar: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.alignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment, content: {
             track
             progress
             border

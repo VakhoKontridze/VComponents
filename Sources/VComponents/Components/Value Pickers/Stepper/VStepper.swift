@@ -147,7 +147,7 @@ public struct VStepper: View {
         gestureState: GestureBaseButtonGestureState
     ) {
         DispatchQueue.main.async(execute: {
-            if !gestureState.isPressed {
+            if !gestureState.didRecognizePress {
                 pressedButton = nil
                 shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
                 zeroLongPressTimers()
@@ -157,7 +157,7 @@ public struct VStepper: View {
                 scheduleLongPressIncrementSchedulerTimer(for: button)
             }
             
-            if gestureState.isClicked {
+            if gestureState.didRecognizeClick {
                 playHapticPressEffect()
                 action(button: button)
             }

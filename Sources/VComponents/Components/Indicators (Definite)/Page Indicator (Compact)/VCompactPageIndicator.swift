@@ -156,7 +156,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             .withReversedDimensions(uiModel.direction.isVertical)
 
         let range: [Int] = (0..<total)
-            .reversedArray(if: uiModel.direction.isReversed)
+            .reversedArray(uiModel.direction.isReversed)
 
         return Group(content: {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -249,7 +249,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 
     private func dotsFallback() -> some View {
         let range: [Int] = (0..<total)
-            .reversedArray(if: uiModel.direction.isReversed)
+            .reversedArray(uiModel.direction.isReversed)
 
         return ForEach(range, id: \.self, content: dotContentView)
     }
@@ -286,7 +286,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         }()
         
         return directionalOffset
-            .withOppositeSign(if: uiModel.direction.isReversed)
+            .withOppositeSign(uiModel.direction.isReversed)
     }
     
     // MARK: Scale
@@ -414,7 +414,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 // MARK: - Helpers
 extension Int {
     fileprivate var isEven: Bool { self % 2 == 0 }
-    
     fileprivate var isOdd: Bool { !isEven }
 }
 

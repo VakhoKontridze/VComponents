@@ -122,7 +122,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-        .scaleEffect(internalState.isPressed ? uiModel.labelPressedScale : 1)
+        .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
 
@@ -150,7 +150,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
 
     private var background: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .scaleEffect(internalState.isPressed ? uiModel.backgroundPressedScale : 1)
+            .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
             .shadow(
                 color: uiModel.shadowColors.value(for: internalState),
@@ -163,15 +163,15 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-                .scaleEffect(internalState.isPressed ? uiModel.backgroundPressedScale : 1)
+                .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
         }
     }
 
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
-        isPressed = gestureState.isPressed
+        isPressed = gestureState.didRecognizePress
 
-        if gestureState.isClicked {
+        if gestureState.didRecognizeClick {
             playHapticEffect()
             state.setNextState()
         }
@@ -189,7 +189,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VRectangularToggleButtonInternalState {
-    fileprivate var isPressed: Bool {
+    fileprivate var isPressedOffPressedOn: Bool {
         switch self {
         case .off: false
         case .on: false

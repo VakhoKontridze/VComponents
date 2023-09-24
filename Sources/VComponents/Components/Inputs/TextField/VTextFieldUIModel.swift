@@ -220,7 +220,7 @@ public struct VTextFieldUIModel {
 
     // MARK: Content Type
     /// Enumeration that represents content type, such as `standard`, `secure`, or `search`.
-    public enum ContentType: Int, CaseIterable {
+    public enum ContentType: Int, CaseIterable { // TODO: Remove properties when `CaseDetection` is added
         // MARK: Cases
         /// Standard type.
         case standard

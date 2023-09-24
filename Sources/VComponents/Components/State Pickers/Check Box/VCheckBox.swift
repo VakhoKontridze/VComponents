@@ -195,9 +195,9 @@ public struct VCheckBox<Label>: View where Label: View {
     
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
-        isPressed = gestureState.isPressed
+        isPressed = gestureState.didRecognizePress
         
-        if gestureState.isClicked {
+        if gestureState.didRecognizeClick {
             playHapticEffect()
             state.setNextState()
         }

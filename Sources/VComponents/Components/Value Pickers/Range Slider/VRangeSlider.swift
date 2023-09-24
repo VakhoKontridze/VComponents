@@ -90,8 +90,8 @@ public struct VRangeSlider: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.alignment, content: {
-            ZStack(alignment: uiModel.direction.alignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment, content: {
+            ZStack(alignment: uiModel.direction.toAlignment, content: {
                 track
                 progress
                 border
@@ -122,8 +122,8 @@ public struct VRangeSlider: View {
     
     private var progress: some View {
         Rectangle()
-            .padding(uiModel.direction.edgeSet, progressWidth(.low))
-            .padding(uiModel.direction.reversed().edgeSet, progressWidth(.high))
+            .padding(uiModel.direction.toEdgeSet, progressWidth(.low))
+            .padding(uiModel.direction.reversed().toEdgeSet, progressWidth(.high))
             .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
@@ -143,14 +143,14 @@ public struct VRangeSlider: View {
                 })
                 .frame(dimension: uiModel.thumbDimension)
                 .offset(
-                    x: uiModel.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(if: uiModel.direction.isReversed) : 0,
-                    y: uiModel.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(if: uiModel.direction.isReversed)
+                    x: uiModel.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed) : 0,
+                    y: uiModel.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed)
                 )
             })
             .frame( // Must be put into group, as content already has frame
                 maxWidth: uiModel.direction.isHorizontal ? .infinity : nil,
                 maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
-                alignment: uiModel.direction.alignment
+                alignment: uiModel.direction.toAlignment
             )
             .gesture(
                 DragGesture(minimumDistance: 0)

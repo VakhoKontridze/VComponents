@@ -76,8 +76,8 @@ public struct VSlider: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.alignment, content: {
-            ZStack(alignment: uiModel.direction.alignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment, content: {
+            ZStack(alignment: uiModel.direction.toAlignment, content: {
                 track
                 progress
                 border
@@ -139,14 +139,14 @@ public struct VSlider: View {
                 })
                 .frame(dimension: uiModel.thumbDimension)
                 .offset(
-                    x: uiModel.direction.isHorizontal ? thumbOffset.withOppositeSign(if: uiModel.direction.isReversed) : 0,
-                    y: uiModel.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(if: uiModel.direction.isReversed)
+                    x: uiModel.direction.isHorizontal ? thumbOffset.withOppositeSign(uiModel.direction.isReversed) : 0,
+                    y: uiModel.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(uiModel.direction.isReversed)
                 )
             })
             .frame( // Must be put into group, as content already has frame
                 maxWidth: uiModel.direction.isHorizontal ? .infinity : nil,
                 maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
-                alignment: uiModel.direction.alignment
+                alignment: uiModel.direction.toAlignment
             )
             .applyIf(
                 uiModel.bodyIsDraggable,

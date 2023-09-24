@@ -208,7 +208,7 @@ struct VAlert<Content>: View
     }
     
     private func buttonContent(reversesOrder: Bool = false) -> some View {
-        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
+        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
             buttons[i].makeBody(
