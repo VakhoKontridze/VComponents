@@ -42,9 +42,8 @@ extension View {
     ///                                 }
     ///                             )
     ///                         })
-    ///
-    ///                         Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
     ///                     })
+    ///                     .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
     ///                 })
     ///             }
     ///         )

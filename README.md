@@ -240,9 +240,8 @@ var body: some View {
                             }
                         )
                     })
-                    
-                    Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
                 })
+                .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
             })
         }
     )

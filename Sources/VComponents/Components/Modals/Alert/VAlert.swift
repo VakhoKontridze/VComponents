@@ -125,7 +125,14 @@ struct VAlert<Content>: View
             maxWidth: currentWidth,
             maxHeight: alertHeight
         )
-        .safeAreaMargins(edges: .vertical, insets: safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
+        .applyModifier({
+            // Since alert doesn't have an explicit height, prevents clipping into safe areas
+            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                $0.safeAreaPaddings(edges: .vertical, insets: safeAreaInsets)
+            } else {
+                $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
+            }
+        })
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
     }
     
@@ -318,20 +325,20 @@ struct VAlert_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             
-//            NoContentPreview().previewDisplayName("No Content")
-//
-//            NoButtonPreview().previewDisplayName("No Button")
-//            SingleButtonPreview().previewDisplayName("Single Button")
-//            ManyButtonsPreview().previewDisplayName("Many Buttons")
-//
-//            ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
-//            ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
+            NoContentPreview().previewDisplayName("No Content")
 
-//            NoTitlePreview().previewDisplayName("No Title")
-//            NoMessagePreview().previewDisplayName("No Message")
-//            NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
+            NoButtonPreview().previewDisplayName("No Button")
+            SingleButtonPreview().previewDisplayName("Single Button")
+            ManyButtonsPreview().previewDisplayName("Many Buttons")
 
-//            OnlyButtonsPreview().previewDisplayName("Only Buttons")
+            ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
+            ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
+
+            NoTitlePreview().previewDisplayName("No Title")
+            NoMessagePreview().previewDisplayName("No Message")
+            NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
+
+            OnlyButtonsPreview().previewDisplayName("Only Buttons")
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)

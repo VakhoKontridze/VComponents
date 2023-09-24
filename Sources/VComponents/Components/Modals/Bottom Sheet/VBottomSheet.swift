@@ -184,7 +184,13 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+        .applyModifier({
+            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                $0.safeAreaPaddings(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+            } else {
+                $0.safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+            }
+        })
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable,
@@ -389,7 +395,7 @@ struct VBottomSheet<Content>: View
 @available(watchOS, unavailable)
 struct VBottomSheet_Previews: PreviewProvider {
     // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var interfaceOrientation: InterfaceOrientation { .landscapeLeft }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
@@ -624,10 +630,9 @@ struct VBottomSheet_Previews: PreviewProvider {
                                             }
                                         )
                                     })
-
-                                    Spacer().frame(height: UIDevice.safeAreaInsets.bottom)
                                 })
                             })
+                            .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
                         }
                     )
             })

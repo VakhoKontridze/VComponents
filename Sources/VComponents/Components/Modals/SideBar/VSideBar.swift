@@ -105,7 +105,13 @@ struct VSideBar<Content>: View where Content: View {
             
             content()
                 .padding(uiModel.contentMargins)
-                .safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                .applyModifier({
+                    if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                        $0.safeAreaPaddings(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                    } else {
+                        $0.safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                    }
+                })
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentWidth,
@@ -382,15 +388,39 @@ struct VSideBar_Previews: PreviewProvider {
                     .vSideBar(
                         id: "preview",
                         uiModel: {
-                            var uiModel: VSideBarUIModel = .init() // No `presentationEdge`
+                            var uiModel: VSideBarUIModel = presentationEdge
 
                             uiModel.colorScheme = VSideBar_Previews.colorScheme
 
                             uiModel.contentSafeAreaMargins = {
-                                if interfaceOrientation.isLandscape {
-                                    return .leading
-                                } else {
-                                    return .vertical
+                                switch uiModel.presentationEdge {
+                                case .leading:
+                                    if interfaceOrientation.isLandscape {
+                                        return .leading
+                                    } else {
+                                        return .vertical
+                                    }
+
+                                case .trailing:
+                                    if interfaceOrientation.isLandscape {
+                                        return .trailing
+                                    } else {
+                                        return .vertical
+                                    }
+
+                                case .top:
+                                    if interfaceOrientation.isLandscape {
+                                        return .horizontal
+                                    } else {
+                                        return .top
+                                    }
+
+                                case .bottom:
+                                    if interfaceOrientation.isLandscape {
+                                        return .horizontal
+                                    } else {
+                                        return .bottom
+                                    }
                                 }
                             }()
 
