@@ -77,17 +77,17 @@ public struct VWrappingMarqueeUIModel {
         /// Velocity, that calculates duration based on the width of the content.
         case velocity(CGFloat)
 
-        // MARK: Initializers
-        /// Default value. Set to `velocity` of `20`.
-        public static var `default`: Self { .velocity(20) }
-
-        // MARK: Helpers
-        func duration(width: CGFloat) -> Double {
+        // MARK: Properties
+        func toDuration(width: CGFloat) -> Double {
             switch self {
             case .velocity(let velocity): width / velocity
             case .duration(let duration): duration
             }
         }
+
+        // MARK: Initializers
+        /// Default value. Set to `velocity` of `20`.
+        public static var `default`: Self { .velocity(20) }
     }
 }
 

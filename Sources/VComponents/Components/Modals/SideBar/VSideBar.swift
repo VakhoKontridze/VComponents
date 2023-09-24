@@ -58,7 +58,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ZStack(
-            alignment: uiModel.presentationEdge.alignment,
+            alignment: uiModel.presentationEdge.toAlignment,
             content: {
                 dimmingView
                 sideBar
@@ -272,6 +272,21 @@ struct VSideBar<Content>: View where Content: View {
         switch uiModel.presentationEdge {
         case .leading, .trailing: abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(in: currentWidth)
         case .top, .bottom: abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(in: currentHeight)
+        }
+    }
+}
+
+// MARK: - Helpers
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension Edge {
+    fileprivate var toAlignment: Alignment {
+        switch self {
+        case .top: return .top
+        case .leading: return .leading
+        case .bottom: return .bottom
+        case .trailing: return .trailing
         }
     }
 }

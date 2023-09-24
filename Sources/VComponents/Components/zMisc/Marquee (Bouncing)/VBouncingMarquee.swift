@@ -142,7 +142,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         
         return BasicAnimation(
             curve: uiModel.animationCurve,
-            duration: uiModel.animationDurationType.duration(width: width),
+            duration: uiModel.animationDurationType.toDuration(width: width),
             delay: uiModel.animationDelay
         )
         .toSwiftUIAnimation

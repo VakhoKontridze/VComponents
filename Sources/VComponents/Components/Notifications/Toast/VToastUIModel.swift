@@ -33,8 +33,8 @@ public struct VToastUIModel {
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default
 
-    /// Edge from which toast appears, and to which it disappears. Set to `default`.
-    public var presentationEdge: PresentationEdge = .default
+    /// Edge from which toast appears, and to which it disappears. Set to `bottom`.
+    public var presentationEdge: VerticalEdge = .bottom
 
     /// Safe area inset from presented edge. Set to `10`.
     public var presentationEdgeSafeAreaInset: CGFloat = 10
@@ -173,7 +173,7 @@ public struct VToastUIModel {
         /// Multi-line.
         case multiLine(alignment: TextAlignment, lineLimit: Int?)
 
-        // MARK: Properties
+        // MARK: Mapping
         var toVCoreTextLineType: VCore.TextLineType {
             switch self {
             case .singleLine:
@@ -192,29 +192,6 @@ public struct VToastUIModel {
     // MARK: Margins
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias Margins = EdgeInsets_HorizontalVertical
-
-    // MARK: Presentation Edge
-    /// Enumeration that represents presentation edge, such as `top` or `bottom`.
-    public enum PresentationEdge: Int, CaseIterable {
-        // MARK: Cases
-        /// Presentation from top.
-        case top
-
-        /// Presentation from bottom.
-        case bottom
-
-        // MARK: Properties
-        var alignment: Alignment {
-            switch self {
-            case .top: .top
-            case .bottom: .bottom
-            }
-        }
-
-        // MARK: Initializers
-        /// Default value. Set to `bottom`.
-        public static var `default`: Self { .bottom }
-    }
 }
 
 // MARK: - Factory (Highlights)

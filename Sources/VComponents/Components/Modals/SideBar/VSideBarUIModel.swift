@@ -29,11 +29,11 @@ public struct VSideBarUIModel {
     }
 
     // MARK: Properties - Global Layout
-    /// Edge from which side bar appears, and to which it disappears. Set to `default`.
+    /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///
     /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
     /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
-    public var presentationEdge: PresentationEdge = .default
+    public var presentationEdge: Edge = .leading
 
     /// Side bar sizes. Set to `default`.
     /// Set to `0.75x1` container ratios in portrait.
@@ -129,37 +129,6 @@ public struct VSideBarUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
-    // MARK: Presentation Edge
-    /// Enumeration that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
-    public enum PresentationEdge: Int, CaseIterable {
-        // MARK: Cases
-        /// Presentation form leading edge.
-        case leading
-
-        /// Presentation form trailing edge.
-        case trailing
-
-        /// Presentation form top edge.
-        case top
-
-        /// Presentation form bottom edge.
-        case bottom
-
-        // MARK: Properties
-        var alignment: Alignment {
-            switch self {
-            case .leading: .leading
-            case .trailing: .trailing
-            case .top: .top
-            case .bottom: .bottom
-            }
-        }
-
-        // MARK: Initializers
-        /// Default value. Set to `leading`.
-        public static var `default`: Self { .leading }
-    }
 
     // MARK: Sizes
     /// Model that represents side bar sizes.

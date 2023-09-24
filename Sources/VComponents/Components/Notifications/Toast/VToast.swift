@@ -51,7 +51,7 @@ struct VToast: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: uiModel.presentationEdge.alignment, content: {
+        ZStack(alignment: uiModel.presentationEdge.toAlignment, content: {
             dimmingView
             contentView
         })
@@ -239,6 +239,19 @@ struct VToast: View {
     }
 }
 
+// MARK: - Helpers
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VerticalEdge {
+    fileprivate var toAlignment: Alignment {
+        switch self {
+        case .top: return .top
+        case .bottom: return .bottom
+        }
+    }
+}
+
 // MARK: - Preview
 // Developmental only
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -253,7 +266,7 @@ struct VToast_Previews: PreviewProvider {
     private static var colorScheme: ColorScheme { .light }
     private static var highlights: VToastUIModel { .init() }
     private static var widthType: VToastUIModel.WidthType { .default }
-    private static var presentationEdge: VToastUIModel.PresentationEdge { .default }
+    private static var presentationEdge: VerticalEdge { .bottom }
 
     // Previews
     static var previews: some View {
