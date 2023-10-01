@@ -83,14 +83,14 @@ public struct VStepper: View {
     // MARK: Body
     public var body: some View {
         ZStack(content: {
-            background
+            backgroundView
             buttons
         })
         .frame(size: uiModel.size)
         .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius))
     }
     
-    private var background: some View {
+    private var backgroundView: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
     }

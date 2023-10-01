@@ -57,7 +57,7 @@ public struct VGroupBox<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         contentView
-            .background(content: { background })
+            .background(content: { backgroundView })
             .cornerRadius(
                 uiModel.cornerRadius,
                 corners: uiModel.roundedCorners
@@ -68,7 +68,7 @@ public struct VGroupBox<Content>: View where Content: View {
             )
     }
     
-    private var background: some View {
+    private var backgroundView: some View {
         uiModel.backgroundColor
     }
     

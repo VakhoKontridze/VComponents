@@ -112,56 +112,20 @@ public struct VTextView: View {
             alignment: .leading,
             spacing: uiModel.headerTextViewAndFooterSpacing,
             content: {
-                header
-                input
-                footer
+                headerView
+                inputView
+                footerView
             }
         )
     }
 
-    @ViewBuilder private var header: some View {
-        if let headerTitle, !headerTitle.isEmpty {
-            Text(headerTitle)
-                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
-                .font(uiModel.headerTitleTextFont)
-
-                .padding(.horizontal, uiModel.headerMarginHorizontal)
-        }
-    }
-
-    @ViewBuilder private var footer: some View {
-        if let footerTitle, !footerTitle.isEmpty {
-            Text(footerTitle)
-                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
-                .font(uiModel.footerTitleTextFont)
-
-                .padding(.horizontal, uiModel.footerMarginHorizontal)
-        }
-    }
-
-    private var input: some View {
+    private var inputView: some View {
         textField
             .frame(minHeight: uiModel.minHeight)
             .padding(uiModel.contentMargins)
             .clipped() // Prevents large content from overflowing
-            .background(content: { backgroundBorder }) // Has own rounding
-            .background(content: { background }) // Has own rounding
-    }
-
-    private var background: some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
-    }
-
-    @ViewBuilder private var backgroundBorder: some View {
-        if uiModel.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-        }
+            .background(content: { backgroundBorderView }) // Has own rounding
+            .background(content: { backgroundView }) // Has own rounding
     }
 
     private var textField: some View {
@@ -206,6 +170,42 @@ public struct VTextView: View {
 #endif
         })
         .submitLabel(uiModel.submitButton)
+    }
+
+    private var backgroundView: some View {
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+    }
+
+    @ViewBuilder private var backgroundBorderView: some View {
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+        }
+    }
+
+    @ViewBuilder private var headerView: some View {
+        if let headerTitle, !headerTitle.isEmpty {
+            Text(headerTitle)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
+
+                .padding(.horizontal, uiModel.headerMarginHorizontal)
+        }
+    }
+
+    @ViewBuilder private var footerView: some View {
+        if let footerTitle, !footerTitle.isEmpty {
+            Text(footerTitle)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
+
+                .padding(.horizontal, uiModel.footerMarginHorizontal)
+        }
     }
 }
 

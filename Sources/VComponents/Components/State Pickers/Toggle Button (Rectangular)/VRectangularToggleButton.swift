@@ -99,7 +99,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(size: uiModel.size)
                     .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { background }) // Has own rounding
+                    .background(content: { backgroundView }) // Has own rounding
                     .overlay(content: { border }) // Has own rounding
                     .padding(uiModel.hitBox)
             }
@@ -148,7 +148,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
 
-    private var background: some View {
+    private var backgroundView: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))

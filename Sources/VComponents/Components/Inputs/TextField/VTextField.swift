@@ -137,9 +137,9 @@ public struct VTextField: View {
             alignment: .leading,
             spacing: uiModel.headerTextFieldAndFooterSpacing,
             content: {
-                header
-                input
-                footer
+                headerView
+                inputView
+                footerView
             }
         )
         .onChange(of: uiModel.contentType, perform: {
@@ -148,32 +148,8 @@ public struct VTextField: View {
             }
         })
     }
-    
-    @ViewBuilder private var header: some View {
-        if let headerTitle, !headerTitle.isEmpty {
-            Text(headerTitle)
-                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
-                .font(uiModel.headerTitleTextFont)
 
-                .padding(.horizontal, uiModel.headerMarginHorizontal)
-        }
-    }
-    
-    @ViewBuilder private var footer: some View {
-        if let footerTitle, !footerTitle.isEmpty {
-            Text(footerTitle)
-                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
-                .font(uiModel.footerTitleTextFont)
-
-                .padding(.horizontal, uiModel.footerMarginHorizontal)
-        }
-    }
-    
-    private var input: some View {
+    private var inputView: some View {
         HStack(spacing: uiModel.textAndButtonSpacing, content: {
             searchIcon // Only for search field
             textField
@@ -183,33 +159,10 @@ public struct VTextField: View {
         .frame(height: uiModel.height)
         .padding(.horizontal, uiModel.contentMarginHorizontal)
         .clipped() // Prevents large content from overflowing
-        .background(content: { backgroundBorder }) // Has own rounding
-        .background(content: { background }) // Has own rounding
-    }
-    
-    private var background: some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+        .background(content: { backgroundBorderView }) // Has own rounding
+        .background(content: { backgroundView }) // Has own rounding
     }
 
-    @ViewBuilder private var backgroundBorder: some View {
-        if uiModel.borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-        }
-    }
-    
-    @ViewBuilder private var searchIcon: some View {
-        if uiModel.contentType.isSearch {
-            uiModel.searchButtonIcon
-                .renderingMode(.template)
-                .resizable()
-                .scaledToFit()
-                .frame(dimension: uiModel.searchIconDimension)
-                .foregroundStyle(uiModel.searchIconColors.value(for: internalState))
-        }
-    }
-    
     private var textField: some View {
         SecurableTextField(
             isSecure: uiModel.contentType.isSecure && !secureFieldIsVisible,
@@ -221,7 +174,7 @@ public struct VTextField: View {
             text: $text
         )
         .textFieldStyle(.plain)
-        
+
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
         .applyModifier({
@@ -267,6 +220,17 @@ public struct VTextField: View {
         })
         .submitLabel(uiModel.submitButton)
     }
+
+    @ViewBuilder private var searchIcon: some View {
+        if uiModel.contentType.isSearch {
+            uiModel.searchButtonIcon
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(dimension: uiModel.searchIconDimension)
+                .foregroundStyle(uiModel.searchIconColors.value(for: internalState))
+        }
+    }
     
     private var clearButton: some View {
         let isVisible: Bool = // Keyboard animation breaks offset when using conditional instead of opacity
@@ -293,7 +257,44 @@ public struct VTextField: View {
             )
         }
     }
-    
+
+    private var backgroundView: some View {
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+    }
+
+    @ViewBuilder private var backgroundBorderView: some View {
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+        }
+    }
+
+    @ViewBuilder private var headerView: some View {
+        if let headerTitle, !headerTitle.isEmpty {
+            Text(headerTitle)
+                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
+                .font(uiModel.headerTitleTextFont)
+
+                .padding(.horizontal, uiModel.headerMarginHorizontal)
+        }
+    }
+
+    @ViewBuilder private var footerView: some View {
+        if let footerTitle, !footerTitle.isEmpty {
+            Text(footerTitle)
+                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
+                .font(uiModel.footerTitleTextFont)
+
+                .padding(.horizontal, uiModel.footerMarginHorizontal)
+        }
+    }
+
+
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {

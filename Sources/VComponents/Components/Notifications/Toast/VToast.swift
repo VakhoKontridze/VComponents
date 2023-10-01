@@ -108,13 +108,13 @@ struct VToast: View {
                 }
             })
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
-            .background(content: { background })
+            .background(content: { backgroundView })
             .getSize({ height = $0.height })
             .padding(.horizontal, uiModel.widthType.marginHorizontal)
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
-    private var background: some View {
+    private var backgroundView: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
             .shadow(
