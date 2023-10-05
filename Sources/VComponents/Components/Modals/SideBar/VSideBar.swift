@@ -117,6 +117,7 @@ struct VSideBar<Content>: View where Content: View {
             maxWidth: currentWidth,
             maxHeight: currentHeight
         )
+        .cornerRadius(uiModel.cornerRadius, corners: uiModel.roundedCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
         .offset(isInternallyPresented ? .zero : initialOffset)
         .gesture(
             DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
