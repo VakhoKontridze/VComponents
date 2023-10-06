@@ -33,6 +33,20 @@ import VCore
 ///         .padding()
 ///     }
 ///
+/// Component can be radio-ed by ignoring select values in state's `Binding`'s setters.
+///
+///     @State private var state: VStretchedToggleButtonState = .on
+///
+///     var body: some View {
+///         VStretchedToggleButton(
+///             state: Binding(
+///                 get: { state },
+///                 set: { if $0 == .on { state = $0 } }
+///             ),
+///             icon: Image(systemName: "swift")
+///         )
+///     }
+///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VStretchedToggleButton<Label>: View where Label: View {

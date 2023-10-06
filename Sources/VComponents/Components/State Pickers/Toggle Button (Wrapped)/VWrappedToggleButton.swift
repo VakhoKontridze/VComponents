@@ -31,6 +31,20 @@ import VCore
 ///         )
 ///     }
 ///
+/// Component can be radio-ed by ignoring select values in state's `Binding`'s setters.
+///
+///     @State private var state: VWrappedToggleButtonState = .on
+///
+///     var body: some View {
+///         VWrappedToggleButtonState(
+///             state: Binding(
+///                 get: { state },
+///                 set: { if $0 == .on { state = $0 } }
+///             ),
+///             icon: Image(systemName: "swift")
+///         )
+///     }
+///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton` support
 public struct VWrappedToggleButton<Label>: View where Label: View {

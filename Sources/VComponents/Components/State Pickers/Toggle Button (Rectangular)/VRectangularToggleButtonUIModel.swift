@@ -1,5 +1,5 @@
 //
-//  VRectangularToggleButton.swift
+//  VRectangularToggleButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.08.23.

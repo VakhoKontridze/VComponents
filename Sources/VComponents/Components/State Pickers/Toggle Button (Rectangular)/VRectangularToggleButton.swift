@@ -16,7 +16,7 @@ import VCore
 ///     var body: some View {
 ///         VRectangularToggleButton(
 ///             state: $state,
-///             title: "Lorem Ipsum"
+///             icon: Image(systemName: "swift")
 ///         )
 ///     }
 ///
@@ -27,7 +27,21 @@ import VCore
 ///     var body: some View {
 ///         VRectangularToggleButton(
 ///             state: Binding(isOn: $isOn),
-///             title: "Lorem Ipsum"
+///             icon: Image(systemName: "swift")
+///         )
+///     }
+///
+/// Component can be radio-ed by ignoring select values in state's `Binding`'s setters.
+///
+///     @State private var state: VRectangularToggleButtonState = .on
+///
+///     var body: some View {
+///         VRectangularToggleButton(
+///             state: Binding(
+///                 get: { state },
+///                 set: { if $0 == .on { state = $0 } }
+///             ),
+///             icon: Image(systemName: "swift")
 ///         )
 ///     }
 ///
