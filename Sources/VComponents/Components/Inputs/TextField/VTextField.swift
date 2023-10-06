@@ -261,6 +261,7 @@ public struct VTextField: View {
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
     }
 
     @ViewBuilder private var backgroundBorderView: some View {
