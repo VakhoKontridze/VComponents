@@ -14,7 +14,7 @@ import VCore
 ///     @State private var value: Double = 10_000
 ///
 ///     var body: some View {
-///         VStack(content: {
+///         ZStack(content: {
 ///             VRollingCounter(value: value)
 ///         })
 ///         .onAppear(perform: changeValue)
@@ -32,7 +32,7 @@ import VCore
 ///     @State private var value: Int = 10_000
 ///
 ///     var body: some View {
-///         VStack(content: {
+///         ZStack(content: {
 ///             VRollingCounter(
 ///                 uiModel: {
 ///                     var uiModel: VRollingCounterUIModel = .init()

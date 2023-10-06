@@ -220,7 +220,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
-        VStack(content: { // Used as container
+        ZStack(content: { // `ZSack` is used as a container
             Group(content: {
                 switch tabItemLabel {
                 case .title(let title):
