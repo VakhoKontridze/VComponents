@@ -58,9 +58,13 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     // MARK: Properties - State - Tab Item
-    private func tabItemInternalState(_ baseButtonState: SwiftUIBaseButtonState) -> VWrappedIndicatorStaticPagerTabViewTabItemInternalState {
+    private func tabItemInternalState(
+        _ baseButtonState: SwiftUIBaseButtonState,
+        _ element: Data.Element
+    ) -> VDynamicPagerTabViewTabItemInternalState {
         .init(
             isEnabled: isEnabled,
+            isSelected: element == selection,
             isPressed: baseButtonState == .pressed
         )
     }
@@ -198,7 +202,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
                     SwiftUIBaseButton(
                         action: { selection = element },
                         label: { baseButtonState in
-                            let tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState)
+                            let tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
                             tabItem(
                                 tabItemInternalState: tabItemInternalState,

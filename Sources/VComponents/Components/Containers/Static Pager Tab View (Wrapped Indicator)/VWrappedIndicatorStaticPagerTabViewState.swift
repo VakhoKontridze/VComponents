@@ -13,4 +13,4 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public typealias VWrappedIndicatorStaticPagerTabViewTabItemInternalState = GenericState_EnabledPressedDisabled
+public typealias VWrappedIndicatorStaticPagerTabViewTabItemInternalState = GenericState_DeselectedSelectedPressedDisabled

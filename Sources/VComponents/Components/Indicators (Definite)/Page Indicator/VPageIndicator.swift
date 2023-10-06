@@ -104,9 +104,11 @@ public struct VPageIndicator<Content>: View where Content: View {
     private let uiModel: VPageIndicatorUIModel
 
     // MARK: Properties - State
-    private func dotInternalState(i: Int) -> VPageIndicatorDotInternalState {
+    private func dotInternalState(
+        _ index: Int
+    ) -> VPageIndicatorDotInternalState {
         .init(
-            isSelected: i == current
+            isSelected: index == current
         )
     }
 
@@ -187,8 +189,8 @@ public struct VPageIndicator<Content>: View where Content: View {
         })
     }
     
-    private func dotContentView(i: Int) -> some View {
-        let internalState: VPageIndicatorDotInternalState = dotInternalState(i: i)
+    private func dotContentView(index: Int) -> some View {
+        let internalState: VPageIndicatorDotInternalState = dotInternalState(index)
 
         return Group(content: {
             switch dotContent {
@@ -205,7 +207,7 @@ public struct VPageIndicator<Content>: View where Content: View {
                 })
                 
             case .content(let content):
-                content(internalState, i)
+                content(internalState, index)
             }
         })
         .frame(

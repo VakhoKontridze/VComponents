@@ -66,9 +66,11 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private let uiModel: VCompactPageIndicatorUIModel
 
     // MARK: Properties - State
-    private func dotInternalState(i: Int) -> VCompactPageIndicatorDotInternalState {
+    private func dotInternalState(
+        _ index: Int
+    ) -> VCompactPageIndicatorDotInternalState {
         .init(
-            isSelected: i == current
+            isSelected: index == current
         )
     }
 
@@ -179,8 +181,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         })
     }
 
-    private func dotContentView(i: Int) -> some View {
-        let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(i: i)
+    private func dotContentView(index: Int) -> some View {
+        let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(index)
 
         return Group(content: {
             switch dotContent {
@@ -197,14 +199,14 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 })
 
             case .content(let content):
-                content(internalState, i)
+                content(internalState, index)
             }
         })
         .frame(
             width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
             height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
         )
-        .scaleEffect(scale(at: i))
+        .scaleEffect(scale(at: index))
     }
 
     private var compactBodyFallback: some View {

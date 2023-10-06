@@ -13,4 +13,4 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public typealias VDynamicPagerTabViewTabItemInternalState = GenericState_EnabledPressedDisabled
+public typealias VDynamicPagerTabViewTabItemInternalState = GenericState_DeselectedSelectedPressedDisabled

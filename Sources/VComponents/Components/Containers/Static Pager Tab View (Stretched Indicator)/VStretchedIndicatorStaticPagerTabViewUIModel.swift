@@ -36,8 +36,10 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
 
     /// Tab item text colors.
     public var tabItemTextColors: TabItemStateColors = .init(
-        enabled: GlobalUIModel.Containers.pagerTabViewTabItemTextColorEnabled,
-        pressed: GlobalUIModel.Containers.pagerTabViewTabItemTextColorPressed,
+        deselected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDeselected,
+        selected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDeSelected,
+        pressedDeselected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorPressedDeselected,
+        pressedSelected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorPressedSelected,
         disabled: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDisabled
     )
 
@@ -88,5 +90,5 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
 
     // MARK: Tab Item State Colors
     /// Model that contains colors for component states.
-    public typealias TabItemStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+    public typealias TabItemStateColors = GenericStateModel_DeselectedSelectedPressedDisabled<Color>
 }

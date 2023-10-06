@@ -399,9 +399,12 @@ struct GlobalUIModel {
 
         static let pagerTabViewTabItemMargin: CGFloat = 10
 
-        static let pagerTabViewTabItemTextColorEnabled: Color = ColorBook.primary
-        static let pagerTabViewTabItemTextColorPressed: Color = ColorBook.primaryPressedDisabled
+        static let pagerTabViewTabItemTextColorDeselected: Color = ColorBook.primary
+        static let pagerTabViewTabItemTextColorDeSelected: Color = ColorBook.accentBlue
+        static let pagerTabViewTabItemTextColorPressedDeselected: Color = ColorBook.primaryPressedDisabled
+        static let pagerTabViewTabItemTextColorPressedSelected: Color = ColorBook.controlLayerBluePressed
         static let pagerTabViewTabItemTextColorDisabled: Color = ColorBook.primaryPressedDisabled
+        
         static let pagerTabViewTabItemTextFont: Font = .body
 
         static let pagerTabViewTabIndicatorStripAlignment: VerticalAlignment = .bottom
