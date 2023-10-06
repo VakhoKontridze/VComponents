@@ -57,6 +57,11 @@ public struct VStepper: View {
     // MARK: Properties - Value
     @Binding private var value: Int
 
+    // MARK: Properties - Actions
+    private let onIncrement: (() -> Void)?
+    private let onDecrement: (() -> Void)?
+    private let onEditingChanged: ((Bool) -> Void)?
+
     // MARK: Properties - Long Press
     @State private var longPressSchedulerTimer: Timer?
 
@@ -72,12 +77,18 @@ public struct VStepper: View {
         uiModel: VStepperUIModel = .init(),
         range: ClosedRange<Int>,
         step: Int = 1,
-        value: Binding<Int>
+        value: Binding<Int>,
+        onIncrement: (() -> Void)? = nil,
+        onDecrement: (() -> Void)? = nil,
+        onEditingChanged: ((Bool) -> Void)? = nil
     ) {
         self.uiModel = uiModel
         self.range = range
         self.step = step
         self._value = value
+        self.onIncrement = onIncrement
+        self.onDecrement = onDecrement
+        self.onEditingChanged = onEditingChanged
     }
     
     // MARK: Body
@@ -156,10 +167,18 @@ public struct VStepper: View {
                 pressedButton = button
                 scheduleLongPressIncrementSchedulerTimer(for: button)
             }
-            
+
+            if gestureState == .began {
+                onEditingChanged?(true)
+            }
+
             if gestureState.didRecognizeClick {
                 playHapticPressEffect()
                 action(button: button)
+            }
+
+            if gestureState == .ended {
+                onEditingChanged?(false)
             }
         })
     }
@@ -176,6 +195,7 @@ public struct VStepper: View {
                 zeroLongPressTimers()
             } else {
                 value -= step
+                onDecrement?()
             }
             
         case .plus:
@@ -183,6 +203,7 @@ public struct VStepper: View {
                 zeroLongPressTimers()
             } else {
                 value += step
+                onIncrement?()
             }
         }
     }
