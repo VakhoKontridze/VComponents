@@ -11,11 +11,19 @@ General
 - `ColorBook.layer` is renamed to `ColorBook.background`
 - `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
+VStretchedButton
+
+- `init` with icon is added
+
+VLoadingStretchedButton
+- `init` with icon is added
+
 VWrappedButton
 
 - Component is renamed to `VWrappedButton`
 - `cornerRadius` can now be changed to be anything other than half of height
 - `hiBox` is now backed up by `EdgeInsets_LeadingTrailingTopBottom`
+- `init` with icon is added
 
 VRectangularButton
 
@@ -33,6 +41,7 @@ VRectangularCaptionButton
 - `borderWidth` is renamed to `rectangleBorderWidth`
 - `borderColors` is renamed to `rectangleBorderColors`
 - `labelPressedScale` is renamed to `iconPressedScale`
+- `init` with icon is added
 
 VPlainButton
 

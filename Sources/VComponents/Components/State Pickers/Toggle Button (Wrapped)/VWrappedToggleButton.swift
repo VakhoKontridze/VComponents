@@ -66,6 +66,19 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
 
+    /// Initializes `VWrappedToggleButton` with state and icon.
+    public init(
+        uiModel: VWrappedToggleButtonUIModel = .init(),
+        state: Binding<VWrappedToggleButtonState>,
+        icon: Image
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self._state = state
+        self.label = .icon(icon: icon)
+    }
+
     /// Initializes `VWrappedToggleButton` with state, icon, and title.
     public init(
         uiModel: VWrappedToggleButtonUIModel = .init(),
@@ -115,6 +128,9 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
             switch label {
             case .title(let title):
                 titleLabelComponent(title: title)
+
+            case .icon(let icon):
+                iconLabelComponent(icon: icon)
 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {

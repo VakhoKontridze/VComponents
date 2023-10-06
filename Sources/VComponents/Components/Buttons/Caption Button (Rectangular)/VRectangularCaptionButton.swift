@@ -50,7 +50,22 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         self.icon = icon
         self.caption = .title(title: titleCaption)
     }
-    
+
+    /// Initializes `VRectangularCaptionButton` with action, icon, and icon caption.
+    public init(
+        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        iconCaption: Image
+    )
+        where CaptionLabel == Never
+    {
+        self.uiModel = uiModel
+        self.action = action
+        self.icon = icon
+        self.caption = .icon(icon: iconCaption)
+    }
+
     /// Initializes `VRectangularCaptionButton` with action, icon, icon caption, and title caption.
     public init(
         uiModel: VRectangularCaptionButtonUIModel = .init(),
@@ -149,7 +164,10 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             switch caption {
             case .title(let title):
                 titleCaptionComponent(internalState: internalState, title: title)
-                
+
+            case .icon(let icon):
+                iconCaptionComponent(internalState: internalState, icon: icon)
+
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.iconCaptionAndTitleCaptionTextSpacing, content: {
                     iconCaptionComponent(internalState: internalState, icon: icon)

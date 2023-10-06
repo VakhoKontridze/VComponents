@@ -12,6 +12,7 @@ import SwiftUI
 @available(watchOS, unavailable)
 enum VLoadingStretchedButtonLabel<Label> where Label: View {
     case title(title: String)
+    case icon(icon: Image)
     case iconTitle(icon: Image, title: String)
     case label(label: (VLoadingStretchedButtonInternalState) -> Label)
 }

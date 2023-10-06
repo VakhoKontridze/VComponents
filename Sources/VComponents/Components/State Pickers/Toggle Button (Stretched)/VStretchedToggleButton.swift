@@ -68,6 +68,19 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
 
+    /// Initializes `VStretchedToggleButton` with state and icon.
+    public init(
+        uiModel: VStretchedToggleButtonUIModel = .init(),
+        state: Binding<VStretchedToggleButtonState>,
+        icon: Image
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self._state = state
+        self.label = .icon(icon: icon)
+    }
+
     /// Initializes `VStretchedToggleButton` with state, icon, and title.
     public init(
         uiModel: VStretchedToggleButtonUIModel = .init(),
@@ -116,6 +129,9 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
             switch label {
             case .title(let title):
                 titleLabelComponent(title: title)
+
+            case .icon(let icon):
+                iconLabelComponent(icon: icon)
 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {

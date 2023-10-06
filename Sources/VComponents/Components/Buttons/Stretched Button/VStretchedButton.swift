@@ -46,7 +46,20 @@ public struct VStretchedButton<Label>: View where Label: View {
         self.action = action
         self.label = .title(title: title)
     }
-    
+
+    /// Initializes `VStretchedButton` with action and icon.
+    public init(
+        uiModel: VStretchedButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self.action = action
+        self.label = .icon(icon: icon)
+    }
+
     /// Initializes `VStretchedButton` with action, icon, and title.
     public init(
         uiModel: VStretchedButtonUIModel = .init(),
@@ -100,7 +113,10 @@ public struct VStretchedButton<Label>: View where Label: View {
             switch label {
             case .title(let title):
                 titleLabelComponent(internalState: internalState, title: title)
-                
+
+            case .icon(let icon):
+                iconLabelComponent(internalState: internalState, icon: icon)
+
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
                     iconLabelComponent(internalState: internalState, icon: icon)

@@ -59,7 +59,22 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         self.action = action
         self.label = .title(title: title)
     }
-    
+
+    /// Initializes `VLoadingStretchedButton` with loading state, action, and icon.
+    public init(
+        uiModel: VLoadingStretchedButtonUIModel = .init(),
+        isLoading: Bool,
+        action: @escaping () -> Void,
+        icon: Image
+    )
+        where Label == Never
+    {
+        self.uiModel = uiModel
+        self.isLoading = isLoading
+        self.action = action
+        self.label = .icon(icon: icon)
+    }
+
     /// Initializes `VLoadingStretchedButton` with loading state, action, icon, and title.
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
@@ -121,7 +136,10 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 switch label {
                 case .title(let title):
                     titleLabelComponent(internalState: internalState, title: title)
-                    
+
+                case .icon(let icon):
+                    iconLabelComponent(internalState: internalState, icon: icon)
+
                 case .iconTitle(let icon, let title):
                     HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
                         iconLabelComponent(internalState: internalState, icon: icon)

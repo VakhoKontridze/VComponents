@@ -11,6 +11,7 @@ import SwiftUI
 @available(tvOS, unavailable)
 enum VStretchedButtonLabel<Label> where Label: View {
     case title(title: String)
+    case icon(icon: Image)
     case iconTitle(icon: Image, title: String)
     case label(label: (VStretchedButtonInternalState) -> Label)
 }
