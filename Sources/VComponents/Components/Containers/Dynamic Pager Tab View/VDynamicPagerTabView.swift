@@ -83,7 +83,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     @Namespace private var selectedTabIndicatorNamespace: Namespace.ID
     private var selectedTabIndicatorNamespaceName: String { "VDynamicPagerTabView.SelectedTabIndicator" }
 
-    private var tabIndicatorStripHeight: CGFloat {
+    private var tabIndicatorContainerHeight: CGFloat {
         max(uiModel.tabIndicatorTrackHeight, uiModel.selectedTabIndicatorHeight)
     }
 
@@ -185,40 +185,44 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     }
 
     private var tabBarAndTabIndicatorStrip: some View {
-        ScrollViewReader(content: { proxy in
-            ScrollView(
-                .horizontal,
-                showsIndicators: false,
-                content: {
-                    HStack(
-                        alignment: uiModel.tabBarAlignment,
-                        spacing: 0,
-                        content: {
-                            ForEach(data, id: id, content: { element in
-                                ZStack(alignment: .bottom, content: {
-                                    SwiftUIBaseButton(
-                                        action: { selection = element },
-                                        label: { baseButtonState in
-                                            let tabItemInternalState: VDynamicPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
+        ZStack(alignment: .bottom, content: {
+            tabIndicatorTrack
 
-                                            tabItem(
-                                                tabItemInternalState: tabItemInternalState,
-                                                element: element
-                                            )
-                                        }
-                                    )
+            ScrollViewReader(content: { proxy in
+                ScrollView(
+                    .horizontal,
+                    showsIndicators: false,
+                    content: {
+                        HStack(
+                            alignment: uiModel.tabBarAlignment,
+                            spacing: 0,
+                            content: {
+                                ForEach(data, id: id, content: { element in
+                                    ZStack(alignment: .bottom, content: {
+                                        SwiftUIBaseButton(
+                                            action: { selection = element },
+                                            label: { baseButtonState in
+                                                let tabItemInternalState: VDynamicPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
-                                    tabIndicatorStripSlice(element)
+                                                tabItem(
+                                                    tabItemInternalState: tabItemInternalState,
+                                                    element: element
+                                                )
+                                            }
+                                        )
+
+                                        selectedTabIndicatorSlice(element)
+                                    })
+                                    .padding(.bottom, tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
+                                    .id(element)
                                 })
-                                .padding(.bottom, tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
-                                .id(element)
-                            })
-                        }
-                    )
-                }
-            )
-            .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
-            .onAppear(perform: { positionSelectedTabIndicatorInitially(in: proxy) })
+                            }
+                        )
+                    }
+                )
+                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
+                .onAppear(perform: { positionSelectedTabIndicatorInitially(in: proxy) })
+            })
         })
     }
 
@@ -246,52 +250,49 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         .contentShape(Rectangle())
     }
 
-    private func tabIndicatorStripSlice(
-        _ element: Data.Element
-    ) -> some View {
-        ZStack(
+    private var tabIndicatorTrack: some View {
+        VStack(content: { // `VSack` is needed as a container
+            Rectangle()
+                .frame(height: uiModel.tabIndicatorTrackHeight)
+                .foregroundStyle(uiModel.tabIndicatorTrackColor)
+        })
+        .frame(
+            height: tabIndicatorContainerHeight,
             alignment: Alignment(
                 horizontal: .center,
                 vertical: uiModel.tabIndicatorStripAlignment
-            ),
-            content: {
-                tabIndicatorTrackSlice
-                selectedTabIndicator(element)
-            }
+            )
         )
-        .frame(height: tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
-        .offset(y: tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
     }
 
-    private var tabIndicatorTrackSlice: some View {
-        Rectangle()
-            .frame(height: uiModel.tabIndicatorTrackHeight)
-            .foregroundStyle(uiModel.tabIndicatorTrackColor)
-    }
-
-    private func selectedTabIndicator(
+    private func selectedTabIndicatorSlice(
         _ element: Data.Element
     ) -> some View {
         VStack(content: { // `VSack` is needed as a container
-            if selection == element {
-                RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
-                    .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
-            }
+            VStack(content: { // `VSack` is needed as a container
+                if selection == element {
+                    RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
+                        .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
+                }
+            })
+            .frame(height: uiModel.selectedTabIndicatorHeight)
+            .padding(
+                .leading, uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+                uiModel.tabItemMargins.leading + (isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+                0
+            )
+            .padding(
+                .trailing,
+                uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+                uiModel.tabItemMargins.trailing + (isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+                0
+            )
+            .foregroundStyle(uiModel.selectedTabIndicatorColor)
+            .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
         })
-        .frame(height: uiModel.selectedTabIndicatorHeight)
-        .padding(
-            .leading, uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
-            uiModel.tabItemMargins.leading + (isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
-            0
-        )
-        .padding(
-            .trailing,
-            uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
-            uiModel.tabItemMargins.trailing + (isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
-            0
-        )
-        .foregroundStyle(uiModel.selectedTabIndicatorColor)
-        .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
+
+        .frame(height: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
+        .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
     }
 
     private var tabView: some View {
