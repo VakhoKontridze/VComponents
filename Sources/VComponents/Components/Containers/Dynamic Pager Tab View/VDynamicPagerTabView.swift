@@ -222,23 +222,6 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         })
     }
 
-    private func tabIndicatorStripSlice(
-        _ element: Data.Element
-    ) -> some View {
-        ZStack(content: {
-            tabIndicatorTrackSlice
-            selectedTabIndicator(element)
-        })
-        .frame(
-            height: tabIndicatorStripHeight, // Needed for `VStack`-like layout in `ZStack`
-            alignment: Alignment(
-                horizontal: .center,
-                vertical: uiModel.tabIndicatorStripAlignment
-            )
-        )
-        .offset(y: tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
-    }
-
     private func tabItem(
         tabItemInternalState: VDynamicPagerTabViewTabItemInternalState,
         element: Data.Element
@@ -263,6 +246,23 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         .contentShape(Rectangle())
     }
 
+    private func tabIndicatorStripSlice(
+        _ element: Data.Element
+    ) -> some View {
+        ZStack(
+            alignment: Alignment(
+                horizontal: .center,
+                vertical: uiModel.tabIndicatorStripAlignment
+            ),
+            content: {
+                tabIndicatorTrackSlice
+                selectedTabIndicator(element)
+            }
+        )
+        .frame(height: tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
+        .offset(y: tabIndicatorStripHeight) // Needed for `VStack`-like layout in `ZStack`
+    }
+
     private var tabIndicatorTrackSlice: some View {
         Rectangle()
             .frame(height: uiModel.tabIndicatorTrackHeight)
@@ -272,7 +272,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     private func selectedTabIndicator(
         _ element: Data.Element
     ) -> some View {
-        Group(content: {
+        VStack(content: { // `VSack` is needed as a container
             if selection == element {
                 RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
                     .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
@@ -455,6 +455,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
 
                         uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
 
+                        uiModel.tabIndicatorStripAlignment = .center
                         uiModel.tabIndicatorTrackHeight = 1
                         uiModel.tabIndicatorTrackColor = ColorBook.layerGray
                         uiModel.selectedTabIndicatorHeight = 3

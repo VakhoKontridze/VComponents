@@ -415,6 +415,7 @@ struct VStretchedIndicatorStaticPagerTabView_Previews: PreviewProvider {
                 VStretchedIndicatorStaticPagerTabView(
                     uiModel: {
                         var uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init()
+                        uiModel.tabIndicatorStripAlignment = .center
                         uiModel.tabIndicatorTrackHeight = 1
                         uiModel.tabIndicatorTrackColor = ColorBook.layerGray
                         uiModel.selectedTabIndicatorHeight = 3

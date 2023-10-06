@@ -469,6 +469,7 @@ struct VWrappedIndicatorStaticPagerTabView_Previews: PreviewProvider {
                 VWrappedIndicatorStaticPagerTabView(
                     uiModel: {
                         var uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init()
+                        uiModel.tabIndicatorStripAlignment = .center
                         uiModel.tabIndicatorTrackHeight = 1
                         uiModel.tabIndicatorTrackColor = ColorBook.layerGray
                         uiModel.selectedTabIndicatorHeight = 3
