@@ -179,7 +179,7 @@ public struct VRadioButton<Label>: View where Label: View {
         
         if gestureState.didRecognizeClick {
             playHapticEffect()
-            state.setNextState()
+            state.setNextStateRadio()
         }
     }
     
