@@ -189,7 +189,7 @@ public struct VSlider: View {
             return ((value / width) * range + self.range.lowerBound)
                 .invertedFromMax(
                     self.range.upperBound,
-                    if: layoutDirection == .rightToLeft || uiModel.direction.isReversed
+                    if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
                 )
         }()
         

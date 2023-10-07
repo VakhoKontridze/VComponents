@@ -191,7 +191,7 @@ public struct VRangeSlider: View {
             return (self.range.lowerBound + (value / width) * range)
                 .invertedFromMax(
                     self.range.upperBound,
-                    if: layoutDirection == .rightToLeft || uiModel.direction.isReversed
+                    if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
                 )
         }()
         

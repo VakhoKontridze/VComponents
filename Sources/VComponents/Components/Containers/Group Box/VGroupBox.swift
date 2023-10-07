@@ -63,7 +63,7 @@ public struct VGroupBox<Content>: View where Content: View {
                 corners: uiModel.roundedCorners
                     .withReversedLeftAndRightCorners(
                         uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                        layoutDirection == .rightToLeft
+                        layoutDirection.isRightToLeft
                     )
             )
     }

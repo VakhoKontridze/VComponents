@@ -110,7 +110,7 @@ struct VModal<Content>: View
                     corners: uiModel.roundedCorners
                         .withReversedLeftAndRightCorners(
                             uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                            layoutDirection == .rightToLeft
+                            layoutDirection.isRightToLeft
                         )
                 )
         })

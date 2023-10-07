@@ -12,7 +12,7 @@ extension String {
     func pseudoRTL(
         _ layoutDirection: LayoutDirection
     ) -> Self {
-        if layoutDirection == .rightToLeft {
+        if layoutDirection.isRightToLeft {
             String(self.reversed())
         } else {
             self
