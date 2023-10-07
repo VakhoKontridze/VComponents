@@ -77,8 +77,8 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     }
     
     private var contentView: some View {
-        content()
-            .fixedSize()
+        content() // TODO: Wait for iOS issue to be resolved with off-screen rendering
+            .fixedSize(horizontal: true, vertical: false)
             .getSize({ contentSize = $0 })
     }
     

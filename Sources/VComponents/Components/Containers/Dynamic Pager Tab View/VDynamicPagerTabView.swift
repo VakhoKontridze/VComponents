@@ -332,7 +332,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         _ newElement: Data.Element,
         in proxy: ScrollViewProxy
     ) {
-        proxy.scrollTo( // TODO: Wait for iOS issue to be resolved for RTL layout.
+        proxy.scrollTo( // TODO: Wait for iOS issue to be resolved for RTL layout, when using few items
             newElement,
             anchor: uiModel.selectedTabIndicatorScrollAnchor
         )
