@@ -54,6 +54,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VDynamicPagerTabViewUIModel
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -220,8 +221,8 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                         )
                     }
                 )
-                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
                 .onAppear(perform: { positionSelectedTabIndicatorInitially(in: proxy) })
+                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
             })
         })
     }
@@ -331,7 +332,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         _ newElement: Data.Element,
         in proxy: ScrollViewProxy
     ) {
-        proxy.scrollTo(
+        proxy.scrollTo( // TODO: Wait for iOS issue to be resolved for RTL layout.
             newElement,
             anchor: uiModel.selectedTabIndicatorScrollAnchor
         )

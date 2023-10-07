@@ -53,6 +53,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 {
     // MARK: Properties - UI Model
     private let uiModel: VStretchedIndicatorStaticPagerTabViewUIModel
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -324,7 +325,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         tabViewProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
-        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX
+        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX // Accounts for `TabView` padding
         let tabViewWidth: CGFloat = tabViewProxy.size.width
 
         selectedTabIndicatorWidth =
@@ -332,10 +333,15 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
             2 * uiModel.selectedTabIndicatorMarginHorizontal
 
         selectedTabIndicatorOffset = {
-            var contentOffset: CGFloat =
-                tabViewWidth * CGFloat(selectedIndexInt) -
-                interstitialOffset +
-                tabViewMinX // Accounts for `TabView` padding
+            var contentOffset: CGFloat = {
+                let accumulatedOffset: CGFloat = tabViewWidth * CGFloat(selectedIndexInt)
+
+                if layoutDirection.isRightToLeft {
+                    return accumulatedOffset + interstitialOffset - tabViewMinX // Frame of reference begins on the right side
+                } else {
+                    return accumulatedOffset - interstitialOffset + tabViewMinX
+                }
+            }()
 
             if !uiModel.selectedTabIndicatorBounces {
                 contentOffset.clamp(

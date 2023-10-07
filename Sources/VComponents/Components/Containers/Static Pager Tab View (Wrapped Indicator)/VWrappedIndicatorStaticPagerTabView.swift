@@ -53,6 +53,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 {
     // MARK: Properties - UI Model
     private let uiModel: VWrappedIndicatorStaticPagerTabViewUIModel
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -81,6 +82,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
     private let content: (Data.Element) -> Content
 
     // MARK: Properties - Frame
+    @State private var tabBarWidth: CGFloat = 0
+
     private var tabBarCoordinateSpaceName: String { "VWrappedIndicatorStaticPagerTabView.TabBar" }
     @State private var tabBarItemWidths: [Int: CGFloat] = [:]
     @State private var tabBarItemPositions: [Int: CGFloat] = [:]
@@ -214,6 +217,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             }
         )
         .coordinateSpace(name: tabBarCoordinateSpaceName)
+        .getSize({ tabBarWidth = $0.width })
     }
 
     private func tabItem(
@@ -236,7 +240,16 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             })
             .getFrame(in: .named(tabBarCoordinateSpaceName), { frame in
                 tabBarItemWidths[element.hashValue] = frame.size.width
-                tabBarItemPositions[element.hashValue] = frame.minX
+
+                tabBarItemPositions[element.hashValue] = {
+                    if layoutDirection.isRightToLeft {
+                        // `min` and `max` start from left side of the screen, regardless of layout direction.
+                        // So, mapping is required.
+                        tabBarWidth - frame.maxX
+                    } else {
+                        frame.minX
+                    }
+                }()
             })
         })
         .padding(uiModel.tabItemMargins)
@@ -335,13 +348,18 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         tabViewProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
-        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX
+        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX // Accounts for `TabView` padding
         let tabViewWidth: CGFloat = tabViewProxy.size.width
 
-        let contentOffset: CGFloat =
-            tabViewWidth * CGFloat(selectedIndexInt) -
-            interstitialOffset +
-            tabViewMinX // Accounts for `TabView` padding
+        let contentOffset: CGFloat = {
+            let accumulatedOffset: CGFloat = tabViewWidth * CGFloat(selectedIndexInt)
+
+            if layoutDirection.isRightToLeft {
+                return accumulatedOffset + interstitialOffset - tabViewMinX // Frame of reference begins on the right side
+            } else {
+                return accumulatedOffset - interstitialOffset + tabViewMinX
+            }
+        }()
 
         let tabContentOffsets: [CGFloat] = (0..<data.count)
             .compactMap { CGFloat($0) * tabViewWidth }
@@ -383,7 +401,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 
         } else if
             let index: Int = (1..<dataSource.count)
-                .first(where: { contentOffset <= tabContentOffsets[$0] })
+                .first(where: { contentOffset < tabContentOffsets[$0] })
         {
             return linearInterpolation(
                 x1: tabContentOffsets[index-1], y1: dataSource[index-1],
