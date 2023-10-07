@@ -33,8 +33,11 @@ public struct VRollingCounterUIModel {
     /// Digit text `Y` offset relative to other components. Set to `0`.
     public var digitTextOffsetY: CGFloat = 0
 
-    /// Digit text rolling edge. Set to `top`.
-    public var digitTextRollEdge: VerticalEdge? = .top
+    /// Digit text increment rolling edge. Set to `bottom`.
+    public var digitTextIncrementRollingEdge: VerticalEdge? = .bottom
+
+    /// Digit text decrement rolling edge. Set to `top`.
+    public var digitTextDecrementRollingEdge: VerticalEdge? = .top
 
     // MARK: Properties - Fraction Digits
     /// Indicates of counter has fraction digits. Set to `true`.
@@ -62,8 +65,11 @@ public struct VRollingCounterUIModel {
     /// Fraction digit text `Y` offset relative to other components. Set to `0`.
     public var fractionDigitTextOffsetY: CGFloat = 0
 
-    /// Fraction digit text rolling edge. Set to `top`.
-    public var fractionDigitTextRollEdge: VerticalEdge? = .top
+    /// Fraction digit text increment rolling edge. Set to `bottom`.
+    public var fractionDigitTextIncrementRollingEdge: VerticalEdge? = .bottom
+
+    /// Fraction digit text decrement rolling edge. Set to `top`.
+    public var fractionDigitTextDecrementRollingEdge: VerticalEdge? = .top
 
     // MARK: Properties - Grouping Separator
     /// Indicates if counter has grouping separator. Set to `true`.

@@ -46,14 +46,16 @@ import VCore
 ///     }
 ///        
 public struct VRollingCounter: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VRollingCounterUIModel
 
+    // MARK: Properties - Values
     private let value: Double
     @State private var components: [any VRollingCounterComponentProtocol]
-
     @State private var numberFormatter: NumberFormatter // Marked as `State` to persist a `class`
-    @State private var highlightedColor: Color?
+    
+    // MARK: Properties - Flags
+    @State private var isIncrementing: Bool?
 
     // MARK: Initializers
     /// Initializes `VRollingCounter` with value.
@@ -109,7 +111,7 @@ public struct VRollingCounter: View {
                 .font(uiModel.digitTextFont)
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
-                .transition(.rollingEdge(edge: (uiModel.digitTextRollEdge).map { Edge(verticalEdge: $0) }) ?? .identity)
+                .transition(.rollingEdge(edge: digitTextRollingEdge.map { Edge(verticalEdge: $0) }) ?? .identity)
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
@@ -117,7 +119,7 @@ public struct VRollingCounter: View {
                 .font(uiModel.fractionDigitTextFont)
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
-                .transition(.rollingEdge(edge: (uiModel.fractionDigitTextRollEdge).map { Edge(verticalEdge: $0) }) ?? .identity)
+                .transition(.rollingEdge(edge: fractionDigitTextRollingEdge.map { Edge(verticalEdge: $0) }) ?? .identity)
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
@@ -160,13 +162,13 @@ public struct VRollingCounter: View {
                 {
                     components = newComponents
 
-                    highlightedColor = {
+                    isIncrementing = {
                         if newValue > oldValue {
-                            uiModel.incrementHighlightColor
+                            true
                         } else if newValue < oldValue {
-                            uiModel.decrementHighlightColor
+                            false
                         } else {
-                            Color.clear
+                            nil
                         }
                     }()
                 },
@@ -174,7 +176,7 @@ public struct VRollingCounter: View {
                     withAnimation(
                         uiModel.dehighlightAnimation?.toSwiftUIAnimation,
                         {
-                            highlightedColor = .clear
+                            isIncrementing = nil
 
                             for i in components.indices {
                                 components[i].isHighlighted = false
@@ -190,20 +192,20 @@ public struct VRollingCounter: View {
                 body: {
                     components = newComponents
 
-                    highlightedColor = {
+                    isIncrementing = {
                         if newValue > oldValue {
-                            uiModel.incrementHighlightColor
+                            true
                         } else if newValue < oldValue {
-                            uiModel.decrementHighlightColor
+                            false
                         } else {
-                            Color.clear
+                            nil
                         }
                     }()
                 },
                 completion: {
                     withAnimation(
                         uiModel.dehighlightAnimation?.toSwiftUIAnimation, {
-                            highlightedColor = .clear
+                            isIncrementing = nil
 
                             for i in components.indices {
                                 components[i].isHighlighted = false
@@ -222,6 +224,30 @@ public struct VRollingCounter: View {
     ) -> Color {
         guard isHighlighted, let highlightedColor else { return defaultValue }
         return highlightedColor
+    }
+
+    private var highlightedColor: Color? {
+        switch isIncrementing {
+        case nil: Color.clear
+        case false?: uiModel.decrementHighlightColor
+        case true?: uiModel.incrementHighlightColor
+        }
+    }
+
+    private var digitTextRollingEdge: VerticalEdge? {
+        switch isIncrementing {
+        case nil: nil
+        case false?: uiModel.digitTextDecrementRollingEdge
+        case true?: uiModel.digitTextIncrementRollingEdge
+        }
+    }
+
+    private var fractionDigitTextRollingEdge: VerticalEdge? {
+        switch isIncrementing {
+        case nil: nil
+        case false?: uiModel.fractionDigitTextDecrementRollingEdge
+        case true?: uiModel.fractionDigitTextIncrementRollingEdge
+        }
     }
 }
 
@@ -379,22 +405,6 @@ struct VRollingCounter_Previews: PreviewProvider {
                                     uiModel.highlightsOnlyTheAffectedCharacters = false
                                     uiModel.groupingSeparatorTextIsHighlightable = true
                                     uiModel.decimalSeparatorTextIsHighlightable = true
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Bottom Edge Roll",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.digitTextRollEdge = .bottom
-                                    uiModel.fractionDigitTextRollEdge = .bottom
                                     return uiModel
                                 }(),
                                 value: value
