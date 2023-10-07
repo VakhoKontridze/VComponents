@@ -21,7 +21,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VStretchedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/485ee9ba-ddf9-44d7-8991-9b1c15254288">
     <img tag="VLoadingStretchedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/be3b5dfd-1971-495d-9b5c-4b9a38af2f34">
     <img tag="VWrappedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/98137969-66da-409a-8d08-23391a09f6a8">
-    <img tag="VRectangularButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/444c8c9b-f9db-424d-b24d-1fc0b19800a0">
+    <img tag="VRectangularButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cd861619-9115-4f16-9274-e8d172eb8290">
     <img tag="VRectangularCaptionButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/96616eab-6d52-43ed-a94c-8f593890d3bb">
     <img tag="VPlainButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/6d34df2a-d555-4e1c-b1bd-f9cef8577d48">
 <p/>
@@ -56,7 +56,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Containers
 
 <p>
-    <img tag="VGroupBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/f4d1d627-1d72-47a1-b1bb-7b761220faf8">
+    <img tag="VGroupBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/403cad11-3d05-462a-8543-2b7389aaa715">
     <img tag="VDisclosureGroup" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/62c190c2-8a23-4d60-ad2e-02700fe1092d">
     <img tag="VStretchedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/27db2a82-380e-493a-a44e-a63d166aad98">
     <img tag="VWrappedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4fc9cdb6-9611-4361-9db3-2a9a1f861d96">
