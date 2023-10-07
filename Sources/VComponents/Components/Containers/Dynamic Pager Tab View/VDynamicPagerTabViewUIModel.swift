@@ -29,6 +29,12 @@ public struct VDynamicPagerTabViewUIModel {
     /// Tab bar horizontal margin. Set to `5`.
     public var tabBarMarginHorizontal: CGFloat = 5
 
+    /// Tab bar item spacing. Set to `0`.
+    ///
+    /// This property controls spacing between items, as well as selection indicator.
+    /// When `tabSelectionIndicatorWidthType` is `stretched`, selection indicator won't stretch to occupy this spacing.
+    public var tabItemSpacing: CGFloat = 0
+
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins. Set to `10`s.
     public var tabItemMargins: Margins = .init(GlobalUIModel.Containers.pagerTabViewTabItemMargin)

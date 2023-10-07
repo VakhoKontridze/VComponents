@@ -196,7 +196,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                     content: {
                         HStack(
                             alignment: uiModel.tabBarAlignment,
-                            spacing: 0,
+                            spacing: uiModel.tabItemSpacing,
                             content: {
                                 ForEach(data, id: id, content: { element in
                                     ZStack(alignment: .bottom, content: {
