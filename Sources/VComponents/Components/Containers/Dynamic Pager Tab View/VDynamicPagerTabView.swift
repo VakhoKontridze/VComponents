@@ -365,6 +365,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
+            FewItemsPreview().previewDisplayName("Few Items")
             CustomTabBarPreview().previewDisplayName("Custom Tab Bar")
             CustomTabIndicatorPreview().previewDisplayName("Custom Tab Indicator")
         })
@@ -405,6 +406,27 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                     }(),
                     selection: $selection,
                     data: WeekDay.allCases,
+                    tabItemTitle: { $0.tabItemTitle },
+                    content: { $0.color }
+                )
+                .padding()
+            })
+        }
+    }
+
+    private struct FewItemsPreview: View {
+        @State private var selection: WeekDay = .monday
+
+        var body: some View {
+            PreviewContainer(hasLayer: false, content: {
+                VDynamicPagerTabView(
+                    uiModel: {
+                        var uiModel: VDynamicPagerTabViewUIModel = .init()
+                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
+                        return uiModel
+                    }(),
+                    selection: $selection,
+                    data: [WeekDay.monday, .tuesday, .wednesday],
                     tabItemTitle: { $0.tabItemTitle },
                     content: { $0.color }
                 )
