@@ -276,36 +276,71 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                             guard element == selection else { return }
 
                             calculateIndicatorFrame(
-                                frame: frame,
-                                tabViewProxy: tabViewProxy
+                                selectedIndexInt: selectedIndexInt,
+                                tabViewProxy: tabViewProxy,
+                                interstitialOffset: frame.minX
                             )
                         })
                 })
             })
             .tabViewStyle(.page(indexDisplayMode: .never))
             .background(content: { uiModel.tabViewBackgroundColor })
+
+            .applyModifier({
+                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                    $0
+                        .onChange(of: selectedIndexInt, initial: true, { (_, newValue) in
+                            calculateIndicatorFrame(
+                                selectedIndexInt: newValue,
+                                tabViewProxy: tabViewProxy,
+                                interstitialOffset: 0
+                            )
+                        })
+
+                } else {
+                    $0
+                        .onAppear(perform: {
+                            calculateIndicatorFrame(
+                                selectedIndexInt: selectedIndexInt,
+                                tabViewProxy: tabViewProxy,
+                                interstitialOffset: 0
+                            )
+                        })
+                        .onChange(of: selectedIndexInt, perform: { newValue in
+                            calculateIndicatorFrame(
+                                selectedIndexInt: newValue,
+                                tabViewProxy: tabViewProxy,
+                                interstitialOffset: 0
+                            )
+                        })
+                }
+            })
         })
     }
 
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
-        frame: CGRect,
-        tabViewProxy: GeometryProxy
+        selectedIndexInt: Int,
+        tabViewProxy: GeometryProxy,
+        interstitialOffset: CGFloat
     ) {
+        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX
+        let tabViewWidth: CGFloat = tabViewProxy.size.width
+
         selectedTabIndicatorWidth =
-            frame.size.width / CGFloat(data.count) -
+            tabViewWidth / CGFloat(data.count) -
             2 * uiModel.selectedTabIndicatorMarginHorizontal
 
         selectedTabIndicatorOffset = {
             var contentOffset: CGFloat =
-                frame.size.width * CGFloat(selectedIndexInt) -
-                frame.minX +
-                tabViewProxy.frame(in: .global).minX // Accounts for `TabView` padding
+                tabViewWidth * CGFloat(selectedIndexInt) -
+                interstitialOffset +
+                tabViewMinX // Accounts for `TabView` padding
 
             if !uiModel.selectedTabIndicatorBounces {
                 contentOffset.clamp(
                     min: 0,
-                    max: frame.size.width * CGFloat(data.count-1)
+                    max: tabViewWidth * CGFloat(data.count-1)
                 )
             }
 
