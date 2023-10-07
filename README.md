@@ -18,95 +18,95 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Buttons
 
 <p>
-    <img tag="VStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779300-dc408524-ac16-4469-ba4f-195a05076154.png">
-    <img tag="VLoadingStretchedButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779495-84b0e553-16af-4b51-82c4-6f15247c9d31.png">
-    <img tag="VWrappedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4267254e-6e97-439b-afd8-ed511b65dcfe">
-    <img tag="VRectangularButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/fd56ac97-6e5e-4e11-8e86-1566d656e31b">
-    <img tag="VRectangularCaptionButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/b785e73e-5bc5-4c79-a381-b9886ce037d0">
-    <img tag="VPlainButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779755-b15a2fc4-d811-4c96-888e-5b437495a484.png">
+    <img tag="VStretchedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/485ee9ba-ddf9-44d7-8991-9b1c15254288">
+    <img tag="VLoadingStretchedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/be3b5dfd-1971-495d-9b5c-4b9a38af2f34">
+    <img tag="VWrappedButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/98137969-66da-409a-8d08-23391a09f6a8">
+    <img tag="VRectangularButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/444c8c9b-f9db-424d-b24d-1fc0b19800a0">
+    <img tag="VRectangularCaptionButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/96616eab-6d52-43ed-a94c-8f593890d3bb">
+    <img tag="VPlainButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/6d34df2a-d555-4e1c-b1bd-f9cef8577d48">
 <p/>
 
 #### State Pickers
 
 <p>
-    <img tag="VToggle" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230779957-94c56311-167d-4087-a702-2c406ca9923d.png">
-    <img tag="VCheckBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780007-237b86c4-e9b2-4a65-9584-0a0fff4367af.png">
-    <img tag="VRadioButton" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780063-bb06c5cc-86e2-4f79-a01f-2351e01280ff.png">
-    <img tag="VStretchedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/f7c33200-2ec1-4f83-9027-cf0e4b26331a">
-    <img tag="VWrappedToggleButton" width="350" align="top" src="https://github-production-user-asset-6210df.s3.amazonaws.com/57289621/263371199-ca8d816e-7a9c-46ee-b427-d06cddf26c30.png">
-    <img tag="VRectangularToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a4d3dee1-7966-4b4c-ab5e-dac9a8cb3cd1">
+    <img tag="VToggle" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a6f2bf7f-62f9-4a96-8cd1-1b7b768c914b">
+    <img tag="VCheckBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a774c429-e89e-4385-9ee6-359591bf69d7">
+    <img tag="VRadioButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/76bfad64-0c07-4f55-9be4-6e3cda33d359">
+    <img tag="VStretchedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8e63724b-afc0-4ae6-a0d2-8a0600c21a39">
+    <img tag="VWrappedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/d074c130-d978-41e5-926a-ecfd54431636">
+    <img tag="VRectangularToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a25cb00b-52ef-41f9-ae89-83305022af45">
 <p/>
 
 #### Value Pickers
 
 <p>
-    <img tag="VStepper" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780455-aa9ef2a0-aa27-4315-8f96-54804048b2bb.png">
-    <img tag="VSlider" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780537-a50527e1-a3f1-40c9-94b2-4f89bb63c847.png">
-    <img tag="VRangeSlider" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780595-53c6ee12-1914-4b33-b2e4-8c2fc087c396.png">
+    <img tag="VStepper" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/9cd522b8-239d-4e7d-9708-b1fd8e4f5038">
+    <img tag="VSlider" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c2a0b3d0-c758-4471-ba6e-d4ed2ebae143">
+    <img tag="VRangeSlider" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/6941c0fa-1a16-4eca-a65f-12b4e53a8064">
 <p/>
 
 #### Inputs
 
 <p>
-    <img tag="VTextField" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230780686-891530b1-c9b2-4988-b3ee-0f101166bfbf.png">
-    <img tag="VTextView" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782956-6050c117-b699-4887-86e5-03ed8eb4eb0c.png">
-    <img tag="VCodeEntryView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/493a6917-1c84-4e13-93dd-f9464506fff4">
+    <img tag="VTextField" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/be4fba23-a13d-45c7-856b-ec0ccd8208e6">
+    <img tag="VTextView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/da506937-2e22-4fb3-b63a-3ef50a6012bb">
+    <img tag="VCodeEntryView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c79e5896-42ee-4bc5-9941-bca0acbc2111">
 <p/>
 
 #### Containers
 
 <p>
-    <img tag="VGroupBox" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236555677-bfab5fa3-c609-452c-b216-9841a7572337.png">
-    <img tag="VDisclosureGroup" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/236562719-5ccb94b2-00b5-43c1-974e-8a2d6f8b59fe.png">
-    <img tag="VStretchedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/9155eb2c-3b15-49f5-a8a0-8d2bbafe0984">
-    <img tag="VWrappedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/90c31b39-faf3-40b8-9b9d-25d95ce9501a">
-    <img tag="VDynamicPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/04b9cf30-e71e-4c33-999d-22365e1f43e5">
+    <img tag="VGroupBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/f4d1d627-1d72-47a1-b1bb-7b761220faf8">
+    <img tag="VDisclosureGroup" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/62c190c2-8a23-4d60-ad2e-02700fe1092d">
+    <img tag="VStretchedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/27db2a82-380e-493a-a44e-a63d166aad98">
+    <img tag="VWrappedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4fc9cdb6-9611-4361-9db3-2a9a1f861d96">
+    <img tag="VDynamicPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/dfd0ea83-9dad-4819-85c6-dd1894a32460">
 <p/>
 
 #### Lists
 
 <p>
-    <img tag="VListRow" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781281-c75c219c-ac6d-4ad2-bcff-e8774687fed4.png">
+    <img tag="VListRow" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/5c1c1180-2f48-4be1-9e1d-9d2a8ed2c39f">
 <p/>
 
 #### Modals
 
 <p>
-    <img tag="VModal" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a55253dc-876a-41b1-9d9a-5ad41ba9d2ad">
-    <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cf383c00-5ba0-40d5-a845-6b22844a7026">
-    <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cf504bfe-7c12-443e-b6cf-17a625a00cad">
-    <img tag="VAlert" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562697-93fb57eb-6e15-4fc9-bc0a-d495955f02b2.jpg">
-    <img tag="VMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562722-13bc695d-6672-401c-b511-383469ed0b9d.jpg">
-    <img tag="VContextMenu" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236562712-c4fb364f-2faf-4caa-8e5b-afad34cf0d4a.jpg">
+    <img tag="VModal" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c9c03311-db7f-4704-932b-41a78f2e3fc0">
+    <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/94ffc7df-19a4-451b-8e9c-561a217c73c2">
+    <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8ea59a66-4742-49a5-8ca9-6a91501e8d3f">
+    <img tag="VAlert" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/34c39b5b-1d65-4b71-b620-ceb1973232ae">
+    <img tag="VMenu" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8118ffe8-3591-43ab-8f34-7de701c5cd50">
+    <img tag="VContextMenu" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/440ef10d-ba43-4b5a-b605-936c4ca632fb">
 <p/>
 
 #### Notifications
 
 <p>
-    <img tag="VToast" width="400" align="top" src="https://user-images.githubusercontent.com/57289621/236565657-4a78011d-f995-43c7-95e4-0cecd1ea5998.jpg">
+    <img tag="VToast" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4867ae79-03c8-4b1c-86b9-e1b160819e23">
 <p/>
 
 #### Indicators (Definite)
 
 <p>
-    <img tag="VProgressBar" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
-    <img tag="VPageIndicator" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cb1b9c43-3a0f-44d6-88e2-1f235f86c520">
-    <img tag="VCompactPageIndicator" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/ea68cb60-9c21-4f94-9f57-c76a474b30ad">
+    <img tag="VProgressBar" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/05fbb1c0-917f-4ffb-91f9-5e70c8825abd">
+    <img tag="VPageIndicator" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/bfbede63-f400-40a5-b1fb-1044941eb41e">
+    <img tag="VCompactPageIndicator" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/f3e6bfae-ee8a-4f59-b529-0b5994249485">
 <p/>
 
 #### Indicators (Indefinite)
 
 <p>
-    <img tag="VContinuousSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
-    <img tag="VDashedSpinner" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
+    <img tag="VContinuousSpinner" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/03021296-f5c4-449c-802c-07d52c1119af">
+    <img tag="VDashedSpinner" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/d8ad9a48-b3c8-4f67-9617-7a8a4ae307bf">
 <p/>
 
 #### Misc
 
 <p>
-    <img tag="VRollingCounter" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/45760672-a84e-470f-8662-ce2abb8fbf0e">
-    <img tag="VWrappingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782559-e42d5352-30c1-46e4-8461-7e0402111d68.png">
-    <img tag="VBouncingMarquee" width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782558-4275425e-62db-4d3e-9fd4-10855e073be3.png">
+    <img tag="VRollingCounter" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/83267731-3c11-4551-898c-9ba86e49558d">
+    <img tag="VWrappingMarquee" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/cbca015c-a237-4569-96b9-8973e5cbf984">
+    <img tag="VBouncingMarquee" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/10de26e3-4c8c-42ef-baa2-c939a1e7cfec">
 <p/>
 
 ## Guidelines
