@@ -92,7 +92,10 @@ public struct VRollingCounter: View {
                 )
             }
         )
-        .clipped() // Prevents animation clipping
+        // Prevents animation clipping
+        .clipped()
+
+        // No need for initial checks, as `VRollingCounterFactory` sets up everything in `init`.
         .onChange(of: value, perform: didChangeValue)
     }
 

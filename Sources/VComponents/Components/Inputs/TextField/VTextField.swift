@@ -142,6 +142,8 @@ public struct VTextField: View {
                 footerView
             }
         )
+        
+        // No need for initial checks, as secure field is always hidden by default
         .onChange(of: uiModel.contentType, perform: {
             if !$0.isSecure {
                 secureFieldIsVisible = false
@@ -187,8 +189,8 @@ public struct VTextField: View {
                     )
             } else {
                 $0
-                    .onChange(of: text, perform: setClearButtonVisibility)
                     .onAppear(perform: { setClearButtonVisibility(text) })
+                    .onChange(of: text, perform: setClearButtonVisibility)
             }
         })
 

@@ -89,8 +89,19 @@ public struct VCodeEntryView: View {
         // Ensures that hidden `TextField`'s frame doesn't overflow
         .clipped()
 
-        .onAppear(perform: { processText(text) })
-        .onChange(of: text, perform: { processText($0) })
+        .applyModifier({
+            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *){
+                $0
+                    .onChange(of: text, initial: true, { (_, newValue) in
+                        processText(newValue)
+                    })
+
+            } else {
+                $0
+                    .onAppear(perform: { processText(text) })
+                    .onChange(of: text, perform: { processText($0) })
+            }
+        })
     }
 
     private var hiddenTextField: some View {
@@ -240,9 +251,12 @@ struct VCodeEntryView_Previews: PreviewProvider {
         .preferredColorScheme(colorScheme)
     }
 
+    // Data
+    private static var text: String { "123" }
+
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var text: String = ""
+        @State private var text: String = VCodeEntryView_Previews.text
 
         var body: some View {
             PreviewContainer(content: {
@@ -255,7 +269,7 @@ struct VCodeEntryView_Previews: PreviewProvider {
     }
 
     private struct StatesPreview: View {
-        private let text: String = "123"
+        private let text: String = VCodeEntryView_Previews.text
 
         var body: some View {
             PreviewContainer(content: {
@@ -304,7 +318,7 @@ struct VCodeEntryView_Previews: PreviewProvider {
     }
 
     private struct OutOfBoundsContentPreventionPreview: View {
-        @State private var text: String = "123"
+        @State private var text: String = VCodeEntryView_Previews.text
 
         var body: some View {
             PreviewContainer(content: {
