@@ -4,7 +4,8 @@
 
 - [Description](#description)
 - [Components](#components)
-- [Guidelines](#guidelines)
+- [Customization](#customization)
+- [Animations](#animations)
 - [Installation](#installation)
 - [Compatibility](#compatibility)
 - [Contact](#contact)
@@ -104,15 +105,13 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VBouncingMarquee" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/10de26e3-4c8c-42ef-baa2-c939a1e7cfec">
 <p/>
 
-## Guidelines
+## Customization
 
-#### UI Models
+Components from `VComponents` are not meant to be customized in the same way as you would atomic SwiftUI components.
 
-Components in this library are not designed for customization in the same manner as conventional SwiftUI components.
+Rather than directly modifying them using `ViewModifiers`s, you are to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, the properties within the UI models have their own default values.
 
-Rather than directly modifying the components, you are encouraged to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, the properties within the UI models have their own default values as well.
-
-For instance, if you wish to alter the foreground color of a `VPlainButton`, you can customize and pass an UI model.
+For instance, you can change the foreground color of a `VPlainButton` by changing the values.
 
 Not Preferred:
 
@@ -154,10 +153,10 @@ Alternately, you can create `static` instances of UI models for reusability.
 
 ```swift
 extension VPlainButtonUIModel {
-    static let someUIModel: VPlainButtonUIModel = {
-        var uiModel: VPlainButtonUIModel = .init()
+    static let someUIModel: Self = {
+        var uiModel: Self = .init()
         
-        uiModel.titleColors = VPlainButtonUIModel.StateColors(
+        uiModel.titleColors = StateColors(
             enabled: Color.black,
             pressed: Color.gray,
             disabled: Color.gray
@@ -176,76 +175,26 @@ var body: some View {
 }
 ```
 
-#### Static Factory-Initialized UI Models
-
 Frequently, you will discover pre-configured static factory-initialized UI models associated with each component. It's highly recommended to investigate these UI model files prior to using them and defining them yourself.
 
-For instance, for most uses, a standard `VBottomSheet` can be instantiated without an explicit UI model, making it convenient to integrate into your SwiftUI projects.
-
 ```swift
-@State private var isPresented: Bool = false
-
 var body: some View {
-    VPlainButton(
-        action: { isPresented = true },
-        title: "Present"
-    )
-    .vBottomSheet(
-        id: "some_bottom_sheet",
-        isPresented: $isPresented,
+    VWrappingMarquee(
+        uiModel: .insettedGradient,
         content: {
-            id: "bottom_sheet",
-            isPresented: $isPresented,
-            content: {
-                ColorBook.accentBlue
-                    .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-            }
-        }
-    )
-}
-```
-
-However, if you wish to use scrollable view as a content, use the following configuration:
-
-```swift
-@State private var isPresented: Bool = false
-
-var body: some View {
-    VPlainButton(
-        action: { isPresented = true },
-        title: "Present"
-    )
-    .vBottomSheet(
-        id: "some_bottom_sheet",
-        uiModel: {
-            var uiModel: VBottomSheetUIModel = .init()
-            uiModel.autoresizesContent = true
-            return uiModel
-        }(),
-        isPresented: $isPresented,
-        content: {
-            ScrollView(content: {
-                VStack(spacing: 0, content: {
-                    ForEach(0..<20, content: { number in
-                        VListRow(
-                            uiModel: .noFirstAndLastSeparators(isFirst: number == 0), 
-                            content: {
-                                Text(String(number))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                        )
-                    })
-                })
-                .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
+            HStack(content: {
+                Image(systemName: "swift")
+                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
             })
+            .drawingGroup() // For `Image`
         }
     )
 }
 ```
 
-#### Animations
+## Animations
 
-`VComponents` adopts an unique approach to animations, associating them directly with the components and their UI models, rather than with the state. This implies that if you wish to modify a component's state with an animation, you'll need to supply a custom UI model.
+`VComponents` associates animations directly with the components and their UI models, rather than with the external state.
 
 ```swift
 @State private var isOn: Bool = false
@@ -262,7 +211,7 @@ var body: some View {
 }
 ```
 
-As an example, by default, the `VToggle` uses an `easeIn` animation with a duration of `0.1` to handle state changes. This applies uniformly to both a press on the toggle and any external modifications of the state. Thus, the use of a custom UI model becomes essential to modify these default animation.
+By default, the `VToggle` uses an `easeIn` animation with a duration of `0.1` to handle state changes. This applies uniformly to both touch interactions, as well as any external modifications of the state. So, to modify state with a different animation, you'll need to provide a custom UI model.
 
 ```swift
 @State private var isOn: Bool = false
@@ -286,11 +235,11 @@ var body: some View {
 }
 ```
 
-If you wish to completely cancel animations, there are two options available to you.
+There are two available options for completely cancelling animations.
 
-The first option involves setting the `stateChangeAnimation` to `nil`. While this does not completely remove animation, it essentially applies a `nil` animation.
+The first is to set `stateChangeAnimation` to `nil`. While this does not completely remove animation, it essentially applies a `nil` animation.
 
-The second option involves setting `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes.
+The second is to set `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes, even `nil`.
 
 ```swift
 @State private var isOn: Bool = false
@@ -338,7 +287,7 @@ var body: some View {
 }
 ```
 
-Choose the option that best suits your application's needs and user experience. In certain scenarios, the distinction between these two options can be substantial. For example, we could set the `appliesStateChangeAnimation` flag to false and subsequently mutate the state with an external animation.
+In certain scenarios, the distinction between these two can be substantial. For example, we could set the `appliesStateChangeAnimation` flag to `false` and subsequently mutate the state with an external animation.
 
 ```swift
 @State private var isOn: Bool = false
