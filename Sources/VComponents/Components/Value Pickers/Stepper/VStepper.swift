@@ -302,9 +302,9 @@ struct VStepper_Previews: PreviewProvider {
     }
     
     // Data
-    private static var range: ClosedRange<Int> { 1...10 }
-    private static var value: Int { 5 }
-    
+    private static var range: ClosedRange<Int> { 1...100 }
+    private static var value: Int { 50 }
+
     // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Int = VStepper_Previews.value
