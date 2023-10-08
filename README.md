@@ -420,7 +420,7 @@ Versions with different majors are not directly compatible. When a new major is 
         tvOS 15.0<br>
         watchOS 8.0
     </td>
-    <td>5.x.x - 5.x.x</td>
+    <td>5.0.0 - 5.x.x</td>
     <td>
         New SDK.<br>
         API changes.<br>
