@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.0(55)
+### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 
 General
 
