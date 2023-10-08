@@ -175,7 +175,7 @@ var body: some View {
 }
 ```
 
-Frequently, you will discover pre-configured static factory-initialized UI models associated with each component. It's highly recommended to investigate these UI model files prior to using them and defining them yourself.
+Frequently, you will discover pre-configured static factory-initialized UI models associated with each component. It's recommended to investigate UI model files before defining them yourself.
 
 ```swift
 var body: some View {
@@ -221,7 +221,7 @@ var body: some View {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
-                uiModel.animations.stateChangeAnimation = .easeIn(duration: 1)
+                uiModel.stateChangeAnimation = .easeIn(duration: 1)
                 return uiModel
             }(),
             isOn: $isOn
@@ -249,7 +249,7 @@ var body: some View {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
-                uiModel.animations.stateChangeAnimation = nil
+                uiModel.stateChangeAnimation = nil
                 return uiModel
             }(),
             isOn: $isOn
@@ -273,7 +273,7 @@ var body: some View {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
-                uiModel.animations.appliesStateChangeAnimation = false
+                uiModel.appliesStateChangeAnimation = false
                 return uiModel
             }(),
             isOn: $isOn
@@ -297,7 +297,7 @@ var body: some View {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
-                uiModel.animations.appliesStateChangeAnimation = false
+                uiModel.appliesStateChangeAnimation = false
                 return uiModel
             }(),
             isOn: $isOn
