@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Menu Group Row Protocol
 /// `VMenu` group row protocol.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuGroupRowProtocol: VMenuGroupRowConvertible {
@@ -19,6 +20,7 @@ public protocol VMenuGroupRowProtocol: VMenuGroupRowConvertible {
     func makeBody() -> Body
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VMenuGroupRowProtocol {
@@ -27,6 +29,7 @@ extension VMenuGroupRowProtocol {
 
 // MARK: - V Menu Picker Row Protocol
 /// `VMenu` picker row protocol.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuPickerRowProtocol: VMenuPickerRowConvertible {
@@ -37,6 +40,7 @@ public protocol VMenuPickerRowProtocol: VMenuPickerRowConvertible {
     func makeBody() -> Body
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VMenuPickerRowProtocol {

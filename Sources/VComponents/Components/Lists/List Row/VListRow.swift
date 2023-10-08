@@ -98,7 +98,7 @@ public struct VListRow<Content>: View
         .listRowInsets(EdgeInsets())
         .listRowBackground(uiModel.backgroundColor)
         .applyModifier({
-#if os(iOS) || os(macOS)
+#if !(os(tvOS) || os(watchOS))
             $0.listRowSeparator(.hidden)
 #else
             $0

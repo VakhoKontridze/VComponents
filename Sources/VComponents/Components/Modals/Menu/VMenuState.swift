@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Menu Internal State
 /// Enumeration that represents state, such as `enabled` or `disabled`.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public typealias VMenuInternalState = GenericState_EnabledDisabled

@@ -38,8 +38,9 @@ import VCore
 ///     }
 ///
 /// Unlike native menu, menu doesn't reverse actions.
-@available(tvOS, unavailable) // No `Menu` support
-@available(watchOS, unavailable) // No `Menu` support
+@available(macOS, unavailable) // N/A
+@available(tvOS 17.0, *)@available(tvOS, unavailable) // N/A
+@available(watchOS, unavailable) // N/A. No `Menu` support.
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VMenuUIModel
@@ -228,6 +229,7 @@ import VCore
 
 // Developmental only
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VMenu_Previews: PreviewProvider {

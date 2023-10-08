@@ -17,7 +17,7 @@ enum _InterfaceOrientation {
     case landscape
 
     // MARK: Initializers
-#if os(iOS) || targetEnvironment(macCatalyst)
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
     init(uiIInterfaceOrientation: UIInterfaceOrientation) {
         if uiIInterfaceOrientation.isLandscape {
             self = .landscape
@@ -28,7 +28,7 @@ enum _InterfaceOrientation {
 #endif
 
     static func initFromSystemInfo() -> Self {
-#if os(iOS) || targetEnvironment(macCatalyst)
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
         if UIDevice.current.orientation.isLandscape {
             .landscape
         } else {

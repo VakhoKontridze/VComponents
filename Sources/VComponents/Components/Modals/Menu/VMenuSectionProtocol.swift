@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Menu Section Protocol
 /// `VMenu` section protocol.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
@@ -22,6 +23,7 @@ public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     func makeBody() -> Body
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VMenuSectionProtocol {

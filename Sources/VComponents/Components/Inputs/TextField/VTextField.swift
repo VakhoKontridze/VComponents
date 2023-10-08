@@ -87,7 +87,7 @@ import VCore
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextField: View {
     // MARK: Properties - UI Model
@@ -199,14 +199,14 @@ public struct VTextField: View {
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.keyboardType(uiModel.keyboardType)
 #else
             $0
 #endif
         })
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.textContentType(uiModel.textContentType)
 #else
             $0
@@ -214,7 +214,7 @@ public struct VTextField: View {
         })
         .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.textInputAutocapitalization(uiModel.autocapitalization)
 #else
             $0

@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Menu Group Row Convertible
 /// Type that allows for conversion to `VMenuGroupRowProtocol`.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuGroupRowConvertible {
@@ -16,12 +17,14 @@ public protocol VMenuGroupRowConvertible {
     func toRows() -> [any VMenuGroupRowProtocol]
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension Array: VMenuGroupRowConvertible where Element == any VMenuGroupRowProtocol {
     public func toRows() -> [any VMenuGroupRowProtocol] { self }
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension EmptyView: VMenuGroupRowConvertible {
@@ -30,6 +33,7 @@ extension EmptyView: VMenuGroupRowConvertible {
 
 // MARK: - V Menu Picker Row Convertible
 /// Type that allows for conversion to `VMenuPickerRowProtocol`.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuPickerRowConvertible {
@@ -37,12 +41,14 @@ public protocol VMenuPickerRowConvertible {
     func toRows() -> [any VMenuPickerRowProtocol]
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension Array: VMenuPickerRowConvertible where Element == any VMenuPickerRowProtocol {
     public func toRows() -> [any VMenuPickerRowProtocol] { self }
 }
 
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension EmptyView: VMenuPickerRowConvertible {

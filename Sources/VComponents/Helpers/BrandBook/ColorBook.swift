@@ -15,16 +15,16 @@ typealias ColorBook = VComponentsColorBook
 public struct VComponentsColorBook {
     // MARK: Properties - Basic
     /// Black color. Set to `(0, 0, 0)`.
-    public static let black: Color = .init(.black)
+    public static let black: Color = .init(.basicBlack)
 
     /// Black color for pressed and disabled states. Set to `(0, 0, 0, 30)`.
-    public static let blackPressedDisabled: Color = .init(.blackPressedDisabled)
+    public static let blackPressedDisabled: Color = .init(.basicBlackPressedDisabled)
 
     /// White color. Set to `(255, 255, 255)`.
-    public static let white: Color = .init(.white)
+    public static let white: Color = .init(.basicWhite)
 
     /// White color for pressed and disabled states. Set to `(255, 255, 255, 30)`.
-    public static let whitePressedDisabled: Color = .init(.whitePressedDisabled)
+    public static let whitePressedDisabled: Color = .init(.basicWhitePressedDisabled)
 
     // MARK: Properties - Background
     /// Background color. Set to `(254, 254, 254)` and `(28, 28, 28)`, like `UIColor.systemBackground`.

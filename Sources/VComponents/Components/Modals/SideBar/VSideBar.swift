@@ -317,7 +317,7 @@ struct VSideBar_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
-#if os(iOS)
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
             SafeAreaPreview().previewDisplayName("Safe Area")
 #endif
         })
@@ -377,7 +377,7 @@ struct VSideBar_Previews: PreviewProvider {
         }
     }
 
-#if os(iOS)
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
     private struct SafeAreaPreview: View {
         @State private var isPresented: Bool = true
         @State private var interfaceOrientation: UIInterfaceOrientation = .unknown

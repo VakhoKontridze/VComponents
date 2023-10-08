@@ -456,13 +456,7 @@ struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have diff
                     tabItemTitle: { $0.tabItemTitle },
                     content: { $0.color }
                 )
-                .applyModifier({
-#if canImport(UIKit)
-                    $0.cornerRadius(20, corners: .topCorners)
-#else
-                    $0
-#endif
-                })
+                .cornerRadius(20, corners: .topCorners)
                 .padding()
             })
         }

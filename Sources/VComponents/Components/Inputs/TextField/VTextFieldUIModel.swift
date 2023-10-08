@@ -21,12 +21,12 @@ public struct VTextFieldUIModel {
     /// Spacing between header, textfield, and footer. Set to `3`.
     public var headerTextFieldAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.
     public var keyboardType: UIKeyboardType = .default
 #endif
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Text content type. Set to `nil`.
     public var textContentType: UITextContentType? = nil
 #endif
@@ -34,7 +34,7 @@ public struct VTextFieldUIModel {
     /// Indicates if auto correction is enabled. Set to `nil`.
     public var isAutocorrectionEnabled: Bool? = nil
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Auto capitalization type. Set to `nil`.
     public var autocapitalization: TextInputAutocapitalization? = nil
 #endif

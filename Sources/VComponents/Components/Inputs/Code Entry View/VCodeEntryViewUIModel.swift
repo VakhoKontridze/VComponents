@@ -21,12 +21,12 @@ public struct VCodeEntryViewUIModel {
     /// Spacing between characters. Set to `7`.
     public var spacing: CGFloat = 7
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.
     public var keyboardType: UIKeyboardType = .default
 #endif
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Text content type. Set to `oneTimeCode`.
     public var textContentType: UITextContentType? = .oneTimeCode
 #endif
@@ -34,7 +34,7 @@ public struct VCodeEntryViewUIModel {
     /// Indicates if auto correction is enabled. Set to `false`.
     public var isAutocorrectionEnabled: Bool? = false
 
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
     /// Auto capitalization type. Set to `never`.
     public var autocapitalization: TextInputAutocapitalization? = .never
 #endif

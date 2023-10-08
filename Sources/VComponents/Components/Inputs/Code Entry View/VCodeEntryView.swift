@@ -128,14 +128,14 @@ public struct VCodeEntryView: View {
             .focused($isFocused)
 
             .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
                 $0.keyboardType(uiModel.keyboardType)
 #else
                 $0
 #endif
             })
             .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
                 $0.textContentType(uiModel.textContentType)
 #else
                 $0
@@ -143,7 +143,7 @@ public struct VCodeEntryView: View {
             })
             .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
             .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
                 $0.textInputAutocapitalization(uiModel.autocapitalization)
 #else
                 $0

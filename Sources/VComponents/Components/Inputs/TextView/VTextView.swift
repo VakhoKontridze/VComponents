@@ -148,14 +148,14 @@ public struct VTextView: View {
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.keyboardType(uiModel.keyboardType)
 #else
             $0
 #endif
         })
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.textContentType(uiModel.textContentType)
 #else
             $0
@@ -163,7 +163,7 @@ public struct VTextView: View {
         })
         .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
         .applyModifier({
-#if os(iOS)
+#if !(os(macOS) || os(watchOS))
             $0.textInputAutocapitalization(uiModel.autocapitalization)
 #else
             $0

@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Menu UI Model
 /// Model that describes UI.
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenuUIModel {

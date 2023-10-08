@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - V Menu Label
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 enum VMenuLabel<Content> where Content: View {

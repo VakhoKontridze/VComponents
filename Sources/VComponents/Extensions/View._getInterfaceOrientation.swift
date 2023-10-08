@@ -16,7 +16,7 @@ extension View {
     @ViewBuilder func _getInterfaceOrientation(
         _ action: @escaping (_InterfaceOrientation) -> Void
     ) -> some View {
-#if os(iOS) || targetEnvironment(macCatalyst)
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
         self
             .getInterfaceOrientation({ action(_InterfaceOrientation(uiIInterfaceOrientation: $0)) })
 #else

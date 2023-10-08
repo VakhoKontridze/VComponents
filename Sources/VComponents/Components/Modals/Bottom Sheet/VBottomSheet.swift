@@ -603,7 +603,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         @State private var isPresented: Bool = true
 
         var body: some View {
-#if os(iOS)
+#if canImport(UIKit) && !os(watchOS)
             PreviewContainer(content: {
                 ModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(

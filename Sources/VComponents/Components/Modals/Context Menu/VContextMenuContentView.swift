@@ -9,8 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Menu Content View
+@available(macOS, unavailable) // N/A
 @available(tvOS, unavailable) // N/A
-@available(watchOS, unavailable) // No `View.contextMenu(...)` support
+@available(watchOS, unavailable) // N/A. No `View.contextMenu(...)` support.
 struct VContextMenuContentView: View {
     // MARK: Properties
     private let sections: () -> [any VMenuSectionProtocol]
@@ -42,6 +43,7 @@ import VCore
 
 // Developmental only
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VContextMenuContentView_Previews: PreviewProvider {
