@@ -355,7 +355,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                         return uiModel
                     }(),
                     action: {},
-                    icon: Image(systemName: "swift"),
+                    icon: icon,
                     title: title
                 )
                 .modifier(StretchedButtonWidthModifier())

@@ -181,7 +181,8 @@ struct VPlainButton_Previews: PreviewProvider {
     
     // Data
     private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
-    
+    private static var icon: Image { .init(systemName: "swift") }
+
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
@@ -194,7 +195,7 @@ struct VPlainButton_Previews: PreviewProvider {
 
                     VPlainButton(
                         action: {},
-                        icon: Image(systemName: "swift")
+                        icon: icon
                     )
 
                     VPlainButton(
@@ -204,7 +205,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             return uiModel
                         }(),
                         action: {},
-                        icon: Image(systemName: "swift"),
+                        icon: icon,
                         title: title
                     )
                 })

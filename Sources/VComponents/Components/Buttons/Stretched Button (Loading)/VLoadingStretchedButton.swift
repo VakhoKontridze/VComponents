@@ -417,7 +417,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     }(),
                     isLoading: false,
                     action: {},
-                    icon: Image(systemName: "swift"),
+                    icon: icon,
                     title: title
                 )
                 .modifier(StretchedButtonWidthModifier())
