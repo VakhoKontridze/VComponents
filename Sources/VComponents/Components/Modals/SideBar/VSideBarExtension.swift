@@ -35,7 +35,7 @@ extension View {
     /// UI model contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
     /// However, these insets are presents even if side bar content doesn't need them.
     /// Therefore, a custom implementation is needed per use-case.
-    /// By default, `automaticContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
+    /// By default, `defaultContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
     ///
     ///     @State private var isPresented: Bool = false
     ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
@@ -51,7 +51,7 @@ extension View {
     ///             uiModel: {
     ///                 var uiModel: VSideBarUIModel = .leading
     ///
-    ///                 uiModel.contentSafeAreaEdges = uiModel.automaticContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+    ///                 uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
     ///
     ///                 return uiModel
     ///             }(),

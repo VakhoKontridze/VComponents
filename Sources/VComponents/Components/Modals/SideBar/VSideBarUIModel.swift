@@ -177,7 +177,7 @@ public struct VSideBarUIModel {
 @available(watchOS, unavailable)
 extension VSideBarUIModel {
     /// Calculates automatic `contentSafeAreaEdges` based on interface orientation.
-    public func automaticContentSafeAreaEdges(
+    public func defaultContentSafeAreaEdges(
         interfaceOrientation: UIInterfaceOrientation
     ) -> Edge.Set {
         switch presentationEdge {

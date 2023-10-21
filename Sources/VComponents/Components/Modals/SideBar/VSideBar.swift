@@ -400,7 +400,7 @@ struct VSideBar_Previews: PreviewProvider {
 
                             uiModel.colorScheme = VSideBar_Previews.colorScheme
 
-                            uiModel.contentSafeAreaEdges = uiModel.automaticContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+                            uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
 
                             return uiModel
                         }(),
