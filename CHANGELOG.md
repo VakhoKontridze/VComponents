@@ -1,10 +1,11 @@
 # Change Log
 
-### 5.1.0(56)
+### 5.0.1(56)
 
 VSideBar
 
 - `automaticContentSafeAreaEdges(interfaceOrientation:)` method is added in UI model that atomically calculates `contentSafeAreaEdges`
+- Issue with SideBar dismissing without animation on drag-back is fixed
 
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 

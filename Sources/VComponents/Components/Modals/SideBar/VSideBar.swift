@@ -42,6 +42,10 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - Content
     private let content: () -> Content
 
+    // MARK: Properties - Flags
+    // Prevents `animateOutFromDrag` being called multiples times during active drag, which can break the animation.
+    @State private var isBeingDismissedFromDragBack: Bool = false
+
     // MARK: Initializers
     init(
         uiModel: VSideBarUIModel,
@@ -219,11 +223,14 @@ struct VSideBar<Content>: View where Content: View {
         guard
             uiModel.dismissType.contains(.dragBack),
             isDraggedInCorrectDirection(dragValue),
-            didExceedDragBackDismissDistance(dragValue)
+            didExceedDragBackDismissDistance(dragValue),
+            !isBeingDismissedFromDragBack
         else {
             return
         }
         
+        isBeingDismissedFromDragBack = true
+
         animateOutFromDrag()
     }
     
