@@ -32,10 +32,10 @@ extension View {
     ///     }
     ///
     /// Due to a Presentation Host API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
-    /// UI model contains `contentSafeAreaMargins`, that inserts `Spacer` with the dimension of safe area on specified edges.
+    /// UI model contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
     /// However, these insets are presents even if side bar content doesn't need them.
     /// Therefore, a custom implementation is needed per use-case.
-    /// For `leading`-presented side bars, safe area can be flipped between `leading` and `vertical` edges based on interface orientation.
+    /// By default, `automaticContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
     ///
     ///     @State private var isPresented: Bool = false
     ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
@@ -51,13 +51,7 @@ extension View {
     ///             uiModel: {
     ///                 var uiModel: VSideBarUIModel = .leading
     ///
-    ///                 uiModel.contentSafeAreaMargins = {
-    ///                     if interfaceOrientation.isLandscape {
-    ///                         .leading
-    ///                     } else {
-    ///                         .vertical
-    ///                     }
-    ///                 }()
+    ///                 uiModel.contentSafeAreaEdges = uiModel.automaticContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
     ///
     ///                 return uiModel
     ///             }(),

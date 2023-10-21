@@ -186,9 +186,9 @@ struct VBottomSheet<Content>: View
         })
         .applyModifier({
             if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0.safeAreaPaddings(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
             } else {
-                $0.safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
             }
         })
         .frame(maxWidth: .infinity)

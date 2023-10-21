@@ -107,9 +107,9 @@ struct VSideBar<Content>: View where Content: View {
                 .padding(uiModel.contentMargins)
                 .applyModifier({
                     if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                        $0.safeAreaPaddings(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                        $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
                     } else {
-                        $0.safeAreaMargins(edges: uiModel.contentSafeAreaMargins, insets: safeAreaInsets)
+                        $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
                     }
                 })
         })
@@ -393,37 +393,7 @@ struct VSideBar_Previews: PreviewProvider {
 
                             uiModel.colorScheme = VSideBar_Previews.colorScheme
 
-                            uiModel.contentSafeAreaMargins = {
-                                switch uiModel.presentationEdge {
-                                case .leading:
-                                    if interfaceOrientation.isLandscape {
-                                        return .leading
-                                    } else {
-                                        return .vertical
-                                    }
-
-                                case .trailing:
-                                    if interfaceOrientation.isLandscape {
-                                        return .trailing
-                                    } else {
-                                        return .vertical
-                                    }
-
-                                case .top:
-                                    if interfaceOrientation.isLandscape {
-                                        return .horizontal
-                                    } else {
-                                        return .top
-                                    }
-
-                                case .bottom:
-                                    if interfaceOrientation.isLandscape {
-                                        return .horizontal
-                                    } else {
-                                        return .bottom
-                                    }
-                                }
-                            }()
+                            uiModel.contentSafeAreaEdges = uiModel.automaticContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
 
                             return uiModel
                         }(),

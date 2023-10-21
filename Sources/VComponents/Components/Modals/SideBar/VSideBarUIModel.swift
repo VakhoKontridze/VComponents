@@ -82,7 +82,7 @@ public struct VSideBarUIModel {
     public var contentMargins: Margins = .zero
 
     /// Edges on which content has safe area margins. Set to `[]`.
-    public var contentSafeAreaMargins: Edge.Set = []
+    public var contentSafeAreaEdges: Edge.Set = []
 
     // MARK: Properties - Keyboard Responsiveness
     /// Keyboard responsiveness strategy. Set to `default`.
@@ -168,6 +168,51 @@ public struct VSideBarUIModel {
         }
     }
 }
+
+// MARK: - Safe Area
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VSideBarUIModel {
+    /// Calculates automatic `contentSafeAreaEdges` based on interface orientation.
+    public func automaticContentSafeAreaEdges(
+        interfaceOrientation: UIInterfaceOrientation
+    ) -> Edge.Set {
+        switch presentationEdge {
+        case .leading:
+            if interfaceOrientation.isLandscape {
+                return .leading
+            } else {
+                return .vertical
+            }
+
+        case .trailing:
+            if interfaceOrientation.isLandscape {
+                return .trailing
+            } else {
+                return .vertical
+            }
+
+        case .top:
+            if interfaceOrientation.isLandscape {
+                return .horizontal
+            } else {
+                return .top
+            }
+
+        case .bottom:
+            if interfaceOrientation.isLandscape {
+                return .horizontal
+            } else {
+                return .bottom
+            }
+        }
+    }
+}
+
+#endif
 
 // MARK: - Factory (Misc)
 @available(macOS, unavailable)

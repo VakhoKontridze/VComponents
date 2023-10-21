@@ -84,7 +84,7 @@ public struct VBottomSheetUIModel {
     public var contentMargins: Margins = .zero
 
     /// Edges on which content has safe area margins. Set to `[]`.
-    public var contentSafeAreaMargins: Edge.Set = []
+    public var contentSafeAreaEdges: Edge.Set = []
 
     /// Indicates if sheet resizes content based on its visible frame. Set to `false`.
     ///
@@ -330,17 +330,17 @@ public struct VBottomSheetUIModel {
             return dragIndicatorSize.height + dragIndicatorMargins.verticalSum
         }()
 
-        let contentSafeAreaMarginsVerticalSum: CGFloat = {
+        let contentSafeAreaEdgesVerticalSum: CGFloat = {
             var result: CGFloat = 0
-            if contentSafeAreaMargins.contains(.top) { result += safeAreaInsets.top }
-            if contentSafeAreaMargins.contains(.bottom) { result += safeAreaInsets.bottom }
+            if contentSafeAreaEdges.contains(.top) { result += safeAreaInsets.top }
+            if contentSafeAreaEdges.contains(.bottom) { result += safeAreaInsets.bottom }
             return result
         }()
 
         return
             dragIndicatorHeight +
             contentMargins.verticalSum +
-            contentSafeAreaMarginsVerticalSum +
+            contentSafeAreaEdgesVerticalSum +
             contentHeight
     }
 }
