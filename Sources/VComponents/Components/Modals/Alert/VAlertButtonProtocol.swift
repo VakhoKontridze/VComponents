@@ -13,6 +13,9 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VAlertButtonProtocol: VAlertButtonConvertible {
+    /// The stable identity of the entity associated with this instance.
+    var id: Int { get }
+
     /// Body type.
     typealias Body = AnyView
 

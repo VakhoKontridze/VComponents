@@ -175,9 +175,9 @@ public struct VMenu<Label>: View where Label: View {
     
     private func contentView() -> some View {
         ForEach(
-            sections().enumeratedArray(),
-            id: \.offset,
-            content: { (_, section) in
+            sections(),
+            id: \.id,
+            content: { section in
                 TitledSection(
                     headerTitle: section.headerTitle,
                     content: { section.makeBody() }

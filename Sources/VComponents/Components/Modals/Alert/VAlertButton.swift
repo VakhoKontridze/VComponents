@@ -47,6 +47,9 @@ public struct VAlertButton: VAlertButtonProtocol {
         case cancel
     }
 
+    // MARK: Identifiable
+    public var id: Int { title.hashValue }
+
     // MARK: Button Protocol
     public func makeBody(
         uiModel: VAlertUIModel,

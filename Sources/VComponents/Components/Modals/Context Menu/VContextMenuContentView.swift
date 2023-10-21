@@ -26,9 +26,9 @@ struct VContextMenuContentView: View {
     // MARK: Body
     var body: some View {
         ForEach(
-            sections().enumeratedArray(),
-            id: \.offset,
-            content: { (_, section) in
+            sections(),
+            id: \.id,
+            content: { section in
                 TitledSection(
                     headerTitle: section.headerTitle,
                     content: { section.makeBody() }

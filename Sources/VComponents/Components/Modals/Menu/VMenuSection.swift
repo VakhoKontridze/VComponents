@@ -27,16 +27,19 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
         self.headerTitle = headerTitle
         self.rows = rows
     }
-    
+
+    // MARK: Identifiable
+    public var id: Int { headerTitle.hashValue }
+
     // MARK: Section Protocol
     //public var headerTitle: String?
     
     public func makeBody() -> AnyView {
         .init(
             ForEach(
-                rows().enumeratedArray(),
-                id: \.offset,
-                content: { (_, row) in row.makeBody() }
+                rows(),
+                id: \.id,
+                content: { row in row.makeBody() }
             )
         )
     }
@@ -59,7 +62,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     @Binding private var selection: Data.Element
 
     private let data: Data
-    private let id: KeyPath<Data.Element, ID>
+    private let _id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> VMenuPickerRowProtocol
 
     // MARK: Initializers
@@ -74,7 +77,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
         self.headerTitle = headerTitle
         self._selection = selection
         self.data = data
-        self.id = id
+        self._id = id
         self.content = content
     }
 
@@ -93,7 +96,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
         self.headerTitle = headerTitle
         self._selection = selection
         self.data = data
-        self.id = \.id
+        self._id = \.id
         self.content = content
     }
     
@@ -111,10 +114,13 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
         self.headerTitle = headerTitle
         self._selection = selection
         self.data = Array(T.allCases)
-        self.id = \.id
+        self._id = \.id
         self.content = { VMenuPickerRow(title: $0.stringRepresentation) }
     }
-    
+
+    // MARK: Identifiable
+    public var id: Int { headerTitle.hashValue }
+
     // MARK: Section Protocol
     //public var headerTitle: String?
     
@@ -123,7 +129,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
             Picker(
                 selection: $selection,
                 content: {
-                    ForEach(data, id: id, content: { element in
+                    ForEach(data, id: _id, content: { element in
                         content(element).makeBody()
                             .tag(element) // TODO: `Picker` requires tag. Remove this when custom component is added.
                     })

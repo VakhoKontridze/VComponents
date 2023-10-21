@@ -217,12 +217,16 @@ struct VAlert<Content>: View
     private func buttonContent(reversesOrder: Bool = false) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
         
-        return ForEach(buttons.indices, id: \.self, content: { i in
-            buttons[i].makeBody(
-                uiModel: uiModel,
-                animateOut: { animateOut(completion: $0) }
-            )
-        })
+        return ForEach(
+            buttons,
+            id: \.id,
+            content: { button in
+                button.makeBody(
+                    uiModel: uiModel,
+                    animateOut: { animateOut(completion: $0) }
+                )
+            }
+        )
     }
     
     // MARK: Animations

@@ -13,6 +13,9 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuGroupRowProtocol: VMenuGroupRowConvertible {
+    /// The stable identity of the entity associated with this instance.
+    var id: Int { get }
+
     /// Body type.
     typealias Body = AnyView
 
@@ -33,6 +36,9 @@ extension VMenuGroupRowProtocol {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuPickerRowProtocol: VMenuPickerRowConvertible {
+    /// The stable identity of the entity associated with this instance.
+    var id: Int { get }
+
     /// Body type.
     typealias Body = AnyView
 

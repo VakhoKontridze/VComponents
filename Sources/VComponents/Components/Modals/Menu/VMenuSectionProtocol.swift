@@ -13,6 +13,9 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
+    /// The stable identity of the entity associated with this instance.
+    var id: Int { get }
+
     /// Section header title.
     var headerTitle: String? { get }
 

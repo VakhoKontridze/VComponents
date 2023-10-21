@@ -33,7 +33,10 @@ public struct VMenuRow: VMenuGroupRowProtocol {
         self.title = title
         self.icon = icon
     }
-    
+
+    // MARK: Identifiable
+    public var id: Int { title.hashValue } // `icon` cannot be hashed
+
     // MARK: Row Protocol
     public func makeBody() -> AnyView {
         .init(
@@ -80,7 +83,10 @@ public struct VMenuExpandingRow: VMenuGroupRowProtocol { // TODO: Add disabling 
         self.primaryAction = primaryAction
         self.sections = sections
     }
-    
+
+    // MARK: Identifiable
+    public var id: Int { title.hashValue }
+
     // MARK: Row Protocol
     public func makeBody() -> AnyView {
         .init(
@@ -112,6 +118,9 @@ public struct VMenuPickerRow: VMenuPickerRowProtocol { // TODO: Add disabling wh
         self.title = title
         self.icon = icon
     }
+
+    // MARK: Identifiable
+    public var id: Int { title.hashValue }
 
     // MARK: Row Protocol
     public func makeBody() -> AnyView {
