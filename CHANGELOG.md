@@ -7,6 +7,10 @@ VSideBar
 - `defaultContentSafeAreaEdges(interfaceOrientation:)` method is added in UI model that atomically calculates `contentSafeAreaEdges`
 - Issue with SideBar dismissing without animation on drag-back is fixed
 
+VCodeEntryView
+
+- Issue with invisible toolbar items is fixed
+
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 
 General
