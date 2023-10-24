@@ -2,6 +2,10 @@
 
 ### 5.0.1(56)
 
+General
+
+- Issue with XCode previews in modal components is fixed
+
 VSideBar
 
 - `defaultContentSafeAreaEdges(interfaceOrientation:)` method is added in UI model that atomically calculates `contentSafeAreaEdges`
