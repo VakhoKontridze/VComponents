@@ -32,7 +32,7 @@ public protocol VComponentsLocalizationProvider {
     /// Localized value for `VAlertOKButton`.
     var vAlertOKButtonTitle: String { get }
     
-    /// Localized value for `VAlertCancelButton`.
+    /// Localized value for `cancel` `VAlertButton`.
     var vAlertCancelButtonTitle: String { get }
 }
 

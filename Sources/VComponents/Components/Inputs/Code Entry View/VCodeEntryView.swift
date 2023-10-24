@@ -120,7 +120,7 @@ public struct VCodeEntryView: View {
 
             // Makes highlighting invisible. Although, invisible highlight still maintains gray color,
             // it is only ever an issue on previews and simulators where `mac` keyboard can act as an input.
-            // .tint(.clear) // Disabled, as it makes toolbar items invisible
+            //.tint(.clear) // Disabled, as it makes toolbar items invisible
 
             // Blocks hit testing for gestures, to ensure that highlighting doesn't occur, and that menu isn't opened
             .blocksHitTesting()

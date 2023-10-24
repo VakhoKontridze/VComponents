@@ -51,8 +51,8 @@ import Foundation
     }
     
     // MARK: Processing
-    // If there are multiple `VAlertCancelButton`s, only the last one will be kept.
-    // `VAlertCancelButton` will be moved to the end of the stack.
+    // If there are multiple `cancel` `VAlertButton`s, only the last one will be kept.
+    // `cancel` `VAlertButton` will be moved to the end of the stack.
     // If there are no buttons, `VAlertOKButton` will be added.
     static func process(_ buttons: [any VAlertButtonProtocol]) -> [any VAlertButtonProtocol] {
         var result: [any VAlertButtonProtocol] = []

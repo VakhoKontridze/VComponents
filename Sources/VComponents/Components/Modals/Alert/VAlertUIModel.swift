@@ -297,6 +297,7 @@ public struct VAlertUIModel {
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
+    // MARK: Button State Colors
     /// Model that contains colors for button component states.
     public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
 }
