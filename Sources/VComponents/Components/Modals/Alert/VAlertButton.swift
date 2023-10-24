@@ -53,7 +53,7 @@ public struct VAlertButton: VAlertButtonProtocol {
     // MARK: Button Protocol
     public func makeBody(
         uiModel: VAlertUIModel,
-        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+        animateOutHandler: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
             VStretchedButton(
@@ -65,7 +65,7 @@ public struct VAlertButton: VAlertButtonProtocol {
                     case .cancel: uiModel.secondaryButtonSubUIModel
                     }
                 }(),
-                action: { animateOut(/*completion: */action) },
+                action: { animateOutHandler(/*completion: */action) },
                 title: title
             )
             .disabled(!isEnabled)

@@ -223,7 +223,7 @@ struct VAlert<Content>: View
             content: { button in
                 button.makeBody(
                     uiModel: uiModel,
-                    animateOut: { animateOut(completion: $0) }
+                    animateOutHandler: { animateOut(completion: $0) }
                 )
             }
         )
