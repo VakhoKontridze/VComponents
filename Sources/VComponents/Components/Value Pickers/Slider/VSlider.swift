@@ -66,7 +66,7 @@ public struct VSlider: View {
         )
         self.step = step.map { Double($0) }
 
-        self._value = Binding(
+        self._value = Binding( // Like native `Slider`, clamps initial value, but not subsequent ones
             get: { Double(value.wrappedValue.clamped(to: range, step: step)) },
             set: { value.wrappedValue = V($0) }
         )
