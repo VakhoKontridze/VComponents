@@ -14,23 +14,23 @@ import SwiftUI
 extension View {
     /// Presents `VAlert` when `VAlertParameters` is non-`nil`.
     ///
-    ///     @State private var isPresented: Bool = false
+    ///     @State private var parameters: VAlertParameters?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true },
+    ///             action: {
+    ///                 parameters = VAlertParameters(
+    ///                     title: "Lorem Ipsum",
+    ///                     message: "Lorem ipsum dolor sit amet",
+    ///                     actions: {
+    ///                         VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+    ///                         VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                     }
+    ///                 )
+    ///             },
     ///             title: "Present"
     ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             title: "Lorem Ipsum",
-    ///             message: "Lorem ipsum dolor sit amet",
-    ///             actions: {
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
+    ///         .vAlert(id: "some_alert", parameters: $parameters)
     ///     }
     ///     
     public func vAlert(
@@ -44,6 +44,59 @@ extension View {
             item: parameters,
             title: { $0.title },
             message: { $0.message },
+            actions: { $0.buttons() }
+        )
+    }
+
+    /// Presents `VAlert` when `parameters` is non-`nil`.
+    ///
+    ///     @State private var parameters: VAlertParameters?
+    ///     @State private var inputText: String = "Lorem ipsum"
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: {
+    ///                 parameters = VAlertParameters(
+    ///                     title: "Lorem Ipsum",
+    ///                     message: "Lorem ipsum dolor sit amet",
+    ///                     actions: {
+    ///                         VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+    ///                         VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                     },
+    ///                     attributes: [
+    ///                         "input_text_binding": $inputText
+    ///                     ]
+    ///                 )
+    ///             },
+    ///             title: "Present"
+    ///         )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             parameters: $parameters,
+    ///             content: { parameters in
+    ///                 if let inputTextBinding = parameters.attributes["input_text_binding"] as? Binding<String> {
+    ///                     TextField("", text: inputTextBinding)
+    ///                         .textFieldStyle(.roundedBorder)
+    ///                 }
+    ///             }
+    ///         )
+    ///     }
+    ///
+    public func vAlert<Content>(
+        id: String,
+        uiModel: VAlertUIModel = .init(),
+        parameters: Binding<VAlertParameters?>,
+        @ViewBuilder content: @escaping (VAlertParameters) -> Content
+    ) -> some View
+        where Content: View
+    {
+        self.vAlert(
+            id: id,
+            uiModel: uiModel,
+            item: parameters,
+            title: { $0.title },
+            message: { $0.message },
+            content: content,
             actions: { $0.buttons() }
         )
     }

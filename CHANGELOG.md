@@ -5,6 +5,7 @@
 General
 
 - Issue with XCode previews in modal components is fixed
+- Redundant `Identifiable` conformances are removed
 
 VSideBar
 
@@ -15,6 +16,11 @@ VCodeEntryView
 
 - Issue with invisible toolbar items is fixed
 
+VAlert
+
+- `attributes` are added to `VAlertParameters` for additional customization
+- `vAlert(...)` method now supports content
+
 VMenu
 
 - Menu is deprecated, until native counterpart is added
@@ -22,6 +28,14 @@ VMenu
 VContextMenu
 
 - ContextMenu is deprecated, until native counterpart is added
+
+VContinuousSpinner
+
+- `attributes` are added to `VAlertParameters` for additional customization
+
+VDashedSpinner
+
+- `attributes` are added to `VAlertParameters` for additional customization
 
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 

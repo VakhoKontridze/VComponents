@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Spinner Extension (Parameters)
 extension View {
-    /// Presents `VContinuousSpinner` when `VSpinnerParameters` is non-`nil`.
+    /// Presents `VContinuousSpinner` when `parameters` is non-`nil`.
     ///
     ///     @State private var parameters: VSpinnerParameters = .init()
     ///
@@ -32,7 +32,7 @@ extension View {
             })
     }
     
-    /// Presents `VDashedSpinner` when `VSpinnerParameters` is non-`nil`.
+    /// Presents `VDashedSpinner` when `parameters` is non-`nil`.
     ///
     ///     @State private var parameters: VSpinnerParameters = .init()
     ///

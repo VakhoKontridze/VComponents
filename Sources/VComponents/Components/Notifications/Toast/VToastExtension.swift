@@ -72,9 +72,7 @@ extension View {
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (Item) -> String
-    ) -> some View
-        where Item: Identifiable
-    {
+    ) -> some View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
         return self

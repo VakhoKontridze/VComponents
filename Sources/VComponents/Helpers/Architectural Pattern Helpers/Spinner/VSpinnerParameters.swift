@@ -17,19 +17,21 @@ import SwiftUI
 ///             .vContinuousSpinner(parameters: parameters)
 ///     }
 ///
-public struct VSpinnerParameters: Identifiable {
+public struct VSpinnerParameters {
     // MARK: Properties
-    /// ID.
-    public let id: UUID = .init()
-    
     /// Indicates if interaction is enabled.
     public var isInteractionEnabled: Bool
-    
+
+    /// Attributes.
+    public var attributes: [String: Any] = [:]
+
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
     public init(
-        isInteractionEnabled: Bool = true
+        isInteractionEnabled: Bool = true,
+        attributes: [String: Any] = [:]
     ) {
         self.isInteractionEnabled = isInteractionEnabled
+        self.attributes = attributes
     }
 }

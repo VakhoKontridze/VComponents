@@ -224,9 +224,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
         
