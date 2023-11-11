@@ -178,7 +178,13 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                 caption(internalState)
             }
         })
-        .frame(maxWidth: uiModel.captionWidthMax)
+        .frame(
+            maxWidth: uiModel.captionWidthMax,
+            alignment: Alignment(
+                horizontal: uiModel.captionFrameAlignment,
+                vertical: .center
+            )
+        )
         .scaleEffect(internalState == .pressed ? uiModel.captionPressedScale : 1)
     }
     

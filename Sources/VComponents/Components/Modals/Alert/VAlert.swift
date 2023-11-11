@@ -144,6 +144,13 @@ struct VAlert<Content>: View
                 .foregroundStyle(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
 
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.titleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
                 .fixedSize(horizontal: false, vertical: true)
 
                 .padding(uiModel.titleTextMargins)
@@ -158,6 +165,13 @@ struct VAlert<Content>: View
                 .foregroundStyle(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
 
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.messageTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
                 .fixedSize(horizontal: false, vertical: true)
 
                 .padding(uiModel.messageTextMargins)

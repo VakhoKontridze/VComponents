@@ -281,6 +281,14 @@ public struct VTextField: View {
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
 
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.headerTitleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
+
                 .padding(.horizontal, uiModel.headerMarginHorizontal)
         }
     }
@@ -292,6 +300,14 @@ public struct VTextField: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
+
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.footerTitleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
 
                 .padding(.horizontal, uiModel.footerMarginHorizontal)
         }

@@ -89,21 +89,30 @@ struct VToast: View {
                     view
                         .frame(
                             maxWidth: .infinity,
-                            alignment: Alignment(horizontal: alignment, vertical: .center)
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
                         )
 
                 case .fixedPoint(let width, let alignment):
                     view
                         .frame(
                             width: width,
-                            alignment: Alignment(horizontal: alignment, vertical: .center)
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
                         )
 
                 case .fixedFraction(let ratio, let alignment):
                     view
                         .frame(
                             width: containerSize.width * ratio,
-                            alignment: Alignment(horizontal: alignment, vertical: .center)
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
                         )
                 }
             })

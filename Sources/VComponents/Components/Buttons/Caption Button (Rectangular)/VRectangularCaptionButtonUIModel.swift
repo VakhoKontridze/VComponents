@@ -110,6 +110,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Maximum caption width. Set to `100`.
     public var captionWidthMax: CGFloat = 100
 
+    /// Caption text frame alignment. Set to `center`.
+    public var captionFrameAlignment: HorizontalAlignment = .center
+
     /// Spacing between icon caption and title caption text. Set to `8`.
     public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
 

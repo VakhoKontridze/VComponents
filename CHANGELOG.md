@@ -7,6 +7,10 @@ General
 - Issue with XCode previews in modal components is fixed
 - Redundant `Identifiable` conformances are removed
 
+VRectangularCaptionButton
+
+- `captionFrameAlignment` is added
+
 VCheckBox
 
 - `hitBox` type is changed from `CGFloat` to `HitBox` 
@@ -16,12 +20,21 @@ VSideBar
 - `defaultContentSafeAreaEdges(interfaceOrientation:)` method is added in UI model that atomically calculates `contentSafeAreaEdges`
 - Issue with SideBar dismissing without animation on drag-back is fixed
 
+VTextField
+
+- `headerTitleTextFrameAlignment` and `footerTitleTextFrameAlignment` are added
+
+VTextView
+
+- `headerTitleTextFrameAlignment` and `footerTitleTextFrameAlignment` are added
+
 VCodeEntryView
 
 - Issue with invisible toolbar items is fixed
 
 VAlert
 
+- `titleTextFrameAlignment` and `messageTextFrameAlignment` are added
 - `attributes` are added to `VAlertParameters` for additional customization
 - `vAlert(...)` method now supports content
 
@@ -33,13 +46,10 @@ VContextMenu
 
 - ContextMenu is deprecated, until native counterpart is added
 
-VContinuousSpinner
+Helpers - Architectural Pattern Helpers
 
-- `attributes` are added to `VAlertParameters` for additional customization
-
-VDashedSpinner
-
-- `attributes` are added to `VAlertParameters` for additional customization
+- `attributes` is added to `VAlertParameters` for additional customization
+- `attributes` is added to `VAlertParameters` for additional customization
 
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 

@@ -143,7 +143,7 @@ public struct VTextView: View {
 
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .multilineTextAlignment(uiModel.textLineType.textAlignment ?? .leading)
+        .multilineTextAlignment(uiModel.textLineType.textAlignment ?? .leading) // May glitch for previews
         .lineLimit(type: uiModel.textLineType.textLineLimitType)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
@@ -193,6 +193,14 @@ public struct VTextView: View {
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
 
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.headerTitleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
+
                 .padding(.horizontal, uiModel.headerMarginHorizontal)
         }
     }
@@ -204,6 +212,14 @@ public struct VTextView: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
+
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.footerTitleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
 
                 .padding(.horizontal, uiModel.footerMarginHorizontal)
         }
@@ -242,7 +258,7 @@ struct VTextView_Previews: PreviewProvider {
 
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var text: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        @State private var text: String = VTextView_Previews.text
 
         var body: some View {
             PreviewContainer(content: {

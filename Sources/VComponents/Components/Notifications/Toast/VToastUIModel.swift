@@ -48,8 +48,8 @@ public struct VToastUIModel {
     public var backgroundColor: Color = GlobalUIModel.Notifications.layerGray
 
     // MARK: Properties - Text
-    /// Text line type. Set to `default`.
-    public var textLineType: TextLineType = .default
+    /// Text line type. Set to `singleLine`.
+    public var textLineType: TextLineType = .singleLine
 
     /// Text minimum scale factor. Set to `0.75`.
     public var textMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor

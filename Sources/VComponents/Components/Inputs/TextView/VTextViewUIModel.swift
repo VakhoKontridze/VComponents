@@ -62,6 +62,9 @@ public struct VTextViewUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Header
+    /// Header title text frame alignment. Set to `leading`.
+    public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
+
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
     public var headerTitleTextLineType: TextLineType = GlobalUIModel.Common.headerTitleTextLineType
 
@@ -79,6 +82,9 @@ public struct VTextViewUIModel {
     public var headerMarginHorizontal: CGFloat = GlobalUIModel.Common.headerAndFooterMarginHorizontal
 
     // MARK: Properties - Footer
+    /// Footer title text frame alignment. Set to `leading`.
+    public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
+
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     public var footerTitleTextLineType: TextLineType = GlobalUIModel.Common.footerTitleTextLineType
 

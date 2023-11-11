@@ -74,6 +74,9 @@ public struct VAlertUIModel {
     }
 
     // MARK: Properties - Title
+    /// Title title text frame alignment. Set to `center`.
+    public var titleTextFrameAlignment: HorizontalAlignment = .center
+
     /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.
     public var titleTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -98,6 +101,9 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Message
+    /// Message title text frame alignment. Set to `center`.
+    public var messageTextFrameAlignment: HorizontalAlignment = .center
+
     /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
     public var messageTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
