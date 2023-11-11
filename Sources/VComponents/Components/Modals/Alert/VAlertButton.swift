@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Alert Button
 /// `VAlert` button.
@@ -55,21 +56,20 @@ public struct VAlertButton: VAlertButtonProtocol {
         uiModel: VAlertUIModel,
         animateOutHandler: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
-        .init(
-            VStretchedButton(
-                uiModel: {
-                    switch role {
-                    case .primary: uiModel.primaryButtonSubUIModel
-                    case .secondary: uiModel.secondaryButtonSubUIModel
-                    case .destructive: uiModel.destructiveButtonSubUIModel
-                    case .cancel: uiModel.secondaryButtonSubUIModel
-                    }
-                }(),
-                action: { animateOutHandler(/*completion: */action) },
-                title: title
-            )
-            .disabled(!isEnabled)
+        VStretchedButton(
+            uiModel: {
+                switch role {
+                case .primary: uiModel.primaryButtonSubUIModel
+                case .secondary: uiModel.secondaryButtonSubUIModel
+                case .destructive: uiModel.destructiveButtonSubUIModel
+                case .cancel: uiModel.secondaryButtonSubUIModel
+                }
+            }(),
+            action: { animateOutHandler(/*completion: */action) },
+            title: title
         )
+        .disabled(!isEnabled)
+        .eraseToAnyView()
     }
 
     // MARK: Modifiers

@@ -22,8 +22,9 @@ struct ModalLauncherView: View {
 
     // MARK: Body
     var body: some View {
-        Color.clear
-            .contentShape(Rectangle())
-            .onTapGesture(perform: { isPresented = true })
+        VPlainButton(
+            action: { isPresented = true },
+            title: "Present"
+        )
     }
 }
