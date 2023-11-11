@@ -8,6 +8,17 @@
 import SwiftUI
 import VCore
 
+// MARK: - V Check Mark
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VCheckBoxUIModel {
+    @available(*, deprecated, renamed: "checkmarkIconColors")
+    public var checkmarkColors: StateColors {
+        get { checkmarkIconColors }
+        set { checkmarkIconColors = newValue }
+    }
+}
+
 // MARK: - V Side Bar
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

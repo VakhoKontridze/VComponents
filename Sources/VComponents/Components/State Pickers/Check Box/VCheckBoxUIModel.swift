@@ -62,7 +62,7 @@ public struct VCheckBoxUIModel {
     public var checkmarkIconDimension: CGFloat = 9
 
     /// Checkmark icon colors.
-    public var checkmarkColors: StateColors = .init(
+    public var checkmarkIconColors: StateColors = .init(
         off: .clear,
         on: ColorBook.white,
         indeterminate: ColorBook.white,
