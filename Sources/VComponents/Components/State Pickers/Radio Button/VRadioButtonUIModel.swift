@@ -103,6 +103,7 @@ public struct VRadioButtonUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
+    // MARK: Hit Box
     /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
     public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 

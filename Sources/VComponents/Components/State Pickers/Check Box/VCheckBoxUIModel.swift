@@ -101,7 +101,7 @@ public struct VCheckBoxUIModel {
 
     // MARK: Properties - Hit Box
     /// Checkbox hit box. Set to `5`.
-    public var checkboxHitBox: CGFloat = GlobalUIModel.StatePickers.componentAndLabelSpacing // Actual spacing is 0
+    public var checkboxHitBox: HitBox = .init(GlobalUIModel.StatePickers.componentAndLabelSpacing) // Actual spacing is 0
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.
@@ -127,6 +127,7 @@ public struct VCheckBoxUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
+    // MARK: Hit Box
     /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
     public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 

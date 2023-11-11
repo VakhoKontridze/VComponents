@@ -7,6 +7,10 @@ General
 - Issue with XCode previews in modal components is fixed
 - Redundant `Identifiable` conformances are removed
 
+VCheckBox
+
+- `hitBox` type is changed from `CGFloat` to `HitBox` 
+
 VSideBar
 
 - `defaultContentSafeAreaEdges(interfaceOrientation:)` method is added in UI model that atomically calculates `contentSafeAreaEdges`
