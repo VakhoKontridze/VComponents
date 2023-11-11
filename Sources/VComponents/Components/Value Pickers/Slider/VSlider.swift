@@ -39,8 +39,8 @@ public struct VSlider: View {
     // MARK: Properties - Value
     @Binding private var value: Double
 
-    // MARK: Properties - Action
-    private let action: ((Bool) -> Void)?
+    // MARK: Properties - Handlers
+    private let changeHandler: ((Bool) -> Void)?
 
     // MARK: Properties - Frame
     @State private var sliderSize: CGSize = .zero
@@ -52,7 +52,7 @@ public struct VSlider: View {
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
         value: Binding<V>,
-        onChange action: ((Bool) -> Void)? = nil
+        onChange changeHandler: ((Bool) -> Void)? = nil
     )
         where
             V: BinaryFloatingPoint,
@@ -71,7 +71,7 @@ public struct VSlider: View {
             set: { value.wrappedValue = V($0) }
         )
 
-        self.action = action
+        self.changeHandler = changeHandler
     }
     
     // MARK: Body
@@ -197,11 +197,11 @@ public struct VSlider: View {
         
         setValue(to: valueFixed)
         
-        action?(true)
+        changeHandler?(true)
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
-        action?(false)
+        changeHandler?(false)
     }
     
     // MARK: Actions

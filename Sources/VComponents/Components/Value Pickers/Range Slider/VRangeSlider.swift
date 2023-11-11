@@ -42,8 +42,8 @@ public struct VRangeSlider: View {
     // MARK: Properties - Values
     @Binding private var value: ClosedRange<Double>
 
-    // MARK: Properties - Action
-    private let action: ((Bool) -> Void)?
+    // MARK: Properties - Handlers
+    private let changeHandler: ((Bool) -> Void)?
 
     // MARK: Properties - Frame
     @State private var sliderSize: CGSize = .zero
@@ -56,7 +56,7 @@ public struct VRangeSlider: View {
         difference: V,
         step: V? = nil,
         value: Binding<ClosedRange<V>>,
-        onChange action: ((Bool) -> Void)? = nil
+        onChange changeHandler: ((Bool) -> Void)? = nil
     )
         where
             V: BinaryFloatingPoint,
@@ -85,7 +85,7 @@ public struct VRangeSlider: View {
             }
         )
 
-        self.action = action
+        self.changeHandler = changeHandler
     }
     
     // MARK: Body
@@ -218,11 +218,11 @@ public struct VRangeSlider: View {
         case .high: setValueHigh(to: valueFixed)
         }
         
-        action?(true)
+        changeHandler?(true)
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
-        action?(false)
+        changeHandler?(false)
     }
     
     // MARK: Actions
