@@ -117,7 +117,7 @@ Not Preferred:
 var body: some View {
     VPlainButton(
         action: doSomething,
-        title: "Lorem ipsum"
+        title: "Lorem Ipsum"
     )
     .foregroundStyle(.black)
 }
@@ -142,7 +142,7 @@ var body: some View {
     VPlainButton(
         uiModel: uiModel,
         action: doSomething,
-        title: "Lorem ipsum"
+        title: "Lorem Ipsum"
     )
 }
 ```
@@ -168,7 +168,7 @@ var body: some View {
     VPlainButton(
         uiModel: .someUIModel,
         action: doSomething,
-        title: "Lorem ipsum"
+        title: "Lorem Ipsum"
     )
 }
 ```
