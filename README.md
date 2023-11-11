@@ -4,8 +4,8 @@
 
 - [Description](#description)
 - [Components](#components)
-- [Customization](#customization)
-- [Animations](#animations)
+- [Guidelines - Customization](#guidelines-customization)
+- [Guidelines - Animations](#guidelines-animations)
 - [Installation](#installation)
 - [Compatibility](#compatibility)
 - [Contact](#contact)
@@ -103,7 +103,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VBouncingMarquee" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/10de26e3-4c8c-42ef-baa2-c939a1e7cfec">
 <p/>
 
-## Customization
+## Guidelines - Customization
 
 Components from `VComponents` are not meant to be customized in the same way as you would atomic SwiftUI components.
 
@@ -190,7 +190,7 @@ var body: some View {
 }
 ```
 
-## Animations
+## Guidelines - Animations
 
 `VComponents` associates animations directly with the components and their UI models, rather than with the external state.
 
