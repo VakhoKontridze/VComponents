@@ -44,7 +44,7 @@ public struct VAlertParameters {
     public var buttons: () -> [any VAlertButtonProtocol]
 
     /// Attributes.
-    public var attributes: [String: Any] = [:]
+    public var attributes: [String: Any]
     
     // MARK: Parameters
     /// Initializes `VAlertParameters`.

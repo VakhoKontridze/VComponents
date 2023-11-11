@@ -23,7 +23,7 @@ public struct VSpinnerParameters {
     public var isInteractionEnabled: Bool
 
     /// Attributes.
-    public var attributes: [String: Any] = [:]
+    public var attributes: [String: Any]
 
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
