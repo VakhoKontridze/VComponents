@@ -73,7 +73,7 @@ public struct VRangeSlider: View {
         self.difference = Double(difference)
         self.step = step.map { .init($0) }
 
-        self._value = Binding(
+        self._value = Binding( // Like native `Slider`, clamps initial value, but not subsequent ones
             get: {
                 ClosedRange(
                     lower: Double(value.wrappedValue.lowerBound.clamped(to: range, step: step)),
