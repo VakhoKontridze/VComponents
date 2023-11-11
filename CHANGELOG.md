@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.0.1(56)
+### 5.1.0(56)
 
 General
 
@@ -14,6 +14,14 @@ VSideBar
 VCodeEntryView
 
 - Issue with invisible toolbar items is fixed
+
+VMenu
+
+- Menu is deprecated, until native counterpart is added
+
+VContextMenu
+
+- ContextMenu is deprecated, until native counterpart is added
 
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 

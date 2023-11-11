@@ -71,8 +71,6 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/94ffc7df-19a4-451b-8e9c-561a217c73c2">
     <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8ea59a66-4742-49a5-8ca9-6a91501e8d3f">
     <img tag="VAlert" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/34c39b5b-1d65-4b71-b620-ceb1973232ae">
-    <img tag="VMenu" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8118ffe8-3591-43ab-8f34-7de701c5cd50">
-    <img tag="VContextMenu" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/440ef10d-ba43-4b5a-b605-936c4ca632fb">
 <p/>
 
 #### Notifications

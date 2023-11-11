@@ -31,3 +31,80 @@ extension VBottomSheetUIModel {
         set { contentSafeAreaEdges = newValue }
     }
 }
+
+// MARK: - V Menu
+@available(*, unavailable)
+public struct VMenu {}
+
+@available(*, unavailable)
+public struct VMenuRow {}
+
+@available(*, unavailable)
+public struct VMenuExpandingRow {}
+
+@available(*, unavailable)
+public struct VMenuPickerRow {}
+
+@available(*, unavailable)
+@resultBuilder public struct VMenuGroupRowBuilder {
+    public static func buildBlock() -> [any VMenuGroupRowProtocol] {
+        []
+    }
+}
+
+@available(*, unavailable)
+public protocol VMenuGroupRowConvertible {}
+
+@available(*, unavailable)
+public protocol VMenuPickerRowConvertible {}
+
+@available(*, unavailable)
+public protocol VMenuGroupRowProtocol {}
+
+@available(*, unavailable)
+public protocol VMenuPickerRowProtocol {}
+
+@available(*, unavailable)
+public struct VMenuGroupSection {}
+
+@available(*, unavailable)
+public struct VMenuPickerSection {}
+
+@available(*, unavailable)
+@resultBuilder public struct VMenuSectionBuilder {
+    public static func buildBlock() -> [any VMenuSectionProtocol] {
+        []
+    }
+}
+
+@available(*, unavailable)
+public protocol VMenuSectionConvertible {}
+
+@available(*, unavailable)
+public protocol VMenuSectionProtocol {}
+
+@available(*, unavailable)
+public struct VMenuInternalState {}
+
+@available(*, unavailable)
+public struct VMenuUIModel {}
+
+// MARK: - V Context Menu
+extension View {
+    @available(*, unavailable)
+    public func vContextMenu(
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
+    ) -> some View {
+        Color.clear
+    }
+
+    @available(*, unavailable)
+    public func vContextMenu<PreviewContent>(
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol],
+        preview: () -> PreviewContent
+    ) -> some View
+        where PreviewContent: View
+    {
+        Color.clear
+    }
+}
