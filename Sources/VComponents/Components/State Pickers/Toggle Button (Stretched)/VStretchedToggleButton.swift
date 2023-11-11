@@ -128,7 +128,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
                 toggleLabel
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
+                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { backgroundView }) // Has own rounding
                     .overlay(content: { border }) // Has own rounding
             }

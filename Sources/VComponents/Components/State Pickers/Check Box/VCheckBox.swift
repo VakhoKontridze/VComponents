@@ -157,7 +157,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     }
                 })
                 .frame(dimension: uiModel.dimension)
-                .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
+                .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                 .padding(uiModel.checkboxHitBox)
             }
         )

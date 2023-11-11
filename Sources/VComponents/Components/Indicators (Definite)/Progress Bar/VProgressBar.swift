@@ -54,7 +54,7 @@ public struct VProgressBar: View {
             progress
             border
         })
-        .clipShape(RoundedRectangle(cornerRadius: uiModel.cornerRadius))
+        .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
         .frame(
             width: uiModel.direction.isHorizontal ? nil : uiModel.height,
             height: uiModel.direction.isHorizontal ? uiModel.height : nil
