@@ -22,7 +22,7 @@ public struct VPlainButtonUIModel {
     }
 
     /// Title text and icon placement. Set to `iconAndTitle`.
-    public var titleAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
+    public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
 
     /// Spacing between title text and icon. Set to `8`.
     ///

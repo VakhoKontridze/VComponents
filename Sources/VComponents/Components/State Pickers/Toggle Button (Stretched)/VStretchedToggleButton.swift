@@ -148,7 +148,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
                 iconLabelComponent(icon: icon)
 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleAndIconPlacement {
+                switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
                         titleLabelComponent(title: title)

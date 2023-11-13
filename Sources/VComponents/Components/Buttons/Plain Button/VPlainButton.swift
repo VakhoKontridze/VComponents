@@ -112,7 +112,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 iconLabelComponent(internalState: internalState, icon: icon)
                 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleAndIconPlacement {
+                switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
                         titleLabelComponent(internalState: internalState, title: title)

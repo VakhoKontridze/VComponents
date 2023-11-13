@@ -62,7 +62,7 @@ public struct VWrappedButtonUIModel {
     public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
     /// Title text and icon placement. Set to `iconAndTitle`.
-    public var titleAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
+    public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
 
     /// Spacing between title text and icon. Set to `8`.
     ///
