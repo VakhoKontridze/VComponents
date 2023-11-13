@@ -92,9 +92,11 @@ public struct VCodeEntryView: View {
         .applyModifier({
             if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *){
                 $0
-                    .onChange(of: text, initial: true, { (_, newValue) in
-                        processText(newValue)
-                    })
+                    .onChange(
+                        of: text,
+                        initial: true,
+                        { (_, newValue) in processText(newValue) }
+                    )
 
             } else {
                 $0

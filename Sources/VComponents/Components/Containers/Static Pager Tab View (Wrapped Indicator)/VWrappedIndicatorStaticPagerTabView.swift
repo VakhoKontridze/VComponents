@@ -313,13 +313,17 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             .applyModifier({
                 if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                     $0
-                        .onChange(of: selectedIndexInt, initial: true, { (_, newValue) in
-                            calculateIndicatorFrame(
-                                selectedIndexInt: newValue,
-                                tabViewProxy: tabViewProxy,
-                                interstitialOffset: 0
-                            )
-                        })
+                        .onChange(
+                            of: selectedIndexInt,
+                            initial: true,
+                            { (_, newValue) in
+                                calculateIndicatorFrame(
+                                    selectedIndexInt: newValue,
+                                    tabViewProxy: tabViewProxy,
+                                    interstitialOffset: 0
+                                )
+                            }
+                        )
 
                 } else {
                     $0
