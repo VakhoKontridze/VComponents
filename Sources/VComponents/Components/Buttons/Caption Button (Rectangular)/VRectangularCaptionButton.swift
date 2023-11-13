@@ -71,15 +71,15 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        iconCaption: Image,
-        titleCaption: String
+        titleCaption: String,
+        iconCaption: Image
     )
         where CaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.caption = .iconTitle(icon: iconCaption, title: titleCaption)
+        self.caption = .titleAndIcon(title: titleCaption, icon: iconCaption)
     }
     
     /// Initializes `VRectangularCaptionButton` with action, icon, and caption.
@@ -168,12 +168,21 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             case .icon(let icon):
                 iconCaptionComponent(internalState: internalState, icon: icon)
 
-            case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.iconCaptionAndTitleCaptionTextSpacing, content: {
-                    iconCaptionComponent(internalState: internalState, icon: icon)
-                    titleCaptionComponent(internalState: internalState, title: title)
-                })
-                
+            case .titleAndIcon(let title, let icon):
+                switch uiModel.titleCaptionTextAndIconCaptionPlacement {
+                case .titleAndIcon:
+                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
+                        titleCaptionComponent(internalState: internalState, title: title)
+                        iconCaptionComponent(internalState: internalState, icon: icon)
+                    })
+
+                case .iconAndTitle:
+                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
+                        iconCaptionComponent(internalState: internalState, icon: icon)
+                        titleCaptionComponent(internalState: internalState, title: title)
+                    })
+                }
+
             case .caption(let caption):
                 caption(internalState)
             }
@@ -274,8 +283,8 @@ struct VRectangularCaptionButton_Previews: PreviewProvider {
                 VRectangularCaptionButton(
                     action: {},
                     icon: icon,
-                    iconCaption: iconCaption,
-                    titleCaption: titleCaptionShort
+                    titleCaption: titleCaptionShort,
+                    iconCaption: iconCaption
                 )
             })
         }

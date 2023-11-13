@@ -13,6 +13,6 @@ import SwiftUI
 enum VRectangularCaptionButtonCaption<Caption> where Caption: View {
     case title(title: String)
     case icon(icon: Image)
-    case iconTitle(icon: Image, title: String)
+    case titleAndIcon(title: String, icon: Image)
     case caption(caption: (VRectangularCaptionButtonInternalState) -> Caption)
 }

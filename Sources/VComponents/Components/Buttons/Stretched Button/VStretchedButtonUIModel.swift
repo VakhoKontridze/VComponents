@@ -62,10 +62,13 @@ public struct VStretchedButtonUIModel {
     /// Label margins. Set to `15` horizontal and `3` vertical.
     public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
 
-    /// Spacing between icon and title text. Set to `8`.
+    /// Title text and icon placement. Set to `iconAndTitle`.
+    public var titleAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
+
+    /// Spacing between title text and icon. Set to `8`.
     ///
     /// Applicable only if `init` with icon and title is used.
-    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+    public var titleTextAndIconSpacing: CGFloat = GlobalUIModel.Buttons.titleTextAndIconSpacing
 
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.

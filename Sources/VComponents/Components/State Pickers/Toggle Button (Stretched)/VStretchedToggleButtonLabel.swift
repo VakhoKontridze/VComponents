@@ -13,6 +13,6 @@ import SwiftUI
 enum VStretchedToggleButtonLabel<Label> where Label: View {
     case title(title: String)
     case icon(icon: Image)
-    case iconTitle(icon: Image, title: String)
+    case titleAndIcon(title: String, icon: Image)
     case label(label: (VStretchedToggleButtonInternalState) -> Label)
 }

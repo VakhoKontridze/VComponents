@@ -113,8 +113,11 @@ public struct VRectangularCaptionButtonUIModel {
     /// Caption text frame alignment. Set to `center`.
     public var captionFrameAlignment: HorizontalAlignment = .center
 
-    /// Spacing between icon caption and title caption text. Set to `8`.
-    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
+    /// Title caption text and icon caption placement. Set to `iconAndTitle`.
+    public var titleCaptionTextAndIconCaptionPlacement: TitleAndIconPlacement = .iconAndTitle
+
+    /// Spacing between title caption text and icon caption. Set to `8`.
+    public var titleCaptionTextAndIconCaptionSpacing: CGFloat = GlobalUIModel.Buttons.titleTextAndIconSpacing
 
     /// Ratio to which caption scales down on press.
     /// Set to `1` on `iOS`.

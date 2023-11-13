@@ -97,14 +97,14 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     public init(
         uiModel: VWrappedToggleButtonUIModel = .init(),
         state: Binding<VWrappedToggleButtonState>,
-        icon: Image,
-        title: String
+        title: String,
+        icon: Image
     )
         where Label == Never
     {
         self.uiModel = uiModel
         self._state = state
-        self.label = .iconTitle(icon: icon, title: title)
+        self.label = .titleAndIcon(title: title, icon: icon)
     }
 
     /// Initializes `VWrappedToggleButton` with state and label.
@@ -146,11 +146,20 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
             case .icon(let icon):
                 iconLabelComponent(icon: icon)
 
-            case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
-                    iconLabelComponent(icon: icon)
-                    titleLabelComponent(title: title)
-                })
+            case .titleAndIcon(let title, let icon):
+                switch uiModel.titleAndIconPlacement {
+                case .titleAndIcon:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        titleLabelComponent(title: title)
+                        iconLabelComponent(icon: icon)
+                    })
+
+                case .iconAndTitle:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        iconLabelComponent(icon: icon)
+                        titleLabelComponent(title: title)
+                    })
+                }
 
             case .label(let label):
                 label(internalState)
@@ -276,8 +285,8 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
 
                 VWrappedToggleButton(
                     state: $state,
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
             })
         }
@@ -421,8 +430,8 @@ struct VWrappedToggleButton_Previews: PreviewProvider {
                         return uiModel
                     }(),
                     state: $state,
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
             })
         }

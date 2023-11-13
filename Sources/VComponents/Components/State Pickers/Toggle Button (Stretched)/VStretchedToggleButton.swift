@@ -99,14 +99,14 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
     public init(
         uiModel: VStretchedToggleButtonUIModel = .init(),
         state: Binding<VStretchedToggleButtonState>,
-        icon: Image,
-        title: String
+        title: String,
+        icon: Image
     )
         where Label == Never
     {
         self.uiModel = uiModel
         self._state = state
-        self.label = .iconTitle(icon: icon, title: title)
+        self.label = .titleAndIcon(title: title, icon: icon)
     }
 
     /// Initializes `VStretchedToggleButton` with state and label.
@@ -147,11 +147,20 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
             case .icon(let icon):
                 iconLabelComponent(icon: icon)
 
-            case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
-                    iconLabelComponent(icon: icon)
-                    titleLabelComponent(title: title)
-                })
+            case .titleAndIcon(let title, let icon):
+                switch uiModel.titleAndIconPlacement {
+                case .titleAndIcon:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        titleLabelComponent(title: title)
+                        iconLabelComponent(icon: icon)
+                    })
+
+                case .iconAndTitle:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        iconLabelComponent(icon: icon)
+                        titleLabelComponent(title: title)
+                    })
+                }
 
             case .label(let label):
                 label(internalState)
@@ -280,8 +289,8 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
 
                 VStretchedToggleButton(
                     state: $state,
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
                 .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
@@ -436,8 +445,8 @@ struct VStretchedToggleButton_Previews: PreviewProvider {
                         return uiModel
                     }(),
                     state: $state,
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
                 .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)

@@ -8,6 +8,150 @@
 import SwiftUI
 import VCore
 
+// MARK: - V Stretched Button
+extension VStretchedButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VStretchedButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            action: action,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VStretchedButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
+// MARK: - V Loading Stretched Button
+extension VLoadingStretchedButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VLoadingStretchedButtonUIModel = .init(),
+        isLoading: Bool,
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            isLoading: isLoading,
+            action: action,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VLoadingStretchedButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
+// MARK: - V Wrapped Button
+extension VWrappedButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VWrappedButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            action: action,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VWrappedButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
+// MARK: - V Rectangular Caption Button
+extension VRectangularCaptionButton {
+    @available(*, deprecated, message: "Use `init` with reversed `iconCaption` and `titleCaption` parameter order")
+    public init(
+        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        iconCaption: Image,
+        titleCaption: String
+    )
+        where CaptionLabel == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            action: action,
+            icon: icon,
+            titleCaption: titleCaption,
+            iconCaption: iconCaption
+        )
+    }
+}
+
+extension VRectangularCaptionButtonUIModel {
+    @available(*, deprecated, renamed: "titleCaptionTextAndIconCaptionSpacing")
+    public var iconCaptionAndTitleCaptionTextSpacing: CGFloat {
+        get { titleCaptionTextAndIconCaptionSpacing }
+        set { titleCaptionTextAndIconCaptionSpacing = newValue }
+    }
+}
+
+// MARK: - V Plain Button
+extension VPlainButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VPlainButtonUIModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            action: action,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VPlainButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
 // MARK: - V Check Mark
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -17,6 +161,68 @@ extension VCheckBoxUIModel {
         get { checkmarkIconColors }
         set { checkmarkIconColors = newValue }
     }
+}
+
+// MARK: - V Stretched Toggle Button
+extension VStretchedToggleButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VStretchedToggleButtonUIModel = .init(),
+        state: Binding<VStretchedToggleButtonState>,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            state: state,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VStretchedToggleButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
+// MARK: - V Wrapped Toggle Button
+extension VWrappedToggleButton {
+    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    public init(
+        uiModel: VWrappedToggleButtonUIModel = .init(),
+        state: Binding<VWrappedToggleButtonState>,
+        icon: Image,
+        title: String
+    )
+        where Label == Never
+    {
+        self.init(
+            uiModel: uiModel,
+            state: state,
+            title: title,
+            icon: icon
+        )
+    }
+}
+
+extension VWrappedToggleButtonUIModel {
+    @available(*, deprecated, renamed: "titleTextAndIconSpacing")
+    public var iconAndTitleTextSpacing: CGFloat {
+        get { titleTextAndIconSpacing }
+        set { titleTextAndIconSpacing = newValue }
+    }
+}
+
+// MARK: - V Rectangular Toggle Button
+extension VRectangularToggleButtonUIModel {
+    @available(*, unavailable)
+    public var iconAndTitleTextSpacing: CGFloat { fatalError() }
 }
 
 // MARK: - V Side Bar

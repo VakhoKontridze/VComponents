@@ -80,15 +80,15 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
         action: @escaping () -> Void,
-        icon: Image,
-        title: String
+        title: String,
+        icon: Image
     )
         where Label == Never
     {
         self.uiModel = uiModel
         self.isLoading = isLoading
         self.action = action
-        self.label = .iconTitle(icon: icon, title: title)
+        self.label = .titleAndIcon(title: title, icon: icon)
     }
     
     /// Initializes `VLoadingStretchedButton` with loading state, action, and label.
@@ -140,12 +140,21 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 case .icon(let icon):
                     iconLabelComponent(internalState: internalState, icon: icon)
 
-                case .iconTitle(let icon, let title):
-                    HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
-                        iconLabelComponent(internalState: internalState, icon: icon)
-                        titleLabelComponent(internalState: internalState, title: title)
-                    })
-                    
+                case .titleAndIcon(let title, let icon):
+                    switch uiModel.titleAndIconPlacement {
+                    case .titleAndIcon:
+                        HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                            titleLabelComponent(internalState: internalState, title: title)
+                            iconLabelComponent(internalState: internalState, icon: icon)
+                        })
+
+                    case .iconAndTitle:
+                        HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                            iconLabelComponent(internalState: internalState, icon: icon)
+                            titleLabelComponent(internalState: internalState, title: title)
+                        })
+                    }
+
                 case .label(let label):
                     label(internalState)
                 }
@@ -280,8 +289,8 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                 VLoadingStretchedButton(
                     isLoading: false,
                     action: {},
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
                 .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)
@@ -417,8 +426,8 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     }(),
                     isLoading: false,
                     action: {},
-                    icon: icon,
-                    title: title
+                    title: title,
+                    icon: icon
                 )
                 .modifier(StretchedButtonWidthModifier())
                 .padding(.horizontal)

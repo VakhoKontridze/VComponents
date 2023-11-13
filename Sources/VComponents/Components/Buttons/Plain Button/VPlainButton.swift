@@ -62,14 +62,14 @@ public struct VPlainButton<Label>: View where Label: View {
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
-        icon: Image,
-        title: String
+        title: String,
+        icon: Image
     )
         where Label == Never
     {
         self.uiModel = uiModel
         self.action = action
-        self.label = .iconTitle(icon: icon, title: title)
+        self.label = .titleAndIcon(title: title, icon: icon)
     }
     
     /// Initializes `VPlainButton` with action and label.
@@ -111,12 +111,21 @@ public struct VPlainButton<Label>: View where Label: View {
             case .icon(let icon):
                 iconLabelComponent(internalState: internalState, icon: icon)
                 
-            case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.iconAndTitleTextSpacing, content: {
-                    iconLabelComponent(internalState: internalState, icon: icon)
-                    titleLabelComponent(internalState: internalState, title: title)
-                })
-                
+            case .titleAndIcon(let title, let icon):
+                switch uiModel.titleAndIconPlacement {
+                case .titleAndIcon:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        titleLabelComponent(internalState: internalState, title: title)
+                        iconLabelComponent(internalState: internalState, icon: icon)
+                    })
+
+                case .iconAndTitle:
+                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        iconLabelComponent(internalState: internalState, icon: icon)
+                        titleLabelComponent(internalState: internalState, title: title)
+                    })
+                }
+
             case .label(let label):
                 label(internalState)
             }
@@ -205,8 +214,8 @@ struct VPlainButton_Previews: PreviewProvider {
                             return uiModel
                         }(),
                         action: {},
-                        icon: icon,
-                        title: title
+                        title: title,
+                        icon: icon
                     )
                 })
             })

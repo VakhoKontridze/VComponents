@@ -53,11 +53,6 @@ public struct VRectangularToggleButtonUIModel {
     /// Label margins. Set to `3`s.
     public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRectButton
 
-    /// Spacing between icon and title text. Set to `8`.
-    ///
-    /// Applicable only if `init` with icon and title is used.
-    public var iconAndTitleTextSpacing: CGFloat = GlobalUIModel.Buttons.iconAndTitleTextSpacing
-
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.

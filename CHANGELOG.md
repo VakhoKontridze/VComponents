@@ -1,5 +1,35 @@
 # Change Log
 
+### 5.2.0(57)
+
+VStretchedButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
+VLoadingStretchedButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
+VWrappedButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
+VRectangularCaptionButton
+
+- `titleCaptionTextAndIconCaptionPlacement` is added for configuring the placement between title caption text and icon caption
+
+VPlainButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
+VStretchedToggleButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
+VWrappedToggleButton
+
+- `titleAndIconPlacement` is added for configuring the placement between title text and icon
+
 ### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — *2023 11 11*
 
 General

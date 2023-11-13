@@ -182,7 +182,7 @@ struct GlobalUIModel {
         static let transparentLayerLabelDisabled: Color = ColorBook.controlLayerBlueDisabled.opacity(0.5)
 
         // MARK: Properties - Label
-        static let iconAndTitleTextSpacing: CGFloat = 8
+        static let titleTextAndIconSpacing: CGFloat = 8
 
         // MARK: Properties - Label - Text - Fonts
         static let titleTextFontStretchedButton: Font = {
