@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VStepperUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Stepper size. Set to `94x32`, similarly to native stepper.
     public var size: CGSize = .init(width: 94, height: 32)
 

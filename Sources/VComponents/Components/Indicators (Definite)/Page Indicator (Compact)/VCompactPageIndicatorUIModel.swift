@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Compact Page Indicator UI Model
 /// Model that describes UI.
 public struct VCompactPageIndicatorUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
     ///
     /// Changing this property conditionally will cause view state to be reset.

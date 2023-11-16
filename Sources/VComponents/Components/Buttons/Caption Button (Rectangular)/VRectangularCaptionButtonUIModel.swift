@@ -22,7 +22,6 @@ public struct VRectangularCaptionButtonUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
     /// Spacing between rectangle and caption.
     /// Set to `7` on `iOS`.
     /// Set to `3` on `watchOS`.

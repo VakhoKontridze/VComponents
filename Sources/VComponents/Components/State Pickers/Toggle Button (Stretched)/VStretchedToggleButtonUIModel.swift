@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VStretchedToggleButtonUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Height.
     /// Set to `48` on `iOS`.
     /// Set to `40` on `macOS`.

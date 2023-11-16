@@ -15,11 +15,6 @@ import VCore
 @available(watchOS, unavailable)
 public struct VAlertUIModel {
     // MARK: Properties - Global
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-    public var colorScheme: ColorScheme? = nil
-
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
@@ -28,7 +23,11 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
+
     /// Alert sizes.
     /// Set to `0.75` ratio of container width in portrait.
     /// Set to `0.5` ratio of container width in landscape.

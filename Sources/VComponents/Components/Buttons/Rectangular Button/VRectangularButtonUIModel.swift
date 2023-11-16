@@ -21,7 +21,6 @@ public struct VRectangularButtonUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
     /// Size.
     /// Set to `56x56` on `iOS`.
     /// Set to `28x28` on `macOS`.

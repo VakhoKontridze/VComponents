@@ -21,7 +21,6 @@ public struct VWrappedButtonUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.

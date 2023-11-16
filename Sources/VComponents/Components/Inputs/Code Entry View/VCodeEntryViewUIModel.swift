@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VCodeEntryViewUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Code length. Set to `6`.
     public var length: Int = 6
 

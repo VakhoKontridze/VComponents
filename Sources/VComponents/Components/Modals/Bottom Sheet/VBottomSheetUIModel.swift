@@ -15,11 +15,6 @@ import VCore
 @available(watchOS, unavailable)
 public struct VBottomSheetUIModel {
     // MARK: Properties - Global
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-    public var colorScheme: ColorScheme? = nil
-
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
@@ -28,7 +23,11 @@ public struct VBottomSheetUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
+
     /// Bottom sheet sizes.
     /// Set to `1` ratio of container width, and `0.6`, `0.6`, and `0.9` ratios of container height in portrait.
     /// Set to `0.7` ratio of container width and `0.9` ratio of container height in landscape.

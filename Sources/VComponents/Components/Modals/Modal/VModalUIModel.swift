@@ -15,11 +15,6 @@ import VCore
 @available(watchOS, unavailable)
 public struct VModalUIModel {
     // MARK: Properties - Global
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-    public var colorScheme: ColorScheme? = nil
-
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
@@ -28,7 +23,11 @@ public struct VModalUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
+
     /// Modal sizes.
     /// Set to `0.9x0.6` container ratios in portrait.
     /// Set to reverse in landscape.

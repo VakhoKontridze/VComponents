@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VCheckBoxUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Checkbox dimension. Set to `16`.
     public var dimension: CGFloat = GlobalUIModel.StatePickers.dimension
 

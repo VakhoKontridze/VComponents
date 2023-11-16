@@ -14,12 +14,12 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VTextFieldUIModel {
-    // MARK: Properties - Global Layout
-    /// Textfield height. Set to `50`.
-    public var height: CGFloat = GlobalUIModel.Inputs.height
-
+    // MARK: Properties - Global
     /// Spacing between header, textfield, and footer. Set to `3`.
     public var headerTextFieldAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
+
+    /// Textfield height. Set to `50`.
+    public var height: CGFloat = GlobalUIModel.Inputs.height
 
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.

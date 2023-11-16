@@ -11,7 +11,7 @@ import VCore
 // MARK: - Rolling Counter
 /// Model that describes UI.
 public struct VRollingCounterUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Spacing between the components. Set to `0`.
     public var spacing: CGFloat = 0
 

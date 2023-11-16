@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VRectangularToggleButtonUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Size.
     /// Set to `56x56` on `iOS`.
     /// Set to `28x28` on `macOS`.

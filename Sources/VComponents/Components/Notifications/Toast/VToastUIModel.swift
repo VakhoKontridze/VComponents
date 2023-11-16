@@ -15,11 +15,6 @@ import VCore
 @available(watchOS, unavailable)
 public struct VToastUIModel {
     // MARK: Properties - Global
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-    public var colorScheme: ColorScheme? = nil
-
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
@@ -29,7 +24,11 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
+
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default
 

@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Wrapping Marquee UI Model
 /// Model that describes UI.
 public struct VWrappingMarqueeUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
 
     /// Scroll direction. Set to `leftToRight`.
     public var scrollDirection: LayoutDirection = .leftToRight

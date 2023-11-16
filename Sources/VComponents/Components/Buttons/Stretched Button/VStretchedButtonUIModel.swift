@@ -21,7 +21,6 @@ public struct VStretchedButtonUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Global Layout
     /// Height.
     /// Set to `48` on `iOS`.
     /// Set to `40` on `macOS`.

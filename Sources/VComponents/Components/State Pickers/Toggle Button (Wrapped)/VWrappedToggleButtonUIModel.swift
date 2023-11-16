@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VWrappedToggleButtonUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Height.
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.

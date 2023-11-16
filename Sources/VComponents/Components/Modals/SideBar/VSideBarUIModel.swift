@@ -15,11 +15,6 @@ import VCore
 @available(watchOS, unavailable)
 public struct VSideBarUIModel {
     // MARK: Properties - Global
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
-    public var colorScheme: ColorScheme? = nil
-
     var presentationHostUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
 
@@ -27,8 +22,12 @@ public struct VSideBarUIModel {
 
         return uiModel
     }
+    
+    /// Color scheme. Set to `nil`.
+    ///
+    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+    public var colorScheme: ColorScheme? = nil
 
-    // MARK: Properties - Global Layout
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///
     /// Changing this property in model alone doesn't guarantee proper sizes and rounding.

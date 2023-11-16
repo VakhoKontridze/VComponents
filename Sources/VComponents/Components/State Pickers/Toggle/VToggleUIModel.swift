@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VToggleUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Toggle size.
     /// Set to `51x32` on `iOS`, similarly to native toggle.
     /// Set to `38x22` on `macOS`, similarly to native toggle.

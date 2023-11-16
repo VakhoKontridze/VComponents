@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VWrappedIndicatorStaticPagerTabViewUIModel {
-    // MARK: Properties - Global Layout
+    // MARK: Properties - Global
     /// Spacing between tab bar and tab view. Set to `0`.
     public var tabBarAndTabViewSpacing: CGFloat = GlobalUIModel.Containers.pagerTabViewTabBarAndTabViewSpacing
 

@@ -15,12 +15,12 @@ import VCore
 @available(tvOS 15.0, *)@available(tvOS, unavailable)
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VTextViewUIModel {
-    // MARK: Properties - Global Layout
-    /// Textview minimum height. Set to `50`.
-    public var minHeight: CGFloat = GlobalUIModel.Inputs.height
-
+    // MARK: Properties - Global
     /// Spacing between header, textview, and footer. Set to `3`.
     public var headerTextViewAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
+
+    /// Textview minimum height. Set to `50`.
+    public var minHeight: CGFloat = GlobalUIModel.Inputs.height
 
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.
