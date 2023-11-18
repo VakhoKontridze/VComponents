@@ -169,8 +169,8 @@ public struct VAlertUIModel {
         disabled: ColorBook.controlLayerBlueDisabled
     )
 
-    /// Primary button title colors.
-    public var primaryButtonTitleColors: ButtonStateColors = .init(ColorBook.primaryWhite)
+    /// Primary button title text colors.
+    public var primaryButtonTitleTextColors: ButtonStateColors = .init(ColorBook.primaryWhite)
 
     var primaryButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
@@ -180,7 +180,7 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = primaryButtonBackgroundColors
 
-        uiModel.titleTextColors = primaryButtonTitleColors
+        uiModel.titleTextColors = primaryButtonTitleTextColors
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic
@@ -197,8 +197,8 @@ public struct VAlertUIModel {
         disabled: Color.clear
     )
 
-    /// Secondary button title colors.
-    public var secondaryButtonTitleColors: ButtonStateColors = .init(
+    /// Secondary button title text colors.
+    public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
         enabled: ColorBook.accentBlue,
         pressed: ColorBook.accentBlue,
         disabled: ColorBook.accentBluePressedDisabled
@@ -212,7 +212,7 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = secondaryButtonBackgroundColors
 
-        uiModel.titleTextColors = secondaryButtonTitleColors
+        uiModel.titleTextColors = secondaryButtonTitleTextColors
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic
@@ -229,8 +229,8 @@ public struct VAlertUIModel {
         disabled: Color.clear
     )
 
-    /// Destructive button title colors.
-    public var destructiveButtonTitleColors: ButtonStateColors = .init(
+    /// Destructive button title text colors.
+    public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
         enabled: ColorBook.accentRed,
         pressed: ColorBook.accentRed,
         disabled: ColorBook.accentRedPressedDisabled
@@ -244,7 +244,7 @@ public struct VAlertUIModel {
 
         uiModel.backgroundColors = destructiveButtonBackgroundColors
 
-        uiModel.titleTextColors = destructiveButtonTitleColors
+        uiModel.titleTextColors = destructiveButtonTitleTextColors
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic

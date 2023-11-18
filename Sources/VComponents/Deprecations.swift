@@ -325,3 +325,27 @@ extension View {
         Color.clear
     }
 }
+
+// MARK: - V Alert
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VAlertUIModel {
+    @available(*, deprecated, renamed: "primaryButtonTitleTextColors")
+    public var primaryButtonTitleColors: ButtonStateColors {
+        get { primaryButtonTitleTextColors }
+        set { primaryButtonTitleTextColors = newValue }
+    }
+
+    @available(*, deprecated, renamed: "secondaryButtonTitleTextColors")
+    public var secondaryButtonTitleColors: ButtonStateColors {
+        get { secondaryButtonTitleTextColors }
+        set { secondaryButtonTitleTextColors = newValue }
+    }
+
+    @available(*, deprecated, renamed: "destructiveButtonTitleTextColors")
+    public var destructiveButtonTitleColors: ButtonStateColors {
+        get { destructiveButtonTitleTextColors }
+        set { destructiveButtonTitleTextColors = newValue }
+    }
+}

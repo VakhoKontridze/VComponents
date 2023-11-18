@@ -518,13 +518,13 @@ struct VAlert_Previews: PreviewProvider {
                             uiModel.colorScheme = VAlert_Previews.colorScheme
 
                             uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
-                            uiModel.primaryButtonTitleColors.enabled = uiModel.primaryButtonTitleColors.pressed
+                            uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.pressed
 
                             uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
-                            uiModel.secondaryButtonTitleColors.enabled = uiModel.secondaryButtonTitleColors.pressed
+                            uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.pressed
 
                             uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
-                            uiModel.destructiveButtonTitleColors.enabled = uiModel.destructiveButtonTitleColors.pressed
+                            uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.pressed
 
                             return uiModel
                         }(),
