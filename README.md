@@ -105,9 +105,9 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 ## Guidelines: Customization
 
-Components from `VComponents` are not meant to be customized in the same way as you would atomic SwiftUI components.
+Components from `VComponents` are not meant to be customized the same way you would customize atomic SwiftUI components.
 
-Rather than directly modifying them using `ViewModifiers`s, you are to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, the properties within the UI models have their own default values.
+Rather than directly modifying them using `ViewModifiers`s, you are supposed to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, all properties within the UI models have their own default values.
 
 For instance, you can change the foreground color of a `VPlainButton` by changing the values.
 
@@ -129,7 +129,7 @@ Preferred:
 let uiModel: VPlainButtonUIModel = {
     var UIModel: VPlainButtonUIModel = .init()
     
-    uiModel.titleColors = VPlainButtonUIModel.StateColors(
+    uiModel.titleTextColors = VPlainButtonUIModel.StateColors(
         enabled: Color.black,
         pressed: Color.gray,
         disabled: Color.gray
@@ -154,7 +154,7 @@ extension VPlainButtonUIModel {
     static let someUIModel: Self = {
         var uiModel: Self = .init()
         
-        uiModel.titleColors = StateColors(
+        uiModel.titleTextColors = StateColors(
             enabled: Color.black,
             pressed: Color.gray,
             disabled: Color.gray
