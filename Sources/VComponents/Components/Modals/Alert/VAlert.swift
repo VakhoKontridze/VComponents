@@ -232,9 +232,9 @@ struct VAlert<Content>: View
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
         
         return ForEach(
-            buttons,
-            id: \.id,
-            content: { button in
+            buttons.enumeratedArray(),
+            id: \.offset, // Native `View.alert(...)` doesn't react to changes
+            content: { (i, button) in
                 button.makeBody(
                     uiModel: uiModel,
                     animateOutHandler: { animateOut(completion: $0) }
