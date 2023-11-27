@@ -95,6 +95,8 @@ extension VWrappedButtonUIModel {
 }
 
 // MARK: - V Rectangular Caption Button
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
 extension VRectangularCaptionButton {
     @available(*, deprecated, message: "Use `init` with reversed `iconCaption` and `titleCaption` parameter order")
     public init(
@@ -116,6 +118,8 @@ extension VRectangularCaptionButton {
     }
 }
 
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
 extension VRectangularCaptionButtonUIModel {
     @available(*, deprecated, renamed: "titleCaptionTextAndIconCaptionSpacing")
     public var iconCaptionAndTitleCaptionTextSpacing: CGFloat {
