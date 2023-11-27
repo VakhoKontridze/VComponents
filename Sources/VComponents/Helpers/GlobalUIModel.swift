@@ -62,9 +62,6 @@ struct GlobalUIModel {
         // MARK: Properties - Divider and Separator
         static let dividerHeightPx: Int = 2
         static let dividerColor: Color = ColorBook._divider
-
-        static let separatorHeightPx: Int = 1
-        static let separatorColor: Color = dividerColor
         
         static let dividerDashColorEnabled: Color = ColorBook._dividerDash
         static let dividerDashColorDisabled: Color = ColorBook._dividerDashDisabled

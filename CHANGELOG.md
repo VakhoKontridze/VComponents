@@ -30,6 +30,10 @@ VWrappedToggleButton
 
 - `titleTextAndIconPlacement` is added for configuring the placement between title text and icon
 
+VListRow
+
+- ListRow is deprecated in favor of more modern `List` APi
+
 ### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — *2023 11 11*
 
 General

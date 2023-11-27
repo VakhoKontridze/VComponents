@@ -349,3 +349,168 @@ extension VAlertUIModel {
         set { destructiveButtonTitleTextColors = newValue }
     }
 }
+
+// MARK: - V List
+@available(*, deprecated, message: "Use modern `List` API instead")
+@available(macOS 13.0, *)
+@available(watchOS, unavailable)
+public struct VListRow<Content>: View
+    where Content: View
+{
+    private let uiModel: VListRowUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
+    private let content: () -> Content
+
+    public init(
+        uiModel: VListRowUIModel = .init(),
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.uiModel = uiModel
+        self.content = content
+    }
+
+    public var body: some View {
+        VStack(
+            alignment: .leading,
+            spacing: 0,
+            content: {
+                if uiModel.separatorType.contains(.top) { separator }
+
+                content()
+                    .padding(uiModel.margins)
+
+                if uiModel.separatorType.contains(.bottom) { separator }
+            }
+        )
+        .listRowInsets(EdgeInsets())
+        .listRowBackground(uiModel.backgroundColor)
+        .applyModifier({
+#if !(os(tvOS) || os(watchOS))
+            $0.listRowSeparator(.hidden)
+#else
+            $0
+#endif
+        })
+    }
+
+    private var separator: some View {
+        uiModel.separatorColor
+            .frame(maxWidth: .infinity)
+            .frame(height: uiModel.separatorHeight.toPoints(scale: displayScale))
+            .padding(uiModel.separatorMargins)
+    }
+}
+
+
+@available(*, deprecated, message: "Use modern `List` API instead")
+@available(macOS 13.0, *)
+@available(watchOS, unavailable)
+public struct VListRowUIModel {
+    public var backgroundColor: Color = ColorBook.background
+
+    public var margins: Margins = .init(
+        horizontal: GlobalUIModel.Common.containerContentMargin,
+        vertical: 9
+    )
+
+    public var separatorType: SeparatorType = .default
+    public var separatorHeight: PointPixelMeasurement = .pixels(1)
+    public var separatorColor: Color = GlobalUIModel.Common.dividerColor
+    public var separatorMargins: HorizontalMargins = .init(GlobalUIModel.Common.containerContentMargin)
+
+    public init() {}
+
+    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
+
+    public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
+
+    public struct SeparatorType: OptionSet {
+        public static let top: Self = .init(rawValue: 1 << 0)
+
+        public static let bottom: Self = .init(rawValue: 1 << 1)
+
+        public static var `default`: Self { .bottom }
+
+        public static var none: Self { [] }
+
+        public static var all: Self { [.top, .bottom] }
+
+        public static func noFirstSeparator() -> Self {
+            .bottom
+        }
+
+        public static func noLastSeparator() -> Self {
+            .top
+        }
+
+        public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
+            isFirst ? .none : .top
+        }
+
+        public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
+            isFirst ? .all : .bottom
+        }
+
+        public let rawValue: Int
+
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
+        }
+    }
+}
+
+@available(macOS 13.0, *)
+@available(watchOS, unavailable)
+extension VListRowUIModel {
+    public static func noSeparators() -> Self {
+        var uiModel: Self = .init()
+
+        uiModel.separatorType = .none
+
+        return uiModel
+    }
+
+    public static func noFirstSeparator() -> Self {
+        var uiModel: Self = .init()
+
+        uiModel.separatorType = .noFirstSeparator()
+
+        return uiModel
+    }
+
+    public static func noLastSeparator() -> Self {
+        var uiModel: Self = .init()
+
+        uiModel.separatorType = .noLastSeparator()
+
+        return uiModel
+    }
+
+    public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
+        var uiModel: Self = .init()
+
+        uiModel.separatorType = .noFirstAndLastSeparators(isFirst: isFirst)
+
+        return uiModel
+    }
+
+    public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
+        var uiModel: Self = .init()
+
+        uiModel.separatorType = .rowEnclosingSeparators(isFirst: isFirst)
+
+        return uiModel
+    }
+}
+
+@available(*, deprecated, message: "Use modern `List` API instead")
+@available(macOS 13.0, *)
+@available(watchOS, unavailable)
+extension View {
+    public func vListStyle() -> some View {
+        self
+            .listStyle(.plain)
+            .environment(\.defaultMinListRowHeight, 0)
+    }
+}

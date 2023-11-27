@@ -34,13 +34,10 @@ extension View {
     ///                 ScrollView(content: {
     ///                     VStack(spacing: 0, content: {
     ///                         ForEach(0..<20, content: { number in
-    ///                             VListRow(
-    ///                                 uiModel: .noFirstAndLastSeparators(isFirst: number == 0),
-    ///                                 content: {
-    ///                                     Text(String(number))
-    ///                                         .frame(maxWidth: .infinity, alignment: .leading)
-    ///                                 }
-    ///                             )
+    ///                             Text(String(number))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                                 .padding(.horizontal, 15)
+    ///                                 .padding(.vertical, 9)
     ///                         })
     ///                     })
     ///                     .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
