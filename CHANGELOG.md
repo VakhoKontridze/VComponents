@@ -38,6 +38,10 @@ VFetchingAsyncImage
 
 - A new component is moved from [VCore](https://github.com/VakhoKontridze/VCore), that asynchronously loads and displays an `Image` with a fetch handler
 
+VTappableText
+
+- A new component is added, that inserts tappable components in `Text`
+
 ### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — *2023 11 11*
 
 General
