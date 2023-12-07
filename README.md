@@ -156,9 +156,9 @@ extension VPlainButtonUIModel {
         var uiModel: Self = .init()
         
         uiModel.titleTextColors = StateColors(
-            enabled: Color.black,
-            pressed: Color.gray,
-            disabled: Color.gray
+            enabled: Color.primary,
+            pressed: Color.secondary,
+            disabled: Color.secondary
         )
         
         return uiModel
