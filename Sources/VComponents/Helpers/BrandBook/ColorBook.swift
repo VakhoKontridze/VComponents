@@ -185,6 +185,8 @@ public struct VComponentsColorBook {
     static let _notificationLayerRed: Color = .init(.notificationLayerRed)
     static let _notificationLayerYellow: Color = .init(.notificationLayerYellow)
 
+    static let _placeholderImage: Color = .gray.opacity(0.3)
+
     // MARK: Initializers
     private init() {}
 }

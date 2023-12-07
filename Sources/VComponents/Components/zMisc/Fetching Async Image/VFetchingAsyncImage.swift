@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - Fetching Async Image
-/// `View` that asynchronously loads and displays an `Image` with a delegated fetch handler.
+// MARK: - V Fetching Async Image
+/// `View` that asynchronously loads and displays an `Image` with a fetch handler.
 ///
 /// Request can be customized with access token and headers, implement custom caching, and more.
 ///
@@ -16,7 +16,7 @@ import SwiftUI
 ///         VFetchingAsyncImage(
 ///             from: URL(string: "https://somewebsite.com/content/image.jpg")!,
 ///             fetch: fetchImage,
-///             content: { phase in
+///             contentWithPhase: { phase in
 ///                 if let image = phase.image {
 ///                     image
 ///                         .resizable()
@@ -35,7 +35,7 @@ import SwiftUI
 ///
 ///     ...
 ///
-///     private var cache: NSCache<NSString, UIImage> = .init()
+///     private let cache: NSCache<NSString, UIImage> = .init()
 ///
 ///     private func fetchImage(url: URL) async throws -> Image {
 ///         let key: NSString = .init(string: url.absoluteString)
@@ -61,22 +61,22 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         PlaceholderContent: View
 {
     // MARK: Properties
-    private let uiModel: FetchDelegatingAsyncImageUIModel
+    private let uiModel: VFetchingAsyncImageUIModel
 
     private let parameter: Parameter?
     private let fetchHandler: (Parameter) async throws -> Image
     
-    private let content: FetchDelegatingAsyncImageContent<Content, PlaceholderContent>
+    private let content: VFetchingAsyncImageContent<Content, PlaceholderContent>
     
     @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image
     @State private var result: Result<Image, any Error>?
 
-    @State private var task: Task<Void, Never>? // Needed for canceling task, if parameter changes during fetch
+    @State private var task: Task<Void, Never>?
 
     // MARK: Initializers
     /// Initializes `VFetchingAsyncImage` with parameter and fetch method.
     public init(
-        uiModel: FetchDelegatingAsyncImageUIModel = .init(),
+        uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image
     )
@@ -92,7 +92,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and content.
     public init(
-        uiModel: FetchDelegatingAsyncImageUIModel = .init(),
+        uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
         @ViewBuilder content: @escaping (Image) -> Content
@@ -110,7 +110,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, content, and placeholder content.
     public init(
-        uiModel: FetchDelegatingAsyncImageUIModel = .init(),
+        uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
         @ViewBuilder content: @escaping (Image) -> Content,
@@ -127,10 +127,10 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and phase-dependent content.
     public init(
-        uiModel: FetchDelegatingAsyncImageUIModel = .init(),
+        uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
-        @ViewBuilder content: @escaping (AsyncImagePhase) -> Content
+        @ViewBuilder contentWithPhase content: @escaping (AsyncImagePhase) -> Content
     )
         where PlaceholderContent == Never
     {
@@ -144,7 +144,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     
     // MARK: Body
     public var body: some View {
-        ZStack(content: { // `ZSack` is used as a container
+        ZStack(content: {
             switch content {
             case .empty:
                 if case .success(let image) = result {
@@ -240,5 +240,33 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
 
         task?.cancel()
         task = nil
+    }
+}
+
+// MARK: - Preview
+// Developmental only
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct VFetchingAsyncImage_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack(content: {
+            VFetchingAsyncImage(
+                from: "-",
+                fetch: { _ in throw URLError(.badURL) }
+            )
+            .frame(dimension: 64)
+
+            VFetchingAsyncImage(
+                from: "-",
+                fetch: { _ in Image(systemName: "swift") },
+                content: { image in
+                    image
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundStyle(ColorBook.accentBlue)
+                }
+            )
+            .frame(dimension: 64)
+        })
     }
 }

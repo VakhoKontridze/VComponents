@@ -2,12 +2,12 @@
 //  VFetchingAsyncImageContent.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 10.03.23.
+//  Created by Vakhtang Kontridze on 06.03.23.
 //
 
 import SwiftUI
 
-// MARK: - Fetching Async Image Content
+// MARK: - V Fetching Async Image Content
 enum VFetchingAsyncImageContent<Content, PlaceholderContent>
     where
         Content: View,

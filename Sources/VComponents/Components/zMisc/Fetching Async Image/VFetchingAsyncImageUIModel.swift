@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - Fetching Async Image UI Model
+// MARK: - V Fetching Async Image UI Model
 /// Model that describes UI.
 public struct VFetchingAsyncImageUIModel {
     // MARK: Properties
     /// Placeholder color.
-    public var placeholderColor: Color = .gray.opacity(0.3)
+    public var placeholderColor: Color = ColorBook._placeholderImage
 
     /// Indicates if `Image` is removed when parameter changes. Set to `true`.
     public var removesImageOnParameterChange: Bool = true
