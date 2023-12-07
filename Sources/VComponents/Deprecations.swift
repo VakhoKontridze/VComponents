@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Stretched Button
+@available(tvOS, unavailable)
 extension VStretchedButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -28,6 +29,7 @@ extension VStretchedButton {
     }
 }
 
+@available(tvOS, unavailable)
 extension VStretchedButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -37,6 +39,8 @@ extension VStretchedButtonUIModel {
 }
 
 // MARK: - V Loading Stretched Button
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VLoadingStretchedButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -58,6 +62,8 @@ extension VLoadingStretchedButton {
     }
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VLoadingStretchedButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -67,6 +73,7 @@ extension VLoadingStretchedButtonUIModel {
 }
 
 // MARK: - V Wrapped Button
+@available(tvOS, unavailable)
 extension VWrappedButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -86,6 +93,7 @@ extension VWrappedButton {
     }
 }
 
+@available(tvOS, unavailable)
 extension VWrappedButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -129,6 +137,7 @@ extension VRectangularCaptionButtonUIModel {
 }
 
 // MARK: - V Plain Button
+@available(tvOS, unavailable)
 extension VPlainButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -148,6 +157,7 @@ extension VPlainButton {
     }
 }
 
+@available(tvOS, unavailable)
 extension VPlainButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -168,6 +178,8 @@ extension VCheckBoxUIModel {
 }
 
 // MARK: - V Stretched Toggle Button
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VStretchedToggleButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -187,6 +199,8 @@ extension VStretchedToggleButton {
     }
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VStretchedToggleButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -196,6 +210,8 @@ extension VStretchedToggleButtonUIModel {
 }
 
 // MARK: - V Wrapped Toggle Button
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VWrappedToggleButton {
     @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
     public init(
@@ -215,6 +231,8 @@ extension VWrappedToggleButton {
     }
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VWrappedToggleButtonUIModel {
     @available(*, deprecated, renamed: "titleTextAndIconSpacing")
     public var iconAndTitleTextSpacing: CGFloat {
@@ -224,6 +242,8 @@ extension VWrappedToggleButtonUIModel {
 }
 
 // MARK: - V Rectangular Toggle Button
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VRectangularToggleButtonUIModel {
     @available(*, unavailable)
     public var iconAndTitleTextSpacing: CGFloat { fatalError() }
