@@ -252,7 +252,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     }
 
     private var tabIndicatorTrack: some View {
-        ZStack(content: { // `ZSack` is used as a container
+        ZStack(content: {
             Rectangle()
                 .frame(height: uiModel.tabIndicatorTrackHeight)
                 .foregroundStyle(uiModel.tabIndicatorTrackColor)
@@ -269,8 +269,8 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     private func selectedTabIndicatorSlice(
         _ element: Data.Element
     ) -> some View {
-        ZStack(content: { // `ZSack` is used as a container
-            ZStack(content: { // `ZSack` is used as a container
+        ZStack(content: {
+            ZStack(content: {
                 if selection == element {
                     RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
                         .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
@@ -291,7 +291,6 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
             .foregroundStyle(uiModel.selectedTabIndicatorColor)
             .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
         })
-
         .frame(height: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
         .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
     }
