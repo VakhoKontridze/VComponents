@@ -1,6 +1,6 @@
 # Change Log
 
-### 5.2.0(57)
+### [5.2.0(57)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.2.0) — *2023 12 07*
 
 VStretchedButton
 
