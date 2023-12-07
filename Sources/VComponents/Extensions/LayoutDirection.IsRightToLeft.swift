@@ -1,6 +1,6 @@
 //
 //  LayoutDirection.IsRightToLeft.swift
-//  VCore
+//  VComponents
 //
 //  Created by Vakhtang Kontridze on 07.10.23.
 //
