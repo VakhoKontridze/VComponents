@@ -128,7 +128,7 @@ Preferred:
 
 ```swift
 let uiModel: VPlainButtonUIModel = {
-    var UIModel: VPlainButtonUIModel = .init()
+    var uiModel: VPlainButtonUIModel = .init()
     
     uiModel.titleTextColors = VPlainButtonUIModel.StateColors(
         enabled: Color.primary,
