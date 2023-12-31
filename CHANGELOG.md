@@ -32,7 +32,7 @@ VWrappedToggleButton
 
 VListRow
 
-- ListRow is deprecated in favor of more modern `List` APi
+- ListRow is deprecated in favor of more modern `List` API
 
 VFetchingAsyncImage
 
