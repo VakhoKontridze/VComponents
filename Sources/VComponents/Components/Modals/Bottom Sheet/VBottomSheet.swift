@@ -377,11 +377,13 @@ struct VBottomSheet<Content>: View
 
         for heights in heightsGroup {
             guard heights.min.value <= heights.ideal.value else {
-                VCoreFatalError("'VBottomSheet''s 'min' height must be less than or equal to 'ideal' height", module: "VComponents")
+                VCoreLogError("'VBottomSheet''s 'min' height must be less than or equal to 'ideal' height")
+                fatalError()
             }
 
             guard heights.ideal.value <= heights.max.value else {
-                VCoreFatalError("'VBottomSheet''s 'ideal' height must be less than or equal to 'max' height", module: "VComponents")
+                VCoreLogError("'VBottomSheet''s 'ideal' height must be less than or equal to 'max' height")
+                fatalError()
             }
         }
     }

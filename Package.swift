@@ -21,7 +21,8 @@ let package: Package = .init(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/VakhoKontridze/VCore", "5.2.0"..<"6.0.0")
+        //.package(url: "https://github.com/VakhoKontridze/VCore", "5.2.0"..<"6.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "dev")
     ],
     
     targets: [
