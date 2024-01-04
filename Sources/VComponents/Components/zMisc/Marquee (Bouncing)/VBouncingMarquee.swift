@@ -77,9 +77,17 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     }
     
     private var contentView: some View {
-        content() // TODO: Wait for iOS issue to be resolved with off-screen rendering
+        content()
             .fixedSize(horizontal: true, vertical: false)
             .getSize({ contentSize = $0 })
+            .applyModifier({
+                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                    $0
+                        .geometryGroup()
+                } else {
+                    $0
+                }
+            })
     }
     
     @ViewBuilder private var gradient: some View {

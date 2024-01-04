@@ -1,5 +1,11 @@
 # Change Log
 
+### 5.2.1(58)
+
+VBouncingMarquee
+
+- Rendering issue in `iOS` `17.0` is fixed
+
 ### [5.2.0(57)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.2.0) — *2023 12 07*
 
 VStretchedButton
