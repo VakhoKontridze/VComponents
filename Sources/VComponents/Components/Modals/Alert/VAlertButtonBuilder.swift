@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VCore
 
 // MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
@@ -58,12 +59,12 @@ import Foundation
         var result: [any VAlertButtonProtocol] = []
 
         for button in buttons {
-            if (button as? VAlertButton)?.role == .cancel {
-                result.removeAll(where: { ($0 as? VAlertButton)?.role == .cancel })
+            if (button as? VAlertButton)?.role.isCancel == true {
+                result.removeAll(where: { ($0 as? VAlertButton)?.role.isCancel == true })
             }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { ($0 as? VAlertButton)?.role == .cancel }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { ($0 as? VAlertButton)?.role.isCancel == true }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
 
