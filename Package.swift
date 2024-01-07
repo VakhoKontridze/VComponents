@@ -16,7 +16,9 @@ let package: Package = .init(
     products: [
         .library(
             name: "VComponents",
-            targets: ["VComponents"]
+            targets: [
+                "VComponents"
+            ]
         )
     ],
     

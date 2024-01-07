@@ -14,7 +14,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VFetchingAsyncImage(
-///             from: URL(string: "https://somewebsite.com/content/image.jpg")!,
+///             from: #URL("https://somewebsite.com/content/image.jpg"),
 ///             fetch: fetchImage,
 ///             contentWithPhase: { phase in
 ///                 if let image = phase.image {

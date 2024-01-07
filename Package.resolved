@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "6ad4ea24b01559dde0773e3d091f1b9e36175036",
+        "version" : "509.0.2"
+      }
+    },
+    {
       "identity" : "vcore",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
         "branch" : "dev",
-        "revision" : "515d64478aa2ef9f4bdb4b8d61d433878d2f75d0"
+        "revision" : "47c52d073e9de3a863fed87874b1d9d840d4bbd1"
       }
     }
   ],
