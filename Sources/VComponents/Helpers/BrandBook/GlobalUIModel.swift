@@ -14,11 +14,10 @@ import WatchKit
 import VCore
 
 // MARK: - Global UI Model
+@NonInitializable
 struct GlobalUIModel {
-    // MARK: Initializers
-    private init() {}
-    
     // MARK: Common
+    @NonInitializable
     struct Common {
         // MARK: Properties - Container
         static let containerCornerRadius: CGFloat = 15
@@ -98,12 +97,10 @@ struct GlobalUIModel {
         static let dimmingViewColor: Color = ColorBook._dimmingView
 
         static let dragIndicatorColor: Color = ColorBook._dragIndicator
-
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Buttons
+    @NonInitializable
     struct Buttons { // Also used for button-like components
         // MARK: Properties - Sizes
         static let heightStretchedButton: CGFloat = {
@@ -273,12 +270,10 @@ struct GlobalUIModel {
 #elseif os(watchOS)
         static let hapticStretchedButtonWatchOS: WKHapticType? = .click
 #endif
-        
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: State Pickers
+    @NonInitializable
     struct StatePickers {
         // MARK: Properties
         static let dimension: CGFloat = 16
@@ -327,14 +322,11 @@ struct GlobalUIModel {
 #if os(iOS)
         static let hapticIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #endif
-        
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Value Pickers
+    @NonInitializable
     struct ValuePickers {
-        // MARK: Properties
         static let sliderThumbDimension: CGFloat = 20
         static let sliderThumbCornerRadius: CGFloat = 10
         static let sliderThumbShadowRadius: CGFloat = {
@@ -355,14 +347,11 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }()
-        
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Inputs
+    @NonInitializable
     struct Inputs {
-        // MARK: Properties
         static let height: CGFloat = 50
         static let cornerRadius: CGFloat = 12
         
@@ -382,12 +371,10 @@ struct GlobalUIModel {
         
         static let searchIconEnabledFocused: Color = ColorBook._inputSearchIcon
         static let searchIconDisabled: Color = ColorBook.primaryPressedDisabled
-        
-        // MARK: Initializers
-        private init() {}
     }
 
     // MARK: Containers
+    @NonInitializable
     struct Containers {
         // MARK: Properties - Pager Tab View
         static let pagerTabViewTabBarAndTabViewSpacing: CGFloat = 0
@@ -415,12 +402,10 @@ struct GlobalUIModel {
         static let pagerTabViewSelectedTabIndicatorAnimation: Animation? = .default
 
         static let pagerTabViewBackgroundColor: Color = ColorBook.background
-
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Modals
+    @NonInitializable
     struct Modals {
         // MARK: Properties - Popping
         static let poppingAppearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
@@ -430,24 +415,19 @@ struct GlobalUIModel {
         // MARK: Properties - Sliding
         static let slidingAppearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
         static let slidingDisappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
-
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Notifications
+    @NonInitializable
     struct Notifications {
-        // MARK: Properties
         static let layerGray: Color = ColorBook.layerGray
         static let layerGreen: Color = ColorBook._notificationLayerGreen
         static let layerYellow: Color = ColorBook._notificationLayerYellow
         static let layerRed: Color = ColorBook._notificationLayerRed
-
-        // MARK: Initializers
-        private init() {}
     }
     
     // MARK: Indicators (Definite)
+    @NonInitializable
     struct DefiniteIndicators {
         // MARK: Properties - Page Indicator
         static let pageIndicatorSpacing: CGFloat = {
@@ -484,8 +464,5 @@ struct GlobalUIModel {
         static let pageIndicatorCompactEdgeDotScale: CGFloat = 0.5
 
         static let pageIndicatorTransitionAnimation: Animation? = .linear(duration: 0.15)
-        
-        // MARK: Initializers
-        private init() {}
     }
 }

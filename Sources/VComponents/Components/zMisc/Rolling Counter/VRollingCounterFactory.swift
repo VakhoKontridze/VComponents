@@ -6,12 +6,11 @@
 //
 
 import Foundation
+import VCore
 
 // MARK: - V Rolling Counter Factory
+@NonInitializable
 struct VRollingCounterFactory {
-    // MARK: Initializers
-    private init() {}
-
     // MARK: Components
     static func components(
         value: Double,

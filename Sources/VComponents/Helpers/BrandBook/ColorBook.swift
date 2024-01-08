@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Color Book
 typealias ColorBook = VComponentsColorBook
 
 // MARK: - VComponents Color Book
 /// Contains fundamental colors used throughout the library.
+@NonInitializable
 public struct VComponentsColorBook {
     // MARK: Properties - Basic
     /// Black color. Set to `(0, 0, 0)`.
@@ -186,7 +188,4 @@ public struct VComponentsColorBook {
     static let _notificationLayerYellow: Color = .init(.notificationLayerYellow)
 
     static let _placeholderImage: Color = .gray.opacity(0.3)
-
-    // MARK: Initializers
-    private init() {}
 }

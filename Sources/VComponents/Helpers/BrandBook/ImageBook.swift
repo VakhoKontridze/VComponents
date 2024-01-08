@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Image Book
+@NonInitializable
 struct ImageBook {
-    // MARK: Properties
     static let checkmarkOn: Image = .init(.checkmarkOn) // Mirrored for RTL languages
     static let checkmarkIndeterminate: Image = .init(.checkmarkIndeterminate)
 
@@ -24,7 +25,4 @@ struct ImageBook {
     static let xMark: Image = .init(.xMark)
 
     static let chevronUp: Image = .init(.chevronUp)
-
-    // MARK: Initializers
-    private init() {}
 }
