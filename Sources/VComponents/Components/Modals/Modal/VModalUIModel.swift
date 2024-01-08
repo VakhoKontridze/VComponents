@@ -129,7 +129,7 @@ public struct VModalUIModel {
 
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap`.
-    @OptionSetRepresentation<UInt64>(accessLevelModifier: "public")
+    @OptionSetRepresentation<Int>(accessLevelModifier: "public")
     public struct DismissType {
         // MARK: Options
         private enum Options: Int {
