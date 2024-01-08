@@ -129,25 +129,19 @@ public struct VModalUIModel {
 
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap`.
-    public struct DismissType: OptionSet {
+    @OptionSetRepresentation<UInt64>(accessLevelModifier: "public")
+    public struct DismissType {
         // MARK: Options
-        /// Back-tap.
-        public static let backTap: Self = .init(rawValue: 1 << 2)
+        private enum Options: Int {
+            case backTap
+        }
 
         // MARK: Options Initializers
-        /// All.
+        /// All dismiss methods.
         public static var all: Self { [.backTap] }
 
         /// Default value. Set to `[]`.
         public static var `default`: Self { [] }
-
-        // MARK: Properties
-        public let rawValue: Int
-
-        // MARK: Initializers
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
     }
 
     // MARK: Methods

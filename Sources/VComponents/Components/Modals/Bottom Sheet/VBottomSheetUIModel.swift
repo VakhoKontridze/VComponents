@@ -291,28 +291,20 @@ public struct VBottomSheetUIModel {
 
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap`, or `pullDown`.
-    public struct DismissType: OptionSet {
+    @OptionSetRepresentation<UInt64>(accessLevelModifier: "public")
+    public struct DismissType {
         // MARK: Options
-        /// Back-tap.
-        public static let backTap: Self = .init(rawValue: 1 << 2)
-
-        /// Pull down.
-        public static let pullDown: Self = .init(rawValue: 1 << 3)
+        private enum Options: Int {
+            case backTap
+            case pullDown
+        }
 
         // MARK: Options Initializers
-        /// Default value. Set to  `pullDown`.
-        public static var `default`: Self { .pullDown }
-
-        /// All.
+        /// All dismiss methods.
         public static var all: Self { [.backTap, .pullDown] }
 
-        // MARK: Properties
-        public let rawValue: Int
-
-        // MARK: Initializers
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
+        /// Default value. Set to  `pullDown`.
+        public static var `default`: Self { .pullDown }
     }
 
     // MARK: Methods
