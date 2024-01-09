@@ -138,6 +138,7 @@ public struct VRollingCounter: View {
                 .transition(.identity)
 
         default:
+            let _ = VCoreLogError("Unsupported type '\(String(describing: type(of: component)))' in 'VRollingCounter'")
             fatalError()
         }
     }

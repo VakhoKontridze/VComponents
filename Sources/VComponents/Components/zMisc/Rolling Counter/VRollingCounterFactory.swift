@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VCore
 
 // MARK: - V Rolling Counter Factory
 struct VRollingCounterFactory {
@@ -21,6 +22,7 @@ struct VRollingCounterFactory {
         guard
             let valueString: String = numberFormatter.string(fromDouble: value)
         else {
+            VCoreLogError("Failed to convert '\(value)' to 'String'")
             fatalError()
         }
 
