@@ -161,7 +161,14 @@ public struct VCodeEntryView: View {
                 ForEach(
                     0..<uiModel.length,
                     id: \.self,
-                    content: { index in characterView(at: index) }
+                    content: { index in 
+                        characterView(at: index)
+                        if uiModel.spacing == 0 {
+                            if uiModel.length -= 1 != index {
+                                Spacer()
+                            }
+                        } 
+                    }
                 )
             }
         )
