@@ -158,16 +158,17 @@ public struct VCodeEntryView: View {
         HStack(
             spacing: uiModel.spacing,
             content: {
+                let codeLength = uiModel.length - 1
                 ForEach(
                     0..<uiModel.length,
                     id: \.self,
                     content: { index in 
                         characterView(at: index)
                         if uiModel.spacing == 0 {
-                            if uiModel.length -= 1 != index {
+                            if codeLength != index {
                                 Spacer()
                             }
-                        } 
+                        }
                     }
                 )
             }
@@ -270,7 +271,13 @@ struct VCodeEntryView_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VCodeEntryView(
-                    uiModel: highlight,
+                    uiModel: {
+                        var model = VCodeEntryViewUIModel()
+                        
+                        model.spacing = 0
+                        
+                        return model
+                    }(),
                     text: $text
                 )
             })
@@ -287,7 +294,7 @@ struct VCodeEntryView_Previews: PreviewProvider {
                     title: "Enabled",
                     content: {
                         VCodeEntryView(
-                            uiModel: highlight,
+                            uiModel: .init(),
                             text: .constant(text)
                         )
                     }
