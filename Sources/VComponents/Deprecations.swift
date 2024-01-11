@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Stretched Button
 @available(tvOS, unavailable)
 extension VStretchedButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VStretchedButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -42,7 +42,7 @@ extension VStretchedButtonUIModel {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VLoadingStretchedButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
@@ -75,7 +75,7 @@ extension VLoadingStretchedButtonUIModel {
 // MARK: - V Wrapped Button
 @available(tvOS, unavailable)
 extension VWrappedButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VWrappedButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -106,7 +106,7 @@ extension VWrappedButtonUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 extension VRectangularCaptionButton {
-    @available(*, deprecated, message: "Use `init` with reversed `iconCaption` and `titleCaption` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'iconCaption' and 'titleCaption' parameter order")
     public init(
         uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -139,7 +139,7 @@ extension VRectangularCaptionButtonUIModel {
 // MARK: - V Plain Button
 @available(tvOS, unavailable)
 extension VPlainButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -181,7 +181,7 @@ extension VCheckBoxUIModel {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VStretchedToggleButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VStretchedToggleButtonUIModel = .init(),
         state: Binding<VStretchedToggleButtonState>,
@@ -213,7 +213,7 @@ extension VStretchedToggleButtonUIModel {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VWrappedToggleButton {
-    @available(*, deprecated, message: "Use `init` with reversed `icon` and `title` parameter order")
+    @available(*, deprecated, message: "Use 'init' with reversed 'icon' and 'title' parameter order")
     public init(
         uiModel: VWrappedToggleButtonUIModel = .init(),
         state: Binding<VWrappedToggleButtonState>,
@@ -375,7 +375,7 @@ extension VAlertUIModel {
 }
 
 // MARK: - V List
-@available(*, deprecated, message: "Use modern `List` API instead")
+@available(*, deprecated, message: "Use modern 'List' API instead")
 @available(macOS 13.0, *)
 @available(watchOS, unavailable)
 public struct VListRow<Content>: View
@@ -427,7 +427,7 @@ public struct VListRow<Content>: View
 }
 
 
-@available(*, deprecated, message: "Use modern `List` API instead")
+@available(*, deprecated, message: "Use modern 'List' API instead")
 @available(macOS 13.0, *)
 @available(watchOS, unavailable)
 public struct VListRowUIModel {
@@ -528,7 +528,7 @@ extension VListRowUIModel {
     }
 }
 
-@available(*, deprecated, message: "Use modern `List` API instead")
+@available(*, deprecated, message: "Use modern 'List' API instead")
 @available(macOS 13.0, *)
 @available(watchOS, unavailable)
 extension View {
