@@ -229,15 +229,15 @@ public struct VTextFieldUIModel {
     @CaseDetection
     public enum ContentType: Int, CaseIterable {
         // MARK: Cases
-        /// Standard type.
+        /// Standard.
         case standard
 
-        /// Secure type.
+        /// Secure.
         ///
         /// Visibility icon is present, and securities, such as copying is enabled.
         case secure
 
-        /// Search type.
+        /// Search.
         ///
         /// Magnification icon is present.
         case search
