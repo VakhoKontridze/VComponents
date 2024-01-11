@@ -249,6 +249,28 @@ extension VRectangularToggleButtonUIModel {
     public var iconAndTitleTextSpacing: CGFloat { fatalError() }
 }
 
+// MARK: - V Code Entry View
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VCodeEntryViewUIModel {
+    @available(*, deprecated, message: "Use 'spacingType' instead")
+    public var spacing: CGFloat {
+        get {
+            switch spacingType {
+            case .fixed(let spacing): return spacing
+            case .stretched: fatalError()
+            }
+        }
+        set {
+            switch spacingType {
+            case .fixed: spacingType = .fixed(spacing: newValue)
+            case .stretched: fatalError()
+            }
+        }
+    }
+}
+
 // MARK: - V Side Bar
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

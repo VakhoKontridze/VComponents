@@ -18,8 +18,8 @@ public struct VCodeEntryViewUIModel {
     /// Code length. Set to `6`.
     public var length: Int = 6
 
-    /// Spacing between characters. Set to `7`.
-    public var spacing: CGFloat = 7
+    /// Spacing type. Set to `default.`
+    public var spacingType: SpacingType = .default
 
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.
@@ -95,6 +95,22 @@ public struct VCodeEntryViewUIModel {
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
+
+    // MARK: Spacing Type
+    /// Enumeration that represents spacing type between the characters, such as `fixed` or `stretched`.
+    @CaseDetection
+    public enum SpacingType {
+        // MARK: Cases
+        /// Fixed spacing.
+        case fixed(spacing: CGFloat)
+
+        /// Stretched spacing.
+        case stretched
+
+        // MARK: Initializers
+        /// Default value. Set to `fixed` with spacing of `7`.
+        public static var `default`: Self { .fixed(spacing: 7) }
+    }
 }
 
 // MARK: - Factory (Highlights)

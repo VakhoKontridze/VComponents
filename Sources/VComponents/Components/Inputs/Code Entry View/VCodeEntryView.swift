@@ -156,12 +156,26 @@ public struct VCodeEntryView: View {
 
     private var charactersView: some View {
         HStack(
-            spacing: uiModel.spacing,
+            spacing: {
+                switch uiModel.spacingType {
+                case .fixed(let spacing): spacing
+                case .stretched: 0
+                }
+            }(),
             content: {
                 ForEach(
                     0..<uiModel.length,
                     id: \.self,
-                    content: { index in characterView(at: index) }
+                    content: { index in 
+                        characterView(at: index)
+
+                        if 
+                            uiModel.spacingType.isStretched,
+                            index != uiModel.length-1
+                        {
+                            Spacer()
+                        }
+                    }
                 )
             }
         )
@@ -246,6 +260,7 @@ struct VCodeEntryView_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            StretchedPreview().previewDisplayName("Stretched")
             OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
         })
         .environment(\.layoutDirection, languageDirection)
@@ -315,6 +330,24 @@ struct VCodeEntryView_Previews: PreviewProvider {
                         .disabled(true)
                     }
                 )
+            })
+        }
+    }
+
+    private struct StretchedPreview: View {
+        @State private var text: String = VCodeEntryView_Previews.text
+
+        var body: some View {
+            PreviewContainer(content: {
+                VCodeEntryView(
+                    uiModel: {
+                        var uiModel: VCodeEntryViewUIModel = highlight
+                        uiModel.spacingType = .stretched
+                        return uiModel
+                    }(),
+                    text: $text
+                )
+                .padding()
             })
         }
     }

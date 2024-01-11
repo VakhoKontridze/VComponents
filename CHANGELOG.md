@@ -1,10 +1,14 @@
 # Change Log
 
-### 5.2.1(58)
+### 5.3.0(58)
 
 VBouncingMarquee
 
 - Rendering issue in `iOS` `17.0` is fixed
+
+VCodeEntryView
+
+- `spacing` is replaced with `spacingType` to support stretched layout
 
 ### [5.2.0(57)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.2.0) — *2023 12 07*
 
