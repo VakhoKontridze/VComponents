@@ -292,7 +292,7 @@ public struct VBottomSheetUIModel {
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap`, or `pullDown`.
     @OptionSetRepresentation<Int>(accessLevelModifier: "public")
-    public struct DismissType {
+    public struct DismissType: OptionSet {
         // MARK: Options
         private enum Options: Int {
             case backTap
