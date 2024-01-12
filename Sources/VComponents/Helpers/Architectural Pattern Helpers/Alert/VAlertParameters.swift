@@ -44,7 +44,7 @@ public struct VAlertParameters {
     public var buttons: () -> [any VAlertButtonProtocol]
 
     /// Attributes.
-    public var attributes: [String: Any]
+    public var attributes: [String: Any?]
     
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
@@ -52,7 +52,7 @@ public struct VAlertParameters {
         title: String,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol],
-        attributes: [String: Any] = [:]
+        attributes: [String: Any?] = [:]
     ) {
         self.title = title
         self.message = message
@@ -65,7 +65,7 @@ public struct VAlertParameters {
         title: String,
         message: String?,
         completion: (() -> Void)?,
-        attributes: [String: Any] = [:]
+        attributes: [String: Any?] = [:]
     ) {
         self.init(
             title: title,
@@ -85,7 +85,7 @@ public struct VAlertParameters {
     public init(
         error: any Error,
         completion: (() -> Void)?,
-        attributes: [String: Any] = [:]
+        attributes: [String: Any?] = [:]
     ) {
         self.init(
             title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,

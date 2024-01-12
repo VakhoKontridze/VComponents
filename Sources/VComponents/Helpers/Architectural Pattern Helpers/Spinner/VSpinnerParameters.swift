@@ -23,13 +23,13 @@ public struct VSpinnerParameters {
     public var isInteractionEnabled: Bool
 
     /// Attributes.
-    public var attributes: [String: Any]
+    public var attributes: [String: Any?]
 
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
     public init(
         isInteractionEnabled: Bool = true,
-        attributes: [String: Any] = [:]
+        attributes: [String: Any?] = [:]
     ) {
         self.isInteractionEnabled = isInteractionEnabled
         self.attributes = attributes
