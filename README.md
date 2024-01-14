@@ -12,7 +12,7 @@
 
 ## Description
 
-VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
+VComponents is a `SwiftUI` collection that contains reusable UI components.
 
 ## Components
 
