@@ -244,196 +244,79 @@ extension VWrappedToggleButtonInternalState {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VWrappedToggleButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            ShadowPreview().previewDisplayName("Shadow")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var state: VWrappedToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VWrappedToggleButton(
+                    state: $state,
+                    title: "Lorem Ipsum"
+                )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Off", content: {
+            VWrappedToggleButton(
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
 
-    // Data
-    private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-    private static var icon: Image { .init(systemName: "swift") }
+        PreviewRow("Pressed Off", content: {
+            VWrappedToggleButton(
+                uiModel: {
+                    var uiModel: VWrappedToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
+                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
+                    return uiModel
+                }(),
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+        })
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var state: VWrappedToggleButtonState = .on
+        PreviewRow("On", content: {
+            VWrappedToggleButton(
+                state: .constant(.on),
+                title: "Lorem Ipsum"
+            )
+        })
 
-        var body: some View {
-            PreviewContainer(content: {
-                VWrappedToggleButton(
-                    state: $state,
-                    title: title
-                )
+        PreviewRow("Pressed On", content: {
+            VWrappedToggleButton(
+                uiModel: {
+                    var uiModel: VWrappedToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
+                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
+                    return uiModel
+                }(),
+                state: .constant(.on),
+                title: "Lorem Ipsum"
+            )
+        })
 
-                VWrappedToggleButton(
-                    state: $state,
-                    title: title,
-                    icon: icon
-                )
-            })
-        }
-    }
+        PreviewRow("Disabled", content: {
+            VWrappedToggleButton(
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+            .disabled(true)
+        })
+    })
+})
 
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Off",
-                    content: {
-                        VWrappedToggleButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
+#endif
 
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed Off",
-                    content: {
-                        VWrappedToggleButton(
-                            uiModel: {
-                                var uiModel: VWrappedToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
-                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                                return uiModel
-                            }(),
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "On",
-                    content: {
-                        VWrappedToggleButton(
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed On",
-                    content: {
-                        VWrappedToggleButton(
-                            uiModel: {
-                                var uiModel: VWrappedToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
-                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                                return uiModel
-                            }(),
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VWrappedToggleButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-
-    private struct BorderPreview: View {
-        @State private var state: VWrappedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VWrappedToggleButton(
-                    uiModel: {
-                        var uiModel: VWrappedToggleButtonUIModel = .init()
-                        uiModel.borderWidth = 2
-                        uiModel.borderColors = VWrappedToggleButtonUIModel.StateColors(
-                            off: uiModel.backgroundColors.off.darken(by: 0.3),
-                            on: uiModel.backgroundColors.on.darken(by: 0.3),
-                            pressedOff: uiModel.backgroundColors.pressedOff.darken(by: 0.3),
-                            pressedOn: uiModel.backgroundColors.pressedOn.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title
-                )
-            })
-        }
-    }
-
-    private struct ShadowPreview: View {
-        @State private var state: VWrappedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VWrappedToggleButton(
-                    uiModel: {
-                        var uiModel: VWrappedToggleButtonUIModel = .init()
-                        uiModel.shadowColors = VWrappedToggleButtonUIModel.StateColors(
-                            off: GlobalUIModel.Common.shadowColorEnabled,
-                            on: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOff: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOn: GlobalUIModel.Common.shadowColorEnabled,
-                            disabled: GlobalUIModel.Common.shadowColorDisabled
-                        )
-                        uiModel.shadowRadius = 3
-                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title
-                )
-            })
-        }
-    }
-
-    private struct OutOfBoundsContentPreventionPreview: View {
-        @State private var state: VWrappedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VWrappedToggleButton(
-                    uiModel: {
-                        var uiModel: VWrappedToggleButtonUIModel = .init()
-                        uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VWrappedToggleButtonUIModel.StateColors(ColorBook.accentRed)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title,
-                    icon: icon
-                )
-            })
-        }
-    }
-}
+#endif

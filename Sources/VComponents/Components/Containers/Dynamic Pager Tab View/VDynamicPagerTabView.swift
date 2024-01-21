@@ -348,147 +348,74 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VDynamicPagerTabView_Previews: PreviewProvider { // Preview may have difficulties with `ScrollViewReader`
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    private static var tabSelectionIndicatorWidthType: VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType { .default }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            FewItemsPreview().previewDisplayName("Few Items")
-            CustomTabBarPreview().previewDisplayName("Custom Tab Bar")
-            CustomTabIndicatorPreview().previewDisplayName("Custom Tab Indicator")
-        })
-        .preferredColorScheme(colorScheme)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-    }
+#if !(os(macOS) || os(tvOS) || os(watchOS))
 
-    // Data
-    private enum WeekDay: Int, Hashable, Identifiable, CaseIterable {
-        case monday, tuesday, wednesday, thursday, friday, saturday, sunday
-
-        var id: Int { rawValue }
-
-        var tabItemTitle: String { .init(describing: self).capitalized.pseudoRTL(languageDirection) }
-        var color: Color {
-            switch rawValue.remainderReportingOverflow(dividingBy: 3).0 {
-            case 0: Color.red
-            case 1: Color.green
-            case 2: Color.blue
-            default: fatalError()
-            }
-        }
-    }
-    private static var selection: WeekDay { .thursday }
-
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var selection: WeekDay = VDynamicPagerTabView_Previews.selection
+#Preview("Many Items", body: {
+    struct Preview: View {
+        @State private var selection: PreviewEnumWeekday = .thursday
 
         var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: WeekDay.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: { $0.color }
-                )
-                .padding()
-            })
-        }
-    }
-
-    private struct FewItemsPreview: View {
-        @State private var selection: WeekDay = .monday
-
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: [WeekDay.monday, .tuesday, .wednesday],
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: { $0.color }
-                )
-                .padding()
-            })
-        }
-    }
-
-    private struct CustomTabBarPreview: View {
-        @State private var selection: WeekDay = VDynamicPagerTabView_Previews.selection
-
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-
-                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
-
-                        uiModel.headerBackgroundColor = ColorBook.layerGray.opacity(0.5)
-                        uiModel.tabItemMargins.top *= 1.5
-
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: WeekDay.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: { $0.color }
-                )
-                .cornerRadius(20, corners: .topCorners)
-                .padding()
-            })
-        }
-    }
-
-    private struct CustomTabIndicatorPreview: View {
-        @State private var selection: WeekDay = VDynamicPagerTabView_Previews.selection
-
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-
-                        uiModel.tabSelectionIndicatorWidthType = tabSelectionIndicatorWidthType
-
-                        uiModel.tabIndicatorStripAlignment = .center
-                        uiModel.tabIndicatorTrackHeight = 1
-                        uiModel.tabIndicatorTrackColor = ColorBook.layerGray
-                        uiModel.selectedTabIndicatorHeight = 3
-
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: WeekDay.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: {
-                        Text($0.tabItemTitle)
-                            .foregroundStyle($0.color)
+            PreviewContainer(layer: .secondary, content: {
+                ForEach(
+                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+                    id: \.self,
+                    content: { widthType in
+                        VDynamicPagerTabView(
+                            uiModel: {
+                                var uiModel: VDynamicPagerTabViewUIModel = .init()
+                                uiModel.tabSelectionIndicatorWidthType = widthType
+                                return uiModel
+                            }(),
+                            selection: $selection,
+                            data: PreviewEnumWeekday.allCases,
+                            tabItemTitle: { $0.title },
+                            content: { $0.color }
+                        )
+                        .padding(.horizontal)
+                        .frame(height: 150)
                     }
                 )
-                .padding()
             })
         }
     }
-}
+
+    return Preview()
+})
+
+#Preview("Few Items", body: {
+    struct Preview: View {
+        @State private var selection: PreviewEnumWeekday = .monday
+
+        var body: some View {
+            PreviewContainer(layer: .secondary, content: {
+                ForEach(
+                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+                    id: \.self,
+                    content: { widthType in
+                        VDynamicPagerTabView(
+                            uiModel: {
+                                var uiModel: VDynamicPagerTabViewUIModel = .init()
+                                uiModel.tabSelectionIndicatorWidthType = widthType
+                                return uiModel
+                            }(),
+                            selection: $selection,
+                            data: PreviewEnumWeekday.allCases.prefix(3),
+                            tabItemTitle: { $0.title },
+                            content: { $0.color }
+                        )
+                        .padding(.horizontal)
+                        .frame(height: 150)
+                    }
+                )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#endif
+
+#endif

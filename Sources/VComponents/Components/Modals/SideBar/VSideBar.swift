@@ -297,118 +297,103 @@ struct VSideBar<Content>: View where Content: View {
 extension Edge {
     fileprivate var toAlignment: Alignment {
         switch self {
-        case .top: return .top
-        case .leading: return .leading
-        case .bottom: return .bottom
-        case .trailing: return .trailing
+        case .top: .top
+        case .leading: .leading
+        case .bottom: .bottom
+        case .trailing: .trailing
         }
     }
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VSideBar_Previews: PreviewProvider {
-    // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    private static var presentationEdge: VSideBarUIModel { .init() }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            InsettedContentPreview().previewDisplayName("Insetted Content")
-#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
-            SafeAreaPreview().previewDisplayName("Safe Area")
-#endif
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("Leading", body: {
+    Preview()
+})
+
+#Preview("Trailing", body: {
+    Preview(uiModel: .trailing)
+})
+
+#Preview("Top", body: {
+    Preview(uiModel: .top)
+})
+
+#Preview("Bottom", body: {
+    Preview(uiModel: .bottom)
+})
+
+#Preview("Safe Area Leading", body: {
+    SafeAreaPreview()
+})
+
+#Preview("Safe Area Trailing", body: {
+    SafeAreaPreview(uiModel: .trailing)
+})
+
+#Preview("Safe Area Top", body: {
+    SafeAreaPreview(uiModel: .top)
+})
+
+#Preview("Safe Area Bottom", body: {
+    SafeAreaPreview(uiModel: .bottom)
+})
+
+private struct Preview: View {
+    private let uiModel: VSideBarUIModel
+    @State private var isPresented: Bool = true
+
+    init(
+        uiModel: VSideBarUIModel = .init()
+    ) {
+        self.uiModel = uiModel
+    }
+
+    var body: some View {
+        PreviewContainer(content: {
+            ModalLauncherView(isPresented: $isPresented)
+                .vSideBar(
+                    id: "preview",
+                    uiModel: uiModel,
+                    isPresented: $isPresented,
+                    content: { ColorBook.accentBlue }
+                )
         })
-        .previewInterfaceOrientation(interfaceOrientation)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
     }
-    
-    // Data
-    private static func content() -> some View {
-        ColorBook.accentBlue
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vSideBar(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VSideBarUIModel = presentationEdge
-                            uiModel.colorScheme = VSideBar_Previews.colorScheme
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vSideBar(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VSideBarUIModel = presentationEdge
-
-                            uiModel.colorScheme = VSideBar_Previews.colorScheme
-
-                            uiModel.contentMargins = VSideBarUIModel.insettedContent.contentMargins
-                            
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-
-#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
-    private struct SafeAreaPreview: View {
-        @State private var isPresented: Bool = true
-        @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .getInterfaceOrientation({ interfaceOrientation = $0 })
-                    .vSideBar(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VSideBarUIModel = presentationEdge
-
-                            uiModel.colorScheme = VSideBar_Previews.colorScheme
-
-                            uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-#endif
 }
+
+private struct SafeAreaPreview: View {
+    private let uiModel: VSideBarUIModel
+    @State private var isPresented: Bool = true
+    @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
+
+    init(
+        uiModel: VSideBarUIModel = .init()
+    ) {
+        self.uiModel = uiModel
+    }
+
+    var body: some View {
+        PreviewContainer(content: {
+            ModalLauncherView(isPresented: $isPresented)
+                .getInterfaceOrientation({ interfaceOrientation = $0 })
+                .vSideBar(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel = uiModel
+                        uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { ColorBook.accentBlue }
+                )
+        })
+    }
+}
+
+#endif
+
+#endif

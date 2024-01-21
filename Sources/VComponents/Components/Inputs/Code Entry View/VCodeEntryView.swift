@@ -192,6 +192,7 @@ public struct VCodeEntryView: View {
             .multilineTextAlignment(.center)
 
             .frame(size: uiModel.characterBackgroundSize)
+        
             .clipped() // Prevents large content from overflowing
             .background(content: { characterBackgroundBorder(internalState) }) // Has own rounding
             .background(content: { characterBackground(internalState) }) // Has own rounding
@@ -243,129 +244,83 @@ public struct VCodeEntryView: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VCodeEntryView_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    private static var highlight: VCodeEntryViewUIModel { .init() }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            StretchedPreview().previewDisplayName("Stretched")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var text: String = "123"
+
+        var body: some View {
+            PreviewContainer(content: {
+                VCodeEntryView(text: $text)
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    StatesPreview()
+})
+
+#Preview("Success", body: {
+    StatesPreview(uiModel: .success)
+})
+
+#Preview("Warning", body: {
+    StatesPreview(uiModel: .warning)
+})
+
+#Preview("Error", body: {
+    StatesPreview(uiModel: .error)
+})
+
+private struct StatesPreview: View {
+    private let uiModel: VCodeEntryViewUIModel
+
+    init(
+        uiModel: VCodeEntryViewUIModel = .init()
+    ) {
+        self.uiModel = uiModel
+    }
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewRow("Enabled", content: {
+                VCodeEntryView(
+                    uiModel: uiModel,
+                    text: .constant("123")
+                )
+            })
+
+            // Color is also applied to other characters
+            PreviewRow("Focused (*)", content: {
+                VCodeEntryView(
+                    uiModel: {
+                        var uiModelMapped: VCodeEntryViewUIModel = uiModel
+                        uiModelMapped.characterBackgroundColors.enabled = uiModel.characterBackgroundColors.focused
+                        uiModelMapped.characterBackgroundBorderColors.enabled = uiModel.characterBackgroundColors.focused
+                        uiModelMapped.textColors.enabled = uiModel.textColors.focused
+                        return uiModelMapped
+                    }(),
+                    text: .constant("123")
+                )
+            })
+
+            PreviewRow("Disabled", content: {
+                VCodeEntryView(
+                    uiModel: uiModel,
+                    text: .constant("123")
+                )
+                .disabled(true)
+            })
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-
-    // Data
-    private static var text: String { "123" }
-
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var text: String = VCodeEntryView_Previews.text
-
-        var body: some View {
-            PreviewContainer(content: {
-                VCodeEntryView(
-                    uiModel: highlight,
-                    text: $text
-                )
-            })
-        }
-    }
-
-    private struct StatesPreview: View {
-        private let text: String = VCodeEntryView_Previews.text
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VCodeEntryView(
-                            uiModel: highlight,
-                            text: .constant(text)
-                        )
-                    }
-                )
-
-                // Color is also applied to other characters
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Focused (*)",
-                    content: {
-                        VCodeEntryView(
-                            uiModel: {
-                                var uiModel: VCodeEntryViewUIModel = highlight
-                                uiModel.characterBackgroundColors.enabled = uiModel.characterBackgroundColors.focused
-                                uiModel.characterBackgroundBorderColors.enabled = uiModel.characterBackgroundColors.focused
-                                uiModel.textColors.enabled = uiModel.textColors.focused
-                                return uiModel
-                            }(),
-                            text: .constant(text)
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VCodeEntryView(
-                            uiModel: highlight,
-                            text: .constant(text)
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-
-    private struct StretchedPreview: View {
-        @State private var text: String = VCodeEntryView_Previews.text
-
-        var body: some View {
-            PreviewContainer(content: {
-                VCodeEntryView(
-                    uiModel: {
-                        var uiModel: VCodeEntryViewUIModel = highlight
-                        uiModel.spacingType = .stretched
-                        return uiModel
-                    }(),
-                    text: $text
-                )
-                .padding()
-            })
-        }
-    }
-
-    private struct OutOfBoundsContentPreventionPreview: View {
-        @State private var text: String = VCodeEntryView_Previews.text
-
-        var body: some View {
-            PreviewContainer(content: {
-                VCodeEntryView(
-                    uiModel: {
-                        var uiModel: VCodeEntryViewUIModel = highlight
-                        uiModel.textFont = .system(size: 100)
-                        return uiModel
-                    }(),
-                    text: $text
-                )
-            })
-        }
     }
 }
+
+#endif
+
+#endif

@@ -189,38 +189,12 @@ struct VModal<Content>: View
 }
 
 // MARK: - Previews
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VModal_Previews: PreviewProvider {
-    // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            InsettedContentPreview().previewDisplayName("Insetted Content")
-            WrappedContentPreview().previewDisplayName("Wrapped Content")
-        })
-        .previewInterfaceOrientation(interfaceOrientation)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static func content() -> some View {
-        ColorBook.accentBlue
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if DEBUG
+
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -228,37 +202,9 @@ struct VModal_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
-                        uiModel: {
-                            var uiModel: VModalUIModel = .init()
-                            uiModel.colorScheme = VModal_Previews.colorScheme
-                            return uiModel
-                        }(),
                         isPresented: $isPresented,
                         content: {
-                            content()
-                                .onTapGesture(perform: { isPresented = false })
-                        }
-                    )
-            })
-        }
-    }
-    
-    private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vModal(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VModalUIModel = .insettedContent
-                            uiModel.colorScheme = VModal_Previews.colorScheme
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: {
-                            content()
+                            ColorBook.accentBlue
                                 .onTapGesture(perform: { isPresented = false })
                         }
                     )
@@ -266,7 +212,11 @@ struct VModal_Previews: PreviewProvider {
         }
     }
 
-    private struct WrappedContentPreview: View {
+    return Preview()
+})
+
+#Preview("Wrapped Content", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
         @State private var contentHeight: CGFloat?
 
@@ -277,8 +227,6 @@ struct VModal_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VModalUIModel = .init()
-
-                            uiModel.colorScheme = VModal_Previews.colorScheme
 
                             uiModel.contentMargins = VModalUIModel.Margins(15)
 
@@ -301,4 +249,10 @@ struct VModal_Previews: PreviewProvider {
             })
         }
     }
-}
+
+    return Preview()
+})
+
+#endif
+
+#endif

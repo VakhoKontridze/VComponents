@@ -215,194 +215,84 @@ extension VRectangularToggleButtonInternalState {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VRectangularToggleButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            ShadowPreview().previewDisplayName("Shadow")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var state: VRectangularToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VRectangularToggleButton(
+                    state: $state,
+                    title: "ABC"
+                )
+
+                VRectangularToggleButton(
+                    state: $state,
+                    icon: Image(systemName: "swift")
+                )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Off", content: {
+            VRectangularToggleButton(
+                state: .constant(.off),
+                icon: Image(systemName: "swift")
+            )
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
 
-    // Data
-    private static var title: String { "ABC".pseudoRTL(languageDirection) }
-    private static var icon: Image { .init(systemName: "swift") }
+        PreviewRow("Pressed Off", content: {
+            VRectangularToggleButton(
+                uiModel: {
+                    var uiModel: VRectangularToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
+                    uiModel.iconColors.off = uiModel.iconColors.pressedOff
+                    return uiModel
+                }(),
+                state: .constant(.off),
+                icon: Image(systemName: "swift")
+            )
+        })
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var state: VRectangularToggleButtonState = .on
+        PreviewRow("On", content: {
+            VRectangularToggleButton(
+                state: .constant(.on),
+                icon: Image(systemName: "swift")
+            )
+        })
 
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularToggleButton(
-                    state: $state,
-                    title: title
-                )
+        PreviewRow("Pressed On", content: {
+            VRectangularToggleButton(
+                uiModel: {
+                    var uiModel: VRectangularToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
+                    uiModel.iconColors.on = uiModel.iconColors.pressedOn
+                    return uiModel
+                }(),
+                state: .constant(.on),
+                icon: Image(systemName: "swift")
+            )
+        })
 
-                VRectangularToggleButton(
-                    state: $state,
-                    icon: icon
-                )
-            })
-        }
-    }
+        PreviewRow("Disabled", content: {
+            VRectangularToggleButton(
+                state: .constant(.off),
+                icon: Image(systemName: "swift")
+            )
+            .disabled(true)
+        })
+    })
+})
 
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Off",
-                    content: {
-                        VRectangularToggleButton(
-                            state: .constant(.off),
-                            icon: icon
-                        )
-                    }
-                )
+#endif
 
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed Off",
-                    content: {
-                        VRectangularToggleButton(
-                            uiModel: {
-                                var uiModel: VRectangularToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
-                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                                return uiModel
-                            }(),
-                            state: .constant(.off),
-                            icon: icon
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "On",
-                    content: {
-                        VRectangularToggleButton(
-                            state: .constant(.on),
-                            icon: icon
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed On",
-                    content: {
-                        VRectangularToggleButton(
-                            uiModel: {
-                                var uiModel: VRectangularToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
-                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                                return uiModel
-                            }(),
-                            state: .constant(.on),
-                            icon: icon
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VRectangularToggleButton(
-                            state: .constant(.off),
-                            icon: icon
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-
-    private struct BorderPreview: View {
-        @State private var state: VRectangularToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularToggleButton(
-                    uiModel: {
-                        var uiModel: VRectangularToggleButtonUIModel = .init()
-                        uiModel.borderWidth = 2
-                        uiModel.borderColors = VRectangularToggleButtonUIModel.StateColors(
-                            off: uiModel.backgroundColors.off.darken(by: 0.3),
-                            on: uiModel.backgroundColors.on.darken(by: 0.3),
-                            pressedOff: uiModel.backgroundColors.pressedOff.darken(by: 0.3),
-                            pressedOn: uiModel.backgroundColors.pressedOn.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    state: $state,
-                    icon: icon
-                )
-            })
-        }
-    }
-
-    private struct ShadowPreview: View {
-        @State private var state: VRectangularToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularToggleButton(
-                    uiModel: {
-                        var uiModel: VRectangularToggleButtonUIModel = .init()
-                        uiModel.shadowColors = VRectangularToggleButtonUIModel.StateColors(
-                            off: GlobalUIModel.Common.shadowColorEnabled,
-                            on: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOff: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOn: GlobalUIModel.Common.shadowColorEnabled,
-                            disabled: GlobalUIModel.Common.shadowColorDisabled
-                        )
-                        uiModel.shadowRadius = 3
-                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    icon: icon
-                )
-            })
-        }
-    }
-
-    private struct OutOfBoundsContentPreventionPreview: View {
-        @State private var state: VRectangularToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularToggleButton(
-                    uiModel: {
-                        var uiModel: VRectangularToggleButtonUIModel = .init()
-                        uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VRectangularToggleButtonUIModel.StateColors(ColorBook.accentRed)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    icon: icon
-                )
-            })
-        }
-    }
-}
+#endif

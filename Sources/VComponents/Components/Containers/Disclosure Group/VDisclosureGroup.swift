@@ -184,135 +184,82 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 }
 
 // MARK: - Previews
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VDisclosureGroup_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            InsettedContentPreview().previewDisplayName("Insetted Content")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var headerTitle: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
-    
-    private static func content() -> some View {
-        ColorBook.accentBlue
-            .frame(height: 100)
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if DEBUG
+
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
         @State private var state: VDisclosureGroupState = .expanded
-        
+
         var body: some View {
-            PreviewContainer(hasLayer: false, content: {
+            PreviewContainer(layer: .secondary, content: {
                 VDisclosureGroup(
                     state: $state,
-                    headerTitle: headerTitle,
-                    content: content
+                    headerTitle: "Lorem Ipsum",
+                    content: { ColorBook.accentBlue.frame(height: 100) }
                 )
-                .padding()
+                .padding(.horizontal)
             })
         }
     }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Collapsed",
-                    content: {
-                        VDisclosureGroup(
-                            state: .constant(.collapsed),
-                            headerTitle: headerTitle,
-                            content: content
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Expanded",
-                    content: {
-                        VDisclosureGroup(
-                            state: .constant(.expanded),
-                            headerTitle: headerTitle,
-                            content: content
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Pressed (Button)",
-                    content: {
-                        VDisclosureGroup(
-                            uiModel: {
-                                var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
-                                uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.pressed
-                                return uiModel
-                            }(),
-                            state: .constant(.collapsed),
-                            headerTitle: headerTitle,
-                            content: content
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VDisclosureGroup(
-                            uiModel: {
-                                var uiModel: VDisclosureGroupUIModel = .init()
-                                uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
-                                uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.disabled
-                                return uiModel
-                            }(),
-                            state: .constant(.expanded),
-                            headerTitle: headerTitle,
-                            content: content
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-    
-    private struct InsettedContentPreview: View {
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Insetted Content",
-                    content: {
-                        VDisclosureGroup(
-                            uiModel: .insettedContent,
-                            state: .constant(.expanded),
-                            headerTitle: headerTitle,
-                            content: content
-                        )
-                    }
-                )
-            })
-        }
-    }
-}
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(layer: .secondary, content: {
+        PreviewRow("Collapsed", content: {
+            VDisclosureGroup(
+                state: .constant(.collapsed),
+                headerTitle: "Lorem Ipsum",
+                content: { ColorBook.accentBlue.frame(height: 100) }
+            )
+            .padding(.horizontal)
+        })
+
+        PreviewRow("Expanded", content: {
+            VDisclosureGroup(
+                state: .constant(.expanded),
+                headerTitle: "Lorem Ipsum",
+                content: { ColorBook.accentBlue.frame(height: 100) }
+            )
+            .padding(.horizontal)
+        })
+
+        PreviewRow("Pressed (Button)", content: {
+            VDisclosureGroup(
+                uiModel: {
+                    var uiModel: VDisclosureGroupUIModel = .init()
+                    uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
+                    uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.pressed
+                    return uiModel
+                }(),
+                state: .constant(.collapsed),
+                headerTitle: "Lorem Ipsum",
+                content: { ColorBook.accentBlue.frame(height: 100) }
+            )
+            .padding(.horizontal)
+        })
+
+        PreviewRow("Disabled", content: {
+            VDisclosureGroup(
+                uiModel: {
+                    var uiModel: VDisclosureGroupUIModel = .init()
+                    uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
+                    uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.disabled
+                    return uiModel
+                }(),
+                state: .constant(.expanded),
+                headerTitle: "Lorem Ipsum",
+                content: { ColorBook.accentBlue.frame(height: 100) }
+            )
+            .disabled(true)
+            .padding(.horizontal)
+        })
+    })
+})
+
+#endif
+
+#endif

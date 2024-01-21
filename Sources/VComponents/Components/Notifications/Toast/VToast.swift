@@ -255,46 +255,19 @@ struct VToast: View {
 extension VerticalEdge {
     fileprivate var toAlignment: Alignment {
         switch self {
-        case .top: return .top
-        case .bottom: return .bottom
+        case .top: .top
+        case .bottom: .bottom
         }
     }
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VToast_Previews: PreviewProvider {
-    // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    private static var highlights: VToastUIModel { .init() }
-    private static var widthType: VToastUIModel.WidthType { .default }
-    private static var presentationEdge: VerticalEdge { .bottom }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            MultiLineTextPreview().previewDisplayName("MultiLine Text")
-        })
-        .previewInterfaceOrientation(interfaceOrientation)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var text: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
-    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("Singleline", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -303,23 +276,22 @@ struct VToast_Previews: PreviewProvider {
                     .vToast(
                         id: "preview",
                         uiModel: {
-                            var uiModel: VToastUIModel = highlights
-
-                            uiModel.colorScheme = VToast_Previews.colorScheme
-                            uiModel.widthType = widthType
-                            uiModel.presentationEdge = presentationEdge
-                            uiModel.duration = .infinity
-
+                            var uiModel: VToastUIModel = .init()
+                            uiModel.duration = TimeInterval.infinity
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        text: text
+                        text: "Lorem ipsum dolor sit amet"
                     )
             })
         }
     }
-    
-    private struct MultiLineTextPreview: View {
+
+    return Preview()
+})
+
+#Preview("Multiline", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -328,20 +300,133 @@ struct VToast_Previews: PreviewProvider {
                     .vToast(
                         id: "preview",
                         uiModel: {
-                            var uiModel: VToastUIModel = highlights
-
-                            uiModel.colorScheme = VToast_Previews.colorScheme
-                            uiModel.widthType = widthType
+                            var uiModel: VToastUIModel = .init()
                             uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                            uiModel.presentationEdge = presentationEdge
-                            uiModel.duration = .infinity
-
+                            uiModel.duration = TimeInterval.infinity
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        text: textLong
+                        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                     )
             })
         }
     }
-}
+
+    return Preview()
+})
+
+#Preview("Top", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vToast(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VToastUIModel = .init()
+                            uiModel.presentationEdge = .top
+                            uiModel.duration = TimeInterval.infinity
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        text: "Lorem ipsum dolor sit amet"
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Width Types", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+        @State private var widthType: VToastUIModel.WidthType?
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vToast(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VToastUIModel = .init()
+                            widthType.map { uiModel.widthType = $0 }
+                            uiModel.duration = TimeInterval.infinity
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        text: "Lorem ipsum dolor sit amet"
+                    )
+                    .task({
+                        try? await Task.sleep(seconds: 1)
+
+                        while true {
+                            widthType = .wrapped(margin: 20)
+                            try? await Task.sleep(seconds: 1)
+
+                            widthType = .stretched(alignment: .leading, margin: 20)
+                            try? await Task.sleep(seconds: 1)
+
+                            widthType = .stretched(alignment: .center, margin: 20)
+                            try? await Task.sleep(seconds: 1)
+
+                            widthType = .stretched(alignment: .trailing, margin: 20)
+                            try? await Task.sleep(seconds: 1)
+
+                            // `fixedPoint` not demoed
+
+                            widthType = .fixedFraction(ratio: 0.5, alignment: .leading)
+                            try? await Task.sleep(seconds: 1)
+                        }
+                    })
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Highlights", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+        @State private var uiModel: VToastUIModel = .init()
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vToast(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel = uiModel
+                            uiModel.duration = TimeInterval.infinity
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        text: "Lorem ipsum dolor sit amet"
+                    )
+                    .task({
+                        try? await Task.sleep(seconds: 1)
+
+                        while true {
+                            uiModel = .success
+                            try? await Task.sleep(seconds: 1)
+
+                            uiModel = .warning
+                            try? await Task.sleep(seconds: 1)
+
+                            uiModel = .error
+                            try? await Task.sleep(seconds: 1)
+                        }
+                    })
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#endif
+
+#endif

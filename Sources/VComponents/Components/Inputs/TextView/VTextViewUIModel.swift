@@ -143,7 +143,7 @@ public struct VTextViewUIModel {
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 }
 
-// MARK: - Factory
+// MARK: - Factory (Highlights)
 @available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

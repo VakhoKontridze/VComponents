@@ -96,61 +96,27 @@ public struct VProgressBar: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VProgressBar_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            BorderPreview().previewDisplayName("Border")
-            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if DEBUG
+
+#Preview("*", body: {
+    struct Preview: View {
         @State private var value: Double = 0
-        
+
         var body: some View {
             PreviewContainer(content: {
                 VProgressBar(value: value)
-                    .padding()
+                    .padding(.horizontal)
             })
             .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }
     }
 
-    private struct BorderPreview: View {
-        @State private var value: Double = 0
+    return Preview()
+})
 
-        var body: some View {
-            PreviewContainer(content: {
-                VProgressBar(
-                    uiModel: {
-                        var uiModel: VProgressBarUIModel = .init()
-                        uiModel.borderWidth = 1
-                        uiModel.borderColor = uiModel.trackColor.darken(by: 0.3)
-                        return uiModel
-                    }(),
-                    value: value
-                )
-                .padding()
-            })
-            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-        }
-    }
-    
-    private struct LayoutDirectionsPreview: View {
-        private let dimension: CGFloat = {
+#Preview("Layout Directions", body: {
+    struct Preview: View {
+        private let length: CGFloat = {
 #if os(iOS)
             250
 #elseif os(macOS)
@@ -159,78 +125,70 @@ struct VProgressBar_Previews: PreviewProvider {
             fatalError() // Not supported
 #endif
         }()
-        
+
         @State private var value: Double = 0
-        
+
         var body: some View {
             PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Left-to-Right",
-                    content: {
+                PreviewRow("Left-to-Right", content: {
+                    VProgressBar(
+                        uiModel: {
+                            var uiModel: VProgressBarUIModel = .init()
+                            uiModel.direction = .leftToRight
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                    .frame(width: length)
+                    .padding(.horizontal)
+                })
+
+                PreviewRow("Right-to-Left", content: {
+                    VProgressBar(
+                        uiModel: {
+                            var uiModel: VProgressBarUIModel = .init()
+                            uiModel.direction = .rightToLeft
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                    .frame(width: length)
+                    .padding(.horizontal)
+                })
+
+                HStack(spacing: 20, content: {
+                    PreviewRow("Top-to-Bottom", content: {
                         VProgressBar(
                             uiModel: {
                                 var uiModel: VProgressBarUIModel = .init()
-                                uiModel.direction = .leftToRight
+                                uiModel.direction = .topToBottom
                                 return uiModel
                             }(),
                             value: value
                         )
-                        .frame(width: dimension)
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Right-to-Left",
-                    content: {
+                        .frame(height: length)
+                        .padding(.horizontal)
+                    })
+
+                    PreviewRow("Bottom-to-Top", content: {
                         VProgressBar(
                             uiModel: {
                                 var uiModel: VProgressBarUIModel = .init()
-                                uiModel.direction = .rightToLeft
+                                uiModel.direction = .bottomToTop
                                 return uiModel
                             }(),
                             value: value
                         )
-                        .frame(width: dimension)
-                    }
-                )
-                
-                HStack(content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Top-to-Bottom",
-                        content: {
-                            VProgressBar(
-                                uiModel: {
-                                    var uiModel: VProgressBarUIModel = .init()
-                                    uiModel.direction = .topToBottom
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                            .frame(height: dimension)
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Bottom-to-Top",
-                        content: {
-                            VProgressBar(
-                                uiModel: {
-                                    var uiModel: VProgressBarUIModel = .init()
-                                    uiModel.direction = .bottomToTop
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                            .frame(height: dimension)
-                        }
-                    )
+                        .frame(height: length)
+                        .padding(.horizontal)
+                    })
                 })
             })
             .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }
     }
-}
+
+    return Preview()
+})
+
+#endif

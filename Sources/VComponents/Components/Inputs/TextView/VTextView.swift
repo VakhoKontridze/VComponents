@@ -227,111 +227,113 @@ public struct VTextView: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VTextView_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    private static var highlight: VTextViewUIModel { .init() }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
+#if !(os(macOS) || os(tvOS) || os(watchOS))
 
-    // Data
-    private static var headerTitle: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
-    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
-    private static var placeholder: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-    private static var text: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
+#Preview("*", body: {
+    guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var text: String = VTextView_Previews.text
+    struct Preview: View {
+        @State private var text: String = "Lorem ipsum"
 
         var body: some View {
             PreviewContainer(content: {
                 VTextView(
-                    uiModel: {
-                        var uiModel: VTextViewUIModel = highlight
-                        uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 7, reservesSpace: true)
-                        return uiModel
-                    }(),
-                    headerTitle: headerTitle,
-                    footerTitle: footerTitle,
-                    placeholder: placeholder,
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    placeholder: "Lorem ipsum",
                     text: $text
                 )
-                .padding()
+                .padding(.horizontal)
             })
         }
     }
 
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VTextView(
-                            uiModel: highlight,
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
+    return Preview()
+})
 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Focused",
-                    content: {
-                        VTextView(
-                            uiModel: {
-                                var uiModel: VTextViewUIModel = highlight
-                                uiModel.backgroundColors.enabled = uiModel.backgroundColors.focused
-                                uiModel.borderColors.enabled = uiModel.borderColors.focused
-                                uiModel.textColors.enabled = uiModel.textColors.focused
-                                uiModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
-                                uiModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
+#Preview("States", body: {
+    guard #available(iOS 16.0, *) else { return EmptyView() }
 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VTextView(
-                            uiModel: highlight,
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                        .disabled(true)
-                    }
+    return StatesPreview()
+})
+
+#Preview("Success", body: {
+    guard #available(iOS 16.0, *) else { return EmptyView() }
+
+    return StatesPreview(uiModel: .success)
+})
+
+#Preview("Warning", body: {
+    guard #available(iOS 16.0, *) else { return EmptyView() }
+
+    return StatesPreview(uiModel: .warning)
+})
+
+#Preview("Error", body: {
+    guard #available(iOS 16.0, *) else { return EmptyView() }
+
+    return StatesPreview(uiModel: .error)
+})
+
+@available(iOS 16.0, *)
+private struct StatesPreview: View {
+    private let uiModel: VTextViewUIModel
+
+    init(
+        uiModel: VTextViewUIModel = .init()
+    ) {
+        self.uiModel = uiModel
+    }
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewRow("Enabled", content: {
+                VTextView(
+                    uiModel: uiModel,
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    placeholder: "Lorem ipsum",
+                    text: .constant("Lorem ipsum")
                 )
+                .padding(.horizontal)
             })
-        }
+
+            PreviewRow("Focused", content: {
+                VTextView(
+                    uiModel: {
+                        var mappedUIModel: VTextViewUIModel = uiModel
+                        mappedUIModel.backgroundColors.enabled = uiModel.backgroundColors.focused
+                        mappedUIModel.borderColors.enabled = uiModel.borderColors.focused
+                        mappedUIModel.textColors.enabled = uiModel.textColors.focused
+                        mappedUIModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
+                        mappedUIModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
+                        return mappedUIModel
+                    }(),
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    placeholder: "Lorem ipsum",
+                    text: .constant("Lorem ipsum")
+                )
+                .padding(.horizontal)
+            })
+
+            PreviewRow("Disabled", content: {
+                VTextView(
+                    uiModel: uiModel,
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    placeholder: "Lorem ipsum",
+                    text: .constant("Lorem ipsum")
+                )
+                .disabled(true)
+                .padding(.horizontal)
+            })
+        })
     }
 }
+
+#endif
+
+#endif

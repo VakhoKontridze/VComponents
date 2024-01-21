@@ -432,116 +432,31 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VWrappedIndicatorStaticPagerTabView_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            CustomTabBarPreview().previewDisplayName("Custom Tab Bar")
-            CustomTabIndicatorPreview().previewDisplayName("Custom Tab Indicator")
-        })
-        .preferredColorScheme(colorScheme)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-    }
+#if !(os(macOS) || os(tvOS) || os(watchOS))
 
-    // Data
-    private enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
-        case red, green, blue
-
-        var id: Int { rawValue }
-
-        var tabItemTitle: String { .init(describing: self).capitalized.pseudoRTL(languageDirection) }
-        var color: Color {
-            switch self {
-            case .red: Color.red
-            case .green: Color.green
-            case .blue: Color.blue
-            }
-        }
-    }
-    private static var selection: RGBColor { .red }
-
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var selection: RGBColor = VWrappedIndicatorStaticPagerTabView_Previews.selection
+#Preview(body: {
+    struct Preview: View {
+        @State private var selection: PreviewEnumRGBColor = .red
 
         var body: some View {
-            PreviewContainer(hasLayer: false, content: {
+            PreviewContainer(layer: .secondary, content: {
                 VWrappedIndicatorStaticPagerTabView(
                     selection: $selection,
-                    data: RGBColor.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
+                    data: PreviewEnumRGBColor.allCases,
+                    tabItemTitle: { $0.title },
                     content: { $0.color }
                 )
-                .padding()
+                .padding(.horizontal)
+                .frame(height: 150)
             })
         }
     }
 
-    private struct CustomTabBarPreview: View {
-        @State private var selection: RGBColor = VWrappedIndicatorStaticPagerTabView_Previews.selection
+    return Preview()
+})
 
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VWrappedIndicatorStaticPagerTabView(
-                    uiModel: {
-                        var uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init()
-                        uiModel.headerBackgroundColor = ColorBook.layerGray.opacity(0.5)
-                        uiModel.tabItemMargins.top *= 1.5
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: RGBColor.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: { $0.color }
-                )
-                .applyModifier({
-#if canImport(UIKit)
-                    $0.cornerRadius(20, corners: .topCorners)
-#else
-                    $0
 #endif
-                })
-                .padding()
-            })
-        }
-    }
 
-    private struct CustomTabIndicatorPreview: View {
-        @State private var selection: RGBColor = VWrappedIndicatorStaticPagerTabView_Previews.selection
-
-        var body: some View {
-            PreviewContainer(hasLayer: false, content: {
-                VWrappedIndicatorStaticPagerTabView(
-                    uiModel: {
-                        var uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init()
-                        uiModel.tabIndicatorStripAlignment = .center
-                        uiModel.tabIndicatorTrackHeight = 1
-                        uiModel.tabIndicatorTrackColor = ColorBook.layerGray
-                        uiModel.selectedTabIndicatorHeight = 3
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: RGBColor.allCases,
-                    tabItemTitle: { $0.tabItemTitle },
-                    content: {
-                        Text($0.tabItemTitle)
-                            .foregroundStyle($0.color)
-                    }
-                )
-                .padding()
-            })
-        }
-    }
-}
+#endif

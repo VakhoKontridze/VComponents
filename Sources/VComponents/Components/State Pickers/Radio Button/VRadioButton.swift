@@ -204,119 +204,85 @@ extension VRadioButtonState {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VRadioButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
+#if DEBUG
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var state: VRadioButtonState = .off
-        
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var state: VRadioButtonState = .on
+
         var body: some View {
             PreviewContainer(content: {
                 VRadioButton(
                     state: $state,
-                    title: title
+                    title: "Lorem ipsum"
                 )
+
+                Button("Toggle State", action: { state.setNextState() })
             })
         }
     }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Off",
-                    content: {
-                        VRadioButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed Off",
-                    content: {
-                        VRadioButton(
-                            uiModel: {
-                                var uiModel: VRadioButtonUIModel = .init()
-                                uiModel.fillColors.off = uiModel.fillColors.pressedOff
-                                uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                                uiModel.bulletColors.off = uiModel.bulletColors.pressedOff
-                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                                return uiModel
-                            }(),
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "On",
-                    content: {
-                        VRadioButton(
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed On",
-                    content: {
-                        VRadioButton(
-                            uiModel: {
-                                var uiModel: VRadioButtonUIModel = .init()
-                                uiModel.fillColors.on = uiModel.fillColors.pressedOn
-                                uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                                uiModel.bulletColors.on = uiModel.bulletColors.pressedOn
-                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                                return uiModel
-                            }(),
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VRadioButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-}
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Off", content: {
+            VRadioButton(
+                state: .constant(.off),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Pressed Off", content: {
+            VRadioButton(
+                uiModel: {
+                    var uiModel: VRadioButtonUIModel = .init()
+                    uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
+                    uiModel.bulletColors.off = uiModel.bulletColors.pressedOff
+                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
+                    return uiModel
+                }(),
+                state: .constant(.off),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("On", content: {
+            VRadioButton(
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Pressed On", content: {
+            VRadioButton(
+                uiModel: {
+                    var uiModel: VRadioButtonUIModel = .init()
+                    uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
+                    uiModel.bulletColors.on = uiModel.bulletColors.pressedOn
+                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
+                    return uiModel
+                }(),
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Disabled", content: {
+            VRadioButton(
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+            .disabled(true)
+        })
+    })
+})
+
+#endif
+
+#endif

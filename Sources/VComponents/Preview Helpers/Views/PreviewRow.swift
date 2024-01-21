@@ -1,0 +1,50 @@
+//
+//  PreviewRow.swift
+//  VComponents
+//
+//  Created by Vakhtang Kontridze on 08.03.23.
+//
+
+#if DEBUG
+
+import SwiftUI
+
+// MARK: - Preview Row
+struct PreviewRow<Content>: View where Content: View {
+    // MARK: Properties
+    private let title: String
+    private let content: () -> Content
+
+    // MARK: Initializers
+    init(
+        _ title: String,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.title = title
+        self.content = content
+    }
+
+    // MARK: Body
+    var body: some View {
+        VStack(
+            spacing: 10,
+            content: {
+                Text(title)
+                    .lineLimit(1)
+                    .foregroundStyle(ColorBook.primary)
+                    .font(.caption.bold())
+
+                content()
+            }
+        )
+    }
+}
+
+// MARK: - Preview
+#Preview(body: {
+    PreviewRow("Lorem Ipsum", content: {
+        Text("Lorem ipsum")
+    })
+})
+
+#endif

@@ -390,46 +390,12 @@ struct VBottomSheet<Content>: View
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VBottomSheet_Previews: PreviewProvider {
-    // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            FixedHeightMinIdealPreview().previewDisplayName("Fixed Height (Min & Ideal)")
-            FixedHeightIdealMaxPreview().previewDisplayName("Fixed Height (Ideal & Max)")
-            FixedHeightMinIdealMaxLargePreview().previewDisplayName("Fixed Height (Large)")
-            FixedHeightMinIdealMaxSmallPreview().previewDisplayName("Fixed Height (Small)")
-            InsettedContentPreview().previewDisplayName("Insetted Content")
-            ScrollableContentPreview().previewDisplayName("Scrollable Content")
-            NoDragIndicatorPreview().previewDisplayName("No Drag Indicator")
-            WrappedContentPreview().previewDisplayName("Wrapped Content")
-        })
-        .previewInterfaceOrientation(interfaceOrientation)
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
-    
-    private static func content() -> some View {
-        ColorBook.accentBlue
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if DEBUG
+
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("Min & Ideal & Max", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -437,19 +403,18 @@ struct VBottomSheet_Previews: PreviewProvider {
                 ModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-                            return uiModel
-                        }(),
                         isPresented: $isPresented,
-                        content: content
+                        content: { ColorBook.accentBlue }
                     )
             })
         }
     }
-    
-    private struct FixedHeightMinIdealPreview: View {
+
+    return Preview()
+})
+
+#Preview("Min & Ideal", body: {
+    struct Preview: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -459,41 +424,6 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct FixedHeightIdealMaxPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
 
                             uiModel.sizes = VBottomSheetUIModel.Sizes(
                                 portrait: VBottomSheetUIModel.Size(
@@ -505,154 +435,6 @@ struct VBottomSheet_Previews: PreviewProvider {
                                     heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                                 )
                             )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct FixedHeightMinIdealMaxLargePreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct FixedHeightMinIdealMaxSmallPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(0.2)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(0.2)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct InsettedContentPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .insettedContent
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: content
-                    )
-            })
-        }
-    }
-    
-    private struct ScrollableContentPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-#if canImport(UIKit) && !os(watchOS)
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-
-                            uiModel.autoresizesContent = true
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: {
-                            ScrollView(content: {
-                                VStack(spacing: 0, content: {
-                                    ForEach(0..<20, content: { number in
-                                        Text(String(number))
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal, 15)
-                                            .padding(.vertical, 9)
-                                    })
-                                })
-                            })
-                            .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
-                        }
-                    )
-            })
-#endif
-        }
-    }
-    
-    private struct NoDragIndicatorPreview: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .noDragIndicator
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
-
-                            uiModel.contentIsDraggable = true
 
                             return uiModel
                         }(),
@@ -663,7 +445,116 @@ struct VBottomSheet_Previews: PreviewProvider {
         }
     }
 
-    private struct WrappedContentPreview: View {
+    return Preview()
+})
+
+#Preview("Ideal & Max", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
+                                )
+                            )
+
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: { ColorBook.accentBlue }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Ideal Small", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(0.2)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(0.2)
+                                )
+                            )
+
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: { ColorBook.accentBlue }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Ideal Large", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(0.9)
+                                )
+                            )
+
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: { ColorBook.accentBlue }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Wrapped Content", body: {
+    struct Preview: View {
         @State private var safeAreaInsets: EdgeInsets = .init()
 
         @State private var isPresented: Bool = true
@@ -679,8 +570,6 @@ struct VBottomSheet_Previews: PreviewProvider {
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.colorScheme = VBottomSheet_Previews.colorScheme
 
                             uiModel.contentMargins = VBottomSheetUIModel.Margins(
                                 leading: 15,
@@ -724,4 +613,92 @@ struct VBottomSheet_Previews: PreviewProvider {
             })
         }
     }
-}
+
+    return Preview()
+})
+
+#Preview("Scrollable Content", body: {
+    guard #available(iOS 17.0, *) else { return EmptyView() }
+
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+                            uiModel.autoresizesContent = true
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: {
+                            ScrollView(content: {
+                                VStack(spacing: 0, content: {
+                                    ForEach(0..<20, content: { number in
+                                        Text(String(number))
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.horizontal, 15)
+                                            .padding(.vertical, 9)
+                                    })
+                                })
+                            })
+                            .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
+                        }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("Insetted Content", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: .insettedContent,
+                        isPresented: $isPresented,
+                        content: { ColorBook.accentBlue }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("No Drag Indicator", body: {
+    struct Preview: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                ModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .noDragIndicator
+                            uiModel.contentIsDraggable = true
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        content: { ColorBook.accentBlue }
+                    )
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#endif
+
+#endif

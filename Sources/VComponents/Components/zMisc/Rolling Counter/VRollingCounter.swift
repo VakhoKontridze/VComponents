@@ -275,168 +275,116 @@ extension AnyTransition {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VRollingCounter_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-
-    // Data
-    private static var value: Double { 10_000 }
-
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var value: Double = VRollingCounter_Previews.value
+#Preview(body: {
+    struct Preview: View {
+        @State private var value: Double = 10_000
 
         var body: some View {
             PreviewContainer(content: {
-                VStack(spacing: 0, content: {
-                    HStack(spacing: 20, content: {
-                        Button( // No `VPlainButton` for unsupported platforms
-                            "DECREMENT",
-                            action: { value -= .random(in: 1...10) }
-                        )
+                HStack(spacing: 20, content: {
+                    Button( // No `VPlainButton` for unsupported platforms
+                        "-",
+                        action: { value -= .random(in: 1...10) }
+                    )
 
-                        Button( // No `VPlainButton` for unsupported platforms
-                            "INCREMENT",
-                            action: { value += .random(in: 1...10) }
-                        )
-                    })
-                    .padding(.top, 20)
-                    .applyModifier({
+                    Button( // No `VPlainButton` for unsupported platforms
+                        "+",
+                        action: { value += .random(in: 1...10) }
+                    )
+                })
+                .padding(.top, 20)
+                .applyModifier({
 #if os(watchOS)
-                        $0.foregroundStyle(ColorBook.accentBlue)
+                    $0.foregroundStyle(ColorBook.accentBlue)
 #else
-                        $0
+                    $0
 #endif
-                    })
                 })
 
-                ScrollView(content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Standard",
-                        content: {
-                            VRollingCounter(value: value)
-                        }
-                    )
+                PreviewRow("Standard", content: {
+                    VRollingCounter(value: value)
+                })
 
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "No Fractions",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.hasFractionDigits = false
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "No Grouping & No Fractions",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.hasGroupingSeparator = false
-                                    uiModel.hasFractionDigits = false
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "No Highlight",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.incrementHighlightColor = nil
-                                    uiModel.decrementHighlightColor = nil
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Highlighted Symbols",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.groupingSeparatorTextIsHighlightable = true
-                                    uiModel.decimalSeparatorTextIsHighlightable = true
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Full Highlight",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-                                    uiModel.highlightsOnlyTheAffectedCharacters = false
-                                    uiModel.groupingSeparatorTextIsHighlightable = true
-                                    uiModel.decimalSeparatorTextIsHighlightable = true
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
-                    )
-
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Custom",
-                        content: {
-                            VRollingCounter(
-                                uiModel: {
-                                    var uiModel: VRollingCounterUIModel = .init()
-
-                                    uiModel.decimalSeparatorTextColor = ColorBook.secondary
-                                    uiModel.decimalSeparatorTextOffsetY = -10
-
-                                    uiModel.fractionDigitTextColor = ColorBook.secondary
-                                    uiModel.fractionDigitTextFont = .footnote.bold()
-                                    uiModel.fractionDigitTextOffsetY = -2
-
-                                    return uiModel
-                                }(),
-                                value: value
-                            )
-                        }
+                PreviewRow("No Fractions", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+                            uiModel.hasFractionDigits = false
+                            return uiModel
+                        }(),
+                        value: value
                     )
                 })
-                .padding(.vertical, 1)
+
+                PreviewRow("No Grouping & No Fractions", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+                            uiModel.hasGroupingSeparator = false
+                            uiModel.hasFractionDigits = false
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                })
+
+                PreviewRow("No Highlight", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+                            uiModel.incrementHighlightColor = nil
+                            uiModel.decrementHighlightColor = nil
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                })
+
+                PreviewRow("Highlighted Symbols", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+                            uiModel.groupingSeparatorTextIsHighlightable = true
+                            uiModel.decimalSeparatorTextIsHighlightable = true
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                })
+
+                PreviewRow("Full Highlight", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+                            uiModel.highlightsOnlyTheAffectedCharacters = false
+                            uiModel.groupingSeparatorTextIsHighlightable = true
+                            uiModel.decimalSeparatorTextIsHighlightable = true
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                })
+
+                PreviewRow("Custom", content: {
+                    VRollingCounter(
+                        uiModel: {
+                            var uiModel: VRollingCounterUIModel = .init()
+
+                            uiModel.decimalSeparatorTextColor = ColorBook.secondary
+                            uiModel.decimalSeparatorTextOffsetY = -10
+
+                            uiModel.fractionDigitTextColor = ColorBook.secondary
+                            uiModel.fractionDigitTextFont = Font.footnote.bold()
+                            uiModel.fractionDigitTextOffsetY = -2
+
+                            return uiModel
+                        }(),
+                        value: value
+                    )
+                })
             })
         }
     }
-}
+
+    return Preview()
+})

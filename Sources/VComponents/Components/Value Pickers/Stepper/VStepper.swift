@@ -279,115 +279,82 @@ public struct VStepper: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VStepper_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var range: ClosedRange<Int> { 1...100 }
-    private static var value: Int { 50 }
+#if DEBUG
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var value: Int = VStepper_Previews.value
-        
+#if !(os(macOS) || os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var value: Int = 50
+
         var body: some View {
             PreviewContainer(content: {
-                VStack(content: {
-                    VStepper(
-                        range: range,
-                        value: $value
-                    )
-                    
-                    Text(String(value))
-                })
+                VStepper(
+                    range: 1...100,
+                    value: $value
+                )
+
+                Text(String(value))
             })
         }
     }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        VStepper(
-                            range: range,
-                            value: .constant(value)
-                        )
-                    }
-                )
-                
-                // Color is also applied to other rows.
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed (Row)",
-                    content: {
-                        VStepper(
-                            uiModel: {
-                                var uiModel: VStepperUIModel = .init()
-                                uiModel.buttonBackgroundColors.enabled = uiModel.buttonBackgroundColors.pressed
-                                uiModel.buttonIconColors.enabled = uiModel.buttonIconColors.pressed
-                                return uiModel
-                            }(),
-                            range: range,
-                            value: .constant(value)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VStepper(
-                            range: range,
-                            value: .constant(value)
-                        )
-                        .disabled(true)
-                    }
-                )
-                
-                PreviewSectionHeader("Native")
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        Stepper("", value: .constant(value), in: range)
-                            .labelsHidden()
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        Stepper("", value: .constant(value), in: range)
-                            .labelsHidden()
-                            .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-}
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Enabled", content: {
+            VStepper(
+                range: 1...100,
+                value: .constant(50)
+            )
+        })
+
+        PreviewRow("Pressed (Row) (*)", content: {
+            VStepper(
+                uiModel: {
+                    var uiModel: VStepperUIModel = .init()
+                    uiModel.buttonBackgroundColors.enabled = uiModel.buttonBackgroundColors.pressed
+                    uiModel.buttonIconColors.enabled = uiModel.buttonIconColors.pressed
+                    return uiModel
+                }(),
+                range: 1...100,
+                value: .constant(50)
+            )
+        })
+
+        PreviewRow("Disabled", content: {
+            VStepper(
+                range: 1...100,
+                value: .constant(50)
+            )
+            .disabled(true)
+        })
+
+        PreviewSectionHeader("Native")
+
+        PreviewRow("Enabled", content: {
+            Stepper(
+                "",
+                value: .constant(50),
+                in: 1...100
+            )
+            .labelsHidden()
+        })
+
+        PreviewRow("Disabled", content: {
+            Stepper(
+                "",
+                value: .constant(50),
+                in: 1...100
+            )
+            .labelsHidden()
+            .disabled(true)
+        })
+    })
+})
+
+#endif
+
+#endif

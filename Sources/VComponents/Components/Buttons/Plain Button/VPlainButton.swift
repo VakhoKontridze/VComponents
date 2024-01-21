@@ -168,140 +168,82 @@ public struct VPlainButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-struct VPlainButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
-    private static var icon: Image { .init(systemName: "swift") }
+#if DEBUG
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VStack(content: {
-                    VPlainButton(
-                        action: {},
-                        title: title
-                    )
+#if !os(tvOS)
 
-                    VPlainButton(
-                        action: {},
-                        icon: icon
-                    )
+#Preview("*", body: {
+    PreviewContainer(content: {
+        VPlainButton(
+            action: {},
+            title: "Lorem Ipsum"
+        )
 
-                    VPlainButton(
-                        uiModel: {
-                            var uiModel: VPlainButtonUIModel = .init()
-                            uiModel.iconSize = CGSize(dimension: 18)
-                            return uiModel
-                        }(),
-                        action: {},
-                        title: title,
-                        icon: icon
-                    )
-                })
-            })
-        }
-    }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(
-                embeddedInScrollViewOnPlatforms: [.watchOS],
-                content: {
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Enabled",
-                        content: {
-                            VPlainButton(
-                                action: {},
-                                title: title
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Pressed",
-                        content: {
-                            VPlainButton(
-                                uiModel: {
-                                    var uiModel: VPlainButtonUIModel = .init()
-                                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
-                                    return uiModel
-                                }(),
-                                action: {},
-                                title: title
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Disabled",
-                        content: {
-                            VPlainButton(
-                                action: {},
-                                title: title
-                            )
-                            .disabled(true)
-                        }
-                    )
-                    
-                    PreviewSectionHeader("Native")
-                    
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Enabled",
-                        content: {
-                            Button(
-                                title,
-                                action: {}
-                            )
-                            .buttonStyle(.plain)
-                            .foregroundStyle(ColorBook.accentBlue)
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Disabled",
-                        content: {
-                            Button(
-                                title,
-                                action: {}
-                            )
-                            .buttonStyle(.plain)
-                            .disabled(true)
-                            .applyModifier({
-#if os(watchOS)
-                                $0.foregroundStyle(ColorBook.controlLayerBlue)
-#else
-                                $0
-#endif
-                            })
-                        }
-                    )
-                }
+        VPlainButton(
+            action: {},
+            icon: Image(systemName: "swift")
+        )
+    })
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Enabled", content: {
+            VPlainButton(
+                action: {},
+                title: "Lorem Ipsum"
             )
-        }
-    }
-}
+        })
+
+        PreviewRow("Pressed", content: {
+            VPlainButton(
+                uiModel: {
+                    var uiModel: VPlainButtonUIModel = .init()
+                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
+                    return uiModel
+                }(),
+                action: {},
+                title: "Lorem Ipsum"
+            )
+        })
+
+        PreviewRow("Disabled", content: {
+            VPlainButton(
+                action: {},
+                title: "Lorem Ipsum"
+            )
+            .disabled(true)
+        })
+
+        PreviewSectionHeader("Native")
+
+        PreviewRow("Enabled", content: {
+            Button(
+                "Lorem Ipsum",
+                action: {}
+            )
+            .buttonStyle(.plain)
+            .foregroundStyle(ColorBook.accentBlue)
+        })
+
+        PreviewRow("Disabled", content: {
+            Button(
+                "Lorem Ipsum",
+                action: {}
+            )
+            .buttonStyle(.plain)
+            .disabled(true)
+            .applyModifier({
+#if os(watchOS)
+                $0.foregroundStyle(ColorBook.controlLayerBlue)
+#else
+                $0
+#endif
+            })
+        })
+    })
+})
+
+#endif
+
+#endif

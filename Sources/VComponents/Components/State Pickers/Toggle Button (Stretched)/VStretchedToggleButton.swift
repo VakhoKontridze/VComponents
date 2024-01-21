@@ -246,214 +246,85 @@ extension VStretchedToggleButtonInternalState {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VStretchedToggleButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            ShadowPreview().previewDisplayName("Shadow")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var state: VStretchedToggleButtonState = .on
+
+        var body: some View {
+            PreviewContainer(content: {
+                VStretchedToggleButton(
+                    state: $state,
+                    title: "Lorem Ipsum"
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Off", content: {
+            VStretchedToggleButton(
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+            .padding(.horizontal)
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
 
-    // Data
-    private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-    private static var icon: Image { .init(systemName: "swift") }
+        PreviewRow("Pressed Off", content: {
+            VStretchedToggleButton(
+                uiModel: {
+                    var uiModel: VStretchedToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
+                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
+                    return uiModel
+                }(),
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+            .padding(.horizontal)
+        })
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var state: VStretchedToggleButtonState = .on
+        PreviewRow("On", content: {
+            VStretchedToggleButton(
+                state: .constant(.on),
+                title: "Lorem Ipsum"
+            )
+            .padding(.horizontal)
+        })
 
-        var body: some View {
-            PreviewContainer(content: {
-                VStretchedToggleButton(
-                    state: $state,
-                    title: title
-                )
-                .modifier(StretchedButtonWidthModifier())
-                .padding(.horizontal)
+        PreviewRow("Pressed On", content: {
+            VStretchedToggleButton(
+                uiModel: {
+                    var uiModel: VStretchedToggleButtonUIModel = .init()
+                    uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
+                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
+                    return uiModel
+                }(),
+                state: .constant(.on),
+                title: "Lorem Ipsum"
+            )
+            .padding(.horizontal)
+        })
 
-                VStretchedToggleButton(
-                    state: $state,
-                    title: title,
-                    icon: icon
-                )
-                .modifier(StretchedButtonWidthModifier())
-                .padding(.horizontal)
-            })
-        }
-    }
+        PreviewRow("Disabled", content: {
+            VStretchedToggleButton(
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+            .disabled(true)
+            .padding(.horizontal)
+        })
+    })
+})
 
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Off",
-                    content: {
-                        VStretchedToggleButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .modifier(StretchedButtonWidthModifier())
-                    }
-                )
+#endif
 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Pressed Off",
-                    content: {
-                        VStretchedToggleButton(
-                            uiModel: {
-                                var uiModel: VStretchedToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
-                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                                return uiModel
-                            }(),
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .modifier(StretchedButtonWidthModifier())
-                    }
-                )
-
-                PreviewRow(
-                    axis: .vertical,
-                    title: "On",
-                    content: {
-                        VStretchedToggleButton(
-                            state: .constant(.on),
-                            title: title
-                        )
-                        .modifier(StretchedButtonWidthModifier())
-                    }
-                )
-
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Pressed On",
-                    content: {
-                        VStretchedToggleButton(
-                            uiModel: {
-                                var uiModel: VStretchedToggleButtonUIModel = .init()
-                                uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
-                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                                return uiModel
-                            }(),
-                            state: .constant(.on),
-                            title: title
-                        )
-                        .modifier(StretchedButtonWidthModifier())
-                    }
-                )
-
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VStretchedToggleButton(
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .modifier(StretchedButtonWidthModifier())
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-
-    private struct BorderPreview: View {
-        @State private var state: VStretchedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VStretchedToggleButton(
-                    uiModel: {
-                        var uiModel: VStretchedToggleButtonUIModel = .init()
-                        uiModel.borderWidth = 2
-                        uiModel.borderColors = VStretchedToggleButtonUIModel.StateColors(
-                            off: uiModel.backgroundColors.off.darken(by: 0.3),
-                            on: uiModel.backgroundColors.on.darken(by: 0.3),
-                            pressedOff: uiModel.backgroundColors.pressedOff.darken(by: 0.3),
-                            pressedOn: uiModel.backgroundColors.pressedOn.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title
-                )
-                .modifier(StretchedButtonWidthModifier())
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    private struct ShadowPreview: View {
-        @State private var state: VStretchedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VStretchedToggleButton(
-                    uiModel: {
-                        var uiModel: VStretchedToggleButtonUIModel = .init()
-                        uiModel.shadowColors = VStretchedToggleButtonUIModel.StateColors(
-                            off: GlobalUIModel.Common.shadowColorEnabled,
-                            on: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOff: GlobalUIModel.Common.shadowColorEnabled,
-                            pressedOn: GlobalUIModel.Common.shadowColorEnabled,
-                            disabled: GlobalUIModel.Common.shadowColorDisabled
-                        )
-                        uiModel.shadowRadius = 3
-                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title
-                )
-                .modifier(StretchedButtonWidthModifier())
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    private struct OutOfBoundsContentPreventionPreview: View {
-        @State private var state: VStretchedToggleButtonState = .on
-
-        var body: some View {
-            PreviewContainer(content: {
-                VStretchedToggleButton(
-                    uiModel: {
-                        var uiModel: VStretchedToggleButtonUIModel = .init()
-                        uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VStretchedToggleButtonUIModel.StateColors(ColorBook.accentRed)
-                        return uiModel
-                    }(),
-                    state: $state,
-                    title: title,
-                    icon: icon
-                )
-                .modifier(StretchedButtonWidthModifier())
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    // Helpers
-    typealias StretchedButtonWidthModifier = VStretchedButton_Previews.StretchedButtonWidthModifier
-}
+#endif

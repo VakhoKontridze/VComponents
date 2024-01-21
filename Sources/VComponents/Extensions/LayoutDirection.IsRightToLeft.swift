@@ -11,9 +11,9 @@ import SwiftUI
 extension LayoutDirection {
     var isRightToLeft: Bool {
         switch self {
-        case .leftToRight: return false
-        case .rightToLeft: return true
-        @unknown default: return false
+        case .leftToRight: false
+        case .rightToLeft: true
+        @unknown default: false
         }
     }
 }

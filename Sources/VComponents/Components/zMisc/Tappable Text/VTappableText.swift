@@ -61,20 +61,14 @@ public struct VTappableText: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VTappableText_Previews: PreviewProvider {
-    // Previews
-    static var previews: some View {
-        Preview()
-    }
+#if DEBUG
 
-    // Previews (Scenes)
-    private struct Preview: View {
+#Preview(body: {
+    struct Preview: View {
         @State private var count: Int = 0
 
         var body: some View {
-            VStack(content: {
+            PreviewContainer(content: {
                 VTappableText([
                     VTappableTextTextComponent(text: "Lorem ipsum dolor sit amet, consectetur adipiscing "),
                     VTappableTextButtonComponent(title: "elit", action: { count += 1 }),
@@ -84,7 +78,10 @@ struct VTappableText_Previews: PreviewProvider {
 
                 Text("\(count)")
             })
-            .padding()
         }
     }
-}
+
+    return Preview()
+})
+
+#endif

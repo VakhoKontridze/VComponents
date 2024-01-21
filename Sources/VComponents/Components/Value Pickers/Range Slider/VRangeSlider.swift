@@ -299,102 +299,52 @@ extension Double {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VRangeSlider_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
+#if DEBUG
 
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var value: ClosedRange<Double> = 0.1...0.8
+
+        var body: some View {
+            PreviewContainer(content: {
+                VRangeSlider(
+                    difference: 0.1,
+                    value: $value
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Enabled", content: {
+            VRangeSlider(
+                difference: 0.1,
+                value: .constant(0.1...0.8)
+            )
+            .padding(.horizontal)
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
 
-    // Data
-    private static var difference: Double { 0.1 }
-    private static var value: ClosedRange<Double> { 0.1...0.8 }
+        PreviewRow("Disabled", content: {
+            VRangeSlider(
+                difference: 0.1,
+                value: .constant(0.1...0.8)
+            )
+            .disabled(true)
+            .padding(.horizontal)
+        })
+    })
+})
 
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var value: ClosedRange = VRangeSlider_Previews.value
-
-        var body: some View {
-            PreviewContainer(content: {
-                VRangeSlider(
-                    difference: difference,
-                    value: $value
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    private struct BorderPreview: View {
-        @State private var value: ClosedRange = VRangeSlider_Previews.value
-
-        var body: some View {
-            PreviewContainer(content: {
-                VRangeSlider(
-                    uiModel: {
-                        var uiModel: VRangeSliderUIModel = .init()
-                        uiModel.borderWidth = 1
-                        uiModel.borderColors = VRangeSliderUIModel.StateColors(
-                            enabled: uiModel.trackColors.enabled.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    difference: difference,
-                    value: $value
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VRangeSlider(
-                            difference: difference,
-                            value: .constant(value)
-                        )
-                    }
-                )
-
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VRangeSlider(
-                            difference: difference,
-                            value: .constant(value)
-                        )
-                        .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-
-    private struct LayoutDirectionsPreview: View {
-        private let dimension: CGFloat = {
+#Preview("Layout Directions", body: {
+    struct Preview: View {
+        private let length: CGFloat = {
 #if os(iOS)
             250
 #elseif os(macOS)
@@ -404,83 +354,73 @@ struct VRangeSlider_Previews: PreviewProvider {
 #endif
         }()
 
-        @State private var value: ClosedRange = VRangeSlider_Previews.value
+        private let difference: Double = 0.1
+        @State private var value: ClosedRange<Double> = 0.1...0.8
 
         var body: some View {
             PreviewContainer(
-                embeddedInScrollViewOnPlatforms: [.macOS],
                 content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Left-to-Right",
-                        content: {
+                    PreviewRow("Left-to-Right", content: {
+                        VRangeSlider(
+                            uiModel: {
+                                var uiModel: VRangeSliderUIModel = .init()
+                                uiModel.direction = .leftToRight
+                                return uiModel
+                            }(),
+                            difference: difference,
+                            value: $value
+                        )
+                        .frame(width: length)
+                    })
+
+                    PreviewRow("Right-to-Left", content: {
+                        VRangeSlider(
+                            uiModel: {
+                                var uiModel: VRangeSliderUIModel = .init()
+                                uiModel.direction = .rightToLeft
+                                return uiModel
+                            }(),
+                            difference: difference,
+                            value: $value
+                        )
+                        .frame(width: length)
+                    })
+
+                    HStack(spacing: 20, content: {
+                        PreviewRow("Top-to-Bottom", content: {
                             VRangeSlider(
                                 uiModel: {
                                     var uiModel: VRangeSliderUIModel = .init()
-                                    uiModel.direction = .leftToRight
+                                    uiModel.direction = .topToBottom
                                     return uiModel
                                 }(),
                                 difference: difference,
                                 value: $value
                             )
-                            .frame(width: dimension)
-                        }
-                    )
+                            .frame(height: length)
+                        })
 
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Right-to-Left",
-                        content: {
+                        PreviewRow("Bottom-to-Top", content: {
                             VRangeSlider(
                                 uiModel: {
                                     var uiModel: VRangeSliderUIModel = .init()
-                                    uiModel.direction = .rightToLeft
+                                    uiModel.direction = .bottomToTop
                                     return uiModel
                                 }(),
                                 difference: difference,
                                 value: $value
                             )
-                            .frame(width: dimension)
-                        }
-                    )
-
-                    HStack(content: {
-                        PreviewRow(
-                            axis: .vertical,
-                            title: "Top-to-Bottom",
-                            content: {
-                                VRangeSlider(
-                                    uiModel: {
-                                        var uiModel: VRangeSliderUIModel = .init()
-                                        uiModel.direction = .topToBottom
-                                        return uiModel
-                                    }(),
-                                    difference: difference,
-                                    value: $value
-                                )
-                                .frame(height: dimension)
-                            }
-                        )
-
-                        PreviewRow(
-                            axis: .vertical,
-                            title: "Bottom-to-Top",
-                            content: {
-                                VRangeSlider(
-                                    uiModel: {
-                                        var uiModel: VRangeSliderUIModel = .init()
-                                        uiModel.direction = .bottomToTop
-                                        return uiModel
-                                    }(),
-                                    difference: difference,
-                                    value: $value
-                                )
-                                .frame(height: dimension)
-                            }
-                        )
+                            .frame(height: length)
+                        })
                     })
                 }
             )
         }
     }
-}
+
+    return Preview()
+})
+
+#endif
+
+#endif

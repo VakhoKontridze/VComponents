@@ -244,29 +244,29 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VFetchingAsyncImage_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(content: {
-            VFetchingAsyncImage(
-                from: "-",
-                fetch: { _ in throw URLError(.badURL) }
-            )
-            .frame(dimension: 64)
+#if DEBUG
 
-            VFetchingAsyncImage(
-                from: "-",
-                fetch: { _ in Image(systemName: "swift") },
-                content: { image in
-                    image
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(ColorBook.accentBlue)
-                }
-            )
-            .frame(dimension: 64)
-        })
-    }
-}
+#Preview(body: {
+    PreviewContainer(content: {
+        VFetchingAsyncImage(
+            from: "-",
+            fetch: { _ in throw URLError(.badURL) }
+        )
+        .frame(dimension: 64)
+
+        VFetchingAsyncImage(
+            from: "-",
+            fetch: { _ in Image(systemName: "swift") },
+            content: { image in
+                image
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(ColorBook.accentBlue)
+            }
+        )
+        .frame(dimension: 64)
+    })
+})
+
+#endif

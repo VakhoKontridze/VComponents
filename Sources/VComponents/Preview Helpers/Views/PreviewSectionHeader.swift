@@ -5,6 +5,8 @@
 //  Created by Vakhtang Kontridze on 08.03.23.
 //
 
+#if DEBUG
+
 import SwiftUI
 import VCore
 
@@ -32,8 +34,8 @@ struct PreviewSectionHeader: View {
                     $0
 #endif
                 })
-                .font(.footnote)
-            
+                .font(.caption.bold())
+
             VStack(content: Divider.init)
         })
         .padding(.horizontal)
@@ -41,28 +43,18 @@ struct PreviewSectionHeader: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct PreviewSectionHeader_Previews: PreviewProvider {
-    static var previews: some View {
-        PreviewContainer(content: {
-            PreviewRow(
-                axis: .vertical,
-                title: "Button",
-                content: {
-                    PreviewContainer_Previews.ContentView()
-                }
-            )
-            
-            PreviewSectionHeader("Section")
-            
-            PreviewRow(
-                axis: .vertical,
-                title: "Button",
-                content: {
-                    PreviewContainer_Previews.ContentView()
-                }
-            )
+#Preview(body: {
+    PreviewContainer(content: {
+        PreviewRow("Lorem Ipsum", content: {
+            Text("Lorem ipsum")
         })
-    }
-}
+
+        PreviewSectionHeader("Lorem Ipsum")
+
+        PreviewRow("Lorem Ipsum", content: {
+            Text("Lorem ipsum")
+        })
+    })
+})
+
+#endif

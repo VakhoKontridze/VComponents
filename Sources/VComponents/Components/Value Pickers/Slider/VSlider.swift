@@ -225,37 +225,14 @@ public struct VSlider: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VSlider_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            DraggableBodyPreview().previewDisplayName("Draggable Body")
-            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var value: Double { 0.5 }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var value: Double = VSlider_Previews.value
-        
+#if DEBUG
+
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
+        @State private var value: Double = 0.5
+
         var body: some View {
             PreviewContainer(content: {
                 VSlider(value: $value)
@@ -263,73 +240,115 @@ struct VSlider_Previews: PreviewProvider {
             })
         }
     }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VSlider(value: .constant(value))
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VSlider(value: .constant(value))
-                            .disabled(true)
-                    }
-                )
-                
-                PreviewSectionHeader("Native")
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        Slider(value: .constant(value))
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        Slider(value: .constant(value))
-                            .disabled(true)
-                    }
-                )
-            })
-        }
-    }
 
-    private struct BorderPreview: View {
-        @State private var value: Double = VSlider_Previews.value
+    return Preview()
+})
 
-        var body: some View {
-            PreviewContainer(content: {
-                VSlider(
-                    uiModel: {
-                        var uiModel: VSliderUIModel = .init()
-                        uiModel.borderWidth = 1
-                        uiModel.borderColors = VSliderUIModel.StateColors(
-                            enabled: uiModel.trackColors.enabled.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    value: $value
-                )
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Enabled", content: {
+            VSlider(value: .constant(0.5))
                 .padding(.horizontal)
-            })
+        })
+
+        PreviewRow("Disabled", content: {
+            VSlider(value: .constant(0.5))
+                .disabled(true)
+                .padding(.horizontal)
+        })
+
+        PreviewSectionHeader("Native")
+
+        PreviewRow("Enabled", content: {
+            Slider(value: .constant(0.5))
+                .padding(.horizontal)
+        })
+
+        PreviewRow("Disabled", content: {
+            Slider(value: .constant(0.5))
+                .disabled(true)
+                .padding(.horizontal)
+        })
+    })
+})
+
+#Preview("Layout Directions", body: {
+    struct Preview: View {
+        private let length: CGFloat = {
+#if os(iOS)
+            250
+#elseif os(macOS)
+            300
+#else
+            fatalError() // Not supported
+#endif
+        }()
+
+        @State private var value: Double = 0.5
+
+        var body: some View {
+            PreviewContainer(
+                content: {
+                    PreviewRow("Left-to-Right", content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.direction = .leftToRight
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
+                        .frame(width: length)
+                    })
+
+                    PreviewRow("Right-to-Left", content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.direction = .rightToLeft
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
+                        .frame(width: length)
+                    })
+
+                    HStack(spacing: 20, content: {
+                        PreviewRow("Top-to-Bottom", content: {
+                            VSlider(
+                                uiModel: {
+                                    var uiModel: VSliderUIModel = .init()
+                                    uiModel.direction = .topToBottom
+                                    return uiModel
+                                }(),
+                                value: $value
+                            )
+                            .frame(height: length)
+                        })
+
+                        PreviewRow("Bottom-to-Top", content: {
+                            VSlider(
+                                uiModel: {
+                                    var uiModel: VSliderUIModel = .init()
+                                    uiModel.direction = .bottomToTop
+                                    return uiModel
+                                }(),
+                                value: $value
+                            )
+                            .frame(height: length)
+                        })
+                    })
+                }
+            )
         }
     }
 
-    private struct DraggableBodyPreview: View {
-        @State private var value: Double = VSlider_Previews.value
+    return Preview()
+})
+
+#Preview("Draggable Body", body: {
+    struct Preview: View {
+        @State private var value: Double = 0.5
 
         var body: some View {
             PreviewContainer(content: {
@@ -345,91 +364,10 @@ struct VSlider_Previews: PreviewProvider {
             })
         }
     }
-    
-    private struct LayoutDirectionsPreview: View {
-        private let dimension: CGFloat = {
-#if os(iOS)
-            250
-#elseif os(macOS)
-            300
-#else
-            fatalError() // Not supported
+
+    return Preview()
+})
+
 #endif
-        }()
-        
-        @State private var value: Double = VSlider_Previews.value
-        
-        var body: some View {
-            PreviewContainer(
-                embeddedInScrollViewOnPlatforms: [.macOS],
-                content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Left-to-Right",
-                        content: {
-                            VSlider(
-                                uiModel: {
-                                    var uiModel: VSliderUIModel = .init()
-                                    uiModel.direction = .leftToRight
-                                    return uiModel
-                                }(),
-                                value: $value
-                            )
-                            .frame(width: dimension)
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Right-to-Left",
-                        content: {
-                            VSlider(
-                                uiModel: {
-                                    var uiModel: VSliderUIModel = .init()
-                                    uiModel.direction = .rightToLeft
-                                    return uiModel
-                                }(),
-                                value: $value
-                            )
-                            .frame(width: dimension)
-                        }
-                    )
-                    
-                    HStack(content: {
-                        PreviewRow(
-                            axis: .vertical,
-                            title: "Top-to-Bottom",
-                            content: {
-                                VSlider(
-                                    uiModel: {
-                                        var uiModel: VSliderUIModel = .init()
-                                        uiModel.direction = .topToBottom
-                                        return uiModel
-                                    }(),
-                                    value: $value
-                                )
-                                .frame(height: dimension)
-                            }
-                        )
-                        
-                        PreviewRow(
-                            axis: .vertical,
-                            title: "Bottom-to-Top",
-                            content: {
-                                VSlider(
-                                    uiModel: {
-                                        var uiModel: VSliderUIModel = .init()
-                                        uiModel.direction = .bottomToTop
-                                        return uiModel
-                                    }(),
-                                    value: $value
-                                )
-                                .frame(height: dimension)
-                            }
-                        )
-                    })
-                }
-            )
-        }
-    }
-}
+
+#endif

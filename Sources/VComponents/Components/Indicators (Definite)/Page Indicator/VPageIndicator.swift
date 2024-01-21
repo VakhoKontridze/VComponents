@@ -225,124 +225,95 @@ public struct VPageIndicator<Content>: View where Content: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VPageIndicator_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-            DifferentSizesPreview().previewDisplayName("Different Sizes")
-            CustomContentPreview().previewDisplayName("Custom Content")
-            StretchedPreview().previewDisplayName("Stretched")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var total: Int { 10 }
-    private static var current: Int { 0 }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var current: Int = VPageIndicator_Previews.current
-        
+#if DEBUG
+
+#Preview("*", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
+
         var body: some View {
             PreviewContainer(content: {
                 VPageIndicator(
                     total: total,
                     current: current
                 )
-                .onReceiveOfTimerIncrement($current, to: total-1)
             })
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
-    
-    private struct LayoutDirectionsPreview: View {
-        @State private var current: Int = VPageIndicator_Previews.current
-        
+
+    return Preview()
+})
+
+#Preview("Layout Directions", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
+
         var body: some View {
             PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Left-to-Right",
-                    content: {
+                PreviewRow("Left-to-Right", content: {
+                    VPageIndicator(
+                        uiModel: {
+                            var uiModel: VPageIndicatorUIModel = .init()
+                            uiModel.direction = .leftToRight
+                            return uiModel
+                        }(),
+                        total: total,
+                        current: current
+                    )
+                })
+
+                PreviewRow("Right-to-Left", content: {
+                    VPageIndicator(
+                        uiModel: {
+                            var uiModel: VPageIndicatorUIModel = .init()
+                            uiModel.direction = .rightToLeft
+                            return uiModel
+                        }(),
+                        total: total,
+                        current: current
+                    )
+                })
+
+                HStack(spacing: 20, content: {
+                    PreviewRow("Top-to-Bottom", content: {
                         VPageIndicator(
                             uiModel: {
                                 var uiModel: VPageIndicatorUIModel = .init()
-                                uiModel.direction = .leftToRight
+                                uiModel.direction = .topToBottom
                                 return uiModel
                             }(),
                             total: total,
                             current: current
                         )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Right-to-Left",
-                    content: {
+                    })
+
+                    PreviewRow("Bottom-to-Top", content: {
                         VPageIndicator(
                             uiModel: {
                                 var uiModel: VPageIndicatorUIModel = .init()
-                                uiModel.direction = .rightToLeft
+                                uiModel.direction = .bottomToTop
                                 return uiModel
                             }(),
                             total: total,
                             current: current
                         )
-                    }
-                )
-                
-                HStack(content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Top-to-Bottom",
-                        content: {
-                            VPageIndicator(
-                                uiModel: {
-                                    var uiModel: VPageIndicatorUIModel = .init()
-                                    uiModel.direction = .topToBottom
-                                    return uiModel
-                                }(),
-                                total: total,
-                                current: current
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Bottom-to-Top",
-                        content: {
-                            VPageIndicator(
-                                uiModel: {
-                                    var uiModel: VPageIndicatorUIModel = .init()
-                                    uiModel.direction = .bottomToTop
-                                    return uiModel
-                                }(),
-                                total: total,
-                                current: current
-                            )
-                        }
-                    )
+                    })
                 })
             })
             .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 
-    private struct DifferentSizesPreview: View {
-        @State private var current: Int = VPageIndicator_Previews.current
+    return Preview()
+})
+
+#Preview("Different Sizes", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
 
         var body: some View {
             PreviewContainer(content: {
@@ -355,48 +326,20 @@ struct VPageIndicator_Previews: PreviewProvider {
                     total: total,
                     current: current
                 )
-                .onReceiveOfTimerIncrement($current, to: total-1)
             })
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 
-    private struct CustomContentPreview: View {
-        private let pageIndicatorUIModel: VPageIndicatorUIModel = {
-            var uiModel: VPageIndicatorUIModel = .init()
-            uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(16)
-            uiModel.dotHeights = VPageIndicatorUIModel.DotStateDimensions(16)
-            return uiModel
-        }()
+    return Preview()
+})
 
-        @State private var current: Int = VPageIndicator_Previews.current
+#Preview("Stretched", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
 
-        var body: some View {
-            PreviewContainer(content: {
-                VPageIndicator(
-                    uiModel: pageIndicatorUIModel,
-                    total: total,
-                    current: current,
-                    dot: { (internalState, _) in
-                        ZStack(content: {
-                            Circle()
-                                .stroke(lineWidth: 1)
-                                .padding(1)
-
-                            Circle()
-                                .padding(3)
-                        })
-                        .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
-                    }
-                )
-                .onReceiveOfTimerIncrement($current, to: total-1)
-            })
-        }
-    }
-    
-    private struct StretchedPreview: View {
-        @State private var current: Int = VPageIndicator_Previews.current
-
-        private let pageIndicatorUIModel: VPageIndicatorUIModel = {
+        private let uiModel: VPageIndicatorUIModel = {
             var uiModel: VPageIndicatorUIModel = .init()
             uiModel.direction = .leftToRight
             uiModel.dotWidths = VPageIndicatorUIModel.DotStateOptionalDimensions(nil)
@@ -407,17 +350,21 @@ struct VPageIndicator_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VPageIndicator(
-                    uiModel: pageIndicatorUIModel,
+                    uiModel: uiModel,
                     total: total,
                     current: current,
                     dot: { (internalState, _) in
                         RoundedRectangle(cornerRadius: 2)
-                            .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+                            .foregroundStyle(uiModel.dotColors.value(for: internalState))
                     }
                 )
-                .padding()
+                .padding(.horizontal)
             })
             .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
-}
+
+    return Preview()
+})
+
+#endif

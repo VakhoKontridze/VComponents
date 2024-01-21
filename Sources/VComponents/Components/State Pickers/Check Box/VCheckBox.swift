@@ -212,216 +212,134 @@ public struct VCheckBox<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-struct VCheckBox_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
+#if DEBUG
+
+#if !(os(tvOS) || os(watchOS))
+
+#Preview("*", body: {
+    struct Preview: View {
         @State private var state: VCheckBoxState = .on
-        
+
         var body: some View {
             PreviewContainer(content: {
                 VCheckBox(
                     state: $state,
-                    title: title
+                    title: "Lorem ipsum"
                 )
-            })
-        }
-    }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Off",
-                    content: {
-                        VCheckBox(
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed Off",
-                    content: {
-                        VCheckBox(
-                            uiModel: {
-                                var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.fillColors.off = uiModel.fillColors.pressedOff
-                                uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                                uiModel.checkmarkIconColors.off = uiModel.checkmarkIconColors.pressedOff
-                                uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                                return uiModel
-                            }(),
-                            state: .constant(.off),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "On",
-                    content: {
-                        VCheckBox(
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed On",
-                    content: {
-                        VCheckBox(
-                            uiModel: {
-                                var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.fillColors.on = uiModel.fillColors.pressedOn
-                                uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                                uiModel.checkmarkIconColors.on = uiModel.checkmarkIconColors.pressedOn
-                                uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                                return uiModel
-                            }(),
-                            state: .constant(.on),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Indeterminate",
-                    content: {
-                        VCheckBox(
-                            state: .constant(.indeterminate),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed Indeterminate",
-                    content: {
-                        VCheckBox(
-                            uiModel: {
-                                var uiModel: VCheckBoxUIModel = .init()
-                                uiModel.fillColors.indeterminate = uiModel.fillColors.pressedIndeterminate
-                                uiModel.borderColors.indeterminate = uiModel.borderColors.pressedIndeterminate
-                                uiModel.checkmarkIconColors.indeterminate = uiModel.checkmarkIconColors.pressedIndeterminate
-                                uiModel.titleTextColors.indeterminate = uiModel.titleTextColors.pressedIndeterminate
-                                return uiModel
-                            }(),
-                            state: .constant(.indeterminate),
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VCheckBox(
-                            state: .constant(.off),
-                            title: title
-                        )
-                        .disabled(true)
-                    }
-                )
-                
-#if os(macOS)
-                Group(content: {
-                    PreviewSectionHeader("Native")
-                    
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "Off",
-                        content: {
-                            Toggle(
-                                "",
-                                isOn: .constant(false)
-                            )
-                            .labelsHidden()
-                            .toggleStyle(.checkbox)
-                            .padding(.trailing, 95)
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "On",
-                        content: {
-                            Toggle(
-                                "",
-                                isOn: .constant(true)
-                            )
-                            .labelsHidden()
-                            .toggleStyle(.checkbox)
-                            .padding(.trailing, 95)
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "Disabled",
-                        content: {
-                            Toggle(
-                                "",
-                                isOn: .constant(false)
-                            )
-                            .labelsHidden()
-                            .toggleStyle(.checkbox)
-                            .disabled(true)
-                            .padding(.trailing, 95)
-                        }
-                    )
-                })
-#endif
             })
         }
     }
 
-    private struct OutOfBoundsContentPreventionPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VCheckBox(
-                    uiModel: {
-                        var uiModel: VCheckBoxUIModel = .init()
-                        uiModel.checkmarkIconDimension = 100
-                        uiModel.checkmarkIconColors = VCheckBoxUIModel.StateColors(ColorBook.accentRed)
-                        return uiModel
-                    }(),
-                    state: .constant(.on),
-                    title: title
-                )
-            })
-        }
-    }
-}
+    return Preview()
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Off", content: {
+            VCheckBox(
+                state: .constant(.off),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Pressed Off", content: {
+            VCheckBox(
+                uiModel: {
+                    var uiModel: VCheckBoxUIModel = .init()
+                    uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
+                    uiModel.checkmarkIconColors.off = uiModel.checkmarkIconColors.pressedOff
+                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
+                    return uiModel
+                }(),
+                state: .constant(.off),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("On", content: {
+            VCheckBox(
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Pressed On", content: {
+            VCheckBox(
+                uiModel: {
+                    var uiModel: VCheckBoxUIModel = .init()
+                    uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
+                    uiModel.checkmarkIconColors.on = uiModel.checkmarkIconColors.pressedOn
+                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
+                    return uiModel
+                }(),
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Indeterminate", content: {
+            VCheckBox(
+                state: .constant(.indeterminate),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Pressed Indeterminate", content: {
+            VCheckBox(
+                uiModel: {
+                    var uiModel: VCheckBoxUIModel = .init()
+                    uiModel.fillColors.indeterminate = uiModel.fillColors.pressedIndeterminate
+                    uiModel.borderColors.indeterminate = uiModel.borderColors.pressedIndeterminate
+                    uiModel.checkmarkIconColors.indeterminate = uiModel.checkmarkIconColors.pressedIndeterminate
+                    uiModel.titleTextColors.indeterminate = uiModel.titleTextColors.pressedIndeterminate
+                    return uiModel
+                }(),
+                state: .constant(.indeterminate),
+                title: "Lorem ipsum"
+            )
+        })
+
+        PreviewRow("Disabled", content: {
+            VCheckBox(
+                state: .constant(.on),
+                title: "Lorem ipsum"
+            )
+            .disabled(true)
+        })
+
+#if os(macOS)
+        PreviewSectionHeader("Native")
+
+        PreviewRow("Off", content: {
+            Toggle(
+                "Lorem ipsum",
+                isOn: .constant(false)
+            )
+            .toggleStyle(.checkbox)
+        })
+
+        PreviewRow("On", content: {
+            Toggle(
+                "Lorem ipsum",
+                isOn: .constant(true)
+            )
+            .toggleStyle(.checkbox)
+        })
+
+        PreviewRow("Disabled", content: {
+            Toggle(
+                "Lorem ipsum",
+                isOn: .constant(false)
+            )
+            .toggleStyle(.checkbox)
+            .disabled(true)
+        })
+#endif
+    })
+})
+
+#endif
+
+#endif

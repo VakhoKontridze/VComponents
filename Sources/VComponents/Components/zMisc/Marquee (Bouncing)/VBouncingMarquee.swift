@@ -160,132 +160,49 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            InsettedContentPreview().previewDisplayName("Insetted & Gradient")
-            ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
+#if DEBUG
+
+#Preview("*", body: {
+    PreviewContainer(content: {
+        VBouncingMarquee(
+            content: { previewMarqueeContentSmall }
+        )
+
+        VBouncingMarquee(
+            content: { previewMarqueeContentLarge }
+        )
+
+        VBouncingMarquee(
+            uiModel: .insettedGradient,
+            content: { previewMarqueeContentLarge }
+        )
+    })
+})
+
+#Preview("Scroll Directions", body: {
+    PreviewContainer(content: {
+        PreviewRow("Left-to-Right", content: {
+            VBouncingMarquee(
+                uiModel: {
+                    var uiModel: VBouncingMarqueeUIModel = .init()
+                    uiModel.scrollDirection = .leftToRight
+                    return uiModel
+                }(),
+                content: { previewMarqueeContentLarge }
+            )
         })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static func contentSmall() -> some View {
-        HStack(content: {
-            Image(systemName: "swift")
-            Text("Lorem ipsum".pseudoRTL(languageDirection))
+
+        PreviewRow("Right-to-Left", content: {
+            VBouncingMarquee(
+                uiModel: {
+                    var uiModel: VBouncingMarqueeUIModel = .init()
+                    uiModel.scrollDirection = .rightToLeft
+                    return uiModel
+                }(),
+                content: { previewMarqueeContentLarge }
+            )
         })
-        .drawingGroup()
-    }
-    
-    private static func contentLarge() -> some View {
-        HStack(content: {
-            Image(systemName: "swift")
-            
-#if os(macOS)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique tempor vehicula. Pellentesque habitant morbi...".pseudoRTL(languageDirection))
-#elseif os(tvOS)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat.".pseudoRTL(languageDirection))
-#else
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.".pseudoRTL(languageDirection))
+    })
+})
+
 #endif
-        })
-        .drawingGroup()
-    }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Small Content",
-                    content: {
-                        VBouncingMarquee(
-                            content: contentSmall
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Large Content",
-                    content: {
-                        VBouncingMarquee(
-                            content: contentLarge
-                        )
-                    }
-                )
-            })
-        }
-    }
-    
-    private struct InsettedContentPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Insetted Gradient",
-                    content: {
-                        VBouncingMarquee(
-                            uiModel: .insettedGradient,
-                            content: contentLarge
-                        )
-                    }
-                )
-            })
-        }
-    }
-    
-    private struct ScrollDirectionsPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Left-to-Right",
-                    content: {
-                        VBouncingMarquee(
-                            uiModel: {
-                                var uiModel: VBouncingMarqueeUIModel = .init()
-                                uiModel.scrollDirection = .leftToRight
-                                return uiModel
-                            }(),
-                            content: contentLarge
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Right-to-Left",
-                    content: {
-                        VBouncingMarquee(
-                            uiModel: {
-                                var uiModel: VBouncingMarqueeUIModel = .init()
-                                uiModel.scrollDirection = .rightToLeft
-                                return uiModel
-                            }(),
-                            content: contentLarge
-                        )
-                    }
-                )
-            })
-        }
-    }
-}

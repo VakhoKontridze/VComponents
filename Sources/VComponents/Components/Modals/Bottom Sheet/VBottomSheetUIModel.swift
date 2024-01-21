@@ -351,6 +351,8 @@ extension VBottomSheetUIModel {
     }
 
     /// `VBottomSheetUIModel` that hides drag indicator.
+    ///
+    /// It's worth considering setting `contentIsDraggable` to `true`.
     public static var noDragIndicator: Self {
         var uiModel: Self = .init()
 

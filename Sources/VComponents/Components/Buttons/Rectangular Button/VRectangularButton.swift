@@ -168,156 +168,56 @@ public struct VRectangularButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-@available(tvOS, unavailable)
-struct VRectangularButton_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            StatesPreview().previewDisplayName("States")
-            BorderPreview().previewDisplayName("Border")
-            ShadowPreview().previewDisplayName("Shadow")
-            OutOfBoundsContentPreventionPreview().previewDisplayName("Out-of-Bounds Content Prevention")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var title: String { "ABC".pseudoRTL(languageDirection) }
-    private static var icon: Image { .init(systemName: "swift") }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularButton(
-                    action: {},
-                    title: title
-                )
+#if DEBUG
 
-                VRectangularButton(
-                    action: {},
-                    icon: icon
-                )
-            })
-        }
-    }
-    
-    private struct StatesPreview: View {
-        var body: some View {
-            PreviewContainer(
-                embeddedInScrollViewOnPlatforms: [.watchOS],
-                content: {
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "Enabled",
-                        content: {
-                            VRectangularButton(
-                                action: {},
-                                icon: icon
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "Pressed",
-                        content: {
-                            VRectangularButton(
-                                uiModel: {
-                                    var uiModel: VRectangularButtonUIModel = .init()
-                                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
-                                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
-                                    return uiModel
-                                }(),
-                                action: {},
-                                icon: icon
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .horizontal,
-                        title: "Disabled",
-                        content: {
-                            VRectangularButton(
-                                action: {},
-                                icon: icon
-                            )
-                            .disabled(true)
-                        }
-                    )
-                }
+#if !os(tvOS)
+
+#Preview("*", body: {
+    PreviewContainer(content: {
+        VRectangularButton(
+            action: {},
+            title: "ABC"
+        )
+
+        VRectangularButton(
+            action: {},
+            icon: Image(systemName: "swift")
+        )
+    })
+})
+
+#Preview("States", body: {
+    PreviewContainer(content: {
+        PreviewRow("Enabled", content: {
+            VRectangularButton(
+                action: {},
+                icon: Image(systemName: "swift")
             )
-        }
-    }
+        })
 
-    private struct BorderPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularButton(
-                    uiModel: {
-                        var uiModel: VRectangularButtonUIModel = .init()
-                        uiModel.borderWidth = 2
-                        uiModel.borderColors = VRectangularButtonUIModel.StateColors(
-                            enabled: uiModel.backgroundColors.enabled.darken(by: 0.3),
-                            pressed: uiModel.backgroundColors.enabled.darken(by: 0.3),
-                            disabled: .clear
-                        )
-                        return uiModel
-                    }(),
-                    action: {},
-                    icon: icon
-                )
-            })
-        }
-    }
+        PreviewRow("Pressed", content: {
+            VRectangularButton(
+                uiModel: {
+                    var uiModel: VRectangularButtonUIModel = .init()
+                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
+                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
+                    return uiModel
+                }(),
+                action: {},
+                icon: Image(systemName: "swift")
+            )
+        })
 
-    private struct ShadowPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularButton(
-                    uiModel: {
-                        var uiModel: VRectangularButtonUIModel = .init()
-                        uiModel.shadowColors = VRectangularButtonUIModel.StateColors(
-                            enabled: GlobalUIModel.Common.shadowColorEnabled,
-                            pressed: GlobalUIModel.Common.shadowColorEnabled,
-                            disabled: GlobalUIModel.Common.shadowColorDisabled
-                        )
-                        uiModel.shadowRadius = 3
-                        uiModel.shadowOffset = CGPoint(x: 0, y: 3)
-                        return uiModel
-                    }(),
-                    action: {},
-                    icon: icon
-                )
-            })
-        }
-    }
+        PreviewRow("Disabled", content: {
+            VRectangularButton(
+                action: {},
+                icon: Image(systemName: "swift")
+            )
+            .disabled(true)
+        })
+    })
+})
 
-    private struct OutOfBoundsContentPreventionPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularButton(
-                    uiModel: {
-                        var uiModel: VRectangularButtonUIModel = .init()
-                        uiModel.iconSize = CGSize(dimension: 100)
-                        uiModel.iconColors = VRectangularButtonUIModel.StateColors(ColorBook.accentRed)
-                        return uiModel
-                    }(),
-                    action: {},
-                    icon: icon
-                )
-            })
-        }
-    }
-}
+#endif
+
+#endif

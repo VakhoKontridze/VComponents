@@ -423,150 +423,89 @@ extension Int {
 }
 
 // MARK: - Preview
-// Developmental only
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct VCompactPageIndicator_Previews: PreviewProvider {
-    // Configuration
-    private static var languageDirection: LayoutDirection { .leftToRight }
-    private static var dynamicTypeSize: DynamicTypeSize? { nil }
-    private static var colorScheme: ColorScheme { .light }
-    
-    // Previews
-    static var previews: some View {
-        Group(content: {
-            Preview().previewDisplayName("*")
-            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-            CustomContentPreview().previewDisplayName("Custom Content")
-        })
-        .environment(\.layoutDirection, languageDirection)
-        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
-        .preferredColorScheme(colorScheme)
-    }
-    
-    // Data
-    private static var total: Int { 10 }
-    private static var current: Int { 0 }
-    
-    // Previews (Scenes)
-    private struct Preview: View {
-        @State private var current: Int = VCompactPageIndicator_Previews.current
-        
+#if DEBUG
+
+#Preview("*", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
+
         var body: some View {
             PreviewContainer(content: {
                 VCompactPageIndicator(
                     total: total,
                     current: current
                 )
-                .onReceiveOfTimerIncrement($current, to: total-1)
             })
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
-    
-    private struct LayoutDirectionsPreview: View {
-        @State private var current: Int = VCompactPageIndicator_Previews.current
-        
+
+    return Preview()
+})
+
+#Preview("Layout Directions", body: {
+    struct Preview: View {
+        private let total: Int = 10
+        @State private var current: Int = 0
+
         var body: some View {
             PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Left-to-Right",
-                    content: {
+                PreviewRow("Left-to-Right", content: {
+                    VCompactPageIndicator(
+                        uiModel: {
+                            var uiModel: VCompactPageIndicatorUIModel = .init()
+                            uiModel.direction = .leftToRight
+                            return uiModel
+                        }(),
+                        total: total,
+                        current: current
+                    )
+                })
+
+                PreviewRow("Right-to-Left", content: {
+                    VCompactPageIndicator(
+                        uiModel: {
+                            var uiModel: VCompactPageIndicatorUIModel = .init()
+                            uiModel.direction = .rightToLeft
+                            return uiModel
+                        }(),
+                        total: total,
+                        current: current
+                    )
+                })
+
+                HStack(spacing: 20, content: {
+                    PreviewRow("Top-to-Bottom", content: {
                         VCompactPageIndicator(
                             uiModel: {
                                 var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.direction = .leftToRight
+                                uiModel.direction = .topToBottom
                                 return uiModel
                             }(),
                             total: total,
                             current: current
                         )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Right-to-Left",
-                    content: {
+                    })
+
+                    PreviewRow("Bottom-to-Top", content: {
                         VCompactPageIndicator(
                             uiModel: {
                                 var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.direction = .rightToLeft
+                                uiModel.direction = .bottomToTop
                                 return uiModel
                             }(),
                             total: total,
                             current: current
                         )
-                    }
-                )
-                
-                HStack(content: {
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Top-to-Bottom",
-                        content: {
-                            VCompactPageIndicator(
-                                uiModel: {
-                                    var uiModel: VCompactPageIndicatorUIModel = .init()
-                                    uiModel.direction = .topToBottom
-                                    return uiModel
-                                }(),
-                                total: total,
-                                current: current
-                            )
-                        }
-                    )
-                    
-                    PreviewRow(
-                        axis: .vertical,
-                        title: "Bottom-to-Top",
-                        content: {
-                            VCompactPageIndicator(
-                                uiModel: {
-                                    var uiModel: VCompactPageIndicatorUIModel = .init()
-                                    uiModel.direction = .bottomToTop
-                                    return uiModel
-                                }(),
-                                total: total,
-                                current: current
-                            )
-                        }
-                    )
+                    })
                 })
             })
             .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 
-    private struct CustomContentPreview: View {
-        private let pageIndicatorUIModel: VCompactPageIndicatorUIModel = {
-            var uiModel: VCompactPageIndicatorUIModel = .init()
-            uiModel.dotWidth *= 2
-            uiModel.dotHeight *= 2
-            return uiModel
-        }()
+    return Preview()
+})
 
-        @State private var current: Int = VCompactPageIndicator_Previews.current
-
-        var body: some View {
-            PreviewContainer(content: {
-                VCompactPageIndicator(
-                    uiModel: pageIndicatorUIModel,
-                    total: total,
-                    current: current,
-                    dot: { (internalState, _) in
-                        ZStack(content: {
-                            Circle()
-                                .stroke(lineWidth: 1)
-                                .padding(1)
-
-                            Circle()
-                                .padding(3)
-                        })
-                        .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
-                    }
-                )
-                .onReceiveOfTimerIncrement($current, to: total-1)
-            })
-        }
-    }
-}
+#endif

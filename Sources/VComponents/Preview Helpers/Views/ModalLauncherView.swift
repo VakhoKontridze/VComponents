@@ -5,6 +5,8 @@
 //  Created by Vakhtang Kontridze on 09.08.23.
 //
 
+#if DEBUG
+
 import SwiftUI
 
 // MARK: - Modal Launcher View
@@ -28,3 +30,5 @@ struct ModalLauncherView: View {
         )
     }
 }
+
+#endif

@@ -205,21 +205,6 @@ extension VSideBarUIModel {
 
 #endif
 
-// MARK: - Factory (Misc)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension VSideBarUIModel {
-    /// `VSideBarUIModel` that insets content.
-    public static var insettedContent: Self {
-        var uiModel: Self = .init()
-        
-        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
-        
-        return uiModel
-    }
-}
-
 // MARK: - Factory (Presentation Edge)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -302,6 +287,21 @@ extension VSideBarUIModel {
         
         uiModel.roundedCorners = .topCorners
         
+        return uiModel
+    }
+}
+
+// MARK: - Factory (Misc)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VSideBarUIModel {
+    /// `VSideBarUIModel` that insets content.
+    public static var insettedContent: Self {
+        var uiModel: Self = .init()
+
+        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
+
         return uiModel
     }
 }
