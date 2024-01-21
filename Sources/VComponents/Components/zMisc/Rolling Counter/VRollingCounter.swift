@@ -42,7 +42,7 @@ import VCore
 ///                 value: Double(value)
 ///             )
 ///         })
-///         .onAppear(perform: ...)
+///         .onAppear(perform: changeValue)
 ///     }
 ///        
 public struct VRollingCounter: View {
@@ -275,6 +275,8 @@ extension AnyTransition {
 }
 
 // MARK: - Preview
+#if DEBUG
+
 #Preview(body: {
     struct Preview: View {
         @State private var value: Double = 10_000
@@ -282,12 +284,12 @@ extension AnyTransition {
         var body: some View {
             PreviewContainer(content: {
                 HStack(spacing: 20, content: {
-                    Button( // No `VPlainButton` for unsupported platforms
+                    Button( // No `VPlainButton` on all platforms
                         "-",
                         action: { value -= .random(in: 1...10) }
                     )
 
-                    Button( // No `VPlainButton` for unsupported platforms
+                    Button( // No `VPlainButton` on all platforms
                         "+",
                         action: { value += .random(in: 1...10) }
                     )
@@ -388,3 +390,5 @@ extension AnyTransition {
 
     return Preview()
 })
+
+#endif
