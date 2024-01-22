@@ -220,7 +220,7 @@ extension VRectangularToggleButtonInternalState {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var state: VRectangularToggleButtonState = .on
 
         var body: some View {
@@ -238,7 +238,7 @@ extension VRectangularToggleButtonInternalState {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

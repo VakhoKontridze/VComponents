@@ -99,7 +99,7 @@ public struct VProgressBar: View {
 #if DEBUG
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: Double = 0
 
         var body: some View {
@@ -111,11 +111,11 @@ public struct VProgressBar: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Layout Directions", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let length: CGFloat = {
 #if os(iOS)
             250
@@ -188,7 +188,7 @@ public struct VProgressBar: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

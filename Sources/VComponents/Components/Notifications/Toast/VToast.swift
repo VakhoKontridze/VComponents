@@ -267,7 +267,7 @@ extension VerticalEdge {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Singleline", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -287,11 +287,11 @@ extension VerticalEdge {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Multiline", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -312,11 +312,11 @@ extension VerticalEdge {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Top", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -337,11 +337,11 @@ extension VerticalEdge {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Width Types", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
         @State private var widthType: VToastUIModel.WidthType?
 
@@ -385,11 +385,11 @@ extension VerticalEdge {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Highlights", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
         @State private var uiModel: VToastUIModel = .init()
 
@@ -424,7 +424,7 @@ extension VerticalEdge {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

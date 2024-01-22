@@ -311,38 +311,38 @@ extension Edge {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Leading", body: {
-    Preview()
+    PreviewView()
 })
 
 #Preview("Trailing", body: {
-    Preview(uiModel: .trailing)
+    PreviewView(uiModel: .trailing)
 })
 
 #Preview("Top", body: {
-    Preview(uiModel: .top)
+    PreviewView(uiModel: .top)
 })
 
 #Preview("Bottom", body: {
-    Preview(uiModel: .bottom)
+    PreviewView(uiModel: .bottom)
 })
 
 #Preview("Safe Area Leading", body: {
-    SafeAreaPreview()
+    PreviewViewSafeArea()
 })
 
 #Preview("Safe Area Trailing", body: {
-    SafeAreaPreview(uiModel: .trailing)
+    PreviewViewSafeArea(uiModel: .trailing)
 })
 
 #Preview("Safe Area Top", body: {
-    SafeAreaPreview(uiModel: .top)
+    PreviewViewSafeArea(uiModel: .top)
 })
 
 #Preview("Safe Area Bottom", body: {
-    SafeAreaPreview(uiModel: .bottom)
+    PreviewViewSafeArea(uiModel: .bottom)
 })
 
-private struct Preview: View {
+private struct PreviewView: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
 
@@ -365,7 +365,7 @@ private struct Preview: View {
     }
 }
 
-private struct SafeAreaPreview: View {
+private struct PreviewViewSafeArea: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown

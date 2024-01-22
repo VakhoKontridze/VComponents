@@ -249,7 +249,7 @@ public struct VCodeEntryView: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var text: String = "123"
 
         var body: some View {
@@ -259,7 +259,7 @@ public struct VCodeEntryView: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

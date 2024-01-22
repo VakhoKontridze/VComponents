@@ -228,7 +228,7 @@ public struct VPageIndicator<Content>: View where Content: View {
 #if DEBUG
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -243,11 +243,11 @@ public struct VPageIndicator<Content>: View where Content: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Layout Directions", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -307,11 +307,11 @@ public struct VPageIndicator<Content>: View where Content: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Different Sizes", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -331,11 +331,11 @@ public struct VPageIndicator<Content>: View where Content: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Stretched", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -364,7 +364,7 @@ public struct VPageIndicator<Content>: View where Content: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

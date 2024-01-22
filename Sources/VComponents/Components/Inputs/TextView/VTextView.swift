@@ -234,7 +234,7 @@ public struct VTextView: View {
 #Preview("*", body: {
     guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    struct Preview: View {
+    struct ContentView: View {
         @State private var text: String = "Lorem ipsum"
 
         var body: some View {
@@ -250,7 +250,7 @@ public struct VTextView: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

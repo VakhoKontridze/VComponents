@@ -205,7 +205,7 @@ public struct VToggle<Label>: View where Label: View {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var state: VToggleState = .on
 
         var body: some View {
@@ -218,7 +218,7 @@ public struct VToggle<Label>: View where Label: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

@@ -353,7 +353,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Many Items", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var selection: PreviewEnumWeekday = .thursday
 
         var body: some View {
@@ -381,11 +381,11 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Few Items", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var selection: PreviewEnumWeekday = .monday
 
         var body: some View {
@@ -413,7 +413,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

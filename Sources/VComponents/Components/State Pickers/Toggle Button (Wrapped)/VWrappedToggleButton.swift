@@ -249,7 +249,7 @@ extension VWrappedToggleButtonInternalState {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var state: VWrappedToggleButtonState = .on
 
         var body: some View {
@@ -262,7 +262,7 @@ extension VWrappedToggleButtonInternalState {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

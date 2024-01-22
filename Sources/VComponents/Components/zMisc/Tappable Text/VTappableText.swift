@@ -64,7 +64,7 @@ public struct VTappableText: View {
 #if DEBUG
 
 #Preview(body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var count: Int = 0
 
         var body: some View {
@@ -81,7 +81,7 @@ public struct VTappableText: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

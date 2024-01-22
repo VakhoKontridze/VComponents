@@ -426,7 +426,7 @@ extension Int {
 #if DEBUG
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -441,11 +441,11 @@ extension Int {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Layout Directions", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let total: Int = 10
         @State private var current: Int = 0
 
@@ -505,7 +505,7 @@ extension Int {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

@@ -395,7 +395,7 @@ struct VBottomSheet<Content>: View
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Min & Ideal & Max", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -410,11 +410,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Min & Ideal", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -445,11 +445,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Ideal & Max", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -480,11 +480,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Ideal Small", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -515,11 +515,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Ideal Large", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -550,11 +550,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Wrapped Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var safeAreaInsets: EdgeInsets = .init()
 
         @State private var isPresented: Bool = true
@@ -614,13 +614,13 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Scrollable Content", body: {
     guard #available(iOS 17.0, *) else { return EmptyView() }
 
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -652,11 +652,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Insetted Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -672,11 +672,11 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("No Drag Indicator", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -696,7 +696,7 @@ struct VBottomSheet<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

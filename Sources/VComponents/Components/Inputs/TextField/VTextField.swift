@@ -340,7 +340,7 @@ public struct VTextField: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var text: String = "Lorem ipsum"
 
         var body: some View {
@@ -356,11 +356,11 @@ public struct VTextField: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Content Types", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var text: String = "Lorem ipsum"
 
         var body: some View {
@@ -389,7 +389,7 @@ public struct VTextField: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

@@ -437,7 +437,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview(body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var selection: PreviewEnumRGBColor = .red
 
         var body: some View {
@@ -454,7 +454,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

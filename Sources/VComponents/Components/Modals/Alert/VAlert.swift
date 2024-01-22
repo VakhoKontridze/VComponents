@@ -331,7 +331,7 @@ struct VAlert<Content>: View
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Title, Message, Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -352,11 +352,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Title, Message", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -376,11 +376,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Title, Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -401,11 +401,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Message, Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -426,11 +426,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Title", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -450,11 +450,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Message", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -474,11 +474,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -499,11 +499,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("No Declared Buttons", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -520,11 +520,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("One Button", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -543,11 +543,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Many Buttons", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -569,11 +569,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Button States (Pressed)", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -608,11 +608,11 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Button States (Disabled)", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -647,7 +647,7 @@ struct VAlert<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 @ViewBuilder private var previewContent: some View {

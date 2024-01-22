@@ -194,7 +194,7 @@ struct VModal<Content>: View
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
@@ -212,11 +212,11 @@ struct VModal<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Wrapped Content", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var isPresented: Bool = true
         @State private var contentHeight: CGFloat?
 
@@ -250,7 +250,7 @@ struct VModal<Content>: View
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

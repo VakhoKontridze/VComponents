@@ -230,7 +230,7 @@ public struct VSlider: View {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: Double = 0.5
 
         var body: some View {
@@ -241,7 +241,7 @@ public struct VSlider: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {
@@ -273,7 +273,7 @@ public struct VSlider: View {
 })
 
 #Preview("Layout Directions", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let length: CGFloat = {
 #if os(iOS)
             250
@@ -343,11 +343,11 @@ public struct VSlider: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("Draggable Body", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: Double = 0.5
 
         var body: some View {
@@ -365,7 +365,7 @@ public struct VSlider: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

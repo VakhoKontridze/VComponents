@@ -284,7 +284,7 @@ public struct VStepper: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: Int = 50
 
         var body: some View {
@@ -299,7 +299,7 @@ public struct VStepper: View {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {

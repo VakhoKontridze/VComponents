@@ -278,7 +278,7 @@ extension AnyTransition {
 #if DEBUG
 
 #Preview(body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: Double = 10_000
 
         var body: some View {
@@ -388,7 +388,7 @@ extension AnyTransition {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

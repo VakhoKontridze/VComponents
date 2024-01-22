@@ -371,7 +371,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview(body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var selection: PreviewEnumRGBColor = .red
 
         var body: some View {
@@ -388,7 +388,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

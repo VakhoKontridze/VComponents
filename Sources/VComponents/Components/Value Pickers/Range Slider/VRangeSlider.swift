@@ -304,7 +304,7 @@ extension Double {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var value: ClosedRange<Double> = 0.1...0.8
 
         var body: some View {
@@ -318,7 +318,7 @@ extension Double {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {
@@ -343,7 +343,7 @@ extension Double {
 })
 
 #Preview("Layout Directions", body: {
-    struct Preview: View {
+    struct ContentView: View {
         private let length: CGFloat = {
 #if os(iOS)
             250
@@ -418,7 +418,7 @@ extension Double {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #endif

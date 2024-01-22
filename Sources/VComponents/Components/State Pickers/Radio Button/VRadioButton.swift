@@ -209,7 +209,7 @@ extension VRadioButtonState {
 #if !(os(tvOS) || os(watchOS))
 
 #Preview("*", body: {
-    struct Preview: View {
+    struct ContentView: View {
         @State private var state: VRadioButtonState = .on
 
         var body: some View {
@@ -224,7 +224,7 @@ extension VRadioButtonState {
         }
     }
 
-    return Preview()
+    return ContentView()
 })
 
 #Preview("States", body: {
