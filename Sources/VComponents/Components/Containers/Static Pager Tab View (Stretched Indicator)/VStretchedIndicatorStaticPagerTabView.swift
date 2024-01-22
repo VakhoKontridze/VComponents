@@ -372,13 +372,13 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
 #Preview(body: {
     struct ContentView: View {
-        @State private var selection: PreviewEnumRGBColor = .red
+        @State private var selection: Preview_RGBColor = .red
 
         var body: some View {
             PreviewContainer(layer: .secondary, content: {
                 VStretchedIndicatorStaticPagerTabView(
                     selection: $selection,
-                    data: PreviewEnumRGBColor.allCases,
+                    data: Preview_RGBColor.allCases,
                     tabItemTitle: { $0.title },
                     content: { $0.color }
                 )

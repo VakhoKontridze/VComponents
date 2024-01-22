@@ -273,7 +273,7 @@ public struct VToggle<Label>: View where Label: View {
             .disabled(true)
         })
 
-        PreviewSectionHeader("Native")
+        PreviewHeader("Native")
 
         PreviewRow("Off", content: {
             Toggle(

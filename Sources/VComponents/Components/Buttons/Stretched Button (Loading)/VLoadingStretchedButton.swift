@@ -251,7 +251,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             action: {},
             title: "Lorem Ipsum"
         )
-        .modifier(PreviewStretchedButtonWidthModifier())
+        .modifier(Preview_StretchedButtonFrameModifier())
     })
 })
 
@@ -263,7 +263,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Pressed", content: {
@@ -278,7 +278,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Loading", content: {
@@ -287,7 +287,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Disabled", content: {
@@ -296,7 +296,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
             .disabled(true)
         })
     })

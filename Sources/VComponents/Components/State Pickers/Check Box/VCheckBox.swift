@@ -310,7 +310,7 @@ public struct VCheckBox<Label>: View where Label: View {
         })
 
 #if os(macOS)
-        PreviewSectionHeader("Native")
+        PreviewHeader("Native")
 
         PreviewRow("Off", content: {
             Toggle(

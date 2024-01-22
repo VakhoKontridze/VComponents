@@ -354,7 +354,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 
 #Preview("Many Items", body: {
     struct ContentView: View {
-        @State private var selection: PreviewEnumWeekday = .thursday
+        @State private var selection: Preview_Weekday = .thursday
 
         var body: some View {
             PreviewContainer(layer: .secondary, content: {
@@ -369,7 +369,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                                 return uiModel
                             }(),
                             selection: $selection,
-                            data: PreviewEnumWeekday.allCases,
+                            data: Preview_Weekday.allCases,
                             tabItemTitle: { $0.title },
                             content: { $0.color }
                         )
@@ -386,7 +386,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 
 #Preview("Few Items", body: {
     struct ContentView: View {
-        @State private var selection: PreviewEnumWeekday = .monday
+        @State private var selection: Preview_Weekday = .monday
 
         var body: some View {
             PreviewContainer(layer: .secondary, content: {
@@ -401,7 +401,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                                 return uiModel
                             }(),
                             selection: $selection,
-                            data: PreviewEnumWeekday.allCases.prefix(3),
+                            data: Preview_Weekday.allCases.prefix(3),
                             tabItemTitle: { $0.title },
                             content: { $0.color }
                         )

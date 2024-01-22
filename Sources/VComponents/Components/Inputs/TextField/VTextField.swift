@@ -491,7 +491,7 @@ private struct StatesPreview: View {
             })
 
             if showsNative {
-                PreviewSectionHeader("Native")
+                PreviewHeader("Native")
 
                 PreviewRow("Enabled", content: {
                     TextField(

@@ -209,7 +209,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             action: {},
             title: "Lorem Ipsum"
         )
-        .modifier(PreviewStretchedButtonWidthModifier())
+        .modifier(Preview_StretchedButtonFrameModifier())
     })
 })
 
@@ -220,7 +220,7 @@ public struct VStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Pressed", content: {
@@ -234,7 +234,7 @@ public struct VStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Disabled", content: {
@@ -242,7 +242,7 @@ public struct VStretchedButton<Label>: View where Label: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(PreviewStretchedButtonWidthModifier())
+            .modifier(Preview_StretchedButtonFrameModifier())
             .disabled(true)
         })
     })

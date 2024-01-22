@@ -272,7 +272,7 @@ extension VerticalEdge {
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
                         id: "preview",
                         uiModel: {
@@ -296,7 +296,7 @@ extension VerticalEdge {
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
                         id: "preview",
                         uiModel: {
@@ -321,7 +321,7 @@ extension VerticalEdge {
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
                         id: "preview",
                         uiModel: {
@@ -347,7 +347,7 @@ extension VerticalEdge {
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
                         id: "preview",
                         uiModel: {
@@ -395,7 +395,7 @@ extension VerticalEdge {
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
                         id: "preview",
                         uiModel: {

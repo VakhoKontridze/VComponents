@@ -400,7 +400,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         isPresented: $isPresented,
@@ -419,7 +419,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
@@ -454,7 +454,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
@@ -489,7 +489,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
@@ -524,7 +524,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
@@ -564,7 +564,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .getSafeAreaInsets({ safeAreaInsets = $0 })
                     .vBottomSheet(
                         id: "preview",
@@ -625,7 +625,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {
@@ -661,7 +661,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: .insettedContent,
@@ -681,7 +681,7 @@ struct VBottomSheet<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
                         uiModel: {

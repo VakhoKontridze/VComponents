@@ -1,5 +1,5 @@
 //
-//  PreviewSectionHeader.swift
+//  PreviewHeader.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 08.03.23.
@@ -10,8 +10,8 @@
 import SwiftUI
 import VCore
 
-// MARK: - Preview Section Header
-struct PreviewSectionHeader: View {
+// MARK: - Preview Header
+struct PreviewHeader: View {
     // MARK: Properties
     private let title: String
     
@@ -49,7 +49,7 @@ struct PreviewSectionHeader: View {
             Text("Lorem ipsum")
         })
 
-        PreviewSectionHeader("Lorem Ipsum")
+        PreviewHeader("Lorem Ipsum")
 
         PreviewRow("Lorem Ipsum", content: {
             Text("Lorem ipsum")

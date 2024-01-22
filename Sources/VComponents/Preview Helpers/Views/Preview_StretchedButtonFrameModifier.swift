@@ -1,5 +1,5 @@
 //
-//  PreviewStretchedButtonWidthModifier.swift
+//  Preview_StretchedButtonFrameModifier.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 21.01.24.
@@ -9,8 +9,8 @@
 
 import SwiftUI
 
-// MARK: - Preview Stretched Button Width Modifier
-struct PreviewStretchedButtonWidthModifier: ViewModifier {
+// MARK: - Stretched Button Frame Modifier
+struct Preview_StretchedButtonFrameModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .applyModifier({

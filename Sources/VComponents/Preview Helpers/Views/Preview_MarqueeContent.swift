@@ -1,5 +1,5 @@
 //
-//  PreviewMarqueeContent.swift
+//  Preview_MarqueeContent.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 21.01.24.
@@ -9,8 +9,8 @@
 
 import SwiftUI
 
-// MARK: - Preview Marquee Content (Small)
-var previewMarqueeContentSmall: some View {
+// MARK: - Marquee Content (Small)
+var preview_MarqueeContentSmall: some View {
     HStack(content: {
         Image(systemName: "swift")
         Text("Lorem ipsum")
@@ -18,8 +18,8 @@ var previewMarqueeContentSmall: some View {
     .drawingGroup()
 }
 
-// MARK: - Preview Marquee Content (Large)
-var previewMarqueeContentLarge: some View {
+// MARK: - Marquee Content
+var preview_MarqueeContent: some View {
     HStack(content: {
         Image(systemName: "swift")
 

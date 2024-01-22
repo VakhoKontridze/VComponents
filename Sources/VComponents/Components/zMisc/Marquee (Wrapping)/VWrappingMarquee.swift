@@ -192,16 +192,16 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 #Preview("*", body: {
     PreviewContainer(content: {
         VWrappingMarquee(
-            content: { previewMarqueeContentSmall }
+            content: { preview_MarqueeContentSmall }
         )
 
         VWrappingMarquee(
-            content: { previewMarqueeContentLarge }
+            content: { preview_MarqueeContent }
         )
 
         VWrappingMarquee(
             uiModel: .insettedGradient,
-            content: { previewMarqueeContentLarge }
+            content: { preview_MarqueeContent }
         )
     })
 })
@@ -215,7 +215,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     uiModel.scrollDirection = .leftToRight
                     return uiModel
                 }(),
-                content: { previewMarqueeContentLarge }
+                content: { preview_MarqueeContent }
             )
         })
 
@@ -226,7 +226,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     uiModel.scrollDirection = .rightToLeft
                     return uiModel
                 }(),
-                content: { previewMarqueeContentLarge }
+                content: { preview_MarqueeContent }
             )
         })
     })

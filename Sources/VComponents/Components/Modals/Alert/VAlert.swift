@@ -336,7 +336,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -361,7 +361,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -385,7 +385,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -410,7 +410,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -435,7 +435,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -459,7 +459,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -483,7 +483,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -508,7 +508,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -529,7 +529,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -552,7 +552,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         isPresented: $isPresented,
@@ -578,7 +578,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         uiModel: {
@@ -617,7 +617,7 @@ struct VAlert<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vAlert(
                         id: "preview",
                         uiModel: {

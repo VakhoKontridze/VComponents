@@ -215,7 +215,7 @@ public struct VPlainButton<Label>: View where Label: View {
             .disabled(true)
         })
 
-        PreviewSectionHeader("Native")
+        PreviewHeader("Native")
 
         PreviewRow("Enabled", content: {
             Button(

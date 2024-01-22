@@ -199,7 +199,7 @@ struct VModal<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
                         isPresented: $isPresented,
@@ -222,7 +222,7 @@ struct VModal<Content>: View
 
         var body: some View {
             PreviewContainer(content: {
-                ModalLauncherView(isPresented: $isPresented)
+                PreviewModalLauncherView(isPresented: $isPresented)
                     .vModal(
                         id: "preview",
                         uiModel: {

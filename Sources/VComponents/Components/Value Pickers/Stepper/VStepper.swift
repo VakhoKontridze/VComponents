@@ -332,7 +332,7 @@ public struct VStepper: View {
             .disabled(true)
         })
 
-        PreviewSectionHeader("Native")
+        PreviewHeader("Native")
 
         PreviewRow("Enabled", content: {
             Stepper(

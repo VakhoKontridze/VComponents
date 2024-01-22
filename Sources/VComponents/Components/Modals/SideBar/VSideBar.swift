@@ -311,38 +311,38 @@ extension Edge {
 #if !(os(macOS) || os(tvOS) || os(watchOS))
 
 #Preview("Leading", body: {
-    PreviewView()
+    Preview_ContentView()
 })
 
 #Preview("Trailing", body: {
-    PreviewView(uiModel: .trailing)
+    Preview_ContentView(uiModel: .trailing)
 })
 
 #Preview("Top", body: {
-    PreviewView(uiModel: .top)
+    Preview_ContentView(uiModel: .top)
 })
 
 #Preview("Bottom", body: {
-    PreviewView(uiModel: .bottom)
+    Preview_ContentView(uiModel: .bottom)
 })
 
 #Preview("Safe Area Leading", body: {
-    PreviewViewSafeArea()
+    Preview_SafeAreaContentView()
 })
 
 #Preview("Safe Area Trailing", body: {
-    PreviewViewSafeArea(uiModel: .trailing)
+    Preview_SafeAreaContentView(uiModel: .trailing)
 })
 
 #Preview("Safe Area Top", body: {
-    PreviewViewSafeArea(uiModel: .top)
+    Preview_SafeAreaContentView(uiModel: .top)
 })
 
 #Preview("Safe Area Bottom", body: {
-    PreviewViewSafeArea(uiModel: .bottom)
+    Preview_SafeAreaContentView(uiModel: .bottom)
 })
 
-private struct PreviewView: View {
+private struct Preview_ContentView: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
 
@@ -354,7 +354,7 @@ private struct PreviewView: View {
 
     var body: some View {
         PreviewContainer(content: {
-            ModalLauncherView(isPresented: $isPresented)
+            PreviewModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     id: "preview",
                     uiModel: uiModel,
@@ -365,7 +365,7 @@ private struct PreviewView: View {
     }
 }
 
-private struct PreviewViewSafeArea: View {
+private struct Preview_SafeAreaContentView: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
@@ -378,7 +378,7 @@ private struct PreviewViewSafeArea: View {
 
     var body: some View {
         PreviewContainer(content: {
-            ModalLauncherView(isPresented: $isPresented)
+            PreviewModalLauncherView(isPresented: $isPresented)
                 .getInterfaceOrientation({ interfaceOrientation = $0 })
                 .vSideBar(
                     id: "preview",

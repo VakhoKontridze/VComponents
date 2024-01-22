@@ -257,7 +257,7 @@ public struct VSlider: View {
                 .padding(.horizontal)
         })
 
-        PreviewSectionHeader("Native")
+        PreviewHeader("Native")
 
         PreviewRow("Enabled", content: {
             Slider(value: .constant(0.5))
