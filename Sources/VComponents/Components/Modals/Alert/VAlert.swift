@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(visionOS, unavailable) // No `View.presentationHost(...)` support
 struct VAlert<Content>: View
     where Content: View
 {
@@ -328,7 +329,7 @@ struct VAlert<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Title, Message, Content", body: {
     struct ContentView: View {

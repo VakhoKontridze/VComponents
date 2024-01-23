@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
     ///
@@ -169,6 +170,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
     ///

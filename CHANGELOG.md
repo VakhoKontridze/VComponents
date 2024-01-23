@@ -1,5 +1,11 @@
 # Change Log
 
+### 6.0.0(60)
+
+General
+
+- Package now partially supports `visionOS`
+
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 
 VTextView

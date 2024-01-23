@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(visionOS, unavailable) // No `View.presentationHost(...)` support
 struct VModal<Content>: View
     where Content: View
 {
@@ -191,7 +192,7 @@ struct VModal<Content>: View
 // MARK: - Previews
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

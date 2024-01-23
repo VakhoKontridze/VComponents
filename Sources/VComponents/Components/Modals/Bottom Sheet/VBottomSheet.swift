@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(visionOS, unavailable) // No `View.presentationHost(...)` support
 struct VBottomSheet<Content>: View
     where Content: View
 {
@@ -392,7 +393,7 @@ struct VBottomSheet<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Min & Ideal & Max", body: {
     struct ContentView: View {

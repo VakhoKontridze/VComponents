@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(visionOS, unavailable) // No `View.presentationHost(...)` support
 struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
@@ -261,7 +262,7 @@ extension VerticalEdge {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Singleline", body: {
     struct ContentView: View {

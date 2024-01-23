@@ -351,7 +351,29 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>
-        5.0<br><i><sup>(5.0.0 - 5.x.x)</sup></i>
+        6.0<br><i><sup>(6.0.0 - 6.x.x)</sup></i>
+    </td>
+    <td>2024 XX XX</td>
+    <td>
+        5.9
+    </td>
+    <td>
+        iOS 15.0<br>
+        macOS 12.0<br>
+        tvOS 15.0<br>
+        watchOS 8.0<br>
+        visionOS 1.0
+    </td>
+    <td>5.3.1 - 5.x.x</td>
+    <td>
+        API changes.<br>
+        visionOS support.
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+        5.0<br><i><sup>(5.0.0 - 5.3.1)</sup></i>
     </td>
     <td>2023 10 08</td>
     <td>

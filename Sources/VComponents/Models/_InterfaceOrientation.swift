@@ -11,13 +11,14 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 enum _InterfaceOrientation {
     // MARK: Cases
     case portrait
     case landscape
 
     // MARK: Initializers
-#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS) || os(visionOS))
     init(uiIInterfaceOrientation: UIInterfaceOrientation) {
         if uiIInterfaceOrientation.isLandscape {
             self = .landscape
@@ -28,7 +29,7 @@ enum _InterfaceOrientation {
 #endif
 
     static func initFromSystemInfo() -> Self {
-#if canImport(UIKit) && !(os(tvOS) || os(watchOS))
+#if canImport(UIKit) && !(os(tvOS) || os(watchOS) || os(visionOS))
         if UIDevice.current.orientation.isLandscape {
             .landscape
         } else {

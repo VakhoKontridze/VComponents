@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(visionOS, unavailable) // No `View.presentationHost(...)` support
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VSideBarUIModel
@@ -305,7 +306,7 @@ extension Edge {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Leading", body: {
     Preview_ContentView()

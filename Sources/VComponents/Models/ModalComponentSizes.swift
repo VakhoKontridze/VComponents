@@ -51,6 +51,7 @@ public struct ModalComponentSizes<ModalSize> {
     @available(macOS, unavailable)
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
+    @available(visionOS, unavailable)
     func current(
         _interfaceOrientation interfaceOrientation: _InterfaceOrientation
     ) -> ModalSize {

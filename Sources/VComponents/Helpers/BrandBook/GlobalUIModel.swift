@@ -87,6 +87,8 @@ struct GlobalUIModel {
             10
 #elseif os(watchOS)
             5
+#elseif os(visionOS)
+            fatalError() // FIXME: Implement
 #endif
         }()
         static let barCornerRadius: CGFloat = barHeight/2
@@ -439,6 +441,8 @@ struct GlobalUIModel {
             10
 #elseif os(watchOS)
             4
+#elseif os(visionOS)
+        fatalError() // FIXME: Implement
 #endif
         }()
 
@@ -451,6 +455,8 @@ struct GlobalUIModel {
             10
 #elseif os(watchOS)
             4
+#elseif os(visionOS)
+        fatalError() // FIXME: Implement
 #endif
         }()
 

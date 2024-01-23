@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that presents toast.
     ///
@@ -61,6 +62,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that presents toast.
     ///
@@ -102,6 +104,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that presents toast.
     ///
@@ -145,6 +148,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component that presents toast.
     ///

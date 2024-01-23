@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
-        "revision" : "4e7feae1fbbc3b1bd97df5162fe63fb14c1bb269",
-        "version" : "5.3.1"
+        "branch" : "feature-6.0.0",
+        "revision" : "3eff9b1c93e1811293c3235ebc93d70a1581688e"
       }
     }
   ],

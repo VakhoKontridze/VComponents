@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component hosts pull-up content on the bottom of the container.
     ///
@@ -209,6 +210,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Modal component hosts pull-up content on the bottom of the container.
     ///

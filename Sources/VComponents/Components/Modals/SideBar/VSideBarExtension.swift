@@ -12,6 +12,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Presents side bar when boolean is `true`.
     ///
@@ -91,6 +92,7 @@ extension View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension View {
     /// Presents side bar using the item as data source for content.
     ///

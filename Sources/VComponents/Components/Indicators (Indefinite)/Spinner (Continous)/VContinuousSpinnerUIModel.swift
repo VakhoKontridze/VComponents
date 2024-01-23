@@ -25,6 +25,8 @@ public struct VContinuousSpinnerUIModel {
         30
 #elseif os(watchOS)
         15
+#elseif os(visionOS)
+        fatalError() // FIXME: Implement
 #endif
     }()
 
@@ -45,6 +47,8 @@ public struct VContinuousSpinnerUIModel {
         4
 #elseif os(watchOS)
         2
+#elseif os(visionOS)
+        fatalError() // FIXME: Implement
 #endif
     }()
 
