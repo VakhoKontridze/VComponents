@@ -97,11 +97,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 checkBox
                 
             case .title(let title):
-                HStack(spacing: 0, content: {
-                    checkBox
-                    
-                    spacer
-                    
+                labeledCheckBox(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -115,13 +111,9 @@ public struct VCheckBox<Label>: View where Label: View {
                     )
                     .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
-                
+
             case .label(let label):
-                HStack(spacing: 0, content: {
-                    checkBox
-                    
-                    spacer
-                    
+                labeledCheckBox(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -162,7 +154,19 @@ public struct VCheckBox<Label>: View where Label: View {
             }
         )
     }
-    
+
+    private func labeledCheckBox<Content>(
+        label: () -> Content
+    ) -> some View
+        where Content: View
+    {
+        HStack(spacing: 0, content: {
+            checkBox
+            spacer
+            label()
+        })
+    }
+
     private var spacer: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,

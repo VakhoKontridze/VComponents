@@ -97,11 +97,7 @@ public struct VRadioButton<Label>: View where Label: View {
                 radioButton
                 
             case .title(let title):
-                HStack(spacing: 0, content: {
-                    radioButton
-                    
-                    spacer
-                    
+                labeledRadioButton(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -117,11 +113,7 @@ public struct VRadioButton<Label>: View where Label: View {
                 })
                 
             case .label(let label):
-                HStack(spacing: 0, content: {
-                    radioButton
-                    
-                    spacer
-                    
+                labeledRadioButton(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -159,7 +151,19 @@ public struct VRadioButton<Label>: View where Label: View {
             }
         )
     }
-    
+
+    private func labeledRadioButton<Content>(
+        label: () -> Content
+    ) -> some View
+        where Content: View
+    {
+        HStack(spacing: 0, content: {
+            radioButton
+            spacer
+            label()
+        })
+    }
+
     private var spacer: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
