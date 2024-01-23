@@ -19,8 +19,8 @@ public struct VTextViewUIModel {
     /// Spacing between header, textview, and footer. Set to `3`.
     public var headerTextViewAndFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentAndFooterSpacing
 
-    /// Textview minimum height. Set to `50`.
-    public var minHeight: CGFloat = GlobalUIModel.Inputs.height
+    /// Minimum textview height. Set to `50`.
+    public var minimumHeight: CGFloat = GlobalUIModel.Inputs.height
 
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type. Set to `default`.

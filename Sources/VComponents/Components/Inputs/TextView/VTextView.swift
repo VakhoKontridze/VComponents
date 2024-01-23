@@ -121,8 +121,11 @@ public struct VTextView: View {
 
     private var inputView: some View {
         textField
-            .frame(minHeight: uiModel.minHeight)
             .padding(uiModel.contentMargins)
+            .frame(
+                minHeight: uiModel.minimumHeight,
+                alignment: .top
+            )
             .clipped() // Prevents large content from overflowing
             .background(content: { backgroundBorderView }) // Has own rounding
             .background(content: { backgroundView }) // Has own rounding

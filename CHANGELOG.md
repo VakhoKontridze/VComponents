@@ -1,5 +1,11 @@
 # Change Log
 
+### 5.4.0(59)
+
+VTextView
+
+- Issue with minimum height is fixed, and `minHeight` is replaced with `minimumHeight`
+
 ### [5.3.0(58)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.0) — *2024 01 12*
 
 VBouncingMarquee

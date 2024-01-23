@@ -249,6 +249,18 @@ extension VRectangularToggleButtonUIModel {
     public var iconAndTitleTextSpacing: CGFloat { fatalError() }
 }
 
+// MARK: - V Text View
+@available(iOS 16.0, *)
+@available(macOS 12.0, *)@available(macOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
+extension VTextViewUIModel {
+    @available(*, unavailable, message: "Use 'minimumHeight' instead")
+    public var minHeight: CGFloat {
+        fatalError()
+    }
+}
+
 // MARK: - V Code Entry View
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
