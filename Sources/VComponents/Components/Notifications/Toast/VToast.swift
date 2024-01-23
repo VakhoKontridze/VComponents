@@ -249,9 +249,6 @@ struct VToast: View {
 }
 
 // MARK: - Helpers
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension VerticalEdge {
     fileprivate var toAlignment: Alignment {
         switch self {

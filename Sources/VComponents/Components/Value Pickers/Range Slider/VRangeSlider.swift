@@ -280,8 +280,6 @@ public struct VRangeSlider: View {
 }
 
 // MARK: - Helpers
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension Double {
     fileprivate func roundedUpWithStep(
         _ step: Double?

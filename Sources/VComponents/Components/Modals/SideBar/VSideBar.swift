@@ -291,9 +291,6 @@ struct VSideBar<Content>: View where Content: View {
 }
 
 // MARK: - Helpers
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension Edge {
     fileprivate var toAlignment: Alignment {
         switch self {
