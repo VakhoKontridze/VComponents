@@ -266,6 +266,28 @@ public struct VCodeEntryView: View {
     StatesPreview()
 })
 
+#Preview("Stretched", body: {
+    struct ContentView: View {
+        @State private var text: String = "123"
+
+        var body: some View {
+            PreviewContainer(content: {
+                VCodeEntryView(
+                    uiModel: {
+                        var uiModel: VCodeEntryViewUIModel = .init()
+                        uiModel.spacingType = .stretched
+                        return uiModel
+                    }(),
+                    text: $text
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    return ContentView()
+})
+
 #Preview("Success", body: {
     StatesPreview(uiModel: .success)
 })
