@@ -65,7 +65,7 @@ struct VSideBar<Content>: View where Content: View {
             alignment: uiModel.presentationEdge.toAlignment,
             content: {
                 dimmingView
-                sideBar
+                sideBarView
             }
         )
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
@@ -98,7 +98,7 @@ struct VSideBar<Content>: View where Content: View {
             })
     }
     
-    private var sideBar: some View {
+    private var sideBarView: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .shadow(

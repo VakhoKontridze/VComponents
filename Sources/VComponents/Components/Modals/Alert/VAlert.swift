@@ -70,7 +70,7 @@ struct VAlert<Content>: View
     var body: some View {
         ZStack(content: {
             dimmingView
-            alert
+            alertView
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
@@ -99,7 +99,7 @@ struct VAlert<Content>: View
             .contentShape(Rectangle())
     }
     
-    private var alert: some View {
+    private var alertView: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .shadow(
@@ -194,30 +194,30 @@ struct VAlert<Content>: View
     
     @ViewBuilder private var buttonsScrollView: some View {
         if isButtonContentLargerThanContainer {
-            ScrollView(content: { buttonStack })
+            ScrollView(content: { buttonStackView })
                 .padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
 
         } else {
-            buttonStack
+            buttonStackView
         }
     }
     
-    private var buttonStack: some View {
+    private var buttonStackView: some View {
         Group(content: {
             switch buttons.count {
             case 1:
-                buttonContent()
-                
+                buttonContentView()
+
             case 2:
                 HStack(
                     spacing: uiModel.horizontalButtonSpacing,
-                    content: { buttonContent(reversesOrder: true) } // Cancel button is last
+                    content: { buttonContentView(reversesOrder: true) } // Cancel button is last
                 )
                 
             case 3...:
                 VStack(
                     spacing: uiModel.verticalButtonSpacing,
-                    content: { buttonContent() }
+                    content: { buttonContentView() }
                 )
                 
             default:
@@ -228,7 +228,7 @@ struct VAlert<Content>: View
         .getSize({ buttonsStackHeight = $0.height })
     }
     
-    private func buttonContent(reversesOrder: Bool = false) -> some View {
+    private func buttonContentView(reversesOrder: Bool = false) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
         
         return ForEach(

@@ -61,7 +61,7 @@ struct VModal<Content>: View
     var body: some View {
         ZStack(content: {
             dimmingView
-            modal
+            modalView
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
@@ -93,7 +93,7 @@ struct VModal<Content>: View
             })
     }
 
-    private var modal: some View {
+    private var modalView: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .shadow(

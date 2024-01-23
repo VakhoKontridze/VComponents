@@ -94,10 +94,10 @@ public struct VCheckBox<Label>: View where Label: View {
         Group(content: {
             switch label {
             case .empty:
-                checkBox
+                checkBoxView
                 
             case .title(let title):
-                labeledCheckBox(label: {
+                labeledCheckBoxView(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -113,7 +113,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 })
 
             case .label(let label):
-                labeledCheckBox(label: {
+                labeledCheckBoxView(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -129,7 +129,7 @@ public struct VCheckBox<Label>: View where Label: View {
         })
     }
     
-    private var checkBox: some View {
+    private var checkBoxView: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {
@@ -155,19 +155,19 @@ public struct VCheckBox<Label>: View where Label: View {
         )
     }
 
-    private func labeledCheckBox<Content>(
+    private func labeledCheckBoxView<Content>(
         label: () -> Content
     ) -> some View
         where Content: View
     {
         HStack(spacing: 0, content: {
-            checkBox
-            spacer
+            checkBoxView
+            spacerView
             label()
         })
     }
 
-    private var spacer: some View {
+    private var spacerView: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {

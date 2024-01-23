@@ -109,7 +109,7 @@ public struct VStepper: View {
     private var buttons: some View {
         HStack(spacing: 0, content: {
             button(.minus)
-            divider
+            dividerView
             button(.plus)
         })
         .frame(maxWidth: .infinity)
@@ -135,7 +135,7 @@ public struct VStepper: View {
         .disabled(!buttonIsEnabled(button))
     }
     
-    private var divider: some View {
+    private var dividerView: some View {
         Rectangle()
             .frame(size: uiModel.dividerSize)
             .foregroundStyle(uiModel.dividerColors.value(for: internalState))

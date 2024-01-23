@@ -150,14 +150,14 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
                 if case .success(let image) = result {
                     image
                 } else {
-                    defaultPlaceholder
+                    defaultPlaceholderView
                 }
                 
             case .content(let content):
                 if case .success(let image) = result {
                     content(image)
                 } else {
-                    defaultPlaceholder
+                    defaultPlaceholderView
                 }
                 
             case .contentPlaceholder(let content, let placeholderContent):
@@ -196,7 +196,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         })
     }
     
-    private var defaultPlaceholder: some View {
+    private var defaultPlaceholderView: some View {
         uiModel.placeholderColor
     }
 

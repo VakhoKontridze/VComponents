@@ -50,9 +50,9 @@ public struct VProgressBar: View {
     // MARK: Body
     public var body: some View {
         ZStack(alignment: uiModel.direction.toAlignment, content: {
-            track
-            progress
-            border
+            trackView
+            progressView
+            borderView
         })
         .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
         .frame(
@@ -65,12 +65,12 @@ public struct VProgressBar: View {
         })
     }
     
-    private var track: some View {
+    private var trackView: some View {
         Rectangle()
             .foregroundStyle(uiModel.trackColor)
     }
     
-    private var progress: some View {
+    private var progressView: some View {
         Rectangle()
             .frame(
                 width: uiModel.direction.isHorizontal ? progressWidth : nil,
@@ -80,7 +80,7 @@ public struct VProgressBar: View {
             .foregroundStyle(uiModel.progressColor)
     }
     
-    @ViewBuilder private var border: some View {
+    @ViewBuilder private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)

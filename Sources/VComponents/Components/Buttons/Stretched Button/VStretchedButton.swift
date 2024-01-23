@@ -96,39 +96,39 @@ public struct VStretchedButton<Label>: View where Label: View {
             label: { baseButtonState in
                 let internalState: VStretchedButtonInternalState = internalState(baseButtonState)
                 
-                buttonLabel(internalState: internalState)
+                labelView(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { background(internalState: internalState) }) // Has own rounding
-                    .overlay(content: { border(internalState: internalState) }) // Has own rounding
+                    .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
+                    .overlay(content: { borderView(internalState: internalState) }) // Has own rounding
             }
         )
     }
     
-    private func buttonLabel(
+    private func labelView(
         internalState: VStretchedButtonInternalState
     ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                titleLabelComponent(internalState: internalState, title: title)
+                titleLabelViewComponent(internalState: internalState, title: title)
 
             case .icon(let icon):
-                iconLabelComponent(internalState: internalState, icon: icon)
+                iconLabelViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        titleLabelComponent(internalState: internalState, title: title)
-                        iconLabelComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        iconLabelComponent(internalState: internalState, icon: icon)
-                        titleLabelComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
                     })
                 }
 
@@ -141,7 +141,7 @@ public struct VStretchedButton<Label>: View where Label: View {
         .padding(uiModel.labelMargins)
     }
     
-    private func titleLabelComponent(
+    private func titleLabelViewComponent(
         internalState: VStretchedButtonInternalState,
         title: String
     ) -> some View {
@@ -153,7 +153,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
     
-    private func iconLabelComponent(
+    private func iconLabelViewComponent(
         internalState: VStretchedButtonInternalState,
         icon: Image
     ) -> some View {
@@ -165,7 +165,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
-    private func background(
+    private func backgroundView(
         internalState: VStretchedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
@@ -178,7 +178,7 @@ public struct VStretchedButton<Label>: View where Label: View {
             )
     }
     
-    @ViewBuilder private func border(
+    @ViewBuilder private func borderView(
         internalState: VStretchedButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {

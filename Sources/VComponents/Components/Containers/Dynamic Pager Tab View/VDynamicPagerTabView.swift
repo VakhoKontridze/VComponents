@@ -174,20 +174,20 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         VStack(
             spacing: uiModel.tabBarAndTabViewSpacing,
             content: {
-                header
+                headerView
                 tabView
             }
         )
     }
 
-    private var header: some View {
-        tabBarAndTabIndicatorStrip
+    private var headerView: some View {
+        tabBarAndTabIndicatorStripView
             .background(content: { uiModel.headerBackgroundColor })
     }
 
-    private var tabBarAndTabIndicatorStrip: some View {
+    private var tabBarAndTabIndicatorStripView: some View {
         ZStack(alignment: .bottom, content: {
-            tabIndicatorTrack
+            tabIndicatorTrackView
 
             ScrollViewReader(content: { proxy in
                 ScrollView(
@@ -205,14 +205,14 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                                             label: { baseButtonState in
                                                 let tabItemInternalState: VDynamicPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
-                                                tabItem(
+                                                tabItemView(
                                                     tabItemInternalState: tabItemInternalState,
                                                     element: element
                                                 )
                                             }
                                         )
 
-                                        selectedTabIndicatorSlice(element)
+                                        selectedTabIndicatorViewSlice(element)
                                     })
                                     .padding(.bottom, tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
                                     .id(element)
@@ -227,7 +227,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         })
     }
 
-    private func tabItem(
+    private func tabItemView(
         tabItemInternalState: VDynamicPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
@@ -251,7 +251,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         .contentShape(Rectangle())
     }
 
-    private var tabIndicatorTrack: some View {
+    private var tabIndicatorTrackView: some View {
         ZStack(content: {
             Rectangle()
                 .frame(height: uiModel.tabIndicatorTrackHeight)
@@ -266,7 +266,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         )
     }
 
-    private func selectedTabIndicatorSlice(
+    private func selectedTabIndicatorViewSlice(
         _ element: Data.Element
     ) -> some View {
         ZStack(content: {

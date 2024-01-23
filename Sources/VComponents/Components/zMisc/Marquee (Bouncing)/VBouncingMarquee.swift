@@ -56,7 +56,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             .frame(height: contentSize.height)
             .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
-            .overlay(content: { gradient })
+            .overlay(content: { gradientView })
             .clipped()
     }
     
@@ -90,7 +90,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             })
     }
     
-    @ViewBuilder private var gradient: some View {
+    @ViewBuilder private var gradientView: some View {
         if isAnimatable && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(

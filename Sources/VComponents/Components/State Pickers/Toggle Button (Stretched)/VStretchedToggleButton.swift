@@ -125,12 +125,12 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {
-                toggleLabel
+                labelView
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { backgroundView }) // Has own rounding
-                    .overlay(content: { border }) // Has own rounding
+                    .overlay(content: { borderView }) // Has own rounding
             }
         )
         .applyIf(uiModel.appliesStateChangeAnimation, transform: {
@@ -138,27 +138,27 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         })
     }
 
-    private var toggleLabel: some View {
+    private var labelView: some View {
         Group(content: {
             switch label {
             case .title(let title):
-                titleLabelComponent(title: title)
+                titleLabelViewComponent(title: title)
 
             case .icon(let icon):
-                iconLabelComponent(icon: icon)
+                iconLabelViewComponent(icon: icon)
 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        titleLabelComponent(title: title)
-                        iconLabelComponent(icon: icon)
+                        titleLabelViewComponent(title: title)
+                        iconLabelViewComponent(icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        iconLabelComponent(icon: icon)
-                        titleLabelComponent(title: title)
+                        iconLabelViewComponent(icon: icon)
+                        titleLabelViewComponent(title: title)
                     })
                 }
 
@@ -171,7 +171,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         .padding(uiModel.labelMargins)
     }
 
-    private func titleLabelComponent(
+    private func titleLabelViewComponent(
         title: String
     ) -> some View {
         Text(title)
@@ -182,7 +182,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
             .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
 
-    private func iconLabelComponent(
+    private func iconLabelViewComponent(
         icon: Image
     ) -> some View {
         icon
@@ -204,7 +204,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
             )
     }
 
-    @ViewBuilder private var border: some View {
+    @ViewBuilder private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)

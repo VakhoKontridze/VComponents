@@ -56,7 +56,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .frame(height: contentSize.height)
             .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
-            .overlay(content: { gradient })
+            .overlay(content: { gradientView })
             .clipped()
     }
     
@@ -92,7 +92,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .getSize({ contentSize = $0 })
     }
     
-    @ViewBuilder private var gradient: some View {
+    @ViewBuilder private var gradientView: some View {
         if isAnimatable && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(

@@ -94,10 +94,10 @@ public struct VToggle<Label>: View where Label: View {
         Group(content: {
             switch label {
             case .empty:
-                toggle
-                
+                toggleView
+
             case .title(let title):
-                labeledToggle(label: {
+                labeledToggleView(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -113,7 +113,7 @@ public struct VToggle<Label>: View where Label: View {
                 })
 
             case .label(let label):
-                labeledToggle(label: {
+                labeledToggleView(label: {
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -129,7 +129,7 @@ public struct VToggle<Label>: View where Label: View {
         })
     }
     
-    private var toggle: some View {
+    private var toggleView: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {
@@ -147,19 +147,19 @@ public struct VToggle<Label>: View where Label: View {
         )
     }
 
-    private func labeledToggle<Content>(
+    private func labeledToggleView<Content>(
         label: () -> Content
     ) -> some View
         where Content: View
     {
         HStack(spacing: 0, content: {
-            toggle
-            spacer
+            toggleView
+            spacerView
             label()
         })
     }
 
-    private var spacer: some View {
+    private var spacerView: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {

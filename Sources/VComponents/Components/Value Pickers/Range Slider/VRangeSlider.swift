@@ -92,9 +92,9 @@ public struct VRangeSlider: View {
     public var body: some View {
         ZStack(alignment: uiModel.direction.toAlignment, content: {
             ZStack(alignment: uiModel.direction.toAlignment, content: {
-                track
-                progress
-                border
+                trackView
+                progressView
+                borderView
             })
             .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
             .frame(
@@ -102,8 +102,8 @@ public struct VRangeSlider: View {
                 height: uiModel.direction.isHorizontal ? uiModel.height : nil
             )
             
-            thumb(.low)
-            thumb(.high)
+            thumbView(.low)
+            thumbView(.high)
         })
         .getSize({ sliderSize = $0 })
         .padding(
@@ -115,31 +115,31 @@ public struct VRangeSlider: View {
         })
     }
     
-    private var track: some View {
+    private var trackView: some View {
         Rectangle()
             .foregroundStyle( uiModel.trackColors.value(for: internalState))
     }
     
-    private var progress: some View {
+    private var progressView: some View {
         Rectangle()
             .padding(uiModel.direction.toEdgeSet, progressWidth(.low))
             .padding(uiModel.direction.reversed().toEdgeSet, progressWidth(.high))
             .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
-    @ViewBuilder private var border: some View {
+    @ViewBuilder private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         }
     }
     
-    @ViewBuilder private func thumb(_ thumb: Thumb) -> some View {
+    @ViewBuilder private func thumbView(_ thumb: Thumb) -> some View {
         if uiModel.thumbDimension > 0 {
             Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {
-                    thumbBackground
-                    thumbBorder
+                    thumbBackgroundView
+                    thumbBorderView
                 })
                 .frame(dimension: uiModel.thumbDimension)
                 .offset(
@@ -160,7 +160,7 @@ public struct VRangeSlider: View {
         }
     }
 
-    private var thumbBackground: some View {
+    private var thumbBackgroundView: some View {
         RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
             .foregroundStyle(uiModel.thumbColors.value(for: internalState))
             .shadow(
@@ -170,7 +170,7 @@ public struct VRangeSlider: View {
             )
     }
 
-    private var thumbBorder: some View {
+    private var thumbBorderView: some View {
         RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
             .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
     }

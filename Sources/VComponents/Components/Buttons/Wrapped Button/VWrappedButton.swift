@@ -94,40 +94,40 @@ public struct VWrappedButton<Label>: View where Label: View {
             label: { baseButtonState in
                 let internalState: VWrappedButtonInternalState = internalState(baseButtonState)
                 
-                buttonLabel(internalState: internalState)
+                labelView(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { background(internalState: internalState) }) // Has own rounding
-                    .overlay(content: { border(internalState: internalState) }) // Has own rounding
+                    .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
+                    .overlay(content: { borderView(internalState: internalState) }) // Has own rounding
                     .padding(uiModel.hitBox)
             }
         )
     }
     
-    private func buttonLabel(
+    private func labelView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                titleLabelComponent(internalState: internalState, title: title)
+                titleLabelViewComponent(internalState: internalState, title: title)
 
             case .icon(let icon):
-                iconLabelComponent(internalState: internalState, icon: icon)
+                iconLabelViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        titleLabelComponent(internalState: internalState, title: title)
-                        iconLabelComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        iconLabelComponent(internalState: internalState, icon: icon)
-                        titleLabelComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
                     })
                 }
 
@@ -139,7 +139,7 @@ public struct VWrappedButton<Label>: View where Label: View {
         .padding(uiModel.labelMargins)
     }
     
-    private func titleLabelComponent(
+    private func titleLabelViewComponent(
         internalState: VWrappedButtonInternalState,
         title: String
     ) -> some View {
@@ -151,7 +151,7 @@ public struct VWrappedButton<Label>: View where Label: View {
             .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
     }
     
-    private func iconLabelComponent(
+    private func iconLabelViewComponent(
         internalState: VWrappedButtonInternalState,
         icon: Image
     ) -> some View {
@@ -163,7 +163,7 @@ public struct VWrappedButton<Label>: View where Label: View {
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
-    private func background(
+    private func backgroundView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
@@ -176,7 +176,7 @@ public struct VWrappedButton<Label>: View where Label: View {
             )
     }
     
-    @ViewBuilder private func border(
+    @ViewBuilder private func borderView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {

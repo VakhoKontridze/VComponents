@@ -94,35 +94,35 @@ public struct VPlainButton<Label>: View where Label: View {
             label: { baseButtonState in
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
                 
-                buttonLabel(internalState: internalState)
+                labelView(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
             }
         )
     }
     
-    private func buttonLabel(
+    private func labelView(
         internalState: VPlainButtonInternalState
     ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                titleLabelComponent(internalState: internalState, title: title)
+                titleLabelViewComponent(internalState: internalState, title: title)
                 
             case .icon(let icon):
-                iconLabelComponent(internalState: internalState, icon: icon)
+                iconLabelViewComponent(internalState: internalState, icon: icon)
                 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        titleLabelComponent(internalState: internalState, title: title)
-                        iconLabelComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        iconLabelComponent(internalState: internalState, icon: icon)
-                        titleLabelComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
                     })
                 }
 
@@ -134,7 +134,7 @@ public struct VPlainButton<Label>: View where Label: View {
         .padding(uiModel.hitBox)
     }
     
-    private func titleLabelComponent(
+    private func titleLabelViewComponent(
         internalState: VPlainButtonInternalState,
         title: String
     ) -> some View {
@@ -145,7 +145,7 @@ public struct VPlainButton<Label>: View where Label: View {
             .font(uiModel.titleTextFont)
     }
     
-    private func iconLabelComponent(
+    private func iconLabelViewComponent(
         internalState: VPlainButtonInternalState,
         icon: Image
     ) -> some View {

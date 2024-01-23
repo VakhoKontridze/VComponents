@@ -213,8 +213,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         frameFallback
             .applyIf(
                 uiModel.direction.isHorizontal,
-                ifTransform: { $0.overlay(content: { dotsHorizontalFallback }) },
-                elseTransform: { $0.overlay(content: { dotsVerticalFallback }) }
+                ifTransform: { $0.overlay(content: { dotsViewHorizontalFallback }) },
+                elseTransform: { $0.overlay(content: { dotsViewVerticalFallback }) }
             )
             .clipped()
             .applyIf(uiModel.appliesTransitionAnimation, transform: {
@@ -233,23 +233,23 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             .frame(size: size)
     }
 
-    private var dotsHorizontalFallback: some View {
+    private var dotsViewHorizontalFallback: some View {
         HStack(
             spacing: uiModel.spacing,
-            content: dotsFallback
+            content: dotsViewFallback
         )
         .offset(x: offset)
     }
 
-    private var dotsVerticalFallback: some View {
+    private var dotsViewVerticalFallback: some View {
         VStack(
             spacing: uiModel.spacing,
-            content: dotsFallback
+            content: dotsViewFallback
         )
         .offset(y: offset)
     }
 
-    private func dotsFallback() -> some View {
+    private func dotsViewFallback() -> some View {
         let range: [Int] = (0..<total)
             .reversedArray(uiModel.direction.isReversed)
 

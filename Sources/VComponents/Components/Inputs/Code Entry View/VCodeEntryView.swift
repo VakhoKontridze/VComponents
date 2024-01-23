@@ -194,18 +194,18 @@ public struct VCodeEntryView: View {
             .frame(size: uiModel.characterBackgroundSize)
         
             .clipped() // Prevents large content from overflowing
-            .background(content: { characterBackgroundBorder(internalState) }) // Has own rounding
-            .background(content: { characterBackground(internalState) }) // Has own rounding
+            .background(content: { characterBackgroundBorderView(internalState) }) // Has own rounding
+            .background(content: { characterBackgroundView(internalState) }) // Has own rounding
     }
 
-    private func characterBackground(
+    private func characterBackgroundView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
             .foregroundStyle(uiModel.characterBackgroundColors.value(for: internalState))
     }
 
-    @ViewBuilder private func characterBackgroundBorder(
+    @ViewBuilder private func characterBackgroundBorderView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
         if uiModel.characterBackgroundBorderWidth > 0 {

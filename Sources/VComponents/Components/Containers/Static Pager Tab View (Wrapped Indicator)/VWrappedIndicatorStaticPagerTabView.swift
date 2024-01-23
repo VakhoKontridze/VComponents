@@ -179,16 +179,16 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         VStack(
             spacing: uiModel.tabBarAndTabViewSpacing,
             content: {
-                header
+                headerView
                 tabView
             }
         )
     }
 
-    private var header: some View {
+    private var headerView: some View {
         VStack(spacing: 0, content: {
-            tabBar
-            tabIndicatorStrip
+            tabBarView
+            tabIndicatorStripView
         })
         .background(content: { uiModel.headerBackgroundColor })
 
@@ -196,7 +196,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         .drawingGroup() // Prevents clipped tab indicator from disappearing
     }
 
-    private var tabBar: some View {
+    private var tabBarView: some View {
         HStack(
             alignment: uiModel.tabBarAlignment,
             spacing: 0,
@@ -207,7 +207,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
                         label: { baseButtonState in
                             let tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
-                            tabItem(
+                            tabItemView(
                                 tabItemInternalState: tabItemInternalState,
                                 element: element
                             )
@@ -220,7 +220,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         .getSize({ tabBarWidth = $0.width })
     }
 
-    private func tabItem(
+    private func tabItemView(
         tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
@@ -257,26 +257,26 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         .contentShape(Rectangle())
     }
 
-    private var tabIndicatorStrip: some View {
+    private var tabIndicatorStripView: some View {
         ZStack(
             alignment: Alignment(
                 horizontal: .leading,
                 vertical: uiModel.tabIndicatorStripAlignment
             ),
             content: {
-                tabIndicatorTrack
-                selectedTabIndicator
+                tabIndicatorTrackView
+                selectedTabIndicatorView
             }
         )
     }
 
-    private var tabIndicatorTrack: some View {
+    private var tabIndicatorTrackView: some View {
         Rectangle()
             .frame(height: uiModel.tabIndicatorTrackHeight)
             .foregroundStyle(uiModel.tabIndicatorTrackColor)
     }
 
-    private var selectedTabIndicator: some View {
+    private var selectedTabIndicatorView: some View {
         RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
             .frame(width: selectedTabIndicatorWidth)
             .frame(height: uiModel.selectedTabIndicatorHeight)

@@ -72,7 +72,7 @@ struct VBottomSheet<Content>: View
     var body: some View {
         ZStack(alignment: .top, content: {
             dimmingView
-            bottomSheet
+            bottomSheetView
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
@@ -111,7 +111,7 @@ struct VBottomSheet<Content>: View
             })
     }
     
-    private var bottomSheet: some View {
+    private var bottomSheetView: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.contentIsDraggable, transform: {
@@ -134,7 +134,7 @@ struct VBottomSheet<Content>: View
                     
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
-                    dragIndicator
+                    dragIndicatorView
                 })
                 .getSize({ headerHeight = $0.height })
 
@@ -165,7 +165,7 @@ struct VBottomSheet<Content>: View
         })
     }
     
-    @ViewBuilder private var dragIndicator: some View {
+    @ViewBuilder private var dragIndicatorView: some View {
         if uiModel.dragIndicatorSize.height > 0 {
             RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
                 .frame(size: uiModel.dragIndicatorSize)

@@ -53,7 +53,7 @@ struct VToast: View {
     var body: some View {
         ZStack(alignment: uiModel.presentationEdge.toAlignment, content: {
             dimmingView
-            contentView
+            toastView
         })
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
@@ -71,7 +71,7 @@ struct VToast: View {
             .contentShape(Rectangle())
     }
     
-    private var contentView: some View {
+    private var toastView: some View {
         Text(text)
             .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
             .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)

@@ -105,10 +105,10 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                     get: { internalState == .expanded },
                     set: { expandCollapseFromHeaderTap($0) }
                 ),
-                label: { header },
+                label: { headerView },
                 content: {
                     VStack(spacing: 0, content: {
-                        divider
+                        dividerView
                         contentView
                     })
                 }
@@ -121,7 +121,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         })
     }
     
-    private var header: some View {
+    private var headerView: some View {
         HStack(spacing: 0, content: {
             Group(content: {
                 switch headerLabel {
@@ -150,7 +150,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         .padding(uiModel.headerMargins)
     }
     
-    @ViewBuilder private var divider: some View {
+    @ViewBuilder private var dividerView: some View {
         if uiModel.dividerHeight.toPoints(scale: displayScale) > 0 {
             Rectangle()
                 .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))

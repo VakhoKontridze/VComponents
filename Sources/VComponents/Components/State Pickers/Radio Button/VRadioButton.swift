@@ -159,12 +159,12 @@ public struct VRadioButton<Label>: View where Label: View {
     {
         HStack(spacing: 0, content: {
             radioButton
-            spacer
+            spacerView
             label()
         })
     }
 
-    private var spacer: some View {
+    private var spacerView: some View {
         SwiftUIGestureBaseButton(
             onStateChange: stateChangeHandler,
             label: {

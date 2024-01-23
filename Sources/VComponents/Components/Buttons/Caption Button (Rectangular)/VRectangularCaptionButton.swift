@@ -107,15 +107,15 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                 let internalState: VRectangularCaptionButtonInternalState = internalState(baseButtonState)
                 
                 VStack(spacing: uiModel.rectangleAndCaptionSpacing, content: {
-                    rectangle(internalState: internalState)
-                    buttonCaption(internalState: internalState)
+                    rectangleView(internalState: internalState)
+                    captionView(internalState: internalState)
                 })
                 .contentShape(Rectangle()) // Registers gestures even when clear
             }
         )
     }
     
-    private func rectangle(
+    private func rectangleView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Group(content: { // `Group` is used for adding multiple frames
@@ -130,11 +130,11 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         })
         .frame(size: uiModel.rectangleSize)
         .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius)) // Prevents large content from overflowing
-        .background(content: { rectangleBackground(internalState: internalState) }) // Has own rounding
-        .overlay(content: { rectangleBorder(internalState: internalState) }) // Has own rounding
+        .background(content: { rectangleBackgroundView(internalState: internalState) }) // Has own rounding
+        .overlay(content: { rectangleBorderView(internalState: internalState) }) // Has own rounding
     }
     
-    private func rectangleBackground(
+    private func rectangleBackgroundView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
@@ -147,7 +147,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             )
     }
     
-    @ViewBuilder private func rectangleBorder(
+    @ViewBuilder private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         if uiModel.rectangleBorderWidth > 0 {
@@ -157,29 +157,29 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         }
     }
     
-    private func buttonCaption(
+    private func captionView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Group(content: {
             switch caption {
             case .title(let title):
-                titleCaptionComponent(internalState: internalState, title: title)
+                titleCaptionViewComponent(internalState: internalState, title: title)
 
             case .icon(let icon):
-                iconCaptionComponent(internalState: internalState, icon: icon)
+                iconCaptionViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleCaptionTextAndIconCaptionPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
-                        titleCaptionComponent(internalState: internalState, title: title)
-                        iconCaptionComponent(internalState: internalState, icon: icon)
+                        titleCaptionViewComponent(internalState: internalState, title: title)
+                        iconCaptionViewComponent(internalState: internalState, icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
-                        iconCaptionComponent(internalState: internalState, icon: icon)
-                        titleCaptionComponent(internalState: internalState, title: title)
+                        iconCaptionViewComponent(internalState: internalState, icon: icon)
+                        titleCaptionViewComponent(internalState: internalState, title: title)
                     })
                 }
 
@@ -197,7 +197,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         .scaleEffect(internalState == .pressed ? uiModel.captionPressedScale : 1)
     }
     
-    private func titleCaptionComponent(
+    private func titleCaptionViewComponent(
         internalState: VRectangularCaptionButtonInternalState,
         title: String
     ) -> some View {
@@ -209,7 +209,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .font(uiModel.titleCaptionTextFont)
     }
     
-    private func iconCaptionComponent(
+    private func iconCaptionViewComponent(
         internalState: VRectangularCaptionButtonInternalState,
         icon: Image
     ) -> some View {
