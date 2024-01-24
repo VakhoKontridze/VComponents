@@ -13,7 +13,7 @@ extension LayoutDirection {
         switch self {
         case .leftToRight: false
         case .rightToLeft: true
-        @unknown default: false
+        @unknown default: fatalError()
         }
     }
 }

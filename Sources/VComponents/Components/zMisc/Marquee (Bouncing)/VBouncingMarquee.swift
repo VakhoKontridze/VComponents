@@ -127,7 +127,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return -offset
         case (.rightToLeft, false): return -offset
         case (.rightToLeft, true): return offset
-        @unknown default: return offset
+        @unknown default: fatalError()
         }
     }
     

@@ -127,7 +127,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         switch uiModel.scrollDirection {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
-        @unknown default: return offset
+        @unknown default: fatalError()
         }
     }
     
@@ -139,7 +139,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return offset
         case (.rightToLeft, false): return offset
         case (.rightToLeft, true): return 0
-        @unknown default: return offset
+        @unknown default: fatalError()
         }
     }
     
@@ -151,7 +151,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return 0
         case (.rightToLeft, false): return 0
         case (.rightToLeft, true): return offset
-        @unknown default: return offset
+        @unknown default: fatalError()
         }
     }
     
