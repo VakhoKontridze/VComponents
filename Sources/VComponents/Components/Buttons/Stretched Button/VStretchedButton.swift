@@ -20,7 +20,7 @@ import VCore
 ///     }
 ///
 /// On `macOS` and `watchOS`, an explicit width should be provided.
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS, unavailable) // Doesn't follow HIG
 public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel

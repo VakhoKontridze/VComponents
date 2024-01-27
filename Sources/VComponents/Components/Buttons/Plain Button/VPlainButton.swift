@@ -18,7 +18,7 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS, unavailable) // Doesn't follow HIG
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel

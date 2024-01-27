@@ -19,8 +19,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG
 public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: View {
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel

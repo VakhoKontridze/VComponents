@@ -38,9 +38,9 @@ import VCore
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewUIModel`.
 ///
 /// When running in `SwiftUI` previews or simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
-@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
 public struct VCodeEntryView: View {
     // MARK: Properties
     private let uiModel: VCodeEntryViewUIModel

@@ -40,9 +40,9 @@ import VCore
 ///         .padding()
 ///     }
 ///
-@available(macOS, unavailable) // No `PageTabViewStyle` support
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS, unavailable) // No `PageTabViewStyle`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
 public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,

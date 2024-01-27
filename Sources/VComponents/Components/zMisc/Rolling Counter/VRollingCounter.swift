@@ -52,7 +52,7 @@ public struct VRollingCounter: View {
     // MARK: Properties - Values
     private let value: Double
     @State private var components: [any VRollingCounterComponentProtocol]
-    @State private var numberFormatter: NumberFormatter // Marked as `State` to persist a `class`
+    @State private var numberFormatter: NumberFormatter // Marked as `State` to persist value
     
     // MARK: Properties - Flags
     @State private var isIncrementing: Bool?

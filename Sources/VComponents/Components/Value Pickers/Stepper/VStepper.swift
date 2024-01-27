@@ -21,9 +21,9 @@ import VCore
 ///         .padding()
 ///     }
 ///
-@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
+@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
+@available(watchOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
 public struct VStepper: View {
     // MARK: Properties - UI Model
     private let uiModel: VStepperUIModel

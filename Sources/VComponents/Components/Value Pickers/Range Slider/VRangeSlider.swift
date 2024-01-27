@@ -20,8 +20,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
 public struct VRangeSlider: View {
     // MARK: Properties - UI Model
     private let uiModel: VRangeSliderUIModel

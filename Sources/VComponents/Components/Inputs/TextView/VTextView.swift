@@ -65,9 +65,9 @@ import VCore
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
 @available(iOS 16.0, *)
-@available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow HIG
 public struct VTextView: View {
     // MARK: Properties - UI Model
     private let uiModel: VTextViewUIModel

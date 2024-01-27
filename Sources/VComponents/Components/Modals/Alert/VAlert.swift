@@ -9,10 +9,10 @@ import SwiftUI
 import VCore
 
 // MARK: - V Alert
-@available(macOS, unavailable) // No `View.presentationHost(...)` support
-@available(tvOS, unavailable) // No `View.presentationHost(...)` support
-@available(watchOS, unavailable) // No `View.presentationHost(...)` support
-@available(visionOS, unavailable) // No `View.presentationHost(...)` support
+@available(macOS, unavailable) // No `View.presentationHost(...)`
+@available(tvOS, unavailable) // No `View.presentationHost(...)`
+@available(watchOS, unavailable) // No `View.presentationHost(...)`
+@available(visionOS, unavailable) // No `View.presentationHost(...)`
 struct VAlert<Content>: View
     where Content: View
 {
