@@ -14,7 +14,8 @@ import VCore
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension View {
-    @ViewBuilder func _getInterfaceOrientation(
+    @ViewBuilder 
+    func _getInterfaceOrientation(
         _ action: @escaping (_InterfaceOrientation) -> Void
     ) -> some View {
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS) || os(visionOS))

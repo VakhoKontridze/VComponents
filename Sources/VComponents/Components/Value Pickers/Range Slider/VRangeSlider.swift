@@ -127,14 +127,16 @@ public struct VRangeSlider: View {
             .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
-    @ViewBuilder private var borderView: some View {
+    @ViewBuilder
+    private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         }
     }
     
-    @ViewBuilder private func thumbView(_ thumb: Thumb) -> some View {
+    @ViewBuilder
+    private func thumbView(_ thumb: Thumb) -> some View {
         if uiModel.thumbDimension > 0 {
             Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {

@@ -166,7 +166,8 @@ struct VBottomSheet<Content>: View
         })
     }
     
-    @ViewBuilder private var dragIndicatorView: some View {
+    @ViewBuilder 
+    private var dragIndicatorView: some View {
         if uiModel.dragIndicatorSize.height > 0 {
             RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
                 .frame(size: uiModel.dragIndicatorSize)

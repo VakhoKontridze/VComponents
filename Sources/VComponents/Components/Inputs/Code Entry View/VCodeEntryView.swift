@@ -205,7 +205,8 @@ public struct VCodeEntryView: View {
             .foregroundStyle(uiModel.characterBackgroundColors.value(for: internalState))
     }
 
-    @ViewBuilder private func characterBackgroundBorderView(
+    @ViewBuilder 
+    private func characterBackgroundBorderView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
         if uiModel.characterBackgroundBorderWidth > 0 {

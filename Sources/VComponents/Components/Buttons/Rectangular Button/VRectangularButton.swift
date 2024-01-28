@@ -147,7 +147,8 @@ public struct VRectangularButton<Label>: View where Label: View {
             )
     }
     
-    @ViewBuilder private func borderView(
+    @ViewBuilder 
+    private func borderView(
         internalState: VRectangularButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {

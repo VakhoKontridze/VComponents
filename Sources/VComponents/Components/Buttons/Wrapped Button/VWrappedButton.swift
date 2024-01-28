@@ -176,7 +176,8 @@ public struct VWrappedButton<Label>: View where Label: View {
             )
     }
     
-    @ViewBuilder private func borderView(
+    @ViewBuilder
+    private func borderView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {

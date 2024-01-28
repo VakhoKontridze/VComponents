@@ -80,7 +80,8 @@ public struct VProgressBar: View {
             .foregroundStyle(uiModel.progressColor)
     }
     
-    @ViewBuilder private var borderView: some View {
+    @ViewBuilder 
+    private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)

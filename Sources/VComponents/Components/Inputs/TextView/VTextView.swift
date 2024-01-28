@@ -181,14 +181,16 @@ public struct VTextView: View {
             .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
     }
 
-    @ViewBuilder private var backgroundBorderView: some View {
+    @ViewBuilder 
+    private var backgroundBorderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         }
     }
 
-    @ViewBuilder private var headerView: some View {
+    @ViewBuilder
+    private var headerView: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
                 .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
@@ -208,7 +210,8 @@ public struct VTextView: View {
         }
     }
 
-    @ViewBuilder private var footerView: some View {
+    @ViewBuilder 
+    private var footerView: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
                 .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)

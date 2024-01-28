@@ -60,7 +60,8 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             .clipped()
     }
     
-    @ViewBuilder private var marqueeContentView: some View {
+    @ViewBuilder 
+    private var marqueeContentView: some View {
         if isAnimatable {
             contentView
                 .offset(x: offsetDynamic)
@@ -90,7 +91,8 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             })
     }
     
-    @ViewBuilder private var gradientView: some View {
+    @ViewBuilder 
+    private var gradientView: some View {
         if isAnimatable && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(

@@ -137,7 +137,8 @@ struct VAlert<Content>: View
         .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
     }
     
-    @ViewBuilder private var titleView: some View {
+    @ViewBuilder
+    private var titleView: some View {
         if let title, !title.isEmpty {
             Text(title)
                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
@@ -158,7 +159,8 @@ struct VAlert<Content>: View
         }
     }
     
-    @ViewBuilder private var messageView: some View {
+    @ViewBuilder
+    private var messageView: some View {
         if let message, !message.isEmpty {
             Text(message)
                 .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
@@ -193,7 +195,8 @@ struct VAlert<Content>: View
         .clipped() // Prevents flickering issues with keyboard handling system
     }
     
-    @ViewBuilder private var buttonsScrollView: some View {
+    @ViewBuilder
+    private var buttonsScrollView: some View {
         if isButtonContentLargerThanContainer {
             ScrollView(content: { buttonStackView })
                 .padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
@@ -651,7 +654,8 @@ struct VAlert<Content>: View
     return ContentView()
 })
 
-@ViewBuilder private var previewContent: some View {
+@ViewBuilder
+private var previewContent: some View {
     TextField( // `VTextField` causes preview crash
         "",
         text: .constant("Lorem ipsum dolor sit amet")

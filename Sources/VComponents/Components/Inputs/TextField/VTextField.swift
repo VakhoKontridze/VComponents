@@ -222,7 +222,8 @@ public struct VTextField: View {
         .submitLabel(uiModel.submitButton)
     }
 
-    @ViewBuilder private var searchIcon: some View {
+    @ViewBuilder
+    private var searchIcon: some View {
         if uiModel.contentType.isSearch {
             uiModel.searchButtonIcon
                 .renderingMode(.template)
@@ -249,7 +250,8 @@ public struct VTextField: View {
         .allowsHitTesting(isVisible)
     }
     
-    @ViewBuilder private var visibilityButton: some View {
+    @ViewBuilder 
+    private var visibilityButton: some View {
         if uiModel.contentType.isSecure {
             VPlainButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
@@ -265,14 +267,16 @@ public struct VTextField: View {
             .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
     }
 
-    @ViewBuilder private var backgroundBorderView: some View {
+    @ViewBuilder
+    private var backgroundBorderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         }
     }
 
-    @ViewBuilder private var headerView: some View {
+    @ViewBuilder 
+    private var headerView: some View {
         if let headerTitle, !headerTitle.isEmpty {
             Text(headerTitle)
                 .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
@@ -292,7 +296,8 @@ public struct VTextField: View {
         }
     }
 
-    @ViewBuilder private var footerView: some View {
+    @ViewBuilder 
+    private var footerView: some View {
         if let footerTitle, !footerTitle.isEmpty {
             Text(footerTitle)
                 .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)

@@ -60,7 +60,8 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .clipped()
     }
     
-    @ViewBuilder private var marqueeContentView: some View {
+    @ViewBuilder 
+    private var marqueeContentView: some View {
         if isAnimatable {
             Group(content: { // `Group` is used non-stacked layout
                 contentView
@@ -92,7 +93,8 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .getSize({ contentSize = $0 })
     }
     
-    @ViewBuilder private var gradientView: some View {
+    @ViewBuilder 
+    private var gradientView: some View {
         if isAnimatable && uiModel.gradientWidth > 0 {
             HStack(spacing: 0, content: {
                 LinearGradient(

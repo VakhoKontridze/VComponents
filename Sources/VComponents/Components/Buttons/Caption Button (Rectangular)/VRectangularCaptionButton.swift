@@ -147,7 +147,8 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             )
     }
     
-    @ViewBuilder private func rectangleBorderView(
+    @ViewBuilder 
+    private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         if uiModel.rectangleBorderWidth > 0 {

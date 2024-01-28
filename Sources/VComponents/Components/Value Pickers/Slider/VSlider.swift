@@ -123,14 +123,16 @@ public struct VSlider: View {
             .foregroundStyle(uiModel.progressColors.value(for: internalState))
     }
     
-    @ViewBuilder private var borderView: some View {
+    @ViewBuilder 
+    private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
         }
     }
     
-    @ViewBuilder private var thumbView: some View {
+    @ViewBuilder 
+    private var thumbView: some View {
         if uiModel.thumbDimension > 0 {
             Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {

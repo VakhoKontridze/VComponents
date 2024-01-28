@@ -101,7 +101,8 @@ public struct VRollingCounter: View {
         .onChange(of: value, perform: didChangeValue)
     }
 
-    @ViewBuilder private func digitView(
+    @ViewBuilder
+    private func digitView(
         _ component: any VRollingCounterComponentProtocol
     ) -> some View {
         switch component {

@@ -191,7 +191,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
-    @ViewBuilder private func spinnerCompensatorView(
+    @ViewBuilder 
+    private func spinnerCompensatorView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
         if internalState == .loading {
@@ -200,7 +201,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         }
     }
     
-    @ViewBuilder private func spinnerView(
+    @ViewBuilder 
+    private func spinnerView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
         if internalState == .loading {
@@ -221,7 +223,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             )
     }
     
-    @ViewBuilder private func borderView(
+    @ViewBuilder 
+    private func borderView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
         if uiModel.borderWidth > 0 {

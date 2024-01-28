@@ -150,7 +150,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         .padding(uiModel.headerMargins)
     }
     
-    @ViewBuilder private var dividerView: some View {
+    @ViewBuilder
+    private var dividerView: some View {
         if uiModel.dividerHeight.toPoints(scale: displayScale) > 0 {
             Rectangle()
                 .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))

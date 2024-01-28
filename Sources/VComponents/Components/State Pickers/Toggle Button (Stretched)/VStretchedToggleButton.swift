@@ -204,7 +204,8 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
             )
     }
 
-    @ViewBuilder private var borderView: some View {
+    @ViewBuilder 
+    private var borderView: some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
