@@ -46,11 +46,12 @@ extension View {
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         text: text
                     )
                 }
@@ -76,66 +77,28 @@ extension View {
         text: @escaping (Item) -> String
     ) -> some View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
-        return self
-            .presentationHost(
-                id: id,
-                uiModel: uiModel.presentationHostUIModel,
-                item: item,
-                content: {
-                    VToast(
-                        uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        text: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                text(item)
-                            } else {
-                                ""
-                            }
-                        }()
-                    )
-                }
-            )
-    }
-}
 
-// MARK: - Presenting Data
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension View {
-    /// Modal component that presents toast.
-    ///
-    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
-    public func vToast<T>(
-        id: String,
-        uiModel: VToastUIModel = .init(),
-        isPresented: Binding<Bool>,
-        presenting data: T?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        text: @escaping (T) -> String
-    ) -> some View {
-        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+        let isPresented: Binding<Bool> = .init(
+            get: { item.wrappedValue != nil },
+            set: { if !$0 { item.wrappedValue = nil } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
-                presenting: data,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         text: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return text(data)
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                text(item)
                             } else {
-                                return ""
+                                ""
                             }
                         }()
                     )
@@ -165,18 +128,23 @@ extension View {
         where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { isPresented.wrappedValue && error != nil },
+            set: { if !$0 { isPresented.wrappedValue = false } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
-                error: error,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         text: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 text(error)

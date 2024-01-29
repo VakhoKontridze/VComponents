@@ -25,8 +25,6 @@ public struct VToastUIModel {
     }
 
     /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
     /// Width type. Set to `default`.
@@ -66,10 +64,10 @@ public struct VToastUIModel {
     )
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `nil`.
+    /// Keyboard responsiveness strategy. Set to `none`.
     ///
     /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy?
+    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .none
 
     // MARK: Properties - Shadow
     /// Shadow color.

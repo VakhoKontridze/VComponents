@@ -35,12 +35,10 @@ struct VModal<Content>: View
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @State private var isInternallyPresented: Bool = false
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
 
-    // MARK: Properties - Handles
-    private let presentHandler: (() -> Void)?
-    private let dismissHandler: (() -> Void)?
+    @Binding private var isPresented: Bool
+    @State private var isPresentedInternally: Bool = false
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -48,13 +46,11 @@ struct VModal<Content>: View
     // MARK: Initializers
     init(
         uiModel: VModalUIModel,
-        onPresent presentHandler: (() -> Void)?,
-        onDismiss dismissHandler: (() -> Void)?,
+        isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
-        self.presentHandler = presentHandler
-        self.dismissHandler = dismissHandler
+        self._isPresented = isPresented
         self.content = content
     }
     
@@ -79,19 +75,14 @@ struct VModal<Content>: View
             interfaceOrientation = newValue
         })
 
-        .onAppear(perform: animateIn)
-        .onChange(
-            of: presentationMode.isExternallyDismissed,
-            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-        )
+        .onReceive(presentationMode.presentPublisher, perform: animateIn)
+        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
     }
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
             .contentShape(Rectangle())
-            .onTapGesture(perform: {
-                if uiModel.dismissType.contains(.backTap) { animateOut() }
-            })
+            .onTapGesture(perform: dismissFromDimmingViewTap)
     }
 
     private var modalView: some View {
@@ -119,71 +110,37 @@ struct VModal<Content>: View
             maxWidth: currentWidth,
             maxHeight: currentHeight
         )
-        .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
+        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
-    
-    // MARK: Animations
-    private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = true },
-                completion: { presentHandler?() }
-            )
 
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isInternallyPresented = true },
-                completion: {
-                    DispatchQueue.main.async(execute: { presentHandler?() })
-                }
-            )
-        }
+    // MARK: Lifecycle
+    private func dismissFromDimmingViewTap() {
+        guard uiModel.dismissType.contains(.backTap) else { return }
+
+        isPresented = false
     }
-    
+
+    // MARK: Lifecycle Animations
+    private func animateIn() {
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
+    }
+
     private func animateOut() {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    dismissHandler?()
-                }
+                { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
-            )
-        }
-    }
-    
-    private func animateOutFromExternalDismiss() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    dismissHandler?()
-                }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
+                body: { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
         }
     }

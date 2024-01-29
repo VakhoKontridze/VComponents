@@ -30,12 +30,10 @@ struct VAlert<Content>: View
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @State private var isInternallyPresented: Bool = false
-
-    // MARK: Properties - Handlers
-    private let presentHandler: (() -> Void)?
-    private let dismissHandler: (() -> Void)?
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    
+    @Binding private var isPresented: Bool
+    @State private var isPresentedInternally: Bool = false
 
     // MARK: Properties - Text, Content, and Buttons
     private let title: String?
@@ -51,16 +49,14 @@ struct VAlert<Content>: View
     // MARK: Initializers
     init(
         uiModel: VAlertUIModel,
-        onPresent presentHandler: (() -> Void)?,
-        onDismiss dismissHandler: (() -> Void)?,
+        isPresented: Binding<Bool>,
         title: String?,
         message: String?,
         content: VAlertContent<Content>,
         buttons: [any VAlertButtonProtocol]
     ) {
         self.uiModel = uiModel
-        self.presentHandler = presentHandler
-        self.dismissHandler = dismissHandler
+        self._isPresented = isPresented
         self.title = title
         self.message = message
         self.content = content
@@ -88,11 +84,8 @@ struct VAlert<Content>: View
             interfaceOrientation = newValue
         })
 
-        .onAppear(perform: animateIn)
-        .onChange(
-            of: presentationMode.isExternallyDismissed,
-            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-        )
+        .onReceive(presentationMode.presentPublisher, perform: animateIn)
+        .onReceive(presentationMode.dismissPublisher, perform: { animateOut(completion: nil) })
     }
     
     private var dimmingView: some View {
@@ -134,7 +127,7 @@ struct VAlert<Content>: View
                 $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
             }
         })
-        .scaleEffect(isInternallyPresented ? 1 : uiModel.scaleEffect)
+        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
     
     @ViewBuilder
@@ -192,7 +185,7 @@ struct VAlert<Content>: View
                     .padding(uiModel.contentMargins)
             }
         })
-        .clipped() // Prevents flickering issues with keyboard handling system
+        .clipped() // Fixes flickering issues caused by the keyboard
     }
     
     @ViewBuilder
@@ -247,34 +240,23 @@ struct VAlert<Content>: View
         )
     }
     
-    // MARK: Animations
+    // MARK: Lifecycle Animations
     private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = true },
-                completion: { presentHandler?() }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isInternallyPresented = true },
-                completion: {
-                    DispatchQueue.main.async(execute: { presentHandler?() })
-                }
-            )
-        }
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
     }
-    
-    private func animateOut(completion: (() -> Void)?) {
+
+    private func animateOut(
+        completion: (() -> Void)?
+    ) {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
+                { isPresentedInternally = false },
                 completion: {
-                    presentationMode.dismiss()
-                    dismissHandler?()
+                    presentationMode.dismissCompletion()
                     completion?()
                 }
             )
@@ -282,33 +264,10 @@ struct VAlert<Content>: View
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
+                body: { isPresentedInternally = false },
                 completion: {
-                    presentationMode.dismiss()
-                    DispatchQueue.main.async(execute: { dismissHandler?(); completion?() })
-                }
-            )
-        }
-    }
-    
-    private func animateOutFromExternalDismiss() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    dismissHandler?()
-                }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
+                    presentationMode.dismissCompletion()
+                    DispatchQueue.main.async(execute: { completion?() })
                 }
             )
         }

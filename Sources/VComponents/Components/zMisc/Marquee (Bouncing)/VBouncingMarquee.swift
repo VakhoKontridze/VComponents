@@ -144,7 +144,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         }
     }
     
-    // MARK: Animation
+    // MARK: Animations
     private var animation: Animation {
         let width: CGFloat =
             (contentSize.width + 2*uiModel.inset) -

@@ -76,11 +76,12 @@ extension View {
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VSideBar<Content>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         content: content
                     )
                 }
@@ -108,17 +109,23 @@ extension View {
         where Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { item.wrappedValue != nil },
+            set: { if !$0 { item.wrappedValue = nil } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
-                item: item,
+                isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VSideBar<Content?>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         content: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 content(item)

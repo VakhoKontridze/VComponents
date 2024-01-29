@@ -24,8 +24,6 @@ public struct VSideBarUIModel {
     }
     
     /// Color scheme. Set to `nil`.
-    ///
-    /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
     public var colorScheme: ColorScheme? = nil
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
@@ -87,7 +85,7 @@ public struct VSideBarUIModel {
     /// Keyboard responsiveness strategy. Set to `default`.
     ///
     /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy? = .default
+    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .default
 
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true

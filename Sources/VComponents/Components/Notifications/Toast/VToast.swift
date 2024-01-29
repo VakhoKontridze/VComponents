@@ -24,29 +24,27 @@ struct VToast: View {
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @State private var isInternallyPresented: Bool = false
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
 
-    // MARK: Properties - Handlers
-    private let presentHandler: (() -> Void)?
-    private let dismissHandler: (() -> Void)?
+    @Binding private var isPresented: Bool
+    @State private var isPresentedInternally: Bool = false
+
+    @State private var lifecycleDismissTask: Task<Void, Never>?
 
     // MARK: Properties - Text
     private let text: String
     
     // MARK: Properties - Frame
     @State private var height: CGFloat = 0
-    
+
     // MARK: Initializers
     init(
         uiModel: VToastUIModel,
-        onPresent presentHandler: (() -> Void)?,
-        onDismiss dismissHandler: (() -> Void)?,
+        isPresented: Binding<Bool>,
         text: String
     ) {
         self.uiModel = uiModel
-        self.presentHandler = presentHandler
-        self.dismissHandler = dismissHandler
+        self._isPresented = isPresented
         self.text = text
     }
     
@@ -56,15 +54,14 @@ struct VToast: View {
             dimmingView
             toastView
         })
+        .onDisappear(perform: { lifecycleDismissTask?.cancel() })
+
         .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
 
         ._getInterfaceOrientation({ interfaceOrientation = $0 })
 
-        .onAppear(perform: animateIn)
-        .onChange(
-            of: presentationMode.isExternallyDismissed,
-            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-        )
+        .onReceive(presentationMode.presentPublisher, perform: animateIn)
+        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
     }
 
     private var dimmingView: some View {
@@ -121,7 +118,7 @@ struct VToast: View {
             .background(content: { backgroundView })
             .getSize({ height = $0.height })
             .padding(.horizontal, uiModel.widthType.marginHorizontal)
-            .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
+            .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
     }
     
     private var backgroundView: some View {
@@ -156,91 +153,60 @@ struct VToast: View {
         case .rounded(let cornerRadius): cornerRadius
         }
     }
-    
-    // MARK: Animations
+
+    // MARK: Lifecycle
+    private func dismissAfterLifecycle() {
+        lifecycleDismissTask?.cancel()
+        lifecycleDismissTask = Task(operation: {
+            try? await Task.sleep(seconds: uiModel.duration)
+            guard !Task.isCancelled else { return }
+
+            isPresented = false
+        })
+    }
+
+    // MARK: Lifecycle Animations
     private func animateIn() {
         playHapticEffect()
 
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = true },
-                completion: {
-                    animateOutAfterLifecycle()
-                    presentHandler?()
-                }
+                { isPresentedInternally = true },
+                completion: dismissAfterLifecycle
             )
 
         } else {
             // `VToast` doesn't have an intrinsic height
             // This delay gives SwiftUI change to return height.
             // Other option was to calculate it using `UILabel`.
-            DispatchQueue.main.async(execute: {
+            Task(operation: { @MainActor in
                 withBasicAnimation(
                     uiModel.appearAnimation,
-                    body: { isInternallyPresented = true },
-                    completion: {
-                        animateOutAfterLifecycle()
-                        DispatchQueue.main.async(execute: { presentHandler?() })
-                    }
+                    body: { isPresentedInternally = true },
+                    completion: dismissAfterLifecycle
                 )
             })
         }
     }
-    
+
     private func animateOut() {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    dismissHandler?()
-                }
+                { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
+                body: { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
         }
     }
-    
-    private func animateOutAfterLifecycle() {
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + uiModel.duration,
-            execute: animateOut
-        )
-    }
-    
-    private func animateOutFromExternalDismiss() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    dismissHandler?()
-                }
-            )
 
-        } else {
-            withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
-            )
-        }
-    }
-    
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
@@ -275,7 +241,7 @@ extension VerticalEdge {
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
-                            uiModel.duration = TimeInterval.infinity
+                            uiModel.duration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -300,7 +266,7 @@ extension VerticalEdge {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                            uiModel.duration = TimeInterval.infinity
+                            uiModel.duration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -325,7 +291,7 @@ extension VerticalEdge {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             uiModel.presentationEdge = .top
-                            uiModel.duration = TimeInterval.infinity
+                            uiModel.duration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -351,7 +317,7 @@ extension VerticalEdge {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             widthType.map { uiModel.widthType = $0 }
-                            uiModel.duration = TimeInterval.infinity
+                            uiModel.duration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -398,7 +364,7 @@ extension VerticalEdge {
                         id: "preview",
                         uiModel: {
                             var uiModel = uiModel
-                            uiModel.duration = TimeInterval.infinity
+                            uiModel.duration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,

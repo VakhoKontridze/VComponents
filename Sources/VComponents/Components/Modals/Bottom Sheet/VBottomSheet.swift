@@ -35,12 +35,10 @@ struct VBottomSheet<Content>: View
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
-    @State private var isInternallyPresented: Bool = false
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
 
-    // MARK: Properties - Handlers
-    private let presentHandler: (() -> Void)?
-    private let dismissHandler: (() -> Void)?
+    @Binding private var isPresented: Bool
+    @State private var isPresentedInternally: Bool = false
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -54,18 +52,19 @@ struct VBottomSheet<Content>: View
 
     @State private var offsetBeforeDrag: CGFloat?
 
+    // MARK: Properties - Flags
+    @State private var isBeingDismissedFromPullDown: Bool = false
+
     // MARK: Initializers
     init(
         uiModel: VBottomSheetUIModel,
-        onPresent presentHandler: (() -> Void)?,
-        onDismiss dismissHandler: (() -> Void)?,
+        isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         Self.assertUIModel(uiModel)
         
         self.uiModel = uiModel
-        self.presentHandler = presentHandler
-        self.dismissHandler = dismissHandler
+        self._isPresented = isPresented
         self.content = content
     }
     
@@ -97,19 +96,14 @@ struct VBottomSheet<Content>: View
             perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(_interfaceOrientation: interfaceOrientation).heights) }
         )
 
-        .onAppear(perform: animateIn)
-        .onChange(
-            of: presentationMode.isExternallyDismissed,
-            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-        )
+        .onReceive(presentationMode.presentPublisher, perform: animateIn)
+        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
     }
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
             .contentShape(Rectangle())
-            .onTapGesture(perform: {
-                if uiModel.dismissType.contains(.backTap) { animateOut() }
-            })
+            .onTapGesture(perform: dismissFromDimmingViewTap)
     }
     
     private var bottomSheetView: some View {
@@ -120,7 +114,7 @@ struct VBottomSheet<Content>: View
                         .frame( // Max dimension fixes issue of safe areas and/or landscape
                             maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                         )
-                        .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
+                        .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -148,7 +142,7 @@ struct VBottomSheet<Content>: View
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
                         maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                     )
-                    .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
+                    .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
             })
         })
         .frame(width: currentWidth)
@@ -157,7 +151,7 @@ struct VBottomSheet<Content>: View
                 .frame( // Max dimension fixes issue of safe areas and/or landscape
                     maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                 )
-                .offset(y: isInternallyPresented ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
+                .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
@@ -200,92 +194,47 @@ struct VBottomSheet<Content>: View
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
     }
-    
-    // MARK: Animation
+
+    // MARK: Lifecycle
+    private func dismissFromDimmingViewTap() {
+        guard uiModel.dismissType.contains(.backTap) else { return }
+
+        isPresented = false
+    }
+
+    private func dismissFromPullDown() {
+        isPresented = false
+    }
+
+    // MARK: Lifecycle Animations
     private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = true },
-                completion: { presentHandler?() }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isInternallyPresented = true },
-                completion: {
-                    DispatchQueue.main.async(execute: { presentHandler?() })
-                }
-            )
-        }
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
     }
-    
+
     private func animateOut() {
+        let animation: BasicAnimation? = {
+            if isBeingDismissedFromPullDown {
+                uiModel.pullDownDismissAnimation
+            } else {
+                uiModel.disappearAnimation
+            }
+        }()
+
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    dismissHandler?()
-                }
+                animation?.toSwiftUIAnimation,
+                { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
 
         } else {
             withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
-            )
-        }
-    }
-    
-    private func animateOutFromDrag() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.pullDownDismissAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    dismissHandler?()
-                }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.pullDownDismissAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.dismiss()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
-            )
-        }
-    }
-    
-    private func animateOutFromExternalDismiss() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    dismissHandler?()
-                }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isInternallyPresented = false },
-                completion: {
-                    presentationMode.externalDismissCompletion()
-                    DispatchQueue.main.async(execute: { dismissHandler?() })
-                }
+                animation,
+                body: { isPresentedInternally = false },
+                completion: presentationMode.dismissCompletion
             )
         }
     }
@@ -352,8 +301,12 @@ struct VBottomSheet<Content>: View
         _ snapAction: VBottomSheetSnapAction
     ) {
         switch snapAction {
-        case .dismiss: animateOutFromDrag()
-        case .snap(let newOffset): withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
+        case .dismiss:
+            isBeingDismissedFromPullDown = true
+            dismissFromPullDown()
+
+        case .snap(let newOffset):
+            withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
         }
     }
     

@@ -55,11 +55,12 @@ extension View {
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: title,
                         message: message,
                         content: .empty,
@@ -90,11 +91,12 @@ extension View {
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Content>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: title,
                         message: message,
                         content: .content(content: content),
@@ -125,17 +127,23 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { item.wrappedValue != nil },
+            set: { if !$0 { item.wrappedValue = nil } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
-                item: item,
+                isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 title(item)
@@ -180,17 +188,23 @@ extension View {
         where Content: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { item.wrappedValue != nil },
+            set: { if !$0 { item.wrappedValue = nil } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
-                item: item,
+                isPresented: isPresented,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Content>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 title(item)
@@ -225,130 +239,6 @@ extension View {
     }
 }
 
-// MARK: - Presenting Data
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension View {
-    /// Modal component that presents alert with actions and hosts content.
-    ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
-    public func vAlert<T>(
-        id: String,
-        uiModel: VAlertUIModel = .init(),
-        isPresented: Binding<Bool>,
-        presenting data: T?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (T) -> String?,
-        message: @escaping (T) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
-    ) -> some View {
-        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
-        return self
-            .presentationHost(
-                id: id,
-                uiModel: uiModel.presentationHostUIModel,
-                isPresented: isPresented,
-                presenting: data,
-                content: {
-                    VAlert<Never>(
-                        uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                title(data)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                message(data)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: .empty,
-                        buttons: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                buttons(data)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
-    }
-    
-    /// Modal component that presents alert with actions and hosts content.
-    ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
-    public func vAlert<T, Content>(
-        id: String,
-        uiModel: VAlertUIModel = .init(),
-        isPresented: Binding<Bool>,
-        presenting data: T?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (T) -> String?,
-        message: @escaping (T) -> String?,
-        @ViewBuilder content: @escaping (T) -> Content,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
-    ) -> some View
-        where Content: View
-    {
-        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
-        return self
-            .presentationHost(
-                id: id,
-                uiModel: uiModel.presentationHostUIModel,
-                isPresented: isPresented,
-                presenting: data,
-                content: {
-                    VAlert<Content>(
-                        uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                title(data)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                message(data)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                VAlertContent.content(content: { content(data) })
-                            } else {
-                                VAlertContent.empty
-                            }
-                        }(),
-                        buttons: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                buttons(data)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
-    }
-}
-
 // MARK: - Error
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -372,18 +262,23 @@ extension View {
         where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { isPresented.wrappedValue && error != nil },
+            set: { if !$0 { isPresented.wrappedValue = false } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
-                error: error,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 title(error)
@@ -431,18 +326,23 @@ extension View {
             Content: View
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-        
+
+        let isPresented: Binding<Bool> = .init(
+            get: { isPresented.wrappedValue && error != nil },
+            set: { if !$0 { isPresented.wrappedValue = false } }
+        )
+
         return self
             .presentationHost(
                 id: id,
                 uiModel: uiModel.presentationHostUIModel,
                 isPresented: isPresented,
-                error: error,
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
                 content: {
                     VAlert<Content>(
                         uiModel: uiModel,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
+                        isPresented: isPresented,
                         title: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 title(error)
