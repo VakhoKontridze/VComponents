@@ -39,6 +39,7 @@ struct VBottomSheet<Content>: View
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
+    @State private var didFinishInternalPresentation: Bool = false
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -197,7 +198,12 @@ struct VBottomSheet<Content>: View
 
     // MARK: Lifecycle
     private func dismissFromDimmingViewTap() {
-        guard uiModel.dismissType.contains(.backTap) else { return }
+        guard
+            didFinishInternalPresentation,
+            uiModel.dismissType.contains(.backTap)
+        else {
+            return
+        }
 
         isPresented = false
     }
@@ -208,10 +214,20 @@ struct VBottomSheet<Content>: View
 
     // MARK: Lifecycle Animations
     private func animateIn() {
-        withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
-            { isPresentedInternally = true }
-        )
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                uiModel.appearAnimation?.toSwiftUIAnimation,
+                { isPresentedInternally = true },
+                completion: { didFinishInternalPresentation = true }
+            )
+
+        } else {
+            withBasicAnimation(
+                uiModel.appearAnimation,
+                body: { isPresentedInternally = true },
+                completion: { didFinishInternalPresentation = true }
+            )
+        }
     }
 
     private func animateOut() {

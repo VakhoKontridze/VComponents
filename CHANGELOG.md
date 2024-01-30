@@ -6,6 +6,18 @@ General
 
 - Package now partially supports `visionOS`
 
+VModal
+
+- Modal will no longer dismiss from back-tap before it finished presentation animation 
+
+VBottomSheet
+
+- BottomSheet will no longer dismiss from back-tap before it finished presentation animation
+
+VSideBar
+
+- SideBar will no longer dismiss from back-tap before it finished presentation animation
+
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 
 VTextView
