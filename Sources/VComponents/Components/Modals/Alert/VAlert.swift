@@ -192,7 +192,7 @@ struct VAlert<Content>: View
     private var buttonsScrollView: some View {
         if isButtonContentLargerThanContainer {
             ScrollView(content: { buttonStackView })
-                .padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
+                .clipped()
 
         } else {
             buttonStackView

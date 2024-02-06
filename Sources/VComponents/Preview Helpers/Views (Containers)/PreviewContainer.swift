@@ -37,7 +37,7 @@ struct PreviewContainer<Content>: View where Content: View {
                             .vertical,
                             content: { vStackedContent }
                         )
-                        .padding(.vertical, 1) // Fixes SwiftUI `ScrollView` safe area bug
+                        .clipped()
                     }
                 )
 
@@ -46,7 +46,7 @@ struct PreviewContainer<Content>: View where Content: View {
                     .vertical,
                     content: { vStackedContent }
                 )
-                .padding(.vertical, 1) // Fixes SwiftUI `ScrollView` safe area bug
+                .clipped()
             }
         })
     }
