@@ -138,7 +138,7 @@ struct VBottomSheet<Content>: View
                 contentView
             })
             .frame(maxHeight: .infinity, alignment: .top)
-            .cornerRadius(uiModel.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VGroupBox`
+            .cornerRadius(uiModel.cornerRadius, corners: .topCorners) // Fixes issupe of content-clipping, as it's not in `VGroupBox`
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
