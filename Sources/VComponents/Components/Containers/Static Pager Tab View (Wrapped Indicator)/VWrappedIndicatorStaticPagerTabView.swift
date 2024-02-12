@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 // MARK: - V Wrapped-Indicator Static Pager Tab View
@@ -395,7 +396,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         tabContentOffsets: [CGFloat]
     ) -> CGFloat? {
         guard dataSource.count == tabContentOffsets.count else {
-            VCoreLogWarning("Invalid layout in 'VWrappedIndicatorStaticPagerTabView'")
+            Logger.wrappedIndicatorStaticPagerTabView.warning("Invalid layout in 'VWrappedIndicatorStaticPagerTabView'")
             return nil
         }
 

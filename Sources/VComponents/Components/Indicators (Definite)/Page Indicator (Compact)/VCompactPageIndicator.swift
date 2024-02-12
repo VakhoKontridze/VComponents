@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 // MARK: - V Compact Page Indicator
@@ -400,17 +401,17 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VCompactPageIndicatorUIModel) {
         guard uiModel.visibleDots.isOdd else {
-            VCoreLogError("'VCompactPageIndicator''s 'visible' count must be odd")
+            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'visible' count must be odd")
             fatalError()
         }
         
         guard uiModel.centerDots.isOdd else {
-            VCoreLogError("'VCompactPageIndicator''s 'center' count must be odd")
+            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'center' count must be odd")
             fatalError()
         }
         
         guard uiModel.visibleDots > uiModel.centerDots else {
-            VCoreLogError("'VCompactPageIndicator''s 'visible' must be greater than 'center'")
+            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'visible' must be greater than 'center'")
             fatalError()
         }
     }
