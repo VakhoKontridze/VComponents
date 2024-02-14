@@ -63,8 +63,8 @@ struct VBottomSheet<Content>: View
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        Self.assertUIModel(uiModel)
-        
+        Self.validate(uiModel: uiModel)
+
         self.uiModel = uiModel
         self._isPresented = isPresented
         self.content = content
@@ -340,8 +340,10 @@ struct VBottomSheet<Content>: View
         heights.idealOffset(in: containerSize.height)
     }
     
-    // MARK: Assertion
-    private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
+    // MARK: Validation
+    private static func validate(
+        uiModel: VBottomSheetUIModel
+    ) {
         let heightsGroup: [VBottomSheetUIModel.Heights] = [
             uiModel.sizes.portrait.heights,
             uiModel.sizes.landscape.heights

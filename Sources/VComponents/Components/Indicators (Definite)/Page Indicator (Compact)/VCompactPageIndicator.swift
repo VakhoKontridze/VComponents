@@ -104,7 +104,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     )
         where Content == Never
     {
-        Self.assertUIModel(uiModel)
+        Self.validate(uiModel: uiModel)
         
         self.uiModel = uiModel
         self.total = total
@@ -119,8 +119,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         current: Int,
         @ViewBuilder dot: @escaping (VCompactPageIndicatorDotInternalState, Int) -> Content
     ) {
-        Self.assertUIModel(uiModel)
-        
+        Self.validate(uiModel: uiModel)
+
         self.uiModel = uiModel
         self.total = total
         self.current = current
@@ -398,8 +398,10 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         }
     }
     
-    // MARK: Assertion
-    private static func assertUIModel(_ uiModel: VCompactPageIndicatorUIModel) {
+    // MARK: Validation
+    private static func validate(
+        uiModel: VCompactPageIndicatorUIModel
+    ) {
         guard uiModel.visibleDots.isOdd else {
             Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'visible' count must be odd")
             fatalError()

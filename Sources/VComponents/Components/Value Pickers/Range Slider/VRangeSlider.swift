@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 // MARK: - V Range Slider
@@ -62,7 +63,7 @@ public struct VRangeSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
-        Self.assertValues(
+        Self.validate(
             value: value.wrappedValue,
             difference: difference
         )
@@ -265,8 +266,8 @@ public struct VRangeSlider: View {
         }
     }
     
-    // MARK: Assertion
-    private static func assertValues<V>(
+    // MARK: Validation
+    private static func validate<V>(
         value: ClosedRange<V>,
         difference: V
     )
@@ -274,10 +275,10 @@ public struct VRangeSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
-        assert(
-            value.boundRange >= difference - .ulpOfOne,
-            "Difference between 'VRangeSlider''s 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference'"
-        )
+        guard value.boundRange >= difference - .ulpOfOne else {
+            Logger.rangeSlider.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference'")
+            fatalError()
+        }
     }
 }
 
