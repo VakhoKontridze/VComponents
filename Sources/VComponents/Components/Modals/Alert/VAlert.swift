@@ -85,7 +85,7 @@ struct VAlert<Content>: View
         })
 
         .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: { animateOut(completion: nil) })
+        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
     }
     
     private var dimmingView: some View {
@@ -234,7 +234,10 @@ struct VAlert<Content>: View
             content: { (i, button) in
                 button.makeBody(
                     uiModel: uiModel,
-                    animateOutHandler: { animateOut(completion: $0) }
+                    animateOutHandler: { completion in
+                        isPresented = false
+                        completion?()
+                    }
                 )
             }
         )
@@ -248,27 +251,19 @@ struct VAlert<Content>: View
         )
     }
 
-    private func animateOut(
-        completion: (() -> Void)?
-    ) {
+    private func animateOut() {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
-                completion: {
-                    presentationMode.dismissCompletion()
-                    completion?()
-                }
+                completion: presentationMode.dismissCompletion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
                 body: { isPresentedInternally = false },
-                completion: {
-                    presentationMode.dismissCompletion()
-                    DispatchQueue.main.async(execute: { completion?() })
-                }
+                completion: presentationMode.dismissCompletion
             )
         }
     }
