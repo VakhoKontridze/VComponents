@@ -140,7 +140,7 @@ public struct VRollingCounter: View {
                 .transition(.identity)
 
         default:
-            let _ = Logger.rollingCounter.critical("Unsupported type '\(String(describing: type(of: component)))' in 'VRollingCounter'")
+            let _ = Logger.rollingCounter.critical("Unsupported 'VRollingCounterComponentProtocol' '\(String(describing: type(of: component)))' in 'VRollingCounter'")
             fatalError()
         }
     }

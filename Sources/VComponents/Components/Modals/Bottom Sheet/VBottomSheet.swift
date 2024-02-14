@@ -351,12 +351,12 @@ struct VBottomSheet<Content>: View
 
         for heights in heightsGroup {
             guard heights.min.value <= heights.ideal.value else {
-                Logger.bottomSheet.critical("'VBottomSheet''s 'min' height must be less than or equal to 'ideal' height")
+                Logger.bottomSheet.critical("'min' height must be less than or equal to 'ideal' height in 'VBottomSheet'")
                 fatalError()
             }
 
             guard heights.ideal.value <= heights.max.value else {
-                Logger.bottomSheet.critical("'VBottomSheet''s 'ideal' height must be less than or equal to 'max' height")
+                Logger.bottomSheet.critical("'ideal' height must be less than or equal to 'max' height in 'VBottomSheet'")
                 fatalError()
             }
         }

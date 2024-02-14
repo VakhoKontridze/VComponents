@@ -403,17 +403,17 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         uiModel: VCompactPageIndicatorUIModel
     ) {
         guard uiModel.visibleDots.isOdd else {
-            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'visible' count must be odd")
+            Logger.compactPageIndicator.critical("'visible' count must be odd in 'VCompactPageIndicator'")
             fatalError()
         }
         
         guard uiModel.centerDots.isOdd else {
-            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'center' count must be odd")
+            Logger.compactPageIndicator.critical("'center' count must be odd in 'VCompactPageIndicator'")
             fatalError()
         }
         
         guard uiModel.visibleDots > uiModel.centerDots else {
-            Logger.compactPageIndicator.critical("'VCompactPageIndicator''s 'visible' must be greater than 'center'")
+            Logger.compactPageIndicator.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
             fatalError()
         }
     }

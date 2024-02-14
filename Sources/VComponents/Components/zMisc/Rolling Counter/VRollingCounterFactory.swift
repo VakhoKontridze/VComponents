@@ -23,7 +23,7 @@ struct VRollingCounterFactory {
         guard
             let valueString: String = numberFormatter.string(fromDouble: value)
         else {
-            Logger.rollingCounter.critical("Failed to convert '\(value)' to 'String'")
+            Logger.rollingCounter.critical("Failed to convert '\(String(describing: type(of: value)))' to 'String' in 'VRollingCounter'")
             fatalError()
         }
 
