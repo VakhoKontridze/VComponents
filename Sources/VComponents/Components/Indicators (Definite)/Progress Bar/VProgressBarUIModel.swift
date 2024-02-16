@@ -19,16 +19,42 @@ public struct VProgressBarUIModel {
     /// Set to `10` on `iOS`.
     /// Set to `10` on `macOS`.
     /// Set to `10` on `tvOS`.
-    /// Set to `5` on `watchOS`.
-    public var height: CGFloat = GlobalUIModel.Common.barHeight
+    /// Set to `13.5` on `watchOS`.
+    /// Set to `10` on `visionOS`.
+    public var height: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        10
+#elseif os(tvOS)
+        10
+#elseif os(watchOS)
+        13.5
+#elseif os(visionOS)
+        10
+#endif
+    }()
 
     // MARK: Properties - Corners
     /// Progress bar corner radius.
     /// Set to `5` on `iOS`.
     /// Set to `5` on `macOS`.
     /// Set to `5` on `tvOS`.
-    /// Set to `2.5` on `watchOS`
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
+    /// Set to `6.55` on `watchOS`
+    /// Set to `5` on `visionOS`.
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        5
+#elseif os(macOS)
+        5
+#elseif os(tvOS)
+        5
+#elseif os(watchOS)
+        6.75
+#elseif os(visionOS)
+        5
+#endif
+    }()
 
     /// Indicates if progress bar rounds progress view right-edge. Set to `true`.
     ///
@@ -45,20 +71,73 @@ public struct VProgressBarUIModel {
 
     // MARK: Properties - Track
     /// Track color.
-    public var trackColor: Color = ColorBook.layerGray
+    public var trackColor: Color = {
+#if os(iOS)
+        Color.makeDynamic((230, 230, 230, 1), (45, 45, 45, 1))
+#elseif os(macOS)
+        Color.dynamic(light: Color.black.opacity(0.05), dark: Color.white.opacity(0.125))
+#elseif os(tvOS)
+        Color.makeDynamic((135, 135, 135, 1), (90, 90, 90, 1))
+#elseif os(watchOS)
+        Color.make((90, 90, 90, 1))
+#elseif os(visionOS)
+        Color.white.opacity(0.2)
+#endif
+    }()
 
     // MARK: Properties - Progress
     /// Progress color.
-    public var progressColor: Color = ColorBook.accentBlue
+    public var progressColor: Color = {
+#if os(iOS)
+        Color.blue
+#elseif os(macOS)
+        Color.blue
+#elseif os(tvOS)
+        Color.makeDynamic((220, 220, 220, 1), (220, 220, 220, 1))
+#elseif os(watchOS)
+        Color.white
+#elseif os(visionOS)
+        Color.blue
+#endif
+    }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `0`.
+    /// Border width.
+    /// Set to `0` point on `iOS`.
+    /// Set to `1` pixel on `macOS`.
+    /// Set to `0` point on `tvOS`.
+    /// Set to `0` point on `watchOS`.
+    /// Set to `0` point on `visionOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 0
+    public var borderWidth: PointPixelMeasurement = {
+#if os(iOS)
+        PointPixelMeasurement.points(0)
+#elseif os(macOS)
+        PointPixelMeasurement.pixels(1)
+#elseif os(tvOS)
+        PointPixelMeasurement.points(0)
+#elseif os(watchOS)
+        PointPixelMeasurement.points(0)
+#elseif os(visionOS)
+        PointPixelMeasurement.points(0)
+#endif
+    }()
 
     /// Border color.
-    public var borderColor: Color = .clear
+    public var borderColor: Color = {
+#if os(iOS)
+        Color.clear
+#elseif os(macOS)
+        Color.dynamic(light: Color.black.opacity(0.125), dark: Color.clear)
+#elseif os(tvOS)
+        Color.clear
+#elseif os(watchOS)
+        Color.clear
+#elseif os(visionOS)
+        Color.clear
+#endif
+    }()
 
     // MARK: Properties - Transition
     /// Indicates if `progress` animation is applied. Set to `true`.
@@ -68,7 +147,7 @@ public struct VProgressBarUIModel {
     /// If  animation is set to `nil`, a `nil` animation is still applied.
     /// If this property is set to `false`, then no animation is applied.
     ///
-    /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+    /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesProgressAnimation: Bool = true
 
     /// Progress animation. Set to `default`.

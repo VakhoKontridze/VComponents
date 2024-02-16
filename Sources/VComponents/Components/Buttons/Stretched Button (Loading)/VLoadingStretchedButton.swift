@@ -20,9 +20,10 @@ import VCore
 ///         .padding(.horizontal)
 ///     }
 ///
-/// On `macOS` and `watchOS`, an explicit width should be provided.
+/// On `macOS`, an explicit width should be provided.
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VLoadingStretchedButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VLoadingStretchedButtonUIModel
@@ -245,7 +246,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {

@@ -178,7 +178,7 @@ struct VModal<Content>: View
                         id: "preview",
                         isPresented: $isPresented,
                         content: {
-                            ColorBook.accentBlue
+                            Color.blue
                                 .onTapGesture(perform: { isPresented = false })
                         }
                     )

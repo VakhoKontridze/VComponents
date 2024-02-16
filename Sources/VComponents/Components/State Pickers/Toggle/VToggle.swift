@@ -31,11 +31,13 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
+@available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VToggleUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -136,7 +138,10 @@ public struct VToggle<Label>: View where Label: View {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .foregroundStyle(uiModel.fillColors.value(for: internalState))
-                    
+
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth.toPoints(scale: displayScale))
+
                     Circle()
                         .frame(dimension: uiModel.thumbDimension)
                         .foregroundStyle(uiModel.thumbColors.value(for: internalState))
@@ -206,7 +211,7 @@ public struct VToggle<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {
@@ -239,6 +244,7 @@ public struct VToggle<Label>: View where Label: View {
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
                     uiModel.fillColors.off = uiModel.fillColors.pressedOff
+                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
                     uiModel.thumbColors.off = uiModel.thumbColors.pressedOff
                     uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                     return uiModel
@@ -260,6 +266,7 @@ public struct VToggle<Label>: View where Label: View {
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
                     uiModel.fillColors.on = uiModel.fillColors.pressedOn
+                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
                     uiModel.thumbColors.on = uiModel.thumbColors.pressedOn
                     uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                     return uiModel

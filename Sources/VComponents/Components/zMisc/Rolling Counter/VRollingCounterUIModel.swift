@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - Rolling Counter
+// MARK: - V Rolling Counter UI Model
 /// Model that describes UI.
 public struct VRollingCounterUIModel {
     // MARK: Properties - Global
@@ -22,9 +22,9 @@ public struct VRollingCounterUIModel {
 
     // MARK: Properties - Digit Text
     /// Digit text color.
-    public var digitTextColor: Color = ColorBook.primary
+    public var digitTextColor: Color = .primary
 
-    /// Digit text font. Set to `bold` `body` (`17`).
+    /// Digit text font. Set to `bold` `body`.
     public var digitTextFont: Font = .body.bold()
 
     /// Digit text margins. Set to `zero`.
@@ -54,9 +54,9 @@ public struct VRollingCounterUIModel {
     public var maxFractionDigits: Int = 2
 
     /// Fraction digit text color.
-    public var fractionDigitTextColor: Color = ColorBook.primary
+    public var fractionDigitTextColor: Color = .primary
 
-    /// Digit text font. Set to `bold` `body` (`17`).
+    /// Digit text font. Set to `bold` `body`.
     public var fractionDigitTextFont: Font = .body.bold()
 
     /// Fraction digit text margins. Set to `zero`.
@@ -75,15 +75,15 @@ public struct VRollingCounterUIModel {
     /// Indicates if counter has grouping separator. Set to `true`.
     public var hasGroupingSeparator: Bool = true
 
-    /// Grouping separator. Set to comma (`","`).
+    /// Grouping separator. Set to comma.
     ///
     /// To hide grouping separator, set `hasGroupingSeparator` to `false`.
     public var groupingSeparator: String = ","
 
     /// Grouping separator text color.
-    public var groupingSeparatorTextColor: Color = ColorBook.primary
+    public var groupingSeparatorTextColor: Color = .primary
 
-    /// Grouping separator font. Set to `bold` `body` (`17`).
+    /// Grouping separator font. Set to `bold` `body`.
     public var groupingSeparatorTextFont: Font = .body.bold()
 
     /// Grouping separator text margins. Set to `zero`.
@@ -93,13 +93,13 @@ public struct VRollingCounterUIModel {
     public var groupingSeparatorTextOffsetY: CGFloat = 0
 
     // MARK: Properties - Decimal Separator
-    /// Decimal separator. Set to dot (`"."`).
+    /// Decimal separator. Set to dot.
     public var decimalSeparator: String = "."
 
     /// Decimal separator text color.
-    public var decimalSeparatorTextColor: Color = ColorBook.primary
+    public var decimalSeparatorTextColor: Color = .primary
 
-    /// Decimal separator font. Set to `bold` `body` (`17`).
+    /// Decimal separator font. Set to `bold` `body`.
     public var decimalSeparatorTextFont: Font = .body.bold()
 
     /// Decimal separator text margins. Set to `zero`.
@@ -121,12 +121,12 @@ public struct VRollingCounterUIModel {
     /// Increment highlight color.
     ///
     /// To hide highlight, set to `nil`.
-    public var incrementHighlightColor: Color? = ColorBook.accentGreen
+    public var incrementHighlightColor: Color? = .green
 
     /// Decrement highlight color.
     ///
     /// To hide highlight, set to `nil`.
-    public var decrementHighlightColor: Color? = ColorBook.accentRed
+    public var decrementHighlightColor: Color? = .red
 
     // MARK: Properties - Transition
     /// Highlight and rolling animation. Set to `easeOut` with duration `0.25`.

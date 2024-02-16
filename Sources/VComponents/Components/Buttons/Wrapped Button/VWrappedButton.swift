@@ -19,6 +19,7 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VWrappedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VWrappedButtonUIModel
@@ -200,7 +201,7 @@ public struct VWrappedButton<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !os(tvOS)
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {

@@ -12,4 +12,5 @@ import VCore
 /// Enumeration that represents state, such as `enabled`, `pressed`, `loading`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public typealias VLoadingStretchedButtonInternalState = GenericState_EnabledPressedLoadingDisabled

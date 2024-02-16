@@ -10,7 +10,10 @@
 import SwiftUI
 
 // MARK: - Preview Modal Launcher View
+@available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
 struct PreviewModalLauncherView: View {
     // MARK: Properties
     @Binding private var isPresented: Bool

@@ -15,13 +15,14 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
-///             VComponentsColorBook.secondaryBackground.ignoresSafeArea()
+///             Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
+///                 uiModel: .systemBackgroundColor,
 ///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum",
 ///                 content: {
-///                     VComponentsColorBook.accentBlue
+///                     VComponentsColor.blue
 ///                         .frame(height: 150)
 ///                 }
 ///             )
@@ -35,6 +36,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VDisclosureGroup(
+///             ...
 ///             state: Binding(isExpanded: $isExpanded),
 ///             ...
 ///         )
@@ -42,6 +44,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // No `PlainDisclosureGroup`
 @available(watchOS, unavailable) // No `PlainDisclosureGroup`
+@available(visionOS, unavailable) // No `PlainDisclosureGroup`
 public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,
@@ -187,18 +190,18 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 // MARK: - Previews
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {
         @State private var state: VDisclosureGroupState = .expanded
 
         var body: some View {
-            PreviewContainer(layer: .secondary, content: {
+            PreviewContainer(content: {
                 VDisclosureGroup(
                     state: $state,
                     headerTitle: "Lorem Ipsum",
-                    content: { ColorBook.accentBlue.frame(height: 100) }
+                    content: { Color.blue.frame(height: 100) }
                 )
                 .padding(.horizontal)
             })
@@ -209,12 +212,12 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 })
 
 #Preview("States", body: {
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(content: {
         PreviewRow("Collapsed", content: {
             VDisclosureGroup(
                 state: .constant(.collapsed),
                 headerTitle: "Lorem Ipsum",
-                content: { ColorBook.accentBlue.frame(height: 100) }
+                content: { Color.blue.frame(height: 100) }
             )
             .padding(.horizontal)
         })
@@ -223,7 +226,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             VDisclosureGroup(
                 state: .constant(.expanded),
                 headerTitle: "Lorem Ipsum",
-                content: { ColorBook.accentBlue.frame(height: 100) }
+                content: { Color.blue.frame(height: 100) }
             )
             .padding(.horizontal)
         })
@@ -238,7 +241,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }(),
                 state: .constant(.collapsed),
                 headerTitle: "Lorem Ipsum",
-                content: { ColorBook.accentBlue.frame(height: 100) }
+                content: { Color.blue.frame(height: 100) }
             )
             .padding(.horizontal)
         })
@@ -253,7 +256,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }(),
                 state: .constant(.expanded),
                 headerTitle: "Lorem Ipsum",
-                content: { ColorBook.accentBlue.frame(height: 100) }
+                content: { Color.blue.frame(height: 100) }
             )
             .disabled(true)
             .padding(.horizontal)

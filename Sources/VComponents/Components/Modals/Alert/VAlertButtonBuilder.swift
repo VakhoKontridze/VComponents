@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 @resultBuilder public struct VAlertButtonBuilder {
     // MARK: Properties
     public typealias Component = any VAlertButtonConvertible

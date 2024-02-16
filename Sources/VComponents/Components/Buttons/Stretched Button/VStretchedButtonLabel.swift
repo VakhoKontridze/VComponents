@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Stretched Button Label
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 enum VStretchedButtonLabel<Label> where Label: View {
     case title(title: String)
     case icon(icon: Image)

@@ -26,14 +26,7 @@ struct PreviewHeader: View {
             VStack(content: Divider.init)
             
             Text(title)
-                .applyModifier({
-#if os(watchOS)
-                    $0
-                        .foregroundStyle(ColorBook.primary)
-#else
-                    $0
-#endif
-                })
+                .foregroundStyle(Color.primary)
                 .font(.caption.bold())
 
             VStack(content: Divider.init)

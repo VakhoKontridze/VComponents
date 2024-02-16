@@ -262,7 +262,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
                     .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
-                    .foregroundStyle(ColorBook.accentBlue)
+                    .foregroundStyle(Color.blue)
             }
         )
         .frame(dimension: 64)

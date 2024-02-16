@@ -11,6 +11,7 @@ import VCore
 // MARK: - V Plain Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public struct VPlainButtonUIModel {
     // MARK: Properties - Label
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
@@ -27,43 +28,40 @@ public struct VPlainButtonUIModel {
     /// Spacing between title text and icon. Set to `8`.
     ///
     /// Applicable only if `init` with icon and title is used.
-    public var titleTextAndIconSpacing: CGFloat = GlobalUIModel.Buttons.titleTextAndIconSpacing
+    public var titleTextAndIconSpacing: CGFloat = 8
 
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
-    // MARK: Properties - Label - Text
-    /// Title text minimum scale factor. Set to `0.75`.
-    public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
-
-    /// Title text colors.
-    public var titleTextColors: StateColors = .init(
-        enabled: ColorBook.accentBlue,
-        pressed: ColorBook.accentBluePressedDisabled,
-        disabled: ColorBook.accentBluePressedDisabled
-    )
-
-    /// Title text font.
-    /// Set to `body` (`17`) on `iOS`.
-    /// Set to `body` (`13`) on `macOS`.
-    /// Set to `body` (`17`) on `watchOS`.
-    public var titleTextFont: Font = {
+    public var labelPressedScale: CGFloat = {
 #if os(iOS)
-        Font.body
+        1
 #elseif os(macOS)
-        Font.body
+        1
 #elseif os(watchOS)
-        Font.body
+        0.98
 #else
         fatalError() // Not supported
 #endif
     }()
 
+    // MARK: Properties - Label - Text
+    /// Title text minimum scale factor. Set to `0.75`.
+    public var titleTextMinimumScaleFactor: CGFloat = 0.75
+
+    /// Title text colors.
+    public var titleTextColors: StateColors = .init(
+        enabled: Color.blue,
+        pressed: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5)),
+        disabled: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
+    )
+
+    /// Title text font. Set to `body`.
+    public var titleTextFont: Font = .body
+
     // MARK: Properties - Label - Icon
-    /// Icon size. Set to `24x24`.
+    /// Icon size. Set to `(24, 24)`.
     ///
     /// This icon size is calibrated for `init` with icon.
     /// For `init` with icon and title, this property should be scaled down.
@@ -74,9 +72,9 @@ public struct VPlainButtonUIModel {
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
     public var iconColors: StateColors = .init(
-        enabled: ColorBook.accentBlue,
-        pressed: ColorBook.accentBluePressedDisabled,
-        disabled: ColorBook.accentBluePressedDisabled
+        enabled: Color.blue,
+        pressed: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5)),
+        disabled: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
     )
 
     /// Icon opacities. Set to `1`s.

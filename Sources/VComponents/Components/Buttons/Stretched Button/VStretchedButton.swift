@@ -21,6 +21,7 @@ import VCore
 ///
 /// On `macOS` and `watchOS`, an explicit width should be provided.
 @available(tvOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable)
 public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel
@@ -202,7 +203,7 @@ public struct VStretchedButton<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !os(tvOS)
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {

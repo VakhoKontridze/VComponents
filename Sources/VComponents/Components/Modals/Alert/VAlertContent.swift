@@ -11,6 +11,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 enum VAlertContent<Content> where Content: View {
     case empty
     case content(content: () -> Content)

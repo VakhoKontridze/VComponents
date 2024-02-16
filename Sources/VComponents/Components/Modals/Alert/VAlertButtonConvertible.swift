@@ -12,6 +12,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public protocol VAlertButtonConvertible {
     /// Converts self to `VAlertButtonProtocol` `Array`.
     func toButtons() -> [any VAlertButtonProtocol]
@@ -20,6 +21,7 @@ public protocol VAlertButtonConvertible {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { self }
 }
@@ -27,6 +29,7 @@ extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtoc
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension EmptyView: VAlertButtonConvertible {
     public func toButtons() -> [any VAlertButtonProtocol] { [] }
 }

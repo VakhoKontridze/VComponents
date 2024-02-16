@@ -25,7 +25,14 @@ struct PreviewContainer<Content>: View where Content: View {
 
     var body: some View {
         ZStack(content: {
-            layer.color.ignoresSafeArea()
+#if os(iOS)
+            switch layer {
+            case .primary: Color(uiColor: UIColor.systemBackground).ignoresSafeArea()
+            case .secondary: Color(uiColor: .secondarySystemBackground).ignoresSafeArea()
+            }
+#else
+            Color.clear.ignoresSafeArea()
+#endif
 
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 ViewThatFits(
@@ -57,22 +64,14 @@ struct PreviewContainer<Content>: View where Content: View {
             content: content
         )
         .padding(.vertical, 20)
+        .frame(maxWidth: .infinity)
     }
 }
 
 // MARK: - Preview Container Layer
 enum PreviewContainerLayer {
-    // MARK: Cases
     case primary
     case secondary
-
-    // MARK: Properties
-    var color: Color {
-        switch self {
-        case .primary: ColorBook.background
-        case .secondary: ColorBook.secondaryBackground
-        }
-    }
 }
 
 // MARK: - Preview

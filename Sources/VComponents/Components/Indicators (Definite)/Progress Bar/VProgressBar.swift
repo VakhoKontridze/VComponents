@@ -21,7 +21,8 @@ import VCore
 public struct VProgressBar: View {
     // MARK: Properties
     private let uiModel: VProgressBarUIModel
-    
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
     private let range: ClosedRange<Double>
     private let value: Double
     
@@ -82,9 +83,11 @@ public struct VProgressBar: View {
     
     @ViewBuilder 
     private var borderView: some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
         }
     }
     
@@ -115,15 +118,45 @@ public struct VProgressBar: View {
     return ContentView()
 })
 
+#Preview("States", body: {
+    struct ContentView: View {
+        @State private var value: Double = 0
+
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(nil, content: {
+                    VProgressBar(value: value)
+                        .padding(.horizontal)
+                })
+
+                PreviewHeader("Native")
+
+                PreviewRow(nil, content: {
+                    ProgressView(value: value)
+                        .progressViewStyle(.linear)
+                        .padding(.horizontal)
+                })
+            })
+            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+        }
+    }
+
+    return ContentView()
+})
+
 #Preview("Layout Directions", body: {
     struct ContentView: View {
         private let length: CGFloat = {
 #if os(iOS)
             250
 #elseif os(macOS)
-            300
-#else
-            fatalError() // Not supported
+            200
+#elseif os(tvOS)
+            250
+#elseif os(watchOS)
+            100
+#elseif os(visionOS)
+            250
 #endif
         }()
 

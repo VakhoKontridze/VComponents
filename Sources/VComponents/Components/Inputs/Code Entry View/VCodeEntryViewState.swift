@@ -12,4 +12,5 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 typealias VCodeEntryViewInternalState = GenericState_EnabledFocusedDisabled

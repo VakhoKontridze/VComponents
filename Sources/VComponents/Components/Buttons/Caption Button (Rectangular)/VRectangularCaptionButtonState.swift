@@ -12,4 +12,5 @@ import VCore
 /// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public typealias VRectangularCaptionButtonInternalState = GenericState_EnabledPressedDisabled

@@ -20,6 +20,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VSlider: View {
     // MARK: Properties - UI Model
     private let uiModel: VSliderUIModel
@@ -125,9 +126,11 @@ public struct VSlider: View {
     
     @ViewBuilder 
     private var borderView: some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
     
@@ -146,8 +149,8 @@ public struct VSlider: View {
                 )
             })
             .frame( // Must be put into group, as content already has frame
-                maxWidth: uiModel.direction.isHorizontal ? .infinity : nil,
-                maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
+                maxWidth: uiModel.direction.isHorizontal ? CGFloat.infinity : nil,
+                maxHeight: uiModel.direction.isHorizontal ? nil : CGFloat.infinity,
                 alignment: uiModel.direction.toAlignment
             )
             .applyIf(
@@ -229,7 +232,7 @@ public struct VSlider: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {
@@ -280,7 +283,7 @@ public struct VSlider: View {
 #if os(iOS)
             250
 #elseif os(macOS)
-            300
+            200
 #else
             fatalError() // Not supported
 #endif

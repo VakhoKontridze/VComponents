@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VBottomSheetUIModel {
     // MARK: Properties - Global
     var presentationHostUIModel: PresentationHostUIModel {
@@ -27,7 +28,7 @@ public struct VBottomSheetUIModel {
     public var colorScheme: ColorScheme? = nil
 
     /// Bottom sheet sizes.
-    /// Set to `1` ratio of container width, and `0.6`, `0.6`, and `0.9` ratios of container height in portrait.
+    /// Set to `1` ratio of container width, and `(0.6, 0.6, 0.9)` ratios of container height in portrait.
     /// Set to `0.7` ratio of container width and `0.9` ratio of container height in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
@@ -42,11 +43,17 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Corners
     /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
+    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.background
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
@@ -62,7 +69,7 @@ public struct VBottomSheetUIModel {
     }
 
     // MARK: Properties - Drag Indicator
-    /// Drag indicator size. Set to `50x4`.
+    /// Drag indicator size. Set to `(50, 4)`.
     ///
     /// To hide drag indicator, set to `zero`.
     public var dragIndicatorSize: CGSize = .init(width: 50, height: 4)
@@ -71,7 +78,7 @@ public struct VBottomSheetUIModel {
     public var dragIndicatorCornerRadius: CGFloat = 2
 
     /// Drag indicator color.
-    public var dragIndicatorColor: Color = GlobalUIModel.Common.dragIndicatorColor
+    public var dragIndicatorColor: Color = .makeDynamic((200, 200, 200, 1), (100, 100, 100, 1))
 
     /// Drag indicator margins. Set to `15`s.
     public var dragIndicatorMargins: VerticalMargins = .init(15)
@@ -128,24 +135,24 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = GlobalUIModel.Common.dimmingViewColor
+    public var dimmingViewColor: Color = .clear
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = .clear
+    public var shadowColor: Color = Color.make((200, 200, 200, 0.5))
 
-    /// Shadow radius. Set to `0`.
-    public var shadowRadius: CGFloat = 0
+    /// Shadow radius. Set to `3`.
+    public var shadowRadius: CGFloat = 3
 
-    /// Shadow offset. Set to `zero`.
-    public var shadowOffset: CGPoint = .zero
+    /// Shadow offset. Set to `(0, -3)`.
+    public var shadowOffset: CGPoint = .init(x: 0, y: -3)
 
     // MARK: Properties - Transition
     /// Appear animation. Set to `easeInOut` with duration `0.3`.
-    public var appearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
+    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     /// Disappear animation. Set to `easeInOut` with duration `0.3`.
-    public var disappearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.1`.
     public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
@@ -338,12 +345,13 @@ public struct VBottomSheetUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that insets content.
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerContentMargin)
+        uiModel.contentMargins = Margins(15)
         
         return uiModel
     }

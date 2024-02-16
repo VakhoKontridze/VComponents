@@ -19,6 +19,7 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRectangularButtonUIModel
@@ -171,7 +172,7 @@ public struct VRectangularButton<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !os(tvOS)
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {
@@ -184,6 +185,10 @@ public struct VRectangularButton<Label>: View where Label: View {
             action: {},
             icon: Image(systemName: "swift")
         )
+
+        Button(action: {}, label: {
+            Image(systemName: "swift")
+        })
     })
 })
 

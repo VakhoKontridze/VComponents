@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Rectangular Caption Button Caption
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 enum VRectangularCaptionButtonCaption<Caption> where Caption: View {
     case title(title: String)
     case icon(icon: Image)

@@ -21,6 +21,7 @@ import VCore
 ///
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: View {
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel
@@ -235,7 +236,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS))
+#if !(os(macOS) || os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {

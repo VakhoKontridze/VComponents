@@ -12,12 +12,13 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VDisclosureGroupUIModel {
     // MARK: Properties - Global
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()
 
-        uiModel.backgroundColor = backgroundColor
+        uiModel.backgroundColor = Color.clear // Color is handled in `groupBoxSubUIModel`
 
         uiModel.expandCollapseAnimation = expandCollapseAnimation
 
@@ -26,7 +27,7 @@ public struct VDisclosureGroupUIModel {
 
     // MARK: Properties - Corners
     /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
+    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     var groupBoxSubUIModel: VGroupBoxUIModel {
@@ -43,11 +44,22 @@ public struct VDisclosureGroupUIModel {
     }
 
     /// Background color.
-    public var backgroundColor: Color = ColorBook.background
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.secondarySystemBackground)
+#elseif os(macOS)
+        Color.dynamic(light: Color.black.opacity(0.03), dark: Color.black.opacity(0.15))
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Header
-    /// Header margins. Set to `15` horizontal and `10` vertical.
-    public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
+    /// Header margins. Set to `(15, 15, 10, 10)`.
+    public var headerMargins: Margins = .init(
+        horizontal: 15,
+        vertical: 10
+    )
 
     /// Indicates if disclosure group expands and collapses from header tap. Set to `true`.
     public var expandsAndCollapsesOnHeaderTap: Bool = true
@@ -55,14 +67,14 @@ public struct VDisclosureGroupUIModel {
     // MARK: Properties - Header - Text
     /// Header title text colors.
     public var headerTitleTextColors: StateColors = .init(
-        collapsed: ColorBook.primary,
-        expanded: ColorBook.primary,
-        disabled: ColorBook.primaryPressedDisabled
+        collapsed: Color.primary,
+        expanded: Color.primary,
+        disabled: Color.primary.opacity(0.3)
     )
 
     /// Header title tex font.
-    /// Set to `bold` `headline` (`17`) on `iOS`.
-    /// Set to `bold` `headline` (`13`) on `macOS`.
+    /// Set to `bold` `headline` on `iOS`.
+    /// Set to `bold` `headline` on `macOS`.
     public var headerTitleTextFont: Font = .headline.weight(.bold)
 
     // MARK: Properties - Disclosure Button
@@ -70,30 +82,42 @@ public struct VDisclosureGroupUIModel {
     public var disclosureButtonIcon: Image = ImageBook.chevronUp
 
     /// Model for customizing disclosure button.
-    /// `size` is set to `30x30`,
+    /// `size` is set to `(30, 30)`,
     /// `cornerRadius` is set to `16`,
     /// `backgroundColors` are changed,
-    /// `iconSize` is set to `12x12`,
+    /// `iconSize` is set to `(12, 12)`,
     /// `iconColors` are changed,
     /// `hitBox` is set to `zero`,
     /// `haptic` is set to `nil`.
     public var disclosureButtonSubUIModel: VRectangularButtonUIModel = {
         var uiModel: VRectangularButtonUIModel = .init()
 
-        uiModel.size = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+        uiModel.size = CGSize(dimension: 30)
         uiModel.cornerRadius = 16
 
-        uiModel.backgroundColors = VRectangularButtonUIModel.StateColors(
-            enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
-            pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-            disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
-        )
+        uiModel.backgroundColors = {
+#if os(iOS)
+            VRectangularButtonUIModel.StateColors(
+                enabled: Color.makeDynamic((220, 220, 220, 1), (60, 60, 60, 1)),
+                pressed: Color.makeDynamic((200, 200, 200, 1), (40, 40, 40, 1)),
+                disabled: Color.makeDynamic((230, 230, 230, 1), (40, 40, 40, 1))
+            )
+#elseif os(macOS)
+            VRectangularButtonUIModel.StateColors(
+                enabled: Color.makeDynamic((0, 0, 0, 0.1), (60, 60, 60, 1)),
+                pressed: Color.makeDynamic((0, 0, 0, 0.15), (40, 40, 40, 1)),
+                disabled: Color.makeDynamic((0, 0, 0, 0.05), (40, 40, 40, 1))
+            )
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
-        uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+        uiModel.iconSize = CGSize(dimension: 12)
         uiModel.iconColors = VRectangularButtonUIModel.StateColors(
-            enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
-            pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
-            disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled
+            enabled: Color.primary,
+            pressed: Color.primary,
+            disabled: Color.primary.opacity(0.3)
         )
 
         uiModel.hitBox = .zero
@@ -116,14 +140,14 @@ public struct VDisclosureGroupUIModel {
     /// Divider height. Set to `2`pixels.
     ///
     /// To hide divider, set to `0`.
-    public var dividerHeight: PointPixelMeasurement = .pixels(GlobalUIModel.Common.dividerHeightPx)
+    public var dividerHeight: PointPixelMeasurement = .pixels(2)
 
     /// Divider color.
-    public var dividerColor: Color = GlobalUIModel.Common.dividerColor
+    public var dividerColor: Color = .makePlatformDynamic((60, 60, 60, 0.3), (120, 120, 120, 0.6))
 
-    /// Divider margins. Set to `15` horizontal and `0` vertical.
+    /// Divider margins. Set to `(15, 15, 0, 0)`.
     public var dividerMargins: Margins = .init(
-        horizontal: GlobalUIModel.Common.containerContentMargin,
+        horizontal: 15,
         vertical: 0
     )
 
@@ -141,7 +165,7 @@ public struct VDisclosureGroupUIModel {
     /// If  animation is set to `nil`, a `nil` animation is still applied.
     /// If this property is set to `false`, then no animation is applied.
     ///
-    /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+    /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesExpandCollapseAnimation: Bool = true
 
     /// Expand and collapse animation. Set to `default`.
@@ -171,13 +195,37 @@ public struct VDisclosureGroupUIModel {
 // MARK: - Factory
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VDisclosureGroupUIModel {
     /// `VDisclosureGroupUIModel` that insets content.
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
-        
+        uiModel.contentMargins = Margins(uiModel.cornerRadius)
+
+        return uiModel
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VDisclosureGroupUIModel {
+    /// `VDisclosureGroupUIModel` with `UIColor.systemBackground` to be used on `UIColor.secondarySystemBackground`.
+    public static var systemBackgroundColor: Self {
+        var uiModel: Self = .init()
+
+#if os(iOS)
+        uiModel.backgroundColor = Color(uiColor: UIColor.systemBackground)
+#endif
+
+        uiModel.disclosureButtonSubUIModel.backgroundColors = VRectangularButtonUIModel.StateColors(
+            enabled: Color.makeDynamic((230, 230, 230, 1), (60, 60, 60, 1)),
+            pressed: Color.makeDynamic((210, 210, 210, 1), (40, 40, 40, 1)),
+            disabled: Color.makeDynamic((240, 240, 240, 1), (40, 40, 40, 1))
+        )
+
         return uiModel
     }
 }

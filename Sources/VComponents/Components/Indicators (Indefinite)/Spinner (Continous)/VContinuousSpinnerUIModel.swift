@@ -16,6 +16,7 @@ public struct VContinuousSpinnerUIModel {
     /// Set to `25` on `macOS`.
     /// Set to `30` on `tvOS`.
     /// Set to `15` on `watchOS`.
+    /// Set to `30` on `visionOS`.
     public var dimension: CGFloat = {
 #if os(iOS)
         15
@@ -26,7 +27,7 @@ public struct VContinuousSpinnerUIModel {
 #elseif os(watchOS)
         15
 #elseif os(visionOS)
-        fatalError() // FIXME: Implement
+        30
 #endif
     }()
 
@@ -38,6 +39,7 @@ public struct VContinuousSpinnerUIModel {
     /// Set to `3` on `macOS`.
     /// Set to `4` on `tvOS`.
     /// Set to `2` on `watchOS`.
+    /// Set to `4` on `visionOS`.
     public var thickness: CGFloat = {
 #if os(iOS)
         2
@@ -48,12 +50,24 @@ public struct VContinuousSpinnerUIModel {
 #elseif os(watchOS)
         2
 #elseif os(visionOS)
-        fatalError() // FIXME: Implement
+        4
 #endif
     }()
 
     /// Color.
-    public var color: Color = ColorBook.accentBlue
+    public var color: Color = {
+#if os(iOS)
+        Color.blue
+#elseif os(macOS)
+        Color.gray
+#elseif os(tvOS)
+        Color.gray
+#elseif os(watchOS)
+        Color.gray
+#elseif os(visionOS)
+        Color.gray
+#endif
+    }()
 
     /// Animation. Set to `linear` with duration `0.75`.
     public var animation: Animation = .linear(duration: 0.75)

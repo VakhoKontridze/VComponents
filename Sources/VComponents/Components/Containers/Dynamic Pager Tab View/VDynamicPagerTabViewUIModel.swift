@@ -13,18 +13,25 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VDynamicPagerTabViewUIModel {
     // MARK: Properties - Global
     /// Spacing between tab bar and tab view. Set to `0`.
-    public var tabBarAndTabViewSpacing: CGFloat = GlobalUIModel.Containers.pagerTabViewTabBarAndTabViewSpacing
+    public var tabBarAndTabViewSpacing: CGFloat = 0
 
     // MARK: Properties - Header
     /// Header background color.
-    public var headerBackgroundColor: Color = GlobalUIModel.Containers.pagerTabViewBackgroundColor
+    public var headerBackgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Tab Bar
     /// Tab bar alignment for tab items. Set to `top`.
-    public var tabBarAlignment: VerticalAlignment = GlobalUIModel.Containers.pagerTabViewTabBarAlignment
+    public var tabBarAlignment: VerticalAlignment = .top
 
     /// Tab bar horizontal margin. Set to `5`.
     public var tabBarMarginHorizontal: CGFloat = 5
@@ -37,57 +44,63 @@ public struct VDynamicPagerTabViewUIModel {
 
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins. Set to `10`s.
-    public var tabItemMargins: Margins = .init(GlobalUIModel.Containers.pagerTabViewTabItemMargin)
+    public var tabItemMargins: Margins = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
     /// Tab item text minimum scale factor. Set to `0.75`.
-    public var tabItemTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+    public var tabItemTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Tab item text colors.
     public var tabItemTextColors: TabItemStateColors = .init(
-        deselected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDeselected,
-        selected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDeSelected,
-        pressedDeselected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorPressedDeselected,
-        pressedSelected: GlobalUIModel.Containers.pagerTabViewTabItemTextColorPressedSelected,
-        disabled: GlobalUIModel.Containers.pagerTabViewTabItemTextColorDisabled
+        deselected: Color.primary,
+        selected: Color.blue,
+        pressedDeselected: Color.primary.opacity(0.3),
+        pressedSelected: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+        disabled: Color.primary.opacity(0.3)
     )
 
-    /// Tab item text font. Set to `body` (`17`).
-    public var tabItemTextFont: Font = GlobalUIModel.Containers.pagerTabViewTabItemTextFont
+    /// Tab item text font. Set to `body`.
+    public var tabItemTextFont: Font = .body
 
     // MARK: Properties - Tab Indicator Strip
     /// Tab indicator strip alignment. Set to `bottom`.
-    public var tabIndicatorStripAlignment: VerticalAlignment = GlobalUIModel.Containers.pagerTabViewTabIndicatorStripAlignment
+    public var tabIndicatorStripAlignment: VerticalAlignment = .bottom
 
     // MARK: Properties - Tab Indicator Strip - Track
     /// Tab indicator track height. Set to `2`.
-    public var tabIndicatorTrackHeight: CGFloat = GlobalUIModel.Containers.pagerTabViewTabIndicatorTrackHeight
+    public var tabIndicatorTrackHeight: CGFloat = 2
 
     /// Tab indicator track color.
-    public var tabIndicatorTrackColor: Color = GlobalUIModel.Containers.pagerTabViewTabIndicatorTrackColor
+    public var tabIndicatorTrackColor: Color = .clear
 
     // MARK: Properties - Tab Indicator Strip - Indicator
     /// Tab selection indicator width type. Set to `default`.
     public var tabSelectionIndicatorWidthType: TabSelectionIndicatorWidthType = .default
 
     /// Selected tab indicator height. Set to `2`.
-    public var selectedTabIndicatorHeight: CGFloat = GlobalUIModel.Containers.pagerTabViewSelectedTabIndicatorHeight
+    public var selectedTabIndicatorHeight: CGFloat = 2
 
     /// Selected tab indicator corner radius. Set to `0`.
-    public var selectedTabIndicatorCornerRadius: CGFloat = GlobalUIModel.Containers.pagerTabViewSelectedTabIndicatorCornerRadius
+    public var selectedTabIndicatorCornerRadius: CGFloat = 0
 
     /// Selected tab indicator color.
-    public var selectedTabIndicatorColor: Color = GlobalUIModel.Containers.pagerTabViewSelectedTabIndicatorColor
+    public var selectedTabIndicatorColor: Color = .blue
 
     /// Selected tab indicator animation. Set to `default`.
-    public var selectedTabIndicatorAnimation: Animation? = GlobalUIModel.Containers.pagerTabViewSelectedTabIndicatorAnimation
+    public var selectedTabIndicatorAnimation: Animation? = .default
 
     /// Selected tab indicator scroll anchor. Set to `center`.
     public var selectedTabIndicatorScrollAnchor: UnitPoint = .center
 
     // MARK: Properties - Tab View
     /// Tab view background color.
-    public var tabViewBackgroundColor: Color = GlobalUIModel.Containers.pagerTabViewBackgroundColor
+    public var tabViewBackgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Initializers
     /// Initializes UI model with default values.

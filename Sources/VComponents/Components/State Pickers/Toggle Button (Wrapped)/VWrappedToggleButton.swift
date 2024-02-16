@@ -47,6 +47,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VWrappedToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappedToggleButtonUIModel
@@ -232,6 +233,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 // MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VWrappedToggleButtonInternalState {
     fileprivate var isPressedOffPressedOn: Bool {
         switch self {
@@ -247,7 +249,7 @@ extension VWrappedToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

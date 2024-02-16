@@ -13,28 +13,29 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VStepperUIModel {
     // MARK: Properties - Global
-    /// Stepper size. Set to `94x32`, similarly to native stepper.
+    /// Stepper size. Set to `(94, 32)`.
     public var size: CGSize = .init(width: 94, height: 32)
 
     // MARK: Properties - Corner
-    /// Stepper corner radius. Set to `7`, similarly to native stepper.
+    /// Stepper corner radius. Set to `7`.
     public var cornerRadius: CGFloat = 7
 
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: ColorBook.layerGray,
-        disabled: ColorBook.layerGrayDisabled
+        enabled: Color.makePlatformDynamic((235, 235, 235, 1), (60, 60, 60, 1)),
+        disabled: Color.makePlatformDynamic((245, 245, 245, 1), (50, 50, 50, 1))
     )
 
     // MARK: Properties - Button Background
     /// Plus and minus button background colors.
     public var buttonBackgroundColors: ButtonStateColors = .init(
-        enabled: .clear,
-        pressed: ColorBook._stepperButtonBackgroundPressed,
-        disabled: .clear
+        enabled: Color.clear,
+        pressed: Color.makeDynamic((200, 200, 200, 1), (90, 90, 90, 1)),
+        disabled: Color.clear
     )
 
     // MARK: Properties - Button Icon
@@ -49,19 +50,19 @@ public struct VStepperUIModel {
 
     /// Plus and minus button icon colors.
     public var buttonIconColors: ButtonStateColors = .init(
-        enabled: ColorBook.primary,
-        pressed: ColorBook.primary,
-        disabled: ColorBook.primaryPressedDisabled
+        enabled: Color.primary,
+        pressed: Color.primary,
+        disabled: Color.primary.opacity(0.3)
     )
 
     // MARK: Properties - Divider
-    /// Plus and minus button divider size. Set to `1x19`.
+    /// Plus and minus button divider size. Set to `(1, 19)`.
     public var dividerSize: CGSize = .init(width: 1, height: 19)
 
     /// Plus and minus button divider colors.
     public var dividerColors: StateColors = .init(
-        enabled: GlobalUIModel.Common.dividerDashColorEnabled,
-        disabled: GlobalUIModel.Common.dividerDashColorDisabled
+        enabled: Color.makeDynamic((210, 210, 210, 1), (80, 80, 80, 1)),
+        disabled: Color.makeDynamic((235, 235, 235, 1), (60, 60, 60, 1))
     )
     
     // MARK: Properties - Transition

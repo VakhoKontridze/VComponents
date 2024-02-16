@@ -56,7 +56,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             .frame(height: contentSize.height)
             .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
-            .overlay(content: { gradientView })
+            .mask({ gradientMask })
             .clipped()
     }
     
@@ -90,36 +90,42 @@ public struct VBouncingMarquee<Content>: View where Content: View {
                 }
             })
     }
-    
-    @ViewBuilder 
-    private var gradientView: some View {
-        if isAnimatable && uiModel.gradientWidth > 0 {
-            HStack(spacing: 0, content: {
-                LinearGradient(
-                    colors: [
-                        uiModel.gradientColorContainerEdge,
-                        uiModel.gradientColorContentEdge
-                    ],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                .frame(width: uiModel.gradientWidth)
-                
-                Spacer()
-                
-                LinearGradient(
-                    colors: [
-                        uiModel.gradientColorContentEdge,
-                        uiModel.gradientColorContainerEdge
-                    ],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                .frame(width: uiModel.gradientWidth)
-            })
+
+    @ViewBuilder
+    private var gradientMask: some View {
+        let isMasked: Bool =
+            isAnimatable &&
+            uiModel.gradientWidth > 0
+
+        if isMasked {
+            LinearGradient(
+                stops: [
+                    Gradient.Stop(
+                        color: Color.black.opacity(uiModel.gradientMaskOpacityContainerEdge),
+                        location: 0
+                    ),
+                    Gradient.Stop(
+                        color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
+                        location: uiModel.gradientWidth/containerWidth
+                    ),
+                    Gradient.Stop(
+                        color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
+                        location: 1 - uiModel.gradientWidth/containerWidth
+                    ),
+                    Gradient.Stop(
+                        color: Color.black.opacity(uiModel.gradientMaskOpacityContainerEdge),
+                        location: 1
+                    )
+                ],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+
+        } else {
+            Color.black
         }
     }
-    
+
     // MARK: Offsets
     private var offsetDynamic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset

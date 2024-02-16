@@ -5,6 +5,20 @@
 General
 
 - Package now partially supports `visionOS`
+- Colors are overhauled to better support other platforms
+- `VComponentsColorBook` is no longer exposed to public
+
+VToggle
+
+- `borderWidth` and `borderColors` properties are added to UI model
+
+VGroupBox
+
+- `backgroundColor` is changed to `UIColor.secondarySystemBackground` on `iOS`. `VGroupBoxUIModel.systemBackgroundColor` can be used to support previous configuration.
+
+VDisclosureGroup
+
+- `backgroundColor` is changed to `UIColor.secondarySystemBackground` on `iOS`. `VDisclosureGroupUIModel.systemBackgroundColor` can be used to support previous configuration.
 
 VModal
 
@@ -17,6 +31,14 @@ VBottomSheet
 VSideBar
 
 - SideBar will no longer dismiss from back-tap before it finished presentation animation
+
+VWrappingMarquee
+
+- `gradientColorContainerEdge` and `gradientColorContentEdge` are replaced with `gradientMaskOpacityContainerEdge` and `gradientMaskOpacityContentEdge` to avoid requiring explicit background colors
+
+VBouncingMarquee
+
+- `gradientColorContainerEdge` and `gradientColorContentEdge` are replaced with `gradientMaskOpacityContainerEdge` and `gradientMaskOpacityContentEdge` to avoid requiring explicit background colors
 
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 
@@ -514,7 +536,7 @@ General
 - Buttons that contained `customLabelContent` in UI models now support label APIs that pass internal states to the custom label callback 
 - Demo app replaced with detailed component previews
 - Some colors are changed throughout the package
-- `ColorBook.accent` is renamed to `ColorBook.accentBlue`
+- `ColorBook.accent` is renamed to `Color.blue`
 - "TitleLineType" used in names is changed to "TextLineType"
 - Shadow offsets are changed from `CGSize` to `CGPoint`
 

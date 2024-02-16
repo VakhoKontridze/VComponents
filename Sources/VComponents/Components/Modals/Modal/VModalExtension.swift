@@ -26,7 +26,7 @@ extension View {
     ///         .vModal(
     ///             id: "some_modal",
     ///             isPresented: $isPresented,
-    ///             content: { VComponentsColorBook.accentBlue }
+    ///             content: { VComponentsColor.blue }
     ///         )
     ///     }
     ///

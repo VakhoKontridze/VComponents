@@ -12,9 +12,21 @@ import SwiftUI
 public struct VTappableTextButtonComponentUIModel {
     // MARK: Properties
     /// Color.
-    public var color: Color = ColorBook.accentBlue
+    public var color: Color = {
+#if os(iOS)
+        Color.blue
+#elseif os(macOS)
+        Color.blue
+#elseif os(tvOS)
+        Color.blue
+#elseif os(watchOS)
+        Color.blue
+#elseif os(visionOS)
+        Color.primary
+#endif
+    }()
 
-    /// Font. Set to `bold` `body` (`17`).
+    /// Font. Set to `bold` `body`.
     public var font: Font = .body.bold()
 
     // MARK: Initializers

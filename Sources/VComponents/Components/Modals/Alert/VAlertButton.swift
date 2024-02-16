@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VAlertButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true

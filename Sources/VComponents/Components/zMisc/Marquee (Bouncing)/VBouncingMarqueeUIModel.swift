@@ -37,11 +37,11 @@ public struct VBouncingMarqueeUIModel {
     /// For best result, should be less than or equal to `inset`.
     public var gradientWidth: CGFloat = 0
 
-    /// Gradient color at the edge of the container.
-    public var gradientColorContainerEdge: Color = ColorBook.background
+    /// Gradient mask opacity at the edge of the container. Set to `0`.
+    public var gradientMaskOpacityContainerEdge: CGFloat = 0
 
-    /// Gradient color at the edge of the content.
-    public var gradientColorContentEdge: Color = ColorBook.background.opacity(0.01)
+    /// Gradient mask opacity at the edge of the content. Set to `1`.
+    public var gradientMaskOpacityContentEdge: CGFloat = 1
 
     // MARK: Properties - Transition
     /// Animation curve. Set to `linear`.

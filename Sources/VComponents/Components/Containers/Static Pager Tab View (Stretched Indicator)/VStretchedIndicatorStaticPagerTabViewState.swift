@@ -13,4 +13,5 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public typealias VStretchedIndicatorStaticPagerTabViewTabItemInternalState = GenericState_DeselectedSelectedPressedDisabled

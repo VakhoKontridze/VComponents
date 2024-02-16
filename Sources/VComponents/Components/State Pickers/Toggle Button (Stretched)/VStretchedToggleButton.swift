@@ -49,6 +49,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`
 @available(watchOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VStretchedToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VStretchedToggleButtonUIModel
@@ -234,6 +235,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
 // MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VStretchedToggleButtonInternalState {
     fileprivate var isPressedOffPressedOn: Bool {
         switch self {
@@ -249,7 +251,7 @@ extension VStretchedToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {
@@ -261,7 +263,7 @@ extension VStretchedToggleButtonInternalState {
                     state: $state,
                     title: "Lorem Ipsum"
                 )
-                .padding(.horizontal)
+                .modifier(Preview_StretchedButtonFrameModifier())
             })
         }
     }
@@ -276,7 +278,7 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-            .padding(.horizontal)
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Pressed Off", content: {
@@ -290,7 +292,7 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-            .padding(.horizontal)
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("On", content: {
@@ -298,7 +300,7 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-            .padding(.horizontal)
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Pressed On", content: {
@@ -312,7 +314,7 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-            .padding(.horizontal)
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
 
         PreviewRow("Disabled", content: {
@@ -321,7 +323,7 @@ extension VStretchedToggleButtonInternalState {
                 title: "Lorem Ipsum"
             )
             .disabled(true)
-            .padding(.horizontal)
+            .modifier(Preview_StretchedButtonFrameModifier())
         })
     })
 })

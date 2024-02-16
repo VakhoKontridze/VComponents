@@ -24,6 +24,7 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
 @available(watchOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VStepper: View {
     // MARK: Properties - UI Model
     private let uiModel: VStepperUIModel
@@ -281,7 +282,7 @@ public struct VStepper: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

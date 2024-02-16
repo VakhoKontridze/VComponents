@@ -47,6 +47,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`.
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VRectangularToggleButtonUIModel
@@ -203,6 +204,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
 // MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VRectangularToggleButtonInternalState {
     fileprivate var isPressedOffPressedOn: Bool {
         switch self {
@@ -218,7 +220,7 @@ extension VRectangularToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

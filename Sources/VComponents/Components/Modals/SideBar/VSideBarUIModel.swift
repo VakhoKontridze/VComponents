@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VSideBarUIModel {
     // MARK: Properties - Global
     var presentationHostUIModel: PresentationHostUIModel {
@@ -33,8 +34,8 @@ public struct VSideBarUIModel {
     public var presentationEdge: Edge = .leading
 
     /// Side bar sizes. Set to `default`.
-    /// Set to `0.75x1` container ratios in portrait.
-    /// Set to `0.5x1` container ratios in landscape.
+    /// Set to `(0.75, 1)` container ratios in portrait.
+    /// Set to `(0.5, 1)` container ratios in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(0.75),
@@ -54,11 +55,17 @@ public struct VSideBarUIModel {
     public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
 
     /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
+    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.background
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
@@ -92,7 +99,7 @@ public struct VSideBarUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = GlobalUIModel.Common.dimmingViewColor
+    public var dimmingViewColor: Color = .makeDynamic((100, 100, 100, 0.3), (0, 0, 0, 0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -115,10 +122,10 @@ public struct VSideBarUIModel {
 
     // MARK: Properties - Transition
     /// Appear animation.  Set to `easeInOut` with duration `0.3`.
-    public var appearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
+    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
-    public var disappearAnimation: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.1`.
     public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
@@ -164,6 +171,7 @@ public struct VSideBarUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VSideBarUIModel {
     /// Calculates automatic `contentSafeAreaEdges` based on interface orientation.
     public func defaultContentSafeAreaEdges(
@@ -207,6 +215,7 @@ extension VSideBarUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that presents side bar from leading edge.
     ///
@@ -234,8 +243,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `top`.
     ///
-    /// `sizes` are set to `0.75x1` container ratios in portrait.
-    /// And to `0.5x1` container ratios in landscape.
+    /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
+    /// And to `(0.5, 1)` container ratios in landscape.
     ///
     /// `roundedCorners` is set to `bottomCorners`.
     public static var top: Self {
@@ -263,8 +272,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `bottom`.
     ///
-    /// `sizes` are set to `0.75x1` container ratios in portrait.
-    /// And to `0.5x1` container ratios in landscape.
+    /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
+    /// And to `(0.5, 1)` container ratios in landscape.
     ///
     /// `roundedCorners` is set to `topCorners`.
     public static var bottom: Self {
@@ -293,12 +302,13 @@ extension VSideBarUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that insets content.
     public static var insettedContent: Self {
         var uiModel: Self = .init()
 
-        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
+        uiModel.contentMargins = Margins(uiModel.cornerRadius)
 
         return uiModel
     }

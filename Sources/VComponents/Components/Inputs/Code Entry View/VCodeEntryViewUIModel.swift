@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VCodeEntryViewUIModel {
     // MARK: Properties - Global
     /// Code length. Set to `6`.
@@ -40,14 +41,14 @@ public struct VCodeEntryViewUIModel {
 #endif
 
     // MARK: Properties - Background
-    /// Character background rectangle size. Set to `40x40`.
+    /// Character background rectangle size. Set to `(40, 40)`.
     public var characterBackgroundSize: CGSize = .init(dimension: 40)
 
     /// Character background colors.
     public var characterBackgroundColors: StateColors = .init(
-        enabled: ColorBook.layerGray,
-        focused: ColorBook.layerGrayPressed,
-        disabled: ColorBook.layerGrayDisabled
+        enabled: Color.makeDynamic((235, 235, 235, 1), (60, 60, 60, 1)),
+        focused: Color.makeDynamic((220, 220, 220, 1), (80, 80, 80, 1)),
+        disabled: Color.makeDynamic((245, 245, 245, 1), (50, 50, 50, 1))
     )
 
     // MARK: Properties - Corners
@@ -66,19 +67,19 @@ public struct VCodeEntryViewUIModel {
     // MARK: Properties - Text
     /// Text colors.
     public var textColors: StateColors = .init(
-        enabled: ColorBook.primary,
-        focused: ColorBook.primary,
-        disabled: ColorBook.primaryPressedDisabled
+        enabled: Color.primary,
+        focused: Color.primary,
+        disabled: Color.primary.opacity(0.3)
     )
 
-    /// Text font. Set to `body` (`17`).
+    /// Text font. Set to `body`.
     public var textFont: Font = .body
 
     // MARK: Properties - Placeholder Text
     /// Placeholder text colors.
-    public var placeholderTextColors: StateColors = .init(ColorBook.primaryPressedDisabled)
+    public var placeholderTextColors: StateColors = .init(Color.secondary)
 
-    /// Placeholder text font. Set to `body` (`17`).
+    /// Placeholder text font. Set to `body`.
     public var placeholderTextFont: Font = .body
 
     // MARK: Properties - Submit Button
@@ -117,6 +118,7 @@ public struct VCodeEntryViewUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VCodeEntryViewUIModel {
     /// `VCodeEntryViewUIModel` that applies green color scheme.
     public static var success: Self {
@@ -152,25 +154,26 @@ extension VCodeEntryViewUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VCodeEntryViewUIModel {
     /// Applies green color scheme to `VCodeEntryViewUIModel`.
     public mutating func applySuccessColorScheme() {
         applyHighlightedColors(
-            border: ColorBook.borderGreen
+            border: Color.makeDynamic((85, 195, 135, 1), (45, 150, 75, 1))
         )
     }
 
     /// Applies yellow color scheme to `VCodeEntryViewUIModel`.
     public mutating func applyWarningColorScheme() {
         applyHighlightedColors(
-            border: ColorBook.borderYellow
+            border: Color.makeDynamic((255, 190, 35, 1), (240, 150, 20, 1))
         )
     }
 
     /// Applies red color scheme to `VCodeEntryViewUIModel`.
     public mutating func applyErrorColorScheme() {
         applyHighlightedColors(
-            border: ColorBook.borderRed
+            border: Color.makeDynamic((235, 110, 105, 1), (215, 60, 55, 1))
         )
     }
 

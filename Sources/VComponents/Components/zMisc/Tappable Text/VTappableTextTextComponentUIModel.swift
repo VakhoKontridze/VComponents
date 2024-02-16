@@ -12,9 +12,9 @@ import SwiftUI
 public struct VTappableTextTextComponentUIModel {
     // MARK: Properties
     /// Color.
-    public var color: Color = ColorBook.primary
+    public var color: Color = .primary
 
-    /// Font. Set to `body` (`17`).
+    /// Font. Set to `body`.
     public var font: Font = .body
 
     // MARK: Initializers

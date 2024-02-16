@@ -30,7 +30,8 @@ public struct VDashedSpinner: View {
     // MARK: Body
     public var body: some View {
         ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: uiModel.color))
+            .progressViewStyle(.circular)
+            .tint(uiModel.color)
     }
 }
 

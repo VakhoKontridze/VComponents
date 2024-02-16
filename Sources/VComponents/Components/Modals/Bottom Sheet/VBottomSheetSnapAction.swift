@@ -11,6 +11,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 enum VBottomSheetSnapAction {
     // MARK: Cases
     case dismiss
@@ -94,6 +95,7 @@ enum VBottomSheetSnapAction {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 private enum VBottomSheetRegion {
     // MARK: Cases
     case idealToMax

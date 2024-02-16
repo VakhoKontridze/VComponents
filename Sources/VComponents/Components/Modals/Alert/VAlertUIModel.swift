@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VAlertUIModel {
     // MARK: Properties - Global
     var presentationHostUIModel: PresentationHostUIModel {
@@ -34,11 +35,11 @@ public struct VAlertUIModel {
         landscape: .fraction(0.5)
     )
 
-    /// Additional margins applied to title text, message text, and content as a whole. Set to `15` leading, `15` trailing,`15` top, and `10` bottom.
+    /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
     public var titleTextMessageTextAndContentMargins: Margins = .init(
-        leading: GlobalUIModel.Common.containerContentMargin,
-        trailing: GlobalUIModel.Common.containerContentMargin,
-        top: GlobalUIModel.Common.containerContentMargin,
+        leading: 15,
+        trailing: 15,
+        top: 15,
         bottom: 10
     )
 
@@ -54,7 +55,13 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.background
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
@@ -84,12 +91,12 @@ public struct VAlertUIModel {
     }()
 
     /// Title text color.
-    public var titleTextColor: Color = ColorBook.primary
+    public var titleTextColor: Color = .primary
 
-    /// Title text font. Set to `bold` `headline` (`17`).
+    /// Title text font. Set to `bold` `headline`.
     public var titleTextFont: Font = .headline.weight(.bold)
 
-    /// Title text margins. Set to `0` leading, `0` trailing, `5` top, and `3` bottom.
+    /// Title text margins. Set to `(0, 0, 5, 3)`.
     public var titleTextMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -111,12 +118,12 @@ public struct VAlertUIModel {
     }()
 
     /// Message text color.
-    public var messageTextColor: Color = ColorBook.primary
+    public var messageTextColor: Color = .primary
 
-    /// Message text font. Set to `subheadline` (`15`).
+    /// Message text font. Set to `subheadline`.
     public var messageTextFont: Font = .subheadline
 
-    /// Message text margins. Set to `0` leading, `0` trailing, `3` top, and `5` bottom.
+    /// Message text margins. Set to `(0, 0, 3, 5)`.
     public var messageTextMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -125,7 +132,7 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Content
-    /// Content margins  Set to `0` leading, `0` trailing, `10` top, and `0` bottom.
+    /// Content margins  Set to `(0, 0, 10, 0)`.
     public var contentMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -140,12 +147,12 @@ public struct VAlertUIModel {
     /// Button corner radius. Set to `10`.
     public var buttonCornerRadius: CGFloat = 10
 
-    /// Button margins. Set to `15` leading, `15` trailing, `10` top, and `15` bottom.
+    /// Button margins. Set to `(15, 15, 10, 15)`
     public var buttonMargins: Margins = .init(
-        leading: GlobalUIModel.Common.containerContentMargin,
-        trailing: GlobalUIModel.Common.containerContentMargin,
+        leading: 15,
+        trailing: 15,
         top: 10,
-        bottom: GlobalUIModel.Common.containerContentMargin
+        bottom: 15
     )
 
     /// Spacing between horizontal buttons.  Set to `10`.
@@ -162,13 +169,13 @@ public struct VAlertUIModel {
     // MARK: Properties - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: ColorBook.controlLayerBlue,
-        pressed: ColorBook.controlLayerBluePressed,
-        disabled: ColorBook.controlLayerBlueDisabled
+        enabled: Color.makeDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
+        pressed: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+        disabled: Color.make((128, 176, 240, 1))
     )
 
     /// Primary button title text colors.
-    public var primaryButtonTitleTextColors: ButtonStateColors = .init(ColorBook.primaryWhite)
+    public var primaryButtonTitleTextColors: ButtonStateColors = .init(Color.white)
 
     var primaryButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
@@ -191,15 +198,15 @@ public struct VAlertUIModel {
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: ColorBook._alertLayerColoredButtonBackgroundPressed,
+        pressed: Color.makeDynamic((240, 240, 240, 1), (70, 70, 70, 1)),
         disabled: Color.clear
     )
 
     /// Secondary button title text colors.
     public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
-        enabled: ColorBook.accentBlue,
-        pressed: ColorBook.accentBlue,
-        disabled: ColorBook.accentBluePressedDisabled
+        enabled: Color.blue,
+        pressed: Color.blue,
+        disabled: Color.dynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
     )
 
     var secondaryButtonSubUIModel: VStretchedButtonUIModel {
@@ -223,15 +230,15 @@ public struct VAlertUIModel {
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: ColorBook._alertLayerColoredButtonBackgroundPressed,
+        pressed: Color.makeDynamic((240, 240, 240, 1), (70, 70, 70, 1)),
         disabled: Color.clear
     )
 
     /// Destructive button title text colors.
     public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
-        enabled: ColorBook.accentRed,
-        pressed: ColorBook.accentRed,
-        disabled: ColorBook.accentRedPressedDisabled
+        enabled: Color.red,
+        pressed: Color.red,
+        disabled: Color.dynamic(light: Color.red.opacity(0.3), dark: Color.red.opacity(0.5))
     )
 
     var destructiveButtonSubUIModel: VStretchedButtonUIModel {
@@ -262,7 +269,7 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = GlobalUIModel.Common.dimmingViewColor
+    public var dimmingViewColor: Color = .makeDynamic((100, 100, 100, 0.3), (0, 0, 0, 0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -276,13 +283,13 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Transition
     /// Appear animation. Set to `linear` with duration `0.05`.
-    public var appearAnimation: BasicAnimation? = GlobalUIModel.Modals.poppingAppearAnimation
+    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
 
     /// Disappear animation. Set to `easeIn` with duration `0.05`.
-    public var disappearAnimation: BasicAnimation? = GlobalUIModel.Modals.poppingDisappearAnimation
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
 
     /// Scale effect during appear and disappear. Set to `1.01`.
-    public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
+    public var scaleEffect: CGFloat = 1.01
 
     // MARK: Initializers
     /// Initializes UI model with default values.

@@ -12,10 +12,12 @@ import VCore
 /// Enumeration that represents state, such as `off` or `on`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public typealias VStretchedToggleButtonState = GenericState_OffOn
 
 // MARK: - V Stretched Toggle Button Internal State
 /// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public typealias VStretchedToggleButtonInternalState = GenericState_OffOnPressedDisabled

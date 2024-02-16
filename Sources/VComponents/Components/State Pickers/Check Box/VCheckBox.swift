@@ -33,6 +33,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // No `SwiftUIGestureBaseButton`
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCheckBox<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VCheckBoxUIModel
@@ -218,7 +219,7 @@ public struct VCheckBox<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

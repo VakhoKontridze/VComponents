@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Radio Button Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 enum VRadioButtonLabel<Label> where Label: View {
     case empty
     case title(title: String)

@@ -319,7 +319,7 @@ private struct Preview_ContentView: View {
                     id: "preview",
                     uiModel: uiModel,
                     isPresented: $isPresented,
-                    content: { ColorBook.accentBlue }
+                    content: { Color.blue }
                 )
         })
     }
@@ -348,7 +348,7 @@ private struct Preview_SafeAreaContentView: View {
                         return uiModel
                     }(),
                     isPresented: $isPresented,
-                    content: { ColorBook.accentBlue }
+                    content: { Color.blue }
                 )
         })
     }

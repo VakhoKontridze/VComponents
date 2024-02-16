@@ -12,7 +12,7 @@ import SwiftUI
 public struct VFetchingAsyncImageUIModel {
     // MARK: Properties
     /// Placeholder color.
-    public var placeholderColor: Color = ColorBook._placeholderImage
+    public var placeholderColor: Color = .gray.opacity(0.3)
 
     /// Indicates if `Image` is removed when parameter changes. Set to `true`.
     public var removesImageOnParameterChange: Bool = true

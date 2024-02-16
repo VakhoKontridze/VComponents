@@ -12,6 +12,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     /// Body type.
     typealias Body = AnyView
@@ -26,6 +27,7 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { [self] }
 }

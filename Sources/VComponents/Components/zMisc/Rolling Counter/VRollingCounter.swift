@@ -297,13 +297,6 @@ extension AnyTransition {
                     )
                 })
                 .padding(.top, 20)
-                .applyModifier({
-#if os(watchOS)
-                    $0.foregroundStyle(ColorBook.accentBlue)
-#else
-                    $0
-#endif
-                })
 
                 PreviewRow("Standard", content: {
                     VRollingCounter(value: value)
@@ -374,10 +367,10 @@ extension AnyTransition {
                         uiModel: {
                             var uiModel: VRollingCounterUIModel = .init()
 
-                            uiModel.decimalSeparatorTextColor = ColorBook.secondary
+                            uiModel.decimalSeparatorTextColor = .secondary
                             uiModel.decimalSeparatorTextOffsetY = -10
 
-                            uiModel.fractionDigitTextColor = ColorBook.secondary
+                            uiModel.fractionDigitTextColor = .secondary
                             uiModel.fractionDigitTextFont = Font.footnote.bold()
                             uiModel.fractionDigitTextOffsetY = -2
 

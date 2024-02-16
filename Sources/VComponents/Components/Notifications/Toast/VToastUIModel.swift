@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VToastUIModel {
     // MARK: Properties - Global
     var presentationHostUIModel: PresentationHostUIModel {
@@ -42,22 +43,22 @@ public struct VToastUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = GlobalUIModel.Notifications.layerGray
+    public var backgroundColor: Color = .makeDynamic((235, 235, 235, 1), (60, 60, 60, 1))
 
     // MARK: Properties - Text
     /// Text line type. Set to `singleLine`.
     public var textLineType: TextLineType = .singleLine
 
     /// Text minimum scale factor. Set to `0.75`.
-    public var textMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+    public var textMinimumScaleFactor: CGFloat = 0.75
 
     /// Text color.
-    public var textColor: Color = ColorBook.primary
+    public var textColor: Color = .primary
 
-    /// Text font. Set to `headline` (`17`).
+    /// Text font. Set to `headline`.
     public var textFont: Font = .headline
 
-    /// Text margins. Set to `20` horizontal and `12` vertical.
+    /// Text margins. Set to `(20, 12)`.
     public var textMargins: Margins = .init(
         horizontal: 20,
         vertical: 12
@@ -195,6 +196,7 @@ public struct VToastUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VToastUIModel {
     /// `VToastUIModel` that applies green color scheme.
     public static var success: Self {
@@ -239,19 +241,20 @@ extension VToastUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VToastUIModel {
     /// Applies green color scheme to `VToastUIModel`.
     public mutating func applySuccessColorScheme() {
-        backgroundColor = GlobalUIModel.Notifications.layerGreen
+        backgroundColor = .makeDynamic((70, 190, 125, 1), (40, 135, 75, 1))
     }
     
     /// Applies yellow color scheme to `VToastUIModel`.
     public mutating func applyWarningColorScheme() {
-        backgroundColor = GlobalUIModel.Notifications.layerYellow
+        backgroundColor = .makeDynamic((255, 205, 95, 1), (230, 160, 40, 1))
     }
     
     /// Applies red color scheme to `VToastUIModel`.
     public mutating func applyErrorColorScheme() {
-        backgroundColor = GlobalUIModel.Notifications.layerRed
+        backgroundColor = .makeDynamic((235, 95, 90, 1), (205, 50, 45, 1))
     }
 }

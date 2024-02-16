@@ -34,12 +34,18 @@ struct VRollingCounterFactory {
             let charStr: String = .init(char)
 
             if charStr == uiModel.groupingSeparator {
-                components.append(VRollingCounterGroupingSeparatorComponent(value: charStr))
+                components.append(VRollingCounterGroupingSeparatorComponent(
+                    id: nil,
+                    value: charStr
+                ))
 
             } else if charStr == uiModel.decimalSeparator {
                 guard !hasPassedDecimalSeparator else { fatalError() }
 
-                components.append(VRollingCounterDecimalSeparatorComponent(value: charStr))
+                components.append(VRollingCounterDecimalSeparatorComponent(
+                    id: nil,
+                    value: charStr
+                ))
                 hasPassedDecimalSeparator = true
 
             } else if
@@ -47,9 +53,15 @@ struct VRollingCounterFactory {
                 let digit: Int = .init(charStr)
             {
                 if hasPassedDecimalSeparator {
-                    components.append(VRollingCounterFractionDigitComponent(digit: digit))
+                    components.append(VRollingCounterFractionDigitComponent(
+                        id: nil,
+                        digit: digit
+                    ))
                 } else {
-                    components.append(VRollingCounterDigitComponent(digit: digit))
+                    components.append(VRollingCounterDigitComponent(
+                        id: nil,
+                        digit: digit
+                    ))
                 }
 
             } else {

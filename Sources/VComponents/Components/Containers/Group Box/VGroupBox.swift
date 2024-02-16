@@ -16,12 +16,15 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(content: {
-///             VComponentsColorBook.secondaryBackground.ignoresSafeArea()
+///             Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
 ///
-///             VGroupBox(content: {
-///                 Text("...")
-///                     .multilineTextAlignment(.center)
-///             })
+///             VGroupBox(
+///                 uiModel: .systemBackgroundColor,
+///                 content: {
+///                     Text("...")
+///                         .multilineTextAlignment(.center)
+///                 }
+///             )
 ///             .padding()
 ///         })
 ///     }
@@ -90,7 +93,7 @@ public struct VGroupBox<Content>: View where Content: View {
 #if DEBUG
 
 #Preview(body: {
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(content: {
         VGroupBox(content: {
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
                 .multilineTextAlignment(.center)

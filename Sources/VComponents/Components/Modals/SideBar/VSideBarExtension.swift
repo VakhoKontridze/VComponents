@@ -28,7 +28,7 @@ extension View {
     ///         .vSideBar(
     ///             id: "some_side_bar",
     ///             isPresented: $isPresented,
-    ///             content: { VComponentsColorBook.accentBlue }
+    ///             content: { VComponentsColor.blue }
     ///         )
     ///     }
     ///
@@ -57,7 +57,7 @@ extension View {
     ///                 return uiModel
     ///             }(),
     ///             isPresented: $isPresented,
-    ///             content: { VComponentsColorBook.accentBlue }
+    ///             content: { VComponentsColor.blue }
     ///         )
     ///     }
     ///

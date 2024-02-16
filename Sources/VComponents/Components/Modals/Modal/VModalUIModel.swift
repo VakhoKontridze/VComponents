@@ -13,6 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VModalUIModel {
     // MARK: Properties - Global
     var presentationHostUIModel: PresentationHostUIModel {
@@ -27,7 +28,7 @@ public struct VModalUIModel {
     public var colorScheme: ColorScheme? = nil
 
     /// Modal sizes.
-    /// Set to `0.9x0.6` container ratios in portrait.
+    /// Set to `(0.9, 0.6)` container ratios in portrait.
     /// Set to reverse in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
@@ -48,11 +49,17 @@ public struct VModalUIModel {
     public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
 
     /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
+    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = ColorBook.background
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
@@ -87,7 +94,7 @@ public struct VModalUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = GlobalUIModel.Common.dimmingViewColor
+    public var dimmingViewColor: Color = .makeDynamic((100, 100, 100, 0.3), (0, 0, 0, 0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -101,13 +108,13 @@ public struct VModalUIModel {
 
     // MARK: Properties - Transition
     /// Appear animation. Set to `linear` with duration `0.05`.
-    public var appearAnimation: BasicAnimation? = GlobalUIModel.Modals.poppingAppearAnimation
+    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
 
     /// Disappear animation. Set to `easeIn` with duration `0.05`.
-    public var disappearAnimation: BasicAnimation? = GlobalUIModel.Modals.poppingDisappearAnimation
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
 
     /// Scale effect during appear and disappear. Set to `1.01`.
-    public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
+    public var scaleEffect: CGFloat = 1.01
     
     // MARK: Initializers
     /// Initializes UI model with default values.
@@ -159,12 +166,13 @@ public struct VModalUIModel {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.contentMargins = Margins(GlobalUIModel.Common.containerCornerRadius)
+        uiModel.contentMargins = Margins(uiModel.cornerRadius)
         
         return uiModel
     }

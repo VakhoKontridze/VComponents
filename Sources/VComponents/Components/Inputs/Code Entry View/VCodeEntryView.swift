@@ -41,6 +41,7 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCodeEntryView: View {
     // MARK: Properties
     private let uiModel: VCodeEntryViewUIModel
@@ -247,7 +248,7 @@ public struct VCodeEntryView: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

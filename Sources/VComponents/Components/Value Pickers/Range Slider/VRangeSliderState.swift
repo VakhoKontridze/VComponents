@@ -11,4 +11,5 @@ import VCore
 // MARK: - V Range Slider Internal State
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 typealias VRangeSliderInternalState = GenericState_EnabledDisabled

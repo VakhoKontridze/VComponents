@@ -12,12 +12,12 @@ import SwiftUI
 // MARK: - Preview Row
 struct PreviewRow<Content>: View where Content: View {
     // MARK: Properties
-    private let title: String
+    private let title: String?
     private let content: () -> Content
 
     // MARK: Initializers
     init(
-        _ title: String,
+        _ title: String?,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.title = title
@@ -29,10 +29,12 @@ struct PreviewRow<Content>: View where Content: View {
         VStack(
             spacing: 10,
             content: {
-                Text(title)
-                    .lineLimit(1)
-                    .foregroundStyle(ColorBook.primary)
-                    .font(.caption.bold())
+                if let title {
+                    Text(title)
+                        .lineLimit(1)
+                        .foregroundStyle(Color.primary)
+                        .font(.caption.bold())
+                }
 
                 content()
             }

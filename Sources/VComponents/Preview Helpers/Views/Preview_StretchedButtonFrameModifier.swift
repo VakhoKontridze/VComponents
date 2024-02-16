@@ -20,6 +20,8 @@ struct Preview_StretchedButtonFrameModifier: ViewModifier {
                 $0.frame(width: 250)
 #elseif os(watchOS)
                 $0.padding(.horizontal)
+#elseif os(visionOS)
+                $0.frame(width: 250)
 #else
                 fatalError() // Not supported
 #endif

@@ -11,6 +11,7 @@ import VCore
 // MARK: - V Wrapped Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public struct VWrappedButtonUIModel {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
@@ -25,27 +26,58 @@ public struct VWrappedButtonUIModel {
     /// Set to `32` on `iOS`.
     /// Set to `32` on `macOS`.
     /// Set to `48` on `watchOS`.
-    public var height: CGFloat = GlobalUIModel.Buttons.heightWrappedButton
+    public var height: CGFloat = {
+#if os(iOS)
+        32
+#elseif os(macOS)
+        32
+#elseif os(watchOS)
+        48
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
     /// Corner radius.
     /// Set to `16` on `iOS`.
     /// Set to `16` on `macOS`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusWrappedButton
+    /// Set to `24` on `watchOS`.
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        16
+#elseif os(macOS)
+        16
+#elseif os(watchOS)
+        24
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: ColorBook.controlLayerBlue,
-        pressed: ColorBook.controlLayerBluePressed,
-        disabled: ColorBook.controlLayerBlueDisabled
+        enabled: Color.makePlatformDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
+        pressed: Color.makePlatformDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+        disabled: Color.make((128, 176, 240, 1))
     )
 
     /// Ratio to which background scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    public var backgroundPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Border
     /// Border width. Set to `0`.
@@ -57,8 +89,8 @@ public struct VWrappedButtonUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Label margins. Set to `15` horizontal and `3` vertical.
-    public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
+    /// Label margins. Set to `(15, 3)`.
+    public var labelMargins: LabelMargins = .init(horizontal: 15, vertical: 3)
 
     /// Title text and icon placement. Set to `iconAndTitle`.
     public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
@@ -66,41 +98,71 @@ public struct VWrappedButtonUIModel {
     /// Spacing between title text and icon. Set to `8`.
     ///
     /// Applicable only if `init` with icon and title is used.
-    public var titleTextAndIconSpacing: CGFloat = GlobalUIModel.Buttons.titleTextAndIconSpacing
+    public var titleTextAndIconSpacing: CGFloat = 8
 
     /// Ratio to which label scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    public var labelPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
-    public var titleTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+    public var titleTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title text colors.
-    public var titleTextColors: StateColors = .init(ColorBook.primaryWhite)
+    public var titleTextColors: StateColors = .init(Color.white)
 
     /// Title text font.
-    /// Set to `semibold` `subheadline` (`15`) on `iOS`.
-    /// Set to `semibold` `body` (`13`) on `macOS`.
-    /// Set to `semibold` `body` (`17`) on `watchOS`.
-    public var titleTextFont: Font = GlobalUIModel.Buttons.titleTextFontWrappedButton
+    /// Set to `semibold` `subheadline` on `iOS`.
+    /// Set to `semibold` `body` on `macOS`.
+    /// Set to `semibold` `body` on `watchOS`.
+    public var titleTextFont: Font = {
+#if os(iOS)
+        Font.subheadline.weight(.semibold)
+#elseif os(macOS)
+        Font.body.weight(.semibold)
+#elseif os(watchOS)
+        Font.body.weight(.semibold)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
 
     // MARK: Properties - Label - Icon
     /// Icon size.
-    /// Set to `16x16` on `iOS`.
-    /// Set to `16x16` on `macOS`.
-    /// Set to `18x18` on `watchOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeWrappedButton
+    /// Set to `(16, 16)` on `iOS`.
+    /// Set to `(16, 16)` on `macOS`.
+    /// Set to `(18, 18)` on `watchOS`.
+    public var iconSize: CGSize = {
+#if os(iOS)
+        CGSize(dimension: 16)
+#elseif os(macOS)
+        CGSize(dimension: 16)
+#elseif os(watchOS)
+        CGSize(dimension: 18)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Icon colors.
     ///
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(ColorBook.primaryWhite)
+    public var iconColors: StateColors = .init(Color.white)
 
     /// Icon opacities. Set to `1`s.
     ///

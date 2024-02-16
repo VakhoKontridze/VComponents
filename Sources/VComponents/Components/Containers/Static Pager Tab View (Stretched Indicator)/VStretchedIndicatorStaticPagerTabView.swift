@@ -37,12 +37,12 @@ import VCore
 ///             tabItemTitle: { $0.tabItemTitle },
 ///             content: { $0.color }
 ///         )
-///         .padding()
 ///     }
 ///
 @available(macOS, unavailable) // No `PageTabViewStyle`
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
@@ -368,7 +368,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview(body: {
     struct ContentView: View {

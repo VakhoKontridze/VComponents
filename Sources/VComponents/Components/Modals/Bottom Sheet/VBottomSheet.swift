@@ -201,7 +201,7 @@ struct VBottomSheet<Content>: View
     private func dismissFromDimmingViewTap() {
         guard
             didFinishInternalPresentation,
-            uiModel.dismissType.contains(.backTap)
+            !uiModel.dismissType.contains(.backTap)
         else {
             return
         }
@@ -378,7 +378,7 @@ struct VBottomSheet<Content>: View
                     .vBottomSheet(
                         id: "preview",
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -413,7 +413,7 @@ struct VBottomSheet<Content>: View
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -448,7 +448,7 @@ struct VBottomSheet<Content>: View
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -483,7 +483,7 @@ struct VBottomSheet<Content>: View
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -518,7 +518,7 @@ struct VBottomSheet<Content>: View
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -640,7 +640,7 @@ struct VBottomSheet<Content>: View
                         id: "preview",
                         uiModel: .insettedContent,
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }
@@ -664,7 +664,7 @@ struct VBottomSheet<Content>: View
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        content: { ColorBook.accentBlue }
+                        content: { Color.blue }
                     )
             })
         }

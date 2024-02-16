@@ -38,12 +38,12 @@ import VCore
 ///             tabItemTitle: { $0.tabItemTitle },
 ///             content: { $0.color }
 ///         )
-///         .padding()
 ///     }
 ///
 @available(macOS, unavailable) // No `PageTabViewStyle`
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
@@ -289,7 +289,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                 0
             )
             .foregroundStyle(uiModel.selectedTabIndicatorColor)
-            .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:_:)`
+            .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:completionCriteria:_:completion:)`
         })
         .frame(height: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
         .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
@@ -350,7 +350,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Many Items", body: {
     struct ContentView: View {

@@ -19,6 +19,7 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel
@@ -170,7 +171,7 @@ public struct VPlainButton<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !os(tvOS)
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     PreviewContainer(content: {
@@ -223,7 +224,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 action: {}
             )
             .buttonStyle(.plain)
-            .foregroundStyle(ColorBook.accentBlue)
+            .foregroundStyle(Color.blue)
         })
 
         PreviewRow("Disabled", content: {
@@ -232,14 +233,8 @@ public struct VPlainButton<Label>: View where Label: View {
                 action: {}
             )
             .buttonStyle(.plain)
+            .foregroundStyle(Color.blue)
             .disabled(true)
-            .applyModifier({
-#if os(watchOS)
-                $0.foregroundStyle(ColorBook.controlLayerBlue)
-#else
-                $0
-#endif
-            })
         })
     })
 })

@@ -33,6 +33,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // No `SwiftUIGestureBaseButton`
 @available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
     private let uiModel: VRadioButtonUIModel
@@ -198,6 +199,7 @@ public struct VRadioButton<Label>: View where Label: View {
 // MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VRadioButtonState {
     mutating fileprivate func setNextStateRadio() {
         switch self {
@@ -210,7 +212,7 @@ extension VRadioButtonState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {
@@ -223,7 +225,10 @@ extension VRadioButtonState {
                     title: "Lorem ipsum"
                 )
 
-                Button("Toggle State", action: { state.setNextState() })
+                VPlainButton(
+                    action: { state.setNextState() },
+                    title: "Toggle State"
+                )
             })
         }
     }

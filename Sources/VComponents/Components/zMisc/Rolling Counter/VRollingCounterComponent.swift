@@ -19,7 +19,7 @@ struct VRollingCounterDigitComponent: VRollingCounterComponentProtocol {
 
     // MARK: Initializers
     init(
-        id: String? = nil, // If `nil`, new one will be generated
+        id: String?, // If `nil`, new one will be generated
         digit: Int,
         isHighlighted: Bool = false
     ) {
@@ -41,7 +41,7 @@ struct VRollingCounterFractionDigitComponent: VRollingCounterComponentProtocol {
 
     // MARK: Initializers
     init(
-        id: String? = nil, // If `nil`, new one will be generated
+        id: String?, // If `nil`, new one will be generated
         digit: Int,
         isHighlighted: Bool = false
     ) {
@@ -63,7 +63,7 @@ struct VRollingCounterGroupingSeparatorComponent: VRollingCounterComponentProtoc
 
     // MARK: Initializers
     init(
-        id: String? = nil, // If `nil`, new one will be generated
+        id: String?, // If `nil`, new one will be generated
         value: String,
         isHighlighted: Bool = false
     ) {
@@ -85,7 +85,7 @@ struct VRollingCounterDecimalSeparatorComponent: VRollingCounterComponentProtoco
 
     // MARK: Initializers
     init(
-        id: String? = nil, // If `nil`, new one will be generated
+        id: String?, // If `nil`, new one will be generated
         value: String,
         isHighlighted: Bool = false
     ) {

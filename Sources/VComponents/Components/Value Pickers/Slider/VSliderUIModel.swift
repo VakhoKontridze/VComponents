@@ -12,17 +12,34 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 public struct VSliderUIModel {
     // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Slider height, but width for vertical layout. Set to `10`.
-    public var height: CGFloat = GlobalUIModel.Common.barHeight
+    public var height: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        10
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
     /// Slider corner radius. Set to `5`.
-    public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        5
+#elseif os(macOS)
+        5
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Body
     /// Indicates if body is draggable.
@@ -42,16 +59,27 @@ public struct VSliderUIModel {
 
     // MARK: Properties - Track
     /// Slider track colors.
-    public var trackColors: StateColors = .init(
-        enabled: ColorBook.layerGray,
-        disabled: ColorBook.layerGrayDisabled
-    )
+    public var trackColors: StateColors = {
+#if os(iOS)
+        StateColors(
+            enabled: Color.makeDynamic((230, 230, 230, 1), (45, 45, 45, 1)),
+            disabled: Color.makeDynamic((245, 245, 245, 1), (35, 35, 35, 1))
+        )
+#elseif os(macOS)
+        StateColors(
+            enabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.white.opacity(0.125)),
+            disabled: Color.dynamic(light: Color.black.opacity(0.03), dark: Color.white.opacity(0.075))
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Progress
     /// Slider progress colors.
     public var progressColors: StateColors = .init(
-        enabled: ColorBook.accentBlue,
-        disabled: ColorBook.accentBluePressedDisabled
+        enabled: Color.blue,
+        disabled: Color.blue.opacity(0.3)
     )
 
     /// Indicates if slider rounds progress view right-edge. Set to `true`.
@@ -68,37 +96,58 @@ public struct VSliderUIModel {
     }
 
     // MARK: Properties - Border
-    /// Border width. Set to `0`.
+    /// Border width.
+    /// Set to `0` point on `iOS`.
+    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 0
+    public var borderWidth: PointPixelMeasurement = {
+#if os(iOS)
+        PointPixelMeasurement.points(0)
+#elseif os(macOS)
+        PointPixelMeasurement.pixels(1)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Border colors.
-    public var borderColors: StateColors = .clearColors
+    public var borderColors: StateColors = {
+#if os(iOS)
+        StateColors(Color.clear)
+#elseif os(macOS)
+        StateColors(
+            enabled: Color.dynamic(light: Color.black.opacity(0.125), dark: Color.clear),
+            disabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.clear)
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Thumb
     /// Thumb dimension. Set to `20`.
     ///
     /// To hide thumb, set to `0`.
-    public var thumbDimension: CGFloat = GlobalUIModel.ValuePickers.sliderThumbDimension
+    public var thumbDimension: CGFloat = 20
 
     /// Thumb corner radius. Set to `10`.
-    public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
+    public var thumbCornerRadius: CGFloat = 10
 
     /// Thumb colors.
-    public var thumbColors: StateColors = .init(ColorBook.white)
+    public var thumbColors: StateColors = .init(Color.white)
 
     // MARK: Properties - Thumb Border
     /// Thumb border widths.
-    /// Set to `0` on `iOS`.
+    /// Set to `0` point on `iOS`.
     /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
     public var thumbBorderWidth: PointPixelMeasurement = {
 #if os(iOS)
-        .points(0)
+        PointPixelMeasurement.points(0)
 #elseif os(macOS)
-        .pixels(1)
+        PointPixelMeasurement.pixels(1)
 #else
         fatalError() // Not supported
 #endif
@@ -110,8 +159,8 @@ public struct VSliderUIModel {
         StateColors.clearColors
 #elseif os(macOS)
         StateColors(
-            enabled: ColorBook.borderGray,
-            disabled: ColorBook.borderGrayDisabled
+            enabled: Color.makeDynamic((200, 200, 200, 1), (100, 100, 100, 1)),
+            disabled: Color.makeDynamic((230, 230, 230, 1), (70, 70, 70, 1))
         )
 #else
         fatalError() // Not supported
@@ -121,19 +170,35 @@ public struct VSliderUIModel {
     // MARK: Properties - Thumb Shadow
     /// Thumb shadow colors.
     public var thumbShadowColors: StateColors = .init(
-        enabled: GlobalUIModel.Common.shadowColorEnabled,
-        disabled: GlobalUIModel.Common.shadowColorDisabled
+        enabled: Color.make((100, 100, 100, 0.5)),
+        disabled: Color.make((100, 100, 100, 0.2))
     )
 
     /// Thumb shadow radius.
     /// Set to `2` on `iOS`.
     /// Set to `1` on `macOS`.
-    public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
+    public var thumbShadowRadius: CGFloat = {
+#if os(iOS)
+        2
+#elseif os(macOS)
+        1
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Thumb shadow offset.
-    /// Set to `0x2` on `iOS`.
-    /// Set to `0x1` on `macOS`.
-    public var thumbShadowOffset: CGPoint = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
+    /// Set to `(0, 2)` on `iOS`.
+    /// Set to `(0, 1)` on `macOS`.
+    public var thumbShadowOffset: CGPoint = {
+#if os(iOS)
+        CGPoint(x: 0, y: 2)
+#elseif os(macOS)
+        CGPoint(x: 0, y: 1)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Transition
     /// Indicates if `progress` animation is applied. Set to `true`.
@@ -143,7 +208,7 @@ public struct VSliderUIModel {
     /// If  animation is set to `nil`, a `nil` animation is still applied.
     /// If this property is set to `false`, then no animation is applied.
     ///
-    /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+    /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesProgressAnimation: Bool = true
 
     /// Progress animation. Set to `nil`.

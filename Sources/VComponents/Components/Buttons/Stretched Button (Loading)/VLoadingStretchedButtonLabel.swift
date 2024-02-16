@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Loading Stretched Button Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
+@available(visionOS, unavailable)
 enum VLoadingStretchedButtonLabel<Label> where Label: View {
     case title(title: String)
     case icon(icon: Image)

@@ -12,6 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public struct VRectangularCaptionButtonUIModel {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
@@ -37,33 +38,40 @@ public struct VRectangularCaptionButtonUIModel {
 
     // MARK: Properties - Rectangle Background
     /// Rectangle size.
-    /// Set to `56x56` on `iOS`.
-    /// Set to `64x56` on `watchOS`.
-    public var rectangleSize: CGSize = GlobalUIModel.Buttons.sizeRectButton
-
-    /// Rectangle corner radius. Set to `24`.
-    public var rectangleCornerRadius: CGFloat = {
+    /// Set to `(56, 56)` on `iOS`.
+    /// Set to `(64, 56)` on `watchOS`.
+    public var rectangleSize: CGSize = {
 #if os(iOS)
-        24
+        CGSize(dimension: 56)
 #elseif os(watchOS)
-        24
+        CGSize(width: 64, height: 56)
 #else
         fatalError() // Not supported
 #endif
     }()
 
+    /// Rectangle corner radius. Set to `24`.
+    public var rectangleCornerRadius: CGFloat = 24
+
     /// Rectangle colors.
     public var rectangleColors: StateColors = .init(
-        enabled: ColorBook.controlLayerBlueTransparent,
-        pressed: ColorBook.controlLayerBlueTransparentPressed,
-        disabled: ColorBook.controlLayerBlueTransparentDisabled
+        enabled: Color.makePlatformDynamic((24, 126, 240, 0.25), (25, 131, 255, 0.35)),
+        pressed: Color.makePlatformDynamic((31, 104, 182, 0.25), (36, 106, 186, 0.35)),
+        disabled: Color.make((128, 176, 240, 0.35))
     )
 
     /// Ratio to which rectangle scales down on press.
     /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var rectanglePressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    public var rectanglePressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Rectangle Border
     /// Rectangle border width. Set to `0`.
@@ -76,18 +84,26 @@ public struct VRectangularCaptionButtonUIModel {
 
     // MARK: Properties - Icon
     /// Icon size.
-    /// Set to `24x24` on `iOS`.
-    /// Set to `26x26` on `watchOS`.
-    public var iconSize: CGSize = GlobalUIModel.Buttons.iconSizeRectButton
+    /// Set to `(24, 24)` on `iOS`.
+    /// Set to `(26, 26)` on `watchOS`.
+    public var iconSize: CGSize = {
+#if os(iOS)
+        CGSize(dimension: 24)
+#elseif os(watchOS)
+        CGSize(dimension: 26)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Icon colors.
     ///
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
     public var iconColors: StateColors = .init(
-        enabled: GlobalUIModel.Buttons.transparentLayerLabelEnabled,
-        pressed: GlobalUIModel.Buttons.transparentLayerLabelPressed,
-        disabled: GlobalUIModel.Buttons.transparentLayerLabelDisabled
+        enabled: Color.makePlatformDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
+        pressed: Color.makePlatformDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+        disabled: Color.make((128, 176, 240, 0.5))
     )
 
     /// Icon opacities. Set to `1`s.
@@ -97,13 +113,23 @@ public struct VRectangularCaptionButtonUIModel {
     public var iconOpacities: StateOpacities = .init(1)
 
     /// Icon margins. Set to `3`s.
-    public var iconMargins: IconMargins = GlobalUIModel.Buttons.labelMarginsRectButton
+    public var iconMargins: IconMargins = .init(3)
 
     /// Ratio to which icon scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var iconPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    public var iconPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Caption
     /// Maximum caption width. Set to `100`.
@@ -116,18 +142,27 @@ public struct VRectangularCaptionButtonUIModel {
     public var titleCaptionTextAndIconCaptionPlacement: TitleAndIconPlacement = .iconAndTitle
 
     /// Spacing between title caption text and icon caption. Set to `8`.
-    public var titleCaptionTextAndIconCaptionSpacing: CGFloat = GlobalUIModel.Buttons.titleTextAndIconSpacing
+    ///
+    /// Applicable only if `init` with icon and title is used.
+    public var titleCaptionTextAndIconCaptionSpacing: CGFloat = 8
 
     /// Ratio to which caption scales down on press.
     /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
     /// Set to `0.98` on `watchOS`.
-    public var captionPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+    public var captionPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Caption - Icon
     /// Icon caption size.
-    /// Set to `16x16` on `iOS`.
-    /// Set to `18x18` on `watchOS`
+    /// Set to `(16, 16)` on `iOS`.
+    /// Set to `(18, 18)` on `watchOS`
     public var iconCaptionSize: CGSize = {
 #if os(iOS)
         CGSize(dimension: 16)
@@ -143,9 +178,9 @@ public struct VRectangularCaptionButtonUIModel {
     /// Applied to all images. But should be used for vector images.
     /// In order to use bitmap images, set this to `clear`.
     public var iconCaptionColors: StateColors = .init(
-        enabled: ColorBook.primary,
-        pressed: ColorBook.primaryPressedDisabled,
-        disabled: ColorBook.primaryPressedDisabled
+        enabled: Color.primary,
+        pressed: Color.primary.opacity(0.3),
+        disabled: Color.primary.opacity(0.3)
     )
 
     /// Icon caption opacities. Set to `1`s.
@@ -174,20 +209,20 @@ public struct VRectangularCaptionButtonUIModel {
 
     /// Title caption text colors.
     public var titleCaptionTextColors: StateColors = .init(
-        enabled: ColorBook.primary,
-        pressed: ColorBook.primaryPressedDisabled,
-        disabled: ColorBook.primaryPressedDisabled
+        enabled: Color.primary,
+        pressed: Color.primary.opacity(0.3),
+        disabled: Color.primary.opacity(0.3)
     )
 
     /// Title caption text minimum scale factor. Set to `0.75`.
-    public var titleCaptionTextMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+    public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title caption text font.
-    /// Set to `subheadline` (`15`) on `iOS`.
-    /// Set to `body` (`17`) on `watchOS`.
+    /// Set to `subheadline` on `iOS`.
+    /// Set to `body` on `watchOS`.
     public var titleCaptionTextFont: Font = {
 #if os(iOS)
-        .subheadline
+        Font.subheadline
 #elseif os(watchOS)
         Font.body
 #else
