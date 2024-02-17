@@ -133,35 +133,29 @@ public struct VCheckBoxUIModel {
 
     /// Title text colors.
     public var titleTextColors: StateColors = {
-        let enabled: Color = {
 #if os(iOS)
-            Color.primary
-#elseif os(macOS)
-            Color.primary.opacity(0.85)
-#else
-            fatalError() // Not supported
-#endif
-        }()
-
-        let disabled: Color = {
-#if os(iOS)
-            Color.primary.opacity(0.3)
-#elseif os(macOS)
-            Color.primary.opacity(0.3).opacity(0.85)
-#else
-            fatalError() // Not supported
-#endif
-        }()
-
-        return StateColors(
-            off: enabled,
-            on: enabled,
-            indeterminate: enabled,
-            pressedOff: enabled,
-            pressedOn: enabled,
-            pressedIndeterminate: enabled,
-            disabled: disabled
+        StateColors(
+            off: Color.primary,
+            on: Color.primary,
+            indeterminate: Color.primary,
+            pressedOff: Color.primary,
+            pressedOn: Color.primary,
+            pressedIndeterminate: Color.primary,
+            disabled: Color.primary.opacity(0.3)
         )
+#elseif os(macOS)
+        StateColors(
+            off: Color.primary.opacity(0.85),
+            on: Color.primary.opacity(0.85),
+            indeterminate: Color.primary.opacity(0.85),
+            pressedOff: Color.primary.opacity(0.85),
+            pressedOn: Color.primary.opacity(0.85),
+            pressedIndeterminate: Color.primary.opacity(0.85),
+            disabled: Color.primary.opacity(0.85 * 0.3)
+        )
+#else
+        fatalError() // Not supported
+#endif
     }()
 
     /// Title text font.
