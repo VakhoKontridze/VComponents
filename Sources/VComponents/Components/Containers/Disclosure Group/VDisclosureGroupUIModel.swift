@@ -48,7 +48,7 @@ public struct VDisclosureGroupUIModel {
 #if os(iOS)
         Color(uiColor: UIColor.secondarySystemBackground)
 #elseif os(macOS)
-        Color.dynamic(light: Color.black.opacity(0.03), dark: Color.black.opacity(0.15))
+        Color.dynamic(Color.black.opacity(0.03), Color.black.opacity(0.15))
 #else
         fatalError() // Not supported
 #endif

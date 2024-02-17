@@ -206,7 +206,7 @@ public struct VAlertUIModel {
     public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
         enabled: Color.blue,
         pressed: Color.blue,
-        disabled: Color.dynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
+        disabled: Color.dynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
     var secondaryButtonSubUIModel: VStretchedButtonUIModel {
@@ -238,7 +238,7 @@ public struct VAlertUIModel {
     public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
         enabled: Color.red,
         pressed: Color.red,
-        disabled: Color.dynamic(light: Color.red.opacity(0.3), dark: Color.red.opacity(0.5))
+        disabled: Color.dynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
     )
 
     var destructiveButtonSubUIModel: VStretchedButtonUIModel {

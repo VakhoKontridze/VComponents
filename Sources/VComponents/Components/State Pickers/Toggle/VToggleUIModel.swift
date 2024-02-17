@@ -169,7 +169,7 @@ public struct VToggleUIModel {
         on: Color.white,
         pressedOff: Color.white,
         pressedOn: Color.white,
-        disabled: Color.platformDynamic(light: Color.white, dark: Color.white.opacity(0.75))
+        disabled: Color.platformDynamic(Color.white, Color.white.opacity(0.75))
     )
 
     // MARK: Properties - Label

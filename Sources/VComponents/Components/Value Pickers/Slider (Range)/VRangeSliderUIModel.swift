@@ -51,8 +51,8 @@ public struct VRangeSliderUIModel {
         )
 #elseif os(macOS)
         StateColors(
-            enabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.white.opacity(0.125)),
-            disabled: Color.dynamic(light: Color.black.opacity(0.03), dark: Color.white.opacity(0.075))
+            enabled: Color.dynamic(Color.black.opacity(0.05), Color.white.opacity(0.125)),
+            disabled: Color.dynamic(Color.black.opacity(0.03), Color.white.opacity(0.075))
         )
 #else
         fatalError() // Not supported
@@ -88,8 +88,8 @@ public struct VRangeSliderUIModel {
         StateColors(Color.clear)
 #elseif os(macOS)
         StateColors(
-            enabled: Color.dynamic(light: Color.black.opacity(0.125), dark: Color.clear),
-            disabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.clear)
+            enabled: Color.dynamic(Color.black.opacity(0.125), Color.clear),
+            disabled: Color.dynamic(Color.black.opacity(0.05), Color.clear)
         )
 #else
         fatalError() // Not supported

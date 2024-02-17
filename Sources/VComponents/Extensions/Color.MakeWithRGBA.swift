@@ -23,8 +23,8 @@ extension Color {
         _ dark: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)
     ) -> Self {
         dynamic(
-            light: Color(red: light.r/255, green: light.g/255, blue: light.b/255, opacity: light.a),
-            dark: Color(red: dark.r/255, green: dark.g/255, blue: dark.b/255, opacity: dark.a)
+            Color(red: light.r/255, green: light.g/255, blue: light.b/255, opacity: light.a),
+            Color(red: dark.r/255, green: dark.g/255, blue: dark.b/255, opacity: dark.a)
         )
     }
 
@@ -33,8 +33,8 @@ extension Color {
         _ dark: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)
     ) -> Color {
         platformDynamic(
-            light: Color(red: light.r/255, green: light.g/255, blue: light.b/255, opacity: light.a),
-            dark: Color(red: dark.r/255, green: dark.g/255, blue: dark.b/255, opacity: dark.a)
+            Color(red: light.r/255, green: light.g/255, blue: light.b/255, opacity: light.a),
+            Color(red: dark.r/255, green: dark.g/255, blue: dark.b/255, opacity: dark.a)
         )
     }
 }

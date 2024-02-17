@@ -54,8 +54,8 @@ public struct VPlainButtonUIModel {
     /// Title text colors.
     public var titleTextColors: StateColors = .init(
         enabled: Color.blue,
-        pressed: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5)),
-        disabled: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
+        pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
+        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
     /// Title text font. Set to `body`.
@@ -93,8 +93,8 @@ public struct VPlainButtonUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconColors: StateColors? = .init(
         enabled: Color.blue,
-        pressed: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5)),
-        disabled: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
+        pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
+        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
     /// Icon opacities. Set to `nil`.

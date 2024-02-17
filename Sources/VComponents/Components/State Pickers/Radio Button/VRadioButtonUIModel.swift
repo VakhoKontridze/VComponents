@@ -72,10 +72,10 @@ public struct VRadioButtonUIModel {
         StateColors(Color.primaryInverted)
 #elseif os(macOS)
         StateColors(
-            off: Color.dynamic(light: Color.white, dark: Color.black.opacity(0.2)),
-            on: Color.dynamic(light: Color.white, dark: Color.black.opacity(0.2)),
-            pressedOff: Color.dynamic(light: Color.white, dark: Color.black.opacity(0.2)),
-            pressedOn: Color.dynamic(light: Color.white, dark: Color.black.opacity(0.2)),
+            off: Color.dynamic(Color.white, Color.black.opacity(0.2)),
+            on: Color.dynamic(Color.white, Color.black.opacity(0.2)),
+            pressedOff: Color.dynamic(Color.white, Color.black.opacity(0.2)),
+            pressedOn: Color.dynamic(Color.white, Color.black.opacity(0.2)),
             disabled: Color.makeDynamic((250, 250, 250, 1), (0, 0, 0, 0.05))
         )
 #else

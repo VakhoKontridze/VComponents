@@ -71,11 +71,11 @@ public struct VWrappedToggleButtonUIModel {
         )
 #elseif os(macOS)
         StateColors(
-            off: Color.dynamic(light: Color.black.opacity(0.1), dark: Color.black.opacity(0.15)),
+            off: Color.dynamic(Color.black.opacity(0.1), Color.black.opacity(0.15)),
             on: Color.makeDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
-            pressedOff: Color.dynamic(light: Color.black.opacity(0.16), dark: Color.black.opacity(0.3)),
+            pressedOff: Color.dynamic(Color.black.opacity(0.16), Color.black.opacity(0.3)),
             pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
-            disabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.black.opacity(0.1))
+            disabled: Color.dynamic(Color.black.opacity(0.05), Color.black.opacity(0.1))
         )
 #elseif os(watchOS)
         StateColors(
