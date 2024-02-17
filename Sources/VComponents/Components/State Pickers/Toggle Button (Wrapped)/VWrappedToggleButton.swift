@@ -45,8 +45,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`
-@available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // ???
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VWrappedToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
@@ -54,13 +54,12 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
-    @Binding private var state: VWrappedToggleButtonState
-    private var internalState: VWrappedToggleButtonInternalState {
+    @Binding private var state: VRectangularToggleButtonState
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VWrappedToggleButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,
-            isPressed: isPressed
+            isPressed: baseButtonState == .pressed
         )
     }
 
@@ -121,44 +120,54 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        SwiftUIGestureBaseButton(
-            onStateChange: stateChangeHandler,
-            label: {
-                labelView
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: {
+                playHapticEffect()
+                state.setNextState()
+            },
+            label: { baseButtonState in
+                let internalState: VWrappedToggleButtonInternalState = internalState(baseButtonState)
+
+                labelView(internalState: internalState)
                     .contentShape(Rectangle()) // Registers gestures even when clear
                     .frame(height: uiModel.height)
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { backgroundView }) // Has own rounding
-                    .overlay(content: { borderView }) // Has own rounding
+                    .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
+                    .overlay(content: { borderView(internalState: internalState) }) // Has own rounding
                     .padding(uiModel.hitBox)
+                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                        $0
+                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(nil, value: baseButtonState == .pressed)
+                    })
             }
         )
-        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.stateChangeAnimation, value: internalState)
-        })
     }
 
-    private var labelView: some View {
+    private func labelView(
+        internalState: VWrappedToggleButtonInternalState
+    ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                titleLabelViewComponent(title: title)
+                titleLabelViewComponent(internalState: internalState, title: title)
 
             case .icon(let icon):
-                iconLabelViewComponent(icon: icon)
+                iconLabelViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        titleLabelViewComponent(title: title)
-                        iconLabelViewComponent(icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
                     })
 
                 case .iconAndTitle:
                     HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
-                        iconLabelViewComponent(icon: icon)
-                        titleLabelViewComponent(title: title)
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
+                        titleLabelViewComponent(internalState: internalState, title: title)
                     })
                 }
 
@@ -171,6 +180,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     }
 
     private func titleLabelViewComponent(
+        internalState: VWrappedToggleButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
@@ -182,6 +192,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     }
 
     private func iconLabelViewComponent(
+        internalState: VWrappedToggleButtonInternalState,
         icon: Image
     ) -> some View {
         icon
@@ -193,7 +204,9 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
             .frame(size: uiModel.iconSize)
     }
 
-    private var backgroundView: some View {
+    private func backgroundView(
+        internalState: VWrappedToggleButtonInternalState
+    ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
@@ -205,21 +218,13 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     }
 
     @ViewBuilder 
-    private var borderView: some View {
+    private func borderView(
+        internalState: VWrappedToggleButtonInternalState
+    ) -> some View {
         if uiModel.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                 .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
                 .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
-        }
-    }
-
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
-        isPressed = gestureState.didRecognizePress
-
-        if gestureState.didRecognizeClick {
-            playHapticEffect()
-            state.setNextState()
         }
     }
 

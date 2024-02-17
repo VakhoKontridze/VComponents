@@ -8,22 +8,63 @@
 import SwiftUI
 import VCore
 
-// MARK: - V CheckBox UI Model
+// MARK: - V Check Box UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct VCheckBoxUIModel {
     // MARK: Properties - Global
-    /// Checkbox dimension. Set to `16`.
-    public var dimension: CGFloat = 16
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
 
-    /// Spacing between checkbox and label. Set to `0`.
-    public var checkBoxAndLabelSpacing: CGFloat = 0
+        // This flag is what makes the component possible.
+        // Animation can be handled within the component,
+        // at a cost of sacrificing tap animation.
+        uiModel.animatesStateChange = false
+
+        return uiModel
+    }
+    
+    /// Checkbox dimension.
+    /// Set to `22` on `iOS`.
+    /// Set to `16` on `macOS`
+    public var dimension: CGFloat = {
+#if os(iOS)
+        22
+#elseif os(macOS)
+        16
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Spacing between checkbox and label.
+    /// Set to `7` on `iOS`
+    /// Set to `5` on `macOS`.
+    public var checkBoxAndLabelSpacing: CGFloat = {
+#if os(iOS)
+        7
+#elseif os(macOS)
+        5
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
-    /// Checkbox corner radius. Set to `5`.
-    public var cornerRadius: CGFloat = 4
+    /// Checkbox corner radius.
+    /// Set to `11` on `macOS`.
+    /// Set to `4` on `macOS`.
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        11
+#elseif os(macOS)
+        4
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Fill
     /// Fill colors.
@@ -54,10 +95,20 @@ public struct VCheckBoxUIModel {
     }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `1`.
+    /// Border width.
+    /// Set to `1.5` on `iOS`.
+    /// Set to `1` on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 1
+    public var borderWidth: CGFloat = {
+#if os(iOS)
+        1.5
+#elseif os(macOS)
+        1
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Border colors.
     public var borderColors: StateColors = .init(
@@ -87,8 +138,18 @@ public struct VCheckBoxUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconContentMode: ContentMode? = .fit
 
-    /// Icon size. Set to `(9, 9)`.
-    public var checkmarkIconSize: CGSize? = .init(dimension: 9)
+    /// Icon size. 
+    /// Set to `(11, 11)` on `iOS`.
+    /// Set to `(9, 9)` on `macOS`.
+    public var checkmarkIconSize: CGSize? = {
+#if os(iOS)
+        CGSize(dimension: 11)
+#elseif os(macOS)
+        CGSize(dimension: 9)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Icon colors.
     ///
@@ -172,8 +233,8 @@ public struct VCheckBoxUIModel {
     }()
 
     // MARK: Properties - Hit Box
-    /// Checkbox hit box. Set to `5`.
-    public var checkboxHitBox: HitBox = .init(5) // Actual spacing is 0
+    /// Checkbox hit box. Set to `zero`.
+    public var checkboxHitBox: HitBox = .zero
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.

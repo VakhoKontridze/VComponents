@@ -15,6 +15,17 @@ import VCore
 @available(visionOS, unavailable)
 public struct VToggleUIModel {
     // MARK: Properties - Global
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        // This flag is what makes the component possible.
+        // Animation can be handled within the component,
+        // at a cost of sacrificing tap animation.
+        uiModel.animatesStateChange = false
+
+        return uiModel
+    }
+
     /// Toggle size.
     /// Set to `(51, 32)` on `iOS`.
     /// Set to `(38, 22)` on `macOS`.
@@ -28,8 +39,18 @@ public struct VToggleUIModel {
 #endif
     }()
 
-    /// Spacing between toggle and label. Set to `5`.
-    public var toggleAndLabelSpacing: CGFloat = 5
+    /// Spacing between toggle and label.
+    /// Set to `7` on `iOS`
+    /// Set to `5` on `macOS`.
+    public var toggleAndLabelSpacing: CGFloat = {
+#if os(iOS)
+        7
+#elseif os(macOS)
+        5
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
     var cornerRadius: CGFloat { size.height }

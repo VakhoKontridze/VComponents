@@ -31,8 +31,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // No `SwiftUIGestureBaseButton`
-@available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
@@ -40,13 +40,12 @@ public struct VRadioButton<Label>: View where Label: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
     @Binding private var state: VRadioButtonState
-    private var internalState: VRadioButtonInternalState {
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRadioButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,
-            isPressed: isPressed
+            isPressed: baseButtonState == .pressed
         )
     }
 
@@ -99,60 +98,46 @@ public struct VRadioButton<Label>: View where Label: View {
                 
             case .title(let title):
                 labeledRadioButton(label: {
-                    SwiftUIGestureBaseButton(
-                        onStateChange: stateChangeHandler,
-                        label: {
-                            Text(title)
-                                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                                .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-                                .font(uiModel.titleTextFont)
-                        }
-                    )
-                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    baseButtonView(label: { internalState in
+                        Text(title)
+                            .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
+                            .font(uiModel.titleTextFont)
+                    })
+                    .blocksHitTesting(!uiModel.labelIsClickable)
                 })
-                
+
             case .label(let label):
                 labeledRadioButton(label: {
-                    SwiftUIGestureBaseButton(
-                        onStateChange: stateChangeHandler,
-                        label: {
-                            label(internalState)
-                        }
-                    )
-                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    baseButtonView(label: label)
+                        .blocksHitTesting(!uiModel.labelIsClickable)
                 })
             }
-        })
-        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.stateChangeAnimation, value: internalState)
         })
     }
-    
+
     private var radioButton: some View {
-        SwiftUIGestureBaseButton(
-            onStateChange: stateChangeHandler,
-            label: {
-                ZStack(content: {
+        baseButtonView(label: { internalState in
+            ZStack(content: {
+                Circle()
+                    .frame(dimension: uiModel.dimension)
+                    .foregroundStyle(uiModel.fillColors.value(for: internalState))
+
+                if uiModel.borderWidth > 0 {
                     Circle()
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
                         .frame(dimension: uiModel.dimension)
-                        .foregroundStyle(uiModel.fillColors.value(for: internalState))
+                }
 
-                    if uiModel.borderWidth > 0 {
-                        Circle()
-                            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-                            .frame(dimension: uiModel.dimension)
-                    }
-
-                    Circle()
-                        .frame(dimension: uiModel.bulletDimension)
-                        .foregroundStyle(uiModel.bulletColors.value(for: internalState))
-                })
-                .frame(dimension: uiModel.dimension)
-                .padding(uiModel.radioButtonHitBox)
-            }
-        )
+                Circle()
+                    .frame(dimension: uiModel.bulletDimension)
+                    .foregroundStyle(uiModel.bulletColors.value(for: internalState))
+            })
+            .frame(dimension: uiModel.dimension)
+            .padding(uiModel.radioButtonHitBox)
+        })
     }
 
     private func labeledRadioButton<Content>(
@@ -160,36 +145,34 @@ public struct VRadioButton<Label>: View where Label: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: 0, content: {
+        HStack(spacing: uiModel.radioButtonAndLabelSpacing, content: {
             radioButton
-            spacerView
             label()
         })
     }
 
-    private var spacerView: some View {
-        SwiftUIGestureBaseButton(
-            onStateChange: stateChangeHandler,
-            label: {
-                Rectangle()
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.radioButtonAndLabelSpacing)
-                    .foregroundStyle(.clear)
+    private func baseButtonView(
+        label: @escaping (VRadioButtonInternalState) -> some View
+    ) -> some View {
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: {
+                playHapticEffect()
+                state.setNextStateRadio()
+            },
+            label: { baseButtonState in
+                let internalState: VRadioButtonInternalState = internalState(baseButtonState)
+
+                label(internalState)
+                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                        $0
+                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
+                    })
             }
         )
-        .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
-    
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
-        isPressed = gestureState.didRecognizePress
-        
-        if gestureState.didRecognizeClick {
-            playHapticEffect()
-            state.setNextStateRadio()
-        }
-    }
-    
+
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)

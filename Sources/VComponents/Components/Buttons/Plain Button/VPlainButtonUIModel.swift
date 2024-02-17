@@ -109,8 +109,8 @@ public struct VPlainButtonUIModel {
     public var iconFont: Font?
 
     // MARK: Properties - Hit Box
-    /// Hit box. Set to `5`s.
-    public var hitBox: HitBox = .init(5)
+    /// Hit box. Set to `zero.
+    public var hitBox: HitBox = .zero
 
     // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.

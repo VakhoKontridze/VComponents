@@ -15,11 +15,42 @@ import VCore
 @available(visionOS, unavailable)
 public struct VRadioButtonUIModel {
     // MARK: Properties - Global
-    /// Radio button dimension. Set to `16`.
-    public var dimension: CGFloat = 16
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
 
-    /// Spacing between radio button and label. Set to `0`.
-    public var radioButtonAndLabelSpacing: CGFloat = 0
+        // This flag is what makes the component possible.
+        // Animation can be handled within the component,
+        // at a cost of sacrificing tap animation.
+        uiModel.animatesStateChange = false
+
+        return uiModel
+    }
+    
+    /// Radio button dimension.
+    /// Set to `22` on `iOS`.
+    /// Set to `16` on `macOS`
+    public var dimension: CGFloat = {
+#if os(iOS)
+        22
+#elseif os(macOS)
+        16
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Spacing between radio button and label. 
+    /// Set to `7` on `iOS`
+    /// Set to `5` on `macOS`.
+    public var radioButtonAndLabelSpacing: CGFloat = {
+#if os(iOS)
+        7
+#elseif os(macOS)
+        5
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Fill
     /// Fill colors.
@@ -41,10 +72,20 @@ public struct VRadioButtonUIModel {
 
 
     // MARK: Properties - Border
-    /// Radio button corner radius. Set to `1`.
+    /// Border width.
+    /// Set to `1.5` on `iOS`.
+    /// Set to `1` on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 1
+    public var borderWidth: CGFloat = {
+#if os(iOS)
+        1.5
+#elseif os(macOS)
+        1
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Border colors.
     public var borderColors: StateColors = .init(
@@ -56,8 +97,18 @@ public struct VRadioButtonUIModel {
     )
 
     // MARK: Properties - Bullet
-    /// Bullet dimension. Set to `8`.
-    public var bulletDimension: CGFloat = 8
+    /// Bullet dimension. 
+    /// Set to `12` on `iOS`.
+    /// Set to `8` on `macOS`.
+    public var bulletDimension: CGFloat = {
+#if os(iOS)
+        12
+#elseif os(macOS)
+        8
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Bullet colors.
     public var bulletColors: StateColors = .init(
@@ -108,9 +159,22 @@ public struct VRadioButtonUIModel {
 #endif
     }()
 
+    /// Title text font.
+    /// Set to `subheadline` on `iOS`.
+    /// Set to `body` on `macOS`.
+    public var titleTextFont: Font = {
+#if os(iOS)
+        Font.subheadline
+#elseif os(macOS)
+        Font.body
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
     // MARK: Properties - Hit Box
-    /// Radio button hit box. Set to `5`s.
-    public var radioButtonHitBox: HitBox = .init(5) // Actual spacing is 0
+    /// Radio button hit box. Set to `zero`.
+    public var radioButtonHitBox: HitBox = .zero
 
     // MARK: Properties - Transition
     /// Indicates if `stateChange` animation is applied. Set to `true`.

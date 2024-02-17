@@ -15,6 +15,17 @@ import VCore
 @available(visionOS, unavailable)
 public struct VRectangularToggleButtonUIModel {
     // MARK: Properties - Global
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        // This flag is what makes the component possible.
+        // Animation can be handled within the component,
+        // at a cost of sacrificing tap animation.
+        uiModel.animatesStateChange = false
+
+        return uiModel
+    }
+
     /// Size.
     /// Set to `(56, 56)` on `iOS`.
     /// Set to `(28, 28)` on `macOS`.

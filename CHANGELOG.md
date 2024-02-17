@@ -30,6 +30,7 @@ VRectangularCaptionButton
 
 VPlainButton
 
+- `hitBox` is set to `zero`
 - Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
 
 VToggle
@@ -38,9 +39,16 @@ VToggle
 
 VCheckBox
 
+- CheckBox is redesigned for `iOS` with larger, more circular design
+- `hitBox` is set to `zero`, and `checkBoxAndLabelSpacing` is set to `5`, as CheckBox now has native extended hit areas
 - `checkmarkIconDimension` is replaced with `checkmarkIconSize`
 - `checkmarkIconOpacities` is added to UI model
 - CheckBox now supports button icon `Font` customization. `isCheckmarkIconResizable`, `checkmarkIconContentMode`, and `checkmarkIconFont` properties have been added. Also, `checkmarkIconColors` and `checkmarkIconSize` have been made `Optional`.
+
+VRadioButton
+
+- Radio Button is redesigned for `iOS` with larger design
+- `hitBox` is set to `zero`, and `checkBoxAndLabelSpacing` is set to `5`, as CheckBox now has native extended hit areas
 
 VStretchedToggleButton
 

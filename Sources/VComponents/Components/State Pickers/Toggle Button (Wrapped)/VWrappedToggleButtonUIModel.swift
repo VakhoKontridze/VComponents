@@ -15,6 +15,17 @@ import VCore
 @available(visionOS, unavailable)
 public struct VWrappedToggleButtonUIModel {
     // MARK: Properties - Global
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+
+        // This flag is what makes the component possible.
+        // Animation can be handled within the component,
+        // at a cost of sacrificing tap animation.
+        uiModel.animatesStateChange = false
+
+        return uiModel
+    }
+
     /// Height. Set to `32`.
     public var height: CGFloat = 32
 

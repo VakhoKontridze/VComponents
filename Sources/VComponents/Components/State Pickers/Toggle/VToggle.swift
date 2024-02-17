@@ -31,8 +31,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow HIG. No `SwiftUIGestureBaseButton`.
-@available(watchOS, unavailable) // No `SwiftUIGestureBaseButton`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // ???
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties - UI Model
@@ -41,13 +41,12 @@ public struct VToggle<Label>: View where Label: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
     @Binding private var state: VToggleState
-    private var internalState: VToggleInternalState {
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VToggleInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,
-            isPressed: isPressed
+            isPressed: baseButtonState == .pressed
         )
     }
 
@@ -100,59 +99,45 @@ public struct VToggle<Label>: View where Label: View {
 
             case .title(let title):
                 labeledToggleView(label: {
-                    SwiftUIGestureBaseButton(
-                        onStateChange: stateChangeHandler,
-                        label: {
-                            Text(title)
-                                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                                .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-                                .font(uiModel.titleTextFont)
-                        }
-                    )
-                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    baseButtonView(label: { internalState in
+                        Text(title)
+                            .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
+                            .font(uiModel.titleTextFont)
+                    })
+                    .blocksHitTesting(!uiModel.labelIsClickable)
                 })
 
             case .label(let label):
                 labeledToggleView(label: {
-                    SwiftUIGestureBaseButton(
-                        onStateChange: stateChangeHandler,
-                        label: {
-                            label(internalState)
-                        }
-                    )
-                    .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    baseButtonView(label: label)
+                        .blocksHitTesting(!uiModel.labelIsClickable)
                 })
             }
-        })
-        .applyIf(uiModel.appliesStateChangeAnimation, transform: {
-            $0.animation(uiModel.stateChangeAnimation, value: internalState)
         })
     }
     
     private var toggleView: some View {
-        SwiftUIGestureBaseButton(
-            onStateChange: stateChangeHandler,
-            label: {
-                ZStack(content: {
+        baseButtonView(label: { internalState in
+            ZStack(content: {
+                RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                    .foregroundStyle(uiModel.fillColors.value(for: internalState))
+
+                let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+                if borderWidth > 0 {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .foregroundStyle(uiModel.fillColors.value(for: internalState))
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+                }
 
-                    let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
-                    if borderWidth > 0 {
-                        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
-                    }
-
-                    Circle()
-                        .frame(dimension: uiModel.thumbDimension)
-                        .foregroundStyle(uiModel.thumbColors.value(for: internalState))
-                        .offset(x: thumbOffset)
-                })
-                .frame(size: uiModel.size)
-            }
-        )
+                Circle()
+                    .frame(dimension: uiModel.thumbDimension)
+                    .foregroundStyle(uiModel.thumbColors.value(for: internalState))
+                    .offset(x: thumbOffset(internalState: internalState))
+            })
+            .frame(size: uiModel.size)
+        })
     }
 
     private func labeledToggleView<Content>(
@@ -160,36 +145,34 @@ public struct VToggle<Label>: View where Label: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: 0, content: {
+        HStack(spacing: uiModel.toggleAndLabelSpacing, content: {
             toggleView
-            spacerView
             label()
         })
     }
 
-    private var spacerView: some View {
-        SwiftUIGestureBaseButton(
-            onStateChange: stateChangeHandler,
-            label: {
-                Rectangle()
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: uiModel.toggleAndLabelSpacing)
-                    .foregroundStyle(.clear)
+    private func baseButtonView(
+        label: @escaping (VToggleInternalState) -> some View
+    ) -> some View {
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: {
+                playHapticEffect()
+                state.setNextState()
+            },
+            label: { baseButtonState in
+                let internalState: VToggleInternalState = internalState(baseButtonState)
+
+                label(internalState)
+                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                        $0
+                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
+                    })
             }
         )
-        .disabled(!uiModel.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
-    
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
-        isPressed = gestureState.didRecognizePress
-        
-        if gestureState.didRecognizeClick {
-            playHapticEffect()
-            state.setNextState()
-        }
-    }
-    
+
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
@@ -198,7 +181,9 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     // MARK: Thumb Position
-    private var thumbOffset: CGFloat {
+    private func thumbOffset(
+        internalState: VToggleInternalState
+    ) -> CGFloat {
         let offset: CGFloat = uiModel.thumbOffset
         
         switch internalState {
