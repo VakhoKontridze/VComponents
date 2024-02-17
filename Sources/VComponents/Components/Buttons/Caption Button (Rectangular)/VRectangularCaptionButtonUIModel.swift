@@ -142,7 +142,7 @@ public struct VRectangularCaptionButtonUIModel {
 #endif
     }()
 
-    /// Icon margins. Set to `3`s.
+    /// Icon margins. Set to `(1, 1)`.
     public var iconMargins: IconMargins = .init(3)
 
     // MARK: Properties - Caption

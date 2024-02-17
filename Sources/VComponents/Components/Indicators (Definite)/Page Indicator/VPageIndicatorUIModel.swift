@@ -131,9 +131,9 @@ public struct VPageIndicatorUIModel {
     }()
 
     // MARK: Properties - Dot Border
-    /// Dot border widths. Set to `0`s.
+    /// Dot border widths. Set to `zero`
     ///
-    /// To hide border, set to `0`s.
+    /// To hide border, set to `zero`.
     ///
     /// Applicable on when `init` without dot content is used.
     public var dotBorderWidths: DotStateDimensions = .zero

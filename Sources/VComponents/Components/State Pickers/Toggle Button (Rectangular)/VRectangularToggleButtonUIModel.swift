@@ -79,7 +79,7 @@ public struct VRectangularToggleButtonUIModel {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Label margins. Set to `3`s.
+    /// Label margins. Set to `(3, 3)`.
     public var labelMargins: LabelMargins = .init(3)
 
     /// Ratio to which label scales down on press. Se to `1`.

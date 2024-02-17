@@ -34,7 +34,7 @@ public struct VWrappedIndicatorStaticPagerTabViewUIModel {
     public var tabBarAlignment: VerticalAlignment = .top
 
     // MARK: Properties - Tab Bar - Tab Item
-    /// Tab bar margins. Set to `10`s.
+    /// Tab bar margins. Set to `(10, 10)`.
     public var tabItemMargins: VerticalMargins = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text

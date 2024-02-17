@@ -38,7 +38,7 @@ public struct VGroupBoxUIModel {
     }()
 
     // MARK: Properties - Content
-    /// Content margins. Set to `15`s.
+    /// Content margins. Set to `(15, 15, 15, 15).
     public var contentMargins: Margins = .init(15)
 
     // MARK: Initializers

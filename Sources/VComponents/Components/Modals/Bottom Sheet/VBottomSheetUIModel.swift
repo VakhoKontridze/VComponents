@@ -80,7 +80,7 @@ public struct VBottomSheetUIModel {
     /// Drag indicator color.
     public var dragIndicatorColor: Color = .makeDynamic((200, 200, 200, 1), (100, 100, 100, 1))
 
-    /// Drag indicator margins. Set to `15`s.
+    /// Drag indicator margins. Set to `(15, 15)`.
     public var dragIndicatorMargins: VerticalMargins = .init(15)
 
     // MARK: Properties - Content

@@ -43,7 +43,7 @@ public struct VDynamicPagerTabViewUIModel {
     public var tabItemSpacing: CGFloat = 0
 
     // MARK: Properties - Tab Bar - Tab Item
-    /// Tab bar margins. Set to `10`s.
+    /// Tab bar margins. Set to `(10, 10, 10, 10)`.
     public var tabItemMargins: Margins = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
