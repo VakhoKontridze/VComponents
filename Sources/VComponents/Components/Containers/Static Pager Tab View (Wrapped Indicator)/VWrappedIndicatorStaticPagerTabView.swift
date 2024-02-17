@@ -408,10 +408,9 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             let index: Int = (1..<dataSource.count)
                 .first(where: { contentOffset < tabContentOffsets[$0] })
         {
-            return linearInterpolation(
+            return contentOffset.linearInterpolation(
                 x1: tabContentOffsets[index-1], y1: dataSource[index-1],
-                x2: tabContentOffsets[index], y2: dataSource[index],
-                x: contentOffset
+                x2: tabContentOffsets[index], y2: dataSource[index]
             )
 
         } else {
@@ -419,17 +418,16 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             return dataSource[dataSource.count-1]
         }
     }
+}
 
-    private func linearInterpolation<T>(
-        x1: T, y1: T,
-        x2: T, y2: T,
-        x: T
-    ) -> T
-        where T: BinaryFloatingPoint
-    {
-        y1 + ((y2-y1) / (x2-x1)) * (x-x1)
+// MARK: - Helpers
+extension FloatingPoint {
+    fileprivate func linearInterpolation(
+        x1: Self, y1: Self,
+        x2: Self, y2: Self
+    ) -> Self {
+        y1 + ((y2-y1) / (x2-x1)) * (self-x1)
     }
-
 }
 
 // MARK: - Preview
