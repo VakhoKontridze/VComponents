@@ -9,7 +9,6 @@ import SwiftUI
 
 // MARK: - V Wrapped Toggle Button Label
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 enum VWrappedToggleButtonLabel<Label> where Label: View {
     case title(title: String)

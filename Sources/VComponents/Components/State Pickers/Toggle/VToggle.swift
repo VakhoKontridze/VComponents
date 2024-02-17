@@ -32,7 +32,6 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
-@available(watchOS, unavailable) // ???
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties - UI Model
@@ -177,6 +176,8 @@ public struct VToggle<Label>: View where Label: View {
     private func playHapticEffect() {
 #if os(iOS)
         HapticManager.shared.playImpact(uiModel.haptic)
+#elseif os(watchOS)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
     
@@ -199,7 +200,7 @@ public struct VToggle<Label>: View where Label: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

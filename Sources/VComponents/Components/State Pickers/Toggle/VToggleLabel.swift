@@ -9,7 +9,6 @@ import SwiftUI
 
 // MARK: - V Toggle Label
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 enum VToggleLabel<Label> where Label: View {
     case empty

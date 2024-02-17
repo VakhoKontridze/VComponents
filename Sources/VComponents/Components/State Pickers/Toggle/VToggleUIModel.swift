@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Toggle UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct VToggleUIModel {
     // MARK: Properties - Global
@@ -29,11 +28,14 @@ public struct VToggleUIModel {
     /// Toggle size.
     /// Set to `(51, 32)` on `iOS`.
     /// Set to `(38, 22)` on `macOS`.
+    /// Set to `(34, 22)` on `watchOS`.
     public var size: CGSize = {
 #if os(iOS)
         CGSize(width: 51, height: 31)
 #elseif os(macOS)
         CGSize(width: 38, height: 22)
+#elseif os(watchOS)
+        CGSize(width: 34, height: 22)
 #else
         fatalError() // Not supported
 #endif
@@ -42,10 +44,13 @@ public struct VToggleUIModel {
     /// Spacing between toggle and label.
     /// Set to `7` on `iOS`
     /// Set to `5` on `macOS`.
+    /// Set to `5` on `watchOS`.
     public var toggleAndLabelSpacing: CGFloat = {
 #if os(iOS)
         7
 #elseif os(macOS)
+        5
+#elseif os(watchOS)
         5
 #else
         fatalError() // Not supported
@@ -74,6 +79,14 @@ public struct VToggleUIModel {
             pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
             disabled: Color.primary.opacity(0.03)
         )
+#elseif os(watchOS)
+        StateColors(
+            off: Color.make((60, 60, 60, 1)),
+            on: Color.make((25, 131, 255, 1)),
+            pressedOff: Color.make((90, 90, 90, 1)),
+            pressedOn: Color.make((36, 106, 186, 1)),
+            disabled: Color.make((50, 50, 50, 1))
+        )
 #else
         fatalError() // Not supported
 #endif
@@ -83,6 +96,7 @@ public struct VToggleUIModel {
     /// Border width.
     /// Set to `0` point on `iOS`.
     /// Set to `1` pixel on `macOS`.
+    /// Set to `0` point on `watchOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -90,6 +104,8 @@ public struct VToggleUIModel {
         PointPixelMeasurement.points(0)
 #elseif os(macOS)
         PointPixelMeasurement.pixels(1)
+#elseif os(watchOS)
+        PointPixelMeasurement.points(0)
 #else
         fatalError() // Not supported
 #endif
@@ -107,6 +123,8 @@ public struct VToggleUIModel {
             pressedOn: Color.clear,
             disabled: Color.makeDynamic((220, 220, 220, 1), (70, 70, 70, 1))
         )
+#elseif os(watchOS)
+        StateColors.clearColors
 #else
         fatalError() // Not supported
 #endif
@@ -116,10 +134,13 @@ public struct VToggleUIModel {
     /// Thumb dimension.
     /// Set to `27` on `iOS`.
     /// Set to `20` on `macOS`.
+    /// Set to `20` on `watchOS`.
     public var thumbDimension: CGFloat = {
 #if os(iOS)
         27
 #elseif os(macOS)
+        20
+#elseif os(watchOS)
         20
 #else
         fatalError() // Not supported
@@ -132,7 +153,7 @@ public struct VToggleUIModel {
         on: Color.white,
         pressedOff: Color.white,
         pressedOn: Color.white,
-        disabled: Color.dynamic(light: Color.white, dark: Color.white.opacity(0.75))
+        disabled: Color.platformDynamic(light: Color.white, dark: Color.white.opacity(0.75))
     )
 
     var thumbOffset: CGFloat {
@@ -177,6 +198,14 @@ public struct VToggleUIModel {
             pressedOn: Color.primary.opacity(0.85),
             disabled: Color.primary.opacity(0.85 * 0.3)
         )
+#elseif os(watchOS)
+        StateColors(
+            off: Color.white,
+            on: Color.white,
+            pressedOff: Color.white,
+            pressedOn: Color.white,
+            disabled: Color.white.opacity(0.3)
+        )
 #else
         fatalError() // Not supported
 #endif
@@ -185,10 +214,13 @@ public struct VToggleUIModel {
     /// Title text font.
     /// Set to `subheadline` on `iOS`.
     /// Set to `body` on `macOS`.
+    /// Set to `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline
 #elseif os(macOS)
+        Font.body
+#elseif os(watchOS)
         Font.body
 #else
         fatalError() // Not supported
@@ -213,8 +245,11 @@ public struct VToggleUIModel {
 #if os(iOS)
     /// Haptic feedback style. Set to `light`.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+#elseif os(watchOS)
+    /// Haptic feedback type. Set to `click`.
+    public var haptic: WKHapticType? = .click
 #endif
-    
+
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}

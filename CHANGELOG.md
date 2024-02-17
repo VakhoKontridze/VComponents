@@ -35,6 +35,7 @@ VPlainButton
 
 VToggle
 
+- Toggle now supports `watchOS`
 - `borderWidth` and `borderColors` properties are added to UI model
 
 VCheckBox
@@ -56,10 +57,12 @@ VStretchedToggleButton
 
 VWrappedToggleButton
 
+- Toggle button now supports `watchOS`
 - Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
 
 VRectangularToggleButton
 
+- Toggle button now supports `watchOS`
 - Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
 
 VStepper

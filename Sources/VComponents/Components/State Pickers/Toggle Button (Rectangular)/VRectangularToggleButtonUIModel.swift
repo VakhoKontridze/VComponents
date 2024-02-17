@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Rectangular Toggle Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct VRectangularToggleButtonUIModel {
     // MARK: Properties - Global
@@ -29,11 +28,14 @@ public struct VRectangularToggleButtonUIModel {
     /// Size.
     /// Set to `(56, 56)` on `iOS`.
     /// Set to `(28, 28)` on `macOS`.
+    /// Set to `(64, 56)` on `watchOS`.
     public var size: CGSize = {
 #if os(iOS)
         CGSize(dimension: 56)
 #elseif os(macOS)
         CGSize(dimension: 28)
+#elseif os(watchOS)
+        CGSize(width: 64, height: 56)
 #else
         fatalError() // Not supported
 #endif
@@ -43,11 +45,14 @@ public struct VRectangularToggleButtonUIModel {
     /// Corner radius.
     /// Set to `16` on `iOS`.
     /// Set to `6` on `macOS`.
+    /// Set to `16` on `watchOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         16
 #elseif os(macOS)
         6
+#elseif os(watchOS)
+        16
 #else
         fatalError() // Not supported
 #endif
@@ -72,13 +77,34 @@ public struct VRectangularToggleButtonUIModel {
             pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
             disabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.black.opacity(0.1))
         )
+#elseif os(watchOS)
+        StateColors(
+            off: Color.make((60, 60, 60, 1)),
+            on: Color.make((25, 131, 255, 1)),
+            pressedOff: Color.make((90, 90, 90, 1)),
+            pressedOn: Color.make((36, 106, 186, 1)),
+            disabled: Color.make((50, 50, 50, 1))
+        )
 #else
         fatalError() // Not supported
 #endif
     }()
 
-    /// Ratio to which background scales down on press. Set to `1`.
-    public var backgroundPressedScale: CGFloat = 1
+    /// Ratio to which background scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var backgroundPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Border
     /// Border width. Set to `0`.
@@ -93,8 +119,21 @@ public struct VRectangularToggleButtonUIModel {
     /// Label margins. Set to `(3, 3)`.
     public var labelMargins: LabelMargins = .init(3)
 
-    /// Ratio to which label scales down on press. Se to `1`.
-    public var labelPressedScale: CGFloat = 1
+    /// Ratio to which label scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var labelPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
@@ -112,11 +151,14 @@ public struct VRectangularToggleButtonUIModel {
     /// Title text font.
     /// Set to `semibold` `subheadline` on `iOS`.
     /// Set to `body` on `macOS`.
+    /// Set to `semibold` `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline.weight(.semibold)
 #elseif os(macOS)
         Font.body
+#elseif os(watchOS)
+        Font.body.weight(.semibold)
 #else
         fatalError() // Not supported
 #endif
@@ -138,11 +180,14 @@ public struct VRectangularToggleButtonUIModel {
     /// Icon size.
     /// Set to `(24, 24)` on `iOS`.
     /// Set to `(14, 14)` on `macOS`.
+    /// Set to `(26, 26)` on `watchOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
 #elseif os(macOS)
         CGSize(dimension: 14)
+#elseif os(watchOS)
+        CGSize(dimension: 26)
 #else
         fatalError() // Not supported
 #endif
@@ -202,6 +247,9 @@ public struct VRectangularToggleButtonUIModel {
 #if os(iOS)
     /// Haptic feedback style. Set to `light`.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+#elseif os(watchOS)
+    /// Haptic feedback type. Set to `click`.
+    public var haptic: WKHapticType? = .click
 #endif
 
     // MARK: Initializers

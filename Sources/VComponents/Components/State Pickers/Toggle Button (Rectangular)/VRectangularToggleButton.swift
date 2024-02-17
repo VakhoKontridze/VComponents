@@ -46,7 +46,6 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
-@available(watchOS, unavailable) // ???
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularToggleButton<Label>: View where Label: View {
     // MARK: Properties - UI Model
@@ -203,13 +202,14 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
     private func playHapticEffect() {
 #if os(iOS)
         HapticManager.shared.playImpact(uiModel.haptic)
+#elseif os(watchOS)
+        HapticManager.shared.playImpact(uiModel.haptic)
 #endif
     }
 }
 
 // MARK: - Helpers
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VRectangularToggleButtonInternalState {
     fileprivate var isPressedOffPressedOn: Bool {
@@ -226,7 +226,7 @@ extension VRectangularToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(visionOS))
 
 #Preview("*", body: {
     struct ContentView: View {

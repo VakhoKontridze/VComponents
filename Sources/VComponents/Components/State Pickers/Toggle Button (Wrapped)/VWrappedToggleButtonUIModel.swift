@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Wrapped Toggle Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public struct VWrappedToggleButtonUIModel {
     // MARK: Properties - Global
@@ -26,12 +25,38 @@ public struct VWrappedToggleButtonUIModel {
         return uiModel
     }
 
-    /// Height. Set to `32`.
-    public var height: CGFloat = 32
+    /// Height.
+    /// Set to `32` on `iOS`.
+    /// Set to `32` on `macOS`.
+    /// Set to `48` on `watchOS`.
+    public var height: CGFloat = {
+#if os(iOS)
+        32
+#elseif os(macOS)
+        32
+#elseif os(watchOS)
+        48
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to `16`.
-    public var cornerRadius: CGFloat = 16
+    /// Corner radius.
+    /// Set to `16` on `iOS`.
+    /// Set to `16` on `macOS`.
+    /// Set to `24` on `watchOS`.
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        16
+#elseif os(macOS)
+        16
+#elseif os(watchOS)
+        24
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Background
     /// Background colors.
@@ -52,13 +77,34 @@ public struct VWrappedToggleButtonUIModel {
             pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
             disabled: Color.dynamic(light: Color.black.opacity(0.05), dark: Color.black.opacity(0.1))
         )
+#elseif os(watchOS)
+        StateColors(
+            off: Color.make((60, 60, 60, 1)),
+            on: Color.make((25, 131, 255, 1)),
+            pressedOff: Color.make((90, 90, 90, 1)),
+            pressedOn: Color.make((36, 106, 186, 1)),
+            disabled: Color.make((50, 50, 50, 1))
+        )
 #else
         fatalError() // Not supported
 #endif
     }()
 
-    /// Ratio to which background scales down on press. Se to `1`.
-    public var backgroundPressedScale: CGFloat = 1
+    /// Ratio to which background scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var backgroundPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Border
     /// Border width. Set to `0`.
@@ -81,8 +127,21 @@ public struct VWrappedToggleButtonUIModel {
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
 
-    /// Ratio to which label scales down on press. Se to `1`.
-    public var labelPressedScale: CGFloat = 1
+    /// Ratio to which label scales down on press.
+    /// Set to `1` on `iOS`.
+    /// Set to `1` on `macOS`.
+    /// Set to `0.98` on `watchOS`.
+    public var labelPressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Label - Text
     /// Title text minimum scale factor. Set to `0.75`.
@@ -100,10 +159,13 @@ public struct VWrappedToggleButtonUIModel {
     /// Title text font.
     /// Set to `semibold` `subheadline` on `iOS`.
     /// Set to `semibold` `body` on `macOS`.
+    /// Set to `semibold` `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline.weight(.semibold)
 #elseif os(macOS)
+        Font.body.weight(.semibold)
+#elseif os(watchOS)
         Font.body.weight(.semibold)
 #else
         fatalError() // Not supported
@@ -123,8 +185,21 @@ public struct VWrappedToggleButtonUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
 
-    /// Icon size. Set to `16`.
-    public var iconSize: CGSize? = .init(dimension: 16)
+    /// Icon size.
+    /// Set to `(16, 16)` on `iOS`.
+    /// Set to `(16, 16)` on `macOS`.
+    /// Set to `(18, 18)` on `watchOS`.
+    public var iconSize: CGSize? = {
+#if os(iOS)
+        CGSize(dimension: 16)
+#elseif os(macOS)
+        CGSize(dimension: 16)
+#elseif os(watchOS)
+        CGSize(dimension: 18)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Icon colors.
     ///
@@ -178,8 +253,11 @@ public struct VWrappedToggleButtonUIModel {
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `light`.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+    /// Haptic feedback style. Set to `nil`.
+    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+#elseif os(watchOS)
+    /// Haptic feedback type. Set to `nil`.
+    public var haptic: WKHapticType? = nil
 #endif
 
     // MARK: Initializers

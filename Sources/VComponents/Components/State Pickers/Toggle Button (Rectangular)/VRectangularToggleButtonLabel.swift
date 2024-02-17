@@ -9,7 +9,6 @@ import SwiftUI
 
 // MARK: - V Rectangular Toggle Button Label
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 enum VRectangularToggleButtonLabel<Label> where Label: View {
     case title(title: String)
