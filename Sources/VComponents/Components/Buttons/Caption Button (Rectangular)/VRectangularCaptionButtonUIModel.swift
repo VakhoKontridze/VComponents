@@ -292,10 +292,6 @@ public struct VRectangularCaptionButtonUIModel {
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias IconMargins = EdgeInsets_HorizontalVertical
 
-    // MARK: Hit Box
-    /// Model that contains `horizontal` and `vertical` hit boxes.
-    public typealias HitBox = EdgeInsets_HorizontalVertical
-
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
