@@ -386,7 +386,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         }
 
         if !enablesSelectedTabIndicatorAnimations {
-            DispatchQueue.main.async(execute: { enablesSelectedTabIndicatorAnimations = true })
+            Task(operation: { enablesSelectedTabIndicatorAnimations = true })
         }
     }
 

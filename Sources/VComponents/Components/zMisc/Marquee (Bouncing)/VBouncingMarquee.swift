@@ -66,10 +66,8 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             contentView
                 .offset(x: offsetDynamic)
                 .animation(animation, value: isAnimating)
-                .onAppear(perform: {
-                    DispatchQueue.main.async(execute: { isAnimating = isAnimatable })
-                })
-            
+                .task({ isAnimating = isAnimatable })
+
         } else {
             contentView
                 .offset(x: offsetStatic)

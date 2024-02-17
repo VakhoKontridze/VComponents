@@ -578,9 +578,7 @@ struct VBottomSheet<Content>: View
                             })
                             .fixedSize(horizontal: false, vertical: true)
                             .getSize({ size in
-                                DispatchQueue.main.async(execute: {
-                                    contentHeight = size.height
-                                })
+                                Task(operation: { contentHeight = size.height })
                             })
                         }
                     )

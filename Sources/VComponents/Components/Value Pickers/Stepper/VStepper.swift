@@ -157,7 +157,7 @@ public struct VStepper: View {
         button: VStepperButton,
         gestureState: GestureBaseButtonGestureState
     ) {
-        DispatchQueue.main.async(execute: {
+        Task(operation: { @MainActor in // `MainActor` is needed
             if !gestureState.didRecognizePress {
                 pressedButton = nil
                 shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil

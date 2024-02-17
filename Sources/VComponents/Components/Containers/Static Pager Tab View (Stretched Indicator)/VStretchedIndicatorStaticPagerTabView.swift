@@ -360,7 +360,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         }()
 
         if !enablesSelectedTabIndicatorAnimations {
-            DispatchQueue.main.async(execute: { enablesSelectedTabIndicatorAnimations = true })
+            Task(operation: { enablesSelectedTabIndicatorAnimations = true })
         }
     }
 }

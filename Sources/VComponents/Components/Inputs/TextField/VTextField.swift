@@ -34,7 +34,8 @@ import VCore
 ///
 ///             .focused($isFocused)
 ///             .onAppear(perform: {
-///                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+///                 Task(operation: {
+///                     try? await Task.sleep(seconds: 1)
 ///                     isFocused = true
 ///                 })
 ///             })

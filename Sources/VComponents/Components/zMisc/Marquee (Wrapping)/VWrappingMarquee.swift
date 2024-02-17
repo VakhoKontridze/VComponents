@@ -67,16 +67,12 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                 contentView
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
-                    .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isAnimatable })
-                    })
-                
+                    .task({ isAnimating = isAnimatable })
+
                 contentView
                     .offset(x: offsetDynamicSecond)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
-                    .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isAnimatable })
-                    })
+                    .task({ isAnimating = isAnimatable })
             })
             .offset(x: offsetDynamic)
             

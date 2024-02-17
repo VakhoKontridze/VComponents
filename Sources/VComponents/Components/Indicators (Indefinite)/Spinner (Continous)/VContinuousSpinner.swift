@@ -39,13 +39,11 @@ public struct VContinuousSpinner: View {
             )
             .frame(width: uiModel.dimension, height: uiModel.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-            .onAppear(perform: {
-                DispatchQueue.main.async(execute: {
-                    withAnimation(
-                        uiModel.animation.repeatForever(autoreverses: false),
-                        { isAnimating.toggle() }
-                    )
-                })
+            .task({
+                withAnimation(
+                    uiModel.animation.repeatForever(autoreverses: false),
+                    { isAnimating.toggle() }
+                )
             })
             .environment(\.layoutDirection, .leftToRight) // Like native `ProgressView`, forces LTR
     }

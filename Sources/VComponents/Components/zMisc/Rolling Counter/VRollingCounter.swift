@@ -22,7 +22,7 @@ import VCore
 ///     }
 ///
 ///     private func changeValue() {
-///         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+///         Task(operation: {
 ///             value += .random(in: -10...10)
 ///             changeValue()
 ///         })
