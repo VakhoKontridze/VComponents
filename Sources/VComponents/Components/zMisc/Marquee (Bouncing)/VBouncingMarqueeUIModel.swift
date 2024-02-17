@@ -48,7 +48,7 @@ public struct VBouncingMarqueeUIModel {
     public var animationCurve: BasicAnimation.AnimationCurve = .linear
 
     /// Animation duration type. Set to `default`.
-    public var animationDurationType: DurationType = .default
+    public var animationDurationType: MarqueeDurationType = .default
 
     /// Animation delay. Set to `1` second.
     public var animationDelay: Double = 1
@@ -59,9 +59,6 @@ public struct VBouncingMarqueeUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
-    /// Enumeration that represents animation duration, such as `duration` or `velocity`.
-    public typealias DurationType = MarqueeDurationType
 }
 
 // MARK: - Factory

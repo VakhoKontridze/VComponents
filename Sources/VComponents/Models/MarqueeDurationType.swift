@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 17.02.24.
 //
 
-import CoreGraphics
+import SwiftUI
 
 // MARK: Marquee Duration Type
 /// Enumeration that represents animation duration, such as `duration` or `velocity`.
