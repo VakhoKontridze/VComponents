@@ -56,9 +56,7 @@ VRectangularToggleButton
 
 VStepper
 
-- `buttonIconDimension` is replaced with `buttonIconSize`
-- `buttonIconOpacities` is added to UI model
-- Stepper now supports button icon `Font` customization. `isButtonIconResizable`, `buttonIconContentMode`, and `buttonIconFont` properties have been added. Also, `buttonIconColors` and `buttonIconSize` have been made `Optional`.
+- Stepper is removed
 
 VSlider
 

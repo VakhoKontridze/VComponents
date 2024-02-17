@@ -41,7 +41,6 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
 #### Value Pickers
 
 <p>
-    <img tag="VStepper" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/9cd522b8-239d-4e7d-9708-b1fd8e4f5038">
     <img tag="VSlider" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c2a0b3d0-c758-4471-ba6e-d4ed2ebae143">
     <img tag="VRangeSlider" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/6941c0fa-1a16-4eca-a65f-12b4e53a8064">
 <p/>
