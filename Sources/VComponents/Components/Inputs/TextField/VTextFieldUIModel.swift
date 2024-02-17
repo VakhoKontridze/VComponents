@@ -149,7 +149,7 @@ public struct VTextFieldUIModel {
     public var hasClearButton: Bool = true
 
     /// Clear button icon.
-    public var clearButtonIcon: Image = ImageBook.xMark
+    public var clearButtonIcon: Image = ImageBook.xMark.renderingMode(.template)
 
     /// Model for customizing clear button.
     /// `size` is set to `(22, 22)`,
@@ -186,10 +186,10 @@ public struct VTextFieldUIModel {
 
     // MARK: Properties - Secure
     /// Visibility button icon (off).
-    public var visibilityOffButtonIcon: Image = ImageBook.visibilityOff
+    public var visibilityOffButtonIcon: Image = ImageBook.visibilityOff.renderingMode(.template)
 
     /// Visibility button icon (on).
-    public var visibilityOnButtonIcon: Image = ImageBook.visibilityOn
+    public var visibilityOnButtonIcon: Image = ImageBook.visibilityOn.renderingMode(.template)
 
     /// Model for customizing visibility button.
     /// `iconSize` is set to `(20, 20)`,
@@ -217,17 +217,40 @@ public struct VTextFieldUIModel {
 
     // MARK: Properties - Search
     /// Search button icon.
-    public var searchButtonIcon: Image = ImageBook.magnifyGlass
+    public var searchButtonIcon: Image = ImageBook.magnifyGlass.renderingMode(.template)
 
-    /// Search icon dimension. Set to `15`.
-    public var searchIconDimension: CGFloat = 15
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to search icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isSearchIconResizable: Bool = true
+
+    /// Search icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var searchIconContentMode: ContentMode? = .fit
+
+    /// Search icon size. Set to `(15, 15)`.
+    public var searchIconSize: CGSize? = .init(dimension: 15)
 
     /// Search icon colors.
-    public var searchIconColors: StateColors = .init(
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var searchIconColors: StateColors? = .init(
         enabled: Color.makeDynamic((70, 70, 70, 1), (240, 240, 240, 1)),
         focused: Color.makeDynamic((70, 70, 70, 1), (240, 240, 240, 1)),
         disabled: Color.primary.opacity(0.3)
     )
+
+    /// Search icon opacities. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var searchIconOpacities: StateOpacities?
+
+    /// Search icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isSearchIconResizable` should be set to `false`, and `searchIconSize` should be set to `nil`.
+    public var searchIconFont: Font?
 
     // MARK: Properties - Submit Button
     /// Submit button type. Set to `return`.
@@ -263,6 +286,10 @@ public struct VTextFieldUIModel {
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
+
+    // MARK: State Opacities
+    /// Model that contains colors for component opacities.
+    public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
 }
 
 // MARK: - Factory (Content Types)

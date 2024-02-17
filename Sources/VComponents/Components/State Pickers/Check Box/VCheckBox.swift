@@ -143,10 +143,12 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     if let checkmarkIcon {
                         checkmarkIcon
-                            .resizable()
-                            .scaledToFit()
-                            .frame(dimension: uiModel.checkmarkIconDimension)
-                            .foregroundStyle(uiModel.checkmarkIconColors.value(for: internalState))
+                            .applyIf(uiModel.isCheckmarkIconResizable, transform: { $0.resizable() })
+                            .applyIfLet(uiModel.checkmarkIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+                            .applyIfLet(uiModel.checkmarkIconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+                            .applyIfLet(uiModel.checkmarkIconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+                            .font(uiModel.checkmarkIconFont)
+                            .frame(size: uiModel.checkmarkIconSize)
                     }
                 })
                 .frame(dimension: uiModel.dimension)
@@ -184,17 +186,10 @@ public struct VCheckBox<Label>: View where Label: View {
     // MARK: Checkmark Icon
     private var checkmarkIcon: Image? {
         switch internalState {
-        case .off, .pressedOff:
-            return nil
-
-        case .on, .pressedOn:
-            return uiModel.checkmarkIconOn.renderingMode(.template)
-
-        case .indeterminate, .pressedIndeterminate:
-            return uiModel.checkmarkIconIndeterminate.renderingMode(.template)
-
-        case .disabled:
-            return nil
+        case .off, .pressedOff: nil
+        case .on, .pressedOn: uiModel.checkmarkIconOn
+        case .indeterminate, .pressedIndeterminate: uiModel.checkmarkIconIndeterminate
+        case .disabled: nil
         }
     }
     
@@ -253,7 +248,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     var uiModel: VCheckBoxUIModel = .init()
                     uiModel.fillColors.off = uiModel.fillColors.pressedOff
                     uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                    uiModel.checkmarkIconColors.off = uiModel.checkmarkIconColors.pressedOff
+                    uiModel.checkmarkIconColors!.off = uiModel.checkmarkIconColors!.pressedOff // Force-unwrap
                     uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
                     return uiModel
                 }(),
@@ -275,7 +270,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     var uiModel: VCheckBoxUIModel = .init()
                     uiModel.fillColors.on = uiModel.fillColors.pressedOn
                     uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                    uiModel.checkmarkIconColors.on = uiModel.checkmarkIconColors.pressedOn
+                    uiModel.checkmarkIconColors!.on = uiModel.checkmarkIconColors!.pressedOn // Force-unwrap
                     uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
                     return uiModel
                 }(),
@@ -297,7 +292,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     var uiModel: VCheckBoxUIModel = .init()
                     uiModel.fillColors.indeterminate = uiModel.fillColors.pressedIndeterminate
                     uiModel.borderColors.indeterminate = uiModel.borderColors.pressedIndeterminate
-                    uiModel.checkmarkIconColors.indeterminate = uiModel.checkmarkIconColors.pressedIndeterminate
+                    uiModel.checkmarkIconColors!.indeterminate = uiModel.checkmarkIconColors!.pressedIndeterminate // Force-unwrap
                     uiModel.titleTextColors.indeterminate = uiModel.titleTextColors.pressedIndeterminate
                     return uiModel
                 }(),

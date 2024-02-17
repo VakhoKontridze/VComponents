@@ -79,7 +79,7 @@ public struct VDisclosureGroupUIModel {
 
     // MARK: Properties - Disclosure Button
     /// Disclosure button icon.
-    public var disclosureButtonIcon: Image = ImageBook.chevronUp
+    public var disclosureButtonIcon: Image = ImageBook.chevronUp.renderingMode(.template)
 
     /// Model for customizing disclosure button.
     /// `size` is set to `(30, 30)`,

@@ -40,20 +40,43 @@ public struct VStepperUIModel {
 
     // MARK: Properties - Button Icon
     /// Minus button icon.
-    public var buttonIconMinus: Image = ImageBook.minus
+    public var buttonIconMinus: Image = ImageBook.minus.renderingMode(.template)
 
     /// Plus button icon.
-    public var buttonIconPlus: Image = ImageBook.plus
+    public var buttonIconPlus: Image = ImageBook.plus.renderingMode(.template)
 
-    /// Plus and minus button icon dimensions. Set to `14`.
-    public var buttonIconDimension: CGFloat = 14
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to button icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isButtonIconResizable: Bool = true
 
-    /// Plus and minus button icon colors.
-    public var buttonIconColors: ButtonStateColors = .init(
+    /// Button icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var buttonIconContentMode: ContentMode? = .fit
+
+    /// Button icon size. Set to `(14, 14)`.
+    public var buttonIconSize: CGSize? = .init(dimension: 14)
+
+    /// Button icon colors.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var buttonIconColors: ButtonStateColors? = .init(
         enabled: Color.primary,
         pressed: Color.primary,
         disabled: Color.primary.opacity(0.3)
     )
+
+    /// Button icon opacities. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var buttonIconOpacities: ButtonStateOpacities?
+
+    /// Button icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isButtonIconResizable` should be set to `false`, and `buttonIconSize` should be set to `nil`.
+    public var buttonIconFont: Font?
 
     // MARK: Properties - Divider
     /// Plus and minus button divider size. Set to `(1, 19)`.
@@ -95,4 +118,8 @@ public struct VStepperUIModel {
     // MARK: Button State Colors
     /// Model that contains colors for component states.
     public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+
+    // MARK: State Opacities
+    /// Model that contains colors for component opacities.
+    public typealias ButtonStateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
 }

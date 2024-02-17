@@ -16,7 +16,7 @@ public struct VDashedSpinnerUIModel {
 #if os(iOS)
         Color.blue
 #elseif os(macOS)
-        nil // TODO: Implement custom, as tint doesn't work on `macOS`
+        nil // TODO: Implement custom component, as tint doesn't work on `macOS`
 #elseif os(tvOS)
         nil
 #elseif os(watchOS)

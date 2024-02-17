@@ -6,11 +6,65 @@ General
 
 - Package now partially supports `visionOS`
 - Colors are overhauled to better support other platforms
-- `VComponentsColorBook` is no longer exposed to public
+
+VStretchedButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VLoadingStretchedButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VWrappedButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VRectangularButton
+
+- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VRectangularCaptionButton
+
+- Button now supports icon `Font` customization when. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports caption icon `Font` customization when `init` with icon or title and icon is used. `isIconCaptionResizable`, `iconCaptionContentMode`, and `iconCaptionFont` properties have been added. Also, `iconCaptionColors`, `iconCaptionOpacities`, and `iconCaptionSize` have been made `Optional`.
+
+VPlainButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
 
 VToggle
 
 - `borderWidth` and `borderColors` properties are added to UI model
+
+VCheckBox
+
+- `checkmarkIconDimension` is replaced with `checkmarkIconSize`
+- `checkmarkIconOpacities` is added to UI model
+- CheckBox now supports button icon `Font` customization. `isCheckmarkIconResizable`, `checkmarkIconContentMode`, and `checkmarkIconFont` properties have been added. Also, `checkmarkIconColors` and `checkmarkIconSize` have been made `Optional`.
+
+VStretchedToggleButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VWrappedToggleButton
+
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VRectangularToggleButton
+
+- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+
+VStepper
+
+- `buttonIconDimension` is replaced with `buttonIconSize`
+- `buttonIconOpacities` is added to UI model
+- Stepper now supports button icon `Font` customization. `isButtonIconResizable`, `buttonIconContentMode`, and `buttonIconFont` properties have been added. Also, `buttonIconColors` and `buttonIconSize` have been made `Optional`.
+
+VTextField
+
+- `searchIconDimension` is replaced with `searchIconSize`
+- `searchIconOpacities` is added to UI model
+- TextField now supports button icon `Font` customization. `isSearchIconResizable`, `searchIconContentMode`, and `searchIconFont` properties have been added. Also, `searchIconColors` and `searchIconSize` have been made `Optional`.
 
 VGroupBox
 
@@ -39,6 +93,10 @@ VWrappingMarquee
 VBouncingMarquee
 
 - `gradientColorContainerEdge` and `gradientColorContentEdge` are replaced with `gradientMaskOpacityContainerEdge` and `gradientMaskOpacityContentEdge` to avoid requiring explicit background colors
+
+Other
+
+- `VComponentsColorBook` is no longer exposed to public
 
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 

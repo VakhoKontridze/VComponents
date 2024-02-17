@@ -119,7 +119,7 @@ public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Properties - Content
     private let dotContent: VPageIndicatorDotContent<Content>
     
-    // MARK: Initializers
+    // MARK: Initializers - Public
     /// Initializes `VPageIndicator` with total and current index.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),

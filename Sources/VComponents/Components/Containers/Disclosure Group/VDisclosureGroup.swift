@@ -146,7 +146,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             VRectangularButton(
                 uiModel: uiModel.disclosureButtonSubUIModel,
                 action: expandCollapse,
-                icon: uiModel.disclosureButtonIcon.renderingMode(.template)
+                icon: uiModel.disclosureButtonIcon
             )
             .rotationEffect(Angle(radians: uiModel.disclosureButtonAngles.value(for: internalState)))
         })
@@ -236,7 +236,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 uiModel: {
                     var uiModel: VDisclosureGroupUIModel = .init()
                     uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
-                    uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.pressed
+                    uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.pressed // Force-unwrap
                     return uiModel
                 }(),
                 state: .constant(.collapsed),
@@ -251,7 +251,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 uiModel: {
                     var uiModel: VDisclosureGroupUIModel = .init()
                     uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
-                    uiModel.disclosureButtonSubUIModel.iconColors.enabled = uiModel.disclosureButtonSubUIModel.iconColors.disabled
+                    uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.disabled // Force-unwrap
                     return uiModel
                 }(),
                 state: .constant(.expanded),

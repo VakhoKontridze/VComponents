@@ -96,7 +96,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
     // Prevents animation when view appears for the first time
     @State private var enablesSelectedTabIndicatorAnimations: Bool = false
 
-    // MARK: Initializers
+    // MARK: Initializers - Standard
     /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.
     public init(
         uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init(),

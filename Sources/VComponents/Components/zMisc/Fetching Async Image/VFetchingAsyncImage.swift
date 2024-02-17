@@ -20,7 +20,8 @@ import SwiftUI
 ///                 if let image = phase.image {
 ///                     image
 ///                         .resizable()
-///                         .fitToAspect(1, contentMode: .fill)
+///                         .scaledToFit()
+///                         .foregroundStyle(Color.blue)
 ///
 ///                 } else if phase.error != nil {
 ///                     ErrorView()
@@ -259,7 +260,6 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
             fetch: { _ in Image(systemName: "swift") },
             content: { image in
                 image
-                    .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(Color.blue)

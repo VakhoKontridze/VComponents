@@ -70,16 +70,28 @@ public struct VCheckBoxUIModel {
 
     // MARK: Properties - Checkmark
     /// Checkmark icon (on).
-    public var checkmarkIconOn: Image = ImageBook.checkmarkOn
+    public var checkmarkIconOn: Image = ImageBook.checkmarkOn.renderingMode(.template)
 
     /// Checkmark icon (indeterminate).
-    public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate
+    public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
 
-    /// Checkmark icon dimension. Set to `9`.
-    public var checkmarkIconDimension: CGFloat = 9
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isCheckmarkIconResizable: Bool = true
 
-    /// Checkmark icon colors.
-    public var checkmarkIconColors: StateColors = .init(
+    /// Icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var checkmarkIconContentMode: ContentMode? = .fit
+
+    /// Icon size. Set to `(9, 9)`.
+    public var checkmarkIconSize: CGSize? = .init(dimension: 9)
+
+    /// Icon colors.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var checkmarkIconColors: StateColors? = .init(
         off: Color.clear,
         on: Color.white,
         indeterminate: Color.white,
@@ -88,6 +100,17 @@ public struct VCheckBoxUIModel {
         pressedIndeterminate: Color.white,
         disabled: Color.clear
     )
+
+    /// Icon opacities. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var checkmarkIconOpacities: StateOpacities?
+
+    /// Icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isCheckmarkIconResizable` should be set to `false`, and `checkmarkIconSize` should be set to `nil`.
+    public var checkmarkIconFont: Font?
 
     // MARK: Properties - Label
     /// Indicates if label is clickable. Set to `true`.
@@ -187,4 +210,8 @@ public struct VCheckBoxUIModel {
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_OffOnIndeterminatePressedDisabled<Color>
+
+    // MARK: State Opacities
+    /// Model that contains colors for component opacities.
+    public typealias StateOpacities = GenericStateModel_OffOnIndeterminatePressedDisabled<CGFloat>
 }

@@ -227,11 +227,12 @@ public struct VTextField: View {
     private var searchIcon: some View {
         if uiModel.contentType.isSearch {
             uiModel.searchButtonIcon
-                .renderingMode(.template)
-                .resizable()
-                .scaledToFit()
-                .frame(dimension: uiModel.searchIconDimension)
-                .foregroundStyle(uiModel.searchIconColors.value(for: internalState))
+                .applyIf(uiModel.isSearchIconResizable, transform: { $0.resizable() })
+                .applyIfLet(uiModel.searchIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+                .applyIfLet(uiModel.searchIconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+                .applyIfLet(uiModel.searchIconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+                .font(uiModel.searchIconFont)
+                .frame(size: uiModel.searchIconSize)
         }
     }
     
@@ -245,7 +246,7 @@ public struct VTextField: View {
         return VRectangularButton(
             uiModel: uiModel.clearButtonSubUIModel,
             action: didTapClearButton,
-            icon: uiModel.clearButtonIcon.renderingMode(.template)
+            icon: uiModel.clearButtonIcon
         )
         .opacity(isVisible ? 1 : 0)
         .allowsHitTesting(isVisible)
@@ -322,9 +323,9 @@ public struct VTextField: View {
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
-            uiModel.visibilityOnButtonIcon.renderingMode(.template)
+            uiModel.visibilityOnButtonIcon
         } else {
-            uiModel.visibilityOffButtonIcon.renderingMode(.template)
+            uiModel.visibilityOffButtonIcon
         }
     }
 
@@ -472,8 +473,8 @@ private struct StatesPreview: View {
                     uiModel: {
                         var mappedUIModel: VTextFieldUIModel = uiModel
                         mappedUIModel.clearButtonSubUIModel.backgroundColors.enabled = uiModel.clearButtonSubUIModel.backgroundColors.pressed
-                        mappedUIModel.clearButtonSubUIModel.iconColors.enabled = uiModel.clearButtonSubUIModel.iconColors.pressed
-                        mappedUIModel.visibilityButtonSubUIModel.iconColors.enabled = uiModel.visibilityButtonSubUIModel.iconColors.pressed
+                        mappedUIModel.clearButtonSubUIModel.iconColors!.enabled = uiModel.clearButtonSubUIModel.iconColors!.pressed // Force-unwrap
+                        mappedUIModel.visibilityButtonSubUIModel.iconColors!.enabled = uiModel.visibilityButtonSubUIModel.iconColors!.pressed // Force-unwrap
                         return mappedUIModel
                     }(),
                     headerTitle: "Lorem ipsum dolor sit amet",

@@ -185,11 +185,12 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         icon: Image
     ) -> some View {
         icon
-            .resizable()
-            .scaledToFit()
+            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
+            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .font(uiModel.iconFont)
             .frame(size: uiModel.iconSize)
-            .foregroundStyle(uiModel.iconColors.value(for: internalState))
-            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
 
     private var backgroundView: some View {

@@ -90,7 +90,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 
     @State private var didPositionSelectionIndicatorInitially: Bool = false
 
-    // MARK: Initializers
+    // MARK: Initializers - Standard
     /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item title, and content.
     public init(
         uiModel: VDynamicPagerTabViewUIModel = .init(),

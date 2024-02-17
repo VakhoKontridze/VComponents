@@ -89,7 +89,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
     // Prevents animation when view appears for the first time
     @State private var enablesSelectedTabIndicatorAnimations: Bool = false
 
-    // MARK: Initializers
+    // MARK: Initializers - Standard
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.
     public init(
         uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),

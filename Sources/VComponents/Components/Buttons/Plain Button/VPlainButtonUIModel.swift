@@ -61,27 +61,51 @@ public struct VPlainButtonUIModel {
     public var titleTextFont: Font = .body
 
     // MARK: Properties - Label - Icon
-    /// Icon size. Set to `(24, 24)`.
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
     ///
-    /// This icon size is calibrated for `init` with icon.
-    /// For `init` with icon and title, this property should be scaled down.
-    public var iconSize: CGSize = .init(dimension: 24)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isIconResizable: Bool = true
+
+    /// Icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconContentMode: ContentMode? = .fit
+
+    /// Icon size.
+    /// Set to `(24, 24)` on `iOS`.
+    /// Set to `(14, 14)` on `macOS`.
+    /// Set to `(26, 26)` on `watchOS`.
+    public var iconSize: CGSize? = {
+#if os(iOS)
+        CGSize(dimension: 24)
+#elseif os(macOS)
+        CGSize(dimension: 14)
+#elseif os(watchOS)
+        CGSize(dimension: 26)
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Icon colors.
     ///
-    /// Applied to all images. But should be used for vector images.
-    /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconColors: StateColors? = .init(
         enabled: Color.blue,
         pressed: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5)),
         disabled: Color.platformDynamic(light: Color.blue.opacity(0.3), dark: Color.blue.opacity(0.5))
     )
 
-    /// Icon opacities. Set to `1`s.
+    /// Icon opacities. Set to `nil`.
     ///
-    /// Applied to all images. But should be used for bitmap images.
-    /// In order to use vector images, set this to `1`s.
-    public var iconOpacities: StateOpacities = .init(1)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconOpacities: StateOpacities?
+
+    /// Icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
+    public var iconFont: Font?
 
     // MARK: Properties - Hit Box
     /// Hit box. Set to `5`s.

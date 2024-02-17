@@ -83,10 +83,20 @@ public struct VRectangularCaptionButtonUIModel {
     public var rectangleBorderColors: StateColors = .clearColors
 
     // MARK: Properties - Icon
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isIconResizable: Bool = true
+
+    /// Icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconContentMode: ContentMode? = .fit
+
     /// Icon size.
     /// Set to `(24, 24)` on `iOS`.
     /// Set to `(26, 26)` on `watchOS`.
-    public var iconSize: CGSize = {
+    public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
 #elseif os(watchOS)
@@ -98,22 +108,23 @@ public struct VRectangularCaptionButtonUIModel {
 
     /// Icon colors.
     ///
-    /// Applied to all images. But should be used for vector images.
-    /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconColors: StateColors? = .init(
         enabled: Color.makePlatformDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
         pressed: Color.makePlatformDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
         disabled: Color.make((128, 176, 240, 0.5))
     )
 
-    /// Icon opacities. Set to `1`s.
+    /// Icon opacities. Set to `nil`.
     ///
-    /// Applied to all images. But should be used for bitmap images.
-    /// In order to use vector images, set this to `1`s.
-    public var iconOpacities: StateOpacities = .init(1)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconOpacities: StateOpacities?
 
-    /// Icon margins. Set to `3`s.
-    public var iconMargins: IconMargins = .init(3)
+    /// Icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
+    public var iconFont: Font?
 
     /// Ratio to which icon scales down on press.
     /// Set to `1` on `iOS`.
@@ -130,6 +141,9 @@ public struct VRectangularCaptionButtonUIModel {
         fatalError() // Not supported
 #endif
     }()
+
+    /// Icon margins. Set to `3`s.
+    public var iconMargins: IconMargins = .init(3)
 
     // MARK: Properties - Caption
     /// Maximum caption width. Set to `100`.
@@ -160,10 +174,20 @@ public struct VRectangularCaptionButtonUIModel {
     }()
 
     // MARK: Properties - Caption - Icon
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isIconCaptionResizable: Bool = true
+
+    /// Icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconCaptionContentMode: ContentMode? = .fit
+
     /// Icon caption size.
     /// Set to `(16, 16)` on `iOS`.
     /// Set to `(18, 18)` on `watchOS`
-    public var iconCaptionSize: CGSize = {
+    public var iconCaptionSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 16)
 #elseif os(watchOS)
@@ -173,21 +197,25 @@ public struct VRectangularCaptionButtonUIModel {
 #endif
     }()
 
-    /// Icon caption colors.
+    /// Icon colors.
     ///
-    /// Applied to all images. But should be used for vector images.
-    /// In order to use bitmap images, set this to `clear`.
-    public var iconCaptionColors: StateColors = .init(
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconCaptionColors: StateColors? = .init(
         enabled: Color.primary,
         pressed: Color.primary.opacity(0.3),
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Icon caption opacities. Set to `1`s.
+    /// Icon opacities. Set to `nil`.
     ///
-    /// Applied to all images. But should be used for bitmap images.
-    /// In order to use vector images, set this to `1`s.
-    public var iconCaptionOpacities: StateOpacities = .init(1)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconCaptionOpacities: StateOpacities?
+
+    /// Icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isIconCaptionResizable` should be set to `false`, and `iconCaptionSize` should be set to `nil`.
+    public var iconCaptionFont: Font?
 
     // MARK: Properties - Caption - Text
     /// Title caption text line type.

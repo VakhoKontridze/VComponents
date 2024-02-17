@@ -134,10 +134,20 @@ public struct VLoadingStretchedButtonUIModel {
     let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
 
     // MARK: Properties - Label - Icon
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isIconResizable: Bool = true
+
+    /// Icon content mode. Set to `fit`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconContentMode: ContentMode? = .fit
+
     /// Icon size.
     /// Set to `(18, 18)` on `iOS`.
     /// Set to `(16, 16)` on `macOS`.
-    public var iconSize: CGSize = {
+    public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 18)
 #elseif os(macOS)
@@ -149,15 +159,19 @@ public struct VLoadingStretchedButtonUIModel {
 
     /// Icon colors.
     ///
-    /// Applied to all images. But should be used for vector images.
-    /// In order to use bitmap images, set this to `clear`.
-    public var iconColors: StateColors = .init(Color.white)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconColors: StateColors? = .init(Color.white)
 
-    /// Icon opacities. Set to `1`s.
+    /// Icon opacities. Set to `nil`.
     ///
-    /// Applied to all images. But should be used for bitmap images.
-    /// In order to use vector images, set this to `1`s.
-    public var iconOpacities: StateOpacities = .init(1)
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconOpacities: StateOpacities?
+
+    /// Icon font. Set to `nil.`
+    ///
+    /// Can be used for setting different weight to SF symbol icons.
+    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
+    public var iconFont: Font?
 
     // MARK: Properties - Spinner
     /// Model for customizing spinner.

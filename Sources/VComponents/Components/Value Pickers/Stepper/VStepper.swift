@@ -125,10 +125,12 @@ public struct VStepper: View {
                         .foregroundStyle(uiModel.buttonBackgroundColors.value(for: buttonInternalState(button)))
 
                     buttonIcon(button)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(dimension: uiModel.buttonIconDimension)
-                        .foregroundStyle(uiModel.buttonIconColors.value(for: buttonInternalState(button)))
+                        .applyIf(uiModel.isButtonIconResizable, transform: { $0.resizable() })
+                        .applyIfLet(uiModel.buttonIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+                        .applyIfLet(uiModel.buttonIconColors, transform: { $0.foregroundStyle($1.value(for: buttonInternalState(button))) })
+                        .applyIfLet(uiModel.buttonIconOpacities, transform: { $0.opacity($1.value(for: buttonInternalState(button))) })
+                        .font(uiModel.buttonIconFont)
+                        .frame(size: uiModel.buttonIconSize)
                 })
                 .frame(maxWidth: .infinity)
             }
@@ -145,11 +147,8 @@ public struct VStepper: View {
     // MARK: Button Icon
     private func buttonIcon(_ button: VStepperButton) -> Image {
         switch button {
-        case .minus:
-            return uiModel.buttonIconMinus.renderingMode(.template)
-            
-        case .plus:
-            return uiModel.buttonIconPlus.renderingMode(.template)
+        case .minus: uiModel.buttonIconMinus
+        case .plus: uiModel.buttonIconPlus
         }
     }
     
@@ -317,7 +316,7 @@ public struct VStepper: View {
                 uiModel: {
                     var uiModel: VStepperUIModel = .init()
                     uiModel.buttonBackgroundColors.enabled = uiModel.buttonBackgroundColors.pressed
-                    uiModel.buttonIconColors.enabled = uiModel.buttonIconColors.pressed
+                    uiModel.buttonIconColors!.enabled = uiModel.buttonIconColors!.pressed // Force-unwrap
                     return uiModel
                 }(),
                 range: 1...100,

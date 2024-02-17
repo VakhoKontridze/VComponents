@@ -121,13 +121,14 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
     ) -> some View {
         Group(content: { // `Group` is used for adding multiple frames
             icon
-                .resizable()
-                .scaledToFit()
+                .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
+                .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+                .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+                .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+                .font(uiModel.iconFont)
                 .frame(size: uiModel.iconSize)
                 .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
                 .padding(uiModel.iconMargins)
-                .foregroundStyle(uiModel.iconColors.value(for: internalState))
-                .opacity(uiModel.iconOpacities.value(for: internalState))
         })
         .frame(size: uiModel.rectangleSize)
         .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius)) // Prevents large content from overflowing
@@ -216,11 +217,12 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         icon: Image
     ) -> some View {
         icon
-            .resizable()
-            .scaledToFit()
+            .applyIf(uiModel.isIconCaptionResizable, transform: { $0.resizable() })
+            .applyIfLet(uiModel.iconCaptionContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+            .applyIfLet(uiModel.iconCaptionColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+            .applyIfLet(uiModel.iconCaptionOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .font(uiModel.iconCaptionFont)
             .frame(size: uiModel.iconCaptionSize)
-            .foregroundStyle(uiModel.iconCaptionColors.value(for: internalState))
-            .opacity(uiModel.iconCaptionOpacities.value(for: internalState))
     }
     
     // MARK: Haptics
@@ -263,7 +265,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                 uiModel: {
                     var uiModel: VRectangularCaptionButtonUIModel = .init()
                     uiModel.rectangleColors.enabled = uiModel.rectangleColors.pressed
-                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
+                    uiModel.iconColors!.enabled = uiModel.iconColors!.pressed // Force-unwrap
                     uiModel.titleCaptionTextColors.enabled = uiModel.titleCaptionTextColors.pressed
                     return uiModel
                 }(),

@@ -128,11 +128,12 @@ public struct VRectangularButton<Label>: View where Label: View {
         icon: Image
     ) -> some View {
         icon
-            .resizable()
-            .scaledToFit()
+            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
+            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .font(uiModel.iconFont)
             .frame(size: uiModel.iconSize)
-            .foregroundStyle(uiModel.iconColors.value(for: internalState))
-            .opacity(uiModel.iconOpacities.value(for: internalState))
     }
     
     private func backgroundView(
@@ -185,10 +186,6 @@ public struct VRectangularButton<Label>: View where Label: View {
             action: {},
             icon: Image(systemName: "swift")
         )
-
-        Button(action: {}, label: {
-            Image(systemName: "swift")
-        })
     })
 })
 
@@ -206,7 +203,7 @@ public struct VRectangularButton<Label>: View where Label: View {
                 uiModel: {
                     var uiModel: VRectangularButtonUIModel = .init()
                     uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
-                    uiModel.iconColors.enabled = uiModel.iconColors.pressed
+                    uiModel.iconColors!.enabled = uiModel.iconColors!.pressed // Force-unwrap
                     return uiModel
                 }(),
                 action: {},
