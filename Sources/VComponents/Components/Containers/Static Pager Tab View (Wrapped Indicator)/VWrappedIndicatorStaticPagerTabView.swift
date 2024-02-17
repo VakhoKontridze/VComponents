@@ -408,10 +408,11 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             let index: Int = (1..<dataSource.count)
                 .first(where: { contentOffset < tabContentOffsets[$0] })
         {
-            return contentOffset.linearInterpolation(
-                x1: tabContentOffsets[index-1], y1: dataSource[index-1],
-                x2: tabContentOffsets[index], y2: dataSource[index]
-            )
+            return contentOffset
+                .linearInterpolation(
+                    x1: tabContentOffsets[index-1], y1: dataSource[index-1],
+                    x2: tabContentOffsets[index], y2: dataSource[index]
+                )
 
         } else {
             // Clamping to max
