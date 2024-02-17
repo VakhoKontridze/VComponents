@@ -121,21 +121,21 @@ public struct VRadioButton<Label>: View where Label: View {
     private var radioButton: some View {
         baseButtonView(label: { internalState in
             ZStack(content: {
-                Circle()
-                    .frame(dimension: uiModel.dimension)
+                RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                    .frame(size: uiModel.size)
                     .foregroundStyle(uiModel.fillColors.value(for: internalState))
 
                 if uiModel.borderWidth > 0 {
-                    Circle()
+                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-                        .frame(dimension: uiModel.dimension)
+                        .frame(size: uiModel.size)
                 }
 
-                Circle()
-                    .frame(dimension: uiModel.bulletDimension)
+                RoundedRectangle(cornerRadius: uiModel.bulletCornerRadius)
+                    .frame(size: uiModel.bulletSize)
                     .foregroundStyle(uiModel.bulletColors.value(for: internalState))
             })
-            .frame(dimension: uiModel.dimension)
+            .frame(size: uiModel.size)
             .padding(uiModel.radioButtonHitBox)
         })
     }

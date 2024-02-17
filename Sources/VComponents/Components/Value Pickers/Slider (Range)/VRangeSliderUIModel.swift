@@ -97,10 +97,10 @@ public struct VRangeSliderUIModel {
     }()
 
     // MARK: Properties - Thumb
-    /// Thumb dimension. Set to `20`.
+    /// Thumb size. Set to `(20, 20)`.
     ///
     /// To hide thumb, set to `0`.
-    public var thumbDimension: CGFloat = 20
+    public var thumbSize: CGSize = .init(dimension: 20)
 
     /// Thumb corner radius. Set to `10`.
     public var thumbCornerRadius: CGFloat = 10

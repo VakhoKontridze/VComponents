@@ -27,13 +27,13 @@ public struct VCheckBoxUIModel {
     }
     
     /// Checkbox dimension.
-    /// Set to `22` on `iOS`.
-    /// Set to `16` on `macOS`
-    public var dimension: CGFloat = {
+    /// Set to `(22, 22)` on `iOS`.
+    /// Set to `(16, 16)` on `macOS`
+    public var size: CGSize = {
 #if os(iOS)
-        22
+        CGSize(dimension: 22)
 #elseif os(macOS)
-        16
+        CGSize(dimension: 16)
 #else
         fatalError() // Not supported
 #endif

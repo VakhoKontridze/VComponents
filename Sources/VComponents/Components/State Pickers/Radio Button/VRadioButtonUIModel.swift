@@ -26,14 +26,27 @@ public struct VRadioButtonUIModel {
         return uiModel
     }
     
-    /// Radio button dimension.
-    /// Set to `22` on `iOS`.
-    /// Set to `16` on `macOS`
-    public var dimension: CGFloat = {
+    /// Size.
+    /// Set to `(22, 22)` on `iOS`.
+    /// Set to `(16, 16)` on `macOS`
+    public var size: CGSize = {
 #if os(iOS)
-        22
+        CGSize(dimension: 22)
 #elseif os(macOS)
-        16
+        CGSize(dimension: 16)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Corner radius.
+    /// Set to `11` on `iOS`.
+    /// Set to `8` on `macOS`
+    public var cornerRadius: CGFloat = {
+#if os(iOS)
+        11
+#elseif os(macOS)
+        8
 #else
         fatalError() // Not supported
 #endif
@@ -98,13 +111,26 @@ public struct VRadioButtonUIModel {
 
     // MARK: Properties - Bullet
     /// Bullet dimension. 
-    /// Set to `12` on `iOS`.
-    /// Set to `8` on `macOS`.
-    public var bulletDimension: CGFloat = {
+    /// Set to `(12, 12)` on `iOS`.
+    /// Set to `(8, 8)` on `macOS`.
+    public var bulletSize: CGSize = {
 #if os(iOS)
-        12
+        CGSize(dimension: 12)
 #elseif os(macOS)
-        8
+        CGSize(dimension: 8)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Bullet corner radius.
+    /// Set to `6` on `iOS`.
+    /// Set to `4` on `macOS`.
+    public var bulletCornerRadius: CGFloat = {
+#if os(iOS)
+        6
+#elseif os(macOS)
+        4
 #else
         fatalError() // Not supported
 #endif

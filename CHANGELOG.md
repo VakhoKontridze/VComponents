@@ -36,12 +36,16 @@ VPlainButton
 VToggle
 
 - Toggle now supports `watchOS`
+- `thumbDimension` is replaced with `thumbSize`
+- `thumbCornerRadius` is added to UI model
 - `borderWidth` and `borderColors` properties are added to UI model
 
 VCheckBox
 
 - CheckBox is redesigned for `iOS` with larger, more circular design
 - `hitBox` is set to `zero`, and `checkBoxAndLabelSpacing` is set to `5`, as CheckBox now has native extended hit areas
+- `dimension` is replaced with `size`
+- `bulletDimension` is replaced with `bulletSize`
 - `checkmarkIconDimension` is replaced with `checkmarkIconSize`
 - `checkmarkIconOpacities` is added to UI model
 - CheckBox now supports button icon `Font` customization. `isCheckmarkIconResizable`, `checkmarkIconContentMode`, and `checkmarkIconFont` properties have been added. Also, `checkmarkIconColors` and `checkmarkIconSize` have been made `Optional`.
@@ -50,6 +54,8 @@ VRadioButton
 
 - Radio Button is redesigned for `iOS` with larger design
 - `hitBox` is set to `zero`, and `checkBoxAndLabelSpacing` is set to `5`, as CheckBox now has native extended hit areas
+- `dimension` is replaced with `size`
+- `cornerRadius` and `bulletCornerRadius` are added to UI model
 
 VStretchedToggleButton
 
@@ -72,10 +78,12 @@ VStepper
 VSlider
 
 - Track will no longer be padded horizontally
+- `thumbDimension` is replaced with `thumbSize`
 
 VRangeSlider
 
 - Track will no longer be padded horizontally
+- `thumbDimension` is replaced with `thumbSize`
 
 VTextField
 

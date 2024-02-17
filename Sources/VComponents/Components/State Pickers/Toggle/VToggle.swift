@@ -130,8 +130,8 @@ public struct VToggle<Label>: View where Label: View {
                         .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
                 }
 
-                Circle()
-                    .frame(dimension: uiModel.thumbDimension)
+                RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
+                    .frame(size: uiModel.thumbSize)
                     .foregroundStyle(uiModel.thumbColors.value(for: internalState))
                     .offset(x: thumbOffset(internalState: internalState))
             })
@@ -185,8 +185,15 @@ public struct VToggle<Label>: View where Label: View {
     private func thumbOffset(
         internalState: VToggleInternalState
     ) -> CGFloat {
-        let offset: CGFloat = uiModel.thumbOffset
-        
+        let offset: CGFloat = {
+            let thumbWidth: CGFloat = uiModel.thumbSize.width
+            let spacing: CGFloat = (uiModel.size.height - thumbWidth)/2
+            let thumbStartPoint: CGFloat = (uiModel.size.width - thumbWidth)/2
+            let offset: CGFloat = thumbStartPoint - spacing
+            
+            return offset
+        }()
+
         switch internalState {
         case .off: return -offset
         case .on: return offset

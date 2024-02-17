@@ -137,13 +137,16 @@ public struct VRangeSlider: View {
     
     @ViewBuilder
     private func thumbView(_ thumb: VRangeSliderThumb) -> some View {
-        if uiModel.thumbDimension > 0 {
+        if 
+            uiModel.thumbSize.width > 0 && 
+            uiModel.thumbSize.height > 0
+        {
             Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {
                     thumbBackgroundView
                     thumbBorderView
                 })
-                .frame(dimension: uiModel.thumbDimension)
+                .frame(size: uiModel.thumbSize)
                 .offset(
                     x: uiModel.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed) : 0,
                     y: uiModel.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed)
@@ -255,7 +258,7 @@ public struct VRangeSlider: View {
     // MARK: Thumb Offset
     private func thumbOffset(_ thumb: VRangeSliderThumb) -> CGFloat {
         let progressWidth: CGFloat = progressWidth(thumb)
-        let thumbWidth: CGFloat = uiModel.thumbDimension
+        let thumbWidth: CGFloat = uiModel.thumbSize.dimension(isWidth: uiModel.direction.isHorizontal)
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         switch thumb {

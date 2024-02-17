@@ -132,16 +132,32 @@ public struct VToggleUIModel {
 
     // MARK: Properties - Thumb
     /// Thumb dimension.
-    /// Set to `27` on `iOS`.
-    /// Set to `20` on `macOS`.
-    /// Set to `20` on `watchOS`.
-    public var thumbDimension: CGFloat = {
+    /// Set to `(27, 27)` on `iOS`.
+    /// Set to `(20, 20)` on `macOS`.
+    /// Set to `(20, 20)` on `watchOS`.
+    public var thumbSize: CGSize = {
 #if os(iOS)
-        27
+        CGSize(dimension: 27)
 #elseif os(macOS)
-        20
+        CGSize(dimension: 20)
 #elseif os(watchOS)
-        20
+        CGSize(dimension: 20)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Thumb corner radius.
+    /// Set to `13.5` on `iOS`.
+    /// Set to `10` on `macOS`.
+    /// Set to `10` on `watchOS`.
+    public var thumbCornerRadius: CGFloat = {
+#if os(iOS)
+        13.5
+#elseif os(macOS)
+        10
+#elseif os(watchOS)
+        10
 #else
         fatalError() // Not supported
 #endif
@@ -155,13 +171,6 @@ public struct VToggleUIModel {
         pressedOn: Color.white,
         disabled: Color.platformDynamic(light: Color.white, dark: Color.white.opacity(0.75))
     )
-
-    var thumbOffset: CGFloat {
-        let spacing: CGFloat = (size.height - thumbDimension)/2
-        let thumbStartPoint: CGFloat = (size.width - thumbDimension)/2
-        let offset: CGFloat = thumbStartPoint - spacing
-        return offset
-    }
 
     // MARK: Properties - Label
     /// Indicates if label is clickable. Set to `true`.
