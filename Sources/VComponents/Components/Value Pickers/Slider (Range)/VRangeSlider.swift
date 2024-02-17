@@ -108,10 +108,6 @@ public struct VRangeSlider: View {
             thumbView(.high)
         })
         .getSize({ sliderSize = $0 })
-        .padding(
-            uiModel.direction.isHorizontal ? .horizontal : .vertical,
-            uiModel.thumbDimension / 2
-        )
         .applyIf(uiModel.appliesProgressAnimation, transform: {
             $0.animation(uiModel.progressAnimation, value: value)
         })
@@ -247,12 +243,12 @@ public struct VRangeSlider: View {
             case .high: self.value.upperBound - self.range.lowerBound
             }
         }()
-        let range: CGFloat = range.upperBound - range.lowerBound
+        let boundRange: CGFloat = range.boundRange
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         switch thumb {
-        case .low: return (value / range) * width
-        case .high: return ((range - value) / range) * width
+        case .low: return (value / boundRange) * width
+        case .high: return ((boundRange - value) / boundRange) * width
         }
     }
     

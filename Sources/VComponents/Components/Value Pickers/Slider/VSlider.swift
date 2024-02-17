@@ -100,10 +100,6 @@ public struct VSlider: View {
                         .onEnded(dragEnded)
                 )
         })
-        .padding(
-            uiModel.direction.isHorizontal ? .horizontal : .vertical,
-            uiModel.thumbDimension / 2
-        )
         .applyIf(uiModel.appliesProgressAnimation, transform: {
             $0.animation(uiModel.progressAnimation, value: value)
         })

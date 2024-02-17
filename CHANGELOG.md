@@ -60,6 +60,14 @@ VStepper
 - `buttonIconOpacities` is added to UI model
 - Stepper now supports button icon `Font` customization. `isButtonIconResizable`, `buttonIconContentMode`, and `buttonIconFont` properties have been added. Also, `buttonIconColors` and `buttonIconSize` have been made `Optional`.
 
+VSlider
+
+- Track will no longer be padded horizontally
+
+VRangeSlider
+
+- Track will no longer be padded horizontally
+
 VTextField
 
 - `searchIconDimension` is replaced with `searchIconSize`
