@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct VPlainButtonUIModel {
-    // MARK: Properties - Label
+    // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()
 
@@ -22,6 +22,7 @@ public struct VPlainButtonUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Label
     /// Title text and icon placement. Set to `iconAndTitle`.
     public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
 
