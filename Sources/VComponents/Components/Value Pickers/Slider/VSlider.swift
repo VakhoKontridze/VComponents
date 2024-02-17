@@ -193,12 +193,12 @@ public struct VSlider: View {
     private func dragChanged(dragValue: DragGesture.Value) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let range: Double = range.boundRange
+            let boundRange: Double = range.boundRange
             let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
             
-            return ((value / width) * range + self.range.lowerBound)
+            return ((value / width) * boundRange + range.lowerBound)
                 .invertedFromMax(
-                    self.range.upperBound,
+                    range.upperBound,
                     if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
                 )
         }()
@@ -222,10 +222,10 @@ public struct VSlider: View {
     // MARK: Progress Width
     private var progressWidth: CGFloat {
         let value: CGFloat = value - range.lowerBound
-        let range: CGFloat = range.boundRange
+        let boundRange: CGFloat = range.boundRange
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
-        return (value / range) * width
+        return (value / boundRange) * width
     }
     
     // MARK: Thumb Offset

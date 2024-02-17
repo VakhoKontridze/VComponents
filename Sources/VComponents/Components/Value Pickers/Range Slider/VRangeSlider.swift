@@ -190,12 +190,12 @@ public struct VRangeSlider: View {
     private func dragChanged(dragValue: DragGesture.Value, thumb: VRangeSliderThumb) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let range: Double = range.boundRange
+            let boundRange: Double = range.boundRange
             let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
             
-            return (self.range.lowerBound + (value / width) * range)
+            return (range.lowerBound + (value / width) * boundRange)
                 .invertedFromMax(
-                    self.range.upperBound,
+                    range.upperBound,
                     if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
                 )
         }()
