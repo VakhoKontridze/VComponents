@@ -199,10 +199,10 @@ public struct VPageIndicator<Content>: View where Content: View {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundStyle(uiModel.dotColors.value(for: internalState))
                     
-                    if uiModel.dotBorderWidths.value(for: internalState) > 0 {
+                    let borderWidth: CGFloat = uiModel.dotBorderWidths.value(for: internalState)
+                    if borderWidth > 0 {
                         RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                            .strokeBorder(lineWidth: uiModel.dotBorderWidths.value(for: internalState))
-                            .foregroundStyle(uiModel.dotBorderColors.value(for: internalState))
+                            .strokeBorder(uiModel.dotBorderColors.value(for: internalState), lineWidth: borderWidth)
                     }
                 })
                 

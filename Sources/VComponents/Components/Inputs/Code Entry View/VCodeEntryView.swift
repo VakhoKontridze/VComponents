@@ -212,10 +212,7 @@ public struct VCodeEntryView: View {
     ) -> some View {
         if uiModel.characterBackgroundBorderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
-                .strokeBorder(
-                    uiModel.characterBackgroundBorderColors.value(for: internalState),
-                    lineWidth: uiModel.characterBackgroundBorderWidth
-                )
+                .strokeBorder(uiModel.characterBackgroundBorderColors.value(for: internalState), lineWidth: uiModel.characterBackgroundBorderWidth)
         }
     }
 

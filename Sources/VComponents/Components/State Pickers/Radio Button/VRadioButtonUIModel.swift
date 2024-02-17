@@ -42,6 +42,8 @@ public struct VRadioButtonUIModel {
 
     // MARK: Properties - Border
     /// Radio button corner radius. Set to `1`.
+    ///
+    /// To hide border, set to `0`.
     public var borderWidth: CGFloat = 1
 
     /// Border colors.

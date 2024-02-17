@@ -139,8 +139,11 @@ public struct VToggle<Label>: View where Label: View {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .foregroundStyle(uiModel.fillColors.value(for: internalState))
 
-                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth.toPoints(scale: displayScale))
+                    let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+                    if borderWidth > 0 {
+                        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+                    }
 
                     Circle()
                         .frame(dimension: uiModel.thumbDimension)

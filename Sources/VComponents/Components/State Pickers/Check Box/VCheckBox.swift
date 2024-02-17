@@ -138,9 +138,11 @@ public struct VCheckBox<Label>: View where Label: View {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                         .foregroundStyle(uiModel.fillColors.value(for: internalState))
                     
-                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-                    
+                    if uiModel.borderWidth > 0 {
+                        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                    }
+
                     if let checkmarkIcon {
                         checkmarkIcon
                             .applyIf(uiModel.isCheckmarkIconResizable, transform: { $0.resizable() })

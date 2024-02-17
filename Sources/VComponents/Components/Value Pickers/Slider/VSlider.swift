@@ -179,9 +179,14 @@ public struct VSlider: View {
 
     }
 
+    @ViewBuilder
     private var thumbBorderView: some View {
-        RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-            .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
+        let borderWidth: CGFloat = uiModel.thumbBorderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
+                .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: borderWidth)
+        }
     }
     
     // MARK: Drag

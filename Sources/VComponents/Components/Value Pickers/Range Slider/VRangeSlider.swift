@@ -140,7 +140,7 @@ public struct VRangeSlider: View {
     }
     
     @ViewBuilder
-    private func thumbView(_ thumb: Thumb) -> some View {
+    private func thumbView(_ thumb: VRangeSliderThumb) -> some View {
         if uiModel.thumbDimension > 0 {
             Group(content: { // `Group` is used for giving multiple frames
                 ZStack(content: {
@@ -176,19 +176,18 @@ public struct VRangeSlider: View {
             )
     }
 
+    @ViewBuilder
     private var thumbBorderView: some View {
-        RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-            .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: uiModel.thumbBorderWidth.toPoints(scale: displayScale))
-    }
-    
-    // MARK: Thumb
-    private enum Thumb {
-        case low
-        case high
+        let borderWidth: CGFloat = uiModel.thumbBorderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
+                .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: borderWidth)
+        }
     }
     
     // MARK: Drag
-    private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
+    private func dragChanged(dragValue: DragGesture.Value, thumb: VRangeSliderThumb) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
             let range: Double = range.boundRange
@@ -241,7 +240,7 @@ public struct VRangeSlider: View {
     }
     
     // MARK: Progress Width
-    private func progressWidth(_ thumb: Thumb) -> CGFloat {
+    private func progressWidth(_ thumb: VRangeSliderThumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
             case .low: self.value.lowerBound - self.range.lowerBound
@@ -258,7 +257,7 @@ public struct VRangeSlider: View {
     }
     
     // MARK: Thumb Offset
-    private func thumbOffset(_ thumb: Thumb) -> CGFloat {
+    private func thumbOffset(_ thumb: VRangeSliderThumb) -> CGFloat {
         let progressWidth: CGFloat = progressWidth(thumb)
         let thumbWidth: CGFloat = uiModel.thumbDimension
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)

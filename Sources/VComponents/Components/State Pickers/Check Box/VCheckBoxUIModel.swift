@@ -55,6 +55,8 @@ public struct VCheckBoxUIModel {
 
     // MARK: Properties - Border
     /// Border width. Set to `1`.
+    ///
+    /// To hide border, set to `0`.
     public var borderWidth: CGFloat = 1
 
     /// Border colors.

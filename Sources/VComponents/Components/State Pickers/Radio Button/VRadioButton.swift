@@ -138,11 +138,13 @@ public struct VRadioButton<Label>: View where Label: View {
                     Circle()
                         .frame(dimension: uiModel.dimension)
                         .foregroundStyle(uiModel.fillColors.value(for: internalState))
-                    
-                    Circle()
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
-                        .frame(dimension: uiModel.dimension)
-                    
+
+                    if uiModel.borderWidth > 0 {
+                        Circle()
+                            .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                            .frame(dimension: uiModel.dimension)
+                    }
+
                     Circle()
                         .frame(dimension: uiModel.bulletDimension)
                         .foregroundStyle(uiModel.bulletColors.value(for: internalState))
