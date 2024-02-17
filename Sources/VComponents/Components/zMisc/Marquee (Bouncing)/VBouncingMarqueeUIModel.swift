@@ -61,7 +61,7 @@ public struct VBouncingMarqueeUIModel {
     public init() {}
 
     /// Enumeration that represents animation duration, such as `duration` or `velocity`.
-    public typealias DurationType = VWrappingMarqueeUIModel.DurationType
+    public typealias DurationType = MarqueeDurationType
 }
 
 // MARK: - Factory
