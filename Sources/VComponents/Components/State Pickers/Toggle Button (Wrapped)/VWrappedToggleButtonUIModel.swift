@@ -253,11 +253,11 @@ public struct VWrappedToggleButtonUIModel {
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `nil`.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+    /// Haptic feedback style. Set to `light`.
+    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `nil`.
-    public var haptic: WKHapticType? = nil
+    /// Haptic feedback type. Set to `click`.
+    public var haptic: WKHapticType? = .click
 #endif
 
     // MARK: Initializers
