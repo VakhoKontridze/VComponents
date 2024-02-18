@@ -48,9 +48,9 @@ public struct VTextViewUIModel {
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: Color.dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1)),
-        focused: Color.dynamic(Color(220, 220, 220, 1), Color(80, 80, 80, 1)),
-        disabled: Color.dynamic(Color(245, 245, 245, 1), Color(50, 50, 50, 1))
+        enabled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+        focused: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
+        disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
     )
 
     // MARK: Properties - Border
@@ -203,24 +203,24 @@ extension VTextViewUIModel {
     /// Applies green color scheme to `VTextViewUIModel`.
     public mutating func applySuccessColorScheme() {
         applyHighlightedColors(
-            border: Color.dynamic(Color(85, 195, 135, 1), Color(45, 150, 75, 1)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(85, 175, 135, 1), Color(85, 195, 135, 1))
+            border: Color.dynamic(Color(85, 195, 135), Color(45, 150, 75)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(85, 175, 135), Color(85, 195, 135))
         )
     }
 
     /// Applies yellow color scheme to `VTextViewUIModel`.
     public mutating func applyWarningColorScheme() {
         applyHighlightedColors(
-            border: Color.dynamic(Color(255, 190, 35, 1), Color(240, 150, 20, 1)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(235, 170, 35, 1), Color(255, 190, 35, 1))
+            border: Color.dynamic(Color(255, 190, 35), Color(240, 150, 20)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(235, 170, 35), Color(255, 190, 35))
         )
     }
 
     /// Applies red color scheme to `VTextViewUIModel`.
     public mutating func applyErrorColorScheme() {
         applyHighlightedColors(
-            border: Color.dynamic(Color(235, 110, 105, 1), Color(215, 60, 55, 1)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(215, 110, 105, 1), Color(235, 110, 105, 1))
+            border: Color.dynamic(Color(235, 110, 105), Color(215, 60, 55)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(215, 110, 105), Color(235, 110, 105))
         )
     }
 

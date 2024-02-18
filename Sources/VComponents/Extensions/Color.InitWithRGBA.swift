@@ -10,12 +10,11 @@ import VCore
 
 // MARK: - Color Init with RGBA
 extension Color {
-    @inline(__always)
     init(
         _ red: CGFloat,
         _ green: CGFloat,
         _ blue: CGFloat,
-        _ opacity: CGFloat
+        _ opacity: CGFloat = 1
     ) {
         self.init(
             red: red/255,

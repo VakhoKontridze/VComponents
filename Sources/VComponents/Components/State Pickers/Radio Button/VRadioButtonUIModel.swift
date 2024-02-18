@@ -76,7 +76,7 @@ public struct VRadioButtonUIModel {
             on: Color.dynamic(Color.white, Color.black.opacity(0.2)),
             pressedOff: Color.dynamic(Color.white, Color.black.opacity(0.2)),
             pressedOn: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            disabled: Color.dynamic(Color(250, 250, 250, 1), Color(0, 0, 0, 0.05))
+            disabled: Color.dynamic(Color(250, 250, 250), Color(0, 0, 0, 0.05))
         )
 #else
         fatalError() // Not supported
@@ -102,11 +102,11 @@ public struct VRadioButtonUIModel {
 
     /// Border colors.
     public var borderColors: StateColors = .init(
-        off: Color.platformDynamic(Color(200, 200, 200, 1), Color(100, 100, 100, 1)),
-        on: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-        pressedOff: Color.platformDynamic(Color(170, 170, 170, 1), Color(130, 130, 130, 1)),
-        pressedOn: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-        disabled: Color.platformDynamic(Color(230, 230, 230, 1), Color(70, 70, 70, 1))
+        off: Color.platformDynamic(Color(200, 200, 200), Color(100, 100, 100)),
+        on: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+        pressedOff: Color.platformDynamic(Color(170, 170, 170), Color(130, 130, 130)),
+        pressedOn: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+        disabled: Color.platformDynamic(Color(230, 230, 230), Color(70, 70, 70))
     )
 
     // MARK: Properties - Bullet
@@ -139,9 +139,9 @@ public struct VRadioButtonUIModel {
     /// Bullet colors.
     public var bulletColors: StateColors = .init(
         off: Color.clear,
-        on: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+        on: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
         pressedOff: Color.clear,
-        pressedOn: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+        pressedOn: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
         disabled: Color.clear
     )
 

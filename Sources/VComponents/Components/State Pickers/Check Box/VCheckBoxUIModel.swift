@@ -72,22 +72,22 @@ public struct VCheckBoxUIModel {
 #if os(iOS)
         StateColors(
             off: Color.primaryInverted,
-            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-            indeterminate: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            indeterminate: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
             pressedOff: Color.primaryInverted,
-            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            pressedIndeterminate: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            pressedIndeterminate: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
             disabled: Color.primaryInverted
         )
 #elseif os(macOS)
         StateColors(
             off: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-            indeterminate: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            indeterminate: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
             pressedOff: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            pressedIndeterminate: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            disabled: Color.dynamic(Color(250, 250, 250, 1), Color(0, 0, 0, 0.05))
+            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            pressedIndeterminate: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            disabled: Color.dynamic(Color(250, 250, 250), Color(0, 0, 0, 0.05))
         )
 #else
         fatalError() // Not supported
@@ -112,13 +112,13 @@ public struct VCheckBoxUIModel {
 
     /// Border colors.
     public var borderColors: StateColors = .init(
-        off: Color.platformDynamic(Color(200, 200, 200, 1), Color(100, 100, 100, 1)),
+        off: Color.platformDynamic(Color(200, 200, 200), Color(100, 100, 100)),
         on: Color.clear,
         indeterminate: Color.clear,
-        pressedOff: Color.platformDynamic(Color(170, 170, 170, 1), Color(130, 130, 130, 1)),
+        pressedOff: Color.platformDynamic(Color(170, 170, 170), Color(130, 130, 130)),
         pressedOn: Color.clear,
         pressedIndeterminate: Color.clear,
-        disabled: Color.platformDynamic(Color(230, 230, 230, 1), Color(70, 70, 70, 1))
+        disabled: Color.platformDynamic(Color(230, 230, 230), Color(70, 70, 70))
     )
 
     // MARK: Properties - Checkmark

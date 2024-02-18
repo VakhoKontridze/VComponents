@@ -98,15 +98,15 @@ public struct VDisclosureGroupUIModel {
         uiModel.backgroundColors = {
 #if os(iOS)
             VRectangularButtonUIModel.StateColors(
-                enabled: Color.dynamic(Color(220, 220, 220, 1), Color(60, 60, 60, 1)),
-                pressed: Color.dynamic(Color(200, 200, 200, 1), Color(40, 40, 40, 1)),
-                disabled: Color.dynamic(Color(230, 230, 230, 1), Color(40, 40, 40, 1))
+                enabled: Color.dynamic(Color(220, 220, 220), Color(60, 60, 60)),
+                pressed: Color.dynamic(Color(200, 200, 200), Color(40, 40, 40)),
+                disabled: Color.dynamic(Color(230, 230, 230), Color(40, 40, 40))
             )
 #elseif os(macOS)
             VRectangularButtonUIModel.StateColors(
-                enabled: Color.dynamic(Color(0, 0, 0, 0.1), Color(60, 60, 60, 1)),
-                pressed: Color.dynamic(Color(0, 0, 0, 0.15), Color(40, 40, 40, 1)),
-                disabled: Color.dynamic(Color(0, 0, 0, 0.05), Color(40, 40, 40, 1))
+                enabled: Color.dynamic(Color(0, 0, 0, 0.1), Color(60, 60, 60)),
+                pressed: Color.dynamic(Color(0, 0, 0, 0.15), Color(40, 40, 40)),
+                disabled: Color.dynamic(Color(0, 0, 0, 0.05), Color(40, 40, 40))
             )
 #else
             fatalError() // Not supported
@@ -221,9 +221,9 @@ extension VDisclosureGroupUIModel {
 #endif
 
         uiModel.disclosureButtonSubUIModel.backgroundColors = VRectangularButtonUIModel.StateColors(
-            enabled: Color.dynamic(Color(230, 230, 230, 1), Color(60, 60, 60, 1)),
-            pressed: Color.dynamic(Color(210, 210, 210, 1), Color(40, 40, 40, 1)),
-            disabled: Color.dynamic(Color(240, 240, 240, 1), Color(40, 40, 40, 1))
+            enabled: Color.dynamic(Color(230, 230, 230), Color(60, 60, 60)),
+            pressed: Color.dynamic(Color(210, 210, 210), Color(40, 40, 40)),
+            disabled: Color.dynamic(Color(240, 240, 240), Color(40, 40, 40))
         )
 
         return uiModel

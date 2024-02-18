@@ -63,27 +63,27 @@ public struct VRectangularToggleButtonUIModel {
     public var backgroundColors: StateColors = {
 #if os(iOS)
         StateColors(
-            off: Color.dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1)),
-            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-            pressedOff: Color.dynamic(Color(220, 220, 220, 1), Color(90, 90, 90, 1)),
-            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            disabled: Color.dynamic(Color(245, 245, 245, 1), Color(50, 50, 50, 1))
+            off: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            pressedOff: Color.dynamic(Color(220, 220, 220), Color(90, 90, 90)),
+            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
         )
 #elseif os(macOS)
         StateColors(
             off: Color.dynamic(Color.black.opacity(0.1), Color.black.opacity(0.15)),
-            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
             pressedOff: Color.dynamic(Color.black.opacity(0.16), Color.black.opacity(0.3)),
-            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
             disabled: Color.dynamic(Color.black.opacity(0.05), Color.black.opacity(0.1))
         )
 #elseif os(watchOS)
         StateColors(
-            off: Color(60, 60, 60, 1),
-            on: Color(25, 131, 255, 1),
-            pressedOff: Color(90, 90, 90, 1),
-            pressedOn: Color(36, 106, 186, 1),
-            disabled: Color(50, 50, 50, 1)
+            off: Color(60, 60, 60),
+            on: Color(25, 131, 255),
+            pressedOff: Color(90, 90, 90),
+            pressedOn: Color(36, 106, 186),
+            disabled: Color(50, 50, 50)
         )
 #else
         fatalError() // Not supported

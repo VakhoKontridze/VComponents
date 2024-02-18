@@ -169,9 +169,9 @@ public struct VAlertUIModel {
     // MARK: Properties - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-        pressed: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-        disabled: Color(128, 176, 240, 1)
+        enabled: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+        pressed: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+        disabled: Color(128, 176, 240)
     )
 
     /// Primary button title text colors.
@@ -198,7 +198,7 @@ public struct VAlertUIModel {
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.dynamic(Color(240, 240, 240, 1), Color(70, 70, 70, 1)),
+        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
         disabled: Color.clear
     )
 
@@ -230,7 +230,7 @@ public struct VAlertUIModel {
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.dynamic(Color(240, 240, 240, 1), Color(70, 70, 70, 1)),
+        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
         disabled: Color.clear
     )
 

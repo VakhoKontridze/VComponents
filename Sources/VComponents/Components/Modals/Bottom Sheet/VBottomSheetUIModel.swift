@@ -78,7 +78,7 @@ public struct VBottomSheetUIModel {
     public var dragIndicatorCornerRadius: CGFloat = 2
 
     /// Drag indicator color.
-    public var dragIndicatorColor: Color = .dynamic(Color(200, 200, 200, 1), Color(100, 100, 100, 1))
+    public var dragIndicatorColor: Color = .dynamic(Color(200, 200, 200), Color(100, 100, 100))
 
     /// Drag indicator margins. Set to `(15, 15)`.
     public var dragIndicatorMargins: VerticalMargins = .init(15)

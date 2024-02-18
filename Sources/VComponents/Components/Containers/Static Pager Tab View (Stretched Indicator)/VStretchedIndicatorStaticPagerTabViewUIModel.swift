@@ -46,7 +46,7 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
         deselected: Color.primary,
         selected: Color.blue,
         pressedDeselected: Color.primary.opacity(0.3),
-        pressedSelected: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+        pressedSelected: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
         disabled: Color.primary.opacity(0.3)
     )
 

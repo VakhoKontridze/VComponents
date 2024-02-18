@@ -62,8 +62,8 @@ public struct VSliderUIModel {
     public var trackColors: StateColors = {
 #if os(iOS)
         StateColors(
-            enabled: Color.dynamic(Color(230, 230, 230, 1), Color(45, 45, 45, 1)),
-            disabled: Color.dynamic(Color(245, 245, 245, 1), Color(35, 35, 35, 1))
+            enabled: Color.dynamic(Color(230, 230, 230), Color(45, 45, 45)),
+            disabled: Color.dynamic(Color(245, 245, 245), Color(35, 35, 35))
         )
 #elseif os(macOS)
         StateColors(
@@ -159,8 +159,8 @@ public struct VSliderUIModel {
         StateColors.clearColors
 #elseif os(macOS)
         StateColors(
-            enabled: Color.dynamic(Color(200, 200, 200, 1), Color(100, 100, 100, 1)),
-            disabled: Color.dynamic(Color(230, 230, 230, 1), Color(70, 70, 70, 1))
+            enabled: Color.dynamic(Color(200, 200, 200), Color(100, 100, 100)),
+            disabled: Color.dynamic(Color(230, 230, 230), Color(70, 70, 70))
         )
 #else
         fatalError() // Not supported
