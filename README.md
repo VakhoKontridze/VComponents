@@ -323,7 +323,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 #### Platform and Version Support
 
-Package provides limited `macOS`, `tvOS`, and `watchOS` support.
+Package provides limited `macOS`, `tvOS`, `watchOS`, and `visionOS` support.
 
 Versions with different majors are not directly compatible. When a new major is released, deprecated symbols are removed.
 
@@ -349,9 +349,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
-    <td>
-        6.0<br><i><sup>(6.0.0 - 6.x.x)</sup></i>
-    </td>
+    <td>6.0</td>
     <td>2024 02 18</td>
     <td>
         5.9
@@ -371,9 +369,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
-    <td>
-        5.0<br><i><sup>(5.0.0 - 5.3.1)</sup></i>
-    </td>
+    <td>5.0</td>
     <td>2023 10 08</td>
     <td>
         5.9
@@ -392,9 +388,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
-    <td>
-        4.0<br><i><sup>(4.0.0 - 4.3.8)</sup></i>
-    </td>
+    <td>4.0</td>
     <td>2023 04 09</td>
     <td>
         5.8
@@ -414,9 +408,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
-    <td>
-        3.0<br><i><sup>(3.0.0 - 3.2.3)</sup></i>
-    </td>
+    <td>3.0</td>
     <td>2022 10 02</td>
     <td>5.7</td>
     <td>iOS 16.0</td>
@@ -428,9 +420,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
     
   <tr>
-    <td>
-        2.0<br><i><sup>(2.0.0 - 2.3.4)</sup></i>
-    </td>
+    <td>2.0</td>
     <td>2022 05 26</td>
     <td>5.6</td>
     <td>iOS 15.0</td>
@@ -443,9 +433,7 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
     
   <tr>
-    <td>
-        1.0<br><i><sup>(1.0.0 - 1.6.0)</sup></i>
-    </td>
+    <td>1.0</td>
     <td>2021 02 07</td>
     <td>5.3</td>
     <td>iOS 14.0</td>
