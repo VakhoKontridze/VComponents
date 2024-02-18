@@ -78,7 +78,7 @@ public struct VBottomSheetUIModel {
     public var dragIndicatorCornerRadius: CGFloat = 2
 
     /// Drag indicator color.
-    public var dragIndicatorColor: Color = .makeDynamic((200, 200, 200, 1), (100, 100, 100, 1))
+    public var dragIndicatorColor: Color = .dynamic(Color(200, 200, 200, 1), Color(100, 100, 100, 1))
 
     /// Drag indicator margins. Set to `(15, 15)`.
     public var dragIndicatorMargins: VerticalMargins = .init(15)
@@ -139,7 +139,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = Color.make((200, 200, 200, 0.5))
+    public var shadowColor: Color = Color(200, 200, 200, 0.5)
 
     /// Shadow radius. Set to `3`.
     public var shadowRadius: CGFloat = 3

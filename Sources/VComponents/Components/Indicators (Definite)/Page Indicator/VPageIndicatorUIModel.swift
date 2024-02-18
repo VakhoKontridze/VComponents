@@ -104,22 +104,22 @@ public struct VPageIndicatorUIModel {
     public var dotColors: DotStateColors = {
 #if os(iOS)
         DotStateColors(
-            deselected: Color.makeDynamic((190, 190, 190, 1), (120, 120, 120, 1)),
+            deselected: Color.dynamic(Color(190, 190, 190, 1), Color(120, 120, 120, 1)),
             selected: Color.blue
         )
 #elseif os(macOS)
         DotStateColors(
-            deselected: Color.makeDynamic((190, 190, 190, 1), (120, 120, 120, 1)),
+            deselected: Color.dynamic(Color(190, 190, 190, 1), Color(120, 120, 120, 1)),
             selected: Color.blue
         )
 #elseif os(tvOS)
         DotStateColors(
-            deselected: Color.makeDynamic((190, 190, 190, 1), (120, 120, 120, 1)),
+            deselected: Color.dynamic(Color(190, 190, 190, 1), Color(120, 120, 120, 1)),
             selected: Color.blue
         )
 #elseif os(watchOS)
         DotStateColors(
-            deselected: Color.make((120, 120, 120, 1)),
+            deselected: Color(120, 120, 120, 1),
             selected: Color.blue
         )
 #elseif os(visionOS)

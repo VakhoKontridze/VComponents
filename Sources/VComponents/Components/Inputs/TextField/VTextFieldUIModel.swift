@@ -47,9 +47,9 @@ public struct VTextFieldUIModel {
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: Color.makeDynamic((235, 235, 235, 1), (60, 60, 60, 1)),
-        focused: Color.makeDynamic((220, 220, 220, 1), (80, 80, 80, 1)),
-        disabled: Color.makeDynamic((245, 245, 245, 1), (50, 50, 50, 1))
+        enabled: Color.dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1)),
+        focused: Color.dynamic(Color(220, 220, 220, 1), Color(80, 80, 80, 1)),
+        disabled: Color.dynamic(Color(245, 245, 245, 1), Color(50, 50, 50, 1))
     )
 
     // MARK: Properties - Border
@@ -164,13 +164,15 @@ public struct VTextFieldUIModel {
         uiModel.size = CGSize(dimension: 22)
 
         uiModel.backgroundColors = VRectangularButtonUIModel.StateColors(
-            enabled: Color.makeDynamic((170, 170, 170, 1), (40, 40, 40, 1)),
-            pressed: Color.makeDynamic((150, 150, 150, 1), (20, 20, 20, 1)),
-            disabled: Color.makeDynamic((220, 220, 220, 1), (40, 40, 40, 1))
+            enabled: Color.dynamic(Color(170, 170, 170, 1), Color(40, 40, 40, 1)),
+            pressed: Color.dynamic(Color(150, 150, 150, 1), Color(20, 20, 20, 1)),
+            disabled: Color.dynamic(Color(220, 220, 220, 1), Color(40, 40, 40, 1))
         )
 
         uiModel.iconSize = CGSize(dimension: 8)
-        uiModel.iconColors = VRectangularButtonUIModel.StateColors(Color.makeDynamic((255, 255, 255, 1), (230, 230, 230, 1)))
+        uiModel.iconColors = VRectangularButtonUIModel.StateColors(
+            Color.dynamic(Color(255, 255, 255, 1), Color(230, 230, 230, 1))
+        )
 
         uiModel.hitBox = .zero
 
@@ -201,7 +203,7 @@ public struct VTextFieldUIModel {
 
         uiModel.iconSize = CGSize(dimension: 20)
         uiModel.iconColors = VPlainButtonUIModel.StateColors(
-            enabled: Color.makeDynamic((70, 70, 70, 1), (240, 240, 240, 1)),
+            enabled: Color.dynamic(Color(70, 70, 70, 1), Color(240, 240, 240, 1)),
             pressed: Color.primary.opacity(0.3),
             disabled: Color.primary.opacity(0.3)
         )
@@ -236,8 +238,8 @@ public struct VTextFieldUIModel {
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconColors: StateColors? = .init(
-        enabled: Color.makeDynamic((70, 70, 70, 1), (240, 240, 240, 1)),
-        focused: Color.makeDynamic((70, 70, 70, 1), (240, 240, 240, 1)),
+        enabled: Color.dynamic(Color(70, 70, 70, 1), Color(240, 240, 240, 1)),
+        focused: Color.dynamic(Color(70, 70, 70, 1), Color(240, 240, 240, 1)),
         disabled: Color.primary.opacity(0.3)
     )
 
@@ -362,24 +364,24 @@ extension VTextFieldUIModel {
     /// Applies green color scheme to `VTextFieldUIModel`.
     public mutating func applySuccessColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((85, 195, 135, 1), (45, 150, 75, 1)),
-            headerTitleTextAndFooterTitleText: Color.makeDynamic((85, 175, 135, 1), (85, 195, 135, 1))
+            border: Color.dynamic(Color(85, 195, 135, 1), Color(45, 150, 75, 1)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(85, 175, 135, 1), Color(85, 195, 135, 1))
         )
     }
 
     /// Applies yellow color scheme to `VTextFieldUIModel`.
     public mutating func applyWarningColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((255, 190, 35, 1), (240, 150, 20, 1)),
-            headerTitleTextAndFooterTitleText: Color.makeDynamic((235, 170, 35, 1), (255, 190, 35, 1))
+            border: Color.dynamic(Color(255, 190, 35, 1), Color(240, 150, 20, 1)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(235, 170, 35, 1), Color(255, 190, 35, 1))
         )
     }
 
     /// Applies red color scheme to `VTextFieldUIModel`.
     public mutating func applyErrorColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((235, 110, 105, 1), (215, 60, 55, 1)),
-            headerTitleTextAndFooterTitleText: Color.makeDynamic((215, 110, 105, 1), (235, 110, 105, 1))
+            border: Color.dynamic(Color(235, 110, 105, 1), Color(215, 60, 55, 1)),
+            headerTitleTextAndFooterTitleText: Color.dynamic(Color(215, 110, 105, 1), Color(235, 110, 105, 1))
         )
     }
     

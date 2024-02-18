@@ -65,27 +65,27 @@ public struct VToggleUIModel {
     public var fillColors: StateColors = {
 #if os(iOS)
         StateColors(
-            off: Color.makeDynamic((235, 235, 235, 1), (60, 60, 60, 1)),
-            on: Color.makeDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
-            pressedOff: Color.makeDynamic((220, 220, 220, 1), (90, 90, 90, 1)),
-            pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
-            disabled: Color.makeDynamic((240, 240, 240, 1), (50, 50, 50, 1))
+            off: Color.dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1)),
+            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            pressedOff: Color.dynamic(Color(220, 220, 220, 1), Color(90, 90, 90, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            disabled: Color.dynamic(Color(240, 240, 240, 1), Color(50, 50, 50, 1))
         )
 #elseif os(macOS)
         StateColors(
             off: Color.primary.opacity(0.1),
-            on: Color.makeDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
             pressedOff: Color.primary.opacity(0.16),
-            pressedOn: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
             disabled: Color.primary.opacity(0.03)
         )
 #elseif os(watchOS)
         StateColors(
-            off: Color.make((60, 60, 60, 1)),
-            on: Color.make((25, 131, 255, 1)),
-            pressedOff: Color.make((90, 90, 90, 1)),
-            pressedOn: Color.make((36, 106, 186, 1)),
-            disabled: Color.make((50, 50, 50, 1))
+            off: Color(60, 60, 60, 1),
+            on: Color(25, 131, 255, 1),
+            pressedOff: Color(90, 90, 90, 1),
+            pressedOn: Color(36, 106, 186, 1),
+            disabled: Color(50, 50, 50, 1)
         )
 #else
         fatalError() // Not supported
@@ -117,11 +117,11 @@ public struct VToggleUIModel {
         StateColors.clearColors
 #elseif os(macOS)
         StateColors(
-            off: Color.makeDynamic((200, 200, 200, 1), (80, 80, 80, 1)),
+            off: Color.dynamic(Color(200, 200, 200, 1), Color(80, 80, 80, 1)),
             on: Color.clear,
-            pressedOff: Color.makeDynamic((170, 170, 170, 1), (110, 110, 110, 1)),
+            pressedOff: Color.dynamic(Color(170, 170, 170, 1), Color(110, 110, 110, 1)),
             pressedOn: Color.clear,
-            disabled: Color.makeDynamic((220, 220, 220, 1), (70, 70, 70, 1))
+            disabled: Color.dynamic(Color(220, 220, 220, 1), Color(70, 70, 70, 1))
         )
 #elseif os(watchOS)
         StateColors.clearColors

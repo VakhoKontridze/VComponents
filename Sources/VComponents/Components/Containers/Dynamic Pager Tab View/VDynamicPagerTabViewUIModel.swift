@@ -55,7 +55,7 @@ public struct VDynamicPagerTabViewUIModel {
         deselected: Color.primary,
         selected: Color.blue,
         pressedDeselected: Color.primary.opacity(0.3),
-        pressedSelected: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
+        pressedSelected: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
         disabled: Color.primary.opacity(0.3)
     )
 

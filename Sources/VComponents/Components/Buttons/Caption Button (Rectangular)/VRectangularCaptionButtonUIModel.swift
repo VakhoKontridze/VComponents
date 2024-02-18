@@ -55,9 +55,9 @@ public struct VRectangularCaptionButtonUIModel {
 
     /// Rectangle colors.
     public var rectangleColors: StateColors = .init(
-        enabled: Color.makePlatformDynamic((24, 126, 240, 0.25), (25, 131, 255, 0.35)),
-        pressed: Color.makePlatformDynamic((31, 104, 182, 0.25), (36, 106, 186, 0.35)),
-        disabled: Color.make((128, 176, 240, 0.35))
+        enabled: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)),
+        pressed: Color.platformDynamic(Color(31, 104, 182, 0.25), Color(36, 106, 186, 0.35)),
+        disabled: Color(128, 176, 240, 0.35)
     )
 
     /// Ratio to which rectangle scales down on press.
@@ -110,9 +110,9 @@ public struct VRectangularCaptionButtonUIModel {
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconColors: StateColors? = .init(
-        enabled: Color.makePlatformDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
-        pressed: Color.makePlatformDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
-        disabled: Color.make((128, 176, 240, 0.5))
+        enabled: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+        pressed: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+        disabled: Color(128, 176, 240, 0.5)
     )
 
     /// Icon opacities. Set to `nil`.

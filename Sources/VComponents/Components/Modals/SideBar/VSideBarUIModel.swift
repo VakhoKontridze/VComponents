@@ -99,7 +99,7 @@ public struct VSideBarUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = .makeDynamic((100, 100, 100, 0.3), (0, 0, 0, 0.4))
+    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color(0, 0, 0, 0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.

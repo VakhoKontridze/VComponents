@@ -98,15 +98,15 @@ public struct VDisclosureGroupUIModel {
         uiModel.backgroundColors = {
 #if os(iOS)
             VRectangularButtonUIModel.StateColors(
-                enabled: Color.makeDynamic((220, 220, 220, 1), (60, 60, 60, 1)),
-                pressed: Color.makeDynamic((200, 200, 200, 1), (40, 40, 40, 1)),
-                disabled: Color.makeDynamic((230, 230, 230, 1), (40, 40, 40, 1))
+                enabled: Color.dynamic(Color(220, 220, 220, 1), Color(60, 60, 60, 1)),
+                pressed: Color.dynamic(Color(200, 200, 200, 1), Color(40, 40, 40, 1)),
+                disabled: Color.dynamic(Color(230, 230, 230, 1), Color(40, 40, 40, 1))
             )
 #elseif os(macOS)
             VRectangularButtonUIModel.StateColors(
-                enabled: Color.makeDynamic((0, 0, 0, 0.1), (60, 60, 60, 1)),
-                pressed: Color.makeDynamic((0, 0, 0, 0.15), (40, 40, 40, 1)),
-                disabled: Color.makeDynamic((0, 0, 0, 0.05), (40, 40, 40, 1))
+                enabled: Color.dynamic(Color(0, 0, 0, 0.1), Color(60, 60, 60, 1)),
+                pressed: Color.dynamic(Color(0, 0, 0, 0.15), Color(40, 40, 40, 1)),
+                disabled: Color.dynamic(Color(0, 0, 0, 0.05), Color(40, 40, 40, 1))
             )
 #else
             fatalError() // Not supported
@@ -143,7 +143,7 @@ public struct VDisclosureGroupUIModel {
     public var dividerHeight: PointPixelMeasurement = .pixels(2)
 
     /// Divider color.
-    public var dividerColor: Color = .makePlatformDynamic((60, 60, 60, 0.3), (120, 120, 120, 0.6))
+    public var dividerColor: Color = .platformDynamic(Color(60, 60, 60, 0.3), Color(120, 120, 120, 0.6))
 
     /// Divider margins. Set to `(15, 15, 0, 0)`.
     public var dividerMargins: Margins = .init(
@@ -221,9 +221,9 @@ extension VDisclosureGroupUIModel {
 #endif
 
         uiModel.disclosureButtonSubUIModel.backgroundColors = VRectangularButtonUIModel.StateColors(
-            enabled: Color.makeDynamic((230, 230, 230, 1), (60, 60, 60, 1)),
-            pressed: Color.makeDynamic((210, 210, 210, 1), (40, 40, 40, 1)),
-            disabled: Color.makeDynamic((240, 240, 240, 1), (40, 40, 40, 1))
+            enabled: Color.dynamic(Color(230, 230, 230, 1), Color(60, 60, 60, 1)),
+            pressed: Color.dynamic(Color(210, 210, 210, 1), Color(40, 40, 40, 1)),
+            disabled: Color.dynamic(Color(240, 240, 240, 1), Color(40, 40, 40, 1))
         )
 
         return uiModel

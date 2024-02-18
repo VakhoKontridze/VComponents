@@ -46,9 +46,9 @@ public struct VCodeEntryViewUIModel {
 
     /// Character background colors.
     public var characterBackgroundColors: StateColors = .init(
-        enabled: Color.makeDynamic((235, 235, 235, 1), (60, 60, 60, 1)),
-        focused: Color.makeDynamic((220, 220, 220, 1), (80, 80, 80, 1)),
-        disabled: Color.makeDynamic((245, 245, 245, 1), (50, 50, 50, 1))
+        enabled: Color.dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1)),
+        focused: Color.dynamic(Color(220, 220, 220, 1), Color(80, 80, 80, 1)),
+        disabled: Color.dynamic(Color(245, 245, 245, 1), Color(50, 50, 50, 1))
     )
 
     // MARK: Properties - Corners
@@ -159,21 +159,21 @@ extension VCodeEntryViewUIModel {
     /// Applies green color scheme to `VCodeEntryViewUIModel`.
     public mutating func applySuccessColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((85, 195, 135, 1), (45, 150, 75, 1))
+            border: Color.dynamic(Color(85, 195, 135, 1), Color(45, 150, 75, 1))
         )
     }
 
     /// Applies yellow color scheme to `VCodeEntryViewUIModel`.
     public mutating func applyWarningColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((255, 190, 35, 1), (240, 150, 20, 1))
+            border: Color.dynamic(Color(255, 190, 35, 1), Color(240, 150, 20, 1))
         )
     }
 
     /// Applies red color scheme to `VCodeEntryViewUIModel`.
     public mutating func applyErrorColorScheme() {
         applyHighlightedColors(
-            border: Color.makeDynamic((235, 110, 105, 1), (215, 60, 55, 1))
+            border: Color.dynamic(Color(235, 110, 105, 1), Color(215, 60, 55, 1))
         )
     }
 

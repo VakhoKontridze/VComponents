@@ -58,10 +58,10 @@ public struct VLoadingStretchedButtonUIModel {
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: Color.makePlatformDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
-        pressed: Color.makePlatformDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
-        loading: Color.make((128, 176, 240, 1)),
-        disabled: Color.make((128, 176, 240, 1))
+        enabled: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+        pressed: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+        loading: Color(128, 176, 240, 1),
+        disabled: Color(128, 176, 240, 1)
     )
 
     /// Ratio to which background scales down on press.

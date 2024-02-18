@@ -43,7 +43,7 @@ public struct VToastUIModel {
 
     // MARK: Properties - Background
     /// Background color.
-    public var backgroundColor: Color = .makeDynamic((235, 235, 235, 1), (60, 60, 60, 1))
+    public var backgroundColor: Color = .dynamic(Color(235, 235, 235, 1), Color(60, 60, 60, 1))
 
     // MARK: Properties - Text
     /// Text line type. Set to `singleLine`.
@@ -245,16 +245,16 @@ extension VToastUIModel {
 extension VToastUIModel {
     /// Applies green color scheme to `VToastUIModel`.
     public mutating func applySuccessColorScheme() {
-        backgroundColor = .makeDynamic((70, 190, 125, 1), (40, 135, 75, 1))
+        backgroundColor = .dynamic(Color(70, 190, 125, 1), Color(40, 135, 75, 1))
     }
     
     /// Applies yellow color scheme to `VToastUIModel`.
     public mutating func applyWarningColorScheme() {
-        backgroundColor = .makeDynamic((255, 205, 95, 1), (230, 160, 40, 1))
+        backgroundColor = .dynamic(Color(255, 205, 95, 1), Color(230, 160, 40, 1))
     }
     
     /// Applies red color scheme to `VToastUIModel`.
     public mutating func applyErrorColorScheme() {
-        backgroundColor = .makeDynamic((235, 95, 90, 1), (205, 50, 45, 1))
+        backgroundColor = .dynamic(Color(235, 95, 90, 1), Color(205, 50, 45, 1))
     }
 }

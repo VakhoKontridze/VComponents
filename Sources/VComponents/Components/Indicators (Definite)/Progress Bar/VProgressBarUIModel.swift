@@ -73,13 +73,13 @@ public struct VProgressBarUIModel {
     /// Track color.
     public var trackColor: Color = {
 #if os(iOS)
-        Color.makeDynamic((230, 230, 230, 1), (45, 45, 45, 1))
+        Color.dynamic(Color(230, 230, 230, 1), Color(45, 45, 45, 1))
 #elseif os(macOS)
         Color.dynamic(Color.black.opacity(0.05), Color.white.opacity(0.125))
 #elseif os(tvOS)
-        Color.makeDynamic((135, 135, 135, 1), (90, 90, 90, 1))
+        Color.dynamic(Color(135, 135, 135, 1), Color(90, 90, 90, 1))
 #elseif os(watchOS)
-        Color.make((90, 90, 90, 1))
+        Color(90, 90, 90, 1)
 #elseif os(visionOS)
         Color.white.opacity(0.2)
 #endif
@@ -93,7 +93,7 @@ public struct VProgressBarUIModel {
 #elseif os(macOS)
         Color.blue
 #elseif os(tvOS)
-        Color.makeDynamic((220, 220, 220, 1), (220, 220, 220, 1))
+        Color.dynamic(Color(220, 220, 220, 1), Color(220, 220, 220, 1))
 #elseif os(watchOS)
         Color.white
 #elseif os(visionOS)

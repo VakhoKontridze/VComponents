@@ -169,9 +169,9 @@ public struct VAlertUIModel {
     // MARK: Properties - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.makeDynamic((24, 126, 240, 1), (25, 131, 255, 1)),
-        pressed: Color.makeDynamic((31, 104, 182, 1), (36, 106, 186, 1)),
-        disabled: Color.make((128, 176, 240, 1))
+        enabled: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+        pressed: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+        disabled: Color(128, 176, 240, 1)
     )
 
     /// Primary button title text colors.
@@ -198,7 +198,7 @@ public struct VAlertUIModel {
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.makeDynamic((240, 240, 240, 1), (70, 70, 70, 1)),
+        pressed: Color.dynamic(Color(240, 240, 240, 1), Color(70, 70, 70, 1)),
         disabled: Color.clear
     )
 
@@ -230,7 +230,7 @@ public struct VAlertUIModel {
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.makeDynamic((240, 240, 240, 1), (70, 70, 70, 1)),
+        pressed: Color.dynamic(Color(240, 240, 240, 1), Color(70, 70, 70, 1)),
         disabled: Color.clear
     )
 
@@ -269,7 +269,7 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = .makeDynamic((100, 100, 100, 0.3), (0, 0, 0, 0.4))
+    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color(0, 0, 0, 0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
