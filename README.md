@@ -31,8 +31,8 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
 
 <p>
     <img tag="VToggle" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a6f2bf7f-62f9-4a96-8cd1-1b7b768c914b">
-    <img tag="VCheckBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a774c429-e89e-4385-9ee6-359591bf69d7">
-    <img tag="VRadioButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/76bfad64-0c07-4f55-9be4-6e3cda33d359">
+    <img tag="VCheckBox" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/2a8315b0-3d15-430d-a5ff-14efb49b035c">
+    <img tag="VRadioButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/756c4c84-08c4-4a39-b66c-4d3b1bcf8658">
     <img tag="VStretchedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8e63724b-afc0-4ae6-a0d2-8a0600c21a39">
     <img tag="VWrappedToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/d074c130-d978-41e5-926a-ecfd54431636">
     <img tag="VRectangularToggleButton" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/a25cb00b-52ef-41f9-ae89-83305022af45">
@@ -67,7 +67,7 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
 
 <p>
     <img tag="VModal" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c9c03311-db7f-4704-932b-41a78f2e3fc0">
-    <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/94ffc7df-19a4-451b-8e9c-561a217c73c2">
+    <img tag="VBottomSheet" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4bec9ec0-cba9-4e61-be5c-fafe4f0daf2b">
     <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8ea59a66-4742-49a5-8ca9-6a91501e8d3f">
     <img tag="VAlert" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/34c39b5b-1d65-4b71-b620-ceb1973232ae">
 <p/>
