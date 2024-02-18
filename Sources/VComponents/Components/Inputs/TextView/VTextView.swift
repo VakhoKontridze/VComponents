@@ -264,29 +264,29 @@ public struct VTextView: View {
 #Preview("States", body: {
     guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    return StatesPreview()
+    return Preview_StatesContentView()
 })
 
 #Preview("Success", body: {
     guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    return StatesPreview(uiModel: .success)
+    return Preview_StatesContentView(uiModel: .success)
 })
 
 #Preview("Warning", body: {
     guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    return StatesPreview(uiModel: .warning)
+    return Preview_StatesContentView(uiModel: .warning)
 })
 
 #Preview("Error", body: {
     guard #available(iOS 16.0, *) else { return EmptyView() }
 
-    return StatesPreview(uiModel: .error)
+    return Preview_StatesContentView(uiModel: .error)
 })
 
 @available(iOS 16.0, *)
-private struct StatesPreview: View {
+private struct Preview_StatesContentView: View {
     private let uiModel: VTextViewUIModel
 
     init(

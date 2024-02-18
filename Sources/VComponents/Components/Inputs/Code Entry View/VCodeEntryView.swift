@@ -262,7 +262,7 @@ public struct VCodeEntryView: View {
 })
 
 #Preview("States", body: {
-    StatesPreview()
+    Preview_StatesContentView()
 })
 
 #Preview("Stretched", body: {
@@ -288,18 +288,18 @@ public struct VCodeEntryView: View {
 })
 
 #Preview("Success", body: {
-    StatesPreview(uiModel: .success)
+    Preview_StatesContentView(uiModel: .success)
 })
 
 #Preview("Warning", body: {
-    StatesPreview(uiModel: .warning)
+    Preview_StatesContentView(uiModel: .warning)
 })
 
 #Preview("Error", body: {
-    StatesPreview(uiModel: .error)
+    Preview_StatesContentView(uiModel: .error)
 })
 
-private struct StatesPreview: View {
+private struct Preview_StatesContentView: View {
     private let uiModel: VCodeEntryViewUIModel
 
     init(

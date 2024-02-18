@@ -401,31 +401,31 @@ public struct VTextField: View {
 })
 
 #Preview("States", body: {
-    StatesPreview()
+    Preview_StatesContentView()
 })
 
 #Preview("Success", body: {
-    StatesPreview(
+    Preview_StatesContentView(
         uiModel: .success,
         showsNative: false
     )
 })
 
 #Preview("Warning", body: {
-    StatesPreview(
+    Preview_StatesContentView(
         uiModel: .warning,
         showsNative: false
     )
 })
 
 #Preview("Error", body: {
-    StatesPreview(
+    Preview_StatesContentView(
         uiModel: .error,
         showsNative: false
     )
 })
 
-private struct StatesPreview: View {
+private struct Preview_StatesContentView: View {
     private let uiModel: VTextFieldUIModel
     private let showsNative: Bool
 
