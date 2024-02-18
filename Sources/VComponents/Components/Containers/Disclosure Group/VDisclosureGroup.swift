@@ -212,57 +212,80 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 })
 
 #Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Collapsed", content: {
-            VDisclosureGroup(
-                state: .constant(.collapsed),
-                headerTitle: "Lorem Ipsum",
-                content: { Color.blue.frame(height: 100) }
-            )
-            .padding(.horizontal)
-        })
-
-        PreviewRow("Expanded", content: {
-            VDisclosureGroup(
-                state: .constant(.expanded),
-                headerTitle: "Lorem Ipsum",
-                content: { Color.blue.frame(height: 100) }
-            )
-            .padding(.horizontal)
-        })
-
-        PreviewRow("Pressed (Button)", content: {
-            VDisclosureGroup(
-                uiModel: {
-                    var uiModel: VDisclosureGroupUIModel = .init()
-                    uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
-                    uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.pressed // Force-unwrap
-                    return uiModel
-                }(),
-                state: .constant(.collapsed),
-                headerTitle: "Lorem Ipsum",
-                content: { Color.blue.frame(height: 100) }
-            )
-            .padding(.horizontal)
-        })
-
-        PreviewRow("Disabled", content: {
-            VDisclosureGroup(
-                uiModel: {
-                    var uiModel: VDisclosureGroupUIModel = .init()
-                    uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
-                    uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.disabled // Force-unwrap
-                    return uiModel
-                }(),
-                state: .constant(.expanded),
-                headerTitle: "Lorem Ipsum",
-                content: { Color.blue.frame(height: 100) }
-            )
-            .disabled(true)
-            .padding(.horizontal)
-        })
-    })
+    Preview_StatesContentView()
 })
+
+#Preview("States (System Background Color)", body: {
+    Preview_StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
+})
+
+private struct Preview_StatesContentView: View {
+    private let layer: PreviewContainerLayer
+    private let uiModel: VDisclosureGroupUIModel
+
+    init(
+        layer: PreviewContainerLayer = .primary,
+        uiModel: VDisclosureGroupUIModel = .init()
+    ) {
+        self.layer = layer
+        self.uiModel = uiModel
+    }
+
+    var body: some View {
+        PreviewContainer(layer: layer, content: {
+            PreviewRow("Collapsed", content: {
+                VDisclosureGroup(
+                    uiModel: uiModel,
+                    state: .constant(.collapsed),
+                    headerTitle: "Lorem Ipsum",
+                    content: { Color.blue.frame(height: 100) }
+                )
+                .padding(.horizontal)
+            })
+
+            PreviewRow("Expanded", content: {
+                VDisclosureGroup(
+                    uiModel: uiModel,
+                    state: .constant(.expanded),
+                    headerTitle: "Lorem Ipsum",
+                    content: { Color.blue.frame(height: 100) }
+                )
+                .padding(.horizontal)
+            })
+
+            PreviewRow("Pressed (Button)", content: {
+                VDisclosureGroup(
+                    uiModel: {
+                        var uiModel: VDisclosureGroupUIModel = uiModel
+                        uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
+                        uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.pressed // Force-unwrap
+                        return uiModel
+                    }(),
+                    state: .constant(.collapsed),
+                    headerTitle: "Lorem Ipsum",
+                    content: { Color.blue.frame(height: 100) }
+                )
+                .padding(.horizontal)
+            })
+
+            PreviewRow("Disabled", content: {
+                VDisclosureGroup(
+                    uiModel: {
+                        var uiModel: VDisclosureGroupUIModel = uiModel
+                        uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
+                        uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.disabled // Force-unwrap
+                        return uiModel
+                    }(),
+                    state: .constant(.expanded),
+                    headerTitle: "Lorem Ipsum",
+                    content: { Color.blue.frame(height: 100) }
+                )
+                .disabled(true)
+                .padding(.horizontal)
+            })
+        })
+    }
+}
 
 #endif
 
