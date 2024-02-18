@@ -72,21 +72,21 @@ public struct VCheckBoxUIModel {
 #if os(iOS)
         StateColors(
             off: Color.primaryInverted,
-            on: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-            indeterminate: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            indeterminate: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
             pressedOff: Color.primaryInverted,
-            pressedOn: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            pressedIndeterminate: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedIndeterminate: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
             disabled: Color.primaryInverted
         )
 #elseif os(macOS)
         StateColors(
             off: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            on: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
-            indeterminate: Color.platformDynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            on: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
+            indeterminate: Color.dynamic(Color(24, 126, 240, 1), Color(25, 131, 255, 1)),
             pressedOff: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            pressedOn: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
-            pressedIndeterminate: Color.platformDynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedOn: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
+            pressedIndeterminate: Color.dynamic(Color(31, 104, 182, 1), Color(36, 106, 186, 1)),
             disabled: Color.dynamic(Color(250, 250, 250, 1), Color(0, 0, 0, 0.05))
         )
 #else
