@@ -377,6 +377,22 @@ struct VBottomSheet<Content>: View
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
                         id: "preview",
+                        uiModel: {
+                            var uiModel: VBottomSheetUIModel = .init()
+
+                            uiModel.sizes = VBottomSheetUIModel.Sizes(
+                                portrait: VBottomSheetUIModel.Size(
+                                    width: .fraction(1),
+                                    heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                                ),
+                                landscape: VBottomSheetUIModel.Size(
+                                    width: .fraction(0.7),
+                                    heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                                )
+                            )
+
+                            return uiModel
+                        }(),
                         isPresented: $isPresented,
                         content: { Color.blue }
                     )
