@@ -323,7 +323,7 @@ private struct Preview_StatesContentView: View {
                     uiModel: {
                         var uiModelMapped: VCodeEntryViewUIModel = uiModel
                         uiModelMapped.characterBackgroundColors.enabled = uiModel.characterBackgroundColors.focused
-                        uiModelMapped.characterBackgroundBorderColors.enabled = uiModel.characterBackgroundColors.focused
+                        uiModelMapped.characterBackgroundBorderColors.enabled = uiModel.characterBackgroundBorderColors.focused
                         uiModelMapped.textColors.enabled = uiModel.textColors.focused
                         return uiModelMapped
                     }(),
