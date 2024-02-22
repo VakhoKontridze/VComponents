@@ -104,9 +104,9 @@ public struct VDisclosureGroupUIModel {
             )
 #elseif os(macOS)
             VRectangularButtonUIModel.StateColors(
-                enabled: Color.dynamic(Color(0, 0, 0, 0.1), Color(60, 60, 60)),
-                pressed: Color.dynamic(Color(0, 0, 0, 0.15), Color(40, 40, 40)),
-                disabled: Color.dynamic(Color(0, 0, 0, 0.05), Color(40, 40, 40))
+                enabled: Color.dynamic(Color.black.opacity(0.1), Color(60, 60, 60)),
+                pressed: Color.dynamic(Color.black.opacity(0.15), Color(40, 40, 40)),
+                disabled: Color.dynamic(Color.black.opacity(0.05), Color(40, 40, 40))
             )
 #else
             fatalError() // Not supported

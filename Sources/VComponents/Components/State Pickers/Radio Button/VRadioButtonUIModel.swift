@@ -76,7 +76,7 @@ public struct VRadioButtonUIModel {
             on: Color.dynamic(Color.white, Color.black.opacity(0.2)),
             pressedOff: Color.dynamic(Color.white, Color.black.opacity(0.2)),
             pressedOn: Color.dynamic(Color.white, Color.black.opacity(0.2)),
-            disabled: Color.dynamic(Color(250, 250, 250), Color(0, 0, 0, 0.05))
+            disabled: Color.dynamic(Color(250, 250, 250), Color.black.opacity(0.05))
         )
 #else
         fatalError() // Not supported

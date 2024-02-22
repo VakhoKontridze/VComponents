@@ -269,7 +269,7 @@ public struct VAlertUIModel {
 
     // MARK: Properties - Dimming View
     /// Dimming view color.
-    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color(0, 0, 0, 0.4))
+    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color.black.opacity(0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
