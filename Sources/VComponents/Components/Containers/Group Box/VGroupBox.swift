@@ -96,9 +96,13 @@ public struct VGroupBox<Content>: View where Content: View {
     Preview_ContentView()
 })
 
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+
 #Preview("System Background Color", body: {
     Preview_ContentView(layer: .secondary, uiModel: .systemBackgroundColor)
 })
+
+#endif
 
 private struct Preview_ContentView: View {
     private let layer: PreviewContainerLayer

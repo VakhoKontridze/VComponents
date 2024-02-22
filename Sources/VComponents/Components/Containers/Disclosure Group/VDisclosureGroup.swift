@@ -215,9 +215,13 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     Preview_StatesContentView()
 })
 
+#if !os(macOS)
+
 #Preview("States (System Background Color)", body: {
     Preview_StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
 })
+
+#endif
 
 private struct Preview_StatesContentView: View {
     private let layer: PreviewContainerLayer
