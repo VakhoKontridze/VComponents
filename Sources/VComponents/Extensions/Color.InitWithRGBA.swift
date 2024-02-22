@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VCore
 
 // MARK: - Color Init with RGBA
 extension Color {
