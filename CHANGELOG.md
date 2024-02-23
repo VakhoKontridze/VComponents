@@ -5,7 +5,7 @@
 VTextField
 
 - Clear button will no longer occupy space when TextField is configured with `secure` content type
-- Clear and visibility buttons have better hit detection, preventing touches accidentally focusing the TextField
+- Clear and visibility buttons have better hit detection, preventing touches from accidentally focusing the TextField
 
 ### [6.0.0(60)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.0) — *2024 02 18*
 
