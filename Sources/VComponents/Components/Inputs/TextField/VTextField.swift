@@ -254,7 +254,7 @@ public struct VTextField: View {
                 )
                 .opacity(isClearButtonVisible ? 1 : 0)
             })
-            // Occupies full height to prevent touches focusing the TextField
+            // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
             .background(content: { Color.clear.contentShape(Rectangle()) })
         }
@@ -270,7 +270,7 @@ public struct VTextField: View {
                     icon: visibilityIcon
                 )
             })
-            // Occupies full height to prevent touches focusing the TextField
+            // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
             .background(content: { Color.clear.contentShape(Rectangle()) })
         }
