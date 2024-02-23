@@ -13,6 +13,7 @@ General
 
 - Package now partially supports `visionOS`
 - Colors are overhauled to better support other platforms
+- `VComponentsColorBook` is no longer exposed to public
 
 VStretchedButton
 
@@ -126,10 +127,6 @@ VBouncingMarquee
 
 - `gradientColorContainerEdge` and `gradientColorContentEdge` are replaced with `gradientMaskOpacityContainerEdge` and `gradientMaskOpacityContentEdge` to avoid requiring explicit background colors
 
-Other
-
-- `VComponentsColorBook` is no longer exposed to public
-
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 
 VTextView
@@ -190,11 +187,6 @@ VTappableText
 
 ### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — *2023 11 11*
 
-General
-
-- Issue with XCode previews in modal components is fixed
-- Redundant `Identifiable` conformances are removed
-
 VRectangularCaptionButton
 
 - `captionFrameAlignment` is added
@@ -239,15 +231,17 @@ Helpers - Architectural Pattern Helpers
 - `attributes` is added to `VAlertParameters` for additional customization
 - `attributes` is added to `VAlertParameters` for additional customization
 
+Other
+
+- Issue with XCode previews in modal components is fixed
+- Redundant `Identifiable` conformances are removed
+
 ### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
 
 General
 
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
-- `ColorBook` is renamed to `VComponentsColorBook` to avoid issues with name-shadowing
-- `ColorBook.canvas` is renamed to `ColorBook.secondaryBackground`
-- `ColorBook.layer` is renamed to `ColorBook.background`
 - `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
 VStretchedButton
@@ -407,6 +401,12 @@ VRollingCounter
 
 - A new component is added that highlights change in a floating-number
 
+Other
+
+- `ColorBook` is renamed to `VComponentsColorBook` to avoid issues with name-shadowing
+- `ColorBook.canvas` is renamed to `ColorBook.secondaryBackground`
+- `ColorBook.layer` is renamed to `ColorBook.background`
+
 ### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 03*
 
 VPageIndicator
@@ -511,7 +511,7 @@ VContextMenu
 
 ### [4.2.3(45)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.3) — *2023 05 01*
 
-General
+Other
 
 - Issue with large icons going out of bounds in several components is fixed 
 
@@ -573,7 +573,7 @@ VSideBar
 
 ### [4.0.7(40)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.7) — *2023 04 20*
 
-General
+Other
 
 - Issue with button's content overflowing over rounded corners when margins are zero is fixed
 
@@ -624,9 +624,7 @@ General
 - Haptic effects are added to most interactive components
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Buttons that contained `customLabelContent` in UI models now support label APIs that pass internal states to the custom label callback 
-- Demo app replaced with detailed component previews
 - Some colors are changed throughout the package
-- `ColorBook.accent` is renamed to `Color.blue`
 - "TitleLineType" used in names is changed to "TextLineType"
 - Shadow offsets are changed from `CGSize` to `CGPoint`
 
@@ -738,9 +736,14 @@ Helpers - Architectural Pattern Helpers
 - `VAlertUIModel` is moved from `VAlertParameters` to `View.vAlert(id:parameters)`
 - `SpinnerType` is removed from `VSpinnerParameters` and is moved to `View.vContinuousSpinner(parameters:)` and `View.vDashedSpinner(parameters:)`
 
+Other
+
+- Demo app is replaced with detailed component previews
+- `ColorBook.accent` is renamed to `Color.blue`
+
 ### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — *2023 04 09*
 
-Other
+General
 
 - [VCore](https://github.com/VakhoKontridze/VCore) is updated to support `4.7.0` and up
 
@@ -762,9 +765,12 @@ VTextField
 
 General
 
+- `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
+
+Other
+
 - Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
 - Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
-- `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
 
 VRoundedLabeledButton
 
@@ -1009,7 +1015,7 @@ Other
 
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
 
-General
+Other
 
 - Bug fixes and improvements
 
