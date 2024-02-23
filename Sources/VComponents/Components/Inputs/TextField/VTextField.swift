@@ -114,9 +114,15 @@ public struct VTextField: View {
     @Binding private var text: String
 
     // MARK: Properties - Flags
-    @State private var clearButtonCanBecomeVisible: Bool = false
-    @State private var secureFieldIsVisible: Bool = false
-    
+    @State private var _isClearButtonVisible: Bool = false
+    private var isClearButtonVisible: Bool {
+        uiModel.hasClearButton &&
+        internalState == .focused &&
+        _isClearButtonVisible
+    }
+
+    @State private var textFieldIsSecure: Bool = false
+
     // MARK: Initializers
     /// Initializes `VTextField` with text.
     public init(
@@ -147,7 +153,7 @@ public struct VTextField: View {
         // No need for initial checks, as secure field is always hidden by default
         .onChange(of: uiModel.contentType, perform: {
             if !$0.isSecure {
-                secureFieldIsVisible = false
+                textFieldIsSecure = false
             }
         })
     }
@@ -156,7 +162,7 @@ public struct VTextField: View {
         HStack(spacing: uiModel.textAndButtonSpacing, content: {
             searchIcon // Only for search field
             textField
-            clearButton
+            clearButton // Not for secure field
             visibilityButton // Only for secure field
         })
         .frame(height: uiModel.height)
@@ -168,7 +174,7 @@ public struct VTextField: View {
 
     private var textField: some View {
         SecurableTextField(
-            isSecure: uiModel.contentType.isSecure && !secureFieldIsVisible,
+            isSecure: uiModel.contentType.isSecure && !textFieldIsSecure,
             placeholder: placeholder.map {
                 Text($0)
                     .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17 - Replace with `foregroundStyle(_:)`
@@ -237,30 +243,36 @@ public struct VTextField: View {
         }
     }
     
+    @ViewBuilder
     private var clearButton: some View {
-        let isVisible: Bool = // Keyboard animation breaks offset when using conditional instead of opacity
-            !uiModel.contentType.isSecure &&
-            uiModel.hasClearButton &&
-            internalState == .focused &&
-            clearButtonCanBecomeVisible
-        
-        return VRectangularButton(
-            uiModel: uiModel.clearButtonSubUIModel,
-            action: didTapClearButton,
-            icon: uiModel.clearButtonIcon
-        )
-        .opacity(isVisible ? 1 : 0)
-        .allowsHitTesting(isVisible)
+        if !uiModel.contentType.isSecure {
+            ZStack(content: {
+                VRectangularButton(
+                    uiModel: uiModel.clearButtonSubUIModel,
+                    action: didTapClearButton,
+                    icon: uiModel.clearButtonIcon
+                )
+                .opacity(isClearButtonVisible ? 1 : 0)
+            })
+            // Occupies full height to prevent touches focusing the TextField
+            .frame(maxHeight: .infinity)
+            .background(content: { Color.clear.contentShape(Rectangle()) })
+        }
     }
     
     @ViewBuilder 
     private var visibilityButton: some View {
         if uiModel.contentType.isSecure {
-            VPlainButton(
-                uiModel: uiModel.visibilityButtonSubUIModel,
-                action: { secureFieldIsVisible.toggle() },
-                icon: visibilityIcon
-            )
+            ZStack(content: {
+                VPlainButton(
+                    uiModel: uiModel.visibilityButtonSubUIModel,
+                    action: { textFieldIsSecure.toggle() },
+                    icon: visibilityIcon
+                )
+            })
+            // Occupies full height to prevent touches focusing the TextField
+            .frame(maxHeight: .infinity)
+            .background(content: { Color.clear.contentShape(Rectangle()) })
         }
     }
 
@@ -323,7 +335,7 @@ public struct VTextField: View {
 
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
-        if secureFieldIsVisible {
+        if textFieldIsSecure {
             uiModel.visibilityOnButtonIcon
         } else {
             uiModel.visibilityOffButtonIcon
@@ -337,7 +349,7 @@ public struct VTextField: View {
 
     private func setClearButtonVisibility(_ text: String) {
         withAnimation(uiModel.clearButtonAppearDisappearAnimation, {
-            clearButtonCanBecomeVisible = !text.isEmpty
+            _isClearButtonVisible = !text.isEmpty
         })
     }
 }
