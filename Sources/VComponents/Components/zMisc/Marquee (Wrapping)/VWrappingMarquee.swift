@@ -13,7 +13,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VWrappingMarquee(
-///             uiModel: .insettedGradient,
+///             uiModel: .insettedGradientMask,
 ///             content: {
 ///                 HStack(content: {
 ///                     Image(systemName: "swift")
@@ -93,7 +93,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var gradientMask: some View {
         let isMasked: Bool =
             isAnimatable &&
-            uiModel.gradientWidth > 0
+            uiModel.gradientMaskWidth > 0
 
         if isMasked {
             LinearGradient(
@@ -104,11 +104,11 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     ),
                     Gradient.Stop(
                         color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
-                        location: uiModel.gradientWidth/containerWidth
+                        location: uiModel.gradientMaskWidth/containerWidth
                     ),
                     Gradient.Stop(
                         color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
-                        location: 1 - uiModel.gradientWidth/containerWidth
+                        location: 1 - uiModel.gradientMaskWidth/containerWidth
                     ),
                     Gradient.Stop(
                         color: Color.black.opacity(uiModel.gradientMaskOpacityContainerEdge),
@@ -204,7 +204,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         )
 
         VWrappingMarquee(
-            uiModel: .insettedGradient,
+            uiModel: .insettedGradientMask,
             content: { preview_MarqueeContent }
         )
     })

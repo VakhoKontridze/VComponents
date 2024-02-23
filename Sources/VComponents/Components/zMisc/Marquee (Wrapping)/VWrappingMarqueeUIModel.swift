@@ -17,31 +17,29 @@ public struct VWrappingMarqueeUIModel {
 
     /// Spacing between wrapped content. Set to `20`.
     ///
-    /// If `inset` is set to non-`0` value or `VWrappingMarqueeUIModel.insettedGradient` is used,
+    /// If `inset` is set to non-`0` value or `VWrappingMarqueeUIModel.insettedGradientMask` is used,
     /// it's better to set `spacing` to `0`.
     public var spacing: CGFloat = 20
 
     /// Content inset. Set to `0`.
     ///
-    /// Ideal for text content.
-    /// Alternately, use `insettedGradient` instance of `VWrappingMarqueeUIModel`.
+    /// Alternately, use `insettedGradientMask` instance of `VWrappingMarqueeUIModel`.
     ///
-    /// For best result, should be greater than or equal to `gradientWidth`.
+    /// For best result, should be greater than or equal to `gradientMaskWidth`.
     public var inset: CGFloat = 0
 
     /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
     public var alignmentStationary: HorizontalAlignment = .leading
 
     // MARK: Properties - Gradient
-    /// Width of fading gradient. Set to `0`.
+    /// Gradient mask width. Set to `0`.
     ///
-    /// To hide gradient, set to `0`.
+    /// To hide gradient mask, set to `0`.
     ///
-    /// Ideal for text content.
-    /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
+    /// Alternately, use `insettedGradientMask` instance of `VBouncingMarqueeUIModel`.
     ///
     /// For best result, should be less than or equal to `inset`.
-    public var gradientWidth: CGFloat = 0
+    public var gradientMaskWidth: CGFloat = 0
 
     /// Gradient mask opacity at the edge of the container. Set to `0`.
     public var gradientMaskOpacityContainerEdge: CGFloat = 0
@@ -70,15 +68,13 @@ public struct VWrappingMarqueeUIModel {
 // MARK: - Factory
 extension VWrappingMarqueeUIModel {
     /// `VWrappingMarqueeUIModel` that insets content and applies fading gradient.
-    ///
-    /// Ideal for text content.
-    public static var insettedGradient: Self {
+    public static var insettedGradientMask: Self {
         var uiModel: Self = .init()
         
         uiModel.spacing = 0
         uiModel.inset = 20
         
-        uiModel.gradientWidth = 20
+        uiModel.gradientMaskWidth = 20
         
         return uiModel
     }

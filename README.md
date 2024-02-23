@@ -178,7 +178,7 @@ Frequently, you will discover pre-configured static factory-initialized UI model
 ```swift
 var body: some View {
     VWrappingMarquee(
-        uiModel: .insettedGradient,
+        uiModel: .insettedGradientMask,
         content: {
             HStack(content: {
                 Image(systemName: "swift")
