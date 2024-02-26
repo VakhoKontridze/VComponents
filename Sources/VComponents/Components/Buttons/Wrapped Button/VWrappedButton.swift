@@ -24,8 +24,12 @@ public struct VWrappedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VWrappedButtonUIModel
 
+    @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VWrappedButtonInternalState {
-        baseButtonState
+        .init(
+            isEnabled: isEnabled,
+            isPressed: baseButtonState == .pressed
+        )
     }
 
     private let action: () -> Void

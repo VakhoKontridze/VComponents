@@ -30,7 +30,9 @@ public struct VSlider: View {
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VSliderInternalState {
-        .init(isEnabled: isEnabled)
+        .init(
+            isEnabled: isEnabled
+        )
     }
 
     // MARK: Properties - Value Range

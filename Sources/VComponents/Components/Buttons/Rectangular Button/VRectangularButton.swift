@@ -24,8 +24,12 @@ public struct VRectangularButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRectangularButtonUIModel
 
+    @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularButtonInternalState {
-        baseButtonState
+        .init(
+            isEnabled: isEnabled,
+            isPressed: baseButtonState == .pressed
+        )
     }
 
     private let action: () -> Void

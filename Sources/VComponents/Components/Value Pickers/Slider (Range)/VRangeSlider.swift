@@ -33,7 +33,9 @@ public struct VRangeSlider: View {
     // MARK: State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VRangeSliderInternalState {
-        .init(isEnabled: isEnabled)
+        .init(
+            isEnabled: isEnabled
+        )
     }
 
     // MARK: Properties - Value Range

@@ -26,10 +26,14 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel
     
+    @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularCaptionButtonInternalState {
-        baseButtonState
+        .init(
+            isEnabled: isEnabled,
+            isPressed: baseButtonState == .pressed
+        )
     }
-    
+
     private let action: () -> Void
     
     private let icon: Image

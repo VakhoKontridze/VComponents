@@ -26,8 +26,12 @@ public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel
 
+    @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState {
-        baseButtonState
+        .init(
+            isEnabled: isEnabled,
+            isPressed: baseButtonState == .pressed
+        )
     }
 
     private let action: () -> Void
