@@ -352,7 +352,8 @@ Versions with different majors are not directly compatible. When a new major is 
     <td>6.0</td>
     <td>2024 02 18</td>
     <td>
-        5.9
+        5.10<br><i><sup>(6.0.1 - 6.x.x)</sup></i><br>
+        5.9<br><i><sup>(6.0.0)</sup></i>
     </td>
     <td>
         iOS 15.0<br>
