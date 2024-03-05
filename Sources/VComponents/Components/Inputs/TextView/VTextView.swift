@@ -138,7 +138,7 @@ public struct VTextView: View {
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17 - Replace with `foregroundStyle(_:)`
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
             },
             axis: .vertical,

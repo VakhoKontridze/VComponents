@@ -177,7 +177,7 @@ public struct VTextField: View {
             isSecure: uiModel.contentType.isSecure && !textFieldIsSecure,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17 - Replace with `foregroundStyle(_:)`
+                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
             },
             text: $text
