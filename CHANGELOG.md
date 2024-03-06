@@ -1,6 +1,6 @@
 # Change Log
 
-### 6.0.1(61)
+### [6.0.1(61)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.1) — *2024 03 07*
 
 VTextField
 
