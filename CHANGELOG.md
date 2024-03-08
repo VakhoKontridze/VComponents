@@ -1,5 +1,15 @@
 # Change Log
 
+### 6.0.2(62)
+
+VWrappingMarquee
+
+- Runtime warning caused by invalid gradient when content size is zero is fixed
+
+VBouncingMarquee
+
+- Runtime warning caused by invalid gradient when content size is zero is fixed
+
 ### [6.0.1(61)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.1) — *2024 03 07*
 
 VTextField

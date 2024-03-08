@@ -92,8 +92,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     @ViewBuilder
     private var gradientMask: some View {
         let isMasked: Bool =
-            isAnimatable &&
-            uiModel.gradientMaskWidth > 0
+            containerWidth > 0 && // Precondition for the layout
+            uiModel.gradientMaskWidth > 0 &&
+            isAnimatable
 
         if isMasked {
             LinearGradient(
