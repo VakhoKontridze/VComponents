@@ -1,6 +1,6 @@
 # Change Log
 
-### 6.0.2(62)
+### [6.0.2(62)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.2) — *2024 03 09*
 
 VWrappingMarquee
 
