@@ -248,7 +248,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         .padding(uiModel.tabItemMargins)
         .padding(.leading, isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0)
         .padding(.trailing, isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0)
-        .contentShape(Rectangle())
+        .contentShape(.rect)
     }
 
     private var tabIndicatorTrackView: some View {

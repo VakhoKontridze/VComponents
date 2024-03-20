@@ -231,7 +231,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         })
         .padding(uiModel.tabItemMargins)
         .frame(maxWidth: .infinity)
-        .contentShape(Rectangle())
+        .contentShape(.rect)
     }
 
     private var tabIndicatorStripView: some View {

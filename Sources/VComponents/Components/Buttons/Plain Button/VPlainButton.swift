@@ -100,7 +100,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
                 
                 labelView(internalState: internalState)
-                    .contentShape(Rectangle()) // Registers gestures even when clear
+                    .contentShape(.rect) // Registers gestures even when clear
             }
         )
     }

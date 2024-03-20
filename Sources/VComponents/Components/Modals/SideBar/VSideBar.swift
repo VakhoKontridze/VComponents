@@ -87,7 +87,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .contentShape(Rectangle())
+            .contentShape(.rect)
             .onTapGesture(perform: dismissFromDimmingViewTap)
     }
     

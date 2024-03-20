@@ -104,7 +104,7 @@ struct VBottomSheet<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .contentShape(Rectangle())
+            .contentShape(.rect)
             .onTapGesture(perform: dismissFromDimmingViewTap)
     }
     
@@ -176,7 +176,7 @@ struct VBottomSheet<Content>: View
         ZStack(content: {
             if !uiModel.contentIsDraggable {
                 Color.clear
-                    .contentShape(Rectangle())
+                    .contentShape(.rect)
             }
             
             content()

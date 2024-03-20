@@ -115,7 +115,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                     rectangleView(internalState: internalState)
                     captionView(internalState: internalState)
                 })
-                .contentShape(Rectangle()) // Registers gestures even when clear
+                .contentShape(.rect) // Registers gestures even when clear
             }
         )
     }

@@ -84,7 +84,7 @@ public struct VCodeEntryView: View {
             charactersView
         })
         // Detects all gestures on frame and focuses hidden `TextField`
-        .contentShape(Rectangle())
+        .contentShape(.rect)
         .onTapGesture(perform: { isFocused = true })
 
         // Ensures that hidden `TextField`'s frame doesn't overflow

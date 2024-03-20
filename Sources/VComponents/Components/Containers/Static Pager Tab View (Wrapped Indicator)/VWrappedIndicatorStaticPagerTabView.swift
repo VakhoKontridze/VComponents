@@ -255,7 +255,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         })
         .padding(uiModel.tabItemMargins)
         .frame(maxWidth: .infinity)
-        .contentShape(Rectangle())
+        .contentShape(.rect)
     }
 
     private var tabIndicatorStripView: some View {

@@ -256,7 +256,7 @@ public struct VTextField: View {
             })
             // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
-            .background(content: { Color.clear.contentShape(Rectangle()) })
+            .background(content: { Color.clear.contentShape(.rect) })
         }
     }
     
@@ -272,7 +272,7 @@ public struct VTextField: View {
             })
             // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
-            .background(content: { Color.clear.contentShape(Rectangle()) })
+            .background(content: { Color.clear.contentShape(.rect) })
         }
     }
 

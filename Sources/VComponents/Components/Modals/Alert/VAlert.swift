@@ -90,7 +90,7 @@ struct VAlert<Content>: View
     
     private var dimmingView: some View {
         uiModel.dimmingViewColor
-            .contentShape(Rectangle())
+            .contentShape(.rect)
     }
     
     private var alertView: some View {

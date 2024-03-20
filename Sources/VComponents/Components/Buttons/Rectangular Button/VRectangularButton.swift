@@ -86,7 +86,7 @@ public struct VRectangularButton<Label>: View where Label: View {
                 let internalState: VRectangularButtonInternalState = internalState(baseButtonState)
                 
                 labelView(internalState: internalState)
-                    .contentShape(Rectangle()) // Registers gestures even when clear
+                    .contentShape(.rect) // Registers gestures even when clear
                     .frame(size: uiModel.size)
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
                     .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
