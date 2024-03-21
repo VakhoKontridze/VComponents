@@ -417,7 +417,7 @@ Other
 - `ColorBook.canvas` is renamed to `ColorBook.secondaryBackground`
 - `ColorBook.layer` is renamed to `ColorBook.background`
 
-### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 03*
+### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.8) — *2023 09 03*
 
 VPageIndicator
 
@@ -435,6 +435,8 @@ Helpers - Architectural Pattern Helpers
 ### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
 
 VSegmentedPicker
+
+- Issue with indicator position on last row is fixed
 
 ### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
 
