@@ -458,7 +458,7 @@ VToast
 
 Other
 
-- [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.11.0`
+- Bug fixes and improvements
 
 ### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
 
@@ -602,7 +602,7 @@ VSheet
 
 Other
 
-- [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
+- Issue with `PresentationHost` breaking modal frames when presented from `UIHostingController` is fixed
 
 ### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
 
@@ -760,7 +760,7 @@ Other
 
 Other
 
-- [VCore](https://github.com/VakhoKontridze/VCore) is updated to support `4.7.0` and up
+- Bug fixes and improvements
 
 ### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
 
@@ -1038,7 +1038,7 @@ Models
 
 Other
 
-- [VCore](https://github.com/VakhoKontridze/VCore) is updated to the latest version
+- Bug fixes and improvements
 
 ### [2.3.1(23)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.1) — *2022 07 04*
 
