@@ -23,7 +23,6 @@ General
 
 - Package now partially supports `visionOS`
 - Colors are overhauled to better support other platforms
-- `VComponentsColorBook` is no longer exposed to public
 
 VStretchedButton
 
@@ -136,6 +135,10 @@ VWrappingMarquee
 VBouncingMarquee
 
 - `gradientColorContainerEdge` and `gradientColorContentEdge` are replaced with `gradientMaskOpacityContainerEdge` and `gradientMaskOpacityContentEdge` to avoid requiring explicit background colors
+
+Other
+
+- `VComponentsColorBook` is no longer exposed to public
 
 ### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
 
@@ -252,7 +255,6 @@ General
 
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
-- `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
 VStretchedButton
 
@@ -416,6 +418,7 @@ Other
 - `ColorBook` is renamed to `VComponentsColorBook` to avoid issues with name-shadowing
 - `ColorBook.canvas` is renamed to `ColorBook.secondaryBackground`
 - `ColorBook.layer` is renamed to `ColorBook.background`
+- `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
 ### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.8) — *2023 09 03*
 
@@ -453,7 +456,7 @@ VToast
 
 ### [4.3.4(50)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.4) — *2023 07 17*
 
-General
+Other
 
 - [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.11.0`
 
@@ -597,7 +600,7 @@ VSheet
 
 ### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
 
-General
+Other
 
 - [VCore](https://github.com/VakhoKontridze/VCore) is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
 
@@ -634,7 +637,6 @@ General
 - Package now supports RTL languages
 - Fonts now support dynamic sizing
 - Haptic effects are added to most interactive components
-- `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Buttons that contained `customLabelContent` in UI models now support label APIs that pass internal states to the custom label callback 
 - Some colors are changed throughout the package
 - "TitleLineType" used in names is changed to "TextLineType"
@@ -750,12 +752,13 @@ Helpers - Architectural Pattern Helpers
 
 Other
 
-- Demo app is replaced with detailed component previews
+- Demo app is replaced with previews
 - `ColorBook.accent` is renamed to `Color.blue`
+- `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 
 ### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — *2023 04 09*
 
-General
+Other
 
 - [VCore](https://github.com/VakhoKontridze/VCore) is updated to support `4.7.0` and up
 
@@ -774,15 +777,6 @@ VTextField
 - Issue with keyboard animation affecting close button's offset is fixed
 
 ### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — *2023 03 09*
-
-General
-
-- `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
-
-Other
-
-- Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
-- Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
 
 VRoundedLabeledButton
 
@@ -824,6 +818,12 @@ VMarquee
 
 - `VMarquee` is split to `VWrappingMarquee` and `VBouncingMarquee`
 
+Other
+
+- `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
+- Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
+- Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
+
 ### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
 
 General
@@ -851,11 +851,6 @@ API
 `VComponentsLocalizationService` is renamed to `VComponentsLocalizationManager`
 
 ### [3.0.0(27)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.0.0) — *2022 10 02*
-
-General
-
-- `PresentationHost` API is updated, and all modals now have id-based `View` extension methods
-- `PresentationHostViewController` is no longer `public`
 
 VPrimaryButton
 
@@ -1018,12 +1013,14 @@ VText
 
 Other
 
+- `PresentationHost` API is updated, and all modals now have id-based `View` extension methods
+- `PresentationHostViewController` is no longer `public`
 - `PickableEnumeration` is renamed to `HashableEnumeration`
 - `PickableTitledEnumeration` is renamed to `StringRepresentableHashableEnumeration`
 - `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - `GenericState`s and `GenericStateModels`s are moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - `BasicAnimation` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
-- pressed and disabled `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
+- `pressed` and `disabled` `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
 
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
 
@@ -1123,8 +1120,6 @@ General
 - Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines
-- `ImageBook` is made public, and asset icons in library can no be re-set
-- Several internal properties are now exposed to public in models
 - `blinder` is renamed to `dimmingView`
 
 VPrimaryButton
@@ -1299,6 +1294,11 @@ Other
 API
 
 - `VComponentsLocalizationService` is added, that supports localization within the Package
+
+Other
+
+- `ImageBook` is made public, and asset icons in library can no be re-set
+- Several internal properties are now exposed to `public` in models
 
 ### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — *2022 01 07*
 
