@@ -2,6 +2,10 @@
 
 ### 6.1.0(63)
 
+VTappableText
+
+- TappableText is deprecated in favor of combination of `AttributedString.init(stringAndDefault:attributeContainers:)` and `View.onOpenURL(_:perform:)`
+
 ### [6.0.2(62)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.2) — *2024 03 09*
 
 VWrappingMarquee
