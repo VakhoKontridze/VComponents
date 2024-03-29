@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Tappable Text
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public struct VTappableText: View {
     private let components: [any VTappableTextComponentProtocol]
 
@@ -47,12 +47,12 @@ public struct VTappableText: View {
     }
 }
 
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public protocol VTappableTextComponentProtocol {
     func makeAttributedString() -> AttributedString
 }
 
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public struct VTappableTextTextComponent: VTappableTextComponentProtocol {
     private let uiModel: VTappableTextTextComponentUIModel
     private let text: String
@@ -75,7 +75,7 @@ public struct VTappableTextTextComponent: VTappableTextComponentProtocol {
     }
 }
 
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public struct VTappableTextTextComponentUIModel {
     public var color: Color = .primary
     public var font: Font = .body
@@ -83,7 +83,7 @@ public struct VTappableTextTextComponentUIModel {
     public init() {}
 }
 
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public struct VTappableTextButtonComponent: VTappableTextComponentProtocol {
     private let uiModel: VTappableTextButtonComponentUIModel
 
@@ -126,7 +126,7 @@ public struct VTappableTextButtonComponent: VTappableTextComponentProtocol {
     }
 }
 
-@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.onOpenURL(_:perform:)'")
+@available(*, deprecated, message: "Use 'AttributedString.init(stringAndDefault:attributeContainers:)' with 'View.addOpenURLAction(_:)'")
 public struct VTappableTextButtonComponentUIModel {
     public var color: Color = {
 #if os(iOS)

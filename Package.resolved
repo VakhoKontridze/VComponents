@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
-        "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
-        "version" : "510.0.0"
+        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
+        "version" : "510.0.1"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
         "branch" : "dev",
-        "revision" : "e7dbb562c9b1824cefec5abce477419c2d29be2b"
+        "revision" : "e28641a7ca90e1e05877a456e8b999a39876cfa7"
       }
     }
   ],
