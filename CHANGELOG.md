@@ -1,6 +1,6 @@
 # Change Log
 
-### 6.1.0(63)
+### [6.0.3(63)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.3) — *2024 04 22*
 
 VTappableText
 
