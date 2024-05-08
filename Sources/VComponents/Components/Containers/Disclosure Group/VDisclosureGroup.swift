@@ -15,7 +15,8 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
-///             Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
+///             Color(uiColor: UIColor.secondarySystemBackground)
+///                 .ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
 ///                 uiModel: .systemBackgroundColor,

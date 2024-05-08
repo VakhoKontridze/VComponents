@@ -16,7 +16,8 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(content: {
-///             Color(uiColor: UIColor.secondarySystemBackground).ignoresSafeArea()
+///             Color(uiColor: UIColor.secondarySystemBackground)
+///                 .ignoresSafeArea()
 ///
 ///             VGroupBox(
 ///                 uiModel: .systemBackgroundColor,

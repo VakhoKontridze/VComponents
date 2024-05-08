@@ -25,14 +25,17 @@ struct PreviewContainer<Content>: View where Content: View {
 
     var body: some View {
         ZStack(content: {
+            Group(content: {
 #if os(iOS)
-            switch layer {
-            case .primary: Color(uiColor: UIColor.systemBackground).ignoresSafeArea()
-            case .secondary: Color(uiColor: .secondarySystemBackground).ignoresSafeArea()
-            }
+                switch layer {
+                case .primary: Color(uiColor: UIColor.systemBackground)
+                case .secondary: Color(uiColor: .secondarySystemBackground)
+                }
 #else
-            Color.clear.ignoresSafeArea()
+                Color.clear
 #endif
+            })
+            .ignoresSafeArea()
 
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 ViewThatFits(
