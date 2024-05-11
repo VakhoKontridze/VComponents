@@ -214,8 +214,7 @@ public struct VPageIndicator<Content>: View where Content: View {
             width:
                 uiModel.direction.isHorizontal ?
                 uiModel.dotWidths.value(for: internalState) :
-                uiModel.dotHeights.value(for: internalState)
-            ,
+                uiModel.dotHeights.value(for: internalState),
             height:
                 uiModel.direction.isHorizontal ?
                 uiModel.dotHeights.value(for: internalState) :
