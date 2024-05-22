@@ -34,18 +34,22 @@ struct VRollingCounterFactory {
             let charStr: String = .init(char)
 
             if charStr == uiModel.groupingSeparator {
-                components.append(VRollingCounterGroupingSeparatorComponent(
-                    id: nil,
-                    value: charStr
-                ))
+                components.append(
+                    VRollingCounterGroupingSeparatorComponent(
+                        id: nil,
+                        value: charStr
+                    )
+                )
 
             } else if charStr == uiModel.decimalSeparator {
                 guard !hasPassedDecimalSeparator else { fatalError() }
 
-                components.append(VRollingCounterDecimalSeparatorComponent(
-                    id: nil,
-                    value: charStr
-                ))
+                components.append(
+                    VRollingCounterDecimalSeparatorComponent(
+                        id: nil,
+                        value: charStr
+                    )
+                )
                 hasPassedDecimalSeparator = true
 
             } else if
@@ -53,15 +57,19 @@ struct VRollingCounterFactory {
                 let digit: Int = .init(charStr)
             {
                 if hasPassedDecimalSeparator {
-                    components.append(VRollingCounterFractionDigitComponent(
-                        id: nil,
-                        digit: digit
-                    ))
+                    components.append(
+                        VRollingCounterFractionDigitComponent(
+                            id: nil,
+                            digit: digit
+                        )
+                    )
                 } else {
-                    components.append(VRollingCounterDigitComponent(
-                        id: nil,
-                        digit: digit
-                    ))
+                    components.append(
+                        VRollingCounterDigitComponent(
+                            id: nil,
+                            digit: digit
+                        )
+                    )
                 }
 
             } else {
@@ -113,11 +121,13 @@ struct VRollingCounterFactory {
                     }
                 }()
 
-                components.append(VRollingCounterGroupingSeparatorComponent(
-                    id: isHighlighted ? nil : oldComponents[i].id,
-                    value: charStr,
-                    isHighlighted: isHighlighted
-                ))
+                components.append(
+                    VRollingCounterGroupingSeparatorComponent(
+                        id: isHighlighted ? nil : oldComponents[i].id,
+                        value: charStr,
+                        isHighlighted: isHighlighted
+                    )
+                )
 
             } else if charStr == uiModel.decimalSeparator {
                 guard !hasPassedDecimalSeparator else { fatalError() }
@@ -132,11 +142,13 @@ struct VRollingCounterFactory {
                     }
                 }()
 
-                components.append(VRollingCounterDecimalSeparatorComponent(
-                    id: isHighlighted ? nil : oldComponents[i].id,
-                    value: charStr,
-                    isHighlighted: isHighlighted
-                ))
+                components.append(
+                    VRollingCounterDecimalSeparatorComponent(
+                        id: isHighlighted ? nil : oldComponents[i].id,
+                        value: charStr,
+                        isHighlighted: isHighlighted
+                    )
+                )
 
                 hasPassedDecimalSeparator = true
 
@@ -155,17 +167,21 @@ struct VRollingCounterFactory {
                 let id: String? = isHighlighted ? nil : oldComponents[i].id
 
                 if hasPassedDecimalSeparator {
-                    components.append(VRollingCounterFractionDigitComponent(
-                        id: id,
-                        digit: digit,
-                        isHighlighted: isHighlighted
-                    ))
+                    components.append(
+                        VRollingCounterFractionDigitComponent(
+                            id: id,
+                            digit: digit,
+                            isHighlighted: isHighlighted
+                        )
+                    )
                 } else {
-                    components.append(VRollingCounterDigitComponent(
-                        id: id,
-                        digit: digit,
-                        isHighlighted: isHighlighted
-                    ))
+                    components.append(
+                        VRollingCounterDigitComponent(
+                            id: id,
+                            digit: digit,
+                            isHighlighted: isHighlighted
+                        )
+                    )
                 }
 
             } else {

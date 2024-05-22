@@ -70,11 +70,13 @@ import VCore
         }
 
         if result.isEmpty {
-            result.append(VAlertButton(
-                role: .secondary,
-                action: nil,
-                title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
-            ))
+            result.append(
+                VAlertButton(
+                    role: .secondary,
+                    action: nil,
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
+                )
+            )
         }
 
         return result

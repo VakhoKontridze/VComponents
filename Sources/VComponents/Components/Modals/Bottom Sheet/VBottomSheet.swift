@@ -294,23 +294,27 @@ struct VBottomSheet<Content>: View
         case false:
             guard let offsetBeforeDrag else { return }
             
-            animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                containerHeight: containerSize.height,
-                heights: currentHeightsObject,
-                canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
-                pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: containerSize.height),
-                offset: offset,
-                offsetBeforeDrag: offsetBeforeDrag,
-                translation: dragValue.translation.height
-            ))
-            
+            animateOffsetOrPullDismissFromSnapAction(
+                .dragEndedSnapAction(
+                    containerHeight: containerSize.height,
+                    heights: currentHeightsObject,
+                    canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
+                    pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: containerSize.height),
+                    offset: offset,
+                    offsetBeforeDrag: offsetBeforeDrag,
+                    translation: dragValue.translation.height
+                )
+            )
+
         case true:
-            animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                containerHeight: containerSize.height,
-                heights: currentHeightsObject,
-                offset: offset,
-                velocity: dragValue.velocity.height
-            ))
+            animateOffsetOrPullDismissFromSnapAction(
+                .dragEndedHighVelocitySnapAction(
+                    containerHeight: containerSize.height,
+                    heights: currentHeightsObject,
+                    offset: offset,
+                    velocity: dragValue.velocity.height
+                )
+            )
         }
     }
     
