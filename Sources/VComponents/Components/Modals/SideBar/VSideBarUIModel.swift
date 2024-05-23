@@ -148,7 +148,7 @@ public struct VSideBarUIModel {
 
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap, or `dragBack`.
-    @OptionSetRepresentation<Int>(accessLevelModifier: "public")
+    @OptionSetRepresentation<Int>(accessLevelModifier: .public)
     public struct DismissType: OptionSet {
         // MARK: Options
         private enum Options: Int {
