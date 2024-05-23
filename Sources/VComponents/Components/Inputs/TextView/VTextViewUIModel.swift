@@ -201,7 +201,7 @@ extension VTextViewUIModel {
 @available(visionOS, unavailable)
 extension VTextViewUIModel {
     /// Applies green color scheme to `VTextViewUIModel`.
-    public mutating func applySuccessColorScheme() {
+    mutating public func applySuccessColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(85, 195, 135), Color(45, 150, 75)),
             headerTitleTextAndFooterTitleText: Color.dynamic(Color(85, 175, 135), Color(85, 195, 135))
@@ -209,7 +209,7 @@ extension VTextViewUIModel {
     }
 
     /// Applies yellow color scheme to `VTextViewUIModel`.
-    public mutating func applyWarningColorScheme() {
+    mutating public func applyWarningColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(255, 190, 35), Color(240, 150, 20)),
             headerTitleTextAndFooterTitleText: Color.dynamic(Color(235, 170, 35), Color(255, 190, 35))
@@ -217,7 +217,7 @@ extension VTextViewUIModel {
     }
 
     /// Applies red color scheme to `VTextViewUIModel`.
-    public mutating func applyErrorColorScheme() {
+    mutating public func applyErrorColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(235, 110, 105), Color(215, 60, 55)),
             headerTitleTextAndFooterTitleText: Color.dynamic(Color(215, 110, 105), Color(235, 110, 105))

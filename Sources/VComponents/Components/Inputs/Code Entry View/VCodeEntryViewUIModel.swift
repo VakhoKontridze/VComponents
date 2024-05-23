@@ -157,21 +157,21 @@ extension VCodeEntryViewUIModel {
 @available(visionOS, unavailable)
 extension VCodeEntryViewUIModel {
     /// Applies green color scheme to `VCodeEntryViewUIModel`.
-    public mutating func applySuccessColorScheme() {
+    mutating public func applySuccessColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(85, 195, 135), Color(45, 150, 75))
         )
     }
 
     /// Applies yellow color scheme to `VCodeEntryViewUIModel`.
-    public mutating func applyWarningColorScheme() {
+    mutating public func applyWarningColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(255, 190, 35), Color(240, 150, 20))
         )
     }
 
     /// Applies red color scheme to `VCodeEntryViewUIModel`.
-    public mutating func applyErrorColorScheme() {
+    mutating public func applyErrorColorScheme() {
         applyHighlightedColors(
             border: Color.dynamic(Color(235, 110, 105), Color(215, 60, 55))
         )
