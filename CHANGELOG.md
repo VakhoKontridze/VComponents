@@ -1,5 +1,11 @@
 # Change Log
 
+### [6.0.4(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — *2024 05 23*
+
+Other
+
+- Bug fixes and improvements
+
 ### [6.0.3(63)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.3) — *2024 04 22*
 
 VTappableText
