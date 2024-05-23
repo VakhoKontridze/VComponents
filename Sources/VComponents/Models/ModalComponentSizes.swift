@@ -10,6 +10,10 @@ import VCore
 
 // MARK: - Modal Component Sizes
 /// Model that represents modal component sizes.
+@MemberwiseInitializable(
+    accessLevelModifier: .public,
+    comment: "/// Initializes `ModalComponentSizes` with sizes."
+)
 public struct ModalComponentSizes<ModalSize> {
     // MARK: Properties
     /// Portrait size .
@@ -19,15 +23,6 @@ public struct ModalComponentSizes<ModalSize> {
     public var landscape: ModalSize
 
     // MARK: Initializers
-    /// Initializes `ModalComponentSizes` with sizes.
-    public init(
-        portrait: ModalSize,
-        landscape: ModalSize
-    ) {
-        self.portrait = portrait
-        self.landscape = landscape
-    }
-
     /// Initializes `ModalComponentSizes` with size.
     public init(
         _ size: ModalSize
@@ -66,23 +61,16 @@ extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
 
 // MARK: - Standard Modal Component Size
 /// Model that represents standard modal component size with width and height.
+@MemberwiseInitializable(
+    accessLevelModifier: .public,
+    comment: "/// Initializes `StandardModalComponentSize` with width and height."
+)
 public struct StandardModalComponentSize: Equatable {
-    // MARK: Properties
     /// Width.
     public var width: ModalComponentDimension
 
     /// Height.
     public var height: ModalComponentDimension
-
-    // MARK: Initializers
-    /// Initializes `StandardModalComponentSize` with width and height.
-    public init(
-        width: ModalComponentDimension,
-        height: ModalComponentDimension
-    ) {
-        self.width = width
-        self.height = height
-    }
 }
 
 // MARK: - Single Dimension Modal Component Size

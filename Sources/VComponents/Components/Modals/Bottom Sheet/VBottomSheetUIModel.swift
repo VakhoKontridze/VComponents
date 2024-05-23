@@ -170,27 +170,21 @@ public struct VBottomSheetUIModel {
 
     // MARK: Size
     /// Model that represents bottom sheet size.
+    @MemberwiseInitializable(
+        accessLevelModifier: .public,
+        comment: "/// Initializes `BottomSheetSize`."
+    )
     public struct Size: Equatable {
-        // MARK: Properties
         /// Width.
         public var width: ModalComponentDimension
 
         /// Heights.
         public var heights: Heights
-
-        // MARK: Initializers
-        /// Initializes `BottomSheetSize`.
-        public init(
-            width: ModalComponentDimension,
-            heights: Heights
-        ) {
-            self.width = width
-            self.heights = heights
-        }
     }
 
     // MARK: Heights
     /// Model that represents bottom sheet heights.
+    @MemberwiseInitializable(accessLevelModifier: .private)
     public struct Heights: Equatable { // Values mustn't be variable to ensure that all are the same `case`s
         // MARK: Properties
         /// Minimum height.
@@ -223,16 +217,6 @@ public struct VBottomSheetUIModel {
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
         // MARK: Initializers
-        private init(
-            min: ModalComponentDimension,
-            ideal: ModalComponentDimension,
-            max: ModalComponentDimension
-        ) {
-            self.min = min
-            self.ideal = ideal
-            self.max = max
-        }
-
         /// Initializes `Heights` with absolute values.
         public static func absolute(
             min: CGFloat,

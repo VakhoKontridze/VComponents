@@ -372,180 +372,175 @@ struct VBottomSheet<Content>: View
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-#Preview("Min & Ideal & Max", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-        }
-    }
-
-    return ContentView()
+#Preview("Min & Ideal & Max", body: { // TODO: Move into macro when nested macro expansions are supported
+    ContentView_MinIdealMax()
 })
+private struct ContentView_MinIdealMax: View {
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                            )
+                        )
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { Color.blue }
+                )
+        })
+    }
+}
 
 #Preview("Min & Ideal", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-        }
-    }
-
-    return ContentView()
+    ContentView_MinIdeal()
 })
+private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested macro expansions are supported
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
+                            )
+                        )
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { Color.blue }
+                )
+        })
+    }
+}
 
 #Preview("Ideal & Max", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-        }
-    }
-
-    return ContentView()
+    ContentView_IdealMax()
 })
+private struct ContentView_IdealMax: View { // TODO: Move into macro when nested macro expansions are supported
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
+                            )
+                        )
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { Color.blue }
+                )
+        })
+    }
+}
 
 #Preview("Ideal Small", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(0.2)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(0.2)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-        }
-    }
-
-    return ContentView()
+    ContentView_IdealSmall()
 })
+private struct ContentView_IdealSmall: View { // TODO: Move into macro when nested macro expansions are supported
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(0.2)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(0.2)
+                            )
+                        )
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { Color.blue }
+                )
+        })
+    }
+}
 
 #Preview("Ideal Large", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-
-                            uiModel.sizes = VBottomSheetUIModel.Sizes(
-                                portrait: VBottomSheetUIModel.Size(
-                                    width: .fraction(1),
-                                    heights: .fraction(0.9)
-                                ),
-                                landscape: VBottomSheetUIModel.Size(
-                                    width: .fraction(0.7),
-                                    heights: .fraction(0.9)
-                                )
-                            )
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-        }
-    }
-
-    return ContentView()
+    ContentView_IdealLarge()
 })
+private struct ContentView_IdealLarge: View { // TODO: Move into macro when nested macro expansions are supported
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+
+                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(0.9)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(0.9)
+                            )
+                        )
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: { Color.blue }
+                )
+        })
+    }
+}
 
 #Preview("Wrapped Content", body: {
     struct ContentView: View {
