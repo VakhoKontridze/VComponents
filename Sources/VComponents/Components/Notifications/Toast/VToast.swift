@@ -157,7 +157,7 @@ struct VToast: View {
     // MARK: Lifecycle
     private func dismissAfterLifecycle() {
         lifecycleDismissTask?.cancel()
-        lifecycleDismissTask = Task(operation: {
+        lifecycleDismissTask = Task(operation: { @MainActor in
             try? await Task.sleep(seconds: uiModel.duration)
             guard !Task.isCancelled else { return }
 

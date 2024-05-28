@@ -216,7 +216,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         if uiModel.removesImageOnParameterChange { result = nil }
 
         task?.cancel()
-        task = Task(operation: {
+        task = Task(operation: { @MainActor in
             do {
                 let image: Image = try await fetchHandler(parameter)
                 guard !Task.isCancelled else { return }
