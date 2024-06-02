@@ -1,6 +1,6 @@
 # Change Log
 
-### [6.0.5(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — *2024 06 02*
+### [6.0.5(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — *2024 06 02*
 
 VSlider
 
@@ -18,7 +18,7 @@ VWrappedIndicatorStaticPagerTabView
 
 - Crash that occurs when data is empty is fixed
 
-### [6.0.4(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — *2024 05 23*
+### [6.0.4(64)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — *2024 05 23*
 
 Other
 
