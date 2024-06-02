@@ -177,7 +177,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 
     // MARK: Body
     public var body: some View {
-        if !data.isEmpty {
+        if data.isEmpty {
             uiModel.tabViewBackgroundColor
 
         } else {
