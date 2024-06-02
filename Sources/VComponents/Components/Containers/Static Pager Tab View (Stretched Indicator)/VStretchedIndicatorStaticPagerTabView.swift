@@ -170,7 +170,10 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
     // MARK: Body
     public var body: some View {
-        if !data.isEmpty {
+        if data.isEmpty {
+            uiModel.tabViewBackgroundColor
+
+        } else {
             VStack(
                 spacing: uiModel.tabBarAndTabViewSpacing,
                 content: {
@@ -178,9 +181,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                     tabView
                 }
             )
-
-        } else {
-            uiModel.tabViewBackgroundColor
         }
     }
 

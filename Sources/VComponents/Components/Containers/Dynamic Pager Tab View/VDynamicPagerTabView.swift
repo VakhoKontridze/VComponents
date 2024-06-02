@@ -171,7 +171,10 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        if !data.isEmpty {
+        if data.isEmpty {
+            uiModel.tabViewBackgroundColor
+
+        } else {
             VStack(
                 spacing: uiModel.tabBarAndTabViewSpacing,
                 content: {
@@ -179,9 +182,6 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                     tabView
                 }
             )
-
-        } else {
-            uiModel.tabViewBackgroundColor
         }
     }
 
