@@ -366,7 +366,7 @@ public struct VPageIndicator<Content>: View where Content: View {
     return ContentView()
 })
 
-#Preview("Empty", body: {
+#Preview("Zero", body: {
     struct ContentView: View {
         var body: some View {
             PreviewContainer(content: {
