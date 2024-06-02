@@ -342,7 +342,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
             2 * uiModel.selectedTabIndicatorMarginHorizontal
 
         selectedTabIndicatorOffset = {
-            guard let selectedIndexInt else { return 0}
+            guard let selectedIndexInt else { return 0 }
 
             var contentOffset: CGFloat = {
                 let accumulatedOffset: CGFloat = tabViewWidth * CGFloat(selectedIndexInt)
