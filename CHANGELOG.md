@@ -1,6 +1,6 @@
 # Change Log
 
-### 6.0.5(66)
+### [6.0.5(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — *2024 06 02*
 
 VSlider
 
