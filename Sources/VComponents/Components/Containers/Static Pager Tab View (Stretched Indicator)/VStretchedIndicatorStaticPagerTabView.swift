@@ -72,8 +72,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
     // MARK: Properties - Selection
     @Binding private var selection: Data.Element
-    private var selectedIndex: Data.Index { data.firstIndex(of: selection)! } // Force-unwrap
-    private var selectedIndexInt: Int { data.distance(from: data.startIndex, to: selectedIndex) }
+    private var selectedIndex: Data.Index? { data.firstIndex(of: selection) }
+    private var selectedIndexInt: Int? { selectedIndex.map { data.distance(from: data.startIndex, to: $0) } }
 
     // MARK: Properties - Data
     private let data: Data
@@ -170,13 +170,18 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
     // MARK: Body
     public var body: some View {
-        VStack(
-            spacing: uiModel.tabBarAndTabViewSpacing,
-            content: {
-                headerView
-                tabView
-            }
-        )
+        if !data.isEmpty {
+            VStack(
+                spacing: uiModel.tabBarAndTabViewSpacing,
+                content: {
+                    headerView
+                    tabView
+                }
+            )
+
+        } else {
+            uiModel.tabViewBackgroundColor
+        }
     }
 
     private var headerView: some View {
@@ -325,7 +330,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
-        selectedIndexInt: Int,
+        selectedIndexInt: Int?,
         tabViewProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
@@ -333,10 +338,12 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         let tabViewWidth: CGFloat = tabViewProxy.size.width
 
         selectedTabIndicatorWidth =
-            tabViewWidth / CGFloat(data.count) -
+            tabViewWidth / CGFloat(data.count) - // Division is safe, as non-emptiness is checked in `body`
             2 * uiModel.selectedTabIndicatorMarginHorizontal
 
         selectedTabIndicatorOffset = {
+            guard let selectedIndexInt else { return 0}
+
             var contentOffset: CGFloat = {
                 let accumulatedOffset: CGFloat = tabViewWidth * CGFloat(selectedIndexInt)
 
@@ -355,7 +362,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
             }
 
             return
-                contentOffset / CGFloat(data.count) +
+                contentOffset / CGFloat(data.count) + // Division is safe, as non-emptiness is checked in `body`
                 uiModel.selectedTabIndicatorMarginHorizontal
         }()
 
@@ -370,7 +377,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-#Preview(body: {
+#Preview("*", body: {
     struct ContentView: View {
         @State private var selection: Preview_RGBColor = .red
 
@@ -379,6 +386,27 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                 VStretchedIndicatorStaticPagerTabView(
                     selection: $selection,
                     data: Preview_RGBColor.allCases,
+                    tabItemTitle: { $0.title },
+                    content: { $0.color }
+                )
+                .padding(.horizontal)
+                .frame(height: 150)
+            })
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("No Items", body: {
+    struct ContentView: View {
+        @State private var selection: Preview_RGBColor = .red
+
+        var body: some View {
+            PreviewContainer(layer: .secondary, content: {
+                VStretchedIndicatorStaticPagerTabView(
+                    selection: $selection,
+                    data: [],
                     tabItemTitle: { $0.title },
                     content: { $0.color }
                 )

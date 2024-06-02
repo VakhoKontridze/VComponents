@@ -376,7 +376,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side)
+        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side) // Division is safe
         let incrementalScale: CGFloat = uiModel.edgeDotScale + CGFloat(index) * scaleStep
         return incrementalScale
     }
@@ -505,6 +505,21 @@ extension Int {
                 })
             })
             .onReceiveOfTimerIncrement($current, to: total-1)
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("Zero", body: {
+    struct ContentView: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VCompactPageIndicator(
+                    total: 0,
+                    current: 0
+                )
+            })
         }
     }
 

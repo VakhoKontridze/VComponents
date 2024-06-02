@@ -73,8 +73,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 
     // MARK: Properties - Selection
     @Binding private var selection: Data.Element
-    private var selectedIndex: Data.Index { data.firstIndex(of: selection)! } // Force-unwrap
-    private var selectedIndexInt: Int { data.distance(from: data.startIndex, to: selectedIndex) }
+    private var selectedIndex: Data.Index? { data.firstIndex(of: selection) }
+    private var selectedIndexInt: Int? { selectedIndex.map { data.distance(from: data.startIndex, to: $0) } }
 
     // MARK: Properties - Data
     private let data: Data
@@ -177,13 +177,18 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 
     // MARK: Body
     public var body: some View {
-        VStack(
-            spacing: uiModel.tabBarAndTabViewSpacing,
-            content: {
-                headerView
-                tabView
-            }
-        )
+        if !data.isEmpty {
+            VStack(
+                spacing: uiModel.tabBarAndTabViewSpacing,
+                content: {
+                    headerView
+                    tabView
+                }
+            )
+
+        } else {
+            uiModel.tabViewBackgroundColor
+        }
     }
 
     private var headerView: some View {
@@ -349,7 +354,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
 
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
-        selectedIndexInt: Int,
+        selectedIndexInt: Int?,
         tabViewProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
@@ -357,6 +362,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         let tabViewWidth: CGFloat = tabViewProxy.size.width
 
         let contentOffset: CGFloat = {
+            guard let selectedIndexInt else { return 0 }
+
             let accumulatedOffset: CGFloat = tabViewWidth * CGFloat(selectedIndexInt)
 
             if layoutDirection.isRightToLeft {
@@ -400,7 +407,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
             return nil
         }
 
-        if contentOffset <= tabContentOffsets[0] {
+        if contentOffset <= tabContentOffsets[0] { // Index is safe, as non-emptiness is checked in `body`
             // Clamping to min
             return dataSource[0]
 
@@ -436,7 +443,7 @@ extension FloatingPoint {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-#Preview(body: {
+#Preview("*", body: {
     struct ContentView: View {
         @State private var selection: Preview_RGBColor = .red
 
@@ -445,6 +452,27 @@ extension FloatingPoint {
                 VWrappedIndicatorStaticPagerTabView(
                     selection: $selection,
                     data: Preview_RGBColor.allCases,
+                    tabItemTitle: { $0.title },
+                    content: { $0.color }
+                )
+                .padding(.horizontal)
+                .frame(height: 150)
+            })
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("No Items", body: {
+    struct ContentView: View {
+        @State private var selection: Preview_RGBColor = .red
+
+        var body: some View {
+            PreviewContainer(layer: .secondary, content: {
+                VWrappedIndicatorStaticPagerTabView(
+                    selection: $selection,
+                    data: [],
                     tabItemTitle: { $0.title },
                     content: { $0.color }
                 )

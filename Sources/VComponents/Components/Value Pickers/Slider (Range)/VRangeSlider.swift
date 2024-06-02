@@ -68,7 +68,8 @@ public struct VRangeSlider: View {
     {
         Self.validate(
             value: value.wrappedValue,
-            difference: difference
+            difference: difference,
+            step: step
         )
         
         self.uiModel = uiModel
@@ -189,18 +190,16 @@ public struct VRangeSlider: View {
     
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: VRangeSliderThumb) {
-        let rawValue: Double = {
-            let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let boundRange: Double = range.boundRange
-            let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
-            
-            return (range.lowerBound + (value / width) * boundRange)
-                .invertedFromMax(
-                    range.upperBound,
-                    if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
-                )
-        }()
-        
+        let dragValue: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
+        let boundRange: Double = range.boundRange
+        guard let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal).nonZero else { return }
+
+        let rawValue: Double = (range.lowerBound + (dragValue / width) * boundRange)
+            .invertedFromMax(
+                range.upperBound,
+                if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
+            )
+
         let valueFixed: Double = {
             switch thumb {
             case .low:
@@ -248,7 +247,7 @@ public struct VRangeSlider: View {
             case .high: self.value.upperBound - self.range.lowerBound
             }
         }()
-        let boundRange: CGFloat = range.boundRange
+        guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         switch thumb {
@@ -260,7 +259,7 @@ public struct VRangeSlider: View {
     // MARK: Thumb Offset
     private func thumbOffset(_ thumb: VRangeSliderThumb) -> CGFloat {
         let progressWidth: CGFloat = progressWidth(thumb)
-        let thumbWidth: CGFloat = uiModel.thumbSize.dimension(isWidth: uiModel.direction.isHorizontal)
+        guard let thumbWidth: CGFloat = uiModel.thumbSize.dimension(isWidth: uiModel.direction.isHorizontal).nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         switch thumb {
@@ -272,7 +271,8 @@ public struct VRangeSlider: View {
     // MARK: Validation
     private static func validate<V>(
         value: ClosedRange<V>,
-        difference: V
+        difference: V,
+        step: V?
     )
         where
             V: BinaryFloatingPoint,
@@ -280,6 +280,11 @@ public struct VRangeSlider: View {
     {
         guard value.boundRange >= difference - .ulpOfOne else {
             Logger.rangeSlider.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference' in 'VRangeSlider'")
+            fatalError()
+        }
+
+        guard step != 0 else {
+            Logger.rangeSlider.critical("'step' cannot be '0'")
             fatalError()
         }
     }

@@ -1,5 +1,23 @@
 # Change Log
 
+### 6.0.5(66)
+
+VSlider
+
+- Crash that sometimes occurs when width is `0` is fixed
+
+VRangeSlider
+
+- Crash that sometimes occurs when width is `0` is fixed
+
+VStretchedIndicatorStaticPagerTabView
+
+- Crash that occurs when data is empty is fixed
+
+VWrappedIndicatorStaticPagerTabView
+
+- Crash that occurs when data is empty is fixed
+
 ### [6.0.4(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — *2024 05 23*
 
 Other

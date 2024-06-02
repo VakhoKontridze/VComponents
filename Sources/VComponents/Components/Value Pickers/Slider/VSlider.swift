@@ -192,18 +192,16 @@ public struct VSlider: View {
     
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
-        let rawValue: Double = {
-            let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
-            let boundRange: Double = range.boundRange
-            let width: Double = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
-            
-            return ((value / width) * boundRange + range.lowerBound)
-                .invertedFromMax(
-                    range.upperBound,
-                    if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
-                )
-        }()
-        
+        let value: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
+        let boundRange: Double = range.boundRange
+        guard let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal).nonZero else { return }
+
+        let rawValue: Double = ((value / width) * boundRange + range.lowerBound)
+            .invertedFromMax(
+                range.upperBound,
+                if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
+            )
+
         let valueFixed: Double = rawValue.clamped(to: range, step: step)
         
         setValue(to: valueFixed)
@@ -223,7 +221,7 @@ public struct VSlider: View {
     // MARK: Progress Width
     private var progressWidth: CGFloat {
         let value: CGFloat = value - range.lowerBound
-        let boundRange: CGFloat = range.boundRange
+        guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
         
         return (value / boundRange) * width

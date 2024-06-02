@@ -171,13 +171,18 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        VStack(
-            spacing: uiModel.tabBarAndTabViewSpacing,
-            content: {
-                headerView
-                tabView
-            }
-        )
+        if !data.isEmpty {
+            VStack(
+                spacing: uiModel.tabBarAndTabViewSpacing,
+                content: {
+                    headerView
+                    tabView
+                }
+            )
+
+        } else {
+            uiModel.tabViewBackgroundColor
+        }
     }
 
     private var headerView: some View {
@@ -402,6 +407,38 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                             }(),
                             selection: $selection,
                             data: Preview_Weekday.allCases.prefix(3),
+                            tabItemTitle: { $0.title },
+                            content: { $0.color }
+                        )
+                        .padding(.horizontal)
+                        .frame(height: 150)
+                    }
+                )
+            })
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("No Items", body: {
+    struct ContentView: View {
+        @State private var selection: Preview_Weekday = .thursday
+
+        var body: some View {
+            PreviewContainer(layer: .secondary, content: {
+                ForEach(
+                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+                    id: \.self,
+                    content: { widthType in
+                        VDynamicPagerTabView(
+                            uiModel: {
+                                var uiModel: VDynamicPagerTabViewUIModel = .init()
+                                uiModel.tabSelectionIndicatorWidthType = widthType
+                                return uiModel
+                            }(),
+                            selection: $selection,
+                            data: [],
                             tabItemTitle: { $0.title },
                             content: { $0.color }
                         )
