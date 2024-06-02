@@ -430,6 +430,25 @@ extension Double {
     return ContentView()
 })
 
+#Preview("Step", body: {
+    struct ContentView: View {
+        @State private var value: ClosedRange<Double> = 0.1...0.8
+
+        var body: some View {
+            PreviewContainer(content: {
+                VRangeSlider(
+                    difference: 0.1,
+                    step: 0.1,
+                    value: $value
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    return ContentView()
+})
+
 #endif
 
 #endif

@@ -357,6 +357,24 @@ public struct VSlider: View {
     return ContentView()
 })
 
+#Preview("Step", body: {
+    struct ContentView: View {
+        @State private var value: Double = 0.5
+
+        var body: some View {
+            PreviewContainer(content: {
+                VSlider(
+                    step: 0.1,
+                    value: $value
+                )
+                .padding(.horizontal)
+            })
+        }
+    }
+
+    return ContentView()
+})
+
 #Preview("Draggable Body", body: {
     struct ContentView: View {
         @State private var value: Double = 0.5
