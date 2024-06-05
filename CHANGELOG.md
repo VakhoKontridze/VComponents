@@ -1458,7 +1458,7 @@ VBaseView
 
 - Default title alignment is changed from `leading` to `center`
 
-### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.1) — *2021 02 27*
+### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.1) — *2021 02 27*
 
 VBaseTextField
 
