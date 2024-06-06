@@ -11,7 +11,6 @@ import VCore
 // MARK: - Modal Component Sizes
 /// Model that represents modal component sizes.
 @MemberwiseInitializable(
-    accessLevelModifier: .public,
     comment: "/// Initializes `ModalComponentSizes` with sizes."
 )
 public struct ModalComponentSizes<ModalSize> {
@@ -62,7 +61,6 @@ extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
 // MARK: - Standard Modal Component Size
 /// Model that represents standard modal component size with width and height.
 @MemberwiseInitializable(
-    accessLevelModifier: .public,
     comment: "/// Initializes `StandardModalComponentSize` with width and height."
 )
 public struct StandardModalComponentSize: Equatable {

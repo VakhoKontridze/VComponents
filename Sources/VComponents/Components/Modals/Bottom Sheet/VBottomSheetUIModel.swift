@@ -171,7 +171,6 @@ public struct VBottomSheetUIModel {
     // MARK: Size
     /// Model that represents bottom sheet size.
     @MemberwiseInitializable(
-        accessLevelModifier: .public,
         comment: "/// Initializes `BottomSheetSize`."
     )
     public struct Size: Equatable {
@@ -280,7 +279,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Dismiss Type
     /// Dismiss type, such as `backTap`, or `pullDown`.
-    @OptionSetRepresentation<Int>(accessLevelModifier: .public)
+    @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet {
         // MARK: Options
         private enum Options: Int {
