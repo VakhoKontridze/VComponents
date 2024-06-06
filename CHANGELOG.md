@@ -1,5 +1,11 @@
 # Change Log
 
+### [6.0.6(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.6) — *2024 06 06*
+
+Other
+
+- Bug fixes and improvements
+
 ### [6.0.5(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — *2024 06 02*
 
 VSlider
