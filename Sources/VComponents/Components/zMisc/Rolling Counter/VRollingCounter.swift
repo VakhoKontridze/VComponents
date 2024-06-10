@@ -75,13 +75,13 @@ public struct VRollingCounter: View {
         self.uiModel = uiModel
         self.value = value
         self._components = State(
-            initialValue: VRollingCounterFactory.components(
+            wrappedValue: VRollingCounterFactory.components(
                 value: value,
                 uiModel: uiModel,
                 numberFormatter: numberFormatter
             )
         )
-        self._numberFormatter = State(initialValue: numberFormatter)
+        self._numberFormatter = State(wrappedValue: numberFormatter)
     }
 
     // MARK: Body
