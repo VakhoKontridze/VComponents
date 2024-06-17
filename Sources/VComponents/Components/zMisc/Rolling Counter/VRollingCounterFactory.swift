@@ -207,6 +207,8 @@ struct VRollingCounterFactory {
     ) -> NumberFormatter {
         let formatter: NumberFormatter = .init()
 
+        formatter.locale = Locale(identifier: "en")
+
         formatter.numberStyle = .decimal
         formatter.generatesDecimalNumbers = true
 
