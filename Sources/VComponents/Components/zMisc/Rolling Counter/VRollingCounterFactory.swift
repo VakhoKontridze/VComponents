@@ -207,7 +207,7 @@ struct VRollingCounterFactory {
     ) -> NumberFormatter {
         let formatter: NumberFormatter = .init()
 
-        formatter.locale = Locale(identifier: "en")
+        formatter.locale = Locale(identifier: "en") // Prevents issues when casting non-Arabic numbers to `Int`
 
         formatter.numberStyle = .decimal
         formatter.generatesDecimalNumbers = true
