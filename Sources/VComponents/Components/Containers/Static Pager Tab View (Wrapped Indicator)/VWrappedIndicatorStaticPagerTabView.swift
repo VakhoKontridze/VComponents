@@ -434,7 +434,10 @@ extension FloatingPoint {
         x1: Self, y1: Self,
         x2: Self, y2: Self
     ) -> Self {
-        y1 + ((y2-y1) / (x2-x1)) * (self-x1)
+        let denominator: Self = y2 - y1
+        let numerator: Self = x2 - x1
+        let result: Self = y1 + (denominator / numerator) * (self - x1)
+        return result
     }
 }
 

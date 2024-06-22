@@ -1,5 +1,11 @@
 # Change Log
 
+### 6.0.7(67)
+
+Other
+
+- Compilation time bottlenecks have been fixed
+
 ### [6.0.6(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.6) — *2024 06 06*
 
 Other

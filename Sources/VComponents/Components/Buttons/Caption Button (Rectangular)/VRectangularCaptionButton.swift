@@ -124,22 +124,30 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Group(content: { // `Group` is used for adding multiple frames
-            icon
-                .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-                .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-                .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-                .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
-                .font(uiModel.iconFont)
-                .frame(size: uiModel.iconSize)
-                .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
-                .padding(uiModel.iconMargins)
+            rectangleIcon(
+                internalState: internalState
+            )
         })
         .frame(size: uiModel.rectangleSize)
         .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius)) // Prevents large content from overflowing
         .background(content: { rectangleBackgroundView(internalState: internalState) }) // Has own rounding
         .overlay(content: { rectangleBorderView(internalState: internalState) }) // Has own rounding
     }
-    
+
+    private func rectangleIcon(
+        internalState: VPlainButtonInternalState
+    ) -> some View {
+        icon
+            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
+            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
+            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .font(uiModel.iconFont)
+            .frame(size: uiModel.iconSize)
+            .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
+            .padding(uiModel.iconMargins)
+    }
+
     private func rectangleBackgroundView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
