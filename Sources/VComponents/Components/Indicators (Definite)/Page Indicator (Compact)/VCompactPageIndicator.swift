@@ -63,7 +63,7 @@ import VCore
 ///     }
 ///
 public struct VCompactPageIndicator<Content>: View where Content: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VCompactPageIndicatorUIModel
 
     // MARK: Properties - State

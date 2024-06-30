@@ -43,7 +43,7 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCodeEntryView: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VCodeEntryViewUIModel
 
     // MARK: Properties - State
@@ -114,6 +114,7 @@ public struct VCodeEntryView: View {
 
             // Makes `TextField` as small as possible
             .frame(dimension: 1)
+
             // Positions `TextField` behind first character's center.
             // `1/4` for `y` helps maintain proper keyboard offset.
             .offset(x: uiModel.characterBackgroundSize.width/2, y: -uiModel.characterBackgroundSize.height/4)
