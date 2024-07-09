@@ -25,6 +25,9 @@ public struct VAlertUIModel {
     }
 
     /// Color scheme. Set to `nil`.
+    ///
+    /// Component will automatically inherit color scheme from the context.
+    /// But if it's overridden with modifiers, this property must be set.
     public var colorScheme: ColorScheme? = nil
 
     /// Alert sizes.

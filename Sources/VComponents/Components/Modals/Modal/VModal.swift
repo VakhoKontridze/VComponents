@@ -31,7 +31,6 @@ struct VModal<Content>: View
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
-
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API

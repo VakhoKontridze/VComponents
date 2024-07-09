@@ -29,7 +29,6 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API

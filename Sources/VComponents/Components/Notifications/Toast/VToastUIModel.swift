@@ -26,6 +26,9 @@ public struct VToastUIModel {
     }
 
     /// Color scheme. Set to `nil`.
+    ///
+    /// Component will automatically inherit color scheme from the context.
+    /// But if it's overridden with modifiers, this property must be set.
     public var colorScheme: ColorScheme? = nil
 
     /// Width type. Set to `default`.
