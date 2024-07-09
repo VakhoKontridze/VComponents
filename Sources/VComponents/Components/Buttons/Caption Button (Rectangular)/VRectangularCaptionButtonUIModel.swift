@@ -225,7 +225,10 @@ public struct VRectangularCaptionButtonUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var titleCaptionTextLineType: TextLineType = {
 #if os(iOS)
-        .multiLine(alignment: .center, lineLimit: 1...2)
+        .multiLine(
+            alignment: .center,
+            lineLimit: 1...2
+        )
 #elseif os(watchOS)
         .singleLine
 #else

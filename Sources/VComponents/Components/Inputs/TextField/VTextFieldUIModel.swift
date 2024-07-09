@@ -68,7 +68,10 @@ public struct VTextFieldUIModel {
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var headerTitleTextLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
+    public var headerTitleTextLineType: TextLineType = .multiLine(
+        alignment: .leading,
+        lineLimit: 1...2
+    )
 
     /// Header title text colors.
     public var headerTitleTextColors: StateColors = .init(
@@ -90,7 +93,10 @@ public struct VTextFieldUIModel {
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var footerTitleTextLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...5)
+    public var footerTitleTextLineType: TextLineType = .multiLine(
+        alignment: .leading,
+        lineLimit: 1...5
+    )
 
     /// Footer title text colors.
     public var footerTitleTextColors: StateColors = .init(
