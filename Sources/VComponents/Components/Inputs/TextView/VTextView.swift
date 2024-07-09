@@ -65,10 +65,9 @@ import VCore
 ///     }
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
-@available(iOS 16.0, *)
-@available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow HIG
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
-@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow HIG
+@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VTextView: View {
     // MARK: Properties - UI Model
@@ -240,8 +239,6 @@ public struct VTextView: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("*", body: {
-    guard #available(iOS 16.0, *) else { return EmptyView() }
-
     struct ContentView: View {
         @State private var text: String = "Lorem ipsum"
 
@@ -262,30 +259,21 @@ public struct VTextView: View {
 })
 
 #Preview("States", body: {
-    guard #available(iOS 16.0, *) else { return EmptyView() }
-
-    return Preview_StatesContentView()
+    Preview_StatesContentView()
 })
 
 #Preview("Success", body: {
-    guard #available(iOS 16.0, *) else { return EmptyView() }
-
-    return Preview_StatesContentView(uiModel: .success)
+    Preview_StatesContentView(uiModel: .success)
 })
 
 #Preview("Warning", body: {
-    guard #available(iOS 16.0, *) else { return EmptyView() }
-
-    return Preview_StatesContentView(uiModel: .warning)
+    Preview_StatesContentView(uiModel: .warning)
 })
 
 #Preview("Error", body: {
-    guard #available(iOS 16.0, *) else { return EmptyView() }
-
-    return Preview_StatesContentView(uiModel: .error)
+    Preview_StatesContentView(uiModel: .error)
 })
 
-@available(iOS 16.0, *)
 private struct Preview_StatesContentView: View {
     private let uiModel: VTextViewUIModel
 

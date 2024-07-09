@@ -84,13 +84,7 @@ public struct VAlertUIModel {
     /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextLineType: TextLineType = {
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            .multiLine(alignment: .center, lineLimit: 1...2)
-        } else {
-            .multiLine(alignment: .center, lineLimit: 2)
-        }
-    }()
+    public var titleTextLineType: TextLineType = .multiLine(alignment: .center, lineLimit: 1...2)
 
     /// Title text color.
     public var titleTextColor: Color = .primary
@@ -113,13 +107,7 @@ public struct VAlertUIModel {
     /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextLineType: TextLineType = {
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            .multiLine(alignment: .center, lineLimit: 1...5)
-        } else {
-            .multiLine(alignment: .center, lineLimit: 5)
-        }
-    }()
+    public var messageTextLineType: TextLineType = .multiLine(alignment: .center, lineLimit: 1...5)
 
     /// Message text color.
     public var messageTextColor: Color = .primary

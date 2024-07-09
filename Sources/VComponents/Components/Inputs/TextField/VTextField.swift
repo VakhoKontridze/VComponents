@@ -88,7 +88,7 @@ import VCore
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(macOS, unavailable) // Doesn't follow HIG
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VTextField: View {

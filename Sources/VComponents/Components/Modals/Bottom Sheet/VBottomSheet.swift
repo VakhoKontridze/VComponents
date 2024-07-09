@@ -11,7 +11,7 @@ import VCore
 
 // MARK: - V Bottom Sheet
 @available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)`
+@available(tvOS, unavailable) // No `View.presentationHost(...)`
 @available(watchOS, unavailable) // No `View.presentationHost(...)`
 @available(visionOS, unavailable) // No `View.presentationHost(...)`
 struct VBottomSheet<Content>: View

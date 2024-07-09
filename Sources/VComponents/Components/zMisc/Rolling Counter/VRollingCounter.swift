@@ -115,7 +115,11 @@ public struct VRollingCounter: View {
                 .font(uiModel.digitTextFont)
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
-                .transition(.rollingEdge(edge: digitTextRollingEdge.map { Edge(verticalEdge: $0) }) ?? .identity)
+                .transition({
+                    guard let digitTextRollingEdge else { return .identity }
+                    let edge: Edge = .init(verticalEdge: digitTextRollingEdge)
+                    return AnyTransition.push(from: edge)
+                }())
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
@@ -123,7 +127,11 @@ public struct VRollingCounter: View {
                 .font(uiModel.fractionDigitTextFont)
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
-                .transition(.rollingEdge(edge: fractionDigitTextRollingEdge.map { Edge(verticalEdge: $0) }) ?? .identity)
+                .transition({
+                    guard let fractionDigitTextRollingEdge else { return .identity }
+                    let edge: Edge = .init(verticalEdge: fractionDigitTextRollingEdge)
+                    return AnyTransition.push(from: edge)
+                }())
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
@@ -262,18 +270,6 @@ extension Edge {
         switch verticalEdge {
         case .top: self = .top
         case .bottom: self = .bottom
-        }
-    }
-}
-
-extension AnyTransition {
-    fileprivate static func rollingEdge(edge: Edge?) -> AnyTransition? {
-        guard let edge else { return nil }
-
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            return AnyTransition.push(from: edge)
-        } else {
-            return AnyTransition.move(edge: edge).combined(with: .opacity)
         }
     }
 }

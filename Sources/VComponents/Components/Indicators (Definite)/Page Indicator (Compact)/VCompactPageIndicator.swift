@@ -161,25 +161,18 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         let range: [Int] = (0..<total)
             .reversedArray(uiModel.direction.isReversed)
 
-        return Group(content: {
-            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                uiModel.direction
-                    .stackLayout(spacing: uiModel.spacing)
-                    .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
-                    .frame(size: size)
-                    .offset(
-                        x: uiModel.direction.isHorizontal ? offset : 0,
-                        y: uiModel.direction.isHorizontal ? 0 : offset
-                    )
-                    .clipped()
-                    .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                        $0.animation(uiModel.transitionAnimation, value: current)
-                    })
-
-            } else {
-                compactBodyFallback
-            }
-        })
+        return uiModel.direction
+            .stackLayout(spacing: uiModel.spacing)
+            .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
+            .frame(size: size)
+            .offset(
+                x: uiModel.direction.isHorizontal ? offset : 0,
+                y: uiModel.direction.isHorizontal ? 0 : offset
+            )
+            .clipped()
+            .applyIf(uiModel.appliesTransitionAnimation, transform: {
+                $0.animation(uiModel.transitionAnimation, value: current)
+            })
     }
 
     private func dotContentView(index: Int) -> some View {
@@ -208,53 +201,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
         )
         .scaleEffect(scale(at: index))
-    }
-
-    private var compactBodyFallback: some View {
-        frameFallback
-            .applyIf(
-                uiModel.direction.isHorizontal,
-                ifTransform: { $0.overlay(content: { dotsViewHorizontalFallback }) },
-                elseTransform: { $0.overlay(content: { dotsViewVerticalFallback }) }
-            )
-            .clipped()
-            .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                $0.animation(uiModel.transitionAnimation, value: current)
-            })
-    }
-
-    private var frameFallback: some View {
-        let size: CGSize = .init(
-            width: visibleWidth,
-            height: uiModel.dotHeight
-        )
-            .withReversedDimensions(uiModel.direction.isVertical)
-
-        return Color.clear
-            .frame(size: size)
-    }
-
-    private var dotsViewHorizontalFallback: some View {
-        HStack(
-            spacing: uiModel.spacing,
-            content: dotsViewFallback
-        )
-        .offset(x: offset)
-    }
-
-    private var dotsViewVerticalFallback: some View {
-        VStack(
-            spacing: uiModel.spacing,
-            content: dotsViewFallback
-        )
-        .offset(y: offset)
-    }
-
-    private func dotsViewFallback() -> some View {
-        let range: [Int] = (0..<total)
-            .reversedArray(uiModel.direction.isReversed)
-
-        return ForEach(range, id: \.self, content: dotContentView)
     }
     
     // MARK: Widths

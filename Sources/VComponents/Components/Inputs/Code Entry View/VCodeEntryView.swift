@@ -39,7 +39,7 @@ import VCore
 ///
 /// When running in `SwiftUI` previews or simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
 @available(macOS, unavailable) // Doesn't follow HIG
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCodeEntryView: View {

@@ -15,10 +15,10 @@ let package: Package = .init(
     name: "VComponents",
     
     platforms: [
-        .iOS(.v15),
-        .macOS(.v12),
-        .tvOS(.v15),
-        .watchOS(.v8),
+        .iOS(.v16),
+        .macOS(.v13),
+        .tvOS(.v16),
+        .watchOS(.v9),
         .visionOS(.v1)
     ],
     
@@ -32,7 +32,8 @@ let package: Package = .init(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/VakhoKontridze/VCore", "6.5.0"..<"7.0.0")
+        //.package(url: "https://github.com/VakhoKontridze/VCore", "7.0.0"..<"8.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "dev")
     ],
     
     targets: [

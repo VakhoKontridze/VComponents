@@ -165,28 +165,12 @@ public struct VPageIndicator<Content>: View where Content: View {
         let range: [Int] = (0..<total)
             .reversedArray(uiModel.direction.isReversed)
 
-        return Group(content: {
-            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                uiModel.direction
-                    .stackLayout(spacing: uiModel.spacing)
-                    .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
-                    .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                        $0.animation(uiModel.transitionAnimation, value: current)
-                    })
-
-            } else {
-                HVStack(
-                    spacing: uiModel.spacing,
-                    isHorizontal: uiModel.direction.isHorizontal,
-                    content: {
-                        ForEach(range, id: \.self, content: dotContentView)
-                    }
-                )
-                .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                    $0.animation(uiModel.transitionAnimation, value: current)
-                })
-            }
-        })
+        return uiModel.direction
+            .stackLayout(spacing: uiModel.spacing)
+            .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
+            .applyIf(uiModel.appliesTransitionAnimation, transform: {
+                $0.animation(uiModel.transitionAnimation, value: current)
+            })
     }
     
     private func dotContentView(index: Int) -> some View {

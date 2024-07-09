@@ -37,27 +37,18 @@ struct PreviewContainer<Content>: View where Content: View {
             })
             .ignoresSafeArea()
 
-            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                ViewThatFits(
-                    in: .vertical,
-                    content: {
-                        vStackedContent
+            ViewThatFits(
+                in: .vertical,
+                content: {
+                    vStackedContent
 
-                        ScrollView(
-                            .vertical,
-                            content: { vStackedContent }
-                        )
-                        .clipped()
-                    }
-                )
-
-            } else {
-                ScrollView(
-                    .vertical,
-                    content: { vStackedContent }
-                )
-                .clipped()
-            }
+                    ScrollView(
+                        .vertical,
+                        content: { vStackedContent }
+                    )
+                    .clipped()
+                }
+            )
         })
     }
 

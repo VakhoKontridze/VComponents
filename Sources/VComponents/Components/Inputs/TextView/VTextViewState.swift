@@ -9,7 +9,6 @@ import Foundation
 import VCore
 
 // MARK: - V Text View Internal State
-@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

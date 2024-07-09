@@ -1,5 +1,13 @@
 # Change Log
 
+### 7.0.0(100)
+
+General
+
+- Minimum SDK version has been increased to `iOS` `16.0`, `macOS `13.0`, `tvOS `16.0`, `watchOS `9.0`
+- Minimum `Swift` language version has been increased to `6.0`
+- Previously deprecated symbols have been removed
+
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
 Other
@@ -69,6 +77,7 @@ General
 
 - Package now partially supports `visionOS` `1.0`
 - Colors are overhauled to better support other platforms
+- Previously deprecated symbols have been removed
 
 VStretchedButton
 
@@ -301,6 +310,7 @@ General
 
 - Minimum SDK version has been increased to `iOS` `15.0`, `macOS `12.0`, `tvOS `15.0`, `watchOS `8.0`
 - Minimum `Swift` language version has been increased to `5.9`
+- Previously deprecated symbols have been removed
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 
@@ -683,6 +693,7 @@ General
 - Minimum SDK version has been decreased to `iOS` `13.0`
 - Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
 - Minimum `Swift` language version has been increased to `5.8`
+- Previously deprecated symbols have been removed
 - Package now supports RTL languages
 - Fonts now support dynamic sizing
 - Haptic effects are added to most interactive components
@@ -905,6 +916,7 @@ General
 
 - Minimum SDK version has been increased to `iOS` `16.0`
 - Minimum `Swift` language version has been increased to `5.7`
+- Previously deprecated symbols have been removed
 
 VPrimaryButton
 
@@ -1170,6 +1182,7 @@ General
 
 - Project is migrated from `XCFramework` to `Swift` Package
 - Minimum SDK version has been increased to `iOS` `15.0`
+- Previously deprecated symbols have been removed
 - Components are reworked
 - Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
