@@ -196,6 +196,8 @@ public struct VStretchedButtonUIModel {
 
     // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
 
     // MARK: Properties - Haptic

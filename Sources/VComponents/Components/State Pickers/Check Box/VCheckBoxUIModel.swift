@@ -181,6 +181,8 @@ public struct VCheckBoxUIModel {
 
     // MARK: Properties - Label - Text
     /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var titleTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             .multiLine(alignment: .leading, lineLimit: 1...2)

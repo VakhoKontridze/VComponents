@@ -67,6 +67,8 @@ public struct VTextViewUIModel {
     public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             .multiLine(alignment: .leading, lineLimit: 1...2)
@@ -93,6 +95,8 @@ public struct VTextViewUIModel {
     public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextLineType: TextLineType = {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             .multiLine(alignment: .leading, lineLimit: 1...5)
@@ -120,6 +124,8 @@ public struct VTextViewUIModel {
 
     // MARK: Properties - Text
     /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var textLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: nil)
 
     /// Text colors.

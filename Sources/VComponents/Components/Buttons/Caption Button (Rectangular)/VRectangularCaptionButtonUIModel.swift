@@ -221,6 +221,8 @@ public struct VRectangularCaptionButtonUIModel {
     /// Title caption text line type.
     /// Set to `multiline` with `center` alignment and `1...2` lines on `iOS`.
     /// Set to `singleLine` on `watchOS`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var titleCaptionTextLineType: TextLineType = {
 #if os(iOS)
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -273,6 +275,8 @@ public struct VRectangularCaptionButtonUIModel {
 
     // MARK: Properties - Transition
     /// Indicates if button animates state change. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
 
     // MARK: Properties - Haptic

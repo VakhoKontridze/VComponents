@@ -47,6 +47,8 @@ public struct VToastUIModel {
 
     // MARK: Properties - Text
     /// Text line type. Set to `singleLine`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
     public var textLineType: TextLineType = .singleLine
 
     /// Text minimum scale factor. Set to `0.75`.
