@@ -54,6 +54,10 @@ VBouncingMarquee
 
 ### [6.0.1(61)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.1) — *2024 03 07*
 
+General
+
+- Minimum `Swift` language version has been increased to `5.10`
+
 VTextField
 
 - Clear button will no longer occupy space when TextField is configured with `secure` content type
@@ -63,7 +67,7 @@ VTextField
 
 General
 
-- Package now partially supports `visionOS`
+- Package now partially supports `visionOS` `1.0`
 - Colors are overhauled to better support other platforms
 
 VStretchedButton
@@ -295,6 +299,8 @@ Other
 
 General
 
+- Minimum SDK version has been increased to `iOS` `15.0`, `macOS `12.0`, `tvOS `15.0`, `watchOS `8.0`
+- Minimum `Swift` language version has been increased to `5.9`
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 
@@ -674,8 +680,9 @@ General
 
 General
 
-- Package now supports `iOS` `13.0`
+- Minimum SDK version has been decreased to `iOS` `13.0`
 - Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
+- Minimum `Swift` language version has been increased to `5.8`
 - Package now supports RTL languages
 - Fonts now support dynamic sizing
 - Haptic effects are added to most interactive components
@@ -893,6 +900,11 @@ API
 `VComponentsLocalizationService` is renamed to `VComponentsLocalizationManager`
 
 ### [3.0.0(27)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.0.0) — *2022 10 02*
+
+General
+
+- Minimum SDK version has been increased to `iOS` `16.0`
+- Minimum `Swift` language version has been increased to `5.7`
 
 VPrimaryButton
 
@@ -1157,7 +1169,7 @@ Other
 General
 
 - Project is migrated from `XCFramework` to `Swift` Package
-- Project now partially supports `macOS`, `tvOS`, and `watchOS`
+- Minimum SDK version has been increased to `iOS` `15.0`
 - Components are reworked
 - Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
