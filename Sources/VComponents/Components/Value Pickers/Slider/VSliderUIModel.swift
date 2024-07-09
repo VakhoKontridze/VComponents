@@ -87,14 +87,6 @@ public struct VSliderUIModel {
     /// For RTL languages, this refers to left-edge.
     public var roundsProgressViewRightEdge: Bool = true
 
-    var progressViewRoundedCorners: RectCorner {
-        if roundsProgressViewRightEdge {
-            .allCorners
-        } else {
-            []
-        }
-    }
-
     // MARK: Properties - Border
     /// Border width.
     /// Set to `0` point on `iOS`.

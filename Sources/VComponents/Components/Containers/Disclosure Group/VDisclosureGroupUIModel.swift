@@ -26,23 +26,13 @@ public struct VDisclosureGroupUIModel {
     }
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = 15
+    /// Corner radii . Set to to `15`s.
+    public var cornerRadii: RectangleCornerRadii = .init(15)
+
+    /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
+    public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    var groupBoxSubUIModel: VGroupBoxUIModel {
-        var uiModel: VGroupBoxUIModel = .init()
-
-        uiModel.roundedCorners = .allCorners
-        uiModel.cornerRadius = cornerRadius
-
-        uiModel.backgroundColor = backgroundColor
-
-        uiModel.contentMargins = .zero
-
-        return uiModel
-    }
-
     /// Background color.
     public var backgroundColor: Color = {
 #if os(iOS)
@@ -53,6 +43,19 @@ public struct VDisclosureGroupUIModel {
         fatalError() // Not supported
 #endif
     }()
+
+    var groupBoxSubUIModel: VGroupBoxUIModel {
+        var uiModel: VGroupBoxUIModel = .init()
+
+        uiModel.cornerRadii = cornerRadii
+        uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
+
+        uiModel.backgroundColor = backgroundColor
+
+        uiModel.contentMargins = .zero
+
+        return uiModel
+    }
 
     // MARK: Properties - Header
     /// Header margins. Set to `(15, 15, 10, 10)`.
@@ -201,7 +204,7 @@ extension VDisclosureGroupUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.contentMargins = Margins(uiModel.cornerRadius)
+        uiModel.contentMargins = Margins(15)
 
         return uiModel
     }

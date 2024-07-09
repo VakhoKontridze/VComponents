@@ -54,7 +54,6 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VDynamicPagerTabViewUIModel
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool

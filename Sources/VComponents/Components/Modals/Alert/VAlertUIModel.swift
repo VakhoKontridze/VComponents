@@ -44,14 +44,11 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Corners
-    /// Rounded corners. Set to to `allCorners`.
-    public var roundedCorners: RectCorner = .allCorners
+    /// Corner radii . Set to to `20`s.
+    public var cornerRadii: RectangleCornerRadii = .init(20)
 
     /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
     public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
-
-    /// Corner radius. Set to `20`.
-    public var cornerRadius: CGFloat = 20
 
     // MARK: Properties - Background
     /// Background color.
@@ -66,9 +63,8 @@ public struct VAlertUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
-        uiModel.roundedCorners = roundedCorners
+        uiModel.cornerRadii = cornerRadii
         uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
-        uiModel.cornerRadius = cornerRadius
 
         uiModel.backgroundColor = backgroundColor
 

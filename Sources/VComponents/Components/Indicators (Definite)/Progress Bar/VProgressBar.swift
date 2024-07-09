@@ -72,13 +72,19 @@ public struct VProgressBar: View {
     }
     
     private var progressView: some View {
-        Rectangle()
-            .frame(
-                width: uiModel.direction.isHorizontal ? progressWidth : nil,
-                height: uiModel.direction.isHorizontal ? nil : progressWidth
+        UnevenRoundedRectangle(
+            cornerRadii: RectangleCornerRadii(
+                topLeading: 0,
+                bottomLeading: 0,
+                bottomTrailing: uiModel.roundsProgressViewRightEdge ? uiModel.cornerRadius : 0,
+                topTrailing: uiModel.roundsProgressViewRightEdge ? uiModel.cornerRadius : 0
             )
-            .cornerRadius(uiModel.cornerRadius, corners: uiModel.progressViewRoundedCorners)
-            .foregroundStyle(uiModel.progressColor)
+        )
+        .frame(
+            width: uiModel.direction.isHorizontal ? progressWidth : nil,
+            height: uiModel.direction.isHorizontal ? nil : progressWidth
+        )
+        .foregroundStyle(uiModel.progressColor)
     }
     
     @ViewBuilder 

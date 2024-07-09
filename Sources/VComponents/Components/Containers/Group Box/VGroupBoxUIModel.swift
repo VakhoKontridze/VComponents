@@ -12,14 +12,11 @@ import VCore
 /// Model that describes UI.
 public struct VGroupBoxUIModel {
     // MARK: Properties - Corners
-    /// Rounded corners. Set to to `allCorners`.
-    public var roundedCorners: RectCorner = .allCorners
+    /// Corner radii . Set to to `15`s.
+    public var cornerRadii: RectangleCornerRadii = .init(15)
 
     /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
     public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
-
-    /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background color.

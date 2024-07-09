@@ -8,6 +8,26 @@ General
 - Minimum `Swift` language version has been increased to `6.0`
 - Previously deprecated symbols have been removed
 
+VGroupBox
+
+- `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
+
+VDisclosureGroup
+
+- `cornerRadius` is replaced with `cornerRadii` and `reversesLeftAndRightCornersForRTLLanguages`
+
+VModal
+
+- `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
+
+VSideBar
+
+- `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
+
+VAlert
+
+- `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
+
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
 Other

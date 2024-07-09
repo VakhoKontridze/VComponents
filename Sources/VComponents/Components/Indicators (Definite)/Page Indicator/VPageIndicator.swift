@@ -119,6 +119,19 @@ public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Properties - Content
     private let dotContent: VPageIndicatorDotContent<Content>
     
+    // MARK: Initializers - Internal
+    init(
+        uiModel: VPageIndicatorUIModel,
+        total: Int,
+        current: Int,
+        dotContent: VPageIndicatorDotContent<Content>
+    ) {
+        self.uiModel = uiModel
+        self.total = total
+        self.current = current
+        self.dotContent = dotContent
+    }
+
     // MARK: Initializers - Public
     /// Initializes `VPageIndicator` with total and current index.
     public init(
@@ -145,19 +158,6 @@ public struct VPageIndicator<Content>: View where Content: View {
         self.total = total
         self.current = current
         self.dotContent = .content(content: dot)
-    }
-    
-    // MARK: Initializers - Internal
-    init(
-        uiModel: VPageIndicatorUIModel,
-        total: Int,
-        current: Int,
-        dotContent: VPageIndicatorDotContent<Content>
-    ) {
-        self.uiModel = uiModel
-        self.total = total
-        self.current = current
-        self.dotContent = dotContent
     }
     
     // MARK: Body

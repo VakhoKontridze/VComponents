@@ -45,6 +45,15 @@ public struct VBottomSheetUIModel {
     /// Corner radius. Set to `15`.
     public var cornerRadius: CGFloat = 15
 
+    var cornerRadii: RectangleCornerRadii {
+        .init(
+            topLeading: cornerRadius,
+            bottomLeading: cornerRadius,
+            bottomTrailing: 0,
+            topTrailing: 0
+        )
+    }
+
     // MARK: Properties - Background
     /// Background color.
     public var backgroundColor: Color = {
@@ -58,8 +67,8 @@ public struct VBottomSheetUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
-        uiModel.roundedCorners = .topCorners
-        uiModel.cornerRadius = cornerRadius
+        uiModel.cornerRadii = cornerRadii
+        uiModel.reversesLeftAndRightCornersForRTLLanguages = false // No need
 
         uiModel.backgroundColor = backgroundColor
 

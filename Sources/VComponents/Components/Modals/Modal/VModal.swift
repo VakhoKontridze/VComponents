@@ -98,13 +98,14 @@ struct VModal<Content>: View
             content()
                 .padding(uiModel.contentMargins)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .cornerRadius( // Fixes issue of content-clipping, as it's not in `VGroupBox`
-                    uiModel.cornerRadius,
-                    corners: uiModel.roundedCorners
-                        .withReversedLeftAndRightCorners(
-                            uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                            layoutDirection.isRightToLeft
-                        )
+                .clipShape( // Fixes issue of content-clipping, as it's not in `VGroupBox`
+                    .rect(
+                        cornerRadii: uiModel.cornerRadii
+                            .withReversedLeftAndRightCorners(
+                                uiModel.reversesLeftAndRightCornersForRTLLanguages &&
+                                layoutDirection.isRightToLeft
+                            )
+                    )
                 )
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape

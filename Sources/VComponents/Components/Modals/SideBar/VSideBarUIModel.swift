@@ -48,14 +48,16 @@ public struct VSideBarUIModel {
     )
 
     // MARK: Properties - Corners
-    /// Rounded corners. Set to `rightCorners`.
-    public var roundedCorners: RectCorner = .rightCorners
+    /// Corner radii . Set to to `(0, 0, 15, 15)`.
+    public var cornerRadii: RectangleCornerRadii = .init(
+        topLeading: 0,
+        bottomLeading: 0,
+        bottomTrailing: 15,
+        topTrailing: 15
+    )
 
     /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
     public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
-
-    /// Corner radius. Set to `15`.
-    public var cornerRadius: CGFloat = 15
 
     // MARK: Properties - Background
     /// Background color.
@@ -70,9 +72,8 @@ public struct VSideBarUIModel {
     var groupBoxSubUIModel: VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
-        uiModel.roundedCorners = roundedCorners
+        uiModel.cornerRadii = cornerRadii
         uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
-        uiModel.cornerRadius = cornerRadius
 
         uiModel.backgroundColor = backgroundColor
 
@@ -228,14 +229,19 @@ extension VSideBarUIModel {
     ///
     /// `roundedCorners` is set to `leftCorners`.
     ///
-    /// Sets `roundedCorners` to `leftCorners`.
+    /// Sets `cornerRadii` to `(15, 15, 0, 0)`.
     public static var trailing: Self {
         var uiModel: Self = .init()
         
         uiModel.presentationEdge = .trailing
         
-        uiModel.roundedCorners = .leftCorners
-        
+        uiModel.cornerRadii = RectangleCornerRadii(
+            topLeading: 15,
+            bottomLeading: 15,
+            bottomTrailing: 0,
+            topTrailing: 0
+        )
+
         return uiModel
     }
     
@@ -246,7 +252,7 @@ extension VSideBarUIModel {
     /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
     /// And to `(0.5, 1)` container ratios in landscape.
     ///
-    /// `roundedCorners` is set to `bottomCorners`.
+    /// `cornerRadii` is set to `(0, 15, 15, 0)`.
     public static var top: Self {
         var uiModel: Self = .init()
         
@@ -263,8 +269,13 @@ extension VSideBarUIModel {
             )
         )
         
-        uiModel.roundedCorners = .bottomCorners
-        
+        uiModel.cornerRadii = RectangleCornerRadii(
+            topLeading: 0,
+            bottomLeading: 15,
+            bottomTrailing: 15,
+            topTrailing: 0
+        )
+
         return uiModel
     }
     
@@ -275,7 +286,7 @@ extension VSideBarUIModel {
     /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
     /// And to `(0.5, 1)` container ratios in landscape.
     ///
-    /// `roundedCorners` is set to `topCorners`.
+    /// `cornerRadii` is set to `(15, 0, 0, 15)`.
     public static var bottom: Self {
         var uiModel: Self = .init()
         
@@ -292,8 +303,13 @@ extension VSideBarUIModel {
             )
         )
         
-        uiModel.roundedCorners = .topCorners
-        
+        uiModel.cornerRadii = RectangleCornerRadii(
+            topLeading: 15,
+            bottomLeading: 0,
+            bottomTrailing: 0,
+            topTrailing: 15
+        )
+
         return uiModel
     }
 }
@@ -308,7 +324,7 @@ extension VSideBarUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
 
-        uiModel.contentMargins = Margins(uiModel.cornerRadius)
+        uiModel.contentMargins = Margins(15)
 
         return uiModel
     }

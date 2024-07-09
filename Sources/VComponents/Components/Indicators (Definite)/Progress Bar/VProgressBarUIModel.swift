@@ -40,7 +40,7 @@ public struct VProgressBarUIModel {
     /// Set to `5` on `iOS`.
     /// Set to `5` on `macOS`.
     /// Set to `5` on `tvOS`.
-    /// Set to `6.55` on `watchOS`
+    /// Set to `6.75` on `watchOS`
     /// Set to `5` on `visionOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
@@ -60,14 +60,6 @@ public struct VProgressBarUIModel {
     ///
     /// For RTL languages, this refers to left-edge.
     public var roundsProgressViewRightEdge: Bool = true
-
-    var progressViewRoundedCorners: RectCorner {
-        if roundsProgressViewRightEdge {
-            .allCorners
-        } else {
-            []
-        }
-    }
 
     // MARK: Properties - Track
     /// Track color.

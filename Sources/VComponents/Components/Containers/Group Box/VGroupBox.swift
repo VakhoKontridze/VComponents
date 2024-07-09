@@ -62,13 +62,14 @@ public struct VGroupBox<Content>: View where Content: View {
     public var body: some View {
         contentView
             .background(content: { backgroundView })
-            .cornerRadius(
-                uiModel.cornerRadius,
-                corners: uiModel.roundedCorners
-                    .withReversedLeftAndRightCorners(
-                        uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                        layoutDirection.isRightToLeft
-                    )
+            .clipShape(
+                .rect(
+                    cornerRadii: uiModel.cornerRadii
+                        .withReversedLeftAndRightCorners(
+                            uiModel.reversesLeftAndRightCornersForRTLLanguages &&
+                            layoutDirection.isRightToLeft
+                        )
+                )
             )
     }
     
