@@ -129,7 +129,10 @@ public struct VStretchedToggleButtonUIModel {
 #endif
     }()
 
-    let titleTextDynamicTypeSizeMax: DynamicTypeSize = .accessibility3
+    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Label - Icon
     /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
@@ -176,6 +179,11 @@ public struct VStretchedToggleButtonUIModel {
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
+
+    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Shadow
     /// Shadow colors.

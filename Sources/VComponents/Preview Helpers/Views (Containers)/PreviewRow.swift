@@ -34,6 +34,7 @@ struct PreviewRow<Content>: View where Content: View {
                         .lineLimit(1)
                         .foregroundStyle(Color.primary)
                         .font(.caption.bold())
+                        .dynamicTypeSize(...(.accessibility2))
                 }
 
                 content()

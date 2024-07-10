@@ -113,6 +113,7 @@ public struct VRollingCounter: View {
             Text(digit.stringRepresentation)
                 .foregroundStyle(textColor(digit.isHighlighted, defaultValue: uiModel.digitTextColor))
                 .font(uiModel.digitTextFont)
+                .applyIfLet(uiModel.digitTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
                 .transition({
@@ -125,6 +126,7 @@ public struct VRollingCounter: View {
             Text(fractionDigit.stringRepresentation)
                 .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.fractionDigitTextFont)
+                .applyIfLet(uiModel.fractionDigitTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
                 .transition({
@@ -137,6 +139,7 @@ public struct VRollingCounter: View {
             Text(groupingSeparator.stringRepresentation)
                 .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: uiModel.groupingSeparatorTextColor))
                 .font(uiModel.groupingSeparatorTextFont)
+                .applyIfLet(uiModel.groupingSeparatorTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
                 .padding(uiModel.groupingSeparatorTextMargins)
                 .offset(y: uiModel.groupingSeparatorTextOffsetY)
                 .transition(.identity)
@@ -145,6 +148,7 @@ public struct VRollingCounter: View {
             Text(decimalSeparator.stringRepresentation)
                 .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.decimalSeparatorTextFont)
+                .applyIfLet(uiModel.decimalSeparatorTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
                 .padding(uiModel.decimalSeparatorTextMargins)
                 .offset(y: uiModel.decimalSeparatorTextOffsetY)
                 .transition(.identity)

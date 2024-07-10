@@ -139,6 +139,7 @@ public struct VTextView: View {
                 Text($0)
                     .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
+                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) }) // Cannot be applied to placeholder only
             },
             axis: .vertical,
             label: EmptyView.init
@@ -151,6 +152,7 @@ public struct VTextView: View {
         .lineLimit(type: uiModel.textLineType.textLineLimitType)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
+        .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
         .applyModifier({
 #if !(os(macOS) || os(watchOS))
             $0.keyboardType(uiModel.keyboardType)
@@ -198,6 +200,7 @@ public struct VTextView: View {
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
+                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,
@@ -219,6 +222,7 @@ public struct VTextView: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
+                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,

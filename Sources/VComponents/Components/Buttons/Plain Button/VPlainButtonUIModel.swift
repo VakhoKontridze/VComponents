@@ -61,6 +61,11 @@ public struct VPlainButtonUIModel {
     /// Title text font. Set to `body`.
     public var titleTextFont: Font = .body
 
+    /// Title text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
+
     // MARK: Properties - Label - Icon
     /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
     ///
@@ -107,6 +112,11 @@ public struct VPlainButtonUIModel {
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
+
+    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Hit Box
     /// Hit box. Set to `zero.

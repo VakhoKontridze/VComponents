@@ -76,6 +76,7 @@ struct VToast: View {
             .minimumScaleFactor(uiModel.textMinimumScaleFactor)
             .foregroundStyle(uiModel.textColor)
             .font(uiModel.textFont)
+            .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
             .padding(uiModel.textMargins)
             .applyModifier({ view in

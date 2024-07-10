@@ -28,6 +28,8 @@ public struct VAlertUIModel {
     ///
     /// Component will automatically inherit color scheme from the context.
     /// But if it's overridden with modifiers, this property must be set.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
     public var colorScheme: ColorScheme? = nil
 
     /// Alert sizes.
@@ -94,6 +96,13 @@ public struct VAlertUIModel {
     /// Title text font. Set to `bold` `headline`.
     public var titleTextFont: Font = .headline.weight(.bold)
 
+    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     /// Title text margins. Set to `(0, 0, 5, 3)`.
     public var titleTextMargins: Margins = .init(
         leading: 0,
@@ -119,6 +128,13 @@ public struct VAlertUIModel {
 
     /// Message text font. Set to `subheadline`.
     public var messageTextFont: Font = .subheadline
+
+    /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    ///
+    /// /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
+    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Message text margins. Set to `(0, 0, 3, 5)`.
     public var messageTextMargins: Margins = .init(
@@ -183,6 +199,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = primaryButtonBackgroundColors
 
         uiModel.titleTextColors = primaryButtonTitleTextColors
+        uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic
@@ -215,6 +232,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = secondaryButtonBackgroundColors
 
         uiModel.titleTextColors = secondaryButtonTitleTextColors
+        uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic
@@ -247,6 +265,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = destructiveButtonBackgroundColors
 
         uiModel.titleTextColors = destructiveButtonTitleTextColors
+        uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         uiModel.haptic = buttonHaptic

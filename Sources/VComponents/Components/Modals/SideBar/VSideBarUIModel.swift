@@ -28,6 +28,8 @@ public struct VSideBarUIModel {
     ///
     /// Component will automatically inherit color scheme from the context.
     /// But if it's overridden with modifiers, this property must be set.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
     public var colorScheme: ColorScheme? = nil
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.

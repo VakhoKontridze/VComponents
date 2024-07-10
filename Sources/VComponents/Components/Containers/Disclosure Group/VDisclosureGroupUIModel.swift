@@ -80,6 +80,11 @@ public struct VDisclosureGroupUIModel {
     /// Set to `bold` `headline` on `macOS`.
     public var headerTitleTextFont: Font = .headline.weight(.bold)
 
+    /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     // MARK: Properties - Disclosure Button
     /// Disclosure button icon.
     public var disclosureButtonIcon: Image = ImageBook.chevronUp.renderingMode(.template)

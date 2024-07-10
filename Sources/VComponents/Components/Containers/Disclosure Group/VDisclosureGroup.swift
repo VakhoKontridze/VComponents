@@ -134,7 +134,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                         .lineLimit(1)
                         .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                         .font(uiModel.headerTitleTextFont)
-                    
+                        .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+
                 case .label(let label):
                     label(internalState)
                 }

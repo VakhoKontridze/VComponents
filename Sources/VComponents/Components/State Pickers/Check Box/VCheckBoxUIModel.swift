@@ -128,17 +128,17 @@ public struct VCheckBoxUIModel {
     /// Checkmark icon (indeterminate).
     public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
 
-    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to checkmark icon. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isCheckmarkIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Checkmark icon content mode. Set to `fit`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconContentMode: ContentMode? = .fit
 
-    /// Icon size. 
+    /// Checkmark icon size.
     /// Set to `(11, 11)` on `iOS`.
     /// Set to `(9, 9)` on `macOS`.
     public var checkmarkIconSize: CGSize? = {
@@ -151,7 +151,7 @@ public struct VCheckBoxUIModel {
 #endif
     }()
 
-    /// Icon colors.
+    /// Checkmark icon colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconColors: StateColors? = .init(
@@ -164,16 +164,21 @@ public struct VCheckBoxUIModel {
         disabled: Color.clear
     )
 
-    /// Icon opacities. Set to `nil`.
+    /// Checkmark icon opacities. Set to `nil`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Checkmark icon font. Set to `nil.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isCheckmarkIconResizable` should be set to `false`, and `checkmarkIconSize` should be set to `nil`.
     public var checkmarkIconFont: Font?
+
+    /// Checkmark icon `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var checkmarkIconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label
     /// Indicates if label is clickable. Set to `true`.
@@ -230,6 +235,11 @@ public struct VCheckBoxUIModel {
         fatalError() // Not supported
 #endif
     }()
+
+    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Hit Box
     /// Checkbox hit box. Set to `zero`.

@@ -177,7 +177,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .dynamicTypeSize(...uiModel.titleTextDynamicTypeSizeMax)
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
     }
     
     private func iconLabelViewComponent(
@@ -190,6 +190,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
             .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
             .font(uiModel.iconFont)
+            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
             .frame(size: uiModel.iconSize)
     }
     

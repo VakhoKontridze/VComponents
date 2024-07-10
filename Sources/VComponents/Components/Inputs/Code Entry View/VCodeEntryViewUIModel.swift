@@ -75,12 +75,22 @@ public struct VCodeEntryViewUIModel {
     /// Text font. Set to `body`.
     public var textFont: Font = .body
 
+    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     // MARK: Properties - Placeholder Text
     /// Placeholder text colors.
     public var placeholderTextColors: StateColors = .init(Color.secondary)
 
     /// Placeholder text font. Set to `body`.
     public var placeholderTextFont: Font = .body
+
+    /// Placeholder text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Submit Button
     /// Submit button type. Set to `return`.

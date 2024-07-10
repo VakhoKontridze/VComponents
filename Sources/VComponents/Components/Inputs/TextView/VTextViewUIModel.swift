@@ -83,6 +83,11 @@ public struct VTextViewUIModel {
     /// Header title text font. Set to `footnote`.
     public var headerTitleTextFont: Font = .footnote
 
+    /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     /// Header footer horizontal margin. Set to `10`.
     public var headerMarginHorizontal: CGFloat = 10
 
@@ -107,6 +112,11 @@ public struct VTextViewUIModel {
 
     /// Footer title text font. Set to `footnote`.
     public var footerTitleTextFont: Font = .footnote
+
+    /// Footer title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Footer horizontal margin. Set to `10`.
     public var footerMarginHorizontal: CGFloat = 10
@@ -133,6 +143,11 @@ public struct VTextViewUIModel {
 
     /// Text font. Set to `body`.
     public var textFont: Font = .body
+
+    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Placeholder Text
     /// Placeholder text colors.

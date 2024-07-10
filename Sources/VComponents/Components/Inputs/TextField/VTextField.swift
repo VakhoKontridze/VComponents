@@ -179,6 +179,7 @@ public struct VTextField: View {
                 Text($0)
                     .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
                     .font(uiModel.placeholderTextFont)
+                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) }) // Cannot be applied to placeholder only
             },
             text: $text
         )
@@ -205,6 +206,7 @@ public struct VTextField: View {
         .lineLimit(1)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
+        .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
         .applyModifier({
 #if !(os(macOS) || os(watchOS))
             $0.keyboardType(uiModel.keyboardType)
@@ -239,6 +241,7 @@ public struct VTextField: View {
                 .applyIfLet(uiModel.searchIconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
                 .applyIfLet(uiModel.searchIconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
                 .font(uiModel.searchIconFont)
+                .applyIfLet(uiModel.searchIconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
                 .frame(size: uiModel.searchIconSize)
         }
     }
@@ -298,6 +301,7 @@ public struct VTextField: View {
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
+                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,
@@ -319,6 +323,7 @@ public struct VTextField: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
+                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,

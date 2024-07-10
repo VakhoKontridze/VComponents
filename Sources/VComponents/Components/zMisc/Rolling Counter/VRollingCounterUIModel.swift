@@ -27,6 +27,11 @@ public struct VRollingCounterUIModel {
     /// Digit text font. Set to `bold` `body`.
     public var digitTextFont: Font = .body.bold()
 
+    /// Digit text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var digitTextDynamicTypeSizeType: DynamicTypeSizeType?
+
     /// Digit text margins. Set to `zero`.
     public var digitTextMargins: Margins = .zero
 
@@ -59,6 +64,11 @@ public struct VRollingCounterUIModel {
     /// Digit text font. Set to `bold` `body`.
     public var fractionDigitTextFont: Font = .body.bold()
 
+    /// Fraction digit text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var fractionDigitTextDynamicTypeSizeType: DynamicTypeSizeType?
+
     /// Fraction digit text margins. Set to `zero`.
     public var fractionDigitTextMargins: Margins = .zero
 
@@ -83,8 +93,13 @@ public struct VRollingCounterUIModel {
     /// Grouping separator text color.
     public var groupingSeparatorTextColor: Color = .primary
 
-    /// Grouping separator font. Set to `bold` `body`.
+    /// Grouping separator text font. Set to `bold` `body`.
     public var groupingSeparatorTextFont: Font = .body.bold()
+
+    /// Grouping separator text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var groupingSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Grouping separator text margins. Set to `zero`.
     public var groupingSeparatorTextMargins: Margins = .zero
@@ -99,8 +114,13 @@ public struct VRollingCounterUIModel {
     /// Decimal separator text color.
     public var decimalSeparatorTextColor: Color = .primary
 
-    /// Decimal separator font. Set to `bold` `body`.
+    /// Decimal separator text font. Set to `bold` `body`.
     public var decimalSeparatorTextFont: Font = .body.bold()
+
+    /// Decimal separator text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var decimalSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Decimal separator text margins. Set to `zero`.
     public var decimalSeparatorTextMargins: Margins = .zero

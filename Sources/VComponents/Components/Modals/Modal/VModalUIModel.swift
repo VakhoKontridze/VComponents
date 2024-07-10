@@ -28,6 +28,8 @@ public struct VModalUIModel {
     ///
     /// Component will automatically inherit color scheme from the context.
     /// But if it's overridden with modifiers, this property must be set.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
     public var colorScheme: ColorScheme? = nil
 
     /// Modal sizes.

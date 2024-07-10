@@ -138,6 +138,7 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
+                .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,
@@ -160,6 +161,7 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
+                .applyIfLet(uiModel.messageTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
                 .frame(
                     maxWidth: .infinity,

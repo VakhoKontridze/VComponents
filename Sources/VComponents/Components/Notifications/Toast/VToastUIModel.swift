@@ -29,6 +29,8 @@ public struct VToastUIModel {
     ///
     /// Component will automatically inherit color scheme from the context.
     /// But if it's overridden with modifiers, this property must be set.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
     public var colorScheme: ColorScheme? = nil
 
     /// Width type. Set to `default`.
@@ -62,6 +64,13 @@ public struct VToastUIModel {
 
     /// Text font. Set to `headline`.
     public var textFont: Font = .headline
+
+    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    ///
+    /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
+    public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Text margins. Set to `(20, 12)`.
     public var textMargins: Margins = .init(

@@ -197,6 +197,11 @@ public struct VRadioButtonUIModel {
 #endif
     }()
 
+    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     // MARK: Properties - Hit Box
     /// Radio button hit box. Set to `zero`.
     public var radioButtonHitBox: HitBox = .zero

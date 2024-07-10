@@ -143,6 +143,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
             .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
             .font(uiModel.iconFont)
+            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
             .frame(size: uiModel.iconSize)
             .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
             .padding(uiModel.iconMargins)
@@ -222,6 +223,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .minimumScaleFactor(uiModel.titleCaptionTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleCaptionTextColors.value(for: internalState))
             .font(uiModel.titleCaptionTextFont)
+            .applyIfLet(uiModel.titleCaptionTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
     }
     
     private func iconCaptionViewComponent(
@@ -234,6 +236,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
             .applyIfLet(uiModel.iconCaptionColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
             .applyIfLet(uiModel.iconCaptionOpacities, transform: { $0.opacity($1.value(for: internalState)) })
             .font(uiModel.iconCaptionFont)
+            .applyIfLet(uiModel.iconCaptionDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
             .frame(size: uiModel.iconCaptionSize)
     }
     

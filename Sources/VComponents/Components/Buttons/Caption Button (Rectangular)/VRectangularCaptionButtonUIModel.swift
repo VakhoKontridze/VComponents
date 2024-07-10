@@ -126,6 +126,11 @@ public struct VRectangularCaptionButtonUIModel {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
+    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
+
     /// Ratio to which icon scales down on press.
     /// Set to `1` on `iOS`.
     /// Set to `1` on `macOS`.
@@ -174,12 +179,12 @@ public struct VRectangularCaptionButtonUIModel {
     }()
 
     // MARK: Properties - Caption - Icon
-    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon caption. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconCaptionResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon caption content mode. Set to `fit`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionContentMode: ContentMode? = .fit
@@ -197,7 +202,7 @@ public struct VRectangularCaptionButtonUIModel {
 #endif
     }()
 
-    /// Icon colors.
+    /// Icon caption colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionColors: StateColors? = .init(
@@ -206,16 +211,21 @@ public struct VRectangularCaptionButtonUIModel {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Icon opacities. Set to `nil`.
+    /// Icon caption opacities. Set to `nil`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon caption font. Set to `nil.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconCaptionResizable` should be set to `false`, and `iconCaptionSize` should be set to `nil`.
     public var iconCaptionFont: Font?
+
+    /// Icon caption `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var iconCaptionDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Caption - Text
     /// Title caption text line type.
@@ -258,6 +268,11 @@ public struct VRectangularCaptionButtonUIModel {
         fatalError() // Not supported
 #endif
     }()
+
+    /// Title caption text `DynamicTypeSize` type. Set to `nil`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleCaptionTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Shadow
     /// Shadow colors.

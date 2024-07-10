@@ -28,6 +28,7 @@ struct PreviewHeader: View {
             Text(title)
                 .foregroundStyle(Color.primary)
                 .font(.caption.bold())
+                .dynamicTypeSize(...(.accessibility2))
 
             VStack(content: Divider.init)
         })

@@ -243,6 +243,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                     .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
                     .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
                     .font(uiModel.tabItemTextFont)
+                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
             case .label(let label):
                 label(tabItemInternalState, element)

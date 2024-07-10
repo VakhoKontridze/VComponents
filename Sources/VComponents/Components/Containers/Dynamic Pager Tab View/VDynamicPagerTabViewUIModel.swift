@@ -62,6 +62,11 @@ public struct VDynamicPagerTabViewUIModel {
     /// Tab item text font. Set to `body`.
     public var tabItemTextFont: Font = .body
 
+    /// Tab item text `DynamicTypeSize` type.  Set to partial range through `accessibility2`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
     // MARK: Properties - Tab Indicator Strip
     /// Tab indicator strip alignment. Set to `bottom`.
     public var tabIndicatorStripAlignment: VerticalAlignment = .bottom
