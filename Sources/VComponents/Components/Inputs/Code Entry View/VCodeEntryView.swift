@@ -188,11 +188,11 @@ public struct VCodeEntryView: View {
         let isPopulated: Bool = isPopulated(at: index)
 
         return Text(character(at: index))
+            .multilineTextAlignment(.center)
             .lineLimit(1)
             .foregroundStyle(isPopulated ? uiModel.textColors.value(for: internalState) : uiModel.placeholderTextColors.value(for: internalState))
             .font(isPopulated ? uiModel.textFont : uiModel.placeholderTextFont)
             .applyIfLet(isPopulated ? uiModel.textDynamicTypeSizeType : uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
-            .multilineTextAlignment(.center)
 
             .frame(size: uiModel.characterBackgroundSize)
         
