@@ -50,13 +50,13 @@ public struct VRollingCounter: View {
     // MARK: Properties - UI Model
     private let uiModel: VRollingCounterUIModel
 
-    // MARK: Properties - Values
+    // MARK: Properties - Value
     private let value: Double
     @State private var components: [any VRollingCounterComponentProtocol]
     @State private var numberFormatter: NumberFormatter // Marked as `State` to persist value
     
     // MARK: Properties - Flags
-    @State private var isIncrementing: Bool?
+    @State private var operation: Operation = .none
 
     // MARK: Initializers
     /// Initializes `VRollingCounter` with value.
@@ -178,22 +178,13 @@ public struct VRollingCounter: View {
                 uiModel.highlightAnimation?.toSwiftUIAnimation,
                 {
                     components = newComponents
-
-                    isIncrementing = {
-                        if newValue > oldValue {
-                            true
-                        } else if newValue < oldValue {
-                            false
-                        } else {
-                            nil
-                        }
-                    }()
+                    operation = Operation(oldValue: oldValue, newValue: newValue)
                 },
                 completion: {
                     withAnimation(
                         uiModel.dehighlightAnimation?.toSwiftUIAnimation,
                         {
-                            isIncrementing = nil
+                            operation = .none
 
                             for i in components.indices {
                                 components[i].isHighlighted = false
@@ -208,21 +199,12 @@ public struct VRollingCounter: View {
                 uiModel.highlightAnimation,
                 body: {
                     components = newComponents
-
-                    isIncrementing = {
-                        if newValue > oldValue {
-                            true
-                        } else if newValue < oldValue {
-                            false
-                        } else {
-                            nil
-                        }
-                    }()
+                    operation = Operation(oldValue: oldValue, newValue: newValue)
                 },
                 completion: {
                     withAnimation(
                         uiModel.dehighlightAnimation?.toSwiftUIAnimation, {
-                            isIncrementing = nil
+                            operation = .none
 
                             for i in components.indices {
                                 components[i].isHighlighted = false
@@ -231,6 +213,27 @@ public struct VRollingCounter: View {
                     )
                 }
             )
+        }
+    }
+
+    // MARK: Operation
+    private enum Operation {
+        // MARK: Cases
+        case none
+        case decrement
+        case increment
+
+        // MARK: Initializers
+        init(oldValue: CGFloat, newValue: CGFloat) {
+            self = {
+                if newValue > oldValue {
+                    .increment
+                } else if newValue < oldValue {
+                    .decrement
+                } else {
+                    .none
+                }
+            }()
         }
     }
 
@@ -244,26 +247,26 @@ public struct VRollingCounter: View {
     }
 
     private var highlightedColor: Color? {
-        switch isIncrementing {
-        case nil: Color.clear
-        case false?: uiModel.decrementHighlightColor
-        case true?: uiModel.incrementHighlightColor
+        switch operation {
+        case .none: Color.clear
+        case .decrement: uiModel.decrementHighlightColor
+        case .increment: uiModel.incrementHighlightColor
         }
     }
 
     private var digitTextRollingEdge: VerticalEdge? {
-        switch isIncrementing {
-        case nil: nil
-        case false?: uiModel.digitTextDecrementRollingEdge
-        case true?: uiModel.digitTextIncrementRollingEdge
+        switch operation {
+        case .none: nil
+        case .decrement: uiModel.digitTextDecrementRollingEdge
+        case .increment: uiModel.digitTextIncrementRollingEdge
         }
     }
 
     private var fractionDigitTextRollingEdge: VerticalEdge? {
-        switch isIncrementing {
-        case nil: nil
-        case false?: uiModel.fractionDigitTextDecrementRollingEdge
-        case true?: uiModel.fractionDigitTextIncrementRollingEdge
+        switch operation {
+        case .none: nil
+        case .decrement: uiModel.fractionDigitTextDecrementRollingEdge
+        case .increment: uiModel.fractionDigitTextIncrementRollingEdge
         }
     }
 }
