@@ -1,10 +1,10 @@
 # Change Log
 
-### 7.0.0(100)
+### 7.0.0(68)
 
 General
 
-- Minimum SDK version has been increased to `iOS` `16.0`, `macOS `13.0`, `tvOS `16.0`, `watchOS `9.0`
+- Minimum SDK version has been increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, `watchOS` `9.0`
 - Minimum `Swift` language version has been increased to `6.0`
 - Previously deprecated symbols have been removed
 - All `Font` properties now have `DynamicTypeSizeType` properties in UI models
@@ -329,7 +329,7 @@ Other
 
 General
 
-- Minimum SDK version has been increased to `iOS` `15.0`, `macOS `12.0`, `tvOS `15.0`, `watchOS `8.0`
+- Minimum SDK version has been increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, `watchOS` `8.0`
 - Minimum `Swift` language version has been increased to `5.9`
 - Previously deprecated symbols have been removed
 - Button components will now register gestures even if the background is clear
