@@ -232,9 +232,7 @@ extension VSideBarUIModel {
     
     /// `VSideBarUIModel` that presents side bar from trailing edge.
     ///
-    /// `roundedCorners` is set to `leftCorners`.
-    ///
-    /// Sets `cornerRadii` to `(15, 15, 0, 0)`.
+    /// `cornerRadii` is set to `(15, 15, 0, 0)`.
     public static var trailing: Self {
         var uiModel: Self = .init()
         
