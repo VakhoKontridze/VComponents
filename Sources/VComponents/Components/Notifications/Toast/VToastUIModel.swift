@@ -31,7 +31,7 @@ public struct VToastUIModel {
     /// But if it's overridden with modifiers, this property must be set.
     ///
     /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme? = nil
+    public var colorScheme: ColorScheme?
 
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default
@@ -107,7 +107,7 @@ public struct VToastUIModel {
     // MARK: Properties - Haptic
 #if os(iOS)
     /// Haptic feedback type. Set to `nil`.
-    public var haptic: UINotificationFeedbackGenerator.FeedbackType? = nil
+    public var haptic: UINotificationFeedbackGenerator.FeedbackType?
 #endif
 
     // MARK: Initializers

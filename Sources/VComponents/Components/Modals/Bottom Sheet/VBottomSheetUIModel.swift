@@ -30,7 +30,7 @@ public struct VBottomSheetUIModel {
     /// But if it's overridden with modifiers, this property must be set.
     ///
     /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme? = nil
+    public var colorScheme: ColorScheme?
 
     /// Bottom sheet sizes.
     /// Set to `1` ratio of container width, and `(0.6, 0.6, 0.9)` ratios of container height in portrait.

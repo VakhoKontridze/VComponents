@@ -30,7 +30,7 @@ public struct VAlertUIModel {
     /// But if it's overridden with modifiers, this property must be set.
     ///
     /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme? = nil
+    public var colorScheme: ColorScheme?
 
     /// Alert sizes.
     /// Set to `0.75` ratio of container width in portrait.
@@ -176,7 +176,7 @@ public struct VAlertUIModel {
 
 #if os(iOS)
     /// Button haptic feedback style. Set to `nil`.
-    public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+    public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #endif
 
     // MARK: Properties - Button - Primary

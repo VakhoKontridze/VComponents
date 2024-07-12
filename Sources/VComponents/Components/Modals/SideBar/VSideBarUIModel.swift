@@ -30,7 +30,7 @@ public struct VSideBarUIModel {
     /// But if it's overridden with modifiers, this property must be set.
     ///
     /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme? = nil
+    public var colorScheme: ColorScheme?
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///

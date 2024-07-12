@@ -183,7 +183,7 @@ public struct VRangeSliderUIModel {
     public var appliesProgressAnimation: Bool = true
 
     /// Progress animation. Set to `nil`.
-    public var progressAnimation: Animation? = nil
+    public var progressAnimation: Animation?
     
     // MARK: Initializers
     /// Initializes UI model with default values.

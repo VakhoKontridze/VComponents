@@ -30,7 +30,7 @@ public struct VModalUIModel {
     /// But if it's overridden with modifiers, this property must be set.
     ///
     /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme? = nil
+    public var colorScheme: ColorScheme?
 
     /// Modal sizes.
     /// Set to `(0.9, 0.6)` container ratios in portrait.

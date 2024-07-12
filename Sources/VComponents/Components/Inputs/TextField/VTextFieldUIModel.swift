@@ -29,15 +29,15 @@ public struct VTextFieldUIModel {
 
 #if !(os(macOS) || os(watchOS))
     /// Text content type. Set to `nil`.
-    public var textContentType: UITextContentType? = nil
+    public var textContentType: UITextContentType?
 #endif
 
     /// Indicates if auto correction is enabled. Set to `nil`.
-    public var isAutocorrectionEnabled: Bool? = nil
+    public var isAutocorrectionEnabled: Bool?
 
 #if !(os(macOS) || os(watchOS))
     /// Auto capitalization type. Set to `nil`.
-    public var autocapitalization: TextInputAutocapitalization? = nil
+    public var autocapitalization: TextInputAutocapitalization?
 #endif
 
     // MARK: Properties - Corners
@@ -197,7 +197,7 @@ public struct VTextFieldUIModel {
     }()
 
     /// Clear button appear and disappear animation. Set to `nil`.
-    public var clearButtonAppearDisappearAnimation: Animation? = nil
+    public var clearButtonAppearDisappearAnimation: Animation?
 
     // MARK: Properties - Secure
     /// Visibility button icon (off).

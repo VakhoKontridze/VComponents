@@ -207,10 +207,10 @@ public struct VRectangularButtonUIModel {
     // MARK: Properties - Haptic
 #if os(iOS)
     /// Haptic feedback style. Set to `nil`.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #elseif os(watchOS)
     /// Haptic feedback type. Set to `nil`.
-    public var haptic: WKHapticType? = nil
+    public var haptic: WKHapticType?
 #endif
     
     // MARK: Initializers
