@@ -109,7 +109,6 @@ public struct VCodeEntryViewUIModel {
 
     // MARK: Spacing Type
     /// Enumeration that represents spacing type between the characters.
-    @CaseDetection(accessLevelModifier: .internal)
     public enum SpacingType {
         // MARK: Cases
         /// Fixed spacing.
@@ -117,6 +116,14 @@ public struct VCodeEntryViewUIModel {
 
         /// Stretched spacing.
         case stretched
+
+        // MARK: Properties
+        var hasFlexibleSpace: Bool {
+            switch self {
+            case .fixed: false
+            case .stretched: true
+            }
+        }
 
         // MARK: Initializers
         /// Default value. Set to `fixed` with spacing of `7`.

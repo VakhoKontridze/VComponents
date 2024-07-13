@@ -282,7 +282,6 @@ public struct VTextFieldUIModel {
 
     // MARK: Content Type
     /// Enumeration that represents content type.
-    @CaseDetection(accessLevelModifier: .internal)
     public enum ContentType: Int, CaseIterable {
         // MARK: Cases
         /// Standard.
@@ -297,6 +296,31 @@ public struct VTextFieldUIModel {
         ///
         /// Magnification icon is present.
         case search
+
+        // MARK: Properties
+        var hasSearchIcon: Bool {
+            switch self {
+            case .standard: false
+            case .secure: false
+            case .search: true
+            }
+        }
+
+        var hasClearButton: Bool {
+            switch self {
+            case .standard: true
+            case .secure: false
+            case .search: true
+            }
+        }
+
+        var hasVisibilityButton: Bool {
+            switch self {
+            case .standard: false
+            case .secure: true
+            case .search: false
+            }
+        }
 
         // MARK: Initializers
         /// Default value. Set to `standard`.

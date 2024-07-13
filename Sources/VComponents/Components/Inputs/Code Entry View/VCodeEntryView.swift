@@ -172,10 +172,10 @@ public struct VCodeEntryView: View {
                         characterView(at: index)
 
                         if 
-                            uiModel.spacingType.isStretched,
+                            uiModel.spacingType.hasFlexibleSpace,
                             index != uiModel.length-1
                         {
-                            Spacer()
+                            Spacer(minLength: 0)
                         }
                     }
                 )

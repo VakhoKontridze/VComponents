@@ -61,12 +61,12 @@ public struct VAlertButtonBuilder {
         var result: [any VAlertButtonProtocol] = []
 
         for button in buttons {
-            if (button as? VAlertButton)?.role.isCancel == true {
-                result.removeAll(where: { ($0 as? VAlertButton)?.role.isCancel == true })
+            if (button as? VAlertButton)?.role == .cancel {
+                result.removeAll(where: { ($0 as? VAlertButton)?.role == .cancel })
             }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { ($0 as? VAlertButton)?.role.isCancel == true }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { ($0 as? VAlertButton)?.role == .cancel }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
 

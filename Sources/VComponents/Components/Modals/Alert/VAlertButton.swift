@@ -35,7 +35,6 @@ public struct VAlertButton: VAlertButtonProtocol {
 
     // MARK: Role
     /// Model that describes the purpose of a button.
-    @CaseDetection(accessLevelModifier: .internal)
     public enum Role: Int, CaseIterable {
         /// Primary.
         case primary

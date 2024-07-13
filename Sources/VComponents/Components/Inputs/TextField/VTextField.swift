@@ -152,7 +152,7 @@ public struct VTextField: View {
         )
         // No need for initial checks, as secure field is always hidden by default
         .onChange(of: uiModel.contentType, perform: {
-            if !$0.isSecure {
+            if $0 != .secure {
                 textFieldIsSecure = false
             }
         })
@@ -174,7 +174,7 @@ public struct VTextField: View {
 
     private var textField: some View {
         SecurableTextField(
-            isSecure: uiModel.contentType.isSecure && !textFieldIsSecure,
+            isSecure: uiModel.contentType == .secure && !textFieldIsSecure,
             placeholder: placeholder.map {
                 Text($0)
                     .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
@@ -234,7 +234,7 @@ public struct VTextField: View {
 
     @ViewBuilder
     private var searchIcon: some View {
-        if uiModel.contentType.isSearch {
+        if uiModel.contentType.hasSearchIcon {
             uiModel.searchButtonIcon
                 .applyIf(uiModel.isSearchIconResizable, transform: { $0.resizable() })
                 .applyIfLet(uiModel.searchIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
@@ -248,7 +248,7 @@ public struct VTextField: View {
     
     @ViewBuilder
     private var clearButton: some View {
-        if !uiModel.contentType.isSecure {
+        if uiModel.contentType.hasClearButton {
             ZStack(content: {
                 VRectangularButton(
                     uiModel: uiModel.clearButtonSubUIModel,
@@ -265,7 +265,7 @@ public struct VTextField: View {
     
     @ViewBuilder 
     private var visibilityButton: some View {
-        if uiModel.contentType.isSecure {
+        if uiModel.contentType.hasVisibilityButton {
             ZStack(content: {
                 VPlainButton(
                     uiModel: uiModel.visibilityButtonSubUIModel,

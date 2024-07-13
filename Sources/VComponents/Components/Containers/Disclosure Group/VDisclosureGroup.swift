@@ -143,7 +143,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             .frame(maxWidth: .infinity, alignment: .leading)
             .allowsHitTesting(false)
             
-            Spacer()
+            Spacer(minLength: 0)
             
             VRectangularButton(
                 uiModel: uiModel.disclosureButtonSubUIModel,
