@@ -282,7 +282,7 @@ public struct VTextFieldUIModel {
 
     // MARK: Content Type
     /// Enumeration that represents content type.
-    @CaseDetection
+    @CaseDetection(accessLevelModifier: .internal)
     public enum ContentType: Int, CaseIterable {
         // MARK: Cases
         /// Standard.

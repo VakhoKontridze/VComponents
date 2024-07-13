@@ -109,7 +109,7 @@ public struct VCodeEntryViewUIModel {
 
     // MARK: Spacing Type
     /// Enumeration that represents spacing type between the characters.
-    @CaseDetection
+    @CaseDetection(accessLevelModifier: .internal)
     public enum SpacingType {
         // MARK: Cases
         /// Fixed spacing.
