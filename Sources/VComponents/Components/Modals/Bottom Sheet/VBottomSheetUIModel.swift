@@ -179,11 +179,11 @@ public struct VBottomSheetUIModel {
     public init() {}
 
     // MARK: Sizes
-    /// Model that represents bottom sheet sizes.
+    /// Bottom sheet sizes.
     public typealias Sizes = ModalComponentSizes<Size>
 
     // MARK: Size
-    /// Model that represents bottom sheet size.
+    /// Bottom sheet size.
     @MemberwiseInitializable(
         comment: "/// Initializes `BottomSheetSize`."
     )
@@ -196,7 +196,7 @@ public struct VBottomSheetUIModel {
     }
 
     // MARK: Heights
-    /// Model that represents bottom sheet heights.
+    /// Bottom sheet heights.
     @MemberwiseInitializable(accessLevelModifier: .private)
     public struct Heights: Equatable { // Values mustn't be variable to ensure that all are the same `case`s
         // MARK: Properties

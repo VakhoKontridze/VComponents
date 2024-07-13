@@ -312,11 +312,11 @@ public struct VAlertUIModel {
     public init() {}
 
     // MARK: Widths
-    /// Model that represents alert widths.
+    /// Alert widths.
     public typealias Widths = ModalComponentSizes<Width>
 
     // MARK: Width
-    /// Model that represents alert width.
+    /// Alert width.
     public typealias Width = SingleDimensionModalComponentSize
 
     // MARK: Margins

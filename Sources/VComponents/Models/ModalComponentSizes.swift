@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - Modal Component Sizes
-/// Model that represents modal component sizes.
+/// Modal component sizes.
 @MemberwiseInitializable(
     comment: "/// Initializes `ModalComponentSizes` with sizes."
 )
@@ -59,7 +59,7 @@ public struct ModalComponentSizes<ModalSize> {
 extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
 
 // MARK: - Standard Modal Component Size
-/// Model that represents standard modal component size with width and height.
+/// Modal component size.
 @MemberwiseInitializable(
     comment: "/// Initializes `StandardModalComponentSize` with width and height."
 )
@@ -72,7 +72,7 @@ public struct StandardModalComponentSize: Equatable {
 }
 
 // MARK: - Single Dimension Modal Component Size
-/// Model that represents modal component size with a single dimension, either width or height.
+///Modal component size with a single dimension, either width or height.
 public typealias SingleDimensionModalComponentSize = ModalComponentDimension
 
 // MARK: - Modal Component Dimension

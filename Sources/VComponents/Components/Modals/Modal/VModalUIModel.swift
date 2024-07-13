@@ -122,11 +122,11 @@ public struct VModalUIModel {
     public init() {}
 
     // MARK: Sizes
-    /// Model that represents modal sizes.
+    /// Modal sizes.
     public typealias Sizes = ModalComponentSizes<Size>
 
     // MARK: Size
-    /// Model that represents modal size.
+    /// Modal size.
     public typealias Size = StandardModalComponentSize
 
     // MARK: Margins
