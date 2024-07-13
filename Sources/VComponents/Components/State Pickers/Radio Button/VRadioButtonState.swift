@@ -9,14 +9,14 @@ import Foundation
 import VCore
 
 // MARK: - V Radio Button State
-/// Enumeration that represents state, such as `off` or `on`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VRadioButtonState = GenericState_OffOn
 
 // MARK: - V Radio Button Internal State
-/// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

@@ -9,14 +9,14 @@ import Foundation
 import VCore
 
 // MARK: - V Check Box State
-/// Enumeration that represents state, such as `off`, `on`, or `indeterminate`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VCheckBoxState = GenericState_OffOnIndeterminate
 
 // MARK: - V Check Box Internal State
-/// Enumeration that represents state, such as `off`, `on`, `indeterminate`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

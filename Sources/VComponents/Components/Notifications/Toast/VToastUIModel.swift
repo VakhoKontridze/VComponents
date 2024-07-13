@@ -115,7 +115,7 @@ public struct VToastUIModel {
     public init() {}
 
     // MARK: Width Type
-    /// Enumeration that represents width type, such as `wrapped`, `stretched`, `fixedPoint`, or `fixedFraction`.
+    /// Enumeration that represents width type.
     public enum WidthType {
         // MARK: Cases
         /// Toast only takes required width, and container wraps it's content.
@@ -159,7 +159,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Corner Radius Type
-    /// Enumeration that represents corner radius, such as `capsule` or `rounded`.
+    /// Enumeration that represents corner radius.
     public enum CornerRadiusType {
         // MARK: Cases
         /// Capsule.
@@ -176,7 +176,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Text Line Type
-    /// Enumeration that represents text line, such as `singleLine` or `multiLine`.
+    /// Enumeration that represents text line.
     public enum TextLineType {
         // MARK: Cases
         /// Single-line.

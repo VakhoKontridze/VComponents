@@ -108,7 +108,7 @@ public struct VCodeEntryViewUIModel {
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 
     // MARK: Spacing Type
-    /// Enumeration that represents spacing type between the characters, such as `fixed` or `stretched`.
+    /// Enumeration that represents spacing type between the characters.
     @CaseDetection
     public enum SpacingType {
         // MARK: Cases

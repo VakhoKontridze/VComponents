@@ -134,7 +134,7 @@ public struct VModalUIModel {
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Dismiss Type
-    /// Dismiss type, such as `backTap`.
+    /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet {
         // MARK: Options

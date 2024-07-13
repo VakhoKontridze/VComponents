@@ -292,7 +292,7 @@ public struct VBottomSheetUIModel {
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
 
     // MARK: Dismiss Type
-    /// Dismiss type, such as `backTap`, or `pullDown`.
+    /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet {
         // MARK: Options

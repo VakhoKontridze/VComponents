@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - V Plain Button Internal State
-/// Enumeration that represents state, such as `enabled`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VPlainButtonInternalState = GenericState_EnabledPressedDisabled

@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: - V Loading Stretched Button Internal State
-/// Enumeration that represents state, such as `enabled`, `pressed`, `loading`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

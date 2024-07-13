@@ -9,13 +9,13 @@ import Foundation
 import VCore
 
 // MARK: - V Toggle State
-/// Enumeration that represents state, such as `off` or `on`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VToggleState = GenericState_OffOn
 
 // MARK: - V Toggle Internal State
-/// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VToggleInternalState = GenericState_OffOnPressedDisabled

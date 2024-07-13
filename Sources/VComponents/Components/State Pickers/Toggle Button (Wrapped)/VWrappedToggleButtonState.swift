@@ -9,13 +9,13 @@ import Foundation
 import VCore
 
 // MARK: - V Wrapped Toggle Button State
-/// Enumeration that represents state, such as `off` or `on`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VWrappedToggleButtonState = GenericState_OffOn
 
 // MARK: - V Wrapped Toggle Button Internal State
-/// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VWrappedToggleButtonInternalState = GenericState_OffOnPressedDisabled

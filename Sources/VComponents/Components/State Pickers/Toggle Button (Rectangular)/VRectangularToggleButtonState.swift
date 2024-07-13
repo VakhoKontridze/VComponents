@@ -9,13 +9,13 @@ import Foundation
 import VCore
 
 // MARK: - V Rectangular Toggle Button State
-/// Enumeration that represents state, such as `off` or `on`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VRectangularToggleButtonState = GenericState_OffOn
 
 // MARK: - V Rectangular Toggle Button Internal State
-/// Enumeration that represents state, such as `off`, `on`, `pressed`, or `disabled`.
+/// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VRectangularToggleButtonInternalState = GenericState_OffOnPressedDisabled
