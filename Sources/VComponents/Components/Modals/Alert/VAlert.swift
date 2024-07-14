@@ -24,10 +24,10 @@ struct VAlert<Content>: View
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 
-    @Environment(\.safeAreaInsets) private var safeAreaInsets: EdgeInsets
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
