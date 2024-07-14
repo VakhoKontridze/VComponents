@@ -62,56 +62,59 @@ struct VToast: View {
     }
     
     private var toastView: some View {
-        Text(text)
-            .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.textMinimumScaleFactor)
-            .foregroundStyle(uiModel.textColor)
-            .font(uiModel.textFont)
-            .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+        ZStack(content: {
+            Text(text)
+                .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
+                .minimumScaleFactor(uiModel.textMinimumScaleFactor)
+                .foregroundStyle(uiModel.textColor)
+                .font(uiModel.textFont)
+                .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-            .padding(uiModel.textMargins)
-            .applyModifier({ view in
-                switch uiModel.widthType {
-                case .wrapped:
-                    view
+                .padding(uiModel.textMargins)
+                .applyModifier({ view in
+                    switch uiModel.widthType {
+                    case .wrapped:
+                        view
 
-                case .stretched(let alignment, _):
-                    view
-                        .frame(
-                            maxWidth: .infinity,
-                            alignment: Alignment(
-                                horizontal: alignment,
-                                vertical: .center
+                    case .stretched(let alignment, _):
+                        view
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: Alignment(
+                                    horizontal: alignment,
+                                    vertical: .center
+                                )
                             )
-                        )
 
-                case .fixedPoint(let width, let alignment):
-                    view
-                        .frame(
-                            width: width,
-                            alignment: Alignment(
-                                horizontal: alignment,
-                                vertical: .center
+                    case .fixedPoint(let width, let alignment):
+                        view
+                            .frame(
+                                width: width,
+                                alignment: Alignment(
+                                    horizontal: alignment,
+                                    vertical: .center
+                                )
                             )
-                        )
 
-                case .fixedFraction(let ratio, let alignment):
-                    view
-                        .frame(
-                            width: containerSize.width * ratio,
-                            alignment: Alignment(
-                                horizontal: alignment,
-                                vertical: .center
+                    case .fixedFraction(let ratio, let alignment):
+                        view
+                            .frame(
+                                width: containerSize.width * ratio,
+                                alignment: Alignment(
+                                    horizontal: alignment,
+                                    vertical: .center
+                                )
                             )
-                        )
-                }
-            })
-            .clipShape(.rect(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
-            .background(content: { backgroundView })
-            .getSize({ height = $0.height })
-            .padding(.horizontal, uiModel.widthType.marginHorizontal)
-            .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
+                    }
+                })
+                .clipShape(.rect(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
+                .background(content: { backgroundView })
+                .padding(.horizontal, uiModel.widthType.marginHorizontal)
+                .getSize({ height = $0.height })
+        })
+        .drawingGroup() // Prevents UI from breaking in some scenarios, such as previews
+        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
     }
     
     private var backgroundView: some View {
