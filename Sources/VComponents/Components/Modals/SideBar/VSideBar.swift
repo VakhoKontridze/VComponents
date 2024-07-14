@@ -24,7 +24,7 @@ struct VSideBar<Content>: View where Content: View {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
-    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 

@@ -27,7 +27,7 @@ struct VBottomSheet<Content>: View
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
     }
     
-    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 

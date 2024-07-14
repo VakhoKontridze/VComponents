@@ -17,7 +17,7 @@ struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
 
-    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 

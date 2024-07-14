@@ -23,7 +23,7 @@ struct VAlert<Content>: View
         uiModel.widths.current(_interfaceOrientation: interfaceOrientation).toAbsolute(in: containerSize.width)
     }
 
-    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
 
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 
