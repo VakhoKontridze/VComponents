@@ -42,10 +42,7 @@ public struct VBottomSheetUIModel {
 
     var cornerRadii: RectangleCornerRadii {
         .init(
-            topLeading: cornerRadius,
-            bottomLeading: 0,
-            bottomTrailing: 0,
-            topTrailing: cornerRadius
+            topCorners: cornerRadius
         )
     }
 
@@ -63,7 +60,7 @@ public struct VBottomSheetUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
         uiModel.cornerRadii = cornerRadii
-        uiModel.reversesLeftAndRightCornersForRTLLanguages = false // No need
+        uiModel.reversesHorizontalCornersForRTLLanguages = false // No need
 
         uiModel.backgroundColor = backgroundColor
 

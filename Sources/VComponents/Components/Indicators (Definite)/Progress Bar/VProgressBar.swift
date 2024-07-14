@@ -74,11 +74,9 @@ public struct VProgressBar: View {
     private var progressView: some View {
         UnevenRoundedRectangle(
             cornerRadii: RectangleCornerRadii(
-                topLeading: 0,
-                bottomLeading: 0,
-                bottomTrailing: uiModel.roundsProgressViewRightEdge ? uiModel.cornerRadius : 0,
-                topTrailing: uiModel.roundsProgressViewRightEdge ? uiModel.cornerRadius : 0
+                trailingCorners: uiModel.roundsProgressViewTrailingCorners ? uiModel.cornerRadius : 0
             )
+            .cornersAdjustedForDirection(uiModel.direction)
         )
         .frame(
             width: uiModel.direction.isHorizontal ? progressWidth : nil,

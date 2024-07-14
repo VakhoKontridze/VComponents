@@ -65,8 +65,8 @@ public struct VGroupBox<Content>: View where Content: View {
             .clipShape(
                 .rect(
                     cornerRadii: uiModel.cornerRadii
-                        .withReversedLeftAndRightCorners(
-                            uiModel.reversesLeftAndRightCornersForRTLLanguages &&
+                        .horizontalCornersReversed(if:
+                            uiModel.reversesHorizontalCornersForRTLLanguages &&
                             layoutDirection.isRightToLeft
                         )
                 )

@@ -45,14 +45,11 @@ public struct VSideBarUIModel {
     // MARK: Properties - Corners
     /// Corner radii . Set to to `(0, 0, 15, 15)`.
     public var cornerRadii: RectangleCornerRadii = .init(
-        topLeading: 0,
-        bottomLeading: 0,
-        bottomTrailing: 15,
-        topTrailing: 15
+        trailingCorners: 15
     )
 
-    /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
-    public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
+    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
     /// Background color.
@@ -68,7 +65,7 @@ public struct VSideBarUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
         uiModel.cornerRadii = cornerRadii
-        uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
+        uiModel.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
         uiModel.backgroundColor = backgroundColor
 
@@ -217,10 +214,7 @@ extension VSideBarUIModel {
         uiModel.presentationEdge = .trailing
         
         uiModel.cornerRadii = RectangleCornerRadii(
-            topLeading: 15,
-            bottomLeading: 15,
-            bottomTrailing: 0,
-            topTrailing: 0
+            leadingCorners: 15
         )
 
         return uiModel
@@ -251,10 +245,7 @@ extension VSideBarUIModel {
         )
         
         uiModel.cornerRadii = RectangleCornerRadii(
-            topLeading: 0,
-            bottomLeading: 15,
-            bottomTrailing: 15,
-            topTrailing: 0
+            bottomCorners: 15
         )
 
         return uiModel
@@ -285,10 +276,7 @@ extension VSideBarUIModel {
         )
         
         uiModel.cornerRadii = RectangleCornerRadii(
-            topLeading: 15,
-            bottomLeading: 0,
-            bottomTrailing: 0,
-            topTrailing: 15
+            topCorners: 15
         )
 
         return uiModel

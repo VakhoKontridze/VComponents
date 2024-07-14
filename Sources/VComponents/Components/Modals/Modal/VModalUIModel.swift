@@ -36,8 +36,8 @@ public struct VModalUIModel {
     /// Corner radii . Set to to `15`s.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
-    /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
-    public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
+    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
     /// Background color.
@@ -53,7 +53,7 @@ public struct VModalUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
         uiModel.cornerRadii = cornerRadii
-        uiModel.reversesLeftAndRightCornersForRTLLanguages = reversesLeftAndRightCornersForRTLLanguages
+        uiModel.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
         uiModel.backgroundColor = backgroundColor
 

@@ -15,7 +15,7 @@ VGroupBox
 
 VDisclosureGroup
 
-- `cornerRadius` is replaced with `cornerRadii` and `reversesLeftAndRightCornersForRTLLanguages`
+- `cornerRadius` is replaced with `cornerRadii` and `reversesHorizontalCornersForRTLLanguages`
 
 VModal
 

@@ -82,10 +82,8 @@ public struct VSliderUIModel {
         disabled: Color.blue.opacity(0.3)
     )
 
-    /// Indicates if slider rounds progress view right-edge. Set to `true`.
-    ///
-    /// For RTL languages, this refers to left-edge.
-    public var roundsProgressViewRightEdge: Bool = true
+    /// Indicates if slider bar rounds progress view trailing corners. Set to `true`.
+    public var roundsProgressViewTrailingCorners: Bool = true
 
     // MARK: Properties - Border
     /// Border width.

@@ -123,7 +123,8 @@ struct VBottomSheet<Content>: View
             })
             .frame(maxHeight: .infinity, alignment: .top)
             
-            // Fixes issue of content-clipping, as it's not in `VGroupBox`. No need to reverse corners for RTL.
+            // Fixes issue of content-clipping, as it's not in `VGroupBox`.
+            // No need to reverse corners for RTL.
             // `compositingGroup` helps fix glitches within subviews.
             .compositingGroup()
             .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
