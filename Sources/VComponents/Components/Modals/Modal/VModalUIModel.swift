@@ -16,22 +16,8 @@ import VCore
 @available(visionOS, unavailable)
 public struct VModalUIModel {
     // MARK: Properties - Global
-    var presentationHostUIModel: PresentationHostUIModel {
-        var uiModel: PresentationHostUIModel = .init()
-
-        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
-
-        return uiModel
-    }
-
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Component will automatically inherit color scheme from the context.
-    /// But if it's overridden with modifiers, this property must be set.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme?
-
+    var presentationHostSubUIModel: PresentationHostUIModel { .init() }
+    
     /// Modal sizes.
     /// Set to `(0.9, 0.6)` container ratios in portrait.
     /// Set to reverse in landscape.
@@ -81,21 +67,12 @@ public struct VModalUIModel {
     public var contentMargins: Margins = .zero
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `default`.
-    ///
-    /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .default
-
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.
     public var dismissType: DismissType = .default
-
-    // MARK: Properties - Dimming View
-    /// Dimming view color.
-    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color.black.opacity(0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.

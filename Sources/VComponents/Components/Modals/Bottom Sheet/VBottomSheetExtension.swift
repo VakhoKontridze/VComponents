@@ -19,31 +19,44 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vBottomSheet(
-    ///             id: "some_bottom_sheet",
-    ///             uiModel: {
-    ///                 var uiModel: VBottomSheetUIModel = .init()
-    ///                 uiModel.autoresizesContent = true // For scrollable views
-    ///                 return uiModel
-    ///             }(),
-    ///             isPresented: $isPresented,
-    ///             content: {
-    ///                 ScrollView(content: {
-    ///                     VStack(spacing: 0, content: {
-    ///                         ForEach(0..<20, content: { number in
-    ///                             Text(String(number))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                                 .padding(.horizontal, 15)
-    ///                                 .padding(.vertical, 9)
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vBottomSheet(
+    ///                 layerID: "sheets",
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.autoresizesContent = true // For scrollable views
+    ///                     return uiModel
+    ///                 }(),
+    ///                 isPresented: $isPresented,
+    ///                 content: {
+    ///                     ScrollView(content: {
+    ///                         VStack(spacing: 0, content: {
+    ///                             ForEach(0..<20, content: { number in
+    ///                                 Text(String(number))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                                     .padding(.horizontal, 15)
+    ///                                     .padding(.vertical, 9)
+    ///                             })
     ///                         })
+    ///                         .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
     ///                     })
-    ///                     .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
-    ///                 })
-    ///             }
+    ///                 }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
+    ///             id: "sheets",
+    ///             uiModel: {
+    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
+    ///                 uiModel.dimmingViewColor = Color.clear
+    ///                 return uiModel
+    ///             }()
     ///         )
     ///     }
     ///
@@ -52,48 +65,60 @@ extension View {
     ///
     ///     @State private var safeAreaInsets: EdgeInsets = .init()
     ///
-    ///     @State private var isPresented: Bool = true
+    ///     @State private var isPresented: Bool = false
     ///     @State private var contentHeight: CGFloat?
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .getSafeAreaInsets({ safeAreaInsets = $0 })
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .getSafeAreaInsets({ safeAreaInsets = $0 })
+    ///             .vBottomSheet(
+    ///                 layerID: "sheets",
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
     ///
-    ///         .vBottomSheet(
-    ///             id: "preview",
-    ///             uiModel: {
-    ///                 var uiModel: VBottomSheetUIModel = .init()
-    ///
-    ///                 uiModel.contentMargins = VBottomSheetUIModel.Margins(
-    ///                     leading: 15,
-    ///                     trailing: 15,
-    ///                     top: 5,
-    ///                     bottom: max(15, safeAreaInsets.bottom)
-    ///                 )
-    ///
-    ///                 if let contentHeight {
-    ///                     let height: CGFloat = uiModel.contentWrappingHeight(
-    ///                         contentHeight: contentHeight,
-    ///                         safeAreaInsets: safeAreaInsets
+    ///                     uiModel.contentMargins = VBottomSheetUIModel.Margins(
+    ///                         leading: 15,
+    ///                         trailing: 15,
+    ///                         top: 5,
+    ///                         bottom: max(15, safeAreaInsets.bottom)
     ///                     )
     ///
-    ///                     uiModel.sizes.portrait.heights = .absolutes(height)
-    ///                     uiModel.sizes.portrait.heights = .absolutes(height)
-    ///                 }
+    ///                     if let contentHeight {
+    ///                         let height: CGFloat = uiModel.contentWrappingHeight(
+    ///                             contentHeight: contentHeight,
+    ///                             safeAreaInsets: safeAreaInsets
+    ///                         )
     ///
+    ///                         uiModel.sizes.portrait.heights = .absolute(height)
+    ///                         uiModel.sizes.portrait.heights = .absolute(height)
+    ///                     }
+    ///
+    ///                     return uiModel
+    ///                 }(),
+    ///                 isPresented: $isPresented,
+    ///                 content: {
+    ///                     Text("...")
+    ///                         .fixedSize(horizontal: false, vertical: true)
+    ///                         .getSize({ size in
+    ///                             Task(operation: { contentHeight = size.height })
+    ///                         })
+    ///                 }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
+    ///             id: "sheets",
+    ///             uiModel: {
+    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
+    ///                 uiModel.dimmingViewColor = Color.clear
     ///                 return uiModel
-    ///             }(),
-    ///             isPresented: $isPresented,
-    ///             content: {
-    ///                 Text("...")
-    ///                     .fixedSize(horizontal: false, vertical: true)
-    ///                     .getSize({ size in
-    ///                         Task(operation: { contentHeight = size.height })
-    ///                     })
-    ///             }
+    ///             }()
     ///         )
     ///     }
     ///
@@ -103,31 +128,39 @@ extension View {
     ///     @State private var modalDidAppear: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vBottomSheet(
-    ///             id: "test",
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vBottomSheet(
+    ///                 layerID: "sheets",
+    ///                 id: "some_bottom_sheet",
+    ///                 isPresented: $isPresented,
+    ///                 onPresent: { modalDidAppear = true },
+    ///                 onDismiss: { modalDidAppear = false },
+    ///                 content: {
+    ///                     NavigationStack(root: {
+    ///                         HomeView(isPresented: $isPresented)
+    ///                             // Disables possible `NavigationStack` animations
+    ///                             .transaction({
+    ///                                 if !modalDidAppear { $0.animation = nil }
+    ///                             })
+    ///                     })
+    ///                     // Resets `NavigationStack` frame that may prevent incorrect subview gesture regions
+    ///                     .id(modalDidAppear)
+    ///                 }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
+    ///             id: "sheets",
     ///             uiModel: {
-    ///                 var uiModel: VBottomSheetUIModel = .noDragIndicator
-    ///                 uiModel.sizes.portrait.heights = .fraction(0.6)
+    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
+    ///                 uiModel.dimmingViewColor = Color.clear
     ///                 return uiModel
-    ///             }(),
-    ///             isPresented: $isPresented,
-    ///             onPresent: { modalDidAppear = true },
-    ///             onDismiss: { modalDidAppear = false },
-    ///             content: {
-    ///                 NavigationStack(root: {
-    ///                     HomeView(isPresented: $isPresented)
-    ///                         // Disables possible `NavigationStack` animations
-    ///                         .transaction({
-    ///                             if !modalDidAppear { $0.animation = nil }
-    ///                         })
-    ///                 })
-    ///                 // Resets `NavigationStack` frame that may prevent incorrect subview gesture regions
-    ///                 .id(modalDidAppear)
-    ///             }
+    ///             }()
     ///         )
     ///     }
     ///
@@ -178,6 +211,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -189,8 +223,9 @@ extension View {
     {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -215,6 +250,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vBottomSheet(id:isPresented:content:)`.
     public func vBottomSheet<Item, Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
@@ -233,8 +269,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,

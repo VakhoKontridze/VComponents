@@ -4,7 +4,7 @@
 
 General
 
-- Minimum SDK version has been increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, `watchOS` `9.0`
+- Minimum SDK version has been increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
 - Minimum `Swift` language version has been increased to `6.0`
 - Previously deprecated symbols have been removed
 - All `Font` properties now have `DynamicTypeSizeType` properties in UI models
@@ -25,9 +25,31 @@ VSideBar
 
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
+VModal
+
+- API is overhauled
+- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+
+VBottomSheet
+
+- API is overhauled
+- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+
+VSideBar
+
+- API is overhauled
+- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+
 VAlert
 
+- API is overhauled
+- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
+
+VToast
+
+- API is overhauled
+- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
@@ -329,7 +351,7 @@ Other
 
 General
 
-- Minimum SDK version has been increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, `watchOS` `8.0`
+- Minimum SDK version has been increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, and `watchOS` `8.0`
 - Minimum `Swift` language version has been increased to `5.9`
 - Previously deprecated symbols have been removed
 - Button components will now register gestures even if the background is clear

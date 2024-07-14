@@ -19,14 +19,27 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vToast(
-    ///             id: "some_toast",
-    ///             isPresented: $isPresented,
-    ///             text: "Lorem ipsum dolor sit amet"
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vToast(
+    ///                 layerID: "notifications",
+    ///                 id: "some_toast",
+    ///                 isPresented: $isPresented,
+    ///                 text: "Lorem ipsum dolor sit amet"
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
+    ///             id: "notifications",
+    ///             uiModel: {
+    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 uiModel.dimmingViewTapAction = .passTapsThrough
+    ///                 uiModel.dimmingViewColor = Color.clear
+    ///                 return uiModel
+    ///             }()
     ///         )
     ///     }
     ///
@@ -34,6 +47,7 @@ extension View {
     ///
     /// Highlights can be applied using `success`, `warning`, and `error` instances of `VToastUIModel`.
     public func vToast(
+        layerID: String? = nil,
         id: String,
         uiModel: VToastUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -43,8 +57,9 @@ extension View {
     ) -> some View {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -69,6 +84,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<Item>(
+        layerID: String? = nil,
         id: String,
         uiModel: VToastUIModel = .init(),
         item: Binding<Item?>,
@@ -85,8 +101,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -117,6 +134,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
     public func vToast<E>(
+        layerID: String? = nil,
         id: String,
         uiModel: VToastUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -136,8 +154,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,

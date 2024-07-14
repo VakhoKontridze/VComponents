@@ -17,10 +17,11 @@ struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
-    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
 
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+
+    @Environment(\.safeAreaInsets) private var safeAreaInsets: EdgeInsets
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
@@ -50,23 +51,14 @@ struct VToast: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: uiModel.presentationEdge.toAlignment, content: {
-            dimmingView
-            toastView
-        })
-        .onDisappear(perform: { lifecycleDismissTask?.cancel() })
+        toastView
+            .onDisappear(perform: { lifecycleDismissTask?.cancel() })
 
-        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
+            ._getInterfaceOrientation({ interfaceOrientation = $0 })
 
-        ._getInterfaceOrientation({ interfaceOrientation = $0 })
-
-        .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-    }
-
-    private var dimmingView: some View {
-        Color.clear
-            .contentShape(.rect)
+            .onReceive(presentationMode.presentPublisher, perform: animateIn)
+            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
     }
     
     private var toastView: some View {
@@ -155,7 +147,9 @@ struct VToast: View {
         }
     }
 
-    // MARK: Lifecycle
+    // MARK: Actions
+    private func didTapDimmingView() {} // Not dismissible from dimming view
+
     private func dismissAfterLifecycle() {
         lifecycleDismissTask?.cancel()
         lifecycleDismissTask = Task(operation: { @MainActor in
@@ -191,19 +185,21 @@ struct VToast: View {
         }
     }
 
-    private func animateOut() {
+    private func animateOut(
+        completion: @escaping () -> Void
+    ) {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
                 body: { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
         }
     }
@@ -213,16 +209,6 @@ struct VToast: View {
 #if os(iOS)
         HapticManager.shared.playNotification(uiModel.haptic)
 #endif
-    }
-}
-
-// MARK: - Helpers
-extension VerticalEdge {
-    fileprivate var toAlignment: Alignment {
-        switch self {
-        case .top: .top
-        case .bottom: .bottom
-        }
     }
 }
 
@@ -239,6 +225,7 @@ extension VerticalEdge {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
+                        layerID: "notifications",
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
@@ -249,6 +236,15 @@ extension VerticalEdge {
                         text: "Lorem ipsum dolor sit amet"
                     )
             })
+            .presentationHostLayer(
+                id: "notifications",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewTapAction = .passTapsThrough
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -263,6 +259,7 @@ extension VerticalEdge {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
+                        layerID: "notifications",
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
@@ -274,6 +271,15 @@ extension VerticalEdge {
                         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                     )
             })
+            .presentationHostLayer(
+                id: "notifications",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewTapAction = .passTapsThrough
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -288,6 +294,7 @@ extension VerticalEdge {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
+                        layerID: "notifications",
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
@@ -299,6 +306,15 @@ extension VerticalEdge {
                         text: "Lorem ipsum dolor sit amet"
                     )
             })
+            .presentationHostLayer(
+                id: "notifications",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewTapAction = .passTapsThrough
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -314,6 +330,7 @@ extension VerticalEdge {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
+                        layerID: "notifications",
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
@@ -347,6 +364,15 @@ extension VerticalEdge {
                         }
                     })
             })
+            .presentationHostLayer(
+                id: "notifications",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewTapAction = .passTapsThrough
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -362,6 +388,7 @@ extension VerticalEdge {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vToast(
+                        layerID: "notifications",
                         id: "preview",
                         uiModel: {
                             var uiModel = uiModel
@@ -386,6 +413,15 @@ extension VerticalEdge {
                         }
                     })
             })
+            .presentationHostLayer(
+                id: "notifications",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewTapAction = .passTapsThrough
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 

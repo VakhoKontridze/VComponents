@@ -19,15 +19,19 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vModal(
-    ///             id: "some_modal",
-    ///             isPresented: $isPresented,
-    ///             content: { VComponentsColor.blue }
-    ///         )
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vModal(
+    ///                 id: "some_modal",
+    ///                 isPresented: $isPresented,
+    ///                 content: { Color.accentColor }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Modal can also wrap it's content by reading geometry size.
@@ -37,33 +41,37 @@ extension View {
     ///     @State private var contentHeight: CGFloat?
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vModal(
-    ///             id: "some_modal",
-    ///             uiModel: {
-    ///                 var uiModel: VModalUIModel = .init()
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vModal(
+    ///                 id: "some_modal",
+    ///                 uiModel: {
+    ///                     var uiModel: VModalUIModel = .init()
     ///
-    ///                 uiModel.contentMargins = VModalUIModel.Margins(15)
+    ///                     uiModel.contentMargins = VModalUIModel.Margins(15)
     ///
-    ///                 if let contentHeight {
-    ///                     let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
+    ///                     if let contentHeight {
+    ///                         let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
     ///
-    ///                     uiModel.sizes.portrait.height = .absolute(height)
-    ///                     uiModel.sizes.landscape.height = .absolute(height)
+    ///                         uiModel.sizes.portrait.height = .absolute(height)
+    ///                         uiModel.sizes.landscape.height = .absolute(height)
+    ///                     }
+    ///
+    ///                     return uiModel
+    ///                 }(),
+    ///                 isPresented: $isPresented,
+    ///                 content: {
+    ///                     Text("...")
+    ///                         .getSize({ contentHeight = $0.height })
+    ///                         .onTapGesture(perform: { isPresented = false })
     ///                 }
-    ///
-    ///                 return uiModel
-    ///             }(),
-    ///             isPresented: $isPresented,
-    ///             content: {
-    ///                 Text("...")
-    ///                     .getSize({ contentHeight = $0.height })
-    ///                     .onTapGesture(perform: { isPresented = false })
-    ///             }
-    ///         )
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Modal can also wrap navigation system.
@@ -72,25 +80,29 @@ extension View {
     ///     @State private var modalDidAppear: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vModal(
-    ///             id: "test",
-    ///             isPresented: $isPresented,
-    ///             onPresent: { modalDidAppear = true },
-    ///             onDismiss: { modalDidAppear = false },
-    ///             content: {
-    ///                 NavigationStack(root: {
-    ///                     HomeView(isPresented: $isPresented)
-    ///                         // Disables possible `NavigationStack` animations
-    ///                         .transaction({
-    ///                             if !modalDidAppear { $0.animation = nil }
-    ///                         })
-    ///                 })
-    ///             }
-    ///         )
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vModal(
+    ///                 id: "test",
+    ///                 isPresented: $isPresented,
+    ///                 onPresent: { modalDidAppear = true },
+    ///                 onDismiss: { modalDidAppear = false },
+    ///                 content: {
+    ///                     NavigationStack(root: {
+    ///                         HomeView(isPresented: $isPresented)
+    ///                             // Disables possible `NavigationStack` animations
+    ///                             .transaction({
+    ///                                 if !modalDidAppear { $0.animation = nil }
+    ///                          })
+    ///                     })
+    ///                 }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     ///     struct HomeView: View {
@@ -140,6 +152,7 @@ extension View {
     ///     }
     ///     
     public func vModal<Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -151,8 +164,9 @@ extension View {
     {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -177,6 +191,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vModal(id:isPresented:content:)`.
     public func vModal<Item, Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
@@ -195,8 +210,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,

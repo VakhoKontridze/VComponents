@@ -361,7 +361,10 @@ Versions with different majors are not directly compatible. When a new major is 
         visionOS 1.0
     </td>
     <td>7.0.0 - 7.x.x</td>
-    <td>New SDK.</td>
+    <td>
+        New SDK.<br>
+        API changes.
+    </td>
   </tr>
   
   <tr>

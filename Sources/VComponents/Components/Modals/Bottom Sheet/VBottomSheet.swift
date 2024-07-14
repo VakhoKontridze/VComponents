@@ -20,28 +20,27 @@ struct VBottomSheet<Content>: View
     // MARK: Properties - UI Model
     private let uiModel: VBottomSheetUIModel
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
-    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
     private var currentWidth: CGFloat {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
     }
+    
+    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+    
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
 
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-
+    @Environment(\.safeAreaInsets) private var safeAreaInsets: EdgeInsets
     @Environment(\.displayScale) private var displayScale: CGFloat
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
-
+    
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
-    @State private var didFinishInternalPresentation: Bool = false
-
+    
     // MARK: Properties - Content
     private let content: () -> Content
 
@@ -72,42 +71,31 @@ struct VBottomSheet<Content>: View
     
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .top, content: {
-            dimmingView
-            bottomSheetView
-        })
-        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
-
-        ._getInterfaceOrientation({ newValue in
-            if
-                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
-                newValue != interfaceOrientation
-            {
+        bottomSheetView
+            ._getInterfaceOrientation({ newValue in
+                if
+                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    newValue != interfaceOrientation
+                {
 #if canImport(UIKit) && !os(watchOS)
-                UIApplication.shared.sendResignFirstResponderAction()
+                    UIApplication.shared.sendResignFirstResponderAction()
 #endif
-            }
+                }
+                
+                interfaceOrientation = newValue
+                
+                resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
+            })
+            .onChange(
+                of: uiModel.sizes,
+                perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(_interfaceOrientation: interfaceOrientation).heights) }
+            )
 
-            interfaceOrientation = newValue
-
-            resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
-        })
-
-        .onChange(
-            of: uiModel.sizes,
-            perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(_interfaceOrientation: interfaceOrientation).heights) }
-        )
-
-        .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.presentPublisher, perform: animateIn)
+            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
     }
-    
-    private var dimmingView: some View {
-        uiModel.dimmingViewColor
-            .contentShape(.rect)
-            .onTapGesture(perform: dismissFromDimmingViewTap)
-    }
-    
+
     private var bottomSheetView: some View {
         ZStack(content: {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
@@ -128,17 +116,18 @@ struct VBottomSheet<Content>: View
                     radius: uiModel.shadowRadius,
                     offset: uiModel.shadowOffset
                 )
-                    
-            VStack(spacing: 0, content: {
-                VStack(spacing: 0, content: {
-                    dragIndicatorView
-                })
-                .getSize({ headerHeight = $0.height })
 
+            VStack(spacing: 0, content: {
+                dragIndicatorView
                 contentView
             })
             .frame(maxHeight: .infinity, alignment: .top)
-            .clipShape(.rect(cornerRadii: uiModel.cornerRadii)) // Fixes issue of content-clipping, as it's not in `VGroupBox`. No need to reverse corners for RTL.
+            
+            // Fixes issue of content-clipping, as it's not in `VGroupBox`. No need to reverse corners for RTL.
+            // `compositingGroup` helps fix glitches within subviews.
+            .compositingGroup()
+            .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
+            
             .applyIf(!uiModel.contentIsDraggable, transform: {
                 $0
                     .frame( // Max dimension fixes issue of safe areas and/or landscape
@@ -161,15 +150,17 @@ struct VBottomSheet<Content>: View
                 )
         })
     }
-    
-    @ViewBuilder 
+
     private var dragIndicatorView: some View {
-        if uiModel.dragIndicatorSize.height > 0 {
-            RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
-                .frame(size: uiModel.dragIndicatorSize)
-                .padding(uiModel.dragIndicatorMargins)
-                .foregroundStyle(uiModel.dragIndicatorColor)
-        }
+        ZStack(content: {
+            if uiModel.dragIndicatorSize.height > 0 {
+                RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
+                    .frame(size: uiModel.dragIndicatorSize)
+                    .padding(uiModel.dragIndicatorMargins)
+                    .foregroundStyle(uiModel.dragIndicatorColor)
+            }
+        })
+        .getSize({ headerHeight = $0.height }) // If it's not rendered, `0` will be returned
     }
     
     private var contentView: some View {
@@ -197,14 +188,9 @@ struct VBottomSheet<Content>: View
         )
     }
 
-    // MARK: Lifecycle
-    private func dismissFromDimmingViewTap() {
-        guard
-            didFinishInternalPresentation,
-            !uiModel.dismissType.contains(.backTap)
-        else {
-            return
-        }
+    // MARK: Actions
+    private func didTapDimmingView() {
+        guard uiModel.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
@@ -213,87 +199,44 @@ struct VBottomSheet<Content>: View
         isPresented = false
     }
 
-    // MARK: Lifecycle Animations
-    private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-        }
-    }
-
-    private func animateOut() {
-        let animation: BasicAnimation? = {
-            if isBeingDismissedFromPullDown {
-                uiModel.pullDownDismissAnimation
-            } else {
-                uiModel.disappearAnimation
-            }
-        }()
-
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                animation?.toSwiftUIAnimation,
-                { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
-            )
-
-        } else {
-            withBasicAnimation(
-                animation,
-                body: { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
-            )
-        }
-    }
-    
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
         guard let offsetBeforeDrag else { fatalError() }
-        
+
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
-        
+
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             _offset = {
                 switch newOffset {
                 case ...currentHeightsObject.maxOffset(in: containerSize.height):
                     return currentHeightsObject.maxOffset(in: containerSize.height)
-                    
+
                 case currentHeightsObject.minOffset(in: containerSize.height)...:
                     if uiModel.dismissType.contains(.pullDown) {
                         return newOffset
                     } else {
                         return currentHeightsObject.minOffset(in: containerSize.height)
                     }
-                    
+
                 default:
                     return newOffset
                 }
             }()
         })
     }
-    
+
     private func dragEnded(dragValue: DragGesture.Value) {
         defer { offsetBeforeDrag = nil }
 
         let velocityExceedsNextAreaSnapThreshold: Bool =
             abs(dragValue.velocity.height) >=
             abs(uiModel.velocityToSnapToNextHeight)
-        
+
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
             guard let offsetBeforeDrag else { return }
-            
+
             animateOffsetOrPullDismissFromSnapAction(
                 .dragEndedSnapAction(
                     containerHeight: containerSize.height,
@@ -317,7 +260,7 @@ struct VBottomSheet<Content>: View
             )
         }
     }
-    
+
     private func animateOffsetOrPullDismissFromSnapAction(
         _ snapAction: VBottomSheetSnapAction
     ) {
@@ -330,7 +273,42 @@ struct VBottomSheet<Content>: View
             withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
         }
     }
-    
+
+    // MARK: Lifecycle Animations
+    private func animateIn() {
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
+    }
+
+    private func animateOut(
+        completion: @escaping () -> Void
+    ) {
+        let animation: BasicAnimation? = {
+            if isBeingDismissedFromPullDown {
+                uiModel.pullDownDismissAnimation
+            } else {
+                uiModel.disappearAnimation
+            }
+        }()
+
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            withAnimation(
+                animation?.toSwiftUIAnimation,
+                { isPresentedInternally = false },
+                completion: completion
+            )
+
+        } else {
+            withBasicAnimation(
+                animation,
+                body: { isPresentedInternally = false },
+                completion: completion
+            )
+        }
+    }
+
     // MARK: Orientation
     private func resetHeightFromEnvironmentOrUIModelChange(
         from heights: VBottomSheetUIModel.Heights
@@ -343,7 +321,7 @@ struct VBottomSheet<Content>: View
     ) -> CGFloat {
         heights.idealOffset(in: containerSize.height)
     }
-    
+
     // MARK: Validation
     private static func validate(
         uiModel: VBottomSheetUIModel
@@ -382,6 +360,7 @@ private struct ContentView_MinIdealMax: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
+                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -403,6 +382,14 @@ private struct ContentView_MinIdealMax: View {
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
     }
 }
 
@@ -416,6 +403,7 @@ private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
+                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -437,6 +425,14 @@ private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
     }
 }
 
@@ -450,6 +446,7 @@ private struct ContentView_IdealMax: View { // TODO: Move into macro when nested
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
+                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -471,6 +468,14 @@ private struct ContentView_IdealMax: View { // TODO: Move into macro when nested
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
     }
 }
 
@@ -484,6 +489,7 @@ private struct ContentView_IdealSmall: View { // TODO: Move into macro when nest
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
+                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -505,6 +511,14 @@ private struct ContentView_IdealSmall: View { // TODO: Move into macro when nest
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
     }
 }
 
@@ -518,6 +532,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
+                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -539,6 +554,14 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
     }
 }
 
@@ -556,6 +579,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .getSafeAreaInsets({ safeAreaInsets = $0 })
                     .vBottomSheet(
+                        layerID: "sheets",
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
@@ -598,6 +622,14 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                         }
                     )
             })
+            .presentationHostLayer(
+                id: "sheets",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -614,6 +646,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
+                        layerID: "sheets",
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .init()
@@ -636,6 +669,14 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                         }
                     )
             })
+            .presentationHostLayer(
+                id: "sheets",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -650,12 +691,21 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
+                        layerID: "sheets",
                         id: "preview",
                         uiModel: .insettedContent,
                         isPresented: $isPresented,
                         content: { Color.blue }
                     )
             })
+            .presentationHostLayer(
+                id: "sheets",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 
@@ -670,6 +720,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
                     .vBottomSheet(
+                        layerID: "sheets",
                         id: "preview",
                         uiModel: {
                             var uiModel: VBottomSheetUIModel = .noDragIndicator
@@ -680,6 +731,14 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                         content: { Color.blue }
                     )
             })
+            .presentationHostLayer(
+                id: "sheets",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
         }
     }
 

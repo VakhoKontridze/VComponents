@@ -16,21 +16,11 @@ import VCore
 @available(visionOS, unavailable)
 public struct VSideBarUIModel {
     // MARK: Properties - Global
-    var presentationHostUIModel: PresentationHostUIModel {
+    var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
-
-        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
-
+        uiModel.alignment = presentationEdge.toAlignment
         return uiModel
     }
-    
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Component will automatically inherit color scheme from the context.
-    /// But if it's overridden with modifiers, this property must be set.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme?
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///
@@ -95,17 +85,8 @@ public struct VSideBarUIModel {
     public var contentSafeAreaEdges: Edge.Set = []
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `default`.
-    ///
-    /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .default
-
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
-
-    // MARK: Properties - Dimming View
-    /// Dimming view color.
-    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color.black.opacity(0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -235,7 +216,7 @@ extension VSideBarUIModel {
     /// `cornerRadii` is set to `(15, 15, 0, 0)`.
     public static var trailing: Self {
         var uiModel: Self = .init()
-        
+
         uiModel.presentationEdge = .trailing
         
         uiModel.cornerRadii = RectangleCornerRadii(
@@ -330,5 +311,17 @@ extension VSideBarUIModel {
         uiModel.contentMargins = Margins(15)
 
         return uiModel
+    }
+}
+
+// MARK: - Helpers
+extension Edge {
+    fileprivate var toAlignment: Alignment {
+        switch self {
+        case .top: .top
+        case .leading: .leading
+        case .bottom: .bottom
+        case .trailing: .trailing
+        }
     }
 }

@@ -16,21 +16,11 @@ import VCore
 @available(visionOS, unavailable)
 public struct VBottomSheetUIModel {
     // MARK: Properties - Global
-    var presentationHostUIModel: PresentationHostUIModel {
+    var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
-
-        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
-
+        uiModel.alignment = .top
         return uiModel
     }
-
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Component will automatically inherit color scheme from the context.
-    /// But if it's overridden with modifiers, this property must be set.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme?
 
     /// Bottom sheet sizes.
     /// Set to `1` ratio of container width, and `(0.6, 0.6, 0.9)` ratios of container height in portrait.
@@ -53,9 +43,9 @@ public struct VBottomSheetUIModel {
     var cornerRadii: RectangleCornerRadii {
         .init(
             topLeading: cornerRadius,
-            bottomLeading: cornerRadius,
+            bottomLeading: 0,
             bottomTrailing: 0,
-            topTrailing: 0
+            topTrailing: cornerRadius
         )
     }
 
@@ -122,11 +112,6 @@ public struct VBottomSheetUIModel {
     public var contentIsDraggable: Bool = false
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `default`.
-    ///
-    /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .default
-
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
@@ -146,10 +131,6 @@ public struct VBottomSheetUIModel {
     ) -> CGFloat {
         pullDownDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
     }
-
-    // MARK: Properties - Dimming View
-    /// Dimming view color.
-    public var dimmingViewColor: Color = .clear
 
     // MARK: Properties - Shadow
     /// Shadow color.

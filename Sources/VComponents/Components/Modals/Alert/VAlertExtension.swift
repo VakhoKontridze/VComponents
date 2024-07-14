@@ -24,23 +24,28 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vAlert(
-    ///             id: "some_alert",
-    ///             isPresented: $isPresented,
-    ///             title: "Lorem Ipsum",
-    ///             message: "Lorem ipsum dolor sit amet",
-    ///             actions: {
-    ///                 VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                 VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-    ///             }
-    ///         )
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vAlert(
+    ///                 id: "some_alert",
+    ///                 isPresented: $isPresented,
+    ///                 title: "Lorem Ipsum",
+    ///                 message: "Lorem ipsum dolor sit amet",
+    ///                 actions: {
+    ///                     VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+    ///                     VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                 }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vAlert(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -52,8 +57,9 @@ extension View {
     ) -> some View {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -74,6 +80,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -88,8 +95,9 @@ extension View {
     {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -117,6 +125,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item>(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
@@ -135,8 +144,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -175,6 +185,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<Item, Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
@@ -196,8 +207,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -249,6 +261,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E>(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -270,8 +283,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -310,6 +324,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
     public func vAlert<E, Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -334,8 +349,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,

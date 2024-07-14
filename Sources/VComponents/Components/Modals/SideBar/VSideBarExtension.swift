@@ -21,15 +21,19 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .vSideBar(
-    ///             id: "some_side_bar",
-    ///             isPresented: $isPresented,
-    ///             content: { VComponentsColor.blue }
-    ///         )
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vSideBar(
+    ///                 id: "some_side_bar",
+    ///                 isPresented: $isPresented,
+    ///                 content: { Color.accentColor }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Due to a Presentation Host API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
@@ -42,26 +46,31 @@ extension View {
     ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
     ///
     ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///         .getInterfaceOrientation({ interfaceOrientation = $0 })
-    ///         .vSideBar(
-    ///             id: "some_side_bar",
-    ///             uiModel: {
-    ///                 var uiModel: VSideBarUIModel = .leading
+    ///         ZStack(content: {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .getInterfaceOrientation({ interfaceOrientation = $0 })
+    ///             .vSideBar(
+    ///                 id: "some_side_bar",
+    ///                 uiModel: {
+    ///                     var uiModel: VSideBarUIModel = .leading
     ///
-    ///                 uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+    ///                     uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
     ///
-    ///                 return uiModel
-    ///             }(),
-    ///             isPresented: $isPresented,
-    ///             content: { VComponentsColor.blue }
-    ///         )
+    ///                     return uiModel
+    ///                 }(),
+    ///                 isPresented: $isPresented,
+    ///                 content: { Color.accentColor }
+    ///             )
+    ///         })
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vSideBar<Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VSideBarUIModel = .init(),
         isPresented: Binding<Bool>,
@@ -73,8 +82,9 @@ extension View {
     {
         self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -99,6 +109,7 @@ extension View {
     ///
     /// For additional info, refer to `View.vSideBar(id:isPresented:content:)`.
     public func vSideBar<Item, Content>(
+        layerID: String? = nil,
         id: String,
         uiModel: VSideBarUIModel = .init(),
         item: Binding<Item?>,
@@ -117,8 +128,9 @@ extension View {
 
         return self
             .presentationHost(
+                layerID: layerID,
                 id: id,
-                uiModel: uiModel.presentationHostUIModel,
+                uiModel: uiModel.presentationHostSubUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,

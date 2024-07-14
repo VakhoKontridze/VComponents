@@ -17,10 +17,6 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VSideBarUIModel
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
-    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
     private var currentWidth: CGFloat {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
@@ -28,6 +24,11 @@ struct VSideBar<Content>: View where Content: View {
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
+    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+
+    @Environment(\.safeAreaInsets) private var safeAreaInsets: EdgeInsets
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -36,7 +37,6 @@ struct VSideBar<Content>: View where Content: View {
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
-    @State private var didFinishInternalPresentation: Bool = false
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -58,47 +58,27 @@ struct VSideBar<Content>: View where Content: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(
-            alignment: uiModel.presentationEdge.toAlignment,
-            content: {
-                dimmingView
-                sideBarView
-            }
-        )
-        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
-
-        ._getInterfaceOrientation({ newValue in
-            if
-                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
-                newValue != interfaceOrientation
-            {
+        sideBarView
+            ._getInterfaceOrientation({ newValue in
+                if
+                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    newValue != interfaceOrientation
+                {
 #if canImport(UIKit) && !os(watchOS)
-                UIApplication.shared.sendResignFirstResponderAction()
+                    UIApplication.shared.sendResignFirstResponderAction()
 #endif
-            }
+                }
 
-            interfaceOrientation = newValue
-        })
+                interfaceOrientation = newValue
+            })
 
-        .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-    }
-    
-    private var dimmingView: some View {
-        uiModel.dimmingViewColor
-            .contentShape(.rect)
-            .onTapGesture(perform: dismissFromDimmingViewTap)
+            .onReceive(presentationMode.presentPublisher, perform: animateIn)
+            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
     }
     
     private var sideBarView: some View {
-        ZStack(content: {
-            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .shadow(
-                    color: uiModel.shadowColor,
-                    radius: uiModel.shadowRadius,
-                    offset: uiModel.shadowOffset
-                )
-            
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
             content()
                 .padding(uiModel.contentMargins)
                 .applyModifier({
@@ -113,14 +93,10 @@ struct VSideBar<Content>: View where Content: View {
             maxWidth: currentWidth,
             maxHeight: currentHeight
         )
-        .clipShape( // Fixes issue of content-clipping, as it's not in `VGroupBox`
-            .rect(
-                cornerRadii: uiModel.cornerRadii
-                    .withReversedLeftAndRightCorners(
-                        uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                        layoutDirection.isRightToLeft
-                    )
-            )
+        .shadow(
+            color: uiModel.shadowColor,
+            radius: uiModel.shadowRadius,
+            offset: uiModel.shadowOffset
         )
         .offset(isPresentedInternally ? .zero : initialOffset)
         .gesture(
@@ -129,14 +105,9 @@ struct VSideBar<Content>: View where Content: View {
         )
     }
 
-    // MARK: Lifecycle
-    private func dismissFromDimmingViewTap() {
-        guard
-            didFinishInternalPresentation,
-            uiModel.dismissType.contains(.backTap)
-        else {
-            return
-        }
+    // MARK: Actions
+    private func didTapDimmingView() {
+        guard uiModel.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
@@ -147,23 +118,15 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Lifecycle Animations
     private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-        }
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
     }
     
-    private func animateOut() {
+    private func animateOut(
+        completion: @escaping () -> Void
+    ) {
         let animation: BasicAnimation? = {
             if isBeingDismissedFromDragBack {
                 uiModel.dragBackDismissAnimation
@@ -176,14 +139,14 @@ struct VSideBar<Content>: View where Content: View {
             withAnimation(
                 animation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
 
         } else {
             withBasicAnimation(
                 animation,
                 body: { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
         }
     }
@@ -329,6 +292,7 @@ private struct Preview_ContentView: View {
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer()
     }
 }
 
@@ -358,6 +322,7 @@ private struct Preview_SafeAreaContentView: View {
                     content: { Color.blue }
                 )
         })
+        .presentationHostLayer()
     }
 }
 

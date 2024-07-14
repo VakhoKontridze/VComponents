@@ -19,14 +19,15 @@ struct VAlert<Content>: View
     // MARK: Properties - UI Model
     private let uiModel: VAlertUIModel
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
-    @Environment(\.presentationHostGeometryReaderSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
     private var currentWidth: CGFloat {
         uiModel.widths.current(_interfaceOrientation: interfaceOrientation).toAbsolute(in: containerSize.width)
     }
 
+    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+
+    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+
+    @Environment(\.safeAreaInsets) private var safeAreaInsets: EdgeInsets
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
@@ -65,43 +66,27 @@ struct VAlert<Content>: View
     
     // MARK: Body
     var body: some View {
-        ZStack(content: {
-            dimmingView
-            alertView
-        })
-        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
-
-        ._getInterfaceOrientation({ newValue in
-            if
-                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
-                newValue != interfaceOrientation
-            {
+        alertView
+            ._getInterfaceOrientation({ newValue in
+                if
+                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    newValue != interfaceOrientation
+                {
 #if canImport(UIKit) && !os(watchOS)
-                UIApplication.shared.sendResignFirstResponderAction()
+                    UIApplication.shared.sendResignFirstResponderAction()
 #endif
-            }
+                }
 
-            interfaceOrientation = newValue
-        })
+                interfaceOrientation = newValue
+            })
 
-        .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-    }
-    
-    private var dimmingView: some View {
-        uiModel.dimmingViewColor
-            .contentShape(.rect)
+            .onReceive(presentationMode.presentPublisher, perform: animateIn)
+            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
     }
     
     private var alertView: some View {
-        ZStack(content: {
-            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .shadow(
-                    color: uiModel.shadowColor,
-                    radius: uiModel.shadowRadius,
-                    offset: uiModel.shadowOffset
-                )
-
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
                     titleView
@@ -127,6 +112,11 @@ struct VAlert<Content>: View
                 $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
             }
         })
+        .shadow(
+            color: uiModel.shadowColor,
+            radius: uiModel.shadowRadius,
+            offset: uiModel.shadowOffset
+        )
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
     
@@ -244,7 +234,10 @@ struct VAlert<Content>: View
             }
         )
     }
-    
+
+    // MARK: Actions
+    private func didTapDimmingView() {} // Not dismissible from dimming view
+
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
@@ -253,19 +246,21 @@ struct VAlert<Content>: View
         )
     }
 
-    private func animateOut() {
+    private func animateOut(
+        completion: @escaping () -> Void
+    ) {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
                 body: { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
         }
     }
@@ -309,6 +304,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -333,6 +329,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -358,6 +355,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -383,6 +381,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -407,6 +406,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -431,6 +431,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -456,6 +457,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -477,6 +479,7 @@ struct VAlert<Content>: View
                         actions: {}
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -500,6 +503,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -526,6 +530,35 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("Scrollable Buttons", body: {
+    struct ContentView: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        isPresented: $isPresented,
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet",
+                        actions: {
+                            for i in 0..<20 {
+                                VAlertButton(role: .primary, action: nil, title: "Confirm \(i+1)")
+                            }
+
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        }
+                    )
+            })
+            .presentationHostLayer()
         }
     }
 
@@ -565,6 +598,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
@@ -604,6 +638,7 @@ struct VAlert<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 

@@ -26,8 +26,9 @@ struct VModal<Content>: View
         uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
+    @Environment(\.presentationHostGeometrySize) private var containerSize: CGSize
+
     @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
-    @Environment(\.presentationHostGeometryReaderSize) private var containerSize: CGSize
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -38,7 +39,6 @@ struct VModal<Content>: View
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
-    @State private var didFinishInternalPresentation: Bool = false
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -56,107 +56,73 @@ struct VModal<Content>: View
     
     // MARK: Body
     var body: some View {
-        ZStack(content: {
-            dimmingView
-            modalView
-        })
-        .environment(\.colorScheme, uiModel.colorScheme ?? colorScheme)
-
-        ._getInterfaceOrientation({ newValue in
-            if
-                uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
-                newValue != interfaceOrientation
-            {
+        modalView
+            ._getInterfaceOrientation({ newValue in
+                if
+                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    newValue != interfaceOrientation
+                {
 #if canImport(UIKit) && !os(watchOS)
-                UIApplication.shared.sendResignFirstResponderAction()
+                    UIApplication.shared.sendResignFirstResponderAction()
 #endif
-            }
-
-            interfaceOrientation = newValue
-        })
-
-        .onReceive(presentationMode.presentPublisher, perform: animateIn)
-        .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-    }
-    
-    private var dimmingView: some View {
-        uiModel.dimmingViewColor
-            .contentShape(.rect)
-            .onTapGesture(perform: dismissFromDimmingViewTap)
+                }
+                
+                interfaceOrientation = newValue
+            })
+        
+            .onReceive(presentationMode.presentPublisher, perform: animateIn)
+            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
     }
 
     private var modalView: some View {
-        ZStack(content: {
-            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .shadow(
-                    color: uiModel.shadowColor,
-                    radius: uiModel.shadowRadius,
-                    offset: uiModel.shadowOffset
-                )
-
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
             content()
                 .padding(uiModel.contentMargins)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipShape( // Fixes issue of content-clipping, as it's not in `VGroupBox`
-                    .rect(
-                        cornerRadii: uiModel.cornerRadii
-                            .withReversedLeftAndRightCorners(
-                                uiModel.reversesLeftAndRightCornersForRTLLanguages &&
-                                layoutDirection.isRightToLeft
-                            )
-                    )
-                )
         })
         .frame( // Max dimension fixes issue of safe areas and/or landscape
             maxWidth: currentWidth,
             maxHeight: currentHeight
         )
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
+        .shadow(
+            color: uiModel.shadowColor,
+            radius: uiModel.shadowRadius,
+            offset: uiModel.shadowOffset
+        )
     }
 
-    // MARK: Lifecycle
-    private func dismissFromDimmingViewTap() {
-        guard
-            didFinishInternalPresentation,
-            uiModel.dismissType.contains(.backTap)
-        else {
-            return
-        }
+    // MARK: Actions
+    private func didTapDimmingView() {
+        guard uiModel.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
 
     // MARK: Lifecycle Animations
     private func animateIn() {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.appearAnimation,
-                body: { isPresentedInternally = true },
-                completion: { didFinishInternalPresentation = true }
-            )
-        }
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true }
+        )
     }
 
-    private func animateOut() {
+    private func animateOut(
+        completion: @escaping () -> Void
+    ) {
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
                 uiModel.disappearAnimation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
 
         } else {
             withBasicAnimation(
                 uiModel.disappearAnimation,
                 body: { isPresentedInternally = false },
-                completion: presentationMode.dismissCompletion
+                completion: completion
             )
         }
     }
@@ -183,11 +149,52 @@ struct VModal<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 
     return ContentView()
 })
+
+#Preview("Max Frame", body: { // TODO: Move into macro when nested macro expansions are supported
+    ContentView_MaxFrame()
+})
+struct ContentView_MaxFrame: View {
+    @State private var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vModal(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VModalUIModel = .init()
+
+                        uiModel.sizes = VModalUIModel.Sizes(
+                            portrait: VModalUIModel.Size(
+                                width: .fraction(1),
+                                height: .fraction(1)
+                            ),
+                            landscape: VModalUIModel.Size(
+                                width: .fraction(1),
+                                height: .fraction(1)
+                            )
+                        )
+
+                        uiModel.contentMargins = VModalUIModel.Margins(15)
+
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: {
+                        Color.blue
+                            .onTapGesture(perform: { isPresented = false })
+                    }
+                )
+        })
+        .presentationHostLayer()
+    }
+}
 
 #Preview("Wrapped Content", body: {
     struct ContentView: View {
@@ -202,7 +209,7 @@ struct VModal<Content>: View
                         uiModel: {
                             var uiModel: VModalUIModel = .init()
 
-                            uiModel.contentMargins = VModalUIModel.Margins(15)
+                            uiModel.contentMargins = VModalUIModel.Margins(15) // Must come before calculation
 
                             if let contentHeight {
                                 let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
@@ -221,6 +228,7 @@ struct VModal<Content>: View
                         }
                     )
             })
+            .presentationHostLayer()
         }
     }
 

@@ -16,21 +16,7 @@ import VCore
 @available(visionOS, unavailable)
 public struct VAlertUIModel {
     // MARK: Properties - Global
-    var presentationHostUIModel: PresentationHostUIModel {
-        var uiModel: PresentationHostUIModel = .init()
-
-        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
-
-        return uiModel
-    }
-
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Component will automatically inherit color scheme from the context.
-    /// But if it's overridden with modifiers, this property must be set.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme?
+    var presentationHostSubUIModel: PresentationHostUIModel { .init() }
 
     /// Alert sizes.
     /// Set to `0.75` ratio of container width in portrait.
@@ -99,8 +85,6 @@ public struct VAlertUIModel {
     /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Title text margins. Set to `(0, 0, 5, 3)`.
@@ -132,8 +116,6 @@ public struct VAlertUIModel {
     /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    ///
-    /// /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Message text margins. Set to `(0, 0, 3, 5)`.
@@ -275,17 +257,8 @@ public struct VAlertUIModel {
     }
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `default`.
-    ///
-    /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .default
-
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
-
-    // MARK: Properties - Dimming View
-    /// Dimming view color.
-    public var dimmingViewColor: Color = .dynamic(Color(100, 100, 100, 0.3), Color.black.opacity(0.4))
 
     // MARK: Properties - Shadow
     /// Shadow color.

@@ -16,22 +16,11 @@ import VCore
 @available(visionOS, unavailable)
 public struct VToastUIModel {
     // MARK: Properties - Global
-    var presentationHostUIModel: PresentationHostUIModel {
+    var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
-
-        uiModel.allowsHitTests = false
-        uiModel.keyboardResponsivenessStrategy = keyboardResponsivenessStrategy
-
+        uiModel.alignment = presentationEdge.toAlignment
         return uiModel
     }
-
-    /// Color scheme. Set to `nil`.
-    ///
-    /// Component will automatically inherit color scheme from the context.
-    /// But if it's overridden with modifiers, this property must be set.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `ColorScheme`.
-    public var colorScheme: ColorScheme?
 
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default
@@ -68,8 +57,6 @@ public struct VToastUIModel {
     /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    ///
-    /// `SwiftUI` previews may have difficulty displaying correct `DynamicTypeSize`.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Text margins. Set to `(20, 12)`.
@@ -77,12 +64,6 @@ public struct VToastUIModel {
         horizontal: 20,
         vertical: 12
     )
-
-    // MARK: Properties - Keyboard Responsiveness
-    /// Keyboard responsiveness strategy. Set to `none`.
-    ///
-    /// Changing this property after modal is presented may cause unintended behaviors.
-    public var keyboardResponsivenessStrategy: PresentationHostUIModel.KeyboardResponsivenessStrategy = .none
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -270,5 +251,15 @@ extension VToastUIModel {
     /// Applies red color scheme to `VToastUIModel`.
     mutating public func applyErrorColorScheme() {
         backgroundColor = .dynamic(Color(235, 95, 90), Color(205, 50, 45))
+    }
+}
+
+// MARK: - Helpers
+extension VerticalEdge {
+    fileprivate var toAlignment: Alignment {
+        switch self {
+        case .top: .top
+        case .bottom: .bottom
+        }
     }
 }
