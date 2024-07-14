@@ -13,20 +13,24 @@ import SwiftUI
 ///     @State private var parameters: VAlertParameters?
 ///
 ///     var body: some View {
-///         VPlainButton(
-///             action: {
-///                 parameters = VAlertParameters(
-///                     title: "Lorem Ipsum",
-///                     message: "Lorem ipsum dolor sit amet",
-///                     actions: {
-///                         VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-///                         VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
-///                     }
-///                 )
-///             },
-///             title: "Present"
-///         )
-///         .vAlert(id: "some_alert", parameters: $parameters)
+///         ZStack(content: {
+///             VPlainButton(
+///                 action: {
+///                     parameters = VAlertParameters(
+///                         title: "Lorem Ipsum",
+///                         message: "Lorem ipsum dolor sit amet",
+///                         actions: {
+///                             VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
+///                             VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+///                         }
+///                     )
+///                 },
+///                 title: "Present"
+///             )
+///             .vAlert(id: "some_alert", parameters: $parameters)
+///         })
+///         .frame(maxWidth: .infinity, maxHeight: .infinity)
+///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
 ///     }
 ///
 @available(macOS, unavailable)
