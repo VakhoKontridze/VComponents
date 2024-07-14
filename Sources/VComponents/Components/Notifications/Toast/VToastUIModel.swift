@@ -75,15 +75,29 @@ public struct VToastUIModel {
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - Transition
-    /// Display duration. Set to `3` seconds.
-    public var duration: TimeInterval = 3
+    // MARK: Properties - Dismiss Type
+    /// Method of dismissing side bar. Set to `default`.
+    public var dismissType: DismissType = .default
 
+    /// Timeout duration. Set to `3` seconds.
+    ///
+    /// Will not have effect if `timeout` isn't included in `dismissType`.
+    public var timeoutDuration: TimeInterval = 3
+
+    /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
+    public var pullDownDismissDistanceHeightRatio: CGFloat = 0.2
+
+    func pullDownDismissDistance(in containerDimension: CGFloat) -> CGFloat { pullDownDismissDistanceHeightRatio * containerDimension }
+
+    // MARK: Properties - Transition
     /// Appear animation. Set to `easeOut` with duration `0.2`.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
 
     /// Disappear animation. Set to `easeIn` with duration `0.2`.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
+
+    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.2`.
+    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Properties - Haptic
 #if os(iOS)
@@ -185,6 +199,21 @@ public struct VToastUIModel {
     // MARK: Margins
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias Margins = EdgeInsets_HorizontalVertical
+
+    // MARK: Dismiss Type
+    /// Dismiss type.
+    @OptionSetRepresentation<Int>
+    public struct DismissType: OptionSet {
+        // MARK: Options
+        private enum Options: Int {
+            case timeout
+            case pullDown
+        }
+
+        // MARK: Options Initializers
+        /// Default value. Set to `all`.
+        public static var `default`: DismissType { .all }
+    }
 }
 
 // MARK: - Factory (Highlights)

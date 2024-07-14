@@ -283,9 +283,6 @@ public struct VBottomSheetUIModel {
         }
 
         // MARK: Options Initializers
-        /// All dismiss methods.
-        public static var all: Self { [.backTap, .pullDown] }
-
         /// Default value. Set to  `pullDown`.
         public static var `default`: Self { .pullDown }
     }

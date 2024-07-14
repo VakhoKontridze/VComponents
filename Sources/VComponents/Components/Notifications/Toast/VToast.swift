@@ -30,13 +30,18 @@ struct VToast: View {
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
 
-    @State private var lifecycleDismissTask: Task<Void, Never>?
-
     // MARK: Properties - Text
     private let text: String
     
     // MARK: Properties - Frame
     @State private var height: CGFloat = 0
+
+    // MARK: Properties - Flags
+    // Prevents `dismissFromPullDown` being called multiples times during active drag, which can break the animation.
+    @State private var isBeingDismissedFromPullDown: Bool = false
+
+    // MARK: Properties - Misc
+    @State private var timeoutDismissTask: Task<Void, Never>?
 
     // MARK: Initializers
     init(
@@ -52,7 +57,7 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         toastView
-            .onDisappear(perform: { lifecycleDismissTask?.cancel() })
+            .onDisappear(perform: { timeoutDismissTask?.cancel() })
 
             ._getInterfaceOrientation({ interfaceOrientation = $0 })
 
@@ -108,15 +113,23 @@ struct VToast: View {
                             )
                     }
                 })
+                
                 .clipShape(.rect(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
+                
                 .background(content: { backgroundView })
                 .padding(.horizontal, uiModel.widthType.marginHorizontal)
+                
                 .getSize({ height = $0.height })
         })
         .drawingGroup() // Prevents UI from breaking in some scenarios, such as previews
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
+
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged(dragChanged)
+        )
     }
-    
+
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
@@ -126,41 +139,40 @@ struct VToast: View {
                 offset: uiModel.shadowOffset
             )
     }
-    
-    // MARK: Offsets
-    private var initialOffset: CGFloat {
-        switch uiModel.presentationEdge {
-        case .top: -height
-        case .bottom: height
-        }
-    }
-    
-    private var presentedOffset: CGFloat {
-        switch uiModel.presentationEdge {
-        case .top: safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
-        case .bottom: -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
-        }
-    }
-    
-    // MARK: Corner Radius
-    private var cornerRadius: CGFloat {
-        switch uiModel.cornerRadiusType {
-        case .capsule: height / 2
-        case .rounded(let cornerRadius): cornerRadius
-        }
-    }
 
     // MARK: Actions
     private func didTapDimmingView() {} // Not dismissible from dimming view
 
-    private func dismissAfterLifecycle() {
-        lifecycleDismissTask?.cancel()
-        lifecycleDismissTask = Task(operation: { @MainActor in
-            try? await Task.sleep(seconds: uiModel.duration)
+    private func dismissFromTimeout() {
+        guard uiModel.dismissType.contains(.timeout) else { return }
+
+        timeoutDismissTask?.cancel()
+        timeoutDismissTask = Task(operation: { @MainActor in
+            try? await Task.sleep(seconds: uiModel.timeoutDuration)
             guard !Task.isCancelled else { return }
 
             isPresented = false
         })
+    }
+
+    private func dismissFromPullDown() {
+        isPresented = false
+    }
+
+    // MARK: Gestures
+    private func dragChanged(dragValue: DragGesture.Value) {
+        guard
+            uiModel.dismissType.contains(.pullDown),
+            !isBeingDismissedFromPullDown,
+            isDraggedInCorrectDirection(dragValue),
+            didExceedDragBackDismissDistance(dragValue)
+        else {
+            return
+        }
+
+        isBeingDismissedFromPullDown = true
+
+        dismissFromPullDown()
     }
 
     // MARK: Lifecycle Animations
@@ -171,7 +183,7 @@ struct VToast: View {
             withAnimation(
                 uiModel.appearAnimation?.toSwiftUIAnimation,
                 { isPresentedInternally = true },
-                completion: dismissAfterLifecycle
+                completion: dismissFromTimeout
             )
 
         } else {
@@ -182,7 +194,7 @@ struct VToast: View {
                 withBasicAnimation(
                     uiModel.appearAnimation,
                     body: { isPresentedInternally = true },
-                    completion: dismissAfterLifecycle
+                    completion: dismissFromTimeout
                 )
             })
         }
@@ -191,20 +203,63 @@ struct VToast: View {
     private func animateOut(
         completion: @escaping () -> Void
     ) {
+        let animation: BasicAnimation? = {
+            if isBeingDismissedFromPullDown {
+                uiModel.pullDownDismissAnimation
+            } else {
+                uiModel.disappearAnimation
+            }
+        }()
+
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
+                animation?.toSwiftUIAnimation,
                 { isPresentedInternally = false },
                 completion: completion
             )
 
         } else {
             withBasicAnimation(
-                uiModel.disappearAnimation,
+                animation,
                 body: { isPresentedInternally = false },
                 completion: completion
             )
         }
+    }
+
+    // MARK: Offsets
+    private var initialOffset: CGFloat {
+        switch uiModel.presentationEdge {
+        case .top: -height
+        case .bottom: height
+        }
+    }
+
+    private var presentedOffset: CGFloat {
+        switch uiModel.presentationEdge {
+        case .top: safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
+        case .bottom: -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
+        }
+    }
+
+    // MARK: Corner Radius
+    private var cornerRadius: CGFloat {
+        switch uiModel.cornerRadiusType {
+        case .capsule: height / 2
+        case .rounded(let cornerRadius): cornerRadius
+        }
+    }
+
+    // MARK: Presentation Edge Dismiss
+    private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
+        switch uiModel.presentationEdge {
+        case .top: dragValue.translation.height <= 0
+        case .bottom: dragValue.translation.height >= 0
+        }
+    }
+
+    private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
+        abs(dragValue.translation.height) >= uiModel.pullDownDismissDistance(in: height)
     }
 
     // MARK: Haptics
@@ -232,7 +287,7 @@ struct VToast: View {
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
-                            uiModel.duration = 60
+                            uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -267,7 +322,7 @@ struct VToast: View {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                            uiModel.duration = 60
+                            uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -302,7 +357,7 @@ struct VToast: View {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             uiModel.presentationEdge = .top
-                            uiModel.duration = 60
+                            uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -338,7 +393,7 @@ struct VToast: View {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
                             widthType.map { uiModel.widthType = $0 }
-                            uiModel.duration = 60
+                            uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -358,6 +413,9 @@ struct VToast: View {
                             try? await Task.sleep(seconds: 1)
 
                             widthType = .stretched(alignment: .trailing, margin: 20)
+                            try? await Task.sleep(seconds: 1)
+
+                            widthType = .stretched(alignment: .leading, margin: 0)
                             try? await Task.sleep(seconds: 1)
 
                             // `fixedPoint` not demoed
@@ -395,7 +453,7 @@ struct VToast: View {
                         id: "preview",
                         uiModel: {
                             var uiModel = uiModel
-                            uiModel.duration = 60
+                            uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,

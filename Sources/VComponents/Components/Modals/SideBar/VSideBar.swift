@@ -116,6 +116,22 @@ struct VSideBar<Content>: View where Content: View {
         isPresented = false
     }
 
+    // MARK: Gestures
+    private func dragChanged(dragValue: DragGesture.Value) {
+        guard
+            uiModel.dismissType.contains(.dragBack),
+            !isBeingDismissedFromDragBack
+            isDraggedInCorrectDirection(dragValue),
+            didExceedDragBackDismissDistance(dragValue)
+        else {
+            return
+        }
+
+        isBeingDismissedFromDragBack = true
+
+        dismissFromDrag()
+    }
+
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
@@ -149,22 +165,6 @@ struct VSideBar<Content>: View where Content: View {
                 completion: completion
             )
         }
-    }
-    
-    // MARK: Gestures
-    private func dragChanged(dragValue: DragGesture.Value) {
-        guard
-            uiModel.dismissType.contains(.dragBack),
-            isDraggedInCorrectDirection(dragValue),
-            didExceedDragBackDismissDistance(dragValue),
-            !isBeingDismissedFromDragBack
-        else {
-            return
-        }
-        
-        isBeingDismissedFromDragBack = true
-
-        dismissFromDrag()
     }
     
     // MARK: Presentation Edge Offsets

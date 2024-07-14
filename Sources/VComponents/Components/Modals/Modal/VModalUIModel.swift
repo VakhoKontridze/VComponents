@@ -120,9 +120,6 @@ public struct VModalUIModel {
         }
 
         // MARK: Options Initializers
-        /// All dismiss methods.
-        public static var all: Self { [.backTap] }
-
         /// Default value. Set to `[]`.
         public static var `default`: Self { [] }
     }

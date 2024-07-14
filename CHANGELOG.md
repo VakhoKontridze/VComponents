@@ -50,6 +50,7 @@ VToast
 
 - API is overhauled
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+- Toast can now be dismissed from pull-down
 
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 

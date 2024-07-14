@@ -102,7 +102,7 @@ public struct VSideBarUIModel {
     /// Method of dismissing side bar. Set to `default`.
     public var dismissType: DismissType = .default
 
-    /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
+    /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
     public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
 
     func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
@@ -144,9 +144,6 @@ public struct VSideBarUIModel {
         }
 
         // MARK: Options Initializers
-        /// All dismiss methods.
-        public static var all: DismissType { [.backTap, .dragBack] }
-
         /// Default value. Set to `all`.
         public static var `default`: DismissType { .all }
     }
