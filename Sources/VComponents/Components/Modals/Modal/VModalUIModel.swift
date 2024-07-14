@@ -183,7 +183,6 @@ public struct VModalUIModel {
 
 // MARK: - Factory
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
     public static var insettedContent: Self {

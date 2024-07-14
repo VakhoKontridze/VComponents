@@ -180,7 +180,6 @@ extension View {
 
 // MARK: - Item
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
     ///
