@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Side Bar UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -29,23 +28,51 @@ public struct VSideBarUIModel {
     public var presentationEdge: Edge = .leading
 
     /// Side bar sizes.
-    /// Set to `(0.75, 1)` fractions in portrait and `(0.5, 1)` fraction in landscape.
-    public var sizes: Sizes = .init(
-        portrait: Size(
-            width: .fraction(0.75),
-            height: .fraction(1)
-        ),
-        landscape: Size(
-            width: .fraction(0.5),
-            height: .fraction(1)
+    /// Set to `(0.75, 1)` fractions in portrait and `(0.5, 1)` fraction in landscape on `iOS`.
+    /// Set to `(0.33, 1)` fractions on `macOS`.
+    public var sizes: Sizes = {
+#if os(iOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.75),
+                height: .fraction(1)
+            ),
+            landscape: Size(
+                width: .fraction(0.5),
+                height: .fraction(1)
+            )
         )
-    )
+#elseif os(macOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.33),
+                height: .fraction(1)
+            ),
+            landscape: Size(
+                width: .absolute(0),
+                height: .absolute(0)
+            )
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
-    /// Corner radii . Set to to `(0, 0, 15, 15)`.
-    public var cornerRadii: RectangleCornerRadii = .init(
-        trailingCorners: 15
-    )
+    /// Corner radii.
+    /// Set to to `(0, 0, 15, 15)` on `iOS`.
+    /// Set to to `0`s on `macOS`.
+    public var cornerRadii: RectangleCornerRadii = {
+#if os(iOS)
+        RectangleCornerRadii(
+            trailingCorners: 15
+        )
+#elseif os(macOS)
+        RectangleCornerRadii()
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
@@ -55,6 +82,8 @@ public struct VSideBarUIModel {
     public var backgroundColor: Color = {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
+#elseif os(macOS)
+        Color(nsColor: NSColor.windowBackgroundColor)
 #else
         fatalError() // Not supported
 #endif
@@ -148,7 +177,6 @@ public struct VSideBarUIModel {
 // MARK: - Safe Area
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS))
 
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -192,7 +220,6 @@ extension VSideBarUIModel {
 #endif
 
 // MARK: - Factory (Presentation Edge)
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -206,15 +233,24 @@ extension VSideBarUIModel {
     
     /// `VSideBarUIModel` that presents side bar from trailing edge.
     ///
-    /// `cornerRadii` is set to `(15, 15, 0, 0)`.
+    /// `cornerRadii` is set to `(15, 15, 0, 0)` on `iOS`.
+    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var trailing: Self {
         var uiModel: Self = .init()
 
         uiModel.presentationEdge = .trailing
         
-        uiModel.cornerRadii = RectangleCornerRadii(
-            leadingCorners: 15
-        )
+        uiModel.cornerRadii = {
+#if os(iOS)
+            RectangleCornerRadii(
+                leadingCorners: 15
+            )
+#elseif os(macOS)
+            RectangleCornerRadii()
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
         return uiModel
     }
@@ -225,7 +261,8 @@ extension VSideBarUIModel {
     ///
     /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
     ///
-    /// `cornerRadii` is set to `(0, 15, 15, 0)`.
+    /// `cornerRadii` is set to `(0, 15, 15, 0)` on `iOS`.
+    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var top: Self {
         var uiModel: Self = .init()
         
@@ -241,10 +278,18 @@ extension VSideBarUIModel {
                 height: .fraction(0.75)
             )
         )
-        
-        uiModel.cornerRadii = RectangleCornerRadii(
-            bottomCorners: 15
-        )
+
+        uiModel.cornerRadii = {
+#if os(iOS)
+            RectangleCornerRadii(
+                bottomCorners: 15
+            )
+#elseif os(macOS)
+            RectangleCornerRadii()
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
         return uiModel
     }
@@ -255,7 +300,8 @@ extension VSideBarUIModel {
     ///
     /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
     ///
-    /// `cornerRadii` is set to `(15, 0, 0, 15)`.
+    /// `cornerRadii` is set to `(15, 0, 0, 15)` on `iOS`.
+    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var bottom: Self {
         var uiModel: Self = .init()
         
@@ -271,17 +317,24 @@ extension VSideBarUIModel {
                 height: .fraction(0.75)
             )
         )
-        
-        uiModel.cornerRadii = RectangleCornerRadii(
-            topCorners: 15
-        )
+
+        uiModel.cornerRadii = {
+#if os(iOS)
+            RectangleCornerRadii(
+                topCorners: 15
+            )
+#elseif os(macOS)
+            RectangleCornerRadii()
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
         return uiModel
     }
 }
 
 // MARK: - Factory (Misc)
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

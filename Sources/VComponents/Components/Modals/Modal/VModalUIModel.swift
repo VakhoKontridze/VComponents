@@ -71,7 +71,7 @@ public struct VModalUIModel {
     }()
 
     // MARK: Properties - Corners
-    /// Corner radii . Set to to `15`s.
+    /// Corner radii. Set to to `15`s.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
     /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.

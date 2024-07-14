@@ -19,20 +19,21 @@ VDisclosureGroup
 
 VModal
 
-- Modal now supports `macOS`, `tvOS`, and `visionOS`
 - API is overhauled
+- Modal now supports `macOS`, `tvOS`, and `visionOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VBottomSheet
 
-- BottomSheet now supports `macOS`
 - API is overhauled
+- BottomSheet now supports `macOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 VSideBar
 
 - API is overhauled
+- SideBar now supports `macOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 

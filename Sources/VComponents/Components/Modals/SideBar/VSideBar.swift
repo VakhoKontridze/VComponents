@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Side Bar
-@available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS, unavailable) // No `View.presentationHost(...)`
-@available(watchOS, unavailable) // No `View.presentationHost(...)`
-@available(visionOS, unavailable) // No `View.presentationHost(...)`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VSideBarUIModel
@@ -223,22 +222,10 @@ struct VSideBar<Content>: View where Content: View {
     }
 }
 
-// MARK: - Helpers
-extension Edge {
-    fileprivate var toAlignment: Alignment {
-        switch self {
-        case .top: .top
-        case .leading: .leading
-        case .bottom: .bottom
-        case .trailing: .trailing
-        }
-    }
-}
-
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Leading", body: {
     Preview_ContentView()
@@ -256,21 +243,38 @@ extension Edge {
     Preview_ContentView(uiModel: .bottom)
 })
 
+#if !os(macOS)
+
 #Preview("Safe Area Leading", body: {
     Preview_SafeAreaContentView()
 })
+
+#endif
+
+#if !os(macOS)
 
 #Preview("Safe Area Trailing", body: {
     Preview_SafeAreaContentView(uiModel: .trailing)
 })
 
+#endif
+
+#if !os(macOS)
+
 #Preview("Safe Area Top", body: {
     Preview_SafeAreaContentView(uiModel: .top)
 })
 
+#endif
+
+#if !os(macOS)
+
+
 #Preview("Safe Area Bottom", body: {
     Preview_SafeAreaContentView(uiModel: .bottom)
 })
+
+#endif
 
 private struct Preview_ContentView: View {
     private let uiModel: VSideBarUIModel
@@ -287,14 +291,31 @@ private struct Preview_ContentView: View {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     id: "preview",
-                    uiModel: uiModel,
+                    uiModel: {
+                        var uiModel = uiModel
+#if os(macOS)
+                        uiModel.dismissType.remove(.backTap)
+#endif
+                        return uiModel
+                    }(),
                     isPresented: $isPresented,
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .presentationHostLayer(
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+#if os(macOS)
+                uiModel.dimmingViewTapAction = .passTapsThrough
+                uiModel.dimmingViewColor = Color.clear
+#endif
+                return uiModel
+            }()
+        )
     }
 }
+
+#if !os(macOS)
 
 private struct Preview_SafeAreaContentView: View {
     private let uiModel: VSideBarUIModel
@@ -325,6 +346,8 @@ private struct Preview_SafeAreaContentView: View {
         .presentationHostLayer()
     }
 }
+
+#endif
 
 #endif
 

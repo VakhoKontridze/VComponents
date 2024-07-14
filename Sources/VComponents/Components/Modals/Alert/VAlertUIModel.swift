@@ -34,7 +34,7 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Corners
-    /// Corner radii . Set to to `20`s.
+    /// Corner radii. Set to to `20`s.
     public var cornerRadii: RectangleCornerRadii = .init(20)
 
     /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
