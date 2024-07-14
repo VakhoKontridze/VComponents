@@ -9,7 +9,6 @@ import SwiftUI
 
 // MARK: - V Alert Button Protocol
 /// `VAlert` button protocol.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -24,7 +23,6 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     ) -> Body
 }
 
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

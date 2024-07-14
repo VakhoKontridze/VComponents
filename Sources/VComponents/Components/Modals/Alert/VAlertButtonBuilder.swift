@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

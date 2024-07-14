@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Alert UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -19,11 +18,23 @@ public struct VAlertUIModel {
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
 
     /// Alert sizes.
-    /// Set to `0.75` fraction in portrait and `0.5` fraction in landscape.
-    public var widths: Widths = .init(
-        portrait: .fraction(0.75),
-        landscape: .fraction(0.5)
-    )
+    /// Set to `0.75` fraction in portrait and `0.5` fraction in landscape on `iOS`.
+    /// Set to `250` on `macOS`.
+    public var widths: Widths = {
+#if os(iOS)
+        Widths(
+            portrait: .fraction(0.75),
+            landscape: .fraction(0.5)
+        )
+#elseif os(macOS)
+        Widths(
+            portrait: .absolute(250),
+            landscape: .absolute(0)
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
     public var titleTextMessageTextAndContentMargins: Margins = .init(
@@ -45,6 +56,8 @@ public struct VAlertUIModel {
     public var backgroundColor: Color = {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
+#elseif os(macOS)
+        Color(nsColor: NSColor.windowBackgroundColor)
 #else
         fatalError() // Not supported
 #endif
@@ -135,11 +148,44 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Buttons
-    /// Button height. Set to `40`.
-    public var buttonHeight: CGFloat = 40
+    /// Button height.
+    /// Set to `40` on `iOS`.
+    /// Set to `22` on `macOS`.
+    public var buttonHeight: CGFloat = {
+#if os(iOS)
+        40
+#elseif os(macOS)
+        22
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
-    /// Button corner radius. Set to `10`.
-    public var buttonCornerRadius: CGFloat = 10
+    /// Button corner radius.
+    /// Set to `10` on `iOS`.
+    /// Set to `4` on `macOS`.
+    public var buttonCornerRadius: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        4
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Button title text font.
+    /// Set to `semibold` `callout` on `iOS`.
+    /// Set to `13` on `macOS`.
+    public var buttonTitleTextFont: Font = {
+#if os(iOS)
+        Font.callout.weight(.semibold)
+#elseif os(macOS)
+        Font.system(size: 13) // No dynamic type on `macOS`
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     /// Button margins. Set to `(15, 15, 10, 15)`
     public var buttonMargins: Margins = .init(
@@ -149,11 +195,21 @@ public struct VAlertUIModel {
         bottom: 15
     )
 
-    /// Spacing between horizontal buttons.  Set to `10`.
+    /// Spacing between horizontal buttons. Set to `10`.
     public var horizontalButtonSpacing: CGFloat = 10
 
-    /// Spacing between vertical buttons.  Set to `5`.
-    public var verticalButtonSpacing: CGFloat = 5
+    /// Spacing between vertical buttons.
+    /// Set to `5` on `iOS`.
+    /// Set to `10` on `macOS`.
+    public var verticalButtonSpacing: CGFloat = {
+#if os(iOS)
+        5
+#elseif os(macOS)
+        10
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
 #if os(iOS)
     /// Button haptic feedback style. Set to `nil`.
@@ -180,6 +236,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = primaryButtonBackgroundColors
 
         uiModel.titleTextColors = primaryButtonTitleTextColors
+        uiModel.titleTextFont = buttonTitleTextFont
         uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
@@ -213,6 +270,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = secondaryButtonBackgroundColors
 
         uiModel.titleTextColors = secondaryButtonTitleTextColors
+        uiModel.titleTextFont = buttonTitleTextFont
         uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
@@ -246,6 +304,7 @@ public struct VAlertUIModel {
         uiModel.backgroundColors = destructiveButtonBackgroundColors
 
         uiModel.titleTextColors = destructiveButtonTitleTextColors
+        uiModel.titleTextFont = buttonTitleTextFont
         uiModel.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)

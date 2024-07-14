@@ -9,10 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Alert
-@available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS, unavailable) // No `View.presentationHost(...)`
-@available(watchOS, unavailable) // No `View.presentationHost(...)`
-@available(visionOS, unavailable) // No `View.presentationHost(...)`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 struct VAlert<Content>: View
     where Content: View
 {
@@ -283,7 +282,7 @@ struct VAlert<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
 
 #Preview("Title, Message, Content", body: {
     struct ContentView: View {

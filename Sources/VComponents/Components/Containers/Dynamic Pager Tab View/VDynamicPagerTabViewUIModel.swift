@@ -62,7 +62,7 @@ public struct VDynamicPagerTabViewUIModel {
     /// Tab item text font. Set to `body`.
     public var tabItemTextFont: Font = .body
 
-    /// Tab item text `DynamicTypeSize` type.  Set to partial range through `accessibility2`.
+    /// Tab item text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

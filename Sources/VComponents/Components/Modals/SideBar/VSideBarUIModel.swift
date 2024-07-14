@@ -133,10 +133,10 @@ public struct VSideBarUIModel {
     func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
 
     // MARK: Properties - Transition
-    /// Appear animation.  Set to `easeInOut` with duration `0.3`.
+    /// Appear animation. Set to `easeInOut` with duration `0.3`.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
-    /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
+    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.

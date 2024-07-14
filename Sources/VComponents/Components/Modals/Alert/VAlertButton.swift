@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Alert Button
 /// `VAlert` button.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
