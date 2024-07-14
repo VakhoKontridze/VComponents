@@ -184,10 +184,10 @@ public struct VToastUIModel {
         var toVCoreTextLineType: VCore.TextLineType {
             switch self {
             case .singleLine:
-                return .singleLine
+                .singleLine
 
             case .multiLine(let alignment, let lineLimit):
-                return .multiLine(alignment: alignment, lineLimit: lineLimit)
+                .multiLine(alignment: alignment, lineLimit: lineLimit)
             }
         }
 

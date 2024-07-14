@@ -41,6 +41,7 @@ VAlert
 
 - API is overhauled
 - Alert now supports `macOS`
+- Button `Font` can now be customized
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 

@@ -9,10 +9,10 @@ import SwiftUI
 import VCore
 
 // MARK: - V Toast
-@available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS, unavailable) // No `View.presentationHost(...)`
-@available(watchOS, unavailable) // No `View.presentationHost(...)`
-@available(visionOS, unavailable) // No `View.presentationHost(...)`
+@available(macOS, unavailable) // Doesn't follow HIG
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
