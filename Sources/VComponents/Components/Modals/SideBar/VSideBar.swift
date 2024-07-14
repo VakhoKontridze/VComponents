@@ -291,13 +291,7 @@ private struct Preview_ContentView: View {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     id: "preview",
-                    uiModel: {
-                        var uiModel = uiModel
-#if os(macOS)
-                        uiModel.dismissType.remove(.backTap)
-#endif
-                        return uiModel
-                    }(),
+                    uiModel: uiModel,
                     isPresented: $isPresented,
                     content: { Color.blue }
                 )

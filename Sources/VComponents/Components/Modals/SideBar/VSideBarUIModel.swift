@@ -169,8 +169,18 @@ public struct VSideBarUIModel {
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to `all`.
-        public static var `default`: DismissType { .all }
+        /// Default value.
+        /// Set to `all` on `iOS`.
+        /// Set to `dragBack` on `macOS`.
+        public static var `default`: DismissType {
+#if os(iOS)
+            .all
+#elseif os(macOS)
+            .dragBack
+#else
+            fatalError() // Not supported
+#endif
+        }
     }
 }
 
