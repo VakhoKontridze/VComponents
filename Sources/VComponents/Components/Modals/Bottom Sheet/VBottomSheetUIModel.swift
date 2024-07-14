@@ -23,8 +23,7 @@ public struct VBottomSheetUIModel {
     }
 
     /// Bottom sheet sizes.
-    /// Set to `1` ratio of container width, and `(0.6, 0.6, 0.9)` ratios of container height in portrait.
-    /// Set to `0.7` ratio of container width and `0.9` ratio of container height in landscape.
+    /// Set to `[1, (0.6, 0.6, 0.9)]` fractions in portrait and `(0.7, 0.9)` fractions in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(1),

@@ -20,7 +20,7 @@ struct VToast: View {
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -59,7 +59,7 @@ struct VToast: View {
         toastView
             .onDisappear(perform: { timeoutDismissTask?.cancel() })
 
-            ._getInterfaceOrientation({ interfaceOrientation = $0 })
+            .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)

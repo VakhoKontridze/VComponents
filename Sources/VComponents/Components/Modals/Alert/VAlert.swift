@@ -20,13 +20,13 @@ struct VAlert<Content>: View
     private let uiModel: VAlertUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.widths.current(_interfaceOrientation: interfaceOrientation).toAbsolute(in: containerSize.width)
+        uiModel.widths.current(orientation: interfaceOrientation).toAbsolute(in: containerSize.width)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -67,7 +67,7 @@ struct VAlert<Content>: View
     // MARK: Body
     var body: some View {
         alertView
-            ._getInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation({ newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation

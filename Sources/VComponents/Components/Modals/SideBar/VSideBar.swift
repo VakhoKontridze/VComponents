@@ -18,16 +18,16 @@ struct VSideBar<Content>: View where Content: View {
     private let uiModel: VSideBarUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
+        uiModel.sizes.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -59,7 +59,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         sideBarView
-            ._getInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation({ newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation

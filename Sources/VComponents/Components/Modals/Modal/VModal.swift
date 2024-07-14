@@ -9,10 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Modal
-@available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS, unavailable) // No `View.presentationHost(...)`
-@available(watchOS, unavailable) // No `View.presentationHost(...)`
-@available(visionOS, unavailable) // No `View.presentationHost(...)`
+@available(watchOS, unavailable) // Doesn't follow HIG
 struct VModal<Content>: View
     where Content: View
 {
@@ -20,15 +17,15 @@ struct VModal<Content>: View
     private let uiModel: VModalUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
+        uiModel.sizes.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -57,7 +54,7 @@ struct VModal<Content>: View
     // MARK: Body
     var body: some View {
         modalView
-            ._getInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation({ newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -131,7 +128,7 @@ struct VModal<Content>: View
 // MARK: - Previews
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !os(watchOS)
 
 #Preview("*", body: {
     struct ContentView: View {

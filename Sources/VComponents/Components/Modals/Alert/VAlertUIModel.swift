@@ -19,8 +19,7 @@ public struct VAlertUIModel {
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
 
     /// Alert sizes.
-    /// Set to `0.75` ratio of container width in portrait.
-    /// Set to `0.5` ratio of container width in landscape.
+    /// Set to `0.75` fraction in portrait and `0.5` fraction in landscape.
     public var widths: Widths = .init(
         portrait: .fraction(0.75),
         landscape: .fraction(0.5)

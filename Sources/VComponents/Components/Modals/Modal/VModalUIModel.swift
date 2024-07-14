@@ -10,27 +10,65 @@ import VCore
 
 // MARK: - V Modal UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 public struct VModalUIModel {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
     
     /// Modal sizes.
-    /// Set to `(0.9, 0.6)` container ratios in portrait.
-    /// Set to reverse in landscape.
-    public var sizes: Sizes = .init(
-        portrait: Size(
-            width: .fraction(0.9),
-            height: .fraction(0.6)
-        ),
-        landscape: Size(
-            width: .fraction(0.6),
-            height: .fraction(0.9)
+    /// Set to `(0.9, 0.6)` fractions in portrait and `(0.5, 1)` fractions in landscape on `iOS`.
+    /// Set to `(0.5, 0.8)` fractions on `macOS`.
+    /// Set to `(0.85, 0.8)` fractions on `tvOS`.
+    /// Set to `(0.5, 0.8)` fractions on `visionOS`.
+    public var sizes: Sizes = {
+#if os(iOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.9),
+                height: .fraction(0.6)
+            ),
+            landscape: Size(
+                width: .fraction(0.6),
+                height: .fraction(0.9)
+            )
         )
-    )
+#elseif os(macOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.5),
+                height: .fraction(0.8)
+            ),
+            landscape: Size(
+                width: .absolute(0),
+                height: .absolute(0)
+            )
+        )
+#elseif os(tvOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.85),
+                height: .fraction(0.8)
+            ),
+            landscape: Size(
+                width: .absolute(0),
+                height: .absolute(0)
+            )
+        )
+#elseif os(visionOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.5),
+                height: .fraction(0.8)
+            ),
+            landscape: Size(
+                width: .absolute(0),
+                height: .absolute(0)
+            )
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
     /// Corner radii . Set to to `15`s.
@@ -44,6 +82,12 @@ public struct VModalUIModel {
     public var backgroundColor: Color = {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
+#elseif os(macOS)
+        Color(nsColor: NSColor.windowBackgroundColor)
+#elseif os(tvOS)
+        Color.dynamic(Color.white, Color.black)
+    #elseif os(visionOS)
+        Color.black
 #else
         fatalError() // Not supported
 #endif
@@ -138,8 +182,6 @@ public struct VModalUIModel {
 }
 
 // MARK: - Factory
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VModalUIModel {

@@ -29,7 +29,7 @@ extension View {
     ///             .vSideBar(
     ///                 id: "some_side_bar",
     ///                 isPresented: $isPresented,
-    ///                 content: { Color.accentColor }
+    ///                 content: { Color.blue }
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -62,7 +62,7 @@ extension View {
     ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
-    ///                 content: { Color.accentColor }
+    ///                 content: { Color.blue }
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)

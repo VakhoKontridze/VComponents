@@ -10,10 +10,6 @@
 import SwiftUI
 
 // MARK: - Preview Modal Launcher View
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
 struct PreviewModalLauncherView: View {
     // MARK: Properties
     @Binding private var isPresented: Bool
@@ -27,10 +23,17 @@ struct PreviewModalLauncherView: View {
 
     // MARK: Body
     var body: some View {
+#if !(os(tvOS) || os(visionOS))
         VPlainButton(
             action: { isPresented = true },
             title: "Present"
         )
+#else
+        Button(
+            "Present",
+            action: { isPresented = true }
+        )
+#endif
     }
 }
 

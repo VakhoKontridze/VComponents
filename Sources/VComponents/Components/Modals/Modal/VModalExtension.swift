@@ -9,10 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
     ///
@@ -27,7 +24,7 @@ extension View {
     ///             .vModal(
     ///                 id: "some_modal",
     ///                 isPresented: $isPresented,
-    ///                 content: { Color.accentColor }
+    ///                 content: { Color.blue }
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -182,8 +179,6 @@ extension View {
 }
 
 // MARK: - Item
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension View {

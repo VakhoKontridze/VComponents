@@ -21,16 +21,16 @@ struct VBottomSheet<Content>: View
     private let uiModel: VBottomSheetUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
-        uiModel.sizes.current(_interfaceOrientation: interfaceOrientation).heights
+        uiModel.sizes.current(orientation: interfaceOrientation).heights
     }
     
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: _InterfaceOrientation = .initFromSystemInfo()
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -72,7 +72,7 @@ struct VBottomSheet<Content>: View
     // MARK: Body
     var body: some View {
         bottomSheetView
-            ._getInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation({ newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -88,7 +88,7 @@ struct VBottomSheet<Content>: View
             })
             .onChange(
                 of: uiModel.sizes,
-                perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(_interfaceOrientation: interfaceOrientation).heights) }
+                perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(orientation: interfaceOrientation).heights) }
             )
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)

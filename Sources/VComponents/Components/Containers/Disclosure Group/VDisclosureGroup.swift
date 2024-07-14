@@ -23,7 +23,7 @@ import VCore
 ///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum",
 ///                 content: {
-///                     Color.accentColor
+///                     Color.blue
 ///                         .frame(height: 150)
 ///                 }
 ///             )

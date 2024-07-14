@@ -28,9 +28,8 @@ public struct VSideBarUIModel {
     /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
     public var presentationEdge: Edge = .leading
 
-    /// Side bar sizes. Set to `default`.
-    /// Set to `(0.75, 1)` container ratios in portrait.
-    /// Set to `(0.5, 1)` container ratios in landscape.
+    /// Side bar sizes.
+    /// Set to `(0.75, 1)` fractions in portrait and `(0.5, 1)` fraction in landscape.
     public var sizes: Sizes = .init(
         portrait: Size(
             width: .fraction(0.75),
@@ -224,8 +223,7 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `top`.
     ///
-    /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
-    /// And to `(0.5, 1)` container ratios in landscape.
+    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
     ///
     /// `cornerRadii` is set to `(0, 15, 15, 0)`.
     public static var top: Self {
@@ -255,8 +253,7 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `bottom`.
     ///
-    /// `sizes` are set to `(0.75, 1)` container ratios in portrait.
-    /// And to `(0.5, 1)` container ratios in landscape.
+    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
     ///
     /// `cornerRadii` is set to `(15, 0, 0, 15)`.
     public static var bottom: Self {

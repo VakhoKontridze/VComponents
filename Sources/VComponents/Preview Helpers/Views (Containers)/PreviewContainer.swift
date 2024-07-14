@@ -29,7 +29,7 @@ struct PreviewContainer<Content>: View where Content: View {
 #if os(iOS)
                 switch layer {
                 case .primary: Color(uiColor: UIColor.systemBackground)
-                case .secondary: Color(uiColor: .secondarySystemBackground)
+                case .secondary: Color(uiColor: UIColor.secondarySystemBackground)
                 }
 #else
                 Color.clear
