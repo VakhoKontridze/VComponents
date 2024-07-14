@@ -120,7 +120,7 @@ struct VSideBar<Content>: View where Content: View {
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
             uiModel.dismissType.contains(.dragBack),
-            !isBeingDismissedFromDragBack
+            !isBeingDismissedFromDragBack,
             isDraggedInCorrectDirection(dragValue),
             didExceedDragBackDismissDistance(dragValue)
         else {
