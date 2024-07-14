@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -23,17 +22,35 @@ public struct VBottomSheetUIModel {
     }
 
     /// Bottom sheet sizes.
-    /// Set to `[1, (0.6, 0.6, 0.9)]` fractions in portrait and `(0.7, 0.9)` fractions in landscape.
-    public var sizes: Sizes = .init(
-        portrait: Size(
-            width: .fraction(1),
-            heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
-        ),
-        landscape: Size(
-            width: .fraction(0.7),
-            heights: .fraction(0.9)
+    /// Set to `[1, (0.6, 0.6, 0.9)]` fractions in portrait and `(0.7, 0.9)` fractions in landscape on `iOS`.
+    /// Set to `(0.8, 0.8)` fractions on `macOS`.
+    public var sizes: Sizes = {
+#if os(iOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(1),
+                heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
+            ),
+            landscape: Size(
+                width: .fraction(0.7),
+                heights: .fraction(0.9)
+            )
         )
-    )
+#elseif os(macOS)
+        Sizes(
+            portrait: Size(
+                width: .fraction(0.8),
+                heights: .fraction(0.8)
+            ),
+            landscape: Size(
+                width: .absolute(0),
+                heights: .absolute(0)
+            )
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Corners
     /// Corner radius. Set to `15`.
@@ -50,6 +67,8 @@ public struct VBottomSheetUIModel {
     public var backgroundColor: Color = {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
+#elseif os(macOS)
+        Color(nsColor: NSColor.windowBackgroundColor)
 #else
         fatalError() // Not supported
 #endif
@@ -313,7 +332,6 @@ public struct VBottomSheetUIModel {
 }
 
 // MARK: - Factory
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

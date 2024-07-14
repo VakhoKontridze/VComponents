@@ -86,7 +86,7 @@ public struct VModalUIModel {
         Color(nsColor: NSColor.windowBackgroundColor)
 #elseif os(tvOS)
         Color.dynamic(Color.white, Color.black)
-    #elseif os(visionOS)
+#elseif os(visionOS)
         Color.black
 #else
         fatalError() // Not supported

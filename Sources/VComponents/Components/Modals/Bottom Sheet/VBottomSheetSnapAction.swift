@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Bottom Sheet Snap Action
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -92,7 +91,6 @@ enum VBottomSheetSnapAction {
 }
 
 // MARK: - V Bottom Sheet Region
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

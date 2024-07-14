@@ -10,10 +10,9 @@ import OSLog
 import VCore
 
 // MARK: - V Bottom Sheet
-@available(macOS, unavailable) // No `View.presentationHost(...)`
-@available(tvOS, unavailable) // No `View.presentationHost(...)`
-@available(watchOS, unavailable) // No `View.presentationHost(...)`
-@available(visionOS, unavailable) // No `View.presentationHost(...)`
+@available(tvOS, unavailable) // Doesn't follow HIG
+@available(watchOS, unavailable) // Doesn't follow HIG
+@available(visionOS, unavailable) // Doesn't follow HIG
 struct VBottomSheet<Content>: View
     where Content: View
 {
@@ -349,7 +348,37 @@ struct VBottomSheet<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS))
+
+#Preview("*", body: {
+    struct ContentView: View {
+        @State private var isPresented: Bool = true
+
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewModalLauncherView(isPresented: $isPresented)
+                    .vBottomSheet(
+                        layerID: "sheets",
+                        id: "preview",
+                        isPresented: $isPresented,
+                        content: { Color.blue }
+                    )
+            })
+            .presentationHostLayer(
+                id: "sheets",
+                uiModel: {
+                    var uiModel: PresentationHostLayerUIModel = .init()
+                    uiModel.dimmingViewColor = Color.clear
+                    return uiModel
+                }()
+            )
+        }
+    }
+
+    return ContentView()
+})
+
+#if !os(macOS)
 
 #Preview("Min & Ideal & Max", body: { // TODO: Move into macro when nested macro expansions are supported
     ContentView_MinIdealMax()
@@ -394,6 +423,10 @@ private struct ContentView_MinIdealMax: View {
     }
 }
 
+#endif
+
+#if !os(macOS)
+
 #Preview("Min & Ideal", body: {
     ContentView_MinIdeal()
 })
@@ -436,6 +469,10 @@ private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested
         )
     }
 }
+
+#endif
+
+#if !os(macOS)
 
 #Preview("Ideal & Max", body: {
     ContentView_IdealMax()
@@ -480,6 +517,10 @@ private struct ContentView_IdealMax: View { // TODO: Move into macro when nested
     }
 }
 
+#endif
+
+#if !os(macOS)
+
 #Preview("Ideal Small", body: {
     ContentView_IdealSmall()
 })
@@ -523,6 +564,10 @@ private struct ContentView_IdealSmall: View { // TODO: Move into macro when nest
     }
 }
 
+#endif
+
+#if !os(macOS)
+
 #Preview("Ideal Large", body: {
     ContentView_IdealLarge()
 })
@@ -565,6 +610,8 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
         )
     }
 }
+
+#endif
 
 #Preview("Wrapped Content", body: {
     struct ContentView: View {
@@ -638,14 +685,17 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
 })
 
 #Preview("Scrollable Content", body: {
-    guard #available(iOS 17.0, *) else { return EmptyView() }
+    guard #available(iOS 17.0, macOS 14.0, *) else { return EmptyView() }
 
     struct ContentView: View {
+        @State private var safeAreaInsets: EdgeInsets = .init()
+
         @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
+                    .getSafeAreaInsets({ safeAreaInsets = $0 })
                     .vBottomSheet(
                         layerID: "sheets",
                         id: "preview",
@@ -666,7 +716,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                                     })
                                 })
                             })
-                            .safeAreaPadding(.bottom, UIDevice.safeAreaInsets.bottom)
+                            .safeAreaPadding(.bottom, safeAreaInsets.bottom)
                         }
                     )
             })
