@@ -114,8 +114,8 @@ public struct VSideBarUIModel {
     /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
-    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.1`.
-    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
+    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
+    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Initializers
     /// Initializes UI model with default values.
