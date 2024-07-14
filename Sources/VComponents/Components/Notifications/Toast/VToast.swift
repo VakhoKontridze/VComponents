@@ -130,8 +130,8 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: -(safeAreaInsets.top + height)
-        case .bottom: safeAreaInsets.bottom + height
+        case .top: -height
+        case .bottom: height
         }
     }
     
