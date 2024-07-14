@@ -623,61 +623,66 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
         @State private var count: Int = 1
 
         var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
+            ZStack(content: {
+                // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+                Color.clear
                     .getSafeAreaInsets({ safeAreaInsets = $0 })
-                    .vBottomSheet(
-                        layerID: "sheets",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
 
-                            uiModel.contentMargins = VBottomSheetUIModel.Margins(
-                                leading: 15,
-                                trailing: 15,
-                                top: 5,
-                                bottom: max(15, safeAreaInsets.bottom)
-                            )
-
-                            if let contentHeight {
-                                let height: CGFloat = uiModel.contentWrappingHeight(
-                                    contentHeight: contentHeight,
-                                    safeAreaInsets: safeAreaInsets
+                PreviewContainer(content: {
+                    PreviewModalLauncherView(isPresented: $isPresented)
+                        .vBottomSheet(
+                            layerID: "sheets",
+                            id: "preview",
+                            uiModel: {
+                                var uiModel: VBottomSheetUIModel = .init()
+                                
+                                uiModel.contentMargins = VBottomSheetUIModel.Margins(
+                                    leading: 15,
+                                    trailing: 15,
+                                    top: 5,
+                                    bottom: max(15, safeAreaInsets.bottom)
                                 )
-
-                                uiModel.sizes.portrait.heights = .absolute(height)
-                                uiModel.sizes.portrait.heights = .absolute(height)
-                            }
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: {
-                            VStack(spacing: 20, content: {
-                                ForEach(0..<count, id: \.self, content: { _ in
-                                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                                
+                                if let contentHeight {
+                                    let height: CGFloat = uiModel.contentWrappingHeight(
+                                        contentHeight: contentHeight,
+                                        safeAreaInsets: safeAreaInsets
+                                    )
+                                    
+                                    uiModel.sizes.portrait.heights = .absolute(height)
+                                    uiModel.sizes.portrait.heights = .absolute(height)
+                                }
+                                
+                                return uiModel
+                            }(),
+                            isPresented: $isPresented,
+                            content: {
+                                VStack(spacing: 20, content: {
+                                    ForEach(0..<count, id: \.self, content: { _ in
+                                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                                    })
+                                    
+                                    Button(
+                                        "Toggle",
+                                        action: { count = count == 1 ? 2 : 1 }
+                                    )
                                 })
-
-                                Button(
-                                    "Toggle",
-                                    action: { count = count == 1 ? 2 : 1 }
-                                )
-                            })
-                            .fixedSize(horizontal: false, vertical: true)
-                            .getSize({ size in
-                                Task(operation: { contentHeight = size.height })
-                            })
-                        }
-                    )
+                                .fixedSize(horizontal: false, vertical: true)
+                                .getSize({ size in
+                                    Task(operation: { contentHeight = size.height })
+                                })
+                            }
+                        )
+                })
+                .presentationHostLayer(
+                    id: "sheets",
+                    uiModel: {
+                        var uiModel: PresentationHostLayerUIModel = .init()
+                        uiModel.dimmingViewColor = Color.clear
+                        return uiModel
+                    }()
+                )
             })
-            .presentationHostLayer(
-                id: "sheets",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
-            )
         }
     }
 
@@ -693,41 +698,50 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
         @State private var isPresented: Bool = true
 
         var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .getSafeAreaInsets({ safeAreaInsets = $0 })
-                    .vBottomSheet(
-                        layerID: "sheets",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .init()
-                            uiModel.autoresizesContent = true
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: {
-                            ScrollView(content: {
-                                VStack(spacing: 0, content: {
-                                    ForEach(0..<20, content: { number in
-                                        Text(String(number))
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal, 15)
-                                            .padding(.vertical, 9)
+            ZStack(content: {
+                // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+                Color.clear
+                    .getSafeAreaInsets({ newValue in
+                        Task(operation: { @MainActor in
+                            safeAreaInsets = newValue
+                        })
+                    })
+
+                PreviewContainer(content: {
+                    PreviewModalLauncherView(isPresented: $isPresented)
+                        .vBottomSheet(
+                            layerID: "sheets",
+                            id: "preview",
+                            uiModel: {
+                                var uiModel: VBottomSheetUIModel = .init()
+                                uiModel.autoresizesContent = true
+                                return uiModel
+                            }(),
+                            isPresented: $isPresented,
+                            content: {
+                                ScrollView(content: {
+                                    VStack(spacing: 0, content: {
+                                        ForEach(0..<20, content: { number in
+                                            Text(String(number))
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .padding(.horizontal, 15)
+                                                .padding(.vertical, 9)
+                                        })
                                     })
                                 })
-                            })
-                            .safeAreaPadding(.bottom, safeAreaInsets.bottom)
-                        }
-                    )
+                                .safeAreaPadding(.bottom, safeAreaInsets.bottom)
+                            }
+                        )
+                })
+                .presentationHostLayer(
+                    id: "sheets",
+                    uiModel: {
+                        var uiModel: PresentationHostLayerUIModel = .init()
+                        uiModel.dimmingViewColor = Color.clear
+                        return uiModel
+                    }()
+                )
             })
-            .presentationHostLayer(
-                id: "sheets",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
-            )
         }
     }
 
