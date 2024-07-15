@@ -68,60 +68,18 @@ struct VToast: View {
     
     private var toastView: some View {
         ZStack(content: {
-            Text(text)
-                .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
-                .minimumScaleFactor(uiModel.textMinimumScaleFactor)
-                .foregroundStyle(uiModel.textColor)
-                .font(uiModel.textFont)
-                .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
-
-                .padding(uiModel.textMargins)
-                .applyModifier({ view in
-                    switch uiModel.widthType {
-                    case .wrapped:
-                        view
-
-                    case .stretched(let alignment, _):
-                        view
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: Alignment(
-                                    horizontal: alignment,
-                                    vertical: .center
-                                )
-                            )
-
-                    case .fixedPoint(let width, let alignment):
-                        view
-                            .frame(
-                                width: width,
-                                alignment: Alignment(
-                                    horizontal: alignment,
-                                    vertical: .center
-                                )
-                            )
-
-                    case .fixedFraction(let ratio, let alignment):
-                        view
-                            .frame(
-                                width: containerSize.width * ratio,
-                                alignment: Alignment(
-                                    horizontal: alignment,
-                                    vertical: .center
-                                )
-                            )
-                    }
-                })
-                
-                .clipShape(.rect(cornerRadius: cornerRadius)) // No need for clipping for preventing content from overflowing here, since background is applied via modifier
-                
-                .background(content: { backgroundView })
-                .padding(.horizontal, uiModel.widthType.marginHorizontal)
-                
-                .getSize({ height = $0.height })
+            contentView
         })
-        .drawingGroup() // Prevents UI from breaking in some scenarios, such as previews
+        // Prevents UI from breaking in some scenarios, such as previews
+        .drawingGroup()
+
+        // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
+        .shadow(
+            color: uiModel.shadowColor,
+            radius: uiModel.shadowRadius,
+            offset: uiModel.shadowOffset
+        )
+
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
         .gesture(
@@ -130,14 +88,66 @@ struct VToast: View {
         )
     }
 
+    private var contentView: some View {
+        Text(text)
+            .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
+            .minimumScaleFactor(uiModel.textMinimumScaleFactor)
+            .foregroundStyle(uiModel.textColor)
+            .font(uiModel.textFont)
+            .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+
+            .padding(uiModel.textMargins)
+            .applyModifier({ view in
+                switch uiModel.widthType {
+                case .wrapped:
+                    view
+
+                case .stretched(let alignment, _):
+                    view
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
+                        )
+
+                case .fixedPoint(let width, let alignment):
+                    view
+                        .frame(
+                            width: width,
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
+                        )
+
+                case .fixedFraction(let ratio, let alignment):
+                    view
+                        .frame(
+                            width: containerSize.width * ratio,
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
+                        )
+                }
+            })
+
+            // No need for clipping for preventing content from overflowing here, since background is applied via modifier
+            .clipShape(.rect(cornerRadius: cornerRadius))
+
+            .background(content: { backgroundView })
+
+            .getSize({ height = $0.height })
+
+            .padding(.horizontal, uiModel.widthType.marginHorizontal)
+    }
+
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
-            .shadow(
-                color: uiModel.shadowColor,
-                radius: uiModel.shadowRadius,
-                offset: uiModel.shadowOffset
-            )
     }
 
     // MARK: Actions
