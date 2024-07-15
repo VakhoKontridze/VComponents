@@ -169,8 +169,11 @@ public struct VModalUIModel {
         /// Default value. Set to `[]`.
         public static var `default`: Self { [] }
     }
+}
 
-    // MARK: Methods
+// MARK: - Wrapped Content
+@available(watchOS, unavailable)
+extension VModalUIModel {
     /// Calculates modal height that wraps content.
     ///
     /// It's important to ensure that large content doesn't overflow beyond the container edges.

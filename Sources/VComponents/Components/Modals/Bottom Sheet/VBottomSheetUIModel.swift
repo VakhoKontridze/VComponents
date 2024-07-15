@@ -310,8 +310,13 @@ public struct VBottomSheetUIModel {
         /// Default value. Set to  `swipe`.
         public static var `default`: Self { .swipe }
     }
+}
 
-    // MARK: Methods
+// MARK: - Wrapped Content
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VBottomSheetUIModel {
     /// Calculates bottom sheet height that wraps content.
     ///
     /// It's important to ensure that large content doesn't overflow beyond the container edges.
