@@ -17,6 +17,10 @@ struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
 
+    private var currentWidth: VToastUIModel.Width {
+        uiModel.widths.current(orientation: interfaceOrientation)
+    }
+
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
@@ -98,22 +102,10 @@ struct VToast: View {
             .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
             .padding(uiModel.textMargins)
+
             .applyModifier({ view in
-                switch uiModel.widthType {
-                case .wrapped:
-                    view
-
-                case .stretched(let alignment, _):
-                    view
-                        .frame(
-                            maxWidth: .infinity,
-                            alignment: Alignment(
-                                horizontal: alignment,
-                                vertical: .center
-                            )
-                        )
-
-                case .fixedPoint(let width, let alignment):
+                switch currentWidth.storage {
+                case .fixed(let width, let alignment):
                     view
                         .frame(
                             width: width,
@@ -123,10 +115,29 @@ struct VToast: View {
                             )
                         )
 
-                case .fixedFraction(let ratio, let alignment):
+                case .fixedFraction(let widthFraction, let alignment):
                     view
                         .frame(
-                            width: containerSize.width * ratio,
+                            width: containerSize.width * widthFraction,
+                            alignment: Alignment(
+                                horizontal: alignment,
+                                vertical: .center
+                            )
+                        )
+
+                case .wrapped:
+                    view
+
+                case .wrappedMaxWidth:
+                    view
+
+                case .wrappedMaxWidthFraction:
+                    view
+
+                case .stretched(let alignment, _):
+                    view
+                        .frame(
+                            maxWidth: .infinity,
                             alignment: Alignment(
                                 horizontal: alignment,
                                 vertical: .center
@@ -140,9 +151,51 @@ struct VToast: View {
 
             .background(content: { backgroundView })
 
+            .applyModifier({ view in
+                switch currentWidth.storage {
+                case .fixed:
+                    view
+
+                case .fixedFraction:
+                    view
+
+                case .wrapped:
+                    view
+
+                case .wrappedMaxWidth(let maxWidth, _):
+                    view
+                        .frame(
+                            maxWidth: maxWidth
+                        )
+
+                case .wrappedMaxWidthFraction(let maxWidthFraction, _):
+                    view
+                        .frame(
+                            maxWidth: containerSize.width * maxWidthFraction
+                        )
+
+                case .stretched:
+                    view
+                }
+            })
+
             .getSize({ height = $0.height })
 
-            .padding(.horizontal, uiModel.widthType.marginHorizontal)
+            .padding(
+                .horizontal,
+                {
+                    switch currentWidth.storage {
+                    case .fixed: 0
+                    case .fixedFraction: 0
+
+                    case .wrapped(let marginHorizontal): marginHorizontal
+                    case .wrappedMaxWidth(_, let marginHorizontal): marginHorizontal
+                    case .wrappedMaxWidthFraction(_, let marginHorizontal): marginHorizontal
+
+                    case .stretched(_, let marginHorizontal): marginHorizontal
+                    }
+                }()
+            )
     }
 
     private var backgroundView: some View {
@@ -392,7 +445,7 @@ struct VToast: View {
 #Preview("Width Types", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
-        @State private var widthType: VToastUIModel.WidthType?
+        @State private var width: VToastUIModel.Width?
 
         var body: some View {
             PreviewContainer(content: {
@@ -402,8 +455,13 @@ struct VToast: View {
                         id: "preview",
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
-                            widthType.map { uiModel.widthType = $0 }
+
+                            if let width {
+                                uiModel.widths = VToastUIModel.Widths(width)
+                            }
+
                             uiModel.timeoutDuration = 60
+
                             return uiModel
                         }(),
                         isPresented: $isPresented,
@@ -413,24 +471,28 @@ struct VToast: View {
                         try? await Task.sleep(seconds: 1)
 
                         while true {
-                            widthType = .wrapped(margin: 20)
+                            width = .fixed(widthFraction: 0.75, alignment: .leading)
                             try? await Task.sleep(seconds: 1)
 
-                            widthType = .stretched(alignment: .leading, margin: 20)
+                            width = .fixed(widthFraction: 0.75, alignment: .center)
                             try? await Task.sleep(seconds: 1)
 
-                            widthType = .stretched(alignment: .center, margin: 20)
+                            width = .fixed(widthFraction: 0.75, alignment: .trailing)
                             try? await Task.sleep(seconds: 1)
 
-                            widthType = .stretched(alignment: .trailing, margin: 20)
+                            width = .wrapped(marginHorizontal: 15)
                             try? await Task.sleep(seconds: 1)
 
-                            widthType = .stretched(alignment: .leading, margin: 0)
+                            width = .wrapped(maxWidthFraction: 0.75, marginHorizontal: 15)
                             try? await Task.sleep(seconds: 1)
 
-                            // `fixedPoint` not demoed
+                            width = .stretched(alignment: .leading, marginHorizontal: 15)
+                            try? await Task.sleep(seconds: 1)
 
-                            widthType = .fixedFraction(ratio: 0.5, alignment: .leading)
+                            width = .stretched(alignment: .center, marginHorizontal: 15)
+                            try? await Task.sleep(seconds: 1)
+
+                            width = .stretched(alignment: .trailing, marginHorizontal: 15)
                             try? await Task.sleep(seconds: 1)
                         }
                     })

@@ -22,8 +22,11 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    /// Width type. Set to `default`.
-    public var widthType: WidthType = .default
+    /// Toast widths. Set to `wrapped` with `marginHorizontal` `15` in portrait and `wrapped` with `maxWidth` fraction 0.5 and `marginHorizontal` 15 in landscape.
+    public var widths: Widths = .init(
+        portrait: .wrapped(marginHorizontal: 15),
+        landscape: .wrapped(maxWidthFraction: 0.5, marginHorizontal: 15)
+    )
 
     /// Margin from presented edge. Set to `10`.
     public var marginPresentedEdge: CGFloat = 10
@@ -122,48 +125,110 @@ public struct VToastUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Width Type
-    /// Enumeration that represents width type.
-    public enum WidthType {
-        // MARK: Cases
-        /// Toast only takes required width, and container wraps it's content.
-        ///
-        /// Margin can be specified to space out toast from the edges of the container.
-        case wrapped(margin: CGFloat)
+    // MARK: Widths
+    /// Toast widths.
+    public typealias Widths = ModalComponentSizeGroup<Width>
 
-        /// Toast stretches to full width with an alignment.
-        ///
-        /// Alignment may not be sufficient to affect multi-line text contents.
-        /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
-        ///
-        /// Margin can be specified to space out toast from the edges of the container.
-        case stretched(alignment: HorizontalAlignment, margin: CGFloat)
-
-        /// Toast takes specified width with an alignment.
-        ///
-        /// Alignment may not be sufficient to affect multi-line text contents.
-        /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
-        case fixedPoint(width: CGFloat, alignment: HorizontalAlignment)
-
-        /// Toast takes specified width relative to container ratio, with an alignment.
-        ///
-        /// Alignment may not be sufficient to affect multi-line text contents.
-        /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
-        case fixedFraction(ratio: CGFloat, alignment: HorizontalAlignment)
-
+    // MARK: Width
+    /// Toast width.
+    public struct Width: Equatable {
         // MARK: Properties
-        var marginHorizontal: CGFloat {
-            switch self {
-            case .wrapped(let margin): margin
-            case .stretched(_, let margin): margin
-            case .fixedPoint: 0
-            case .fixedFraction: 0
-            }
-        }
+        let storage: Storage
 
         // MARK: Initializers
-        /// Default value. Set to `wrapped` with `20` `margin`.
-        public static var `default`: Self { .wrapped(margin: 20) }
+        init(
+            _ storage: Storage
+        ) {
+            self.storage = storage
+        }
+
+        /// Toast takes specified width.
+        public static func fixed(
+            width: CGFloat,
+            alignment: HorizontalAlignment
+        ) -> Self {
+            self.init(
+                .fixed(
+                    width: width,
+                    alignment: alignment
+                )
+            )
+        }
+
+        /// Toast takes specified width fraction, relative to container.
+        public static func fixed(
+            widthFraction: CGFloat,
+            alignment: HorizontalAlignment
+        ) -> Self {
+            self.init(
+                .fixedFraction(
+                    widthFraction: widthFraction,
+                    alignment: alignment
+                )
+            )
+        }
+
+        /// Toast wraps body and takes only required width.
+        public static func wrapped(
+            marginHorizontal: CGFloat
+        ) -> Self {
+            self.init(
+                .wrapped(
+                    marginHorizontal: marginHorizontal
+                )
+            )
+        }
+
+        /// Toast wraps body and takes only required width, but with max width.
+        public static func wrapped(
+            maxWidth: CGFloat,
+            marginHorizontal: CGFloat
+        ) -> Self {
+            self.init(
+                .wrappedMaxWidth(
+                    maxWidth: maxWidth,
+                    marginHorizontal: marginHorizontal
+                )
+            )
+        }
+
+        /// Toast wraps body and takes only required width, but with max width fraction, relative to container.
+        public static func wrapped(
+            maxWidthFraction: CGFloat,
+            marginHorizontal: CGFloat
+        ) -> Self {
+            self.init(
+                .wrappedMaxWidthFraction(
+                    maxWidthFraction: maxWidthFraction,
+                    marginHorizontal: marginHorizontal
+                )
+            )
+        }
+
+        /// Toast stretches to full width.
+        public static func stretched(
+            alignment: HorizontalAlignment,
+            marginHorizontal: CGFloat
+        ) -> Self {
+            self.init(
+                .stretched(
+                    alignment: alignment,
+                    marginHorizontal: marginHorizontal
+                )
+            )
+        }
+
+        // MARK: Storage
+        enum Storage: Equatable {
+            case fixed(width: CGFloat, alignment: HorizontalAlignment)
+            case fixedFraction(widthFraction: CGFloat, alignment: HorizontalAlignment)
+
+            case wrapped(marginHorizontal: CGFloat)
+            case wrappedMaxWidth(maxWidth: CGFloat, marginHorizontal: CGFloat)
+            case wrappedMaxWidthFraction(maxWidthFraction: CGFloat, marginHorizontal: CGFloat)
+
+            case stretched(alignment: HorizontalAlignment, marginHorizontal: CGFloat)
+        }
     }
 
     // MARK: Corner Radius Type
@@ -182,6 +247,10 @@ public struct VToastUIModel {
         /// Default value. Set to `rounded`.
         public static var `default`: Self { .capsule }
     }
+
+    // MARK: Margins
+    /// Model that contains `horizontal` and `vertical` margins.
+    public typealias Margins = EdgeInsets_HorizontalVertical
 
     // MARK: Text Line Type
     /// Enumeration that represents text line.
@@ -208,10 +277,6 @@ public struct VToastUIModel {
         /// Default value. Set to `singleLine`.
         public static var `default`: Self { .singleLine }
     }
-
-    // MARK: Margins
-    /// Model that contains `horizontal` and `vertical` margins.
-    public typealias Margins = EdgeInsets_HorizontalVertical
 
     // MARK: Dismiss Type
     /// Dismiss type.

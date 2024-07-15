@@ -47,8 +47,10 @@ VAlert
 
 VToast
 
-- Toast can now be dismissed with pull-down
 - API is overhauled
+- Toast now supports more width types
+- Toast now supports separate width configurations for portrait and landscape modes
+- Toast can now be dismissed with swipe
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*

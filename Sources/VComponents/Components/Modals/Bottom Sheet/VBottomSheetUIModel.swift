@@ -235,7 +235,7 @@ public struct VBottomSheetUIModel {
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
         // MARK: Initializers
-        /// Initializes `Heights` with absolute values.
+        /// Initializes `Heights` with dimensions.
         public static func absolute(
             min: CGFloat,
             ideal: CGFloat,
@@ -248,7 +248,7 @@ public struct VBottomSheetUIModel {
             )
         }
 
-        /// Initializes `Heights` with absolute value.
+        /// Initializes `Heights` with dimensions.
         public static func absolute(
             _ value: CGFloat
         ) -> Self {
@@ -259,7 +259,7 @@ public struct VBottomSheetUIModel {
             )
         }
 
-        /// Initializes `Heights` with point values.
+        /// Initializes `Heights` with dimension fractions, relative to container.
         public static func fraction(
             min: CGFloat,
             ideal: CGFloat,
@@ -272,7 +272,7 @@ public struct VBottomSheetUIModel {
             )
         }
 
-        /// Initializes `Heights` with fraction value.
+        /// Initializes `Heights` with dimension fractions, relative to container.
         public static func fraction(
             _ value: CGFloat
         ) -> Self {
