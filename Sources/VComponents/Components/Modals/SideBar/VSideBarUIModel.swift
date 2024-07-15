@@ -126,12 +126,16 @@ public struct VSideBarUIModel {
     // MARK: Properties - Transition - Drag-Back Dismiss
     /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
     ///
+    /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
+    ///
     /// Has no effect unless `dismissType` includes `dragBack`.
     public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
 
     func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
 
     /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
+    ///
+    /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
     /// Has no effect unless `dismissType` includes `dragBack`.
     public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)

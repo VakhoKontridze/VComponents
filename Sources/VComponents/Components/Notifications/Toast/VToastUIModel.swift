@@ -88,12 +88,16 @@ public struct VToastUIModel {
     // MARK: Properties - Transition - Pull-Down Dismiss
     /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
     ///
+    /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
+    ///
     /// Has no effect unless `dismissType` includes `pullDown`.
     public var pullDownDismissDistanceHeightRatio: CGFloat = 0.2
 
     func pullDownDismissDistance(in containerDimension: CGFloat) -> CGFloat { pullDownDismissDistanceHeightRatio * containerDimension }
 
     /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.2`.
+    ///
+    /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
     /// Has no effect unless `dismissType` includes `pullDown`.
     public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)

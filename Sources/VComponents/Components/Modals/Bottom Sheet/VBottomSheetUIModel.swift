@@ -141,7 +141,7 @@ public struct VBottomSheetUIModel {
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     // MARK: Properties - Transition - Pull-Down Dismiss
-    /// Ratio of distance to drag bottom sheet by, relative to min height, to initiate dismiss. Set to `0.1`.
+    /// Ratio of distance to drag bottom sheet by, past the min height, relative to it, to initiate dismiss. Set to `0.1`.
     ///
     /// Has no effect unless `dismissType` includes `pullDown`.
     public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
@@ -171,7 +171,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = Color(200, 200, 200, 0.5)
+    public var shadowColor: Color = .init(200, 200, 200, 0.5)
 
     /// Shadow radius. Set to `3`.
     public var shadowRadius: CGFloat = 3
