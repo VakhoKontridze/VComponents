@@ -35,8 +35,8 @@ enum VBottomSheetSnapAction {
         case (.idealToMax, true): return .snap(heights.idealOffset(in: containerHeight))
         case (.minToIdeal, false): return .snap(heights.idealOffset(in: containerHeight))
         case (.minToIdeal, true): return .snap(heights.minOffset(in: containerHeight))
-        case (.pullDownToMin, false): return .snap(heights.minOffset(in: containerHeight))
-        case (.pullDownToMin, true): return .dismiss
+        case (.swipeToMin, false): return .snap(heights.minOffset(in: containerHeight))
+        case (.swipeToMin, true): return .dismiss
         }
     }
     
@@ -44,21 +44,21 @@ enum VBottomSheetSnapAction {
         containerHeight: CGFloat,
 
         heights: VBottomSheetUIModel.Heights,
-        canPullDownToDismiss: Bool,
-        pullDownDismissDistance: CGFloat,
+        canSwipeToDismiss: Bool,
+        swipeDismissDistance: CGFloat,
         
         offset: CGFloat,
         offsetBeforeDrag: CGFloat,
         translation: CGFloat
     ) -> VBottomSheetSnapAction {
         let shouldDismiss: Bool = {
-            guard canPullDownToDismiss else { return false }
+            guard canSwipeToDismiss else { return false }
             
             let isDraggedDown: Bool = translation > 0
             guard isDraggedDown else { return false }
             
             let newOffset: CGFloat = offsetBeforeDrag + translation
-            guard newOffset - heights.minOffset(in: containerHeight) >= abs(pullDownDismissDistance) else { return false }
+            guard newOffset - heights.minOffset(in: containerHeight) >= abs(swipeDismissDistance) else { return false }
             
             return true
         }()
@@ -73,8 +73,8 @@ enum VBottomSheetSnapAction {
                 
                 return .snap(newOffset)
                 
-            case .pullDownToMin, .minToIdeal:
-                // If `pullDown` is disabled, code won't get here.
+            case .swipeToMin, .minToIdeal:
+                // If `swipe` is disabled, code won't get here.
                 // So, modal should snap to min heights.
                 
                 let minDiff: CGFloat = abs(heights.minOffset(in: containerHeight) - offset)
@@ -98,7 +98,7 @@ private enum VBottomSheetRegion {
     // MARK: Cases
     case idealToMax
     case minToIdeal
-    case pullDownToMin
+    case swipeToMin
     
     // MARK: Initializers
     init(
@@ -112,7 +112,7 @@ private enum VBottomSheetRegion {
             } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
                 .minToIdeal
             } else if offset > heights.minOffset(in: containerHeight) {
-                .pullDownToMin
+                .swipeToMin
             } else {
                 fatalError()
             }

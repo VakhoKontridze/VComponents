@@ -53,7 +53,7 @@ struct VBottomSheet<Content>: View
     @State private var offsetBeforeDrag: CGFloat?
 
     // MARK: Properties - Flags
-    @State private var isBeingDismissedFromPullDown: Bool = false
+    @State private var isBeingDismissedFromSwipe: Bool = false
 
     // MARK: Initializers
     init(
@@ -195,7 +195,7 @@ struct VBottomSheet<Content>: View
         isPresented = false
     }
 
-    private func dismissFromPullDown() {
+    private func dismissFromSwipe() {
         isPresented = false
     }
 
@@ -213,7 +213,7 @@ struct VBottomSheet<Content>: View
                     return currentHeightsObject.maxOffset(in: containerSize.height)
 
                 case currentHeightsObject.minOffset(in: containerSize.height)...:
-                    if uiModel.dismissType.contains(.pullDown) {
+                    if uiModel.dismissType.contains(.swipe) {
                         return newOffset
                     } else {
                         return currentHeightsObject.minOffset(in: containerSize.height)
@@ -241,8 +241,8 @@ struct VBottomSheet<Content>: View
                 .dragEndedSnapAction(
                     containerHeight: containerSize.height,
                     heights: currentHeightsObject,
-                    canPullDownToDismiss: uiModel.dismissType.contains(.pullDown),
-                    pullDownDismissDistance: uiModel.pullDownDismissDistance(heights: currentHeightsObject, in: containerSize.height),
+                    canSwipeToDismiss: uiModel.dismissType.contains(.swipe),
+                    swipeDismissDistance: uiModel.swipeDismissDistance(heights: currentHeightsObject, in: containerSize.height),
                     offset: offset,
                     offsetBeforeDrag: offsetBeforeDrag,
                     translation: dragValue.translation.height
@@ -266,8 +266,8 @@ struct VBottomSheet<Content>: View
     ) {
         switch snapAction {
         case .dismiss:
-            isBeingDismissedFromPullDown = true
-            dismissFromPullDown()
+            isBeingDismissedFromSwipe = true
+            dismissFromSwipe()
 
         case .snap(let newOffset):
             withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
@@ -286,8 +286,8 @@ struct VBottomSheet<Content>: View
         completion: @escaping () -> Void
     ) {
         let animation: BasicAnimation? = {
-            if isBeingDismissedFromPullDown {
-                uiModel.pullDownDismissAnimation
+            if isBeingDismissedFromSwipe {
+                uiModel.swipeDismissAnimation
             } else {
                 uiModel.disappearAnimation
             }

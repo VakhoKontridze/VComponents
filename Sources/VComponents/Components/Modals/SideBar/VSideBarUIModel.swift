@@ -120,25 +120,25 @@ public struct VSideBarUIModel {
     // MARK: Properties - Transition - Disappear
     /// Disappear animation. Set to `easeInOut` with duration `0.3`.
     ///
-    /// This is a standard disappear animation. Other dismiss methods, such as drag-back, are handled elsewhere.
+    /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
-    // MARK: Properties - Transition - Drag-Back Dismiss
+    // MARK: Properties - Transition - Swipe Dismiss
     /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
-    /// Has no effect unless `dismissType` includes `dragBack`.
-    public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissDistanceWidthRatio: CGFloat = 0.1
 
-    func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
+    func swipeDismissDistance(in containerDimension: CGFloat) -> CGFloat { swipeDismissDistanceWidthRatio * containerDimension }
 
-    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
+    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.2`.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
-    /// Has no effect unless `dismissType` includes `dragBack`.
-    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Properties - Keyboard Responsiveness
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
@@ -177,18 +177,18 @@ public struct VSideBarUIModel {
         // MARK: Options
         private enum Options: Int {
             case backTap
-            case dragBack
+            case swipe
         }
 
         // MARK: Options Initializers
         /// Default value.
         /// Set to `all` on `iOS`.
-        /// Set to `dragBack` on `macOS`.
+        /// Set to `swipe` on `macOS`.
         public static var `default`: DismissType {
 #if os(iOS)
             .all
 #elseif os(macOS)
-            .dragBack
+            .swipe
 #else
             fatalError() // Not supported
 #endif

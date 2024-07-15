@@ -37,8 +37,8 @@ struct VToast: View {
     @State private var height: CGFloat = 0
 
     // MARK: Properties - Flags
-    // Prevents `dismissFromPullDown` being called multiples times during active drag, which can break the animation.
-    @State private var isBeingDismissedFromPullDown: Bool = false
+    // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
+    @State private var isBeingDismissedFromSwipe: Bool = false
 
     // MARK: Properties - Misc
     @State private var timeoutDismissTask: Task<Void, Never>?
@@ -165,24 +165,24 @@ struct VToast: View {
         })
     }
 
-    private func dismissFromPullDown() {
+    private func dismissFromSwipe() {
         isPresented = false
     }
 
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.dismissType.contains(.pullDown),
-            !isBeingDismissedFromPullDown,
+            uiModel.dismissType.contains(.swipe),
+            !isBeingDismissedFromSwipe,
             isDraggedInCorrectDirection(dragValue),
-            didExceedDragBackDismissDistance(dragValue)
+            didExceedSwipeDismissDistance(dragValue)
         else {
             return
         }
 
-        isBeingDismissedFromPullDown = true
+        isBeingDismissedFromSwipe = true
 
-        dismissFromPullDown()
+        dismissFromSwipe()
     }
 
     // MARK: Lifecycle Animations
@@ -214,8 +214,8 @@ struct VToast: View {
         completion: @escaping () -> Void
     ) {
         let animation: BasicAnimation? = {
-            if isBeingDismissedFromPullDown {
-                uiModel.pullDownDismissAnimation
+            if isBeingDismissedFromSwipe {
+                uiModel.swipeDismissAnimation
             } else {
                 uiModel.disappearAnimation
             }
@@ -268,8 +268,8 @@ struct VToast: View {
         }
     }
 
-    private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
-        abs(dragValue.translation.height) >= uiModel.pullDownDismissDistance(in: height)
+    private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
+        abs(dragValue.translation.height) >= uiModel.swipeDismissDistance(in: height)
     }
 
     // MARK: Haptics

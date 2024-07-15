@@ -76,7 +76,7 @@ public struct VToastUIModel {
     // MARK: Properties - Transition - Disappear
     /// Disappear animation. Set to `easeIn` with duration `0.2`.
     ///
-    /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
+    /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
 
     // MARK: Properties - Transition - Timeout Dismiss
@@ -85,22 +85,22 @@ public struct VToastUIModel {
     /// Has no effect unless `dismissType` includes `timeout`.
     public var timeoutDuration: TimeInterval = 3
 
-    // MARK: Properties - Transition - Pull-Down Dismiss
+    // MARK: Properties - Transition - Swipe Dismiss
     /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
-    /// Has no effect unless `dismissType` includes `pullDown`.
-    public var pullDownDismissDistanceHeightRatio: CGFloat = 0.2
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissDistanceHeightRatio: CGFloat = 0.2
 
-    func pullDownDismissDistance(in containerDimension: CGFloat) -> CGFloat { pullDownDismissDistanceHeightRatio * containerDimension }
+    func swipeDismissDistance(in containerDimension: CGFloat) -> CGFloat { swipeDismissDistanceHeightRatio * containerDimension }
 
-    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.2`.
+    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.2`.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
-    /// Has no effect unless `dismissType` includes `pullDown`.
-    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -220,7 +220,7 @@ public struct VToastUIModel {
         // MARK: Options
         private enum Options: Int {
             case timeout
-            case pullDown
+            case swipe
         }
 
         // MARK: Options Initializers

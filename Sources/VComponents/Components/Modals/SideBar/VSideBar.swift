@@ -42,7 +42,7 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Properties - Flags
     // Prevents `dismissFromDrag` being called multiples times during active drag, which can break the animation.
-    @State private var isBeingDismissedFromDragBack: Bool = false
+    @State private var isBeingDismissedFromSwipe: Bool = false
 
     // MARK: Initializers
     init(
@@ -118,15 +118,15 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.dismissType.contains(.dragBack),
-            !isBeingDismissedFromDragBack,
+            uiModel.dismissType.contains(.swipe),
+            !isBeingDismissedFromSwipe,
             isDraggedInCorrectDirection(dragValue),
-            didExceedDragBackDismissDistance(dragValue)
+            didExceedSwipeDismissDistance(dragValue)
         else {
             return
         }
 
-        isBeingDismissedFromDragBack = true
+        isBeingDismissedFromSwipe = true
 
         dismissFromDrag()
     }
@@ -143,8 +143,8 @@ struct VSideBar<Content>: View where Content: View {
         completion: @escaping () -> Void
     ) {
         let animation: BasicAnimation? = {
-            if isBeingDismissedFromDragBack {
-                uiModel.dragBackDismissAnimation
+            if isBeingDismissedFromSwipe {
+                uiModel.swipeDismissAnimation
             } else {
                 uiModel.disappearAnimation
             }
@@ -214,10 +214,10 @@ struct VSideBar<Content>: View where Content: View {
         }
     }
     
-    private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
+    private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.presentationEdge {
-        case .leading, .trailing: abs(dragValue.translation.width) >= uiModel.dragBackDismissDistance(in: currentWidth)
-        case .top, .bottom: abs(dragValue.translation.height) >= uiModel.dragBackDismissDistance(in: currentHeight)
+        case .leading, .trailing: abs(dragValue.translation.width) >= uiModel.swipeDismissDistance(in: currentWidth)
+        case .top, .bottom: abs(dragValue.translation.height) >= uiModel.swipeDismissDistance(in: currentHeight)
         }
     }
 }

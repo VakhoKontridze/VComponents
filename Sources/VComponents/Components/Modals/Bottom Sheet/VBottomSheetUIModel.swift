@@ -137,26 +137,26 @@ public struct VBottomSheetUIModel {
     // MARK: Properties - Transition - Disappear
     /// Disappear animation. Set to `easeInOut` with duration `0.3`.
     ///
-    /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
+    /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
-    // MARK: Properties - Transition - Pull-Down Dismiss
+    // MARK: Properties - Transition - Swipe Dismiss
     /// Ratio of distance to drag bottom sheet by, past the min height, relative to it, to initiate dismiss. Set to `0.1`.
     ///
-    /// Has no effect unless `dismissType` includes `pullDown`.
-    public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissDistanceMinHeightRatio: CGFloat = 0.1
 
-    func pullDownDismissDistance(
+    func swipeDismissDistance(
         heights: Heights,
         in containerHeight: CGFloat
     ) -> CGFloat {
-        pullDownDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
+        swipeDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
     }
 
-    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.15`.
+    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.15`.
     ///
-    /// Has no effect unless `dismissType` includes `pullDown`.
-    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
+    /// Has no effect unless `dismissType` includes `swipe`.
+    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
 
     // MARK: Properties - Transition - Snap
     /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
@@ -303,12 +303,12 @@ public struct VBottomSheetUIModel {
         // MARK: Options
         private enum Options: Int {
             case backTap
-            case pullDown
+            case swipe
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to  `pullDown`.
-        public static var `default`: Self { .pullDown }
+        /// Default value. Set to  `swipe`.
+        public static var `default`: Self { .swipe }
     }
 
     // MARK: Methods
