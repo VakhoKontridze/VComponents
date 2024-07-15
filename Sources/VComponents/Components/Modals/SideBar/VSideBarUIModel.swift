@@ -23,8 +23,8 @@ public struct VSideBarUIModel {
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///
-    /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
-    /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
+    /// Changing this property alone doesn't guarantee a proper behavior.
+    /// Use `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel` instead.
     public var presentationEdge: Edge = .leading
 
     /// Side bar sizes.
@@ -281,7 +281,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `top`.
     ///
-    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
+    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions in landscape on `iOS`.
+    /// `sizes` are set to `(1, 0.5)` fractions on `macOS`.
     ///
     /// `cornerRadii` is set to `(0, 15, 15, 0)` on `iOS`.
     /// `cornerRadii` is set to `0`s on `macOS`.
@@ -290,16 +291,33 @@ extension VSideBarUIModel {
         
         uiModel.presentationEdge = .top
 
-        uiModel.sizes = Sizes(
-            portrait: Size(
-                width: .fraction(1),
-                height: .fraction(0.5)
-            ),
-            landscape: Size(
-                width: .fraction(1),
-                height: .fraction(0.75)
+        uiModel.sizes = {
+#if os(iOS)
+            Sizes(
+                portrait: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.5)
+                ),
+                landscape: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.75)
+                )
             )
-        )
+#elseif os(macOS)
+            Sizes(
+                portrait: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.5)
+                ),
+                landscape: Size(
+                    width: .absolute(0),
+                    height: .absolute(0)
+                )
+            )
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
         uiModel.cornerRadii = {
 #if os(iOS)
@@ -320,7 +338,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `bottom`.
     ///
-    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions landscape.
+    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions in landscape on `iOS`.
+    /// `sizes` are set to `(1, 0.5)` fractions on `macOS`.
     ///
     /// `cornerRadii` is set to `(15, 0, 0, 15)` on `iOS`.
     /// `cornerRadii` is set to `0`s on `macOS`.
@@ -328,17 +347,34 @@ extension VSideBarUIModel {
         var uiModel: Self = .init()
         
         uiModel.presentationEdge = .bottom
-        
-        uiModel.sizes = Sizes(
-            portrait: Size(
-                width: .fraction(1),
-                height: .fraction(0.5)
-            ),
-            landscape: Size(
-                width: .fraction(1),
-                height: .fraction(0.75)
+
+        uiModel.sizes = {
+#if os(iOS)
+            Sizes(
+                portrait: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.5)
+                ),
+                landscape: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.75)
+                )
             )
-        )
+#elseif os(macOS)
+            Sizes(
+                portrait: Size(
+                    width: .fraction(1),
+                    height: .fraction(0.5)
+                ),
+                landscape: Size(
+                    width: .absolute(0),
+                    height: .absolute(0)
+                )
+            )
+#else
+            fatalError() // Not supported
+#endif
+        }()
 
         uiModel.cornerRadii = {
 #if os(iOS)
