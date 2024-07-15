@@ -109,6 +109,33 @@ public struct VSideBarUIModel {
     /// Edges on which content has safe area margins. Set to `[]`.
     public var contentSafeAreaEdges: Edge.Set = []
 
+    // MARK: Properties - Dismiss Type
+    /// Method of dismissing side bar. Set to `default`.
+    public var dismissType: DismissType = .default
+
+    // MARK: Properties - Transition - Appear
+    /// Appear animation. Set to `easeInOut` with duration `0.3`.
+    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+
+    // MARK: Properties - Transition - Disappear
+    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
+    ///
+    /// This is a standard disappear animation. Other dismiss methods, such as drag-back, are handled elsewhere.
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+
+    // MARK: Properties - Transition - Drag-Back Dismiss
+    /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
+    ///
+    /// Has no effect unless `dismissType` includes `dragBack`.
+    public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
+
+    func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
+
+    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
+    ///
+    /// Has no effect unless `dismissType` includes `dragBack`.
+    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+
     // MARK: Properties - Keyboard Responsiveness
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
@@ -122,25 +149,6 @@ public struct VSideBarUIModel {
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Dismiss Type
-    /// Method of dismissing side bar. Set to `default`.
-    public var dismissType: DismissType = .default
-
-    /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
-    public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
-
-    func dragBackDismissDistance(in containerDimension: CGFloat) -> CGFloat { dragBackDismissDistanceWidthRatio * containerDimension }
-
-    // MARK: Properties - Transition
-    /// Appear animation. Set to `easeInOut` with duration `0.3`.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
-
-    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
-
-    /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
-    public var dragBackDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Initializers
     /// Initializes UI model with default values.

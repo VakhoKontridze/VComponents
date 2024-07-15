@@ -122,7 +122,7 @@ public struct VPlainButtonUIModel {
     /// Hit box. Set to `zero.
     public var hitBox: HitBox = .zero
 
-    // MARK: Properties - Transition
+    // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.

@@ -245,7 +245,7 @@ public struct VCheckBoxUIModel {
     /// Checkbox hit box. Set to `zero`.
     public var checkboxHitBox: HitBox = .zero
 
-    // MARK: Properties - Transition
+    // MARK: Properties - Transition - State Change
     /// Indicates if `stateChange` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.

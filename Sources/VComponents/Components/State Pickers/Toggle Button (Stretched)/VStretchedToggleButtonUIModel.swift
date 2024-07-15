@@ -185,17 +185,7 @@ public struct VStretchedToggleButtonUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
-    // MARK: Properties - Shadow
-    /// Shadow colors.
-    public var shadowColors: StateColors = .clearColors
-
-    /// Shadow radius. Set to `0`.
-    public var shadowRadius: CGFloat = 0
-
-    /// Shadow offset. Set to `zero`.
-    public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Transition
+    // MARK: Properties - Transition - State Change
     /// Indicates if `stateChange` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -208,6 +198,16 @@ public struct VStretchedToggleButtonUIModel {
 
     /// State change animation. Set to `easeIn` with duration `0.1`.
     public var stateChangeAnimation: Animation? = .easeIn(duration: 0.1)
+
+    // MARK: Properties - Shadow
+    /// Shadow colors.
+    public var shadowColors: StateColors = .clearColors
+
+    /// Shadow radius. Set to `0`.
+    public var shadowRadius: CGFloat = 0
+
+    /// Shadow offset. Set to `zero`.
+    public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)

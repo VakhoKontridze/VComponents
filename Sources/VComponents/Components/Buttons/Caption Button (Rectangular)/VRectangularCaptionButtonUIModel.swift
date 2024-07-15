@@ -274,6 +274,12 @@ public struct VRectangularCaptionButtonUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var titleCaptionTextDynamicTypeSizeType: DynamicTypeSizeType?
 
+    // MARK: Properties - Transition - State Change
+    /// Indicates if button animates state change. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var animatesStateChange: Bool = true
+
     // MARK: Properties - Shadow
     /// Shadow colors.
     ///
@@ -286,12 +292,6 @@ public struct VRectangularCaptionButtonUIModel {
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Transition
-    /// Indicates if button animates state change. Set to `true`.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var animatesStateChange: Bool = true
 
     // MARK: Properties - Haptic
 #if os(iOS)

@@ -65,6 +65,39 @@ public struct VToastUIModel {
         vertical: 12
     )
 
+    // MARK: Properties - Dismiss Type
+    /// Method of dismissing side bar. Set to `default`.
+    public var dismissType: DismissType = .default
+
+    // MARK: Properties - Transition - Appear
+    /// Appear animation. Set to `easeOut` with duration `0.2`.
+    public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
+
+    // MARK: Properties - Transition - Disappear
+    /// Disappear animation. Set to `easeIn` with duration `0.2`.
+    ///
+    /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
+
+    // MARK: Properties - Transition - Timeout Dismiss
+    /// Timeout duration. Set to `3` seconds.
+    ///
+    /// Has no effect unless `dismissType` includes `timeout`.
+    public var timeoutDuration: TimeInterval = 3
+
+    // MARK: Properties - Transition - Pull-Down Dismiss
+    /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
+    ///
+    /// Has no effect unless `dismissType` includes `pullDown`.
+    public var pullDownDismissDistanceHeightRatio: CGFloat = 0.2
+
+    func pullDownDismissDistance(in containerDimension: CGFloat) -> CGFloat { pullDownDismissDistanceHeightRatio * containerDimension }
+
+    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.2`.
+    ///
+    /// Has no effect unless `dismissType` includes `pullDown`.
+    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+
     // MARK: Properties - Shadow
     /// Shadow color.
     public var shadowColor: Color = .clear
@@ -74,30 +107,6 @@ public struct VToastUIModel {
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Dismiss Type
-    /// Method of dismissing side bar. Set to `default`.
-    public var dismissType: DismissType = .default
-
-    /// Timeout duration. Set to `3` seconds.
-    ///
-    /// Will have no effect if `timeout` isn't included in `dismissType`.
-    public var timeoutDuration: TimeInterval = 3
-
-    /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
-    public var pullDownDismissDistanceHeightRatio: CGFloat = 0.2
-
-    func pullDownDismissDistance(in containerDimension: CGFloat) -> CGFloat { pullDownDismissDistanceHeightRatio * containerDimension }
-
-    // MARK: Properties - Transition
-    /// Appear animation. Set to `easeOut` with duration `0.2`.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
-
-    /// Disappear animation. Set to `easeIn` with duration `0.2`.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
-
-    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.2`.
-    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Properties - Haptic
 #if os(iOS)

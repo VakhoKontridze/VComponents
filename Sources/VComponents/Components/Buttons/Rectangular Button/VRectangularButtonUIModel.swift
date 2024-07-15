@@ -188,6 +188,12 @@ public struct VRectangularButtonUIModel {
     /// Hit box. Set to `zero`.
     public var hitBox: HitBox = .zero
 
+    // MARK: Properties - Transition - State Change
+    /// Indicates if button animates state change. Set to `true`.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var animatesStateChange: Bool = true
+
     // MARK: Properties - Shadow
     /// Shadow colors.
     public var shadowColors: StateColors = .clearColors
@@ -197,12 +203,6 @@ public struct VRectangularButtonUIModel {
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Transitions
-    /// Indicates if button animates state change. Set to `true`.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var animatesStateChange: Bool = true
 
     // MARK: Properties - Haptic
 #if os(iOS)

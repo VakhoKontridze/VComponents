@@ -148,7 +148,7 @@ public struct VRollingCounterUIModel {
     /// To hide highlight, set to `nil`.
     public var decrementHighlightColor: Color? = .red
 
-    // MARK: Properties - Transition
+    // MARK: Properties - Transition - Highlight/Dehighlight
     /// Highlight and rolling animation. Set to `easeOut` with duration `0.25`.
     public var highlightAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.25)
 

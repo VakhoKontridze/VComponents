@@ -126,18 +126,24 @@ public struct VBottomSheetUIModel {
     /// Has no effect on fixed bottom sheet.
     public var contentIsDraggable: Bool = false
 
-    // MARK: Properties - Keyboard Responsiveness
-    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
-    public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
-
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal. Set to `default`.
     public var dismissType: DismissType = .default
 
-    /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
-    public var velocityToSnapToNextHeight: CGFloat = 600
+    // MARK: Properties - Transition - Appear
+    /// Appear animation. Set to `easeInOut` with duration `0.3`.
+    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
-    /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Set to `0.1`.
+    // MARK: Properties - Transition - Disappear
+    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
+    ///
+    /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+
+    // MARK: Properties - Transition - Pull-Down Dismiss
+    /// Ratio of distance to drag bottom sheet by, relative to min height, to initiate dismiss. Set to `0.1`.
+    ///
+    /// Has no effect unless `dismissType` includes `pullDown`.
     public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
 
     func pullDownDismissDistance(
@@ -146,6 +152,22 @@ public struct VBottomSheetUIModel {
     ) -> CGFloat {
         pullDownDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
     }
+
+    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.15`.
+    ///
+    /// Has no effect unless `dismissType` includes `pullDown`.
+    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
+
+    // MARK: Properties - Transition - Snap
+    /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
+    public var velocityToSnapToNextHeight: CGFloat = 600
+
+    /// Height snapping animation between `min`, `ideal`, and `max` states. Set to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
+    public var heightSnapAnimation: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
+
+    // MARK: Properties - Keyboard Responsiveness
+    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Shadow
     /// Shadow color.
@@ -157,19 +179,6 @@ public struct VBottomSheetUIModel {
     /// Shadow offset. Set to `(0, -3)`.
     public var shadowOffset: CGPoint = .init(x: 0, y: -3)
 
-    // MARK: Properties - Transition
-    /// Appear animation. Set to `easeInOut` with duration `0.3`.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
-
-    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
-
-    /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.15`.
-    public var pullDownDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
-
-    /// Height snapping animation between `min`, `ideal`, and `max` states. Set to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
-    public var heightSnapAnimation: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
-    
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}

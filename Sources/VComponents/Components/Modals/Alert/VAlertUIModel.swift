@@ -329,6 +329,18 @@ public struct VAlertUIModel {
         return uiModel
     }
 
+    // MARK: Properties - Transition - Appear/Disappear
+    /// Scale effect during appear and disappear. Set to `1.01`.
+    public var scaleEffect: CGFloat = 1.01
+
+    // MARK: Properties - Transition - Appear
+    /// Appear animation. Set to `linear` with duration `0.05`.
+    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+
+    // MARK: Properties - Transition - Disappear
+    /// Disappear animation. Set to `easeIn` with duration `0.05`.
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+
     // MARK: Properties - Keyboard Responsiveness
     /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
@@ -342,16 +354,6 @@ public struct VAlertUIModel {
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
-
-    // MARK: Properties - Transition
-    /// Appear animation. Set to `linear` with duration `0.05`.
-    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
-
-    /// Disappear animation. Set to `easeIn` with duration `0.05`.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
-
-    /// Scale effect during appear and disappear. Set to `1.01`.
-    public var scaleEffect: CGFloat = 1.01
 
     // MARK: Initializers
     /// Initializes UI model with default values.

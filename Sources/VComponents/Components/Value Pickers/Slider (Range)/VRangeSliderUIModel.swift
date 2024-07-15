@@ -171,7 +171,7 @@ public struct VRangeSliderUIModel {
 #endif
     }()
 
-    // MARK: Properties - Transition
+    // MARK: Properties - Transition - Progress
     /// Indicates if `progress` animation is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
