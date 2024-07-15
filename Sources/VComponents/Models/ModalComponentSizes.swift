@@ -54,22 +54,18 @@ public struct ModalComponentSizes<ModalSize> {
 
 extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
 
-// MARK: - Standard Modal Component Size
+// MARK: - Modal Component Size
 /// Modal component size.
 @MemberwiseInitializable(
-    comment: "/// Initializes `StandardModalComponentSize` with width and height."
+    comment: "/// Initializes `ModalComponentSize` with width and height."
 )
-public struct StandardModalComponentSize: Equatable {
+public struct ModalComponentSize: Equatable {
     /// Width.
     public var width: ModalComponentDimension
 
     /// Height.
     public var height: ModalComponentDimension
 }
-
-// MARK: - Single Dimension Modal Component Size
-///Modal component size with a single dimension, either width or height.
-public typealias SingleDimensionModalComponentSize = ModalComponentDimension
 
 // MARK: - Modal Component Dimension
 /// Enumeration that represents modal component dimension, either in points or fractions.

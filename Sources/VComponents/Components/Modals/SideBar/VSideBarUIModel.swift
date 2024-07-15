@@ -164,7 +164,7 @@ public struct VSideBarUIModel {
 
     // MARK: Size
     /// Side bar size.
-    public typealias Size = StandardModalComponentSize
+    public typealias Size = ModalComponentSize
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.

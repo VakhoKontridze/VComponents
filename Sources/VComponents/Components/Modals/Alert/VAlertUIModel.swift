@@ -366,7 +366,7 @@ public struct VAlertUIModel {
 
     // MARK: Width
     /// Alert width.
-    public typealias Width = SingleDimensionModalComponentSize
+    public typealias Width = ModalComponentDimension
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
