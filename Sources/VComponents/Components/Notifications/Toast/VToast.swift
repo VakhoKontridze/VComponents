@@ -101,26 +101,26 @@ struct VToast: View {
             .font(uiModel.textFont)
             .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-            .padding(uiModel.textMargins)
+            .padding(uiModel.bodyMargins)
 
             .applyModifier({ view in
                 switch currentWidth.storage {
-                case .fixed(let width, let alignment):
+                case .fixed(let width):
                     view
                         .frame(
                             width: width,
                             alignment: Alignment(
-                                horizontal: alignment,
+                                horizontal: uiModel.bodyHorizontalAlignment,
                                 vertical: .center
                             )
                         )
 
-                case .fixedFraction(let widthFraction, let alignment):
+                case .fixedFraction(let widthFraction):
                     view
                         .frame(
                             width: containerSize.width * widthFraction,
                             alignment: Alignment(
-                                horizontal: alignment,
+                                horizontal: uiModel.bodyHorizontalAlignment,
                                 vertical: .center
                             )
                         )
@@ -134,19 +134,18 @@ struct VToast: View {
                 case .wrappedMaxWidthFraction:
                     view
 
-                case .stretched(let alignment, _):
+                case .stretched:
                     view
                         .frame(
                             maxWidth: .infinity,
                             alignment: Alignment(
-                                horizontal: alignment,
+                                horizontal: uiModel.bodyHorizontalAlignment,
                                 vertical: .center
                             )
                         )
                 }
             })
 
-            // No need for clipping for preventing content from overflowing here, since background is applied via modifier
             .clipShape(.rect(cornerRadius: cornerRadius))
 
             .background(content: { backgroundView })
@@ -192,7 +191,7 @@ struct VToast: View {
                     case .wrappedMaxWidth(_, let marginHorizontal): marginHorizontal
                     case .wrappedMaxWidthFraction(_, let marginHorizontal): marginHorizontal
 
-                    case .stretched(_, let marginHorizontal): marginHorizontal
+                    case .stretched(let marginHorizontal): marginHorizontal
                     }
                 }()
             )
@@ -445,7 +444,9 @@ struct VToast: View {
 #Preview("Width Types", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
+        
         @State private var width: VToastUIModel.Width?
+        @State private var alignment: HorizontalAlignment?
 
         var body: some View {
             PreviewContainer(content: {
@@ -460,6 +461,10 @@ struct VToast: View {
                                 uiModel.widths = VToastUIModel.Widths(width)
                             }
 
+                            if let alignment {
+                                uiModel.bodyHorizontalAlignment = alignment
+                            }
+
                             uiModel.timeoutDuration = 60
 
                             return uiModel
@@ -471,28 +476,36 @@ struct VToast: View {
                         try? await Task.sleep(seconds: 1)
 
                         while true {
-                            width = .fixed(widthFraction: 0.75, alignment: .leading)
+                            width = .fixed(widthFraction: 0.75)
+                            alignment = .leading
                             try? await Task.sleep(seconds: 1)
 
-                            width = .fixed(widthFraction: 0.75, alignment: .center)
+                            width = .fixed(widthFraction: 0.75)
+                            alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .fixed(widthFraction: 0.75, alignment: .trailing)
+                            width = .fixed(widthFraction: 0.75)
+                            alignment = .trailing
                             try? await Task.sleep(seconds: 1)
 
                             width = .wrapped(marginHorizontal: 15)
+                            alignment = .center
                             try? await Task.sleep(seconds: 1)
 
                             width = .wrapped(maxWidthFraction: 0.75, marginHorizontal: 15)
+                            alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(alignment: .leading, marginHorizontal: 15)
+                            width = .stretched(marginHorizontal: 15)
+                            alignment = .leading
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(alignment: .center, marginHorizontal: 15)
+                            width = .stretched(marginHorizontal: 15)
+                            alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(alignment: .trailing, marginHorizontal: 15)
+                            width = .stretched(marginHorizontal: 15)
+                            alignment = .trailing
                             try? await Task.sleep(seconds: 1)
                         }
                     })

@@ -42,7 +42,17 @@ public struct VToastUIModel {
     /// Background color.
     public var backgroundColor: Color = .dynamic(Color(235, 235, 235), Color(60, 60, 60))
 
-    // MARK: Properties - Text
+    // MARK: Properties - Body
+    /// Body horizontal alignment. Set to `center`.
+    public var bodyHorizontalAlignment: HorizontalAlignment = .center
+
+    /// Body margins. Set to `(20, 12)`.
+    public var bodyMargins: Margins = .init(
+        horizontal: 20,
+        vertical: 12
+    )
+
+    // MARK: Properties - Body - Text
     /// Text line type. Set to `singleLine`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -61,12 +71,6 @@ public struct VToastUIModel {
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
-
-    /// Text margins. Set to `(20, 12)`.
-    public var textMargins: Margins = .init(
-        horizontal: 20,
-        vertical: 12
-    )
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing side bar. Set to `default`.
@@ -144,26 +148,22 @@ public struct VToastUIModel {
 
         /// Toast takes specified width.
         public static func fixed(
-            width: CGFloat,
-            alignment: HorizontalAlignment
+            width: CGFloat
         ) -> Self {
             self.init(
                 .fixed(
-                    width: width,
-                    alignment: alignment
+                    width: width
                 )
             )
         }
 
         /// Toast takes specified width fraction, relative to container.
         public static func fixed(
-            widthFraction: CGFloat,
-            alignment: HorizontalAlignment
+            widthFraction: CGFloat
         ) -> Self {
             self.init(
                 .fixedFraction(
-                    widthFraction: widthFraction,
-                    alignment: alignment
+                    widthFraction: widthFraction
                 )
             )
         }
@@ -207,12 +207,10 @@ public struct VToastUIModel {
 
         /// Toast stretches to full width.
         public static func stretched(
-            alignment: HorizontalAlignment,
             marginHorizontal: CGFloat
         ) -> Self {
             self.init(
                 .stretched(
-                    alignment: alignment,
                     marginHorizontal: marginHorizontal
                 )
             )
@@ -220,14 +218,14 @@ public struct VToastUIModel {
 
         // MARK: Storage
         enum Storage: Equatable {
-            case fixed(width: CGFloat, alignment: HorizontalAlignment)
-            case fixedFraction(widthFraction: CGFloat, alignment: HorizontalAlignment)
+            case fixed(width: CGFloat)
+            case fixedFraction(widthFraction: CGFloat)
 
             case wrapped(marginHorizontal: CGFloat)
             case wrappedMaxWidth(maxWidth: CGFloat, marginHorizontal: CGFloat)
             case wrappedMaxWidthFraction(maxWidthFraction: CGFloat, marginHorizontal: CGFloat)
 
-            case stretched(alignment: HorizontalAlignment, marginHorizontal: CGFloat)
+            case stretched(marginHorizontal: CGFloat)
         }
     }
 
