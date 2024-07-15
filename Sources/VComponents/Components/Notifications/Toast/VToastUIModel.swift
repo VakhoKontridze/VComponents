@@ -81,7 +81,7 @@ public struct VToastUIModel {
 
     /// Timeout duration. Set to `3` seconds.
     ///
-    /// Will not have effect if `timeout` isn't included in `dismissType`.
+    /// Will have no effect if `timeout` isn't included in `dismissType`.
     public var timeoutDuration: TimeInterval = 3
 
     /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.

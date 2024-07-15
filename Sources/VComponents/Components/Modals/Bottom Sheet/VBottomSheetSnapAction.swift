@@ -106,14 +106,16 @@ private enum VBottomSheetRegion {
         heights: VBottomSheetUIModel.Heights,
         offset: CGFloat
     ) {
-        if offset >= heights.maxOffset(in: containerHeight) && offset <= heights.idealOffset(in: containerHeight) {
-            self = .idealToMax
-        } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
-            self = .minToIdeal
-        } else if offset > heights.minOffset(in: containerHeight) {
-            self = .pullDownToMin
-        } else {
-            fatalError()
-        }
+        self = {
+            if offset >= heights.maxOffset(in: containerHeight) && offset <= heights.idealOffset(in: containerHeight) {
+                .idealToMax
+            } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
+                .minToIdeal
+            } else if offset > heights.minOffset(in: containerHeight) {
+                .pullDownToMin
+            } else {
+                fatalError()
+            }
+        }()
     }
 }

@@ -28,11 +28,13 @@ enum PlatformInterfaceOrientation {
 
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS) || os(visionOS))
     init(uiIInterfaceOrientation: UIInterfaceOrientation) {
-        if uiIInterfaceOrientation.isLandscape {
-            self = .landscape
-        } else {
-            self = .portrait
-        }
+        self = {
+            if uiIInterfaceOrientation.isLandscape {
+                .landscape
+            } else {
+                .portrait
+            }
+        }()
     }
 #endif
 }
