@@ -128,7 +128,7 @@ public struct VCheckBoxUIModel {
     /// Checkmark icon (indeterminate).
     public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
 
-    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to checkmark icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to checkmark icon. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isCheckmarkIconResizable: Bool = true

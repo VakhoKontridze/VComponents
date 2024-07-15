@@ -25,11 +25,11 @@ public struct VToastUIModel {
     /// Width type. Set to `default`.
     public var widthType: WidthType = .default
 
+    /// Margin from presented edge. Set to `10`.
+    public var marginPresentedEdge: CGFloat = 10
+
     /// Edge from which toast appears, and to which it disappears. Set to `bottom`.
     public var presentationEdge: VerticalEdge = .bottom
-
-    /// Safe area inset from presented edge. Set to `10`.
-    public var presentationEdgeSafeAreaInset: CGFloat = 10
 
     // MARK: Properties - Corners
     /// Corner radius type. Set to `default`.

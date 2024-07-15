@@ -234,7 +234,7 @@ public struct VTextFieldUIModel {
     /// Search button icon.
     public var searchButtonIcon: Image = ImageBook.magnifyGlass.renderingMode(.template)
 
-    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to search icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to search icon. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isSearchIconResizable: Bool = true

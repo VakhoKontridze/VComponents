@@ -247,8 +247,8 @@ struct VToast: View {
 
     private var presentedOffset: CGFloat {
         switch uiModel.presentationEdge {
-        case .top: safeAreaInsets.top + uiModel.presentationEdgeSafeAreaInset
-        case .bottom: -(safeAreaInsets.bottom + uiModel.presentationEdgeSafeAreaInset)
+        case .top: safeAreaInsets.top + uiModel.marginPresentedEdge
+        case .bottom: -(safeAreaInsets.bottom + uiModel.marginPresentedEdge)
         }
     }
 

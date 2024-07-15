@@ -51,14 +51,6 @@ public struct VAlertUIModel {
 #endif
     }()
 
-    /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
-    public var titleTextMessageTextAndContentMargins: Margins = .init(
-        leading: 15,
-        trailing: 15,
-        top: 15,
-        bottom: 10
-    )
-
     // MARK: Properties - Corners
     /// Corner radii. Set to to `20`s.
     public var cornerRadii: RectangleCornerRadii = .init(20)
@@ -91,7 +83,16 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Title
+    // MARK: Properties - Body
+    /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
+    public var titleTextMessageTextAndContentMargins: Margins = .init(
+        leading: 15,
+        trailing: 15,
+        top: 15,
+        bottom: 10
+    )
+
+    // MARK: Properties - Body - Title
     /// Title title text frame alignment. Set to `center`.
     public var titleTextFrameAlignment: HorizontalAlignment = .center
 
@@ -122,7 +123,7 @@ public struct VAlertUIModel {
         bottom: 3
     )
 
-    // MARK: Properties - Message
+    // MARK: Properties - Body - Message
     /// Message title text frame alignment. Set to `center`.
     public var messageTextFrameAlignment: HorizontalAlignment = .center
 
@@ -153,7 +154,7 @@ public struct VAlertUIModel {
         bottom: 5
     )
 
-    // MARK: Properties - Content
+    // MARK: Properties - Body - Content
     /// Content margins  Set to `(0, 0, 10, 0)`.
     public var contentMargins: Margins = .init(
         leading: 0,
@@ -162,7 +163,7 @@ public struct VAlertUIModel {
         bottom: 0
     )
 
-    // MARK: Properties - Buttons
+    // MARK: Properties - Body - Buttons
     /// Button height.
     /// Set to `40` on `iOS`.
     /// Set to `22` on `macOS`.
@@ -231,7 +232,7 @@ public struct VAlertUIModel {
     public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #endif
 
-    // MARK: Properties - Button - Primary
+    // MARK: Properties - Body - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
@@ -261,7 +262,7 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Button - Secondary
+    // MARK: Properties - Body - Button - Secondary
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
@@ -295,7 +296,7 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Button - Destructive
+    // MARK: Properties - Body - Button - Destructive
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,

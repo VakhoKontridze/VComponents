@@ -179,7 +179,7 @@ public struct VRectangularCaptionButtonUIModel {
     }()
 
     // MARK: Properties - Caption - Icon
-    /// Indicates if `resizable(capInsets:resizingMode)` modifier is applied to icon caption. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon caption. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconCaptionResizable: Bool = true
