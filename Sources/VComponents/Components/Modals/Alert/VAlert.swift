@@ -111,6 +111,7 @@ struct VAlert<Content>: View
                 $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
             }
         })
+        .padding(.vertical, uiModel.marginVertical)
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
@@ -536,7 +537,7 @@ struct VAlert<Content>: View
     return ContentView()
 })
 
-#Preview("Scrollable Buttons", body: {
+#Preview("Max Height", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
 

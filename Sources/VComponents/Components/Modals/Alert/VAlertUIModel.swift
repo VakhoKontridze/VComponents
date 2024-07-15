@@ -36,6 +36,21 @@ public struct VAlertUIModel {
 #endif
     }()
 
+    /// Vertical margin.
+    /// Set to `10` on `iOS`.
+    /// Set to `20` on `macOS`.
+    ///
+    /// Margin isn't noticeable most of the time, but when alert reaches maximum height, it will pad it.
+    public var marginVertical: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        20
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
     /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
     public var titleTextMessageTextAndContentMargins: Margins = .init(
         leading: 15,
