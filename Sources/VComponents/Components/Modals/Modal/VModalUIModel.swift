@@ -146,7 +146,7 @@ public struct VModalUIModel {
 
     // MARK: Sizes
     /// Modal sizes.
-    public typealias Sizes = ModalComponentSizes<Size>
+    public typealias Sizes = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Modal size.

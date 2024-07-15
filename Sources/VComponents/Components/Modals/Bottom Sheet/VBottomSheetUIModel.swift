@@ -185,7 +185,7 @@ public struct VBottomSheetUIModel {
 
     // MARK: Sizes
     /// Bottom sheet sizes.
-    public typealias Sizes = ModalComponentSizes<Size>
+    public typealias Sizes = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Bottom sheet size.

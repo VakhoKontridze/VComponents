@@ -1,5 +1,5 @@
 //
-//  ModalComponentSizes.swift
+//  ModalComponentSizeGroup.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 22.05.22.
@@ -8,12 +8,12 @@
 import Foundation
 import VCore
 
-// MARK: - Modal Component Sizes
+// MARK: - Modal Component Size Group
 /// Modal component sizes.
 @MemberwiseInitializable(
-    comment: "/// Initializes `ModalComponentSizes` with sizes."
+    comment: "/// Initializes `ModalComponentSizeGroup` with sizes."
 )
-public struct ModalComponentSizes<ModalSize> {
+public struct ModalComponentSizeGroup<ModalSize> {
     // MARK: Properties
     /// Portrait size .
     public var portrait: ModalSize
@@ -22,7 +22,7 @@ public struct ModalComponentSizes<ModalSize> {
     public var landscape: ModalSize
 
     // MARK: Initializers
-    /// Initializes `ModalComponentSizes` with size.
+    /// Initializes `ModalComponentSizeGroup` with size.
     public init(
         _ size: ModalSize
     ) {
@@ -52,7 +52,7 @@ public struct ModalComponentSizes<ModalSize> {
     }
 }
 
-extension ModalComponentSizes: Equatable where ModalSize: Equatable {}
+extension ModalComponentSizeGroup: Equatable where ModalSize: Equatable {}
 
 // MARK: - Modal Component Size
 /// Modal component size.

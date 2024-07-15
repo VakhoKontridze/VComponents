@@ -160,7 +160,7 @@ public struct VSideBarUIModel {
 
     // MARK: Sizes
     /// Sde bar sizes.
-    public typealias Sizes = ModalComponentSizes<Size>
+    public typealias Sizes = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Side bar size.

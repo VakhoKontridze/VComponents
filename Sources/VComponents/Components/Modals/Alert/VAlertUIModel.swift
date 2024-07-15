@@ -362,7 +362,7 @@ public struct VAlertUIModel {
 
     // MARK: Widths
     /// Alert widths.
-    public typealias Widths = ModalComponentSizes<Width>
+    public typealias Widths = ModalComponentSizeGroup<Width>
 
     // MARK: Width
     /// Alert width.
