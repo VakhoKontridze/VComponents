@@ -173,7 +173,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
             })
     }
     
-    private func dotContentView(index: Int) -> some View {
+    private func dotContentView(
+        index: Int
+    ) -> some View {
         let internalState: VPageIndicatorDotInternalState = dotInternalState(index)
 
         return Group(content: {

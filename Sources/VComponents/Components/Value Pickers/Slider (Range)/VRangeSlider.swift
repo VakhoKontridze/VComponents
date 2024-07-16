@@ -139,8 +139,10 @@ public struct VRangeSlider: View {
     }
     
     @ViewBuilder
-    private func thumbView(_ thumb: VRangeSliderThumb) -> some View {
-        if 
+    private func thumbView(
+        _ thumb: VRangeSliderThumb
+    ) -> some View {
+        if
             uiModel.thumbSize.width > 0 && 
             uiModel.thumbSize.height > 0
         {

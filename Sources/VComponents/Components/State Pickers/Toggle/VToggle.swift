@@ -151,9 +151,11 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
         })
     }
 
-    private func baseButtonView(
-        label: @escaping (VToggleInternalState) -> some View
-    ) -> some View {
+    private func baseButtonView<Content>(
+        label: @escaping (VToggleInternalState) -> Content
+    ) -> some View
+        where Content: View
+    {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
             action: {

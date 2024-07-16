@@ -152,9 +152,11 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
         })
     }
 
-    private func baseButtonView(
-        label: @escaping (VRadioButtonInternalState) -> some View
-    ) -> some View {
+    private func baseButtonView<Content>(
+        label: @escaping (VRadioButtonInternalState) -> Content
+    ) -> some View
+        where Content: View
+    {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
             action: {

@@ -158,9 +158,11 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         })
     }
 
-    private func baseButtonView(
-        label: @escaping (VCheckBoxInternalState) -> some View
-    ) -> some View {
+    private func baseButtonView<Content>(
+        label: @escaping (VCheckBoxInternalState) -> Content
+    ) -> some View
+        where Content: View
+    {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
             action: {

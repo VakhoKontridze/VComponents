@@ -169,7 +169,7 @@ public struct VCodeEntryView: View {
                     0..<uiModel.length,
                     id: \.self,
                     content: { index in 
-                        characterView(at: index)
+                        characterView(index: index)
 
                         if 
                             uiModel.spacingType.hasFlexibleSpace,
@@ -183,7 +183,9 @@ public struct VCodeEntryView: View {
         )
     }
 
-    private func characterView(at index: Int) -> some View {
+    private func characterView(
+        index: Int
+    ) -> some View {
         let internalState: VCodeEntryViewInternalState = internalState(index)
         let isPopulated: Bool = isPopulated(at: index)
 

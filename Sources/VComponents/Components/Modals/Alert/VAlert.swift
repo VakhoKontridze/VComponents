@@ -235,7 +235,9 @@ struct VAlert<Content>: View
         .getSize({ buttonsStackHeight = $0.height })
     }
     
-    private func buttonContentView(reversesOrder: Bool = false) -> some View {
+    private func buttonContentView(
+        reversesOrder: Bool = false
+    ) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
 
         return ForEach(
