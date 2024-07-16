@@ -13,18 +13,18 @@ import VCore
 @MemberwiseInitializable(
     comment: "/// Initializes `ModalComponentSizeGroup` with sizes."
 )
-public struct ModalComponentSizeGroup<ModalSize> {
+public struct ModalComponentSizeGroup<Size> {
     // MARK: Properties
     /// Portrait size .
-    public var portrait: ModalSize
+    public var portrait: Size
 
     /// Landscape size.
-    public var landscape: ModalSize
+    public var landscape: Size
 
     // MARK: Initializers
     /// Initializes `ModalComponentSizeGroup` with size.
     public init(
-        _ size: ModalSize
+        _ size: Size
     ) {
         self.portrait = size
         self.landscape = size
@@ -34,7 +34,7 @@ public struct ModalComponentSizeGroup<ModalSize> {
     /// Current size based on interface orientation.
     public func current(
         isPortrait: Bool
-    ) -> ModalSize {
+    ) -> Size {
         if isPortrait {
             portrait
         } else {
@@ -44,7 +44,7 @@ public struct ModalComponentSizeGroup<ModalSize> {
 
     func current(
         orientation: PlatformInterfaceOrientation
-    ) -> ModalSize {
+    ) -> Size {
         switch orientation {
         case .portrait: portrait
         case .landscape: landscape
@@ -52,46 +52,19 @@ public struct ModalComponentSizeGroup<ModalSize> {
     }
 }
 
-extension ModalComponentSizeGroup: Equatable where ModalSize: Equatable {}
+extension ModalComponentSizeGroup: Equatable where Size: Equatable {}
 
 // MARK: - Modal Component Size
 /// Modal component size.
 @MemberwiseInitializable(
     comment: "/// Initializes `ModalComponentSize` with width and height."
 )
-public struct ModalComponentSize: Equatable {
+public struct ModalComponentSize<Width, Height> {
     /// Width.
-    public var width: ModalComponentDimension
+    public var width: Width
 
     /// Height.
-    public var height: ModalComponentDimension
+    public var height: Height
 }
 
-// MARK: - Modal Component Dimension
-/// Enumeration that represents modal component dimension, either in points or fractions.
-public enum ModalComponentDimension: Equatable {
-    // MARK: Cases
-    /// Absolute measurement.
-    case absolute(CGFloat)
-
-    /// Fraction measurement.
-    case fraction(CGFloat)
-
-    // MARK: Properties
-    var value: CGFloat {
-        switch self {
-        case .absolute(let dimension): dimension
-        case .fraction(let fraction): fraction
-        }
-    }
-
-    /// Converts `ModalComponentDimension` to absolute dimension.
-    public func toAbsolute(
-        in containerDimension: CGFloat
-    ) -> CGFloat {
-        switch self {
-        case .absolute(let dimension): dimension
-        case .fraction(let fraction): fraction * containerDimension
-        }
-    }
-}
+extension ModalComponentSize: Equatable where Width: Equatable, Height: Equatable {}

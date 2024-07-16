@@ -18,8 +18,8 @@ struct VAlert<Content>: View
     // MARK: Properties - UI Model
     private let uiModel: VAlertUIModel
 
-    private var currentWidth: CGFloat {
-        uiModel.widths.current(orientation: interfaceOrientation).toAbsolute(in: containerSize.width)
+    private var currentWidth: VAlertUIModel.Width {
+        uiModel.widthGroup.current(orientation: interfaceOrientation)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -86,23 +86,25 @@ struct VAlert<Content>: View
     
     private var alertView: some View {
         VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
-            VStack(spacing: 0, content: {
-                VStack(spacing: 0, content: {
-                    titleView
-                    messageView
-                    contentView
-                })
-                .padding(uiModel.titleTextMessageTextAndContentMargins)
-                .getSize({ titleMessageContentHeight = $0.height })
-
-                buttonsScrollView
+            ZStack(content: {
+                alertContentView
             })
-            .getSize({ alertHeight = $0.height })
+            .applyModifier({
+                switch currentWidth {
+                case .fixed(let width):
+                    $0
+                        .frame(width: width.toAbsolute(in: containerSize.width))
+
+                case .stretched:
+                    $0
+                        .frame(maxWidth: .infinity)
+                }
+            })
         })
-        .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentWidth,
-            maxHeight: alertHeight
-        )
+        .frame(maxHeight: .infinity)
+
+        .padding(.horizontal, currentWidth.margin)
+        .padding(.vertical, uiModel.marginVertical)
         .applyModifier({
             // Since alert doesn't have an explicit height, prevents clipping into safe areas
             if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
@@ -111,15 +113,31 @@ struct VAlert<Content>: View
                 $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
             }
         })
-        .padding(.vertical, uiModel.marginVertical)
+
+        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
+
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
-        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
-    
+
+    private var alertContentView: some View {
+        VStack(spacing: 0, content: {
+            VStack(spacing: 0, content: {
+                titleView
+                messageView
+                contentView
+            })
+            .padding(uiModel.titleTextMessageTextAndContentMargins)
+            .getSize({ titleMessageContentHeight = $0.height })
+
+            buttonsScrollView
+        })
+        .getSize({ alertHeight = $0.height })
+    }
+
     @ViewBuilder
     private var titleView: some View {
         if let title, !title.isEmpty {
@@ -526,6 +544,48 @@ struct VAlert<Content>: View
                             VAlertButton(role: .cancel, action: nil, title: "Cancel")
                         }
                     )
+            })
+            .presentationHostLayer()
+        }
+    }
+
+    return ContentView()
+})
+
+#Preview("Width Types", body: {
+    struct ContentView: View {
+        @State private var isPresented: Bool = true
+        @State private var width: VAlertUIModel.Width?
+
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewModalLauncherView(isPresented: $isPresented)
+                    .vAlert(
+                        id: "preview",
+                        uiModel: {
+                            var uiModel: VAlertUIModel = .init()
+                            width.map { uiModel.widthGroup = VAlertUIModel.WidthGroup($0) }
+                            return uiModel
+                        }(),
+                        isPresented: $isPresented,
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet",
+                        actions: {
+                            VAlertButton(role: .primary, action: nil, title: "Confirm")
+                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                        }
+                    )
+                    .task({
+                        try? await Task.sleep(seconds: 1)
+
+                        while true {
+                            width = .fixed(width: .fraction(0.74))
+                            try? await Task.sleep(seconds: 1)
+
+                            width = .stretched(margin: 15)
+                            try? await Task.sleep(seconds: 1)
+                        }
+                    })
             })
             .presentationHostLayer()
         }

@@ -20,7 +20,7 @@ struct VNotification<Content>: View
     private let uiModel: VNotificationUIModel
 
     private var currentWidth: VNotificationUIModel.Width {
-        uiModel.widths.current(orientation: interfaceOrientation)
+        uiModel.widthGroup.current(orientation: interfaceOrientation)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -76,14 +76,10 @@ struct VNotification<Content>: View
         ZStack(content: {
             contentView
                 .applyModifier({
-                    switch currentWidth.storage {
+                    switch currentWidth {
                     case .fixed(let width):
                         $0
-                            .frame(width: width)
-
-                    case .fixedFraction(let widthFraction):
-                        $0
-                            .frame(width: containerSize.width * widthFraction)
+                            .frame(width: width.toAbsolute(in: containerSize.width))
 
                     case .stretched:
                         $0
@@ -97,17 +93,7 @@ struct VNotification<Content>: View
 
                 .getSize({ height = $0.height })
 
-                .padding(
-                    .horizontal,
-                    {
-                        switch currentWidth.storage {
-                        case .fixed: 0
-                        case .fixedFraction: 0
-
-                        case .stretched(let marginHorizontal): marginHorizontal
-                        }
-                    }()
-                )
+                .padding(.horizontal, currentWidth.margin)
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
@@ -468,10 +454,8 @@ struct VNotification<Content>: View
                         uiModel: {
                             var uiModel: VNotificationUIModel = .init()
 
-                            if let width {
-                                uiModel.widths = VNotificationUIModel.Widths(width)
-                            }
-
+                            width.map { uiModel.widthGroup = VNotificationUIModel.WidthGroup($0) }
+                            
                             uiModel.timeoutDuration = 60
 
                             return uiModel
@@ -485,10 +469,10 @@ struct VNotification<Content>: View
                         try? await Task.sleep(seconds: 1)
 
                         while true {
-                            width = .fixed(widthFraction: 0.75)
+                            width = .fixed(width: .fraction(0.75))
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(marginHorizontal: 15)
+                            width = .stretched(margin: 15)
                             try? await Task.sleep(seconds: 1)
                         }
                     })

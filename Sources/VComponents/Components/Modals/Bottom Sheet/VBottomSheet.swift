@@ -20,10 +20,10 @@ struct VBottomSheet<Content>: View
     private let uiModel: VBottomSheetUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
-        uiModel.sizes.current(orientation: interfaceOrientation).heights
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
     }
     
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -86,7 +86,7 @@ struct VBottomSheet<Content>: View
                 resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
             })
             .onChange(
-                of: uiModel.sizes,
+                of: uiModel.sizeGroup,
                 perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(orientation: interfaceOrientation).heights) }
             )
 
@@ -100,8 +100,8 @@ struct VBottomSheet<Content>: View
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
-                        .frame( // Max dimension fixes issue of safe areas and/or landscape
-                            maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
+                        .frame(
+                            height: currentHeightsObject.max.toAbsolute(in: containerSize.height)
                         )
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
@@ -116,38 +116,38 @@ struct VBottomSheet<Content>: View
                     offset: uiModel.shadowOffset
                 )
 
-            VStack(spacing: 0, content: {
-                dragIndicatorView
-                contentView
-            })
-            .frame(maxHeight: .infinity, alignment: .top)
-            
-            // Fixes issue of content-clipping, as it's not in `VGroupBox`.
-            // No need to reverse corners for RTL.
-            // `compositingGroup` helps fix glitches within subviews.
-            .compositingGroup()
-            .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
-            
-            .applyIf(!uiModel.contentIsDraggable, transform: {
-                $0
-                    .frame( // Max dimension fixes issue of safe areas and/or landscape
-                        maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
-                    )
-                    .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
-            })
+            bottomSheetContentView
+                .frame(maxHeight: .infinity, alignment: .top)
+
+                // Fixes issue of content-clipping, as it's not in `VGroupBox`.
+                // No need to reverse corners for RTL.
+                // `compositingGroup` helps fix glitches within subviews.
+                .compositingGroup()
+                .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
+
+                .applyIf(!uiModel.contentIsDraggable, transform: {
+                    $0
+                        .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
+                        .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
+                })
         })
         .frame(width: currentWidth)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
-                .frame( // Max dimension fixes issue of safe areas and/or landscape
-                    maxHeight: currentHeightsObject.max.toAbsolute(in: containerSize.height)
-                )
+                .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
                 .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
                         .onEnded(dragEnded)
                 )
+        })
+    }
+
+    private var bottomSheetContentView: some View {
+        VStack(spacing: 0, content: {
+            dragIndicatorView
+            contentView
         })
     }
 
@@ -327,8 +327,8 @@ struct VBottomSheet<Content>: View
         uiModel: VBottomSheetUIModel
     ) {
         let heightsGroup: [VBottomSheetUIModel.Heights] = [
-            uiModel.sizes.portrait.heights,
-            uiModel.sizes.landscape.heights
+            uiModel.sizeGroup.portrait.heights,
+            uiModel.sizeGroup.landscape.heights
         ]
 
         for heights in heightsGroup {
@@ -395,7 +395,7 @@ private struct ContentView_MinIdealMax: View {
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
                             portrait: VBottomSheetUIModel.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
@@ -442,7 +442,7 @@ private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
                             portrait: VBottomSheetUIModel.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
@@ -489,7 +489,7 @@ private struct ContentView_IdealMax: View { // TODO: Move into macro when nested
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
                             portrait: VBottomSheetUIModel.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
@@ -536,7 +536,7 @@ private struct ContentView_IdealSmall: View { // TODO: Move into macro when nest
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
                             portrait: VBottomSheetUIModel.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.2)
@@ -583,7 +583,7 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
-                        uiModel.sizes = VBottomSheetUIModel.Sizes(
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
                             portrait: VBottomSheetUIModel.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.9)
@@ -649,8 +649,8 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
                                         safeAreaInsets: safeAreaInsets
                                     )
                                     
-                                    uiModel.sizes.portrait.heights = .absolute(height)
-                                    uiModel.sizes.portrait.heights = .absolute(height)
+                                    uiModel.sizeGroup.portrait.heights = .absolute(height)
+                                    uiModel.sizeGroup.portrait.heights = .absolute(height)
                                 }
                                 
                                 return uiModel

@@ -17,19 +17,19 @@ public struct VAlertUIModel {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
 
-    /// Alert sizes.
-    /// Set to `0.75` fraction in portrait and `0.5` fraction in landscape on `iOS`.
-    /// Set to `250` on `macOS`.
-    public var widths: Widths = {
+    /// Alert width group.
+    /// Set to `fixed` `fraction` `0.75` in portrait and `fixed` `fraction` `0.5` in landscape on `iOS`.
+    /// Set to `fixed` `absolute`  `250` on `macOS`.
+    public var widthGroup: WidthGroup = {
 #if os(iOS)
-        Widths(
-            portrait: .fraction(0.75),
-            landscape: .fraction(0.5)
+        WidthGroup(
+            portrait: .fixed(width: .fraction(0.75)),
+            landscape: .fixed(width: .fraction(0.5))
         )
 #elseif os(macOS)
-        Widths(
-            portrait: .absolute(250),
-            landscape: .absolute(0)
+        WidthGroup(
+            portrait: .fixed(width: .absolute(250)),
+            landscape: .fixed(width: .absolute(0))
         )
 #else
         fatalError() // Not supported
@@ -83,7 +83,7 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Body
+    // MARK: Properties - Alert Content
     /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
     public var titleTextMessageTextAndContentMargins: Margins = .init(
         leading: 15,
@@ -92,7 +92,7 @@ public struct VAlertUIModel {
         bottom: 10
     )
 
-    // MARK: Properties - Body - Title
+    // MARK: Properties - Alert Content - Title
     /// Title text frame alignment. Set to `center`.
     public var titleTextFrameAlignment: HorizontalAlignment = .center
 
@@ -123,7 +123,7 @@ public struct VAlertUIModel {
         bottom: 3
     )
 
-    // MARK: Properties - Body - Message
+    // MARK: Properties - Alert Content - Message
     /// Message title text frame alignment. Set to `center`.
     public var messageTextFrameAlignment: HorizontalAlignment = .center
 
@@ -154,7 +154,7 @@ public struct VAlertUIModel {
         bottom: 5
     )
 
-    // MARK: Properties - Body - Content
+    // MARK: Properties - Alert Content - Content
     /// Content margins  Set to `(0, 0, 10, 0)`.
     public var contentMargins: Margins = .init(
         leading: 0,
@@ -163,7 +163,7 @@ public struct VAlertUIModel {
         bottom: 0
     )
 
-    // MARK: Properties - Body - Buttons
+    // MARK: Properties - Alert Content - Buttons
     /// Button height.
     /// Set to `40` on `iOS`.
     /// Set to `22` on `macOS`.
@@ -232,7 +232,7 @@ public struct VAlertUIModel {
     public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #endif
 
-    // MARK: Properties - Body - Button - Primary
+    // MARK: Properties - Alert Content - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
@@ -262,7 +262,7 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Body - Button - Secondary
+    // MARK: Properties - Alert Content - Button - Secondary
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
@@ -296,7 +296,7 @@ public struct VAlertUIModel {
         return uiModel
     }
 
-    // MARK: Properties - Body - Button - Destructive
+    // MARK: Properties - Alert Content - Button - Destructive
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
@@ -360,13 +360,28 @@ public struct VAlertUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Widths
-    /// Alert widths.
-    public typealias Widths = ModalComponentSizeGroup<Width>
+    // MARK: Width Group
+    /// Alert width group.
+    public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
     /// Alert width.
-    public typealias Width = ModalComponentDimension
+    public enum Width {
+        // MARK: Cases
+        /// Fixed width.
+        case fixed(width: AbsoluteFractionMeasurement)
+
+        /// Stretched width.
+        case stretched(margin: CGFloat)
+
+        // MARK: Properties
+        var margin: CGFloat {
+            switch self {
+            case .fixed: 0
+            case .stretched(let margin): margin
+            }
+        }
+    }
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.

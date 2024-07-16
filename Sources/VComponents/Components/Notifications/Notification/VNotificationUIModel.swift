@@ -22,10 +22,10 @@ public struct VNotificationUIModel {
         return uiModel
     }
 
-    /// Widths.
-    public var widths: Widths = .init(
-        portrait: .stretched(marginHorizontal: 15),
-        landscape: .fixed(widthFraction: 0.5)
+    /// Width group. Set to `stretched` with `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
+    public var widthGroup: WidthGroup = .init(
+        portrait: .stretched(margin: 15),
+        landscape: .fixed(width: .fraction(0.5))
     )
 
     /// Edge from which notification appears, and to which it disappears. Set to `top`.
@@ -48,7 +48,7 @@ public struct VNotificationUIModel {
 #endif
     }()
 
-    // MARK: Properties - Body
+    // MARK: Properties - Notification Content
     /// Body margins. Set to `15`s.
     public var bodyMargins: Margins = .init(15)
 
@@ -58,7 +58,7 @@ public struct VNotificationUIModel {
     /// Spacing between tile text and message text. Set to `2`.
     public var titleTextAndMessageTextSpacing: CGFloat = 2
 
-    // MARK: Properties - Body - Icon
+    // MARK: Properties - Notification Content - Icon
     /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -93,7 +93,7 @@ public struct VNotificationUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
-    // MARK: Properties - Body - Icon Background
+    // MARK: Properties - Notification Content - Icon Background
     /// Icon background size. Set to `(44, 44)`.
     public var iconBackgroundSize: CGSize = .init(dimension: 44)
 
@@ -112,7 +112,7 @@ public struct VNotificationUIModel {
 #endif
     }()
 
-    // MARK: Properties - Body - Title
+    // MARK: Properties - Notification Content - Title
     /// Title text frame alignment. Set to `leading`.
     public var titleTextFrameAlignment: HorizontalAlignment = .leading
 
@@ -138,7 +138,7 @@ public struct VNotificationUIModel {
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    // MARK: Properties - Body - Message
+    // MARK: Properties - Notification Content - Message
     /// Message text frame alignment. Set to `leading`.
     public var messageTextFrameAlignment: HorizontalAlignment = .leading
 
@@ -222,61 +222,25 @@ public struct VNotificationUIModel {
     public init() {}
 
     // MARK: Widths
-    /// Notification widths..
-    public typealias Widths = ModalComponentSizeGroup<Width>
+    /// Notification width group.
+    public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
     /// Notification width.
-    public struct Width: Equatable {
+    public enum Width: Equatable {
+        // MARK: Cases
+        /// Fixed width.
+        case fixed(width: AbsoluteFractionMeasurement)
+
+        /// Stretched width.
+        case stretched(margin: CGFloat)
+
         // MARK: Properties
-        let storage: Storage
-
-        // MARK: Initializers
-        init(
-            _ storage: Storage
-        ) {
-            self.storage = storage
-        }
-
-        /// Notification takes specified width.
-        public static func fixed(
-            width: CGFloat
-        ) -> Self {
-            self.init(
-                .fixed(
-                    width: width
-                )
-            )
-        }
-
-        /// Notification takes specified width fraction, relative to container.
-        public static func fixed(
-            widthFraction: CGFloat
-        ) -> Self {
-            self.init(
-                .fixedFraction(
-                    widthFraction: widthFraction
-                )
-            )
-        }
-
-        /// Notification stretches to full width.
-        public static func stretched(
-            marginHorizontal: CGFloat
-        ) -> Self {
-            self.init(
-                .stretched(
-                    marginHorizontal: marginHorizontal
-                )
-            )
-        }
-
-        // MARK: Storage
-        enum Storage: Equatable {
-            case fixed(width: CGFloat)
-            case fixedFraction(widthFraction: CGFloat)
-
-            case stretched(marginHorizontal: CGFloat)
+        var margin: CGFloat {
+            switch self {
+            case .fixed: 0
+            case .stretched(let margin): margin
+            }
         }
     }
 

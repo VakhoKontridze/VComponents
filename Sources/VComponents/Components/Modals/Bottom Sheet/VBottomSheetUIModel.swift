@@ -21,12 +21,12 @@ public struct VBottomSheetUIModel {
         return uiModel
     }
 
-    /// Bottom sheet sizes.
-    /// Set to `[1, (0.6, 0.6, 0.9)]` fractions in portrait and `(0.7, 0.9)` fractions in landscape on `iOS`.
-    /// Set to `(0.8, 0.8)` fractions on `macOS`.
-    public var sizes: Sizes = {
+    /// Bottom sheet size group.
+    /// Set to `[1, (0.6, 0.6, 0.9)]` `fraction`s in portrait and `(0.7, 0.9)` `fraction`s in landscape on `iOS`.
+    /// Set to `(0.8, 0.8)` `fraction`s on `macOS`.
+    public var sizeGroup: SizeGroup = {
 #if os(iOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
                 width: .fraction(1),
                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
@@ -37,7 +37,7 @@ public struct VBottomSheetUIModel {
             )
         )
 #elseif os(macOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
                 width: .fraction(0.8),
                 heights: .fraction(0.8)
@@ -183,9 +183,9 @@ public struct VBottomSheetUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Sizes
-    /// Bottom sheet sizes.
-    public typealias Sizes = ModalComponentSizeGroup<Size>
+    // MARK: Size Group
+    /// Bottom sheet size group..
+    public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Bottom sheet size.
@@ -194,7 +194,7 @@ public struct VBottomSheetUIModel {
     )
     public struct Size: Equatable {
         /// Width.
-        public var width: ModalComponentDimension
+        public var width: AbsoluteFractionMeasurement
 
         /// Heights.
         public var heights: Heights
@@ -203,16 +203,16 @@ public struct VBottomSheetUIModel {
     // MARK: Heights
     /// Bottom sheet heights.
     @MemberwiseInitializable(accessLevelModifier: .private)
-    public struct Heights: Equatable { // Values mustn't be variable to ensure that all are the same `case`s
+    public struct Heights: Equatable { // Values mustn't be variable to ensure that all properties are either absolute or fractional
         // MARK: Properties
         /// Minimum height.
-        public let min: ModalComponentDimension
+        public let min: AbsoluteFractionMeasurement
 
         /// Ideal height.
-        public let ideal: ModalComponentDimension
+        public let ideal: AbsoluteFractionMeasurement
 
         /// Maximum height.
-        public let max: ModalComponentDimension
+        public let max: AbsoluteFractionMeasurement
 
         /// Indicates if model allows resizing.
         public var isResizable: Bool {
@@ -368,5 +368,15 @@ extension VBottomSheetUIModel {
         uiModel.dragIndicatorSize.height = 0
 
         return uiModel
+    }
+}
+
+// MARK: - Helpers
+extension AbsoluteFractionMeasurement {
+    /*fileprivate*/ var value: CGFloat {
+        switch self {
+        case .absolute(let value): value
+        case .fraction(let value): value
+        }
     }
 }

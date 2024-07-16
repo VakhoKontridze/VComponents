@@ -15,54 +15,54 @@ public struct VModalUIModel {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
     
-    /// Modal sizes.
-    /// Set to `(0.9, 0.6)` fractions in portrait and `(0.5, 1)` fractions in landscape on `iOS`.
-    /// Set to `(0.5, 0.8)` fractions on `macOS`.
-    /// Set to `(0.85, 0.8)` fractions on `tvOS`.
-    /// Set to `(0.5, 0.8)` fractions on `visionOS`.
-    public var sizes: Sizes = {
+    /// Modal size group.
+    /// Set to `fixed` with `(0.9, 0.6)` `fraction`s in portrait and `fixed` with `(0.5, 1)` `fraction`s in landscape on `iOS`.
+    /// Set to `fixed` with `(0.5, 0.8)` `fraction`s on `macOS`.
+    /// Set to `fixed` with `(0.85, 0.8)` `fraction`s on `tvOS`.
+    /// Set to `fixed` with `(0.5, 0.8)` `fraction`s on `visionOS`.
+    public var sizeGroup: SizeGroup = {
 #if os(iOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
-                width: .fraction(0.9),
-                height: .fraction(0.6)
+                width: .fixed(dimension: .fraction(0.9)),
+                height: .fixed(dimension: .fraction(0.6))
             ),
             landscape: Size(
-                width: .fraction(0.6),
-                height: .fraction(0.9)
+                width: .fixed(dimension: .fraction(0.6)),
+                height: .fixed(dimension: .fraction(0.9))
             )
         )
 #elseif os(macOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
-                width: .fraction(0.5),
-                height: .fraction(0.8)
+                width: .fixed(dimension: .fraction(0.5)),
+                height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .absolute(0),
-                height: .absolute(0)
+                width: .fixed(dimension: .absolute(0)),
+                height: .fixed(dimension: .absolute(0))
             )
         )
 #elseif os(tvOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
-                width: .fraction(0.85),
-                height: .fraction(0.8)
+                width: .fixed(dimension: .fraction(0.85)),
+                height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .absolute(0),
-                height: .absolute(0)
+                width: .fixed(dimension: .absolute(0)),
+                height: .fixed(dimension: .absolute(0))
             )
         )
 #elseif os(visionOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
-                width: .fraction(0.5),
-                height: .fraction(0.8)
+                width: .fixed(dimension: .fraction(0.5)),
+                height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .absolute(0),
-                height: .absolute(0)
+                width: .fixed(dimension: .absolute(0)),
+                height: .fixed(dimension: .absolute(0))
             )
         )
 #else
@@ -144,13 +144,36 @@ public struct VModalUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Sizes
-    /// Modal sizes.
-    public typealias Sizes = ModalComponentSizeGroup<Size>
+    // MARK: Size Group
+    /// Modal size group.
+    public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Modal size.
-    public typealias Size = ModalComponentSize
+    public typealias Size = ModalComponentSize<Dimension, Dimension>
+
+    // MARK: Dimension
+    /// Modal dimension.
+    public enum Dimension {
+        // MARK: Cases
+        /// Fixed dimension.
+        case fixed(dimension: AbsoluteFractionMeasurement)
+
+        /// Wrapped dimension.
+        case wrapped(margin: CGFloat)
+
+        /// Stretched dimension.
+        case stretched(margin: CGFloat)
+
+        // MARK: Properties
+        var margin: CGFloat {
+            switch self {
+            case .fixed: 0
+            case .wrapped(let margin): margin
+            case .stretched(let margin): margin
+            }
+        }
+    }
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.

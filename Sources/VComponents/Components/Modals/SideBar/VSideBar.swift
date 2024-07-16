@@ -17,10 +17,10 @@ struct VSideBar<Content>: View where Content: View {
     private let uiModel: VSideBarUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizes.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -78,30 +78,36 @@ struct VSideBar<Content>: View where Content: View {
     
     private var sideBarView: some View {
         VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
-            content()
-                .padding(uiModel.contentMargins)
-                .applyModifier({
-                    if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                        $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-                    } else {
-                        $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-                    }
-                })
+            contentView
+                .frame(
+                    width: currentWidth,
+                    height: currentHeight
+                )
         })
-        .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentWidth,
-            maxHeight: currentHeight
-        )
+        .offset(isPresentedInternally ? .zero : initialOffset)
+
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
-        .offset(isPresentedInternally ? .zero : initialOffset)
+
         .gesture(
             DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
                 .onChanged(dragChanged)
         )
+    }
+
+    private var contentView: some View {
+        content()
+            .padding(uiModel.contentMargins)
+            .applyModifier({
+                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                    $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
+                } else {
+                    $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
+                }
+            })
     }
 
     // MARK: Actions

@@ -22,10 +22,10 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    /// Widths. Set to `wrapped` with `marginHorizontal` `15` in portrait and `wrapped` with `maxWidth` fraction 0.5 and `marginHorizontal` 15 in landscape.
-    public var widths: Widths = .init(
-        portrait: .wrapped(marginHorizontal: 15),
-        landscape: .wrapped(maxWidthFraction: 0.5, marginHorizontal: 15)
+    /// Width group. Set to `wrapped` with `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `margin` `15` in landscape.
+    public var widthGroup: WidthGroup = .init(
+        portrait: .wrapped(margin: 15),
+        landscape: .wrapped(maxWidth: .fraction(0.5), margin: 15)
     )
 
     /// Margin from presented edge. Set to `10`.
@@ -42,7 +42,7 @@ public struct VToastUIModel {
     /// Background color.
     public var backgroundColor: Color = .dynamic(Color(235, 235, 235), Color(60, 60, 60))
 
-    // MARK: Properties - Body
+    // MARK: Properties - Toast Content
     /// Body horizontal alignment. Set to `center`.
     public var bodyHorizontalAlignment: HorizontalAlignment = .center
 
@@ -52,7 +52,7 @@ public struct VToastUIModel {
         vertical: 12
     )
 
-    // MARK: Properties - Body - Text
+    // MARK: Properties - Toast Content - Text
     /// Text line type. Set to `singleLine`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -129,15 +129,26 @@ public struct VToastUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Widths
-    /// Toast widths.
-    public typealias Widths = ModalComponentSizeGroup<Width>
+    // MARK: Width Group
+    /// Toast width group.
+    public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
     /// Toast width.
     public struct Width: Equatable {
         // MARK: Properties
         let storage: Storage
+
+        var margin: CGFloat {
+            switch storage {
+            case .fixed: 0
+
+            case .wrapped(let margin): margin
+            case .wrappedMaxWidth(_, let margin): margin
+
+            case .stretched(let margin): margin
+            }
+        }
 
         // MARK: Initializers
         init(
@@ -146,9 +157,9 @@ public struct VToastUIModel {
             self.storage = storage
         }
 
-        /// Toast takes specified width.
+        /// Fixed width.
         public static func fixed(
-            width: CGFloat
+            width: AbsoluteFractionMeasurement
         ) -> Self {
             self.init(
                 .fixed(
@@ -157,75 +168,49 @@ public struct VToastUIModel {
             )
         }
 
-        /// Toast takes specified width fraction, relative to container.
-        public static func fixed(
-            widthFraction: CGFloat
-        ) -> Self {
-            self.init(
-                .fixedFraction(
-                    widthFraction: widthFraction
-                )
-            )
-        }
-
-        /// Toast wraps body and takes only required width.
+        /// Wrapped width.
         public static func wrapped(
-            marginHorizontal: CGFloat
+            margin: CGFloat
         ) -> Self {
             self.init(
                 .wrapped(
-                    marginHorizontal: marginHorizontal
+                    margin: margin
                 )
             )
         }
 
-        /// Toast wraps body and takes only required width, but with max width.
+        /// Wrapped width.
         public static func wrapped(
-            maxWidth: CGFloat,
-            marginHorizontal: CGFloat
+            maxWidth: AbsoluteFractionMeasurement,
+            margin: CGFloat
         ) -> Self {
             self.init(
                 .wrappedMaxWidth(
                     maxWidth: maxWidth,
-                    marginHorizontal: marginHorizontal
+                    margin: margin
                 )
             )
         }
 
-        /// Toast wraps body and takes only required width, but with max width fraction, relative to container.
-        public static func wrapped(
-            maxWidthFraction: CGFloat,
-            marginHorizontal: CGFloat
-        ) -> Self {
-            self.init(
-                .wrappedMaxWidthFraction(
-                    maxWidthFraction: maxWidthFraction,
-                    marginHorizontal: marginHorizontal
-                )
-            )
-        }
-
-        /// Toast stretches to full width.
+        /// Stretched width.
         public static func stretched(
-            marginHorizontal: CGFloat
+            margin: CGFloat
         ) -> Self {
             self.init(
                 .stretched(
-                    marginHorizontal: marginHorizontal
+                    margin: margin
                 )
             )
         }
 
         // MARK: Storage
         enum Storage: Equatable {
-            case fixed(width: CGFloat)
-            case fixedFraction(widthFraction: CGFloat)
+            case fixed(width: AbsoluteFractionMeasurement)
 
-            case wrapped(marginHorizontal: CGFloat)
-            case wrappedMaxWidth(maxWidth: CGFloat, marginHorizontal: CGFloat)
-            case wrappedMaxWidthFraction(maxWidthFraction: CGFloat, marginHorizontal: CGFloat)
+            case wrapped(margin: CGFloat)
+            case wrappedMaxWidth(maxWidth: AbsoluteFractionMeasurement, margin: CGFloat)
 
-            case stretched(marginHorizontal: CGFloat)
+            case stretched(margin: CGFloat)
         }
     }
 

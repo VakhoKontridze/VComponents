@@ -283,7 +283,8 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
             })
             .frame(height: uiModel.selectedTabIndicatorHeight)
             .padding(
-                .leading, uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+                .leading, 
+                uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
                 uiModel.tabItemMargins.leading + (isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
                 0
             )

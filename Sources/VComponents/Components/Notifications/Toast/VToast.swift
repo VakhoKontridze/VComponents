@@ -18,7 +18,7 @@ struct VToast: View {
     private let uiModel: VToastUIModel
 
     private var currentWidth: VToastUIModel.Width {
-        uiModel.widths.current(orientation: interfaceOrientation)
+        uiModel.widthGroup.current(orientation: interfaceOrientation)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -73,22 +73,12 @@ struct VToast: View {
     private var toastView: some View {
         ZStack(content: {
             contentView
-                .applyModifier({ view in
+                .applyModifier({
                     switch currentWidth.storage {
                     case .fixed(let width):
-                        view
+                        $0
                             .frame(
-                                width: width,
-                                alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
-                                    vertical: .center
-                                )
-                            )
-
-                    case .fixedFraction(let widthFraction):
-                        view
-                            .frame(
-                                width: containerSize.width * widthFraction,
+                                width: width.toAbsolute(in: containerSize.width),
                                 alignment: Alignment(
                                     horizontal: uiModel.bodyHorizontalAlignment,
                                     vertical: .center
@@ -96,16 +86,13 @@ struct VToast: View {
                             )
 
                     case .wrapped:
-                        view
+                        $0
 
                     case .wrappedMaxWidth:
-                        view
-
-                    case .wrappedMaxWidthFraction:
-                        view
+                        $0
 
                     case .stretched:
-                        view
+                        $0
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: Alignment(
@@ -125,19 +112,12 @@ struct VToast: View {
                     case .fixed:
                         $0
 
-                    case .fixedFraction:
-                        $0
-
                     case .wrapped:
                         $0
 
                     case .wrappedMaxWidth(let maxWidth, _):
                         $0
-                            .frame(maxWidth: maxWidth)
-
-                    case .wrappedMaxWidthFraction(let maxWidthFraction, _):
-                        $0
-                            .frame(maxWidth: containerSize.width * maxWidthFraction)
+                            .frame(maxWidth: maxWidth.toAbsolute(in: containerSize.width))
 
                     case .stretched:
                         $0
@@ -146,21 +126,7 @@ struct VToast: View {
 
                 .getSize({ height = $0.height })
 
-                .padding(
-                    .horizontal,
-                    {
-                        switch currentWidth.storage {
-                        case .fixed: 0
-                        case .fixedFraction: 0
-
-                        case .wrapped(let marginHorizontal): marginHorizontal
-                        case .wrappedMaxWidth(_, let marginHorizontal): marginHorizontal
-                        case .wrappedMaxWidthFraction(_, let marginHorizontal): marginHorizontal
-
-                        case .stretched(let marginHorizontal): marginHorizontal
-                        }
-                    }()
-                )
+                .padding(.horizontal, currentWidth.margin)
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
@@ -450,13 +416,9 @@ struct VToast: View {
                         uiModel: {
                             var uiModel: VToastUIModel = .init()
 
-                            if let width {
-                                uiModel.widths = VToastUIModel.Widths(width)
-                            }
+                            width.map { uiModel.widthGroup = VToastUIModel.WidthGroup($0) }
 
-                            if let alignment {
-                                uiModel.bodyHorizontalAlignment = alignment
-                            }
+                            alignment.map { uiModel.bodyHorizontalAlignment = $0 }
 
                             uiModel.timeoutDuration = 60
 
@@ -469,35 +431,35 @@ struct VToast: View {
                         try? await Task.sleep(seconds: 1)
 
                         while true {
-                            width = .fixed(widthFraction: 0.75)
+                            width = .fixed(width: .fraction(0.75))
                             alignment = .leading
                             try? await Task.sleep(seconds: 1)
 
-                            width = .fixed(widthFraction: 0.75)
+                            width = .fixed(width: .fraction(0.75))
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .fixed(widthFraction: 0.75)
+                            width = .fixed(width: .fraction(0.75))
                             alignment = .trailing
                             try? await Task.sleep(seconds: 1)
 
-                            width = .wrapped(marginHorizontal: 15)
+                            width = .wrapped(margin: 15)
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .wrapped(maxWidthFraction: 0.75, marginHorizontal: 15)
+                            width = .wrapped(maxWidth: .fraction(0.75), margin: 15)
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(marginHorizontal: 15)
+                            width = .stretched(margin: 15)
                             alignment = .leading
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(marginHorizontal: 15)
+                            width = .stretched(margin: 15)
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(marginHorizontal: 15)
+                            width = .stretched(margin: 15)
                             alignment = .trailing
                             try? await Task.sleep(seconds: 1)
                         }

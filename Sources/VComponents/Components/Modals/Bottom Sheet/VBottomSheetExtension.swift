@@ -93,8 +93,8 @@ extension View {
     ///                             safeAreaInsets: safeAreaInsets
     ///                         )
     ///
-    ///                         uiModel.sizes.portrait.heights = .absolute(height)
-    ///                         uiModel.sizes.portrait.heights = .absolute(height)
+    ///                         uiModel.sizeGroup.portrait.heights = .absolute(height)
+    ///                         uiModel.sizeGroup.portrait.heights = .absolute(height)
     ///                     }
     ///
     ///                     return uiModel

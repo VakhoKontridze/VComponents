@@ -45,8 +45,6 @@ extension View {
     ///         )
     ///     }
     ///
-    /// Width can be configured via `widths` in UI model.
-    ///
     /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VNotificationUIModel`.
     public func vNotification(
         layerID: String? = nil,

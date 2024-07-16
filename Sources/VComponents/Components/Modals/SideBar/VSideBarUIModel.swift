@@ -27,12 +27,12 @@ public struct VSideBarUIModel {
     /// Use `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel` instead.
     public var presentationEdge: Edge = .leading
 
-    /// Side bar sizes.
-    /// Set to `(0.75, 1)` fractions in portrait and `(0.5, 1)` fraction in landscape on `iOS`.
-    /// Set to `(0.33, 1)` fractions on `macOS`.
-    public var sizes: Sizes = {
+    /// Side bar size group.
+    /// Set to `(0.75, 1)` `fraction`s in portrait and `(0.5, 1)` fraction in landscape on `iOS`.
+    /// Set to `(0.33, 1)` `fraction`s on `macOS`.
+    public var sizeGroup: SizeGroup = {
 #if os(iOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
                 width: .fraction(0.75),
                 height: .fraction(1)
@@ -43,7 +43,7 @@ public struct VSideBarUIModel {
             )
         )
 #elseif os(macOS)
-        Sizes(
+        SizeGroup(
             portrait: Size(
                 width: .fraction(0.33),
                 height: .fraction(1)
@@ -158,13 +158,13 @@ public struct VSideBarUIModel {
     /// Initializes UI model with default values.
     public init() {}
 
-    // MARK: Sizes
-    /// Side bar sizes.
-    public typealias Sizes = ModalComponentSizeGroup<Size>
+    // MARK: Size Group
+    /// Side bar size group.
+    public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
     /// Side bar size.
-    public typealias Size = ModalComponentSize
+    public typealias Size = ModalComponentSize<AbsoluteFractionMeasurement, AbsoluteFractionMeasurement>
 
     // MARK: Margins
     /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
@@ -281,8 +281,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `top`.
     ///
-    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions in landscape on `iOS`.
-    /// `sizes` are set to `(1, 0.5)` fractions on `macOS`.
+    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s in portrait and `(1, 0.75)` `fraction`s in landscape on `iOS`.
+    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s on `macOS`.
     ///
     /// `cornerRadii` is set to `(0, 15, 15, 0)` on `iOS`.
     /// `cornerRadii` is set to `0`s on `macOS`.
@@ -291,9 +291,9 @@ extension VSideBarUIModel {
         
         uiModel.presentationEdge = .top
 
-        uiModel.sizes = {
+        uiModel.sizeGroup = {
 #if os(iOS)
-            Sizes(
+            SizeGroup(
                 portrait: Size(
                     width: .fraction(1),
                     height: .fraction(0.5)
@@ -304,7 +304,7 @@ extension VSideBarUIModel {
                 )
             )
 #elseif os(macOS)
-            Sizes(
+            SizeGroup(
                 portrait: Size(
                     width: .fraction(1),
                     height: .fraction(0.5)
@@ -338,8 +338,8 @@ extension VSideBarUIModel {
     ///
     /// `presentationEdge` is set to `bottom`.
     ///
-    /// `sizes` are set to `(1, 0.5)` fractions in portrait and `(1, 0.75)` fractions in landscape on `iOS`.
-    /// `sizes` are set to `(1, 0.5)` fractions on `macOS`.
+    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s in portrait and `(1, 0.75)` `fraction`s in landscape on `iOS`.
+    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s on `macOS`.
     ///
     /// `cornerRadii` is set to `(15, 0, 0, 15)` on `iOS`.
     /// `cornerRadii` is set to `0`s on `macOS`.
@@ -348,9 +348,9 @@ extension VSideBarUIModel {
         
         uiModel.presentationEdge = .bottom
 
-        uiModel.sizes = {
+        uiModel.sizeGroup = {
 #if os(iOS)
-            Sizes(
+            SizeGroup(
                 portrait: Size(
                     width: .fraction(1),
                     height: .fraction(0.5)
@@ -361,7 +361,7 @@ extension VSideBarUIModel {
                 )
             )
 #elseif os(macOS)
-            Sizes(
+            SizeGroup(
                 portrait: Size(
                     width: .fraction(1),
                     height: .fraction(0.5)

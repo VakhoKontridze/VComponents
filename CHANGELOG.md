@@ -19,27 +19,30 @@ VDisclosureGroup
 
 VModal
 
-- API is overhauled
+- Presentation API is overhauled
+- Size API is extended
 - Modal now supports `macOS`, `tvOS`, and `visionOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VBottomSheet
 
-- API is overhauled
+- Presentation API is overhauled
 - BottomSheet now supports `macOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 VSideBar
 
-- API is overhauled
+- Presentation API is overhauled
+- Size API is extended
 - SideBar now supports `macOS`
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VAlert
 
-- API is overhauled
+- Presentation API is overhauled
+- Width API is extended
 - Alert now supports `macOS`
 - `buttonTitleTextFont` is added in UI model
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
@@ -51,7 +54,8 @@ VNotification
 
 VToast
 
-- API is overhauled
+- Presentation API is overhauled
+- Width API is extended
 - Toast now supports more width types
 - Toast now supports separate width configurations for portrait and landscape modes
 - Toast can now be dismissed with swipe

@@ -16,11 +16,11 @@ struct VModal<Content>: View
     // MARK: Properties - UI Model
     private let uiModel: VModalUIModel
 
-    private var currentWidth: CGFloat {
-        uiModel.sizes.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+    private var currentWidth: VModalUIModel.Dimension {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width
     }
-    private var currentHeight: CGFloat {
-        uiModel.sizes.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
+    private var currentHeight: VModalUIModel.Dimension {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).height
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
@@ -74,20 +74,55 @@ struct VModal<Content>: View
 
     private var modalView: some View {
         VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
-            content()
-                .padding(uiModel.contentMargins)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            contentView
+                .applyModifier({
+                    switch currentWidth {
+                    case .fixed(let dimension):
+                        $0
+                            .frame(
+                                width: dimension.toAbsolute(in: containerSize.width)
+                            )
+
+                    case .wrapped:
+                        $0
+
+                    case .stretched:
+                        $0
+                            .frame(maxWidth: .infinity)
+                    }
+                })
+                .applyModifier({
+                    switch currentHeight {
+                    case .fixed(let dimension):
+                        $0
+                            .frame(
+                                height: dimension.toAbsolute(in: containerSize.height)
+                            )
+
+                    case .wrapped:
+                        $0
+
+                    case .stretched:
+                        $0
+                            .frame(maxHeight: .infinity)
+                    }
+                })
         })
-        .frame( // Max dimension fixes issue of safe areas and/or landscape
-            maxWidth: currentWidth,
-            maxHeight: currentHeight
-        )
+        .padding(.horizontal, currentWidth.margin)
+        .padding(.vertical, currentHeight.margin)
+        
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
+
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
+    }
+
+    private var contentView: some View {
+        content()
+            .padding(uiModel.contentMargins)
     }
 
     // MARK: Actions
@@ -153,11 +188,12 @@ struct VModal<Content>: View
     return ContentView()
 })
 
-#Preview("Max Frame", body: { // TODO: Move into macro when nested macro expansions are supported
-    ContentView_MaxFrame()
+#Preview("Size Types", body: { // TODO: Move into macro when nested macro expansions are supported
+    ContentView_SizeTypes()
 })
-struct ContentView_MaxFrame: View {
+private struct ContentView_SizeTypes: View {
     @State private var isPresented: Bool = true
+    @State private var size: VModalUIModel.Size?
 
     var body: some View {
         PreviewContainer(content: {
@@ -166,71 +202,43 @@ struct ContentView_MaxFrame: View {
                     id: "preview",
                     uiModel: {
                         var uiModel: VModalUIModel = .init()
-
-                        uiModel.sizes = VModalUIModel.Sizes(
-                            portrait: VModalUIModel.Size(
-                                width: .fraction(1),
-                                height: .fraction(1)
-                            ),
-                            landscape: VModalUIModel.Size(
-                                width: .fraction(1),
-                                height: .fraction(1)
-                            )
-                        )
-
-                        uiModel.contentMargins = VModalUIModel.Margins(15)
-
+                        size.map { uiModel.sizeGroup = VModalUIModel.SizeGroup($0) }
                         return uiModel
                     }(),
                     isPresented: $isPresented,
                     content: {
-                        Color.blue
+                        Text("Lorem ipsum dolor sit amet")
+                            .contentShape(.rect)
                             .onTapGesture(perform: { isPresented = false })
                     }
                 )
+                .task({
+                    try? await Task.sleep(seconds: 1)
+
+                    while true {
+                        size = VModalUIModel.Size(
+                            width: .fixed(dimension: .fraction(0.75)),
+                            height: .fixed(dimension: .fraction(0.75))
+                        )
+                        try? await Task.sleep(seconds: 1)
+
+                        size = VModalUIModel.Size(
+                            width: .wrapped(margin: 15),
+                            height: .wrapped(margin: 15)
+                        )
+                        try? await Task.sleep(seconds: 1)
+
+                        size = VModalUIModel.Size(
+                            width: .stretched(margin: 15),
+                            height: .stretched(margin: 15)
+                        )
+                        try? await Task.sleep(seconds: 1)
+                    }
+                })
         })
         .presentationHostLayer()
     }
 }
-
-#Preview("Wrapped Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-        @State private var contentHeight: CGFloat?
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vModal(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VModalUIModel = .init()
-
-                            uiModel.contentMargins = VModalUIModel.Margins(15) // Must come before calculation
-
-                            if let contentHeight {
-                                let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
-
-                                uiModel.sizes.portrait.height = .absolute(height)
-                                uiModel.sizes.landscape.height = .absolute(height)
-                            }
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: {
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
-                                .getSize({ contentHeight = $0.height })
-                                .onTapGesture(perform: { isPresented = false })
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
-})
 
 #endif
 
