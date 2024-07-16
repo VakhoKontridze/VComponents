@@ -47,7 +47,7 @@ import VCore
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: { (internalState, _) in
+///             dotContent: { (internalState, _) in
 ///                 ZStack(content: {
 ///                     Circle()
 ///                         .stroke(lineWidth: 1)
@@ -62,7 +62,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-public struct VCompactPageIndicator<Content>: View where Content: View {
+public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotContent: View {
     // MARK: Properties - UI Model
     private let uiModel: VCompactPageIndicatorUIModel
 
@@ -83,8 +83,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private var middle: Int { uiModel.middleDots }
     private let current: Int
 
-    // MARK: Properties - Content
-    private let dotContent: VCompactPageIndicatorDotContent<Content>
+    // MARK: Properties - Dot Content
+    private let dotContent: VCompactPageIndicatorDotContent<CustomDotContent>
 
     // MARK: Frame
     private var region: Region {
@@ -102,14 +102,14 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         total: Int,
         current: Int
     )
-        where Content == Never
+        where CustomDotContent == Never
     {
         Self.validate(uiModel: uiModel)
         
         self.uiModel = uiModel
         self.total = total
         self.current = current
-        self.dotContent = .empty
+        self.dotContent = .standard
     }
     
     /// Initializes `VCompactPageIndicator` with total, current index, and custom dot content.
@@ -117,14 +117,14 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,
         current: Int,
-        @ViewBuilder dot: @escaping (VCompactPageIndicatorDotInternalState, Int) -> Content
+        @ViewBuilder dotContent customDotContent: @escaping (VCompactPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
         Self.validate(uiModel: uiModel)
 
         self.uiModel = uiModel
         self.total = total
         self.current = current
-        self.dotContent = .content(content: dot)
+        self.dotContent = .custom(custom: customDotContent)
     }
     
     // MARK: Body
@@ -136,14 +136,14 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 compactBody
                 
             } else {
-                VPageIndicator<Content>(
+                VPageIndicator<CustomDotContent>(
                     uiModel: uiModel.standardPageIndicatorSubUIModel,
                     total: total,
                     current: current,
                     dotContent: {
                         switch dotContent {
-                        case .empty: VPageIndicatorDotContent.empty
-                        case .content(let content): VPageIndicatorDotContent.content(content: content)
+                        case .standard: VPageIndicatorDotContent.standard
+                        case .custom(let custom): VPageIndicatorDotContent.custom(custom: custom)
                         }
                     }()
                 )
@@ -180,7 +180,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 
         return Group(content: {
             switch dotContent {
-            case .empty:
+            case .standard:
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundStyle(uiModel.dotColors.value(for: internalState))
@@ -192,8 +192,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                     }
                 })
 
-            case .content(let content):
-                content(internalState, index)
+            case .custom(let custom):
+                custom(internalState, index)
             }
         })
         .frame(

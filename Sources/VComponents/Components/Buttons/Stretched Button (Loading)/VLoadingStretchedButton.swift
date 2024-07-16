@@ -24,7 +24,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VLoadingStretchedButton<Label>: View where Label: View {
+public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VLoadingStretchedButtonUIModel
 
@@ -43,8 +43,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     private let action: () -> Void
 
     // MARK: Properties - Label
-    private let label: VLoadingStretchedButtonLabel<Label>
-    
+    private let label: VLoadingStretchedButtonLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VLoadingStretchedButton` with loading state, action, and title.
     public init(
@@ -53,7 +53,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.isLoading = isLoading
@@ -68,7 +68,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.isLoading = isLoading
@@ -84,7 +84,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         title: String,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.isLoading = isLoading
@@ -92,17 +92,17 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         self.label = .titleAndIcon(title: title, icon: icon)
     }
     
-    /// Initializes `VLoadingStretchedButton` with loading state, action, and label.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, and custom label.
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VLoadingStretchedButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VLoadingStretchedButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self.isLoading = isLoading
         self.action = action
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -156,8 +156,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                         })
                     }
 
-                case .label(let label):
-                    label(internalState)
+                case .custom(let custom):
+                    custom(internalState)
                 }
             })
             .frame(maxWidth: .infinity)

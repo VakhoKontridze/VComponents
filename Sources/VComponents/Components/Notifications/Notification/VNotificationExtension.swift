@@ -82,16 +82,16 @@ extension View {
     /// Modal component that presents notification.
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
-    public func vNotification<Content>(
+    public func vNotification<CustomContent>(
         layerID: String? = nil,
         id: String,
         uiModel: VNotificationUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View 
-        where Content: View
+        @ViewBuilder content customContent: @escaping () -> CustomContent
+    ) -> some View
+        where CustomContent: View
     {
         self
             .presentationHost(
@@ -105,8 +105,8 @@ extension View {
                     VNotification(
                         uiModel: uiModel,
                         isPresented: isPresented,
-                        content: .content(
-                            content: content
+                        content: .custom(
+                            custom: customContent
                         )
                     )
                 }
@@ -184,16 +184,16 @@ extension View {
     /// Modal component that presents notification.
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
-    public func vNotification<Item, Content>(
+    public func vNotification<Item, CustomContent>(
         layerID: String? = nil,
         id: String,
         uiModel: VNotificationUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content customContent: @escaping (Item) -> CustomContent
     ) -> some View
-        where Content: View
+        where CustomContent: View
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
@@ -214,11 +214,11 @@ extension View {
                     VNotification(
                         uiModel: uiModel,
                         isPresented: isPresented,
-                        content: .content(
-                            content: {
+                        content: .custom(
+                            custom: {
                                 Group(content: {
                                     if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                        content(item)
+                                        customContent(item)
                                     }
                                 })
                             }

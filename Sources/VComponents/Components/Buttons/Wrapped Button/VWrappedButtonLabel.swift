@@ -10,9 +10,9 @@ import SwiftUI
 // MARK: - V Wrapped Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VWrappedButtonLabel<Label> where Label: View {
+enum VWrappedButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case label(label: (VWrappedButtonInternalState) -> Label)
+    case custom(custom: (VWrappedButtonInternalState) -> CustomLabel)
 }

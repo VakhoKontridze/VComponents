@@ -88,7 +88,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         self.uiModel = uiModel
         self.parameter = parameter
         self.fetchHandler = fetchHandler
-        self.content = .empty
+        self.content = .auto
     }
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and content.
@@ -147,7 +147,7 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     public var body: some View {
         ZStack(content: {
             switch content {
-            case .empty:
+            case .auto:
                 if case .success(let image) = result {
                     image
                 } else {

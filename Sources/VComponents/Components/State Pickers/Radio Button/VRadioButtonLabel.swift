@@ -11,8 +11,8 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VRadioButtonLabel<Label> where Label: View {
+enum VRadioButtonLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case label(label: (VRadioButtonInternalState) -> Label)
+    case custom(custom: (VRadioButtonInternalState) -> CustomLabel)
 }

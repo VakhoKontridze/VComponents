@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Compact Page Indicator Dot Content
-enum VCompactPageIndicatorDotContent<Content> where Content: View {
-    case empty
-    case content(content: (VCompactPageIndicatorDotInternalState, Int) -> Content)
+enum VCompactPageIndicatorDotContent<CustomDotContent> where CustomDotContent: View {
+    case standard
+    case custom(custom: (VCompactPageIndicatorDotInternalState, Int) -> CustomDotContent)
 }

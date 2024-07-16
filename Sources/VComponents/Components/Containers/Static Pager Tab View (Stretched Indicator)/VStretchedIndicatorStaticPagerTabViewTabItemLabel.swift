@@ -12,11 +12,11 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VStretchedIndicatorStaticPagerTabViewTabItemLabel<Element, Content>
+enum VStretchedIndicatorStaticPagerTabViewTabItemLabel<Element, CustomTabItemLabel>
     where
         Element: Hashable,
-        Content: View
+        CustomTabItemLabel: View
 {
     case title(title: (Element) -> String)
-    case label(label: (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> Content)
+    case custom(custom: (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
 }

@@ -11,8 +11,8 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VCheckBoxLabel<Label> where Label: View {
+enum VCheckBoxLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case label(label: (VCheckBoxInternalState) -> Label)
+    case custom(custom: (VCheckBoxInternalState) -> CustomLabel)
 }

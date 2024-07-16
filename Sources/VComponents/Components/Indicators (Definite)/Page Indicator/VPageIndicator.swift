@@ -62,7 +62,7 @@ import VCore
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: { (internalState, _) in
+///             dotContent: { (internalState, _) in
 ///                 ZStack(content: {
 ///                     Circle()
 ///                         .stroke(lineWidth: 1)
@@ -91,7 +91,7 @@ import VCore
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dot: { (internalState, _) in
+///             dotContnent: { (internalState, _) in
 ///                 RoundedRectangle(cornerRadius: 2)
 ///                     .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }
@@ -99,7 +99,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-public struct VPageIndicator<Content>: View where Content: View {
+public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: View {
     // MARK: Properties - UI Model
     private let uiModel: VPageIndicatorUIModel
 
@@ -116,15 +116,15 @@ public struct VPageIndicator<Content>: View where Content: View {
     private let total: Int
     private let current: Int
 
-    // MARK: Properties - Content
-    private let dotContent: VPageIndicatorDotContent<Content>
-    
+    // MARK: Properties - Dot Content
+    private let dotContent: VPageIndicatorDotContent<CustomDotContent>
+
     // MARK: Initializers - Internal
     init(
         uiModel: VPageIndicatorUIModel,
         total: Int,
         current: Int,
-        dotContent: VPageIndicatorDotContent<Content>
+        dotContent: VPageIndicatorDotContent<CustomDotContent>
     ) {
         self.uiModel = uiModel
         self.total = total
@@ -139,12 +139,12 @@ public struct VPageIndicator<Content>: View where Content: View {
         total: Int,
         current: Int
     )
-        where Content == Never
+        where CustomDotContent == Never
     {
         self.uiModel = uiModel
         self.total = total
         self.current = current
-        self.dotContent = .empty
+        self.dotContent = .standard
     }
     
     /// Initializes `VPageIndicator` with total, current index, and custom dot content.
@@ -152,12 +152,12 @@ public struct VPageIndicator<Content>: View where Content: View {
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
         current: Int,
-        @ViewBuilder dot: @escaping (VPageIndicatorDotInternalState, Int) -> Content
+        @ViewBuilder dotContent customDotContent: @escaping (VPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
         self.uiModel = uiModel
         self.total = total
         self.current = current
-        self.dotContent = .content(content: dot)
+        self.dotContent = .custom(custom: customDotContent)
     }
     
     // MARK: Body
@@ -178,7 +178,7 @@ public struct VPageIndicator<Content>: View where Content: View {
 
         return Group(content: {
             switch dotContent {
-            case .empty:
+            case .standard:
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundStyle(uiModel.dotColors.value(for: internalState))
@@ -190,8 +190,8 @@ public struct VPageIndicator<Content>: View where Content: View {
                     }
                 })
                 
-            case .content(let content):
-                content(internalState, index)
+            case .custom(let custom):
+                custom(internalState, index)
             }
         })
         .frame(
@@ -336,7 +336,7 @@ public struct VPageIndicator<Content>: View where Content: View {
                     uiModel: uiModel,
                     total: total,
                     current: current,
-                    dot: { (internalState, _) in
+                    dotContent: { (internalState, _) in
                         RoundedRectangle(cornerRadius: 2)
                             .foregroundStyle(uiModel.dotColors.value(for: internalState))
                     }

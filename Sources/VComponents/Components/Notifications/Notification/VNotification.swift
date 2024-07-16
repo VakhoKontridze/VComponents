@@ -13,9 +13,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-struct VNotification<Content>: View
-    where Content: View
-{
+struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Properties - UI Model
     private let uiModel: VNotificationUIModel
 
@@ -37,7 +35,7 @@ struct VNotification<Content>: View
     @State private var isPresentedInternally: Bool = false
 
     // MARK: Properties - Content
-    private let content: VNotificationContent<Content>
+    private let content: VNotificationContent<CustomContent>
 
     // MARK: Properties - Frame
     @State private var height: CGFloat = 0
@@ -53,7 +51,7 @@ struct VNotification<Content>: View
     init(
         uiModel: VNotificationUIModel,
         isPresented: Binding<Bool>,
-        content: VNotificationContent<Content>
+        content: VNotificationContent<CustomContent>
     ) {
         self.uiModel = uiModel
         self._isPresented = isPresented
@@ -125,8 +123,8 @@ struct VNotification<Content>: View
                     }
                 )
 
-            case .content(let content):
-                content()
+            case .custom(let custom):
+                custom()
             }
         })
         .padding(uiModel.bodyMargins)

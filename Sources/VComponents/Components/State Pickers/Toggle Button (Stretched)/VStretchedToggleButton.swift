@@ -50,7 +50,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VStretchedToggleButton<Label>: View where Label: View {
+public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VStretchedToggleButtonUIModel
 
@@ -65,7 +65,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         )
     }
     // MARK: Properties - Label
-    private let label: VStretchedToggleButtonLabel<Label>
+    private let label: VStretchedToggleButtonLabel<CustomLabel>
 
     // MARK: Initializers
     /// Initializes `VStretchedToggleButton` with state and title.
@@ -74,7 +74,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         state: Binding<VStretchedToggleButtonState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -87,7 +87,7 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         state: Binding<VStretchedToggleButtonState>,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -101,22 +101,22 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
         title: String,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .titleAndIcon(title: title, icon: icon)
     }
 
-    /// Initializes `VStretchedToggleButton` with state and label.
+    /// Initializes `VStretchedToggleButton` with state and custom label.
     public init(
         uiModel: VStretchedToggleButtonUIModel = .init(),
         state: Binding<VStretchedToggleButtonState>,
-        @ViewBuilder label: @escaping (VStretchedToggleButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VStretchedToggleButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
 
     // MARK: Body
@@ -171,8 +171,8 @@ public struct VStretchedToggleButton<Label>: View where Label: View {
                     })
                 }
 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .frame(maxWidth: .infinity)

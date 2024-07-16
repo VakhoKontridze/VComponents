@@ -47,7 +47,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VWrappedToggleButton<Label>: View where Label: View {
+public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappedToggleButtonUIModel
 
@@ -63,7 +63,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VWrappedToggleButtonLabel<Label>
+    private let label: VWrappedToggleButtonLabel<CustomLabel>
 
     // MARK: Initializers
     /// Initializes `VWrappedToggleButton` with state and title.
@@ -72,7 +72,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         state: Binding<VWrappedToggleButtonState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -85,7 +85,7 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         state: Binding<VWrappedToggleButtonState>,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -99,22 +99,22 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
         title: String,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .titleAndIcon(title: title, icon: icon)
     }
 
-    /// Initializes `VWrappedToggleButton` with state and label.
+    /// Initializes `VWrappedToggleButton` with state and custom label.
     public init(
         uiModel: VWrappedToggleButtonUIModel = .init(),
         state: Binding<VWrappedToggleButtonState>,
-        @ViewBuilder label: @escaping (VWrappedToggleButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VWrappedToggleButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
 
     // MARK: Body
@@ -170,8 +170,8 @@ public struct VWrappedToggleButton<Label>: View where Label: View {
                     })
                 }
 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)

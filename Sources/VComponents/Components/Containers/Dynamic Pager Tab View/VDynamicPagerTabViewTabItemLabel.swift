@@ -12,11 +12,11 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VDynamicPagerTabViewTabItemLabel<Element, Content>
+enum VDynamicPagerTabViewTabItemLabel<Element, CustomTabItemLabel>
     where
         Element: Hashable,
-        Content: View
+        CustomTabItemLabel: View
 {
     case title(title: (Element) -> String)
-    case label(label: (VDynamicPagerTabViewTabItemInternalState, Element) -> Content)
+    case custom(custom: (VDynamicPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
 }

@@ -22,7 +22,7 @@ import VCore
 /// On `macOS` and `watchOS`, an explicit width should be provided.
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable)
-public struct VStretchedButton<Label>: View where Label: View {
+public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel
 
@@ -36,8 +36,8 @@ public struct VStretchedButton<Label>: View where Label: View {
 
     private let action: () -> Void
 
-    private let label: VStretchedButtonLabel<Label>
-    
+    private let label: VStretchedButtonLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VStretchedButton` with action and title.
     public init(
@@ -45,7 +45,7 @@ public struct VStretchedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -58,7 +58,7 @@ public struct VStretchedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -72,22 +72,22 @@ public struct VStretchedButton<Label>: View where Label: View {
         title: String,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.label = .titleAndIcon(title: title, icon: icon)
     }
     
-    /// Initializes `VStretchedButton` with action and label.
+    /// Initializes `VStretchedButton` with action and custom label.
     public init(
         uiModel: VStretchedButtonUIModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VStretchedButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VStretchedButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self.action = action
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -137,8 +137,8 @@ public struct VStretchedButton<Label>: View where Label: View {
                     })
                 }
 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .frame(maxWidth: .infinity)

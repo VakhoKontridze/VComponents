@@ -20,7 +20,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VWrappedButton<Label>: View where Label: View {
+public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties
     private let uiModel: VWrappedButtonUIModel
 
@@ -34,8 +34,8 @@ public struct VWrappedButton<Label>: View where Label: View {
 
     private let action: () -> Void
 
-    private let label: VWrappedButtonLabel<Label>
-    
+    private let label: VWrappedButtonLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VWrappedButton` with action and title.
     public init(
@@ -43,7 +43,7 @@ public struct VWrappedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -56,7 +56,7 @@ public struct VWrappedButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -70,22 +70,22 @@ public struct VWrappedButton<Label>: View where Label: View {
         title: String,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.label = .titleAndIcon(title: title, icon: icon)
     }
     
-    /// Initializes `VWrappedButton` with action and label.
+    /// Initializes `VWrappedButton` with action and custom label.
     public init(
         uiModel: VWrappedButtonUIModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VWrappedButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VWrappedButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self.action = action
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -136,8 +136,8 @@ public struct VWrappedButton<Label>: View where Label: View {
                     })
                 }
 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)

@@ -44,12 +44,12 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
+public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,
         ID: Hashable,
-        TabItemLabel: View,
+        CustomTabItemLabel: View,
         Content: View
 {
     // MARK: Properties - UI Model
@@ -76,7 +76,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
     // MARK: Properties - Data
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
-    private let tabItemLabel: VDynamicPagerTabViewTabItemLabel<Data.Element, TabItemLabel>
+    private let tabItemLabel: VDynamicPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
     // MARK: Properties - Frame
@@ -99,7 +99,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         tabItemTitle: @escaping (Data.Element) -> String,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
-        where TabItemLabel == Never
+        where CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -109,20 +109,20 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         self.content = content
     }
 
-    /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VDynamicPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VDynamicPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder tabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selection = selection
         self.data = data
         self.id = id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -138,7 +138,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         where
             Data.Element: Identifiable,
             ID == Data.Element.ID,
-            TabItemLabel == Never
+            CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -148,12 +148,12 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         self.content = content
     }
 
-    /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VDynamicPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VDynamicPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
-        @ViewBuilder tabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
@@ -164,7 +164,7 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -245,8 +245,8 @@ public struct VDynamicPagerTabView<Data, ID, TabItemLabel, Content>: View
                     .font(uiModel.tabItemTextFont)
                     .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-            case .label(let label):
-                label(tabItemInternalState, element)
+            case .custom(let custom):
+                custom(tabItemInternalState, element)
             }
         })
         .fixedSize(horizontal: true, vertical: false)

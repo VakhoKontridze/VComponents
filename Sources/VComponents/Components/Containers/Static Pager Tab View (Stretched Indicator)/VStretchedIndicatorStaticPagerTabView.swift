@@ -43,12 +43,12 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Content>: View
+public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,
         ID: Hashable,
-        TabItemLabel: View,
+        CustomTabItemLabel: View,
         Content: View
 {
     // MARK: Properties - UI Model
@@ -78,7 +78,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
     // MARK: Properties - Data
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
-    private let tabItemLabel: VStretchedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, TabItemLabel>
+    private let tabItemLabel: VStretchedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
     // MARK: Properties - Frame
@@ -99,7 +99,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         tabItemTitle: @escaping (Data.Element) -> String,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
-        where TabItemLabel == Never
+        where CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -109,20 +109,20 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         self.content = content
     }
 
-    /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder tabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selection = selection
         self.data = data
         self.id = id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -138,7 +138,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         where
             Data.Element: Identifiable,
             ID == Data.Element.ID,
-            TabItemLabel == Never
+            CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -148,12 +148,12 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         self.content = content
     }
 
-    /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
-        @ViewBuilder tabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
@@ -164,7 +164,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -231,8 +231,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Cont
                     .font(uiModel.tabItemTextFont)
                     .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-            case .label(let label):
-                label(tabItemInternalState, element)
+            case .custom(let custom):
+                custom(tabItemInternalState, element)
             }
         })
         .padding(uiModel.tabItemMargins)

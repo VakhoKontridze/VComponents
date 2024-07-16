@@ -13,7 +13,7 @@ enum VFetchingAsyncImageContent<Content, PlaceholderContent>
         Content: View,
         PlaceholderContent: View
 {
-    case empty
+    case auto
     
     case content(
         content: (Image) -> Content

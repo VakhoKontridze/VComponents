@@ -10,9 +10,9 @@ import SwiftUI
 // MARK: - V Plain Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VPlainButtonLabel<Label> where Label: View {
+enum VPlainButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case label(label: (VPlainButtonInternalState) -> Label)
+    case custom(custom: (VPlainButtonInternalState) -> CustomLabel)
 }

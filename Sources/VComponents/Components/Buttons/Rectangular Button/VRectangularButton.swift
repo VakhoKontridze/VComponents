@@ -20,7 +20,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularButton<Label>: View where Label: View {
+public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties
     private let uiModel: VRectangularButtonUIModel
 
@@ -34,8 +34,8 @@ public struct VRectangularButton<Label>: View where Label: View {
 
     private let action: () -> Void
 
-    private let label: VRectangularButtonLabel<Label>
-    
+    private let label: VRectangularButtonLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VRectangularButton` with action and title.
     public init(
@@ -43,7 +43,7 @@ public struct VRectangularButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -56,22 +56,22 @@ public struct VRectangularButton<Label>: View where Label: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.label = .icon(icon: icon)
     }
     
-    /// Initializes `VRectangularButton` with action and label.
+    /// Initializes `VRectangularButton` with action and custom label.
     public init(
         uiModel: VRectangularButtonUIModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VRectangularButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VRectangularButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self.action = action
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -107,8 +107,8 @@ public struct VRectangularButton<Label>: View where Label: View {
             case .icon(let icon):
                 iconLabelViewComponent(internalState: internalState, icon: icon)
                 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)

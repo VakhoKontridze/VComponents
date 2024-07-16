@@ -11,9 +11,9 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VRectangularCaptionButtonCaption<Caption> where Caption: View {
+enum VRectangularCaptionButtonCaption<CustomCaption> where CustomCaption: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case caption(caption: (VRectangularCaptionButtonInternalState) -> Caption)
+    case custom(custom: (VRectangularCaptionButtonInternalState) -> CustomCaption)
 }

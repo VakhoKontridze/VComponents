@@ -44,12 +44,12 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Content>: View
+public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,
         ID: Hashable,
-        TabItemLabel: View,
+        CustomTabItemLabel: View,
         Content: View
 {
     // MARK: Properties - UI Model
@@ -79,7 +79,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
     // MARK: Properties - Data
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
-    private let tabItemLabel: VWrappedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, TabItemLabel>
+    private let tabItemLabel: VWrappedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
     // MARK: Properties - Frame
@@ -106,7 +106,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         tabItemTitle: @escaping (Data.Element) -> String,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
-        where TabItemLabel == Never
+        where CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -116,20 +116,20 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         self.content = content
     }
 
-    /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder tabItemLabel: @escaping (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selection = selection
         self.data = data
         self.id = id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -145,7 +145,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         where
             Data.Element: Identifiable,
             ID == Data.Element.ID,
-            TabItemLabel == Never
+            CustomTabItemLabel == Never
     {
         self.uiModel = uiModel
         self._selection = selection
@@ -155,12 +155,12 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         self.content = content
     }
 
-    /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, tab item label, and content.
+    /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
         uiModel: VWrappedIndicatorStaticPagerTabViewUIModel = .init(),
         selection: Binding<Data.Element>,
         data: Data,
-        @ViewBuilder tabItemLabel: @escaping (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> TabItemLabel,
+        @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
@@ -171,7 +171,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.tabItemLabel = .label(label: tabItemLabel)
+        self.tabItemLabel = .custom(custom: customTabItemLabel)
         self.content = content
     }
 
@@ -241,8 +241,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, TabItemLabel, Conten
                         .font(uiModel.tabItemTextFont)
                         .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-                case .label(let label):
-                    label(tabItemInternalState, element)
+                case .custom(let custom):
+                    custom(tabItemInternalState, element)
                 }
             })
             .getFrame(in: .named(tabBarCoordinateSpaceName), { frame in

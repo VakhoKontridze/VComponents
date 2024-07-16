@@ -11,7 +11,7 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VDisclosureGroupHeaderLabel<Label> where Label: View {
+enum VDisclosureGroupHeaderLabel<CustomHeaderLabel> where CustomHeaderLabel: View {
     case title(title: String)
-    case label(label: (VDisclosureGroupInternalState) -> Label)
+    case custom(custom: (VDisclosureGroupInternalState) -> CustomHeaderLabel)
 }

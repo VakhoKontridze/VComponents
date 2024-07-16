@@ -34,7 +34,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VCheckBox<Label>: View where Label: View {
+public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VCheckBoxUIModel
 
@@ -50,15 +50,15 @@ public struct VCheckBox<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VCheckBoxLabel<Label>
-    
+    private let label: VCheckBoxLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VCheckBox` with state.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -71,22 +71,22 @@ public struct VCheckBox<Label>: View where Label: View {
         state: Binding<VCheckBoxState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
-    /// Initializes `VCheckBox` with state and label.
+    /// Initializes `VCheckBox` with state and custom label.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
-        @ViewBuilder label: @escaping (VCheckBoxInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VCheckBoxInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -110,9 +110,9 @@ public struct VCheckBox<Label>: View where Label: View {
                     .blocksHitTesting(!uiModel.labelIsClickable)
                 })
 
-            case .label(let label):
+            case .custom(let custom):
                 labeledCheckBoxView(label: {
-                    baseButtonView(label: label)
+                    baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
                 })
             }

@@ -10,8 +10,8 @@ import SwiftUI
 // MARK: - V Toggle Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VToggleLabel<Label> where Label: View {
+enum VToggleLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case label(label: (VToggleInternalState) -> Label)
+    case custom(custom: (VToggleInternalState) -> CustomLabel)
 }

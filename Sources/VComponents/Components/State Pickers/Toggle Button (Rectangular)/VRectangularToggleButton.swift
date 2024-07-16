@@ -47,7 +47,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularToggleButton<Label>: View where Label: View {
+public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VRectangularToggleButtonUIModel
 
@@ -63,7 +63,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VRectangularToggleButtonLabel<Label>
+    private let label: VRectangularToggleButtonLabel<CustomLabel>
 
     // MARK: Initializers
     /// Initializes `VRectangularToggleButton` with state and title.
@@ -72,7 +72,7 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
         state: Binding<VRectangularToggleButtonState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -85,22 +85,22 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
         state: Binding<VRectangularToggleButtonState>,
         icon: Image
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .icon(icon: icon)
     }
 
-    /// Initializes `VRectangularToggleButton` with state and label.
+    /// Initializes `VRectangularToggleButton` with state and custom label.
     public init(
         uiModel: VRectangularToggleButtonUIModel = .init(),
         state: Binding<VRectangularToggleButtonState>,
-        @ViewBuilder label: @escaping (VRectangularToggleButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VRectangularToggleButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
 
     // MARK: Body
@@ -141,8 +141,8 @@ public struct VRectangularToggleButton<Label>: View where Label: View {
             case .icon(let icon):
                 iconLabelViewComponent(internalState: internalState, icon: icon)
 
-            case .label(let label):
-                label(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)

@@ -10,9 +10,9 @@ import SwiftUI
 // MARK: - V Wrapped Toggle Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VWrappedToggleButtonLabel<Label> where Label: View {
+enum VWrappedToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case label(label: (VWrappedToggleButtonInternalState) -> Label)
+    case custom(custom: (VWrappedToggleButtonInternalState) -> CustomLabel)
 }

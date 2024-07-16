@@ -46,9 +46,9 @@ import VCore
 @available(tvOS, unavailable) // No `PlainDisclosureGroup`
 @available(watchOS, unavailable) // No `PlainDisclosureGroup`
 @available(visionOS, unavailable) // No `PlainDisclosureGroup`
-public struct VDisclosureGroup<HeaderLabel, Content>: View
+public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     where
-        HeaderLabel: View,
+        CustomHeaderLabel: View,
         Content: View
 {
     // MARK: Properties - UI Model
@@ -66,7 +66,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     }
 
     // MARK: Properties - Header
-    private let headerLabel: VDisclosureGroupHeaderLabel<HeaderLabel>
+    private let headerLabel: VDisclosureGroupHeaderLabel<CustomHeaderLabel>
 
     // MARK: Properties - Content
     private let content: () -> Content
@@ -79,7 +79,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
-        where HeaderLabel == Never
+        where CustomHeaderLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -87,16 +87,16 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         self.content = content
     }
     
-    /// Initializes `VDisclosureGroup` with header and content.
+    /// Initializes `VDisclosureGroup` with custom header label and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
-        @ViewBuilder headerLabel: @escaping (VDisclosureGroupInternalState) -> HeaderLabel,
+        @ViewBuilder headerLabel customHeaderLabel: @escaping (VDisclosureGroupInternalState) -> CustomHeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.headerLabel = .label(label: headerLabel)
+        self.headerLabel = .custom(custom: customHeaderLabel)
         self.content = content
     }
     
@@ -136,8 +136,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                         .font(uiModel.headerTitleTextFont)
                         .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
-                case .label(let label):
-                    label(internalState)
+                case .custom(let custom):
+                    custom(internalState)
                 }
             })
             .frame(maxWidth: .infinity, alignment: .leading)

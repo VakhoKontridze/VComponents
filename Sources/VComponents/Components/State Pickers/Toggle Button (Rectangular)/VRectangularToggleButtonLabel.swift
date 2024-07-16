@@ -10,8 +10,8 @@ import SwiftUI
 // MARK: - V Rectangular Toggle Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-enum VRectangularToggleButtonLabel<Label> where Label: View {
+enum VRectangularToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
-    case label(label: (VRectangularToggleButtonInternalState) -> Label)
+    case custom(custom: (VRectangularToggleButtonInternalState) -> CustomLabel)
 }

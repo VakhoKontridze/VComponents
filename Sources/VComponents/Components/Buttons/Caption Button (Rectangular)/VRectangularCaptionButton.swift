@@ -22,7 +22,7 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: View {
+public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCaptionLabel: View {
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel
     
@@ -38,8 +38,8 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
     
     private let icon: Image
 
-    private let caption: VRectangularCaptionButtonCaption<CaptionLabel>
-    
+    private let caption: VRectangularCaptionButtonCaption<CustomCaptionLabel>
+
     // MARK: Initializers
     /// Initializes `VRectangularCaptionButton` with action, icon, and title caption.
     public init(
@@ -48,7 +48,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         icon: Image,
         titleCaption: String
     )
-        where CaptionLabel == Never
+        where CustomCaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -63,7 +63,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         icon: Image,
         iconCaption: Image
     )
-        where CaptionLabel == Never
+        where CustomCaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -79,7 +79,7 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         titleCaption: String,
         iconCaption: Image
     )
-        where CaptionLabel == Never
+        where CustomCaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -87,17 +87,17 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
         self.caption = .titleAndIcon(title: titleCaption, icon: iconCaption)
     }
     
-    /// Initializes `VRectangularCaptionButton` with action, icon, and caption.
+    /// Initializes `VRectangularCaptionButton` with action, icon, and custom caption.
     public init(
         uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        @ViewBuilder caption: @escaping (VRectangularCaptionButtonInternalState) -> CaptionLabel
+        @ViewBuilder caption customCaption: @escaping (VRectangularCaptionButtonInternalState) -> CustomCaptionLabel
     ) {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.caption = .caption(caption: caption)
+        self.caption = .custom(custom: customCaption)
     }
     
     // MARK: Body
@@ -199,8 +199,8 @@ public struct VRectangularCaptionButton<CaptionLabel>: View where CaptionLabel: 
                     })
                 }
 
-            case .caption(let caption):
-                caption(internalState)
+            case .custom(let custom):
+                custom(internalState)
             }
         })
         .frame(

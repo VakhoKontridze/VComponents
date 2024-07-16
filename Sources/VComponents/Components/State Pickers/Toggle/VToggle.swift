@@ -33,7 +33,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VToggle<Label>: View where Label: View {
+public struct VToggle<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VToggleUIModel
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -50,15 +50,15 @@ public struct VToggle<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VToggleLabel<Label>
-    
+    private let label: VToggleLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VToggle` with state.
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -71,22 +71,22 @@ public struct VToggle<Label>: View where Label: View {
         state: Binding<VToggleState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
-    /// Initializes `VToggle` with state and label.
+    /// Initializes `VToggle` with state and custom label.
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
-        @ViewBuilder label: @escaping (VToggleInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VToggleInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -110,9 +110,9 @@ public struct VToggle<Label>: View where Label: View {
                     .blocksHitTesting(!uiModel.labelIsClickable)
                 })
 
-            case .label(let label):
+            case .custom(let custom):
                 labeledToggleView(label: {
-                    baseButtonView(label: label)
+                    baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
                 })
             }

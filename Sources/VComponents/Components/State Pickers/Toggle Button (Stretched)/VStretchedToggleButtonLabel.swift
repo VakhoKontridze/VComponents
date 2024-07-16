@@ -11,9 +11,9 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VStretchedToggleButtonLabel<Label> where Label: View {
+enum VStretchedToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case label(label: (VStretchedToggleButtonInternalState) -> Label)
+    case custom(custom: (VStretchedToggleButtonInternalState) -> CustomLabel)
 }

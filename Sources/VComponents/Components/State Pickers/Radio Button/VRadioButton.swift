@@ -34,7 +34,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRadioButton<Label>: View where Label: View {
+public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VRadioButtonUIModel
 
@@ -50,15 +50,15 @@ public struct VRadioButton<Label>: View where Label: View {
     }
 
     // MARK: Properties - Label
-    private let label: VRadioButtonLabel<Label>
-    
+    private let label: VRadioButtonLabel<CustomLabel>
+
     // MARK: Initializers
     /// Initializes `VRadioButton` with state.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
@@ -71,22 +71,22 @@ public struct VRadioButton<Label>: View where Label: View {
         state: Binding<VRadioButtonState>,
         title: String
     )
-        where Label == Never
+        where CustomLabel == Never
     {
         self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
-    /// Initializes `VRadioButton` with state and label.
+    /// Initializes `VRadioButton` with state and custom label.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>,
-        @ViewBuilder label: @escaping (VRadioButtonInternalState) -> Label
+        @ViewBuilder label customLabel: @escaping (VRadioButtonInternalState) -> CustomLabel
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
+        self.label = .custom(custom: customLabel)
     }
     
     // MARK: Body
@@ -110,9 +110,9 @@ public struct VRadioButton<Label>: View where Label: View {
                     .blocksHitTesting(!uiModel.labelIsClickable)
                 })
 
-            case .label(let label):
+            case .custom(let custom):
                 labeledRadioButton(label: {
-                    baseButtonView(label: label)
+                    baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
                 })
             }
