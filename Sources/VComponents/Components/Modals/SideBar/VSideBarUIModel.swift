@@ -49,8 +49,8 @@ public struct VSideBarUIModel {
                 height: .fraction(1)
             ),
             landscape: Size(
-                width: .absolute(0),
-                height: .absolute(0)
+                width: .zero,
+                height: .zero
             )
         )
 #else

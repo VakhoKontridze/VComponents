@@ -68,3 +68,10 @@ public struct ModalComponentSize<Width, Height> {
 }
 
 extension ModalComponentSize: Equatable where Width: Equatable, Height: Equatable {}
+
+// MARK: - Helpers
+extension AbsoluteFractionMeasurement {
+    static var zero: Self {
+        .absolute(0)
+    }
+}

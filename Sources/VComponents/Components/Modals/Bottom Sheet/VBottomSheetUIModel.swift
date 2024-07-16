@@ -43,8 +43,8 @@ public struct VBottomSheetUIModel {
                 heights: .fraction(0.8)
             ),
             landscape: Size(
-                width: .absolute(0),
-                heights: .absolute(0)
+                width: .zero,
+                heights: .zero
             )
         )
 #else
@@ -281,6 +281,10 @@ public struct VBottomSheetUIModel {
                 ideal: .fraction(value),
                 max: .fraction(value)
             )
+        }
+
+        static var zero: Self {
+            .absolute(0)
         }
     }
 

@@ -39,8 +39,8 @@ public struct VModalUIModel {
                 height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .fixed(dimension: .absolute(0)),
-                height: .fixed(dimension: .absolute(0))
+                width: .zero,
+                height: .zero
             )
         )
 #elseif os(tvOS)
@@ -50,8 +50,8 @@ public struct VModalUIModel {
                 height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .fixed(dimension: .absolute(0)),
-                height: .fixed(dimension: .absolute(0))
+                width: .zero,
+                height: .zero
             )
         )
 #elseif os(visionOS)
@@ -61,8 +61,8 @@ public struct VModalUIModel {
                 height: .fixed(dimension: .fraction(0.8))
             ),
             landscape: Size(
-                width: .fixed(dimension: .absolute(0)),
-                height: .fixed(dimension: .absolute(0))
+                width: .zero,
+                height: .zero
             )
         )
 #else
@@ -172,6 +172,11 @@ public struct VModalUIModel {
             case .wrapped(let margin): margin
             case .stretched(let margin): margin
             }
+        }
+
+        // MARK: Initializers
+        static var zero: Self {
+            .fixed(dimension: .absolute(0))
         }
     }
 

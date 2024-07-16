@@ -29,7 +29,7 @@ public struct VAlertUIModel {
 #elseif os(macOS)
         WidthGroup(
             portrait: .fixed(width: .absolute(250)),
-            landscape: .fixed(width: .absolute(0))
+            landscape: .zero
         )
 #else
         fatalError() // Not supported
@@ -380,6 +380,11 @@ public struct VAlertUIModel {
             case .fixed: 0
             case .stretched(let margin): margin
             }
+        }
+
+        // MARK: Initializers
+        static var zero: Self {
+            .fixed(width: .absolute(0))
         }
     }
 
