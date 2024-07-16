@@ -194,7 +194,7 @@ public struct VTextView: View {
 
     @ViewBuilder
     private var headerView: some View {
-        if let headerTitle, !headerTitle.isEmpty {
+        if let headerTitle = headerTitle?.nonEmpty {
             Text(headerTitle)
                 .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
@@ -216,7 +216,7 @@ public struct VTextView: View {
 
     @ViewBuilder 
     private var footerView: some View {
-        if let footerTitle, !footerTitle.isEmpty {
+        if let footerTitle = footerTitle?.nonEmpty {
             Text(footerTitle)
                 .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)

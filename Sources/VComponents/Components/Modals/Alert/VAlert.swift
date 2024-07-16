@@ -140,7 +140,7 @@ struct VAlert<Content>: View
 
     @ViewBuilder
     private var titleView: some View {
-        if let title, !title.isEmpty {
+        if let title = title?.nonEmpty {
             Text(title)
                 .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
@@ -163,7 +163,7 @@ struct VAlert<Content>: View
     
     @ViewBuilder
     private var messageView: some View {
-        if let message, !message.isEmpty {
+        if let message = message?.nonEmpty {
             Text(message)
                 .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
