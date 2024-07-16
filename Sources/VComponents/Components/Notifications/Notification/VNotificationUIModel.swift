@@ -331,8 +331,8 @@ extension VNotificationUIModel {
     /// Applies blue color scheme to `VNotificationUIModel`.
     mutating public func applyInfoColorScheme() {
         applyHighlightedColors(
-            background: Color.dynamic(Color(0, 160, 240), Color(0, 100, 190)),
-            iconBackground: Color.dynamic(Color(0, 130, 210), Color(0, 75, 15))
+            background: Color.dynamic(Color(0, 150, 230), Color(0, 100, 190)),
+            iconBackground: Color.dynamic(Color(0, 120, 200), Color(0, 75, 15))
         )
     }
 

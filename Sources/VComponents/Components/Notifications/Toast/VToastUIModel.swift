@@ -344,7 +344,7 @@ extension VToastUIModel {
     /// Applies blue color scheme to `VToastUIModel`.
     mutating public func applyInfoColorScheme() {
         applyHighlightedColors(
-            background: Color.dynamic(Color(0, 160, 240), Color(0, 100, 190))
+            background: Color.dynamic(Color(0, 150, 230), Color(0, 100, 190))
         )
     }
 
