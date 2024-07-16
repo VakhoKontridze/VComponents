@@ -11,10 +11,12 @@ General
 
 VGroupBox
 
+- GroupBox now has border configuration
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VDisclosureGroup
 
+- DisclosureGroup now has border configuration
 - `cornerRadius` is replaced with `cornerRadii` and `reversesHorizontalCornersForRTLLanguages`
 
 VModal
@@ -22,6 +24,7 @@ VModal
 - Presentation API is overhauled
 - Size API is extended
 - Modal now supports `macOS`, `tvOS`, and `visionOS`
+- Modal now has border configuration
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
@@ -45,6 +48,7 @@ VAlert
 - Width API is extended
 - Alert now supports `macOS`
 - `buttonTitleTextFont` is added in UI model
+- Alert now has border configuration
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
@@ -58,6 +62,7 @@ VToast
 - Width API is extended
 - Toast now supports more width types
 - Toast now supports separate width configurations for portrait and landscape modes
+- Toast now has border configuration
 - Toast can now be dismissed with swipe
 - Toast now has `info` highlight
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root

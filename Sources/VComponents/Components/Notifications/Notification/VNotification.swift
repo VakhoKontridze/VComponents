@@ -88,6 +88,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
 
                 .background(content: { backgroundView })
+                .overlay(content: { borderView }) // Has own rounding
 
                 .getSize({ height = $0.height })
 
@@ -96,14 +97,14 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
 
+        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
+
         // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
-
-        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -235,6 +236,14 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
+    }
+
+    @ViewBuilder
+    private var borderView: some View {
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+                .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)
+        }
     }
 
     // MARK: Actions

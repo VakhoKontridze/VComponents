@@ -48,6 +48,15 @@ public struct VNotificationUIModel {
 #endif
     }()
 
+    // MARK: Properties - Border
+    /// Border width. Set to `0`.
+    ///
+    /// To hide border, set to `0`.
+    public var borderWidth: CGFloat = 0
+
+    /// Border color.
+    public var borderColor: Color = .clear
+
     // MARK: Properties - Notification Content
     /// Body margins. Set to `15`s.
     public var bodyMargins: Margins = .init(15)

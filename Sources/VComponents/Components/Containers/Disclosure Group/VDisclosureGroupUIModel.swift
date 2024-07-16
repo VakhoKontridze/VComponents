@@ -44,7 +44,9 @@ public struct VDisclosureGroupUIModel {
 #endif
     }()
 
-    var groupBoxSubUIModel: VGroupBoxUIModel {
+    func groupBoxSubUIModel(
+        internalState: VDisclosureGroupInternalState
+    ) -> VGroupBoxUIModel {
         var uiModel: VGroupBoxUIModel = .init()
 
         uiModel.cornerRadii = cornerRadii
@@ -52,10 +54,44 @@ public struct VDisclosureGroupUIModel {
 
         uiModel.backgroundColor = backgroundColor
 
+        uiModel.borderWidth = borderWidth
+        uiModel.borderColor = borderColors.value(for: internalState)
+
         uiModel.contentMargins = .zero
 
         return uiModel
     }
+
+    // MARK: Properties - Border
+    /// Border width. 
+    /// Set to `0` point on `iOS`.
+    /// Set to `1` pixel on `macOS`.
+    ///
+    /// To hide border, set to `0`.
+    public var borderWidth: PointPixelMeasurement = {
+#if os(iOS)
+        PointPixelMeasurement.points(0)
+#elseif os(macOS)
+        PointPixelMeasurement.pixels(1)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Border colors.
+    public var borderColors: StateColors = {
+#if os(iOS)
+        StateColors.clearColors
+#elseif os(macOS)
+        StateColors(
+            collapsed: Color.dynamic(Color(200, 200, 200), Color(100, 100, 100)),
+            expanded: Color.dynamic(Color(200, 200, 200), Color(100, 100, 100)),
+            disabled: Color.dynamic(Color(230, 230, 230), Color(70, 70, 70))
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
 
     // MARK: Properties - Header
     /// Header margins. Set to `(15, 15, 10, 10)`.

@@ -33,6 +33,7 @@ import VCore
 public struct VGroupBox<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VGroupBoxUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 
     // MARK: Properties - Content
@@ -62,6 +63,7 @@ public struct VGroupBox<Content>: View where Content: View {
     public var body: some View {
         contentView
             .background(content: { backgroundView })
+            .overlay(content: { borderView }) // Has own rounding
             .clipShape(
                 .rect(
                     cornerRadii: uiModel.cornerRadii
@@ -72,22 +74,38 @@ public struct VGroupBox<Content>: View where Content: View {
                 )
             )
     }
-    
-    private var backgroundView: some View {
-        uiModel.backgroundColor
-    }
-    
+
     private var contentView: some View {
         Group(content: {
             switch content {
             case .empty:
                 Color.clear // `EmptyView` cannot be used as it doesn't render
-                
+
             case .content(let content):
                 content()
             }
         })
         .padding(uiModel.contentMargins)
+    }
+
+    private var backgroundView: some View {
+        uiModel.backgroundColor
+    }
+
+    @ViewBuilder
+    private var borderView: some View {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
+            UnevenRoundedRectangle(
+                cornerRadii: uiModel.cornerRadii
+                    .horizontalCornersReversed(if:
+                        uiModel.reversesHorizontalCornersForRTLLanguages &&
+                        layoutDirection.isRightToLeft
+                    )
+            )
+            .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
+        }
     }
 }
 

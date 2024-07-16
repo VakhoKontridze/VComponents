@@ -42,6 +42,15 @@ public struct VToastUIModel {
     /// Background color.
     public var backgroundColor: Color = .dynamic(Color(235, 235, 235), Color(60, 60, 60))
 
+    // MARK: Properties - Border
+    /// Border width. Set to `0`.
+    ///
+    /// To hide border, set to `0`.
+    public var borderWidth: CGFloat = 0
+
+    /// Border color.
+    public var borderColor: Color = .clear
+
     // MARK: Properties - Toast Content
     /// Body horizontal alignment. Set to `center`.
     public var bodyHorizontalAlignment: HorizontalAlignment = .center

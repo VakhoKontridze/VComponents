@@ -106,6 +106,7 @@ struct VToast: View {
                 .clipShape(.rect(cornerRadius: cornerRadius))
 
                 .background(content: { backgroundView })
+                .overlay(content: { borderView }) // Has own rounding
 
                 .applyModifier({
                     switch currentWidth.storage {
@@ -131,14 +132,14 @@ struct VToast: View {
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
 
+        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
+
         // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
-
-        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -161,6 +162,14 @@ struct VToast: View {
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
+    }
+
+    @ViewBuilder
+    private var borderView: some View {
+        if uiModel.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)
+        }
     }
 
     // MARK: Actions

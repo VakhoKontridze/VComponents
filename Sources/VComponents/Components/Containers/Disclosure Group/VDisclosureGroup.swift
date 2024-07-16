@@ -102,22 +102,27 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
-            PlainDisclosureGroup(
-                uiModel: uiModel.plainDisclosureGroupSubUIModel,
-                isExpanded: Binding(
-                    get: { internalState == .expanded },
-                    set: { expandCollapseFromHeaderTap($0) }
-                ),
-                label: { headerView },
-                content: {
-                    VStack(spacing: 0, content: {
-                        dividerView
-                        contentView
-                    })
-                }
-            )
-        })
+        VGroupBox(
+            uiModel: uiModel.groupBoxSubUIModel(
+                internalState: internalState
+            ),
+            content: {
+                PlainDisclosureGroup(
+                    uiModel: uiModel.plainDisclosureGroupSubUIModel,
+                    isExpanded: Binding(
+                        get: { internalState == .expanded },
+                        set: { expandCollapseFromHeaderTap($0) }
+                    ),
+                    label: { headerView },
+                    content: {
+                        VStack(spacing: 0, content: {
+                            dividerView
+                            contentView
+                        })
+                    }
+                )
+            }
+        )
         .applyIf(uiModel.appliesExpandCollapseAnimation, transform: {
             $0
                 .animation(uiModel.expandCollapseAnimation, value: isEnabled)

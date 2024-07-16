@@ -101,10 +101,22 @@ public struct VModalUIModel {
 
         uiModel.backgroundColor = backgroundColor
 
+        uiModel.borderWidth = borderWidth
+        uiModel.borderColor = borderColor
+
         uiModel.contentMargins = .zero
 
         return uiModel
     }
+
+    // MARK: Properties - Border
+    /// Border width. Set to `0` points.
+    ///
+    /// To hide border, set to `0`.
+    public var borderWidth: PointPixelMeasurement = .points(0)
+
+    /// Border color.
+    public var borderColor: Color = .clear
 
     // MARK: Properties - Content
     /// Content margins. Set to `zero`.
