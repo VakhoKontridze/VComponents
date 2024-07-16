@@ -22,7 +22,7 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    /// Toast widths. Set to `wrapped` with `marginHorizontal` `15` in portrait and `wrapped` with `maxWidth` fraction 0.5 and `marginHorizontal` 15 in landscape.
+    /// Widths. Set to `wrapped` with `marginHorizontal` `15` in portrait and `wrapped` with `maxWidth` fraction 0.5 and `marginHorizontal` 15 in landscape.
     public var widths: Widths = .init(
         portrait: .wrapped(marginHorizontal: 15),
         landscape: .wrapped(maxWidthFraction: 0.5, marginHorizontal: 15)
@@ -111,10 +111,10 @@ public struct VToastUIModel {
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = .clear
+    public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `0`.
-    public var shadowRadius: CGFloat = 0
+    /// Shadow radius. Set to `20`.
+    public var shadowRadius: CGFloat = 20
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero
@@ -298,6 +298,19 @@ public struct VToastUIModel {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VToastUIModel {
+    /// `VToastUIModel` that applies blue color scheme.
+    public static var info: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.applyInfoColorScheme()
+        
+#if os(iOS)
+        uiModel.haptic = .success
+#endif
+        
+        return uiModel
+    }
+
     /// `VToastUIModel` that applies green color scheme.
     public static var success: Self {
         var uiModel: Self = .init()
@@ -343,19 +356,38 @@ extension VToastUIModel {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VToastUIModel {
+    /// Applies blue color scheme to `VToastUIModel`.
+    mutating public func applyInfoColorScheme() {
+        applyHighlightedColors(
+            background: Color.dynamic(Color(0, 160, 240), Color(0, 100, 190))
+        )
+    }
+
     /// Applies green color scheme to `VToastUIModel`.
     mutating public func applySuccessColorScheme() {
-        backgroundColor = .dynamic(Color(70, 190, 125), Color(40, 135, 75))
+        applyHighlightedColors(
+            background: Color.dynamic(Color(70, 190, 125), Color(40, 135, 75))
+        )
     }
     
     /// Applies yellow color scheme to `VToastUIModel`.
     mutating public func applyWarningColorScheme() {
-        backgroundColor = .dynamic(Color(255, 205, 95), Color(230, 160, 40))
+        applyHighlightedColors(
+            background: Color.dynamic(Color(255, 205, 95), Color(230, 160, 40))
+        )
     }
     
     /// Applies red color scheme to `VToastUIModel`.
     mutating public func applyErrorColorScheme() {
-        backgroundColor = .dynamic(Color(235, 95, 90), Color(205, 50, 45))
+        applyHighlightedColors(
+            background: Color.dynamic(Color(235, 95, 90), Color(205, 50, 45))
+        )
+    }
+
+    private mutating func applyHighlightedColors(
+        background: Color
+    ) {
+        backgroundColor = background
     }
 }
 

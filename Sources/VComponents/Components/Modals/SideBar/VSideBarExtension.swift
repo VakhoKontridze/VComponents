@@ -105,7 +105,7 @@ extension View {
 extension View {
     /// Presents side bar using the item as data source for content.
     ///
-    /// For additional info, refer to `View.vSideBar(id:isPresented:content:)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vSideBar<Item, Content>(
         layerID: String? = nil,
         id: String,

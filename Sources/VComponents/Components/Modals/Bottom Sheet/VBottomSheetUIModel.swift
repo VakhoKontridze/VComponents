@@ -190,7 +190,7 @@ public struct VBottomSheetUIModel {
     // MARK: Size
     /// Bottom sheet size.
     @MemberwiseInitializable(
-        comment: "/// Initializes `BottomSheetSize`."
+        comment: "/// Initializes `Size`."
     )
     public struct Size: Equatable {
         /// Width.

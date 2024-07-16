@@ -121,9 +121,9 @@ public struct VTextViewUIModel {
     /// Footer horizontal margin. Set to `10`.
     public var footerMarginHorizontal: CGFloat = 10
 
-    // MARK: Properties - TextView Content
-    /// Content margins. Set to `(15, 15, 15, 15)`.
-    public var contentMargins: Margins = .init(15)
+    // MARK: Properties - TextView
+    /// Textview content margins. Set to `(15, 15, 15, 15)`.
+    public var textViewContentMargins: Margins = .init(15)
 
     // MARK: Properties - Text
     /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.

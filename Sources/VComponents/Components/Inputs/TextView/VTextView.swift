@@ -122,7 +122,7 @@ public struct VTextView: View {
 
     private var inputView: some View {
         textField
-            .padding(uiModel.contentMargins)
+            .padding(uiModel.textViewContentMargins)
             .frame(
                 minHeight: uiModel.minimumHeight,
                 alignment: .top

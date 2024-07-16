@@ -81,7 +81,7 @@ struct VAlert<Content>: View
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
+            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
     }
     
     private var alertView: some View {
@@ -219,7 +219,7 @@ struct VAlert<Content>: View
     
     private func buttonContentView(reversesOrder: Bool = false) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
-        
+
         return ForEach(
             buttons.enumeratedArray(),
             id: \.offset, // Native `View.alert(...)` doesn't react to changes
@@ -234,9 +234,6 @@ struct VAlert<Content>: View
             }
         )
     }
-
-    // MARK: Actions
-    private func didTapDimmingView() {} // Not dismissible from dimming view
 
     // MARK: Lifecycle Animations
     private func animateIn() {

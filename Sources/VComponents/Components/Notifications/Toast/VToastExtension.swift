@@ -43,9 +43,9 @@ extension View {
     ///         )
     ///     }
     ///
-    /// Width can be configured via `widthType` in UI model.
+    /// Width can be configured via `widths` in UI model.
     ///
-    /// Highlights can be applied using `success`, `warning`, and `error` instances of `VToastUIModel`.
+    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VToastUIModel`.
     public func vToast(
         layerID: String? = nil,
         id: String,
@@ -82,7 +82,7 @@ extension View {
 extension View {
     /// Modal component that presents toast.
     ///
-    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<Item>(
         layerID: String? = nil,
         id: String,
@@ -132,7 +132,7 @@ extension View {
 extension View {
     /// Modal component that presents toast.
     ///
-    /// For additional info, refer to `View.vToast(id:isPresented:text:)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<E>(
         layerID: String? = nil,
         id: String,

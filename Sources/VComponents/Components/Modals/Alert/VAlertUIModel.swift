@@ -93,7 +93,7 @@ public struct VAlertUIModel {
     )
 
     // MARK: Properties - Body - Title
-    /// Title title text frame alignment. Set to `center`.
+    /// Title text frame alignment. Set to `center`.
     public var titleTextFrameAlignment: HorizontalAlignment = .center
 
     /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.

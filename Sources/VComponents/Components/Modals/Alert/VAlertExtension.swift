@@ -77,7 +77,7 @@ extension View {
     
     /// Modal component that presents alert with actions and hosts content.
     ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Content>(
         layerID: String? = nil,
         id: String,
@@ -121,7 +121,7 @@ extension View {
 extension View {
     /// Modal component that presents alert with actions and hosts content.
     ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item>(
         layerID: String? = nil,
         id: String,
@@ -181,7 +181,7 @@ extension View {
     
     /// Modal component that presents alert with actions and hosts content.
     ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item, Content>(
         layerID: String? = nil,
         id: String,
@@ -256,7 +256,7 @@ extension View {
 extension View {
     /// Modal component that presents alert with actions and hosts content.
     ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E>(
         layerID: String? = nil,
         id: String,
@@ -319,7 +319,7 @@ extension View {
     
     /// Modal component that presents alert with actions and hosts content.
     ///
-    /// For additional info, refer to `View.vAlert(id:isPresented:title:message:buttons)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E, Content>(
         layerID: String? = nil,
         id: String,

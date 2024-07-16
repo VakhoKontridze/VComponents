@@ -246,7 +246,7 @@ extension View {
 extension View {
     /// Modal component hosts pull-up content on the bottom of the container.
     ///
-    /// For additional info, refer to `View.vBottomSheet(id:isPresented:content:)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vBottomSheet<Item, Content>(
         layerID: String? = nil,
         id: String,

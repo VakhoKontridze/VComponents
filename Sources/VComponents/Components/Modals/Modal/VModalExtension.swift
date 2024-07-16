@@ -183,7 +183,7 @@ extension View {
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
     ///
-    /// For additional info, refer to `View.vModal(id:isPresented:content:)`.
+    /// For additional info, refer to method with `Bool` presentation flag.
     public func vModal<Item, Content>(
         layerID: String? = nil,
         id: String,

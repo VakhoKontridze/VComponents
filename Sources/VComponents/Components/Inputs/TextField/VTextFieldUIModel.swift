@@ -121,12 +121,12 @@ public struct VTextFieldUIModel {
     /// Footer horizontal margin. Set to `10`.
     public var footerMarginHorizontal: CGFloat = 10
 
-    // MARK: Properties - TextField Content
+    // MARK: Properties - TextField
     /// Content type. Set to `default`.
     public var contentType: ContentType = .default
 
-    /// Content horizontal margin. Set to `15`.
-    public var contentMarginHorizontal: CGFloat = 15
+    /// Textfield content horizontal margin. Set to `15`.
+    public var textFieldContentMarginHorizontal: CGFloat = 15
 
     /// Spacing between text and buttons. Set to `10`.
     public var textAndButtonSpacing: CGFloat = 10

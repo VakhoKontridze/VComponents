@@ -160,13 +160,13 @@ public struct VTextField: View {
 
     private var inputView: some View {
         HStack(spacing: uiModel.textAndButtonSpacing, content: {
-            searchIcon // Only for search field
+            searchIcon
             textField
-            clearButton // Not for secure field
-            visibilityButton // Only for secure field
+            clearButton
+            visibilityButton
         })
         .frame(height: uiModel.height)
-        .padding(.horizontal, uiModel.contentMarginHorizontal)
+        .padding(.horizontal, uiModel.textFieldContentMarginHorizontal)
         .clipped() // Prevents large content from overflowing
         .background(content: { backgroundBorderView }) // Has own rounding
         .background(content: { backgroundView }) // Has own rounding

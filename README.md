@@ -77,7 +77,8 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
 #### Notifications
 
 <p>
-    <img tag="VToast" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4867ae79-03c8-4b1c-86b9-e1b160819e23">
+    <img tag="VNotification" width="400" align="top" src="https://github.com/user-attachments/assets/907aa427-a3d2-40d1-bed4-9b4dc0ee22a6">
+    <img tag="VToast" width="400" align="top" src="https://github.com/user-attachments/assets/a7cd6b6c-da98-4ea3-b78e-465d9b52e6b4">
 <p/>
 
 #### Indicators (Definite)

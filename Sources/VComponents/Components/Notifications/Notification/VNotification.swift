@@ -1,23 +1,25 @@
 //
-//  VToast.swift
+//  VNotification.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 2/7/21.
+//  Created by Vakhtang Kontridze on 15.07.24.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - V Toast
+// MARK: - V Notification
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-struct VToast: View {
+struct VNotification<Content>: View
+    where Content: View
+{
     // MARK: Properties - UI Model
-    private let uiModel: VToastUIModel
+    private let uiModel: VNotificationUIModel
 
-    private var currentWidth: VToastUIModel.Width {
+    private var currentWidth: VNotificationUIModel.Width {
         uiModel.widths.current(orientation: interfaceOrientation)
     }
 
@@ -34,9 +36,9 @@ struct VToast: View {
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
 
-    // MARK: Properties - Text
-    private let text: String
-    
+    // MARK: Properties - Content
+    private let content: VNotificationContent<Content>
+
     // MARK: Properties - Frame
     @State private var height: CGFloat = 0
 
@@ -49,18 +51,18 @@ struct VToast: View {
 
     // MARK: Initializers
     init(
-        uiModel: VToastUIModel,
+        uiModel: VNotificationUIModel,
         isPresented: Binding<Bool>,
-        text: String
+        content: VNotificationContent<Content>
     ) {
         self.uiModel = uiModel
         self._isPresented = isPresented
-        self.text = text
+        self.content = content
     }
-    
+
     // MARK: Body
     var body: some View {
-        toastView
+        notificationView
             .onDisappear(perform: { timeoutDismissTask?.cancel() })
 
             .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
@@ -69,80 +71,29 @@ struct VToast: View {
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
             //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
     }
-    
-    private var toastView: some View {
+
+    private var notificationView: some View {
         ZStack(content: {
             contentView
-                .applyModifier({ view in
-                    switch currentWidth.storage {
-                    case .fixed(let width):
-                        view
-                            .frame(
-                                width: width,
-                                alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
-                                    vertical: .center
-                                )
-                            )
-
-                    case .fixedFraction(let widthFraction):
-                        view
-                            .frame(
-                                width: containerSize.width * widthFraction,
-                                alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
-                                    vertical: .center
-                                )
-                            )
-
-                    case .wrapped:
-                        view
-
-                    case .wrappedMaxWidth:
-                        view
-
-                    case .wrappedMaxWidthFraction:
-                        view
-
-                    case .stretched:
-                        view
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
-                                    vertical: .center
-                                )
-                            )
-                    }
-                })
-
-                .clipShape(.rect(cornerRadius: cornerRadius))
-
-                .background(content: { backgroundView })
-
                 .applyModifier({
                     switch currentWidth.storage {
-                    case .fixed:
+                    case .fixed(let width):
                         $0
+                            .frame(width: width)
 
-                    case .fixedFraction:
+                    case .fixedFraction(let widthFraction):
                         $0
-
-                    case .wrapped:
-                        $0
-
-                    case .wrappedMaxWidth(let maxWidth, _):
-                        $0
-                            .frame(maxWidth: maxWidth)
-
-                    case .wrappedMaxWidthFraction(let maxWidthFraction, _):
-                        $0
-                            .frame(maxWidth: containerSize.width * maxWidthFraction)
+                            .frame(width: containerSize.width * widthFraction)
 
                     case .stretched:
                         $0
+                            .frame(maxWidth: .infinity)
                     }
                 })
+
+                .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+
+                .background(content: { backgroundView })
 
                 .getSize({ height = $0.height })
 
@@ -152,10 +103,6 @@ struct VToast: View {
                         switch currentWidth.storage {
                         case .fixed: 0
                         case .fixedFraction: 0
-
-                        case .wrapped(let marginHorizontal): marginHorizontal
-                        case .wrappedMaxWidth(_, let marginHorizontal): marginHorizontal
-                        case .wrappedMaxWidthFraction(_, let marginHorizontal): marginHorizontal
 
                         case .stretched(let marginHorizontal): marginHorizontal
                         }
@@ -181,19 +128,128 @@ struct VToast: View {
     }
 
     private var contentView: some View {
-        Text(text)
-            .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.textMinimumScaleFactor)
-            .foregroundStyle(uiModel.textColor)
-            .font(uiModel.textFont)
-            .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+        Group(content: {
+            switch content {
+            case .iconTitleMessage(let icon, let title, let message):
+                HStack(
+                    spacing: uiModel.iconAndTitleTextMessageTextSpacing,
+                    content: {
+                        iconView(icon: icon)
+                        textsView(title: title, message: message)
+                    }
+                )
 
-            .padding(uiModel.bodyMargins)
+            case .content(let content):
+                content()
+            }
+        })
+        .padding(uiModel.bodyMargins)
+    }
+
+    @ViewBuilder
+    private func iconView(
+        icon: Image?
+    ) -> some View {
+        if let icon {
+            ZStack(content: {
+                RoundedRectangle(cornerRadius: uiModel.iconBackgroundCornerRadius)
+                    .frame(size: uiModel.iconBackgroundSize)
+                    .foregroundStyle(uiModel.iconBackgroundColor)
+
+                icon
+                    .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
+                    .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
+                    .applyIfLet(uiModel.iconColor, transform: { $0.foregroundStyle($1) })
+                    .applyIfLet(uiModel.iconOpacity, transform: { $0.opacity($1) })
+                    .font(uiModel.iconFont)
+                    .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                    .frame(size: uiModel.iconSize)
+            })
+        }
+    }
+
+    private func textsView(
+        title: String?,
+        message: String?
+    ) -> some View {
+        // Space should still be reserved for both title and message, even if they are `nil`
+        _textsView(
+            title: title ?? "A",
+            message: message ?? "A"
+        )
+        .opacity(0)
+        .overlay(content: {
+            _textsView(
+                title: title,
+                message: message
+            )
+        })
+    }
+
+    private func _textsView(
+        title: String?,
+        message: String?
+    ) -> some View {
+        VStack(
+            alignment: .leading,
+            spacing: uiModel.titleTextAndMessageTextSpacing,
+            content: {
+                titleText(title: title)
+                messageText(message: message)
+            }
+        )
+    }
+
+    @ViewBuilder
+    private func titleText(
+        title: String?
+    ) -> some View {
+        if let title {
+            Text(title)
+                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
+                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
+                .foregroundStyle(uiModel.titleTextColor)
+                .font(uiModel.titleTextFont)
+                .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.titleTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    @ViewBuilder
+    private func messageText(
+        message: String?
+    ) -> some View {
+        if let message {
+            Text(message)
+                .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
+                .minimumScaleFactor(uiModel.messageTextMinimumScaleFactor)
+                .foregroundStyle(uiModel.messageTextColor)
+                .font(uiModel.messageTextFont)
+                .applyIfLet(uiModel.messageTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: Alignment(
+                        horizontal: uiModel.messageTextFrameAlignment,
+                        vertical: .center
+                    )
+                )
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
     private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: cornerRadius)
+        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
             .foregroundStyle(uiModel.backgroundColor)
     }
 
@@ -242,9 +298,8 @@ struct VToast: View {
             )
 
         } else {
-            // `VToast` doesn't have an intrinsic height
+            // `VNotification` doesn't have an intrinsic height
             // This delay gives SwiftUI change to return height.
-            // Other option was to calculate it using `UILabel`.
             Task(operation: { @MainActor in
                 withBasicAnimation(
                     uiModel.appearAnimation,
@@ -297,14 +352,6 @@ struct VToast: View {
         }
     }
 
-    // MARK: Corner Radius
-    private var cornerRadius: CGFloat {
-        switch uiModel.cornerRadiusType {
-        case .capsule: height / 2
-        case .rounded(let cornerRadius): cornerRadius
-        }
-    }
-
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.presentationEdge {
@@ -330,93 +377,66 @@ struct VToast: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-#Preview("Singleline", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
-                    )
-            })
-            .presentationHostLayer(
-                id: "notifications",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
-            )
-        }
-    }
-
-    return ContentView()
+#Preview("Icon & Title & Message", body: {
+    Preview_ContentView(
+        icon: Image(systemName: "swift"),
+        title: "Lorem Ipsum Dolor Sit Amet",
+        message: "Lorem ipsum dolor sit amet"
+    )
 })
 
-#Preview("Multiline", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                    )
-            })
-            .presentationHostLayer(
-                id: "notifications",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
-            )
-        }
-    }
-
-    return ContentView()
+#Preview("Title & Message", body: {
+    Preview_ContentView(
+        icon: nil,
+        title: "Lorem Ipsum Dolor Sit Amet",
+        message: "Lorem ipsum dolor sit amet"
+    )
 })
 
-#Preview("Top", body: {
+#Preview("Icon & Title", body: {
+    Preview_ContentView(
+        icon: Image(systemName: "swift"),
+        title: "Lorem Ipsum Dolor Sit Amet",
+        message: nil
+    )
+})
+
+#Preview("Icon & Message", body: {
+    Preview_ContentView(
+        icon: Image(systemName: "swift"),
+        title: nil,
+        message: "Lorem ipsum dolor sit amet"
+    )
+})
+
+#Preview("No Content", body: {
+    Preview_ContentView(
+        icon: nil,
+        title: nil,
+        message: nil
+    )
+})
+
+#Preview("Bottom", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
 
         var body: some View {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
+                    .vNotification(
                         layerID: "notifications",
                         id: "preview",
                         uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.presentationEdge = .top
+                            var uiModel: VNotificationUIModel = .init()
+                            uiModel.presentationEdge = .bottom
                             uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
+                        icon: Image(systemName: "swift"),
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet"
                     )
             })
             .presentationHostLayer(
@@ -437,25 +457,19 @@ struct VToast: View {
 #Preview("Width Types", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
-        
-        @State private var width: VToastUIModel.Width?
-        @State private var alignment: HorizontalAlignment?
+        @State private var width: VNotificationUIModel.Width?
 
         var body: some View {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
+                    .vNotification(
                         layerID: "notifications",
                         id: "preview",
                         uiModel: {
-                            var uiModel: VToastUIModel = .init()
+                            var uiModel: VNotificationUIModel = .init()
 
                             if let width {
-                                uiModel.widths = VToastUIModel.Widths(width)
-                            }
-
-                            if let alignment {
-                                uiModel.bodyHorizontalAlignment = alignment
+                                uiModel.widths = VNotificationUIModel.Widths(width)
                             }
 
                             uiModel.timeoutDuration = 60
@@ -463,42 +477,18 @@ struct VToast: View {
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
+                        icon: Image(systemName: "swift"),
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet"
                     )
                     .task({
                         try? await Task.sleep(seconds: 1)
 
                         while true {
                             width = .fixed(widthFraction: 0.75)
-                            alignment = .leading
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .fixed(widthFraction: 0.75)
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .fixed(widthFraction: 0.75)
-                            alignment = .trailing
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .wrapped(marginHorizontal: 15)
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .wrapped(maxWidthFraction: 0.75, marginHorizontal: 15)
-                            alignment = .center
                             try? await Task.sleep(seconds: 1)
 
                             width = .stretched(marginHorizontal: 15)
-                            alignment = .leading
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .stretched(marginHorizontal: 15)
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .stretched(marginHorizontal: 15)
-                            alignment = .trailing
                             try? await Task.sleep(seconds: 1)
                         }
                     })
@@ -521,21 +511,23 @@ struct VToast: View {
 #Preview("Highlights", body: {
     struct ContentView: View {
         @State private var isPresented: Bool = true
-        @State private var uiModel: VToastUIModel = .init()
+        @State private var uiModel: VNotificationUIModel = .init()
 
         var body: some View {
             PreviewContainer(content: {
                 PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
+                    .vNotification(
                         layerID: "notifications",
                         id: "preview",
                         uiModel: {
-                            var uiModel = uiModel
+                            var uiModel: VNotificationUIModel = uiModel
                             uiModel.timeoutDuration = 60
                             return uiModel
                         }(),
                         isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
+                        icon: Image(systemName: "swift"),
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet"
                     )
                     .task({
                         try? await Task.sleep(seconds: 1)
@@ -569,6 +561,52 @@ struct VToast: View {
 
     return ContentView()
 })
+
+private struct Preview_ContentView: View {
+    @State private var isPresented: Bool = true
+
+    private let icon: Image?
+    private let title: String?
+    private let message: String?
+
+    init(
+        icon: Image?,
+        title: String?,
+        message: String?
+    ) {
+        self.icon = icon
+        self.title = title
+        self.message = message
+    }
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vNotification(
+                    layerID: "notifications",
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VNotificationUIModel = .init()
+                        uiModel.timeoutDuration = 60
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    icon: icon,
+                    title: title,
+                    message: message
+                )
+        })
+        .presentationHostLayer(
+            id: "notifications",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewTapAction = .passTapsThrough
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
+    }
+}
 
 #endif
 
