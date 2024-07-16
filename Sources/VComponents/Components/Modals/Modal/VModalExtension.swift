@@ -31,46 +31,6 @@ extension View {
     ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
-    /// Modal can also wrap it's content by reading geometry size.
-    /// Although, the possibility of smaller screen sizes should be considered.
-    ///
-    ///     @State private var isPresented: Bool = false
-    ///     @State private var contentHeight: CGFloat?
-    ///
-    ///     var body: some View {
-    ///         ZStack(content: {
-    ///             VPlainButton(
-    ///                 action: { isPresented = true },
-    ///                 title: "Present"
-    ///             )
-    ///             .vModal(
-    ///                 id: "some_modal",
-    ///                 uiModel: {
-    ///                     var uiModel: VModalUIModel = .init()
-    ///
-    ///                     uiModel.contentMargins = VModalUIModel.Margins(15)
-    ///
-    ///                     if let contentHeight {
-    ///                         let height: CGFloat = uiModel.contentWrappingHeight(contentHeight: contentHeight)
-    ///
-    ///                         uiModel.sizeGroup.portrait.height = .absolute(height)
-    ///                         uiModel.sizeGroup.landscape.height = .absolute(height)
-    ///                     }
-    ///
-    ///                     return uiModel
-    ///                 }(),
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     Text("...")
-    ///                         .getSize({ contentHeight = $0.height })
-    ///                         .onTapGesture(perform: { isPresented = false })
-    ///                 }
-    ///             )
-    ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
-    ///     }
-    ///
     /// Modal can also wrap navigation system.
     ///
     ///     @State private var isPresented: Bool = false
