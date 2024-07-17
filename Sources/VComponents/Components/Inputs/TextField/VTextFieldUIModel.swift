@@ -53,10 +53,10 @@ public struct VTextFieldUIModel {
     )
 
     // MARK: Properties - Border
-    /// Border width. Set to `0`.
+    /// Border width. Set to `0` points.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 0
+    public var borderWidth: PointPixelMeasurement = .points(0)
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors
@@ -371,7 +371,7 @@ extension VTextFieldUIModel {
     public static var success: Self {
         var uiModel: Self = .init()
         
-        uiModel.borderWidth = 1.5
+        uiModel.borderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applySuccessColorScheme()
         
         return uiModel
@@ -381,7 +381,7 @@ extension VTextFieldUIModel {
     public static var warning: Self {
         var uiModel: Self = .init()
         
-        uiModel.borderWidth = 1.5
+        uiModel.borderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applyWarningColorScheme()
         
         return uiModel
@@ -391,7 +391,7 @@ extension VTextFieldUIModel {
     public static var error: Self {
         var uiModel: Self = .init()
         
-        uiModel.borderWidth = 1.5
+        uiModel.borderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applyErrorColorScheme()
         
         return uiModel

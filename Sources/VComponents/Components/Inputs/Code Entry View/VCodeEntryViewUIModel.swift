@@ -56,10 +56,10 @@ public struct VCodeEntryViewUIModel {
     public var characterBackgroundCornerRadius: CGFloat = 5
 
     // MARK: Properties - Border
-    /// Character background border width. Set to `0`.
+    /// Character background border width. Set to `0` points.
     ///
     /// To hide border, set to `0`.
-    public var characterBackgroundBorderWidth: CGFloat = 0
+    public var characterBackgroundBorderWidth: PointPixelMeasurement = .points(0)
 
     /// Character background border colors.
     public var characterBackgroundBorderColors: StateColors = .clearColors
@@ -141,7 +141,7 @@ extension VCodeEntryViewUIModel {
     public static var success: Self {
         var uiModel: Self = .init()
 
-        uiModel.characterBackgroundBorderWidth = 1.5
+        uiModel.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applySuccessColorScheme()
 
         return uiModel
@@ -151,7 +151,7 @@ extension VCodeEntryViewUIModel {
     public static var warning: Self {
         var uiModel: Self = .init()
 
-        uiModel.characterBackgroundBorderWidth = 1.5
+        uiModel.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applyWarningColorScheme()
 
         return uiModel
@@ -161,7 +161,7 @@ extension VCodeEntryViewUIModel {
     public static var error: Self {
         var uiModel: Self = .init()
 
-        uiModel.characterBackgroundBorderWidth = 1.5
+        uiModel.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
         uiModel.applyErrorColorScheme()
 
         return uiModel

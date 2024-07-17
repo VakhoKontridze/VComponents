@@ -25,7 +25,8 @@ import VCore
 public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCaptionLabel: View {
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel
-    
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
     @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularCaptionButtonInternalState {
         .init(
@@ -166,9 +167,11 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
     private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        if uiModel.rectangleBorderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.rectangleBorderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
-                .strokeBorder(uiModel.rectangleBorderColors.value(for: internalState), lineWidth: uiModel.rectangleBorderWidth)
+                .strokeBorder(uiModel.rectangleBorderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
         }
     }

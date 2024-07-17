@@ -26,6 +26,7 @@ struct VToast: View {
 
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
+    @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
@@ -166,9 +167,11 @@ struct VToast: View {
 
     @ViewBuilder
     private var borderView: some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(uiModel.borderColor, lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
         }
     }
 

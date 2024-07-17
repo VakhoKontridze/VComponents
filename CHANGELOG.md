@@ -7,6 +7,7 @@ General
 - Minimum SDK version has been increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
 - Minimum `Swift` language version has been increased to `6.0`
 - Previously deprecated symbols have been removed
+- All border properties are now represented with `PointPixelMeasurement` instead of `CGFloat`
 - All `Font` properties now have `DynamicTypeSizeType` properties in UI models
 
 VGroupBox

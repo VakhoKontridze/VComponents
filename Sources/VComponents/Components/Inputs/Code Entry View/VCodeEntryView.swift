@@ -45,6 +45,7 @@ import VCore
 public struct VCodeEntryView: View {
     // MARK: Properties - UI Model
     private let uiModel: VCodeEntryViewUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -214,9 +215,11 @@ public struct VCodeEntryView: View {
     private func characterBackgroundBorderView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
-        if uiModel.characterBackgroundBorderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.characterBackgroundBorderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
-                .strokeBorder(uiModel.characterBackgroundBorderColors.value(for: internalState), lineWidth: uiModel.characterBackgroundBorderWidth)
+                .strokeBorder(uiModel.characterBackgroundBorderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
 

@@ -74,10 +74,10 @@ public struct VRectangularCaptionButtonUIModel {
     }()
 
     // MARK: Properties - Rectangle Border
-    /// Rectangle border width. Set to `0`.
+    /// Rectangle border width. Set to `0` points.
     ///
     /// To hide border, set to `0`.
-    public var rectangleBorderWidth: CGFloat = 0
+    public var rectangleBorderWidth: PointPixelMeasurement = .points(0)
 
     /// Rectangle border colors.
     public var rectangleBorderColors: StateColors = .clearColors

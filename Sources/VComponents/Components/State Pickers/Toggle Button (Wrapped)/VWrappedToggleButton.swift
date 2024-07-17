@@ -51,6 +51,8 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappedToggleButtonUIModel
 
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VRectangularToggleButtonState
@@ -221,9 +223,11 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
     private func borderView(
         internalState: VWrappedToggleButtonInternalState
     ) -> some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
         }
     }

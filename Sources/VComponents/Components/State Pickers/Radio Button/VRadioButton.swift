@@ -38,6 +38,8 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VRadioButtonUIModel
 
+    @Environment(\.displayScale) private var displayScale: CGFloat
+
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VRadioButtonState
@@ -120,15 +122,17 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     }
 
     private var radioButton: some View {
-        baseButtonView(label: { internalState in
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        return baseButtonView(label: { internalState in
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                     .frame(size: uiModel.size)
                     .foregroundStyle(uiModel.fillColors.value(for: internalState))
 
-                if uiModel.borderWidth > 0 {
+                if borderWidth > 0 {
                     RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
                         .frame(size: uiModel.size)
                 }
 

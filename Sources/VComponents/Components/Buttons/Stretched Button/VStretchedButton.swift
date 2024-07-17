@@ -25,6 +25,7 @@ import VCore
 public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties
     private let uiModel: VStretchedButtonUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
 
     @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState {
@@ -189,9 +190,11 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
     private func borderView(
         internalState: VStretchedButtonInternalState
     ) -> some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
         }
     }

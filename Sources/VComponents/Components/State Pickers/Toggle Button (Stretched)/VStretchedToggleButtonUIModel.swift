@@ -80,10 +80,10 @@ public struct VStretchedToggleButtonUIModel {
     public var backgroundPressedScale: CGFloat = 1
 
     // MARK: Properties - Border
-    /// Border width. Set to `0`.
+    /// Border width. Set to `0` points.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = 0
+    public var borderWidth: PointPixelMeasurement = .points(0)
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors

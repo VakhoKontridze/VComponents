@@ -94,6 +94,7 @@ import VCore
 public struct VTextField: View {
     // MARK: Properties - UI Model
     private let uiModel: VTextFieldUIModel
+    @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -287,9 +288,11 @@ public struct VTextField: View {
 
     @ViewBuilder
     private var backgroundBorderView: some View {
-        if uiModel.borderWidth > 0 {
+        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+
+        if borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: uiModel.borderWidth)
+                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
 

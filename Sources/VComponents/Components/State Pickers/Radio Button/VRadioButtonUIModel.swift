@@ -86,15 +86,15 @@ public struct VRadioButtonUIModel {
 
     // MARK: Properties - Border
     /// Border width.
-    /// Set to `1.5` on `iOS`.
-    /// Set to `1` on `macOS`.
+    /// Set to `1.5` points on `iOS`.
+    /// Set to `1`point  on `macOS`.
     ///
     /// To hide border, set to `0`.
-    public var borderWidth: CGFloat = {
+    public var borderWidth: PointPixelMeasurement = {
 #if os(iOS)
-        1.5
+        PointPixelMeasurement.points(1.5)
 #elseif os(macOS)
-        1
+        PointPixelMeasurement.points(1)
 #else
         fatalError() // Not supported
 #endif
