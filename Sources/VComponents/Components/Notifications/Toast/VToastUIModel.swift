@@ -22,7 +22,8 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    /// Width group. Set to `wrapped` with `absolute` `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `absolute` `margin` `15` in landscape.
+    /// Width group.
+    /// Set to `wrapped` with `absolute` `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `absolute` `margin` `15` in landscape.
     public var widthGroup: WidthGroup = .init(
         portrait: .wrapped(margin: .absolute(15)),
         landscape: .wrapped(maxWidth: .fraction(0.5), margin: .absolute(15))

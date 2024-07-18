@@ -22,7 +22,8 @@ public struct VNotificationUIModel {
         return uiModel
     }
 
-    /// Width group. Set to `stretched` with `absolute` `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
+    /// Width group.
+    /// Set to `stretched` with `absolute` `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
     public var widthGroup: WidthGroup = .init(
         portrait: .stretched(margin: .absolute(15)),
         landscape: .fixed(width: .fraction(0.5))
