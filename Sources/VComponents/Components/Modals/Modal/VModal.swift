@@ -79,9 +79,7 @@ struct VModal<Content>: View
                     switch currentWidth {
                     case .fixed(let dimension):
                         $0
-                            .frame(
-                                width: dimension.toAbsolute(in: containerSize.width)
-                            )
+                            .frame(width: dimension.toAbsolute(in: containerSize.width))
 
                     case .wrapped:
                         $0
@@ -95,9 +93,7 @@ struct VModal<Content>: View
                     switch currentHeight {
                     case .fixed(let dimension):
                         $0
-                            .frame(
-                                height: dimension.toAbsolute(in: containerSize.height)
-                            )
+                            .frame(height: dimension.toAbsolute(in: containerSize.height))
 
                     case .wrapped:
                         $0

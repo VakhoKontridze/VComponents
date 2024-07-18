@@ -100,9 +100,7 @@ struct VBottomSheet<Content>: View
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
-                        .frame(
-                            height: currentHeightsObject.max.toAbsolute(in: containerSize.height)
-                        )
+                        .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
