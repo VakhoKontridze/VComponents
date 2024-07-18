@@ -281,7 +281,7 @@ public struct VTextFieldUIModel {
     public init() {}
 
     // MARK: Content Type
-    /// Enumeration that represents content type.
+    /// Content type.
     public enum ContentType: Int, CaseIterable {
         // MARK: Cases
         /// Standard.

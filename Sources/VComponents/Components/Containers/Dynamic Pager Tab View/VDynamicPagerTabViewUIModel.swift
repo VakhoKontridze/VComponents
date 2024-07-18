@@ -116,7 +116,7 @@ public struct VDynamicPagerTabViewUIModel {
     public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Tab Selection Indicator Width Type
-    /// Enumeration that represents tab selection indicator width type.
+    /// Tab selection indicator width type.
     public enum TabSelectionIndicatorWidthType: Int, CaseIterable {
         // MARK: Cases
         /// Selection indicator stretches to the width of the label of tab item.

@@ -225,7 +225,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Corner Radius Type
-    /// Enumeration that represents corner radius.
+    /// Corner radius.
     public enum CornerRadiusType {
         // MARK: Cases
         /// Capsule.
@@ -246,7 +246,7 @@ public struct VToastUIModel {
     public typealias Margins = EdgeInsets_HorizontalVertical
 
     // MARK: Text Line Type
-    /// Enumeration that represents text line.
+    /// Text line type.
     public enum TextLineType {
         // MARK: Cases
         /// Single-line.

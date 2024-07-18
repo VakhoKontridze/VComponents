@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: Marquee Duration Type
-/// Enumeration that represents animation duration.
+/// Marquee duration type.
 public enum MarqueeDurationType {
     // MARK: Cases
     /// Duration.

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Title and Icon Placement
-/// Enumeration that represents title and icon placement.
+/// Title and icon placement.
 public enum TitleAndIconPlacement: Int, CaseIterable {
     /// Title and icon.
     case titleAndIcon
