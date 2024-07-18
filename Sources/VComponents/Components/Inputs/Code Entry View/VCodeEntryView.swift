@@ -198,16 +198,16 @@ public struct VCodeEntryView: View {
             .applyIfLet(isPopulated ? uiModel.textDynamicTypeSizeType : uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
 
             .frame(size: uiModel.characterBackgroundSize)
-        
-            .clipped() // Prevents large content from overflowing
-            .background(content: { characterBackgroundBorderView(internalState) }) // Has own rounding
-            .background(content: { characterBackgroundView(internalState) }) // Has own rounding
+
+            .background(content: { characterBackgroundBorderView(internalState) })
+            .background(content: { characterBackgroundView(internalState) })
+            .clipShape(.rect(cornerRadius: uiModel.characterBackgroundCornerRadius))
     }
 
     private func characterBackgroundView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
+        Rectangle()
             .foregroundStyle(uiModel.characterBackgroundColors.value(for: internalState))
     }
 

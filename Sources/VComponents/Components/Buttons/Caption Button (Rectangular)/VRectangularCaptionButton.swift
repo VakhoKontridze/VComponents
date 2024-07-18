@@ -130,9 +130,9 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
             )
         })
         .frame(size: uiModel.rectangleSize)
-        .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius)) // Prevents large content from overflowing
-        .background(content: { rectangleBackgroundView(internalState: internalState) }) // Has own rounding
-        .overlay(content: { rectangleBorderView(internalState: internalState) }) // Has own rounding
+        .background(content: { rectangleBackgroundView(internalState: internalState) })
+        .overlay(content: { rectangleBorderView(internalState: internalState) })
+        .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius))
     }
 
     private func rectangleIcon(
@@ -153,7 +153,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
     private func rectangleBackgroundView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
+        Rectangle()
             .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
             .foregroundStyle(uiModel.rectangleColors.value(for: internalState))
             .shadow(

@@ -135,9 +135,9 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
-                    .overlay(content: { borderView(internalState: internalState) }) // Has own rounding
+                    .background(content: { backgroundView(internalState: internalState) })
+                    .overlay(content: { borderView(internalState: internalState) })
+                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
                     .applyIf(uiModel.appliesStateChangeAnimation, transform: {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
@@ -211,7 +211,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     private func backgroundView(
         internalState: VStretchedToggleButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+        Rectangle()
             .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
             .shadow(

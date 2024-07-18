@@ -104,10 +104,10 @@ struct VToast: View {
                     }
                 })
 
-                .clipShape(.rect(cornerRadius: cornerRadius))
-
                 .background(content: { backgroundView })
-                .overlay(content: { borderView }) // Has own rounding
+                .overlay(content: { borderView })
+
+                .clipShape(.rect(cornerRadius: cornerRadius))
 
                 .applyModifier({
                     switch currentWidth.storage {
@@ -161,7 +161,7 @@ struct VToast: View {
     }
 
     private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: cornerRadius)
+        Rectangle()
             .foregroundStyle(uiModel.backgroundColor)
     }
 

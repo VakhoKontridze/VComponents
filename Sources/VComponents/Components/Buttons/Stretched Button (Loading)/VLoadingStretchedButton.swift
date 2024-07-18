@@ -121,9 +121,9 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-                    .background(content: { backgroundView(internalState: internalState) }) // Has own rounding
-                    .overlay(content: { borderView(internalState: internalState) }) // Has own rounding
+                    .background(content: { backgroundView(internalState: internalState) })
+                    .overlay(content: { borderView(internalState: internalState) })
+                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
             }
         )
         .disabled(isLoading)
@@ -218,7 +218,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
     private func backgroundView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+        Rectangle()
             .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
             .shadow(

@@ -63,7 +63,7 @@ public struct VGroupBox<Content>: View where Content: View {
     public var body: some View {
         contentView
             .background(content: { backgroundView })
-            .overlay(content: { borderView }) // Has own rounding
+            .overlay(content: { borderView })
             .clipShape(
                 .rect(
                     cornerRadii: uiModel.cornerRadii

@@ -128,9 +128,9 @@ public struct VTextView: View {
                 minHeight: uiModel.minimumHeight,
                 alignment: .top
             )
-            .clipped() // Prevents large content from overflowing
-            .background(content: { backgroundBorderView }) // Has own rounding
-            .background(content: { backgroundView }) // Has own rounding
+            .background(content: { borderView })
+            .background(content: { backgroundView })
+            .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
     }
 
     private var textField: some View {
@@ -180,13 +180,13 @@ public struct VTextView: View {
     }
 
     private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+        Rectangle()
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
             .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
     }
 
     @ViewBuilder 
-    private var backgroundBorderView: some View {
+    private var borderView: some View {
         let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {

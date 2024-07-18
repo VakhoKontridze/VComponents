@@ -91,7 +91,7 @@ import VCore
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
 ///             current: current,
-///             dotContnent: { (internalState, _) in
+///             dotContent: { (internalState, _) in
 ///                 RoundedRectangle(cornerRadius: 2)
 ///                     .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
 ///             }

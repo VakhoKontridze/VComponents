@@ -86,10 +86,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     }
                 })
 
-                .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
-
                 .background(content: { backgroundView })
-                .overlay(content: { borderView }) // Has own rounding
+                .overlay(content: { borderView })
+
+                .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
 
                 .getSize({ height = $0.height })
 
@@ -235,7 +235,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: uiModel.cornerRadius)
+        Rectangle()
             .foregroundStyle(uiModel.backgroundColor)
     }
 
