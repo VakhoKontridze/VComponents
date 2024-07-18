@@ -384,12 +384,12 @@ public struct VAlertUIModel {
         case fixed(width: AbsoluteFractionMeasurement)
 
         /// Stretched width.
-        case stretched(margin: CGFloat)
+        case stretched(margin: AbsoluteFractionMeasurement)
 
         // MARK: Properties
-        var margin: CGFloat {
+        var margin: AbsoluteFractionMeasurement {
             switch self {
-            case .fixed: 0
+            case .fixed: .absolute(0)
             case .stretched(let margin): margin
             }
         }

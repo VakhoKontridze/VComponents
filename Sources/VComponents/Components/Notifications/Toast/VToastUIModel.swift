@@ -22,10 +22,10 @@ public struct VToastUIModel {
         return uiModel
     }
 
-    /// Width group. Set to `wrapped` with `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `margin` `15` in landscape.
+    /// Width group. Set to `wrapped` with `absolute` `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `absolute` `margin` `15` in landscape.
     public var widthGroup: WidthGroup = .init(
-        portrait: .wrapped(margin: 15),
-        landscape: .wrapped(maxWidth: .fraction(0.5), margin: 15)
+        portrait: .wrapped(margin: .absolute(15)),
+        landscape: .wrapped(maxWidth: .fraction(0.5), margin: .absolute(15))
     )
 
     /// Margin from presented edge. Set to `10`.
@@ -148,9 +148,9 @@ public struct VToastUIModel {
         // MARK: Properties
         let storage: Storage
 
-        var margin: CGFloat {
+        var margin: AbsoluteFractionMeasurement {
             switch storage {
-            case .fixed: 0
+            case .fixed: .absolute(0)
 
             case .wrapped(let margin): margin
             case .wrappedMaxWidth(_, let margin): margin
@@ -179,7 +179,7 @@ public struct VToastUIModel {
 
         /// Wrapped width.
         public static func wrapped(
-            margin: CGFloat
+            margin: AbsoluteFractionMeasurement
         ) -> Self {
             self.init(
                 .wrapped(
@@ -191,7 +191,7 @@ public struct VToastUIModel {
         /// Wrapped width.
         public static func wrapped(
             maxWidth: AbsoluteFractionMeasurement,
-            margin: CGFloat
+            margin: AbsoluteFractionMeasurement
         ) -> Self {
             self.init(
                 .wrappedMaxWidth(
@@ -203,7 +203,7 @@ public struct VToastUIModel {
 
         /// Stretched width.
         public static func stretched(
-            margin: CGFloat
+            margin: AbsoluteFractionMeasurement
         ) -> Self {
             self.init(
                 .stretched(
@@ -216,10 +216,10 @@ public struct VToastUIModel {
         enum Storage: Equatable {
             case fixed(width: AbsoluteFractionMeasurement)
 
-            case wrapped(margin: CGFloat)
-            case wrappedMaxWidth(maxWidth: AbsoluteFractionMeasurement, margin: CGFloat)
+            case wrapped(margin: AbsoluteFractionMeasurement)
+            case wrappedMaxWidth(maxWidth: AbsoluteFractionMeasurement, margin: AbsoluteFractionMeasurement)
 
-            case stretched(margin: CGFloat)
+            case stretched(margin: AbsoluteFractionMeasurement)
         }
     }
 

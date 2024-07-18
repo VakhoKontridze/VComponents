@@ -128,7 +128,7 @@ struct VToast: View {
 
                 .getSize({ height = $0.height })
 
-                .padding(.horizontal, currentWidth.margin)
+                .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
@@ -455,23 +455,23 @@ struct VToast: View {
                             alignment = .trailing
                             try? await Task.sleep(seconds: 1)
 
-                            width = .wrapped(margin: 15)
+                            width = .wrapped(margin: .absolute(15))
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .wrapped(maxWidth: .fraction(0.75), margin: 15)
+                            width = .wrapped(maxWidth: .fraction(0.75), margin: .absolute(15))
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: 15)
+                            width = .stretched(margin: .absolute(15))
                             alignment = .leading
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: 15)
+                            width = .stretched(margin: .absolute(15))
                             alignment = .center
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: 15)
+                            width = .stretched(margin: .absolute(15))
                             alignment = .trailing
                             try? await Task.sleep(seconds: 1)
                         }

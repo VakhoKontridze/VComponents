@@ -103,7 +103,7 @@ struct VAlert<Content>: View
         })
         .frame(maxHeight: .infinity)
 
-        .padding(.horizontal, currentWidth.margin)
+        .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
         .padding(.vertical, uiModel.marginVertical)
         .applyModifier({
             // Since alert doesn't have an explicit height, prevents clipping into safe areas
@@ -584,7 +584,7 @@ struct VAlert<Content>: View
                             width = .fixed(width: .fraction(0.74))
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: 15)
+                            width = .stretched(margin: .absolute(15))
                             try? await Task.sleep(seconds: 1)
                         }
                     })

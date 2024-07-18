@@ -93,7 +93,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
                 .getSize({ height = $0.height })
 
-                .padding(.horizontal, currentWidth.margin)
+                .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
@@ -482,7 +482,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                             width = .fixed(width: .fraction(0.75))
                             try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: 15)
+                            width = .stretched(margin: .absolute(15))
                             try? await Task.sleep(seconds: 1)
                         }
                     })

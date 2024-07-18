@@ -22,9 +22,9 @@ public struct VNotificationUIModel {
         return uiModel
     }
 
-    /// Width group. Set to `stretched` with `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
+    /// Width group. Set to `stretched` with `absolute` `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
     public var widthGroup: WidthGroup = .init(
-        portrait: .stretched(margin: 15),
+        portrait: .stretched(margin: .absolute(15)),
         landscape: .fixed(width: .fraction(0.5))
     )
 
@@ -242,12 +242,12 @@ public struct VNotificationUIModel {
         case fixed(width: AbsoluteFractionMeasurement)
 
         /// Stretched width.
-        case stretched(margin: CGFloat)
+        case stretched(margin: AbsoluteFractionMeasurement)
 
         // MARK: Properties
-        var margin: CGFloat {
+        var margin: AbsoluteFractionMeasurement {
             switch self {
-            case .fixed: 0
+            case .fixed: .absolute(0)
             case .stretched(let margin): margin
             }
         }

@@ -172,15 +172,15 @@ public struct VModalUIModel {
         case fixed(dimension: AbsoluteFractionMeasurement)
 
         /// Wrapped dimension.
-        case wrapped(margin: CGFloat)
+        case wrapped(margin: AbsoluteFractionMeasurement)
 
         /// Stretched dimension.
-        case stretched(margin: CGFloat)
+        case stretched(margin: AbsoluteFractionMeasurement)
 
         // MARK: Properties
-        var margin: CGFloat {
+        var margin: AbsoluteFractionMeasurement {
             switch self {
-            case .fixed: 0
+            case .fixed: .absolute(0)
             case .wrapped(let margin): margin
             case .stretched(let margin): margin
             }

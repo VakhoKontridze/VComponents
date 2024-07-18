@@ -108,9 +108,9 @@ struct VModal<Content>: View
                     }
                 })
         })
-        .padding(.horizontal, currentWidth.margin)
-        .padding(.vertical, currentHeight.margin)
-        
+        .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
+        .padding(.vertical, currentHeight.margin.toAbsolute(in: containerSize.height))
+
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
 
         .shadow(
@@ -223,14 +223,14 @@ private struct ContentView_SizeTypes: View {
                         try? await Task.sleep(seconds: 1)
 
                         size = VModalUIModel.Size(
-                            width: .wrapped(margin: 15),
-                            height: .wrapped(margin: 15)
+                            width: .wrapped(margin: .absolute(15)),
+                            height: .wrapped(margin: .absolute(15))
                         )
                         try? await Task.sleep(seconds: 1)
 
                         size = VModalUIModel.Size(
-                            width: .stretched(margin: 15),
-                            height: .stretched(margin: 15)
+                            width: .stretched(margin: .absolute(15)),
+                            height: .stretched(margin: .absolute(15))
                         )
                         try? await Task.sleep(seconds: 1)
                     }
