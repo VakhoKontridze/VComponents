@@ -79,7 +79,7 @@ struct VToast: View {
                     case .fixed(let width):
                         $0
                             .frame(
-                                width: width.toAbsolute(in: containerSize.width),
+                                width: width.toAbsolute(dimension: containerSize.width),
                                 alignment: Alignment(
                                     horizontal: uiModel.bodyHorizontalAlignment,
                                     vertical: .center
@@ -119,7 +119,7 @@ struct VToast: View {
 
                     case .wrappedMaxWidth(let maxWidth, _):
                         $0
-                            .frame(maxWidth: maxWidth.toAbsolute(in: containerSize.width))
+                            .frame(maxWidth: maxWidth.toAbsolute(dimension: containerSize.width))
 
                     case .stretched:
                         $0
@@ -128,7 +128,7 @@ struct VToast: View {
 
                 .getSize({ height = $0.height })
 
-                .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
+                .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()

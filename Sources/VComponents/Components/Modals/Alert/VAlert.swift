@@ -93,7 +93,7 @@ struct VAlert<Content>: View
                 switch currentWidth {
                 case .fixed(let width):
                     $0
-                        .frame(width: width.toAbsolute(in: containerSize.width))
+                        .frame(width: width.toAbsolute(dimension: containerSize.width))
 
                 case .stretched:
                     $0
@@ -103,7 +103,7 @@ struct VAlert<Content>: View
         })
         .frame(maxHeight: .infinity)
 
-        .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
+        .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         .padding(.vertical, uiModel.marginVertical)
         .applyModifier({
             // Since alert doesn't have an explicit height, prevents clipping into safe areas

@@ -17,10 +17,10 @@ struct VSideBar<Content>: View where Content: View {
     private let uiModel: VSideBarUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
     private var currentHeight: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(in: containerSize.height)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(dimension: containerSize.height)
     }
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize

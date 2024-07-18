@@ -79,7 +79,7 @@ struct VModal<Content>: View
                     switch currentWidth {
                     case .fixed(let dimension):
                         $0
-                            .frame(width: dimension.toAbsolute(in: containerSize.width))
+                            .frame(width: dimension.toAbsolute(dimension: containerSize.width))
 
                     case .wrapped:
                         $0
@@ -93,7 +93,7 @@ struct VModal<Content>: View
                     switch currentHeight {
                     case .fixed(let dimension):
                         $0
-                            .frame(height: dimension.toAbsolute(in: containerSize.height))
+                            .frame(height: dimension.toAbsolute(dimension: containerSize.height))
 
                     case .wrapped:
                         $0
@@ -104,8 +104,8 @@ struct VModal<Content>: View
                     }
                 })
         })
-        .padding(.horizontal, currentWidth.margin.toAbsolute(in: containerSize.width))
-        .padding(.vertical, currentHeight.margin.toAbsolute(in: containerSize.height))
+        .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
+        .padding(.vertical, currentHeight.margin.toAbsolute(dimension: containerSize.height))
 
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
 

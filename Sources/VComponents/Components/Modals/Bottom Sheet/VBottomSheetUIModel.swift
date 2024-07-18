@@ -150,7 +150,7 @@ public struct VBottomSheetUIModel {
         heights: Heights,
         in containerHeight: CGFloat
     ) -> CGFloat {
-        swipeDismissDistanceMinHeightRatio * heights.min.toAbsolute(in: containerHeight)
+        swipeDismissDistanceMinHeightRatio * heights.min.toAbsolute(dimension: containerHeight)
     }
 
     /// Swipe dismiss animation. Set to `easeInOut` with duration `0.15`.
@@ -226,11 +226,11 @@ public struct VBottomSheetUIModel {
             ideal.value == max.value
         }
 
-        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.toAbsolute(in: containerHeight) }
+        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.toAbsolute(dimension: containerHeight) }
 
-        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.toAbsolute(in: containerHeight) }
+        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.toAbsolute(dimension: containerHeight) }
 
-        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.toAbsolute(in: containerHeight) }
+        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.toAbsolute(dimension: containerHeight) }
 
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 

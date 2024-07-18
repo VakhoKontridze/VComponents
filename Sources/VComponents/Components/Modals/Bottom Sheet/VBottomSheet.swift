@@ -20,7 +20,7 @@ struct VBottomSheet<Content>: View
     private let uiModel: VBottomSheetUIModel
 
     private var currentWidth: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(in: containerSize.width)
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
@@ -100,7 +100,7 @@ struct VBottomSheet<Content>: View
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
-                        .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
+                        .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                         .gesture(
                             DragGesture(minimumDistance: 0)
@@ -125,14 +125,14 @@ struct VBottomSheet<Content>: View
 
                 .applyIf(!uiModel.contentIsDraggable, transform: {
                     $0
-                        .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
+                        .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 })
         })
         .frame(width: currentWidth)
         .applyIf(uiModel.contentIsDraggable, transform: {
             $0
-                .frame(height: currentHeightsObject.max.toAbsolute(in: containerSize.height))
+                .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                 .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 .gesture(
                     DragGesture(minimumDistance: 0)
