@@ -31,26 +31,4 @@ extension View {
                 }
             })
     }
-    
-    /// Presents `VDashedSpinner` when `parameters` is non-`nil`.
-    ///
-    ///     @State private var parameters: VSpinnerParameters = .init()
-    ///
-    ///     var body: some View {
-    ///         content
-    ///             .vDashedSpinner(parameters: parameters)
-    ///     }
-    ///
-    public func vDashedSpinner(
-        uiModel: VDashedSpinnerUIModel = .init(),
-        parameters: VSpinnerParameters?
-    ) -> some View {
-        self
-            .blocksHitTesting(parameters?.isInteractionEnabled == false)
-            .overlay(content: {
-                if parameters != nil {
-                    VDashedSpinner(uiModel: uiModel)
-                }
-            })
-    }
 }

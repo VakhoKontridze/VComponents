@@ -68,6 +68,10 @@ VToast
 - Toast now has `info` highlight
 - Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
 
+VDashedSpinner
+
+- Spinner is removed
+
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
 Other

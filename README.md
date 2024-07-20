@@ -93,7 +93,6 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
 
 <p>
     <img tag="VContinuousSpinner" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/03021296-f5c4-449c-802c-07d52c1119af">
-    <img tag="VDashedSpinner" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/d8ad9a48-b3c8-4f67-9617-7a8a4ae307bf">
 <p/>
 
 #### Misc
