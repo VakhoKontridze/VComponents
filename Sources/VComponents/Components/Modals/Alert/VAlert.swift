@@ -195,7 +195,6 @@ struct VAlert<Content>: View
                     .padding(uiModel.contentMargins)
             }
         })
-        .clipped() // Fixes flickering issues caused by the keyboard
     }
     
     @ViewBuilder

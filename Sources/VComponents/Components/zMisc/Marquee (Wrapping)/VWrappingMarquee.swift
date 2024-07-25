@@ -57,7 +57,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
             .mask({ gradientMask })
-            .clipped()
+            .clipped() // Clips off-bound content
     }
     
     @ViewBuilder 

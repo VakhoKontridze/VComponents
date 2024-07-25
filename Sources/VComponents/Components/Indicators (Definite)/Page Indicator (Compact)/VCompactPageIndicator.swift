@@ -169,7 +169,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                 x: uiModel.direction.isHorizontal ? offset : 0,
                 y: uiModel.direction.isHorizontal ? 0 : offset
             )
-            .clipped()
+            .clipped() // Clips off-bound dots
             .applyIf(uiModel.appliesTransitionAnimation, transform: {
                 $0.animation(uiModel.transitionAnimation, value: current)
             })
