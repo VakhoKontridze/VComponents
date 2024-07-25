@@ -31,17 +31,6 @@ public struct ModalComponentSizeGroup<Size> {
     }
 
     // MARK: Current
-    /// Current size based on interface orientation.
-    public func current(
-        isPortrait: Bool
-    ) -> Size {
-        if isPortrait {
-            portrait
-        } else {
-            landscape
-        }
-    }
-
     func current(
         orientation: PlatformInterfaceOrientation
     ) -> Size {
