@@ -236,7 +236,7 @@ public struct VWrappedToggleButtonUIModel {
     public var hitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if `stateChange` animation is applied. Set to `true`.
+    /// Indicates if `stateChangeAnimation` is applied. Set to `true`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///

@@ -18,7 +18,8 @@ import VCore
 ///
 ///         var id: Int { rawValue }
 ///
-///         var tabItemTitle: String { .init(describing: self).capitalized }
+///         var title: String { .init(describing: self).capitalized }
+///         
 ///         var color: Color {
 ///             switch self {
 ///             case .red: Color.red
@@ -34,7 +35,7 @@ import VCore
 ///         VStretchedIndicatorStaticPagerTabView(
 ///             selection: $selection,
 ///             data: RGBColor.allCases,
-///             tabItemTitle: { $0.tabItemTitle },
+///             tabItemTitle: { $0.title },
 ///             content: { $0.color }
 ///         )
 ///     }

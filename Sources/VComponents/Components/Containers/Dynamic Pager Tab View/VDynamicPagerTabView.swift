@@ -18,9 +18,10 @@ import VCore
 ///
 ///         var id: Int { rawValue }
 ///
-///         var tabItemTitle: String { .init(describing: self).capitalized }
+///         var title: String { .init(describing: self).capitalized }
+///         
 ///         var color: Color {
-///             switch rawValue.remainderReportingOverflow(dividingBy: 3).0 {
+///             switch rawValue.quotientAndRemainder(dividingBy: 3).remainder {
 ///             case 0: Color.red
 ///             case 1: Color.green
 ///             case 2: Color.blue
@@ -35,7 +36,7 @@ import VCore
 ///         VDynamicPagerTabView(
 ///             selection: $selection,
 ///             data: WeekDay.allCases,
-///             tabItemTitle: { $0.tabItemTitle },
+///             tabItemTitle: { $0.title },
 ///             content: { $0.color }
 ///         )
 ///     }

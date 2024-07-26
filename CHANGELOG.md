@@ -20,6 +20,10 @@ VDisclosureGroup
 - DisclosureGroup now has border configuration
 - `cornerRadius` is replaced with `cornerRadii` and `reversesHorizontalCornersForRTLLanguages`
 
+VCarousel
+
+- A new component is added, that paginates between child views horizontally
+
 VModal
 
 - Presentation API is overhauled

@@ -63,6 +63,7 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
     <img tag="VStretchedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/27db2a82-380e-493a-a44e-a63d166aad98">
     <img tag="VWrappedIndicatorStaticPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/4fc9cdb6-9611-4361-9db3-2a9a1f861d96">
     <img tag="VDynamicPagerTabView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/dfd0ea83-9dad-4819-85c6-dd1894a32460">
+    <img tag="VCarousel" width="350" align="top" src="https://github.com/user-attachments/assets/0e2503b2-2461-4e5e-ac61-c1e4e9b86125">
 <p/>
 
 #### Modals

@@ -18,7 +18,7 @@ enum Preview_Weekday: Int, Hashable, Identifiable, CaseIterable {
     var title: String { .init(describing: self).capitalized }
 
     var color: Color {
-        switch rawValue.remainderReportingOverflow(dividingBy: 3).0 {
+        switch rawValue.quotientAndRemainder(dividingBy: 3).remainder {
         case 0: Color.red
         case 1: Color.green
         case 2: Color.blue
