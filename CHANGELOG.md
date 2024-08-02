@@ -1,6 +1,6 @@
 # Change Log
 
-### 6.0.8(68)
+### [6.0.8(68)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.8) — *2024 08 02*
 
 Other
 
