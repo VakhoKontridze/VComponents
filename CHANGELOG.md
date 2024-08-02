@@ -4,9 +4,9 @@
 
 General
 
-- Minimum SDK version has been increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
-- Minimum `Swift` language version has been increased to `6.0`
-- Previously deprecated symbols have been removed
+- Minimum SDK version is increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
+- Minimum `Swift` language version is increased to `6.0`
+- Previously deprecated symbols are removed
 - All border properties are now represented with `PointPixelMeasurement` instead of `CGFloat`
 - All `Font` properties now have `DynamicTypeSizeType` properties in UI models
 
@@ -86,7 +86,7 @@ Other
 
 Other
 
-- Compilation time bottlenecks have been fixed
+- Compilation time bottlenecks are fixed
 
 ### [6.0.6(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.6) — *2024 06 06*
 
@@ -138,7 +138,7 @@ VBouncingMarquee
 
 General
 
-- Minimum `Swift` language version has been increased to `5.10`
+- Minimum `Swift` language version is increased to `5.10`
 
 VTextField
 
@@ -151,33 +151,33 @@ General
 
 - Package now partially supports `visionOS` `1.0`
 - Colors are overhauled to better support other platforms
-- Previously deprecated symbols have been removed
+- Previously deprecated symbols are removed
 
 VStretchedButton
 
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VLoadingStretchedButton
 
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VWrappedButton
 
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VRectangularButton
 
-- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VRectangularCaptionButton
 
-- Button now supports icon `Font` customization when. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
-- Button now supports caption icon `Font` customization when `init` with icon or title and icon is used. `isIconCaptionResizable`, `iconCaptionContentMode`, and `iconCaptionFont` properties have been added. Also, `iconCaptionColors`, `iconCaptionOpacities`, and `iconCaptionSize` have been made `Optional`.
+- Button now supports icon `Font` customization when. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
+- Button now supports caption icon `Font` customization when `init` with icon or title and icon is used. `isIconCaptionResizable`, `iconCaptionContentMode`, and `iconCaptionFont` properties are added. Also, `iconCaptionColors`, `iconCaptionOpacities`, and `iconCaptionSize` are made `Optional`.
 
 VPlainButton
 
 - `hitBox` is set to `zero`
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VToggle
 
@@ -194,7 +194,7 @@ VCheckBox
 - `bulletDimension` is replaced with `bulletSize`
 - `checkmarkIconDimension` is replaced with `checkmarkIconSize`
 - `checkmarkIconOpacities` is added to UI model
-- CheckBox now supports button icon `Font` customization. `isCheckmarkIconResizable`, `checkmarkIconContentMode`, and `checkmarkIconFont` properties have been added. Also, `checkmarkIconColors` and `checkmarkIconSize` have been made `Optional`.
+- CheckBox now supports button icon `Font` customization. `isCheckmarkIconResizable`, `checkmarkIconContentMode`, and `checkmarkIconFont` properties are added. Also, `checkmarkIconColors` and `checkmarkIconSize` are made `Optional`.
 
 VRadioButton
 
@@ -205,17 +205,17 @@ VRadioButton
 
 VStretchedToggleButton
 
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VWrappedToggleButton
 
 - Toggle button now supports `watchOS`
-- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon or title and icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VRectangularToggleButton
 
 - Toggle button now supports `watchOS`
-- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties have been added. Also, `iconColors`, `iconOpacities`, and `iconSize` have been made `Optional`.
+- Button now supports icon `Font` customization when `init` with icon is used. `isIconResizable`, `iconContentMode`, and `iconFont` properties are added. Also, `iconColors`, `iconOpacities`, and `iconSize` are made `Optional`.
 
 VStepper
 
@@ -235,7 +235,7 @@ VTextField
 
 - `searchIconDimension` is replaced with `searchIconSize`
 - `searchIconOpacities` is added to UI model
-- TextField now supports button icon `Font` customization. `isSearchIconResizable`, `searchIconContentMode`, and `searchIconFont` properties have been added. Also, `searchIconColors` and `searchIconSize` have been made `Optional`.
+- TextField now supports button icon `Font` customization. `isSearchIconResizable`, `searchIconContentMode`, and `searchIconFont` properties are added. Also, `searchIconColors` and `searchIconSize` are made `Optional`.
 
 VGroupBox
 
@@ -382,9 +382,9 @@ Other
 
 General
 
-- Minimum SDK version has been increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, and `watchOS` `8.0`
-- Minimum `Swift` language version has been increased to `5.9`
-- Previously deprecated symbols have been removed
+- Minimum SDK version is increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, and `watchOS` `8.0`
+- Minimum `Swift` language version is increased to `5.9`
+- Previously deprecated symbols are removed
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
 
@@ -764,10 +764,10 @@ General
 
 General
 
-- Minimum SDK version has been decreased to `iOS` `13.0`
+- Minimum SDK version is decreased to `iOS` `13.0`
 - Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
-- Minimum `Swift` language version has been increased to `5.8`
-- Previously deprecated symbols have been removed
+- Minimum `Swift` language version is increased to `5.8`
+- Previously deprecated symbols are removed
 - Package now supports RTL languages
 - Fonts now support dynamic sizing
 - Haptic effects are added to most interactive components
@@ -988,9 +988,9 @@ API
 
 General
 
-- Minimum SDK version has been increased to `iOS` `16.0`
-- Minimum `Swift` language version has been increased to `5.7`
-- Previously deprecated symbols have been removed
+- Minimum SDK version is increased to `iOS` `16.0`
+- Minimum `Swift` language version is increased to `5.7`
+- Previously deprecated symbols are removed
 
 VPrimaryButton
 
@@ -1211,7 +1211,7 @@ VList
 
 - `VListLayoutType` is deprecated. Old `VList` now supports flexible layout, and new `VStaticList` is added for fixed layout.
 - Last separator is now visible by default
-- Separator has been added before the first row, which is visible by default
+- Separator is added before the first row, which is visible by default
 
 VStaticList
 
@@ -1255,10 +1255,10 @@ Other
 General
 
 - Project is migrated from `XCFramework` to `Swift` Package
-- Minimum SDK version has been increased to `iOS` `15.0`
-- Previously deprecated symbols have been removed
+- Minimum SDK version is increased to `iOS` `15.0`
+- Previously deprecated symbols are removed
 - Components are reworked
-- Colors have been reworked
+- Colors are reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines
 - `blinder` is renamed to `dimmingView`
