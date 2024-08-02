@@ -2,15 +2,6 @@
 
 import PackageDescription
 
-let swiftSettings: [SwiftSetting] = [
-    .unsafeFlags([
-        "-Xfrontend", "-debug-time-function-bodies",
-        "-Xfrontend", "-debug-time-expression-type-checking",
-        "-Xfrontend", "-warn-long-function-bodies=100",
-        "-Xfrontend", "-warn-long-expression-type-checking=100"
-    ])
-]
-
 let package: Package = .init(
     name: "VComponents",
     
@@ -44,8 +35,7 @@ let package: Package = .init(
             ],
             resources: [
                 .process("Resources")
-            ],
-            swiftSettings: swiftSettings
+            ]
         )
     ]
 )

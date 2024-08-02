@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.0.0(68)
+### 7.0.0(69)
 
 General
 
@@ -75,6 +75,12 @@ VToast
 VDashedSpinner
 
 - Spinner is removed
+
+### [6.0.8(68)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.8) — *2024 08 02*
+
+Other
+
+- Build issues caused by unsafe flags are fixed
 
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
