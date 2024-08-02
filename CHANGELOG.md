@@ -1,5 +1,11 @@
 # Change Log
 
+### 6.0.8(68)
+
+Other
+
+- Build issues caused by unsafe flags are fixed
+
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
 Other
