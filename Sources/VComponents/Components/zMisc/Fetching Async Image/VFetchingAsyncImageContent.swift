@@ -8,23 +8,23 @@
 import SwiftUI
 
 // MARK: - V Fetching Async Image Content
-enum VFetchingAsyncImageContent<Content, PlaceholderContent>
+enum VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
     where
-        Content: View,
-        PlaceholderContent: View
+        CustomContent: View,
+        CustomPlaceholderContent: View
 {
     case auto
     
     case content(
-        content: (Image) -> Content
+        customContent: (Image) -> CustomContent
     )
     
-    case contentPlaceholder(
-        content: (Image) -> Content,
-        placeholder: () -> PlaceholderContent
+    case contentAndPlaceholder(
+        customContent: (Image) -> CustomContent,
+        customPlaceholderContent: () -> CustomPlaceholderContent
     )
     
     case contentWithPhase(
-        content: (AsyncImagePhase) -> Content
+        customContentWithPhase: (AsyncImagePhase) -> CustomContent
     )
 }

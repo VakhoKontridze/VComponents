@@ -55,11 +55,11 @@ import SwiftUI
 ///         }
 ///     }
 ///
-public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
+public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderContent>: View
     where
         Parameter: Equatable,
-        Content: View,
-        PlaceholderContent: View
+        CustomContent: View,
+        CustomPlaceholderContent: View
 {
     // MARK: Properties
     private let uiModel: VFetchingAsyncImageUIModel
@@ -67,8 +67,8 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
     private let parameter: Parameter?
     private let fetchHandler: (Parameter) async throws -> Image
     
-    private let content: VFetchingAsyncImageContent<Content, PlaceholderContent>
-    
+    private let content: VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
+
     @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image
     @State private var result: Result<Image, any Error>?
 
@@ -82,8 +82,8 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image
     )
         where
-            Content == Never,
-            PlaceholderContent == Never
+            CustomContent == Never,
+            CustomPlaceholderContent == Never
     {
         self.uiModel = uiModel
         self.parameter = parameter
@@ -96,16 +96,16 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
-        @ViewBuilder content: @escaping (Image) -> Content
+        @ViewBuilder content customContent: @escaping (Image) -> CustomContent
     )
         where
-            PlaceholderContent == Never
+            CustomPlaceholderContent == Never
     {
         self.uiModel = uiModel
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .content(
-            content: content
+            customContent: customContent
         )
     }
     
@@ -114,15 +114,15 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
-        @ViewBuilder content: @escaping (Image) -> Content,
-        @ViewBuilder placeholder placeholderContent: @escaping () -> PlaceholderContent
+        @ViewBuilder content customContent: @escaping (Image) -> CustomContent,
+        @ViewBuilder placeholder customPlaceholderContent: @escaping () -> CustomPlaceholderContent
     ) {
         self.uiModel = uiModel
         self.parameter = parameter
         self.fetchHandler = fetchHandler
-        self.content = .contentPlaceholder(
-            content: content,
-            placeholder: placeholderContent
+        self.content = .contentAndPlaceholder(
+            customContent: customContent,
+            customPlaceholderContent: customPlaceholderContent
         )
     }
     
@@ -131,15 +131,15 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
-        @ViewBuilder contentWithPhase content: @escaping (AsyncImagePhase) -> Content
+        @ViewBuilder contentWithPhase customContentWithPhase: @escaping (AsyncImagePhase) -> CustomContent
     )
-        where PlaceholderContent == Never
+        where CustomPlaceholderContent == Never
     {
         self.uiModel = uiModel
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .contentWithPhase(
-            content: content
+            customContentWithPhase: customContentWithPhase
         )
     }
     
@@ -161,15 +161,15 @@ public struct VFetchingAsyncImage<Parameter, Content, PlaceholderContent>: View
                     defaultPlaceholderView
                 }
                 
-            case .contentPlaceholder(let content, let placeholderContent):
+            case .contentAndPlaceholder(let customContent, let customPlaceholderContent):
                 if case .success(let image) = result {
-                    content(image)
+                    customContent(image)
                 } else {
-                    placeholderContent()
+                    customPlaceholderContent()
                 }
                 
-            case .contentWithPhase(let content):
-                content({
+            case .contentWithPhase(let customContentWithPhase):
+                customContentWithPhase({
                     switch result {
                     case nil: AsyncImagePhase.empty
                     case .success(let image): AsyncImagePhase.success(image)

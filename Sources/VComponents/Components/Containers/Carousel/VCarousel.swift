@@ -126,6 +126,7 @@ public struct VCarousel<Data, ID, Content>: View
         self.content = content
     }
 
+    // MARK: Body
     public var body: some View {
         GeometryReader(content: { geometryProxy in
             ScrollViewReader(content: { scrollViewProxy in
