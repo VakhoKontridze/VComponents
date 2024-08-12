@@ -22,7 +22,7 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCaptionLabel: View {
+public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption: View {
     // MARK: Properties
     private let uiModel: VRectangularCaptionButtonUIModel
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -39,7 +39,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
     
     private let icon: Image
 
-    private let caption: VRectangularCaptionButtonCaption<CustomCaptionLabel>
+    private let caption: VRectangularCaptionButtonCaption<CustomCaption>
 
     // MARK: Initializers
     /// Initializes `VRectangularCaptionButton` with action, icon, and title caption.
@@ -49,7 +49,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
         icon: Image,
         titleCaption: String
     )
-        where CustomCaptionLabel == Never
+        where CustomCaption == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -64,7 +64,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
         icon: Image,
         iconCaption: Image
     )
-        where CustomCaptionLabel == Never
+        where CustomCaption == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -80,7 +80,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
         titleCaption: String,
         iconCaption: Image
     )
-        where CustomCaptionLabel == Never
+        where CustomCaption == Never
     {
         self.uiModel = uiModel
         self.action = action
@@ -93,7 +93,7 @@ public struct VRectangularCaptionButton<CustomCaptionLabel>: View where CustomCa
         uiModel: VRectangularCaptionButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        @ViewBuilder caption customCaption: @escaping (VRectangularCaptionButtonInternalState) -> CustomCaptionLabel
+        @ViewBuilder caption customCaption: @escaping (VRectangularCaptionButtonInternalState) -> CustomCaption
     ) {
         self.uiModel = uiModel
         self.action = action
