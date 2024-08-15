@@ -80,7 +80,7 @@ VDashedSpinner
 
 Other
 
-- Build issues caused by unsafe flags are fixed
+- Build issue caused by unsafe flags in `Swift` settings is fixed
 
 ### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
 
