@@ -59,13 +59,12 @@ VAlert
 
 VNotification
 
-- A new component is added, that present notification modally
+- A new component is added, that presents notification modally
 
 VToast
 
 - Presentation API is overhauled
 - Width API is extended
-- Toast now supports more width types
 - Toast now supports separate width configurations for portrait and landscape modes
 - Toast now has border configuration
 - Toast can now be dismissed with swipe
