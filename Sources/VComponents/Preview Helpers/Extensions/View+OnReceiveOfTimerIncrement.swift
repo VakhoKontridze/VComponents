@@ -1,5 +1,5 @@
 //
-//  View.OnReceiveOfTimerIncrement.swift
+//  View+OnReceiveOfTimerIncrement.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 08.03.23.
@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-// MARK: - View on Receive of Timer Increment
+// MARK: - View + On Receive of Timer Increment
 extension View {
     func onReceiveOfTimerIncrement(
         _ value: Binding<Int>,

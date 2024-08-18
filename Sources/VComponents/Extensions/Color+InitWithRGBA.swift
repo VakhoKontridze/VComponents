@@ -1,5 +1,5 @@
 //
-//  Color.InitWithRGBA.swift
+//  Color+InitWithRGBA.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Color Init with RGBA
+// MARK: - Color + Init with RGBA
 extension Color {
     init(
         _ red: CGFloat,

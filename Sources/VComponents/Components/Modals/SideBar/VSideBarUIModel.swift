@@ -196,7 +196,7 @@ public struct VSideBarUIModel {
     }
 }
 
-// MARK: - Safe Area
+// MARK: - Content Safe Area Edges
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS))
 
 @available(tvOS, unavailable)

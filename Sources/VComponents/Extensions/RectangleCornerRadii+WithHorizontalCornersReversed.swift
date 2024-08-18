@@ -1,5 +1,5 @@
 //
-//  RectangleCornerRadii.HorizontalCornersReversed.swift
+//  RectangleCornerRadii+WithHorizontalCornersReversed.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 09.07.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Rectangle Corner Radii with Horizontal Corners Reversed
+// MARK: - Rectangle Corner Radii + With Horizontal Corners Reversed
 extension RectangleCornerRadii {
     func horizontalCornersReversed(
         if condition: Bool = true

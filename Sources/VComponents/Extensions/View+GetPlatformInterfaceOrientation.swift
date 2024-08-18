@@ -1,5 +1,5 @@
 //
-//  View.GetPlatformInterfaceOrientation.swift
+//  View+GetPlatformInterfaceOrientation.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 06.08.23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - View Get Platform Interface Orientation
+// MARK: - View + Get Platform Interface Orientation
 extension View {
     @ViewBuilder 
     func getPlatformInterfaceOrientation(
