@@ -211,7 +211,7 @@ public struct VModalUIModel {
     }
 }
 
-// MARK: - Wrapped Content
+// MARK: - V Modal UI Model + Content Wrapping Height
 @available(watchOS, unavailable)
 extension VModalUIModel {
     /// Calculates modal height that wraps content.

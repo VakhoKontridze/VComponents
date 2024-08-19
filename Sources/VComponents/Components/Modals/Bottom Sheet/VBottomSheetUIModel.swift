@@ -316,7 +316,7 @@ public struct VBottomSheetUIModel {
     }
 }
 
-// MARK: - Wrapped Content
+// MARK: - V Bottom Sheet UI Model + Content Wrapping Content
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
