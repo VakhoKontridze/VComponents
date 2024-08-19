@@ -1,5 +1,5 @@
 //
-//  VNotificationExtension.swift
+//  View+VNotification.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 15.07.24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - Bool
+// MARK: - View + V Notification - Bool
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -114,7 +114,7 @@ extension View {
     }
 }
 
-// MARK: - Item
+// MARK: - View + V Notification - Item
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

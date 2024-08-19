@@ -1,5 +1,5 @@
 //
-//  VAlertExtension.swift
+//  View+VAlert.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - Bool
+// MARK: - View + V Alert - Bool
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -114,7 +114,7 @@ extension View {
     }
 }
 
-// MARK: - Item
+// MARK: - View + V Alert - Item
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -249,7 +249,7 @@ extension View {
     }
 }
 
-// MARK: - Error
+// MARK: - View + V Alert - Error
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

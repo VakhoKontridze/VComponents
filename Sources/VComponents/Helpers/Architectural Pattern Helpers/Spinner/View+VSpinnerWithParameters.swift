@@ -1,5 +1,5 @@
 //
-//  VSpinnerExtension_Parameters.swift
+//  View+VSpinnerWithParameters.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 02.10.22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Spinner Extension (Parameters)
+// MARK: - View + V Spinner
 extension View {
     /// Presents `VContinuousSpinner` when `parameters` is non-`nil`.
     ///

@@ -1,21 +1,17 @@
 //
-//  VSideBarExtension.swift
+//  View+VModal.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 1/13/21.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - Bool
-@available(tvOS, unavailable)
+// MARK: - View + V Modal - Bool
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension View {
-    /// Presents side bar when boolean is `true`.
-    ///
-    /// Side bar component that draws from an edge with background, and hosts content.
+    /// Modal component that hosts slide-able content on the edge of the container.
     ///
     ///     @State private var isPresented: Bool = false
     ///
@@ -25,8 +21,8 @@ extension View {
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
-    ///             .vSideBar(
-    ///                 id: "some_side_bar",
+    ///             .vModal(
+    ///                 id: "some_modal",
     ///                 isPresented: $isPresented,
     ///                 content: { Color.blue }
     ///             )
@@ -35,14 +31,10 @@ extension View {
     ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
-    /// Due to a Presentation Host API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
-    /// UI model contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
-    /// However, these insets are presents even if side bar content doesn't need them.
-    /// Therefore, a custom implementation is needed per use-case.
-    /// By default, `defaultContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
+    /// Modal can also wrap navigation system.
     ///
     ///     @State private var isPresented: Bool = false
-    ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
+    ///     @State private var modalDidAppear: Bool = false
     ///
     ///     var body: some View {
     ///         ZStack(content: {
@@ -50,28 +42,76 @@ extension View {
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
-    ///             .getInterfaceOrientation({ interfaceOrientation = $0 })
-    ///             .vSideBar(
-    ///                 id: "some_side_bar",
-    ///                 uiModel: {
-    ///                     var uiModel: VSideBarUIModel = .leading
-    ///
-    ///                     uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
-    ///
-    ///                     return uiModel
-    ///                 }(),
+    ///             .vModal(
+    ///                 id: "test",
     ///                 isPresented: $isPresented,
-    ///                 content: { Color.blue }
+    ///                 onPresent: { modalDidAppear = true },
+    ///                 onDismiss: { modalDidAppear = false },
+    ///                 content: {
+    ///                     NavigationStack(root: {
+    ///                         HomeView(isPresented: $isPresented)
+    ///                             // Disables possible `NavigationStack` animations
+    ///                             .transaction({
+    ///                                 if !modalDidAppear { $0.animation = nil }
+    ///                          })
+    ///                     })
+    ///                 }
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
     ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
-    public func vSideBar<Content>(
+    ///     struct HomeView: View {
+    ///         @Binding private var isPresented: Bool
+    ///
+    ///         init(isPresented: Binding<Bool>) {
+    ///             self._isPresented = isPresented
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             NavigationLink(
+    ///                 "To Destination",
+    ///                 destination: { DestinationView(isPresented: $isPresented) }
+    ///             )
+    ///             .inlineNavigationTitle("Home")
+    ///             .toolbar(content: {
+    ///                 VPlainButton(
+    ///                     action: { isPresented = false },
+    ///                     title: "Dismiss"
+    ///                 )
+    ///             })
+    ///         }
+    ///     }
+    ///
+    ///     struct DestinationView: View {
+    ///         @Environment(\.dismiss) private var dismissAction: DismissAction
+    ///
+    ///         @Binding private var isPresented: Bool
+    ///
+    ///         init(isPresented: Binding<Bool>) {
+    ///             self._isPresented = isPresented
+    ///         }
+    ///
+    ///         var body: some View {
+    ///             VPlainButton(
+    ///                 action: { dismissAction.callAsFunction() },
+    ///                 title: "To Home"
+    ///             )
+    ///             .inlineNavigationTitle("Destination")
+    ///             .toolbar(content: {
+    ///                 VPlainButton(
+    ///                     action: { isPresented = false },
+    ///                     title: "Dismiss"
+    ///                 )
+    ///             })
+    ///         }
+    ///     }
+    ///     
+    public func vModal<Content>(
         layerID: String? = nil,
         id: String,
-        uiModel: VSideBarUIModel = .init(),
+        uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -88,7 +128,7 @@ extension View {
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
                 content: {
-                    VSideBar<Content>(
+                    VModal<Content>(
                         uiModel: uiModel,
                         isPresented: isPresented,
                         content: content
@@ -98,18 +138,16 @@ extension View {
     }
 }
 
-// MARK: - Item
-@available(tvOS, unavailable)
+// MARK: - View + V Modal - Item
 @available(watchOS, unavailable)
-@available(visionOS, unavailable)
 extension View {
-    /// Presents side bar using the item as data source for content.
+    /// Modal component that hosts slide-able content on the edge of the container.
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
-    public func vSideBar<Item, Content>(
+    public func vModal<Item, Content>(
         layerID: String? = nil,
         id: String,
-        uiModel: VSideBarUIModel = .init(),
+        uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -133,7 +171,7 @@ extension View {
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
                 content: {
-                    VSideBar<Content?>(
+                    VModal<Content?>(
                         uiModel: uiModel,
                         isPresented: isPresented,
                         content: {

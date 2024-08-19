@@ -1,5 +1,5 @@
 //
-//  VToastExtension.swift
+//  View+VToast.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - Bool
+// MARK: - View + V Toast - Bool
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -72,7 +72,7 @@ extension View {
     }
 }
 
-// MARK: - Item
+// MARK: - View + V Toast - Item
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -122,7 +122,7 @@ extension View {
     }
 }
 
-// MARK: - Error
+// MARK: - View + V Toast - Error
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

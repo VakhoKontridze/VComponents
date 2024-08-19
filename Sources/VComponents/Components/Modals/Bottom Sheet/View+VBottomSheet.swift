@@ -1,5 +1,5 @@
 //
-//  VBottomSheetExtension.swift
+//  View+VBottomSheet.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - Bool
+// MARK: - View + V Bottom Sheet - Bool
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -239,7 +239,7 @@ extension View {
     }
 }
 
-// MARK: - Item
+// MARK: - View + V Bottom Sheet - Item
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

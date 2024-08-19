@@ -1,5 +1,5 @@
 //
-//  VAlertExtension_Parameters.swift
+//  View+VAlertWithParameters.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 02.10.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - V Alert Extension (Parameters)
+// MARK: - View + V Alert
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
