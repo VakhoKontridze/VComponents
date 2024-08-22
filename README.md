@@ -239,8 +239,6 @@ There are two available options for completely cancelling animations.
 
 The first is to set `stateChangeAnimation` to `nil`. While this does not completely remove animation, it essentially applies a `nil` animation.
 
-The second is to set `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes, even `nil`.
-
 ```swift
 @State private var isOn: Bool = false
 
@@ -263,7 +261,7 @@ var body: some View {
 }
 ```
 
-or
+The second is to set `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes, even `nil`.
 
 ```swift
 @State private var isOn: Bool = false
