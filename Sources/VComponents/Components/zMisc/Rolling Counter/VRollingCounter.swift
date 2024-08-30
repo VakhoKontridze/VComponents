@@ -24,6 +24,8 @@ import VCore
 ///     private func changeValue() {
 ///         Task(operation: {
 ///             value += .random(in: -10...10)
+///             try? await Task.sleep(seconds: 1)
+///
 ///             changeValue()
 ///         })
 ///     }

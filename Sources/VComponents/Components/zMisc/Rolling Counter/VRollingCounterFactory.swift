@@ -223,3 +223,10 @@ struct VRollingCounterFactory {
         return formatter
     }
 }
+
+// MARK: - Helpers
+extension NumberFormatter {
+    fileprivate func string(fromDouble double: Double) -> String? {
+        string(from: NSDecimalNumber(decimal: Decimal(double)))
+    }
+}
