@@ -14,6 +14,7 @@ enum PlatformInterfaceOrientation {
     case landscape
 
     // MARK: Initializers
+    @MainActor
     static func initFromDeviceOrientation() -> Self {
 #if os(iOS)
         if UIDevice.current.orientation.isLandscape {

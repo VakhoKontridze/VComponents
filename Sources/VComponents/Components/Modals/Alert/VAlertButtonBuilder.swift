@@ -20,34 +20,42 @@ public struct VAlertButtonBuilder {
     public typealias Result = [any VAlertButtonProtocol]
     
     // MARK: Build Blocks
+    @MainActor
     public static func buildBlock() -> Result {
         []
     }
     
+    @MainActor
     public static func buildBlock(_ components: Component...) -> Result {
         components.flatMap { $0.toButtons() }
     }
     
+    @MainActor
     public static func buildOptional(_ component: Component?) -> Result {
         component?.toButtons() ?? []
     }
     
+    @MainActor
     public static func buildEither(first component: Component) -> Result {
         component.toButtons()
     }
     
+    @MainActor
     public static func buildEither(second component: Component) -> Result {
         component.toButtons()
     }
     
+    @MainActor
     public static func buildArray(_ components: [Component]) -> Result {
         components.flatMap { $0.toButtons() }
     }
     
+    @MainActor
     public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toButtons()
     }
     
+    @MainActor
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toButtons()
     }
@@ -56,6 +64,7 @@ public struct VAlertButtonBuilder {
     // If there are multiple `cancel` `VAlertButton`s, only the last one will be kept.
     // `cancel` `VAlertButton` will be moved to the end of the stack.
     // If there are no buttons, `VAlertOKButton` will be added.
+    @MainActor
     static func process(_ buttons: [any VAlertButtonProtocol]) -> [any VAlertButtonProtocol] {
         var result: [any VAlertButtonProtocol] = []
 

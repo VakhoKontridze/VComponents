@@ -173,7 +173,13 @@ public struct VCarousel<Data, ID, Content>: View
         geometryProxy: GeometryProxy,
         element: Data.Element
     ) -> some View {
-        ZStack(content: {
+        // These properties cannot be extracted within `scrollTransition(transition:`,
+        // as they are `MainActor`, while method is not.
+        let cardState: VCarouselCardInternalState = cardInternalState(isSelected: selection == element)
+        let scaleEffect: CGFloat = uiModel.cardHeightScales.value(for: cardState)
+        let opacity: CGFloat = uiModel.cardOpacities.value(for: cardState)
+        
+        return ZStack(content: {
             content(element)
         })
         .frame(
@@ -185,12 +191,10 @@ public struct VCarousel<Data, ID, Content>: View
         )
 
         .containerRelativeFrame(.horizontal)
-        .scrollTransition(transition: { (view, phase) in
-            let cardState: VCarouselCardInternalState = cardInternalState(isSelected: phase.isIdentity)
-
-            return view
-                .scaleEffect(y: uiModel.cardHeightScales.value(for: cardState))
-                .opacity(uiModel.cardOpacities.value(for: cardState))
+        .scrollTransition(transition: { (view, _) in
+            view
+                .scaleEffect(y: scaleEffect)
+                .opacity(opacity)
         })
 
         .shadow(
@@ -270,9 +274,9 @@ public struct VCarousel<Data, ID, Content>: View
     struct ContentView: View {
         @State private var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
             data: Preview_RGBColor.allCases,
-            numberOfBatches: 9,
-            initialSelection: Preview_RGBColor.red,
-            initialSelectionBatchIndex: 4
+            numberOfDuplicateGroups: 9,
+            initialGroupIndex: 4,
+            initialSelection: Preview_RGBColor.red
         )
 
         var body: some View {

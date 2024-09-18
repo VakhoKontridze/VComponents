@@ -55,7 +55,6 @@ public struct VRollingCounter: View {
     // MARK: Properties - Value
     private let value: Double
     @State private var components: [any VRollingCounterComponentProtocol]
-    @State private var numberFormatter: NumberFormatter // Marked as `State` to persist value
     
     // MARK: Properties - Flags
     @State private var operation: Operation = .none
@@ -70,20 +69,14 @@ public struct VRollingCounter: View {
     {
         let value: Double = .init(value)
 
-        let numberFormatter: NumberFormatter = VRollingCounterFactory.numberFormatter(
-            uiModel: uiModel
-        )
-
         self.uiModel = uiModel
         self.value = value
         self._components = State(
             wrappedValue: VRollingCounterFactory.components(
                 value: value,
-                uiModel: uiModel,
-                numberFormatter: numberFormatter
+                uiModel: uiModel
             )
         )
-        self._numberFormatter = State(wrappedValue: numberFormatter)
     }
 
     // MARK: Body
@@ -102,8 +95,17 @@ public struct VRollingCounter: View {
         // Prevents animation clipping
         .clipped()
 
-        // No need for initial checks, as `VRollingCounterFactory` sets up everything in `init`.
-        .onChange(of: value, perform: didChangeValue)
+        .applyModifier({
+            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                $0.onChange(of: value, didChangeValue)
+
+            } else {
+                $0
+                    .onChange(of: value, perform: { [value] newValue in
+                        didChangeValue(from: value, to: newValue)
+                    })
+            }
+        })
     }
 
     @ViewBuilder
@@ -162,17 +164,15 @@ public struct VRollingCounter: View {
     }
 
     // MARK: Actions
-    private func didChangeValue(to newValue: Double) {
-        let oldValue: Double = VRollingCounterFactory.value(
-            components: components,
-            numberFormatter: numberFormatter
-        )
-
+    private func didChangeValue(
+        from oldValue: Double,
+        to newValue: Double
+    ) {
         let newComponents: [any VRollingCounterComponentProtocol] = VRollingCounterFactory.components(
+            oldValue: oldValue,
             oldComponents: components,
             newValue: newValue,
-            uiModel: uiModel,
-            numberFormatter: numberFormatter
+            uiModel: uiModel
         )
 
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {

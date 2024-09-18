@@ -10,11 +10,11 @@ import Foundation
 // MARK: - V Carousel Infinite Scroll Data Source Manager
 /// Object that inflates data source to create an illusion of infinite scroll when using `VCarousel`.
 ///
-/// If `data` is represented as `[1, 2, 3]` and `numberOfBatches` equals `3`,
+/// If `data` is represented as `[1, 2, 3]` and `numberOfDuplicateGroups` equals `3`,
 /// `dataInflated` will be `[1, 2, 3, 1, 2, 3, 1, 2, 3]`.
 ///
-/// If, with the same data, `initialSelection` is `2`, and `initialSelectionBatchIndex` equals `1`,
-/// `selectedIndexInflated` will be calculated from the batch at index `1`, plus the index of `2` in original `data`, which is `1`.
+/// If, with the same data, `initialSelection` is `2`, and `initialGroupIndex` equals `1`,
+/// `selectedIndexInflated` will be calculated from the group at index `1`, plus the index of `2` in original `data`, which is `1`.
 /// As a result, `selectedIndexInflated` will be `4`, which is in the middle of the `dataInflated`.
 ///
 ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
@@ -33,9 +33,9 @@ import Foundation
 ///
 ///     @State private var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
 ///         data: Preview_RGBColor.allCases,
-///         numberOfBatches: 9,
-///         initialSelection: Preview_RGBColor.red,
-///         initialSelectionBatchIndex: 4
+///         numberOfDuplicateGroups: 9,
+///         initialGroupIndex: 4,
+///         initialSelection: RGBColor.red
 ///     )
 ///
 ///     var body: some View {
@@ -69,12 +69,12 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
 
     /// Inflated data.
     public var dataInflated: [Element] {
-        Array(repeating: data, count: numberOfBatches)
+        Array(repeating: data, count: numberOfDuplicateGroups)
             .flatMap { $0 }
     }
 
-    /// Number of inflation batches.
-    public var numberOfBatches: Int
+    /// Number of duplicate groups.
+    public var numberOfDuplicateGroups: Int
 
     // MARK: Properties - Count
     /// Count of original data.
@@ -84,7 +84,7 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
     public var countInflated: Int {
         Self.countInflated(
             count: count,
-            numberOfBatches: numberOfBatches
+            numberOfDuplicateGroups: numberOfDuplicateGroups
         )
     }
 
@@ -110,18 +110,18 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
     /// Initializes `VCarouselInfiniteScrollDataSourceManager` with data and inflation parameters.
     public init(
         data: [Element],
-        numberOfBatches: Int,
-        initialSelection: Element,
-        initialSelectionBatchIndex: Int
+        numberOfDuplicateGroups: Int,
+        initialGroupIndex: Int,
+        initialSelection: Element
     ) {
         self.data = data
 
-        self.numberOfBatches = numberOfBatches
+        self.numberOfDuplicateGroups = numberOfDuplicateGroups
 
         self.selectedIndexInflated = Self.indexInflated(
             count: data.count,
-            index: data.firstIndex(of: initialSelection) ?? 0,
-            batchIndex: initialSelectionBatchIndex
+            groupIndex: initialGroupIndex,
+            index: data.firstIndex(of: initialSelection) ?? 0
         )
     }
 
@@ -139,9 +139,9 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
     // MARK: Helpers
     private static func countInflated(
         count: Int,
-        numberOfBatches: Int
+        numberOfDuplicateGroups: Int
     ) -> Int {
-        count * numberOfBatches
+        count * numberOfDuplicateGroups
     }
 
     private static func index(
@@ -153,9 +153,9 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
 
     private static func indexInflated(
         count: Int,
-        index: Int,
-        batchIndex: Int
+        groupIndex: Int,
+        index: Int
     ) -> Int {
-        batchIndex * count + index
+        groupIndex * count + index
     }
 }

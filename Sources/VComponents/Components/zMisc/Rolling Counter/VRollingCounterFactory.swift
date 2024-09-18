@@ -17,9 +17,12 @@ struct VRollingCounterFactory {
     // MARK: Components
     static func components(
         value: Double,
-        uiModel: VRollingCounterUIModel,
-        numberFormatter: NumberFormatter
+        uiModel: VRollingCounterUIModel
     ) -> [any VRollingCounterComponentProtocol] {
+        let numberFormatter: NumberFormatter = numberFormatter(
+            uiModel: uiModel
+        )
+
         guard
             let valueString: String = numberFormatter.string(fromDouble: value)
         else {
@@ -81,14 +84,13 @@ struct VRollingCounterFactory {
     }
 
     static func components(
+        oldValue: Double,
         oldComponents: [any VRollingCounterComponentProtocol],
         newValue: Double,
-        uiModel: VRollingCounterUIModel,
-        numberFormatter: NumberFormatter
+        uiModel: VRollingCounterUIModel
     ) -> [any VRollingCounterComponentProtocol] {
-        let oldValue: Double = value(
-            components: oldComponents,
-            numberFormatter: numberFormatter
+        let numberFormatter: NumberFormatter = numberFormatter(
+            uiModel: uiModel
         )
 
         guard
@@ -192,17 +194,8 @@ struct VRollingCounterFactory {
         return components
     }
 
-    // MARK: Value
-    static func value(
-        components: [any VRollingCounterComponentProtocol],
-        numberFormatter: NumberFormatter
-    ) -> Double {
-        let string: String = components.map { $0.stringRepresentation }.joined()
-        return numberFormatter.number(from: string)?.doubleValue ?? .zero
-    }
-
     // MARK: Number Formatter
-    static func numberFormatter(
+    private static func numberFormatter(
         uiModel: VRollingCounterUIModel
     ) -> NumberFormatter {
         let formatter: NumberFormatter = .init()
@@ -227,6 +220,12 @@ struct VRollingCounterFactory {
 // MARK: - Helpers
 extension NumberFormatter {
     fileprivate func string(fromDouble double: Double) -> String? {
-        string(from: NSDecimalNumber(decimal: Decimal(double)))
+        string(
+            from: NSDecimalNumber(
+                decimal: Decimal(
+                    double
+                )
+            )
+        )
     }
 }

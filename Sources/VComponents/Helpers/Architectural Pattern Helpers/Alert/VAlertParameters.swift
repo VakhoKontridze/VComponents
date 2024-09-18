@@ -37,6 +37,7 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
+@MainActor
 public struct VAlertParameters {
     // MARK: Properties
     /// Title.

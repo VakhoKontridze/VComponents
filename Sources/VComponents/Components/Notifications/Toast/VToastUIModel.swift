@@ -274,7 +274,7 @@ public struct VToastUIModel {
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
-    public struct DismissType: OptionSet {
+    public struct DismissType: Sendable {
         // MARK: Options
         private enum Options: Int {
             case timeout

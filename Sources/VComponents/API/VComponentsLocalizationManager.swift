@@ -11,13 +11,27 @@ import Foundation
 /// Object that manages localization in the package.
 ///
 /// `localizationProvider` in `shared` instance can be set to override the localized values.
-public final class VComponentsLocalizationManager {
-    // MARK: Properties
-    /// Shared instance of `VComponentsLocalizationService`.
+///
+///     struct SomeLocalizationProvider: VComponentsLocalizationProvider { ... }
+///
+///     VComponentsLocalizationManager.shared.localizationProvider = SomeLocalizationProvider()
+///
+public final class VComponentsLocalizationManager: @unchecked Sendable {
+    // MARK: Properties - Singleton
+    /// Shared instance of `VComponentsLocalizationManager`.
     public static let shared: VComponentsLocalizationManager = .init()
     
+    // MARK: Properties - Localization
+    private var _localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
+    
     /// Localization provider. Set to `DefaultVComponentsLocalizationProvider`.
-    public var localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
+    public var localizationProvider: any VComponentsLocalizationProvider {
+        get { lock.withLock({ _localizationProvider }) }
+        set { lock.withLock({ _localizationProvider = newValue }) }
+    }
+    
+    // MARK: Properties - Lock
+    private let lock: NSLock = .init()
     
     // MARK: Initializers
     private init() {}

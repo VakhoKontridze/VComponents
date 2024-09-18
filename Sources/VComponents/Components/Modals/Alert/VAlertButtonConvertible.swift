@@ -12,6 +12,7 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
+@MainActor
 public protocol VAlertButtonConvertible {
     /// Converts self to `VAlertButtonProtocol` `Array`.
     func toButtons() -> [any VAlertButtonProtocol]
