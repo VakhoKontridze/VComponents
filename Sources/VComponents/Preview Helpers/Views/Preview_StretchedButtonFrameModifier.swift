@@ -13,19 +13,15 @@ import SwiftUI
 struct Preview_StretchedButtonFrameModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .applyModifier({
 #if os(iOS)
-                $0.padding(.horizontal)
+            .padding(.horizontal)
 #elseif os(macOS)
-                $0.frame(width: 250)
+            .frame(width: 250)
 #elseif os(watchOS)
-                $0.padding(.horizontal)
+            .padding(.horizontal)
 #elseif os(visionOS)
-                $0.frame(width: 250)
-#else
-                fatalError() // Not supported
+            .frame(width: 250)
 #endif
-            })
     }
 }
 

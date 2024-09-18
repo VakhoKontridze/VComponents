@@ -132,28 +132,16 @@ public struct VCodeEntryView: View {
 
             .focused($isFocused)
 
-            .applyModifier({
 #if !(os(macOS) || os(watchOS))
-                $0.keyboardType(uiModel.keyboardType)
-#else
-                $0
+            .keyboardType(uiModel.keyboardType)
 #endif
-            })
-            .applyModifier({
 #if !(os(macOS) || os(watchOS))
-                $0.textContentType(uiModel.textContentType)
-#else
-                $0
+            .textContentType(uiModel.textContentType)
 #endif
-            })
             .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
-            .applyModifier({
 #if !(os(macOS) || os(watchOS))
-                $0.textInputAutocapitalization(uiModel.autocapitalization)
-#else
-                $0
+            .textInputAutocapitalization(uiModel.autocapitalization)
 #endif
-            })
             .submitLabel(uiModel.submitButton)
     }
 
