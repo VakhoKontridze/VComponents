@@ -261,7 +261,7 @@ public struct VNotificationUIModel {
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
-    public struct DismissType: Sendable {
+    public struct DismissType: OptionSet, Sendable {
         // MARK: Options
         private enum Options: Int {
             case timeout
