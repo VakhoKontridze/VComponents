@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.0.0(69)
+### [7.0.0(69)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.0.0) — *2024 09 20*
 
 General
 

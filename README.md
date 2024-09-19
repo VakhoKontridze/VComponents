@@ -350,7 +350,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>7.0</td>
-    <td>2024 ?? ??</td>
+    <td>2024 09 20</td>
     <td>6.0</td>
     <td>
         iOS 16.0<br>
