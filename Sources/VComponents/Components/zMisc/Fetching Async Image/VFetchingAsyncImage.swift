@@ -79,7 +79,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image
+        fetch fetchHandler: @escaping (Parameter) async throws -> Image
     )
         where
             CustomContent == Never,
@@ -95,7 +95,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
+        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent
     )
         where
@@ -113,7 +113,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
+        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent,
         @ViewBuilder placeholder customPlaceholderContent: @escaping () -> CustomPlaceholderContent
     ) {
@@ -130,7 +130,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         uiModel: VFetchingAsyncImageUIModel = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping @Sendable (Parameter) async throws -> Image,
+        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder contentWithPhase customContentWithPhase: @escaping (AsyncImagePhase) -> CustomContent
     )
         where CustomPlaceholderContent == Never
