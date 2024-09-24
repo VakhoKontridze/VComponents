@@ -348,39 +348,36 @@ struct VBottomSheet<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        layerID: "sheets",
-                        id: "preview",
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-            .presentationHostLayer(
-                id: "sheets",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vBottomSheet(
+                layerID: "sheets",
+                id: "preview",
+                isPresented: $isPresented,
+                content: { Color.blue }
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "sheets",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
 #if !os(macOS)
 
-#Preview("Min & Ideal & Max", body: { // TODO: Move into macro when nested macro expansions are supported
+#Preview("Min & Ideal & Max", body: {
     ContentView_MinIdealMax()
 })
+
+// Preview macro doesn’t support nested macro expansions
 private struct ContentView_MinIdealMax: View {
     @State private var isPresented: Bool = true
 
@@ -428,7 +425,9 @@ private struct ContentView_MinIdealMax: View {
 #Preview("Min & Ideal", body: {
     ContentView_MinIdeal()
 })
-private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested macro expansions are supported
+
+// Preview macro doesn’t support nested macro expansions
+private struct ContentView_MinIdeal: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
@@ -475,7 +474,9 @@ private struct ContentView_MinIdeal: View { // TODO: Move into macro when nested
 #Preview("Ideal & Max", body: {
     ContentView_IdealMax()
 })
-private struct ContentView_IdealMax: View { // TODO: Move into macro when nested macro expansions are supported
+
+// Preview macro doesn’t support nested macro expansions
+private struct ContentView_IdealMax: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
@@ -522,7 +523,9 @@ private struct ContentView_IdealMax: View { // TODO: Move into macro when nested
 #Preview("Ideal Small", body: {
     ContentView_IdealSmall()
 })
-private struct ContentView_IdealSmall: View { // TODO: Move into macro when nested macro expansions are supported
+
+// Preview macro doesn’t support nested macro expansions
+private struct ContentView_IdealSmall: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
@@ -569,7 +572,9 @@ private struct ContentView_IdealSmall: View { // TODO: Move into macro when nest
 #Preview("Ideal Large", body: {
     ContentView_IdealLarge()
 })
-private struct ContentView_IdealLarge: View { // TODO: Move into macro when nested macro expansions are supported
+
+// Preview macro doesn’t support nested macro expansions
+private struct ContentView_IdealLarge: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
@@ -611,201 +616,179 @@ private struct ContentView_IdealLarge: View { // TODO: Move into macro when nest
 
 #endif
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Wrapped Content", body: {
-    struct ContentView: View {
-        @State private var safeAreaInsets: EdgeInsets = .init()
+    @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
-        @State private var isPresented: Bool = true
-        @State private var contentHeight: CGFloat?
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var contentHeight: CGFloat?
 
-        @State private var count: Int = 1
+    @Previewable @State var count: Int = 1
 
-        var body: some View {
-            ZStack(content: {
-                // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
-                Color.clear
-                    .getSafeAreaInsets({ safeAreaInsets = $0 })
+    ZStack(content: {
+        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        Color.clear
+            .getSafeAreaInsets({ safeAreaInsets = $0 })
 
-                PreviewContainer(content: {
-                    PreviewModalLauncherView(isPresented: $isPresented)
-                        .vBottomSheet(
-                            layerID: "sheets",
-                            id: "preview",
-                            uiModel: {
-                                var uiModel: VBottomSheetUIModel = .init()
-                                
-                                uiModel.contentMargins = VBottomSheetUIModel.Margins(
-                                    leading: 15,
-                                    trailing: 15,
-                                    top: 5,
-                                    bottom: max(15, safeAreaInsets.bottom)
-                                )
-                                
-                                if let contentHeight {
-                                    let height: CGFloat = uiModel.contentWrappingHeight(
-                                        contentHeight: contentHeight,
-                                        safeAreaInsets: safeAreaInsets
-                                    )
-                                    
-                                    uiModel.sizeGroup.portrait.heights = .absolute(height)
-                                    uiModel.sizeGroup.portrait.heights = .absolute(height)
-                                }
-                                
-                                return uiModel
-                            }(),
-                            isPresented: $isPresented,
-                            content: {
-                                VStack(spacing: 20, content: {
-                                    ForEach(0..<count, id: \.self, content: { _ in
-                                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
-                                    })
-                                    
-                                    Button(
-                                        "Toggle",
-                                        action: { count = count == 1 ? 2 : 1 }
-                                    )
-                                })
-                                .fixedSize(horizontal: false, vertical: true)
-                                .getSize({ size in
-                                    Task(operation: { contentHeight = size.height })
-                                })
-                            }
-                        )
-                })
-                .presentationHostLayer(
-                    id: "sheets",
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    layerID: "sheets",
+                    id: "preview",
                     uiModel: {
-                        var uiModel: PresentationHostLayerUIModel = .init()
-                        uiModel.dimmingViewColor = Color.clear
+                        var uiModel: VBottomSheetUIModel = .init()
+                        
+                        uiModel.contentMargins = VBottomSheetUIModel.Margins(
+                            leading: 15,
+                            trailing: 15,
+                            top: 5,
+                            bottom: max(15, safeAreaInsets.bottom)
+                        )
+                        
+                        if let contentHeight {
+                            let height: CGFloat = uiModel.contentWrappingHeight(
+                                contentHeight: contentHeight,
+                                safeAreaInsets: safeAreaInsets
+                            )
+                            
+                            uiModel.sizeGroup.portrait.heights = .absolute(height)
+                            uiModel.sizeGroup.portrait.heights = .absolute(height)
+                        }
+                        
                         return uiModel
-                    }()
-                )
-            })
-        }
-    }
-
-    return ContentView()
-})
-
-#Preview("Scrollable Content", body: {
-    guard #available(iOS 17.0, macOS 14.0, *) else { return EmptyView() }
-
-    struct ContentView: View {
-        @State private var safeAreaInsets: EdgeInsets = .init()
-
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            ZStack(content: {
-                // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
-                Color.clear
-                    .getSafeAreaInsets({ newValue in
-                        Task(operation: { @MainActor in
-                            safeAreaInsets = newValue
+                    }(),
+                    isPresented: $isPresented,
+                    content: {
+                        VStack(spacing: 20, content: {
+                            ForEach(0..<count, id: \.self, content: { _ in
+                                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                            })
+                            
+                            Button(
+                                "Toggle",
+                                action: { count = count == 1 ? 2 : 1 }
+                            )
                         })
-                    })
-
-                PreviewContainer(content: {
-                    PreviewModalLauncherView(isPresented: $isPresented)
-                        .vBottomSheet(
-                            layerID: "sheets",
-                            id: "preview",
-                            uiModel: {
-                                var uiModel: VBottomSheetUIModel = .init()
-                                uiModel.autoresizesContent = true
-                                return uiModel
-                            }(),
-                            isPresented: $isPresented,
-                            content: {
-                                ScrollView(content: {
-                                    VStack(spacing: 0, content: {
-                                        ForEach(0..<20, content: { number in
-                                            Text(String(number))
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .padding(.horizontal, 15)
-                                                .padding(.vertical, 9)
-                                        })
-                                    })
-                                })
-                                .safeAreaPadding(.bottom, safeAreaInsets.bottom)
-                            }
-                        )
-                })
-                .presentationHostLayer(
-                    id: "sheets",
-                    uiModel: {
-                        var uiModel: PresentationHostLayerUIModel = .init()
-                        uiModel.dimmingViewColor = Color.clear
-                        return uiModel
-                    }()
+                        .fixedSize(horizontal: false, vertical: true)
+                        .getSize({ size in
+                            Task(operation: { contentHeight = size.height })
+                        })
+                    }
                 )
-            })
-        }
-    }
-
-    return ContentView()
+        })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Scrollable Content", body: {
+    @Previewable @State var safeAreaInsets: EdgeInsets = .init()
+
+    @Previewable @State var isPresented: Bool = true
+
+    ZStack(content: {
+        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        Color.clear
+            .getSafeAreaInsets({ newValue in
+                Task(operation: { @MainActor in
+                    safeAreaInsets = newValue
+                })
+            })
+
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    layerID: "sheets",
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+                        uiModel.autoresizesContent = true
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: {
+                        ScrollView(content: {
+                            VStack(spacing: 0, content: {
+                                ForEach(0..<20, content: { number in
+                                    Text(String(number))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal, 15)
+                                        .padding(.vertical, 9)
+                                })
+                            })
+                        })
+                        .safeAreaPadding(.bottom, safeAreaInsets.bottom)
+                    }
+                )
+        })
+        .presentationHostLayer(
+            id: "sheets",
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+                uiModel.dimmingViewColor = Color.clear
+                return uiModel
+            }()
+        )
+    })
+})
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Insetted Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        layerID: "sheets",
-                        id: "preview",
-                        uiModel: .insettedContent,
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-            .presentationHostLayer(
-                id: "sheets",
-                uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vBottomSheet(
+                layerID: "sheets",
+                id: "preview",
+                uiModel: .insettedContent,
+                isPresented: $isPresented,
+                content: { Color.blue }
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "sheets",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Drag Indicator", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vBottomSheet(
-                        layerID: "sheets",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VBottomSheetUIModel = .noDragIndicator
-                            uiModel.contentIsDraggable = true
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        content: { Color.blue }
-                    )
-            })
-            .presentationHostLayer(
-                id: "sheets",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vBottomSheet(
+                layerID: "sheets",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewColor = Color.clear
+                    var uiModel: VBottomSheetUIModel = .noDragIndicator
+                    uiModel.contentIsDraggable = true
                     return uiModel
-                }()
+                }(),
+                isPresented: $isPresented,
+                content: { Color.blue }
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "sheets",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
 #endif

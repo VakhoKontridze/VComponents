@@ -161,32 +161,29 @@ struct VModal<Content>: View
 
 #if !os(watchOS)
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vModal(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        content: {
-                            Color.blue
-                                .onTapGesture(perform: { isPresented = false })
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vModal(
+                id: "preview",
+                isPresented: $isPresented,
+                content: {
+                    Color.blue
+                        .onTapGesture(perform: { isPresented = false })
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
-#Preview("Size Types", body: { // TODO: Move into macro when nested macro expansions are supported
+#Preview("Size Types", body: {
     ContentView_SizeTypes()
 })
+
+// Preview macro doesn’t support nested macro expansions
 private struct ContentView_SizeTypes: View {
     @State private var isPresented: Bool = true
     @State private var size: VModalUIModel.Size?

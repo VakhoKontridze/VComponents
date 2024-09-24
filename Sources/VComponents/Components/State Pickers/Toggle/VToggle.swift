@@ -212,21 +212,16 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VToggleState = .on
+    @Previewable @State var state: VToggleState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VToggle(
-                    state: $state,
-                    title: "Lorem ipsum"
-                )
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VToggle(
+            state: $state,
+            title: "Lorem ipsum"
+        )
+    })
 })
 
 #Preview("States", body: {

@@ -244,19 +244,14 @@ public struct VSlider: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var value: Double = 0.5
+    @Previewable @State var value: Double = 0.5
 
-        var body: some View {
-            PreviewContainer(content: {
-                VSlider(value: $value)
-                    .padding(.horizontal)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VSlider(value: $value)
+            .padding(.horizontal)
+    })
 })
 
 #Preview("States", body: {
@@ -287,118 +282,103 @@ public struct VSlider: View {
     })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
-    struct ContentView: View {
-        private let length: CGFloat = {
+    @Previewable @State var value: Double = 0.5 // '@Previewable' items must be at the beginning of the preview block
+    
+    let length: CGFloat = {
 #if os(iOS)
-            250
+        250
 #elseif os(macOS)
-            200
+        200
 #else
-            fatalError() // Not supported
+        fatalError() // Not supported
 #endif
-        }()
+    }()
 
-        @State private var value: Double = 0.5
-
-        var body: some View {
-            PreviewContainer(
-                content: {
-                    PreviewRow("Left-to-Right", content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.direction = .leftToRight
-                                return uiModel
-                            }(),
-                            value: $value
-                        )
-                        .frame(width: length)
-                    })
-
-                    PreviewRow("Right-to-Left", content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.direction = .rightToLeft
-                                return uiModel
-                            }(),
-                            value: $value
-                        )
-                        .frame(width: length)
-                    })
-
-                    HStack(spacing: 20, content: {
-                        PreviewRow("Top-to-Bottom", content: {
-                            VSlider(
-                                uiModel: {
-                                    var uiModel: VSliderUIModel = .init()
-                                    uiModel.direction = .topToBottom
-                                    return uiModel
-                                }(),
-                                value: $value
-                            )
-                            .frame(height: length)
-                        })
-
-                        PreviewRow("Bottom-to-Top", content: {
-                            VSlider(
-                                uiModel: {
-                                    var uiModel: VSliderUIModel = .init()
-                                    uiModel.direction = .bottomToTop
-                                    return uiModel
-                                }(),
-                                value: $value
-                            )
-                            .frame(height: length)
-                        })
-                    })
-                }
-            )
-        }
-    }
-
-    return ContentView()
-})
-
-#Preview("Step", body: {
-    struct ContentView: View {
-        @State private var value: Double = 0.5
-
-        var body: some View {
-            PreviewContainer(content: {
-                VSlider(
-                    step: 0.1,
-                    value: $value
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    return ContentView()
-})
-
-#Preview("Draggable Body", body: {
-    struct ContentView: View {
-        @State private var value: Double = 0.5
-
-        var body: some View {
-            PreviewContainer(content: {
+    PreviewContainer(
+        content: {
+            PreviewRow("Left-to-Right", content: {
                 VSlider(
                     uiModel: {
                         var uiModel: VSliderUIModel = .init()
-                        uiModel.bodyIsDraggable = true
+                        uiModel.direction = .leftToRight
                         return uiModel
                     }(),
                     value: $value
                 )
-                .padding(.horizontal)
+                .frame(width: length)
+            })
+
+            PreviewRow("Right-to-Left", content: {
+                VSlider(
+                    uiModel: {
+                        var uiModel: VSliderUIModel = .init()
+                        uiModel.direction = .rightToLeft
+                        return uiModel
+                    }(),
+                    value: $value
+                )
+                .frame(width: length)
+            })
+
+            HStack(spacing: 20, content: {
+                PreviewRow("Top-to-Bottom", content: {
+                    VSlider(
+                        uiModel: {
+                            var uiModel: VSliderUIModel = .init()
+                            uiModel.direction = .topToBottom
+                            return uiModel
+                        }(),
+                        value: $value
+                    )
+                    .frame(height: length)
+                })
+
+                PreviewRow("Bottom-to-Top", content: {
+                    VSlider(
+                        uiModel: {
+                            var uiModel: VSliderUIModel = .init()
+                            uiModel.direction = .bottomToTop
+                            return uiModel
+                        }(),
+                        value: $value
+                    )
+                    .frame(height: length)
+                })
             })
         }
-    }
+    )
+})
 
-    return ContentView()
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Step", body: {
+    @Previewable @State var value: Double = 0.5
+
+    PreviewContainer(content: {
+        VSlider(
+            step: 0.1,
+            value: $value
+        )
+        .padding(.horizontal)
+    })
+})
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Draggable Body", body: {
+    @Previewable @State var value: Double = 0.5
+
+    PreviewContainer(content: {
+        VSlider(
+            uiModel: {
+                var uiModel: VSliderUIModel = .init()
+                uiModel.bodyIsDraggable = true
+                return uiModel
+            }(),
+            value: $value
+        )
+        .padding(.horizontal)
+    })
 })
 
 #endif

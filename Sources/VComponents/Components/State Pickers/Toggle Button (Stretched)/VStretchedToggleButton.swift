@@ -263,22 +263,17 @@ extension VStretchedToggleButtonInternalState {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VStretchedToggleButtonState = .on
+    @Previewable @State var state: VStretchedToggleButtonState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VStretchedToggleButton(
-                    state: $state,
-                    title: "Lorem Ipsum"
-                )
-                .modifier(Preview_StretchedButtonFrameModifier())
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VStretchedToggleButton(
+            state: $state,
+            title: "Lorem Ipsum"
+        )
+        .modifier(Preview_StretchedButtonFrameModifier())
+    })
 })
 
 #Preview("States", body: {

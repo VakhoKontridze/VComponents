@@ -314,22 +314,17 @@ extension Double {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var value: ClosedRange<Double> = 0.1...0.8
+    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
-        var body: some View {
-            PreviewContainer(content: {
-                VRangeSlider(
-                    difference: 0.1,
-                    value: $value
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VRangeSlider(
+            difference: 0.1,
+            value: $value
+        )
+        .padding(.horizontal)
+    })
 })
 
 #Preview("States", body: {
@@ -353,102 +348,93 @@ extension Double {
     })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
-    struct ContentView: View {
-        private let length: CGFloat = {
+    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8 // '@Previewable' items must be at the beginning of the preview block
+    
+    let difference: Double = 0.1
+    
+    let length: CGFloat = {
 #if os(iOS)
-            250
+        250
 #elseif os(macOS)
-            200
+        200
 #else
-            fatalError() // Not supported
+        fatalError() // Not supported
 #endif
-        }()
+    }()
 
-        private let difference: Double = 0.1
-        @State private var value: ClosedRange<Double> = 0.1...0.8
-
-        var body: some View {
-            PreviewContainer(
-                content: {
-                    PreviewRow("Left-to-Right", content: {
-                        VRangeSlider(
-                            uiModel: {
-                                var uiModel: VRangeSliderUIModel = .init()
-                                uiModel.direction = .leftToRight
-                                return uiModel
-                            }(),
-                            difference: difference,
-                            value: $value
-                        )
-                        .frame(width: length)
-                    })
-
-                    PreviewRow("Right-to-Left", content: {
-                        VRangeSlider(
-                            uiModel: {
-                                var uiModel: VRangeSliderUIModel = .init()
-                                uiModel.direction = .rightToLeft
-                                return uiModel
-                            }(),
-                            difference: difference,
-                            value: $value
-                        )
-                        .frame(width: length)
-                    })
-
-                    HStack(spacing: 20, content: {
-                        PreviewRow("Top-to-Bottom", content: {
-                            VRangeSlider(
-                                uiModel: {
-                                    var uiModel: VRangeSliderUIModel = .init()
-                                    uiModel.direction = .topToBottom
-                                    return uiModel
-                                }(),
-                                difference: difference,
-                                value: $value
-                            )
-                            .frame(height: length)
-                        })
-
-                        PreviewRow("Bottom-to-Top", content: {
-                            VRangeSlider(
-                                uiModel: {
-                                    var uiModel: VRangeSliderUIModel = .init()
-                                    uiModel.direction = .bottomToTop
-                                    return uiModel
-                                }(),
-                                difference: difference,
-                                value: $value
-                            )
-                            .frame(height: length)
-                        })
-                    })
-                }
-            )
-        }
-    }
-
-    return ContentView()
-})
-
-#Preview("Step", body: {
-    struct ContentView: View {
-        @State private var value: ClosedRange<Double> = 0.1...0.8
-
-        var body: some View {
-            PreviewContainer(content: {
+    PreviewContainer(
+        content: {
+            PreviewRow("Left-to-Right", content: {
                 VRangeSlider(
-                    difference: 0.1,
-                    step: 0.1,
+                    uiModel: {
+                        var uiModel: VRangeSliderUIModel = .init()
+                        uiModel.direction = .leftToRight
+                        return uiModel
+                    }(),
+                    difference: difference,
                     value: $value
                 )
-                .padding(.horizontal)
+                .frame(width: length)
+            })
+
+            PreviewRow("Right-to-Left", content: {
+                VRangeSlider(
+                    uiModel: {
+                        var uiModel: VRangeSliderUIModel = .init()
+                        uiModel.direction = .rightToLeft
+                        return uiModel
+                    }(),
+                    difference: difference,
+                    value: $value
+                )
+                .frame(width: length)
+            })
+
+            HStack(spacing: 20, content: {
+                PreviewRow("Top-to-Bottom", content: {
+                    VRangeSlider(
+                        uiModel: {
+                            var uiModel: VRangeSliderUIModel = .init()
+                            uiModel.direction = .topToBottom
+                            return uiModel
+                        }(),
+                        difference: difference,
+                        value: $value
+                    )
+                    .frame(height: length)
+                })
+
+                PreviewRow("Bottom-to-Top", content: {
+                    VRangeSlider(
+                        uiModel: {
+                            var uiModel: VRangeSliderUIModel = .init()
+                            uiModel.direction = .bottomToTop
+                            return uiModel
+                        }(),
+                        difference: difference,
+                        value: $value
+                    )
+                    .frame(height: length)
+                })
             })
         }
-    }
+    )
+})
 
-    return ContentView()
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Step", body: {
+    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
+
+    PreviewContainer(content: {
+        VRangeSlider(
+            difference: 0.1,
+            step: 0.1,
+            value: $value
+        )
+        .padding(.horizontal)
+    })
 })
 
 #endif

@@ -233,26 +233,21 @@ extension VRectangularToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VRectangularToggleButtonState = .on
+    @Previewable @State var state: VRectangularToggleButtonState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VRectangularToggleButton(
-                    state: $state,
-                    title: "ABC"
-                )
+    PreviewContainer(content: {
+        VRectangularToggleButton(
+            state: $state,
+            title: "ABC"
+        )
 
-                VRectangularToggleButton(
-                    state: $state,
-                    icon: Image(systemName: "swift")
-                )
-            })
-        }
-    }
-
-    return ContentView()
+        VRectangularToggleButton(
+            state: $state,
+            icon: Image(systemName: "swift")
+        )
+    })
 })
 
 #Preview("States", body: {

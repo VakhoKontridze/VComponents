@@ -106,127 +106,112 @@ public struct VProgressBar: View {
 // MARK: - Preview
 #if DEBUG
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var value: Double = 0
+    @Previewable @State var value: Double = 0
 
-        var body: some View {
-            PreviewContainer(content: {
-                VProgressBar(value: value)
-                    .padding(.horizontal)
-            })
-            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VProgressBar(value: value)
+            .padding(.horizontal)
+    })
+    .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("States", body: {
-    struct ContentView: View {
-        @State private var value: Double = 0
+    @Previewable @State var value: Double = 0
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(nil, content: {
-                    VProgressBar(value: value)
-                        .padding(.horizontal)
-                })
+    PreviewContainer(content: {
+        PreviewRow(nil, content: {
+            VProgressBar(value: value)
+                .padding(.horizontal)
+        })
 
-                PreviewHeader("Native")
+        PreviewHeader("Native")
 
-                PreviewRow(nil, content: {
-                    ProgressView(value: value)
-                        .progressViewStyle(.linear)
-                        .padding(.horizontal)
-                })
-            })
-            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-        }
-    }
-
-    return ContentView()
+        PreviewRow(nil, content: {
+            ProgressView(value: value)
+                .progressViewStyle(.linear)
+                .padding(.horizontal)
+        })
+    })
+    .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
-    struct ContentView: View {
-        private let length: CGFloat = {
+    @Previewable @State var value: Double = 0 // '@Previewable' items must be at the beginning of the preview block
+    
+    let length: CGFloat = {
 #if os(iOS)
-            250
+        250
 #elseif os(macOS)
-            200
+        200
 #elseif os(tvOS)
-            250
+        250
 #elseif os(watchOS)
-            100
+        100
 #elseif os(visionOS)
-            250
+        250
 #endif
-        }()
+    }()
 
-        @State private var value: Double = 0
+    PreviewContainer(content: {
+        PreviewRow("Left-to-Right", content: {
+            VProgressBar(
+                uiModel: {
+                    var uiModel: VProgressBarUIModel = .init()
+                    uiModel.direction = .leftToRight
+                    return uiModel
+                }(),
+                value: value
+            )
+            .frame(width: length)
+            .padding(.horizontal)
+        })
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow("Left-to-Right", content: {
-                    VProgressBar(
-                        uiModel: {
-                            var uiModel: VProgressBarUIModel = .init()
-                            uiModel.direction = .leftToRight
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                    .frame(width: length)
-                    .padding(.horizontal)
-                })
+        PreviewRow("Right-to-Left", content: {
+            VProgressBar(
+                uiModel: {
+                    var uiModel: VProgressBarUIModel = .init()
+                    uiModel.direction = .rightToLeft
+                    return uiModel
+                }(),
+                value: value
+            )
+            .frame(width: length)
+            .padding(.horizontal)
+        })
 
-                PreviewRow("Right-to-Left", content: {
-                    VProgressBar(
-                        uiModel: {
-                            var uiModel: VProgressBarUIModel = .init()
-                            uiModel.direction = .rightToLeft
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                    .frame(width: length)
-                    .padding(.horizontal)
-                })
-
-                HStack(spacing: 20, content: {
-                    PreviewRow("Top-to-Bottom", content: {
-                        VProgressBar(
-                            uiModel: {
-                                var uiModel: VProgressBarUIModel = .init()
-                                uiModel.direction = .topToBottom
-                                return uiModel
-                            }(),
-                            value: value
-                        )
-                        .frame(height: length)
-                        .padding(.horizontal)
-                    })
-
-                    PreviewRow("Bottom-to-Top", content: {
-                        VProgressBar(
-                            uiModel: {
-                                var uiModel: VProgressBarUIModel = .init()
-                                uiModel.direction = .bottomToTop
-                                return uiModel
-                            }(),
-                            value: value
-                        )
-                        .frame(height: length)
-                        .padding(.horizontal)
-                    })
-                })
+        HStack(spacing: 20, content: {
+            PreviewRow("Top-to-Bottom", content: {
+                VProgressBar(
+                    uiModel: {
+                        var uiModel: VProgressBarUIModel = .init()
+                        uiModel.direction = .topToBottom
+                        return uiModel
+                    }(),
+                    value: value
+                )
+                .frame(height: length)
+                .padding(.horizontal)
             })
-            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-        }
-    }
 
-    return ContentView()
+            PreviewRow("Bottom-to-Top", content: {
+                VProgressBar(
+                    uiModel: {
+                        var uiModel: VProgressBarUIModel = .init()
+                        uiModel.direction = .bottomToTop
+                        return uiModel
+                    }(),
+                    value: value
+                )
+                .frame(height: length)
+                .padding(.horizontal)
+            })
+        })
+    })
+    .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
 })
 
 #endif

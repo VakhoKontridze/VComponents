@@ -210,100 +210,79 @@ public struct VCarousel<Data, ID, Content>: View
 
 #if !os(tvOS)
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    guard #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) else { return EmptyView() }
+    @Previewable @State var selection: Preview_Weekday = .monday
+    var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
 
-    struct ContentView: View {
-        @State private var selection: Preview_Weekday = .monday
-        private var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
+    PreviewContainer(content: {
+        VStack(spacing: 15, content: {
+            VCarousel(
+                selection: $selection,
+                data: Preview_Weekday.allCases,
+                content: {
+                    $0
+                        .color
+                        .clipShape(.rect(cornerRadius: preview_CornerRadius))
+                }
+            )
+            .frame(height: preview_Height)
 
-        var body: some View {
-            PreviewContainer(content: {
-                VStack(spacing: 15, content: {
-                    VCarousel(
-                        selection: $selection,
-                        data: Preview_Weekday.allCases,
-                        content: {
-                            $0
-                                .color
-                                .clipShape(.rect(cornerRadius: preview_CornerRadius))
-                        }
-                    )
-                    .frame(height: preview_Height)
-
-                    VPageIndicator(
-                        total: 7,
-                        current: selectedIndex ?? 0
-                    )
-                })
-            })
-        }
-    }
-
-    return ContentView()
+            VPageIndicator(
+                total: 7,
+                current: selectedIndex ?? 0
+            )
+        })
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Items", body: {
-    guard #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) else { return EmptyView() }
+    @Previewable @State var selection: Preview_Weekday = .monday
 
-    struct ContentView: View {
-        @State private var selection: Preview_Weekday = .monday
-
-        var body: some View {
-            PreviewContainer(content: {
-                VCarousel(
-                    selection: $selection,
-                    data: [],
-                    content: {
-                        $0
-                            .color
-                            .clipShape(.rect(cornerRadius: preview_CornerRadius))
-                    }
-                )
-                .frame(height: preview_Height)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VCarousel(
+            selection: $selection,
+            data: [],
+            content: {
+                $0
+                    .color
+                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
+            }
+        )
+        .frame(height: preview_Height)
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Infinite Items", body: {
-    guard #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) else { return EmptyView() }
+    @Previewable @State var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
+        data: Preview_RGBColor.allCases,
+        numberOfDuplicateGroups: 9,
+        initialGroupIndex: 4,
+        initialSelection: Preview_RGBColor.red
+    )
 
-    struct ContentView: View {
-        @State private var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
-            data: Preview_RGBColor.allCases,
-            numberOfDuplicateGroups: 9,
-            initialGroupIndex: 4,
-            initialSelection: Preview_RGBColor.red
-        )
+    PreviewContainer(content: {
+        VStack(spacing: 15, content: {
+            VCarousel(
+                selection: $dataSourceManager.selectedIndexInflated,
+                data: 0..<dataSourceManager.countInflated,
+                id: \.self,
+                content: {
+                    dataSourceManager.element(atInflatedIndex: $0)
+                        .color
+                        .clipShape(.rect(cornerRadius: preview_CornerRadius))
+                }
+            )
+            .frame(height: preview_Height)
 
-        var body: some View {
-            PreviewContainer(content: {
-                VStack(spacing: 15, content: {
-                    VCarousel(
-                        selection: $dataSourceManager.selectedIndexInflated,
-                        data: 0..<dataSourceManager.countInflated,
-                        id: \.self,
-                        content: {
-                            dataSourceManager.element(atInflatedIndex: $0)
-                                .color
-                                .clipShape(.rect(cornerRadius: preview_CornerRadius))
-                        }
-                    )
-                    .frame(height: preview_Height)
-
-                    VCompactPageIndicator(
-                        total: dataSourceManager.countInflated,
-                        current: dataSourceManager.selectedIndexInflated
-                    )
-                })
-            })
-        }
-    }
-
-    return ContentView()
+            VCompactPageIndicator(
+                total: dataSourceManager.countInflated,
+                current: dataSourceManager.selectedIndexInflated
+            )
+        })
+    })
 })
 
 private var preview_Height: CGFloat {

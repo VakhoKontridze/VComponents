@@ -262,21 +262,16 @@ extension VWrappedToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VWrappedToggleButtonState = .on
+    @Previewable @State var state: VWrappedToggleButtonState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VWrappedToggleButton(
-                    state: $state,
-                    title: "Lorem Ipsum"
-                )
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VWrappedToggleButton(
+            state: $state,
+            title: "Lorem Ipsum"
+        )
+    })
 })
 
 #Preview("States", body: {

@@ -376,102 +376,87 @@ extension Int {
 // MARK: - Preview
 #if DEBUG
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        private let total: Int = 10
-        @State private var current: Int = 0
+    @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
+    let total: Int = 10
 
-        var body: some View {
-            PreviewContainer(content: {
+    PreviewContainer(content: {
+        VCompactPageIndicator(
+            total: total,
+            current: current
+        )
+    })
+    .onReceiveOfTimerIncrement($current, to: total-1)
+})
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Layout Directions", body: {
+    @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
+    let total: Int = 10
+    
+    PreviewContainer(content: {
+        PreviewRow("Left-to-Right", content: {
+            VCompactPageIndicator(
+                uiModel: {
+                    var uiModel: VCompactPageIndicatorUIModel = .init()
+                    uiModel.direction = .leftToRight
+                    return uiModel
+                }(),
+                total: total,
+                current: current
+            )
+        })
+
+        PreviewRow("Right-to-Left", content: {
+            VCompactPageIndicator(
+                uiModel: {
+                    var uiModel: VCompactPageIndicatorUIModel = .init()
+                    uiModel.direction = .rightToLeft
+                    return uiModel
+                }(),
+                total: total,
+                current: current
+            )
+        })
+
+        HStack(spacing: 20, content: {
+            PreviewRow("Top-to-Bottom", content: {
                 VCompactPageIndicator(
+                    uiModel: {
+                        var uiModel: VCompactPageIndicatorUIModel = .init()
+                        uiModel.direction = .topToBottom
+                        return uiModel
+                    }(),
                     total: total,
                     current: current
                 )
             })
-            .onReceiveOfTimerIncrement($current, to: total-1)
-        }
-    }
 
-    return ContentView()
-})
-
-#Preview("Layout Directions", body: {
-    struct ContentView: View {
-        private let total: Int = 10
-        @State private var current: Int = 0
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow("Left-to-Right", content: {
-                    VCompactPageIndicator(
-                        uiModel: {
-                            var uiModel: VCompactPageIndicatorUIModel = .init()
-                            uiModel.direction = .leftToRight
-                            return uiModel
-                        }(),
-                        total: total,
-                        current: current
-                    )
-                })
-
-                PreviewRow("Right-to-Left", content: {
-                    VCompactPageIndicator(
-                        uiModel: {
-                            var uiModel: VCompactPageIndicatorUIModel = .init()
-                            uiModel.direction = .rightToLeft
-                            return uiModel
-                        }(),
-                        total: total,
-                        current: current
-                    )
-                })
-
-                HStack(spacing: 20, content: {
-                    PreviewRow("Top-to-Bottom", content: {
-                        VCompactPageIndicator(
-                            uiModel: {
-                                var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.direction = .topToBottom
-                                return uiModel
-                            }(),
-                            total: total,
-                            current: current
-                        )
-                    })
-
-                    PreviewRow("Bottom-to-Top", content: {
-                        VCompactPageIndicator(
-                            uiModel: {
-                                var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.direction = .bottomToTop
-                                return uiModel
-                            }(),
-                            total: total,
-                            current: current
-                        )
-                    })
-                })
-            })
-            .onReceiveOfTimerIncrement($current, to: total-1)
-        }
-    }
-
-    return ContentView()
-})
-
-#Preview("Zero", body: {
-    struct ContentView: View {
-        var body: some View {
-            PreviewContainer(content: {
+            PreviewRow("Bottom-to-Top", content: {
                 VCompactPageIndicator(
-                    total: 0,
-                    current: 0
+                    uiModel: {
+                        var uiModel: VCompactPageIndicatorUIModel = .init()
+                        uiModel.direction = .bottomToTop
+                        return uiModel
+                    }(),
+                    total: total,
+                    current: current
                 )
             })
-        }
-    }
+        })
+    })
+    .onReceiveOfTimerIncrement($current, to: total-1)
+})
 
-    return ContentView()
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Zero", body: {
+    PreviewContainer(content: {
+        VCompactPageIndicator(
+            total: 0,
+            current: 0
+        )
+    })
 })
 
 #endif

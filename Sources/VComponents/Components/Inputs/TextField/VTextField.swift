@@ -355,57 +355,47 @@ public struct VTextField: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var text: String = "Lorem ipsum"
+    @Previewable @State var text: String = "Lorem ipsum"
 
-        var body: some View {
-            PreviewContainer(content: {
-                VTextField(
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    placeholder: "Lorem ipsum",
-                    text: $text
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VTextField(
+            headerTitle: "Lorem ipsum dolor sit amet",
+            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            placeholder: "Lorem ipsum",
+            text: $text
+        )
+        .padding(.horizontal)
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Types", body: {
-    struct ContentView: View {
-        @State private var text: String = "Lorem ipsum"
+    @Previewable @State var text: String = "Lorem ipsum"
 
-        var body: some View {
-            PreviewContainer(content: {
-                ForEach(
-                    VTextFieldUIModel.ContentType.allCases,
-                    id: \.self,
-                    content: { contentType in
-                        let title: String = .init(describing: contentType).capitalized
+    PreviewContainer(content: {
+        ForEach(
+            VTextFieldUIModel.ContentType.allCases,
+            id: \.self,
+            content: { contentType in
+                let title: String = .init(describing: contentType).capitalized
 
-                        PreviewRow(title, content: {
-                            VTextField(
-                                uiModel: {
-                                    var uiModel: VTextFieldUIModel = .init()
-                                    uiModel.contentType = contentType
-                                    return uiModel
-                                }(),
-                                placeholder: "Lorem ipsum",
-                                text: $text
-                            )
-                            .padding(.horizontal)
-                        })
-                    }
-                )
-            })
-        }
-    }
-
-    return ContentView()
+                PreviewRow(title, content: {
+                    VTextField(
+                        uiModel: {
+                            var uiModel: VTextFieldUIModel = .init()
+                            uiModel.contentType = contentType
+                            return uiModel
+                        }(),
+                        placeholder: "Lorem ipsum",
+                        text: $text
+                    )
+                    .padding(.horizontal)
+                })
+            }
+        )
+    })
 })
 
 #Preview("States", body: {

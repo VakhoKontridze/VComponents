@@ -301,406 +301,336 @@ struct VAlert<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Title, Message, Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        content: { previewContent },
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    @Previewable @State var isPresented: Bool = true
+    
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                content: { previewContent },
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Title, Message", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    @Previewable @State var isPresented: Bool = true
+    
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Title, Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: nil,
-                        content: { previewContent },
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    @Previewable @State var isPresented: Bool = true
+    
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: nil,
+                content: { previewContent },
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Message, Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: nil,
-                        message: "Lorem ipsum dolor sit amet",
-                        content: { previewContent },
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: nil,
+                message: "Lorem ipsum dolor sit amet",
+                content: { previewContent },
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Title", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: nil,
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: nil,
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Message", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: nil,
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: nil,
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: nil,
-                        message: nil,
-                        content: { previewContent },
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: nil,
+                message: nil,
+                content: { previewContent },
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Declared Buttons", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {}
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {}
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("One Button", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .secondary, action: nil, title: "Ok")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .secondary, action: nil, title: "Ok")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Many Buttons", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Option A")
-                            VAlertButton(role: .secondary, action: nil, title: "Option B")
-                            VAlertButton(role: .destructive, action: nil, title: "Delete")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Option A")
+                    VAlertButton(role: .secondary, action: nil, title: "Option B")
+                    VAlertButton(role: .destructive, action: nil, title: "Delete")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Width Types", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-        @State private var width: VAlertUIModel.Width?
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var width: VAlertUIModel.Width?
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VAlertUIModel = .init()
-                            width.map { uiModel.widthGroup = VAlertUIModel.WidthGroup($0) }
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Confirm")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-                    .task({
-                        try? await Task.sleep(seconds: 1)
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                uiModel: {
+                    var uiModel: VAlertUIModel = .init()
+                    width.map { uiModel.widthGroup = VAlertUIModel.WidthGroup($0) }
+                    return uiModel
+                }(),
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Confirm")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+            .task({
+                try? await Task.sleep(seconds: 1)
 
-                        while true {
-                            width = .fixed(width: .fraction(0.74))
-                            try? await Task.sleep(seconds: 1)
+                while true {
+                    width = .fixed(width: .fraction(0.74))
+                    try? await Task.sleep(seconds: 1)
 
-                            width = .stretched(margin: .absolute(15))
-                            try? await Task.sleep(seconds: 1)
-                        }
-                    })
+                    width = .stretched(margin: .absolute(15))
+                    try? await Task.sleep(seconds: 1)
+                }
             })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Max Height", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            for i in 0..<20 {
-                                VAlertButton(role: .primary, action: nil, title: "Confirm \(i+1)")
-                            }
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    for i in 0..<20 {
+                        VAlertButton(role: .primary, action: nil, title: "Confirm \(i+1)")
+                    }
 
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Button States (Pressed)", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VAlertUIModel = .init()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                uiModel: {
+                    var uiModel: VAlertUIModel = .init()
 
-                            uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
-                            uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.pressed
+                    uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
+                    uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.pressed
 
-                            uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
-                            uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.pressed
+                    uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
+                    uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.pressed
 
-                            uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
-                            uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.pressed
+                    uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
+                    uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.pressed
 
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Option A")
-                            VAlertButton(role: .destructive, action: nil, title: "Delete")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+                    return uiModel
+                }(),
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Option A")
+                    VAlertButton(role: .destructive, action: nil, title: "Delete")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Button States (Disabled)", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vAlert(
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VAlertUIModel = .init()
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                id: "preview",
+                uiModel: {
+                    var uiModel: VAlertUIModel = .init()
 
-                            uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.disabled
-                            uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.disabled
+                    uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.disabled
+                    uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.disabled
 
-                            uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.disabled
-                            uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.disabled
+                    uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.disabled
+                    uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.disabled
 
-                            uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.disabled
-                            uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.disabled
+                    uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.disabled
+                    uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.disabled
 
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
-                        actions: {
-                            VAlertButton(role: .primary, action: nil, title: "Option A")
-                            VAlertButton(role: .destructive, action: nil, title: "Delete")
-                            VAlertButton(role: .cancel, action: nil, title: "Cancel")
-                        }
-                    )
-            })
-            .presentationHostLayer()
-        }
-    }
-
-    return ContentView()
+                    return uiModel
+                }(),
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(role: .primary, action: nil, title: "Option A")
+                    VAlertButton(role: .destructive, action: nil, title: "Delete")
+                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                }
+            )
+    })
+    .presentationHostLayer()
 })
 
 @ViewBuilder

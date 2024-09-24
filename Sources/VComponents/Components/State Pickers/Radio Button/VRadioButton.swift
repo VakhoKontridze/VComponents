@@ -206,26 +206,21 @@ extension VRadioButtonState {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VRadioButtonState = .on
+    @Previewable @State var state: VRadioButtonState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VRadioButton(
-                    state: $state,
-                    title: "Lorem ipsum"
-                )
+    PreviewContainer(content: {
+        VRadioButton(
+            state: $state,
+            title: "Lorem ipsum"
+        )
 
-                VPlainButton(
-                    action: { state.setNextState() },
-                    title: "Toggle State"
-                )
-            })
-        }
-    }
-
-    return ContentView()
+        VPlainButton(
+            action: { state.setNextState() },
+            title: "Toggle State"
+        )
+    })
 })
 
 #Preview("States", body: {

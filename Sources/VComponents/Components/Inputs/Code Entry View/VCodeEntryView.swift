@@ -242,44 +242,34 @@ public struct VCodeEntryView: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var text: String = "123"
+    @Previewable @State var text: String = "123"
 
-        var body: some View {
-            PreviewContainer(content: {
-                VCodeEntryView(text: $text)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VCodeEntryView(text: $text)
+    })
 })
 
 #Preview("States", body: {
     Preview_StatesContentView()
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Stretched", body: {
-    struct ContentView: View {
-        @State private var text: String = "123"
+    @Previewable @State var text: String = "123"
 
-        var body: some View {
-            PreviewContainer(content: {
-                VCodeEntryView(
-                    uiModel: {
-                        var uiModel: VCodeEntryViewUIModel = .init()
-                        uiModel.spacingType = .stretched
-                        return uiModel
-                    }(),
-                    text: $text
-                )
-                .padding(.horizontal)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VCodeEntryView(
+            uiModel: {
+                var uiModel: VCodeEntryViewUIModel = .init()
+                uiModel.spacingType = .stretched
+                return uiModel
+            }(),
+            text: $text
+        )
+        .padding(.horizontal)
+    })
 })
 
 #Preview("Success", body: {

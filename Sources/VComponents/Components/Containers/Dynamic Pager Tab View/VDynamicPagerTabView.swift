@@ -359,100 +359,85 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Many Items", body: {
-    struct ContentView: View {
-        @State private var selection: Preview_Weekday = .thursday
+    @Previewable @State var selection: Preview_Weekday = .thursday
 
-        var body: some View {
-            PreviewContainer(layer: .secondary, content: {
-                ForEach(
-                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-                    id: \.self,
-                    content: { widthType in
-                        VDynamicPagerTabView(
-                            uiModel: {
-                                var uiModel: VDynamicPagerTabViewUIModel = .init()
-                                uiModel.tabSelectionIndicatorWidthType = widthType
-                                return uiModel
-                            }(),
-                            selection: $selection,
-                            data: Preview_Weekday.allCases,
-                            tabItemTitle: { $0.title },
-                            content: { $0.color }
-                        )
-                        .padding(.horizontal)
-                        .frame(height: 150)
-                    }
+    PreviewContainer(layer: .secondary, content: {
+        ForEach(
+            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            id: \.self,
+            content: { widthType in
+                VDynamicPagerTabView(
+                    uiModel: {
+                        var uiModel: VDynamicPagerTabViewUIModel = .init()
+                        uiModel.tabSelectionIndicatorWidthType = widthType
+                        return uiModel
+                    }(),
+                    selection: $selection,
+                    data: Preview_Weekday.allCases,
+                    tabItemTitle: { $0.title },
+                    content: { $0.color }
                 )
-            })
-        }
-    }
-
-    return ContentView()
+                .padding(.horizontal)
+                .frame(height: 150)
+            }
+        )
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Few Items", body: {
-    struct ContentView: View {
-        @State private var selection: Preview_Weekday = .monday
+    @Previewable @State var selection: Preview_Weekday = .monday
 
-        var body: some View {
-            PreviewContainer(layer: .secondary, content: {
-                ForEach(
-                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-                    id: \.self,
-                    content: { widthType in
-                        VDynamicPagerTabView(
-                            uiModel: {
-                                var uiModel: VDynamicPagerTabViewUIModel = .init()
-                                uiModel.tabSelectionIndicatorWidthType = widthType
-                                return uiModel
-                            }(),
-                            selection: $selection,
-                            data: Preview_Weekday.allCases.prefix(3),
-                            tabItemTitle: { $0.title },
-                            content: { $0.color }
-                        )
-                        .padding(.horizontal)
-                        .frame(height: 150)
-                    }
+    PreviewContainer(layer: .secondary, content: {
+        ForEach(
+            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            id: \.self,
+            content: { widthType in
+                VDynamicPagerTabView(
+                    uiModel: {
+                        var uiModel: VDynamicPagerTabViewUIModel = .init()
+                        uiModel.tabSelectionIndicatorWidthType = widthType
+                        return uiModel
+                    }(),
+                    selection: $selection,
+                    data: Preview_Weekday.allCases.prefix(3),
+                    tabItemTitle: { $0.title },
+                    content: { $0.color }
                 )
-            })
-        }
-    }
-
-    return ContentView()
+                .padding(.horizontal)
+                .frame(height: 150)
+            }
+        )
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Items", body: {
-    struct ContentView: View {
-        @State private var selection: Preview_Weekday = .thursday
+    @Previewable @State var selection: Preview_Weekday = .thursday
 
-        var body: some View {
-            PreviewContainer(layer: .secondary, content: {
-                ForEach(
-                    VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-                    id: \.self,
-                    content: { widthType in
-                        VDynamicPagerTabView(
-                            uiModel: {
-                                var uiModel: VDynamicPagerTabViewUIModel = .init()
-                                uiModel.tabSelectionIndicatorWidthType = widthType
-                                return uiModel
-                            }(),
-                            selection: $selection,
-                            data: [],
-                            tabItemTitle: { $0.title },
-                            content: { $0.color }
-                        )
-                        .padding(.horizontal)
-                        .frame(height: 150)
-                    }
+    PreviewContainer(layer: .secondary, content: {
+        ForEach(
+            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            id: \.self,
+            content: { widthType in
+                VDynamicPagerTabView(
+                    uiModel: {
+                        var uiModel: VDynamicPagerTabViewUIModel = .init()
+                        uiModel.tabSelectionIndicatorWidthType = widthType
+                        return uiModel
+                    }(),
+                    selection: $selection,
+                    data: [],
+                    tabItemTitle: { $0.title },
+                    content: { $0.color }
                 )
-            })
-        }
-    }
-
-    return ContentView()
+                .padding(.horizontal)
+                .frame(height: 150)
+            }
+        )
+    })
 })
 
 #endif

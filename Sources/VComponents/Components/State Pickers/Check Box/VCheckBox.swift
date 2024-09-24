@@ -211,21 +211,16 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var state: VCheckBoxState = .on
+    @Previewable @State var state: VCheckBoxState = .on
 
-        var body: some View {
-            PreviewContainer(content: {
-                VCheckBox(
-                    state: $state,
-                    title: "Lorem ipsum"
-                )
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(content: {
+        VCheckBox(
+            state: $state,
+            title: "Lorem ipsum"
+        )
+    })
 })
 
 #Preview("States", body: {

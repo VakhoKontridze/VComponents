@@ -286,111 +286,106 @@ extension Edge {
 // MARK: - Preview
 #if DEBUG
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview(body: {
-    struct ContentView: View {
-        @State private var value: Double = 10_000
+    @Previewable @State var value: Double = 10_000
+    
+    PreviewContainer(content: {
+        HStack(spacing: 20, content: {
+            Button( // No `VPlainButton` on all platforms
+                "-",
+                action: { value -= .random(in: 1...10) }
+            )
 
-        var body: some View {
-            PreviewContainer(content: {
-                HStack(spacing: 20, content: {
-                    Button( // No `VPlainButton` on all platforms
-                        "-",
-                        action: { value -= .random(in: 1...10) }
-                    )
+            Button( // No `VPlainButton` on all platforms
+                "+",
+                action: { value += .random(in: 1...10) }
+            )
+        })
+        .padding(.top, 20)
 
-                    Button( // No `VPlainButton` on all platforms
-                        "+",
-                        action: { value += .random(in: 1...10) }
-                    )
-                })
-                .padding(.top, 20)
+        PreviewRow("Standard", content: {
+            VRollingCounter(value: value)
+        })
 
-                PreviewRow("Standard", content: {
-                    VRollingCounter(value: value)
-                })
+        PreviewRow("No Fractions", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.hasFractionDigits = false
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
 
-                PreviewRow("No Fractions", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
-                            uiModel.hasFractionDigits = false
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
+        PreviewRow("No Grouping & No Fractions", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.hasGroupingSeparator = false
+                    uiModel.hasFractionDigits = false
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
 
-                PreviewRow("No Grouping & No Fractions", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
-                            uiModel.hasGroupingSeparator = false
-                            uiModel.hasFractionDigits = false
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
+        PreviewRow("No Highlight", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.incrementHighlightColor = nil
+                    uiModel.decrementHighlightColor = nil
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
 
-                PreviewRow("No Highlight", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
-                            uiModel.incrementHighlightColor = nil
-                            uiModel.decrementHighlightColor = nil
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
+        PreviewRow("Highlighted Symbols", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.groupingSeparatorTextIsHighlightable = true
+                    uiModel.decimalSeparatorTextIsHighlightable = true
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
 
-                PreviewRow("Highlighted Symbols", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
-                            uiModel.groupingSeparatorTextIsHighlightable = true
-                            uiModel.decimalSeparatorTextIsHighlightable = true
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
+        PreviewRow("Full Highlight", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.highlightsOnlyTheAffectedCharacters = false
+                    uiModel.groupingSeparatorTextIsHighlightable = true
+                    uiModel.decimalSeparatorTextIsHighlightable = true
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
 
-                PreviewRow("Full Highlight", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
-                            uiModel.highlightsOnlyTheAffectedCharacters = false
-                            uiModel.groupingSeparatorTextIsHighlightable = true
-                            uiModel.decimalSeparatorTextIsHighlightable = true
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
+        PreviewRow("Custom", content: {
+            VRollingCounter(
+                uiModel: {
+                    var uiModel: VRollingCounterUIModel = .init()
 
-                PreviewRow("Custom", content: {
-                    VRollingCounter(
-                        uiModel: {
-                            var uiModel: VRollingCounterUIModel = .init()
+                    uiModel.decimalSeparatorTextColor = .secondary
+                    uiModel.decimalSeparatorTextOffsetY = -10
 
-                            uiModel.decimalSeparatorTextColor = .secondary
-                            uiModel.decimalSeparatorTextOffsetY = -10
+                    uiModel.fractionDigitTextColor = .secondary
+                    uiModel.fractionDigitTextFont = Font.footnote.bold()
+                    uiModel.fractionDigitTextOffsetY = -2
 
-                            uiModel.fractionDigitTextColor = .secondary
-                            uiModel.fractionDigitTextFont = Font.footnote.bold()
-                            uiModel.fractionDigitTextOffsetY = -2
-
-                            return uiModel
-                        }(),
-                        value: value
-                    )
-                })
-            })
-        }
-    }
-
-    return ContentView()
+                    return uiModel
+                }(),
+                value: value
+            )
+        })
+    })
 })
 
 #endif

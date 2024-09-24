@@ -379,46 +379,36 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
-    struct ContentView: View {
-        @State private var selection: Preview_RGBColor = .red
+    @Previewable @State var selection: Preview_RGBColor = .red
 
-        var body: some View {
-            PreviewContainer(layer: .secondary, content: {
-                VStretchedIndicatorStaticPagerTabView(
-                    selection: $selection,
-                    data: Preview_RGBColor.allCases,
-                    tabItemTitle: { $0.title },
-                    content: { $0.color }
-                )
-                .padding(.horizontal)
-                .frame(height: 150)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(layer: .secondary, content: {
+        VStretchedIndicatorStaticPagerTabView(
+            selection: $selection,
+            data: Preview_RGBColor.allCases,
+            tabItemTitle: { $0.title },
+            content: { $0.color }
+        )
+        .padding(.horizontal)
+        .frame(height: 150)
+    })
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Items", body: {
-    struct ContentView: View {
-        @State private var selection: Preview_RGBColor = .red
+    @Previewable @State var selection: Preview_RGBColor = .red
 
-        var body: some View {
-            PreviewContainer(layer: .secondary, content: {
-                VStretchedIndicatorStaticPagerTabView(
-                    selection: $selection,
-                    data: [],
-                    tabItemTitle: { $0.title },
-                    content: { $0.color }
-                )
-                .padding(.horizontal)
-                .frame(height: 150)
-            })
-        }
-    }
-
-    return ContentView()
+    PreviewContainer(layer: .secondary, content: {
+        VStretchedIndicatorStaticPagerTabView(
+            selection: $selection,
+            data: [],
+            tabItemTitle: { $0.title },
+            content: { $0.color }
+        )
+        .padding(.horizontal)
+        .frame(height: 150)
+    })
 })
 
 #endif

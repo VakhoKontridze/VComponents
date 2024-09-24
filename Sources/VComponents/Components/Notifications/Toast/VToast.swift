@@ -308,240 +308,215 @@ struct VToast: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Singleline", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
-                    )
-            })
-            .presentationHostLayer(
-                id: "notifications",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                layerID: "notifications",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
+                    var uiModel: VToastUIModel = .init()
+                    uiModel.timeoutDuration = 60
                     return uiModel
-                }()
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet"
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "notifications",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewTapAction = .passTapsThrough
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Multiline", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                    )
-            })
-            .presentationHostLayer(
-                id: "notifications",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                layerID: "notifications",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
+                    var uiModel: VToastUIModel = .init()
+                    uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                    uiModel.timeoutDuration = 60
                     return uiModel
-                }()
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "notifications",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewTapAction = .passTapsThrough
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Top", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
+    @Previewable @State var isPresented: Bool = true
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-                            uiModel.presentationEdge = .top
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
-                    )
-            })
-            .presentationHostLayer(
-                id: "notifications",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                layerID: "notifications",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
+                    var uiModel: VToastUIModel = .init()
+                    uiModel.presentationEdge = .top
+                    uiModel.timeoutDuration = 60
                     return uiModel
-                }()
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet"
             )
-        }
-    }
-
-    return ContentView()
+    })
+    .presentationHostLayer(
+        id: "notifications",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewTapAction = .passTapsThrough
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Width Types", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-        
-        @State private var width: VToastUIModel.Width?
-        @State private var alignment: HorizontalAlignment?
+    @Previewable @State var isPresented: Bool = true
+    
+    @Previewable @State var width: VToastUIModel.Width?
+    @Previewable @State var alignment: HorizontalAlignment?
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel: VToastUIModel = .init()
-
-                            width.map { uiModel.widthGroup = VToastUIModel.WidthGroup($0) }
-
-                            alignment.map { uiModel.bodyHorizontalAlignment = $0 }
-
-                            uiModel.timeoutDuration = 60
-
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
-                    )
-                    .task({
-                        try? await Task.sleep(seconds: 1)
-
-                        while true {
-                            width = .fixed(width: .fraction(0.75))
-                            alignment = .leading
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .fixed(width: .fraction(0.75))
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .fixed(width: .fraction(0.75))
-                            alignment = .trailing
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .wrapped(margin: .absolute(15))
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .wrapped(maxWidth: .fraction(0.75), margin: .absolute(15))
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .stretched(margin: .absolute(15))
-                            alignment = .leading
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .stretched(margin: .absolute(15))
-                            alignment = .center
-                            try? await Task.sleep(seconds: 1)
-
-                            width = .stretched(margin: .absolute(15))
-                            alignment = .trailing
-                            try? await Task.sleep(seconds: 1)
-                        }
-                    })
-            })
-            .presentationHostLayer(
-                id: "notifications",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                layerID: "notifications",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
-                    return uiModel
-                }()
-            )
-        }
-    }
+                    var uiModel: VToastUIModel = .init()
 
-    return ContentView()
+                    width.map { uiModel.widthGroup = VToastUIModel.WidthGroup($0) }
+
+                    alignment.map { uiModel.bodyHorizontalAlignment = $0 }
+
+                    uiModel.timeoutDuration = 60
+
+                    return uiModel
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet"
+            )
+            .task({
+                try? await Task.sleep(seconds: 1)
+
+                while true {
+                    width = .fixed(width: .fraction(0.75))
+                    alignment = .leading
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .fixed(width: .fraction(0.75))
+                    alignment = .center
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .fixed(width: .fraction(0.75))
+                    alignment = .trailing
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .wrapped(margin: .absolute(15))
+                    alignment = .center
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .wrapped(maxWidth: .fraction(0.75), margin: .absolute(15))
+                    alignment = .center
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .stretched(margin: .absolute(15))
+                    alignment = .leading
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .stretched(margin: .absolute(15))
+                    alignment = .center
+                    try? await Task.sleep(seconds: 1)
+
+                    width = .stretched(margin: .absolute(15))
+                    alignment = .trailing
+                    try? await Task.sleep(seconds: 1)
+                }
+            })
+    })
+    .presentationHostLayer(
+        id: "notifications",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewTapAction = .passTapsThrough
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Highlights", body: {
-    struct ContentView: View {
-        @State private var isPresented: Bool = true
-        @State private var uiModel: VToastUIModel = .init()
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var uiModel: VToastUIModel = .init()
 
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewModalLauncherView(isPresented: $isPresented)
-                    .vToast(
-                        layerID: "notifications",
-                        id: "preview",
-                        uiModel: {
-                            var uiModel = uiModel
-                            uiModel.timeoutDuration = 60
-                            return uiModel
-                        }(),
-                        isPresented: $isPresented,
-                        text: "Lorem ipsum dolor sit amet"
-                    )
-                    .task({
-                        try? await Task.sleep(seconds: 1)
-
-                        while true {
-                            uiModel = .info
-                            try? await Task.sleep(seconds: 1)
-
-                            uiModel = .success
-                            try? await Task.sleep(seconds: 1)
-
-                            uiModel = .warning
-                            try? await Task.sleep(seconds: 1)
-
-                            uiModel = .error
-                            try? await Task.sleep(seconds: 1)
-                        }
-                    })
-            })
-            .presentationHostLayer(
-                id: "notifications",
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                layerID: "notifications",
+                id: "preview",
                 uiModel: {
-                    var uiModel: PresentationHostLayerUIModel = .init()
-                    uiModel.dimmingViewTapAction = .passTapsThrough
-                    uiModel.dimmingViewColor = Color.clear
+                    var uiModel = uiModel
+                    uiModel.timeoutDuration = 60
                     return uiModel
-                }()
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet"
             )
-        }
-    }
+            .task({
+                try? await Task.sleep(seconds: 1)
 
-    return ContentView()
+                while true {
+                    uiModel = .info
+                    try? await Task.sleep(seconds: 1)
+
+                    uiModel = .success
+                    try? await Task.sleep(seconds: 1)
+
+                    uiModel = .warning
+                    try? await Task.sleep(seconds: 1)
+
+                    uiModel = .error
+                    try? await Task.sleep(seconds: 1)
+                }
+            })
+    })
+    .presentationHostLayer(
+        id: "notifications",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewTapAction = .passTapsThrough
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
 })
 
 #endif
