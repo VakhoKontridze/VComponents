@@ -32,9 +32,6 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
     // MARK: Properties - Tab Bar
     /// Tab bar alignment for tab items. Set to `top`.
     public var tabBarAlignment: VerticalAlignment = .top
-    
-    /// Indicates if tab bar scrolling is enabled. Set to `true`.
-    public var isTabBarScrollingEnabled: Bool = true
 
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins. Set to `(10, 10)`.
