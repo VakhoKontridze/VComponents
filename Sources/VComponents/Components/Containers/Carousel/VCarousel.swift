@@ -130,31 +130,29 @@ public struct VCarousel<Data, ID, Content>: View
     public var body: some View {
         GeometryReader(content: { geometryProxy in
             ScrollViewReader(content: { scrollViewProxy in
-                ScrollView(
-                    .horizontal,
-                    showsIndicators: false,
-                    content: {
-                        LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                            alignment: uiModel.cardsAlignment,
-                            spacing: uiModel.cardsSpacing,
-                            content: {
-                                ForEach(data, id: id, content: { element in
-                                    cardView(
-                                        geometryProxy: geometryProxy,
-                                        element: element
-                                    )
-                                    .id(element[keyPath: id])
-                                })
-                        })
-                        .scrollTargetLayout()
-                    }
-                )
+                ScrollView(.horizontal, content: {
+                    LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                        alignment: uiModel.cardsAlignment,
+                        spacing: uiModel.cardsSpacing,
+                        content: {
+                            ForEach(data, id: id, content: { element in
+                                cardView(
+                                    geometryProxy: geometryProxy,
+                                    element: element
+                                )
+                                .id(element[keyPath: id])
+                            })
+                    })
+                    .scrollTargetLayout()
+                })
                 .scrollTargetBehavior(.viewAligned)
                 .scrollPosition(id: selectionIDBinding)
 
                 .contentMargins(.horizontal, uiModel.cardMarginHorizontal, for: .scrollContent)
                 .contentMargins(.top, uiModel.cardMarginTop, for: .scrollContent)
                 .contentMargins(.bottom, uiModel.cardMarginBottom, for: .scrollContent)
+                
+                .scrollIndicators(.hidden)
                 
                 .scrollDisabled(!uiModel.isScrollingEnabled)
 

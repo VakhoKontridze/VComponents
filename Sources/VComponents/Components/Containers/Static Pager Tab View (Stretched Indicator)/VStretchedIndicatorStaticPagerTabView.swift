@@ -291,37 +291,35 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         GeometryReader(content: { geometryProxy in
             Group(content: {
                 if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                    ScrollView(
-                        .horizontal,
-                        showsIndicators: false,
-                        content: {
-                            LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                                spacing: 0,
-                                content: {
-                                    ForEach(data, id: id, content: { element in
-                                        content(element)
-                                            .tag(element)
-                                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                                            .frame(maxHeight: .infinity)
-                                            .getFrame(in: .global, { frame in
-                                                guard element == selection else { return }
+                    ScrollView(.horizontal, content: {
+                        LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                            spacing: 0,
+                            content: {
+                                ForEach(data, id: id, content: { element in
+                                    content(element)
+                                        .tag(element)
+                                        .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                                        .frame(maxHeight: .infinity)
+                                        .getFrame(in: .global, { frame in
+                                            guard element == selection else { return }
 
-                                                calculateIndicatorFrame(
-                                                    selectedIndexInt: selectedIndexInt,
-                                                    tabViewGeometryProxy: geometryProxy,
-                                                    interstitialOffset: frame.minX
-                                                )
-                                            })
-                                    })
-                                }
-                            )
-                            .scrollTargetLayout()
-                        }
-                    )
+                                            calculateIndicatorFrame(
+                                                selectedIndexInt: selectedIndexInt,
+                                                tabViewGeometryProxy: geometryProxy,
+                                                interstitialOffset: frame.minX
+                                            )
+                                        })
+                                })
+                            }
+                        )
+                        .scrollTargetLayout()
+                    })
                     .scrollTargetBehavior(.paging)
                     .scrollPosition(id: selectionIDBinding)
                     
                     .background(content: { uiModel.tabViewBackgroundColor })
+                    
+                    .scrollIndicators(.hidden)
                     
                     .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
                     
