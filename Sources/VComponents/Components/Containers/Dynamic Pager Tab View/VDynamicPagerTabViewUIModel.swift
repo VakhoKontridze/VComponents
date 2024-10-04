@@ -116,7 +116,7 @@ public struct VDynamicPagerTabViewUIModel {
         get { _isTabViewScrollingEnabled }
         set { _isTabViewScrollingEnabled = newValue }
     }
-    var _isTabViewScrollingEnabled: Bool = true
+    private var _isTabViewScrollingEnabled: Bool = true // TODO: iOS 17.0 - Remove
 
     // MARK: Initializers
     /// Initializes UI model with default values.

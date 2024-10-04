@@ -89,7 +89,7 @@ public struct VWrappedIndicatorStaticPagerTabViewUIModel {
         get { _isTabViewScrollingEnabled }
         set { _isTabViewScrollingEnabled = newValue }
     }
-    var _isTabViewScrollingEnabled: Bool = true
+    private var _isTabViewScrollingEnabled: Bool = true // TODO: iOS 17.0 - Remove
     
     /// Tab view background color.
     public var tabViewBackgroundColor: Color = {
