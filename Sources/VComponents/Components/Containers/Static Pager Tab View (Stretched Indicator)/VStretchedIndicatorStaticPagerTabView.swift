@@ -77,8 +77,22 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     // MARK: Properties - Selection
     @Binding private var selection: Data.Element
+    
     private var selectedIndex: Data.Index? { data.firstIndex(of: selection) }
     private var selectedIndexInt: Int? { selectedIndex.map { data.distance(from: data.startIndex, to: $0) } }
+    
+    private var selectionIDBinding: Binding<ID?> {
+        .init(
+            get: {
+                selection[keyPath: id]
+            },
+            set: { newValue in
+                if let element: Data.Element = data.first(where: { $0[keyPath: id] == newValue }) {
+                    selection = element
+                }
+            }
+        )
+    }
 
     // MARK: Properties - Data
     private let data: Data
@@ -274,26 +288,64 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     }
 
     private var tabView: some View {
-        GeometryReader(content: { tabViewProxy in
-            TabView(selection: $selection, content: {
-                ForEach(data, id: id, content: { element in
-                    content(element)
-                        .tag(element)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
-                        .getFrame(in: .global, { frame in
-                            guard element == selection else { return }
+        GeometryReader(content: { geometryProxy in
+            Group(content: {
+                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                    ScrollView(
+                        .horizontal,
+                        showsIndicators: false,
+                        content: {
+                            LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                                spacing: 0,
+                                content: {
+                                    ForEach(data, id: id, content: { element in
+                                        content(element)
+                                            .tag(element)
+                                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                                            .frame(maxHeight: .infinity)
+                                            .getFrame(in: .global, { frame in
+                                                guard element == selection else { return }
 
-                            calculateIndicatorFrame(
-                                selectedIndexInt: selectedIndexInt,
-                                tabViewProxy: tabViewProxy,
-                                interstitialOffset: frame.minX
+                                                calculateIndicatorFrame(
+                                                    selectedIndexInt: selectedIndexInt,
+                                                    tabViewGeometryProxy: geometryProxy,
+                                                    interstitialOffset: frame.minX
+                                                )
+                                            })
+                                    })
+                                }
                             )
-                        })
-                })
-            })
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .background(content: { uiModel.tabViewBackgroundColor })
+                            .scrollTargetLayout()
+                        }
+                    )
+                    .scrollTargetBehavior(.paging)
+                    .scrollPosition(id: selectionIDBinding)
+                    
+                    .background(content: { uiModel.tabViewBackgroundColor })
+                    
+                    .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
+                    
+                } else {
+                    TabView(selection: $selection, content: {
+                        ForEach(data, id: id, content: { element in
+                            content(element)
+                                .tag(element)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
+                                .getFrame(in: .global, { frame in
+                                    guard element == selection else { return }
 
+                                    calculateIndicatorFrame(
+                                        selectedIndexInt: selectedIndexInt,
+                                        tabViewGeometryProxy: geometryProxy,
+                                        interstitialOffset: frame.minX
+                                    )
+                                })
+                        })
+                    })
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .background(content: { uiModel.tabViewBackgroundColor })
+                }
+            })
             .applyModifier({
                 if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                     $0
@@ -303,7 +355,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                             { (_, newValue) in
                                 calculateIndicatorFrame(
                                     selectedIndexInt: newValue,
-                                    tabViewProxy: tabViewProxy,
+                                    tabViewGeometryProxy: geometryProxy,
                                     interstitialOffset: 0
                                 )
                             }
@@ -314,14 +366,14 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                         .onAppear(perform: {
                             calculateIndicatorFrame(
                                 selectedIndexInt: selectedIndexInt,
-                                tabViewProxy: tabViewProxy,
+                                tabViewGeometryProxy: geometryProxy,
                                 interstitialOffset: 0
                             )
                         })
                         .onChange(of: selectedIndexInt, perform: { newValue in
                             calculateIndicatorFrame(
                                 selectedIndexInt: newValue,
-                                tabViewProxy: tabViewProxy,
+                                tabViewGeometryProxy: geometryProxy,
                                 interstitialOffset: 0
                             )
                         })
@@ -333,11 +385,11 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
         selectedIndexInt: Int?,
-        tabViewProxy: GeometryProxy,
+        tabViewGeometryProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
-        let tabViewMinX: CGFloat = tabViewProxy.frame(in: .global).minX // Accounts for `TabView` padding
-        let tabViewWidth: CGFloat = tabViewProxy.size.width
+        let tabViewMinX: CGFloat = tabViewGeometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
+        let tabViewWidth: CGFloat = tabViewGeometryProxy.size.width
 
         selectedTabIndicatorWidth =
             tabViewWidth / CGFloat(data.count) - // Division is safe, as non-emptiness is checked in `body`

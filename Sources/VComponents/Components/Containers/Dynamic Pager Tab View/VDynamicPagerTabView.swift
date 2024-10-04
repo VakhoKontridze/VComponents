@@ -77,6 +77,19 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     // MARK: Properties - Selection
     @Binding private var selection: Data.Element
+    
+    private var selectionIDBinding: Binding<ID?> {
+        .init(
+            get: {
+                selection[keyPath: id]
+            },
+            set: { newValue in
+                if let element: Data.Element = data.first(where: { $0[keyPath: id] == newValue }) {
+                    selection = element
+                }
+            }
+        )
+    }
 
     // MARK: Properties - Data
     private let data: Data
@@ -227,6 +240,8 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                         )
                     }
                 )
+                .scrollDisabled(!uiModel.isTabBarScrollingEnabled)
+                
                 .onAppear(perform: { positionSelectedTabIndicatorInitially(in: proxy) })
                 .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
             })
@@ -303,16 +318,47 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
     }
 
+    @ViewBuilder
     private var tabView: some View {
-        TabView(selection: $selection, content: {
-            ForEach(data, id: id, content: { element in
-                content(element)
-                    .tag(element)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
+        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+            GeometryReader(content: { geometryProxy in
+                ScrollView(
+                    .horizontal,
+                    showsIndicators: false,
+                    content: {
+                        LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                            spacing: 0,
+                            content: {
+                                ForEach(data, id: id, content: { element in
+                                    content(element)
+                                        .tag(element)
+                                        .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                                        .frame(maxHeight: .infinity)
+                                })
+                            }
+                        )
+                        .scrollTargetLayout()
+                    }
+                )
+                .scrollTargetBehavior(.paging)
+                .scrollPosition(id: selectionIDBinding)
+                
+                .background(content: { uiModel.tabViewBackgroundColor })
+                
+                .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
             })
-        })
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        .background(content: { uiModel.tabViewBackgroundColor })
+            
+        } else {
+            TabView(selection: $selection, content: {
+                ForEach(data, id: id, content: { element in
+                    content(element)
+                        .tag(element)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
+                })
+            })
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .background(content: { uiModel.tabViewBackgroundColor })
+        }
     }
 
     // MARK: Selected Tab Indicator Frame

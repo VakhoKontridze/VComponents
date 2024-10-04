@@ -35,6 +35,9 @@ public struct VDynamicPagerTabViewUIModel {
 
     /// Tab bar horizontal margin. Set to `5`.
     public var tabBarMarginHorizontal: CGFloat = 5
+    
+    /// Indicates if tab bar scrolling is enabled. Set to `true`.
+    public var isTabBarScrollingEnabled: Bool = true
 
     /// Tab bar item spacing. Set to `0`.
     ///
@@ -106,6 +109,14 @@ public struct VDynamicPagerTabViewUIModel {
         fatalError() // Not supported
 #endif
     }()
+    
+    /// Indicates if tab view scrolling is enabled. Set to `true`.
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    public var isTabViewScrollingEnabled: Bool {
+        get { _isTabViewScrollingEnabled }
+        set { _isTabViewScrollingEnabled = newValue }
+    }
+    var _isTabViewScrollingEnabled: Bool = true
 
     // MARK: Initializers
     /// Initializes UI model with default values.

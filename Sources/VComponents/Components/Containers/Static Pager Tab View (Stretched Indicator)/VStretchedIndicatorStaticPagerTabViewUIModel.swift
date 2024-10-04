@@ -32,6 +32,9 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
     // MARK: Properties - Tab Bar
     /// Tab bar alignment for tab items. Set to `top`.
     public var tabBarAlignment: VerticalAlignment = .top
+    
+    /// Indicates if tab bar scrolling is enabled. Set to `true`.
+    public var isTabBarScrollingEnabled: Bool = true
 
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins. Set to `(10, 10)`.
@@ -97,6 +100,14 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel {
         fatalError() // Not supported
 #endif
     }()
+    
+    /// Indicates if tab view scrolling is enabled. Set to `true`.
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    public var isTabViewScrollingEnabled: Bool {
+        get { _isTabViewScrollingEnabled }
+        set { _isTabViewScrollingEnabled = newValue }
+    }
+    var _isTabViewScrollingEnabled: Bool = true
 
     // MARK: Initializers
     /// Initializes UI model with default values.

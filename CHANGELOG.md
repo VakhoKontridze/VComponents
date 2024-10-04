@@ -1,5 +1,19 @@
 # Change Log
 
+### 7.1.0(70)
+
+VStretchedIndicatorStaticPagerTabView
+
+- `isTabViewScrollingEnabled` property is added in UI Model
+
+VWrappedIndicatorStaticPagerTabView
+
+- `isTabViewScrollingEnabled` property is added in UI Model
+
+VDynamicPagerTabView
+
+- `isTabBarScrollingEnabled` and `isTabViewScrollingEnabled` properties are added in UI Model
+
 ### [7.0.0(69)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.0.0) — *2024 09 20*
 
 General
