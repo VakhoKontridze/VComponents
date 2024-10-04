@@ -23,10 +23,12 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VRectangularCaptionButtonUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularCaptionButtonInternalState {
         .init(
@@ -35,8 +37,10 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         )
     }
 
+    // MARK: Properties - Action
     private let action: () -> Void
     
+    // MARK: Properties - Label & Caption
     private let icon: Image
 
     private let caption: VRectangularCaptionButtonCaption<CustomCaption>

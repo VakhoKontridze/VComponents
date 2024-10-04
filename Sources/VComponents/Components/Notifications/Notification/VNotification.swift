@@ -16,18 +16,20 @@ import VCore
 struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Properties - UI Model
     private let uiModel: VNotificationUIModel
+    
+    @Environment(\.displayScale) private var displayScale: CGFloat
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
+    
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    
     private var currentWidth: VNotificationUIModel.Width {
         uiModel.widthGroup.current(orientation: interfaceOrientation)
     }
-
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-
-    @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @State private var height: CGFloat = 0
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
@@ -37,9 +39,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     // MARK: Properties - Content
     private let content: VNotificationContent<CustomContent>
-
-    // MARK: Properties - Frame
-    @State private var height: CGFloat = 0
 
     // MARK: Properties - Flags
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.

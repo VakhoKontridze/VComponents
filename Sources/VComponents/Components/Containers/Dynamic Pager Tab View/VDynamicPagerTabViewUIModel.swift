@@ -78,7 +78,7 @@ public struct VDynamicPagerTabViewUIModel {
     /// Tab indicator track color.
     public var tabIndicatorTrackColor: Color = .clear
 
-    // MARK: Properties - Tab Indicator Strip - Indicator
+    // MARK: Properties - Tab Indicator Strip - Selection
     /// Tab selection indicator width type. Set to `default`.
     public var tabSelectionIndicatorWidthType: TabSelectionIndicatorWidthType = .default
 

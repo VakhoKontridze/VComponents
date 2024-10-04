@@ -17,17 +17,21 @@ struct VAlert<Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VAlertUIModel
+    
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
+    
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: VAlertUIModel.Width {
         uiModel.widthGroup.current(orientation: interfaceOrientation)
     }
 
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    @State private var alertHeight: CGFloat = 0
+    @State private var titleMessageContentHeight: CGFloat = 0
+    @State private var buttonsStackHeight: CGFloat = 0
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
@@ -40,11 +44,6 @@ struct VAlert<Content>: View
     private let message: String?
     private let content: VAlertContent<Content>
     private let buttons: [any VAlertButtonProtocol]
-
-    // MARK: Properties - Frame
-    @State private var alertHeight: CGFloat = 0
-    @State private var titleMessageContentHeight: CGFloat = 0
-    @State private var buttonsStackHeight: CGFloat = 0
     
     // MARK: Initializers
     init(

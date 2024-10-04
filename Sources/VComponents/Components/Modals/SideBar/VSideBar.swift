@@ -16,20 +16,21 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VSideBarUIModel
 
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
+    
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    
     private var currentWidth: CGFloat {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
+    
     private var currentHeight: CGFloat {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(dimension: containerSize.height)
     }
-
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
-
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!

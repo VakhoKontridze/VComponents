@@ -16,9 +16,10 @@ import VCore
 ///     }
 ///
 public struct VContinuousSpinner: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VContinuousSpinnerUIModel
     
+    // MARK: Properties - Flags
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers

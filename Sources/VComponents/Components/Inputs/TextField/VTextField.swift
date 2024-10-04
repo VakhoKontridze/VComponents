@@ -94,6 +94,7 @@ import VCore
 public struct VTextField: View {
     // MARK: Properties - UI Model
     private let uiModel: VTextFieldUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State

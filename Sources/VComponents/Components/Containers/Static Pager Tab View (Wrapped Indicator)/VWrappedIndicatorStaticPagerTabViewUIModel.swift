@@ -69,7 +69,7 @@ public struct VWrappedIndicatorStaticPagerTabViewUIModel {
     /// Tab indicator track color.
     public var tabIndicatorTrackColor: Color = .clear
 
-    // MARK: Properties - Tab Indicator Strip - Indicator
+    // MARK: Properties - Tab Indicator Strip - Selection
     /// Selected tab indicator height. Set to `2`.
     public var selectedTabIndicatorHeight: CGFloat = 2
 

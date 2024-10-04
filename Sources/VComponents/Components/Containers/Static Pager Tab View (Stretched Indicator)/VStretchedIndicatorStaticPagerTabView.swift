@@ -54,7 +54,11 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 {
     // MARK: Properties - UI Model
     private let uiModel: VStretchedIndicatorStaticPagerTabViewUIModel
+    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    
+    @State private var selectedTabIndicatorWidth: CGFloat = 0
+    @State private var selectedTabIndicatorOffset: CGFloat = 0
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -81,10 +85,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     private let id: KeyPath<Data.Element, ID>
     private let tabItemLabel: VStretchedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
-
-    // MARK: Properties - Frame
-    @State private var selectedTabIndicatorWidth: CGFloat = 0
-    @State private var selectedTabIndicatorOffset: CGFloat = 0
 
     // MARK: Properties - Flags
     // Prevents animation when view appears for the first time

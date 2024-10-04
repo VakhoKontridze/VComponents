@@ -21,9 +21,10 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VPlainButtonUIModel
 
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState {
         .init(
@@ -32,8 +33,10 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
         )
     }
 
+    // MARK: Properties - Action
     private let action: () -> Void
 
+    // MARK: Properties - Label
     private let label: VPlainButtonLabel<CustomLabel>
 
     // MARK: Initializers

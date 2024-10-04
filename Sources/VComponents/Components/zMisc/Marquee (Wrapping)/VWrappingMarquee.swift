@@ -28,15 +28,15 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappingMarqueeUIModel
 
+    @State private var containerWidth: CGFloat = 0
+    @State private var contentSize: CGSize = .zero
+    
     // MARK: Properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Frame
-    @State private var containerWidth: CGFloat = 0
-    @State private var contentSize: CGSize = .zero
-    private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
-
     // MARK: Properties - Flags
+    private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
+    
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
     

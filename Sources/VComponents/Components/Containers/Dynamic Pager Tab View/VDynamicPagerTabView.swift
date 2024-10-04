@@ -55,6 +55,10 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VDynamicPagerTabViewUIModel
+    
+    private var tabIndicatorContainerHeight: CGFloat {
+        max(uiModel.tabIndicatorTrackHeight, uiModel.selectedTabIndicatorHeight)
+    }
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -80,15 +84,12 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     private let tabItemLabel: VDynamicPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
-    // MARK: Properties - Frame
+    // MARK: Properties - Flags
+    @State private var didPositionSelectionIndicatorInitially: Bool = false
+    
+    // MARK: Propeties - Misc
     @Namespace private var selectedTabIndicatorNamespace: Namespace.ID
     private var selectedTabIndicatorNamespaceName: String { "VDynamicPagerTabView.SelectedTabIndicator" }
-
-    private var tabIndicatorContainerHeight: CGFloat {
-        max(uiModel.tabIndicatorTrackHeight, uiModel.selectedTabIndicatorHeight)
-    }
-
-    @State private var didPositionSelectionIndicatorInitially: Bool = false
 
     // MARK: Initializers - Standard
     /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item title, and content.

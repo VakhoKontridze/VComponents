@@ -24,8 +24,11 @@ import VCore
 public struct VSlider: View {
     // MARK: Properties - UI Model
     private let uiModel: VSliderUIModel
+    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
+    
+    @State private var sliderSize: CGSize = .zero
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -44,9 +47,6 @@ public struct VSlider: View {
 
     // MARK: Properties - Handlers
     private let changeHandler: ((Bool) -> Void)?
-
-    // MARK: Properties - Frame
-    @State private var sliderSize: CGSize = .zero
     
     // MARK: Initializers
     /// Initializes `VSlider` with value.

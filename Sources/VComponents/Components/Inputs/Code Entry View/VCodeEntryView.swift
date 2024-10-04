@@ -45,6 +45,7 @@ import VCore
 public struct VCodeEntryView: View {
     // MARK: Properties - UI Model
     private let uiModel: VCodeEntryViewUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State

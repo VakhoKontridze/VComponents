@@ -61,17 +61,20 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         CustomContent: View,
         CustomPlaceholderContent: View
 {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VFetchingAsyncImageUIModel
 
+    // MARK: Properties - Fetching
     private let parameter: Parameter?
     private let fetchHandler: (Parameter) async throws -> Image
     
-    private let content: VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
-
     @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image
     @State private var result: Result<Image, any Error>?
+    
+    // MARK: Properties - Content
+    private let content: VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
 
+    // MARK: Properties - Cancellables
     @State private var task: Task<Void, Never>?
 
     // MARK: Initializers

@@ -15,21 +15,22 @@ struct VModal<Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VModalUIModel
-
-    private var currentWidth: VModalUIModel.Dimension {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width
-    }
-    private var currentHeight: VModalUIModel.Dimension {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).height
-    }
-
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-
+    
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-
+    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    
+    private var currentWidth: VModalUIModel.Dimension {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width
+    }
+    
+    private var currentHeight: VModalUIModel.Dimension {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).height
+    }
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!

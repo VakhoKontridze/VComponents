@@ -36,6 +36,7 @@ import VCore
 public struct VToggle<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VToggleUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State

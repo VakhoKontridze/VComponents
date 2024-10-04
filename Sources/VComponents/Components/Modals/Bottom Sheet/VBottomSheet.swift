@@ -18,21 +18,29 @@ struct VBottomSheet<Content>: View
 {
     // MARK: Properties - UI Model
     private let uiModel: VBottomSheetUIModel
-
-    private var currentWidth: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
-    }
-    private var currentHeightsObject: VBottomSheetUIModel.Heights {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
-    }
+    
+    @Environment(\.displayScale) private var displayScale: CGFloat
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
+    private var currentWidth: CGFloat {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
+    }
+    
+    private var currentHeightsObject: VBottomSheetUIModel.Heights {
+        uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
+    }
+    
+    @State private var headerHeight: CGFloat = 0
 
-    @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    @State private var _offset: CGFloat? // If `nil`, will be set from body render.
+    private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }
+
+    @State private var offsetBeforeDrag: CGFloat?
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
@@ -42,15 +50,6 @@ struct VBottomSheet<Content>: View
     
     // MARK: Properties - Content
     private let content: () -> Content
-
-    // MARK: Properties - Frame
-    @State private var headerHeight: CGFloat = 0
-
-    // If `nil`, will be set from body render.
-    @State private var _offset: CGFloat?
-    private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }
-
-    @State private var offsetBeforeDrag: CGFloat?
 
     // MARK: Properties - Flags
     @State private var isBeingDismissedFromSwipe: Bool = false

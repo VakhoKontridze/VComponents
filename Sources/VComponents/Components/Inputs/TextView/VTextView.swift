@@ -72,6 +72,7 @@ import VCore
 public struct VTextView: View {
     // MARK: Properties - UI Model
     private let uiModel: VTextViewUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State

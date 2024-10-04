@@ -27,8 +27,11 @@ import VCore
 public struct VRangeSlider: View {
     // MARK: Properties - UI Model
     private let uiModel: VRangeSliderUIModel
+    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
+    
+    @State private var sliderSize: CGSize = .zero
 
     // MARK: State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -48,9 +51,6 @@ public struct VRangeSlider: View {
 
     // MARK: Properties - Handlers
     private let changeHandler: ((Bool) -> Void)?
-
-    // MARK: Properties - Frame
-    @State private var sliderSize: CGSize = .zero
     
     // MARK: Initializers
     /// Initializes `VRangeSlider` with difference, and low and high values.

@@ -55,7 +55,16 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
 {
     // MARK: Properties - UI Model
     private let uiModel: VWrappedIndicatorStaticPagerTabViewUIModel
+    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    
+    @State private var tabBarWidth: CGFloat = 0
+
+    @State private var tabBarItemWidths: [Int: CGFloat] = [:]
+    @State private var tabBarItemPositions: [Int: CGFloat] = [:]
+
+    @State private var selectedTabIndicatorWidth: CGFloat = 0
+    @State private var selectedTabIndicatorOffset: CGFloat = 0
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -83,19 +92,12 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     private let tabItemLabel: VWrappedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
-    // MARK: Properties - Frame
-    @State private var tabBarWidth: CGFloat = 0
-
-    private var tabBarCoordinateSpaceName: String { "VWrappedIndicatorStaticPagerTabView.TabBar" }
-    @State private var tabBarItemWidths: [Int: CGFloat] = [:]
-    @State private var tabBarItemPositions: [Int: CGFloat] = [:]
-
-    @State private var selectedTabIndicatorWidth: CGFloat = 0
-    @State private var selectedTabIndicatorOffset: CGFloat = 0
-
     // MARK: Properties - Flags
     // Prevents animation when view appears for the first time
     @State private var enablesSelectedTabIndicatorAnimations: Bool = false
+    
+    // MARK: Properties - Misc
+    private var tabBarCoordinateSpaceName: String { "VWrappedIndicatorStaticPagerTabView.TabBar" }
 
     // MARK: Initializers - Standard
     /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.

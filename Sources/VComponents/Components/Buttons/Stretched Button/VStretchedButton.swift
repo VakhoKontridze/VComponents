@@ -23,10 +23,12 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable)
 public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VStretchedButtonUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
 
+    // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState {
         .init(
@@ -35,8 +37,10 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
         )
     }
 
+    // MARK: Properties - Action
     private let action: () -> Void
 
+    // MARK: Properties - Label
     private let label: VStretchedButtonLabel<CustomLabel>
 
     // MARK: Initializers

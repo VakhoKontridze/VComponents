@@ -82,11 +82,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     private var side: Int { uiModel.sideDots }
     private var middle: Int { uiModel.middleDots }
     private let current: Int
-
-    // MARK: Properties - Dot Content
-    private let dotContent: VCompactPageIndicatorDotContent<CustomDotContent>
-
-    // MARK: Frame
+    
     private var region: Region {
         .init(
             current: current,
@@ -94,6 +90,9 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
             middle: middle
         )
     }
+
+    // MARK: Properties - Dot Content
+    private let dotContent: VCompactPageIndicatorDotContent<CustomDotContent>
     
     // MARK: Initializers
     /// Initializes `VCompactPageIndicator` with total and current index.

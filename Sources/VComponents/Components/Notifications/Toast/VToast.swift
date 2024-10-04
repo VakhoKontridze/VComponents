@@ -17,17 +17,19 @@ struct VToast: View {
     // MARK: Properties - UI Model
     private let uiModel: VToastUIModel
 
-    private var currentWidth: VToastUIModel.Width {
-        uiModel.widthGroup.current(orientation: interfaceOrientation)
-    }
+    @Environment(\.displayScale) private var displayScale: CGFloat
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
     @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
     @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-
-    @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    private var currentWidth: VToastUIModel.Width {
+        uiModel.widthGroup.current(orientation: interfaceOrientation)
+    }
+    
+    @State private var height: CGFloat = 0
 
     // MARK: Properties - Presentation API
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
@@ -37,9 +39,7 @@ struct VToast: View {
 
     // MARK: Properties - Text
     private let text: String
-    
-    // MARK: Properties - Frame
-    @State private var height: CGFloat = 0
+
 
     // MARK: Properties - Flags
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.

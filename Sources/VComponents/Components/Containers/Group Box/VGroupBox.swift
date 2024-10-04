@@ -33,6 +33,7 @@ import VCore
 public struct VGroupBox<Content>: View where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VGroupBoxUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
 

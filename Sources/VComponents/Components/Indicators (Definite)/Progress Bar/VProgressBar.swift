@@ -19,14 +19,16 @@ import VCore
 ///     }
 ///
 public struct VProgressBar: View {
-    // MARK: Properties
+    // MARK: Properties - UI Model
     private let uiModel: VProgressBarUIModel
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
-
-    private let range: ClosedRange<Double>
-    private let value: Double
     
     @State private var progressBarSize: CGSize = .zero
+
+    // MARK: Properties - Data
+    private let range: ClosedRange<Double>
+    private let value: Double
     
     // MARK: Initializers
     /// Initializes `VProgressBar` with value.

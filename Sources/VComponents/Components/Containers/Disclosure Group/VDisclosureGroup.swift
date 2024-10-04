@@ -52,6 +52,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
         Content: View
 {
     // MARK: Properties - UI Model
+    
     private let uiModel: VDisclosureGroupUIModel
     @Environment(\.displayScale) private var displayScale: CGFloat
 
