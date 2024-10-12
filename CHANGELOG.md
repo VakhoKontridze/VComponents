@@ -51,14 +51,14 @@ VBottomSheet
 
 - Presentation API is overhauled
 - BottomSheet now supports `macOS`
-- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+- BottomSheet no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 VSideBar
 
 - Presentation API is overhauled
 - Size API is extended
 - SideBar now supports `macOS`
-- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+- SideBar no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VAlert
@@ -68,7 +68,7 @@ VAlert
 - Alert now supports `macOS`
 - `buttonTitleTextFont` is added in UI model
 - Alert now has border configuration
-- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+- Alert no longer requires `ColorScheme` as parameter when it's overridden in the root
 - `roundedCorners` and `cornerRadius` are replaced with `cornerRadii`
 
 VNotification
@@ -83,7 +83,7 @@ VToast
 - Toast now has border configuration
 - Toast can now be dismissed with swipe
 - Toast now has `info` highlight
-- Modal no longer requires `ColorScheme` as parameter when it's overridden in the root
+- Toast no longer requires `ColorScheme` as parameter when it's overridden in the root
 
 VDashedSpinner
 
