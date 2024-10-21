@@ -37,7 +37,6 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-@MainActor
 public struct VAlertParameters {
     // MARK: Properties
     /// Title.
@@ -70,7 +69,7 @@ public struct VAlertParameters {
     public init(
         title: String,
         message: String?,
-        completion: (() -> Void)?,
+        completion: (@Sendable () -> Void)?,
         attributes: [String: Any?] = [:]
     ) {
         self.init(
@@ -90,7 +89,7 @@ public struct VAlertParameters {
     /// Initializes `VAlertParameters` with error and "ok" action.
     public init(
         error: any Error,
-        completion: (() -> Void)?,
+        completion: (@Sendable () -> Void)?,
         attributes: [String: Any?] = [:]
     ) {
         self.init(

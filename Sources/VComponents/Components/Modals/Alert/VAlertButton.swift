@@ -17,14 +17,14 @@ public struct VAlertButton: VAlertButtonProtocol, Sendable {
     // MARK: Properties
     private var isEnabled: Bool = true
     /*private*/ let role: Role
-    private let action: (() -> Void)?
+    private let action: (@Sendable () -> Void)?
     private let title: String
 
     // MARK: Initializers
     /// Initializes `VAlertButton` with action and title.
     public init(
         role: Role,
-        action: (() -> Void)?,
+        action: (@Sendable () -> Void)?,
         title: String
     ) {
         self.role = role

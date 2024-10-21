@@ -18,6 +18,10 @@ VDynamicPagerTabView
 
 - `isTabBarScrollingEnabled` and `isTabViewScrollingEnabled` properties are added in UI Model
 
+VAlert
+
+- `VAlertParameters` is no longer bound by `MainActor`
+
 ### [7.0.0(69)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.0.0) — *2024 09 20*
 
 General
