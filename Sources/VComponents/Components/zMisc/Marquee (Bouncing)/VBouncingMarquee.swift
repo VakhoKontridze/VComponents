@@ -24,7 +24,7 @@ import VCore
 ///         )
 ///     }
 ///
-public struct VBouncingMarquee<Content>: View where Content: View {
+public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
     // MARK: properties - UI Model
     private let uiModel: VBouncingMarqueeUIModel
     

@@ -24,7 +24,7 @@ import VCore
 ///         )
 ///     }
 ///
-public struct VWrappingMarquee<Content>: View where Content: View {
+public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappingMarqueeUIModel
 

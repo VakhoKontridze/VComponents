@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Modal UI Model
 /// Model that describes UI.
 @available(watchOS, unavailable)
-public struct VModalUIModel {
+public struct VModalUIModel: Sendable {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
     
@@ -166,7 +166,7 @@ public struct VModalUIModel {
 
     // MARK: Dimension
     /// Modal dimension.
-    public enum Dimension {
+    public enum Dimension: Sendable {
         // MARK: Cases
         /// Fixed dimension.
         case fixed(dimension: AbsoluteFractionMeasurement)

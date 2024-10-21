@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Group Box UI Model
 /// Model that describes UI.
-public struct VGroupBoxUIModel {
+public struct VGroupBoxUIModel: Sendable {
     // MARK: Properties - Corners
     /// Corner radii.
     /// Set to `15`s on `iOS`.

@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VToastUIModel {
+public struct VToastUIModel: Sendable {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
@@ -145,7 +145,7 @@ public struct VToastUIModel {
 
     // MARK: Width
     /// Toast width.
-    public struct Width: Equatable {
+    public struct Width: Equatable, Sendable {
         // MARK: Properties
         let storage: Storage
 
@@ -226,7 +226,7 @@ public struct VToastUIModel {
 
     // MARK: Corner Radius Type
     /// Corner radius.
-    public enum CornerRadiusType {
+    public enum CornerRadiusType: Sendable {
         // MARK: Cases
         /// Capsule.
         ///
@@ -247,7 +247,7 @@ public struct VToastUIModel {
 
     // MARK: Text Line Type
     /// Text line type.
-    public enum TextLineType {
+    public enum TextLineType: Sendable {
         // MARK: Cases
         /// Single-line.
         case singleLine

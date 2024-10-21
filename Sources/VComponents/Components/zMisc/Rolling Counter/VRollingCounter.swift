@@ -48,7 +48,7 @@ import VCore
 ///         .onAppear(perform: changeValue)
 ///     }
 ///        
-public struct VRollingCounter: View {
+public struct VRollingCounter: View, Sendable {
     // MARK: Properties - UI Model
     private let uiModel: VRollingCounterUIModel
 

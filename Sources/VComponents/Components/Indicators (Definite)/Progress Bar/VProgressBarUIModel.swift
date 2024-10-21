@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Progress Bar UI Model
 /// Model that describes UI.
-public struct VProgressBarUIModel {
+public struct VProgressBarUIModel: Sendable {
     // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight

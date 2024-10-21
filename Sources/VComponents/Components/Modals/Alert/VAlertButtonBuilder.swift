@@ -14,7 +14,7 @@ import VCore
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 @resultBuilder 
-public struct VAlertButtonBuilder {
+public struct VAlertButtonBuilder: Sendable {
     // MARK: Properties
     public typealias Component = any VAlertButtonConvertible
     public typealias Result = [any VAlertButtonProtocol]

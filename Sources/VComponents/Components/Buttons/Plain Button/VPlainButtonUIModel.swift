@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct VPlainButtonUIModel {
+public struct VPlainButtonUIModel: Sendable {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()

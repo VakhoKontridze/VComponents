@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VNotificationUIModel {
+public struct VNotificationUIModel: Sendable {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
@@ -237,7 +237,7 @@ public struct VNotificationUIModel {
 
     // MARK: Width
     /// Notification width.
-    public enum Width: Equatable {
+    public enum Width: Equatable, Sendable {
         // MARK: Cases
         /// Fixed width.
         case fixed(width: AbsoluteFractionMeasurement)

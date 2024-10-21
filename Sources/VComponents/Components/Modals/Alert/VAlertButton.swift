@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertButton: VAlertButtonProtocol {
+public struct VAlertButton: VAlertButtonProtocol, Sendable {
     // MARK: Properties
     private var isEnabled: Bool = true
     /*private*/ let role: Role
@@ -34,7 +34,7 @@ public struct VAlertButton: VAlertButtonProtocol {
 
     // MARK: Role
     /// Model that describes the purpose of a button.
-    public enum Role: Int, CaseIterable {
+    public enum Role: Int, Sendable, CaseIterable {
         /// Primary.
         case primary
 

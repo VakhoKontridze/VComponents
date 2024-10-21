@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertUIModel {
+public struct VAlertUIModel: Sendable {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel { .init() }
 
@@ -378,7 +378,7 @@ public struct VAlertUIModel {
 
     // MARK: Width
     /// Alert width.
-    public enum Width {
+    public enum Width: Sendable {
         // MARK: Cases
         /// Fixed width.
         case fixed(width: AbsoluteFractionMeasurement)

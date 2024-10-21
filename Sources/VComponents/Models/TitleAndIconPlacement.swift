@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Title and Icon Placement
 /// Title and icon placement.
-public enum TitleAndIconPlacement: Int, CaseIterable {
+public enum TitleAndIconPlacement: Int, Sendable, CaseIterable {
     /// Title and icon.
     case titleAndIcon
 

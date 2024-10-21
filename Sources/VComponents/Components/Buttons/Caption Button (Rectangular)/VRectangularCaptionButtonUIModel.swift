@@ -13,7 +13,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct VRectangularCaptionButtonUIModel {
+public struct VRectangularCaptionButtonUIModel: Sendable {
     // MARK: Properties - Global
     var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
         var uiModel: SwiftUIBaseButtonUIModel = .init()

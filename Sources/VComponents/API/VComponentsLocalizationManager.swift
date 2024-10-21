@@ -52,7 +52,7 @@ public protocol VComponentsLocalizationProvider {
 
 // MARK: - Default VComponents Localization Provider
 /// Defaults VComponents localization provider.
-public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider {
+public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider, Sendable {
     // MARK: Initializers
     /// Initializes `VComponentsLocalizationProvider`.
     public init() {}

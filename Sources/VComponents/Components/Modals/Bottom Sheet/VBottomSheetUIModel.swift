@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VBottomSheetUIModel {
+public struct VBottomSheetUIModel: Sendable {
     // MARK: Properties - Global
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
@@ -192,7 +192,7 @@ public struct VBottomSheetUIModel {
     @MemberwiseInitializable(
         comment: "/// Initializes `Size`."
     )
-    public struct Size: Equatable {
+    public struct Size: Equatable, Sendable {
         /// Width.
         public var width: AbsoluteFractionMeasurement
 
@@ -203,7 +203,7 @@ public struct VBottomSheetUIModel {
     // MARK: Heights
     /// Bottom sheet heights.
     @MemberwiseInitializable(accessLevelModifier: .private)
-    public struct Heights: Equatable { // Values mustn't be variable to ensure that all properties are either absolute or fractional
+    public struct Heights: Equatable, Sendable { // Values mustn't be variable to ensure that all properties are either absolute or fractional
         // MARK: Properties
         /// Minimum height.
         public let min: AbsoluteFractionMeasurement

@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - V Fetching Async Image UI Model
 /// Model that describes UI.
-public struct VFetchingAsyncImageUIModel {
+public struct VFetchingAsyncImageUIModel: Sendable {
     // MARK: Properties
     /// Placeholder color.
     public var placeholderColor: Color = .gray.opacity(0.3)

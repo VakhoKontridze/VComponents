@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @available(tvOS, unavailable)
-public struct VCarouselUIModel {
+public struct VCarouselUIModel: Sendable {
     // MARK: Properties - Global
     /// Indicates if scrolling is enabled. Set to `true`.
     public var isScrollingEnabled: Bool = true

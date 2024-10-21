@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VTextViewUIModel {
+public struct VTextViewUIModel: Sendable {
     // MARK: Properties - Global
     /// Spacing between header, textview, and footer. Set to `3`.
     public var headerTextViewAndFooterSpacing: CGFloat = 3

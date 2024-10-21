@@ -42,7 +42,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VCodeEntryView: View {
+public struct VCodeEntryView: View, Sendable {
     // MARK: Properties - UI Model
     private let uiModel: VCodeEntryViewUIModel
     

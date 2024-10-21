@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VDisclosureGroupUIModel {
+public struct VDisclosureGroupUIModel: Sendable {
     // MARK: Properties - Global
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()

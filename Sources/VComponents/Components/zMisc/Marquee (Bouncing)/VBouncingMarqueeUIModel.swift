@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Bouncing Marquee UI Model
 /// Model that describes UI.
-public struct VBouncingMarqueeUIModel {
+public struct VBouncingMarqueeUIModel: Sendable {
     // MARK: Properties - Global
     /// Scroll direction. Set to `leftToRight`.
     public var scrollDirection: LayoutDirection = .leftToRight

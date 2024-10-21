@@ -15,7 +15,7 @@ import VCore
 ///         VContinuousSpinner()
 ///     }
 ///
-public struct VContinuousSpinner: View {
+public struct VContinuousSpinner: View, Sendable {
     // MARK: Properties - UI Model
     private let uiModel: VContinuousSpinnerUIModel
     

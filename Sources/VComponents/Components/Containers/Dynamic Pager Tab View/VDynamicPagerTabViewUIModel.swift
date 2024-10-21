@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VDynamicPagerTabViewUIModel {
+public struct VDynamicPagerTabViewUIModel: Sendable {
     // MARK: Properties - Global
     /// Spacing between tab bar and tab view. Set to `0`.
     public var tabBarAndTabViewSpacing: CGFloat = 0
@@ -128,7 +128,7 @@ public struct VDynamicPagerTabViewUIModel {
 
     // MARK: Tab Selection Indicator Width Type
     /// Tab selection indicator width type.
-    public enum TabSelectionIndicatorWidthType: Int, CaseIterable {
+    public enum TabSelectionIndicatorWidthType: Int, Sendable, CaseIterable {
         // MARK: Cases
         /// Selection indicator stretches to the width of the label of tab item.
         case wrapped

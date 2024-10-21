@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Compact Page Indicator UI Model
 /// Model that describes UI.
-public struct VCompactPageIndicatorUIModel {
+public struct VCompactPageIndicatorUIModel: Sendable {
     // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
     ///

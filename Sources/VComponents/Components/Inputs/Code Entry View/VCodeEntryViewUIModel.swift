@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VCodeEntryViewUIModel {
+public struct VCodeEntryViewUIModel: Sendable {
     // MARK: Properties - Global
     /// Code length. Set to `6`.
     public var length: Int = 6
@@ -109,7 +109,7 @@ public struct VCodeEntryViewUIModel {
 
     // MARK: Spacing Type
     /// Spacing type.
-    public enum SpacingType {
+    public enum SpacingType: Sendable {
         // MARK: Cases
         /// Fixed spacing.
         case fixed(spacing: CGFloat)

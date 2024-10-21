@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Rolling Counter UI Model
 /// Model that describes UI.
-public struct VRollingCounterUIModel {
+public struct VRollingCounterUIModel: Sendable {
     // MARK: Properties - Global
     /// Spacing between the components. Set to `0`.
     public var spacing: CGFloat = 0

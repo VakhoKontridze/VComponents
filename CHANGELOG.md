@@ -2,6 +2,10 @@
 
 ### 7.1.0(70)
 
+General
+
+- Most `public` and `open` types now conform to `Sendable` `protocol`
+
 VStretchedIndicatorStaticPagerTabView
 
 - `isTabViewScrollingEnabled` property is added in UI Model

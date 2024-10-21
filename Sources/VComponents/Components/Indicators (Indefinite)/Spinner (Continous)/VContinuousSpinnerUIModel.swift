@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - V Continuous Spinner UI Model
 /// Model that describes UI.
-public struct VContinuousSpinnerUIModel {
+public struct VContinuousSpinnerUIModel: Sendable {
     // MARK: Properties
     /// Dimension.
     /// Set to `15` on `iOS`.

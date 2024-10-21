@@ -20,7 +20,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
+public struct VPlainButton<CustomLabel>: View, Sendable where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VPlainButtonUIModel
 

@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Page Indicator UI Model
 /// Model that describes UI.
-public struct VPageIndicatorUIModel {
+public struct VPageIndicatorUIModel: Sendable {
     // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
     public var direction: LayoutDirectionOmni = .leftToRight

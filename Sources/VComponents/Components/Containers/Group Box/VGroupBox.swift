@@ -30,7 +30,7 @@ import VCore
 ///         })
 ///     }
 ///
-public struct VGroupBox<Content>: View where Content: View {
+public struct VGroupBox<Content>: View, Sendable where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VGroupBoxUIModel
     

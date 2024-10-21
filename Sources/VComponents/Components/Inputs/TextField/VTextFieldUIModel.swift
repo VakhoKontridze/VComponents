@@ -14,7 +14,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VTextFieldUIModel {
+public struct VTextFieldUIModel: Sendable {
     // MARK: Properties - Global
     /// Spacing between header, textfield, and footer. Set to `3`.
     public var headerTextFieldAndFooterSpacing: CGFloat = 3
@@ -282,7 +282,7 @@ public struct VTextFieldUIModel {
 
     // MARK: Content Type
     /// Content type.
-    public enum ContentType: Int, CaseIterable {
+    public enum ContentType: Int, Sendable, CaseIterable {
         // MARK: Cases
         /// Standard.
         case standard
