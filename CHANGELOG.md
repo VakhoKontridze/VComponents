@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.1.0(70)
+### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — *2024 10 24*
 
 General
 
