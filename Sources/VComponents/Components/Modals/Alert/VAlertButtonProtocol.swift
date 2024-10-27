@@ -28,5 +28,7 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VAlertButtonProtocol {
-    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
+    public func toButtons() -> [any VAlertButtonProtocol] {
+        [self]
+    }
 }

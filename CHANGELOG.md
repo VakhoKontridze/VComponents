@@ -1,5 +1,11 @@
 # Change Log
 
+### 7.1.1(71)
+
+Helpers - Architectural Pattern Helpers
+
+- `VAlertButtonConvertible` conformance is added to `Never`
+
 ### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — *2024 10 24*
 
 General

@@ -21,12 +21,25 @@ public protocol VAlertButtonConvertible {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtocol {
-    public func toButtons() -> [any VAlertButtonProtocol] { self }
+    public func toButtons() -> [any VAlertButtonProtocol] {
+        self
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension Never: VAlertButtonConvertible {
+    public func toButtons() -> [any VAlertButtonProtocol] {
+        fatalError()
+    }
 }
 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension EmptyView: VAlertButtonConvertible {
-    nonisolated public func toButtons() -> [any VAlertButtonProtocol] { [] }
+    nonisolated public func toButtons() -> [any VAlertButtonProtocol] {
+        []
+    }
 }
