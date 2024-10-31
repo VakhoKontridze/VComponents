@@ -331,7 +331,7 @@ Versions with different majors are not directly compatible. When a new major is 
 
 ***Major***. Major changes, such as big overhauls
 
-***Minor***. Minor changes, such as new component, types, or properties in UI models
+***Minor***. Minor changes, such as new components and customization options
 
 ***Patch***. Bug fixes and improvements
 
