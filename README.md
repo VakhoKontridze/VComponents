@@ -382,8 +382,8 @@ Versions with different majors are not directly compatible. When a new major is 
     </td>
     <td>6.0.0 - 6.x.x</td>
     <td>
-        API changes.<br>
-        visionOS support.
+        visionOS support.<br>
+        API changes.
     </td>
   </tr>
   
@@ -442,8 +442,8 @@ Versions with different majors are not directly compatible. When a new major is 
     <td>3.2.0 - 3.x.x</td>
     <td>
         New SDK.<br>
-        API changes.<br>
-        SPM support.
+        SPM support.<br>
+        API changes.
     </td>
   </tr>
     
