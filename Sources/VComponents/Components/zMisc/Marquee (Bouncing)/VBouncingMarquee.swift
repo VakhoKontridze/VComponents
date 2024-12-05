@@ -57,7 +57,7 @@ public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
             .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
             .mask({ gradientMask })
-            .clipped() // Clips off-bound content
+            .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
     }
     
     @ViewBuilder 

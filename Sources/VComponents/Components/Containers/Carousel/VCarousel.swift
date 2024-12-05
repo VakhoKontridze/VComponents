@@ -167,7 +167,7 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
                 })
             })
         })
-        .clipped() // Clips off-bound content that appears on some platforms
+        .clipped() // Clips off-bound content that appears on some platforms. Also clips shadows.
     }
 
     private func cardView(

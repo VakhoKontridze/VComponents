@@ -92,8 +92,7 @@ public struct VRollingCounter: View, Sendable {
                 )
             }
         )
-        // Prevents animation clipping
-        .clipped()
+        .clipped() // Prevents clipping from animations
 
         .applyModifier({
             if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
