@@ -63,7 +63,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     @ViewBuilder 
     private var marqueeContentView: some View {
         if isAnimatable {
-            Group(content: { // `Group` is used non-stacked layout
+            Group(content: { // `Group` is used for non-stacked layout
                 contentView
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
