@@ -40,7 +40,7 @@ public struct VContinuousSpinner: View, Sendable {
             )
             .frame(width: uiModel.dimension, height: uiModel.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-            .task({
+            .onAppear(perform: {
                 withAnimation(
                     uiModel.animation.repeatForever(autoreverses: false),
                     { isAnimating.toggle() }
