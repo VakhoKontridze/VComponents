@@ -100,7 +100,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
     // MARK: Properties - Flags
     @State private var didPositionSelectionIndicatorInitially: Bool = false
     
-    // MARK: Propeties - Misc
+    // MARK: Properties - Misc
     @Namespace private var selectedTabIndicatorNamespace: Namespace.ID
     private var selectedTabIndicatorNamespaceName: String { "VDynamicPagerTabView.SelectedTabIndicator" }
 
