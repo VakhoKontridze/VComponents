@@ -2,6 +2,10 @@
 
 ### 7.1.1(71)
 
+VWrappingMarquee
+
+- Issue with `spacing` is fixed
+
 Helpers - Architectural Pattern Helpers
 
 - `VAlertButtonConvertible` conformance is added to `Never`
