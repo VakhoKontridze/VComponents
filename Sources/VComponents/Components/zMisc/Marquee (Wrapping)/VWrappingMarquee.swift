@@ -24,6 +24,28 @@ import VCore
 ///         )
 ///     }
 ///
+/// If you wish to have consistent spacing between elements, and two duplicates of marquee content,
+/// `wrappedContentSpacing` property needs to be set.
+///
+///     var body: some View {
+///         VWrappingMarquee(
+///             uiModel: {
+///                 var uiModel: VWrappingMarqueeUIModel = .init()
+///                 uiModel.wrappedContentSpacing = 16
+///                 return uiModel
+///             }(),
+///             content: {
+///                 HStack(spacing: 16, content: {
+///                     ForEach(0..<5, id: \.self, content: { i in
+///                         Text("\(i)")
+///                             .frame(dimension: 100)
+///                             .background(content: { Color.accentColor })
+///                     })
+///                 })
+///             }
+///         )
+///     }
+///
 public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     // MARK: Properties - UI Model
     private let uiModel: VWrappingMarqueeUIModel
@@ -136,7 +158,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     }
     
     private var offsetDynamicFirst: CGFloat {
-        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.spacing)
+        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.wrappedContentSpacing)
         
         switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return 0
@@ -148,7 +170,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     }
     
     private var offsetDynamicSecond: CGFloat {
-        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.spacing
+        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.wrappedContentSpacing
         
         switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
@@ -175,7 +197,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
         let width: CGFloat = // Not dependent on container width
             contentSize.width +
             uiModel.inset +
-            uiModel.spacing
+            uiModel.wrappedContentSpacing
         
         return BasicAnimation(
             curve: uiModel.animationCurve,

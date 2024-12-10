@@ -7,3 +7,12 @@
 
 import SwiftUI
 import VCore
+
+// MARK: - V Wrapping Marquee
+extension VWrappingMarqueeUIModel {
+    @available(*, deprecated, renamed: "wrappedContentSpacing")
+    public var spacing: CGFloat {
+        get { wrappedContentSpacing }
+        set { wrappedContentSpacing = newValue }
+    }
+}

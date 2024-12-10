@@ -18,14 +18,16 @@ public struct VWrappingMarqueeUIModel: Sendable {
     /// Spacing between wrapped content. Set to `20`.
     ///
     /// If `inset` is set to non-`0` value or `VWrappingMarqueeUIModel.insettedGradientMask` is used,
-    /// it's better to set `spacing` to `0`.
-    public var spacing: CGFloat = 20
+    /// it's better to set this to `0`.
+    public var wrappedContentSpacing: CGFloat = 20
 
     /// Content inset. Set to `0`.
     ///
     /// Alternately, use `insettedGradientMask` instance of `VWrappingMarqueeUIModel`.
     ///
     /// For best result, should be greater than or equal to `gradientMaskWidth`.
+    ///
+    /// If this is set to non-`0` value, it's better to set `wrappedContentSpacing` to `0`.
     public var inset: CGFloat = 0
 
     /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
@@ -71,7 +73,7 @@ extension VWrappingMarqueeUIModel {
     public static var insettedGradientMask: Self {
         var uiModel: Self = .init()
         
-        uiModel.spacing = 0
+        uiModel.wrappedContentSpacing = 0
         uiModel.inset = 20
         
         uiModel.gradientMaskWidth = 20
