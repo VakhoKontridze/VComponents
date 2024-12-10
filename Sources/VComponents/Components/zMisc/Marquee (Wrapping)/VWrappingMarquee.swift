@@ -136,7 +136,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     }
     
     private var offsetDynamicFirst: CGFloat {
-        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.spacing/2)
+        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.spacing)
         
         switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return 0
@@ -148,7 +148,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     }
     
     private var offsetDynamicSecond: CGFloat {
-        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.spacing/2
+        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.spacing
         
         switch (uiModel.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
@@ -175,7 +175,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
         let width: CGFloat = // Not dependent on container width
             contentSize.width +
             uiModel.inset +
-            uiModel.spacing/2
+            uiModel.spacing
         
         return BasicAnimation(
             curve: uiModel.animationCurve,
