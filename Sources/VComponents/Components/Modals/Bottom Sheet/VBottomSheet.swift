@@ -35,7 +35,7 @@ struct VBottomSheet<Content>: View
         uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
     }
     
-    @State private var headerHeight: CGFloat = 0
+    @State private var dragIndicatorHeight: CGFloat = 0
 
     @State private var _offset: CGFloat? // If `nil`, will be set from body render.
     private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }
@@ -157,7 +157,7 @@ struct VBottomSheet<Content>: View
                     .foregroundStyle(uiModel.dragIndicatorColor)
             }
         })
-        .getSize({ headerHeight = $0.height }) // If it's not rendered, `0` will be returned
+        .getSize({ dragIndicatorHeight = $0.height }) // If it's not rendered, `0` will be returned
     }
     
     private var contentView: some View {
@@ -180,7 +180,7 @@ struct VBottomSheet<Content>: View
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable,
-            ifTransform: { $0.frame(height: containerSize.height - offset - headerHeight) },
+            ifTransform: { $0.frame(height: containerSize.height - offset - dragIndicatorHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
     }
@@ -616,7 +616,42 @@ private struct ContentView_IdealLarge: View {
 #endif
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-#Preview("Wrapped Content", body: {
+#Preview("Autoresizes Content", body: {
+    @Previewable @State var isPresented: Bool = true
+
+    PreviewContainer(content: {
+        PreviewModalLauncherView(isPresented: $isPresented)
+            .vBottomSheet(
+                layerID: "sheets",
+                id: "preview",
+                uiModel: {
+                    var uiModel: VBottomSheetUIModel = .init()
+                    uiModel.autoresizesContent = true
+                    return uiModel
+                }(),
+                isPresented: $isPresented,
+                content: {
+                    VStack(spacing: 0, content: {
+                        Text("Hello")
+                        Spacer()
+                        Text("World")
+                    })
+                    .background(content: { Color.accentColor })
+                }
+            )
+    })
+    .presentationHostLayer(
+        id: "sheets",
+        uiModel: {
+            var uiModel: PresentationHostLayerUIModel = .init()
+            uiModel.dimmingViewColor = Color.clear
+            return uiModel
+        }()
+    )
+})
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Content Wrapping Height", body: {
     @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
     @Previewable @State var isPresented: Bool = true

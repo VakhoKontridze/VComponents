@@ -316,7 +316,7 @@ public struct VBottomSheetUIModel: Sendable {
     }
 }
 
-// MARK: - V Bottom Sheet UI Model + Content Wrapping Content
+// MARK: - V Bottom Sheet UI Model + Content Wrapping Height
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

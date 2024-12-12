@@ -28,7 +28,7 @@ extension View {
     ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.autoresizesContent = true // For scrollable views
+    ///                     uiModel.autoresizesContent = true // For wrapping content
     ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
