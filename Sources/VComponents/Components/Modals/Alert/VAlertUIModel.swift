@@ -15,7 +15,14 @@ import VCore
 @available(visionOS, unavailable)
 public struct VAlertUIModel: Sendable {
     // MARK: Properties - Global
-    var presentationHostSubUIModel: PresentationHostUIModel { .init() }
+    var presentationHostSubUIModel: PresentationHostUIModel {
+        var uiModel: PresentationHostUIModel = .init()
+        uiModel.preferredDimmingViewColor = preferredDimmingViewColor
+        return uiModel
+    }
+    
+    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    public var preferredDimmingViewColor: Color?
 
     /// Alert width group.
     /// Set to `fixed` `fraction` `0.75` in portrait and `fixed` `fraction` `0.5` in landscape on `iOS`.

@@ -1,6 +1,30 @@
 # Change Log
 
-### 7.1.1(71)
+### 7.2.0(71)
+
+VModal
+
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
+
+VBottomSheet
+
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented. By default, it's set to `clear`. So, customizing Presentation Host Layer is no longer required.
+
+VSideBar
+
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
+
+VAlert
+
+- Missing `layerID` parameter has been added in architectural pattern helper methods
+
+VNotification
+
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
+
+VToast
+
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
 
 VWrappingMarquee
 

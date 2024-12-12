@@ -19,8 +19,12 @@ public struct VNotificationUIModel: Sendable {
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
         uiModel.alignment = presentationEdge.toAlignment
+        uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
+    
+    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    public var preferredDimmingViewColor: Color?
 
     /// Width group.
     /// Set to `stretched` with `absolute` `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.

@@ -354,20 +354,12 @@ struct VBottomSheet<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                layerID: "sheets",
                 id: "preview",
                 isPresented: $isPresented,
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer(
-        id: "sheets",
-        uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            return uiModel
-        }()
-    )
+    .presentationHostLayer()
 })
 
 #if !os(macOS)
@@ -384,7 +376,6 @@ private struct ContentView_MinIdealMax: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -406,14 +397,7 @@ private struct ContentView_MinIdealMax: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     }
 }
 
@@ -433,7 +417,6 @@ private struct ContentView_MinIdeal: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -455,14 +438,7 @@ private struct ContentView_MinIdeal: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     }
 }
 
@@ -482,7 +458,6 @@ private struct ContentView_IdealMax: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -504,14 +479,7 @@ private struct ContentView_IdealMax: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     }
 }
 
@@ -531,7 +499,6 @@ private struct ContentView_IdealSmall: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -553,14 +520,7 @@ private struct ContentView_IdealSmall: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     }
 }
 
@@ -580,7 +540,6 @@ private struct ContentView_IdealLarge: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -602,14 +561,7 @@ private struct ContentView_IdealLarge: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     }
 }
 
@@ -622,7 +574,6 @@ private struct ContentView_IdealLarge: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                layerID: "sheets",
                 id: "preview",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .init()
@@ -640,14 +591,7 @@ private struct ContentView_IdealLarge: View {
                 }
             )
     })
-    .presentationHostLayer(
-        id: "sheets",
-        uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            return uiModel
-        }()
-    )
+    .presentationHostLayer()
 })
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -667,7 +611,6 @@ private struct ContentView_IdealLarge: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -710,14 +653,7 @@ private struct ContentView_IdealLarge: View {
                     }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     })
 })
 
@@ -739,7 +675,6 @@ private struct ContentView_IdealLarge: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    layerID: "sheets",
                     id: "preview",
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
@@ -762,14 +697,7 @@ private struct ContentView_IdealLarge: View {
                     }
                 )
         })
-        .presentationHostLayer(
-            id: "sheets",
-            uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                return uiModel
-            }()
-        )
+        .presentationHostLayer()
     })
 })
 
@@ -780,21 +708,13 @@ private struct ContentView_IdealLarge: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                layerID: "sheets",
                 id: "preview",
                 uiModel: .insettedContent,
                 isPresented: $isPresented,
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer(
-        id: "sheets",
-        uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            return uiModel
-        }()
-    )
+    .presentationHostLayer()
 })
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
@@ -804,7 +724,6 @@ private struct ContentView_IdealLarge: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                layerID: "sheets",
                 id: "preview",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .noDragIndicator
@@ -815,14 +734,7 @@ private struct ContentView_IdealLarge: View {
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer(
-        id: "sheets",
-        uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            return uiModel
-        }()
-    )
+    .presentationHostLayer()
 })
 
 #endif

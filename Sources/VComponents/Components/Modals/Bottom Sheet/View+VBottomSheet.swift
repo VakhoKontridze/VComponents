@@ -24,7 +24,6 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 layerID: "sheets",
     ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
@@ -48,15 +47,7 @@ extension View {
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
-    ///             id: "sheets",
-    ///             uiModel: {
-    ///                 var uiModel: PresentationHostLayerUIModel = .init()
-    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
-    ///                 uiModel.dimmingViewColor = Color.clear
-    ///                 return uiModel
-    ///             }()
-    ///         )
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap it's content by reading geometry size.
@@ -75,7 +66,6 @@ extension View {
     ///             )
     ///             .getSafeAreaInsets({ safeAreaInsets = $0 })
     ///             .vBottomSheet(
-    ///                 layerID: "sheets",
     ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
@@ -110,15 +100,7 @@ extension View {
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
-    ///             id: "sheets",
-    ///             uiModel: {
-    ///                 var uiModel: PresentationHostLayerUIModel = .init()
-    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
-    ///                 uiModel.dimmingViewColor = Color.clear
-    ///                 return uiModel
-    ///             }()
-    ///         )
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap navigation system.
@@ -133,7 +115,6 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 layerID: "sheets",
     ///                 id: "some_bottom_sheet",
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
@@ -152,15 +133,7 @@ extension View {
     ///             )
     ///         })
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
-    ///             id: "sheets",
-    ///             uiModel: {
-    ///                 var uiModel: PresentationHostLayerUIModel = .init()
-    ///                 //uiModel.dimmingViewTapAction = .passTapsThrough // For background interaction
-    ///                 uiModel.dimmingViewColor = Color.clear
-    ///                 return uiModel
-    ///             }()
-    ///         )
+    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     ///     struct HomeView: View {

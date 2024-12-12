@@ -18,8 +18,12 @@ public struct VBottomSheetUIModel: Sendable {
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
         uiModel.alignment = .top
+        uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
+    
+    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    public var preferredDimmingViewColor: Color? = .clear
 
     /// Bottom sheet size group.
     /// Set to `[1, (0.6, 0.6, 0.9)]` `fraction`s in portrait and `(0.7, 0.9)` `fraction`s in landscape on `iOS`.

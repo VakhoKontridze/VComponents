@@ -344,7 +344,16 @@ private struct Preview_SafeAreaContentView: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .presentationHostLayer(
+            uiModel: {
+                var uiModel: PresentationHostLayerUIModel = .init()
+#if os(macOS)
+                uiModel.dimmingViewTapAction = .passTapsThrough
+                uiModel.dimmingViewColor = Color.clear
+#endif
+                return uiModel
+            }()
+        )
     }
 }
 

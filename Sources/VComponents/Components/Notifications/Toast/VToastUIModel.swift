@@ -19,8 +19,12 @@ public struct VToastUIModel: Sendable {
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
         uiModel.alignment = presentationEdge.toAlignment
+        uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
+    
+    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    public var preferredDimmingViewColor: Color?
 
     /// Width group.
     /// Set to `wrapped` with `absolute` `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `absolute` `margin` `15` in landscape.

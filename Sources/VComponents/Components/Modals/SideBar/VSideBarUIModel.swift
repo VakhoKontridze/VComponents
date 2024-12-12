@@ -18,8 +18,12 @@ public struct VSideBarUIModel: Sendable {
     var presentationHostSubUIModel: PresentationHostUIModel {
         var uiModel: PresentationHostUIModel = .init()
         uiModel.alignment = presentationEdge.toAlignment
+        uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
+    
+    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    public var preferredDimmingViewColor: Color?
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
     ///
