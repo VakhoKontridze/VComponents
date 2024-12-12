@@ -8,7 +8,7 @@ VModal
 
 VBottomSheet
 
-- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented. By default, it's set to `clear`. So, customizing Presentation Host Layer is no longer required.
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented. So, customizing Presentation Host Layer is no longer required.
 
 VSideBar
 
@@ -17,6 +17,7 @@ VSideBar
 VAlert
 
 - Missing `layerID` parameter has been added in architectural pattern helper methods
+- `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
 
 VNotification
 
