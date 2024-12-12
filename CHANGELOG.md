@@ -8,7 +8,7 @@ VModal
 
 VBottomSheet
 
-- Bottom Sheets heights can now be composed with a mix of absolute and fractional values
+- Bottom Sheet heights can now be composed with a mix of absolute and fractional values
 - Bottom Sheet will no longer crash, if invalid heights are provided. Instead, values will be re-adjusted.
 - `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented. So, customizing Presentation Host Layer is no longer required.
 
@@ -18,7 +18,6 @@ VSideBar
 
 VAlert
 
-- Missing `layerID` parameter has been added in architectural pattern helper methods
 - `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented
 
 VNotification
@@ -36,6 +35,7 @@ VWrappingMarquee
 Helpers - Architectural Pattern Helpers
 
 - `VAlertButtonConvertible` conformance is added to `Never`
+- Missing `layerID` parameter has been added in `VAlert`'s 'architectural pattern helper methods
 
 ### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — *2024 10 24*
 
