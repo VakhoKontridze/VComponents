@@ -184,9 +184,20 @@ struct VBottomSheet<Content>: View
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height),
-            ifTransform: { $0.frame(height: containerSize.height - offset - dragIndicatorHeight) },
-            elseTransform: { $0.frame(maxHeight: .infinity) }
+            ifTransform: {
+                $0
+                    .frame(
+                        height: max( // Autoresized content shouldn't get smaller that the `min` height
+                            containerSize.height - offset - dragIndicatorHeight,
+                            currentHeightsObject.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
+                        )
+                    )
+            },
+            elseTransform: {
+                $0.frame(maxHeight: .infinity)
+            }
         )
+        .clipped() // Clips off-bound content that might clip into header
     }
 
     // MARK: Actions
@@ -559,7 +570,19 @@ private struct ContentView_IdealLarge: View {
                 id: "preview",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .init()
+                    
+                    uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
+                        portrait: VBottomSheetUIModel.Size(
+                            width: .fraction(1),
+                            heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                        ),
+                        landscape: VBottomSheetUIModel.Size(
+                            width: .fraction(0.7),
+                            heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                        )
+                    )
                     uiModel.autoresizesContent = true
+                    
                     return uiModel
                 }(),
                 isPresented: $isPresented,
