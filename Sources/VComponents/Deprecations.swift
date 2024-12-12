@@ -9,6 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Bottom Sheet
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VBottomSheetUIModel.Heights {
     @available(*, unavailable)
     public var isResizable: Bool { fatalError() }
