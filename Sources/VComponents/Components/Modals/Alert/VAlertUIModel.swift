@@ -367,10 +367,10 @@ public struct VAlertUIModel: Sendable {
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = .clear
+    public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `0`.
-    public var shadowRadius: CGFloat = 0
+    /// Shadow radius. Set to `10`.
+    public var shadowRadius: CGFloat = 10
 
     /// Shadow offset. Set to `zero`.
     public var shadowOffset: CGPoint = .zero

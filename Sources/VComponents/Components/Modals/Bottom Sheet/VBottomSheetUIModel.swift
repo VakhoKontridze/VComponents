@@ -175,13 +175,13 @@ public struct VBottomSheetUIModel: Sendable {
 
     // MARK: Properties - Shadow
     /// Shadow color.
-    public var shadowColor: Color = .init(200, 200, 200, 0.5)
+    public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `3`.
-    public var shadowRadius: CGFloat = 3
+    /// Shadow radius. Set to `10`.
+    public var shadowRadius: CGFloat = 10
 
-    /// Shadow offset. Set to `(0, -3)`.
-    public var shadowOffset: CGPoint = .init(x: 0, y: -3)
+    /// Shadow offset. Set to `zero`.
+    public var shadowOffset: CGPoint = .zero
 
     // MARK: Initializers
     /// Initializes UI model with default values.
