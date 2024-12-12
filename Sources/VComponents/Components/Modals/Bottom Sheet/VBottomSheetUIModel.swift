@@ -206,6 +206,10 @@ public struct VBottomSheetUIModel: Sendable {
 
     // MARK: Heights
     /// Bottom sheet heights.
+    ///
+    /// Values used here may not represent actual values used in Bottom Sheet.
+    /// If `ideal` is greater than `max`, it will be clamped to `max`.
+    /// If `min` is greater than `ideal`, it will be clamped to `ideal`.
     public struct Heights: Equatable, Sendable {
         // MARK: Properties - Values
         /// Minimum height.
@@ -218,20 +222,14 @@ public struct VBottomSheetUIModel: Sendable {
         public var max: AbsoluteFractionMeasurement
 
         // MARK: Properties - Flags
-        /// Indicates if model allows resizing.
-        ///
-        /// Values used here may not represent actual values used in Bottom Sheet.
-        /// If `ideal` is greater than `max`, it will be clamped to `max`.
-        /// If `min` is greater than `ideal`, it will be clamped to `ideal`.
-        public func isResizable(
+        func isResizable(
             in containerHeight: CGFloat
         ) -> Bool {
             min.toAbsolute(dimension: containerHeight) != ideal.toAbsolute(dimension: containerHeight) ||
             ideal.toAbsolute(dimension: containerHeight) != max.toAbsolute(dimension: containerHeight)
         }
 
-        /// Indicates if model suggests fully fixed height.
-        public func isFixed(
+        func isFixed(
             in containerHeight: CGFloat
         ) -> Bool {
             min.toAbsolute(dimension: containerHeight) == ideal.toAbsolute(dimension: containerHeight) &&

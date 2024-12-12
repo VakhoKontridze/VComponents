@@ -8,6 +8,15 @@
 import SwiftUI
 import VCore
 
+// MARK: - V Bottom Sheet
+extension VBottomSheetUIModel.Heights {
+    @available(*, unavailable)
+    public var isResizable: Bool { fatalError() }
+    
+    @available(*, unavailable)
+    public var isFixed: Bool { fatalError() }
+}
+
 // MARK: - V Wrapping Marquee
 extension VWrappingMarqueeUIModel {
     @available(*, deprecated, renamed: "wrappedContentSpacing")
