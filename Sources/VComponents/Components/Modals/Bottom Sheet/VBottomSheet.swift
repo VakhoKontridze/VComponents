@@ -616,7 +616,7 @@ private struct ContentView_IdealLarge: View {
 #endif
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-#Preview("Autoresizes Content", body: {
+#Preview("Content Autoresizing", body: {
     @Previewable @State var isPresented: Bool = true
 
     PreviewContainer(content: {
