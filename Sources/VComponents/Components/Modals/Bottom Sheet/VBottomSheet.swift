@@ -562,41 +562,48 @@ private struct ContentView_IdealLarge: View {
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Autoresizing", body: {
-    @Previewable @State var isPresented: Bool = true
-
-    PreviewContainer(content: {
-        PreviewModalLauncherView(isPresented: $isPresented)
-            .vBottomSheet(
-                id: "preview",
-                uiModel: {
-                    var uiModel: VBottomSheetUIModel = .init()
-                    
-                    uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                        portrait: VBottomSheetUIModel.Size(
-                            width: .fraction(1),
-                            heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
-                        ),
-                        landscape: VBottomSheetUIModel.Size(
-                            width: .fraction(0.7),
-                            heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
-                        )
-                    )
-                    uiModel.autoresizesContent = true
-                    
-                    return uiModel
-                }(),
-                isPresented: $isPresented,
-                content: {
-                    VStack(spacing: 0, content: {
-                        Text("Top")
-                        Spacer(minLength: 0)
-                        Text("Bottom")
-                    })
-                }
-            )
-    })
-    .presentationHostLayer()
+    ContentView_ContentAutoresizing()
 })
+
+// Preview macro doesn’t support nested macro expansions
+private struct ContentView_ContentAutoresizing: View {
+    @State var isPresented: Bool = true
+
+    var body: some View {
+        PreviewContainer(content: {
+            PreviewModalLauncherView(isPresented: $isPresented)
+                .vBottomSheet(
+                    id: "preview",
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+                        
+                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
+                            portrait: VBottomSheetUIModel.Size(
+                                width: .fraction(1),
+                                heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                            ),
+                            landscape: VBottomSheetUIModel.Size(
+                                width: .fraction(0.7),
+                                heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
+                            )
+                        )
+                        uiModel.autoresizesContent = true
+                        
+                        return uiModel
+                    }(),
+                    isPresented: $isPresented,
+                    content: {
+                        VStack(spacing: 0, content: {
+                            Text("Top")
+                            Spacer(minLength: 0)
+                            Text("Bottom")
+                        })
+                    }
+                )
+        })
+        .presentationHostLayer()
+    }
+}
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Wrapping Height", body: {
