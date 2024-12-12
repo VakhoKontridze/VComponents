@@ -8,6 +8,8 @@ VModal
 
 VBottomSheet
 
+- Bottom Sheets heights can now be composed with a mix of absolute and fractional values
+- Bottom Sheet will no longer crash, if invalid heights are provided. Instead, values will be re-adjusted.
 - `preferredDimmingViewColor` is added, that overrides a shared color from Presentation Host layer, when only this modal is presented. So, customizing Presentation Host Layer is no longer required.
 
 VSideBar

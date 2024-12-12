@@ -33,6 +33,7 @@ struct VBottomSheet<Content>: View
     
     private var currentHeightsObject: VBottomSheetUIModel.Heights {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
+            .withFixedValues(in: containerSize.height)
     }
     
     @State private var dragIndicatorHeight: CGFloat = 0
@@ -60,8 +61,6 @@ struct VBottomSheet<Content>: View
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        Self.validate(uiModel: uiModel)
-
         self.uiModel = uiModel
         self._isPresented = isPresented
         self.content = content
@@ -86,7 +85,12 @@ struct VBottomSheet<Content>: View
             })
             .onChange(
                 of: uiModel.sizeGroup,
-                perform: { resetHeightFromEnvironmentOrUIModelChange(from: $0.current(orientation: interfaceOrientation).heights) }
+                perform: { newValue in
+                    resetHeightFromEnvironmentOrUIModelChange(
+                        from: newValue.current(orientation: interfaceOrientation).heights
+                            .withFixedValues(in: containerSize.height)
+                    )
+                }
             )
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
@@ -179,7 +183,7 @@ struct VBottomSheet<Content>: View
         })
         .frame(maxWidth: .infinity)
         .applyIf(
-            uiModel.autoresizesContent && currentHeightsObject.isResizable,
+            uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height),
             ifTransform: { $0.frame(height: containerSize.height - offset - dragIndicatorHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
@@ -317,28 +321,6 @@ struct VBottomSheet<Content>: View
         from heights: VBottomSheetUIModel.Heights
     ) -> CGFloat {
         heights.idealOffset(in: containerSize.height)
-    }
-
-    // MARK: Validation
-    private static func validate(
-        uiModel: VBottomSheetUIModel
-    ) {
-        let heightsGroup: [VBottomSheetUIModel.Heights] = [
-            uiModel.sizeGroup.portrait.heights,
-            uiModel.sizeGroup.landscape.heights
-        ]
-
-        for heights in heightsGroup {
-            guard heights.min.rawValue <= heights.ideal.rawValue else {
-                Logger.bottomSheet.critical("'min' height must be less than or equal to 'ideal' height in 'VBottomSheet'")
-                fatalError()
-            }
-
-            guard heights.ideal.rawValue <= heights.max.rawValue else {
-                Logger.bottomSheet.critical("'ideal' height must be less than or equal to 'max' height in 'VBottomSheet'")
-                fatalError()
-            }
-        }
     }
 }
 
@@ -583,11 +565,10 @@ private struct ContentView_IdealLarge: View {
                 isPresented: $isPresented,
                 content: {
                     VStack(spacing: 0, content: {
-                        Text("Hello")
-                        Spacer()
-                        Text("World")
+                        Text("Top")
+                        Spacer(minLength: 0)
+                        Text("Bottom")
                     })
-                    .background(content: { Color.accentColor })
                 }
             )
     })

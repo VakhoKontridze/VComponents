@@ -206,29 +206,36 @@ public struct VBottomSheetUIModel: Sendable {
 
     // MARK: Heights
     /// Bottom sheet heights.
-    @MemberwiseInitializable(accessLevelModifier: .private) // Values mustn't be variable to ensure that all properties are either absolute or fractional
     public struct Heights: Equatable, Sendable {
         // MARK: Properties - Values
         /// Minimum height.
-        public let min: AbsoluteFractionMeasurement
+        public var min: AbsoluteFractionMeasurement
 
         /// Ideal height.
-        public let ideal: AbsoluteFractionMeasurement
+        public var ideal: AbsoluteFractionMeasurement
 
         /// Maximum height.
-        public let max: AbsoluteFractionMeasurement
+        public var max: AbsoluteFractionMeasurement
 
         // MARK: Properties - Flags
         /// Indicates if model allows resizing.
-        public var isResizable: Bool {
-            min.rawValue != ideal.rawValue ||
-            ideal.rawValue != max.rawValue
+        ///
+        /// Values used here may not represent actual values used in Bottom Sheet.
+        /// If `ideal` is greater than `max`, it will be clamped to `max`.
+        /// If `min` is greater than `ideal`, it will be clamped to `ideal`.
+        public func isResizable(
+            in containerHeight: CGFloat
+        ) -> Bool {
+            min.toAbsolute(dimension: containerHeight) != ideal.toAbsolute(dimension: containerHeight) ||
+            ideal.toAbsolute(dimension: containerHeight) != max.toAbsolute(dimension: containerHeight)
         }
 
         /// Indicates if model suggests fully fixed height.
-        public var isFixed: Bool {
-            min.rawValue == ideal.rawValue &&
-            ideal.rawValue == max.rawValue
+        public func isFixed(
+            in containerHeight: CGFloat
+        ) -> Bool {
+            min.toAbsolute(dimension: containerHeight) == ideal.toAbsolute(dimension: containerHeight) &&
+            ideal.toAbsolute(dimension: containerHeight) == max.toAbsolute(dimension: containerHeight)
         }
 
         // MARK: Properties - Offsets
@@ -241,6 +248,17 @@ public struct VBottomSheetUIModel: Sendable {
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
         // MARK: Initializers
+        /// Initializes `Heights` with values.
+        public init(
+            min: AbsoluteFractionMeasurement,
+            ideal: AbsoluteFractionMeasurement,
+            max: AbsoluteFractionMeasurement
+        ) {
+            self.min = min
+            self.ideal = ideal
+            self.max = max
+        }
+        
         /// Initializes `Heights` with absolute values.
         public static func absolute(
             min: CGFloat,
@@ -291,6 +309,35 @@ public struct VBottomSheetUIModel: Sendable {
 
         static var zero: Self {
             .absolute(0)
+        }
+        
+        // MARK: Value Fixing
+        func withFixedValues(
+            in containerHeight: CGFloat
+        ) -> Self {
+            let maxFixed: AbsoluteFractionMeasurement = max
+            
+            let idealFixed: AbsoluteFractionMeasurement = {
+                if ideal.toAbsolute(dimension: containerHeight) <= maxFixed.toAbsolute(dimension: containerHeight) {
+                    return ideal
+                } else {
+                    return maxFixed
+                }
+            }()
+            
+            let minFixed: AbsoluteFractionMeasurement = {
+                if min.toAbsolute(dimension: containerHeight) <= idealFixed.toAbsolute(dimension: containerHeight) {
+                    return min
+                } else {
+                    return idealFixed
+                }
+            }()
+            
+            return Self(
+                min: minFixed,
+                ideal: idealFixed,
+                max: maxFixed
+            )
         }
     }
 
@@ -378,15 +425,5 @@ extension VBottomSheetUIModel {
         uiModel.dragIndicatorSize.height = 0
 
         return uiModel
-    }
-}
-
-// MARK: - Helpers
-extension AbsoluteFractionMeasurement {
-    /*fileprivate*/ var rawValue: CGFloat {
-        switch self {
-        case .absolute(let value): value
-        case .fraction(let value): value
-        }
     }
 }
