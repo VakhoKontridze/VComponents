@@ -206,9 +206,9 @@ public struct VBottomSheetUIModel: Sendable {
 
     // MARK: Heights
     /// Bottom sheet heights.
-    @MemberwiseInitializable(accessLevelModifier: .private)
-    public struct Heights: Equatable, Sendable { // Values mustn't be variable to ensure that all properties are either absolute or fractional
-        // MARK: Properties
+    @MemberwiseInitializable(accessLevelModifier: .private) // Values mustn't be variable to ensure that all properties are either absolute or fractional
+    public struct Heights: Equatable, Sendable {
+        // MARK: Properties - Values
         /// Minimum height.
         public let min: AbsoluteFractionMeasurement
 
@@ -218,18 +218,20 @@ public struct VBottomSheetUIModel: Sendable {
         /// Maximum height.
         public let max: AbsoluteFractionMeasurement
 
+        // MARK: Properties - Flags
         /// Indicates if model allows resizing.
         public var isResizable: Bool {
-            min.value != ideal.value ||
-            ideal.value != max.value
+            min.rawValue != ideal.rawValue ||
+            ideal.rawValue != max.rawValue
         }
 
         /// Indicates if model suggests fully fixed height.
         public var isFixed: Bool {
-            min.value == ideal.value &&
-            ideal.value == max.value
+            min.rawValue == ideal.rawValue &&
+            ideal.rawValue == max.rawValue
         }
 
+        // MARK: Properties - Offsets
         func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.toAbsolute(dimension: containerHeight) }
 
         func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.toAbsolute(dimension: containerHeight) }
@@ -239,7 +241,7 @@ public struct VBottomSheetUIModel: Sendable {
         func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
 
         // MARK: Initializers
-        /// Initializes `Heights` with dimensions.
+        /// Initializes `Heights` with absolute values.
         public static func absolute(
             min: CGFloat,
             ideal: CGFloat,
@@ -252,7 +254,7 @@ public struct VBottomSheetUIModel: Sendable {
             )
         }
 
-        /// Initializes `Heights` with dimensions.
+        /// Initializes `Heights` with absolute values.
         public static func absolute(
             _ value: CGFloat
         ) -> Self {
@@ -263,7 +265,7 @@ public struct VBottomSheetUIModel: Sendable {
             )
         }
 
-        /// Initializes `Heights` with dimension fractions, relative to container.
+        /// Initializes `Heights` with fractional values, relative to container.
         public static func fraction(
             min: CGFloat,
             ideal: CGFloat,
@@ -276,7 +278,7 @@ public struct VBottomSheetUIModel: Sendable {
             )
         }
 
-        /// Initializes `Heights` with dimension fractions, relative to container.
+        /// Initializes `Heights` with fractional values, relative to container.
         public static func fraction(
             _ value: CGFloat
         ) -> Self {
@@ -381,7 +383,7 @@ extension VBottomSheetUIModel {
 
 // MARK: - Helpers
 extension AbsoluteFractionMeasurement {
-    /*fileprivate*/ var value: CGFloat {
+    /*fileprivate*/ var rawValue: CGFloat {
         switch self {
         case .absolute(let value): value
         case .fraction(let value): value
