@@ -208,7 +208,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
         ZStack(alignment: .bottom, content: {
             tabIndicatorTrackView
 
-            ScrollViewReader(content: { proxy in
+            ScrollViewReader(content: { scrollViewProxy in
                 ScrollView(.horizontal, content: {
                     HStack(
                         alignment: uiModel.tabBarAlignment,
@@ -240,8 +240,8 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
                 
                 .scrollDisabled(!uiModel.isTabBarScrollingEnabled)
                 
-                .onAppear(perform: { positionSelectedTabIndicatorInitially(in: proxy) })
-                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, in: proxy) })
+                .onAppear(perform: { positionSelectedTabIndicatorInitially(scrollViewProxy: scrollViewProxy) })
+                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, scrollViewProxy: scrollViewProxy) })
             })
         })
     }
@@ -359,29 +359,29 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
 
     // MARK: Selected Tab Indicator Frame
     private func positionSelectedTabIndicatorInitially(
-        in proxy: ScrollViewProxy
+        scrollViewProxy: ScrollViewProxy
     ) {
         guard !didPositionSelectionIndicatorInitially else { return }
         didPositionSelectionIndicatorInitially = true
 
-        _positionSelectedTabIndicator(selection, in: proxy)
+        _positionSelectedTabIndicator(selection, scrollViewProxy: scrollViewProxy)
     }
 
     private func positionSelectedTabIndicator(
         _ newElement: Data.Element,
-        in proxy: ScrollViewProxy
+        scrollViewProxy: ScrollViewProxy
     ) {
         withAnimation( // Needed alongside `animation(_:value:)` to maintain proper `ScrollView` offset
             uiModel.selectedTabIndicatorAnimation,
-            { _positionSelectedTabIndicator(newElement, in: proxy) }
+            { _positionSelectedTabIndicator(newElement, scrollViewProxy: scrollViewProxy) }
         )
     }
 
     private func _positionSelectedTabIndicator(
         _ newElement: Data.Element,
-        in proxy: ScrollViewProxy
+        scrollViewProxy: ScrollViewProxy
     ) {
-        proxy.scrollTo( // TODO: Wait for iOS issue to be resolved for RTL layout, when using few items
+        scrollViewProxy.scrollTo( // TODO: Wait for iOS issue to be resolved for RTL layout, when using few items
             newElement,
             anchor: uiModel.selectedTabIndicatorScrollAnchor
         )

@@ -54,7 +54,7 @@ public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .getSize({ containerWidth = $0.width })
+            .getWidth(assignTo: $containerWidth)
             .overlay(content: { marqueeContentView })
             .mask({ gradientMask })
             .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
@@ -78,7 +78,7 @@ public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
     private var contentView: some View {
         content()
             .fixedSize(horizontal: true, vertical: false)
-            .getSize({ contentSize = $0 })
+            .getSize(assignTo: $contentSize)
             .applyModifier({
                 if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                     $0

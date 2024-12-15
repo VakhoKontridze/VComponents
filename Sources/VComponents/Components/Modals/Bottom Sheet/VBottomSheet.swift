@@ -161,7 +161,7 @@ struct VBottomSheet<Content>: View
                     .foregroundStyle(uiModel.dragIndicatorColor)
             }
         })
-        .getSize({ dragIndicatorHeight = $0.height }) // If it's not rendered, `0` will be returned
+        .getHeight(assignTo: $dragIndicatorHeight) // If it's not rendered, `0` will be returned
     }
     
     private var contentView: some View {
@@ -617,7 +617,7 @@ private struct ContentView_ContentAutoresizing: View {
     ZStack(content: {
         // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
         Color.clear
-            .getSafeAreaInsets({ safeAreaInsets = $0 })
+            .getSafeAreaInsets(assignTo: $safeAreaInsets)
 
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
@@ -659,7 +659,9 @@ private struct ContentView_ContentAutoresizing: View {
                         })
                         .fixedSize(horizontal: false, vertical: true)
                         .getSize({ size in
-                            Task(operation: { contentHeight = size.height })
+                            Task(operation: { @MainActor in
+                                contentHeight = size.height
+                            })
                         })
                     }
                 )

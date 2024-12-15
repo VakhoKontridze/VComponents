@@ -49,6 +49,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,
+        Data.Element: Sendable,
         ID: Hashable,
         CustomTabItemLabel: View,
         Content: View
@@ -240,7 +241,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             }
         )
         .coordinateSpace(name: tabBarCoordinateSpaceName)
-        .getSize({ tabBarWidth = $0.width })
+        .getWidth(assignTo: $tabBarWidth)
     }
 
     private func tabItemView(
@@ -262,10 +263,10 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                     custom(tabItemInternalState, element)
                 }
             })
-            .getFrame(in: .named(tabBarCoordinateSpaceName), { frame in
-                tabBarItemWidths[element.hashValue] = frame.size.width
+            .getFrame(in: .named(tabBarCoordinateSpaceName), { [layoutDirection, tabBarWidth, $tabBarItemWidths, $tabBarItemPositions] frame in
+                $tabBarItemWidths.wrappedValue[element.hashValue] = frame.size.width
 
-                tabBarItemPositions[element.hashValue] = {
+                $tabBarItemPositions.wrappedValue[element.hashValue] = {
                     if layoutDirection.isRightToLeft {
                         // `min` and `max` start from left side of the screen, regardless of layout direction.
                         // So, mapping is required.
@@ -315,6 +316,10 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
 
     private var tabView: some View {
         GeometryReader(content: { geometryProxy in
+            // `GeometryProxy` isn't `Sendable`, so data needs to be extracted beforehand
+            let tabViewMinX: CGFloat = geometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
+            let tabViewWidth: CGFloat = geometryProxy.size.width
+            
             Group(content: {
                 if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
                     ScrollView(.horizontal, content: {
@@ -326,14 +331,17 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                                         .tag(element)
                                         .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
                                         .frame(maxHeight: .infinity)
-                                        .getFrame(in: .global, { frame in
+                                        .getFrame(in: .global, { [selection] frame in
                                             guard element == selection else { return }
                                             
-                                            calculateIndicatorFrame(
-                                                selectedIndexInt: selectedIndexInt,
-                                                tabViewGeometryProxy: geometryProxy,
-                                                interstitialOffset: frame.minX
-                                            )
+                                            Task(operation: { @MainActor in
+                                                calculateIndicatorFrame(
+                                                    selectedIndexInt: selectedIndexInt,
+                                                    tabViewMinX: tabViewMinX,
+                                                    tabViewWidth: tabViewWidth,
+                                                    interstitialOffset: frame.minX
+                                                )
+                                            })
                                         })
                                 })
                             }
@@ -355,14 +363,17 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                             content(element)
                                 .tag(element)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
-                                .getFrame(in: .global, { frame in
+                                .getFrame(in: .global, { [selection] frame in
                                     guard element == selection else { return }
                                     
-                                    calculateIndicatorFrame(
-                                        selectedIndexInt: selectedIndexInt,
-                                        tabViewGeometryProxy: geometryProxy,
-                                        interstitialOffset: frame.minX
-                                    )
+                                    Task(operation: { @MainActor in
+                                        calculateIndicatorFrame(
+                                            selectedIndexInt: selectedIndexInt,
+                                            tabViewMinX: tabViewMinX,
+                                            tabViewWidth: tabViewWidth,
+                                            interstitialOffset: frame.minX
+                                        )
+                                    })
                                 })
                         })
                     })
@@ -379,7 +390,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                             { (_, newValue) in
                                 calculateIndicatorFrame(
                                     selectedIndexInt: newValue,
-                                    tabViewGeometryProxy: geometryProxy,
+                                    tabViewMinX: tabViewMinX,
+                                    tabViewWidth: tabViewWidth,
                                     interstitialOffset: 0
                                 )
                             }
@@ -390,14 +402,16 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                         .onAppear(perform: {
                             calculateIndicatorFrame(
                                 selectedIndexInt: selectedIndexInt,
-                                tabViewGeometryProxy: geometryProxy,
+                                tabViewMinX: tabViewMinX,
+                                tabViewWidth: tabViewWidth,
                                 interstitialOffset: 0
                             )
                         })
                         .onChange(of: selectedIndexInt, perform: { newValue in
                             calculateIndicatorFrame(
                                 selectedIndexInt: newValue,
-                                tabViewGeometryProxy: geometryProxy,
+                                tabViewMinX: tabViewMinX,
+                                tabViewWidth: tabViewWidth,
                                 interstitialOffset: 0
                             )
                         })
@@ -409,12 +423,10 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
         selectedIndexInt: Int?,
-        tabViewGeometryProxy: GeometryProxy,
+        tabViewMinX: CGFloat,
+        tabViewWidth: CGFloat,
         interstitialOffset: CGFloat
     ) {
-        let tabViewMinX: CGFloat = tabViewGeometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
-        let tabViewWidth: CGFloat = tabViewGeometryProxy.size.width
-
         let contentOffset: CGFloat = {
             guard let selectedIndexInt else { return 0 }
 
@@ -447,7 +459,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         }
 
         if !enablesSelectedTabIndicatorAnimations {
-            Task(operation: { enablesSelectedTabIndicatorAnimations = true })
+            Task(operation: { @MainActor in enablesSelectedTabIndicatorAnimations = true })
         }
     }
 

@@ -64,7 +64,7 @@ extension View {
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
-    ///             .getSafeAreaInsets({ safeAreaInsets = $0 })
+    ///             .getSafeAreaInsets(assignTo: $safeAreaInsets)
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
@@ -94,7 +94,9 @@ extension View {
     ///                     Text("...")
     ///                         .fixedSize(horizontal: false, vertical: true)
     ///                         .getSize({ size in
-    ///                             Task(operation: { contentHeight = size.height })
+    ///                             Task(operation: { @MainActor in
+    ///                                 contentHeight = size.height
+    ///                             })
     ///                         })
     ///                 }
     ///             )

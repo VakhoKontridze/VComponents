@@ -93,7 +93,7 @@ public struct VSlider: View, Sendable {
             
             thumbView
         })
-        .getSize({ sliderSize = $0 })
+        .getSize(assignTo: $sliderSize)
         .applyIf(uiModel.bodyIsDraggable, transform: {
             $0
                 .gesture(
