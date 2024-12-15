@@ -1,5 +1,15 @@
 # Change Log
 
+### 7.2.1(72)
+
+VStretchedIndicatorStaticPagerTabView
+
+- Indicator jitter caused when scrolling slowly is fixed
+
+VWrappedIndicatorStaticPagerTabView
+
+- Indicator jitter caused when scrolling slowly is fixed
+
 ### [7.2.0(71)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.0) — *2024 12 12*
 
 VModal

@@ -104,6 +104,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Properties - Flags
     // Prevents animation when view appears for the first time
     @State private var enablesSelectedTabIndicatorAnimations: Bool = false
+    
+    @State private var isBeingScrolled: Bool = false
 
     // MARK: Initializers - Standard
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.
@@ -305,7 +307,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                                         .tag(element)
                                         .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
                                         .frame(maxHeight: .infinity)
-                                        .getFrame(in: .global, { [selection] frame in
+                                        .getFrame(in: .global, { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
                                             guard element == selection else { return }
 
                                             Task(operation: { @MainActor in
@@ -324,6 +326,16 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                     })
                     .scrollTargetBehavior(.paging)
                     .scrollPosition(id: selectionIDBinding)
+                    .applyModifier({
+                        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+                            $0
+                                .onScrollPhaseChange({ (_, newValue) in
+                                    isBeingScrolled = newValue == .interacting
+                                })
+                        } else {
+                            $0
+                        }
+                    })
                     
                     .background(content: { uiModel.tabViewBackgroundColor })
                     
@@ -337,7 +349,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                             content(element)
                                 .tag(element)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
-                                .getFrame(in: .global, { [selection] frame in
+                                .getFrame(in: .global, { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
                                     guard element == selection else { return }
 
                                     Task(operation: { @MainActor in
@@ -362,32 +374,42 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                             of: selectedIndexInt,
                             initial: true,
                             { (_, newValue) in
-                                calculateIndicatorFrame(
-                                    selectedIndexInt: newValue,
-                                    tabViewMinX: tabViewMinX,
-                                    tabViewWidth: tabViewWidth,
-                                    interstitialOffset: 0
-                                )
+                                guard !isBeingScrolled else { return }
+                                
+                                Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                                    calculateIndicatorFrame(
+                                        selectedIndexInt: newValue,
+                                        tabViewMinX: tabViewMinX,
+                                        tabViewWidth: tabViewWidth,
+                                        interstitialOffset: 0
+                                    )
+                                })
                             }
                         )
 
                 } else {
                     $0
                         .onAppear(perform: {
-                            calculateIndicatorFrame(
-                                selectedIndexInt: selectedIndexInt,
-                                tabViewMinX: tabViewMinX,
-                                tabViewWidth: tabViewWidth,
-                                interstitialOffset: 0
-                            )
+                            Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                                calculateIndicatorFrame(
+                                    selectedIndexInt: selectedIndexInt,
+                                    tabViewMinX: tabViewMinX,
+                                    tabViewWidth: tabViewWidth,
+                                    interstitialOffset: 0
+                                )
+                            })
                         })
                         .onChange(of: selectedIndexInt, perform: { newValue in
-                            calculateIndicatorFrame(
-                                selectedIndexInt: newValue,
-                                tabViewMinX: tabViewMinX,
-                                tabViewWidth: tabViewWidth,
-                                interstitialOffset: 0
-                            )
+                            guard !isBeingScrolled else { return }
+                            
+                            Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                                calculateIndicatorFrame(
+                                    selectedIndexInt: newValue,
+                                    tabViewMinX: tabViewMinX,
+                                    tabViewWidth: tabViewWidth,
+                                    interstitialOffset: 0
+                                )
+                            })
                         })
                 }
             })
