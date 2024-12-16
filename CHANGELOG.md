@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.2.1(72)
+### [7.2.1(72)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.1) — *2024 12 16*
 
 Helpers - Architectural Pattern Helpers
 
