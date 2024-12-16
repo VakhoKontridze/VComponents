@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.2.1(72)
+### 7.2.2(73)
 
 VStretchedIndicatorStaticPagerTabView
 
@@ -9,6 +9,12 @@ VStretchedIndicatorStaticPagerTabView
 VWrappedIndicatorStaticPagerTabView
 
 - Indicator jitter caused when scrolling slowly is fixed
+
+### [7.2.1(72)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.1) — *2024 12 16*
+
+Helpers - Architectural Pattern Helpers
+
+- Missing `nil` default value is added to `layerID` in `VAlert`'s architectural pattern helper methods
 
 ### [7.2.0(71)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.0) — *2024 12 12*
 
@@ -44,7 +50,7 @@ VWrappingMarquee
 
 Helpers - Architectural Pattern Helpers
 
-- Missing `layerID` parameter has been added in `VAlert`'s 'architectural pattern helper methods
+- Missing `layerID` parameter has been added in `VAlert`'s architectural pattern helper methods
 - `VAlertButtonConvertible` conformance is added to `Never`
 
 ### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — *2024 10 24*

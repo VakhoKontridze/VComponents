@@ -39,7 +39,7 @@ extension View {
     ///     }
     ///     
     public func vAlert(
-        layerID: String?,
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         parameters: Binding<VAlertParameters?>
@@ -93,7 +93,7 @@ extension View {
     ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
     ///
     public func vAlert<Content>(
-        layerID: String?,
+        layerID: String? = nil,
         id: String,
         uiModel: VAlertUIModel = .init(),
         parameters: Binding<VAlertParameters?>,
