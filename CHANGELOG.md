@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.2.2(73)
+### [7.2.2(73)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.2) — *2025 01 17*
 
 VStretchedIndicatorStaticPagerTabView
 
