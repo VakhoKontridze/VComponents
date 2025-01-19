@@ -102,8 +102,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     private let content: (Data.Element) -> Content
 
     // MARK: Properties - Flags
-    // Prevents animation when view appears for the first time
-    @State private var enablesSelectedTabIndicatorAnimations: Bool = false
+    // Used to disable animations when view appears for the first time
+    @State private var tabIndicatorAnimationIsEnabled: Bool = false
     
     @State private var isBeingScrolled: Bool = false
 
@@ -286,8 +286,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
             .foregroundStyle(uiModel.selectedTabIndicatorColor)
 
-            .animation(enablesSelectedTabIndicatorAnimations ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorWidth)
-            .animation(enablesSelectedTabIndicatorAnimations ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorOffset)
+            .animation(tabIndicatorAnimationIsEnabled ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorWidth)
+            .animation(tabIndicatorAnimationIsEnabled ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorOffset)
     }
 
     private var tabView: some View {
@@ -452,8 +452,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                 uiModel.selectedTabIndicatorMarginHorizontal
         }()
 
-        if !enablesSelectedTabIndicatorAnimations {
-            Task(operation: { @MainActor in enablesSelectedTabIndicatorAnimations = true })
+        if !tabIndicatorAnimationIsEnabled {
+            Task(operation: { @MainActor in tabIndicatorAnimationIsEnabled = true })
         }
     }
 }
