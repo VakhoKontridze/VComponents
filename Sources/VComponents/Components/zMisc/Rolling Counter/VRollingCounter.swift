@@ -18,7 +18,7 @@ import VCore
 ///         ZStack(content: {
 ///             VRollingCounter(value: value)
 ///         })
-///         .onAppear(perform: changeValue)
+///         .onFirstAppear(perform: changeValue)
 ///     }
 ///
 ///     private func changeValue() {
@@ -45,7 +45,7 @@ import VCore
 ///                 value: Double(value)
 ///             )
 ///         })
-///         .onAppear(perform: changeValue)
+///         .onFirstAppear(perform: changeValue)
 ///     }
 ///        
 public struct VRollingCounter: View, Sendable {

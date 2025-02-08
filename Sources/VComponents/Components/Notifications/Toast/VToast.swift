@@ -40,13 +40,9 @@ struct VToast: View {
     // MARK: Properties - Text
     private let text: String
 
-
     // MARK: Properties - Flags
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
-
-    // MARK: Properties - Misc
-    @State private var timeoutDismissTask: Task<Void, Never>?
 
     // MARK: Initializers
     init(
@@ -62,8 +58,6 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         toastView
-            .onDisappear(perform: { timeoutDismissTask?.cancel() })
-
             .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
@@ -179,11 +173,8 @@ struct VToast: View {
     private func dismissFromTimeout() {
         guard uiModel.dismissType.contains(.timeout) else { return }
 
-        timeoutDismissTask?.cancel()
-        timeoutDismissTask = Task(operation: { @MainActor in
-            try? await Task.sleep(seconds: uiModel.timeoutDuration)
-            guard !Task.isCancelled else { return }
-
+        Task(operation: { @MainActor in
+            try? await Task.sleep(seconds: uiModel.timeoutDuration) // No need to handle reentrancy
             isPresented = false
         })
     }
@@ -221,7 +212,7 @@ struct VToast: View {
 
         } else {
             // `VToast` doesn't have an intrinsic height
-            // This delay gives SwiftUI change to return height.
+            // This delay gives SwiftUI chance to return height.
             // Other option was to calculate it using `UILabel`.
             Task(operation: { @MainActor in
                 withBasicAnimation(

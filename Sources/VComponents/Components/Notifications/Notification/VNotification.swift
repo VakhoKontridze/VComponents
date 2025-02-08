@@ -44,9 +44,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
 
-    // MARK: Properties - Misc
-    @State private var timeoutDismissTask: Task<Void, Never>?
-
     // MARK: Initializers
     init(
         uiModel: VNotificationUIModel,
@@ -61,8 +58,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Body
     var body: some View {
         notificationView
-            .onDisappear(perform: { timeoutDismissTask?.cancel() })
-
             .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
@@ -252,11 +247,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private func dismissFromTimeout() {
         guard uiModel.dismissType.contains(.timeout) else { return }
 
-        timeoutDismissTask?.cancel()
-        timeoutDismissTask = Task(operation: { @MainActor in
-            try? await Task.sleep(seconds: uiModel.timeoutDuration)
-            guard !Task.isCancelled else { return }
-
+        Task(operation: { @MainActor in
+            try? await Task.sleep(seconds: uiModel.timeoutDuration) // No need to handle reentrancy
             isPresented = false
         })
     }
@@ -294,7 +286,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
         } else {
             // `VNotification` doesn't have an intrinsic height
-            // This delay gives SwiftUI change to return height.
+            // This delay gives SwiftUI chance to return height.
             Task(operation: { @MainActor in
                 withBasicAnimation(
                     uiModel.appearAnimation,

@@ -33,7 +33,7 @@ import VCore
 ///             .padding()
 ///
 ///             .focused($isFocused)
-///             .onAppear(perform: {
+///             .onFirstAppear(perform: {
 ///                 Task(operation: {
 ///                     try? await Task.sleep(seconds: 1)
 ///                     isFocused = true

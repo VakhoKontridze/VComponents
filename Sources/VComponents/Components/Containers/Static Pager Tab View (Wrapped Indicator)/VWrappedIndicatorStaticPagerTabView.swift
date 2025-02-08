@@ -481,7 +481,9 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         }
 
         if !tabIndicatorAnimationIsEnabled {
-            Task(operation: { @MainActor in tabIndicatorAnimationIsEnabled = true })
+            Task(operation: { @MainActor in
+                tabIndicatorAnimationIsEnabled = true
+            })
         }
     }
 
