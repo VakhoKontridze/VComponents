@@ -183,9 +183,9 @@ public struct VCompactPageIndicatorUIModel: Sendable {
             spacing: spacing,
             dotWidths: VPageIndicatorUIModel.DotStateOptionalDimensions(dotWidth),
             dotHeights: VPageIndicatorUIModel.DotStateDimensions(dotHeight),
+            dotCornerRadii: dotCornerRadii,
             dotColors: dotColors,
             dotBorderWidths: dotBorderWidths,
-            dotCornerRadii: dotCornerRadii,
             dotBorderColors: dotBorderColors,
             appliesTransitionAnimation: appliesTransitionAnimation,
             transitionAnimation: transitionAnimation

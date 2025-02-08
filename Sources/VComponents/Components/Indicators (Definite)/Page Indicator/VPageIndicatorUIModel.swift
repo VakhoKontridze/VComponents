@@ -10,6 +10,12 @@ import VCore
 
 // MARK: - V Page Indicator UI Model
 /// Model that describes UI.
+@MemberwiseInitializable(
+    accessLevelModifier: .internal,
+    parameterDefaultValues: [
+        "*": .omit
+    ]
+)
 public struct VPageIndicatorUIModel: Sendable {
     // MARK: Properties - Global
     /// Direction. Set to `leftToRight`.
@@ -160,30 +166,6 @@ public struct VPageIndicatorUIModel: Sendable {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
-    init(
-        direction: LayoutDirectionOmni,
-        spacing: CGFloat,
-        dotWidths: DotStateOptionalDimensions,
-        dotHeights: DotStateDimensions,
-        dotColors: DotStateColors,
-        dotBorderWidths: DotStateDimensions,
-        dotCornerRadii: DotStateDimensions,
-        dotBorderColors: DotStateColors,
-        appliesTransitionAnimation: Bool,
-        transitionAnimation: Animation?
-    ) {
-        self.direction = direction
-        self.spacing = spacing
-        self.dotWidths = dotWidths
-        self.dotHeights = dotHeights
-        self.dotColors = dotColors
-        self.dotBorderWidths = dotBorderWidths
-        self.dotCornerRadii = dotCornerRadii
-        self.dotBorderColors = dotBorderColors
-        self.appliesTransitionAnimation = appliesTransitionAnimation
-        self.transitionAnimation = transitionAnimation
-    }
 
     // MARK: Dot State Dimensions
     /// Model that contains dimensions  for component states.
