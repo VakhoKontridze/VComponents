@@ -1,10 +1,10 @@
 {
-  "originHash" : "e02c3c3b1dc7a7752d7f147be5d152c9ca2ae7f0ff1a8146aae1a863f33a61e0",
+  "originHash" : "7c37307e0d02016e92d15a1ba20247fdf36b4886a23cbe9fef3f15732cc830d5",
   "pins" : [
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
         "revision" : "0687f71944021d616d34d922343dcef086855920",
         "version" : "600.0.1"
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
-        "revision" : "8062ce1b776bfce86cdb1195c5d00ecb65e7bf1d",
-        "version" : "7.3.0"
+        "branch" : "dev",
+        "revision" : "045b160b3dc8b5578a9ef52f90dcb72374ca64b4"
       }
     }
   ],
