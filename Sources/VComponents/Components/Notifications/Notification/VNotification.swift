@@ -247,8 +247,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private func dismissFromTimeout() {
         guard uiModel.dismissType.contains(.timeout) else { return }
 
+        // No need to handle reentrancy and cancellation
         Task(operation: { @MainActor in
-            try? await Task.sleep(seconds: uiModel.timeoutDuration) // No need to handle reentrancy
+            try? await Task.sleep(seconds: uiModel.timeoutDuration)
             isPresented = false
         })
     }
