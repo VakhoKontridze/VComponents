@@ -415,7 +415,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-            .task({
+            .task({ @MainActor in
                 try? await Task.sleep(seconds: 1)
 
                 while true {
@@ -482,7 +482,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-            .task({
+            .task({ @MainActor in
                 try? await Task.sleep(seconds: 1)
 
                 while true {

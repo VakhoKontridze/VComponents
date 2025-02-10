@@ -524,7 +524,7 @@ struct VAlert<Content>: View
                     VAlertButton(role: .cancel, action: nil, title: "Cancel")
                 }
             )
-            .task({
+            .task({ @MainActor in
                 try? await Task.sleep(seconds: 1)
 
                 while true {

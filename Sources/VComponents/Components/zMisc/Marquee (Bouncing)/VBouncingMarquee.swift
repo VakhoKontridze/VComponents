@@ -66,7 +66,9 @@ public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
             contentView
                 .offset(x: offsetDynamic)
                 .animation(animation, value: isAnimating)
-                .task({ isAnimating = isAnimatable }) // `onAppear(perform:)` causes UI glitches
+                .task({ @MainActor in // `onAppear(perform:)` causes UI glitches
+                    isAnimating = isAnimatable
+                })
 
         } else {
             contentView

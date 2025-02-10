@@ -206,7 +206,7 @@ private struct ContentView_SizeTypes: View {
                             .onTapGesture(perform: { isPresented = false })
                     }
                 )
-                .task({
+                .task({ @MainActor in
                     try? await Task.sleep(seconds: 1)
 
                     while true {

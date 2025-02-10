@@ -461,7 +461,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task({
+            .task({ @MainActor in
                 try? await Task.sleep(seconds: 1)
 
                 while true {
@@ -504,7 +504,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task({
+            .task({ @MainActor in
                 try? await Task.sleep(seconds: 1)
                 
                 while true {

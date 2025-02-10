@@ -95,7 +95,9 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
             })
             .offset(x: offsetDynamic)
-            .task({ isAnimating = isAnimatable }) // `onAppear(perform:)` causes UI glitches
+            .task({ @MainActor in // `onAppear(perform:)` causes UI glitches
+                isAnimating = isAnimatable
+            })
             
         } else {
             contentView
