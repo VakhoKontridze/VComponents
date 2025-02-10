@@ -101,6 +101,12 @@ struct VAlert<Content>: View
             })
         })
         .frame(maxHeight: .infinity)
+        
+        .shadow(
+            color: uiModel.shadowColor,
+            radius: uiModel.shadowRadius,
+            offset: uiModel.shadowOffset
+        )
 
         .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         .padding(.vertical, uiModel.marginVertical)
@@ -114,12 +120,6 @@ struct VAlert<Content>: View
         })
 
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
-
-        .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
-        )
     }
 
     private var alertContentView: some View {

@@ -38,8 +38,8 @@ extension View {
     ///             id: "notifications",
     ///             uiModel: {
     ///                 var uiModel: PresentationHostLayerUIModel = .init()
-    ///                 uiModel.dimmingViewTapAction = .passTapsThrough
     ///                 uiModel.dimmingViewColor = Color.clear
+    ///                 uiModel.dimmingViewTapAction = .passTapsThrough
     ///                 return uiModel
     ///             }()
     ///         )

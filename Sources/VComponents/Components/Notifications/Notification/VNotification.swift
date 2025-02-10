@@ -91,15 +91,15 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         })
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
-
-        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
-
+        
         // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
+
+        .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -430,8 +430,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         id: "notifications",
         uiModel: {
             var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewTapAction = .passTapsThrough
             uiModel.dimmingViewColor = Color.clear
+            uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
         }()
     )
@@ -477,8 +477,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         id: "notifications",
         uiModel: {
             var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewTapAction = .passTapsThrough
             uiModel.dimmingViewColor = Color.clear
+            uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
         }()
     )
@@ -526,8 +526,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         id: "notifications",
         uiModel: {
             var uiModel: PresentationHostLayerUIModel = .init()
-            uiModel.dimmingViewTapAction = .passTapsThrough
             uiModel.dimmingViewColor = Color.clear
+            uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
         }()
     )
@@ -571,8 +571,8 @@ private struct Preview_ContentView: View {
             id: "notifications",
             uiModel: {
                 var uiModel: PresentationHostLayerUIModel = .init()
-                uiModel.dimmingViewTapAction = .passTapsThrough
                 uiModel.dimmingViewColor = Color.clear
+                uiModel.dimmingViewTapAction = .passTapsThrough
                 return uiModel
             }()
         )

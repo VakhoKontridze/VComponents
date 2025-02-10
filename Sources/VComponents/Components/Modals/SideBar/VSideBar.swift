@@ -85,13 +85,13 @@ struct VSideBar<Content>: View where Content: View {
                     height: currentHeight
                 )
         })
-        .offset(isPresentedInternally ? .zero : initialOffset)
-
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
+        
+        .offset(isPresentedInternally ? .zero : initialOffset)
 
         .gesture(
             DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
@@ -307,8 +307,8 @@ private struct Preview_ContentView: View {
             uiModel: {
                 var uiModel: PresentationHostLayerUIModel = .init()
 #if os(macOS)
-                uiModel.dimmingViewTapAction = .passTapsThrough
                 uiModel.dimmingViewColor = Color.clear
+                uiModel.dimmingViewTapAction = .passTapsThrough
 #endif
                 return uiModel
             }()
@@ -348,8 +348,8 @@ private struct Preview_SafeAreaContentView: View {
             uiModel: {
                 var uiModel: PresentationHostLayerUIModel = .init()
 #if os(macOS)
-                uiModel.dimmingViewTapAction = .passTapsThrough
                 uiModel.dimmingViewColor = Color.clear
+                uiModel.dimmingViewTapAction = .passTapsThrough
 #endif
                 return uiModel
             }()

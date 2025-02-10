@@ -105,16 +105,16 @@ struct VModal<Content>: View
                     }
                 })
         })
-        .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
-        .padding(.vertical, currentHeight.margin.toAbsolute(dimension: containerSize.height))
-
-        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
-
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
             offset: uiModel.shadowOffset
         )
+        
+        .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
+        .padding(.vertical, currentHeight.margin.toAbsolute(dimension: containerSize.height))
+
+        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
 
     private var contentView: some View {
