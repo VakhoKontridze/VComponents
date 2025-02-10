@@ -66,16 +66,21 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
     <img tag="VCarousel" width="350" align="top" src="https://github.com/user-attachments/assets/0e2503b2-2461-4e5e-ac61-c1e4e9b86125">
 <p/>
 
-#### Modals
+#### Modals (Containers)
 
 <p>
     <img tag="VModal" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c9c03311-db7f-4704-932b-41a78f2e3fc0">
     <img tag="VBottomSheet" width="400" align="top" src="https://github.com/user-attachments/assets/f25b5e9e-fd1a-44d2-bb77-c08e480e7e61">
     <img tag="VSideBar" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/8ea59a66-4742-49a5-8ca9-6a91501e8d3f">
+<p/>
+
+#### Modals (Alerts)
+
+<p>
     <img tag="VAlert" width="400" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/34c39b5b-1d65-4b71-b620-ceb1973232ae">
 <p/>
 
-#### Notifications
+#### Modals (Notifications)
 
 <p>
     <img tag="VNotification" width="400" align="top" src="https://github.com/user-attachments/assets/907aa427-a3d2-40d1-bed4-9b4dc0ee22a6">
