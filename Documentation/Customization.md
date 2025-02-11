@@ -4,8 +4,8 @@
 
 - [Intro](#intro)
 - [Example](#example)
-- [Factory](#factory)
-- [Pre-Existing Factory](#pre-existing-factory)
+- [Factory Instances](#factory-instances)
+- [Pre-Existing Factory Instances](#pre-existing-factory-instances)
 
 ## Intro
 
@@ -51,7 +51,7 @@ var body: some View {
 }
 ```
 
-## Factory
+## Factory Instances
 
 Alternately, you can create `static` instances of UI models for reusability.
 
@@ -79,7 +79,7 @@ var body: some View {
 }
 ```
 
-## Pre-Existing Factory
+## Pre-Existing Factory Instances
 
 Frequently, you will discover pre-existing static factory-initialized UI models associated with each component. It's recommended to check UI model files before creating them yourself.
 

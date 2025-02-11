@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Intro](#intro)
-- [Configuring Animations](configuring-animations)
+- [Configuring Animations](#configuring-animations)
 - [Cancelling Animations and Applying Animations Externally](#cancelling-animations-and-applying-animations-externally)
 
 ## Intro
