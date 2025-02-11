@@ -1,5 +1,11 @@
 # Change Log
 
+### 7.2.3(74)
+
+Documentation
+
+- Customization and Animations documentations have been extracted from README.md
+
 ### [7.2.2(73)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.2) — *2025 01 17*
 
 VStretchedIndicatorStaticPagerTabView

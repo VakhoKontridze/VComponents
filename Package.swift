@@ -33,6 +33,9 @@ let package: Package = .init(
             dependencies: [
                 "VCore"
             ],
+            exclude: [
+                "../../Documentation"
+            ],
             resources: [
                 .process("Resources")
             ]

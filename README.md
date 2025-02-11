@@ -2,19 +2,23 @@
 
 ## Table of Contents
 
-- [Description](#description)
+- [Intro](#intro)
 - [Components](#components)
-- [Guidelines: Customization](#guidelines-customization)
-- [Guidelines: Animations](#guidelines-animations)
 - [Installation](#installation)
 - [Compatibility](#compatibility)
 - [Contact](#contact)
 
-## Description
+## Intro
 
 VComponents is a `SwiftUI` collection that contains reusable UI components.
 
 <img src="https://github.com/VakhoKontridze/VComponents/assets/57289621/2471203b-8e67-4302-b634-d1a2682e923f">
+
+For additional info on component customization, refer to "Customization" documentation.
+
+For additional info on animations, refer to "Animations" documentation.
+
+For additional info on modal components, refer to "Presentation Host" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
 
 ## Components
 
@@ -109,214 +113,6 @@ VComponents is a `SwiftUI` collection that contains reusable UI components.
     <img tag="VBouncingMarquee" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/10de26e3-4c8c-42ef-baa2-c939a1e7cfec">
     <img tag="VRollingCounter" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/83267731-3c11-4551-898c-9ba86e49558d">
 <p/>
-
-## Guidelines: Customization
-
-Components from `VComponents` are not meant to be customized the same way you would customize atomic SwiftUI components.
-
-Rather than directly modifying them using `ViewModifiers`s, you are supposed to pass an UI model as a parameter to the initializers. All components have default UI models and passing them to initializers is not required. Furthermore, all properties within the UI models have their own default values.
-
-For instance, you can change the foreground color of a `VPlainButton` by changing the values.
-
-Not Preferred:
-
-```swift
-var body: some View {
-    VPlainButton(
-        action: doSomething,
-        title: "Lorem Ipsum"
-    )
-    .foregroundStyle(.primary)
-}
-```
-
-Preferred:
-
-```swift
-let uiModel: VPlainButtonUIModel = {
-    var uiModel: VPlainButtonUIModel = .init()
-    
-    uiModel.titleTextColors = VPlainButtonUIModel.StateColors(
-        enabled: Color.primary,
-        pressed: Color.secondary,
-        disabled: Color.secondary
-    )
-    
-    return uiModel
-}()
-
-var body: some View {
-    VPlainButton(
-        uiModel: uiModel,
-        action: doSomething,
-        title: "Lorem Ipsum"
-    )
-}
-```
-
-Alternately, you can create `static` instances of UI models for reusability.
-
-```swift
-extension VPlainButtonUIModel {
-    static let someUIModel: Self = {
-        var uiModel: Self = .init()
-        
-        uiModel.titleTextColors = StateColors(
-            enabled: Color.primary,
-            pressed: Color.secondary,
-            disabled: Color.secondary
-        )
-        
-        return uiModel
-    }()
-}
-
-var body: some View {
-    VPlainButton(
-        uiModel: .someUIModel,
-        action: doSomething,
-        title: "Lorem Ipsum"
-    )
-}
-```
-
-Frequently, you will discover pre-configured static factory-initialized UI models associated with each component. It's recommended to investigate UI model files before defining them yourself.
-
-```swift
-var body: some View {
-    VWrappingMarquee(
-        uiModel: .insettedGradientMask,
-        content: {
-            HStack(content: {
-                Image(systemName: "swift")
-                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-            })
-            .drawingGroup() // For `Image`
-        }
-    )
-}
-```
-
-## Guidelines: Animations
-
-`VComponents` associates animations directly with the components and their UI models, rather than with the external state.
-
-```swift
-@State private var isOn: Bool = false
-
-var body: some View {
-    VStack(content: {
-        VToggle(isOn: $isOn)
-        
-        VPlainButton(
-            action: { isOn.toggle() },
-            title: "Toggle"
-        )
-    })
-}
-```
-
-By default, the `VToggle` uses an `easeIn` animation with a duration of `0.1` to handle state changes. This applies uniformly to both touch interactions, as well as any external modifications of the state. So, to modify state with a different animation, you'll need to provide a custom UI model.
-
-```swift
-@State private var isOn: Bool = false
-
-var body: some View {
-    VStack(content: {
-        VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.stateChangeAnimation = .easeIn(duration: 1)
-                return uiModel
-            }(),
-            isOn: $isOn
-        )
-        
-        VPlainButton(
-            action: { isOn.toggle() },
-            title: "Toggle"
-        )
-    })
-}
-```
-
-There are two available options for completely cancelling animations.
-
-The first is to set `stateChangeAnimation` to `nil`. While this does not completely remove animation, it essentially applies a `nil` animation.
-
-```swift
-@State private var isOn: Bool = false
-
-var body: some View {
-    VStack(content: {
-        VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.stateChangeAnimation = nil
-                return uiModel
-            }(),
-            isOn: $isOn
-        )
-        
-        VPlainButton(
-            action: { isOn.toggle() },
-            title: "Toggle"
-        )
-    })
-}
-```
-
-The second is to set `appliesStateChangeAnimation` to `false`. This option ensures that the `stateChangeAnimation` is not applied at all, thus effectively removing any animation tied to state changes, even `nil`.
-
-```swift
-@State private var isOn: Bool = false
-
-var body: some View {
-    VStack(content: {
-        VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.appliesStateChangeAnimation = false
-                return uiModel
-            }(),
-            isOn: $isOn
-        )
-        
-        VPlainButton(
-            action: { isOn.toggle() },
-            title: "Toggle"
-        )
-    })
-}
-```
-
-In certain scenarios, the distinction between these two can be substantial. For example, we could set the `appliesStateChangeAnimation` flag to `false` and subsequently mutate the state with an external animation.
-
-```swift
-@State private var isOn: Bool = false
-
-var body: some View {
-    VStack(content: {
-        VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.appliesStateChangeAnimation = false
-                return uiModel
-            }(),
-            isOn: $isOn
-        )
-        
-        VPlainButton(
-            action: { 
-                withAnimation(.easeInOut(duration: 1), {
-                    isOn.toggle()
-                })
-            },
-            title: "Toggle"
-        )
-    })
-}
-```
 
 ## Installation
 
