@@ -41,7 +41,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Swipe
     // Prevents `dismissFromDrag` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
 

@@ -57,7 +57,7 @@ import VCore
 ///
 ///             .focused($isFocused)
 ///             .onFirstAppear(perform: {
-///                 Task(operation: {
+///                 Task(operation: { @MainActor in
 ///                     try? await Task.sleep(seconds: 1)
 ///                     isFocused = true
 ///                 })

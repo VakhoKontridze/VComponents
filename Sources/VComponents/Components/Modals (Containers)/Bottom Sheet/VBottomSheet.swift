@@ -52,7 +52,7 @@ struct VBottomSheet<Content>: View
     // MARK: Properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Swipe
     @State private var isBeingDismissedFromSwipe: Bool = false
 
     // MARK: Initializers

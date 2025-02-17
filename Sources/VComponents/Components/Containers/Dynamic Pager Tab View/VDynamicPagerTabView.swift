@@ -97,12 +97,11 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
     private let tabItemLabel: VDynamicPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
-    // MARK: Properties - Flags
-    @State private var didPositionSelectionIndicatorInitially: Bool = false
-    
-    // MARK: Properties - Misc
+    // MARK: Properties - Tab Indicator
     @Namespace private var selectedTabIndicatorNamespace: Namespace.ID
     private var selectedTabIndicatorNamespaceName: String { "VDynamicPagerTabView.SelectedTabIndicator" }
+    
+    @State private var didPositionSelectionIndicatorInitially: Bool = false
 
     // MARK: Initializers - Standard
     /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item title, and content.

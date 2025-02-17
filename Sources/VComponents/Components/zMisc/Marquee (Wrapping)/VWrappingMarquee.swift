@@ -56,7 +56,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     // MARK: Properties - Content
     private let content: () -> Content
 
-    // MARK: Properties - Flags
+    // MARK: Properties - State
     private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault

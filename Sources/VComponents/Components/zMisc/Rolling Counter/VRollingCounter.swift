@@ -22,7 +22,7 @@ import VCore
 ///     }
 ///
 ///     private func changeValue() {
-///         Task(operation: {
+///         Task(operation: { @MainActor in
 ///             value += .random(in: -10...10)
 ///             try? await Task.sleep(seconds: 1)
 ///             
@@ -56,7 +56,7 @@ public struct VRollingCounter: View, Sendable {
     private let value: Double
     @State private var components: [any VRollingCounterComponentProtocol]
     
-    // MARK: Properties - Flags
+    // MARK: Properties - Operation
     @State private var operation: Operation = .none
 
     // MARK: Initializers

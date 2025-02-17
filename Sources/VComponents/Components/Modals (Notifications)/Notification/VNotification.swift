@@ -40,7 +40,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Properties - Content
     private let content: VNotificationContent<CustomContent>
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Swipe
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
 

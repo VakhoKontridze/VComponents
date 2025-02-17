@@ -34,7 +34,7 @@ import VCore
 ///
 ///             .focused($isFocused)
 ///             .onFirstAppear(perform: {
-///                 Task(operation: {
+///                 Task(operation: { @MainActor in
 ///                     try? await Task.sleep(seconds: 1)
 ///                     isFocused = true
 ///                 })
@@ -115,14 +115,16 @@ public struct VTextField: View, Sendable {
     private let placeholder: String?
     @Binding private var text: String
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Clear Button
     @State private var _isClearButtonVisible: Bool = false
+    
     private var isClearButtonVisible: Bool {
         uiModel.hasClearButton &&
         internalState == .focused &&
         _isClearButtonVisible
     }
 
+    // MARK: Properties - Secure Field
     @State private var textFieldIsSecure: Bool = false
 
     // MARK: Initializers

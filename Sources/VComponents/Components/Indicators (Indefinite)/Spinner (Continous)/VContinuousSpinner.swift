@@ -19,7 +19,7 @@ public struct VContinuousSpinner: View, Sendable {
     // MARK: Properties - UI Model
     private let uiModel: VContinuousSpinnerUIModel
     
-    // MARK: Properties - Flags
+    // MARK: Properties - State
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers

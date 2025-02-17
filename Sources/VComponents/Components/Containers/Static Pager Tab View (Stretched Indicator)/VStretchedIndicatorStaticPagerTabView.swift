@@ -101,10 +101,11 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     private let tabItemLabel: VStretchedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Tab Indicator
     // Used to disable animations when view appears for the first time
     @State private var tabIndicatorAnimationIsEnabled: Bool = false
     
+    // MARK: Properties - Scrolling
     @State private var isBeingScrolled: Bool = false
 
     // MARK: Initializers - Standard

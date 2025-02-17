@@ -106,15 +106,15 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     private let id: KeyPath<Data.Element, ID>
     private let tabItemLabel: VWrappedIndicatorStaticPagerTabViewTabItemLabel<Data.Element, CustomTabItemLabel>
     private let content: (Data.Element) -> Content
-
-    // MARK: Properties - Flags
+    
+    // MARK: Properties - Tab Indicator
+    private var tabBarCoordinateSpaceName: String { "VWrappedIndicatorStaticPagerTabView.TabBar" }
+    
     // Used to disable animations when view appears for the first time
     @State private var tabIndicatorAnimationIsEnabled: Bool = false
     
+    // MARK: Properties - Scrolling
     @State private var isBeingScrolled: Bool = false
-    
-    // MARK: Properties - Misc
-    private var tabBarCoordinateSpaceName: String { "VWrappedIndicatorStaticPagerTabView.TabBar" }
 
     // MARK: Initializers - Standard
     /// Initializes `VWrappedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.

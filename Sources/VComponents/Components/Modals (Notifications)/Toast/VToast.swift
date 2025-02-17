@@ -40,7 +40,7 @@ struct VToast: View {
     // MARK: Properties - Text
     private let text: String
 
-    // MARK: Properties - Flags
+    // MARK: Properties - Swipe
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
 

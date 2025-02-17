@@ -161,8 +161,8 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
                 })
 
                 .onFirstAppear(perform: {
-                    Task(operation: { @MainActor in // Fixes glitch on some platforms
-                        scrollViewProxy.scrollTo(selection[keyPath: id]) // Doesn't have an animation
+                    Task(operation: { @MainActor in
+                        scrollViewProxy.scrollTo(selection[keyPath: id])
                     })
                 })
             })
