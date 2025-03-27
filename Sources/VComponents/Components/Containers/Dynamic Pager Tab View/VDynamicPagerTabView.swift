@@ -60,7 +60,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
         max(uiModel.tabIndicatorTrackHeight, uiModel.selectedTabIndicatorHeight)
     }
 
-    // MARK: Properties - State
+    // MARK: Properties - State - Global
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     // MARK: Properties - State - Tab Item

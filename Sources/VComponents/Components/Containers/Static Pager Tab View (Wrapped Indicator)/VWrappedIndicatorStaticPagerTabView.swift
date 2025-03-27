@@ -67,7 +67,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     @State private var selectedTabIndicatorWidth: CGFloat = 0
     @State private var selectedTabIndicatorOffset: CGFloat = 0
 
-    // MARK: Properties - State
+    // MARK: Properties - State - Global
     @Environment(\.isEnabled) private var isEnabled: Bool
 
     // MARK: Properties - State - Tab Item
