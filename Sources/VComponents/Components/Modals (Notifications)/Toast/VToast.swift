@@ -120,7 +120,7 @@ struct VToast: View {
                     }
                 })
 
-                .getHeight(assignTo: $height)
+                .getSize({ height = $0.height })
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         })

@@ -64,7 +64,7 @@ extension View {
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
-    ///             .getSafeAreaInsets(assignTo: $safeAreaInsets)
+    ///             .getSafeAreaInsets({ safeAreaInsets = $0 )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
     ///                 uiModel: {

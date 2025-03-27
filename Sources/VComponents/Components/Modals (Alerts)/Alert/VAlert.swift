@@ -130,11 +130,11 @@ struct VAlert<Content>: View
                 contentView
             })
             .padding(uiModel.titleTextMessageTextAndContentMargins)
-            .getHeight(assignTo: $titleMessageContentHeight)
+            .getSize({ titleMessageContentHeight = $0.height })
 
             buttonsScrollView
         })
-        .getHeight(assignTo: $alertHeight)
+        .getSize({ alertHeight = $0.height })
     }
 
     @ViewBuilder
@@ -230,7 +230,7 @@ struct VAlert<Content>: View
             }
         })
         .padding(uiModel.buttonMargins)
-        .getHeight(assignTo: $buttonsStackHeight)
+        .getSize({ buttonsStackHeight = $0.height })
     }
     
     private func buttonContentView(

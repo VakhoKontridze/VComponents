@@ -85,7 +85,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
                 .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
 
-                .getHeight(assignTo: $height)
+                .getSize({ height = $0.height })
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         })

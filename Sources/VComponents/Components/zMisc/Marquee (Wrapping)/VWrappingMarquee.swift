@@ -76,7 +76,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .getWidth(assignTo: $containerWidth)
+            .getSize({ containerWidth = $0.width })
             .overlay(content: { marqueeContentView })
             .mask({ gradientMask })
             .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
@@ -109,7 +109,7 @@ public struct VWrappingMarquee<Content>: View, Sendable where Content: View {
     private var contentView: some View {
         content()
             .fixedSize()
-            .getSize(assignTo: $contentSize)
+            .getSize({ contentSize = $0 })
     }
     
     @ViewBuilder

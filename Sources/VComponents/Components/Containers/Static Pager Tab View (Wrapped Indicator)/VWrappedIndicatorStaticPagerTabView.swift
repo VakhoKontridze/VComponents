@@ -243,7 +243,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             }
         )
         .coordinateSpace(name: tabBarCoordinateSpaceName)
-        .getWidth(assignTo: $tabBarWidth)
+        .getSize({ tabBarWidth = $0.width })
     }
 
     private func tabItemView(
@@ -265,10 +265,10 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                     custom(tabItemInternalState, element)
                 }
             })
-            .getFrame(in: .named(tabBarCoordinateSpaceName), { [layoutDirection, tabBarWidth, $tabBarItemWidths, $tabBarItemPositions] frame in
-                $tabBarItemWidths.wrappedValue[element.hashValue] = frame.size.width
+            .getFrame(in: .named(tabBarCoordinateSpaceName), { [layoutDirection, tabBarWidth] frame in
+                tabBarItemWidths[element.hashValue] = frame.size.width
 
-                $tabBarItemPositions.wrappedValue[element.hashValue] = {
+                tabBarItemPositions[element.hashValue] = {
                     if layoutDirection.isRightToLeft {
                         // `min` and `max` start from left side of the screen, regardless of layout direction.
                         // So, mapping is required.

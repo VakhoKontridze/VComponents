@@ -62,7 +62,7 @@ public struct VProgressBar: View, Sendable {
             width: uiModel.direction.isHorizontal ? nil : uiModel.height,
             height: uiModel.direction.isHorizontal ? uiModel.height : nil
         )
-        .getSize(assignTo: $progressBarSize)
+        .getSize({ progressBarSize = $0 })
         .applyIf(uiModel.appliesProgressAnimation, transform: {
             $0.animation(uiModel.progressAnimation, value: value)
         })

@@ -110,7 +110,7 @@ public struct VRangeSlider: View, Sendable {
             thumbView(.low)
             thumbView(.high)
         })
-        .getSize(assignTo: $sliderSize)
+        .getSize({ sliderSize = $0 })
         .applyIf(uiModel.appliesProgressAnimation, transform: {
             $0.animation(uiModel.progressAnimation, value: value)
         })
