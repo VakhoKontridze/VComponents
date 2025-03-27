@@ -84,9 +84,8 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
                 selection[keyPath: id]
             },
             set: { newValue in
-                if let element: Data.Element = data.first(where: { $0[keyPath: id] == newValue }) {
-                    selection = element
-                }
+                guard let element: Data.Element = data.first(where: { $0[keyPath: id] == newValue }) else { return }
+                selection = element
             }
         )
     }
