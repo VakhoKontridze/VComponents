@@ -1,6 +1,6 @@
 # Change Log
 
-### 7.2.3(74)
+### [7.2.3(74)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.3) — 2025 03 27
 
 Documentation
 
