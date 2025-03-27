@@ -6,7 +6,7 @@ Documentation
 
 - Customization and Animations documentations have been extracted from README.md
 
-### [7.2.2(73)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.2) — *2025 01 17*
+### [7.2.2(73)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.2) — 2025 01 17
 
 VStretchedIndicatorStaticPagerTabView
 
@@ -16,13 +16,13 @@ VWrappedIndicatorStaticPagerTabView
 
 - Indicator jitter caused when scrolling slowly is fixed
 
-### [7.2.1(72)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.1) — *2024 12 16*
+### [7.2.1(72)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.1) — 2024 12 16
 
 Helpers - Architectural Pattern Helpers
 
 - Missing `nil` default value is added to `layerID` in `VAlert`'s architectural pattern helper methods
 
-### [7.2.0(71)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.0) — *2024 12 12*
+### [7.2.0(71)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.0) — 2024 12 12
 
 VModal
 
@@ -59,7 +59,7 @@ Helpers - Architectural Pattern Helpers
 - Missing `layerID` parameter has been added in `VAlert`'s architectural pattern helper methods
 - `VAlertButtonConvertible` conformance is added to `Never`
 
-### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — *2024 10 24*
+### [7.1.0(70)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.1.0) — 2024 10 24
 
 General
 
@@ -81,7 +81,7 @@ VAlert
 
 - `VAlertParameters` is no longer bound by `MainActor`
 
-### [7.0.0(69)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.0.0) — *2024 09 20*
+### [7.0.0(69)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.0.0) — 2024 09 20
 
 General
 
@@ -156,25 +156,25 @@ VDashedSpinner
 
 - Spinner is removed
 
-### [6.0.8(68)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.8) — *2024 08 02*
+### [6.0.8(68)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.8) — 2024 08 02
 
 Other
 
 - Build issue caused by unsafe flags in `Swift` settings is fixed
 
-### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — *2024 07 09*
+### [6.0.7(67)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.7) — 2024 07 09
 
 Other
 
 - Compilation time bottlenecks are fixed
 
-### [6.0.6(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.6) — *2024 06 06*
+### [6.0.6(66)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.6) — 2024 06 06
 
 Other
 
 - Bug fixes and improvements
 
-### [6.0.5(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — *2024 06 02*
+### [6.0.5(65)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.5) — 2024 06 02
 
 VSlider
 
@@ -192,19 +192,19 @@ VWrappedIndicatorStaticPagerTabView
 
 - Crash that occurs when data is empty is fixed
 
-### [6.0.4(64)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — *2024 05 23*
+### [6.0.4(64)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.4) — 2024 05 23
 
 Other
 
 - Bug fixes and improvements
 
-### [6.0.3(63)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.3) — *2024 04 22*
+### [6.0.3(63)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.3) — 2024 04 22
 
 VTappableText
 
 - TappableText is deprecated in favor of combination of `AttributedString.init(stringAndDefault:attributeContainers:)` and `View.addOpenURLAction(_:)`
 
-### [6.0.2(62)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.2) — *2024 03 09*
+### [6.0.2(62)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.2) — 2024 03 09
 
 VWrappingMarquee
 
@@ -214,7 +214,7 @@ VBouncingMarquee
 
 - Runtime warning caused by invalid gradient when content size is `0` is fixed
 
-### [6.0.1(61)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.1) — *2024 03 07*
+### [6.0.1(61)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.1) — 2024 03 07
 
 General
 
@@ -225,7 +225,7 @@ VTextField
 - Clear button will no longer occupy space when TextField is configured with `secure` content type
 - Clear and visibility buttons have better hit detection, preventing touches from accidentally focusing the TextField
 
-### [6.0.0(60)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.0) — *2024 02 18*
+### [6.0.0(60)](https://github.com/VakhoKontridze/VComponents/releases/tag/6.0.0) — 2024 02 18
 
 General
 
@@ -349,13 +349,13 @@ Other
 
 - `VComponentsColorBook` is no longer exposed to public
 
-### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — *2024 01 23*
+### [5.3.1(59)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.1) — 2024 01 23
 
 VTextView
 
 - Issue with minimum height is fixed, and `minHeight` is replaced with `minimumHeight`
 
-### [5.3.0(58)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.0) — *2024 01 12*
+### [5.3.0(58)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.3.0) — 2024 01 12
 
 VBouncingMarquee
 
@@ -365,7 +365,7 @@ VCodeEntryView
 
 - `spacing` is replaced with `spacingType` to support stretched layout
 
-### [5.2.0(57)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.2.0) — *2023 12 07*
+### [5.2.0(57)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.2.0) — 2023 12 07
 
 VStretchedButton
 
@@ -407,7 +407,7 @@ VTappableText
 
 - A new component is added, that inserts tappable components in `Text`
 
-### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — *2023 11 11*
+### [5.1.0(56)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.1.0) — 2023 11 11
 
 VRectangularCaptionButton
 
@@ -458,7 +458,7 @@ Other
 - Issue with XCode previews in modal components is fixed
 - Redundant `Identifiable` conformances are removed
 
-### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — *2023 10 08*
+### [5.0.0(55)](https://github.com/VakhoKontridze/VComponents/releases/tag/5.0.0) — 2023 10 08
 
 General
 
@@ -632,7 +632,7 @@ Other
 - `ColorBook.layer` is renamed to `ColorBook.background`
 - `ImageBook` is no longer exposed to `public`, but UI models take icons instead
 
-### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.8) — *2023 09 03*
+### [4.3.8(54)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.8) — 2023 09 03
 
 VPageIndicator
 
@@ -647,50 +647,50 @@ Helpers - Architectural Pattern Helpers
 - `VAlertPresentable` is removed
 - `VSpinnerPresentable` is removed
 
-### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — *2023 09 01*
+### [4.3.7(53)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.7) — 2023 09 01
 
 VSegmentedPicker
 
 - Issue with indicator position on last row is fixed
 
-### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — *2023 08 06*
+### [4.3.6(52)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.6) — 2023 08 06
 
 VAlert
 
 - Issue of title and message not wrapping to multiple lines is fixed
 
-### [4.3.5(51)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.5) — *2023 08 06*
+### [4.3.5(51)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.5) — 2023 08 06
 
 VToast
 
 - Issue with lifecycle duration not respecting appear animation duration is fixed
 - Issue with hidden offset is fixed
 
-### [4.3.4(50)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.4) — *2023 07 17*
+### [4.3.4(50)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.4) — 2023 07 17
 
 Other
 
 - Bug fixes and improvements
 
-### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — *2023 06 10*
+### [4.3.3(49)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.3) — 2023 06 10
 
 VListRow
 
 - Issue with `VListRow.rowEnclosingSeparators(isFirst:)` not inserting first and last separators is fixed
 
-### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — *2023 06 10*
+### [4.3.2(48)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.2) — 2023 06 10
 
 VSegmentedPicker
 
 - Issue with all rows scaling down on press is fixed
 
-### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — *2023 06 07*
+### [4.3.1(47)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.1) — 2023 06 07
 
 VRoundedButton
 
 - `iconSize` is changed to `24x24` on `iOS` and to `26x26` on `watchOS`
 
-### [4.3.0(46)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.0) — *2023 05 06*
+### [4.3.0(46)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.3.0) — 2023 05 06
 
 VStretchedButton
 
@@ -736,19 +736,19 @@ VContextMenu
 
 - API is overhauled
 
-### [4.2.3(45)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.3) — *2023 05 01*
+### [4.2.3(45)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.3) — 2023 05 01
 
 Other
 
 - Issue with large icons going out of bounds in several components is fixed 
 
-### [4.2.2(44)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.2) — *2023 05 01*
+### [4.2.2(44)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.2) — 2023 05 01
 
 Other
 
 - Platform-specific compilation errors are fixed
 
-### [4.2.1(43)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.1) — *2023 05 01*
+### [4.2.1(43)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.1) — 2023 05 01
 
 VBottomSheet
 
@@ -759,7 +759,7 @@ Other
 
 - Compilation errors are fixed
 
-### [4.2.0(42)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.0) — *2023 04 29*
+### [4.2.0(42)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.2.0) — 2023 04 29
 
 General
 
@@ -782,7 +782,7 @@ VContextMenu
 
 - Rows can now be disabled
 
-### [4.1.0(41)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.1.0) — *2023 04 21*
+### [4.1.0(41)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.1.0) — 2023 04 21
 
 VModal
 
@@ -798,49 +798,49 @@ VSideBar
 - SideBar now supports `iOS` `14.0`
 - Issue with screen-sized modal in landscape is fixed
 
-### [4.0.7(40)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.7) — *2023 04 20*
+### [4.0.7(40)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.7) — 2023 04 20
 
 Other
 
 - Issue with button's content overflowing over rounded corners when margins are zero is fixed
 
-### [4.0.6(39)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.6) — *2023 04 15*
+### [4.0.6(39)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.6) — 2023 04 15
 
 VSheet
 
 - Default value of `roundedCorner` is fixed to be `allCorners` again in `VSheetUIModel`
 
-### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
+### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — 2023 04 15
 
 Other
 
 - Issue with `PresentationHost` breaking modal frames when presented from `UIHostingController` is fixed
 
-### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
+### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — 2023 04 14
 
 VBottomSheet
 
 - Issue with positioning of smaller sheets when using fully fixed height is fixed
 
-### [4.0.3(36)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.3) — *2023 04 13*
+### [4.0.3(36)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.3) — 2023 04 13
 
 Other
 
 - Issue of DEBUG imports preventing archiving is fixed 
 
-### [4.0.2(35)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.2) — *2023 04 13*
+### [4.0.2(35)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.2) — 2023 04 13
 
 VBottomSheet
 
 - Issue with positioning when using fully fixed height is fixed
 
-### [4.0.1(34)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.1) — *2023 04 12*
+### [4.0.1(34)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.1) — 2023 04 12
 
 General
 
 - Default haptic value is set to `nil` for most button components - `VCapsuleButton`, `VRoundedButton`, `VRoundedCaptionButton`, and `VPlainButton`
 
-### [4.0.0(33)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.0) — *2023 04 09*
+### [4.0.0(33)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.0) — 2023 04 09
 
 General
 
@@ -970,19 +970,19 @@ Other
 - `ColorBook.accent` is renamed to `Color.blue`
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 
-### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — *2023 04 09*
+### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — 2023 04 09
 
 Other
 
 - Bug fixes and improvements
 
-### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
+### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — 2023 04 02
 
 VSlider
 
 - Issue with tap gesture registering incorrect location is fixed
 
-### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — *2023 03 23*
+### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — 2023 03 23
 
 VTextField
 
@@ -990,7 +990,7 @@ VTextField
 - Close button animation is set to `nil`
 - Issue with keyboard animation affecting close button's offset is fixed
 
-### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — *2023 03 09*
+### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — 2023 03 09
 
 VRoundedLabeledButton
 
@@ -1038,7 +1038,7 @@ Other
 - Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
 - Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
 
-### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
+### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — 2023 03 03
 
 General
 
@@ -1064,7 +1064,7 @@ API
 
 `VComponentsLocalizationService` is renamed to `VComponentsLocalizationManager`
 
-### [3.0.0(27)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.0.0) — *2022 10 02*
+### [3.0.0(27)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.0.0) — 2022 10 02
 
 General
 
@@ -1242,25 +1242,25 @@ Other
 - `BasicAnimation` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - `pressed` and `disabled` `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
 
-### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
+### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — 2022 07 04
 
 Other
 
 - Bug fixes and improvements
 
-### [2.3.3(25)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.3) — *2022 07 04*
+### [2.3.3(25)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.3) — 2022 07 04
 
 Models
 
 - `EdgeInsets`s are renamed to full names from [VCore](https://github.com/VakhoKontridze/VCore)
 
-### [2.3.2(24)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.2) — *2022 07 04*
+### [2.3.2(24)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.2) — 2022 07 04
 
 Other
 
 - Bug fixes and improvements
 
-### [2.3.1(23)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.1) — *2022 07 04*
+### [2.3.1(23)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.1) — 2022 07 04
 
 General
 
@@ -1270,14 +1270,14 @@ VModal
 
 - Issue with content clipping outside border, when margins are zero, is fixed
 
-### [2.3.0(22)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.0) — *2022 06 27*
+### [2.3.0(22)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.0) — 2022 06 27
 
 VSideBar
 
 - SideBar now supports presentation from all four edges
 - Issue with buttons, nested inside `ScrollView`, not registering clicks is fixed
 
-### [2.2.0(21)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.2.0) — *2022 06 25*
+### [2.2.0(21)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.2.0) — 2022 06 25
 
 VBaseButton
 
@@ -1301,19 +1301,19 @@ VContextMenu
 
 - ContextMenu component is added
 
-### [2.1.2(20)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.2) — *2022 06 20*
+### [2.1.2(20)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.2) — 2022 06 20
 
 General
 
 - `Model` objects are renamed to `UIModel`s
 
-### [2.1.1(19)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.1) — *2022 06 17*
+### [2.1.1(19)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.1) — 2022 06 17
 
 Other
 
 - Missing demo app `.xcodeproj` file is now tracked
 
-### [2.1.0(18)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.0) — *2022 06 15*
+### [2.1.0(18)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.0) — 2022 06 15
 
 VSlider
 
@@ -1330,7 +1330,7 @@ Other
 - `ModalSizes` and `ModalSizes.SizeConfiguration` now conform to `Equatable, `Hashable`, and `Comparable`
 - `asSwiftUIAnimation` is renamed to `toSwiftUIAnimation` in `BasicAnimation`
 
-### [2.0.0(17)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.0.0) — *2022 05 26*
+### [2.0.0(17)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.0.0) — 2022 05 26
 
 General
 
@@ -1521,7 +1521,7 @@ Other
 - `ImageBook` is made public, and asset icons in library can no be re-set
 - Several internal properties are now exposed to `public` in models
 
-### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — *2022 01 07*
+### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — 2022 01 07
 
 General
 
@@ -1541,7 +1541,7 @@ Extensions
 
 - Issues with conditional `View` function `if` are fixed
 
-### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.5.0) — *2021 12 24*
+### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.5.0) — 2021 12 24
 
 VBaseButton
 
@@ -1564,7 +1564,7 @@ Other
 
 - `StateColors_EPDL` is renamed to `StateColors_EPLD`
 
-### [1.4.6(14)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.6) — *2021 12 10*
+### [1.4.6(14)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.6) — 2021 12 10
 
 VBaseButton
 
@@ -1574,7 +1574,7 @@ VPrimaryButton
 
 - Button height is changed to `56`
 
-### [1.4.5(13)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.5) — *2021 11 05*
+### [1.4.5(13)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.5) — 2021 11 05
 
 General
 
@@ -1584,23 +1584,23 @@ Other
 
 - Several color group objects and their parameters are renamed
 
-### [1.4.4(12)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.4) — *2021 10 28*
+### [1.4.4(12)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.4) — 2021 10 28
 
 VHalfModal
 
 - `Resize Indicator` is renamed to `Grabber`
 
-### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.3) — *2021 10 11*
+### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.3) — 2021 10 11
 
 Bug fixes and improvements
 
-### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.2) — *2021 09 02*
+### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.2) — 2021 09 02
 
 VSpinner
 
 - Issue with `continuous` spinner breaking in `NavigationView` in `SwiftUI` `3.0` is fixed
 
-### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.1) — *2021 08 29*
+### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.1) — 2021 08 29
 
 VCheckBox
 
@@ -1617,7 +1617,7 @@ Other
 
 - Layout and color groups used in models can now be initialized as `.zero`, `.clear`, and `.solid`
 
-### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.0) — *2021 08 26*
+### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.0) — 2021 08 26
 
 VNavigationLink
 
@@ -1649,7 +1649,7 @@ VBaseView
 
 - Default title alignment is changed from `leading` to `center`
 
-### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.1) — *2021 02 27*
+### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.1) — 2021 02 27
 
 VBaseTextField
 
@@ -1659,7 +1659,7 @@ VTextField
 
 - TextField calling `onChange` handler one keystroke behind is fixed
 
-### [1.3.0(6)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.0) — *2021 02 16*
+### [1.3.0(6)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.0) — 2021 02 16
 
 VBaseTextField
 
@@ -1669,13 +1669,13 @@ VTextField
 
 - `autocapitalization` is added to `VTextFieldModel`
 
-### [1.2.1(5)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.1) — *2021 02 14*
+### [1.2.1(5)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.1) — 2021 02 14
 
 VHalfModal
 
 - Close button layout when embedded inside `VNavigationView` is fixed
 
-### [1.2.0(4)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.0) — *2021 02 12*
+### [1.2.0(4)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.0) — 2021 02 12
 
 VSection
 
@@ -1689,16 +1689,16 @@ VLazyList
 
 - `VLazyList` is renamed to `VLazyScrollView`
 
-### [1.1.1(3)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.1) — *2021 02 10*
+### [1.1.1(3)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.1) — 2021 02 10
 
 Bug fixes and improvements
 
-### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.0) — *2021 02 09*
+### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.0) — 2021 02 09
 
 General
 
 - Documentation on public declarations, methods, and properties are added
 
-### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.0.0) — *2021 02 07*
+### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.0.0) — 2021 02 07
 
 Initial release
