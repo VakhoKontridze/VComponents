@@ -525,14 +525,14 @@ struct VAlert<Content>: View
                 }
             )
             .task({ @MainActor in
-                try? await Task.sleep(seconds: 1)
+                try? await Task.sleep(for: .seconds(1))
 
                 while true {
                     width = .fixed(width: .fraction(0.74))
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .stretched(margin: .absolute(15))
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
                 }
             })
     })

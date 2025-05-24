@@ -175,7 +175,7 @@ struct VToast: View {
 
         // No need to handle reentrancy and cancellation
         Task(operation: { @MainActor in
-            try? await Task.sleep(seconds: uiModel.timeoutDuration)
+            try? await Task.sleep(for: .seconds(uiModel.timeoutDuration))
             isPresented = false
         })
     }
@@ -416,40 +416,40 @@ struct VToast: View {
                 text: "Lorem ipsum dolor sit amet"
             )
             .task({ @MainActor in
-                try? await Task.sleep(seconds: 1)
+                try? await Task.sleep(for: .seconds(1))
 
                 while true {
                     width = .fixed(width: .fraction(0.75))
                     alignment = .leading
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .fixed(width: .fraction(0.75))
                     alignment = .center
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .fixed(width: .fraction(0.75))
                     alignment = .trailing
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .wrapped(margin: .absolute(15))
                     alignment = .center
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .wrapped(maxWidth: .fraction(0.75), margin: .absolute(15))
                     alignment = .center
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .stretched(margin: .absolute(15))
                     alignment = .leading
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .stretched(margin: .absolute(15))
                     alignment = .center
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     width = .stretched(margin: .absolute(15))
                     alignment = .trailing
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
                 }
             })
     })
@@ -483,20 +483,20 @@ struct VToast: View {
                 text: "Lorem ipsum dolor sit amet"
             )
             .task({ @MainActor in
-                try? await Task.sleep(seconds: 1)
+                try? await Task.sleep(for: .seconds(1))
 
                 while true {
                     uiModel = .info
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     uiModel = .success
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     uiModel = .warning
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     uiModel = .error
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
                 }
             })
     })

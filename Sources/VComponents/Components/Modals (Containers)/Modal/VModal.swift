@@ -207,26 +207,26 @@ private struct ContentView_SizeTypes: View {
                     }
                 )
                 .task({ @MainActor in
-                    try? await Task.sleep(seconds: 1)
+                    try? await Task.sleep(for: .seconds(1))
 
                     while true {
                         size = VModalUIModel.Size(
                             width: .fixed(dimension: .fraction(0.75)),
                             height: .fixed(dimension: .fraction(0.75))
                         )
-                        try? await Task.sleep(seconds: 1)
+                        try? await Task.sleep(for: .seconds(1))
 
                         size = VModalUIModel.Size(
                             width: .wrapped(margin: .absolute(15)),
                             height: .wrapped(margin: .absolute(15))
                         )
-                        try? await Task.sleep(seconds: 1)
+                        try? await Task.sleep(for: .seconds(1))
 
                         size = VModalUIModel.Size(
                             width: .stretched(margin: .absolute(15)),
                             height: .stretched(margin: .absolute(15))
                         )
-                        try? await Task.sleep(seconds: 1)
+                        try? await Task.sleep(for: .seconds(1))
                     }
                 })
         })
