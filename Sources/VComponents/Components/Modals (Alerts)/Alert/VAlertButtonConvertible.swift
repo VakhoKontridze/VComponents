@@ -39,7 +39,7 @@ extension Never: VAlertButtonConvertible {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension EmptyView: VAlertButtonConvertible {
-    nonisolated public func toButtons() -> [any VAlertButtonProtocol] {
+    public func toButtons() -> [any VAlertButtonProtocol] {
         []
     }
 }
