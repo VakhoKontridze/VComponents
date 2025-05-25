@@ -300,7 +300,6 @@ struct VToast: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Singleline", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -329,7 +328,6 @@ struct VToast: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Multiline", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -359,7 +357,6 @@ struct VToast: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Top", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -389,7 +386,6 @@ struct VToast: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Width Types", body: {
     @Previewable @State var isPresented: Bool = true
     
@@ -464,7 +460,6 @@ struct VToast: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Highlights", body: {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VToastUIModel = .init()

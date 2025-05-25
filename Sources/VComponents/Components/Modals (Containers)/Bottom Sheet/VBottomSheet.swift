@@ -340,7 +340,6 @@ struct VBottomSheet<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -560,7 +559,6 @@ private struct ContentView_IdealLarge: View {
 
 #endif
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Autoresizing", body: {
     ContentView_ContentAutoresizing()
 })
@@ -605,7 +603,6 @@ private struct ContentView_ContentAutoresizing: View {
     }
 }
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Wrapping Height", body: {
     @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
@@ -670,7 +667,6 @@ private struct ContentView_ContentAutoresizing: View {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Scrollable Content", body: {
     @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
@@ -714,7 +710,6 @@ private struct ContentView_ContentAutoresizing: View {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Insetted Content", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -730,7 +725,6 @@ private struct ContentView_ContentAutoresizing: View {
     .presentationHostLayer()
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Drag Indicator", body: {
     @Previewable @State var isPresented: Bool = true
 

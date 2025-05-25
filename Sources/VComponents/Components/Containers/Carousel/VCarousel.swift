@@ -50,7 +50,6 @@ import VCore
 ///     }
 ///
 /// `VCarousel` also supports infinite scroll. Fore more info, refer to `VCarouselInfiniteScrollDataSourceManager`.
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 @available(tvOS, unavailable) // `scrollPosition(id:)` API doesn't work
 public struct VCarousel<Data, ID, Content>: View, Sendable
     where
@@ -210,7 +209,6 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
 
 #if !os(tvOS)
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var selection: Preview_Weekday = .monday
     var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
@@ -236,7 +234,6 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Items", body: {
     @Previewable @State var selection: Preview_Weekday = .monday
 
@@ -254,7 +251,6 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Infinite Items", body: {
     @Previewable @State var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
         data: Preview_RGBColor.allCases,

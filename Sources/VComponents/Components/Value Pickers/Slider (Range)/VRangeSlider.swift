@@ -314,7 +314,6 @@ extension Double {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
@@ -348,7 +347,6 @@ extension Double {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8 // '@Previewable' items must be at the beginning of the preview block
     
@@ -423,7 +421,6 @@ extension Double {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Step", body: {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 

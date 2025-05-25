@@ -213,7 +213,6 @@ public struct VToggle<CustomLabel>: View, Sendable where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var state: VToggleState = .on
 

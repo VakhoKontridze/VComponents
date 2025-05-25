@@ -212,7 +212,6 @@ public struct VPageIndicator<CustomDotContent>: View, Sendable where CustomDotCo
 // MARK: - Preview
 #if DEBUG
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
@@ -226,7 +225,6 @@ public struct VPageIndicator<CustomDotContent>: View, Sendable where CustomDotCo
     .onReceiveOfTimerIncrement($current, to: total-1)
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
@@ -285,7 +283,6 @@ public struct VPageIndicator<CustomDotContent>: View, Sendable where CustomDotCo
     .onReceiveOfTimerIncrement($current, to: total-1)
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Different Sizes", body: {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
@@ -304,7 +301,6 @@ public struct VPageIndicator<CustomDotContent>: View, Sendable where CustomDotCo
     .onReceiveOfTimerIncrement($current, to: total-1)
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Stretched", body: {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10

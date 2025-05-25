@@ -84,12 +84,7 @@ public struct VWrappedIndicatorStaticPagerTabViewUIModel: Sendable {
 
     // MARK: Properties - Tab View
     /// Indicates if tab view scrolling is enabled. Set to `true`.
-    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-    public var isTabViewScrollingEnabled: Bool {
-        get { _isTabViewScrollingEnabled }
-        set { _isTabViewScrollingEnabled = newValue }
-    }
-    private var _isTabViewScrollingEnabled: Bool = true // TODO: iOS 17.0 - Remove
+    public var isTabViewScrollingEnabled: Bool = true
     
     /// Tab view background color.
     public var tabViewBackgroundColor: Color = {

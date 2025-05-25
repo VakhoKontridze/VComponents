@@ -400,7 +400,6 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Many Items", body: {
     @Previewable @State var selection: Preview_Weekday = .thursday
 
@@ -427,7 +426,6 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Few Items", body: {
     @Previewable @State var selection: Preview_Weekday = .monday
 
@@ -454,7 +452,6 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("No Items", body: {
     @Previewable @State var selection: Preview_Weekday = .thursday
 

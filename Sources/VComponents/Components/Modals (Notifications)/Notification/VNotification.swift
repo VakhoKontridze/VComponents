@@ -405,7 +405,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Bottom", body: {
     @Previewable @State var isPresented: Bool = true
 
@@ -437,7 +436,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Width Types", body: {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VNotificationUIModel.Width?
@@ -484,7 +482,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Highlights", body: {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VNotificationUIModel = .init()

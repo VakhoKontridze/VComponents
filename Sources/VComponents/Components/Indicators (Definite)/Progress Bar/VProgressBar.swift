@@ -108,7 +108,6 @@ public struct VProgressBar: View, Sendable {
 // MARK: - Preview
 #if DEBUG
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var value: Double = 0
 
@@ -119,7 +118,6 @@ public struct VProgressBar: View, Sendable {
     .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("States", body: {
     @Previewable @State var value: Double = 0
 
@@ -140,7 +138,6 @@ public struct VProgressBar: View, Sendable {
     .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
     @Previewable @State var value: Double = 0 // '@Previewable' items must be at the beginning of the preview block
     

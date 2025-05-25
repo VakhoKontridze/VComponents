@@ -200,7 +200,6 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View, Sendable
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var state: VDisclosureGroupState = .expanded
     

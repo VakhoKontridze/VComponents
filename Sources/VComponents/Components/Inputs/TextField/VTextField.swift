@@ -358,7 +358,6 @@ public struct VTextField: View, Sendable {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var text: String = "Lorem ipsum"
 
@@ -373,7 +372,6 @@ public struct VTextField: View, Sendable {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Content Types", body: {
     @Previewable @State var text: String = "Lorem ipsum"
 

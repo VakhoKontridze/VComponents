@@ -244,7 +244,6 @@ public struct VSlider: View, Sendable {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS))
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("*", body: {
     @Previewable @State var value: Double = 0.5
 
@@ -282,7 +281,6 @@ public struct VSlider: View, Sendable {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Layout Directions", body: {
     @Previewable @State var value: Double = 0.5 // '@Previewable' items must be at the beginning of the preview block
     
@@ -351,7 +349,6 @@ public struct VSlider: View, Sendable {
     )
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Step", body: {
     @Previewable @State var value: Double = 0.5
 
@@ -364,7 +361,6 @@ public struct VSlider: View, Sendable {
     })
 })
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview("Draggable Body", body: {
     @Previewable @State var value: Double = 0.5
 
