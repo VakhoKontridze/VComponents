@@ -191,21 +191,12 @@ public struct VTextField: View, Sendable {
 
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .applyModifier({
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0
-                    .onChange(
-                        of: text,
-                        initial: true,
-                        { (_, newValue) in setClearButtonVisibility(newValue) }
-                    )
-            } else {
-                $0
-                    .onAppear(perform: { setClearButtonVisibility(text) })
-                    .onChange(of: text, perform: setClearButtonVisibility)
-            }
-        })
-
+        .onChange(
+            of: text,
+            initial: true,
+            { (_, newValue) in setClearButtonVisibility(newValue) }
+        )
+        
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
         .foregroundStyle(uiModel.textColors.value(for: internalState))

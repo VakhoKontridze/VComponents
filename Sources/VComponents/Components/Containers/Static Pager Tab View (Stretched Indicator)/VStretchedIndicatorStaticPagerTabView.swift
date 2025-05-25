@@ -296,59 +296,15 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             let tabViewMinX: CGFloat = geometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
             let tabViewWidth: CGFloat = geometryProxy.size.width
             
-            Group(content: {
-                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                    ScrollView(.horizontal, content: {
-                        LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                            spacing: 0,
-                            content: {
-                                ForEach(data, id: id, content: { element in
-                                    content(element)
-                                        .tag(element)
-                                        .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                                        .frame(maxHeight: .infinity)
-                                        .getFrame(in: .global, { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
-                                            guard element == selection else { return }
-
-                                            Task(operation: { @MainActor in
-                                                calculateIndicatorFrame(
-                                                    selectedIndexInt: selectedIndexInt,
-                                                    tabViewMinX: tabViewMinX,
-                                                    tabViewWidth: tabViewWidth,
-                                                    interstitialOffset: frame.minX
-                                                )
-                                            })
-                                        })
-                                })
-                            }
-                        )
-                        .scrollTargetLayout()
-                    })
-                    .scrollTargetBehavior(.paging)
-                    .scrollPosition(id: selectionIDBinding)
-                    .applyModifier({
-                        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
-                            $0
-                                .onScrollPhaseChange({ (_, newValue) in
-                                    isBeingScrolled = newValue == .interacting
-                                })
-                        } else {
-                            $0
-                        }
-                    })
-                    
-                    .background(content: { uiModel.tabViewBackgroundColor })
-                    
-                    .scrollIndicators(.hidden)
-                    
-                    .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
-                    
-                } else {
-                    TabView(selection: $selection, content: {
+            ScrollView(.horizontal, content: {
+                LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                    spacing: 0,
+                    content: {
                         ForEach(data, id: id, content: { element in
                             content(element)
                                 .tag(element)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensures that small content doesn't break page indicator calculation
+                                .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                                .frame(maxHeight: .infinity)
                                 .getFrame(in: .global, { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
                                     guard element == selection else { return }
 
@@ -362,57 +318,45 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                                     })
                                 })
                         })
-                    })
-                    .tabViewStyle(.page(indexDisplayMode: .never))
-                    .background(content: { uiModel.tabViewBackgroundColor })
-                }
+                    }
+                )
+                .scrollTargetLayout()
             })
+            .scrollTargetBehavior(.paging)
+            .scrollPosition(id: selectionIDBinding)
             .applyModifier({
-                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
+                if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
                     $0
-                        .onChange(
-                            of: selectedIndexInt,
-                            initial: true,
-                            { (_, newValue) in
-                                guard !isBeingScrolled else { return }
-                                
-                                Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
-                                    calculateIndicatorFrame(
-                                        selectedIndexInt: newValue,
-                                        tabViewMinX: tabViewMinX,
-                                        tabViewWidth: tabViewWidth,
-                                        interstitialOffset: 0
-                                    )
-                                })
-                            }
-                        )
-
+                        .onScrollPhaseChange({ (_, newValue) in
+                            isBeingScrolled = newValue == .interacting
+                        })
                 } else {
                     $0
-                        .onAppear(perform: {
-                            Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
-                                calculateIndicatorFrame(
-                                    selectedIndexInt: selectedIndexInt,
-                                    tabViewMinX: tabViewMinX,
-                                    tabViewWidth: tabViewWidth,
-                                    interstitialOffset: 0
-                                )
-                            })
-                        })
-                        .onChange(of: selectedIndexInt, perform: { newValue in
-                            guard !isBeingScrolled else { return }
-                            
-                            Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
-                                calculateIndicatorFrame(
-                                    selectedIndexInt: newValue,
-                                    tabViewMinX: tabViewMinX,
-                                    tabViewWidth: tabViewWidth,
-                                    interstitialOffset: 0
-                                )
-                            })
-                        })
                 }
             })
+            
+            .background(content: { uiModel.tabViewBackgroundColor })
+            
+            .scrollIndicators(.hidden)
+            
+            .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
+            
+            .onChange(
+                of: selectedIndexInt,
+                initial: true,
+                { (_, newValue) in
+                    guard !isBeingScrolled else { return }
+                    
+                    Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                        calculateIndicatorFrame(
+                            selectedIndexInt: newValue,
+                            tabViewMinX: tabViewMinX,
+                            tabViewWidth: tabViewWidth,
+                            interstitialOffset: 0
+                        )
+                    })
+                }
+            )
         })
     }
 

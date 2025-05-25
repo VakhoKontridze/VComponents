@@ -81,14 +81,7 @@ public struct VBouncingMarquee<Content>: View, Sendable where Content: View {
         content()
             .fixedSize(horizontal: true, vertical: false)
             .getSize({ contentSize = $0 })
-            .applyModifier({
-                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                    $0
-                        .geometryGroup()
-                } else {
-                    $0
-                }
-            })
+            .geometryGroup()
     }
 
     @ViewBuilder

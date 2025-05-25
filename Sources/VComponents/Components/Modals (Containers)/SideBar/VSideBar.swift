@@ -102,13 +102,7 @@ struct VSideBar<Content>: View where Content: View {
     private var contentView: some View {
         content()
             .padding(uiModel.contentMargins)
-            .applyModifier({
-                if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                    $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-                } else {
-                    $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-                }
-            })
+            .safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
     }
 
     // MARK: Actions
@@ -157,20 +151,11 @@ struct VSideBar<Content>: View where Content: View {
             }
         }()
 
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                animation?.toSwiftUIAnimation,
-                { isPresentedInternally = false },
-                completion: completion
-            )
-
-        } else {
-            withBasicAnimation(
-                animation,
-                body: { isPresentedInternally = false },
-                completion: completion
-            )
-        }
+        withAnimation(
+            animation?.toSwiftUIAnimation,
+            { isPresentedInternally = false },
+            completion: completion
+        )
     }
     
     // MARK: Presentation Edge Offsets

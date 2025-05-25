@@ -94,17 +94,7 @@ public struct VRollingCounter: View, Sendable {
         )
         .clipped() // Prevents clipping from animations
 
-        .applyModifier({
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0.onChange(of: value, didChangeValue)
-
-            } else {
-                $0
-                    .onChange(of: value, perform: { [value] newValue in
-                        didChangeValue(from: value, to: newValue)
-                    })
-            }
-        })
+        .onChange(of: value, didChangeValue)
     }
 
     @ViewBuilder
@@ -174,47 +164,25 @@ public struct VRollingCounter: View, Sendable {
             uiModel: uiModel
         )
 
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.highlightAnimation?.toSwiftUIAnimation,
-                {
-                    components = newComponents
-                    operation = Operation(oldValue: oldValue, newValue: newValue)
-                },
-                completion: {
-                    withAnimation(
-                        uiModel.dehighlightAnimation?.toSwiftUIAnimation,
-                        {
-                            operation = .none
+        withAnimation(
+            uiModel.highlightAnimation?.toSwiftUIAnimation,
+            {
+                components = newComponents
+                operation = Operation(oldValue: oldValue, newValue: newValue)
+            },
+            completion: {
+                withAnimation(
+                    uiModel.dehighlightAnimation?.toSwiftUIAnimation,
+                    {
+                        operation = .none
 
-                            for i in components.indices {
-                                components[i].isHighlighted = false
-                            }
+                        for i in components.indices {
+                            components[i].isHighlighted = false
                         }
-                    )
-                }
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.highlightAnimation,
-                body: {
-                    components = newComponents
-                    operation = Operation(oldValue: oldValue, newValue: newValue)
-                },
-                completion: {
-                    withAnimation(
-                        uiModel.dehighlightAnimation?.toSwiftUIAnimation, {
-                            operation = .none
-
-                            for i in components.indices {
-                                components[i].isHighlighted = false
-                            }
-                        }
-                    )
-                }
-            )
-        }
+                    }
+                )
+            }
+        )
     }
 
     // MARK: Operation

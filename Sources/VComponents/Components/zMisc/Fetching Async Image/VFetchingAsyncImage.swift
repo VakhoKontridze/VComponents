@@ -181,20 +181,11 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                 }())
             }
         })
-        .applyModifier({
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0
-                    .onChange(
-                        of: parameter,
-                        initial: true,
-                        { (_, newValue) in fetch(from: newValue) }
-                    )
-            } else {
-                $0
-                    .onAppear(perform: { fetch(from: parameter) })
-                    .onChange(of: parameter, perform: { fetch(from: $0) })
-            }
-        })
+        .onChange(
+            of: parameter,
+            initial: true,
+            { (_, newValue) in fetch(from: newValue) }
+        )
         .onDisappear(perform: {
             if uiModel.removesImageOnDisappear { reset() }
         })

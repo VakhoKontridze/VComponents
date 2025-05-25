@@ -174,13 +174,7 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.contentMargins)
         })
-        .applyModifier({
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0.safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-            } else {
-                $0.safeAreaMargins(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
-            }
-        })
+        .safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
         .applyIf(
             uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height),
@@ -305,20 +299,11 @@ struct VBottomSheet<Content>: View
             }
         }()
 
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                animation?.toSwiftUIAnimation,
-                { isPresentedInternally = false },
-                completion: completion
-            )
-
-        } else {
-            withBasicAnimation(
-                animation,
-                body: { isPresentedInternally = false },
-                completion: completion
-            )
-        }
+        withAnimation(
+            animation?.toSwiftUIAnimation,
+            { isPresentedInternally = false },
+            completion: completion
+        )
     }
 
     // MARK: Orientation

@@ -92,21 +92,11 @@ public struct VCodeEntryView: View, Sendable {
         // Ensures that hidden `TextField`'s frame doesn't overflow
         .clipped()
 
-        .applyModifier({
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *){
-                $0
-                    .onChange(
-                        of: text,
-                        initial: true,
-                        { (_, newValue) in processText(newValue) }
-                    )
-
-            } else {
-                $0
-                    .onAppear(perform: { processText(text) })
-                    .onChange(of: text, perform: { processText($0) })
-            }
-        })
+        .onChange(
+            of: text,
+            initial: true,
+            { (_, newValue) in processText(newValue) }
+        )
     }
 
     private var hiddenTextField: some View {

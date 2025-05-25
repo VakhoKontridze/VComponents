@@ -110,14 +110,7 @@ struct VAlert<Content>: View
 
         .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         .padding(.vertical, uiModel.marginVertical)
-        .applyModifier({
-            // Since alert doesn't have an explicit height, prevents clipping into safe areas
-            if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-                $0.safeAreaPaddings(edges: .vertical, insets: safeAreaInsets)
-            } else {
-                $0.safeAreaMargins(edges: .vertical, insets: safeAreaInsets)
-            }
-        })
+        .safeAreaPaddings(edges: .vertical, insets: safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
 
         .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
     }
@@ -264,20 +257,11 @@ struct VAlert<Content>: View
     private func animateOut(
         completion: @escaping () -> Void
     ) {
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.disappearAnimation?.toSwiftUIAnimation,
-                { isPresentedInternally = false },
-                completion: completion
-            )
-
-        } else {
-            withBasicAnimation(
-                uiModel.disappearAnimation,
-                body: { isPresentedInternally = false },
-                completion: completion
-            )
-        }
+        withAnimation(
+            uiModel.disappearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = false },
+            completion: completion
+        )
     }
 
     // MARK: Size that Fits

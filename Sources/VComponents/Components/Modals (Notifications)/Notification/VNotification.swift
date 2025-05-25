@@ -278,24 +278,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private func animateIn() {
         playHapticEffect()
 
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                uiModel.appearAnimation?.toSwiftUIAnimation,
-                { isPresentedInternally = true },
-                completion: dismissFromTimeout
-            )
-
-        } else {
-            // `VNotification` doesn't have an intrinsic height
-            // This delay gives SwiftUI chance to return height.
-            Task(operation: { @MainActor in
-                withBasicAnimation(
-                    uiModel.appearAnimation,
-                    body: { isPresentedInternally = true },
-                    completion: dismissFromTimeout
-                )
-            })
-        }
+        withAnimation(
+            uiModel.appearAnimation?.toSwiftUIAnimation,
+            { isPresentedInternally = true },
+            completion: dismissFromTimeout
+        )
     }
 
     private func animateOut(
@@ -309,20 +296,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             }
         }()
 
-        if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            withAnimation(
-                animation?.toSwiftUIAnimation,
-                { isPresentedInternally = false },
-                completion: completion
-            )
-
-        } else {
-            withBasicAnimation(
-                animation,
-                body: { isPresentedInternally = false },
-                completion: completion
-            )
-        }
+        withAnimation(
+            animation?.toSwiftUIAnimation,
+            { isPresentedInternally = false },
+            completion: completion
+        )
     }
 
     // MARK: Offsets
