@@ -1,5 +1,13 @@
 # Change Log
 
+### [8.0.0(77)]
+
+General
+
+- Minimum `Swift` language version is increased to `6.2`
+- Minimum SDK version is increased to `iOS` `17.0`, `macOS` `14.0`, `tvOS` `17.0`, and `watchOS` `10.0`
+- Previously deprecated symbols are removed
+
 ### [7.2.5(76)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.5) — 2025 05 25
 
 General
@@ -97,8 +105,8 @@ VAlert
 
 General
 
-- Minimum SDK version is increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
 - Minimum `Swift` language version is increased to `6.0`
+- Minimum SDK version is increased to `iOS` `16.0`, `macOS` `13.0`, `tvOS` `16.0`, and `watchOS` `9.0`
 - Previously deprecated symbols are removed
 - All border properties are now represented with `PointPixelMeasurement` instead of `CGFloat`
 - All `Font` properties now have `DynamicTypeSizeType` properties in UI models
@@ -474,8 +482,8 @@ Other
 
 General
 
-- Minimum SDK version is increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, and `watchOS` `8.0`
 - Minimum `Swift` language version is increased to `5.9`
+- Minimum SDK version is increased to `iOS` `15.0`, `macOS` `12.0`, `tvOS` `15.0`, and `watchOS` `8.0`
 - Previously deprecated symbols are removed
 - Button components will now register gestures even if the background is clear
 - UIModels are re-structured and no longer depend on sub UI models
@@ -1080,8 +1088,8 @@ API
 
 General
 
-- Minimum SDK version is increased to `iOS` `16.0`
 - Minimum `Swift` language version is increased to `5.7`
+- Minimum SDK version is increased to `iOS` `16.0`
 - Previously deprecated symbols are removed
 
 VPrimaryButton

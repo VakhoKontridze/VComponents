@@ -6,25 +6,3 @@
 //
 
 import SwiftUI
-import VCore
-
-// MARK: - V Bottom Sheet
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VBottomSheetUIModel.Heights {
-    @available(*, unavailable)
-    public var isResizable: Bool { fatalError() }
-    
-    @available(*, unavailable)
-    public var isFixed: Bool { fatalError() }
-}
-
-// MARK: - V Wrapping Marquee
-extension VWrappingMarqueeUIModel {
-    @available(*, deprecated, renamed: "wrappedContentSpacing")
-    public var spacing: CGFloat {
-        get { wrappedContentSpacing }
-        set { wrappedContentSpacing = newValue }
-    }
-}

@@ -1,15 +1,15 @@
 // swift-tools-version: 6.1
-
+// FIXME: Replace with 6.2
 import PackageDescription
 
 let package: Package = .init(
     name: "VComponents",
     
     platforms: [
-        .iOS(.v16),
-        .macOS(.v13),
-        .tvOS(.v16),
-        .watchOS(.v9),
+        .iOS(.v17),
+        .macOS(.v14),
+        .tvOS(.v17),
+        .watchOS(.v10),
         .visionOS(.v1)
     ],
     
@@ -23,7 +23,8 @@ let package: Package = .init(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/VakhoKontridze/VCore", "7.5.2"..<"8.0.0")
+        //.package(url: "https://github.com/VakhoKontridze/VCore", "8.0.0"..<"9.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "feature-8.0.0")
     ],
     
     targets: [
