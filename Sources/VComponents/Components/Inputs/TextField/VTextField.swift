@@ -181,7 +181,7 @@ public struct VTextField: View, Sendable {
             isSecure: uiModel.contentType == .secure && !textFieldIsSecure,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundColor(uiModel.placeholderTextColors.value(for: internalState)) // TODO: iOS 17.0 - Replace with `foregroundStyle(_:)`
+                    .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
                     .font(uiModel.placeholderTextFont)
                     //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) }) // Cannot be applied to placeholder only
             },
