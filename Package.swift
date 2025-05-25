@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import PackageDescription
 
@@ -23,7 +23,7 @@ let package: Package = .init(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/VakhoKontridze/VCore", "7.5.1"..<"8.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", "7.5.2"..<"8.0.0")
     ],
     
     targets: [

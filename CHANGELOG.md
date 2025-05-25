@@ -1,5 +1,11 @@
 # Change Log
 
+### [7.2.5(76)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.5) — 2025 05 25
+
+General
+
+- Minimum `Swift` language version is increased to `6.1`
+
 ### [7.2.4(75)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.4) — 2025 05 25
 
 Other
