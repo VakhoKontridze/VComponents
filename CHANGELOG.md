@@ -1,5 +1,11 @@
 # Change Log
 
+### [7.2.4(75)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.4) — 2025 05 25
+
+Other
+
+- Bug fixes and improvements
+
 ### [7.2.3(74)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.3) — 2025 03 27
 
 Documentation
