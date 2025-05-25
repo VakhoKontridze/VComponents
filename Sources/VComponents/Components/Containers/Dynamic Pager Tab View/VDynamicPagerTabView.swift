@@ -239,7 +239,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
                 .scrollDisabled(!uiModel.isTabBarScrollingEnabled)
                 
                 .onAppear(perform: { positionSelectedTabIndicatorInitially(scrollViewProxy: scrollViewProxy) })
-                .onChange(of: selection, perform: { positionSelectedTabIndicator($0, scrollViewProxy: scrollViewProxy) })
+                .onChange(of: selection, { (_, newValue) in
+                    positionSelectedTabIndicator(newValue, scrollViewProxy: scrollViewProxy)
+                })
             })
         })
     }

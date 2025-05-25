@@ -155,8 +155,8 @@ public struct VTextField: View, Sendable {
             }
         )
         // No need for initial checks, as secure field is always hidden by default
-        .onChange(of: uiModel.contentType, perform: {
-            if $0 != .secure {
+        .onChange(of: uiModel.contentType, { (_, newValue) in
+            if newValue != .secure {
                 textFieldIsSecure = false
             }
         })

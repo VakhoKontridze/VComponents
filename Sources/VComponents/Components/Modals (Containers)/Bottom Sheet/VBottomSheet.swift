@@ -83,15 +83,12 @@ struct VBottomSheet<Content>: View
                 
                 resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
             })
-            .onChange(
-                of: uiModel.sizeGroup,
-                perform: { newValue in
-                    resetHeightFromEnvironmentOrUIModelChange(
-                        from: newValue.current(orientation: interfaceOrientation).heights
-                            .withFixedValues(in: containerSize.height)
-                    )
-                }
-            )
+            .onChange(of: uiModel.sizeGroup, { (_, newValue) in
+                resetHeightFromEnvironmentOrUIModelChange(
+                    from: newValue.current(orientation: interfaceOrientation).heights
+                        .withFixedValues(in: containerSize.height)
+                )
+            })
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
