@@ -191,11 +191,7 @@ public struct VTextField: View, Sendable {
 
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .onChange(
-            of: text,
-            initial: true,
-            { (_, newValue) in setClearButtonVisibility(newValue) }
-        )
+        .onChange(of: text, initial: true, { setClearButtonVisibility($1) })
         
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)

@@ -341,22 +341,18 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             
             .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
             
-            .onChange(
-                of: selectedIndexInt,
-                initial: true,
-                { (_, newValue) in
-                    guard !isBeingScrolled else { return }
-                    
-                    Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
-                        calculateIndicatorFrame(
-                            selectedIndexInt: newValue,
-                            tabViewMinX: tabViewMinX,
-                            tabViewWidth: tabViewWidth,
-                            interstitialOffset: 0
-                        )
-                    })
-                }
-            )
+            .onChange(of: selectedIndexInt, initial: true, { (_, newValue) in
+                guard !isBeingScrolled else { return }
+                
+                Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                    calculateIndicatorFrame(
+                        selectedIndexInt: newValue,
+                        tabViewMinX: tabViewMinX,
+                        tabViewWidth: tabViewWidth,
+                        interstitialOffset: 0
+                    )
+                })
+            })
         })
     }
 

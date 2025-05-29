@@ -181,11 +181,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                 }())
             }
         })
-        .onChange(
-            of: parameter,
-            initial: true,
-            { (_, newValue) in fetch(from: newValue) }
-        )
+        .onChange(of: parameter, initial: true, { fetch(from: $1) })
         .onDisappear(perform: {
             if uiModel.removesImageOnDisappear { reset() }
         })

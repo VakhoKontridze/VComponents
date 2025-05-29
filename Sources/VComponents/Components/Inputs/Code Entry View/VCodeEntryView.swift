@@ -92,11 +92,7 @@ public struct VCodeEntryView: View, Sendable {
         // Ensures that hidden `TextField`'s frame doesn't overflow
         .clipped()
 
-        .onChange(
-            of: text,
-            initial: true,
-            { (_, newValue) in processText(newValue) }
-        )
+        .onChange(of: text, initial: true, { processText($1) })
     }
 
     private var hiddenTextField: some View {
