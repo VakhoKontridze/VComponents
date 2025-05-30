@@ -189,7 +189,7 @@ public struct VTextFieldUIModel: Sendable {
 
         uiModel.hitBox = .zero
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
         uiModel.haptic = nil
 #endif
 
@@ -223,7 +223,7 @@ public struct VTextFieldUIModel: Sendable {
 
         uiModel.hitBox = .zero
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
         uiModel.haptic = nil
 #endif
 

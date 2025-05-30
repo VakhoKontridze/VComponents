@@ -260,7 +260,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View, Sendable where Cus
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     PreviewContainer(content: {

@@ -209,7 +209,7 @@ public struct VCheckBox<CustomLabel>: View, Sendable where CustomLabel: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var state: VCheckBoxState = .on
@@ -298,7 +298,7 @@ public struct VCheckBox<CustomLabel>: View, Sendable where CustomLabel: View {
             .disabled(true)
         })
 
-#if os(macOS)
+#if !(os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)) // No `CheckboxToggleStyle`
         PreviewHeader("Native")
 
         PreviewRow("Off", content: {

@@ -261,7 +261,7 @@ extension VStretchedToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var state: VStretchedToggleButtonState = .on

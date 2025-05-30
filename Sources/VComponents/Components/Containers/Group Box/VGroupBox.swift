@@ -117,7 +117,7 @@ public struct VGroupBox<Content>: View, Sendable where Content: View {
     Preview_ContentView()
 })
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color", body: {
     Preview_ContentView(layer: .secondary, uiModel: .systemBackgroundColor)

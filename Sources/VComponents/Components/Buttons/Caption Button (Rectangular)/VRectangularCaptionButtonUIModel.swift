@@ -138,8 +138,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var iconPressedScale: CGFloat = {
 #if os(iOS)
         1
-#elseif os(macOS)
-        1
 #elseif os(watchOS)
         0.98
 #else

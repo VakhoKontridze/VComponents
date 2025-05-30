@@ -198,7 +198,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View, Sendable
 // MARK: - Previews
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var state: VDisclosureGroupState = .expanded
@@ -217,7 +217,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View, Sendable
     Preview_StatesContentView()
 })
 
-#if !os(macOS)
+#if !os(macOS) // Redundant
 
 #Preview("States (System Background Color)", body: {
     Preview_StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)

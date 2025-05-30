@@ -207,7 +207,7 @@ public struct VCarousel<Data, ID, Content>: View, Sendable
 // MARK: - Preview
 #if DEBUG
 
-#if !os(tvOS)
+#if !os(tvOS) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var selection: Preview_Weekday = .monday

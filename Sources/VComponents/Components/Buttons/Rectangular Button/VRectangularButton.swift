@@ -185,7 +185,7 @@ public struct VRectangularButton<CustomLabel>: View, Sendable where CustomLabel:
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(visionOS))
+#if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     PreviewContainer(content: {

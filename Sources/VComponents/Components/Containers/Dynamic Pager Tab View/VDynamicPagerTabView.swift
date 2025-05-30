@@ -384,7 +384,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View,
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Many Items", body: {
     @Previewable @State var selection: Preview_Weekday = .thursday

@@ -473,7 +473,7 @@ extension FloatingPoint {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var selection: Preview_RGBColor = .red

@@ -260,7 +260,7 @@ extension VWrappedToggleButtonInternalState {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(visionOS))
+#if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var state: VWrappedToggleButtonState = .on

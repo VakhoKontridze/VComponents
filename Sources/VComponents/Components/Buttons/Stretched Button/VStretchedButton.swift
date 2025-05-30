@@ -216,7 +216,7 @@ public struct VStretchedButton<CustomLabel>: View, Sendable where CustomLabel: V
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(visionOS))
+#if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     PreviewContainer(content: {
