@@ -21,7 +21,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VSlider: View, Sendable {
+public struct VSlider: View {
     // MARK: Properties - UI Model
     private let uiModel: VSliderUIModel
     

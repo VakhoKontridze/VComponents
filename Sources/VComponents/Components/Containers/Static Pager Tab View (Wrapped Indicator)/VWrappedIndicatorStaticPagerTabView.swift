@@ -45,7 +45,7 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, Content>: View, Sendable
+public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,

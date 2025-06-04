@@ -62,7 +62,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-public struct VCompactPageIndicator<CustomDotContent>: View, Sendable where CustomDotContent: View {
+public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotContent: View {
     // MARK: Properties - UI Model
     private let uiModel: VCompactPageIndicatorUIModel
 

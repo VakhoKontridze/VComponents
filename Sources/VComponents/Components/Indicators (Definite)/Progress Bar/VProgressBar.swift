@@ -18,7 +18,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
-public struct VProgressBar: View, Sendable {
+public struct VProgressBar: View {
     // MARK: Properties - UI Model
     private let uiModel: VProgressBarUIModel
     

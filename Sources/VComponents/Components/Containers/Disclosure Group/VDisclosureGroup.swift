@@ -46,7 +46,7 @@ import VCore
 @available(tvOS, unavailable) // No `PlainDisclosureGroup`
 @available(watchOS, unavailable) // No `PlainDisclosureGroup`
 @available(visionOS, unavailable) // No `PlainDisclosureGroup`
-public struct VDisclosureGroup<CustomHeaderLabel, Content>: View, Sendable
+public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     where
         CustomHeaderLabel: View,
         Content: View

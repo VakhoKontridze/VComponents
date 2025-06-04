@@ -47,7 +47,7 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularToggleButton<CustomLabel>: View, Sendable where CustomLabel: View {
+public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VRectangularToggleButtonUIModel
 

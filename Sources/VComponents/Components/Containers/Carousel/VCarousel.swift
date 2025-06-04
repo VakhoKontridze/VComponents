@@ -51,7 +51,7 @@ import VCore
 ///
 /// `VCarousel` also supports infinite scroll. Fore more info, refer to `VCarouselInfiniteScrollDataSourceManager`.
 @available(tvOS, unavailable) // `scrollPosition(id:)` API doesn't work
-public struct VCarousel<Data, ID, Content>: View, Sendable
+public struct VCarousel<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,

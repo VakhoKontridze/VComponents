@@ -55,7 +55,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
-public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderContent>: View, Sendable
+public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderContent>: View
     where
         Parameter: Equatable,
         CustomContent: View,

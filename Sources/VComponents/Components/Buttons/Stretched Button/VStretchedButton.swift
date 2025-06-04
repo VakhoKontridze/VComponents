@@ -22,7 +22,7 @@ import VCore
 /// On `macOS` and `watchOS`, an explicit width should be provided.
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable)
-public struct VStretchedButton<CustomLabel>: View, Sendable where CustomLabel: View {
+public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Properties - UI Model
     private let uiModel: VStretchedButtonUIModel
     

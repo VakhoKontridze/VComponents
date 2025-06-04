@@ -22,7 +22,7 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
-public struct VRectangularCaptionButton<CustomCaption>: View, Sendable where CustomCaption: View {
+public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption: View {
     // MARK: Properties - UI Model
     private let uiModel: VRectangularCaptionButtonUIModel
     
