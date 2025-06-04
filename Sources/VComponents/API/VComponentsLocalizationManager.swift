@@ -26,12 +26,15 @@ public final class VComponentsLocalizationManager: @unchecked Sendable {
     
     /// Localization provider. Set to `DefaultVComponentsLocalizationProvider`.
     public var localizationProvider: any VComponentsLocalizationProvider {
-        get { lock.withLock({ _localizationProvider }) }
-        set { lock.withLock({ _localizationProvider = newValue }) }
+        get { queue.sync(execute: { _localizationProvider }) }
+        set { queue.sync(flags: .barrier, execute: { _localizationProvider = newValue }) }
     }
     
-    // MARK: Properties - Lock
-    private let lock: NSLock = .init()
+    // MARK: Properties - Queue
+    private let queue: DispatchQueue = .init(
+        label: "com.vakhtang-kontridze.vcomponents.vcomponents-localization-manager",
+        attributes: .concurrent
+    )
     
     // MARK: Initializers
     private init() {}
