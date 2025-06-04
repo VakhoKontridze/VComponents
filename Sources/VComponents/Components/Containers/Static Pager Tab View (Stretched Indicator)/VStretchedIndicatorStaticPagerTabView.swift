@@ -48,7 +48,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     where
         Data: RandomAccessCollection,
         Data.Element: Hashable,
-        Data.Element: Sendable,
         ID: Hashable,
         CustomTabItemLabel: View,
         Content: View
@@ -292,10 +291,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     private var tabView: some View {
         GeometryReader(content: { geometryProxy in
-            // `GeometryProxy` isn't `Sendable`, so data needs to be extracted beforehand
-            let tabViewMinX: CGFloat = geometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
-            let tabViewWidth: CGFloat = geometryProxy.size.width
-            
             ScrollView(.horizontal, content: {
                 LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
                     spacing: 0,
@@ -311,8 +306,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                                     Task(operation: { @MainActor in
                                         calculateIndicatorFrame(
                                             selectedIndexInt: selectedIndexInt,
-                                            tabViewMinX: tabViewMinX,
-                                            tabViewWidth: tabViewWidth,
+                                            geometryProxy: geometryProxy,
                                             interstitialOffset: frame.minX
                                         )
                                     })
@@ -347,8 +341,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                 Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
                     calculateIndicatorFrame(
                         selectedIndexInt: newValue,
-                        tabViewMinX: tabViewMinX,
-                        tabViewWidth: tabViewWidth,
+                        geometryProxy: geometryProxy,
                         interstitialOffset: 0
                     )
                 })
@@ -359,10 +352,12 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Selected Tab Indicator Frame
     private func calculateIndicatorFrame(
         selectedIndexInt: Int?,
-        tabViewMinX: CGFloat,
-        tabViewWidth: CGFloat,
+        geometryProxy: GeometryProxy,
         interstitialOffset: CGFloat
     ) {
+        let tabViewMinX: CGFloat = geometryProxy.frame(in: .global).minX // Accounts for `TabView` padding
+        let tabViewWidth: CGFloat = geometryProxy.size.width
+        
         selectedTabIndicatorWidth =
             tabViewWidth / CGFloat(data.count) - // Division is safe, as non-emptiness is checked in `body`
             2 * uiModel.selectedTabIndicatorMarginHorizontal
