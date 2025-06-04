@@ -13,18 +13,18 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertButton: VAlertButtonProtocol, Sendable {
+public struct VAlertButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
     /*private*/ let role: Role
-    private let action: (@Sendable () -> Void)?
+    private let action: (@MainActor () -> Void)?
     private let title: String
 
     // MARK: Initializers
     /// Initializes `VAlertButton` with action and title.
     public init(
         role: Role,
-        action: (@Sendable () -> Void)?,
+        action: (@MainActor () -> Void)?,
         title: String
     ) {
         self.role = role
