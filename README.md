@@ -18,7 +18,7 @@ For additional info on component customization, refer to "Customization" documen
 
 For additional info on animations, refer to "Animations" documentation.
 
-For additional info on modal components, refer to "Presentation Host" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
 
 ## Components
 

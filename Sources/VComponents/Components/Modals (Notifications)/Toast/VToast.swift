@@ -22,8 +22,8 @@ struct VToast: View {
     
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: VToastUIModel.Width {
         uiModel.widthGroup.current(orientation: interfaceOrientation)
@@ -32,7 +32,7 @@ struct VToast: View {
     @State private var height: CGFloat = 0
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -275,7 +275,7 @@ struct VToast: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Singleline", body: {
     @Previewable @State var isPresented: Bool = true
@@ -283,8 +283,7 @@ struct VToast: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VToastUIModel = .init()
                     uiModel.timeoutDuration = 60
@@ -294,10 +293,10 @@ struct VToast: View {
                 text: "Lorem ipsum dolor sit amet"
             )
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -311,8 +310,7 @@ struct VToast: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VToastUIModel = .init()
                     uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
@@ -323,10 +321,10 @@ struct VToast: View {
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             )
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -340,8 +338,7 @@ struct VToast: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VToastUIModel = .init()
                     uiModel.presentationEdge = .top
@@ -352,10 +349,10 @@ struct VToast: View {
                 text: "Lorem ipsum dolor sit amet"
             )
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -372,8 +369,7 @@ struct VToast: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VToastUIModel = .init()
 
@@ -426,10 +422,10 @@ struct VToast: View {
                 }
             })
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -444,8 +440,7 @@ struct VToast: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel = uiModel
                     uiModel.timeoutDuration = 60
@@ -472,10 +467,10 @@ struct VToast: View {
                 }
             })
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -484,5 +479,7 @@ struct VToast: View {
 })
 
 #endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 #endif

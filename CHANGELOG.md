@@ -1,12 +1,36 @@
 # Change Log
 
-### [8.0.0(77)]
+### 8.0.0(77)
 
 General
 
 - Minimum `Swift` language version is increased to `6.2`
 - Minimum SDK version is increased to `iOS` `17.0`, `macOS` `14.0`, `tvOS` `17.0`, and `watchOS` `10.0`
 - Previously deprecated symbols are removed
+
+VModal
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+
+VBottomSheet
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+
+VSideBar
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+
+VAlert
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+
+VNotification
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+
+VToast
+
+- Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
 
 ### [7.2.5(76)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.5) — 2025 05 25
 

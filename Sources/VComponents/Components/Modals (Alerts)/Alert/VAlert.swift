@@ -22,8 +22,8 @@ struct VAlert<Content>: View
     
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: VAlertUIModel.Width {
         uiModel.widthGroup.current(orientation: interfaceOrientation)
@@ -34,7 +34,7 @@ struct VAlert<Content>: View
     @State private var buttonsStackHeight: CGFloat = 0
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
     
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -282,7 +282,7 @@ struct VAlert<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Title, Message, Content", body: {
     @Previewable @State var isPresented: Bool = true
@@ -290,7 +290,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -301,7 +301,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Title, Message", body: {
@@ -310,7 +310,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -320,7 +320,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Title, Content", body: {
@@ -329,7 +329,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: nil,
@@ -340,7 +340,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Message, Content", body: {
@@ -349,7 +349,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: nil,
                 message: "Lorem ipsum dolor sit amet",
@@ -360,7 +360,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Title", body: {
@@ -369,7 +369,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: nil,
@@ -379,7 +379,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Message", body: {
@@ -388,7 +388,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: nil,
                 message: "Lorem ipsum dolor sit amet",
@@ -398,7 +398,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Content", body: {
@@ -407,7 +407,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: nil,
                 message: nil,
@@ -418,7 +418,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("No Declared Buttons", body: {
@@ -427,14 +427,14 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {}
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("One Button", body: {
@@ -443,7 +443,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -452,7 +452,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Many Buttons", body: {
@@ -461,7 +461,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -473,7 +473,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Width Types", body: {
@@ -483,7 +483,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VAlertUIModel = .init()
                     width.map { uiModel.widthGroup = VAlertUIModel.WidthGroup($0) }
@@ -509,7 +509,7 @@ struct VAlert<Content>: View
                 }
             })
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Max Height", body: {
@@ -518,7 +518,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -531,7 +531,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Button States (Pressed)", body: {
@@ -540,7 +540,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VAlertUIModel = .init()
 
@@ -565,7 +565,7 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Button States (Disabled)", body: {
@@ -574,7 +574,7 @@ struct VAlert<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VAlertUIModel = .init()
 
@@ -599,8 +599,12 @@ struct VAlert<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
+
+#endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 @ViewBuilder
 private var previewContent: some View {
@@ -610,7 +614,5 @@ private var previewContent: some View {
     )
     .textFieldStyle(.roundedBorder)
 }
-
-#endif
 
 #endif

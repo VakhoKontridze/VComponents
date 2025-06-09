@@ -15,14 +15,14 @@ import VCore
 @available(visionOS, unavailable)
 public struct VSideBarUIModel: Sendable {
     // MARK: Properties - Global
-    var presentationHostSubUIModel: PresentationHostUIModel {
-        var uiModel: PresentationHostUIModel = .init()
+    var modalPresenterLinkUIModel: ModalPresenterLinkUIModel {
+        var uiModel: ModalPresenterLinkUIModel = .init()
         uiModel.alignment = presentationEdge.toAlignment
         uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
     
-    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootUIModel`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
 
     /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
@@ -203,8 +203,6 @@ public struct VSideBarUIModel: Sendable {
 // MARK: - V Side Bar UI Model + Default Content Safe Area Edges
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS))
 
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VSideBarUIModel {
     /// Calculates automatic `contentSafeAreaEdges` based on interface orientation.

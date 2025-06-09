@@ -22,7 +22,7 @@ struct VModal<Content>: View
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     
     private var currentWidth: VModalUIModel.Dimension {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).width
@@ -33,7 +33,7 @@ struct VModal<Content>: View
     }
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -151,7 +151,7 @@ struct VModal<Content>: View
 // MARK: - Previews
 #if DEBUG
 
-#if !os(watchOS)
+#if !os(watchOS) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var isPresented: Bool = true
@@ -159,7 +159,7 @@ struct VModal<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vModal(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 content: {
                     Color.blue
@@ -167,7 +167,7 @@ struct VModal<Content>: View
                 }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("Size Types", body: {
@@ -183,7 +183,7 @@ private struct ContentView_SizeTypes: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vModal(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VModalUIModel = .init()
                         size.map { uiModel.sizeGroup = VModalUIModel.SizeGroup($0) }
@@ -220,10 +220,12 @@ private struct ContentView_SizeTypes: View {
                     }
                 })
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 #endif

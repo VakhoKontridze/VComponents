@@ -26,16 +26,16 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vSideBar(
-    ///                 id: "some_side_bar",
+    ///                 link: .window(linkID: "some_side_bar"),
     ///                 isPresented: $isPresented,
     ///                 content: { Color.blue }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
-    /// Due to a Presentation Host API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
+    /// Due to a Modal Presenter API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
     /// UI model contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
     /// However, these insets are presents even if side bar content doesn't need them.
     /// Therefore, a custom implementation is needed per use-case.
@@ -52,7 +52,7 @@ extension View {
     ///             )
     ///             .getInterfaceOrientation({ interfaceOrientation = $0 })
     ///             .vSideBar(
-    ///                 id: "some_side_bar",
+    ///                 link: .window(linkID: "some_side_bar"),
     ///                 uiModel: {
     ///                     var uiModel: VSideBarUIModel = .leading
     ///
@@ -64,13 +64,12 @@ extension View {
     ///                 content: { Color.blue }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vSideBar<Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VSideBarUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -80,10 +79,9 @@ extension View {
         where Content: View
     {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -107,8 +105,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vSideBar<Item, Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VSideBarUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -117,7 +114,7 @@ extension View {
     ) -> some View
         where Content: View
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -125,10 +122,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -137,7 +133,7 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 content(item)
                             }
                         }

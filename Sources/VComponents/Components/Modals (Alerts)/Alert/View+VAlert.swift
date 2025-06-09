@@ -29,7 +29,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vAlert(
-    ///                 id: "some_alert",
+    ///                 link: .window(linkID: "some_alert"),
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
@@ -39,13 +39,12 @@ extension View {
     ///                 }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vAlert(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -55,10 +54,9 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -79,8 +77,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -93,10 +90,9 @@ extension View {
         where Content: View
     {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -123,8 +119,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -133,7 +128,7 @@ extension View {
         message: @escaping (Item) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -141,10 +136,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -153,14 +147,14 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         title: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 title(item)
                             } else {
                                 ""
                             }
                         }(),
                         message: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 message(item)
                             } else {
                                 ""
@@ -168,7 +162,7 @@ extension View {
                         }(),
                         content: VAlertContent.empty,
                         buttons: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 buttons(item)
                             } else {
                                 []
@@ -183,8 +177,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item, Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -196,7 +189,7 @@ extension View {
     ) -> some View
         where Content: View
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -204,10 +197,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -216,28 +208,28 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         title: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 title(item)
                             } else {
                                 ""
                             }
                         }(),
                         message: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 message(item)
                             } else {
                                 ""
                             }
                         }(),
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 VAlertContent.content(content: { content(item) })
                             } else {
                                 VAlertContent.empty
                             }
                         }(),
                         buttons: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 buttons(item)
                             } else {
                                 []
@@ -258,8 +250,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -271,7 +262,7 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -279,10 +270,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -291,14 +281,14 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         title: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 title(error)
                             } else {
                                 ""
                             }
                         }(),
                         message: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 message(error)
                             } else {
                                 ""
@@ -306,7 +296,7 @@ extension View {
                         }(),
                         content: VAlertContent.empty,
                         buttons: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 buttons(error)
                             } else {
                                 []
@@ -321,8 +311,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E, Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -337,7 +326,7 @@ extension View {
             E: Error,
             Content: View
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -345,10 +334,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -357,28 +345,28 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         title: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 title(error)
                             } else {
                                 ""
                             }
                         }(),
                         message: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 message(error)
                             } else {
                                 ""
                             }
                         }(),
                         content: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 VAlertContent.content(content: { content(error) })
                             } else {
                                 VAlertContent.empty
                             }
                         }(),
                         buttons: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 buttons(error)
                             } else {
                                 []

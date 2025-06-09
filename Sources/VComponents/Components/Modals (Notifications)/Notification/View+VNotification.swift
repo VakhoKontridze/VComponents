@@ -25,19 +25,18 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vNotification(
-    ///                 layerID: "notifications",
-    ///                 id: "some_notification",
+    ///                 link: .window(rootID: "notifications", linkID: "some_notification"),
     ///                 isPresented: $isPresented,
     ///                 icon: Image(systemName: "swift"),
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet"
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
-    ///             id: "notifications",
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
+    ///             root: .window(rootID: "notifications"),
     ///             uiModel: {
-    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 var uiModel: ModalPresenterRootUIModel = .init()
     ///                 uiModel.dimmingViewColor = Color.clear
     ///                 uiModel.dimmingViewTapAction = .passTapsThrough
     ///                 return uiModel
@@ -47,8 +46,7 @@ extension View {
     ///
     /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VNotificationUIModel`.
     public func vNotification(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VNotificationUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -58,10 +56,9 @@ extension View {
         message: String?
     ) -> some View {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -83,8 +80,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<CustomContent>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VNotificationUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -94,10 +90,9 @@ extension View {
         where CustomContent: View
     {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -124,8 +119,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VNotificationUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -134,7 +128,7 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
     ) -> some View {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -142,10 +136,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -155,21 +148,21 @@ extension View {
                         isPresented: isPresented,
                         content: .iconTitleMessage(
                             icon: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                     icon(item)
                                 } else {
                                      nil
                                 }
                             }(),
                             title: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                     title(item)
                                 } else {
                                     nil
                                 }
                             }(),
                             message: {
-                                if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                     message(item)
                                 } else {
                                     nil
@@ -185,8 +178,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item, CustomContent>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VNotificationUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -195,7 +187,7 @@ extension View {
     ) -> some View
         where CustomContent: View
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -203,10 +195,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -217,7 +208,7 @@ extension View {
                         content: .custom(
                             custom: {
                                 Group(content: {
-                                    if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                                    if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                         customContent(item)
                                     }
                                 })

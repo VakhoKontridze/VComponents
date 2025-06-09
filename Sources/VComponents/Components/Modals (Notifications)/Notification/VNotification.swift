@@ -22,8 +22,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
     
     private var currentWidth: VNotificationUIModel.Width {
         uiModel.widthGroup.current(orientation: interfaceOrientation)
@@ -32,7 +32,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @State private var height: CGFloat = 0
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -341,7 +341,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Icon & Title & Message", body: {
     Preview_ContentView(
@@ -389,8 +389,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VNotificationUIModel = .init()
                     uiModel.presentationEdge = .bottom
@@ -403,10 +402,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 message: "Lorem ipsum dolor sit amet"
             )
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -421,8 +420,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VNotificationUIModel = .init()
 
@@ -449,10 +447,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 }
             })
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -467,8 +465,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
-                layerID: "notifications",
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VNotificationUIModel = uiModel
                     uiModel.timeoutDuration = 60
@@ -497,10 +494,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 }
             })
     })
-    .presentationHostLayer(
-        id: "notifications",
+    .modalPresenterRoot(
+        root: rootAndLink.root,
         uiModel: {
-            var uiModel: PresentationHostLayerUIModel = .init()
+            var uiModel: ModalPresenterRootUIModel = .init()
             uiModel.dimmingViewColor = Color.clear
             uiModel.dimmingViewTapAction = .passTapsThrough
             return uiModel
@@ -529,8 +526,7 @@ private struct Preview_ContentView: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vNotification(
-                    layerID: "notifications",
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VNotificationUIModel = .init()
                         uiModel.timeoutDuration = 60
@@ -542,10 +538,10 @@ private struct Preview_ContentView: View {
                     message: message
                 )
         })
-        .presentationHostLayer(
-            id: "notifications",
+        .modalPresenterRoot(
+            root: rootAndLink.root,
             uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
+                var uiModel: ModalPresenterRootUIModel = .init()
                 uiModel.dimmingViewColor = Color.clear
                 uiModel.dimmingViewTapAction = .passTapsThrough
                 return uiModel
@@ -555,5 +551,7 @@ private struct Preview_ContentView: View {
 }
 
 #endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 #endif

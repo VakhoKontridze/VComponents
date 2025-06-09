@@ -13,13 +13,13 @@ import VCore
 @available(watchOS, unavailable)
 public struct VModalUIModel: Sendable {
     // MARK: Properties - Global
-    var presentationHostSubUIModel: PresentationHostUIModel {
-        var uiModel: PresentationHostUIModel = .init()
+    var modalPresenterLinkUIModel: ModalPresenterLinkUIModel {
+        var uiModel: ModalPresenterLinkUIModel = .init()
         uiModel.preferredDimmingViewColor = preferredDimmingViewColor
         return uiModel
     }
     
-    /// Preferred dimming color, that overrides a shared color from Presentation Host layer, when only this modal is presented.
+    /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootUIModel`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
     
     /// Modal size group.

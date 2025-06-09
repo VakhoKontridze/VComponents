@@ -16,18 +16,18 @@ enum PlatformInterfaceOrientation {
     // MARK: Initializers
     @MainActor
     static func initFromDeviceOrientation() -> Self {
-#if os(iOS)
+#if os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+        .portrait
+#else
         if UIDevice.current.orientation.isLandscape {
             .landscape
         } else {
             .portrait
         }
-#else
-        .portrait
 #endif
     }
 
-#if canImport(UIKit) && !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
     init(uiIInterfaceOrientation: UIInterfaceOrientation) {
         self = {
             if uiIInterfaceOrientation.isLandscape {

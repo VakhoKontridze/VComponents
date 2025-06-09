@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - View + V Alert
 @available(macOS, unavailable)
@@ -32,21 +33,19 @@ extension View {
     ///                 },
     ///                 title: "Present"
     ///             )
-    ///             .vAlert(id: "some_alert", parameters: $parameters)
+    ///             .vAlert(link: .window(linkID: "some_alert"), parameters: $parameters)
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///     
     public func vAlert(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         parameters: Binding<VAlertParameters?>
     ) -> some View {
         self.vAlert(
-            layerID: layerID,
-            id: id,
+            link: link,
             uiModel: uiModel,
             item: parameters,
             title: { $0.title },
@@ -79,7 +78,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vAlert(
-    ///                 id: "some_alert",
+    ///                 link: .window(linkID: "some_alert"),
     ///                 parameters: $parameters,
     ///                 content: { parameters in
     ///                     if let inputTextBinding = parameters.attributes["input_text_binding"] as? Binding<String> {
@@ -89,12 +88,11 @@ extension View {
     ///                 }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///
     public func vAlert<Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VAlertUIModel = .init(),
         parameters: Binding<VAlertParameters?>,
         @ViewBuilder content: @escaping (VAlertParameters) -> Content
@@ -102,8 +100,7 @@ extension View {
         where Content: View
     {
         self.vAlert(
-            layerID: layerID,
-            id: id,
+            link: link,
             uiModel: uiModel,
             item: parameters,
             title: { $0.title },

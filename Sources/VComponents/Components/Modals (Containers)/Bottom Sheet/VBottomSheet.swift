@@ -24,8 +24,8 @@ struct VBottomSheet<Content>: View
     
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
@@ -44,7 +44,7 @@ struct VBottomSheet<Content>: View
     @State private var offsetBeforeDrag: CGFloat?
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
     
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -320,7 +320,7 @@ struct VBottomSheet<Content>: View
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*", body: {
     @Previewable @State var isPresented: Bool = true
@@ -328,15 +328,15 @@ struct VBottomSheet<Content>: View
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented,
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
-#if !os(macOS)
+#if !os(macOS) // Doesn't follow HIG
 
 #Preview("Min & Ideal & Max", body: {
     ContentView_MinIdealMax()
@@ -350,7 +350,7 @@ private struct ContentView_MinIdealMax: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
@@ -371,13 +371,13 @@ private struct ContentView_MinIdealMax: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // Doesn't follow HIG
 
 #Preview("Min & Ideal", body: {
     ContentView_MinIdeal()
@@ -391,7 +391,7 @@ private struct ContentView_MinIdeal: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
@@ -412,13 +412,13 @@ private struct ContentView_MinIdeal: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // Doesn't follow HIG
 
 #Preview("Ideal & Max", body: {
     ContentView_IdealMax()
@@ -432,7 +432,7 @@ private struct ContentView_IdealMax: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
@@ -453,15 +453,15 @@ private struct ContentView_IdealMax: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // Doesn't follow HIG
 
-#Preview("Ideal Small", body: {
+#Preview("Ideal (Small)", body: {
     ContentView_IdealSmall()
 })
 
@@ -473,7 +473,7 @@ private struct ContentView_IdealSmall: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
@@ -494,15 +494,15 @@ private struct ContentView_IdealSmall: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // Doesn't follow HIG
 
-#Preview("Ideal Large", body: {
+#Preview("Ideal (Large)", body: {
     ContentView_IdealLarge()
 })
 
@@ -514,7 +514,7 @@ private struct ContentView_IdealLarge: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
 
@@ -535,7 +535,7 @@ private struct ContentView_IdealLarge: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
@@ -553,7 +553,7 @@ private struct ContentView_ContentAutoresizing: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
                         
@@ -581,7 +581,7 @@ private struct ContentView_ContentAutoresizing: View {
                     }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
@@ -601,7 +601,7 @@ private struct ContentView_ContentAutoresizing: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
                         
@@ -645,7 +645,7 @@ private struct ContentView_ContentAutoresizing: View {
                     }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     })
 })
 
@@ -666,7 +666,7 @@ private struct ContentView_ContentAutoresizing: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel: VBottomSheetUIModel = .init()
                         uiModel.autoresizesContent = true
@@ -688,7 +688,7 @@ private struct ContentView_ContentAutoresizing: View {
                     }
                 )
         })
-        .presentationHostLayer()
+        .modalPresenterRoot(root: rootAndLink.root)
     })
 })
 
@@ -698,13 +698,13 @@ private struct ContentView_ContentAutoresizing: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: .insettedContent,
                 isPresented: $isPresented,
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #Preview("No Drag Indicator", body: {
@@ -713,7 +713,7 @@ private struct ContentView_ContentAutoresizing: View {
     PreviewContainer(content: {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
-                id: "preview",
+                link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .noDragIndicator
                     uiModel.contentIsDraggable = true
@@ -723,9 +723,11 @@ private struct ContentView_ContentAutoresizing: View {
                 content: { Color.blue }
             )
     })
-    .presentationHostLayer()
+    .modalPresenterRoot(root: rootAndLink.root)
 })
 
 #endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 #endif

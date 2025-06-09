@@ -21,8 +21,8 @@ struct VSideBar<Content>: View where Content: View {
     
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
-    @Environment(\.presentationHostContainerSize) private var containerSize: CGSize
-    @Environment(\.presentationHostSafeAreaInsets) private var safeAreaInsets: EdgeInsets
+    @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
+    @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
     
     private var currentWidth: CGFloat {
         uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
@@ -33,7 +33,7 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Properties - Presentation API
-    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -217,7 +217,7 @@ struct VSideBar<Content>: View where Content: View {
 // MARK: - Preview
 #if DEBUG
 
-#if !(os(tvOS) || os(watchOS) || os(visionOS))
+#if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Leading", body: {
     Preview_ContentView()
@@ -235,7 +235,7 @@ struct VSideBar<Content>: View where Content: View {
     Preview_ContentView(uiModel: .bottom)
 })
 
-#if !os(macOS)
+#if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Leading", body: {
     Preview_SafeAreaContentView()
@@ -243,7 +243,7 @@ struct VSideBar<Content>: View where Content: View {
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Trailing", body: {
     Preview_SafeAreaContentView(uiModel: .trailing)
@@ -251,7 +251,7 @@ struct VSideBar<Content>: View where Content: View {
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Top", body: {
     Preview_SafeAreaContentView(uiModel: .top)
@@ -259,7 +259,7 @@ struct VSideBar<Content>: View where Content: View {
 
 #endif
 
-#if !os(macOS)
+#if !os(macOS) // No `UIEdgeInsets`
 
 
 #Preview("Safe Area Bottom", body: {
@@ -282,15 +282,16 @@ private struct Preview_ContentView: View {
         PreviewContainer(content: {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: uiModel,
                     isPresented: $isPresented,
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
+        .modalPresenterRoot(
+            root: rootAndLink.root,
             uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
+                var uiModel: ModalPresenterRootUIModel = .init()
 #if os(macOS)
                 uiModel.dimmingViewColor = Color.clear
                 uiModel.dimmingViewTapAction = .passTapsThrough
@@ -301,7 +302,7 @@ private struct Preview_ContentView: View {
     }
 }
 
-#if !os(macOS)
+#if !os(macOS) // No `UIEdgeInsets`
 
 private struct Preview_SafeAreaContentView: View {
     private let uiModel: VSideBarUIModel
@@ -319,7 +320,7 @@ private struct Preview_SafeAreaContentView: View {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .getInterfaceOrientation({ interfaceOrientation = $0 })
                 .vSideBar(
-                    id: "preview",
+                    link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
                         var uiModel = uiModel
                         uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
@@ -329,9 +330,10 @@ private struct Preview_SafeAreaContentView: View {
                     content: { Color.blue }
                 )
         })
-        .presentationHostLayer(
+        .modalPresenterRoot(
+            root: rootAndLink.root,
             uiModel: {
-                var uiModel: PresentationHostLayerUIModel = .init()
+                var uiModel: ModalPresenterRootUIModel = .init()
 #if os(macOS)
                 uiModel.dimmingViewColor = Color.clear
                 uiModel.dimmingViewTapAction = .passTapsThrough
@@ -345,5 +347,7 @@ private struct Preview_SafeAreaContentView: View {
 #endif
 
 #endif
+
+private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
 
 #endif

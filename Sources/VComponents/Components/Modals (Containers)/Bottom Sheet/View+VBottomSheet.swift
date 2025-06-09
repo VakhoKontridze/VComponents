@@ -24,7 +24,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 id: "some_bottom_sheet",
+    ///                 link: .window(linkID: "some_bottom_sheet"),
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.autoresizesContent = true // For wrapping content
@@ -46,8 +46,8 @@ extension View {
     ///                 }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap it's content by reading geometry size.
@@ -66,7 +66,7 @@ extension View {
     ///             )
     ///             .getSafeAreaInsets({ safeAreaInsets = $0 )
     ///             .vBottomSheet(
-    ///                 id: "some_bottom_sheet",
+    ///                 link: .window(linkID: "some_bottom_sheet"),
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///
@@ -101,8 +101,8 @@ extension View {
     ///                 }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap navigation system.
@@ -117,7 +117,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 id: "some_bottom_sheet",
+    ///                 link: .window(linkID: "some_bottom_sheet"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
     ///                 onDismiss: { modalDidAppear = false },
@@ -134,8 +134,8 @@ extension View {
     ///                 }
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer() // Or declare in `App` on a `WindowScene`-level
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     ///     struct HomeView: View {
@@ -185,8 +185,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -196,10 +195,9 @@ extension View {
         where Content: View
     {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -223,8 +221,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vBottomSheet<Item, Content>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -233,7 +230,7 @@ extension View {
     ) -> some View
         where Content: View
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -241,10 +238,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -253,7 +249,7 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 content(item)
                             }
                         }

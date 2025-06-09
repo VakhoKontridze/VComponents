@@ -25,17 +25,16 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vToast(
-    ///                 layerID: "notifications",
-    ///                 id: "some_toast",
+    ///                 link: .window(rootID: "notifications", linkID: "some_toast"),
     ///                 isPresented: $isPresented,
     ///                 text: "Lorem ipsum dolor sit amet"
     ///             )
     ///         })
-    ///         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    ///         .presentationHostLayer( // Or declare in `App` on a `WindowScene`-level
-    ///             id: "notifications",
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
+    ///             root: .window(rootID: "notifications"),
     ///             uiModel: {
-    ///                 var uiModel: PresentationHostLayerUIModel = .init()
+    ///                 var uiModel: ModalPresenterRootUIModel = .init()
     ///                 uiModel.dimmingViewColor = Color.clear
     ///                 uiModel.dimmingViewTapAction = .passTapsThrough
     ///                 return uiModel
@@ -45,8 +44,7 @@ extension View {
     ///
     /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VToastUIModel`.
     public func vToast(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VToastUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -54,10 +52,9 @@ extension View {
         text: String
     ) -> some View {
         self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -82,15 +79,14 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<Item>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VToastUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (Item) -> String
     ) -> some View {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -98,10 +94,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -110,7 +105,7 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         text: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 text(item)
                             } else {
                                 ""
@@ -132,8 +127,7 @@ extension View {
     ///
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<E>(
-        layerID: String? = nil,
-        id: String,
+        link: ModalPresenterLink,
         uiModel: VToastUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -143,7 +137,7 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -151,10 +145,9 @@ extension View {
         )
 
         return self
-            .presentationHost(
-                layerID: layerID,
-                id: id,
-                uiModel: uiModel.presentationHostSubUIModel,
+            .modalPresenterLink(
+                link: link,
+                uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler,
@@ -163,7 +156,7 @@ extension View {
                         uiModel: uiModel,
                         isPresented: isPresented,
                         text: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
+                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
                                 text(error)
                             } else {
                                 ""
