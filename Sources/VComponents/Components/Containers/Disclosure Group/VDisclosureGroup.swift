@@ -186,13 +186,18 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
             uiModel.expandsAndCollapsesOnHeaderTap,
-            isExpanded ^^ (internalState == .expanded)
+            exclusiveOr(isExpanded, internalState == .expanded)
         else {
             return
         }
         
         expandCollapse()
     }
+}
+
+// MARK: - Helpers
+fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
+    lhs != rhs
 }
 
 // MARK: - Previews
