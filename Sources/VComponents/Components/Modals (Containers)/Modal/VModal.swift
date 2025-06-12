@@ -55,7 +55,7 @@ struct VModal<Content>: View
     // MARK: Body
     var body: some View {
         modalView
-            .getPlatformInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation { newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -66,7 +66,7 @@ struct VModal<Content>: View
                 }
                 
                 interfaceOrientation = newValue
-            })
+            }
         
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -74,9 +74,9 @@ struct VModal<Content>: View
     }
 
     private var modalView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
             contentView
-                .applyModifier({
+                .applyModifier {
                     switch currentWidth {
                     case .fixed(let dimension):
                         $0
@@ -89,8 +89,8 @@ struct VModal<Content>: View
                         $0
                             .frame(maxWidth: .infinity)
                     }
-                })
-                .applyModifier({
+                }
+                .applyModifier {
                     switch currentHeight {
                     case .fixed(let dimension):
                         $0
@@ -103,8 +103,8 @@ struct VModal<Content>: View
                         $0
                             .frame(maxHeight: .infinity)
                     }
-                })
-        })
+                }
+        }
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
@@ -153,26 +153,25 @@ struct VModal<Content>: View
 
 #if !os(watchOS) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vModal(
                 link: rootAndLink.link(linkID: "preview"),
-                isPresented: $isPresented,
-                content: {
-                    Color.blue
-                        .onTapGesture(perform: { isPresented = false })
-                }
-            )
-    })
+                isPresented: $isPresented
+            ) {
+                Color.blue
+                    .onTapGesture { isPresented = false }
+            }
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Size Types", body: {
+#Preview("Size Types") {
     ContentView_SizeTypes()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_SizeTypes: View {
@@ -180,7 +179,7 @@ private struct ContentView_SizeTypes: View {
     @State private var size: VModalUIModel.Size?
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vModal(
                     link: rootAndLink.link(linkID: "preview"),
@@ -189,14 +188,13 @@ private struct ContentView_SizeTypes: View {
                         size.map { uiModel.sizeGroup = VModalUIModel.SizeGroup($0) }
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: {
-                        Text("Lorem ipsum dolor sit amet")
-                            .contentShape(.rect)
-                            .onTapGesture(perform: { isPresented = false })
-                    }
-                )
-                .task({ @MainActor in
+                    isPresented: $isPresented
+                ) {
+                    Text("Lorem ipsum dolor sit amet")
+                        .contentShape(.rect)
+                        .onTapGesture { isPresented = false }
+                }
+                .task { @MainActor in
                     try? await Task.sleep(for: .seconds(1))
 
                     while true {
@@ -218,8 +216,8 @@ private struct ContentView_SizeTypes: View {
                         )
                         try? await Task.sleep(for: .seconds(1))
                     }
-                })
-        })
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }

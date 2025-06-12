@@ -34,7 +34,7 @@ import VCore
 /// Component can dynamically switch to `VCompactPageIndicator` using `ViewThatFits`.
 ///
 ///     var body: some View {
-///         ViewThatFits(in: .horizontal, content: {
+///         ViewThatFits(in: .horizontal) {
 ///             VPageIndicator(
 ///                 total: total,
 ///                 current: current
@@ -44,7 +44,7 @@ import VCore
 ///                 total: total,
 ///                 current: current
 ///             )
-///         })
+///         }
 ///     }
 ///
 /// Dots can be fully customized. For instance, we can get a "bullet" shape.
@@ -61,19 +61,18 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
-///             current: current,
-///             dotContent: { (internalState, _) in
-///                 ZStack(content: {
-///                     Circle()
-///                         .stroke(lineWidth: 1)
-///                         .padding(1)
+///             current: current)
+///          ) { (internalState, _) in
+///             ZStack {
+///                 Circle()
+///                     .stroke(lineWidth: 1)
+///                     .padding(1)
 ///
-///                     Circle()
-///                         .padding(3)
-///                 })
-///                 .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///                 Circle()
+///                     .padding(3)
 ///             }
-///         )
+///             .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///         }
 ///     }
 ///
 /// Component can be stretched on its primary axis by removing primary dimension.
@@ -90,12 +89,11 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
-///             current: current,
-///             dotContent: { (internalState, _) in
-///                 RoundedRectangle(cornerRadius: 2)
-///                     .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
-///             }
-///         )
+///             current: current
+///         ) { (internalState, _) in
+///             RoundedRectangle(cornerRadius: 2)
+///                 .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///         }
 ///         .padding()
 ///     }
 ///
@@ -164,13 +162,14 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     public var body: some View {
         let range: [Int] = (0..<total)
             .reversedArray(uiModel.direction.isReversed)
-
-        return uiModel.direction
+        
+        let layout: AnyLayout = uiModel.direction
             .stackLayout(spacing: uiModel.spacing)
-            .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
-            .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                $0.animation(uiModel.transitionAnimation, value: current)
-            })
+        
+        return layout {
+            ForEach(range, id: \.self, content: dotContentView)
+        }
+        .applyIf(uiModel.appliesTransitionAnimation) { $0.animation(uiModel.transitionAnimation, value: current) }
     }
     
     private func dotContentView(
@@ -178,10 +177,10 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     ) -> some View {
         let internalState: VPageIndicatorDotInternalState = dotInternalState(index)
 
-        return Group(content: {
+        return Group {
             switch dotContent {
             case .standard:
-                ZStack(content: {
+                ZStack {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundStyle(uiModel.dotColors.value(for: internalState))
                     
@@ -190,12 +189,12 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                         RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                             .strokeBorder(uiModel.dotBorderColors.value(for: internalState), lineWidth: borderWidth)
                     }
-                })
+                }
                 
             case .custom(let custom):
                 custom(internalState, index)
             }
-        })
+        }
         .frame(
             width:
                 uiModel.direction.isHorizontal ?
@@ -212,25 +211,25 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VPageIndicator(
             total: total,
             current: current
         )
-    })
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Layout Directions", body: {
+#Preview("Layout Directions") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
     
-    PreviewContainer(content: {
-        PreviewRow("Left-to-Right", content: {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VPageIndicator(
                 uiModel: {
                     var uiModel: VPageIndicatorUIModel = .init()
@@ -240,9 +239,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                 total: total,
                 current: current
             )
-        })
+        }
 
-        PreviewRow("Right-to-Left", content: {
+        PreviewRow("Right-to-Left") {
             VPageIndicator(
                 uiModel: {
                     var uiModel: VPageIndicatorUIModel = .init()
@@ -252,10 +251,10 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                 total: total,
                 current: current
             )
-        })
+        }
 
-        HStack(spacing: 20, content: {
-            PreviewRow("Top-to-Bottom", content: {
+        HStack(spacing: 20) {
+            PreviewRow("Top-to-Bottom") {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
@@ -265,9 +264,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                     total: total,
                     current: current
                 )
-            })
+            }
 
-            PreviewRow("Bottom-to-Top", content: {
+            PreviewRow("Bottom-to-Top") {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
@@ -277,17 +276,17 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                     total: total,
                     current: current
                 )
-            })
-        })
-    })
+            }
+        }
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Different Sizes", body: {
+#Preview("Different Sizes") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VPageIndicator(
             uiModel: {
                 var uiModel: VPageIndicatorUIModel = .init()
@@ -297,11 +296,11 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
             total: total,
             current: current
         )
-    })
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Stretched", body: {
+#Preview("Stretched") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
@@ -313,28 +312,27 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         return uiModel
     }()
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VPageIndicator(
             uiModel: uiModel,
             total: total,
-            current: current,
-            dotContent: { (internalState, _) in
-                RoundedRectangle(cornerRadius: 2)
-                    .foregroundStyle(uiModel.dotColors.value(for: internalState))
-            }
-        )
+            current: current
+        ) { (internalState, _) in
+            RoundedRectangle(cornerRadius: 2)
+                .foregroundStyle(uiModel.dotColors.value(for: internalState))
+        }
         .padding(.horizontal)
-    })
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Zero", body: {
-    PreviewContainer(content: {
+#Preview("Zero") {
+    PreviewContainer {
         VPageIndicator(
             total: 0,
             current: 0
         )
-    })
-})
+    }
+}
 
 #endif

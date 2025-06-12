@@ -107,8 +107,8 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .background(content: { backgroundView(internalState: internalState) })
-                    .overlay(content: { borderView(internalState: internalState) })
+                    .background { backgroundView(internalState: internalState) }
+                    .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
                     .padding(uiModel.hitBox)
             }
@@ -118,7 +118,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     private func labelView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch label {
             case .title(let title):
                 titleLabelViewComponent(internalState: internalState, title: title)
@@ -129,22 +129,22 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
-                    })
+                    }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
-                    })
+                    }
                 }
 
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
@@ -158,7 +158,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -166,12 +166,12 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
     
@@ -216,25 +216,25 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
-    PreviewContainer(content: {
+#Preview("*") {
+    PreviewContainer {
         VWrappedButton(
             action: {},
             title: "Lorem Ipsum"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VWrappedButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed", content: {
+        PreviewRow("Pressed") {
             VWrappedButton(
                 uiModel: {
                     var uiModel: VWrappedButtonUIModel = .init()
@@ -245,17 +245,17 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VWrappedButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

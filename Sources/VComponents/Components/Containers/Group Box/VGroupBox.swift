@@ -15,19 +15,16 @@ import VCore
 /// If content is not passed, `VGroupBox` would expand to occupy maximum space.
 ///
 ///     var body: some View {
-///         ZStack(content: {
+///         ZStack {
 ///             Color(uiColor: UIColor.secondarySystemBackground)
 ///                 .ignoresSafeArea()
 ///
-///             VGroupBox(
-///                 uiModel: .systemBackgroundColor,
-///                 content: {
-///                     Text("...")
-///                         .multilineTextAlignment(.center)
-///                 }
-///             )
+///             VGroupBox(uiModel: .systemBackgroundColor) {
+///                 Text("...")
+///                     .multilineTextAlignment(.center)
+///             }
 ///             .padding()
-///         })
+///         }
 ///     }
 ///
 public struct VGroupBox<Content>: View where Content: View {
@@ -63,8 +60,8 @@ public struct VGroupBox<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         contentView
-            .background(content: { backgroundView })
-            .overlay(content: { borderView })
+            .background { backgroundView }
+            .overlay { borderView }
             .clipShape(
                 .rect(
                     cornerRadii: uiModel.cornerRadii
@@ -77,7 +74,7 @@ public struct VGroupBox<Content>: View where Content: View {
     }
 
     private var contentView: some View {
-        Group(content: {
+        Group {
             switch content {
             case .empty:
                 Color.clear // `EmptyView` cannot be used as it doesn't render
@@ -85,7 +82,7 @@ public struct VGroupBox<Content>: View where Content: View {
             case .content(let content):
                 content()
             }
-        })
+        }
         .padding(uiModel.contentMargins)
     }
 
@@ -113,15 +110,15 @@ public struct VGroupBox<Content>: View where Content: View {
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
+#Preview("*") {
     Preview_ContentView()
-})
+}
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("System Background Color", body: {
+#Preview("System Background Color") {
     Preview_ContentView(layer: .secondary, uiModel: .systemBackgroundColor)
-})
+}
 
 #endif
 
@@ -138,16 +135,13 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(layer: layer, content: {
-            VGroupBox(
-                uiModel: uiModel,
-                content: {
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
-                        .multilineTextAlignment(.center)
-                }
-            )
+        PreviewContainer(layer: layer) {
+            VGroupBox(uiModel: uiModel) {
+                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
+                    .multilineTextAlignment(.center)
+            }
             .padding()
-        })
+        }
     }
 }
 

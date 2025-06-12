@@ -15,10 +15,10 @@ extension View {
     ) -> some View {
 #if os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
         self
-            .onFirstAppear(perform: { action(.portrait) })
+            .onFirstAppear { action(.portrait) }
 #else
         self
-            .getInterfaceOrientation({ action(PlatformInterfaceOrientation(uiIInterfaceOrientation: $0)) })
+            .getInterfaceOrientation { action(PlatformInterfaceOrientation(uiIInterfaceOrientation: $0)) }
 #endif
     }
 }

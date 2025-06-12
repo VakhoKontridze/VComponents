@@ -13,22 +13,22 @@ import SwiftUI
 ///     @State private var parameters: VAlertParameters?
 ///
 ///     var body: some View {
-///         ZStack(content: {
+///         ZStack {
 ///             VPlainButton(
 ///                 action: {
 ///                     parameters = VAlertParameters(
 ///                         title: "Lorem Ipsum",
 ///                         message: "Lorem ipsum dolor sit amet",
 ///                         actions: {
-///                             VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-///                             VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+///                             VAlertButton(action: { print("Confirmed") }, title: "Confirm", role: .primary)
+///                             VAlertButton(action: { print("Cancelled") }, title: "Cancel", role: .cancel)
 ///                         }
 ///                     )
 ///                 },
 ///                 title: "Present"
 ///             )
 ///             .vAlert(link: .window(linkID: "some_alert"), parameters: $parameters)
-///         })
+///         }
 ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
 ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
 ///     }
@@ -77,9 +77,9 @@ public struct VAlertParameters {
             message: message,
             actions: {
                 VAlertButton(
-                    role: .cancel,
                     action: completion,
-                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle,
+                    role: .cancel
                 )
             },
             attributes: attributes
@@ -97,9 +97,9 @@ public struct VAlertParameters {
             message: error.localizedDescription,
             actions: {
                 VAlertButton(
-                    role: .secondary,
                     action: completion,
-                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle,
+                    role: .secondary
                 )
             },
             attributes: attributes

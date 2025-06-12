@@ -26,8 +26,8 @@ public final class VComponentsLocalizationManager: @unchecked Sendable {
     
     /// Localization provider. Set to `DefaultVComponentsLocalizationProvider`.
     public var localizationProvider: any VComponentsLocalizationProvider {
-        get { queue.sync(execute: { _localizationProvider }) }
-        set { queue.sync(flags: .barrier, execute: { _localizationProvider = newValue }) }
+        get { queue.sync { _localizationProvider } }
+        set { queue.sync(flags: .barrier) { _localizationProvider = newValue } }
     }
     
     // MARK: Properties - Queue

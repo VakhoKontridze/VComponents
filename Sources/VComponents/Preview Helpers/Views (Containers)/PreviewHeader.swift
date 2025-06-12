@@ -22,7 +22,7 @@ struct PreviewHeader: View {
     
     // MARK: Body
     var body: some View {
-        HStack(content: {
+        HStack {
             VStack(content: Divider.init)
             
             Text(title)
@@ -31,24 +31,24 @@ struct PreviewHeader: View {
                 .dynamicTypeSize(...(.accessibility2))
 
             VStack(content: Divider.init)
-        })
+        }
         .padding(.horizontal)
     }
 }
 
 // MARK: - Preview
-#Preview(body: {
-    PreviewContainer(content: {
-        PreviewRow("Lorem Ipsum", content: {
+#Preview {
+    PreviewContainer {
+        PreviewRow("Lorem Ipsum") {
             Text("Lorem ipsum")
-        })
+        }
 
         PreviewHeader("Lorem Ipsum")
 
-        PreviewRow("Lorem Ipsum", content: {
+        PreviewRow("Lorem Ipsum") {
             Text("Lorem ipsum")
-        })
-    })
-})
+        }
+    }
+}
 
 #endif

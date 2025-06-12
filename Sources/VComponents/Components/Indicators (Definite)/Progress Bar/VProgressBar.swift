@@ -52,20 +52,18 @@ public struct VProgressBar: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.toAlignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment) {
             trackView
             progressView
             borderView
-        })
+        }
         .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
         .frame(
             width: uiModel.direction.isHorizontal ? nil : uiModel.height,
             height: uiModel.direction.isHorizontal ? uiModel.height : nil
         )
-        .getSize({ progressBarSize = $0 })
-        .applyIf(uiModel.appliesProgressAnimation, transform: {
-            $0.animation(uiModel.progressAnimation, value: value)
-        })
+        .getSize { progressBarSize = $0 }
+        .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
     }
     
     private var trackView: some View {
@@ -108,37 +106,37 @@ public struct VProgressBar: View {
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var value: Double = 0
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VProgressBar(value: value)
             .padding(.horizontal)
-    })
+    }
     .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-})
+}
 
-#Preview("States", body: {
+#Preview("States") {
     @Previewable @State var value: Double = 0
 
-    PreviewContainer(content: {
-        PreviewRow(nil, content: {
+    PreviewContainer {
+        PreviewRow {
             VProgressBar(value: value)
                 .padding(.horizontal)
-        })
+        }
 
         PreviewHeader("Native")
 
-        PreviewRow(nil, content: {
+        PreviewRow {
             ProgressView(value: value)
                 .progressViewStyle(.linear)
                 .padding(.horizontal)
-        })
-    })
+        }
+    }
     .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-})
+}
 
-#Preview("Layout Directions", body: {
+#Preview("Layout Directions") {
     @Previewable @State var value: Double = 0 // '@Previewable' items must be at the beginning of the preview block
     
     let length: CGFloat = {
@@ -155,8 +153,8 @@ public struct VProgressBar: View {
 #endif
     }()
 
-    PreviewContainer(content: {
-        PreviewRow("Left-to-Right", content: {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VProgressBar(
                 uiModel: {
                     var uiModel: VProgressBarUIModel = .init()
@@ -167,9 +165,9 @@ public struct VProgressBar: View {
             )
             .frame(width: length)
             .padding(.horizontal)
-        })
+        }
 
-        PreviewRow("Right-to-Left", content: {
+        PreviewRow("Right-to-Left") {
             VProgressBar(
                 uiModel: {
                     var uiModel: VProgressBarUIModel = .init()
@@ -180,10 +178,10 @@ public struct VProgressBar: View {
             )
             .frame(width: length)
             .padding(.horizontal)
-        })
+        }
 
-        HStack(spacing: 20, content: {
-            PreviewRow("Top-to-Bottom", content: {
+        HStack(spacing: 20) {
+            PreviewRow("Top-to-Bottom") {
                 VProgressBar(
                     uiModel: {
                         var uiModel: VProgressBarUIModel = .init()
@@ -194,9 +192,9 @@ public struct VProgressBar: View {
                 )
                 .frame(height: length)
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Bottom-to-Top", content: {
+            PreviewRow("Bottom-to-Top") {
                 VProgressBar(
                     uiModel: {
                         var uiModel: VProgressBarUIModel = .init()
@@ -207,10 +205,10 @@ public struct VProgressBar: View {
                 )
                 .frame(height: length)
                 .padding(.horizontal)
-            })
-        })
-    })
+            }
+        }
+    }
     .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
-})
+}
 
 #endif

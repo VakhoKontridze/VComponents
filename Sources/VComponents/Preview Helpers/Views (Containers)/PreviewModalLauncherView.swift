@@ -29,10 +29,9 @@ struct PreviewModalLauncherView: View {
             title: "Present"
         )
 #else
-        Button(
-            "Present",
-            action: { isPresented = true }
-        )
+        Button("Present") {
+            isPresented = true
+        }
 #endif
     }
 }

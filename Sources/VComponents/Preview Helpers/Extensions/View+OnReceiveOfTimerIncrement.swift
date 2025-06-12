@@ -19,14 +19,13 @@ extension View {
     ) -> some View {
         self
             .onReceive(
-                Timer.publish(every: timeInterval, on: .main, in: .common).autoconnect(),
-                perform: { _ in
-                    var valueToSet: Int = value.wrappedValue + increment
-                    if valueToSet > total { valueToSet = 0 }
-                    
-                    value.wrappedValue = valueToSet
-                }
-            )
+                Timer.publish(every: timeInterval, on: .main, in: .common).autoconnect()
+            ) { _ in
+                var valueToSet: Int = value.wrappedValue + increment
+                if valueToSet > total { valueToSet = 0 }
+                
+                value.wrappedValue = valueToSet
+            }
     }
     
     func onReceiveOfTimerIncrement(
@@ -37,14 +36,13 @@ extension View {
     ) -> some View {
         self
             .onReceive(
-                Timer.publish(every: timeInterval, on: .main, in: .common).autoconnect(),
-                perform: { _ in
-                    var valueToSet: Double = value.wrappedValue + increment
-                    if valueToSet > total { valueToSet = 0 }
-                    
-                    value.wrappedValue = valueToSet
-                }
-            )
+                Timer.publish(every: timeInterval, on: .main, in: .common).autoconnect()
+            ) { _ in
+                var valueToSet: Double = value.wrappedValue + increment
+                if valueToSet > total { valueToSet = 0 }
+                
+                value.wrappedValue = valueToSet
+            }
     }
 }
 

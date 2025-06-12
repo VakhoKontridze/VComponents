@@ -93,39 +93,39 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     
     // MARK: Body
     public var body: some View {
-        Group(content: {
+        Group {
             switch label {
             case .empty:
                 checkBoxView
                 
             case .title(let title):
-                labeledCheckBoxView(label: {
-                    baseButtonView(label: { internalState in
+                labeledCheckBoxView {
+                    baseButtonView { internalState in
                         Text(title)
                             .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                             .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
                             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                             .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
-                    })
+                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    }
                     .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
 
             case .custom(let custom):
-                labeledCheckBoxView(label: {
+                labeledCheckBoxView {
                     baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
             }
-        })
+        }
     }
     
     private var checkBoxView: some View {
         let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
 
-        return baseButtonView(label: { internalState in
-            ZStack(content: {
+        return baseButtonView { internalState in
+            ZStack {
                 RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                     .foregroundStyle(uiModel.fillColors.value(for: internalState))
 
@@ -136,19 +136,19 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
                 if let checkmarkIcon: Image = checkmarkIcon(internalState: internalState) {
                     checkmarkIcon
-                        .applyIf(uiModel.isCheckmarkIconResizable, transform: { $0.resizable() })
-                        .applyIfLet(uiModel.checkmarkIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-                        .applyIfLet(uiModel.checkmarkIconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-                        .applyIfLet(uiModel.checkmarkIconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+                        .applyIf(uiModel.isCheckmarkIconResizable) { $0.resizable() }
+                        .applyIfLet(uiModel.checkmarkIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                        .applyIfLet(uiModel.checkmarkIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                        .applyIfLet(uiModel.checkmarkIconOpacities) { $0.opacity($1.value(for: internalState)) }
                         .font(uiModel.checkmarkIconFont)
-                        .applyIfLet(uiModel.checkmarkIconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                        .applyIfLet(uiModel.checkmarkIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                         .frame(size: uiModel.checkmarkIconSize)
                 }
-            })
+            }
             .frame(size: uiModel.size)
             .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
             .padding(uiModel.checkboxHitBox)
-        })
+        }
     }
 
     private func labeledCheckBoxView<Content>(
@@ -156,10 +156,10 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.checkBoxAndLabelSpacing, content: {
+        HStack(spacing: uiModel.checkBoxAndLabelSpacing) {
             checkBoxView
             label()
-        })
+        }
     }
 
     private func baseButtonView<Content>(
@@ -177,11 +177,11 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 let internalState: VCheckBoxInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                    .applyIf(uiModel.appliesStateChangeAnimation) {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
-                    })
+                    }
             }
         )
     }
@@ -211,27 +211,27 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VCheckBoxState = .on
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VCheckBox(
             state: $state,
             title: "Lorem ipsum"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Off", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VCheckBox(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed Off", content: {
+        PreviewRow("Pressed Off") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -244,16 +244,16 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             VCheckBox(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed On", content: {
+        PreviewRow("Pressed On") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -266,16 +266,16 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Indeterminate", content: {
+        PreviewRow("Indeterminate") {
             VCheckBox(
                 state: .constant(.indeterminate),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed Indeterminate", content: {
+        PreviewRow("Pressed Indeterminate") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -288,46 +288,46 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 state: .constant(.indeterminate),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VCheckBox(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
             .disabled(true)
-        })
+        }
 
 #if !(os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)) // No `CheckboxToggleStyle`
         PreviewHeader("Native")
 
-        PreviewRow("Off", content: {
+        PreviewRow("Off") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
             )
             .toggleStyle(.checkbox)
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(true)
             )
             .toggleStyle(.checkbox)
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
             )
             .toggleStyle(.checkbox)
             .disabled(true)
-        })
+        }
 #endif
-    })
-})
+    }
+}
 
 #endif
 

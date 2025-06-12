@@ -121,8 +121,8 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .background(content: { backgroundView(internalState: internalState) })
-                    .overlay(content: { borderView(internalState: internalState) })
+                    .background { backgroundView(internalState: internalState) }
+                    .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
             }
         )
@@ -132,10 +132,10 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
     private func labelView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
-        HStack(spacing: uiModel.labelAndSpinnerSpacing, content: {
+        HStack(spacing: uiModel.labelAndSpinnerSpacing) {
             spinnerCompensatorView(internalState: internalState)
 
-            Group(content: {
+            Group {
                 switch label {
                 case .title(let title):
                     titleLabelViewComponent(internalState: internalState, title: title)
@@ -146,26 +146,26 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 case .titleAndIcon(let title, let icon):
                     switch uiModel.titleTextAndIconPlacement {
                     case .titleAndIcon:
-                        HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        HStack(spacing: uiModel.titleTextAndIconSpacing) {
                             titleLabelViewComponent(internalState: internalState, title: title)
                             iconLabelViewComponent(internalState: internalState, icon: icon)
-                        })
+                        }
 
                     case .iconAndTitle:
-                        HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                        HStack(spacing: uiModel.titleTextAndIconSpacing) {
                             iconLabelViewComponent(internalState: internalState, icon: icon)
                             titleLabelViewComponent(internalState: internalState, title: title)
-                        })
+                        }
                     }
 
                 case .custom(let custom):
                     custom(internalState)
                 }
-            })
+            }
             .frame(maxWidth: .infinity)
             
             spinnerView(internalState: internalState)
-        })
+        }
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
@@ -179,7 +179,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -187,12 +187,12 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
     
@@ -254,29 +254,29 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
-    PreviewContainer(content: {
+#Preview("*") {
+    PreviewContainer {
         VLoadingStretchedButton(
             isLoading: false,
             action: {},
             title: "Lorem Ipsum"
         )
         .modifier(Preview_StretchedButtonFrameModifier())
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},
                 title: "Lorem Ipsum"
             )
             .modifier(Preview_StretchedButtonFrameModifier())
-        })
+        }
 
-        PreviewRow("Pressed", content: {
+        PreviewRow("Pressed") {
             VLoadingStretchedButton(
                 uiModel: {
                     var uiModel: VLoadingStretchedButtonUIModel = .init()
@@ -289,18 +289,18 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 title: "Lorem Ipsum"
             )
             .modifier(Preview_StretchedButtonFrameModifier())
-        })
+        }
 
-        PreviewRow("Loading", content: {
+        PreviewRow("Loading") {
             VLoadingStretchedButton(
                 isLoading: true,
                 action: {},
                 title: "Lorem Ipsum"
             )
             .modifier(Preview_StretchedButtonFrameModifier())
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},
@@ -308,9 +308,9 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             )
             .modifier(Preview_StretchedButtonFrameModifier())
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

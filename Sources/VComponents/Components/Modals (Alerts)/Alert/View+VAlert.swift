@@ -23,7 +23,7 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
@@ -34,11 +34,11 @@ extension View {
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
     ///                 actions: {
-    ///                     VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                     VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                     VAlertButton(action: { print("Confirmed") }, title: "Confirm", role: .primary)
+    ///                     VAlertButton(action: { print("Cancelled") }, title: "Cancel", role: .cancel)
     ///                 }
     ///             )
-    ///         })
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -59,18 +59,17 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Never>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: title,
-                        message: message,
-                        content: .empty,
-                        buttons: buttons()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Never>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: title,
+                    message: message,
+                    content: .empty,
+                    buttons: buttons()
+                )
+            }
     }
     
     /// Modal component that presents alert with actions and hosts content.
@@ -95,18 +94,17 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Content>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: title,
-                        message: message,
-                        content: .content(content: content),
-                        buttons: buttons()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Content>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: title,
+                    message: message,
+                    content: .content(content: content),
+                    buttons: buttons()
+                )
+            }
     }
 }
 
@@ -141,36 +139,35 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Never>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                title(item)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                message(item)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: VAlertContent.empty,
-                        buttons: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                buttons(item)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Never>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            title(item)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    message: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            message(item)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    content: VAlertContent.empty,
+                    buttons: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            buttons(item)
+                        } else {
+                            []
+                        }
+                    }()
+                )
+            }
     }
     
     /// Modal component that presents alert with actions and hosts content.
@@ -202,42 +199,41 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Content>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                title(item)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                message(item)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                VAlertContent.content(content: { content(item) })
-                            } else {
-                                VAlertContent.empty
-                            }
-                        }(),
-                        buttons: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                buttons(item)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Content>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            title(item)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    message: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            message(item)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    content: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            VAlertContent.content(content: { content(item) })
+                        } else {
+                            VAlertContent.empty
+                        }
+                    }(),
+                    buttons: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            buttons(item)
+                        } else {
+                            []
+                        }
+                    }()
+                )
+            }
     }
 }
 
@@ -275,36 +271,35 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Never>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                title(error)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                message(error)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: VAlertContent.empty,
-                        buttons: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                buttons(error)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Never>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            title(error)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    message: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            message(error)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    content: VAlertContent.empty,
+                    buttons: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            buttons(error)
+                        } else {
+                            []
+                        }
+                    }()
+                )
+            }
     }
     
     /// Modal component that presents alert with actions and hosts content.
@@ -339,41 +334,40 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VAlert<Content>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        title: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                title(error)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        message: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                message(error)
-                            } else {
-                                ""
-                            }
-                        }(),
-                        content: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                VAlertContent.content(content: { content(error) })
-                            } else {
-                                VAlertContent.empty
-                            }
-                        }(),
-                        buttons: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                buttons(error)
-                            } else {
-                                []
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VAlert<Content>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    title: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            title(error)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    message: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            message(error)
+                        } else {
+                            ""
+                        }
+                    }(),
+                    content: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            VAlertContent.content(content: { content(error) })
+                        } else {
+                            VAlertContent.empty
+                        }
+                    }(),
+                    buttons: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            buttons(error)
+                        } else {
+                            []
+                        }
+                    }()
+                )
+            }
     }
 }

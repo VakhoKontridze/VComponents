@@ -24,15 +24,14 @@ import VCore
 ///             text: $text
 ///         )
 ///         .focused($isFocused)
-///         .toolbar(content: {
-///             ToolbarItemGroup(
-///                 placement: .keyboard,
-///                 content: {
-///                     Spacer()
-///                     Button("Done", action: { isFocused = false })
+///         .toolbar {
+///             ToolbarItemGroup(placement: .keyboard) {
+///                 Spacer()
+///                 Button("Done") {
+///                     isFocused = false
 ///                 }
-///             )
-///         })
+///             }
+///         }
 ///     }
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewUIModel`.
@@ -81,18 +80,18 @@ public struct VCodeEntryView: View {
     // MARK: Body
     public var body: some View {
         // `bottomLeading` is required for hiding hidden `TextField` behind first character
-        ZStack(alignment: .bottomLeading, content: {
+        ZStack(alignment: .bottomLeading) {
             hiddenTextField
             charactersView
-        })
+        }
         // Detects all gestures on frame and focuses hidden `TextField`
         .contentShape(.rect)
-        .onTapGesture(perform: { isFocused = true })
+        .onTapGesture { isFocused = true }
 
         // Ensures that hidden `TextField`'s frame doesn't overflow
         .clipped()
 
-        .onChange(of: text, initial: true, { processText($1) })
+        .onChange(of: text, initial: true) { processText($1) }
     }
 
     private var hiddenTextField: some View {
@@ -139,24 +138,19 @@ public struct VCodeEntryView: View {
                 case .fixed(let spacing): spacing
                 case .stretched: 0
                 }
-            }(),
-            content: {
-                ForEach(
-                    0..<uiModel.length,
-                    id: \.self,
-                    content: { index in 
-                        characterView(index: index)
+            }()
+        ) {
+            ForEach(0..<uiModel.length, id: \.self) { index in
+                characterView(index: index)
 
-                        if 
-                            uiModel.spacingType.hasFlexibleSpace,
-                            index != uiModel.length-1
-                        {
-                            Spacer(minLength: 0)
-                        }
-                    }
-                )
+                if
+                    uiModel.spacingType.hasFlexibleSpace,
+                    index != uiModel.length-1
+                {
+                    Spacer(minLength: 0)
+                }
             }
-        )
+        }
     }
 
     private func characterView(
@@ -170,12 +164,12 @@ public struct VCodeEntryView: View {
             .lineLimit(1)
             .foregroundStyle(isPopulated ? uiModel.textColors.value(for: internalState) : uiModel.placeholderTextColors.value(for: internalState))
             .font(isPopulated ? uiModel.textFont : uiModel.placeholderTextFont)
-            .applyIfLet(isPopulated ? uiModel.textDynamicTypeSizeType : uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(isPopulated ? uiModel.textDynamicTypeSizeType : uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             .frame(size: uiModel.characterBackgroundSize)
 
-            .background(content: { characterBackgroundBorderView(internalState) })
-            .background(content: { characterBackgroundView(internalState) })
+            .background { characterBackgroundBorderView(internalState) }
+            .background { characterBackgroundView(internalState) }
             .clipShape(.rect(cornerRadius: uiModel.characterBackgroundCornerRadius))
     }
 
@@ -229,22 +223,22 @@ public struct VCodeEntryView: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var text: String = "123"
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VCodeEntryView(text: $text)
-    })
-})
+    }
+}
 
-#Preview("States", body: {
+#Preview("States") {
     Preview_StatesContentView()
-})
+}
 
-#Preview("Stretched", body: {
+#Preview("Stretched") {
     @Previewable @State var text: String = "123"
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VCodeEntryView(
             uiModel: {
                 var uiModel: VCodeEntryViewUIModel = .init()
@@ -254,20 +248,20 @@ public struct VCodeEntryView: View {
             text: $text
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("Success", body: {
+#Preview("Success") {
     Preview_StatesContentView(uiModel: .success)
-})
+}
 
-#Preview("Warning", body: {
+#Preview("Warning") {
     Preview_StatesContentView(uiModel: .warning)
-})
+}
 
-#Preview("Error", body: {
+#Preview("Error") {
     Preview_StatesContentView(uiModel: .error)
-})
+}
 
 private struct Preview_StatesContentView: View {
     private let uiModel: VCodeEntryViewUIModel
@@ -279,16 +273,16 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
-            PreviewRow("Enabled", content: {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")
                 )
-            })
+            }
 
             // Color is also applied to other characters
-            PreviewRow("Focused (*)", content: {
+            PreviewRow("Focused (*)") {
                 VCodeEntryView(
                     uiModel: {
                         var uiModelMapped: VCodeEntryViewUIModel = uiModel
@@ -299,16 +293,16 @@ private struct Preview_StatesContentView: View {
                     }(),
                     text: .constant("123")
                 )
-            })
+            }
 
-            PreviewRow("Disabled", content: {
+            PreviewRow("Disabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")
                 )
                 .disabled(true)
-            })
-        })
+            }
+        }
     }
 }
 

@@ -17,7 +17,7 @@ struct PreviewRow<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        _ title: String?,
+        _ title: String? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.title = title
@@ -26,28 +26,25 @@ struct PreviewRow<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        VStack(
-            spacing: 10,
-            content: {
-                if let title {
-                    Text(title)
-                        .lineLimit(1)
-                        .foregroundStyle(Color.primary)
-                        .font(.caption.bold())
-                        .dynamicTypeSize(...(.accessibility2))
-                }
-
-                content()
+        VStack(spacing: 10) {
+            if let title {
+                Text(title)
+                    .lineLimit(1)
+                    .foregroundStyle(Color.primary)
+                    .font(.caption.bold())
+                    .dynamicTypeSize(...(.accessibility2))
             }
-        )
+            
+            content()
+        }
     }
 }
 
 // MARK: - Preview
-#Preview(body: {
-    PreviewRow("Lorem Ipsum", content: {
+#Preview {
+    PreviewRow("Lorem Ipsum") {
         Text("Lorem ipsum")
-    })
-})
+    }
+}
 
 #endif

@@ -12,16 +12,13 @@ import VCore
 /// Container component that automatically scrolls and wraps it's content edge-to-edge.
 ///
 ///     var body: some View {
-///         VWrappingMarquee(
-///             uiModel: .insettedGradientMask,
-///             content: {
-///                 HStack(content: {
-///                     Image(systemName: "swift")
-///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-///                 })
-///                 .drawingGroup() // For `Image`
+///         VWrappingMarquee(uiModel: .insettedGradientMask) {
+///             HStack {
+///                 Image(systemName: "swift")
+///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
 ///             }
-///         )
+///             .drawingGroup() // For `Image`
+///         }
 ///     }
 ///
 /// If you wish to have consistent spacing between elements, and two duplicates of marquee content,
@@ -33,17 +30,16 @@ import VCore
 ///                 var uiModel: VWrappingMarqueeUIModel = .init()
 ///                 uiModel.wrappedContentSpacing = 16
 ///                 return uiModel
-///             }(),
-///             content: {
-///                 HStack(spacing: 16, content: {
-///                     ForEach(0..<5, id: \.self, content: { i in
-///                         Text("\(i)")
-///                             .frame(dimension: 100)
-///                             .background(content: { Color.accentColor })
-///                     })
-///                 })
+///             }()
+///         ) {
+///             HStack(spacing: 16) {
+///                 ForEach(0..<5, id: \.self) {
+///                     Text("\(i)")
+///                         .frame(dimension: 100)
+///                         .background { Color.accentColor }
+///                 }
 ///             }
-///         )
+///         }
 ///     }
 ///
 public struct VWrappingMarquee<Content>: View where Content: View {
@@ -76,16 +72,16 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .getSize({ containerWidth = $0.width })
-            .overlay(content: { marqueeContentView })
-            .mask({ gradientMask })
+            .getSize { containerWidth = $0.width }
+            .overlay { marqueeContentView }
+            .mask { gradientMask }
             .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
     }
     
     @ViewBuilder 
     private var marqueeContentView: some View {
         if isAnimatable {
-            Group(content: { // `Group` is used for non-stacked layout
+            Group { // `Group` is used for non-stacked layout
                 contentView
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
@@ -93,23 +89,23 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                 contentView
                     .offset(x: offsetDynamicSecond)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
-            })
+            }
             .offset(x: offsetDynamic)
-            .task({ @MainActor in // `onAppear(perform:)` causes UI glitches
+            .task { @MainActor in // `onAppear(perform:)` causes UI glitches
                 isAnimating = isAnimatable
-            })
+            }
             
         } else {
             contentView
                 .offset(x: offsetStatic)
-                .onAppear(perform: { isAnimating = Self.isAnimatingDefault })
+                .onAppear { isAnimating = Self.isAnimatingDefault }
         }
     }
     
     private var contentView: some View {
         content()
             .fixedSize()
-            .getSize({ contentSize = $0 })
+            .getSize { contentSize = $0 }
     }
     
     @ViewBuilder
@@ -217,47 +213,48 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
-    PreviewContainer(content: {
-        VWrappingMarquee(
-            content: { preview_MarqueeContentSmall }
-        )
+#Preview("*") {
+    PreviewContainer {
+        VWrappingMarquee {
+            preview_MarqueeContentSmall
+        }
 
-        VWrappingMarquee(
-            content: { preview_MarqueeContent }
-        )
+        VWrappingMarquee {
+            preview_MarqueeContent
+        }
 
-        VWrappingMarquee(
-            uiModel: .insettedGradientMask,
-            content: { preview_MarqueeContent }
-        )
-    })
-})
+        VWrappingMarquee(uiModel: .insettedGradientMask) {
+            preview_MarqueeContent
+        }
+    }
+}
 
-#Preview("Scroll Directions", body: {
-    PreviewContainer(content: {
-        PreviewRow("Left-to-Right", content: {
+#Preview("Scroll Directions") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VWrappingMarquee(
                 uiModel: {
                     var uiModel: VWrappingMarqueeUIModel = .init()
                     uiModel.scrollDirection = .leftToRight
                     return uiModel
-                }(),
-                content: { preview_MarqueeContent }
-            )
-        })
-
-        PreviewRow("Right-to-Left", content: {
-            VWrappingMarquee(
-                uiModel: {
-                    var uiModel: VWrappingMarqueeUIModel = .init()
-                    uiModel.scrollDirection = .rightToLeft
-                    return uiModel
-                }(),
-                content: { preview_MarqueeContent }
-            )
-        })
-    })
-})
+                }()
+            ) {
+                preview_MarqueeContent
+            }
+        }
+    }
+    
+    PreviewRow("Right-to-Left") {
+        VWrappingMarquee(
+            uiModel: {
+                var uiModel: VWrappingMarqueeUIModel = .init()
+                uiModel.scrollDirection = .rightToLeft
+                return uiModel
+            }()
+        ) {
+            preview_MarqueeContent
+        }
+    }
+}
 
 #endif

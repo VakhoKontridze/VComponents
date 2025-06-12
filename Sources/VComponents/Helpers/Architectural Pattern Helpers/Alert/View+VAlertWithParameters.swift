@@ -19,22 +19,22 @@ extension View {
     ///     @State private var parameters: VAlertParameters?
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: {
     ///                     parameters = VAlertParameters(
     ///                         title: "Lorem Ipsum",
     ///                         message: "Lorem ipsum dolor sit amet",
     ///                         actions: {
-    ///                             VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                             VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                             VAlertButton(action: { print("Confirmed") }, title: "Confirm", role: .primary)
+    ///                             VAlertButton(action: { print("Cancelled") }, title: "Cancel", role: .cancel)
     ///                         }
     ///                     )
     ///                 },
     ///                 title: "Present"
     ///             )
     ///             .vAlert(link: .window(linkID: "some_alert"), parameters: $parameters)
-    ///         })
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -60,15 +60,15 @@ extension View {
     ///     @State private var inputText: String = "Lorem ipsum"
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: {
     ///                     parameters = VAlertParameters(
     ///                         title: "Lorem Ipsum",
     ///                         message: "Lorem ipsum dolor sit amet",
     ///                         actions: {
-    ///                             VAlertButton(role: .primary, action: { print("Confirmed") }, title: "Confirm")
-    ///                             VAlertButton(role: .cancel, action: { print("Cancelled") }, title: "Cancel")
+    ///                             VAlertButton(action: { print("Confirmed") }, title: "Confirm", role: .primary)
+    ///                             VAlertButton(action: { print("Cancelled") }, title: "Cancel", role: .cancel)
     ///                         },
     ///                         attributes: [
     ///                             "input_text_binding": $inputText
@@ -79,15 +79,14 @@ extension View {
     ///             )
     ///             .vAlert(
     ///                 link: .window(linkID: "some_alert"),
-    ///                 parameters: $parameters,
-    ///                 content: { parameters in
-    ///                     if let inputTextBinding = parameters.attributes["input_text_binding"] as? Binding<String> {
-    ///                         TextField("", text: inputTextBinding)
-    ///                             .textFieldStyle(.roundedBorder)
-    ///                     }
+    ///                 parameters: $parameters
+    ///             ) { parameters in
+    ///                 if let inputTextBinding = parameters.attributes["input_text_binding"] as? Binding<String> {
+    ///                     TextField("", text: inputTextBinding)
+    ///                         .textFieldStyle(.roundedBorder)
     ///                 }
-    ///             )
-    ///         })
+    ///             }
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///

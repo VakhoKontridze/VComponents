@@ -25,10 +25,10 @@ extension View {
     ) -> some View {
         self
             .blocksHitTesting(parameters?.isInteractionEnabled == false)
-            .overlay(content: {
+            .overlay {
                 if parameters != nil {
                     VContinuousSpinner(uiModel: uiModel)
                 }
-            })
+            }
     }
 }

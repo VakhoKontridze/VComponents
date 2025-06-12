@@ -35,23 +35,19 @@ struct PreviewContainer<Content>: View where Content: View {
 #endif
         }()
         
-        return ZStack(content: {
+        return ZStack {
             backgroundColor
                 .ignoresSafeArea()
 
-            ViewThatFits(
-                in: .vertical,
-                content: {
+            ViewThatFits(in: .vertical) {
+                vStackedContent
+                
+                ScrollView(.vertical) {
                     vStackedContent
-
-                    ScrollView(
-                        .vertical,
-                        content: { vStackedContent }
-                    )
-                    .clipped()
                 }
-            )
-        })
+                .clipped()
+            }
+        }
     }
 
     private var vStackedContent: some View {
@@ -71,10 +67,10 @@ enum PreviewContainerLayer {
 }
 
 // MARK: - Preview
-#Preview(body: {
-    PreviewContainer(content: {
+#Preview {
+    PreviewContainer {
         Text("Lorem ipsum")
-    })
-})
+    }
+}
 
 #endif

@@ -111,7 +111,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
     private func labelView(
         internalState: VPlainButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch label {
             case .title(let title):
                 titleLabelViewComponent(internalState: internalState, title: title)
@@ -122,22 +122,22 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
-                    })
+                    }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
-                    })
+                    }
                 }
 
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.hitBox)
     }
@@ -151,7 +151,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -159,12 +159,12 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
     
@@ -183,8 +183,8 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
-    PreviewContainer(content: {
+#Preview("*") {
+    PreviewContainer {
         VPlainButton(
             action: {},
             title: "Lorem Ipsum"
@@ -194,19 +194,19 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             action: {},
             icon: Image(systemName: "swift")
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VPlainButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed", content: {
+        PreviewRow("Pressed") {
             VPlainButton(
                 uiModel: {
                     var uiModel: VPlainButtonUIModel = .init()
@@ -216,38 +216,32 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
                 action: {},
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VPlainButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
             .disabled(true)
-        })
+        }
 
         PreviewHeader("Native")
 
-        PreviewRow("Enabled", content: {
-            Button(
-                "Lorem Ipsum",
-                action: {}
-            )
-            .buttonStyle(.plain)
-            .foregroundStyle(Color.blue)
-        })
+        PreviewRow("Enabled") {
+            Button("Lorem Ipsum") {}
+                .buttonStyle(.plain)
+                .foregroundStyle(Color.blue)
+        }
 
-        PreviewRow("Disabled", content: {
-            Button(
-                "Lorem Ipsum",
-                action: {}
-            )
-            .buttonStyle(.plain)
-            .foregroundStyle(Color.blue)
-            .disabled(true)
-        })
-    })
-})
+        PreviewRow("Disabled") {
+            Button("Lorem Ipsum") {}
+                .buttonStyle(.plain)
+                .foregroundStyle(Color.blue)
+                .disabled(true)
+        }
+    }
+}
 
 #endif
 

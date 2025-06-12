@@ -93,8 +93,8 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(size: uiModel.size)
-                    .background(content: { backgroundView(internalState: internalState) })
-                    .overlay(content: { borderView(internalState: internalState) })
+                    .background { backgroundView(internalState: internalState) }
+                    .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
                     .padding(uiModel.hitBox)
             }
@@ -104,7 +104,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
     private func labelView(
         internalState: VRectangularButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch label {
             case .title(let title):
                 titleLabelViewComponent(internalState: internalState, title: title)
@@ -115,7 +115,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
@@ -129,7 +129,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -137,12 +137,12 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
     
@@ -187,8 +187,8 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
-    PreviewContainer(content: {
+#Preview("*") {
+    PreviewContainer {
         VRectangularButton(
             action: {},
             title: "ABC"
@@ -198,19 +198,19 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             action: {},
             icon: Image(systemName: "swift")
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VRectangularButton(
                 action: {},
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("Pressed", content: {
+        PreviewRow("Pressed") {
             VRectangularButton(
                 uiModel: {
                     var uiModel: VRectangularButtonUIModel = .init()
@@ -221,17 +221,17 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
                 action: {},
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+    PreviewRow("Disabled") {
             VRectangularButton(
                 action: {},
                 icon: Image(systemName: "swift")
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

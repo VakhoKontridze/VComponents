@@ -14,21 +14,20 @@ import VCore
 ///     @State private var state: VDisclosureGroupState = .expanded
 ///
 ///     var body: some View {
-///         ZStack(alignment: .top, content: {
+///         ZStack(alignment: .top) {
 ///             Color(uiColor: UIColor.secondarySystemBackground)
 ///                 .ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
 ///                 uiModel: .systemBackgroundColor,
 ///                 state: $state,
-///                 headerTitle: "Lorem Ipsum",
-///                 content: {
-///                     Color.blue
-///                         .frame(height: 150)
-///                 }
-///             )
+///                 headerTitle: "Lorem Ipsum"
+///             ) {
+///                 Color.blue
+///                     .frame(height: 150)
+///             }
 ///             .padding()
-///         })
+///         }
 ///     }
 ///
 /// Component can be also initialized with `Bool`.
@@ -106,46 +105,45 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
         VGroupBox(
             uiModel: uiModel.groupBoxSubUIModel(
                 internalState: internalState
-            ),
-            content: {
-                PlainDisclosureGroup(
-                    uiModel: uiModel.plainDisclosureGroupSubUIModel,
-                    isExpanded: Binding(
-                        get: { internalState == .expanded },
-                        set: { expandCollapseFromHeaderTap($0) }
-                    ),
-                    label: { headerView },
-                    content: {
-                        VStack(spacing: 0, content: {
-                            dividerView
-                            contentView
-                        })
+            )
+        ) {
+            PlainDisclosureGroup(
+                uiModel: uiModel.plainDisclosureGroupSubUIModel,
+                isExpanded: Binding(
+                    get: { internalState == .expanded },
+                    set: { expandCollapseFromHeaderTap($0) }
+                ),
+                label: { headerView },
+                content: {
+                    VStack(spacing: 0) {
+                        dividerView
+                        contentView
                     }
-                )
-            }
-        )
-        .applyIf(uiModel.appliesExpandCollapseAnimation, transform: {
+                }
+            )
+        }
+        .applyIf(uiModel.appliesExpandCollapseAnimation) {
             $0
                 .animation(uiModel.expandCollapseAnimation, value: isEnabled)
                 .animation(uiModel.expandCollapseAnimation, value: state) // +withAnimation
-        })
+        }
     }
     
     private var headerView: some View {
-        HStack(spacing: 0, content: {
-            Group(content: {
+        HStack(spacing: 0) {
+            Group {
                 switch headerLabel {
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
                         .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                         .font(uiModel.headerTitleTextFont)
-                        .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                        .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 case .custom(let custom):
                     custom(internalState)
                 }
-            })
+            }
             .frame(maxWidth: .infinity, alignment: .leading)
             .allowsHitTesting(false)
             
@@ -157,7 +155,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 icon: uiModel.disclosureButtonIcon
             )
             .rotationEffect(Angle(radians: uiModel.disclosureButtonAngles.value(for: internalState)))
-        })
+        }
         .padding(uiModel.headerMargins)
     }
     
@@ -180,7 +178,9 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     // MARK: Actions
     private func expandCollapse() {
         // Not affected by animation flag
-        withAnimation(uiModel.expandCollapseAnimation, { state.setNextState() })
+        withAnimation(uiModel.expandCollapseAnimation) {
+            state.setNextState()
+        }
     }
     
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
@@ -205,28 +205,29 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VDisclosureGroupState = .expanded
     
-    PreviewContainer(content: {
+    PreviewContainer {
         VDisclosureGroup(
             state: $state,
             headerTitle: "Lorem Ipsum",
-            content: { Color.blue.frame(height: 100) }
-        )
+        ) {
+            Color.blue.frame(height: 100)
+        }
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("States", body: {
+#Preview("States") {
     Preview_StatesContentView()
-})
+}
 
 #if !os(macOS) // Redundant
 
-#Preview("States (System Background Color)", body: {
+#Preview("States (System Background Color)") {
     Preview_StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
-})
+}
 
 #endif
 
@@ -243,28 +244,30 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(layer: layer, content: {
-            PreviewRow("Collapsed", content: {
+        PreviewContainer(layer: layer) {
+            PreviewRow("Collapsed") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.collapsed),
-                    headerTitle: "Lorem Ipsum",
-                    content: { Color.blue.frame(height: 100) }
-                )
+                    headerTitle: "Lorem Ipsum"
+                ) {
+                    Color.blue.frame(height: 100)
+                }
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Expanded", content: {
+            PreviewRow("Expanded") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.expanded),
-                    headerTitle: "Lorem Ipsum",
-                    content: { Color.blue.frame(height: 100) }
-                )
+                    headerTitle: "Lorem Ipsum"
+                ) {
+                    Color.blue.frame(height: 100)
+                }
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Pressed (Button)", content: {
+            PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel
@@ -273,13 +276,14 @@ private struct Preview_StatesContentView: View {
                         return uiModel
                     }(),
                     state: .constant(.collapsed),
-                    headerTitle: "Lorem Ipsum",
-                    content: { Color.blue.frame(height: 100) }
-                )
+                    headerTitle: "Lorem Ipsum"
+                ) {
+                    Color.blue.frame(height: 100)
+                }
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Disabled", content: {
+            PreviewRow("Disabled") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel
@@ -288,13 +292,14 @@ private struct Preview_StatesContentView: View {
                         return uiModel
                     }(),
                     state: .constant(.expanded),
-                    headerTitle: "Lorem Ipsum",
-                    content: { Color.blue.frame(height: 100) }
-                )
+                    headerTitle: "Lorem Ipsum"
+                ) {
+                    Color.blue.frame(height: 100)
+                }
                 .disabled(true)
                 .padding(.horizontal)
-            })
-        })
+            }
+        }
     }
 }
 

@@ -11,16 +11,16 @@ import SwiftUI
 
 // MARK: - Marquee Content (Small)
 var preview_MarqueeContentSmall: some View {
-    HStack(content: {
+    HStack {
         Image(systemName: "swift")
         Text("Lorem ipsum")
-    })
+    }
     .drawingGroup()
 }
 
 // MARK: - Marquee Content
 var preview_MarqueeContent: some View {
-    HStack(content: {
+    HStack {
         Image(systemName: "swift")
 
 #if os(iOS)
@@ -34,7 +34,7 @@ var preview_MarqueeContent: some View {
 #elseif os(visionOS)
         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu.")
 #endif
-    })
+    }
     .drawingGroup()
 }
 

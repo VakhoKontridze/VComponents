@@ -16,17 +16,18 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
     ///             .vModal(
     ///                 link: .window(linkID: "some_modal"),
-    ///                 isPresented: $isPresented,
-    ///                 content: { Color.blue }
-    ///             )
-    ///         })
+    ///                 isPresented: $isPresented
+    ///             ) {
+    ///                 Color.blue
+    ///             }
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -37,7 +38,7 @@ extension View {
     ///     @State private var modalDidAppear: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
@@ -46,18 +47,18 @@ extension View {
     ///                 link: .window(linkID: "some_modal"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
-    ///                 onDismiss: { modalDidAppear = false },
-    ///                 content: {
-    ///                     NavigationStack(root: {
-    ///                         HomeView(isPresented: $isPresented)
-    ///                             // Disables possible `NavigationStack` animations
-    ///                             .transaction({
-    ///                                 if !modalDidAppear { $0.animation = nil }
-    ///                          })
-    ///                     })
+    ///                 onDismiss: { modalDidAppear = false }
+    ///             ) {
+    ///                 NavigationStack {
+    ///                     HomeView(isPresented: $isPresented)
+    ///                         // Disables possible `NavigationStack` animations
+    ///                         .transaction {
+    ///                             if !modalDidAppear { $0.animation = nil }
+    ///                         }
+    ///                     }
     ///                 }
-    ///             )
-    ///         })
+    ///             }
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -75,12 +76,12 @@ extension View {
     ///                 destination: { DestinationView(isPresented: $isPresented) }
     ///             )
     ///             .inlineNavigationTitle("Home")
-    ///             .toolbar(content: {
+    ///             .toolbar {
     ///                 VPlainButton(
     ///                     action: { isPresented = false },
     ///                     title: "Dismiss"
     ///                 )
-    ///             })
+    ///             }
     ///         }
     ///     }
     ///
@@ -95,16 +96,16 @@ extension View {
     ///
     ///         var body: some View {
     ///             VPlainButton(
-    ///                 action: { dismissAction.callAsFunction() },
+    ///                 action: dismissAction,
     ///                 title: "To Home"
     ///             )
     ///             .inlineNavigationTitle("Destination")
-    ///             .toolbar(content: {
+    ///             .toolbar {
     ///                 VPlainButton(
     ///                     action: { isPresented = false },
     ///                     title: "Dismiss"
     ///                 )
-    ///             })
+    ///             }
     ///         }
     ///     }
     ///     
@@ -124,15 +125,14 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VModal<Content>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: content
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VModal<Content>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: content
+                )
+            }
     }
 }
 
@@ -165,18 +165,17 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VModal<Content?>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                content(item)
-                            }
+                onDismiss: dismissHandler
+            ) {
+                VModal<Content?>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            content(item)
                         }
-                    )
-                }
-            )
+                    }
+                )
+            }
     }
 }

@@ -119,15 +119,15 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(size: uiModel.size)
-                    .background(content: { backgroundView(internalState: internalState) })
-                    .overlay(content: { borderView(internalState: internalState) })
+                    .background { backgroundView(internalState: internalState) }
+                    .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
                     .padding(uiModel.hitBox)
-                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                    .applyIf(uiModel.appliesStateChangeAnimation) {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed)
-                    })
+                    }
             }
         )
     }
@@ -135,7 +135,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     private func labelView(
         internalState: VRectangularToggleButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch label {
             case .title(let title):
                 titleLabelViewComponent(internalState: internalState, title: title)
@@ -146,7 +146,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
@@ -160,7 +160,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
 
     private func iconLabelViewComponent(
@@ -168,12 +168,12 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
 
@@ -233,10 +233,10 @@ extension VRectangularToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VRectangularToggleButtonState = .on
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VRectangularToggleButton(
             state: $state,
             title: "ABC"
@@ -246,19 +246,19 @@ extension VRectangularToggleButtonInternalState {
             state: $state,
             icon: Image(systemName: "swift")
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Off", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VRectangularToggleButton(
                 state: .constant(.off),
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("Pressed Off", content: {
+        PreviewRow("Pressed Off") {
             VRectangularToggleButton(
                 uiModel: {
                     var uiModel: VRectangularToggleButtonUIModel = .init()
@@ -269,16 +269,16 @@ extension VRectangularToggleButtonInternalState {
                 state: .constant(.off),
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             VRectangularToggleButton(
                 state: .constant(.on),
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("Pressed On", content: {
+        PreviewRow("Pressed On") {
             VRectangularToggleButton(
                 uiModel: {
                     var uiModel: VRectangularToggleButtonUIModel = .init()
@@ -289,17 +289,17 @@ extension VRectangularToggleButtonInternalState {
                 state: .constant(.on),
                 icon: Image(systemName: "swift")
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VRectangularToggleButton(
                 state: .constant(.off),
                 icon: Image(systemName: "swift")
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

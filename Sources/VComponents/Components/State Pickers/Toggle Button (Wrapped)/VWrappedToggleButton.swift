@@ -133,15 +133,15 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: uiModel.height)
-                    .background(content: { backgroundView(internalState: internalState) })
-                    .overlay(content: { borderView(internalState: internalState) })
+                    .background { backgroundView(internalState: internalState) }
+                    .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
                     .padding(uiModel.hitBox)
-                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                    .applyIf(uiModel.appliesStateChangeAnimation) {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed)
-                    })
+                    }
             }
         )
     }
@@ -149,7 +149,7 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
     private func labelView(
         internalState: VWrappedToggleButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch label {
             case .title(let title):
                 titleLabelViewComponent(internalState: internalState, title: title)
@@ -160,22 +160,22 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
-                    })
+                    }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing, content: {
+                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
-                    })
+                    }
                 }
 
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)
         .padding(uiModel.labelMargins)
     }
@@ -189,7 +189,7 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
             .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
 
     private func iconLabelViewComponent(
@@ -197,12 +197,12 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
     }
 
@@ -262,27 +262,27 @@ extension VWrappedToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VWrappedToggleButtonState = .on
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VWrappedToggleButton(
             state: $state,
             title: "Lorem Ipsum"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Off", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VWrappedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed Off", content: {
+        PreviewRow("Pressed Off") {
             VWrappedToggleButton(
                 uiModel: {
                     var uiModel: VWrappedToggleButtonUIModel = .init()
@@ -293,16 +293,16 @@ extension VWrappedToggleButtonInternalState {
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             VWrappedToggleButton(
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed On", content: {
+        PreviewRow("Pressed On") {
             VWrappedToggleButton(
                 uiModel: {
                     var uiModel: VWrappedToggleButtonUIModel = .init()
@@ -313,17 +313,17 @@ extension VWrappedToggleButtonInternalState {
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VWrappedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

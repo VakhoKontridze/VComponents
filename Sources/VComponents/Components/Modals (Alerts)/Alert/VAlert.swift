@@ -65,7 +65,7 @@ struct VAlert<Content>: View
     // MARK: Body
     var body: some View {
         alertView
-            .getPlatformInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation { newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -76,7 +76,7 @@ struct VAlert<Content>: View
                 }
 
                 interfaceOrientation = newValue
-            })
+            }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -84,11 +84,11 @@ struct VAlert<Content>: View
     }
     
     private var alertView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
-            ZStack(content: {
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
+            ZStack {
                 alertContentView
-            })
-            .applyModifier({
+            }
+            .applyModifier {
                 switch currentWidth {
                 case .fixed(let width):
                     $0
@@ -98,8 +98,8 @@ struct VAlert<Content>: View
                     $0
                         .frame(maxWidth: .infinity)
                 }
-            })
-        })
+            }
+        }
         .frame(maxHeight: .infinity)
         
         .shadow(
@@ -116,18 +116,18 @@ struct VAlert<Content>: View
     }
 
     private var alertContentView: some View {
-        VStack(spacing: 0, content: {
-            VStack(spacing: 0, content: {
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
                 titleView
                 messageView
                 contentView
-            })
+            }
             .padding(uiModel.titleTextMessageTextAndContentMargins)
-            .getSize({ titleMessageContentHeight = $0.height })
+            .getSize { titleMessageContentHeight = $0.height }
 
             buttonsScrollView
-        })
-        .getSize({ alertHeight = $0.height })
+        }
+        .getSize { alertHeight = $0.height }
     }
 
     @ViewBuilder
@@ -138,7 +138,7 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
-                .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -161,7 +161,7 @@ struct VAlert<Content>: View
                 .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
-                .applyIfLet(uiModel.messageTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -177,7 +177,7 @@ struct VAlert<Content>: View
     }
     
     private var contentView: some View {
-        Group(content: {
+        Group {
             switch content {
             case .empty:
                 EmptyView()
@@ -186,13 +186,13 @@ struct VAlert<Content>: View
                 content()
                     .padding(uiModel.contentMargins)
             }
-        })
+        }
     }
     
     @ViewBuilder
     private var buttonsScrollView: some View {
         if isButtonContentLargerThanContainer {
-            ScrollView(content: { buttonStackView })
+            ScrollView { buttonStackView }
                 .clipped()
 
         } else {
@@ -201,29 +201,27 @@ struct VAlert<Content>: View
     }
     
     private var buttonStackView: some View {
-        Group(content: {
+        Group {
             switch buttons.count {
             case 1:
                 buttonContentView()
-
+                
             case 2:
-                HStack(
-                    spacing: uiModel.horizontalButtonSpacing,
-                    content: { buttonContentView(reversesOrder: true) } // Cancel button is last
-                )
+                HStack(spacing: uiModel.horizontalButtonSpacing) {
+                    buttonContentView(reversesOrder: true) // Cancel button is last
+                }
                 
             case 3...:
-                VStack(
-                    spacing: uiModel.verticalButtonSpacing,
-                    content: { buttonContentView() }
-                )
+                VStack(spacing: uiModel.verticalButtonSpacing) {
+                    buttonContentView()
+                }
                 
             default:
                 fatalError()
             }
-        })
+        }
         .padding(uiModel.buttonMargins)
-        .getSize({ buttonsStackHeight = $0.height })
+        .getSize { buttonsStackHeight = $0.height }
     }
     
     private func buttonContentView(
@@ -231,19 +229,16 @@ struct VAlert<Content>: View
     ) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(reversesOrder)
 
-        return ForEach(
-            buttons.enumeratedArray(),
-            id: \.offset, // Native `View.alert(...)` doesn't react to changes
-            content: { (i, button) in
-                button.makeBody(
-                    uiModel: uiModel,
-                    animateOutHandler: { completion in
-                        isPresented = false
-                        completion?()
-                    }
-                )
-            }
-        )
+        // Native `View.alert(...)` doesn't react to changes, so using `offset` as ID is okay
+        return ForEach(buttons.enumeratedArray(), id: \.offset) { (i, button) in
+            button.makeBody(
+                uiModel: uiModel,
+                animateOutHandler: { completion in
+                    isPresented = false
+                    completion?()
+                }
+            )
+        }
     }
 
     // MARK: Lifecycle Animations
@@ -284,10 +279,10 @@ struct VAlert<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Title, Message, Content", body: {
+#Preview("Title, Message, Content") {
     @Previewable @State var isPresented: Bool = true
     
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -296,18 +291,18 @@ struct VAlert<Content>: View
                 message: "Lorem ipsum dolor sit amet",
                 content: { previewContent },
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Title, Message", body: {
+#Preview("Title, Message") {
     @Previewable @State var isPresented: Bool = true
     
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -315,18 +310,18 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Title, Content", body: {
+#Preview("Title, Content") {
     @Previewable @State var isPresented: Bool = true
     
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -335,18 +330,18 @@ struct VAlert<Content>: View
                 message: nil,
                 content: { previewContent },
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Message, Content", body: {
+#Preview("Message, Content") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -355,18 +350,18 @@ struct VAlert<Content>: View
                 message: "Lorem ipsum dolor sit amet",
                 content: { previewContent },
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Title", body: {
+#Preview("Title") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -374,18 +369,18 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: nil,
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Message", body: {
+#Preview("Message") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -393,18 +388,18 @@ struct VAlert<Content>: View
                 title: nil,
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Content", body: {
+#Preview("Content") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -413,18 +408,18 @@ struct VAlert<Content>: View
                 message: nil,
                 content: { previewContent },
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("No Declared Buttons", body: {
+#Preview("No Declared Buttons") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -433,14 +428,14 @@ struct VAlert<Content>: View
                 message: "Lorem ipsum dolor sit amet",
                 actions: {}
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("One Button", body: {
+#Preview("One Button") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -448,17 +443,17 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .secondary, action: nil, title: "Ok")
+                    VAlertButton(action: nil, title: "Ok", role: .secondary)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Many Buttons", body: {
+#Preview("Many Buttons") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -466,21 +461,21 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Option A")
-                    VAlertButton(role: .secondary, action: nil, title: "Option B")
-                    VAlertButton(role: .destructive, action: nil, title: "Delete")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Option A", role: .primary)
+                    VAlertButton(action: nil, title: "Option B", role: .secondary)
+                    VAlertButton(action: nil, title: "Delete", role: .destructive)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Width Types", body: {
+#Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VAlertUIModel.Width?
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -493,11 +488,11 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Confirm")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Confirm", role: .primary)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-            .task({ @MainActor in
+            .task { @MainActor in
                 try? await Task.sleep(for: .seconds(1))
 
                 while true {
@@ -507,15 +502,15 @@ struct VAlert<Content>: View
                     width = .stretched(margin: .absolute(15))
                     try? await Task.sleep(for: .seconds(1))
                 }
-            })
-    })
+            }
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Max Height", body: {
+#Preview("Max Height") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -524,20 +519,20 @@ struct VAlert<Content>: View
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
                     for i in 0..<20 {
-                        VAlertButton(role: .primary, action: nil, title: "Confirm \(i+1)")
+                        VAlertButton(action: nil, title: "Confirm \(i+1)", role: .primary)
                     }
 
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Button States (Pressed)", body: {
+#Preview("Button States (Pressed)") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -559,19 +554,19 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Option A")
-                    VAlertButton(role: .destructive, action: nil, title: "Delete")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Option A", role: .primary)
+                    VAlertButton(action: nil, title: "Delete", role: .destructive)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("Button States (Disabled)", body: {
+#Preview("Button States (Disabled)") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
@@ -593,14 +588,14 @@ struct VAlert<Content>: View
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 actions: {
-                    VAlertButton(role: .primary, action: nil, title: "Option A")
-                    VAlertButton(role: .destructive, action: nil, title: "Delete")
-                    VAlertButton(role: .cancel, action: nil, title: "Cancel")
+                    VAlertButton(action: nil, title: "Option A", role: .primary)
+                    VAlertButton(action: nil, title: "Delete", role: .destructive)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
                 }
             )
-    })
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
 #endif
 

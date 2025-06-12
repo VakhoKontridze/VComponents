@@ -33,12 +33,12 @@ import VCore
 ///             .padding()
 ///
 ///             .focused($isFocused)
-///             .onFirstAppear(perform: {
-///                 Task(operation: { @MainActor in
+///             .onFirstAppear) {
+///                 Task { @MainActor in
 ///                     try? await Task.sleep(for: .seconds(1))
 ///                     isFocused = true
-///                 })
-///             })
+///                 }
+///             }
 ///     }
 ///
 /// Editing states can be observed by using `onChange(of:perform:)` modifiers.
@@ -51,15 +51,15 @@ import VCore
 ///             .padding()
 ///
 ///             .focused($isFocused)
-///             .onChange(of: text, perform: { _ in print("Editing Changed") })
-///             .onChange(of: isFocused, perform: {
+///             .onChange(of: text) { _ in print("Editing Changed") }
+///             .onChange(of: isFocused) {
 ///                 if $0 {
 ///                     print("Editing Began")
 ///                 } else {
 ///                     print("Editing Ended")
 ///                 }
-///             })
-///             .onSubmit({ print("Submitted") })
+///             }
+///             .onSubmit { print("Submitted") }
 ///     }
 ///
 /// TextField can be configured as secure by passing UI model.
@@ -148,31 +148,30 @@ public struct VTextField: View {
         VStack(
             alignment: .leading,
             spacing: uiModel.headerTextFieldAndFooterSpacing,
-            content: {
-                headerView
-                inputView
-                footerView
-            }
-        )
+        ) {
+            headerView
+            inputView
+            footerView
+        }
         // No need for initial checks, as secure field is always hidden by default
-        .onChange(of: uiModel.contentType, { (_, newValue) in
+        .onChange(of: uiModel.contentType) { (_, newValue) in
             if newValue != .secure {
                 textFieldIsSecure = false
             }
-        })
+        }
     }
 
     private var inputView: some View {
-        HStack(spacing: uiModel.textAndButtonSpacing, content: {
+        HStack(spacing: uiModel.textAndButtonSpacing) {
             searchIcon
             textField
             clearButton
             visibilityButton
-        })
+        }
         .frame(height: uiModel.height)
         .padding(.horizontal, uiModel.textFieldContentMarginHorizontal)
-        .background(content: { borderView })
-        .background(content: { backgroundView })
+        .background { borderView }
+        .background { backgroundView }
         .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
     }
 
@@ -183,7 +182,7 @@ public struct VTextField: View {
                 Text($0)
                     .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
                     .font(uiModel.placeholderTextFont)
-                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) }) // Cannot be applied to placeholder only
+                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
             },
             text: $text
         )
@@ -191,13 +190,13 @@ public struct VTextField: View {
 
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .onChange(of: text, initial: true, { setClearButtonVisibility($1) })
+        .onChange(of: text, initial: true) { setClearButtonVisibility($1) }
         
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
-        .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+        .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 #if !(os(macOS) || os(watchOS))
         .keyboardType(uiModel.keyboardType)
 #endif
@@ -215,12 +214,12 @@ public struct VTextField: View {
     private var searchIcon: some View {
         if uiModel.contentType.hasSearchIcon {
             uiModel.searchButtonIcon
-                .applyIf(uiModel.isSearchIconResizable, transform: { $0.resizable() })
-                .applyIfLet(uiModel.searchIconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-                .applyIfLet(uiModel.searchIconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-                .applyIfLet(uiModel.searchIconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+                .applyIf(uiModel.isSearchIconResizable) { $0.resizable() }
+                .applyIfLet(uiModel.searchIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                .applyIfLet(uiModel.searchIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                .applyIfLet(uiModel.searchIconOpacities) { $0.opacity($1.value(for: internalState)) }
                 .font(uiModel.searchIconFont)
-                .applyIfLet(uiModel.searchIconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.searchIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                 .frame(size: uiModel.searchIconSize)
         }
     }
@@ -228,40 +227,40 @@ public struct VTextField: View {
     @ViewBuilder
     private var clearButton: some View {
         if uiModel.contentType.hasClearButton {
-            ZStack(content: {
+            ZStack {
                 VRectangularButton(
                     uiModel: uiModel.clearButtonSubUIModel,
                     action: didTapClearButton,
                     icon: uiModel.clearButtonIcon
                 )
                 .opacity(isClearButtonVisible ? 1 : 0)
-            })
+            }
             // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
-            .background(content: { Color.clear.contentShape(.rect) })
+            .background { Color.clear.contentShape(.rect) }
         }
     }
     
     @ViewBuilder 
     private var visibilityButton: some View {
         if uiModel.contentType.hasVisibilityButton {
-            ZStack(content: {
+            ZStack {
                 VPlainButton(
                     uiModel: uiModel.visibilityButtonSubUIModel,
                     action: { textFieldIsSecure.toggle() },
                     icon: visibilityIcon
                 )
-            })
+            }
             // Occupies full height to prevent touches from accidentally focusing the TextField
             .frame(maxHeight: .infinity)
-            .background(content: { Color.clear.contentShape(.rect) })
+            .background { Color.clear.contentShape(.rect) }
         }
     }
 
     private var backgroundView: some View {
         Rectangle()
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
-            .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
+            .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
     @ViewBuilder
@@ -282,7 +281,7 @@ public struct VTextField: View {
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
-                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -304,7 +303,7 @@ public struct VTextField: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
-                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -334,9 +333,9 @@ public struct VTextField: View {
     }
 
     private func setClearButtonVisibility(_ text: String) {
-        withAnimation(uiModel.clearButtonAppearDisappearAnimation, {
+        withAnimation(uiModel.clearButtonAppearDisappearAnimation) {
             _isClearButtonVisible = !text.isEmpty
-        })
+        }
     }
 }
 
@@ -345,10 +344,10 @@ public struct VTextField: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VTextField(
             headerTitle: "Lorem ipsum dolor sit amet",
             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -356,60 +355,59 @@ public struct VTextField: View {
             text: $text
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("Content Types", body: {
+#Preview("Content Types") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    PreviewContainer(content: {
+    PreviewContainer {
         ForEach(
             VTextFieldUIModel.ContentType.allCases,
-            id: \.self,
-            content: { contentType in
-                let title: String = .init(describing: contentType).capitalized
+            id: \.self
+        ) { contentType in
+            let title: String = .init(describing: contentType).capitalized
 
-                PreviewRow(title, content: {
-                    VTextField(
-                        uiModel: {
-                            var uiModel: VTextFieldUIModel = .init()
-                            uiModel.contentType = contentType
-                            return uiModel
-                        }(),
-                        placeholder: "Lorem ipsum",
-                        text: $text
-                    )
-                    .padding(.horizontal)
-                })
+            PreviewRow(title) {
+                VTextField(
+                    uiModel: {
+                        var uiModel: VTextFieldUIModel = .init()
+                        uiModel.contentType = contentType
+                        return uiModel
+                    }(),
+                    placeholder: "Lorem ipsum",
+                    text: $text
+                )
+                .padding(.horizontal)
             }
-        )
-    })
-})
+        }
+    }
+}
 
-#Preview("States", body: {
+#Preview("States") {
     Preview_StatesContentView()
-})
+}
 
-#Preview("Success", body: {
+#Preview("Success") {
     Preview_StatesContentView(
         uiModel: .success,
         showsNative: false
     )
-})
+}
 
-#Preview("Warning", body: {
+#Preview("Warning") {
     Preview_StatesContentView(
         uiModel: .warning,
         showsNative: false
     )
-})
+}
 
-#Preview("Error", body: {
+#Preview("Error") {
     Preview_StatesContentView(
         uiModel: .error,
         showsNative: false
     )
-})
+}
 
 private struct Preview_StatesContentView: View {
     private let uiModel: VTextFieldUIModel
@@ -424,8 +422,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
-            PreviewRow("Enabled", content: {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VTextField(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -434,9 +432,9 @@ private struct Preview_StatesContentView: View {
                     text: .constant("Lorem ipsum")
                 )
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Focused", content: {
+            PreviewRow("Focused") {
                 VTextField(
                     uiModel: {
                         var mappedUIModel: VTextFieldUIModel = uiModel
@@ -453,9 +451,9 @@ private struct Preview_StatesContentView: View {
                     text: .constant("Lorem ipsum")
                 )
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Pressed (Button) (*)", content: {
+            PreviewRow("Pressed (Button) (*)") {
                 VTextField(
                     uiModel: {
                         var mappedUIModel: VTextFieldUIModel = uiModel
@@ -470,9 +468,9 @@ private struct Preview_StatesContentView: View {
                     text: .constant("Lorem ipsum")
                 )
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Disabled", content: {
+            PreviewRow("Disabled") {
                 VTextField(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -482,21 +480,21 @@ private struct Preview_StatesContentView: View {
                 )
                 .disabled(true)
                 .padding(.horizontal)
-            })
+            }
 
             if showsNative {
                 PreviewHeader("Native")
 
-                PreviewRow("Enabled", content: {
+                PreviewRow("Enabled") {
                     TextField(
                         "Lorem ipsum",
                         text: .constant("Lorem ipsum")
                     )
                     .textFieldStyle(.roundedBorder)
                     .padding(.horizontal)
-                })
+                }
 
-                PreviewRow("Disabled", content: {
+                PreviewRow("Disabled") {
                     TextField(
                         "Lorem ipsum",
                         text: .constant("Lorem ipsum")
@@ -504,9 +502,9 @@ private struct Preview_StatesContentView: View {
                     .textFieldStyle(.roundedBorder)
                     .disabled(true)
                     .padding(.horizontal)
-                })
+                }
             }
-        })
+        }
     }
 }
 

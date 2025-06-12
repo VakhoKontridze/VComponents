@@ -61,7 +61,7 @@ public struct VAlertButtonBuilder {
 
         for button in buttons {
             if (button as? VAlertButton)?.role == .cancel {
-                result.removeAll(where: { ($0 as? VAlertButton)?.role == .cancel })
+                result.removeAll { ($0 as? VAlertButton)?.role == .cancel }
             }
             result.append(button)
         }
@@ -72,9 +72,9 @@ public struct VAlertButtonBuilder {
         if result.isEmpty {
             result.append(
                 VAlertButton(
-                    role: .secondary,
                     action: nil,
-                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
+                    title: VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle,
+                    role: .secondary
                 )
             )
         }

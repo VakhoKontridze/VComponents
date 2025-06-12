@@ -95,12 +95,12 @@ public struct VRangeSlider: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.toAlignment, content: {
-            ZStack(alignment: uiModel.direction.toAlignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment) {
+            ZStack(alignment: uiModel.direction.toAlignment) {
                 trackView
                 progressView
                 borderView
-            })
+            }
             .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
             .frame(
                 width: uiModel.direction.isHorizontal ? nil : uiModel.height,
@@ -109,11 +109,9 @@ public struct VRangeSlider: View {
             
             thumbView(.low)
             thumbView(.high)
-        })
-        .getSize({ sliderSize = $0 })
-        .applyIf(uiModel.appliesProgressAnimation, transform: {
-            $0.animation(uiModel.progressAnimation, value: value)
-        })
+        }
+        .getSize { sliderSize = $0 }
+        .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
     }
     
     private var trackView: some View {
@@ -146,17 +144,17 @@ public struct VRangeSlider: View {
             uiModel.thumbSize.width > 0 && 
             uiModel.thumbSize.height > 0
         {
-            Group(content: { // `Group` is used for giving multiple frames
-                ZStack(content: {
+            Group { // `Group` is used for giving multiple frames
+                ZStack {
                     thumbBackgroundView
                     thumbBorderView
-                })
+                }
                 .frame(size: uiModel.thumbSize)
                 .offset(
                     x: uiModel.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed) : 0,
                     y: uiModel.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed)
                 )
-            })
+            }
             .frame( // Must be put into group, as content already has frame
                 maxWidth: uiModel.direction.isHorizontal ? .infinity : nil,
                 maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
@@ -164,8 +162,8 @@ public struct VRangeSlider: View {
             )
             .gesture(
                 DragGesture(minimumDistance: 0)
-                    .onChanged({ dragChanged(dragValue: $0, thumb: thumb) })
-                    .onEnded({ dragEnded(dragValue: $0) })
+                    .onChanged { dragChanged(dragValue: $0, thumb: thumb) }
+                    .onEnded { dragEnded(dragValue: $0) }
             )
         }
     }
@@ -314,40 +312,40 @@ extension Double {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VRangeSlider(
             difference: 0.1,
             value: $value
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VRangeSlider(
                 difference: 0.1,
                 value: .constant(0.1...0.8)
             )
             .padding(.horizontal)
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VRangeSlider(
                 difference: 0.1,
                 value: .constant(0.1...0.8)
             )
             .disabled(true)
             .padding(.horizontal)
-        })
-    })
-})
+        }
+    }
+}
 
-#Preview("Layout Directions", body: {
+#Preview("Layout Directions") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8 // '@Previewable' items must be at the beginning of the preview block
     
     let difference: Double = 0.1
@@ -362,77 +360,75 @@ extension Double {
 #endif
     }()
 
-    PreviewContainer(
-        content: {
-            PreviewRow("Left-to-Right", content: {
-                VRangeSlider(
-                    uiModel: {
-                        var uiModel: VRangeSliderUIModel = .init()
-                        uiModel.direction = .leftToRight
-                        return uiModel
-                    }(),
-                    difference: difference,
-                    value: $value
-                )
-                .frame(width: length)
-            })
-
-            PreviewRow("Right-to-Left", content: {
-                VRangeSlider(
-                    uiModel: {
-                        var uiModel: VRangeSliderUIModel = .init()
-                        uiModel.direction = .rightToLeft
-                        return uiModel
-                    }(),
-                    difference: difference,
-                    value: $value
-                )
-                .frame(width: length)
-            })
-
-            HStack(spacing: 20, content: {
-                PreviewRow("Top-to-Bottom", content: {
-                    VRangeSlider(
-                        uiModel: {
-                            var uiModel: VRangeSliderUIModel = .init()
-                            uiModel.direction = .topToBottom
-                            return uiModel
-                        }(),
-                        difference: difference,
-                        value: $value
-                    )
-                    .frame(height: length)
-                })
-
-                PreviewRow("Bottom-to-Top", content: {
-                    VRangeSlider(
-                        uiModel: {
-                            var uiModel: VRangeSliderUIModel = .init()
-                            uiModel.direction = .bottomToTop
-                            return uiModel
-                        }(),
-                        difference: difference,
-                        value: $value
-                    )
-                    .frame(height: length)
-                })
-            })
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
+            VRangeSlider(
+                uiModel: {
+                    var uiModel: VRangeSliderUIModel = .init()
+                    uiModel.direction = .leftToRight
+                    return uiModel
+                }(),
+                difference: difference,
+                value: $value
+            )
+            .frame(width: length)
         }
-    )
-})
+        
+        PreviewRow("Right-to-Left") {
+            VRangeSlider(
+                uiModel: {
+                    var uiModel: VRangeSliderUIModel = .init()
+                    uiModel.direction = .rightToLeft
+                    return uiModel
+                }(),
+                difference: difference,
+                value: $value
+            )
+            .frame(width: length)
+        }
+        
+        HStack(spacing: 20) {
+            PreviewRow("Top-to-Bottom") {
+                VRangeSlider(
+                    uiModel: {
+                        var uiModel: VRangeSliderUIModel = .init()
+                        uiModel.direction = .topToBottom
+                        return uiModel
+                    }(),
+                    difference: difference,
+                    value: $value
+                )
+                .frame(height: length)
+            }
+            
+            PreviewRow("Bottom-to-Top") {
+                VRangeSlider(
+                    uiModel: {
+                        var uiModel: VRangeSliderUIModel = .init()
+                        uiModel.direction = .bottomToTop
+                        return uiModel
+                    }(),
+                    difference: difference,
+                    value: $value
+                )
+                .frame(height: length)
+            }
+        }
+    }
+}
 
-#Preview("Step", body: {
+#Preview("Step") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VRangeSlider(
             difference: 0.1,
             step: 0.1,
             value: $value
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
 #endif
 

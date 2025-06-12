@@ -58,7 +58,7 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         toastView
-            .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
+            .getPlatformInterfaceOrientation { interfaceOrientation = $0 }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -66,9 +66,9 @@ struct VToast: View {
     }
     
     private var toastView: some View {
-        ZStack(content: {
+        ZStack {
             contentView
-                .applyModifier({
+                .applyModifier {
                     switch currentWidth.storage {
                     case .fixed(let width):
                         $0
@@ -96,14 +96,14 @@ struct VToast: View {
                                 )
                             )
                     }
-                })
+                }
 
-                .background(content: { backgroundView })
-                .overlay(content: { borderView })
+                .background { backgroundView }
+                .overlay { borderView }
 
                 .clipShape(.rect(cornerRadius: cornerRadius))
 
-                .applyModifier({
+                .applyModifier {
                     switch currentWidth.storage {
                     case .fixed:
                         $0
@@ -118,12 +118,12 @@ struct VToast: View {
                     case .stretched:
                         $0
                     }
-                })
+                }
 
-                .getSize({ height = $0.height })
+                .getSize { height = $0.height }
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
-        })
+        }
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
         
@@ -149,7 +149,7 @@ struct VToast: View {
             .minimumScaleFactor(uiModel.textMinimumScaleFactor)
             .foregroundStyle(uiModel.textColor)
             .font(uiModel.textFont)
-            .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             .padding(uiModel.bodyMargins)
     }
@@ -174,10 +174,10 @@ struct VToast: View {
         guard uiModel.dismissType.contains(.timeout) else { return }
 
         // No need to handle reentrancy and cancellation
-        Task(operation: { @MainActor in
+        Task { @MainActor in
             try? await Task.sleep(for: .seconds(uiModel.timeoutDuration))
             isPresented = false
-        })
+        }
     }
 
     private func dismissFromSwipe() {
@@ -277,10 +277,10 @@ struct VToast: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Singleline", body: {
+#Preview("Singleline") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
@@ -292,7 +292,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-    })
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -302,12 +302,12 @@ struct VToast: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Multiline", body: {
+#Preview("Multiline") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
@@ -320,7 +320,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             )
-    })
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -330,12 +330,12 @@ struct VToast: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Top", body: {
+#Preview("Top") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
@@ -348,7 +348,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-    })
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -358,15 +358,15 @@ struct VToast: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Width Types", body: {
+#Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
     
     @Previewable @State var width: VToastUIModel.Width?
     @Previewable @State var alignment: HorizontalAlignment?
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
@@ -384,7 +384,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-            .task({ @MainActor in
+            .task { @MainActor in
                 try? await Task.sleep(for: .seconds(1))
 
                 while true {
@@ -420,8 +420,8 @@ struct VToast: View {
                     alignment = .trailing
                     try? await Task.sleep(for: .seconds(1))
                 }
-            })
-    })
+            }
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -431,13 +431,13 @@ struct VToast: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Highlights", body: {
+#Preview("Highlights") {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VToastUIModel = .init()
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
@@ -449,7 +449,7 @@ struct VToast: View {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
-            .task({ @MainActor in
+            .task { @MainActor in
                 try? await Task.sleep(for: .seconds(1))
 
                 while true {
@@ -465,8 +465,8 @@ struct VToast: View {
                     uiModel = .error
                     try? await Task.sleep(for: .seconds(1))
                 }
-            })
-    })
+            }
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -476,7 +476,7 @@ struct VToast: View {
             return uiModel
         }()
     )
-})
+}
 
 #endif
 

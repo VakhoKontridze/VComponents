@@ -16,20 +16,20 @@ import VCore
 public struct VAlertButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
-    /*private*/ let role: Role
     private let action: (@MainActor () -> Void)?
     private let title: String
+    /*private*/ let role: Role
 
     // MARK: Initializers
-    /// Initializes `VAlertButton` with action and title.
+    /// Initializes `VAlertButton` with action, title, and role.
     public init(
-        role: Role,
         action: (@MainActor () -> Void)?,
-        title: String
+        title: String,
+        role: Role
     ) {
-        self.role = role
         self.action = action
         self.title = title
+        self.role = role
     }
 
     // MARK: Role

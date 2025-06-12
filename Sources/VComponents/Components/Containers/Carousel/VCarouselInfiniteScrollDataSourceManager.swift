@@ -39,24 +39,23 @@ import Foundation
 ///     )
 ///
 ///     var body: some View {
-///         VStack(spacing: 15, content: {
+///         VStack(spacing: 15) {
 ///             VCarousel(
 ///                 selection: $dataSourceManager.selectedIndexInflated,
 ///                 data: 0..<dataSourceManager.countInflated,
-///                 id: \.self,
-///                 content: {
-///                     dataSourceManager.element(atInflatedIndex: $0)
-///                         .color
-///                         .clipShape(.rect(cornerRadius: 15))
-///                 }
-///             )
+///                 id: \.self
+///             ) {
+///                 dataSourceManager.element(atInflatedIndex: $0)
+///                     .color
+///                     .clipShape(.rect(cornerRadius: 15))
+///             }
 ///             .frame(height: 200)
 ///
 ///             VCompactPageIndicator(
 ///                 total: dataSourceManager.countInflated,
 ///                 current: dataSourceManager.selectedIndexInflated
 ///             )
-///         })
+///         }
 ///     }
 ///
 @available(tvOS, unavailable)

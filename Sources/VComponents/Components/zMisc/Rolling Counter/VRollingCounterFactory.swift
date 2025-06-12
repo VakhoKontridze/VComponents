@@ -102,7 +102,7 @@ struct VRollingCounterFactory {
 
         let firstChangedIndex: Int = oldString
             .enumerated()
-            .first(where: { (i, char) in char != newString[i] })?
+            .first { (i, char) in char != newString[i] }?
             .offset ??
             newString.count - 1
 

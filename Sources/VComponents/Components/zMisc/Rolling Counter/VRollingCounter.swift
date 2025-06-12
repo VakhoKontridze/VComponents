@@ -15,19 +15,19 @@ import VCore
 ///     @State private var value: Double = 10_000
 ///
 ///     var body: some View {
-///         ZStack(content: {
+///         ZStack {
 ///             VRollingCounter(value: value)
-///         })
+///         }
 ///         .onFirstAppear(perform: changeValue)
 ///     }
 ///
 ///     private func changeValue() {
-///         Task(operation: { @MainActor in
+///         Task { @MainActor in
 ///             value += .random(in: -10...10)
 ///             try? await Task.sleep(for: .seconds(1))
 ///             
 ///             changeValue()
-///         })
+///         }
 ///     }
 ///
 /// Integer types can be represented by hiding fraction digits.
@@ -35,7 +35,7 @@ import VCore
 ///     @State private var value: Int = 10_000
 ///
 ///     var body: some View {
-///         ZStack(content: {
+///         ZStack {
 ///             VRollingCounter(
 ///                 uiModel: {
 ///                     var uiModel: VRollingCounterUIModel = .init()
@@ -44,7 +44,7 @@ import VCore
 ///                 }(),
 ///                 value: Double(value)
 ///             )
-///         })
+///         }
 ///         .onFirstAppear(perform: changeValue)
 ///     }
 ///        
@@ -83,15 +83,10 @@ public struct VRollingCounter: View {
     public var body: some View {
         HStack(
             alignment: uiModel.verticalAlignment,
-            spacing: uiModel.spacing,
-            content: {
-                ForEach(
-                    components,
-                    id: \.id,
-                    content: digitView
-                )
-            }
-        )
+            spacing: uiModel.spacing
+        ) {
+            ForEach(components, id: \.id, content: digitView)
+        }
         .clipped() // Prevents clipping from animations
 
         .onChange(of: value, didChangeValue)
@@ -106,7 +101,7 @@ public struct VRollingCounter: View {
             Text(digit.stringRepresentation)
                 .foregroundStyle(textColor(digit.isHighlighted, defaultValue: uiModel.digitTextColor))
                 .font(uiModel.digitTextFont)
-                .applyIfLet(uiModel.digitTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.digitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                 .padding(uiModel.digitTextMargins)
                 .offset(y: uiModel.digitTextOffsetY)
                 .transition({
@@ -119,7 +114,7 @@ public struct VRollingCounter: View {
             Text(fractionDigit.stringRepresentation)
                 .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.fractionDigitTextFont)
-                .applyIfLet(uiModel.fractionDigitTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.fractionDigitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                 .padding(uiModel.fractionDigitTextMargins)
                 .offset(y: uiModel.fractionDigitTextOffsetY)
                 .transition({
@@ -132,7 +127,7 @@ public struct VRollingCounter: View {
             Text(groupingSeparator.stringRepresentation)
                 .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: uiModel.groupingSeparatorTextColor))
                 .font(uiModel.groupingSeparatorTextFont)
-                .applyIfLet(uiModel.groupingSeparatorTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.groupingSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                 .padding(uiModel.groupingSeparatorTextMargins)
                 .offset(y: uiModel.groupingSeparatorTextOffsetY)
                 .transition(.identity)
@@ -141,7 +136,7 @@ public struct VRollingCounter: View {
             Text(decimalSeparator.stringRepresentation)
                 .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
                 .font(uiModel.decimalSeparatorTextFont)
-                .applyIfLet(uiModel.decimalSeparatorTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.decimalSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                 .padding(uiModel.decimalSeparatorTextMargins)
                 .offset(y: uiModel.decimalSeparatorTextOffsetY)
                 .transition(.identity)
@@ -253,28 +248,26 @@ extension Edge {
 // MARK: - Preview
 #if DEBUG
 
-#Preview(body: {
+#Preview {
     @Previewable @State var value: Double = 10_000
     
-    PreviewContainer(content: {
-        HStack(spacing: 20, content: {
-            Button( // No `VPlainButton` on all platforms
-                "-",
-                action: { value -= .random(in: 1...10) }
-            )
-
-            Button( // No `VPlainButton` on all platforms
-                "+",
-                action: { value += .random(in: 1...10) }
-            )
-        })
+    PreviewContainer {
+        HStack(spacing: 20) {
+            Button("-") { // No `VPlainButton` on all platforms
+                value -= .random(in: 1...10)
+            }
+            
+            Button("+") { // No `VPlainButton` on all platforms
+                value += .random(in: 1...10)
+            }
+        }
         .padding(.top, 20)
 
-        PreviewRow("Standard", content: {
+        PreviewRow("Standard") {
             VRollingCounter(value: value)
-        })
+        }
 
-        PreviewRow("No Fractions", content: {
+        PreviewRow("No Fractions") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -283,9 +276,9 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
+        }
 
-        PreviewRow("No Grouping & No Fractions", content: {
+        PreviewRow("No Grouping & No Fractions") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -295,9 +288,9 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
+        }
 
-        PreviewRow("No Highlight", content: {
+        PreviewRow("No Highlight") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -307,9 +300,9 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
+        }
 
-        PreviewRow("Highlighted Symbols", content: {
+        PreviewRow("Highlighted Symbols") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -319,9 +312,9 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
+        }
 
-        PreviewRow("Full Highlight", content: {
+        PreviewRow("Full Highlight") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -332,9 +325,9 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
+        }
 
-        PreviewRow("Custom", content: {
+        PreviewRow("Custom") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -350,8 +343,8 @@ extension Edge {
                 }(),
                 value: value
             )
-        })
-    })
-})
+        }
+    }
+}
 
 #endif

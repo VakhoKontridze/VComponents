@@ -19,7 +19,7 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
@@ -29,7 +29,7 @@ extension View {
     ///                 isPresented: $isPresented,
     ///                 text: "Lorem ipsum dolor sit amet"
     ///             )
-    ///         })
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
     ///             root: .window(rootID: "notifications"),
@@ -57,15 +57,14 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VToast(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        text: text
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VToast(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    text: text
+                )
+            }
     }
 }
 
@@ -99,21 +98,20 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VToast(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        text: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                text(item)
-                            } else {
-                                ""
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VToast(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    text: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            text(item)
+                        } else {
+                            ""
+                        }
+                    }()
+                )
+            }
     }
 }
 
@@ -150,20 +148,19 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VToast(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        text: {
-                            if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
-                                text(error)
-                            } else {
-                                ""
-                            }
-                        }()
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VToast(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    text: {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                            text(error)
+                        } else {
+                            ""
+                        }
+                    }()
+                )
+            }
     }
 }

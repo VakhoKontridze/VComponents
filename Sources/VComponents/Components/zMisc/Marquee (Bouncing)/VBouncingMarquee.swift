@@ -12,16 +12,13 @@ import VCore
 /// Container component that automatically scrolls and bounces it's content edge-to-edge.
 ///
 ///     var body: some View {
-///         VBouncingMarquee(
-///             uiModel: .insettedGradientMask,
-///             content: {
-///                 HStack(content: {
-///                     Image(systemName: "swift")
-///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-///                 })
-///                 .drawingGroup() // For `Image`
+///         VBouncingMarquee(uiModel: .insettedGradientMask) {
+///             HStack {
+///                 Image(systemName: "swift")
+///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
 ///             }
-///         )
+///             .drawingGroup() // For `Image`
+///         }
 ///     }
 ///
 public struct VBouncingMarquee<Content>: View where Content: View {
@@ -54,9 +51,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .getSize({ containerWidth = $0.width })
-            .overlay(content: { marqueeContentView })
-            .mask({ gradientMask })
+            .getSize { containerWidth = $0.width }
+            .overlay { marqueeContentView }
+            .mask { gradientMask }
             .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
     }
     
@@ -66,21 +63,21 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             contentView
                 .offset(x: offsetDynamic)
                 .animation(animation, value: isAnimating)
-                .task({ @MainActor in // `onAppear(perform:)` causes UI glitches
+                .task { @MainActor in // `onAppear(perform:)` causes UI glitches
                     isAnimating = isAnimatable
-                })
+                }
 
         } else {
             contentView
                 .offset(x: offsetStatic)
-                .onAppear(perform: { isAnimating = Self.isAnimatingDefault })
+                .onAppear { isAnimating = Self.isAnimatingDefault }
         }
     }
     
     private var contentView: some View {
         content()
             .fixedSize(horizontal: true, vertical: false)
-            .getSize({ contentSize = $0 })
+            .getSize { contentSize = $0 }
             .geometryGroup()
     }
 
@@ -164,47 +161,48 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
-    PreviewContainer(content: {
-        VBouncingMarquee(
-            content: { preview_MarqueeContentSmall }
-        )
+#Preview("*") {
+    PreviewContainer {
+        VBouncingMarquee {
+            preview_MarqueeContentSmall
+        }
+        
+        VBouncingMarquee {
+            preview_MarqueeContent
+        }
+        
+        VBouncingMarquee(uiModel: .insettedGradientMask) {
+            preview_MarqueeContent
+        }
+    }
+}
 
-        VBouncingMarquee(
-            content: { preview_MarqueeContent }
-        )
-
-        VBouncingMarquee(
-            uiModel: .insettedGradientMask,
-            content: { preview_MarqueeContent }
-        )
-    })
-})
-
-#Preview("Scroll Directions", body: {
-    PreviewContainer(content: {
-        PreviewRow("Left-to-Right", content: {
+#Preview("Scroll Directions") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()
                     uiModel.scrollDirection = .leftToRight
                     return uiModel
-                }(),
-                content: { preview_MarqueeContent }
-            )
-        })
+                }()
+            ) {
+                preview_MarqueeContent
+            }
+        }
 
-        PreviewRow("Right-to-Left", content: {
+        PreviewRow("Right-to-Left") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()
                     uiModel.scrollDirection = .rightToLeft
                     return uiModel
-                }(),
-                content: { preview_MarqueeContent }
-            )
-        })
-    })
-})
+                }()
+            ) {
+                preview_MarqueeContent
+            }
+        }
+    }
+}
 
 #endif

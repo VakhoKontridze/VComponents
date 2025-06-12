@@ -93,39 +93,39 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     
     // MARK: Body
     public var body: some View {
-        Group(content: {
+        Group {
             switch label {
             case .empty:
                 radioButton
                 
             case .title(let title):
-                labeledRadioButton(label: {
-                    baseButtonView(label: { internalState in
+                labeledRadioButton {
+                    baseButtonView { internalState in
                         Text(title)
                             .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                             .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
                             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                             .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
-                    })
+                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    }
                     .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
 
             case .custom(let custom):
-                labeledRadioButton(label: {
+                labeledRadioButton {
                     baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
             }
-        })
+        }
     }
 
     private var radioButton: some View {
         let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
 
-        return baseButtonView(label: { internalState in
-            ZStack(content: {
+        return baseButtonView { internalState in
+            ZStack {
                 RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                     .frame(size: uiModel.size)
                     .foregroundStyle(uiModel.fillColors.value(for: internalState))
@@ -139,10 +139,10 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 RoundedRectangle(cornerRadius: uiModel.bulletCornerRadius)
                     .frame(size: uiModel.bulletSize)
                     .foregroundStyle(uiModel.bulletColors.value(for: internalState))
-            })
+            }
             .frame(size: uiModel.size)
             .padding(uiModel.radioButtonHitBox)
-        })
+        }
     }
 
     private func labeledRadioButton<Content>(
@@ -150,10 +150,10 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.radioButtonAndLabelSpacing, content: {
+        HStack(spacing: uiModel.radioButtonAndLabelSpacing) {
             radioButton
             label()
-        })
+        }
     }
 
     private func baseButtonView<Content>(
@@ -171,11 +171,11 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 let internalState: VRadioButtonInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                    .applyIf(uiModel.appliesStateChangeAnimation) {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
-                    })
+                    }
             }
         )
     }
@@ -206,10 +206,10 @@ extension VRadioButtonState {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VRadioButtonState = .on
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VRadioButton(
             state: $state,
             title: "Lorem ipsum"
@@ -219,19 +219,19 @@ extension VRadioButtonState {
             action: { state.setNextState() },
             title: "Toggle State"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Off", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VRadioButton(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed Off", content: {
+        PreviewRow("Pressed Off") {
             VRadioButton(
                 uiModel: {
                     var uiModel: VRadioButtonUIModel = .init()
@@ -244,16 +244,16 @@ extension VRadioButtonState {
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             VRadioButton(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed On", content: {
+        PreviewRow("Pressed On") {
             VRadioButton(
                 uiModel: {
                     var uiModel: VRadioButtonUIModel = .init()
@@ -266,17 +266,17 @@ extension VRadioButtonState {
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VRadioButton(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

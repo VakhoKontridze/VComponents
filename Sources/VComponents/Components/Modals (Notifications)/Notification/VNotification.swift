@@ -58,7 +58,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Body
     var body: some View {
         notificationView
-            .getPlatformInterfaceOrientation({ interfaceOrientation = $0 })
+            .getPlatformInterfaceOrientation { interfaceOrientation = $0 }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -66,9 +66,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     private var notificationView: some View {
-        ZStack(content: {
+        ZStack {
             contentView
-                .applyModifier({
+                .applyModifier {
                     switch currentWidth {
                     case .fixed(let width):
                         $0
@@ -78,17 +78,17 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                         $0
                             .frame(maxWidth: .infinity)
                     }
-                })
+                }
 
-                .background(content: { backgroundView })
-                .overlay(content: { borderView })
+                .background { backgroundView }
+                .overlay { borderView }
 
                 .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
 
-                .getSize({ height = $0.height })
+                .getSize { height = $0.height }
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
-        })
+        }
         // Prevents UI from breaking in some scenarios, such as previews
         .drawingGroup()
         
@@ -108,21 +108,18 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     private var contentView: some View {
-        Group(content: {
+        Group {
             switch content {
             case .iconTitleMessage(let icon, let title, let message):
-                HStack(
-                    spacing: uiModel.iconAndTitleTextMessageTextSpacing,
-                    content: {
-                        iconView(icon: icon)
-                        textsView(title: title, message: message)
-                    }
-                )
+                HStack(spacing: uiModel.iconAndTitleTextMessageTextSpacing) {
+                    iconView(icon: icon)
+                    textsView(title: title, message: message)
+                }
 
             case .custom(let custom):
                 custom()
             }
-        })
+        }
         .padding(uiModel.bodyMargins)
     }
 
@@ -131,20 +128,20 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         icon: Image?
     ) -> some View {
         if let icon {
-            ZStack(content: {
+            ZStack {
                 RoundedRectangle(cornerRadius: uiModel.iconBackgroundCornerRadius)
                     .frame(size: uiModel.iconBackgroundSize)
                     .foregroundStyle(uiModel.iconBackgroundColor)
 
                 icon
-                    .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-                    .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-                    .applyIfLet(uiModel.iconColor, transform: { $0.foregroundStyle($1) })
-                    .applyIfLet(uiModel.iconOpacity, transform: { $0.opacity($1) })
+                    .applyIf(uiModel.isIconResizable) { $0.resizable() }
+                    .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                    .applyIfLet(uiModel.iconColor) { $0.foregroundStyle($1) }
+                    .applyIfLet(uiModel.iconOpacity) { $0.opacity($1) }
                     .font(uiModel.iconFont)
-                    .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                    .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     .frame(size: uiModel.iconSize)
-            })
+            }
         }
     }
 
@@ -158,12 +155,12 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             message: message ?? "A"
         )
         .opacity(0)
-        .overlay(content: {
+        .overlay {
             _textsView(
                 title: title,
                 message: message
             )
-        })
+        }
     }
 
     private func _textsView(
@@ -172,12 +169,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.titleTextAndMessageTextSpacing,
-            content: {
-                titleText(title: title)
-                messageText(message: message)
-            }
-        )
+            spacing: uiModel.titleTextAndMessageTextSpacing
+        ) {
+            titleText(title: title)
+            messageText(message: message)
+        }
     }
 
     @ViewBuilder
@@ -191,7 +187,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
                 .foregroundStyle(uiModel.titleTextColor)
                 .font(uiModel.titleTextFont)
-                .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -215,7 +211,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 .minimumScaleFactor(uiModel.messageTextMinimumScaleFactor)
                 .foregroundStyle(uiModel.messageTextColor)
                 .font(uiModel.messageTextFont)
-                .applyIfLet(uiModel.messageTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -248,10 +244,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         guard uiModel.dismissType.contains(.timeout) else { return }
 
         // No need to handle reentrancy and cancellation
-        Task(operation: { @MainActor in
+        Task { @MainActor in
             try? await Task.sleep(for: .seconds(uiModel.timeoutDuration))
             isPresented = false
-        })
+        }
     }
 
     private func dismissFromSwipe() {
@@ -343,50 +339,50 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Icon & Title & Message", body: {
+#Preview("Icon & Title & Message") {
     Preview_ContentView(
         icon: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
     )
-})
+}
 
-#Preview("Title & Message", body: {
+#Preview("Title & Message") {
     Preview_ContentView(
         icon: nil,
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
     )
-})
+}
 
-#Preview("Icon & Title", body: {
+#Preview("Icon & Title") {
     Preview_ContentView(
         icon: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: nil
     )
-})
+}
 
-#Preview("Icon & Message", body: {
+#Preview("Icon & Message") {
     Preview_ContentView(
         icon: Image(systemName: "swift"),
         title: nil,
         message: "Lorem ipsum dolor sit amet"
     )
-})
+}
 
-#Preview("No Content", body: {
+#Preview("No Content") {
     Preview_ContentView(
         icon: nil,
         title: nil,
         message: nil
     )
-})
+}
 
-#Preview("Bottom", body: {
+#Preview("Bottom") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
@@ -401,7 +397,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-    })
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -411,13 +407,13 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Width Types", body: {
+#Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VNotificationUIModel.Width?
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
@@ -435,7 +431,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task({ @MainActor in
+            .task { @MainActor in
                 try? await Task.sleep(for: .seconds(1))
 
                 while true {
@@ -445,8 +441,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     width = .stretched(margin: .absolute(15))
                     try? await Task.sleep(for: .seconds(1))
                 }
-            })
-    })
+            }
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -456,13 +452,13 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             return uiModel
         }()
     )
-})
+}
 
-#Preview("Highlights", body: {
+#Preview("Highlights") {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VNotificationUIModel = .init()
     
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
@@ -476,7 +472,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task({ @MainActor in
+            .task { @MainActor in
                 try? await Task.sleep(for: .seconds(1))
                 
                 while true {
@@ -492,8 +488,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     uiModel = .error
                     try? await Task.sleep(for: .seconds(1))
                 }
-            })
-    })
+            }
+    }
     .modalPresenterRoot(
         root: rootAndLink.root,
         uiModel: {
@@ -503,7 +499,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             return uiModel
         }()
     )
-})
+}
 
 private struct Preview_ContentView: View {
     @State private var isPresented: Bool = true
@@ -523,7 +519,7 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vNotification(
                     link: rootAndLink.link(linkID: "preview"),
@@ -537,7 +533,7 @@ private struct Preview_ContentView: View {
                     title: title,
                     message: message
                 )
-        })
+        }
         .modalPresenterRoot(
             root: rootAndLink.root,
             uiModel: {

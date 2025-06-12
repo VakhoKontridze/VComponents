@@ -30,23 +30,22 @@ import VCore
 ///     private var selectedIndex: Int? { WeekDay.allCases.firstIndex(of: selection) }
 ///
 ///     var body: some View {
-///         VStack(spacing: 15, content: {
+///         VStack(spacing: 15) {
 ///             VCarousel(
 ///                 selection: $selection,
 ///                 data: WeekDay.allCases,
-///                 content: {
-///                     $0
-///                         .color
-///                         .clipShape(.rect(cornerRadius: 15))
-///                 }
-///             )
+///             ) {
+///                 $0
+///                     .color
+///                     .clipShape(.rect(cornerRadius: 15))
+///             }
 ///             .frame(height: 200)
 ///
 ///             VPageIndicator(
 ///                 total: 7,
 ///                 current: selectedIndex ?? 0
 ///             )
-///         })
+///         }
 ///     }
 ///
 /// `VCarousel` also supports infinite scroll. Fore more info, refer to `VCarouselInfiniteScrollDataSourceManager`.
@@ -126,23 +125,23 @@ public struct VCarousel<Data, ID, Content>: View
 
     // MARK: Body
     public var body: some View {
-        GeometryReader(content: { geometryProxy in
-            ScrollViewReader(content: { scrollViewProxy in
-                ScrollView(.horizontal, content: {
+        GeometryReader { geometryProxy in
+            ScrollViewReader { scrollViewProxy in
+                ScrollView(.horizontal) {
                     LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
                         alignment: uiModel.cardsAlignment,
-                        spacing: uiModel.cardsSpacing,
-                        content: {
-                            ForEach(data, id: id, content: { element in
-                                cardView(
-                                    geometryProxy: geometryProxy,
-                                    element: element
-                                )
-                                .id(element[keyPath: id])
-                            })
-                    })
+                        spacing: uiModel.cardsSpacing
+                    ) {
+                        ForEach(data, id: id) { element in
+                            cardView(
+                                geometryProxy: geometryProxy,
+                                element: element
+                            )
+                            .id(element[keyPath: id])
+                        }
+                    }
                     .scrollTargetLayout()
-                })
+                }
                 .scrollTargetBehavior(.viewAligned)
                 .scrollPosition(id: selectionIDBinding)
 
@@ -154,17 +153,17 @@ public struct VCarousel<Data, ID, Content>: View
                 
                 .scrollDisabled(!uiModel.isScrollingEnabled)
 
-                .applyIf(uiModel.appliesSelectionAnimation, transform: {
+                .applyIf(uiModel.appliesSelectionAnimation) {
                     $0.animation(uiModel.selectionAnimation, value: selection)
-                })
+                }
 
-                .onFirstAppear(perform: {
-                    Task(operation: { @MainActor in
+                .onFirstAppear {
+                    Task { @MainActor in
                         scrollViewProxy.scrollTo(selection[keyPath: id])
-                    })
-                })
-            })
-        })
+                    }
+                }
+            }
+        }
         .clipped() // Clips off-bound content that appears on some platforms. Also clips shadows.
     }
 
@@ -178,9 +177,9 @@ public struct VCarousel<Data, ID, Content>: View
         let scaleEffect: CGFloat = uiModel.cardHeightScales.value(for: cardState)
         let opacity: CGFloat = uiModel.cardOpacities.value(for: cardState)
         
-        return ZStack(content: {
+        return ZStack {
             content(element)
-        })
+        }
         .frame(
             width: {
                 let width: CGFloat = geometryProxy.size.width - uiModel.cardMarginHorizontal*2
@@ -190,11 +189,11 @@ public struct VCarousel<Data, ID, Content>: View
         )
 
         .containerRelativeFrame(.horizontal)
-        .scrollTransition(transition: { (view, _) in
+        .scrollTransition { (view, _) in
             view
                 .scaleEffect(y: scaleEffect)
                 .opacity(opacity)
-        })
+        }
 
         .shadow(
             color: uiModel.cardShadowColor,
@@ -209,49 +208,47 @@ public struct VCarousel<Data, ID, Content>: View
 
 #if !os(tvOS) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var selection: Preview_Weekday = .monday
     var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
 
-    PreviewContainer(content: {
-        VStack(spacing: 15, content: {
+    PreviewContainer {
+        VStack(spacing: 15) {
             VCarousel(
                 selection: $selection,
                 data: Preview_Weekday.allCases,
-                content: {
-                    $0
-                        .color
-                        .clipShape(.rect(cornerRadius: preview_CornerRadius))
-                }
-            )
+            ) {
+                $0
+                    .color
+                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
+            }
             .frame(height: preview_Height)
 
             VPageIndicator(
                 total: 7,
                 current: selectedIndex ?? 0
             )
-        })
-    })
-})
+        }
+    }
+}
 
-#Preview("No Items", body: {
+#Preview("No Items") {
     @Previewable @State var selection: Preview_Weekday = .monday
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VCarousel(
             selection: $selection,
-            data: [],
-            content: {
-                $0
-                    .color
-                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
-            }
-        )
+            data: []
+        ) {
+            $0
+                .color
+                .clipShape(.rect(cornerRadius: preview_CornerRadius))
+        }
         .frame(height: preview_Height)
-    })
-})
+    }
+}
 
-#Preview("Infinite Items", body: {
+#Preview("Infinite Items") {
     @Previewable @State var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
         data: Preview_RGBColor.allCases,
         numberOfDuplicateGroups: 9,
@@ -259,27 +256,26 @@ public struct VCarousel<Data, ID, Content>: View
         initialSelection: Preview_RGBColor.red
     )
 
-    PreviewContainer(content: {
-        VStack(spacing: 15, content: {
+    PreviewContainer {
+        VStack(spacing: 15) {
             VCarousel(
                 selection: $dataSourceManager.selectedIndexInflated,
                 data: 0..<dataSourceManager.countInflated,
-                id: \.self,
-                content: {
-                    dataSourceManager.element(atInflatedIndex: $0)
-                        .color
-                        .clipShape(.rect(cornerRadius: preview_CornerRadius))
-                }
-            )
+                id: \.self
+            ) {
+                dataSourceManager.element(atInflatedIndex: $0)
+                    .color
+                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
+            }
             .frame(height: preview_Height)
 
             VCompactPageIndicator(
                 total: dataSourceManager.countInflated,
                 current: dataSourceManager.selectedIndexInflated
             )
-        })
-    })
-})
+        }
+    }
+}
 
 private var preview_Height: CGFloat {
 #if os(iOS)

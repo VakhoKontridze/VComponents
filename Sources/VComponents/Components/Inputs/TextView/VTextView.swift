@@ -56,12 +56,12 @@ import VCore
 ///             .padding()
 ///
 ///             .focused($isFocused)
-///             .onFirstAppear(perform: {
-///                 Task(operation: { @MainActor in
+///             .onFirstAppear) {
+///                 Task { @MainActor in
 ///                     try? await Task.sleep(for: .seconds(1))
 ///                     isFocused = true
-///                 })
-///             })
+///                 }
+///             }
 ///     }
 ///
 /// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
@@ -113,13 +113,12 @@ public struct VTextView: View {
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.headerTextViewAndFooterSpacing,
-            content: {
-                headerView
-                inputView
-                footerView
-            }
-        )
+            spacing: uiModel.headerTextViewAndFooterSpacing
+        ) {
+            headerView
+            inputView
+            footerView
+        }
     }
 
     private var inputView: some View {
@@ -129,8 +128,8 @@ public struct VTextView: View {
                 minHeight: uiModel.minimumHeight,
                 alignment: .top
             )
-            .background(content: { borderView })
-            .background(content: { backgroundView })
+            .background { borderView }
+            .background { backgroundView }
             .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
     }
 
@@ -141,7 +140,7 @@ public struct VTextView: View {
                 Text($0)
                     .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
                     .font(uiModel.placeholderTextFont)
-                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) }) // Cannot be applied to placeholder only
+                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
             },
             axis: .vertical,
             label: EmptyView.init
@@ -154,7 +153,7 @@ public struct VTextView: View {
         .lineLimit(type: uiModel.textLineType.textLineLimitType)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
         .font(uiModel.textFont)
-        .applyIfLet(uiModel.textDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+        .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 #if !(os(macOS) || os(watchOS))
         .keyboardType(uiModel.keyboardType)
 #endif
@@ -171,7 +170,7 @@ public struct VTextView: View {
     private var backgroundView: some View {
         Rectangle()
             .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
-            .onTapGesture(perform: { isFocused = true }) // Detects gestures even on background
+            .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
     @ViewBuilder 
@@ -192,7 +191,7 @@ public struct VTextView: View {
                 .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
                 .font(uiModel.headerTitleTextFont)
-                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -214,7 +213,7 @@ public struct VTextView: View {
                 .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
                 .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
                 .font(uiModel.footerTitleTextFont)
-                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
@@ -234,10 +233,10 @@ public struct VTextView: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VTextView(
             headerTitle: "Lorem ipsum dolor sit amet",
             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -245,24 +244,24 @@ public struct VTextView: View {
             text: $text
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("States", body: {
+#Preview("States") {
     Preview_StatesContentView()
-})
+}
 
-#Preview("Success", body: {
+#Preview("Success") {
     Preview_StatesContentView(uiModel: .success)
-})
+}
 
-#Preview("Warning", body: {
+#Preview("Warning") {
     Preview_StatesContentView(uiModel: .warning)
-})
+}
 
-#Preview("Error", body: {
+#Preview("Error") {
     Preview_StatesContentView(uiModel: .error)
-})
+}
 
 private struct Preview_StatesContentView: View {
     private let uiModel: VTextViewUIModel
@@ -274,8 +273,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
-            PreviewRow("Enabled", content: {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -284,9 +283,9 @@ private struct Preview_StatesContentView: View {
                     text: .constant("Lorem ipsum")
                 )
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Focused", content: {
+            PreviewRow("Focused") {
                 VTextView(
                     uiModel: {
                         var mappedUIModel: VTextViewUIModel = uiModel
@@ -303,9 +302,9 @@ private struct Preview_StatesContentView: View {
                     text: .constant("Lorem ipsum")
                 )
                 .padding(.horizontal)
-            })
+            }
 
-            PreviewRow("Disabled", content: {
+            PreviewRow("Disabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -315,8 +314,8 @@ private struct Preview_StatesContentView: View {
                 )
                 .disabled(true)
                 .padding(.horizontal)
-            })
-        })
+            }
+        }
     }
 }
 

@@ -92,37 +92,37 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     
     // MARK: Body
     public var body: some View {
-        Group(content: {
+        Group {
             switch label {
             case .empty:
                 toggleView
 
             case .title(let title):
-                labeledToggleView(label: {
-                    baseButtonView(label: { internalState in
+                labeledToggleView {
+                    baseButtonView { internalState in
                         Text(title)
                             .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
                             .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
                             .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
                             .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
                             .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
-                    })
+                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    }
                     .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
 
             case .custom(let custom):
-                labeledToggleView(label: {
+                labeledToggleView {
                     baseButtonView(label: custom)
                         .blocksHitTesting(!uiModel.labelIsClickable)
-                })
+                }
             }
-        })
+        }
     }
     
     private var toggleView: some View {
-        baseButtonView(label: { internalState in
-            ZStack(content: {
+        baseButtonView { internalState in
+            ZStack {
                 RoundedRectangle(cornerRadius: uiModel.cornerRadius)
                     .foregroundStyle(uiModel.fillColors.value(for: internalState))
 
@@ -136,9 +136,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                     .frame(size: uiModel.thumbSize)
                     .foregroundStyle(uiModel.thumbColors.value(for: internalState))
                     .offset(x: thumbOffset(internalState: internalState))
-            })
+            }
             .frame(size: uiModel.size)
-        })
+        }
     }
 
     private func labeledToggleView<Content>(
@@ -146,10 +146,10 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.toggleAndLabelSpacing, content: {
+        HStack(spacing: uiModel.toggleAndLabelSpacing) {
             toggleView
             label()
-        })
+        }
     }
 
     private func baseButtonView<Content>(
@@ -167,11 +167,11 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 let internalState: VToggleInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation, transform: {
+                    .applyIf(uiModel.appliesStateChangeAnimation) {
                         $0
                             .animation(uiModel.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
-                    })
+                    }
             }
         )
     }
@@ -213,27 +213,27 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var state: VToggleState = .on
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VToggle(
             state: $state,
             title: "Lorem ipsum"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Off", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VToggle(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed Off", content: {
+        PreviewRow("Pressed Off") {
             VToggle(
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
@@ -246,16 +246,16 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             VToggle(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed On", content: {
+        PreviewRow("Pressed On") {
             VToggle(
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
@@ -268,37 +268,37 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VToggle(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
             .disabled(true)
-        })
+        }
 
         PreviewHeader("Native")
 
-        PreviewRow("Off", content: {
+        PreviewRow("Off") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
             )
             .labelsHidden()
             .toggleStyle(.switch)
-        })
+        }
 
-        PreviewRow("On", content: {
+        PreviewRow("On") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(true)
             )
             .labelsHidden()
             .toggleStyle(.switch)
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
@@ -306,9 +306,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             .labelsHidden()
             .toggleStyle(.switch)
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

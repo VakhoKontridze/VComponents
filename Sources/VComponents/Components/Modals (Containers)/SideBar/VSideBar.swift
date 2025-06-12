@@ -59,7 +59,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         sideBarView
-            .getPlatformInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation { newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -70,7 +70,7 @@ struct VSideBar<Content>: View where Content: View {
                 }
 
                 interfaceOrientation = newValue
-            })
+            }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -78,13 +78,13 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private var sideBarView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel, content: {
+        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
             contentView
                 .frame(
                     width: currentWidth,
                     height: currentHeight
                 )
-        })
+        }
         .shadow(
             color: uiModel.shadowColor,
             radius: uiModel.shadowRadius,
@@ -219,52 +219,52 @@ struct VSideBar<Content>: View where Content: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Leading", body: {
+#Preview("Leading") {
     Preview_ContentView()
-})
+}
 
-#Preview("Trailing", body: {
+#Preview("Trailing") {
     Preview_ContentView(uiModel: .trailing)
-})
+}
 
-#Preview("Top", body: {
+#Preview("Top") {
     Preview_ContentView(uiModel: .top)
-})
+}
 
-#Preview("Bottom", body: {
+#Preview("Bottom") {
     Preview_ContentView(uiModel: .bottom)
-})
+}
 
 #if !os(macOS) // No `UIEdgeInsets`
 
-#Preview("Safe Area Leading", body: {
+#Preview("Safe Area Leading") {
     Preview_SafeAreaContentView()
-})
+}
 
 #endif
 
 #if !os(macOS) // No `UIEdgeInsets`
 
-#Preview("Safe Area Trailing", body: {
+#Preview("Safe Area Trailing") {
     Preview_SafeAreaContentView(uiModel: .trailing)
-})
+}
 
 #endif
 
 #if !os(macOS) // No `UIEdgeInsets`
 
-#Preview("Safe Area Top", body: {
+#Preview("Safe Area Top") {
     Preview_SafeAreaContentView(uiModel: .top)
-})
+}
 
 #endif
 
 #if !os(macOS) // No `UIEdgeInsets`
 
 
-#Preview("Safe Area Bottom", body: {
+#Preview("Safe Area Bottom") {
     Preview_SafeAreaContentView(uiModel: .bottom)
-})
+}
 
 #endif
 
@@ -279,15 +279,16 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: uiModel,
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(
             root: rootAndLink.root,
             uiModel: {
@@ -316,9 +317,9 @@ private struct Preview_SafeAreaContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
-                .getInterfaceOrientation({ interfaceOrientation = $0 })
+                .getInterfaceOrientation { interfaceOrientation = $0 }
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -326,10 +327,11 @@ private struct Preview_SafeAreaContentView: View {
                         uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(
             root: rootAndLink.root,
             uiModel: {

@@ -191,22 +191,19 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             uiModel.tabViewBackgroundColor
 
         } else {
-            VStack(
-                spacing: uiModel.tabBarAndTabViewSpacing,
-                content: {
-                    headerView
-                    tabView
-                }
-            )
+            VStack(spacing: uiModel.tabBarAndTabViewSpacing) {
+                headerView
+                tabView
+            }
         }
     }
 
     private var headerView: some View {
-        VStack(spacing: 0, content: {
+        VStack(spacing: 0) {
             tabBarView
             tabIndicatorStripView
-        })
-        .background(content: { uiModel.headerBackgroundColor })
+        }
+        .background { uiModel.headerBackgroundColor }
 
         .clipped() // Prevents bouncing tab indicator from overflowing
         .drawingGroup() // Prevents clipped tab indicator from disappearing
@@ -215,30 +212,29 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     private var tabBarView: some View {
         HStack(
             alignment: uiModel.tabBarAlignment,
-            spacing: 0,
-            content: {
-                ForEach(data, id: id, content: { element in
-                    SwiftUIBaseButton(
-                        action: { selection = element },
-                        label: { baseButtonState in
-                            let tabItemInternalState: VStretchedIndicatorStaticPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
+            spacing: 0
+        ) {
+            ForEach(data, id: id) { element in
+                SwiftUIBaseButton(
+                    action: { selection = element },
+                    label: { baseButtonState in
+                        let tabItemInternalState: VStretchedIndicatorStaticPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
-                            tabItemView(
-                                tabItemInternalState: tabItemInternalState,
-                                element: element
-                            )
-                        }
-                    )
-                })
+                        tabItemView(
+                            tabItemInternalState: tabItemInternalState,
+                            element: element
+                        )
+                    }
+                )
             }
-        )
+        }
     }
 
     private func tabItemView(
         tabItemInternalState: VStretchedIndicatorStaticPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
-        Group(content: {
+        Group {
             switch tabItemLabel {
             case .title(let title):
                 Text(title(element))
@@ -246,12 +242,12 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                     .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
                     .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
                     .font(uiModel.tabItemTextFont)
-                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             case .custom(let custom):
                 custom(tabItemInternalState, element)
             }
-        })
+        }
         .padding(uiModel.tabItemMargins)
         .frame(maxWidth: .infinity)
         .contentShape(.rect)
@@ -262,12 +258,11 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             alignment: Alignment(
                 horizontal: .leading,
                 vertical: uiModel.tabIndicatorStripAlignment
-            ),
-            content: {
-                tabIndicatorTrackView
-                selectedTabIndicatorView
-            }
-        )
+            )
+        ) {
+            tabIndicatorTrackView
+            selectedTabIndicatorView
+        }
     }
 
     private var tabIndicatorTrackView: some View {
@@ -290,63 +285,60 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     }
 
     private var tabView: some View {
-        GeometryReader(content: { geometryProxy in
-            ScrollView(.horizontal, content: {
-                LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                    spacing: 0,
-                    content: {
-                        ForEach(data, id: id, content: { element in
-                            content(element)
-                                .tag(element)
-                                .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                                .frame(maxHeight: .infinity)
-                                .getFrame(in: .global, { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
-                                    guard element == selection else { return }
+        GeometryReader { geometryProxy in
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 0) { // `scrollPosition(id:)` doesn't work with `HStack`
+                    ForEach(data, id: id) { element in
+                        content(element)
+                            .tag(element)
+                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                            .frame(maxHeight: .infinity)
+                            .getFrame(in: .global) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
+                                guard element == selection else { return }
 
-                                    Task(operation: { @MainActor in
-                                        calculateIndicatorFrame(
-                                            selectedIndexInt: selectedIndexInt,
-                                            geometryProxy: geometryProxy,
-                                            interstitialOffset: frame.minX
-                                        )
-                                    })
-                                })
-                        })
+                                Task { @MainActor in
+                                    calculateIndicatorFrame(
+                                        selectedIndexInt: selectedIndexInt,
+                                        geometryProxy: geometryProxy,
+                                        interstitialOffset: frame.minX
+                                    )
+                                }
+                            }
                     }
-                )
+                }
                 .scrollTargetLayout()
-            })
+            }
             .scrollTargetBehavior(.paging)
             .scrollPosition(id: selectionIDBinding)
-            .applyModifier({
+            .applyModifier {
                 if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
                     $0
-                        .onScrollPhaseChange({ (_, newValue) in
+                        .onScrollPhaseChange { (_, newValue) in
                             isBeingScrolled = newValue == .interacting
-                        })
+                        }
                 } else {
                     $0
                 }
-            })
+            }
             
-            .background(content: { uiModel.tabViewBackgroundColor })
+            .background { uiModel.tabViewBackgroundColor }
             
             .scrollIndicators(.hidden)
             
             .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
             
-            .onChange(of: selectedIndexInt, initial: true, { (_, newValue) in
+            .onChange(of: selectedIndexInt, initial: true) { (_, newValue) in
                 guard !isBeingScrolled else { return }
                 
-                Task(operation: { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                Task { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
                     calculateIndicatorFrame(
                         selectedIndexInt: newValue,
                         geometryProxy: geometryProxy,
                         interstitialOffset: 0
                     )
-                })
-            })
-        })
+                }
+            }
+        }
     }
 
     // MARK: Selected Tab Indicator Frame
@@ -388,9 +380,9 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         }()
 
         if !tabIndicatorAnimationIsEnabled {
-            Task(operation: { @MainActor in
+            Task { @MainActor in
                 tabIndicatorAnimationIsEnabled = true
-            })
+            }
         }
     }
 }
@@ -400,10 +392,10 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(layer: .secondary) {
         VStretchedIndicatorStaticPagerTabView(
             selection: $selection,
             data: Preview_RGBColor.allCases,
@@ -412,13 +404,13 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         )
         .padding(.horizontal)
         .frame(height: 150)
-    })
-})
+    }
+}
 
-#Preview("No Items", body: {
+#Preview("No Items") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(layer: .secondary) {
         VStretchedIndicatorStaticPagerTabView(
             selection: $selection,
             data: [],
@@ -427,8 +419,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         )
         .padding(.horizontal)
         .frame(height: 150)
-    })
-})
+    }
+}
 
 #endif
 

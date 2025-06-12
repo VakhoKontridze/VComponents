@@ -116,10 +116,10 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             label: { baseButtonState in
                 let internalState: VRectangularCaptionButtonInternalState = internalState(baseButtonState)
                 
-                VStack(spacing: uiModel.rectangleAndCaptionSpacing, content: {
+                VStack(spacing: uiModel.rectangleAndCaptionSpacing) {
                     rectangleView(internalState: internalState)
                     captionView(internalState: internalState)
-                })
+                }
                 .contentShape(.rect) // Registers gestures even when clear
             }
         )
@@ -128,14 +128,14 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private func rectangleView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        Group(content: { // `Group` is used for adding multiple frames
+        Group { // `Group` is used for adding multiple frames
             rectangleIcon(
                 internalState: internalState
             )
-        })
+        }
         .frame(size: uiModel.rectangleSize)
-        .background(content: { rectangleBackgroundView(internalState: internalState) })
-        .overlay(content: { rectangleBorderView(internalState: internalState) })
+        .background { rectangleBackgroundView(internalState: internalState) }
+        .overlay { rectangleBorderView(internalState: internalState) }
         .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius))
     }
 
@@ -143,12 +143,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         internalState: VPlainButtonInternalState
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconSize)
             .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
             .padding(uiModel.iconMargins)
@@ -183,7 +183,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private func captionView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        Group(content: {
+        Group {
             switch caption {
             case .title(let title):
                 titleCaptionViewComponent(internalState: internalState, title: title)
@@ -194,22 +194,22 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             case .titleAndIcon(let title, let icon):
                 switch uiModel.titleCaptionTextAndIconCaptionPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
+                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing) {
                         titleCaptionViewComponent(internalState: internalState, title: title)
                         iconCaptionViewComponent(internalState: internalState, icon: icon)
-                    })
+                    }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing, content: {
+                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing) {
                         iconCaptionViewComponent(internalState: internalState, icon: icon)
                         titleCaptionViewComponent(internalState: internalState, title: title)
-                    })
+                    }
                 }
 
             case .custom(let custom):
                 custom(internalState)
             }
-        })
+        }
         .frame(
             maxWidth: uiModel.captionWidthMax,
             alignment: Alignment(
@@ -230,7 +230,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             .minimumScaleFactor(uiModel.titleCaptionTextMinimumScaleFactor)
             .foregroundStyle(uiModel.titleCaptionTextColors.value(for: internalState))
             .font(uiModel.titleCaptionTextFont)
-            .applyIfLet(uiModel.titleCaptionTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.titleCaptionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconCaptionViewComponent(
@@ -238,12 +238,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconCaptionResizable, transform: { $0.resizable() })
-            .applyIfLet(uiModel.iconCaptionContentMode, transform: { $0.aspectRatio(nil, contentMode: $1) })
-            .applyIfLet(uiModel.iconCaptionColors, transform: { $0.foregroundStyle($1.value(for: internalState)) })
-            .applyIfLet(uiModel.iconCaptionOpacities, transform: { $0.opacity($1.value(for: internalState)) })
+            .applyIf(uiModel.isIconCaptionResizable) { $0.resizable() }
+            .applyIfLet(uiModel.iconCaptionContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(uiModel.iconCaptionColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(uiModel.iconCaptionOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(uiModel.iconCaptionFont)
-            .applyIfLet(uiModel.iconCaptionDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+            .applyIfLet(uiModel.iconCaptionDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
             .frame(size: uiModel.iconCaptionSize)
     }
     
@@ -262,27 +262,27 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
 #if !(os(macOS) || os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
-    PreviewContainer(content: {
+#Preview("*") {
+    PreviewContainer {
         VRectangularCaptionButton(
             action: {},
             icon: Image(systemName: "swift"),
             titleCaption: "Lorem Ipsum"
         )
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VRectangularCaptionButton(
                 action: {},
                 icon: Image(systemName: "swift"),
                 titleCaption: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Pressed", content: {
+        PreviewRow("Pressed") {
             VRectangularCaptionButton(
                 uiModel: {
                     var uiModel: VRectangularCaptionButtonUIModel = .init()
@@ -295,18 +295,18 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 icon: Image(systemName: "swift"),
                 titleCaption: "Lorem Ipsum"
             )
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VRectangularCaptionButton(
                 action: {},
                 icon: Image(systemName: "swift"),
                 titleCaption: "Lorem Ipsum"
             )
             .disabled(true)
-        })
-    })
-})
+        }
+    }
+}
 
 #endif
 

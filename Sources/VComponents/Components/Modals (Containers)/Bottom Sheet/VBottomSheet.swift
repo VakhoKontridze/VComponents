@@ -69,7 +69,7 @@ struct VBottomSheet<Content>: View
     // MARK: Body
     var body: some View {
         bottomSheetView
-            .getPlatformInterfaceOrientation({ newValue in
+            .getPlatformInterfaceOrientation { newValue in
                 if
                     uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -82,13 +82,13 @@ struct VBottomSheet<Content>: View
                 interfaceOrientation = newValue
                 
                 resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
-            })
-            .onChange(of: uiModel.sizeGroup, { (_, newValue) in
+            }
+            .onChange(of: uiModel.sizeGroup) { (_, newValue) in
                 resetHeightFromEnvironmentOrUIModelChange(
                     from: newValue.current(orientation: interfaceOrientation).heights
                         .withFixedValues(in: containerSize.height)
                 )
-            })
+            }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
@@ -96,9 +96,9 @@ struct VBottomSheet<Content>: View
     }
 
     private var bottomSheetView: some View {
-        ZStack(content: {
+        ZStack {
             VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .applyIf(!uiModel.contentIsDraggable, transform: {
+                .applyIf(!uiModel.contentIsDraggable) {
                     $0
                         .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
@@ -107,7 +107,7 @@ struct VBottomSheet<Content>: View
                                 .onChanged(dragChanged)
                                 .onEnded(dragEnded)
                         )
-                })
+                }
                 .shadow(
                     color: uiModel.shadowColor,
                     radius: uiModel.shadowRadius,
@@ -123,14 +123,14 @@ struct VBottomSheet<Content>: View
                 .compositingGroup()
                 .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
 
-                .applyIf(!uiModel.contentIsDraggable, transform: {
+                .applyIf(!uiModel.contentIsDraggable) {
                     $0
                         .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
-                })
-        })
+                }
+        }
         .frame(width: currentWidth)
-        .applyIf(uiModel.contentIsDraggable, transform: {
+        .applyIf(uiModel.contentIsDraggable) {
             $0
                 .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                 .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
@@ -139,30 +139,30 @@ struct VBottomSheet<Content>: View
                         .onChanged(dragChanged)
                         .onEnded(dragEnded)
                 )
-        })
+        }
     }
 
     private var bottomSheetContentView: some View {
-        VStack(spacing: 0, content: {
+        VStack(spacing: 0) {
             dragIndicatorView
             contentView
-        })
+        }
     }
 
     private var dragIndicatorView: some View {
-        ZStack(content: {
+        ZStack {
             if uiModel.dragIndicatorSize.height > 0 {
                 RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
                     .frame(size: uiModel.dragIndicatorSize)
                     .padding(uiModel.dragIndicatorMargins)
                     .foregroundStyle(uiModel.dragIndicatorColor)
             }
-        })
-        .getSize({ dragIndicatorHeight = $0.height }) // If it's not rendered, `0` will be returned
+        }
+        .getSize { dragIndicatorHeight = $0.height } // If it's not rendered, `0` will be returned
     }
     
     private var contentView: some View {
-        ZStack(content: {
+        ZStack {
             if !uiModel.contentIsDraggable {
                 Color.clear
                     .contentShape(.rect)
@@ -170,24 +170,20 @@ struct VBottomSheet<Content>: View
             
             content()
                 .padding(uiModel.contentMargins)
-        })
+        }
         .safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
-        .applyIf(
-            uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height),
-            ifTransform: {
-                $0
-                    .frame(
-                        height: max( // Autoresized content shouldn't get smaller that the `min` height
-                            containerSize.height - offset - dragIndicatorHeight,
-                            currentHeightsObject.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
-                        )
+        .applyIf(uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height)) {
+            $0
+                .frame(
+                    height: max( // Autoresized content shouldn't get smaller that the `min` height
+                        containerSize.height - offset - dragIndicatorHeight,
+                        currentHeightsObject.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
                     )
-            },
-            elseTransform: {
-                $0.frame(maxHeight: .infinity)
-            }
-        )
+                )
+        } else: {
+            $0.frame(maxHeight: .infinity)
+        }
         .clipped() // Clips off-bound content that might clip into header
     }
 
@@ -209,7 +205,7 @@ struct VBottomSheet<Content>: View
 
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
 
-        withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
+        withAnimation(.linear(duration: 0.1)) { // Gets rid of stuttering
             _offset = {
                 switch newOffset {
                 case ...currentHeightsObject.maxOffset(in: containerSize.height):
@@ -226,7 +222,7 @@ struct VBottomSheet<Content>: View
                     return newOffset
                 }
             }()
-        })
+        }
     }
 
     private func dragEnded(dragValue: DragGesture.Value) {
@@ -273,7 +269,7 @@ struct VBottomSheet<Content>: View
             dismissFromSwipe()
 
         case .snap(let newOffset):
-            withAnimation(uiModel.heightSnapAnimation, { _offset = newOffset })
+            withAnimation(uiModel.heightSnapAnimation) { _offset = newOffset }
         }
     }
 
@@ -322,32 +318,33 @@ struct VBottomSheet<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
-                isPresented: $isPresented,
-                content: { Color.blue }
-            )
-    })
+                isPresented: $isPresented
+            ) {
+                Color.blue
+            }
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
 #if !os(macOS) // Doesn't follow HIG
 
-#Preview("Min & Ideal & Max", body: {
+#Preview("Min & Ideal & Max") {
     ContentView_MinIdealMax()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_MinIdealMax: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -367,10 +364,11 @@ private struct ContentView_MinIdealMax: View {
 
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
@@ -379,16 +377,16 @@ private struct ContentView_MinIdealMax: View {
 
 #if !os(macOS) // Doesn't follow HIG
 
-#Preview("Min & Ideal", body: {
+#Preview("Min & Ideal") {
     ContentView_MinIdeal()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_MinIdeal: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -408,10 +406,11 @@ private struct ContentView_MinIdeal: View {
 
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
@@ -420,16 +419,16 @@ private struct ContentView_MinIdeal: View {
 
 #if !os(macOS) // Doesn't follow HIG
 
-#Preview("Ideal & Max", body: {
+#Preview("Ideal & Max") {
     ContentView_IdealMax()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_IdealMax: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -449,10 +448,11 @@ private struct ContentView_IdealMax: View {
 
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
@@ -461,16 +461,16 @@ private struct ContentView_IdealMax: View {
 
 #if !os(macOS) // Doesn't follow HIG
 
-#Preview("Ideal (Small)", body: {
+#Preview("Ideal (Small)") {
     ContentView_IdealSmall()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_IdealSmall: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -490,10 +490,11 @@ private struct ContentView_IdealSmall: View {
 
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
@@ -502,16 +503,16 @@ private struct ContentView_IdealSmall: View {
 
 #if !os(macOS) // Doesn't follow HIG
 
-#Preview("Ideal (Large)", body: {
+#Preview("Ideal (Large)") {
     ContentView_IdealLarge()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_IdealLarge: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -531,26 +532,27 @@ private struct ContentView_IdealLarge: View {
 
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: { Color.blue }
-                )
-        })
+                    isPresented: $isPresented
+                ) {
+                    Color.blue
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
 #endif
 
-#Preview("Content Autoresizing", body: {
+#Preview("Content Autoresizing") {
     ContentView_ContentAutoresizing()
-})
+}
 
 // Preview macro doesn’t support nested macro expansions
 private struct ContentView_ContentAutoresizing: View {
     @State var isPresented: Bool = true
 
     var body: some View {
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -571,21 +573,20 @@ private struct ContentView_ContentAutoresizing: View {
                         
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: {
-                        VStack(spacing: 0, content: {
-                            Text("Top")
-                            Spacer(minLength: 0)
-                            Text("Bottom")
-                        })
+                    isPresented: $isPresented
+                ) {
+                    VStack(spacing: 0) {
+                        Text("Top")
+                        Spacer(minLength: 0)
+                        Text("Bottom")
                     }
-                )
-        })
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
     }
 }
 
-#Preview("Content Wrapping Height", body: {
+#Preview("Content Wrapping Height") {
     @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
     @Previewable @State var isPresented: Bool = true
@@ -593,12 +594,12 @@ private struct ContentView_ContentAutoresizing: View {
 
     @Previewable @State var count: Int = 1
 
-    ZStack(content: {
+    ZStack {
         // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
         Color.clear
-            .getSafeAreaInsets({ safeAreaInsets = $0 })
+            .getSafeAreaInsets { safeAreaInsets = $0 }
 
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -624,46 +625,44 @@ private struct ContentView_ContentAutoresizing: View {
                         
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: {
-                        VStack(spacing: 20, content: {
-                            ForEach(0..<count, id: \.self, content: { _ in
-                                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
-                            })
-                            
-                            Button(
-                                "Toggle",
-                                action: { count = count == 1 ? 2 : 1 }
-                            )
-                        })
-                        .fixedSize(horizontal: false, vertical: true)
-                        .getSize({ size in
-                            Task(operation: { @MainActor in
-                                contentHeight = size.height
-                            })
-                        })
+                    isPresented: $isPresented
+                ) {
+                    VStack(spacing: 20) {
+                        ForEach(0..<count, id: \.self) { _ in
+                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere sem consequat felis imperdiet, eu ornare velit tincidunt. Praesent viverra sem lacus, sed gravida dui cursus sit amet.")
+                        }
+                        
+                        Button("Toggle") {
+                            count = count == 1 ? 2 : 1
+                        }
                     }
-                )
-        })
+                    .fixedSize(horizontal: false, vertical: true)
+                    .getSize { size in
+                        Task { @MainActor in
+                            contentHeight = size.height
+                        }
+                    }
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
-    })
-})
+    }
+}
 
-#Preview("Scrollable Content", body: {
+#Preview("Scrollable Content") {
     @Previewable @State var safeAreaInsets: EdgeInsets = .init()
 
     @Previewable @State var isPresented: Bool = true
 
-    ZStack(content: {
+    ZStack {
         // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
         Color.clear
-            .getSafeAreaInsets({ newValue in
-                Task(operation: { @MainActor in
+            .getSafeAreaInsets { newValue in
+                Task { @MainActor in
                     safeAreaInsets = newValue
-                })
-            })
+                }
+            }
 
-        PreviewContainer(content: {
+        PreviewContainer {
             PreviewModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
@@ -672,45 +671,45 @@ private struct ContentView_ContentAutoresizing: View {
                         uiModel.autoresizesContent = true
                         return uiModel
                     }(),
-                    isPresented: $isPresented,
-                    content: {
-                        ScrollView(content: {
-                            VStack(spacing: 0, content: {
-                                ForEach(0..<20, content: { number in
-                                    Text(String(number))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.horizontal, 15)
-                                        .padding(.vertical, 9)
-                                })
-                            })
-                        })
-                        .safeAreaPadding(.bottom, safeAreaInsets.bottom)
+                    isPresented: $isPresented
+                ) {
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            ForEach(0..<20) { number in
+                                Text(String(number))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 9)
+                            }
+                        }
                     }
-                )
-        })
+                    .safeAreaPadding(.bottom, safeAreaInsets.bottom)
+                }
+        }
         .modalPresenterRoot(root: rootAndLink.root)
-    })
-})
+    }
+}
 
-#Preview("Insetted Content", body: {
+#Preview("Insetted Content") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: .insettedContent,
-                isPresented: $isPresented,
-                content: { Color.blue }
-            )
-    })
+                isPresented: $isPresented
+            ) {
+                Color.blue
+            }
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
-#Preview("No Drag Indicator", body: {
+#Preview("No Drag Indicator") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer(content: {
+    PreviewContainer {
         PreviewModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
@@ -719,12 +718,13 @@ private struct ContentView_ContentAutoresizing: View {
                     uiModel.contentIsDraggable = true
                     return uiModel
                 }(),
-                isPresented: $isPresented,
-                content: { Color.blue }
-            )
-    })
+                isPresented: $isPresented
+            ) {
+                Color.blue
+            }
+    }
     .modalPresenterRoot(root: rootAndLink.root)
-})
+}
 
 #endif
 

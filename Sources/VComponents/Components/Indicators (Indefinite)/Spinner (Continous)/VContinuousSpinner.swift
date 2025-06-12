@@ -40,12 +40,12 @@ public struct VContinuousSpinner: View {
             )
             .frame(width: uiModel.dimension, height: uiModel.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-            .onAppear(perform: {
+            .onAppear {
                 withAnimation(
                     uiModel.animation.repeatForever(autoreverses: false),
                     { isAnimating.toggle() }
                 )
-            })
+            }
             .environment(\.layoutDirection, .leftToRight) // Like native `ProgressView`, forces LTR
     }
 }
@@ -53,10 +53,10 @@ public struct VContinuousSpinner: View {
 // MARK: - Preview
 #if DEBUG
 
-#Preview(body: {
-    PreviewContainer(content: {
+#Preview {
+    PreviewContainer {
         VContinuousSpinner()
-    })
-})
+    }
+}
 
 #endif

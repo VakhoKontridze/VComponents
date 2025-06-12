@@ -46,19 +46,18 @@ import VCore
 ///         VCompactPageIndicator(
 ///             uiModel: pageIndicatorUIModel,
 ///             total: total,
-///             current: current,
-///             dotContent: { (internalState, _) in
-///                 ZStack(content: {
-///                     Circle()
-///                         .stroke(lineWidth: 1)
-///                         .padding(1)
+///             current: current
+///         ) { (internalState, _) in
+///             ZStack {
+///                 Circle()
+///                     .stroke(lineWidth: 1)
+///                     .padding(1)
 ///
-///                     Circle()
-///                         .padding(3)
-///                 })
-///                 .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///                 Circle()
+///                     .padding(3)
 ///             }
-///         )
+///             .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///         }
 ///         .padding()
 ///     }
 ///
@@ -130,7 +129,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     public var body: some View {
         // `VPageIndicator` is needed, because if total number of dots are not more that visible,
         // `0`-sizes dots would offset the page indicator.
-        Group(content: {
+        Group {
             if total > visible {
                 compactBody
                 
@@ -147,7 +146,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                     }()
                 )
             }
-        })
+        }
     }
 
     private var compactBody: some View {
@@ -156,22 +155,23 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
             height: uiModel.dotHeight
         )
             .withReversedDimensions(uiModel.direction.isVertical)
-
+        
         let range: [Int] = (0..<total)
             .reversedArray(uiModel.direction.isReversed)
-
-        return uiModel.direction
+        
+        let layout: AnyLayout = uiModel.direction
             .stackLayout(spacing: uiModel.spacing)
-            .callAsFunction({ ForEach(range, id: \.self, content: dotContentView) })
-            .frame(size: size)
-            .offset(
-                x: uiModel.direction.isHorizontal ? offset : 0,
-                y: uiModel.direction.isHorizontal ? 0 : offset
-            )
-            .clipped() // Clips off-bound dots
-            .applyIf(uiModel.appliesTransitionAnimation, transform: {
-                $0.animation(uiModel.transitionAnimation, value: current)
-            })
+
+        return layout {
+            ForEach(range, id: \.self, content: dotContentView)
+        }
+        .frame(size: size)
+        .offset(
+            x: uiModel.direction.isHorizontal ? offset : 0,
+            y: uiModel.direction.isHorizontal ? 0 : offset
+        )
+        .clipped() // Clips off-bound dots
+        .applyIf(uiModel.appliesTransitionAnimation) { $0.animation(uiModel.transitionAnimation, value: current) }
     }
 
     private func dotContentView(
@@ -179,10 +179,10 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     ) -> some View {
         let internalState: VCompactPageIndicatorDotInternalState = dotInternalState(index)
 
-        return Group(content: {
+        return Group {
             switch dotContent {
             case .standard:
-                ZStack(content: {
+                ZStack {
                     RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                         .foregroundStyle(uiModel.dotColors.value(for: internalState))
 
@@ -191,12 +191,12 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                         RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
                             .strokeBorder(uiModel.dotBorderColors.value(for: internalState), lineWidth: borderWidth)
                     }
-                })
+                }
 
             case .custom(let custom):
                 custom(internalState, index)
             }
-        })
+        }
         .frame(
             width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
             height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
@@ -375,25 +375,25 @@ extension Int {
 // MARK: - Preview
 #if DEBUG
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VCompactPageIndicator(
             total: total,
             current: current
         )
-    })
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Layout Directions", body: {
+#Preview("Layout Directions") {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
     
-    PreviewContainer(content: {
-        PreviewRow("Left-to-Right", content: {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VCompactPageIndicator(
                 uiModel: {
                     var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -403,9 +403,9 @@ extension Int {
                 total: total,
                 current: current
             )
-        })
+        }
 
-        PreviewRow("Right-to-Left", content: {
+        PreviewRow("Right-to-Left") {
             VCompactPageIndicator(
                 uiModel: {
                     var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -415,10 +415,10 @@ extension Int {
                 total: total,
                 current: current
             )
-        })
+        }
 
-        HStack(spacing: 20, content: {
-            PreviewRow("Top-to-Bottom", content: {
+        HStack(spacing: 20) {
+            PreviewRow("Top-to-Bottom") {
                 VCompactPageIndicator(
                     uiModel: {
                         var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -428,9 +428,9 @@ extension Int {
                     total: total,
                     current: current
                 )
-            })
+            }
 
-            PreviewRow("Bottom-to-Top", content: {
+            PreviewRow("Bottom-to-Top") {
                 VCompactPageIndicator(
                     uiModel: {
                         var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -440,19 +440,19 @@ extension Int {
                     total: total,
                     current: current
                 )
-            })
-        })
-    })
+            }
+        }
+    }
     .onReceiveOfTimerIncrement($current, to: total-1)
-})
+}
 
-#Preview("Zero", body: {
-    PreviewContainer(content: {
+#Preview("Zero") {
+    PreviewContainer {
         VCompactPageIndicator(
             total: 0,
             current: 0
         )
-    })
-})
+    }
+}
 
 #endif

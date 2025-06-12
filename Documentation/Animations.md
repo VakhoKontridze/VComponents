@@ -14,14 +14,14 @@
 @State private var isOn: Bool = false
 
 var body: some View {
-    VStack(content: {
+    VStack {
         VToggle(isOn: $isOn)
         
         VPlainButton(
             action: { isOn.toggle() },
             title: "Toggle"
         )
-    })
+    }
 }
 ```
 
@@ -33,7 +33,7 @@ By default, `VToggle` has an `easeIn` animation with a duration of `0.1`. This a
 @State private var isOn: Bool = false
 
 var body: some View {
-    VStack(content: {
+    VStack {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
@@ -47,7 +47,7 @@ var body: some View {
             action: { isOn.toggle() },
             title: "Toggle"
         )
-    })
+    }
 }
 ```
 
@@ -65,7 +65,7 @@ The first is to set `stateChangeAnimation` to `nil`. While this does not complet
 @State private var isOn: Bool = false
 
 var body: some View {
-    VStack(content: {
+    VStack {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
@@ -79,7 +79,7 @@ var body: some View {
             action: { isOn.toggle() },
             title: "Toggle"
         )
-    })
+    }
 }
 ```
 
@@ -91,7 +91,7 @@ The second is to set `appliesStateChangeAnimation` to `false`. This option ensur
 @State private var isOn: Bool = false
 
 var body: some View {
-    VStack(content: {
+    VStack {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
@@ -105,7 +105,7 @@ var body: some View {
             action: { isOn.toggle() },
             title: "Toggle"
         )
-    })
+    }
 }
 ```
 
@@ -117,7 +117,7 @@ In certain scenarios, the distinction between these two can be substantial. For 
 @State private var isOn: Bool = false
 
 var body: some View {
-    VStack(content: {
+    VStack {
         VToggle(
             uiModel: {
                 var uiModel: VToggleUIModel = .init()
@@ -129,12 +129,12 @@ var body: some View {
         
         VPlainButton(
             action: { 
-                withAnimation(.easeInOut(duration: 1), {
+                withAnimation(.easeInOut(duration: 1) {
                     isOn.toggle()
-                })
+                }
             },
             title: "Toggle"
         )
-    })
+    }
 }
 ```

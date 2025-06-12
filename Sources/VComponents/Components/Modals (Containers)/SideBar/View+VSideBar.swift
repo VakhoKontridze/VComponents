@@ -20,17 +20,18 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
     ///             .vSideBar(
     ///                 link: .window(linkID: "some_side_bar"),
-    ///                 isPresented: $isPresented,
-    ///                 content: { Color.blue }
-    ///             )
-    ///         })
+    ///                 isPresented: $isPresented
+    ///             ) {
+    ///                 Color.blue
+    ///             }
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -45,12 +46,12 @@ extension View {
     ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
     ///             )
-    ///             .getInterfaceOrientation({ interfaceOrientation = $0 })
+    ///             .getInterfaceOrientation { interfaceOrientation = $0 }
     ///             .vSideBar(
     ///                 link: .window(linkID: "some_side_bar"),
     ///                 uiModel: {
@@ -60,10 +61,11 @@ extension View {
     ///
     ///                     return uiModel
     ///                 }(),
-    ///                 isPresented: $isPresented,
-    ///                 content: { Color.blue }
-    ///             )
-    ///         })
+    ///                 isPresented: $isPresented
+    ///             ) {
+    ///                 Color.blue
+    ///             }
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
     ///     }
@@ -84,15 +86,14 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VSideBar<Content>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: content
-                    )
-                }
-            )
+                onDismiss: dismissHandler
+            ) {
+                VSideBar<Content>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: content
+                )
+            }
     }
 }
 
@@ -127,18 +128,17 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VSideBar<Content?>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                content(item)
-                            }
+                onDismiss: dismissHandler
+            ) {
+                VSideBar<Content?>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            content(item)
                         }
-                    )
-                }
-            )
+                    }
+                )
+            }
     }
 }

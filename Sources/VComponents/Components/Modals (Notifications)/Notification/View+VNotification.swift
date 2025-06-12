@@ -19,7 +19,7 @@ extension View {
     ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
-    ///         ZStack(content: {
+    ///         ZStack {
     ///             VPlainButton(
     ///                 action: { isPresented = true },
     ///                 title: "Present"
@@ -31,7 +31,7 @@ extension View {
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet"
     ///             )
-    ///         })
+    ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
     ///             root: .window(rootID: "notifications"),
@@ -61,19 +61,18 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VNotification<Never>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: .iconTitleMessage(
-                            icon: icon,
-                            title: title,
-                            message: message
-                        )
+                onDismiss: dismissHandler
+            ) {
+                VNotification<Never>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: .iconTitleMessage(
+                        icon: icon,
+                        title: title,
+                        message: message
                     )
-                }
-            )
+                )
+            }
     }
 
     /// Modal component that presents notification.
@@ -95,17 +94,16 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VNotification(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: .custom(
-                            custom: customContent
-                        )
+                onDismiss: dismissHandler
+            ) {
+                VNotification(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: .custom(
+                        custom: customContent
                     )
-                }
-            )
+                )
+            }
     }
 }
 
@@ -141,37 +139,36 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VNotification<Never>(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: .iconTitleMessage(
-                            icon: {
-                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                    icon(item)
-                                } else {
-                                     nil
-                                }
-                            }(),
-                            title: {
-                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                    title(item)
-                                } else {
-                                    nil
-                                }
-                            }(),
-                            message: {
-                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                    message(item)
-                                } else {
-                                    nil
-                                }
-                            }()
-                        )
+                onDismiss: dismissHandler
+            ) {
+                VNotification<Never>(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: .iconTitleMessage(
+                        icon: {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                                icon(item)
+                            } else {
+                                 nil
+                            }
+                        }(),
+                        title: {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                                title(item)
+                            } else {
+                                nil
+                            }
+                        }(),
+                        message: {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                                message(item)
+                            } else {
+                                nil
+                            }
+                        }()
                     )
-                }
-            )
+                )
+            }
     }
 
     /// Modal component that presents notification.
@@ -200,22 +197,21 @@ extension View {
                 uiModel: uiModel.modalPresenterLinkUIModel,
                 isPresented: isPresented,
                 onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                content: {
-                    VNotification(
-                        uiModel: uiModel,
-                        isPresented: isPresented,
-                        content: .custom(
-                            custom: {
-                                Group(content: {
-                                    if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                        customContent(item)
-                                    }
-                                })
+                onDismiss: dismissHandler
+            ) {
+                VNotification(
+                    uiModel: uiModel,
+                    isPresented: isPresented,
+                    content: .custom(
+                        custom: {
+                            Group {
+                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                                    customContent(item)
+                                }
                             }
-                        )
+                        }
                     )
-                }
-            )
+                )
+            }
     }
 }

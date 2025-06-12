@@ -79,12 +79,12 @@ public struct VSlider: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.toAlignment, content: {
-            ZStack(alignment: uiModel.direction.toAlignment, content: {
+        ZStack(alignment: uiModel.direction.toAlignment) {
+            ZStack(alignment: uiModel.direction.toAlignment) {
                 trackView
                 progressView
                 borderView
-            })
+            }
             .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
             .frame(
                 width: uiModel.direction.isHorizontal ? nil : uiModel.height,
@@ -92,19 +92,17 @@ public struct VSlider: View {
             )
             
             thumbView
-        })
-        .getSize({ sliderSize = $0 })
-        .applyIf(uiModel.bodyIsDraggable, transform: {
+        }
+        .getSize { sliderSize = $0 }
+        .applyIf(uiModel.bodyIsDraggable) {
             $0
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged(dragChanged)
                         .onEnded(dragEnded)
                 )
-        })
-        .applyIf(uiModel.appliesProgressAnimation, transform: {
-            $0.animation(uiModel.progressAnimation, value: value)
-        })
+        }
+        .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
     }
     
     private var trackView: some View {
@@ -142,34 +140,32 @@ public struct VSlider: View {
             uiModel.thumbSize.width > 0 &&
             uiModel.thumbSize.height > 0
         {
-            Group(content: { // `Group` is used for giving multiple frames
-                ZStack(content: {
+            Group { // `Group` is used for giving multiple frames
+                ZStack {
                     thumbBackgroundView
                     thumbBorderView
-                })
+                }
                 .frame(size: uiModel.thumbSize)
                 .offset(
                     x: uiModel.direction.isHorizontal ? thumbOffset.withOppositeSign(uiModel.direction.isReversed) : 0,
                     y: uiModel.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(uiModel.direction.isReversed)
                 )
-            })
+            }
             .frame( // Must be put into group, as content already has frame
                 maxWidth: uiModel.direction.isHorizontal ? CGFloat.infinity : nil,
                 maxHeight: uiModel.direction.isHorizontal ? nil : CGFloat.infinity,
                 alignment: uiModel.direction.toAlignment
             )
-            .applyIf(
-                uiModel.bodyIsDraggable,
-                ifTransform: { $0.allowsHitTesting(false) },
-                elseTransform: {
-                    $0
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged(dragChanged)
-                                .onEnded(dragEnded)
-                        )
-                }
-            )
+            .applyIf(uiModel.bodyIsDraggable) {
+                $0.allowsHitTesting(false)
+            } else: {
+                $0
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged(dragChanged)
+                            .onEnded(dragEnded)
+                    )
+            }
         }
     }
 
@@ -244,44 +240,44 @@ public struct VSlider: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*", body: {
+#Preview("*") {
     @Previewable @State var value: Double = 0.5
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VSlider(value: $value)
             .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("States", body: {
-    PreviewContainer(content: {
-        PreviewRow("Enabled", content: {
+#Preview("States") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VSlider(value: .constant(0.5))
                 .padding(.horizontal)
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             VSlider(value: .constant(0.5))
                 .disabled(true)
                 .padding(.horizontal)
-        })
+        }
 
         PreviewHeader("Native")
 
-        PreviewRow("Enabled", content: {
+        PreviewRow("Enabled") {
             Slider(value: .constant(0.5))
                 .padding(.horizontal)
-        })
+        }
 
-        PreviewRow("Disabled", content: {
+        PreviewRow("Disabled") {
             Slider(value: .constant(0.5))
                 .disabled(true)
                 .padding(.horizontal)
-        })
-    })
-})
+        }
+    }
+}
 
-#Preview("Layout Directions", body: {
+#Preview("Layout Directions") {
     @Previewable @State var value: Double = 0.5 // '@Previewable' items must be at the beginning of the preview block
     
     let length: CGFloat = {
@@ -294,77 +290,75 @@ public struct VSlider: View {
 #endif
     }()
 
-    PreviewContainer(
-        content: {
-            PreviewRow("Left-to-Right", content: {
-                VSlider(
-                    uiModel: {
-                        var uiModel: VSliderUIModel = .init()
-                        uiModel.direction = .leftToRight
-                        return uiModel
-                    }(),
-                    value: $value
-                )
-                .frame(width: length)
-            })
-
-            PreviewRow("Right-to-Left", content: {
-                VSlider(
-                    uiModel: {
-                        var uiModel: VSliderUIModel = .init()
-                        uiModel.direction = .rightToLeft
-                        return uiModel
-                    }(),
-                    value: $value
-                )
-                .frame(width: length)
-            })
-
-            HStack(spacing: 20, content: {
-                PreviewRow("Top-to-Bottom", content: {
-                    VSlider(
-                        uiModel: {
-                            var uiModel: VSliderUIModel = .init()
-                            uiModel.direction = .topToBottom
-                            return uiModel
-                        }(),
-                        value: $value
-                    )
-                    .frame(height: length)
-                })
-
-                PreviewRow("Bottom-to-Top", content: {
-                    VSlider(
-                        uiModel: {
-                            var uiModel: VSliderUIModel = .init()
-                            uiModel.direction = .bottomToTop
-                            return uiModel
-                        }(),
-                        value: $value
-                    )
-                    .frame(height: length)
-                })
-            })
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
+            VSlider(
+                uiModel: {
+                    var uiModel: VSliderUIModel = .init()
+                    uiModel.direction = .leftToRight
+                    return uiModel
+                }(),
+                value: $value
+            )
+            .frame(width: length)
         }
-    )
-})
+        
+        PreviewRow("Right-to-Left") {
+            VSlider(
+                uiModel: {
+                    var uiModel: VSliderUIModel = .init()
+                    uiModel.direction = .rightToLeft
+                    return uiModel
+                }(),
+                value: $value
+            )
+            .frame(width: length)
+        }
+        
+        HStack(spacing: 20) {
+            PreviewRow("Top-to-Bottom") {
+                VSlider(
+                    uiModel: {
+                        var uiModel: VSliderUIModel = .init()
+                        uiModel.direction = .topToBottom
+                        return uiModel
+                    }(),
+                    value: $value
+                )
+                .frame(height: length)
+            }
+            
+            PreviewRow("Bottom-to-Top") {
+                VSlider(
+                    uiModel: {
+                        var uiModel: VSliderUIModel = .init()
+                        uiModel.direction = .bottomToTop
+                        return uiModel
+                    }(),
+                    value: $value
+                )
+                .frame(height: length)
+            }
+        }
+    }
+}
 
-#Preview("Step", body: {
+#Preview("Step") {
     @Previewable @State var value: Double = 0.5
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VSlider(
             step: 0.1,
             value: $value
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
-#Preview("Draggable Body", body: {
+#Preview("Draggable Body") {
     @Previewable @State var value: Double = 0.5
 
-    PreviewContainer(content: {
+    PreviewContainer {
         VSlider(
             uiModel: {
                 var uiModel: VSliderUIModel = .init()
@@ -374,8 +368,8 @@ public struct VSlider: View {
             value: $value
         )
         .padding(.horizontal)
-    })
-})
+    }
+}
 
 #endif
 

@@ -148,7 +148,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     
     // MARK: Body
     public var body: some View {
-        ZStack(content: {
+        ZStack {
             switch content {
             case .auto:
                 if case .success(let image) = result {
@@ -180,11 +180,11 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                     }
                 }())
             }
-        })
-        .onChange(of: parameter, initial: true, { fetch(from: $1) })
-        .onDisappear(perform: {
+        }
+        .onChange(of: parameter, initial: true) { fetch(from: $1) }
+        .onDisappear {
             if uiModel.removesImageOnDisappear { reset() }
-        })
+        }
     }
     
     private var defaultPlaceholderView: some View {
@@ -206,7 +206,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         if uiModel.removesImageOnParameterChange { result = nil }
 
         task?.cancel()
-        task = Task(operation: { @MainActor in
+        task = Task { @MainActor in
             do {
                 let image: Image = try await fetchHandler(parameter)
                 guard !Task.isCancelled else { return }
@@ -218,7 +218,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                 
                 result = .failure(error)
             }
-        })
+        }
     }
     
     private func zeroData() {
@@ -237,8 +237,8 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
 // MARK: - Preview
 #if DEBUG
 
-#Preview(body: {
-    PreviewContainer(content: {
+#Preview {
+    PreviewContainer {
         VFetchingAsyncImage(
             from: "-",
             fetch: { _ in throw URLError(.badURL) }
@@ -256,7 +256,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
             }
         )
         .frame(dimension: 64)
-    })
-})
+    }
+}
 
 #endif

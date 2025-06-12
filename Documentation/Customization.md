@@ -85,15 +85,12 @@ Frequently, you will discover pre-existing static factory-initialized UI models 
 
 ```swift
 var body: some View {
-    VWrappingMarquee(
-        uiModel: .insettedGradientMask,
-        content: {
-            HStack(content: {
-                Image(systemName: "swift")
-                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-            })
-            .drawingGroup() // For `Image`
+    VWrappingMarquee(uiModel: .insettedGradientMask) {
+        HStack {
+            Image(systemName: "swift")
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
         }
-    )
+        .drawingGroup() // For `Image`
+    }
 }
 ```

@@ -187,68 +187,64 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             uiModel.tabViewBackgroundColor
 
         } else {
-            VStack(
-                spacing: uiModel.tabBarAndTabViewSpacing,
-                content: {
-                    headerView
-                    tabView
-                }
-            )
+            VStack(spacing: uiModel.tabBarAndTabViewSpacing) {
+                headerView
+                tabView
+            }
         }
     }
 
     private var headerView: some View {
         tabBarAndTabIndicatorStripView
-            .background(content: { uiModel.headerBackgroundColor })
+            .background { uiModel.headerBackgroundColor }
     }
 
     private var tabBarAndTabIndicatorStripView: some View {
-        ZStack(alignment: .bottom, content: {
+        ZStack(alignment: .bottom) {
             tabIndicatorTrackView
 
-            ScrollViewReader(content: { scrollViewProxy in
-                ScrollView(.horizontal, content: {
+            ScrollViewReader { scrollViewProxy in
+                ScrollView(.horizontal) {
                     HStack(
                         alignment: uiModel.tabBarAlignment,
-                        spacing: uiModel.tabItemSpacing,
-                        content: {
-                            ForEach(data, id: id, content: { element in
-                                ZStack(alignment: .bottom, content: {
-                                    SwiftUIBaseButton(
-                                        action: { selection = element },
-                                        label: { baseButtonState in
-                                            let tabItemInternalState: VDynamicPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
+                        spacing: uiModel.tabItemSpacing
+                    ) {
+                        ForEach(data, id: id) { element in
+                            ZStack(alignment: .bottom) {
+                                SwiftUIBaseButton(
+                                    action: { selection = element },
+                                    label: { baseButtonState in
+                                        let tabItemInternalState: VDynamicPagerTabViewTabItemInternalState = tabItemInternalState(baseButtonState, element)
 
-                                            tabItemView(
-                                                tabItemInternalState: tabItemInternalState,
-                                                element: element
-                                            )
-                                        }
-                                    )
+                                        tabItemView(
+                                            tabItemInternalState: tabItemInternalState,
+                                            element: element
+                                        )
+                                    }
+                                )
 
-                                    selectedTabIndicatorViewSlice(element)
-                                })
-                                .padding(.bottom, tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
-                                .id(element)
-                            })
+                                selectedTabIndicatorViewSlice(element)
+                            }
+                            .padding(.bottom, tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
+                            .id(element)
                         }
-                    )
-                })
+                    }
+                }
                 .scrollIndicators(.hidden)
                 
                 .scrollDisabled(!uiModel.isTabBarScrollingEnabled)
                 
-                .onAppear(perform: { positionSelectedTabIndicatorInitially(scrollViewProxy: scrollViewProxy) })
-                .onChange(of: selection, { positionSelectedTabIndicator($1, scrollViewProxy: scrollViewProxy) })
-            })
-        })
+                .onAppear { positionSelectedTabIndicatorInitially(scrollViewProxy: scrollViewProxy) }
+                .onChange(of: selection) { positionSelectedTabIndicator($1, scrollViewProxy: scrollViewProxy) }
+            }
+        }
     }
 
     private func tabItemView(
         tabItemInternalState: VDynamicPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
-        Group(content: {
+        Group {
             switch tabItemLabel {
             case .title(let title):
                 Text(title(element))
@@ -256,12 +252,12 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                     .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
                     .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
                     .font(uiModel.tabItemTextFont)
-                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType, transform: { $0.dynamicTypeSize(type: $1) })
+                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             case .custom(let custom):
                 custom(tabItemInternalState, element)
             }
-        })
+        }
         .fixedSize(horizontal: true, vertical: false)
         .padding(uiModel.tabItemMargins)
         .padding(.leading, isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0)
@@ -270,11 +266,11 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     }
 
     private var tabIndicatorTrackView: some View {
-        ZStack(content: {
+        ZStack {
             Rectangle()
                 .frame(height: uiModel.tabIndicatorTrackHeight)
                 .foregroundStyle(uiModel.tabIndicatorTrackColor)
-        })
+        }
         .frame(
             height: tabIndicatorContainerHeight,
             alignment: Alignment(
@@ -287,13 +283,13 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     private func selectedTabIndicatorViewSlice(
         _ element: Data.Element
     ) -> some View {
-        ZStack(content: {
-            ZStack(content: {
+        ZStack {
+            ZStack {
                 if selection == element {
                     RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
                         .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
                 }
-            })
+            }
             .frame(height: uiModel.selectedTabIndicatorHeight)
             .padding(
                 .leading, 
@@ -309,36 +305,33 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             )
             .foregroundStyle(uiModel.selectedTabIndicatorColor)
             .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:completionCriteria:_:completion:)`
-        })
+        }
         .frame(height: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
         .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
     }
 
     private var tabView: some View {
-        GeometryReader(content: { geometryProxy in
-            ScrollView(.horizontal, content: {
-                LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                    spacing: 0,
-                    content: {
-                        ForEach(data, id: id, content: { element in
-                            content(element)
-                                .tag(element)
-                                .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                                .frame(maxHeight: .infinity)
-                        })
+        GeometryReader { geometryProxy in
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 0) { // `scrollPosition(id:)` doesn't work with `HStack`
+                    ForEach(data, id: id) { element in
+                        content(element)
+                            .tag(element)
+                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                            .frame(maxHeight: .infinity)
                     }
-                )
+                }
                 .scrollTargetLayout()
-            })
+            }
             .scrollTargetBehavior(.paging)
             .scrollPosition(id: selectionIDBinding)
             
-            .background(content: { uiModel.tabViewBackgroundColor })
+            .background { uiModel.tabViewBackgroundColor }
             
             .scrollIndicators(.hidden)
             
             .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
-        })
+        }
     }
 
     // MARK: Selected Tab Indicator Frame
@@ -386,83 +379,80 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Many Items", body: {
+#Preview("Many Items") {
     @Previewable @State var selection: Preview_Weekday = .thursday
 
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-            id: \.self,
-            content: { widthType in
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-                        uiModel.tabSelectionIndicatorWidthType = widthType
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: Preview_Weekday.allCases,
-                    tabItemTitle: { $0.title },
-                    content: { $0.color }
-                )
-                .padding(.horizontal)
-                .frame(height: 150)
-            }
-        )
-    })
-})
+            id: \.self
+        ) { widthType in
+            VDynamicPagerTabView(
+                uiModel: {
+                    var uiModel: VDynamicPagerTabViewUIModel = .init()
+                    uiModel.tabSelectionIndicatorWidthType = widthType
+                    return uiModel
+                }(),
+                selection: $selection,
+                data: Preview_Weekday.allCases,
+                tabItemTitle: { $0.title },
+                content: { $0.color }
+            )
+            .padding(.horizontal)
+            .frame(height: 150)
+        }
+    }
+}
 
-#Preview("Few Items", body: {
+#Preview("Few Items") {
     @Previewable @State var selection: Preview_Weekday = .monday
 
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-            id: \.self,
-            content: { widthType in
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-                        uiModel.tabSelectionIndicatorWidthType = widthType
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: Preview_Weekday.allCases.prefix(3),
-                    tabItemTitle: { $0.title },
-                    content: { $0.color }
-                )
-                .padding(.horizontal)
-                .frame(height: 150)
-            }
-        )
-    })
-})
+            id: \.self
+        ) { widthType in
+            VDynamicPagerTabView(
+                uiModel: {
+                    var uiModel: VDynamicPagerTabViewUIModel = .init()
+                    uiModel.tabSelectionIndicatorWidthType = widthType
+                    return uiModel
+                }(),
+                selection: $selection,
+                data: Preview_Weekday.allCases.prefix(3),
+                tabItemTitle: { $0.title },
+                content: { $0.color }
+            )
+            .padding(.horizontal)
+            .frame(height: 150)
+        }
+    }
+}
 
-#Preview("No Items", body: {
+#Preview("No Items") {
     @Previewable @State var selection: Preview_Weekday = .thursday
 
-    PreviewContainer(layer: .secondary, content: {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
-            id: \.self,
-            content: { widthType in
-                VDynamicPagerTabView(
-                    uiModel: {
-                        var uiModel: VDynamicPagerTabViewUIModel = .init()
-                        uiModel.tabSelectionIndicatorWidthType = widthType
-                        return uiModel
-                    }(),
-                    selection: $selection,
-                    data: [],
-                    tabItemTitle: { $0.title },
-                    content: { $0.color }
-                )
-                .padding(.horizontal)
-                .frame(height: 150)
-            }
-        )
-    })
-})
+            id: \.self
+        ) { widthType in
+            VDynamicPagerTabView(
+                uiModel: {
+                    var uiModel: VDynamicPagerTabViewUIModel = .init()
+                    uiModel.tabSelectionIndicatorWidthType = widthType
+                    return uiModel
+                }(),
+                selection: $selection,
+                data: [],
+                tabItemTitle: { $0.title },
+                content: { $0.color }
+            )
+            .padding(.horizontal)
+            .frame(height: 150)
+        }
+    }
+}
 
 #endif
 
