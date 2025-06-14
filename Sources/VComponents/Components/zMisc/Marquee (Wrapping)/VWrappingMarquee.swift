@@ -36,7 +36,7 @@ import VCore
 ///                 ForEach(0..<5, id: \.self) {
 ///                     Text("\(i)")
 ///                         .frame(dimension: 100)
-///                         .background { Color.accentColor }
+///                         .background(Color.accentColor)
 ///                 }
 ///             }
 ///         }

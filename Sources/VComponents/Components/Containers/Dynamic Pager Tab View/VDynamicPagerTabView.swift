@@ -196,7 +196,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     private var headerView: some View {
         tabBarAndTabIndicatorStripView
-            .background { uiModel.headerBackgroundColor }
+            .background(uiModel.headerBackgroundColor)
     }
 
     private var tabBarAndTabIndicatorStripView: some View {
@@ -326,7 +326,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             .scrollTargetBehavior(.paging)
             .scrollPosition(id: selectionIDBinding)
             
-            .background { uiModel.tabViewBackgroundColor }
+            .background(uiModel.tabViewBackgroundColor)
             
             .scrollIndicators(.hidden)
             
