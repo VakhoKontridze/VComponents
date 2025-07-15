@@ -184,7 +184,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VPlainButton(
             action: {},
             title: "Lorem Ipsum"
@@ -198,15 +198,15 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Enabled") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Enabled") {
             VPlainButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
         }
 
-        PreviewRow("Pressed") {
+        Preview_PreviewRow("Pressed") {
             VPlainButton(
                 uiModel: {
                     var uiModel: VPlainButtonUIModel = .init()
@@ -218,7 +218,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VPlainButton(
                 action: {},
                 title: "Lorem Ipsum"
@@ -226,15 +226,15 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             .disabled(true)
         }
 
-        PreviewHeader("Native")
+        Preview_PreviewHeader("Native")
 
-        PreviewRow("Enabled") {
+        Preview_PreviewRow("Enabled") {
             Button("Lorem Ipsum") {}
                 .buttonStyle(.plain)
                 .foregroundStyle(Color.blue)
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             Button("Lorem Ipsum") {}
                 .buttonStyle(.plain)
                 .foregroundStyle(Color.blue)

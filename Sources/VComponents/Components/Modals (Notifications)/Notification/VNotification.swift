@@ -382,8 +382,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 #Preview("Bottom") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -413,8 +413,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VNotificationUIModel.Width?
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -458,8 +458,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VNotificationUIModel = .init()
     
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -519,8 +519,8 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        PreviewContainer {
-            PreviewModalLauncherView(isPresented: $isPresented)
+        Preview_PreviewContainer {
+            Preview_ModalLauncherView(isPresented: $isPresented)
                 .vNotification(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {

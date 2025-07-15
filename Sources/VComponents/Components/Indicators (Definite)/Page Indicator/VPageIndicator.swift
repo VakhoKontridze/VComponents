@@ -215,7 +215,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VPageIndicator(
             total: total,
             current: current
@@ -228,8 +228,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
     
-    PreviewContainer {
-        PreviewRow("Left-to-Right") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Left-to-Right") {
             VPageIndicator(
                 uiModel: {
                     var uiModel: VPageIndicatorUIModel = .init()
@@ -241,7 +241,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
             )
         }
 
-        PreviewRow("Right-to-Left") {
+        Preview_PreviewRow("Right-to-Left") {
             VPageIndicator(
                 uiModel: {
                     var uiModel: VPageIndicatorUIModel = .init()
@@ -254,7 +254,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         }
 
         HStack(spacing: 20) {
-            PreviewRow("Top-to-Bottom") {
+            Preview_PreviewRow("Top-to-Bottom") {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
@@ -266,7 +266,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                 )
             }
 
-            PreviewRow("Bottom-to-Top") {
+            Preview_PreviewRow("Bottom-to-Top") {
                 VPageIndicator(
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
@@ -286,7 +286,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VPageIndicator(
             uiModel: {
                 var uiModel: VPageIndicatorUIModel = .init()
@@ -312,7 +312,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         return uiModel
     }()
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VPageIndicator(
             uiModel: uiModel,
             total: total,
@@ -327,7 +327,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 }
 
 #Preview("Zero") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VPageIndicator(
             total: 0,
             current: 0

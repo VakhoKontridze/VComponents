@@ -212,7 +212,7 @@ public struct VCarousel<Data, ID, Content>: View
     @Previewable @State var selection: Preview_Weekday = .monday
     var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VStack(spacing: 15) {
             VCarousel(
                 selection: $selection,
@@ -235,7 +235,7 @@ public struct VCarousel<Data, ID, Content>: View
 #Preview("No Items") {
     @Previewable @State var selection: Preview_Weekday = .monday
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VCarousel(
             selection: $selection,
             data: []
@@ -256,7 +256,7 @@ public struct VCarousel<Data, ID, Content>: View
         initialSelection: Preview_RGBColor.red
     )
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VStack(spacing: 15) {
             VCarousel(
                 selection: $dataSourceManager.selectedIndexInflated,

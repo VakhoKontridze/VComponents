@@ -255,7 +255,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VLoadingStretchedButton(
             isLoading: false,
             action: {},
@@ -266,8 +266,8 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Enabled") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Enabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},
@@ -276,7 +276,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Pressed") {
+        Preview_PreviewRow("Pressed") {
             VLoadingStretchedButton(
                 uiModel: {
                     var uiModel: VLoadingStretchedButtonUIModel = .init()
@@ -291,7 +291,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Loading") {
+        Preview_PreviewRow("Loading") {
             VLoadingStretchedButton(
                 isLoading: true,
                 action: {},
@@ -300,7 +300,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},

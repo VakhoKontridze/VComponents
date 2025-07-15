@@ -1,5 +1,5 @@
 //
-//  PreviewRow.swift
+//  Preview_PreviewRow.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 08.03.23.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - Preview Row
-struct PreviewRow<Content>: View where Content: View {
+struct Preview_PreviewRow<Content>: View where Content: View {
     // MARK: Properties
     private let title: String?
     private let content: () -> Content
@@ -42,7 +42,7 @@ struct PreviewRow<Content>: View where Content: View {
 
 // MARK: - Preview
 #Preview {
-    PreviewRow("Lorem Ipsum") {
+    Preview_PreviewRow("Lorem Ipsum") {
         Text("Lorem ipsum")
     }
 }

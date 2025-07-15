@@ -217,7 +217,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VWrappedButton(
             action: {},
             title: "Lorem Ipsum"
@@ -226,15 +226,15 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Enabled") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Enabled") {
             VWrappedButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
         }
 
-        PreviewRow("Pressed") {
+        Preview_PreviewRow("Pressed") {
             VWrappedButton(
                 uiModel: {
                     var uiModel: VWrappedButtonUIModel = .init()
@@ -247,7 +247,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VWrappedButton(
                 action: {},
                 title: "Lorem Ipsum"

@@ -280,8 +280,8 @@ struct VToast: View {
 #Preview("Singleline") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -307,8 +307,8 @@ struct VToast: View {
 #Preview("Multiline") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -335,8 +335,8 @@ struct VToast: View {
 #Preview("Top") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -366,8 +366,8 @@ struct VToast: View {
     @Previewable @State var width: VToastUIModel.Width?
     @Previewable @State var alignment: HorizontalAlignment?
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -437,8 +437,8 @@ struct VToast: View {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VToastUIModel = .init()
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {

@@ -279,8 +279,8 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        PreviewContainer {
-            PreviewModalLauncherView(isPresented: $isPresented)
+        Preview_PreviewContainer {
+            Preview_ModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: uiModel,
@@ -317,8 +317,8 @@ private struct Preview_SafeAreaContentView: View {
     }
 
     var body: some View {
-        PreviewContainer {
-            PreviewModalLauncherView(isPresented: $isPresented)
+        Preview_PreviewContainer {
+            Preview_ModalLauncherView(isPresented: $isPresented)
                 .getInterfaceOrientation { interfaceOrientation = $0 }
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),

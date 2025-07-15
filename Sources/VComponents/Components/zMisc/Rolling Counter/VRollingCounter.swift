@@ -251,7 +251,7 @@ extension Edge {
 #Preview {
     @Previewable @State var value: Double = 10_000
     
-    PreviewContainer {
+    Preview_PreviewContainer {
         HStack(spacing: 20) {
             Button("-") { // No `VPlainButton` on all platforms
                 value -= .random(in: 1...10)
@@ -263,11 +263,11 @@ extension Edge {
         }
         .padding(.top, 20)
 
-        PreviewRow("Standard") {
+        Preview_PreviewRow("Standard") {
             VRollingCounter(value: value)
         }
 
-        PreviewRow("No Fractions") {
+        Preview_PreviewRow("No Fractions") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -278,7 +278,7 @@ extension Edge {
             )
         }
 
-        PreviewRow("No Grouping & No Fractions") {
+        Preview_PreviewRow("No Grouping & No Fractions") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -290,7 +290,7 @@ extension Edge {
             )
         }
 
-        PreviewRow("No Highlight") {
+        Preview_PreviewRow("No Highlight") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -302,7 +302,7 @@ extension Edge {
             )
         }
 
-        PreviewRow("Highlighted Symbols") {
+        Preview_PreviewRow("Highlighted Symbols") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -314,7 +314,7 @@ extension Edge {
             )
         }
 
-        PreviewRow("Full Highlight") {
+        Preview_PreviewRow("Full Highlight") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()
@@ -327,7 +327,7 @@ extension Edge {
             )
         }
 
-        PreviewRow("Custom") {
+        Preview_PreviewRow("Custom") {
             VRollingCounter(
                 uiModel: {
                     var uiModel: VRollingCounterUIModel = .init()

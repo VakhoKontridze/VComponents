@@ -214,7 +214,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 #Preview("*") {
     @Previewable @State var state: VCheckBoxState = .on
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VCheckBox(
             state: $state,
             title: "Lorem ipsum"
@@ -223,15 +223,15 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Off") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Off") {
             VCheckBox(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
         }
 
-        PreviewRow("Pressed Off") {
+        Preview_PreviewRow("Pressed Off") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -246,14 +246,14 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        PreviewRow("On") {
+        Preview_PreviewRow("On") {
             VCheckBox(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
         }
 
-        PreviewRow("Pressed On") {
+        Preview_PreviewRow("Pressed On") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -268,14 +268,14 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        PreviewRow("Indeterminate") {
+        Preview_PreviewRow("Indeterminate") {
             VCheckBox(
                 state: .constant(.indeterminate),
                 title: "Lorem ipsum"
             )
         }
 
-        PreviewRow("Pressed Indeterminate") {
+        Preview_PreviewRow("Pressed Indeterminate") {
             VCheckBox(
                 uiModel: {
                     var uiModel: VCheckBoxUIModel = .init()
@@ -290,7 +290,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VCheckBox(
                 state: .constant(.on),
                 title: "Lorem ipsum"
@@ -299,9 +299,9 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         }
 
 #if !(os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)) // No `CheckboxToggleStyle`
-        PreviewHeader("Native")
+        Preview_PreviewHeader("Native")
 
-        PreviewRow("Off") {
+        Preview_PreviewRow("Off") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
@@ -309,7 +309,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             .toggleStyle(.checkbox)
         }
 
-        PreviewRow("On") {
+        Preview_PreviewRow("On") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(true)
@@ -317,7 +317,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             .toggleStyle(.checkbox)
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)

@@ -219,7 +219,7 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VStretchedButton(
             action: {},
             title: "Lorem Ipsum"
@@ -229,8 +229,8 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Enabled") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Enabled") {
             VStretchedButton(
                 action: {},
                 title: "Lorem Ipsum"
@@ -238,7 +238,7 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Pressed") {
+        Preview_PreviewRow("Pressed") {
             VStretchedButton(
                 uiModel: {
                     var uiModel: VStretchedButtonUIModel = .init()
@@ -252,7 +252,7 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VStretchedButton(
                 action: {},
                 title: "Lorem Ipsum"

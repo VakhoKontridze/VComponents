@@ -156,8 +156,8 @@ struct VModal<Content>: View
 #Preview("*") {
     @Previewable @State var isPresented: Bool = true
 
-    PreviewContainer {
-        PreviewModalLauncherView(isPresented: $isPresented)
+    Preview_PreviewContainer {
+        Preview_ModalLauncherView(isPresented: $isPresented)
             .vModal(
                 link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented
@@ -179,8 +179,8 @@ private struct ContentView_SizeTypes: View {
     @State private var size: VModalUIModel.Size?
 
     var body: some View {
-        PreviewContainer {
-            PreviewModalLauncherView(isPresented: $isPresented)
+        Preview_PreviewContainer {
+            Preview_ModalLauncherView(isPresented: $isPresented)
                 .vModal(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {

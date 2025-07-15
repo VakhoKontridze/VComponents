@@ -226,7 +226,7 @@ public struct VCodeEntryView: View {
 #Preview("*") {
     @Previewable @State var text: String = "123"
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VCodeEntryView(text: $text)
     }
 }
@@ -238,7 +238,7 @@ public struct VCodeEntryView: View {
 #Preview("Stretched") {
     @Previewable @State var text: String = "123"
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VCodeEntryView(
             uiModel: {
                 var uiModel: VCodeEntryViewUIModel = .init()
@@ -273,8 +273,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer {
-            PreviewRow("Enabled") {
+        Preview_PreviewContainer {
+            Preview_PreviewRow("Enabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")
@@ -282,7 +282,7 @@ private struct Preview_StatesContentView: View {
             }
 
             // Color is also applied to other characters
-            PreviewRow("Focused (*)") {
+            Preview_PreviewRow("Focused (*)") {
                 VCodeEntryView(
                     uiModel: {
                         var uiModelMapped: VCodeEntryViewUIModel = uiModel
@@ -295,7 +295,7 @@ private struct Preview_StatesContentView: View {
                 )
             }
 
-            PreviewRow("Disabled") {
+            Preview_PreviewRow("Disabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")

@@ -208,7 +208,7 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #Preview("*") {
     @Previewable @State var state: VDisclosureGroupState = .expanded
     
-    PreviewContainer {
+    Preview_PreviewContainer {
         VDisclosureGroup(
             state: $state,
             headerTitle: "Lorem Ipsum",
@@ -232,11 +232,11 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #endif
 
 private struct Preview_StatesContentView: View {
-    private let layer: PreviewContainerLayer
+    private let layer: Preview_PreviewContainerLayer
     private let uiModel: VDisclosureGroupUIModel
 
     init(
-        layer: PreviewContainerLayer = .primary,
+        layer: Preview_PreviewContainerLayer = .primary,
         uiModel: VDisclosureGroupUIModel = .init()
     ) {
         self.layer = layer
@@ -244,8 +244,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer(layer: layer) {
-            PreviewRow("Collapsed") {
+        Preview_PreviewContainer(layer: layer) {
+            Preview_PreviewRow("Collapsed") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.collapsed),
@@ -256,7 +256,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            PreviewRow("Expanded") {
+            Preview_PreviewRow("Expanded") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.expanded),
@@ -267,7 +267,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            PreviewRow("Pressed (Button)") {
+            Preview_PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel
@@ -283,7 +283,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            PreviewRow("Disabled") {
+            Preview_PreviewRow("Disabled") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel

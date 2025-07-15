@@ -236,7 +236,7 @@ public struct VTextView: View {
 #Preview("*") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VTextView(
             headerTitle: "Lorem ipsum dolor sit amet",
             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -273,8 +273,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        PreviewContainer {
-            PreviewRow("Enabled") {
+        Preview_PreviewContainer {
+            Preview_PreviewRow("Enabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -285,7 +285,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            PreviewRow("Focused") {
+            Preview_PreviewRow("Focused") {
                 VTextView(
                     uiModel: {
                         var mappedUIModel: VTextViewUIModel = uiModel
@@ -304,7 +304,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            PreviewRow("Disabled") {
+            Preview_PreviewRow("Disabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",

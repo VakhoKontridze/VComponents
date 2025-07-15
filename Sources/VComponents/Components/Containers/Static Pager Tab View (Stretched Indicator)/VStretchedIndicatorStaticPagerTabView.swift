@@ -395,7 +395,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 #Preview("*") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         VStretchedIndicatorStaticPagerTabView(
             selection: $selection,
             data: Preview_RGBColor.allCases,
@@ -410,7 +410,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 #Preview("No Items") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         VStretchedIndicatorStaticPagerTabView(
             selection: $selection,
             data: [],

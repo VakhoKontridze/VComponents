@@ -382,7 +382,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 #Preview("Many Items") {
     @Previewable @State var selection: Preview_Weekday = .thursday
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self
@@ -407,7 +407,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 #Preview("Few Items") {
     @Previewable @State var selection: Preview_Weekday = .monday
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self
@@ -432,7 +432,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 #Preview("No Items") {
     @Previewable @State var selection: Preview_Weekday = .thursday
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self

@@ -315,7 +315,7 @@ extension Double {
 #Preview("*") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VRangeSlider(
             difference: 0.1,
             value: $value
@@ -325,8 +325,8 @@ extension Double {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Enabled") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Enabled") {
             VRangeSlider(
                 difference: 0.1,
                 value: .constant(0.1...0.8)
@@ -334,7 +334,7 @@ extension Double {
             .padding(.horizontal)
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VRangeSlider(
                 difference: 0.1,
                 value: .constant(0.1...0.8)
@@ -360,8 +360,8 @@ extension Double {
 #endif
     }()
 
-    PreviewContainer {
-        PreviewRow("Left-to-Right") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Left-to-Right") {
             VRangeSlider(
                 uiModel: {
                     var uiModel: VRangeSliderUIModel = .init()
@@ -374,7 +374,7 @@ extension Double {
             .frame(width: length)
         }
         
-        PreviewRow("Right-to-Left") {
+        Preview_PreviewRow("Right-to-Left") {
             VRangeSlider(
                 uiModel: {
                     var uiModel: VRangeSliderUIModel = .init()
@@ -388,7 +388,7 @@ extension Double {
         }
         
         HStack(spacing: 20) {
-            PreviewRow("Top-to-Bottom") {
+            Preview_PreviewRow("Top-to-Bottom") {
                 VRangeSlider(
                     uiModel: {
                         var uiModel: VRangeSliderUIModel = .init()
@@ -401,7 +401,7 @@ extension Double {
                 .frame(height: length)
             }
             
-            PreviewRow("Bottom-to-Top") {
+            Preview_PreviewRow("Bottom-to-Top") {
                 VRangeSlider(
                     uiModel: {
                         var uiModel: VRangeSliderUIModel = .init()
@@ -420,7 +420,7 @@ extension Double {
 #Preview("Step") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VRangeSlider(
             difference: 0.1,
             step: 0.1,

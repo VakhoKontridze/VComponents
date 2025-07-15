@@ -238,7 +238,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
 #if DEBUG
 
 #Preview {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VFetchingAsyncImage(
             from: "-",
             fetch: { _ in throw URLError(.badURL) }

@@ -162,7 +162,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 #if DEBUG
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VBouncingMarquee {
             preview_MarqueeContentSmall
         }
@@ -178,8 +178,8 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 }
 
 #Preview("Scroll Directions") {
-    PreviewContainer {
-        PreviewRow("Left-to-Right") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Left-to-Right") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()
@@ -191,7 +191,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             }
         }
 
-        PreviewRow("Right-to-Left") {
+        Preview_PreviewRow("Right-to-Left") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()

@@ -465,7 +465,7 @@ extension FloatingPoint {
 #Preview("*") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         VWrappedIndicatorStaticPagerTabView(
             selection: $selection,
             data: Preview_RGBColor.allCases,
@@ -480,7 +480,7 @@ extension FloatingPoint {
 #Preview("No Items") {
     @Previewable @State var selection: Preview_RGBColor = .red
 
-    PreviewContainer(layer: .secondary) {
+    Preview_PreviewContainer(layer: .secondary) {
         VWrappedIndicatorStaticPagerTabView(
             selection: $selection,
             data: [],

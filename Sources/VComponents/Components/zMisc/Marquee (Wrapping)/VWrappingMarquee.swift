@@ -214,7 +214,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 #if DEBUG
 
 #Preview("*") {
-    PreviewContainer {
+    Preview_PreviewContainer {
         VWrappingMarquee {
             preview_MarqueeContentSmall
         }
@@ -230,8 +230,8 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 }
 
 #Preview("Scroll Directions") {
-    PreviewContainer {
-        PreviewRow("Left-to-Right") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Left-to-Right") {
             VWrappingMarquee(
                 uiModel: {
                     var uiModel: VWrappingMarqueeUIModel = .init()
@@ -244,7 +244,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         }
     }
     
-    PreviewRow("Right-to-Left") {
+    Preview_PreviewRow("Right-to-Left") {
         VWrappingMarquee(
             uiModel: {
                 var uiModel: VWrappingMarqueeUIModel = .init()

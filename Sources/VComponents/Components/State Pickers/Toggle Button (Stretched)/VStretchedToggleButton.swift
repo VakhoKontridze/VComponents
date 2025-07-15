@@ -266,7 +266,7 @@ extension VStretchedToggleButtonInternalState {
 #Preview("*") {
     @Previewable @State var state: VStretchedToggleButtonState = .on
 
-    PreviewContainer {
+    Preview_PreviewContainer {
         VStretchedToggleButton(
             state: $state,
             title: "Lorem Ipsum"
@@ -276,8 +276,8 @@ extension VStretchedToggleButtonInternalState {
 }
 
 #Preview("States") {
-    PreviewContainer {
-        PreviewRow("Off") {
+    Preview_PreviewContainer {
+        Preview_PreviewRow("Off") {
             VStretchedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
@@ -285,7 +285,7 @@ extension VStretchedToggleButtonInternalState {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Pressed Off") {
+        Preview_PreviewRow("Pressed Off") {
             VStretchedToggleButton(
                 uiModel: {
                     var uiModel: VStretchedToggleButtonUIModel = .init()
@@ -299,7 +299,7 @@ extension VStretchedToggleButtonInternalState {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("On") {
+        Preview_PreviewRow("On") {
             VStretchedToggleButton(
                 state: .constant(.on),
                 title: "Lorem Ipsum"
@@ -307,7 +307,7 @@ extension VStretchedToggleButtonInternalState {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Pressed On") {
+        Preview_PreviewRow("Pressed On") {
             VStretchedToggleButton(
                 uiModel: {
                     var uiModel: VStretchedToggleButtonUIModel = .init()
@@ -321,7 +321,7 @@ extension VStretchedToggleButtonInternalState {
             .modifier(Preview_StretchedButtonFrameModifier())
         }
 
-        PreviewRow("Disabled") {
+        Preview_PreviewRow("Disabled") {
             VStretchedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
