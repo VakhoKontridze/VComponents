@@ -1,5 +1,5 @@
 //
-//  LayoutDirectionHelpers.swift
+//  LayoutDirection.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 02.04.23.
