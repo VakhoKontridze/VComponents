@@ -173,7 +173,7 @@ struct VModal<Content>: View
     ContentView_SizeTypes()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_SizeTypes: View {
     @State private var isPresented: Bool = true
     @State private var size: VModalUIModel.Size?

@@ -339,7 +339,7 @@ struct VBottomSheet<Content>: View
     ContentView_MinIdealMax()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_MinIdealMax: View {
     @State private var isPresented: Bool = true
 
@@ -381,7 +381,7 @@ private struct ContentView_MinIdealMax: View {
     ContentView_MinIdeal()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_MinIdeal: View {
     @State private var isPresented: Bool = true
 
@@ -423,7 +423,7 @@ private struct ContentView_MinIdeal: View {
     ContentView_IdealMax()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_IdealMax: View {
     @State private var isPresented: Bool = true
 
@@ -465,7 +465,7 @@ private struct ContentView_IdealMax: View {
     ContentView_IdealSmall()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_IdealSmall: View {
     @State private var isPresented: Bool = true
 
@@ -507,7 +507,7 @@ private struct ContentView_IdealSmall: View {
     ContentView_IdealLarge()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_IdealLarge: View {
     @State private var isPresented: Bool = true
 
@@ -547,7 +547,7 @@ private struct ContentView_IdealLarge: View {
     ContentView_ContentAutoresizing()
 }
 
-// Preview macro doesn’t support nested macro expansions
+// Macros aren't allowed in Preview macro
 private struct ContentView_ContentAutoresizing: View {
     @State var isPresented: Bool = true
 
