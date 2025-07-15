@@ -8,9 +8,9 @@
 import Foundation
 import OSLog
 
-// MARK: - Loggers
+// MARK: - Logger + Instances
 extension Logger {
-    // Views
+    // MARK: Properties - Views
     static let compactPageIndicator: Self = .init(subsystem: "VComponents", category: "VCompactPageIndicator")
     static let rangeSlider: Self = .init(subsystem: "VComponents", category: "VRangeSlider")
     static let rollingCounter: Self = .init(subsystem: "VComponents", category: "VRollingCounter")
