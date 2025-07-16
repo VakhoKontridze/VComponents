@@ -352,7 +352,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             
             .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
             
-            .onChange(of: selectedIndexInt, initial: true) { (_, newValue) in
+            .onChange(of: selectedIndexInt) { (_, newValue) in
                 guard !isBeingScrolled else { return }
                 
                 Task { @MainActor in // `MainActor` is needed to sync with call from `View.onGeometryChange(...)` reading frame
@@ -408,6 +408,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
 
         if !tabIndicatorAnimationIsEnabled {
             Task { @MainActor in
+                await Task.yield()
                 tabIndicatorAnimationIsEnabled = true
             }
         }
