@@ -158,7 +158,7 @@ struct VBottomSheet<Content>: View
                     .foregroundStyle(uiModel.dragIndicatorColor)
             }
         }
-        .getSize { dragIndicatorHeight = $0.height } // If it's not rendered, `0` will be returned
+        .onGeometryChange(of: { $0.size.height }) { dragIndicatorHeight = $0 } // If it's not rendered, `0` will be returned
     }
     
     private var contentView: some View {
@@ -637,7 +637,7 @@ private struct ContentView_ContentAutoresizing: View {
                         }
                     }
                     .fixedSize(horizontal: false, vertical: true)
-                    .getSize { size in
+                    .onGeometryChange(of: { $0.size }) { size in
                         Task { @MainActor in
                             contentHeight = size.height
                         }

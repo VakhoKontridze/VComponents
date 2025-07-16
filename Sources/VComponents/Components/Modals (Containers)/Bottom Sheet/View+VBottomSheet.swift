@@ -92,7 +92,7 @@ extension View {
     ///             ) {
     ///                 Text("...")
     ///                     .fixedSize(horizontal: false, vertical: true)
-    ///                     .getSize { size in
+    ///                     .onGeometryChange(of: { $0.size }) { size in
     ///                         Task { @MainActor in
     ///                             contentHeight = size.height
     ///                         }

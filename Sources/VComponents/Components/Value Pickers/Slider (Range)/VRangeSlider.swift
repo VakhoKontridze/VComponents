@@ -110,7 +110,7 @@ public struct VRangeSlider: View {
             thumbView(.low)
             thumbView(.high)
         }
-        .getSize { sliderSize = $0 }
+        .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
         .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
     }
     

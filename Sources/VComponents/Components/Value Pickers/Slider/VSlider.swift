@@ -93,7 +93,7 @@ public struct VSlider: View {
             
             thumbView
         }
-        .getSize { sliderSize = $0 }
+        .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
         .applyIf(uiModel.bodyIsDraggable) {
             $0
                 .gesture(

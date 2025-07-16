@@ -293,7 +293,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                             .tag(element)
                             .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
                             .frame(maxHeight: .infinity)
-                            .getFrame(in: .global) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
+                            .onGeometryChange(of: { $0.frame(in: .global) }) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
                                 guard element == selection else { return }
 
                                 Task { @MainActor in
@@ -330,7 +330,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             .onChange(of: selectedIndexInt, initial: true) { (_, newValue) in
                 guard !isBeingScrolled else { return }
                 
-                Task { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                Task { @MainActor in // `MainActor` is needed to sync with call from `View.onGeometryChange(...)` reading frame
                     calculateIndicatorFrame(
                         selectedIndexInt: newValue,
                         geometryProxy: geometryProxy,

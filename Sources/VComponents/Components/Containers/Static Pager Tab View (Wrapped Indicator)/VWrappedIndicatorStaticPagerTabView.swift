@@ -237,14 +237,14 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             }
         }
         .coordinateSpace(name: tabBarCoordinateSpaceName)
-        .getSize { tabBarWidth = $0.width }
+        .onGeometryChange(of: { $0.size.width }) { tabBarWidth = $0 }
     }
 
     private func tabItemView(
         tabItemInternalState: VWrappedIndicatorStaticPagerTabViewTabItemInternalState,
         element: Data.Element
     ) -> some View {
-        ZStack {
+        ZStack { [tabBarCoordinateSpaceName] in
             Group {
                 switch tabItemLabel {
                 case .title(let title):
@@ -259,7 +259,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                     custom(tabItemInternalState, element)
                 }
             }
-            .getFrame(in: .named(tabBarCoordinateSpaceName)) { [layoutDirection, tabBarWidth] frame in
+            .onGeometryChange(of: { $0.frame(in: .named(tabBarCoordinateSpaceName)) }) { [layoutDirection, tabBarWidth] frame in
                 tabBarItemWidths[element.hashValue] = frame.size.width
 
                 tabBarItemPositions[element.hashValue] = {
@@ -318,7 +318,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                             .tag(element)
                             .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
                             .frame(maxHeight: .infinity)
-                            .getFrame(in: .global) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
+                            .onGeometryChange(of: { $0.frame(in: .global) }) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
                                 guard element == selection else { return }
                                 
                                 Task { @MainActor in
@@ -355,7 +355,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             .onChange(of: selectedIndexInt, initial: true) { (_, newValue) in
                 guard !isBeingScrolled else { return }
                 
-                Task { @MainActor in // `MainActor` is needed to sync with call from `View.getFrame(...)`
+                Task { @MainActor in // `MainActor` is needed to sync with call from `View.onGeometryChange(...)` reading frame
                     calculateIndicatorFrame(
                         selectedIndexInt: newValue,
                         geometryProxy: geometryProxy,

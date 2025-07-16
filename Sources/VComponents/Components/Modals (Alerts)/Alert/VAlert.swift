@@ -123,11 +123,11 @@ struct VAlert<Content>: View
                 contentView
             }
             .padding(uiModel.titleTextMessageTextAndContentMargins)
-            .getSize { titleMessageContentHeight = $0.height }
+            .onGeometryChange(of: { $0.size.height }) { titleMessageContentHeight = $0 }
 
             buttonsScrollView
         }
-        .getSize { alertHeight = $0.height }
+        .onGeometryChange(of: { $0.size.height }) { alertHeight = $0 }
     }
 
     @ViewBuilder
@@ -201,7 +201,7 @@ struct VAlert<Content>: View
     }
     
     private var buttonStackView: some View {
-        Group {
+        ZStack {
             switch buttons.count {
             case 1:
                 buttonContentView()
@@ -221,7 +221,7 @@ struct VAlert<Content>: View
             }
         }
         .padding(uiModel.buttonMargins)
-        .getSize { buttonsStackHeight = $0.height }
+        .onGeometryChange(of: { $0.size.height }) { buttonsStackHeight = $0 }
     }
     
     private func buttonContentView(

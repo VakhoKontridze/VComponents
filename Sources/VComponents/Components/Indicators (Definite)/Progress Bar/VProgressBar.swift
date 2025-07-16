@@ -62,7 +62,7 @@ public struct VProgressBar: View {
             width: uiModel.direction.isHorizontal ? nil : uiModel.height,
             height: uiModel.direction.isHorizontal ? uiModel.height : nil
         )
-        .getSize { progressBarSize = $0 }
+        .onGeometryChange(of: { $0.size }) { progressBarSize = $0 }
         .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
     }
     
