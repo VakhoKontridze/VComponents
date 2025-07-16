@@ -265,7 +265,7 @@ extension VWrappedToggleButtonInternalState {
 #Preview("*") {
     @Previewable @State var state: VWrappedToggleButtonState = .on
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VWrappedToggleButton(
             state: $state,
             title: "Lorem Ipsum"
@@ -274,15 +274,15 @@ extension VWrappedToggleButtonInternalState {
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Off") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VWrappedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed Off") {
+        PreviewRow("Pressed Off") {
             VWrappedToggleButton(
                 uiModel: {
                     var uiModel: VWrappedToggleButtonUIModel = .init()
@@ -295,14 +295,14 @@ extension VWrappedToggleButtonInternalState {
             )
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             VWrappedToggleButton(
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed On") {
+        PreviewRow("Pressed On") {
             VWrappedToggleButton(
                 uiModel: {
                     var uiModel: VWrappedToggleButtonUIModel = .init()
@@ -315,7 +315,7 @@ extension VWrappedToggleButtonInternalState {
             )
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VWrappedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"

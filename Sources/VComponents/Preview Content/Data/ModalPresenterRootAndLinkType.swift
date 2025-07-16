@@ -1,5 +1,5 @@
 //
-//  Preview_ModalPresenterRootAndLink.swift
+//  ModalPresenterRootAndLink.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 30.05.25.
@@ -11,7 +11,7 @@ import Foundation
 import VCore
 
 // MARK: - Modal Presenter Root and Link
-enum Preview_ModalPresenterRootAndLink {
+enum ModalPresenterRootAndLink {
     // MARK: Cases
     case overlay
     case window

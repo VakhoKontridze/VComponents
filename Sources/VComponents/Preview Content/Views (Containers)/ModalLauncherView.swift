@@ -1,5 +1,5 @@
 //
-//  Preview_ModalLauncherView.swift
+//  ModalLauncherView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 09.08.23.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - Modal Launcher View
-struct Preview_ModalLauncherView: View {
+struct ModalLauncherView: View {
     // MARK: Properties
     @Binding private var isPresented: Bool
 

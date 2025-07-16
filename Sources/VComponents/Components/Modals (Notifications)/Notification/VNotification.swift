@@ -340,7 +340,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Icon & Title & Message") {
-    Preview_ContentView(
+    ContentView(
         icon: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
@@ -348,7 +348,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 }
 
 #Preview("Title & Message") {
-    Preview_ContentView(
+    ContentView(
         icon: nil,
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
@@ -356,7 +356,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 }
 
 #Preview("Icon & Title") {
-    Preview_ContentView(
+    ContentView(
         icon: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: nil
@@ -364,7 +364,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 }
 
 #Preview("Icon & Message") {
-    Preview_ContentView(
+    ContentView(
         icon: Image(systemName: "swift"),
         title: nil,
         message: "Lorem ipsum dolor sit amet"
@@ -372,7 +372,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 }
 
 #Preview("No Content") {
-    Preview_ContentView(
+    ContentView(
         icon: nil,
         title: nil,
         message: nil
@@ -382,8 +382,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 #Preview("Bottom") {
     @Previewable @State var isPresented: Bool = true
 
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -413,8 +413,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VNotificationUIModel.Width?
 
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -458,8 +458,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var uiModel: VNotificationUIModel = .init()
     
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -501,7 +501,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     )
 }
 
-private struct Preview_ContentView: View {
+private struct ContentView: View {
     @State private var isPresented: Bool = true
 
     private let icon: Image?
@@ -519,8 +519,8 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vNotification(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -548,6 +548,6 @@ private struct Preview_ContentView: View {
 
 #endif
 
-private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
+private let rootAndLink: ModalPresenterRootAndLink = .overlay
 
 #endif

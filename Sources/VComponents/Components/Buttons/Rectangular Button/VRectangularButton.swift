@@ -188,7 +188,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VRectangularButton(
             action: {},
             title: "ABC"
@@ -202,15 +202,15 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Enabled") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VRectangularButton(
                 action: {},
                 icon: Image(systemName: "swift")
             )
         }
 
-        Preview_PreviewRow("Pressed") {
+        PreviewRow("Pressed") {
             VRectangularButton(
                 uiModel: {
                     var uiModel: VRectangularButtonUIModel = .init()
@@ -223,7 +223,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-    Preview_PreviewRow("Disabled") {
+    PreviewRow("Disabled") {
             VRectangularButton(
                 action: {},
                 icon: Image(systemName: "swift")

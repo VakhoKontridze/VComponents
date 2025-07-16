@@ -1,5 +1,5 @@
 //
-//  Preview_PreviewContainer.swift
+//  PreviewContainer.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 08.03.23.
@@ -11,14 +11,14 @@ import SwiftUI
 import VCore
 
 // MARK: - Preview Container
-struct Preview_PreviewContainer<Content>: View where Content: View {
+struct PreviewContainer<Content>: View where Content: View {
     // MARK: Properties
-    private let layer: Preview_PreviewContainerLayer
+    private let layer: PreviewContainerLayer
     private let content: () -> Content
 
     // MARK: Initializers
     init(
-        layer: Preview_PreviewContainerLayer = .primary,
+        layer: PreviewContainerLayer = .primary,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.layer = layer
@@ -64,14 +64,14 @@ struct Preview_PreviewContainer<Content>: View where Content: View {
 }
 
 // MARK: - Preview Container Layer
-enum Preview_PreviewContainerLayer {
+enum PreviewContainerLayer {
     case primary
     case secondary
 }
 
 // MARK: - Preview
 #Preview {
-    Preview_PreviewContainer {
+    PreviewContainer {
         Text("Lorem ipsum")
     }
 }

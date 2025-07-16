@@ -321,8 +321,8 @@ struct VBottomSheet<Content>: View
 #Preview("*") {
     @Previewable @State var isPresented: Bool = true
 
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
                 isPresented: $isPresented
@@ -344,8 +344,8 @@ private struct ContentView_MinIdealMax: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -386,8 +386,8 @@ private struct ContentView_MinIdeal: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -428,8 +428,8 @@ private struct ContentView_IdealMax: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -470,8 +470,8 @@ private struct ContentView_IdealSmall: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -512,8 +512,8 @@ private struct ContentView_IdealLarge: View {
     @State private var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -552,8 +552,8 @@ private struct ContentView_ContentAutoresizing: View {
     @State var isPresented: Bool = true
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -595,12 +595,12 @@ private struct ContentView_ContentAutoresizing: View {
     @Previewable @State var count: Int = 1
 
     ZStack {
-        // `Preview_PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
         Color.clear
             .getSafeAreaInsets { safeAreaInsets = $0 }
 
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -654,7 +654,7 @@ private struct ContentView_ContentAutoresizing: View {
     @Previewable @State var isPresented: Bool = true
 
     ZStack {
-        // `Preview_PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
         Color.clear
             .getSafeAreaInsets { newValue in
                 Task { @MainActor in
@@ -662,8 +662,8 @@ private struct ContentView_ContentAutoresizing: View {
                 }
             }
 
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: {
@@ -693,8 +693,8 @@ private struct ContentView_ContentAutoresizing: View {
 #Preview("Insetted Content") {
     @Previewable @State var isPresented: Bool = true
 
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: .insettedContent,
@@ -709,8 +709,8 @@ private struct ContentView_ContentAutoresizing: View {
 #Preview("No Drag Indicator") {
     @Previewable @State var isPresented: Bool = true
 
-    Preview_PreviewContainer {
-        Preview_ModalLauncherView(isPresented: $isPresented)
+    PreviewContainer {
+        ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
                 uiModel: {
@@ -728,6 +728,6 @@ private struct ContentView_ContentAutoresizing: View {
 
 #endif
 
-private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
+private let rootAndLink: ModalPresenterRootAndLink = .overlay
 
 #endif

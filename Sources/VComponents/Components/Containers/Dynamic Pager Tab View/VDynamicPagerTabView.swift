@@ -380,9 +380,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Many Items") {
-    @Previewable @State var selection: Preview_Weekday = .thursday
+    @Previewable @State var selection: Weekday = .thursday
 
-    Preview_PreviewContainer(layer: .secondary) {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self
@@ -394,7 +394,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                     return uiModel
                 }(),
                 selection: $selection,
-                data: Preview_Weekday.allCases,
+                data: Weekday.allCases,
                 tabItemTitle: { $0.title },
                 content: { $0.color }
             )
@@ -405,9 +405,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 }
 
 #Preview("Few Items") {
-    @Previewable @State var selection: Preview_Weekday = .monday
+    @Previewable @State var selection: Weekday = .monday
 
-    Preview_PreviewContainer(layer: .secondary) {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self
@@ -419,7 +419,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                     return uiModel
                 }(),
                 selection: $selection,
-                data: Preview_Weekday.allCases.prefix(3),
+                data: Weekday.allCases.prefix(3),
                 tabItemTitle: { $0.title },
                 content: { $0.color }
             )
@@ -430,9 +430,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 }
 
 #Preview("No Items") {
-    @Previewable @State var selection: Preview_Weekday = .thursday
+    @Previewable @State var selection: Weekday = .thursday
 
-    Preview_PreviewContainer(layer: .secondary) {
+    PreviewContainer(layer: .secondary) {
         ForEach(
             VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
             id: \.self

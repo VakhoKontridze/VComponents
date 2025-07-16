@@ -226,19 +226,19 @@ public struct VCodeEntryView: View {
 #Preview("*") {
     @Previewable @State var text: String = "123"
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VCodeEntryView(text: $text)
     }
 }
 
 #Preview("States") {
-    Preview_StatesContentView()
+    StatesContentView()
 }
 
 #Preview("Stretched") {
     @Previewable @State var text: String = "123"
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VCodeEntryView(
             uiModel: {
                 var uiModel: VCodeEntryViewUIModel = .init()
@@ -252,18 +252,18 @@ public struct VCodeEntryView: View {
 }
 
 #Preview("Success") {
-    Preview_StatesContentView(uiModel: .success)
+    StatesContentView(uiModel: .success)
 }
 
 #Preview("Warning") {
-    Preview_StatesContentView(uiModel: .warning)
+    StatesContentView(uiModel: .warning)
 }
 
 #Preview("Error") {
-    Preview_StatesContentView(uiModel: .error)
+    StatesContentView(uiModel: .error)
 }
 
-private struct Preview_StatesContentView: View {
+private struct StatesContentView: View {
     private let uiModel: VCodeEntryViewUIModel
 
     init(
@@ -273,8 +273,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_PreviewRow("Enabled") {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")
@@ -282,7 +282,7 @@ private struct Preview_StatesContentView: View {
             }
 
             // Color is also applied to other characters
-            Preview_PreviewRow("Focused (*)") {
+            PreviewRow("Focused (*)") {
                 VCodeEntryView(
                     uiModel: {
                         var uiModelMapped: VCodeEntryViewUIModel = uiModel
@@ -295,7 +295,7 @@ private struct Preview_StatesContentView: View {
                 )
             }
 
-            Preview_PreviewRow("Disabled") {
+            PreviewRow("Disabled") {
                 VCodeEntryView(
                     uiModel: uiModel,
                     text: .constant("123")

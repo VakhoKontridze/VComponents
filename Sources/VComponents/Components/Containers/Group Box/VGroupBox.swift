@@ -111,23 +111,23 @@ public struct VGroupBox<Content>: View where Content: View {
 #if DEBUG
 
 #Preview("*") {
-    Preview_ContentView()
+    ContentView()
 }
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color") {
-    Preview_ContentView(layer: .secondary, uiModel: .systemBackgroundColor)
+    ContentView(layer: .secondary, uiModel: .systemBackgroundColor)
 }
 
 #endif
 
-private struct Preview_ContentView: View {
-    private let layer: Preview_PreviewContainerLayer
+private struct ContentView: View {
+    private let layer: PreviewContainerLayer
     private let uiModel: VGroupBoxUIModel
 
     init(
-        layer: Preview_PreviewContainerLayer = .primary,
+        layer: PreviewContainerLayer = .primary,
         uiModel: VGroupBoxUIModel = .init()
     ) {
         self.layer = layer
@@ -135,7 +135,7 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer(layer: layer) {
+        PreviewContainer(layer: layer) {
             VGroupBox(uiModel: uiModel) {
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
                     .multilineTextAlignment(.center)

@@ -263,7 +263,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 #if !(os(macOS) || os(tvOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VRectangularCaptionButton(
             action: {},
             icon: Image(systemName: "swift"),
@@ -273,8 +273,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Enabled") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VRectangularCaptionButton(
                 action: {},
                 icon: Image(systemName: "swift"),
@@ -282,7 +282,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             )
         }
 
-        Preview_PreviewRow("Pressed") {
+        PreviewRow("Pressed") {
             VRectangularCaptionButton(
                 uiModel: {
                     var uiModel: VRectangularCaptionButtonUIModel = .init()
@@ -297,7 +297,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             )
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VRectangularCaptionButton(
                 action: {},
                 icon: Image(systemName: "swift"),

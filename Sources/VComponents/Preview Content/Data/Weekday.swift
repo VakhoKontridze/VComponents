@@ -1,5 +1,5 @@
 //
-//  Preview_Weekday.swift
+//  Weekday.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 21.01.24.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - Weekday
-enum Preview_Weekday: Int, Hashable, Identifiable, CaseIterable {
+enum Weekday: Int, Hashable, Identifiable, CaseIterable {
     // MARK: Cases
     case monday, tuesday, wednesday, thursday, friday, saturday, sunday
 

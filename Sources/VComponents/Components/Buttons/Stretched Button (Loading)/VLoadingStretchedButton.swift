@@ -255,28 +255,28 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VLoadingStretchedButton(
             isLoading: false,
             action: {},
             title: "Lorem Ipsum"
         )
-        .modifier(Preview_StretchedButtonFrameModifier())
+        .modifier(StretchedButtonFrameModifier())
     }
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Enabled") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Pressed") {
+        PreviewRow("Pressed") {
             VLoadingStretchedButton(
                 uiModel: {
                     var uiModel: VLoadingStretchedButtonUIModel = .init()
@@ -288,25 +288,25 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Loading") {
+        PreviewRow("Loading") {
             VLoadingStretchedButton(
                 isLoading: true,
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VLoadingStretchedButton(
                 isLoading: false,
                 action: {},
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
             .disabled(true)
         }
     }

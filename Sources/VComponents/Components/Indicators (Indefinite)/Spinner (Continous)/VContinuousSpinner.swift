@@ -54,7 +54,7 @@ public struct VContinuousSpinner: View {
 #if DEBUG
 
 #Preview {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VContinuousSpinner()
     }
 }

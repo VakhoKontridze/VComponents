@@ -1,5 +1,5 @@
 //
-//  Preview_StretchedButtonFrameModifier.swift
+//  StretchedButtonFrameModifier.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 21.01.24.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - Stretched Button Frame Modifier
-struct Preview_StretchedButtonFrameModifier: ViewModifier {
+struct StretchedButtonFrameModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
 #if os(iOS)

@@ -162,24 +162,24 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 #if DEBUG
 
 #Preview("*") {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VBouncingMarquee {
-            preview_MarqueeContentSmall
+            marqueeContentSmall
         }
         
         VBouncingMarquee {
-            preview_MarqueeContent
+            marqueeContent
         }
         
         VBouncingMarquee(uiModel: .insettedGradientMask) {
-            preview_MarqueeContent
+            marqueeContent
         }
     }
 }
 
 #Preview("Scroll Directions") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Left-to-Right") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()
@@ -187,11 +187,11 @@ public struct VBouncingMarquee<Content>: View where Content: View {
                     return uiModel
                 }()
             ) {
-                preview_MarqueeContent
+                marqueeContent
             }
         }
 
-        Preview_PreviewRow("Right-to-Left") {
+        PreviewRow("Right-to-Left") {
             VBouncingMarquee(
                 uiModel: {
                     var uiModel: VBouncingMarqueeUIModel = .init()
@@ -199,7 +199,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
                     return uiModel
                 }()
             ) {
-                preview_MarqueeContent
+                marqueeContent
             }
         }
     }

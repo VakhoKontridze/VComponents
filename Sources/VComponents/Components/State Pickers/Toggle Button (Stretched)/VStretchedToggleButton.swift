@@ -266,26 +266,26 @@ extension VStretchedToggleButtonInternalState {
 #Preview("*") {
     @Previewable @State var state: VStretchedToggleButtonState = .on
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VStretchedToggleButton(
             state: $state,
             title: "Lorem Ipsum"
         )
-        .modifier(Preview_StretchedButtonFrameModifier())
+        .modifier(StretchedButtonFrameModifier())
     }
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Off") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VStretchedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Pressed Off") {
+        PreviewRow("Pressed Off") {
             VStretchedToggleButton(
                 uiModel: {
                     var uiModel: VStretchedToggleButtonUIModel = .init()
@@ -296,18 +296,18 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             VStretchedToggleButton(
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Pressed On") {
+        PreviewRow("Pressed On") {
             VStretchedToggleButton(
                 uiModel: {
                     var uiModel: VStretchedToggleButtonUIModel = .init()
@@ -318,16 +318,16 @@ extension VStretchedToggleButtonInternalState {
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VStretchedToggleButton(
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
             .disabled(true)
-            .modifier(Preview_StretchedButtonFrameModifier())
+            .modifier(StretchedButtonFrameModifier())
         }
     }
 }

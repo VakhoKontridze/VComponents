@@ -1,5 +1,5 @@
 //
-//  Preview_MarqueeContent.swift
+//  MarqueeContent.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 21.01.24.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - Marquee Content (Small)
-var preview_MarqueeContentSmall: some View {
+var marqueeContentSmall: some View {
     HStack {
         Image(systemName: "swift")
         Text("Lorem ipsum")
@@ -19,7 +19,7 @@ var preview_MarqueeContentSmall: some View {
 }
 
 // MARK: - Marquee Content
-var preview_MarqueeContent: some View {
+var marqueeContent: some View {
     HStack {
         Image(systemName: "swift")
 

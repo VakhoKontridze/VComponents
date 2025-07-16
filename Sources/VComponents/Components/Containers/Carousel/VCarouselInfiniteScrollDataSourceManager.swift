@@ -32,7 +32,7 @@ import Foundation
 ///     }
 ///
 ///     @State private var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
-///         data: Preview_RGBColor.allCases,
+///         data: RGBColor.allCases,
 ///         numberOfDuplicateGroups: 9,
 ///         initialGroupIndex: 4,
 ///         initialSelection: RGBColor.red

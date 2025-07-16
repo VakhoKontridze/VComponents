@@ -220,25 +220,25 @@ struct VSideBar<Content>: View where Content: View {
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("Leading") {
-    Preview_ContentView()
+    ContentView()
 }
 
 #Preview("Trailing") {
-    Preview_ContentView(uiModel: .trailing)
+    ContentView(uiModel: .trailing)
 }
 
 #Preview("Top") {
-    Preview_ContentView(uiModel: .top)
+    ContentView(uiModel: .top)
 }
 
 #Preview("Bottom") {
-    Preview_ContentView(uiModel: .bottom)
+    ContentView(uiModel: .bottom)
 }
 
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Leading") {
-    Preview_SafeAreaContentView()
+    SafeAreaContentView()
 }
 
 #endif
@@ -246,7 +246,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Trailing") {
-    Preview_SafeAreaContentView(uiModel: .trailing)
+    SafeAreaContentView(uiModel: .trailing)
 }
 
 #endif
@@ -254,7 +254,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Top") {
-    Preview_SafeAreaContentView(uiModel: .top)
+    SafeAreaContentView(uiModel: .top)
 }
 
 #endif
@@ -263,12 +263,12 @@ struct VSideBar<Content>: View where Content: View {
 
 
 #Preview("Safe Area Bottom") {
-    Preview_SafeAreaContentView(uiModel: .bottom)
+    SafeAreaContentView(uiModel: .bottom)
 }
 
 #endif
 
-private struct Preview_ContentView: View {
+private struct ContentView: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
 
@@ -279,8 +279,8 @@ private struct Preview_ContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
                     uiModel: uiModel,
@@ -305,7 +305,7 @@ private struct Preview_ContentView: View {
 
 #if !os(macOS) // No `UIEdgeInsets`
 
-private struct Preview_SafeAreaContentView: View {
+private struct SafeAreaContentView: View {
     private let uiModel: VSideBarUIModel
     @State private var isPresented: Bool = true
     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
@@ -317,8 +317,8 @@ private struct Preview_SafeAreaContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_ModalLauncherView(isPresented: $isPresented)
+        PreviewContainer {
+            ModalLauncherView(isPresented: $isPresented)
                 .getInterfaceOrientation { interfaceOrientation = $0 }
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
@@ -350,6 +350,6 @@ private struct Preview_SafeAreaContentView: View {
 
 #endif
 
-private let rootAndLink: Preview_ModalPresenterRootAndLink = .overlay
+private let rootAndLink: ModalPresenterRootAndLink = .overlay
 
 #endif

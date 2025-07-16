@@ -1,5 +1,5 @@
 //
-//  Preview_RGBColor.swift
+//  RGBColor.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 22.01.24.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 // MARK: - RGB Color
-enum Preview_RGBColor: Int, Hashable, Identifiable, CaseIterable {
+enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
     // MARK: Cases
     case red, green, blue
 

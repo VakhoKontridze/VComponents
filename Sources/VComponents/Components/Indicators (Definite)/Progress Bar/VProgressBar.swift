@@ -109,7 +109,7 @@ public struct VProgressBar: View {
 #Preview("*") {
     @Previewable @State var value: Double = 0
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VProgressBar(value: value)
             .padding(.horizontal)
     }
@@ -119,15 +119,15 @@ public struct VProgressBar: View {
 #Preview("States") {
     @Previewable @State var value: Double = 0
 
-    Preview_PreviewContainer {
-        Preview_PreviewRow {
+    PreviewContainer {
+        PreviewRow {
             VProgressBar(value: value)
                 .padding(.horizontal)
         }
 
-        Preview_PreviewHeader("Native")
+        PreviewHeader("Native")
 
-        Preview_PreviewRow {
+        PreviewRow {
             ProgressView(value: value)
                 .progressViewStyle(.linear)
                 .padding(.horizontal)
@@ -153,8 +153,8 @@ public struct VProgressBar: View {
 #endif
     }()
 
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Left-to-Right") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VProgressBar(
                 uiModel: {
                     var uiModel: VProgressBarUIModel = .init()
@@ -167,7 +167,7 @@ public struct VProgressBar: View {
             .padding(.horizontal)
         }
 
-        Preview_PreviewRow("Right-to-Left") {
+        PreviewRow("Right-to-Left") {
             VProgressBar(
                 uiModel: {
                     var uiModel: VProgressBarUIModel = .init()
@@ -181,7 +181,7 @@ public struct VProgressBar: View {
         }
 
         HStack(spacing: 20) {
-            Preview_PreviewRow("Top-to-Bottom") {
+            PreviewRow("Top-to-Bottom") {
                 VProgressBar(
                     uiModel: {
                         var uiModel: VProgressBarUIModel = .init()
@@ -194,7 +194,7 @@ public struct VProgressBar: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Bottom-to-Top") {
+            PreviewRow("Bottom-to-Top") {
                 VProgressBar(
                     uiModel: {
                         var uiModel: VProgressBarUIModel = .init()

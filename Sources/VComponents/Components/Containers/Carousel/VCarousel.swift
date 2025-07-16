@@ -209,20 +209,20 @@ public struct VCarousel<Data, ID, Content>: View
 #if !os(tvOS) // Redundant
 
 #Preview("*") {
-    @Previewable @State var selection: Preview_Weekday = .monday
-    var selectedIndex: Int? { Preview_Weekday.allCases.firstIndex(of: selection) }
+    @Previewable @State var selection: Weekday = .monday
+    var selectedIndex: Int? { Weekday.allCases.firstIndex(of: selection) }
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VStack(spacing: 15) {
             VCarousel(
                 selection: $selection,
-                data: Preview_Weekday.allCases,
+                data: Weekday.allCases,
             ) {
                 $0
                     .color
-                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
+                    .clipShape(.rect(cornerRadius: cornerRadius))
             }
-            .frame(height: preview_Height)
+            .frame(height: height)
 
             VPageIndicator(
                 total: 7,
@@ -233,30 +233,30 @@ public struct VCarousel<Data, ID, Content>: View
 }
 
 #Preview("No Items") {
-    @Previewable @State var selection: Preview_Weekday = .monday
+    @Previewable @State var selection: Weekday = .monday
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VCarousel(
             selection: $selection,
             data: []
         ) {
             $0
                 .color
-                .clipShape(.rect(cornerRadius: preview_CornerRadius))
+                .clipShape(.rect(cornerRadius: cornerRadius))
         }
-        .frame(height: preview_Height)
+        .frame(height: height)
     }
 }
 
 #Preview("Infinite Items") {
     @Previewable @State var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
-        data: Preview_RGBColor.allCases,
+        data: RGBColor.allCases,
         numberOfDuplicateGroups: 9,
         initialGroupIndex: 4,
-        initialSelection: Preview_RGBColor.red
+        initialSelection: RGBColor.red
     )
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VStack(spacing: 15) {
             VCarousel(
                 selection: $dataSourceManager.selectedIndexInflated,
@@ -265,9 +265,9 @@ public struct VCarousel<Data, ID, Content>: View
             ) {
                 dataSourceManager.element(atInflatedIndex: $0)
                     .color
-                    .clipShape(.rect(cornerRadius: preview_CornerRadius))
+                    .clipShape(.rect(cornerRadius: cornerRadius))
             }
-            .frame(height: preview_Height)
+            .frame(height: height)
 
             VCompactPageIndicator(
                 total: dataSourceManager.countInflated,
@@ -277,7 +277,7 @@ public struct VCarousel<Data, ID, Content>: View
     }
 }
 
-private var preview_Height: CGFloat {
+private var height: CGFloat {
 #if os(iOS)
     200
 #elseif os(macOS)
@@ -291,7 +291,7 @@ private var preview_Height: CGFloat {
 #endif
 }
 
-private var preview_CornerRadius: CGFloat {
+private var cornerRadius: CGFloat {
 #if os(iOS)
     15
 #elseif os(macOS)

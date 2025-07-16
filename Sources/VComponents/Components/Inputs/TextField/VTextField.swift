@@ -347,7 +347,7 @@ public struct VTextField: View {
 #Preview("*") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VTextField(
             headerTitle: "Lorem ipsum dolor sit amet",
             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -361,14 +361,14 @@ public struct VTextField: View {
 #Preview("Content Types") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         ForEach(
             VTextFieldUIModel.ContentType.allCases,
             id: \.self
         ) { contentType in
             let title: String = .init(describing: contentType).capitalized
 
-            Preview_PreviewRow(title) {
+            PreviewRow(title) {
                 VTextField(
                     uiModel: {
                         var uiModel: VTextFieldUIModel = .init()
@@ -385,31 +385,31 @@ public struct VTextField: View {
 }
 
 #Preview("States") {
-    Preview_StatesContentView()
+    StatesContentView()
 }
 
 #Preview("Success") {
-    Preview_StatesContentView(
+    StatesContentView(
         uiModel: .success,
         showsNative: false
     )
 }
 
 #Preview("Warning") {
-    Preview_StatesContentView(
+    StatesContentView(
         uiModel: .warning,
         showsNative: false
     )
 }
 
 #Preview("Error") {
-    Preview_StatesContentView(
+    StatesContentView(
         uiModel: .error,
         showsNative: false
     )
 }
 
-private struct Preview_StatesContentView: View {
+private struct StatesContentView: View {
     private let uiModel: VTextFieldUIModel
     private let showsNative: Bool
 
@@ -422,8 +422,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_PreviewRow("Enabled") {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VTextField(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -434,7 +434,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Focused") {
+            PreviewRow("Focused") {
                 VTextField(
                     uiModel: {
                         var mappedUIModel: VTextFieldUIModel = uiModel
@@ -453,7 +453,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Pressed (Button) (*)") {
+            PreviewRow("Pressed (Button) (*)") {
                 VTextField(
                     uiModel: {
                         var mappedUIModel: VTextFieldUIModel = uiModel
@@ -470,7 +470,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Disabled") {
+            PreviewRow("Disabled") {
                 VTextField(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -483,9 +483,9 @@ private struct Preview_StatesContentView: View {
             }
 
             if showsNative {
-                Preview_PreviewHeader("Native")
+                PreviewHeader("Native")
 
-                Preview_PreviewRow("Enabled") {
+                PreviewRow("Enabled") {
                     TextField(
                         "Lorem ipsum",
                         text: .constant("Lorem ipsum")
@@ -494,7 +494,7 @@ private struct Preview_StatesContentView: View {
                     .padding(.horizontal)
                 }
 
-                Preview_PreviewRow("Disabled") {
+                PreviewRow("Disabled") {
                     TextField(
                         "Lorem ipsum",
                         text: .constant("Lorem ipsum")

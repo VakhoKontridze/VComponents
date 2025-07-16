@@ -243,33 +243,33 @@ public struct VSlider: View {
 #Preview("*") {
     @Previewable @State var value: Double = 0.5
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VSlider(value: $value)
             .padding(.horizontal)
     }
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Enabled") {
+    PreviewContainer {
+        PreviewRow("Enabled") {
             VSlider(value: .constant(0.5))
                 .padding(.horizontal)
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VSlider(value: .constant(0.5))
                 .disabled(true)
                 .padding(.horizontal)
         }
 
-        Preview_PreviewHeader("Native")
+        PreviewHeader("Native")
 
-        Preview_PreviewRow("Enabled") {
+        PreviewRow("Enabled") {
             Slider(value: .constant(0.5))
                 .padding(.horizontal)
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             Slider(value: .constant(0.5))
                 .disabled(true)
                 .padding(.horizontal)
@@ -290,8 +290,8 @@ public struct VSlider: View {
 #endif
     }()
 
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Left-to-Right") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VSlider(
                 uiModel: {
                     var uiModel: VSliderUIModel = .init()
@@ -303,7 +303,7 @@ public struct VSlider: View {
             .frame(width: length)
         }
         
-        Preview_PreviewRow("Right-to-Left") {
+        PreviewRow("Right-to-Left") {
             VSlider(
                 uiModel: {
                     var uiModel: VSliderUIModel = .init()
@@ -316,7 +316,7 @@ public struct VSlider: View {
         }
         
         HStack(spacing: 20) {
-            Preview_PreviewRow("Top-to-Bottom") {
+            PreviewRow("Top-to-Bottom") {
                 VSlider(
                     uiModel: {
                         var uiModel: VSliderUIModel = .init()
@@ -328,7 +328,7 @@ public struct VSlider: View {
                 .frame(height: length)
             }
             
-            Preview_PreviewRow("Bottom-to-Top") {
+            PreviewRow("Bottom-to-Top") {
                 VSlider(
                     uiModel: {
                         var uiModel: VSliderUIModel = .init()
@@ -346,7 +346,7 @@ public struct VSlider: View {
 #Preview("Step") {
     @Previewable @State var value: Double = 0.5
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VSlider(
             step: 0.1,
             value: $value
@@ -358,7 +358,7 @@ public struct VSlider: View {
 #Preview("Draggable Body") {
     @Previewable @State var value: Double = 0.5
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VSlider(
             uiModel: {
                 var uiModel: VSliderUIModel = .init()

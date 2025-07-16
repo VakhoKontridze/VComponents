@@ -236,7 +236,7 @@ extension VRectangularToggleButtonInternalState {
 #Preview("*") {
     @Previewable @State var state: VRectangularToggleButtonState = .on
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VRectangularToggleButton(
             state: $state,
             title: "ABC"
@@ -250,15 +250,15 @@ extension VRectangularToggleButtonInternalState {
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Off") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VRectangularToggleButton(
                 state: .constant(.off),
                 icon: Image(systemName: "swift")
             )
         }
 
-        Preview_PreviewRow("Pressed Off") {
+        PreviewRow("Pressed Off") {
             VRectangularToggleButton(
                 uiModel: {
                     var uiModel: VRectangularToggleButtonUIModel = .init()
@@ -271,14 +271,14 @@ extension VRectangularToggleButtonInternalState {
             )
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             VRectangularToggleButton(
                 state: .constant(.on),
                 icon: Image(systemName: "swift")
             )
         }
 
-        Preview_PreviewRow("Pressed On") {
+        PreviewRow("Pressed On") {
             VRectangularToggleButton(
                 uiModel: {
                     var uiModel: VRectangularToggleButtonUIModel = .init()
@@ -291,7 +291,7 @@ extension VRectangularToggleButtonInternalState {
             )
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VRectangularToggleButton(
                 state: .constant(.off),
                 icon: Image(systemName: "swift")

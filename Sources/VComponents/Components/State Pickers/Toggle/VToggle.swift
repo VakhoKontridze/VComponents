@@ -216,7 +216,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 #Preview("*") {
     @Previewable @State var state: VToggleState = .on
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VToggle(
             state: $state,
             title: "Lorem ipsum"
@@ -225,15 +225,15 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Off") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VToggle(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed Off") {
+        PreviewRow("Pressed Off") {
             VToggle(
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
@@ -248,14 +248,14 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             VToggle(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed On") {
+        PreviewRow("Pressed On") {
             VToggle(
                 uiModel: {
                     var uiModel: VToggleUIModel = .init()
@@ -270,7 +270,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VToggle(
                 state: .constant(.on),
                 title: "Lorem ipsum"
@@ -278,9 +278,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             .disabled(true)
         }
 
-        Preview_PreviewHeader("Native")
+        PreviewHeader("Native")
 
-        Preview_PreviewRow("Off") {
+        PreviewRow("Off") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)
@@ -289,7 +289,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             .toggleStyle(.switch)
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(true)
@@ -298,7 +298,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
             .toggleStyle(.switch)
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             Toggle(
                 "Lorem ipsum",
                 isOn: .constant(false)

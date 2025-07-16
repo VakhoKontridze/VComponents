@@ -463,12 +463,12 @@ extension FloatingPoint {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("*") {
-    @Previewable @State var selection: Preview_RGBColor = .red
+    @Previewable @State var selection: RGBColor = .red
 
-    Preview_PreviewContainer(layer: .secondary) {
+    PreviewContainer(layer: .secondary) {
         VWrappedIndicatorStaticPagerTabView(
             selection: $selection,
-            data: Preview_RGBColor.allCases,
+            data: RGBColor.allCases,
             tabItemTitle: { $0.title },
             content: { $0.color }
         )
@@ -478,9 +478,9 @@ extension FloatingPoint {
 }
 
 #Preview("No Items") {
-    @Previewable @State var selection: Preview_RGBColor = .red
+    @Previewable @State var selection: RGBColor = .red
 
-    Preview_PreviewContainer(layer: .secondary) {
+    PreviewContainer(layer: .secondary) {
         VWrappedIndicatorStaticPagerTabView(
             selection: $selection,
             data: [],

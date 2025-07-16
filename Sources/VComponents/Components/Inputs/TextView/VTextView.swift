@@ -236,7 +236,7 @@ public struct VTextView: View {
 #Preview("*") {
     @Previewable @State var text: String = "Lorem ipsum"
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VTextView(
             headerTitle: "Lorem ipsum dolor sit amet",
             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -248,22 +248,22 @@ public struct VTextView: View {
 }
 
 #Preview("States") {
-    Preview_StatesContentView()
+    StatesContentView()
 }
 
 #Preview("Success") {
-    Preview_StatesContentView(uiModel: .success)
+    StatesContentView(uiModel: .success)
 }
 
 #Preview("Warning") {
-    Preview_StatesContentView(uiModel: .warning)
+    StatesContentView(uiModel: .warning)
 }
 
 #Preview("Error") {
-    Preview_StatesContentView(uiModel: .error)
+    StatesContentView(uiModel: .error)
 }
 
-private struct Preview_StatesContentView: View {
+private struct StatesContentView: View {
     private let uiModel: VTextViewUIModel
 
     init(
@@ -273,8 +273,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer {
-            Preview_PreviewRow("Enabled") {
+        PreviewContainer {
+            PreviewRow("Enabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -285,7 +285,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Focused") {
+            PreviewRow("Focused") {
                 VTextView(
                     uiModel: {
                         var mappedUIModel: VTextViewUIModel = uiModel
@@ -304,7 +304,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Disabled") {
+            PreviewRow("Disabled") {
                 VTextView(
                     uiModel: uiModel,
                     headerTitle: "Lorem ipsum dolor sit amet",

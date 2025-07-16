@@ -379,7 +379,7 @@ extension Int {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VCompactPageIndicator(
             total: total,
             current: current
@@ -392,8 +392,8 @@ extension Int {
     @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
     let total: Int = 10
     
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Left-to-Right") {
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
             VCompactPageIndicator(
                 uiModel: {
                     var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -405,7 +405,7 @@ extension Int {
             )
         }
 
-        Preview_PreviewRow("Right-to-Left") {
+        PreviewRow("Right-to-Left") {
             VCompactPageIndicator(
                 uiModel: {
                     var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -418,7 +418,7 @@ extension Int {
         }
 
         HStack(spacing: 20) {
-            Preview_PreviewRow("Top-to-Bottom") {
+            PreviewRow("Top-to-Bottom") {
                 VCompactPageIndicator(
                     uiModel: {
                         var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -430,7 +430,7 @@ extension Int {
                 )
             }
 
-            Preview_PreviewRow("Bottom-to-Top") {
+            PreviewRow("Bottom-to-Top") {
                 VCompactPageIndicator(
                     uiModel: {
                         var uiModel: VCompactPageIndicatorUIModel = .init()
@@ -447,7 +447,7 @@ extension Int {
 }
 
 #Preview("Zero") {
-    Preview_PreviewContainer {
+    PreviewContainer {
         VCompactPageIndicator(
             total: 0,
             current: 0

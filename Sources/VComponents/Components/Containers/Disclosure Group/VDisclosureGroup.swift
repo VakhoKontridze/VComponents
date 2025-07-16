@@ -208,7 +208,7 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #Preview("*") {
     @Previewable @State var state: VDisclosureGroupState = .expanded
     
-    Preview_PreviewContainer {
+    PreviewContainer {
         VDisclosureGroup(
             state: $state,
             headerTitle: "Lorem Ipsum",
@@ -220,23 +220,23 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 }
 
 #Preview("States") {
-    Preview_StatesContentView()
+    StatesContentView()
 }
 
 #if !os(macOS) // Redundant
 
 #Preview("States (System Background Color)") {
-    Preview_StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
+    StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
 }
 
 #endif
 
-private struct Preview_StatesContentView: View {
-    private let layer: Preview_PreviewContainerLayer
+private struct StatesContentView: View {
+    private let layer: PreviewContainerLayer
     private let uiModel: VDisclosureGroupUIModel
 
     init(
-        layer: Preview_PreviewContainerLayer = .primary,
+        layer: PreviewContainerLayer = .primary,
         uiModel: VDisclosureGroupUIModel = .init()
     ) {
         self.layer = layer
@@ -244,8 +244,8 @@ private struct Preview_StatesContentView: View {
     }
 
     var body: some View {
-        Preview_PreviewContainer(layer: layer) {
-            Preview_PreviewRow("Collapsed") {
+        PreviewContainer(layer: layer) {
+            PreviewRow("Collapsed") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.collapsed),
@@ -256,7 +256,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Expanded") {
+            PreviewRow("Expanded") {
                 VDisclosureGroup(
                     uiModel: uiModel,
                     state: .constant(.expanded),
@@ -267,7 +267,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Pressed (Button)") {
+            PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel
@@ -283,7 +283,7 @@ private struct Preview_StatesContentView: View {
                 .padding(.horizontal)
             }
 
-            Preview_PreviewRow("Disabled") {
+            PreviewRow("Disabled") {
                 VDisclosureGroup(
                     uiModel: {
                         var uiModel: VDisclosureGroupUIModel = uiModel

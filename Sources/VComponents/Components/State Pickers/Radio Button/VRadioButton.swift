@@ -209,7 +209,7 @@ extension VRadioButtonState {
 #Preview("*") {
     @Previewable @State var state: VRadioButtonState = .on
 
-    Preview_PreviewContainer {
+    PreviewContainer {
         VRadioButton(
             state: $state,
             title: "Lorem ipsum"
@@ -223,15 +223,15 @@ extension VRadioButtonState {
 }
 
 #Preview("States") {
-    Preview_PreviewContainer {
-        Preview_PreviewRow("Off") {
+    PreviewContainer {
+        PreviewRow("Off") {
             VRadioButton(
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed Off") {
+        PreviewRow("Pressed Off") {
             VRadioButton(
                 uiModel: {
                     var uiModel: VRadioButtonUIModel = .init()
@@ -246,14 +246,14 @@ extension VRadioButtonState {
             )
         }
 
-        Preview_PreviewRow("On") {
+        PreviewRow("On") {
             VRadioButton(
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
         }
 
-        Preview_PreviewRow("Pressed On") {
+        PreviewRow("Pressed On") {
             VRadioButton(
                 uiModel: {
                     var uiModel: VRadioButtonUIModel = .init()
@@ -268,7 +268,7 @@ extension VRadioButtonState {
             )
         }
 
-        Preview_PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VRadioButton(
                 state: .constant(.on),
                 title: "Lorem ipsum"
