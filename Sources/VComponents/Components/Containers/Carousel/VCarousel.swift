@@ -220,9 +220,9 @@ public struct VCarousel<Data, ID, Content>: View
             ) {
                 $0
                     .color
-                    .clipShape(.rect(cornerRadius: cornerRadius))
+                    .clipShape(.rect(cornerRadius: _cornerRadius))
             }
-            .frame(height: height)
+            .frame(height: _height)
 
             VPageIndicator(
                 total: 7,
@@ -242,9 +242,9 @@ public struct VCarousel<Data, ID, Content>: View
         ) {
             $0
                 .color
-                .clipShape(.rect(cornerRadius: cornerRadius))
+                .clipShape(.rect(cornerRadius: _cornerRadius))
         }
-        .frame(height: height)
+        .frame(height: _height)
     }
 }
 
@@ -265,9 +265,9 @@ public struct VCarousel<Data, ID, Content>: View
             ) {
                 dataSourceManager.element(atInflatedIndex: $0)
                     .color
-                    .clipShape(.rect(cornerRadius: cornerRadius))
+                    .clipShape(.rect(cornerRadius: _cornerRadius))
             }
-            .frame(height: height)
+            .frame(height: _height)
 
             VCompactPageIndicator(
                 total: dataSourceManager.countInflated,
@@ -277,7 +277,7 @@ public struct VCarousel<Data, ID, Content>: View
     }
 }
 
-private var height: CGFloat {
+private var _height: CGFloat {
 #if os(iOS)
     200
 #elseif os(macOS)
@@ -291,7 +291,7 @@ private var height: CGFloat {
 #endif
 }
 
-private var cornerRadius: CGFloat {
+private var _cornerRadius: CGFloat {
 #if os(iOS)
     15
 #elseif os(macOS)
