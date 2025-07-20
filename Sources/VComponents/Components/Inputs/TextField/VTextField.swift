@@ -125,7 +125,12 @@ public struct VTextField: View {
     }
 
     // MARK: Properties - Secure Field
-    @State private var textFieldIsSecure: Bool = false
+    @State private var isSecureTextFieldContentRevealed: Bool = false
+    
+    private var isTextFieldSecure: Bool {
+        uiModel.contentType == .secure &&
+        !isSecureTextFieldContentRevealed
+    }
 
     // MARK: Initializers
     /// Initializes `VTextField` with text.
@@ -150,21 +155,21 @@ public struct VTextField: View {
             spacing: uiModel.headerTextFieldAndFooterSpacing,
         ) {
             headerView
-            inputView
+            textField
             footerView
         }
         // No need for initial checks, as secure field is always hidden by default
         .onChange(of: uiModel.contentType) { (_, newValue) in
             if newValue != .secure {
-                textFieldIsSecure = false
+                isSecureTextFieldContentRevealed = false
             }
         }
     }
 
-    private var inputView: some View {
-        HStack(spacing: uiModel.textAndButtonSpacing) {
+    private var textField: some View {
+        HStack(spacing: uiModel.textFieldContentSpacingHorizontal) {
             searchIcon
-            textField
+            _textField
             clearButton
             visibilityButton
         }
@@ -175,9 +180,9 @@ public struct VTextField: View {
         .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
     }
 
-    private var textField: some View {
+    private var _textField: some View {
         SecurableTextField(
-            isSecure: uiModel.contentType == .secure && !textFieldIsSecure,
+            isSecure: isTextFieldSecure,
             placeholder: placeholder.map {
                 Text($0)
                     .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
@@ -186,12 +191,9 @@ public struct VTextField: View {
             },
             text: $text
         )
-        .textFieldStyle(.plain)
-
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
-
-        .onChange(of: text, initial: true) { setClearButtonVisibility($1) }
         
+        .textFieldStyle(.plain)
         .multilineTextAlignment(uiModel.textAlignment)
         .lineLimit(1)
         .foregroundStyle(uiModel.textColors.value(for: internalState))
@@ -208,6 +210,8 @@ public struct VTextField: View {
         .textInputAutocapitalization(uiModel.autocapitalization)
 #endif
         .submitLabel(uiModel.submitButton)
+        
+        .onChange(of: text, initial: true) { setClearButtonVisibility($1) }
     }
 
     @ViewBuilder
@@ -247,7 +251,7 @@ public struct VTextField: View {
             ZStack {
                 VPlainButton(
                     uiModel: uiModel.visibilityButtonSubUIModel,
-                    action: { textFieldIsSecure.toggle() },
+                    action: { isSecureTextFieldContentRevealed.toggle() },
                     icon: visibilityIcon
                 )
             }
@@ -320,7 +324,7 @@ public struct VTextField: View {
 
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
-        if textFieldIsSecure {
+        if isSecureTextFieldContentRevealed {
             uiModel.visibilityOnButtonIcon
         } else {
             uiModel.visibilityOffButtonIcon

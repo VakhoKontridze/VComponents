@@ -128,8 +128,8 @@ public struct VTextFieldUIModel: Sendable {
     /// Textfield content horizontal margin. Set to `15`.
     public var textFieldContentMarginHorizontal: CGFloat = 15
 
-    /// Spacing between text and buttons. Set to `10`.
-    public var textAndButtonSpacing: CGFloat = 10
+    /// Spacing content horizontal spacing. Set to `10`.
+    public var textFieldContentSpacingHorizontal: CGFloat = 10
 
     // MARK: Properties - Text
     /// Text alignment. Set to `leading`.
