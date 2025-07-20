@@ -221,30 +221,6 @@ public struct VBottomSheetUIModel: Sendable {
         /// Maximum height.
         public var max: AbsoluteFractionMeasurement
 
-        // MARK: Properties - Flags
-        func isResizable(
-            in containerHeight: CGFloat
-        ) -> Bool {
-            min.toAbsolute(dimension: containerHeight) != ideal.toAbsolute(dimension: containerHeight) ||
-            ideal.toAbsolute(dimension: containerHeight) != max.toAbsolute(dimension: containerHeight)
-        }
-
-        func isFixed(
-            in containerHeight: CGFloat
-        ) -> Bool {
-            min.toAbsolute(dimension: containerHeight) == ideal.toAbsolute(dimension: containerHeight) &&
-            ideal.toAbsolute(dimension: containerHeight) == max.toAbsolute(dimension: containerHeight)
-        }
-
-        // MARK: Properties - Offsets
-        func minOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - min.toAbsolute(dimension: containerHeight) }
-
-        func idealOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - ideal.toAbsolute(dimension: containerHeight) }
-
-        func maxOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight - max.toAbsolute(dimension: containerHeight) }
-
-        func hiddenOffset(in containerHeight: CGFloat) -> CGFloat { containerHeight }
-
         // MARK: Initializers
         /// Initializes `Heights` with values.
         public init(
@@ -307,6 +283,46 @@ public struct VBottomSheetUIModel: Sendable {
 
         static var zero: Self {
             .absolute(0)
+        }
+        
+        // MARK: Flags
+        func isResizable(
+            in containerHeight: CGFloat
+        ) -> Bool {
+            min.toAbsolute(dimension: containerHeight) != ideal.toAbsolute(dimension: containerHeight) ||
+            ideal.toAbsolute(dimension: containerHeight) != max.toAbsolute(dimension: containerHeight)
+        }
+
+        func isFixed(
+            in containerHeight: CGFloat
+        ) -> Bool {
+            min.toAbsolute(dimension: containerHeight) == ideal.toAbsolute(dimension: containerHeight) &&
+            ideal.toAbsolute(dimension: containerHeight) == max.toAbsolute(dimension: containerHeight)
+        }
+
+        // MARK: Offsets
+        func minOffset(
+            in containerHeight: CGFloat
+        ) -> CGFloat {
+            containerHeight - min.toAbsolute(dimension: containerHeight)
+        }
+
+        func idealOffset(
+            in containerHeight: CGFloat
+        ) -> CGFloat {
+            containerHeight - ideal.toAbsolute(dimension: containerHeight)
+        }
+
+        func maxOffset(
+            in containerHeight: CGFloat
+        ) -> CGFloat {
+            containerHeight - max.toAbsolute(dimension: containerHeight)
+        }
+
+        func hiddenOffset(
+            in containerHeight: CGFloat
+        ) -> CGFloat {
+            containerHeight
         }
         
         // MARK: Value Fixing
