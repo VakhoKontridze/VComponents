@@ -245,7 +245,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
         // No need to handle reentrancy and cancellation
         Task { @MainActor in
-            try? await Task.sleep(for: .seconds(uiModel.timeoutDuration))
+            try await Task.sleep(for: .seconds(uiModel.timeoutDuration))
             isPresented = false
         }
     }
@@ -431,15 +431,17 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task { @MainActor in
-                try? await Task.sleep(for: .seconds(1))
-
-                while true {
-                    width = .fixed(width: .fraction(0.75))
-                    try? await Task.sleep(for: .seconds(1))
-
-                    width = .stretched(margin: .absolute(15))
-                    try? await Task.sleep(for: .seconds(1))
+            .onFirstAppear {
+                Task { @MainActor in
+                    try await Task.sleep(for: .seconds(1))
+                    
+                    while true {
+                        width = .fixed(width: .fraction(0.75))
+                        try await Task.sleep(for: .seconds(1))
+                        
+                        width = .stretched(margin: .absolute(15))
+                        try await Task.sleep(for: .seconds(1))
+                    }
                 }
             }
     }
@@ -472,21 +474,23 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
-            .task { @MainActor in
-                try? await Task.sleep(for: .seconds(1))
-                
-                while true {
-                    uiModel = .info
-                    try? await Task.sleep(for: .seconds(1))
+            .onFirstAppear {
+                Task { @MainActor in
+                    try await Task.sleep(for: .seconds(1))
                     
-                    uiModel = .success
-                    try? await Task.sleep(for: .seconds(1))
-                    
-                    uiModel = .warning
-                    try? await Task.sleep(for: .seconds(1))
-                    
-                    uiModel = .error
-                    try? await Task.sleep(for: .seconds(1))
+                    while true {
+                        uiModel = .info
+                        try await Task.sleep(for: .seconds(1))
+                        
+                        uiModel = .success
+                        try await Task.sleep(for: .seconds(1))
+                        
+                        uiModel = .warning
+                        try await Task.sleep(for: .seconds(1))
+                        
+                        uiModel = .error
+                        try await Task.sleep(for: .seconds(1))
+                    }
                 }
             }
     }
