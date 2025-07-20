@@ -14,10 +14,3 @@ import VCore
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 typealias VTextFieldInternalState = GenericState_EnabledFocusedDisabled
-
-// MARK: - V Text Field Button Internal State
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-typealias VTextFieldButtonInternalState = GenericState_EnabledPressedFocusedDisabled
