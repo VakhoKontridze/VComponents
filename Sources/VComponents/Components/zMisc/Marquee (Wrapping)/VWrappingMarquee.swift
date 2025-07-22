@@ -33,8 +33,8 @@ import VCore
 ///             }()
 ///         ) {
 ///             HStack(spacing: 16) {
-///                 ForEach(0..<5, id: \.self) {
-///                     Text("\(i)")
+///                 ForEach(0..<5, id: \.self) { number in
+///                     Text("\(number)")
 ///                         .frame(dimension: 100)
 ///                         .background(Color.accentColor)
 ///                 }
