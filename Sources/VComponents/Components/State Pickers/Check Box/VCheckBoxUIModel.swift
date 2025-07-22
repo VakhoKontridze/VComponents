@@ -27,8 +27,6 @@ public struct VCheckBoxUIModel: Sendable {
     }
     
     /// Checkbox dimension.
-    /// Set to `(22, 22)` on `iOS`.
-    /// Set to `(16, 16)` on `macOS`
     public var size: CGSize = {
 #if os(iOS)
         CGSize(dimension: 22)
@@ -40,8 +38,6 @@ public struct VCheckBoxUIModel: Sendable {
     }()
 
     /// Spacing between checkbox and label.
-    /// Set to `7` on `iOS`
-    /// Set to `5` on `macOS`.
     public var checkBoxAndLabelSpacing: CGFloat = {
 #if os(iOS)
         7
@@ -54,8 +50,6 @@ public struct VCheckBoxUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Checkbox corner radius.
-    /// Set to `11` on `macOS`.
-    /// Set to `4` on `macOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         11
@@ -96,8 +90,6 @@ public struct VCheckBoxUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width.
-    /// Set to `1.5` points on `iOS`.
-    /// Set to `1` point on `macOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -139,8 +131,6 @@ public struct VCheckBoxUIModel: Sendable {
     public var checkmarkIconContentMode: ContentMode? = .fit
 
     /// Checkmark icon size.
-    /// Set to `(11, 11)` on `iOS`.
-    /// Set to `(9, 9)` on `macOS`.
     public var checkmarkIconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 11)
@@ -169,7 +159,7 @@ public struct VCheckBoxUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconOpacities: StateOpacities?
 
-    /// Checkmark icon font. Set to `nil.`
+    /// Checkmark icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isCheckmarkIconResizable` should be set to `false`, and `checkmarkIconSize` should be set to `nil`.
@@ -185,7 +175,7 @@ public struct VCheckBoxUIModel: Sendable {
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
-    /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextLineType: TextLineType = .multiLine(
@@ -224,8 +214,6 @@ public struct VCheckBoxUIModel: Sendable {
     }()
 
     /// Title text font.
-    /// Set to `subheadline` on `iOS`.
-    /// Set to `body` on `macOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline
@@ -236,7 +224,7 @@ public struct VCheckBoxUIModel: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

@@ -32,8 +32,6 @@ public struct VSideBarUIModel: Sendable {
     public var presentationEdge: Edge = .leading
 
     /// Side bar size group.
-    /// Set to `(0.75, 1)` `fraction`s in portrait and `(0.5, 1)` fraction in landscape on `iOS`.
-    /// Set to `(0.33, 1)` `fraction`s on `macOS`.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -64,8 +62,6 @@ public struct VSideBarUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Corner radii.
-    /// Set to to `(0, 0, 15, 15)` on `iOS`.
-    /// Set to to `0`s on `macOS`.
     public var cornerRadii: RectangleCornerRadii = {
 #if os(iOS)
         RectangleCornerRadii(
@@ -186,8 +182,6 @@ public struct VSideBarUIModel: Sendable {
 
         // MARK: Options Initializers
         /// Default value.
-        /// Set to `all` on `iOS`.
-        /// Set to `swipe` on `macOS`.
         public static var `default`: DismissType {
 #if os(iOS)
             .all
@@ -256,9 +250,6 @@ extension VSideBarUIModel {
     }
     
     /// `VSideBarUIModel` that presents side bar from trailing edge.
-    ///
-    /// `cornerRadii` is set to `(15, 15, 0, 0)` on `iOS`.
-    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var trailing: Self {
         var uiModel: Self = .init()
 
@@ -280,14 +271,6 @@ extension VSideBarUIModel {
     }
     
     /// `VSideBarUIModel` that presents side bar from top edge.
-    ///
-    /// `presentationEdge` is set to `top`.
-    ///
-    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s in portrait and `(1, 0.75)` `fraction`s in landscape on `iOS`.
-    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s on `macOS`.
-    ///
-    /// `cornerRadii` is set to `(0, 15, 15, 0)` on `iOS`.
-    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var top: Self {
         var uiModel: Self = .init()
         
@@ -337,14 +320,6 @@ extension VSideBarUIModel {
     }
     
     /// `VSideBarUIModel` that presents side bar from bottom edge.
-    ///
-    /// `presentationEdge` is set to `bottom`.
-    ///
-    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s in portrait and `(1, 0.75)` `fraction`s in landscape on `iOS`.
-    /// `sizeGroup` is set to `(1, 0.5)` `fraction`s on `macOS`.
-    ///
-    /// `cornerRadii` is set to `(15, 0, 0, 15)` on `iOS`.
-    /// `cornerRadii` is set to `0`s on `macOS`.
     public static var bottom: Self {
         var uiModel: Self = .init()
         

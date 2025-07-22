@@ -21,10 +21,6 @@ public struct VCarouselUIModel: Sendable {
     public var cardsAlignment: VerticalAlignment = .center
 
     /// Spacing between cards.
-    /// Set to `15` on `iOS`.
-    /// Set to `15` on `macOS`.
-    /// Set to `7.5` on `watchOS`.
-    /// Set to `15` on `visionOS`.
     public var cardsSpacing: CGFloat = {
 #if os(iOS)
         15
@@ -41,10 +37,6 @@ public struct VCarouselUIModel: Sendable {
 
     // MARK: Properties - Card - Global
     /// Card horizontal margin.
-    /// Set to `30` on `iOS`.
-    /// Set to `30` on `macOS`.
-    /// Set to `15` on `watchOS`.
-    /// Set to `30` on `visionOS`.
     ///
     /// This property determines margins around the selected card.
     public var cardMarginHorizontal: CGFloat = {
@@ -67,10 +59,10 @@ public struct VCarouselUIModel: Sendable {
     /// Card bottom margin.
     public var cardMarginBottom: CGFloat = 0
 
-    /// Card height scales. Set to `1`s.
+    /// Card height scales.
     public var cardHeightScales: CardStateDimensions = .init(1)
 
-    /// Card opacities. Set to `1`s.
+    /// Card opacities.
     public var cardOpacities: CardStateOpacities = .init(1)
 
     // MARK: Properties - Card - Shadow

@@ -26,9 +26,6 @@ public struct VToggleUIModel: Sendable {
     }
 
     /// Toggle size.
-    /// Set to `(51, 32)` on `iOS`.
-    /// Set to `(38, 22)` on `macOS`.
-    /// Set to `(34, 22)` on `watchOS`.
     public var size: CGSize = {
 #if os(iOS)
         CGSize(width: 51, height: 31)
@@ -42,9 +39,6 @@ public struct VToggleUIModel: Sendable {
     }()
 
     /// Spacing between toggle and label.
-    /// Set to `7` on `iOS`
-    /// Set to `5` on `macOS`.
-    /// Set to `5` on `watchOS`.
     public var toggleAndLabelSpacing: CGFloat = {
 #if os(iOS)
         7
@@ -94,9 +88,6 @@ public struct VToggleUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width.
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
-    /// Set to `0` point on `watchOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -132,9 +123,6 @@ public struct VToggleUIModel: Sendable {
 
     // MARK: Properties - Thumb
     /// Thumb dimension.
-    /// Set to `(27, 27)` on `iOS`.
-    /// Set to `(20, 20)` on `macOS`.
-    /// Set to `(20, 20)` on `watchOS`.
     public var thumbSize: CGSize = {
 #if os(iOS)
         CGSize(dimension: 27)
@@ -148,9 +136,6 @@ public struct VToggleUIModel: Sendable {
     }()
 
     /// Thumb corner radius.
-    /// Set to `13.5` on `iOS`.
-    /// Set to `10` on `macOS`.
-    /// Set to `10` on `watchOS`.
     public var thumbCornerRadius: CGFloat = {
 #if os(iOS)
         13.5
@@ -177,7 +162,7 @@ public struct VToggleUIModel: Sendable {
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
-    /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextLineType: TextLineType = .multiLine(
@@ -220,9 +205,6 @@ public struct VToggleUIModel: Sendable {
     }()
 
     /// Title text font.
-    /// Set to `subheadline` on `iOS`.
-    /// Set to `body` on `macOS`.
-    /// Set to `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline
@@ -235,7 +217,7 @@ public struct VToggleUIModel: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

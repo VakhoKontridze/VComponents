@@ -23,9 +23,6 @@ public struct VRectangularButtonUIModel: Sendable {
     }
 
     /// Size.
-    /// Set to `(56, 56)` on `iOS`.
-    /// Set to `(28, 28)` on `macOS`.
-    /// Set to `(64, 56)` on `watchOS`.
     public var size: CGSize = {
 #if os(iOS)
         CGSize(dimension: 56)
@@ -40,9 +37,6 @@ public struct VRectangularButtonUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Corner radius.
-    /// Set to `16` on `iOS`.
-    /// Set to `6` on `macOS`.
-    /// Set to `16` on `watchOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         16
@@ -64,9 +58,6 @@ public struct VRectangularButtonUIModel: Sendable {
     )
 
     /// Ratio to which background scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -80,7 +71,7 @@ public struct VRectangularButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -93,9 +84,6 @@ public struct VRectangularButtonUIModel: Sendable {
     public var labelMargins: LabelMargins = .init(3)
 
     /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -116,9 +104,6 @@ public struct VRectangularButtonUIModel: Sendable {
     public var titleTextColors: StateColors = .init(Color.white)
 
     /// Title text font.
-    /// Set to `semibold` `subheadline` on `iOS`.
-    /// Set to `body` on `macOS`.
-    /// Set to `semibold` `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline.weight(.semibold)
@@ -131,7 +116,7 @@ public struct VRectangularButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -148,9 +133,6 @@ public struct VRectangularButtonUIModel: Sendable {
     public var iconContentMode: ContentMode? = .fit
 
     /// Icon size.
-    /// Set to `(24, 24)` on `iOS`.
-    /// Set to `(14, 14)` on `macOS`.
-    /// Set to `(26, 26)` on `watchOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
@@ -173,7 +155,7 @@ public struct VRectangularButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.

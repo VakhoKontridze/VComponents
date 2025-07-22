@@ -53,7 +53,7 @@ public struct VTextFieldUIModel: Sendable {
     )
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -65,7 +65,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Header title text frame alignment.
     public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Header title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextLineType: TextLineType = .multiLine(
@@ -83,7 +83,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Header title text font.
     public var headerTitleTextFont: Font = .footnote
 
-    /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Header title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -95,7 +95,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Footer title text frame alignment.
     public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+    /// Footer title text line type...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextLineType: TextLineType = .multiLine(
@@ -113,7 +113,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Footer title text font.
     public var footerTitleTextFont: Font = .footnote
 
-    /// Footer title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Footer title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -145,7 +145,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Text font.
     public var textFont: Font = .body
 
-    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -165,12 +165,6 @@ public struct VTextFieldUIModel: Sendable {
     public var clearButtonIcon: Image = ImageBook.xMark.renderingMode(.template)
 
     /// Model for customizing clear button.
-    /// `size` is set to `(22, 22)`,
-    /// `backgroundColors` are changed,
-    /// `iconSize` is set to `(8, 8)`,
-    /// `iconColors` are changed,
-    /// `hitBox` is set to `zero`,
-    /// `haptic` is set to `nil`.
     public var clearButtonSubUIModel: VRectangularButtonUIModel = {
         var uiModel: VRectangularButtonUIModel = .init()
 
@@ -207,10 +201,6 @@ public struct VTextFieldUIModel: Sendable {
     public var visibilityOnButtonIcon: Image = ImageBook.visibilityOn.renderingMode(.template)
 
     /// Model for customizing visibility button.
-    /// `iconSize` is set to `(20, 20)`,
-    /// `iconColors` are changed,
-    /// `hitBox` is set to `zero`,
-    /// `haptic` is set to `nil`.
     public var visibilityButtonSubUIModel: VPlainButtonUIModel = {
         var uiModel: VPlainButtonUIModel = .init()
 
@@ -261,7 +251,7 @@ public struct VTextFieldUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconOpacities: StateOpacities?
 
-    /// Search icon font. Set to `nil.`
+    /// Search icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isSearchIconResizable` should be set to `false`, and `searchIconSize` should be set to `nil`.

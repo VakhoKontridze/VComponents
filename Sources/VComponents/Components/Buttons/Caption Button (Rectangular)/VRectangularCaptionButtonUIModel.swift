@@ -24,8 +24,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     }
 
     /// Spacing between rectangle and caption.
-    /// Set to `7` on `iOS`.
-    /// Set to `3` on `watchOS`.
     public var rectangleAndCaptionSpacing: CGFloat = {
 #if os(iOS)
         7
@@ -38,8 +36,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
 
     // MARK: Properties - Rectangle Background
     /// Rectangle size.
-    /// Set to `(56, 56)` on `iOS`.
-    /// Set to `(64, 56)` on `watchOS`.
     public var rectangleSize: CGSize = {
 #if os(iOS)
         CGSize(dimension: 56)
@@ -61,8 +57,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     )
 
     /// Ratio to which rectangle scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `0.98` on `watchOS`.
     public var rectanglePressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -74,7 +68,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Rectangle Border
-    /// Rectangle border width. Set to `0` points.
+    /// Rectangle border width.
     ///
     /// To hide border, set to `0`.
     public var rectangleBorderWidth: PointPixelMeasurement = .points(0)
@@ -94,8 +88,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var iconContentMode: ContentMode? = .fit
 
     /// Icon size.
-    /// Set to `(24, 24)` on `iOS`.
-    /// Set to `(26, 26)` on `watchOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
@@ -120,7 +112,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
@@ -132,9 +124,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Ratio to which icon scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var iconPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -164,8 +153,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var titleCaptionTextAndIconCaptionSpacing: CGFloat = 8
 
     /// Ratio to which caption scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `0.98` on `watchOS`.
     public var captionPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -188,8 +175,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var iconCaptionContentMode: ContentMode? = .fit
 
     /// Icon caption size.
-    /// Set to `(16, 16)` on `iOS`.
-    /// Set to `(18, 18)` on `watchOS`
     public var iconCaptionSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 16)
@@ -214,7 +199,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionOpacities: StateOpacities?
 
-    /// Icon caption font. Set to `nil.`
+    /// Icon caption font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconCaptionResizable` should be set to `false`, and `iconCaptionSize` should be set to `nil`.
@@ -227,8 +212,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
 
     // MARK: Properties - Caption - Text
     /// Title caption text line type.
-    /// Set to `multiline` with `center` alignment and `1...2` lines on `iOS`.
-    /// Set to `singleLine` on `watchOS`.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleCaptionTextLineType: TextLineType = {
@@ -255,8 +238,6 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title caption text font.
-    /// Set to `subheadline` on `iOS`.
-    /// Set to `body` on `watchOS`.
     public var titleCaptionTextFont: Font = {
 #if os(iOS)
         Font.subheadline

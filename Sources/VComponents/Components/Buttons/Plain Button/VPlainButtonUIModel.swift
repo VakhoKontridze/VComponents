@@ -32,9 +32,6 @@ public struct VPlainButtonUIModel: Sendable {
     public var titleTextAndIconSpacing: CGFloat = 8
 
     /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -78,9 +75,6 @@ public struct VPlainButtonUIModel: Sendable {
     public var iconContentMode: ContentMode? = .fit
 
     /// Icon size.
-    /// Set to `(24, 24)` on `iOS`.
-    /// Set to `(14, 14)` on `macOS`.
-    /// Set to `(26, 26)` on `watchOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
@@ -107,7 +101,7 @@ public struct VPlainButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
@@ -119,7 +113,7 @@ public struct VPlainButtonUIModel: Sendable {
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Hit Box
-    /// Hit box. Set to `zero.
+    /// Hit box.
     public var hitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change

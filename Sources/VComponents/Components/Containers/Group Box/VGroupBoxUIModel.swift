@@ -13,11 +13,6 @@ import VCore
 public struct VGroupBoxUIModel: Sendable {
     // MARK: Properties - Corners
     /// Corner radii.
-    /// Set to `15`s on `iOS`.
-    /// Set to `7.5`s on `macOS`.
-    /// Set to `20`s on `tvOS`.
-    /// Set to `10`s on `watchOS`.
-    /// Set to `15`s on `visionOS`.
     public var cornerRadii: RectangleCornerRadii = {
 #if os(iOS)
         RectangleCornerRadii(15)
@@ -53,11 +48,6 @@ public struct VGroupBoxUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width. 
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
-    /// Set to `0` point on `tvOS`.
-    /// Set to `0` point on `watchOS`.
-    /// Set to `0` point on `visionOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -91,11 +81,6 @@ public struct VGroupBoxUIModel: Sendable {
 
     // MARK: Properties - Content
     /// Content margins.
-    /// Set to `15`s on `iOS`.
-    /// Set to `7.5`s on `macOS`.
-    /// Set to `20`s on `tvOS`.
-    /// Set to `10`s on `watchOS`.
-    /// Set to `15`s on `visionOS`.
     public var contentMargins: Margins = {
 #if os(iOS)
         Margins(15)

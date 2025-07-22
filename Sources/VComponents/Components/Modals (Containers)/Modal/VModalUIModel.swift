@@ -23,10 +23,6 @@ public struct VModalUIModel: Sendable {
     public var preferredDimmingViewColor: Color?
     
     /// Modal size group.
-    /// Set to `fixed` with `(0.9, 0.6)` `fraction`s in portrait and `fixed` with `(0.5, 1)` `fraction`s in landscape on `iOS`.
-    /// Set to `fixed` with `(0.5, 0.8)` `fraction`s on `macOS`.
-    /// Set to `fixed` with `(0.85, 0.8)` `fraction`s on `tvOS`.
-    /// Set to `fixed` with `(0.5, 0.8)` `fraction`s on `visionOS`.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -78,7 +74,7 @@ public struct VModalUIModel: Sendable {
     }()
 
     // MARK: Properties - Corners
-    /// Corner radii. Set to to `15`s.
+    /// Corner radii.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
     /// Indicates if horizontal corners should switch to support RTL languages.
@@ -117,7 +113,7 @@ public struct VModalUIModel: Sendable {
     }
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)

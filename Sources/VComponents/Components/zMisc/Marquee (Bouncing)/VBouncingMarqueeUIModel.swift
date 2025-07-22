@@ -49,10 +49,10 @@ public struct VBouncingMarqueeUIModel: Sendable {
     /// Animation duration type.
     public var animationDurationType: MarqueeDurationType = .default
 
-    /// Animation delay. Set to `1` second.
+    /// Animation delay.
     public var animationDelay: Double = 1
 
-    /// Initial animation delay. Set to `1` second.
+    /// Initial animation delay.
     public var animationInitialDelay: Double = 1
     
     // MARK: Initializers

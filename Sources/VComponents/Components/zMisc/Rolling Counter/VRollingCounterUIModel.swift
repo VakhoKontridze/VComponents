@@ -85,7 +85,7 @@ public struct VRollingCounterUIModel: Sendable {
     /// Indicates if counter has grouping separator.
     public var hasGroupingSeparator: Bool = true
 
-    /// Grouping separator. Set to comma.
+    /// Grouping separator.
     ///
     /// To hide grouping separator, set `hasGroupingSeparator` to `false`.
     public var groupingSeparator: String = ","
@@ -108,7 +108,7 @@ public struct VRollingCounterUIModel: Sendable {
     public var groupingSeparatorTextOffsetY: CGFloat = 0
 
     // MARK: Properties - Decimal Separator
-    /// Decimal separator. Set to dot.
+    /// Decimal separator.
     public var decimalSeparator: String = "."
 
     /// Decimal separator text color.

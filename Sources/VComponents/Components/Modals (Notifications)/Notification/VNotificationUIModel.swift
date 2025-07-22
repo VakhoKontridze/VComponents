@@ -27,7 +27,6 @@ public struct VNotificationUIModel: Sendable {
     public var preferredDimmingViewColor: Color?
 
     /// Width group.
-    /// Set to `stretched` with `absolute` `margin` `15` in portrait and `fixed` with `fraction` `width` `0.5` in landscape.
     public var widthGroup: WidthGroup = .init(
         portrait: .stretched(margin: .absolute(15)),
         landscape: .fixed(width: .fraction(0.5))
@@ -54,7 +53,7 @@ public struct VNotificationUIModel: Sendable {
     }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -63,7 +62,7 @@ public struct VNotificationUIModel: Sendable {
     public var borderColor: Color = .clear
 
     // MARK: Properties - Notification Content
-    /// Body margins. Set to `15`s.
+    /// Body margins.
     public var bodyMargins: Margins = .init(15)
 
     /// Spacing between icon and title/messages texts.
@@ -96,7 +95,7 @@ public struct VNotificationUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacity: CGFloat?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
@@ -130,7 +129,7 @@ public struct VNotificationUIModel: Sendable {
     /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextLineType: TextLineType = .multiLine(
@@ -147,7 +146,7 @@ public struct VNotificationUIModel: Sendable {
     /// Title text font.
     public var titleTextFont: Font = .callout.weight(.semibold)
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -156,7 +155,7 @@ public struct VNotificationUIModel: Sendable {
     /// Message text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Message line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Message line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextLineType: TextLineType = .multiLine(
@@ -173,7 +172,7 @@ public struct VNotificationUIModel: Sendable {
     /// Message text font.
     public var messageTextFont: Font = .callout
 
-    /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Message text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -193,7 +192,7 @@ public struct VNotificationUIModel: Sendable {
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
 
     // MARK: Properties - Transition - Timeout Dismiss
-    /// Timeout duration. Set to `5` seconds.
+    /// Timeout duration.
     ///
     /// Has no effect unless `dismissType` includes `timeout`.
     public var timeoutDuration: TimeInterval = 5

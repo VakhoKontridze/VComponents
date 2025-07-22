@@ -26,7 +26,7 @@ public struct VDisclosureGroupUIModel: Sendable {
     }
 
     // MARK: Properties - Corners
-    /// Corner radii. Set to to `15`s.
+    /// Corner radii.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
     /// Indicates if horizontal corners should switch to support RTL languages.
@@ -64,8 +64,6 @@ public struct VDisclosureGroupUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width. 
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -112,11 +110,9 @@ public struct VDisclosureGroupUIModel: Sendable {
     )
 
     /// Header title tex font.
-    /// Set to `bold` `headline` on `iOS`.
-    /// Set to `bold` `headline` on `macOS`.
     public var headerTitleTextFont: Font = .headline.weight(.bold)
 
-    /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Header title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -126,13 +122,6 @@ public struct VDisclosureGroupUIModel: Sendable {
     public var disclosureButtonIcon: Image = ImageBook.chevronUp.renderingMode(.template)
 
     /// Model for customizing disclosure button.
-    /// `size` is set to `(30, 30)`,
-    /// `cornerRadius` is set to `16`,
-    /// `backgroundColors` are changed,
-    /// `iconSize` is set to `(12, 12)`,
-    /// `iconColors` are changed,
-    /// `hitBox` is set to `zero`,
-    /// `haptic` is set to `nil`.
     public var disclosureButtonSubUIModel: VRectangularButtonUIModel = {
         var uiModel: VRectangularButtonUIModel = .init()
 
@@ -181,7 +170,7 @@ public struct VDisclosureGroupUIModel: Sendable {
     )
 
     // MARK: Properties - Divider
-    /// Divider height. Set to `2`pixels.
+    /// Divider height.
     ///
     /// To hide divider, set to `0`.
     public var dividerHeight: PointPixelMeasurement = .pixels(2)

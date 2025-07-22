@@ -68,8 +68,6 @@ public struct VRangeSliderUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width.
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {
@@ -110,8 +108,6 @@ public struct VRangeSliderUIModel: Sendable {
 
     // MARK: Properties - Thumb Border
     /// Thumb border widths.
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
     ///
     /// To hide border, set to `0`.
     public var thumbBorderWidth: PointPixelMeasurement = {
@@ -146,8 +142,6 @@ public struct VRangeSliderUIModel: Sendable {
     )
 
     /// Thumb shadow radius.
-    /// Set to `2` on `iOS`.
-    /// Set to `1` on `macOS`.
     public var thumbShadowRadius: CGFloat = {
 #if os(iOS)
         2
@@ -159,8 +153,6 @@ public struct VRangeSliderUIModel: Sendable {
     }()
 
     /// Thumb shadow offset.
-    /// Set to `(0, 2)` on `iOS`.
-    /// Set to `(0, 1)` on `macOS`.
     public var thumbShadowOffset: CGPoint = {
 #if os(iOS)
         CGPoint(x: 0, y: 2)

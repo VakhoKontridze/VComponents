@@ -19,7 +19,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     /// Code length.
     public var length: Int = 6
 
-    /// Spacing type. Set to `default.`
+    /// Spacing type.`
     public var spacingType: SpacingType = .default
 
 #if !(os(macOS) || os(watchOS))
@@ -56,7 +56,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     public var characterBackgroundCornerRadius: CGFloat = 5
 
     // MARK: Properties - Border
-    /// Character background border width. Set to `0` points.
+    /// Character background border width.
     ///
     /// To hide border, set to `0`.
     public var characterBackgroundBorderWidth: PointPixelMeasurement = .points(0)
@@ -75,7 +75,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     /// Text font.
     public var textFont: Font = .body
 
-    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -87,7 +87,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     /// Placeholder text font.
     public var placeholderTextFont: Font = .body
 
-    /// Placeholder text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Placeholder text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

@@ -25,8 +25,6 @@ public struct VAlertUIModel: Sendable {
     public var preferredDimmingViewColor: Color?
 
     /// Alert width group.
-    /// Set to `fixed` `fraction` `0.75` in portrait and `fixed` `fraction` `0.5` in landscape on `iOS`.
-    /// Set to `fixed` `absolute`  `250` on `macOS`.
     public var widthGroup: WidthGroup = {
 #if os(iOS)
         WidthGroup(
@@ -44,8 +42,6 @@ public struct VAlertUIModel: Sendable {
     }()
 
     /// Vertical margin.
-    /// Set to `10` on `iOS`.
-    /// Set to `20` on `macOS`.
     ///
     /// Margin isn't noticeable most of the time, but when alert reaches maximum height, it will pad it.
     public var marginVertical: CGFloat = {
@@ -59,7 +55,7 @@ public struct VAlertUIModel: Sendable {
     }()
 
     // MARK: Properties - Corners
-    /// Corner radii. Set to to `20`s.
+    /// Corner radii.
     public var cornerRadii: RectangleCornerRadii = .init(20)
 
     /// Indicates if horizontal corners should switch to support RTL languages.
@@ -94,7 +90,7 @@ public struct VAlertUIModel: Sendable {
     }
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -115,7 +111,7 @@ public struct VAlertUIModel: Sendable {
     /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .center
 
-    /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.
+    /// Title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextLineType: TextLineType = .multiLine(
@@ -129,7 +125,7 @@ public struct VAlertUIModel: Sendable {
     /// Title text font.
     public var titleTextFont: Font = .headline.weight(.bold)
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -146,7 +142,7 @@ public struct VAlertUIModel: Sendable {
     /// Message title text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .center
 
-    /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
+    /// Message line type...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextLineType: TextLineType = .multiLine(
@@ -160,7 +156,7 @@ public struct VAlertUIModel: Sendable {
     /// Message text font.
     public var messageTextFont: Font = .subheadline
 
-    /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Message text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -174,7 +170,7 @@ public struct VAlertUIModel: Sendable {
     )
 
     // MARK: Properties - Alert Content - Content
-    /// Content margins  Set to `(0, 0, 10, 0)`.
+    /// Content margins.
     public var contentMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -184,8 +180,6 @@ public struct VAlertUIModel: Sendable {
 
     // MARK: Properties - Alert Content - Buttons
     /// Button height.
-    /// Set to `40` on `iOS`.
-    /// Set to `22` on `macOS`.
     public var buttonHeight: CGFloat = {
 #if os(iOS)
         40
@@ -197,8 +191,6 @@ public struct VAlertUIModel: Sendable {
     }()
 
     /// Button corner radius.
-    /// Set to `10` on `iOS`.
-    /// Set to `4` on `macOS`.
     public var buttonCornerRadius: CGFloat = {
 #if os(iOS)
         10
@@ -210,8 +202,6 @@ public struct VAlertUIModel: Sendable {
     }()
 
     /// Button title text font.
-    /// Set to `semibold` `callout` on `iOS`.
-    /// Set to `13` on `macOS`.
     public var buttonTitleTextFont: Font = {
 #if os(iOS)
         Font.callout.weight(.semibold)
@@ -222,7 +212,7 @@ public struct VAlertUIModel: Sendable {
 #endif
     }()
 
-    /// Button margins. Set to `(15, 15, 10, 15)`
+    /// Button margins.
     public var buttonMargins: Margins = .init(
         leading: 15,
         trailing: 15,
@@ -234,8 +224,6 @@ public struct VAlertUIModel: Sendable {
     public var horizontalButtonSpacing: CGFloat = 10
 
     /// Spacing between vertical buttons.
-    /// Set to `5` on `iOS`.
-    /// Set to `10` on `macOS`.
     public var verticalButtonSpacing: CGFloat = {
 #if os(iOS)
         5

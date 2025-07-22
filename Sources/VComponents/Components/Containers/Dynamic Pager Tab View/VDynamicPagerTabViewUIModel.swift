@@ -65,7 +65,7 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
     /// Tab item text font.
     public var tabItemTextFont: Font = .body
 
-    /// Tab item text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Tab item text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

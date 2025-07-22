@@ -12,11 +12,6 @@ import SwiftUI
 public struct VContinuousSpinnerUIModel: Sendable {
     // MARK: Properties
     /// Dimension.
-    /// Set to `15` on `iOS`.
-    /// Set to `25` on `macOS`.
-    /// Set to `30` on `tvOS`.
-    /// Set to `15` on `watchOS`.
-    /// Set to `30` on `visionOS`.
     public var dimension: CGFloat = {
 #if os(iOS)
         15
@@ -35,11 +30,6 @@ public struct VContinuousSpinnerUIModel: Sendable {
     public var length: CGFloat = 0.75
 
     /// Thickness.
-    /// Set to `2` on `watchOS`.
-    /// Set to `3` on `macOS`.
-    /// Set to `4` on `tvOS`.
-    /// Set to `2` on `watchOS`.
-    /// Set to `4` on `visionOS`.
     public var thickness: CGFloat = {
 #if os(iOS)
         2

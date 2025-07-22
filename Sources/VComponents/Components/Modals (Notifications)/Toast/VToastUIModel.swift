@@ -27,7 +27,6 @@ public struct VToastUIModel: Sendable {
     public var preferredDimmingViewColor: Color?
 
     /// Width group.
-    /// Set to `wrapped` with `absolute` `margin` `15` in portrait and `wrapped` with `fraction` `maxWidth` `0.5` and `absolute` `margin` `15` in landscape.
     public var widthGroup: WidthGroup = .init(
         portrait: .wrapped(margin: .absolute(15)),
         landscape: .wrapped(maxWidth: .fraction(0.5), margin: .absolute(15))
@@ -48,7 +47,7 @@ public struct VToastUIModel: Sendable {
     public var backgroundColor: Color = .dynamic(Color(235, 235, 235), Color(60, 60, 60))
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -81,7 +80,7 @@ public struct VToastUIModel: Sendable {
     /// Text font.
     public var textFont: Font = .headline
 
-    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -101,7 +100,7 @@ public struct VToastUIModel: Sendable {
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
 
     // MARK: Properties - Transition - Timeout Dismiss
-    /// Timeout duration. Set to `3` seconds.
+    /// Timeout duration.
     ///
     /// Has no effect unless `dismissType` includes `timeout`.
     public var timeoutDuration: TimeInterval = 3

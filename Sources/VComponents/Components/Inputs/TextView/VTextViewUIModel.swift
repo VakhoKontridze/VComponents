@@ -53,7 +53,7 @@ public struct VTextViewUIModel: Sendable {
     )
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -65,7 +65,7 @@ public struct VTextViewUIModel: Sendable {
     /// Header title text frame alignment.
     public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
+    /// Header title text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextLineType: TextLineType = .multiLine(
@@ -83,7 +83,7 @@ public struct VTextViewUIModel: Sendable {
     /// Header title text font.
     public var headerTitleTextFont: Font = .footnote
 
-    /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Header title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -95,7 +95,7 @@ public struct VTextViewUIModel: Sendable {
     /// Footer title text frame alignment.
     public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
+    /// Footer title text line type...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextLineType: TextLineType = .multiLine(
@@ -113,7 +113,7 @@ public struct VTextViewUIModel: Sendable {
     /// Footer title text font.
     public var footerTitleTextFont: Font = .footnote
 
-    /// Footer title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Footer title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -126,7 +126,7 @@ public struct VTextViewUIModel: Sendable {
     public var textViewContentMargins: Margins = .init(15)
 
     // MARK: Properties - Text
-    /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
+    /// Text line type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textLineType: TextLineType = .multiLine(
@@ -144,7 +144,7 @@ public struct VTextViewUIModel: Sendable {
     /// Text font.
     public var textFont: Font = .body
 
-    /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))

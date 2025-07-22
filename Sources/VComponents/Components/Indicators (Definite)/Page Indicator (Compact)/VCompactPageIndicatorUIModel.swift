@@ -18,11 +18,6 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Dot spacing.
-    /// Set to `8` on `iOS`.
-    /// Set to `8` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `4` on `watchOS`.
-    /// Set to `10` on `visionOS`.
     public var spacing: CGFloat = {
 #if os(iOS)
         8
@@ -47,19 +42,14 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
     public var centerDots: Int = 3
 
-    /// Number of side dots. Set to the half of difference between `visibleDots` and `centerDots`.
+    /// Number of side dots.
     public var sideDots: Int { (visibleDots - centerDots) / 2 }
 
-    /// Number of middle dots. Set to the half of `visibleDots`.
+    /// Number of middle dots.
     public var middleDots: Int { visibleDots / 2 }
 
     // MARK: Properties - Dot
     /// Dot width, but height for vertical layout.
-    /// Set to `8` on `iOS`.
-    /// Set to `8` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `4` on `watchOS`.
-    /// Set to `10` on `visionOS`.
     public var dotWidth: CGFloat = {
 #if os(iOS)
         8
@@ -75,11 +65,6 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     }()
 
     /// Dot height, but width for vertical layout.
-    /// Set to `8` on `iOS`.
-    /// Set to `8` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `4` on `watchOS`.
-    /// Set to `10` on `visionOS`.
     public var dotHeight: CGFloat = {
 #if os(iOS)
         8
@@ -100,11 +85,6 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     public var edgeDotScale: CGFloat = 0.5
 
     /// Dot corner radii.
-    /// Set to `4`s on `iOS`.
-    /// Set to `4`s on `macOS`.
-    /// Set to `5`s on `tvOS`.
-    /// Set to `2`s on `watchOS`.
-    /// Set to `5`s on `visionOS`.
     ///
     /// Applicable on when `init` without dot content is used.
     public var dotCornerRadii: DotStateDimensions = {

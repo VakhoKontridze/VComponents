@@ -23,9 +23,6 @@ public struct VWrappedButtonUIModel: Sendable {
     }
 
     /// Height.
-    /// Set to `32` on `iOS`.
-    /// Set to `32` on `macOS`.
-    /// Set to `48` on `watchOS`.
     public var height: CGFloat = {
 #if os(iOS)
         32
@@ -40,9 +37,6 @@ public struct VWrappedButtonUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Corner radius.
-    /// Set to `16` on `iOS`.
-    /// Set to `16` on `macOS`.
-    /// Set to `24` on `watchOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         16
@@ -64,9 +58,6 @@ public struct VWrappedButtonUIModel: Sendable {
     )
 
     /// Ratio to which background scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -80,7 +71,7 @@ public struct VWrappedButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -101,9 +92,6 @@ public struct VWrappedButtonUIModel: Sendable {
     public var titleTextAndIconSpacing: CGFloat = 8
 
     /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
-    /// Set to `0.98` on `watchOS`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -124,9 +112,6 @@ public struct VWrappedButtonUIModel: Sendable {
     public var titleTextColors: StateColors = .init(Color.white)
 
     /// Title text font.
-    /// Set to `semibold` `subheadline` on `iOS`.
-    /// Set to `semibold` `body` on `macOS`.
-    /// Set to `semibold` `body` on `watchOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.subheadline.weight(.semibold)
@@ -139,7 +124,7 @@ public struct VWrappedButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -156,9 +141,6 @@ public struct VWrappedButtonUIModel: Sendable {
     public var iconContentMode: ContentMode? = .fit
 
     /// Icon size.
-    /// Set to `(16, 16)` on `iOS`.
-    /// Set to `(16, 16)` on `macOS`.
-    /// Set to `(18, 18)` on `watchOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 16)
@@ -181,7 +163,7 @@ public struct VWrappedButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.

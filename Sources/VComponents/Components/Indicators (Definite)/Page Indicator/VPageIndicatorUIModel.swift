@@ -22,11 +22,6 @@ public struct VPageIndicatorUIModel: Sendable {
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Dot spacing.
-    /// Set to `8` on `iOS`.
-    /// Set to `8` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `4` on `watchOS`.
-    /// Set to `10` on `visionOS`.
     public var spacing: CGFloat = {
 #if os(iOS)
         8
@@ -43,11 +38,6 @@ public struct VPageIndicatorUIModel: Sendable {
 
     // MARK: Properties - Dot
     /// Dot widths, but heights for vertical layout.
-    /// Set to `8`s on `iOS`.
-    /// Set to `8`s on `macOS`.
-    /// Set to `10`s on `tvOS`.
-    /// Set to `4`s on `watchOS`.
-    /// Set to `10`s on `visionOS`.
     ///
     /// Set to `nil`s, to make dot stretch to take available space.
     public var dotWidths: DotStateOptionalDimensions = {
@@ -65,11 +55,6 @@ public struct VPageIndicatorUIModel: Sendable {
     }()
 
     /// Dot heights, but widths for vertical layout.
-    /// Set to `8`s on `iOS`.
-    /// Set to `8`s on `macOS`.
-    /// Set to `10`s on `tvOS`.
-    /// Set to `4`s on `watchOS`.
-    /// Set to `10`s on `visionOS`.
     public var dotHeights: DotStateDimensions = {
 #if os(iOS)
         DotStateDimensions(8)
@@ -85,11 +70,6 @@ public struct VPageIndicatorUIModel: Sendable {
     }()
 
     /// Dot corner radii.
-    /// Set to `4`s on `iOS`.
-    /// Set to `4`s on `macOS`.
-    /// Set to `5`s on `tvOS`.
-    /// Set to `2`s on `watchOS`.
-    /// Set to `5`s on `visionOS`.
     ///
     /// Applicable on when `init` without dot content is used.
     public var dotCornerRadii: DotStateDimensions = {
@@ -137,7 +117,7 @@ public struct VPageIndicatorUIModel: Sendable {
     }()
 
     // MARK: Properties - Dot Border
-    /// Dot border widths. Set to `zero`
+    /// Dot border widths.
     ///
     /// To hide border, set to `zero`.
     ///

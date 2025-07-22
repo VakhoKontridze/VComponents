@@ -26,8 +26,6 @@ public struct VBottomSheetUIModel: Sendable {
     public var preferredDimmingViewColor: Color?
 
     /// Bottom sheet size group.
-    /// Set to `[1, (0.6, 0.6, 0.9)]` `fraction`s in portrait and `(0.7, 0.9)` `fraction`s in landscape on `iOS`.
-    /// Set to `(0.8, 0.8)` `fraction`s on `macOS`.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -163,7 +161,7 @@ public struct VBottomSheetUIModel: Sendable {
     public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
 
     // MARK: Properties - Transition - Snap
-    /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
+    /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled.
     public var velocityToSnapToNextHeight: CGFloat = 600
 
     /// Height snapping animation between `min`, `ideal`, and `max` states.
@@ -378,7 +376,7 @@ public struct VBottomSheetUIModel: Sendable {
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to  `swipe`.
+        /// Default value.
         public static var `default`: Self { .swipe }
     }
 }

@@ -16,11 +16,6 @@ public struct VProgressBarUIModel: Sendable {
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Progress bar height, but width for vertical layout.
-    /// Set to `10` on `iOS`.
-    /// Set to `10` on `macOS`.
-    /// Set to `10` on `tvOS`.
-    /// Set to `13.5` on `watchOS`.
-    /// Set to `10` on `visionOS`.
     public var height: CGFloat = {
 #if os(iOS)
         10
@@ -37,11 +32,6 @@ public struct VProgressBarUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Progress bar corner radius.
-    /// Set to `5` on `iOS`.
-    /// Set to `5` on `macOS`.
-    /// Set to `5` on `tvOS`.
-    /// Set to `6.75` on `watchOS`
-    /// Set to `5` on `visionOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         5
@@ -93,11 +83,6 @@ public struct VProgressBarUIModel: Sendable {
 
     // MARK: Properties - Border
     /// Border width.
-    /// Set to `0` point on `iOS`.
-    /// Set to `1` pixel on `macOS`.
-    /// Set to `0` point on `tvOS`.
-    /// Set to `0` point on `watchOS`.
-    /// Set to `0` point on `visionOS`.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = {

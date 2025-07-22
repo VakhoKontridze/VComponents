@@ -24,8 +24,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     }
 
     /// Height.
-    /// Set to `48` on `iOS`.
-    /// Set to `40` on `macOS`.
     public var height: CGFloat = {
 #if os(iOS)
         48
@@ -43,8 +41,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
 
     // MARK: Properties - Corners
     /// Corner radius.
-    /// Set to `14` on `iOS`.
-    /// Set to `12` on `macOS`.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         14
@@ -65,8 +61,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     )
 
     /// Ratio to which background scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -78,7 +72,7 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Border
-    /// Border width. Set to `0` points.
+    /// Border width.
     ///
     /// To hide border, set to `0`.
     public var borderWidth: PointPixelMeasurement = .points(0)
@@ -99,8 +93,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     public var titleTextAndIconSpacing: CGFloat = 8
 
     /// Ratio to which label scales down on press.
-    /// Set to `1` on `iOS`.
-    /// Set to `1` on `macOS`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -119,8 +111,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     public var titleTextColors: StateColors = .init(Color.white)
 
     /// Title text font.
-    /// Set to `semibold` `callout` on `iOS`.
-    /// Set to `semibold` `16` on `macOS`.
     public var titleTextFont: Font = {
 #if os(iOS)
         Font.callout.weight(.semibold)
@@ -131,7 +121,7 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
@@ -148,8 +138,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     public var iconContentMode: ContentMode? = .fit
 
     /// Icon size.
-    /// Set to `(18, 18)` on `iOS`.
-    /// Set to `(16, 16)` on `macOS`.
     public var iconSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 18)
@@ -170,7 +158,7 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
 
-    /// Icon font. Set to `nil.`
+    /// Icon font.`
     ///
     /// Can be used for setting different weight to SF symbol icons.
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
@@ -183,9 +171,6 @@ public struct VLoadingStretchedButtonUIModel: Sendable {
 
     // MARK: Properties - Spinner
     /// Model for customizing spinner.
-    /// `dimension` is set to `16`.
-    /// `thickness` is set to `2`.
-    /// `spinnerColor` is changed.
     public var spinnerSubUIModel: VContinuousSpinnerUIModel = {
         var uiModel: VContinuousSpinnerUIModel = .init()
 
