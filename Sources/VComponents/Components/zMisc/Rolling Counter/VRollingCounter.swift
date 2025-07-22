@@ -168,14 +168,14 @@ public struct VRollingCounter: View {
         )
 
         withAnimation(
-            appearance.highlightAnimation?.toSwiftUIAnimation,
+            appearance.highlightAnimation,
             {
                 components = newComponents
                 operation = Operation(oldValue: oldValue, newValue: newValue)
             },
             completion: {
                 withAnimation(
-                    appearance.dehighlightAnimation?.toSwiftUIAnimation,
+                    appearance.dehighlightAnimation,
                     {
                         operation = .none
 

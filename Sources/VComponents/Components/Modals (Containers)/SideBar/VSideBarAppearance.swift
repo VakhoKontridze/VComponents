@@ -115,13 +115,13 @@ public struct VSideBarAppearance: Sendable {
 
     // MARK: Properties - Transition - Appear
     /// Appear animation.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+    public var appearAnimation: Animation? = .easeInOut(duration: 0.3)
 
     // MARK: Properties - Transition - Disappear
     /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+    public var disappearAnimation: Animation? = .easeInOut(duration: 0.3)
 
     // MARK: Properties - Transition - Swipe Dismiss
     /// Ratio of width to drag side bar by to initiate dismiss.
@@ -138,7 +138,7 @@ public struct VSideBarAppearance: Sendable {
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
     /// Has no effect unless `dismissType` includes `swipe`.
-    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+    public var swipeDismissAnimation: Animation? = .easeInOut(duration: 0.2)
 
     // MARK: Properties - Keyboard Responsiveness
     /// Indicates if keyboard is dismissed when interface orientation changes.

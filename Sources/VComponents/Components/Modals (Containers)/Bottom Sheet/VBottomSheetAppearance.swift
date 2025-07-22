@@ -134,13 +134,13 @@ public struct VBottomSheetAppearance: Sendable {
 
     // MARK: Properties - Transition - Appear
     /// Appear animation.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+    public var appearAnimation: Animation? = .easeInOut(duration: 0.3)
 
     // MARK: Properties - Transition - Disappear
     /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+    public var disappearAnimation: Animation? = .easeInOut(duration: 0.3)
 
     // MARK: Properties - Transition - Swipe Dismiss
     /// Ratio of distance to drag bottom sheet by, past the min height, relative to it, to initiate dismiss.
@@ -158,7 +158,7 @@ public struct VBottomSheetAppearance: Sendable {
     /// Swipe dismiss animation.
     ///
     /// Has no effect unless `dismissType` includes `swipe`.
-    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
+    public var swipeDismissAnimation: Animation? = .easeInOut(duration: 0.15)
 
     // MARK: Properties - Transition - Snap
     /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled.

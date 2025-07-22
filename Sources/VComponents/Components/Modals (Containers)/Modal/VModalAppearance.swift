@@ -135,11 +135,11 @@ public struct VModalAppearance: Sendable {
 
     // MARK: Properties - Transition - Appear
     /// Appear animation.
-    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+    public var appearAnimation: Animation? = .linear(duration: 0.05)
 
     // MARK: Properties - Transition - Disappear
     /// Disappear animation.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+    public var disappearAnimation: Animation? = .easeIn(duration: 0.05)
 
     // MARK: Properties - Keyboard Responsiveness
     /// Indicates if keyboard is dismissed when interface orientation changes.

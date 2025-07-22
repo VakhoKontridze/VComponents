@@ -243,7 +243,7 @@ struct VAlert<Content>: View
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            appearance.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -252,7 +252,7 @@ struct VAlert<Content>: View
         completion: @escaping () -> Void
     ) {
         withAnimation(
-            appearance.disappearAnimation?.toSwiftUIAnimation,
+            appearance.disappearAnimation,
             { isPresentedInternally = false },
             completion: completion
         )

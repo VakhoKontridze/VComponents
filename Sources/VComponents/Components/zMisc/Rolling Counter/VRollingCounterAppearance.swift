@@ -150,10 +150,10 @@ public struct VRollingCounterAppearance: Sendable {
 
     // MARK: Properties - Transition - Highlight/Dehighlight
     /// Highlight and rolling animation.
-    public var highlightAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.25)
+    public var highlightAnimation: Animation? = .easeOut(duration: 0.25)
 
     /// Dehighlight animation.
-    public var dehighlightAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.25)
+    public var dehighlightAnimation: Animation? = .easeOut(duration: 0.25)
 
     // MARK: Initializers
     /// Initializes appearance with default values.

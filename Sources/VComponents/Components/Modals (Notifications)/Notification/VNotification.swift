@@ -272,7 +272,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         playHapticEffect()
 
         withAnimation(
-            appearance.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation,
             { isPresentedInternally = true },
             completion: dismissFromTimeout
         )
@@ -281,7 +281,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private func animateOut(
         completion: @escaping () -> Void
     ) {
-        let animation: BasicAnimation? = {
+        let animation: Animation? = {
             if isBeingDismissedFromSwipe {
                 appearance.swipeDismissAnimation
             } else {
@@ -290,7 +290,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         }()
 
         withAnimation(
-            animation?.toSwiftUIAnimation,
+            animation,
             { isPresentedInternally = false },
             completion: completion
         )

@@ -183,13 +183,13 @@ public struct VNotificationAppearance: Sendable {
 
     // MARK: Properties - Transition - Appear
     /// Appear animation.
-    public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
+    public var appearAnimation: Animation? = .easeOut(duration: 0.2)
 
     // MARK: Properties - Transition - Disappear
     /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
-    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
+    public var disappearAnimation: Animation? = .easeIn(duration: 0.2)
 
     // MARK: Properties - Transition - Timeout Dismiss
     /// Timeout duration.
@@ -212,7 +212,7 @@ public struct VNotificationAppearance: Sendable {
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
     /// Has no effect unless `dismissType` includes `swipe`.
-    public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
+    public var swipeDismissAnimation: Animation? = .easeInOut(duration: 0.2)
 
     // MARK: Properties - Shadow
     /// Shadow color.

@@ -272,7 +272,7 @@ struct VBottomSheet<Content>: View
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            appearance.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -280,7 +280,7 @@ struct VBottomSheet<Content>: View
     private func animateOut(
         completion: @escaping () -> Void
     ) {
-        let animation: BasicAnimation? = {
+        let animation: Animation? = {
             if isBeingDismissedFromSwipe {
                 appearance.swipeDismissAnimation
             } else {
@@ -289,7 +289,7 @@ struct VBottomSheet<Content>: View
         }()
 
         withAnimation(
-            animation?.toSwiftUIAnimation,
+            animation,
             { isPresentedInternally = false },
             completion: completion
         )
