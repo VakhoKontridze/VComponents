@@ -15,10 +15,10 @@ import VCore
 @available(visionOS, unavailable)
 public struct VSliderUIModel: Sendable {
     // MARK: Properties - Global
-    /// Direction. Set to `leftToRight`.
+    /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight
 
-    /// Slider height, but width for vertical layout. Set to `10`.
+    /// Slider height, but width for vertical layout.
     public var height: CGFloat = {
 #if os(iOS)
         10
@@ -30,7 +30,7 @@ public struct VSliderUIModel: Sendable {
     }()
 
     // MARK: Properties - Corners
-    /// Slider corner radius. Set to `5`.
+    /// Slider corner radius.
     public var cornerRadius: CGFloat = {
 #if os(iOS)
         5
@@ -82,7 +82,7 @@ public struct VSliderUIModel: Sendable {
         disabled: Color.blue.opacity(0.3)
     )
 
-    /// Indicates if slider bar rounds progress view trailing corners. Set to `true`.
+    /// Indicates if slider bar rounds progress view trailing corners.
     public var roundsProgressViewTrailingCorners: Bool = true
 
     // MARK: Properties - Border
@@ -116,12 +116,12 @@ public struct VSliderUIModel: Sendable {
     }()
 
     // MARK: Properties - Thumb
-    /// Thumb size. Set to `(20, 20)`.
+    /// Thumb size.
     ///
     /// To hide thumb, set to `0`.
     public var thumbSize: CGSize = .init(dimension: 20)
     
-    /// Thumb corner radius. Set to `10`.
+    /// Thumb corner radius.
     public var thumbCornerRadius: CGFloat = 10
 
     /// Thumb colors.
@@ -191,7 +191,7 @@ public struct VSliderUIModel: Sendable {
     }()
 
     // MARK: Properties - Transition - Progress
-    /// Indicates if `progress` animation is applied. Set to `true`.
+    /// Indicates if `progress` animation is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -201,7 +201,7 @@ public struct VSliderUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesProgressAnimation: Bool = true
 
-    /// Progress animation. Set to `nil`.
+    /// Progress animation.
     public var progressAnimation: Animation?
 
     // MARK: Initializers

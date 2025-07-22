@@ -62,7 +62,7 @@ public struct VAlertUIModel: Sendable {
     /// Corner radii. Set to to `20`s.
     public var cornerRadii: RectangleCornerRadii = .init(20)
 
-    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    /// Indicates if horizontal corners should switch to support RTL languages.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
@@ -103,7 +103,7 @@ public struct VAlertUIModel: Sendable {
     public var borderColor: Color = .clear
 
     // MARK: Properties - Alert Content
-    /// Additional margins applied to title text, message text, and content as a whole. Set to `(15, 15, 15, 10)`.
+    /// Additional margins applied to title text, message text, and content as a whole.
     public var titleTextMessageTextAndContentMargins: Margins = .init(
         leading: 15,
         trailing: 15,
@@ -112,7 +112,7 @@ public struct VAlertUIModel: Sendable {
     )
 
     // MARK: Properties - Alert Content - Title
-    /// Title text frame alignment. Set to `center`.
+    /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .center
 
     /// Title text line type. Set to `multiline` with `center` alignment and `1...2` lines.
@@ -126,7 +126,7 @@ public struct VAlertUIModel: Sendable {
     /// Title text color.
     public var titleTextColor: Color = .primary
 
-    /// Title text font. Set to `bold` `headline`.
+    /// Title text font.
     public var titleTextFont: Font = .headline.weight(.bold)
 
     /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -134,7 +134,7 @@ public struct VAlertUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Title text margins. Set to `(0, 0, 5, 3)`.
+    /// Title text margins.
     public var titleTextMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -143,7 +143,7 @@ public struct VAlertUIModel: Sendable {
     )
 
     // MARK: Properties - Alert Content - Message
-    /// Message title text frame alignment. Set to `center`.
+    /// Message title text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .center
 
     /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
@@ -157,7 +157,7 @@ public struct VAlertUIModel: Sendable {
     /// Message text color.
     public var messageTextColor: Color = .primary
 
-    /// Message text font. Set to `subheadline`.
+    /// Message text font.
     public var messageTextFont: Font = .subheadline
 
     /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -165,7 +165,7 @@ public struct VAlertUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Message text margins. Set to `(0, 0, 3, 5)`.
+    /// Message text margins.
     public var messageTextMargins: Margins = .init(
         leading: 0,
         trailing: 0,
@@ -230,7 +230,7 @@ public struct VAlertUIModel: Sendable {
         bottom: 15
     )
 
-    /// Spacing between horizontal buttons. Set to `10`.
+    /// Spacing between horizontal buttons.
     public var horizontalButtonSpacing: CGFloat = 10
 
     /// Spacing between vertical buttons.
@@ -247,7 +247,7 @@ public struct VAlertUIModel: Sendable {
     }()
 
 #if os(iOS)
-    /// Button haptic feedback style. Set to `nil`.
+    /// Button haptic feedback style.
     public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #endif
 
@@ -350,29 +350,29 @@ public struct VAlertUIModel: Sendable {
     }
 
     // MARK: Properties - Transition - Appear/Disappear
-    /// Scale effect during appear and disappear. Set to `1.01`.
+    /// Scale effect during appear and disappear.
     public var scaleEffect: CGFloat = 1.01
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `linear` with duration `0.05`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeIn` with duration `0.05`.
+    /// Disappear animation.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    /// Indicates if keyboard is dismissed when interface orientation changes.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Shadow
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `10`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 10
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Initializers

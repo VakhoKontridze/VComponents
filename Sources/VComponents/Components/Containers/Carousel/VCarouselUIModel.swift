@@ -13,11 +13,11 @@ import VCore
 @available(tvOS, unavailable)
 public struct VCarouselUIModel: Sendable {
     // MARK: Properties - Global
-    /// Indicates if scrolling is enabled. Set to `true`.
+    /// Indicates if scrolling is enabled.
     public var isScrollingEnabled: Bool = true
 
     // MARK: Properties - Cards
-    /// Cards alignment. Set to `center`.
+    /// Cards alignment.
     public var cardsAlignment: VerticalAlignment = .center
 
     /// Spacing between cards.
@@ -61,10 +61,10 @@ public struct VCarouselUIModel: Sendable {
 #endif
     }()
 
-    /// Card top margin. Set to `0`.
+    /// Card top margin.
     public var cardMarginTop: CGFloat = 0
 
-    /// Card bottom margin. Set to `0`.
+    /// Card bottom margin.
     public var cardMarginBottom: CGFloat = 0
 
     /// Card height scales. Set to `1`s.
@@ -77,14 +77,14 @@ public struct VCarouselUIModel: Sendable {
     /// Card shadow color.
     public var cardShadowColor: Color = .clear
 
-    /// Card shadow radius. Set to `0`.
+    /// Card shadow radius.
     public var cardShadowRadius: CGFloat = 0
 
-    /// Card shadow offset. Set to `zero`.
+    /// Card shadow offset.
     public var cardShadowOffset: CGPoint = .zero
 
     // MARK: Properties - Transition - Selection
-    /// Indicates if `appliesSelectionAnimation` is applied. Set to `true`.
+    /// Indicates if `appliesSelectionAnimation` is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -94,7 +94,7 @@ public struct VCarouselUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesSelectionAnimation: Bool = true
 
-    /// State change animation. Set to `default`.
+    /// State change animation.
     public var selectionAnimation: Animation? = .default
 
     // MARK: Initializers

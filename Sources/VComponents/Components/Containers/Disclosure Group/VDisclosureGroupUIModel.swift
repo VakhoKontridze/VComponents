@@ -29,7 +29,7 @@ public struct VDisclosureGroupUIModel: Sendable {
     /// Corner radii. Set to to `15`s.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
-    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    /// Indicates if horizontal corners should switch to support RTL languages.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
@@ -94,13 +94,13 @@ public struct VDisclosureGroupUIModel: Sendable {
     }()
 
     // MARK: Properties - Header
-    /// Header margins. Set to `(15, 15, 10, 10)`.
+    /// Header margins.
     public var headerMargins: Margins = .init(
         horizontal: 15,
         vertical: 10
     )
 
-    /// Indicates if disclosure group expands and collapses from header tap. Set to `true`.
+    /// Indicates if disclosure group expands and collapses from header tap.
     public var expandsAndCollapsesOnHeaderTap: Bool = true
 
     // MARK: Properties - Header - Text
@@ -189,18 +189,18 @@ public struct VDisclosureGroupUIModel: Sendable {
     /// Divider color.
     public var dividerColor: Color = .platformDynamic(Color(60, 60, 60, 0.3), Color(120, 120, 120, 0.6))
 
-    /// Divider margins. Set to `(15, 15, 0, 0)`.
+    /// Divider margins.
     public var dividerMargins: Margins = .init(
         horizontal: 15,
         vertical: 0
     )
 
     // MARK: Properties - Content
-    /// Content margins. Set to `zero`.
+    /// Content margins.
     public var contentMargins: Margins = .zero
 
     // MARK: Properties - Transition - Expand/Collapse
-    /// Indicates if `expandCollapse` animation is applied. Set to `true`.
+    /// Indicates if `expandCollapse` animation is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -212,7 +212,7 @@ public struct VDisclosureGroupUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesExpandCollapseAnimation: Bool = true
 
-    /// Expand and collapse animation. Set to `default`.
+    /// Expand and collapse animation.
     public var expandCollapseAnimation: Animation? = .default
 
     // MARK: Initializers

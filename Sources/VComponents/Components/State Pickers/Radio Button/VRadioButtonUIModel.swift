@@ -146,7 +146,7 @@ public struct VRadioButtonUIModel: Sendable {
     )
 
     // MARK: Properties - Label
-    /// Indicates if label is clickable. Set to `true`.
+    /// Indicates if label is clickable.
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
@@ -158,7 +158,7 @@ public struct VRadioButtonUIModel: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor. Set to `1`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 1
 
     /// Title text colors.
@@ -203,11 +203,11 @@ public struct VRadioButtonUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Hit Box
-    /// Radio button hit box. Set to `zero`.
+    /// Radio button hit box.
     public var radioButtonHitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if `stateChangeAnimation` is applied. Set to `true`.
+    /// Indicates if `stateChangeAnimation` is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -217,12 +217,12 @@ public struct VRadioButtonUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesStateChangeAnimation: Bool = true
 
-    /// State change animation. Set to `easeIn` with duration `0.1`.
+    /// State change animation.
     public var stateChangeAnimation: Animation? = .easeIn(duration: 0.1)
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `light`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #endif
     

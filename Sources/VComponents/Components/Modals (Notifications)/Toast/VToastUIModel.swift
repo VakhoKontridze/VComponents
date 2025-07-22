@@ -33,14 +33,14 @@ public struct VToastUIModel: Sendable {
         landscape: .wrapped(maxWidth: .fraction(0.5), margin: .absolute(15))
     )
 
-    /// Margin from presented edge. Set to `10`.
+    /// Margin from presented edge.
     public var marginPresentedEdge: CGFloat = 10
 
-    /// Edge from which toast appears, and to which it disappears. Set to `bottom`.
+    /// Edge from which toast appears, and to which it disappears.
     public var presentationEdge: VerticalEdge = .bottom
 
     // MARK: Properties - Corners
-    /// Corner radius type. Set to `default`.
+    /// Corner radius type.
     public var cornerRadiusType: CornerRadiusType = .default
 
     // MARK: Properties - Background
@@ -57,28 +57,28 @@ public struct VToastUIModel: Sendable {
     public var borderColor: Color = .clear
 
     // MARK: Properties - Toast Content
-    /// Body horizontal alignment. Set to `center`.
+    /// Body horizontal alignment.
     public var bodyHorizontalAlignment: HorizontalAlignment = .center
 
-    /// Body margins. Set to `(20, 12)`.
+    /// Body margins.
     public var bodyMargins: Margins = .init(
         horizontal: 20,
         vertical: 12
     )
 
     // MARK: Properties - Toast Content - Text
-    /// Text line type. Set to `singleLine`.
+    /// Text line type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var textLineType: TextLineType = .singleLine
 
-    /// Text minimum scale factor. Set to `0.75`.
+    /// Text minimum scale factor.
     public var textMinimumScaleFactor: CGFloat = 0.75
 
     /// Text color.
     public var textColor: Color = .primary
 
-    /// Text font. Set to `headline`.
+    /// Text font.
     public var textFont: Font = .headline
 
     /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -87,15 +87,15 @@ public struct VToastUIModel: Sendable {
     public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Dismiss Type
-    /// Method of dismissing side bar. Set to `default`.
+    /// Method of dismissing side bar.
     public var dismissType: DismissType = .default
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `easeOut` with duration `0.2`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeIn` with duration `0.2`.
+    /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
@@ -107,7 +107,7 @@ public struct VToastUIModel: Sendable {
     public var timeoutDuration: TimeInterval = 3
 
     // MARK: Properties - Transition - Swipe Dismiss
-    /// Ratio of height to drag toast by to initiate dismiss. Set to `0.2`.
+    /// Ratio of height to drag toast by to initiate dismiss.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -116,7 +116,7 @@ public struct VToastUIModel: Sendable {
 
     func swipeDismissDistance(in containerDimension: CGFloat) -> CGFloat { swipeDismissDistanceHeightRatio * containerDimension }
 
-    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.2`.
+    /// Swipe dismiss animation.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -127,15 +127,15 @@ public struct VToastUIModel: Sendable {
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `20`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 20
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback type. Set to `nil`.
+    /// Haptic feedback type.
     public var haptic: UINotificationFeedbackGenerator.FeedbackType?
 #endif
 
@@ -241,7 +241,7 @@ public struct VToastUIModel: Sendable {
         case rounded(cornerRadius: CGFloat)
 
         // MARK: Initializers
-        /// Default value. Set to `rounded`.
+        /// Default value.
         public static var `default`: Self { .capsule }
     }
 
@@ -271,7 +271,7 @@ public struct VToastUIModel: Sendable {
         }
 
         // MARK: Initializers
-        /// Default value. Set to `singleLine`.
+        /// Default value.
         public static var `default`: Self { .singleLine }
     }
 
@@ -286,7 +286,7 @@ public struct VToastUIModel: Sendable {
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to `all`.
+        /// Default value.
         public static var `default`: DismissType { .all }
     }
 }

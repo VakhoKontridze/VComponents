@@ -16,32 +16,32 @@ import VCore
 @available(visionOS, unavailable)
 public struct VTextFieldUIModel: Sendable {
     // MARK: Properties - Global
-    /// Spacing between header, textfield, and footer. Set to `3`.
+    /// Spacing between header, textfield, and footer.
     public var headerTextFieldAndFooterSpacing: CGFloat = 3
 
-    /// Textfield height. Set to `50`.
+    /// Textfield height.
     public var height: CGFloat = 50
 
 #if !(os(macOS) || os(watchOS))
-    /// Keyboard type. Set to `default`.
+    /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
 #endif
 
 #if !(os(macOS) || os(watchOS))
-    /// Text content type. Set to `nil`.
+    /// Text content type.
     public var textContentType: UITextContentType?
 #endif
 
-    /// Indicates if auto correction is enabled. Set to `nil`.
+    /// Indicates if auto correction is enabled.
     public var isAutocorrectionEnabled: Bool?
 
 #if !(os(macOS) || os(watchOS))
-    /// Auto capitalization type. Set to `nil`.
+    /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization?
 #endif
 
     // MARK: Properties - Corners
-    /// Textfield corner radius. Set to `12`.
+    /// Textfield corner radius.
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
@@ -62,7 +62,7 @@ public struct VTextFieldUIModel: Sendable {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Header
-    /// Header title text frame alignment. Set to `leading`.
+    /// Header title text frame alignment.
     public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
@@ -80,7 +80,7 @@ public struct VTextFieldUIModel: Sendable {
         disabled: Color.secondary.opacity(0.75)
     )
 
-    /// Header title text font. Set to `footnote`.
+    /// Header title text font.
     public var headerTitleTextFont: Font = .footnote
 
     /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -88,11 +88,11 @@ public struct VTextFieldUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Header footer horizontal margin. Set to `10`.
+    /// Header footer horizontal margin.
     public var headerMarginHorizontal: CGFloat = 10
 
     // MARK: Properties - Footer
-    /// Footer title text frame alignment. Set to `leading`.
+    /// Footer title text frame alignment.
     public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
@@ -110,7 +110,7 @@ public struct VTextFieldUIModel: Sendable {
         disabled: Color.secondary.opacity(0.75)
     )
 
-    /// Footer title text font. Set to `footnote`.
+    /// Footer title text font.
     public var footerTitleTextFont: Font = .footnote
 
     /// Footer title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -118,21 +118,21 @@ public struct VTextFieldUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Footer horizontal margin. Set to `10`.
+    /// Footer horizontal margin.
     public var footerMarginHorizontal: CGFloat = 10
 
     // MARK: Properties - TextField
-    /// Content type. Set to `default`.
+    /// Content type.
     public var contentType: ContentType = .default
 
-    /// Textfield content horizontal margin. Set to `15`.
+    /// Textfield content horizontal margin.
     public var textFieldContentMarginHorizontal: CGFloat = 15
 
-    /// Spacing content horizontal spacing. Set to `10`.
+    /// Spacing content horizontal spacing.
     public var textFieldContentSpacingHorizontal: CGFloat = 10
 
     // MARK: Properties - Text
-    /// Text alignment. Set to `leading`.
+    /// Text alignment.
     public var textAlignment: TextAlignment = .leading
 
     /// Text colors.
@@ -142,7 +142,7 @@ public struct VTextFieldUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Text font. Set to `body`.
+    /// Text font.
     public var textFont: Font = .body
 
     /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -154,11 +154,11 @@ public struct VTextFieldUIModel: Sendable {
     /// Placeholder text colors.
     public var placeholderTextColors: StateColors = .init(Color.secondary)
 
-    /// Placeholder text font. Set to `body`.
+    /// Placeholder text font.
     public var placeholderTextFont: Font = .body
 
     // MARK: Properties - Clear Button
-    /// Indicates if textfield has clear button. Set to `true`.
+    /// Indicates if textfield has clear button.
     public var hasClearButton: Bool = true
 
     /// Clear button icon.
@@ -196,7 +196,7 @@ public struct VTextFieldUIModel: Sendable {
         return uiModel
     }()
 
-    /// Clear button appear and disappear animation. Set to `nil`.
+    /// Clear button appear and disappear animation.
     public var clearButtonAppearDisappearAnimation: Animation?
 
     // MARK: Properties - Secure
@@ -234,17 +234,17 @@ public struct VTextFieldUIModel: Sendable {
     /// Search button icon.
     public var searchButtonIcon: Image = ImageBook.magnifyGlass.renderingMode(.template)
 
-    /// Indicates if `resizable(...)` modifier is applied to search icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to search icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isSearchIconResizable: Bool = true
 
-    /// Search icon content mode. Set to `fit`.
+    /// Search icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconContentMode: ContentMode? = .fit
 
-    /// Search icon size. Set to `(15, 15)`.
+    /// Search icon size.
     public var searchIconSize: CGSize? = .init(dimension: 15)
 
     /// Search icon colors.
@@ -256,7 +256,7 @@ public struct VTextFieldUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Search icon opacities. Set to `nil`.
+    /// Search icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconOpacities: StateOpacities?
@@ -267,13 +267,13 @@ public struct VTextFieldUIModel: Sendable {
     /// To achieve this, `isSearchIconResizable` should be set to `false`, and `searchIconSize` should be set to `nil`.
     public var searchIconFont: Font?
 
-    /// Search icon `DynamicTypeSize` type. Set to `nil`.
+    /// Search icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Submit Button
-    /// Submit button type. Set to `return`.
+    /// Submit button type.
     public var submitButton: SubmitLabel = .return
 
     // MARK: Initializers
@@ -323,7 +323,7 @@ public struct VTextFieldUIModel: Sendable {
         }
 
         // MARK: Initializers
-        /// Default value. Set to `standard`.
+        /// Default value.
         public static var `default`: Self { .standard }
     }
 

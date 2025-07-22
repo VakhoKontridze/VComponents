@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VProgressBarUIModel: Sendable {
     // MARK: Properties - Global
-    /// Direction. Set to `leftToRight`.
+    /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Progress bar height, but width for vertical layout.
@@ -56,7 +56,7 @@ public struct VProgressBarUIModel: Sendable {
 #endif
     }()
 
-    /// Indicates if progress bar rounds progress view trailing corners. Set to `true`.
+    /// Indicates if progress bar rounds progress view trailing corners.
     public var roundsProgressViewTrailingCorners: Bool = true
 
     // MARK: Properties - Track
@@ -130,7 +130,7 @@ public struct VProgressBarUIModel: Sendable {
     }()
 
     // MARK: Properties - Transition - Progress
-    /// Indicates if `progress` animation is applied. Set to `true`.
+    /// Indicates if `progress` animation is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -140,7 +140,7 @@ public struct VProgressBarUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesProgressAnimation: Bool = true
 
-    /// Progress animation. Set to `default`.
+    /// Progress animation.
     public var progressAnimation: Animation? = .default
     
     // MARK: Initializers

@@ -16,32 +16,32 @@ import VCore
 @available(visionOS, unavailable)
 public struct VTextViewUIModel: Sendable {
     // MARK: Properties - Global
-    /// Spacing between header, textview, and footer. Set to `3`.
+    /// Spacing between header, textview, and footer.
     public var headerTextViewAndFooterSpacing: CGFloat = 3
 
-    /// Minimum textview height. Set to `50`.
+    /// Minimum textview height.
     public var minimumHeight: CGFloat = 50
 
 #if !(os(macOS) || os(watchOS))
-    /// Keyboard type. Set to `default`.
+    /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
 #endif
 
 #if !(os(macOS) || os(watchOS))
-    /// Text content type. Set to `nil`.
+    /// Text content type.
     public var textContentType: UITextContentType?
 #endif
 
-    /// Indicates if auto correction is enabled. Set to `nil`.
+    /// Indicates if auto correction is enabled.
     public var isAutocorrectionEnabled: Bool?
 
 #if !(os(macOS) || os(watchOS))
-    /// Auto capitalization type. Set to `nil`.
+    /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization?
 #endif
 
     // MARK: Properties - Corners
-    /// Textview orner radius. Set to `12`.
+    /// Textview orner radius.
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
@@ -62,7 +62,7 @@ public struct VTextViewUIModel: Sendable {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Header
-    /// Header title text frame alignment. Set to `leading`.
+    /// Header title text frame alignment.
     public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Header title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
@@ -80,7 +80,7 @@ public struct VTextViewUIModel: Sendable {
         disabled: Color.secondary.opacity(0.75)
     )
 
-    /// Header title text font. Set to `footnote`.
+    /// Header title text font.
     public var headerTitleTextFont: Font = .footnote
 
     /// Header title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -88,11 +88,11 @@ public struct VTextViewUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Header footer horizontal margin. Set to `10`.
+    /// Header footer horizontal margin.
     public var headerMarginHorizontal: CGFloat = 10
 
     // MARK: Properties - Footer
-    /// Footer title text frame alignment. Set to `leading`.
+    /// Footer title text frame alignment.
     public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Footer title text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
@@ -110,7 +110,7 @@ public struct VTextViewUIModel: Sendable {
         disabled: Color.secondary.opacity(0.75)
     )
 
-    /// Footer title text font. Set to `footnote`.
+    /// Footer title text font.
     public var footerTitleTextFont: Font = .footnote
 
     /// Footer title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -118,11 +118,11 @@ public struct VTextViewUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    /// Footer horizontal margin. Set to `10`.
+    /// Footer horizontal margin.
     public var footerMarginHorizontal: CGFloat = 10
 
     // MARK: Properties - TextView
-    /// Textview content margins. Set to `(15, 15, 15, 15)`.
+    /// Textview content margins.
     public var textViewContentMargins: Margins = .init(15)
 
     // MARK: Properties - Text
@@ -141,7 +141,7 @@ public struct VTextViewUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Text font. Set to `body`.
+    /// Text font.
     public var textFont: Font = .body
 
     /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -153,11 +153,11 @@ public struct VTextViewUIModel: Sendable {
     /// Placeholder text colors.
     public var placeholderTextColors: StateColors = .init(Color.secondary)
 
-    /// Placeholder text font. Set to `body`.
+    /// Placeholder text font.
     public var placeholderTextFont: Font = .body
 
     // MARK: Properties - Submit Button
-    /// Submit button type. Set to `return`.
+    /// Submit button type.
     public var submitButton: SubmitLabel = .return
 
     // MARK: Initializers

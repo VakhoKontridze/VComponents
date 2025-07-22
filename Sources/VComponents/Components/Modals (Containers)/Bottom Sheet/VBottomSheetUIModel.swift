@@ -57,7 +57,7 @@ public struct VBottomSheetUIModel: Sendable {
     }()
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to `15`.
+    /// Corner radius.
     public var cornerRadius: CGFloat = 15
 
     var cornerRadii: RectangleCornerRadii {
@@ -92,28 +92,28 @@ public struct VBottomSheetUIModel: Sendable {
     }
 
     // MARK: Properties - Drag Indicator
-    /// Drag indicator size. Set to `(50, 4)`.
+    /// Drag indicator size.
     ///
     /// To hide drag indicator, set to `zero`.
     public var dragIndicatorSize: CGSize = .init(width: 50, height: 4)
 
-    /// Drag indicator corner radius. Set to `2`.
+    /// Drag indicator corner radius.
     public var dragIndicatorCornerRadius: CGFloat = 2
 
     /// Drag indicator color.
     public var dragIndicatorColor: Color = .dynamic(Color(200, 200, 200), Color(100, 100, 100))
 
-    /// Drag indicator margins. Set to `(15, 15)`.
+    /// Drag indicator margins.
     public var dragIndicatorMargins: VerticalMargins = .init(15)
 
     // MARK: Properties - Content
-    /// Content margins. Set to `zero`.
+    /// Content margins.
     public var contentMargins: Margins = .zero
 
-    /// Edges on which content has safe area margins. Set to `[]`.
+    /// Edges on which content has safe area margins.
     public var contentSafeAreaEdges: Edge.Set = []
 
-    /// Indicates if sheet resizes content based on its visible frame. Set to `false`.
+    /// Indicates if sheet resizes content based on its visible frame.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -121,7 +121,7 @@ public struct VBottomSheetUIModel: Sendable {
     /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
     public var autoresizesContent: Bool = false
 
-    /// Indicates if bottom sheet can be resized by dragging outside the header. Set to `false`.
+    /// Indicates if bottom sheet can be resized by dragging outside the header.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -131,21 +131,21 @@ public struct VBottomSheetUIModel: Sendable {
     public var contentIsDraggable: Bool = false
 
     // MARK: Properties - Dismiss Type
-    /// Method of dismissing modal. Set to `default`.
+    /// Method of dismissing modal.
     public var dismissType: DismissType = .default
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `easeInOut` with duration `0.3`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
+    /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     // MARK: Properties - Transition - Swipe Dismiss
-    /// Ratio of distance to drag bottom sheet by, past the min height, relative to it, to initiate dismiss. Set to `0.1`.
+    /// Ratio of distance to drag bottom sheet by, past the min height, relative to it, to initiate dismiss.
     ///
     /// Has no effect unless `dismissType` includes `swipe`.
     public var swipeDismissDistanceMinHeightRatio: CGFloat = 0.1
@@ -157,7 +157,7 @@ public struct VBottomSheetUIModel: Sendable {
         swipeDismissDistanceMinHeightRatio * heights.min.toAbsolute(dimension: containerHeight)
     }
 
-    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.15`.
+    /// Swipe dismiss animation.
     ///
     /// Has no effect unless `dismissType` includes `swipe`.
     public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.15)
@@ -166,21 +166,21 @@ public struct VBottomSheetUIModel: Sendable {
     /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
     public var velocityToSnapToNextHeight: CGFloat = 600
 
-    /// Height snapping animation between `min`, `ideal`, and `max` states. Set to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
+    /// Height snapping animation between `min`, `ideal`, and `max` states.
     public var heightSnapAnimation: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    /// Indicates if keyboard is dismissed when interface orientation changes.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Shadow
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `10`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 10
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Initializers

@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VCompactPageIndicatorUIModel: Sendable {
     // MARK: Properties - Global
-    /// Direction. Set to `leftToRight`.
+    /// Direction.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var direction: LayoutDirectionOmni = .leftToRight
@@ -37,12 +37,12 @@ public struct VCompactPageIndicatorUIModel: Sendable {
 #endif
     }()
 
-    /// Number of visible dots. Set to `7`.
+    /// Number of visible dots.
     ///
     /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
     public var visibleDots: Int = 7
 
-    /// Number of center dots. Set to `3`.
+    /// Number of center dots.
     ///
     /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
     public var centerDots: Int = 3
@@ -94,7 +94,7 @@ public struct VCompactPageIndicatorUIModel: Sendable {
 #endif
     }()
 
-    /// Scale of dot at the edge. Set to `0.5`.
+    /// Scale of dot at the edge.
     ///
     /// If there are `7` visible dots, and `3` center dots, resulting dot scales would be `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
     public var edgeDotScale: CGFloat = 0.5
@@ -152,7 +152,7 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     }()
 
     // MARK: Properties - Dot Border
-    /// Dot border widths. Set to `zero`.
+    /// Dot border widths.
     ///
     /// To hide border, set to `zero`.
     ///
@@ -165,7 +165,7 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition
-    /// Indicates if `transition` animation is applied. Set to `true`.
+    /// Indicates if `transition` animation is applied.
     ///
     /// If  animation is set to `nil`, a `nil` animation is still applied.
     /// If this property is set to `false`, then no animation is applied.
@@ -173,7 +173,7 @@ public struct VCompactPageIndicatorUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesTransitionAnimation: Bool = true
 
-    /// Transition animation. Set to `linear` with duration `0.15`.
+    /// Transition animation.
     public var transitionAnimation: Animation? = .linear(duration: 0.15)
 
     // MARK: Properties - Standard Layout

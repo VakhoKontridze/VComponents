@@ -173,7 +173,7 @@ public struct VToggleUIModel: Sendable {
     )
 
     // MARK: Properties - Label
-    /// Indicates if label is clickable. Set to `true`.
+    /// Indicates if label is clickable.
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
@@ -185,7 +185,7 @@ public struct VToggleUIModel: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor. Set to `1`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 1
 
     /// Title text colors.
@@ -241,7 +241,7 @@ public struct VToggleUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if `stateChangeAnimation` is applied. Set to `true`.
+    /// Indicates if `stateChangeAnimation` is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -251,15 +251,15 @@ public struct VToggleUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesStateChangeAnimation: Bool = true
 
-    /// State change animation. Set to `easeIn` with duration `0.1`.
+    /// State change animation.
     public var stateChangeAnimation: Animation? = .easeIn(duration: 0.1)
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `light`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `click`.
+    /// Haptic feedback type.
     public var haptic: WKHapticType? = .click
 #endif
 

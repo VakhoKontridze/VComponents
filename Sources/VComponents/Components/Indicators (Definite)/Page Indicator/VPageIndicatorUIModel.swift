@@ -18,7 +18,7 @@ import VCore
 )
 public struct VPageIndicatorUIModel: Sendable {
     // MARK: Properties - Global
-    /// Direction. Set to `leftToRight`.
+    /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight
 
     /// Dot spacing.
@@ -150,7 +150,7 @@ public struct VPageIndicatorUIModel: Sendable {
     public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition
-    /// Indicates if `transition` animation is applied. Set to `true`.
+    /// Indicates if `transition` animation is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -160,7 +160,7 @@ public struct VPageIndicatorUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesTransitionAnimation: Bool = true
 
-    /// Transition animation. Set to `linear` with duration `0.15`.
+    /// Transition animation.
     public var transitionAnimation: Animation? = .linear(duration: 0.15)
     
     // MARK: Initializers

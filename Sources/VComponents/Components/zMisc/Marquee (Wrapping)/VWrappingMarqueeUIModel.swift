@@ -12,16 +12,16 @@ import VCore
 /// Model that describes UI.
 public struct VWrappingMarqueeUIModel: Sendable {
     // MARK: Properties - Global
-    /// Scroll direction. Set to `leftToRight`.
+    /// Scroll direction.
     public var scrollDirection: LayoutDirection = .leftToRight
 
-    /// Spacing between wrapped content. Set to `20`.
+    /// Spacing between wrapped content.
     ///
     /// If `inset` is set to non-`0` value or `VWrappingMarqueeUIModel.insettedGradientMask` is used,
     /// it's better to set this to `0`.
     public var wrappedContentSpacing: CGFloat = 20
 
-    /// Content inset. Set to `0`.
+    /// Content inset.
     ///
     /// Alternately, use `insettedGradientMask` instance of `VWrappingMarqueeUIModel`.
     ///
@@ -30,11 +30,11 @@ public struct VWrappingMarqueeUIModel: Sendable {
     /// If this is set to non-`0` value, it's better to set `wrappedContentSpacing` to `0`.
     public var inset: CGFloat = 0
 
-    /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
+    /// Horizontal alignment for non-scrolling stationary content.
     public var alignmentStationary: HorizontalAlignment = .leading
 
     // MARK: Properties - Gradient
-    /// Gradient mask width. Set to `0`.
+    /// Gradient mask width.
     ///
     /// To hide gradient mask, set to `0`.
     ///
@@ -43,17 +43,17 @@ public struct VWrappingMarqueeUIModel: Sendable {
     /// For best result, should be less than or equal to `inset`.
     public var gradientMaskWidth: CGFloat = 0
 
-    /// Gradient mask opacity at the edge of the container. Set to `0`.
+    /// Gradient mask opacity at the edge of the container.
     public var gradientMaskOpacityContainerEdge: CGFloat = 0
 
-    /// Gradient mask opacity at the edge of the content. Set to `1`.
+    /// Gradient mask opacity at the edge of the content.
     public var gradientMaskOpacityContentEdge: CGFloat = 1
 
     // MARK: Properties - Transition
-    /// Animation curve. Set to `linear`.
+    /// Animation curve.
     public var animationCurve: BasicAnimation.AnimationCurve = .linear
 
-    /// Animation duration type. Set to `default`.
+    /// Animation duration type.
     public var animationDurationType: MarqueeDurationType = .default
 
     /// Animation delay. Set to `1` second.

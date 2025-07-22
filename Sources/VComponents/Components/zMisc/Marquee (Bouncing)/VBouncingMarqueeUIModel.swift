@@ -12,10 +12,10 @@ import VCore
 /// Model that describes UI.
 public struct VBouncingMarqueeUIModel: Sendable {
     // MARK: Properties - Global
-    /// Scroll direction. Set to `leftToRight`.
+    /// Scroll direction.
     public var scrollDirection: LayoutDirection = .leftToRight
 
-    /// Content inset. Set to `0`.
+    /// Content inset.
     ///
     /// Ideal for text content.
     /// Alternately, use `insettedGradientMask` instance of `VBouncingMarqueeUIModel`.
@@ -23,11 +23,11 @@ public struct VBouncingMarqueeUIModel: Sendable {
     /// For best result, should be greater than or equal to `gradientMaskWidth`.
     public var inset: CGFloat = 0
 
-    /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
+    /// Horizontal alignment for non-scrolling stationary content.
     public var alignmentStationary: HorizontalAlignment = .leading
 
     // MARK: Properties - Gradient
-    /// Gradient mask width. Set to `0`.
+    /// Gradient mask width.
     ///
     /// To hide gradient mask, set to `0`.
     ///
@@ -36,17 +36,17 @@ public struct VBouncingMarqueeUIModel: Sendable {
     /// For best result, should be less than or equal to `inset`.
     public var gradientMaskWidth: CGFloat = 0
 
-    /// Gradient mask opacity at the edge of the container. Set to `0`.
+    /// Gradient mask opacity at the edge of the container.
     public var gradientMaskOpacityContainerEdge: CGFloat = 0
 
-    /// Gradient mask opacity at the edge of the content. Set to `1`.
+    /// Gradient mask opacity at the edge of the content.
     public var gradientMaskOpacityContentEdge: CGFloat = 1
 
     // MARK: Properties - Transition
-    /// Animation curve. Set to `linear`.
+    /// Animation curve.
     public var animationCurve: BasicAnimation.AnimationCurve = .linear
 
-    /// Animation duration type. Set to `default`.
+    /// Animation duration type.
     public var animationDurationType: MarqueeDurationType = .default
 
     /// Animation delay. Set to `1` second.

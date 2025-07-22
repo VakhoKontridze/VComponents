@@ -89,7 +89,7 @@ public struct VRectangularButtonUIModel: Sendable {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Label margins. Set to `(3, 3)`.
+    /// Label margins.
     public var labelMargins: LabelMargins = .init(3)
 
     /// Ratio to which label scales down on press.
@@ -109,7 +109,7 @@ public struct VRectangularButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Label - Text
-    /// Title text minimum scale factor. Set to `0.75`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title text colors.
@@ -137,12 +137,12 @@ public struct VRectangularButtonUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Label - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
@@ -168,7 +168,7 @@ public struct VRectangularButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconColors: StateColors? = .init(Color.white)
 
-    /// Icon opacities. Set to `nil`.
+    /// Icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
@@ -179,17 +179,17 @@ public struct VRectangularButtonUIModel: Sendable {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
-    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    /// Icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Hit Box
-    /// Hit box. Set to `zero`.
+    /// Hit box.
     public var hitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if button animates state change. Set to `true`.
+    /// Indicates if button animates state change.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
@@ -198,18 +198,18 @@ public struct VRectangularButtonUIModel: Sendable {
     /// Shadow colors.
     public var shadowColors: StateColors = .clearColors
 
-    /// Shadow radius. Set to `0`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 0
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `nil`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `nil`.
+    /// Haptic feedback type.
     public var haptic: WKHapticType?
 #endif
     

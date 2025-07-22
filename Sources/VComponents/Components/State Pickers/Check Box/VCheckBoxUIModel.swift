@@ -128,12 +128,12 @@ public struct VCheckBoxUIModel: Sendable {
     /// Checkmark icon (indeterminate).
     public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
 
-    /// Indicates if `resizable(...)` modifier is applied to checkmark icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to checkmark icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isCheckmarkIconResizable: Bool = true
 
-    /// Checkmark icon content mode. Set to `fit`.
+    /// Checkmark icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconContentMode: ContentMode? = .fit
@@ -164,7 +164,7 @@ public struct VCheckBoxUIModel: Sendable {
         disabled: Color.clear
     )
 
-    /// Checkmark icon opacities. Set to `nil`.
+    /// Checkmark icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconOpacities: StateOpacities?
@@ -175,13 +175,13 @@ public struct VCheckBoxUIModel: Sendable {
     /// To achieve this, `isCheckmarkIconResizable` should be set to `false`, and `checkmarkIconSize` should be set to `nil`.
     public var checkmarkIconFont: Font?
 
-    /// Checkmark icon `DynamicTypeSize` type. Set to `nil`.
+    /// Checkmark icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var checkmarkIconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label
-    /// Indicates if label is clickable. Set to `true`.
+    /// Indicates if label is clickable.
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
@@ -193,7 +193,7 @@ public struct VCheckBoxUIModel: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor. Set to `1`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 1
 
     /// Title text colors.
@@ -242,11 +242,11 @@ public struct VCheckBoxUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Hit Box
-    /// Checkbox hit box. Set to `zero`.
+    /// Checkbox hit box.
     public var checkboxHitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if `stateChangeAnimation` is applied. Set to `true`.
+    /// Indicates if `stateChangeAnimation` is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     ///
@@ -256,12 +256,12 @@ public struct VCheckBoxUIModel: Sendable {
     /// One use-case for this property is to externally mutate state using `withAnimation(_:completionCriteria:_:completion:)` function.
     public var appliesStateChangeAnimation: Bool = true
 
-    /// State change animation. Set to `easeIn` with duration `0.1`.
+    /// State change animation.
     public var stateChangeAnimation: Animation? = .easeIn(duration: 0.1)
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `light`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #endif
 

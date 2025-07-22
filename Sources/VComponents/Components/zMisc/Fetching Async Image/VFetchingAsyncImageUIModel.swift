@@ -14,10 +14,10 @@ public struct VFetchingAsyncImageUIModel: Sendable {
     /// Placeholder color.
     public var placeholderColor: Color = .gray.opacity(0.3)
 
-    /// Indicates if `Image` is removed when parameter changes. Set to `true`.
+    /// Indicates if `Image` is removed when parameter changes.
     public var removesImageOnParameterChange: Bool = true
 
-    /// Indicates if `Image` is removed when component disappears. Set to `false`.
+    /// Indicates if `Image` is removed when component disappears.
     public var removesImageOnDisappear: Bool = false
     
     // MARK: Initializers

@@ -81,7 +81,7 @@ public struct VModalUIModel: Sendable {
     /// Corner radii. Set to to `15`s.
     public var cornerRadii: RectangleCornerRadii = .init(15)
 
-    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    /// Indicates if horizontal corners should switch to support RTL languages.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
@@ -126,37 +126,37 @@ public struct VModalUIModel: Sendable {
     public var borderColor: Color = .clear
 
     // MARK: Properties - Content
-    /// Content margins. Set to `zero`.
+    /// Content margins.
     public var contentMargins: Margins = .zero
 
     // MARK: Properties - Dismiss Type
-    /// Method of dismissing modal. Set to `default`.
+    /// Method of dismissing modal.
     public var dismissType: DismissType = .default
 
     // MARK: Properties - Transition - Appear/Disappear
-    /// Scale effect during appear and disappear. Set to `1.01`.
+    /// Scale effect during appear and disappear.
     public var scaleEffect: CGFloat = 1.01
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `linear` with duration `0.05`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeIn` with duration `0.05`.
+    /// Disappear animation.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    /// Indicates if keyboard is dismissed when interface orientation changes.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Shadow
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `10`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 10
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Initializers
@@ -213,7 +213,7 @@ public struct VModalUIModel: Sendable {
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to `[]`.
+        /// Default value.
         public static var `default`: Self { [] }
     }
 }

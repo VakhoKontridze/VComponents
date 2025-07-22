@@ -25,7 +25,7 @@ public struct VSideBarUIModel: Sendable {
     /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootUIModel`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
 
-    /// Edge from which side bar appears, and to which it disappears. Set to `leading`.
+    /// Edge from which side bar appears, and to which it disappears.
     ///
     /// Changing this property alone doesn't guarantee a proper behavior.
     /// Use `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel` instead.
@@ -78,7 +78,7 @@ public struct VSideBarUIModel: Sendable {
 #endif
     }()
 
-    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    /// Indicates if horizontal corners should switch to support RTL languages.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
@@ -107,28 +107,28 @@ public struct VSideBarUIModel: Sendable {
     }
 
     // MARK: Properties - Content
-    /// Content margins. Set to `zero`.
+    /// Content margins.
     public var contentMargins: Margins = .zero
 
-    /// Edges on which content has safe area margins. Set to `[]`.
+    /// Edges on which content has safe area margins.
     public var contentSafeAreaEdges: Edge.Set = []
 
     // MARK: Properties - Dismiss Type
-    /// Method of dismissing side bar. Set to `default`.
+    /// Method of dismissing side bar.
     public var dismissType: DismissType = .default
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `easeInOut` with duration `0.3`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeInOut` with duration `0.3`.
+    /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as swipe, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
 
     // MARK: Properties - Transition - Swipe Dismiss
-    /// Ratio of width to drag side bar by to initiate dismiss. Set to `0.1`.
+    /// Ratio of width to drag side bar by to initiate dismiss.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -137,7 +137,7 @@ public struct VSideBarUIModel: Sendable {
 
     func swipeDismissDistance(in containerDimension: CGFloat) -> CGFloat { swipeDismissDistanceWidthRatio * containerDimension }
 
-    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.2`.
+    /// Swipe dismiss animation.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -145,17 +145,17 @@ public struct VSideBarUIModel: Sendable {
     public var swipeDismissAnimation: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
 
     // MARK: Properties - Keyboard Responsiveness
-    /// Indicates if keyboard is dismissed when interface orientation changes. Set to `true`.
+    /// Indicates if keyboard is dismissed when interface orientation changes.
     public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
 
     // MARK: Properties - Shadow
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `10`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 10
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Initializers

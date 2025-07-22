@@ -23,10 +23,10 @@ public struct VPlainButtonUIModel: Sendable {
     }
 
     // MARK: Properties - Label
-    /// Title text and icon placement. Set to `iconAndTitle`.
+    /// Title text and icon placement.
     public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
 
-    /// Spacing between title text and icon. Set to `8`.
+    /// Spacing between title text and icon.
     ///
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
@@ -48,7 +48,7 @@ public struct VPlainButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Label - Text
-    /// Title text minimum scale factor. Set to `0.75`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title text colors.
@@ -58,21 +58,21 @@ public struct VPlainButtonUIModel: Sendable {
         disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
-    /// Title text font. Set to `body`.
+    /// Title text font.
     public var titleTextFont: Font = .body
 
-    /// Title text `DynamicTypeSize` type. Set to `nil`.
+    /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
@@ -102,7 +102,7 @@ public struct VPlainButtonUIModel: Sendable {
         disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
-    /// Icon opacities. Set to `nil`.
+    /// Icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
@@ -113,7 +113,7 @@ public struct VPlainButtonUIModel: Sendable {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
-    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    /// Icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
@@ -123,17 +123,17 @@ public struct VPlainButtonUIModel: Sendable {
     public var hitBox: HitBox = .zero
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if button animates state change. Set to `true`.
+    /// Indicates if button animates state change.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `nil`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `nil`.
+    /// Haptic feedback type.
     public var haptic: WKHapticType?
 #endif
 

@@ -50,7 +50,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Rectangle corner radius. Set to `24`.
+    /// Rectangle corner radius.
     public var rectangleCornerRadius: CGFloat = 24
 
     /// Rectangle colors.
@@ -83,12 +83,12 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     public var rectangleBorderColors: StateColors = .clearColors
 
     // MARK: Properties - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
@@ -115,7 +115,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
         disabled: Color(128, 176, 240, 0.5)
     )
 
-    /// Icon opacities. Set to `nil`.
+    /// Icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
@@ -126,7 +126,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
-    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    /// Icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
@@ -145,20 +145,20 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Icon margins. Set to `(1, 1)`.
+    /// Icon margins.
     public var iconMargins: IconMargins = .init(3)
 
     // MARK: Properties - Caption
-    /// Maximum caption width. Set to `100`.
+    /// Maximum caption width.
     public var captionWidthMax: CGFloat = 100
 
-    /// Caption text frame alignment. Set to `center`.
+    /// Caption text frame alignment.
     public var captionFrameAlignment: HorizontalAlignment = .center
 
-    /// Title caption text and icon caption placement. Set to `iconAndTitle`.
+    /// Title caption text and icon caption placement.
     public var titleCaptionTextAndIconCaptionPlacement: TitleAndIconPlacement = .iconAndTitle
 
-    /// Spacing between title caption text and icon caption. Set to `8`.
+    /// Spacing between title caption text and icon caption.
     ///
     /// Applicable only if `init` with icon and title is used.
     public var titleCaptionTextAndIconCaptionSpacing: CGFloat = 8
@@ -177,12 +177,12 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Caption - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon caption. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon caption.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconCaptionResizable: Bool = true
 
-    /// Icon caption content mode. Set to `fit`.
+    /// Icon caption content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionContentMode: ContentMode? = .fit
@@ -209,7 +209,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Icon caption opacities. Set to `nil`.
+    /// Icon caption opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionOpacities: StateOpacities?
@@ -220,7 +220,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     /// To achieve this, `isIconCaptionResizable` should be set to `false`, and `iconCaptionSize` should be set to `nil`.
     public var iconCaptionFont: Font?
 
-    /// Icon caption `DynamicTypeSize` type. Set to `nil`.
+    /// Icon caption `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconCaptionDynamicTypeSizeType: DynamicTypeSizeType?
@@ -251,7 +251,7 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Title caption text minimum scale factor. Set to `0.75`.
+    /// Title caption text minimum scale factor.
     public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title caption text font.
@@ -267,13 +267,13 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
 #endif
     }()
 
-    /// Title caption text `DynamicTypeSize` type. Set to `nil`.
+    /// Title caption text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var titleCaptionTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if button animates state change. Set to `true`.
+    /// Indicates if button animates state change.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
@@ -285,18 +285,18 @@ public struct VRectangularCaptionButtonUIModel: Sendable {
     /// And applying shadow directly without making it opaque is not recommended.
     public var shadowColors: StateColors = .clearColors
 
-    /// Shadow radius. Set to `0`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 0
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `nil`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle?
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `nil`.
+    /// Haptic feedback type.
     public var haptic: WKHapticType?
 #endif
     

@@ -26,6 +26,6 @@ public enum MarqueeDurationType: Sendable {
     }
 
     // MARK: Initializers
-    /// Default value. Set to `velocity` of `20`.
+    /// Default value.
     public static var `default`: Self { .velocity(20) }
 }

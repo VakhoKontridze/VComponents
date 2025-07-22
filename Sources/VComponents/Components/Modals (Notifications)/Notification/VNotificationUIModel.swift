@@ -33,14 +33,14 @@ public struct VNotificationUIModel: Sendable {
         landscape: .fixed(width: .fraction(0.5))
     )
 
-    /// Edge from which notification appears, and to which it disappears. Set to `top`.
+    /// Edge from which notification appears, and to which it disappears.
     public var presentationEdge: VerticalEdge = .top
 
-    /// Margin from presented edge. Set to `5`.
+    /// Margin from presented edge.
     public var marginPresentedEdge: CGFloat = 5
 
     // MARK: Properties - Corners
-    /// Corner radius. Set to `12`.
+    /// Corner radius.
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
@@ -66,24 +66,24 @@ public struct VNotificationUIModel: Sendable {
     /// Body margins. Set to `15`s.
     public var bodyMargins: Margins = .init(15)
 
-    /// Spacing between icon and title/messages texts. Set to `12`.
+    /// Spacing between icon and title/messages texts.
     public var iconAndTitleTextMessageTextSpacing: CGFloat = 12
 
-    /// Spacing between tile text and message text. Set to `2`.
+    /// Spacing between tile text and message text.
     public var titleTextAndMessageTextSpacing: CGFloat = 2
 
     // MARK: Properties - Notification Content - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
 
-    /// Icon size. Set to `(22, 22)`.
+    /// Icon size.
     public var iconSize: CGSize? = .init(dimension: 22)
 
     /// Icon color.
@@ -91,7 +91,7 @@ public struct VNotificationUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconColor: Color? = .primary
 
-    /// Icon opacity. Set to `nil`.
+    /// Icon opacity.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacity: CGFloat?
@@ -102,16 +102,16 @@ public struct VNotificationUIModel: Sendable {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
-    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    /// Icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Notification Content - Icon Background
-    /// Icon background size. Set to `(44, 44)`.
+    /// Icon background size.
     public var iconBackgroundSize: CGSize = .init(dimension: 44)
 
-    /// Icon background corner radius. Set to `10`.
+    /// Icon background corner radius.
     public var iconBackgroundCornerRadius: CGFloat = 10
 
     /// Icon background color.
@@ -127,7 +127,7 @@ public struct VNotificationUIModel: Sendable {
     }()
 
     // MARK: Properties - Notification Content - Title
-    /// Title text frame alignment. Set to `leading`.
+    /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
@@ -138,13 +138,13 @@ public struct VNotificationUIModel: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor. Set to `0.75`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title text color.
     public var titleTextColor: Color = .primary
 
-    /// Title text font. Set to `semibold` `callout`.
+    /// Title text font.
     public var titleTextFont: Font = .callout.weight(.semibold)
 
     /// Title text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -153,7 +153,7 @@ public struct VNotificationUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Notification Content - Message
-    /// Message text frame alignment. Set to `leading`.
+    /// Message text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .leading
 
     /// Message line type. Set to `multiline` with `leading` alignment and `1...2` lines.
@@ -164,13 +164,13 @@ public struct VNotificationUIModel: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor. Set to `0.75`.
+    /// Title text minimum scale factor.
     public var messageTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Message text color.
     public var messageTextColor: Color = .primary
 
-    /// Message text font. Set to `callout`.
+    /// Message text font.
     public var messageTextFont: Font = .callout
 
     /// Message text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -179,15 +179,15 @@ public struct VNotificationUIModel: Sendable {
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Dismiss Type
-    /// Method of dismissing side bar. Set to `default`.
+    /// Method of dismissing side bar.
     public var dismissType: DismissType = .default
 
     // MARK: Properties - Transition - Appear
-    /// Appear animation. Set to `easeOut` with duration `0.2`.
+    /// Appear animation.
     public var appearAnimation: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
 
     // MARK: Properties - Transition - Disappear
-    /// Disappear animation. Set to `easeIn` with duration `0.2`.
+    /// Disappear animation.
     ///
     /// This is a standard disappear animation. Other dismiss methods, such as pull-down, are handled elsewhere.
     public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
@@ -199,7 +199,7 @@ public struct VNotificationUIModel: Sendable {
     public var timeoutDuration: TimeInterval = 5
 
     // MARK: Properties - Transition - Swipe Dismiss
-    /// Ratio of height to drag notification by to initiate dismiss. Set to `0.2`.
+    /// Ratio of height to drag notification by to initiate dismiss.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -208,7 +208,7 @@ public struct VNotificationUIModel: Sendable {
 
     func swipeDismissDistance(in containerDimension: CGFloat) -> CGFloat { swipeDismissDistanceHeightRatio * containerDimension }
 
-    /// Swipe dismiss animation. Set to `easeInOut` with duration `0.2`.
+    /// Swipe dismiss animation.
     ///
     /// Transition is non-interactive. Threshold has to be passed for dismiss to occur.
     ///
@@ -219,15 +219,15 @@ public struct VNotificationUIModel: Sendable {
     /// Shadow color.
     public var shadowColor: Color = .black.opacity(0.15)
 
-    /// Shadow radius. Set to `20`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 20
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback type. Set to `nil`.
+    /// Haptic feedback type.
     public var haptic: UINotificationFeedbackGenerator.FeedbackType?
 #endif
 
@@ -273,7 +273,7 @@ public struct VNotificationUIModel: Sendable {
         }
 
         // MARK: Options Initializers
-        /// Default value. Set to `all`.
+        /// Default value.
         public static var `default`: DismissType { .all }
     }
 }

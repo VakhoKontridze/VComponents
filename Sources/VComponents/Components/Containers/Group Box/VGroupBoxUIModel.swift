@@ -32,7 +32,7 @@ public struct VGroupBoxUIModel: Sendable {
 #endif
     }()
 
-    /// Indicates if horizontal corners should switch to support RTL languages. Set to `true`.
+    /// Indicates if horizontal corners should switch to support RTL languages.
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background

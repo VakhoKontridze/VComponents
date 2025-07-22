@@ -16,32 +16,32 @@ import VCore
 @available(visionOS, unavailable)
 public struct VCodeEntryViewUIModel: Sendable {
     // MARK: Properties - Global
-    /// Code length. Set to `6`.
+    /// Code length.
     public var length: Int = 6
 
     /// Spacing type. Set to `default.`
     public var spacingType: SpacingType = .default
 
 #if !(os(macOS) || os(watchOS))
-    /// Keyboard type. Set to `default`.
+    /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
 #endif
 
 #if !(os(macOS) || os(watchOS))
-    /// Text content type. Set to `oneTimeCode`.
+    /// Text content type.
     public var textContentType: UITextContentType? = .oneTimeCode
 #endif
 
-    /// Indicates if auto correction is enabled. Set to `false`.
+    /// Indicates if auto correction is enabled.
     public var isAutocorrectionEnabled: Bool? = false
 
 #if !(os(macOS) || os(watchOS))
-    /// Auto capitalization type. Set to `never`.
+    /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization? = .never
 #endif
 
     // MARK: Properties - Background
-    /// Character background rectangle size. Set to `(40, 40)`.
+    /// Character background rectangle size.
     public var characterBackgroundSize: CGSize = .init(dimension: 40)
 
     /// Character background colors.
@@ -52,7 +52,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     )
 
     // MARK: Properties - Corners
-    /// Character background corner radius. Set to `5`.
+    /// Character background corner radius.
     public var characterBackgroundCornerRadius: CGFloat = 5
 
     // MARK: Properties - Border
@@ -72,7 +72,7 @@ public struct VCodeEntryViewUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Text font. Set to `body`.
+    /// Text font.
     public var textFont: Font = .body
 
     /// Text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -84,7 +84,7 @@ public struct VCodeEntryViewUIModel: Sendable {
     /// Placeholder text colors.
     public var placeholderTextColors: StateColors = .init(Color.secondary)
 
-    /// Placeholder text font. Set to `body`.
+    /// Placeholder text font.
     public var placeholderTextFont: Font = .body
 
     /// Placeholder text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -93,10 +93,10 @@ public struct VCodeEntryViewUIModel: Sendable {
     public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Submit Button
-    /// Submit button type. Set to `return`.
+    /// Submit button type.
     public var submitButton: SubmitLabel = .return
 
-    /// Indicates if first responder is resigned when the last character is entered. Set to `true`.
+    /// Indicates if first responder is resigned when the last character is entered.
     public var submitsWhenLastCharacterIsEntered: Bool = true
 
     // MARK: Initializers
@@ -126,7 +126,7 @@ public struct VCodeEntryViewUIModel: Sendable {
         }
 
         // MARK: Initializers
-        /// Default value. Set to `fixed` with spacing of `7`.
+        /// Default value.
         public static var `default`: Self { .fixed(spacing: 7) }
     }
 }

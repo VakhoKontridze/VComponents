@@ -16,7 +16,7 @@ import VCore
 @available(visionOS, unavailable)
 public struct VStretchedIndicatorStaticPagerTabViewUIModel: Sendable {
     // MARK: Properties - Global
-    /// Spacing between tab bar and tab view. Set to `0`.
+    /// Spacing between tab bar and tab view.
     public var tabBarAndTabViewSpacing: CGFloat = 0
 
     // MARK: Properties - Header
@@ -30,15 +30,15 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel: Sendable {
     }()
 
     // MARK: Properties - Tab Bar
-    /// Tab bar alignment for tab items. Set to `top`.
+    /// Tab bar alignment for tab items.
     public var tabBarAlignment: VerticalAlignment = .top
 
     // MARK: Properties - Tab Bar - Tab Item
-    /// Tab bar margins. Set to `(10, 10)`.
+    /// Tab bar margins.
     public var tabItemMargins: VerticalMargins = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
-    /// Tab item text minimum scale factor. Set to `0.75`.
+    /// Tab item text minimum scale factor.
     public var tabItemTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Tab item text colors.
@@ -50,7 +50,7 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Tab item text font. Set to `body`.
+    /// Tab item text font.
     public var tabItemTextFont: Font = .body
 
     /// Tab item text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -59,33 +59,33 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel: Sendable {
     public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Tab Indicator Strip
-    /// Tab indicator strip alignment. Set to `bottom`.
+    /// Tab indicator strip alignment.
     public var tabIndicatorStripAlignment: VerticalAlignment = .bottom
 
     // MARK: Properties - Tab Indicator Strip - Track
-    /// Tab indicator track height. Set to `2`.
+    /// Tab indicator track height.
     public var tabIndicatorTrackHeight: CGFloat = 2
 
     /// Tab indicator track color.
     public var tabIndicatorTrackColor: Color = .clear
 
     // MARK: Properties - Tab Indicator Strip - Selection
-    /// Selected tab indicator height. Set to `2`.
+    /// Selected tab indicator height.
     public var selectedTabIndicatorHeight: CGFloat = 2
 
-    /// Selected tab indicator corner radius. Set to `0`.
+    /// Selected tab indicator corner radius.
     public var selectedTabIndicatorCornerRadius: CGFloat = 0
 
     /// Selected tab indicator color.
     public var selectedTabIndicatorColor: Color = .blue
 
-    /// Selected tab indicator animation. Set to `default`.
+    /// Selected tab indicator animation.
     public var selectedTabIndicatorAnimation: Animation? = .default
 
-    /// Indicates if tab indicator bounces when content is dragged out of frame. Set to `true`.
+    /// Indicates if tab indicator bounces when content is dragged out of frame.
     public var selectedTabIndicatorBounces: Bool = true
 
-    /// Selected tab indicator horizontal margin. Set to `0`.
+    /// Selected tab indicator horizontal margin.
     public var selectedTabIndicatorMarginHorizontal: CGFloat = 0
 
     // MARK: Properties - Tab View
@@ -98,7 +98,7 @@ public struct VStretchedIndicatorStaticPagerTabViewUIModel: Sendable {
 #endif
     }()
     
-    /// Indicates if tab view scrolling is enabled. Set to `true`.
+    /// Indicates if tab view scrolling is enabled.
     public var isTabViewScrollingEnabled: Bool = true
 
     // MARK: Initializers

@@ -89,13 +89,13 @@ public struct VStretchedButtonUIModel: Sendable {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Label
-    /// Label margins. Set to `(15, 3)`.
+    /// Label margins.
     public var labelMargins: LabelMargins = .init(horizontal: 15, vertical: 3)
 
-    /// Title text and icon placement. Set to `iconAndTitle`.
+    /// Title text and icon placement.
     public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
 
-    /// Spacing between title text and icon. Set to `8`.
+    /// Spacing between title text and icon.
     ///
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
@@ -117,7 +117,7 @@ public struct VStretchedButtonUIModel: Sendable {
     }()
 
     // MARK: Properties - Label - Text
-    /// Title text minimum scale factor. Set to `0.75`.
+    /// Title text minimum scale factor.
     public var titleTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title text colors.
@@ -145,12 +145,12 @@ public struct VStretchedButtonUIModel: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Label - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon. Set to `true`.
+    /// Indicates if `resizable(...)` modifier is applied to icon.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var isIconResizable: Bool = true
 
-    /// Icon content mode. Set to `fit`.
+    /// Icon content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconContentMode: ContentMode? = .fit
@@ -176,7 +176,7 @@ public struct VStretchedButtonUIModel: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconColors: StateColors? = .init(Color.white)
 
-    /// Icon opacities. Set to `nil`.
+    /// Icon opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconOpacities: StateOpacities?
@@ -187,13 +187,13 @@ public struct VStretchedButtonUIModel: Sendable {
     /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
     public var iconFont: Font?
 
-    /// Icon `DynamicTypeSize` type. Set to `nil`.
+    /// Icon `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
-    /// Indicates if button animates state change. Set to `true`.
+    /// Indicates if button animates state change.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var animatesStateChange: Bool = true
@@ -202,18 +202,18 @@ public struct VStretchedButtonUIModel: Sendable {
     /// Shadow colors.
     public var shadowColors: StateColors = .clearColors
 
-    /// Shadow radius. Set to `0`.
+    /// Shadow radius.
     public var shadowRadius: CGFloat = 0
 
-    /// Shadow offset. Set to `zero`.
+    /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
     // MARK: Properties - Haptic
 #if os(iOS)
-    /// Haptic feedback style. Set to `light`.
+    /// Haptic feedback style.
     public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
 #elseif os(watchOS)
-    /// Haptic feedback type. Set to `click`.
+    /// Haptic feedback type.
     public var haptic: WKHapticType? = .click
 #endif
 

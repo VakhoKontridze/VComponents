@@ -31,7 +31,7 @@ public struct VContinuousSpinnerUIModel: Sendable {
 #endif
     }()
 
-    /// Length of the colored part. Set to `0.75`.
+    /// Length of the colored part.
     public var length: CGFloat = 0.75
 
     /// Thickness.
@@ -69,7 +69,7 @@ public struct VContinuousSpinnerUIModel: Sendable {
 #endif
     }()
 
-    /// Animation. Set to `linear` with duration `0.75`.
+    /// Animation.
     public var animation: Animation = .linear(duration: 0.75)
     
     // MARK: Initializers

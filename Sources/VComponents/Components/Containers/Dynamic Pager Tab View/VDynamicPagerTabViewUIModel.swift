@@ -16,7 +16,7 @@ import VCore
 @available(visionOS, unavailable)
 public struct VDynamicPagerTabViewUIModel: Sendable {
     // MARK: Properties - Global
-    /// Spacing between tab bar and tab view. Set to `0`.
+    /// Spacing between tab bar and tab view.
     public var tabBarAndTabViewSpacing: CGFloat = 0
 
     // MARK: Properties - Header
@@ -30,27 +30,27 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
     }()
 
     // MARK: Properties - Tab Bar
-    /// Tab bar alignment for tab items. Set to `top`.
+    /// Tab bar alignment for tab items.
     public var tabBarAlignment: VerticalAlignment = .top
 
-    /// Tab bar horizontal margin. Set to `5`.
+    /// Tab bar horizontal margin.
     public var tabBarMarginHorizontal: CGFloat = 5
     
-    /// Indicates if tab bar scrolling is enabled. Set to `true`.
+    /// Indicates if tab bar scrolling is enabled.
     public var isTabBarScrollingEnabled: Bool = true
 
-    /// Tab bar item spacing. Set to `0`.
+    /// Tab bar item spacing.
     ///
     /// This property controls spacing between items, as well as selection indicator.
     /// When `tabSelectionIndicatorWidthType` is `stretched`, selection indicator won't stretch to occupy this spacing.
     public var tabItemSpacing: CGFloat = 0
 
     // MARK: Properties - Tab Bar - Tab Item
-    /// Tab bar margins. Set to `(10, 10, 10, 10)`.
+    /// Tab bar margins.
     public var tabItemMargins: Margins = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
-    /// Tab item text minimum scale factor. Set to `0.75`.
+    /// Tab item text minimum scale factor.
     public var tabItemTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Tab item text colors.
@@ -62,7 +62,7 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Tab item text font. Set to `body`.
+    /// Tab item text font.
     public var tabItemTextFont: Font = .body
 
     /// Tab item text `DynamicTypeSize` type. Set to partial range through `accessibility2`.
@@ -71,33 +71,33 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
     public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Tab Indicator Strip
-    /// Tab indicator strip alignment. Set to `bottom`.
+    /// Tab indicator strip alignment.
     public var tabIndicatorStripAlignment: VerticalAlignment = .bottom
 
     // MARK: Properties - Tab Indicator Strip - Track
-    /// Tab indicator track height. Set to `2`.
+    /// Tab indicator track height.
     public var tabIndicatorTrackHeight: CGFloat = 2
 
     /// Tab indicator track color.
     public var tabIndicatorTrackColor: Color = .clear
 
     // MARK: Properties - Tab Indicator Strip - Selection
-    /// Tab selection indicator width type. Set to `default`.
+    /// Tab selection indicator width type.
     public var tabSelectionIndicatorWidthType: TabSelectionIndicatorWidthType = .default
 
-    /// Selected tab indicator height. Set to `2`.
+    /// Selected tab indicator height.
     public var selectedTabIndicatorHeight: CGFloat = 2
 
-    /// Selected tab indicator corner radius. Set to `0`.
+    /// Selected tab indicator corner radius.
     public var selectedTabIndicatorCornerRadius: CGFloat = 0
 
     /// Selected tab indicator color.
     public var selectedTabIndicatorColor: Color = .blue
 
-    /// Selected tab indicator animation. Set to `default`.
+    /// Selected tab indicator animation.
     public var selectedTabIndicatorAnimation: Animation? = .default
 
-    /// Selected tab indicator scroll anchor. Set to `center`.
+    /// Selected tab indicator scroll anchor.
     public var selectedTabIndicatorScrollAnchor: UnitPoint = .center
 
     // MARK: Properties - Tab View
@@ -110,7 +110,7 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
 #endif
     }()
     
-    /// Indicates if tab view scrolling is enabled. Set to `true`.
+    /// Indicates if tab view scrolling is enabled.
     public var isTabViewScrollingEnabled: Bool = true
 
     // MARK: Initializers
@@ -140,7 +140,7 @@ public struct VDynamicPagerTabViewUIModel: Sendable {
         }
 
         // MARK: Initializers
-        /// Default value. Set to `wrapped`.
+        /// Default value.
         public static var `default`: Self { .wrapped }
     }
 
