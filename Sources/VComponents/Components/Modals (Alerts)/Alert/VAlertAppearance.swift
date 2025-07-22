@@ -84,7 +84,7 @@ public struct VAlertAppearance: Sendable {
         appearance.borderWidth = borderWidth
         appearance.borderColor = borderColor
 
-        appearance.contentMargins = .zero
+        appearance.contentMargins = EdgeInsets()
 
         return appearance
     }
@@ -100,7 +100,7 @@ public struct VAlertAppearance: Sendable {
 
     // MARK: Properties - Alert Content
     /// Additional margins applied to title text, message text, and content as a whole.
-    public var titleTextAndMessageTextAndContentMargins: Margins = .init(
+    public var titleTextAndMessageTextAndContentMargins: EdgeInsets = .init(
         leading: 15,
         trailing: 15,
         top: 15,
@@ -134,7 +134,7 @@ public struct VAlertAppearance: Sendable {
     public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Title text margins.
-    public var titleTextMargins: Margins = .init(
+    public var titleTextMargins: EdgeInsets = .init(
         leading: 0,
         trailing: 0,
         top: 5,
@@ -168,7 +168,7 @@ public struct VAlertAppearance: Sendable {
     public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     /// Message text margins.
-    public var messageTextMargins: Margins = .init(
+    public var messageTextMargins: EdgeInsets = .init(
         leading: 0,
         trailing: 0,
         top: 3,
@@ -177,7 +177,7 @@ public struct VAlertAppearance: Sendable {
 
     // MARK: Properties - Alert Content - Content
     /// Content margins.
-    public var contentMargins: Margins = .init(
+    public var contentMargins: EdgeInsets = .init(
         leading: 0,
         trailing: 0,
         top: 10,
@@ -219,7 +219,7 @@ public struct VAlertAppearance: Sendable {
     }()
 
     /// Button margins.
-    public var buttonMargins: Margins = .init(
+    public var buttonMargins: EdgeInsets = .init(
         leading: 15,
         trailing: 15,
         top: 10,
@@ -400,10 +400,6 @@ public struct VAlertAppearance: Sendable {
             .fixed(width: .absolute(0))
         }
     }
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Button State Colors
     /// Model that contains colors for button component states.

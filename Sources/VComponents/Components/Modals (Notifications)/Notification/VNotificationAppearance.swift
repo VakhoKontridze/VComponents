@@ -63,7 +63,7 @@ public struct VNotificationAppearance: Sendable {
 
     // MARK: Properties - Notification Content
     /// Body margins.
-    public var bodyMargins: Margins = .init(15)
+    public var bodyMargins: EdgeInsets = .init(15)
 
     /// Spacing between icon and title/messages texts.
     public var iconAndTextsSpacing: CGFloat = 12
@@ -256,10 +256,6 @@ public struct VNotificationAppearance: Sendable {
             }
         }
     }
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Dismiss Type
     /// Dismiss type.

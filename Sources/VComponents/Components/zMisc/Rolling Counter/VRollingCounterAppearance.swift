@@ -33,7 +33,7 @@ public struct VRollingCounterAppearance: Sendable {
     public var digitTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Digit text margins.
-    public var digitTextMargins: Margins = .zero
+    public var digitTextMargins: EdgeInsets = .init()
 
     /// Digit text `Y` offset relative to other components.
     public var digitTextOffsetY: CGFloat = 0
@@ -70,7 +70,7 @@ public struct VRollingCounterAppearance: Sendable {
     public var fractionDigitTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Fraction digit text margins.
-    public var fractionDigitTextMargins: Margins = .zero
+    public var fractionDigitTextMargins: EdgeInsets = .init()
 
     /// Fraction digit text `Y` offset relative to other components.
     public var fractionDigitTextOffsetY: CGFloat = 0
@@ -102,7 +102,7 @@ public struct VRollingCounterAppearance: Sendable {
     public var groupingSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Grouping separator text margins.
-    public var groupingSeparatorTextMargins: Margins = .zero
+    public var groupingSeparatorTextMargins: EdgeInsets = .init()
 
     /// Grouping separator text `Y` offset relative to other components.
     public var groupingSeparatorTextOffsetY: CGFloat = 0
@@ -123,7 +123,7 @@ public struct VRollingCounterAppearance: Sendable {
     public var decimalSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Decimal separator text margins.
-    public var decimalSeparatorTextMargins: Margins = .zero
+    public var decimalSeparatorTextMargins: EdgeInsets = .init()
 
     /// Decimal separator text `Y` offset relative to other components.
     public var decimalSeparatorTextOffsetY: CGFloat = 0
@@ -158,7 +158,4 @@ public struct VRollingCounterAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 }

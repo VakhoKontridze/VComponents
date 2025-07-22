@@ -57,7 +57,7 @@ public struct VDisclosureGroupAppearance: Sendable {
         appearance.borderWidth = borderWidth
         appearance.borderColor = borderColors.value(for: internalState)
 
-        appearance.contentMargins = .zero
+        appearance.contentMargins = EdgeInsets()
 
         return appearance
     }
@@ -93,10 +93,7 @@ public struct VDisclosureGroupAppearance: Sendable {
 
     // MARK: Properties - Header
     /// Header margins.
-    public var headerMargins: Margins = .init(
-        horizontal: 15,
-        vertical: 10
-    )
+    public var headerMargins: EdgeInsets = .init(horizontal: 15, vertical: 10)
 
     /// Indicates if disclosure group expands and collapses from header tap.
     public var expandsAndCollapsesOnHeaderTap: Bool = true
@@ -156,7 +153,7 @@ public struct VDisclosureGroupAppearance: Sendable {
             disabled: Color.primary.opacity(0.3)
         )
 
-        appearance.hitBox = .zero
+        appearance.hitBox = EdgeInsets()
 
 #if os(iOS)
         appearance.haptic = nil
@@ -182,14 +179,14 @@ public struct VDisclosureGroupAppearance: Sendable {
     public var dividerColor: Color = .platformDynamic(Color(60, 60, 60, 0.3), Color(120, 120, 120, 0.6))
 
     /// Divider margins.
-    public var dividerMargins: Margins = .init(
+    public var dividerMargins: EdgeInsets = .init(
         horizontal: 15,
         vertical: 0
     )
 
     // MARK: Properties - Content
     /// Content margins.
-    public var contentMargins: Margins = .zero
+    public var contentMargins: EdgeInsets = .init()
 
     // MARK: Properties - Transition - Expand/Collapse
     /// Indicates if `expandCollapse` animation is applied.
@@ -210,10 +207,6 @@ public struct VDisclosureGroupAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.
@@ -237,7 +230,7 @@ extension VDisclosureGroupAppearance {
     public static var insettedContent: Self {
         var appearance: Self = .init()
         
-        appearance.contentMargins = Margins(15)
+        appearance.contentMargins = EdgeInsets(15)
 
         return appearance
     }

@@ -81,27 +81,23 @@ public struct VGroupBoxAppearance: Sendable {
 
     // MARK: Properties - Content
     /// Content margins.
-    public var contentMargins: Margins = {
+    public var contentMargins: EdgeInsets = {
 #if os(iOS)
-        Margins(15)
+        EdgeInsets(15)
 #elseif os(macOS)
-        Margins(7.5)
+        EdgeInsets(7.5)
 #elseif os(tvOS)
-        Margins(20)
+        EdgeInsets(20)
 #elseif os(watchOS)
-        Margins(10)
+        EdgeInsets(10)
 #elseif os(visionOS)
-        Margins(15)
+        EdgeInsets(15)
 #endif
     }()
 
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 }
 
 // MARK: - Factory

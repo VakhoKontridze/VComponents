@@ -114,7 +114,7 @@ public struct VPlainButtonAppearance: Sendable {
 
     // MARK: Properties - Hit Box
     /// Hit box.
-    public var hitBox: HitBox = .zero
+    public var hitBox: EdgeInsets = .init()
 
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.
@@ -134,10 +134,6 @@ public struct VPlainButtonAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Hit Box
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
-    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

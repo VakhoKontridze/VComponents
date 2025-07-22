@@ -187,7 +187,7 @@ public struct VTextFieldAppearance: Sendable {
             Color.dynamic(Color(255, 255, 255), Color(230, 230, 230))
         )
 
-        appearance.hitBox = .zero
+        appearance.hitBox = EdgeInsets()
 
 #if os(iOS) || os(watchOS)
         appearance.haptic = nil
@@ -217,7 +217,7 @@ public struct VTextFieldAppearance: Sendable {
             disabled: Color.primary.opacity(0.3)
         )
 
-        appearance.hitBox = .zero
+        appearance.hitBox = EdgeInsets()
 
 #if os(iOS) || os(watchOS)
         appearance.haptic = nil

@@ -84,7 +84,7 @@ public struct VBottomSheetAppearance: Sendable {
 
         appearance.backgroundColor = backgroundColor
 
-        appearance.contentMargins = .zero
+        appearance.contentMargins = EdgeInsets()
 
         return appearance
     }
@@ -102,11 +102,11 @@ public struct VBottomSheetAppearance: Sendable {
     public var dragIndicatorColor: Color = .dynamic(Color(200, 200, 200), Color(100, 100, 100))
 
     /// Drag indicator margins.
-    public var dragIndicatorMargins: VerticalMargins = .init(15)
+    public var dragIndicatorMargins: EdgeInsetsVertical = .init(15)
 
     // MARK: Properties - Content
     /// Content margins.
-    public var contentMargins: Margins = .zero
+    public var contentMargins: EdgeInsets = .init()
 
     /// Edges on which content has safe area margins.
     public var contentSafeAreaEdges: Edge.Set = []
@@ -353,14 +353,6 @@ public struct VBottomSheetAppearance: Sendable {
         }
     }
 
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
-
-    // MARK: Vertical Margins
-    /// Model that contains `top` and `bottom` margins.
-    public typealias VerticalMargins = EdgeInsets_TopBottom
-
     // MARK: State Colors
     /// Model that contains colors for component states.
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
@@ -423,7 +415,7 @@ extension VBottomSheetAppearance {
     public static var insettedContent: Self {
         var appearance: Self = .init()
         
-        appearance.contentMargins = Margins(15)
+        appearance.contentMargins = EdgeInsets(15)
         
         return appearance
     }

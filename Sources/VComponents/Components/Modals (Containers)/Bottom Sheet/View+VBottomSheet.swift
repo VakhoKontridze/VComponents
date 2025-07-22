@@ -69,7 +69,7 @@ extension View {
     ///                 appearance: {
     ///                     var appearance: VBottomSheetAppearance = .init()
     ///
-    ///                     appearance.contentMargins = VBottomSheetAppearance.Margins(
+    ///                     appearance.contentMargins = EdgeInsets(
     ///                         leading: 15,
     ///                         trailing: 15,
     ///                         top: 5,

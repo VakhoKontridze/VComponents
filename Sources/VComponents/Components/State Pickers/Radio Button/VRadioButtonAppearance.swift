@@ -190,7 +190,7 @@ public struct VRadioButtonAppearance: Sendable {
 
     // MARK: Properties - Hit Box
     /// Radio button hit box.
-    public var radioButtonHitBox: HitBox = .zero
+    public var radioButtonHitBox: EdgeInsets = .init()
 
     // MARK: Properties - Transition - State Change
     /// Indicates if `stateChangeAnimation` is applied.
@@ -215,10 +215,6 @@ public struct VRadioButtonAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Hit Box
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
-    public typealias HitBox = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

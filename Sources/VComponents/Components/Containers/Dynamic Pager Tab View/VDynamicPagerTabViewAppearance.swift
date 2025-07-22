@@ -47,7 +47,7 @@ public struct VDynamicPagerTabViewAppearance: Sendable {
 
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins.
-    public var tabItemMargins: Margins = .init(10)
+    public var tabItemMargins: EdgeInsets = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
     /// Tab item text minimum scale factor.
@@ -116,10 +116,6 @@ public struct VDynamicPagerTabViewAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` hit boxes.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Tab Selection Indicator Width Type
     /// Tab selection indicator width type.

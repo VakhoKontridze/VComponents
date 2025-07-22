@@ -134,7 +134,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     }()
 
     /// Icon margins.
-    public var iconMargins: IconMargins = .init(3)
+    public var iconMargins: EdgeInsets = .init(3)
 
     // MARK: Properties - Caption
     /// Maximum caption width.
@@ -283,10 +283,6 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Icon Margins
-    /// Model that contains `horizontal` and `vertical` margins.
-    public typealias IconMargins = EdgeInsets_HorizontalVertical
 
     // MARK: State Colors
     /// Model that contains colors for component states.

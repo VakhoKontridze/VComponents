@@ -35,7 +35,7 @@ public struct VStretchedIndicatorStaticPagerTabViewAppearance: Sendable {
 
     // MARK: Properties - Tab Bar - Tab Item
     /// Tab bar margins.
-    public var tabItemMargins: VerticalMargins = .init(10)
+    public var tabItemMargins: EdgeInsetsVertical = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
     /// Tab item text minimum scale factor.
@@ -104,10 +104,6 @@ public struct VStretchedIndicatorStaticPagerTabViewAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Vertical Margins
-    /// Model that contains `top` and `bottom` margins.
-    public typealias VerticalMargins = EdgeInsets_TopBottom
 
     // MARK: Tab Item State Colors
     /// Model that contains colors for component states.

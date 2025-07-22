@@ -129,7 +129,7 @@ public struct VTextViewAppearance: Sendable {
 
     // MARK: Properties - TextView
     /// Textview content margins.
-    public var textViewContentMargins: Margins = .init(15)
+    public var textViewContentMargins: EdgeInsets = .init(15)
 
     // MARK: Properties - Text
     /// Text line type.
@@ -169,10 +169,6 @@ public struct VTextViewAppearance: Sendable {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: State Colors
     /// Model that contains colors for component states.

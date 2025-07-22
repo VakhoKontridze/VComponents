@@ -97,14 +97,14 @@ public struct VSideBarAppearance: Sendable {
 
         appearance.backgroundColor = backgroundColor
 
-        appearance.contentMargins = .zero
+        appearance.contentMargins = EdgeInsets()
 
         return appearance
     }
 
     // MARK: Properties - Content
     /// Content margins.
-    public var contentMargins: Margins = .zero
+    public var contentMargins: EdgeInsets = .init()
 
     /// Edges on which content has safe area margins.
     public var contentSafeAreaEdges: Edge.Set = []
@@ -165,10 +165,6 @@ public struct VSideBarAppearance: Sendable {
     // MARK: Size
     /// Side bar size.
     public typealias Size = ModalComponentSize<AbsoluteFractionMeasurement, AbsoluteFractionMeasurement>
-
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
 
     // MARK: Dismiss Type
     /// Dismiss type.
@@ -378,7 +374,7 @@ extension VSideBarAppearance {
     public static var insettedContent: Self {
         var appearance: Self = .init()
 
-        appearance.contentMargins = Margins(15)
+        appearance.contentMargins = EdgeInsets(15)
 
         return appearance
     }

@@ -60,10 +60,7 @@ public struct VToastAppearance: Sendable {
     public var bodyHorizontalAlignment: HorizontalAlignment = .center
 
     /// Body margins.
-    public var bodyMargins: Margins = .init(
-        horizontal: 20,
-        vertical: 12
-    )
+    public var bodyMargins: EdgeInsets = .init(horizontal: 20, vertical: 12)
 
     // MARK: Properties - Toast Content - Text
     /// Text line type.
@@ -243,10 +240,6 @@ public struct VToastAppearance: Sendable {
         /// Default value.
         public static var `default`: Self { .capsule }
     }
-
-    // MARK: Margins
-    /// Model that contains `horizontal` and `vertical` margins.
-    public typealias Margins = EdgeInsets_HorizontalVertical
 
     // MARK: Text Line Type
     /// Text line type.

@@ -107,7 +107,7 @@ public struct VModalAppearance: Sendable {
         appearance.borderWidth = borderWidth
         appearance.borderColor = borderColor
 
-        appearance.contentMargins = .zero
+        appearance.contentMargins = EdgeInsets()
 
         return appearance
     }
@@ -123,7 +123,7 @@ public struct VModalAppearance: Sendable {
 
     // MARK: Properties - Content
     /// Content margins.
-    public var contentMargins: Margins = .zero
+    public var contentMargins: EdgeInsets = .init()
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing modal.
@@ -195,10 +195,6 @@ public struct VModalAppearance: Sendable {
         }
     }
 
-    // MARK: Margins
-    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
-    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
-
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
@@ -236,7 +232,7 @@ extension VModalAppearance {
     public static var insettedContent: Self {
         var appearance: Self = .init()
         
-        appearance.contentMargins = Margins(15)
+        appearance.contentMargins = EdgeInsets(15)
 
         return appearance
     }
