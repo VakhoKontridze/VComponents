@@ -20,14 +20,14 @@ extension View {
     ///     }
     ///
     public func vContinuousSpinner(
-        uiModel: VContinuousSpinnerUIModel = .init(),
+        appearance: VContinuousSpinnerAppearance = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
         self
             .blocksHitTesting(parameters?.isInteractionEnabled == false)
             .overlay {
                 if parameters != nil {
-                    VContinuousSpinner(uiModel: uiModel)
+                    VContinuousSpinner(appearance: appearance)
                 }
             }
     }

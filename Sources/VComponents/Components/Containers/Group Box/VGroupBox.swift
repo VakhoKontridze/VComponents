@@ -19,7 +19,7 @@ import VCore
 ///             Color(uiColor: UIColor.secondarySystemBackground)
 ///                 .ignoresSafeArea()
 ///
-///             VGroupBox(uiModel: .systemBackgroundColor) {
+///             VGroupBox(appearance: .systemBackgroundColor) {
 ///                 Text("...")
 ///                     .multilineTextAlignment(.center)
 ///             }
@@ -28,8 +28,8 @@ import VCore
 ///     }
 ///
 public struct VGroupBox<Content>: View where Content: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VGroupBoxUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VGroupBoxAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
@@ -40,20 +40,20 @@ public struct VGroupBox<Content>: View where Content: View {
     // MARK: Initializers
     /// Initializes `VGroupBox`.
     public init(
-        uiModel: VGroupBoxUIModel = .init()
+        appearance: VGroupBoxAppearance = .init()
     )
         where Content == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.content = .empty
     }
     
     /// Initializes `VGroupBox` with content.
     public init(
-        uiModel: VGroupBoxUIModel = .init(),
+        appearance: VGroupBoxAppearance = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.content = .content(content: content)
     }
     
@@ -64,9 +64,9 @@ public struct VGroupBox<Content>: View where Content: View {
             .overlay { borderView }
             .clipShape(
                 .rect(
-                    cornerRadii: uiModel.cornerRadii
+                    cornerRadii: appearance.cornerRadii
                         .horizontalCornersReversed(if:
-                            uiModel.reversesHorizontalCornersForRTLLanguages &&
+                            appearance.reversesHorizontalCornersForRTLLanguages &&
                             layoutDirection.isRightToLeft
                         )
                 )
@@ -83,26 +83,26 @@ public struct VGroupBox<Content>: View where Content: View {
                 content()
             }
         }
-        .padding(uiModel.contentMargins)
+        .padding(appearance.contentMargins)
     }
 
     private var backgroundView: some View {
-        uiModel.backgroundColor
+        appearance.backgroundColor
     }
 
     @ViewBuilder
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
             UnevenRoundedRectangle(
-                cornerRadii: uiModel.cornerRadii
+                cornerRadii: appearance.cornerRadii
                     .horizontalCornersReversed(if:
-                        uiModel.reversesHorizontalCornersForRTLLanguages &&
+                        appearance.reversesHorizontalCornersForRTLLanguages &&
                         layoutDirection.isRightToLeft
                     )
             )
-            .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
+            .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
     }
 }
@@ -117,26 +117,26 @@ public struct VGroupBox<Content>: View where Content: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color") {
-    ContentView(layer: .secondary, uiModel: .systemBackgroundColor)
+    ContentView(layer: .secondary, appearance: .systemBackgroundColor)
 }
 
 #endif
 
 private struct ContentView: View {
     private let layer: PreviewContainerLayer
-    private let uiModel: VGroupBoxUIModel
+    private let appearance: VGroupBoxAppearance
 
     init(
         layer: PreviewContainerLayer = .primary,
-        uiModel: VGroupBoxUIModel = .init()
+        appearance: VGroupBoxAppearance = .init()
     ) {
         self.layer = layer
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
         PreviewContainer(layer: layer) {
-            VGroupBox(uiModel: uiModel) {
+            VGroupBox(appearance: appearance) {
                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
                     .multilineTextAlignment(.center)
             }

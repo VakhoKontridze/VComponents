@@ -25,10 +25,10 @@ extension View {
     ///             )
     ///             .vBottomSheet(
     ///                 link: .window(linkID: "some_bottom_sheet"),
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.autoresizesContent = true // For wrapping content
-    ///                     return uiModel
+    ///                 appearance: {
+    ///                     var appearance: VBottomSheetAppearance = .init()
+    ///                     appearance.autoresizesContent = true // For wrapping content
+    ///                     return appearance
     ///                 }(),
     ///                 isPresented: $isPresented
     ///             ) {
@@ -66,10 +66,10 @@ extension View {
     ///             .getSafeAreaInsets { safeAreaInsets = $0 }
     ///             .vBottomSheet(
     ///                 link: .window(linkID: "some_bottom_sheet"),
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                 appearance: {
+    ///                     var appearance: VBottomSheetAppearance = .init()
     ///
-    ///                     uiModel.contentMargins = VBottomSheetUIModel.Margins(
+    ///                     appearance.contentMargins = VBottomSheetAppearance.Margins(
     ///                         leading: 15,
     ///                         trailing: 15,
     ///                         top: 5,
@@ -77,16 +77,16 @@ extension View {
     ///                     )
     ///
     ///                     if let contentHeight {
-    ///                         let height: CGFloat = uiModel.contentWrappingHeight(
+    ///                         let height: CGFloat = appearance.contentWrappingHeight(
     ///                             contentHeight: contentHeight,
     ///                             safeAreaInsets: safeAreaInsets
     ///                         )
     ///
-    ///                         uiModel.sizeGroup.portrait.heights = .absolute(height)
-    ///                         uiModel.sizeGroup.portrait.heights = .absolute(height)
+    ///                         appearance.sizeGroup.portrait.heights = .absolute(height)
+    ///                         appearance.sizeGroup.portrait.heights = .absolute(height)
     ///                     }
     ///
-    ///                     return uiModel
+    ///                     return appearance
     ///                 }(),
     ///                 isPresented: $isPresented
     ///             ) {
@@ -182,7 +182,7 @@ extension View {
     ///
     public func vBottomSheet<Content>(
         link: ModalPresenterLink,
-        uiModel: VBottomSheetUIModel = .init(),
+        appearance: VBottomSheetAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -193,13 +193,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VBottomSheet<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: content
                 )
@@ -217,7 +217,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vBottomSheet<Item, Content>(
         link: ModalPresenterLink,
-        uiModel: VBottomSheetUIModel = .init(),
+        appearance: VBottomSheetAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -235,13 +235,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VBottomSheet<Content?>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {

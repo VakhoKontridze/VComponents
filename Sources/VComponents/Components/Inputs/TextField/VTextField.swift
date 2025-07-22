@@ -62,38 +62,38 @@ import VCore
 ///             .onSubmit { print("Submitted") }
 ///     }
 ///
-/// TextField can be configured as secure by passing UI model.
+/// TextField can be configured as secure by passing Appearance.
 ///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
-///             uiModel: .secure,
+///             appearance: .secure,
 ///             text: $text
 ///         )
 ///         .padding()
 ///     }
 ///
-/// TextField can be configured as search by passing UI model.
+/// TextField can be configured as search by passing Appearance.
 ///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
-///             uiModel: .search,
+///             appearance: .search,
 ///             text: $text
 ///         )
 ///         .padding()
 ///     }
 ///
-/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
+/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldAppearance`.
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VTextField: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VTextFieldUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VTextFieldAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -119,7 +119,7 @@ public struct VTextField: View {
     @State private var _isClearButtonVisible: Bool = false
     
     private var isClearButtonVisible: Bool {
-        uiModel.hasClearButton &&
+        appearance.hasClearButton &&
         internalState == .focused &&
         _isClearButtonVisible
     }
@@ -128,20 +128,20 @@ public struct VTextField: View {
     @State private var isSecureTextFieldContentRevealed: Bool = false
     
     private var isTextFieldSecure: Bool {
-        uiModel.contentType == .secure &&
+        appearance.contentType == .secure &&
         !isSecureTextFieldContentRevealed
     }
 
     // MARK: Initializers
     /// Initializes `VTextField` with text.
     public init(
-        uiModel: VTextFieldUIModel = .init(),
+        appearance: VTextFieldAppearance = .init(),
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         placeholder: String? = nil,
         text: Binding<String>
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.placeholder = placeholder
@@ -152,14 +152,14 @@ public struct VTextField: View {
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.headerTextFieldAndFooterSpacing,
+            spacing: appearance.headerTextFieldAndFooterSpacing,
         ) {
             headerView
             textField
             footerView
         }
         // No need for initial checks, as secure field is always hidden by default
-        .onChange(of: uiModel.contentType) { (_, newValue) in
+        .onChange(of: appearance.contentType) { (_, newValue) in
             if newValue != .secure {
                 isSecureTextFieldContentRevealed = false
             }
@@ -167,17 +167,17 @@ public struct VTextField: View {
     }
 
     private var textField: some View {
-        HStack(spacing: uiModel.textFieldContentSpacingHorizontal) {
+        HStack(spacing: appearance.textFieldContentSpacingHorizontal) {
             searchIcon
             _textField
             clearButton
             visibilityButton
         }
-        .frame(height: uiModel.height)
-        .padding(.horizontal, uiModel.textFieldContentMarginHorizontal)
+        .frame(height: appearance.height)
+        .padding(.horizontal, appearance.textFieldContentMarginHorizontal)
         .background { borderView }
         .background { backgroundView }
-        .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+        .clipShape(.rect(cornerRadius: appearance.cornerRadius))
     }
 
     private var _textField: some View {
@@ -185,57 +185,57 @@ public struct VTextField: View {
             isSecure: isTextFieldSecure,
             placeholder: placeholder.map {
                 Text($0)
-                    .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
-                    .font(uiModel.placeholderTextFont)
-                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
+                    .foregroundStyle(appearance.placeholderTextColors.value(for: internalState))
+                    .font(appearance.placeholderTextFont)
+                    //.applyIfLet(appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
             },
             text: $text
         )
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
         .textFieldStyle(.plain)
-        .multilineTextAlignment(uiModel.textAlignment)
+        .multilineTextAlignment(appearance.textAlignment)
         .lineLimit(1)
-        .foregroundStyle(uiModel.textColors.value(for: internalState))
-        .font(uiModel.textFont)
-        .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+        .foregroundStyle(appearance.textColors.value(for: internalState))
+        .font(appearance.textFont)
+        .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 #if !(os(macOS) || os(watchOS))
-        .keyboardType(uiModel.keyboardType)
+        .keyboardType(appearance.keyboardType)
 #endif
 #if !(os(macOS) || os(watchOS))
-        .textContentType(uiModel.textContentType)
+        .textContentType(appearance.textContentType)
 #endif
-        .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
+        .disableAutocorrection(appearance.isAutocorrectionEnabled?.toggled())
 #if !(os(macOS) || os(watchOS))
-        .textInputAutocapitalization(uiModel.autocapitalization)
+        .textInputAutocapitalization(appearance.autocapitalization)
 #endif
-        .submitLabel(uiModel.submitButton)
+        .submitLabel(appearance.submitButton)
         
         .onChange(of: text, initial: true) { setClearButtonVisibility($1) }
     }
 
     @ViewBuilder
     private var searchIcon: some View {
-        if uiModel.contentType.hasSearchIcon {
-            uiModel.searchButtonIcon
-                .applyIf(uiModel.isSearchIconResizable) { $0.resizable() }
-                .applyIfLet(uiModel.searchIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                .applyIfLet(uiModel.searchIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-                .applyIfLet(uiModel.searchIconOpacities) { $0.opacity($1.value(for: internalState)) }
-                .font(uiModel.searchIconFont)
-                .applyIfLet(uiModel.searchIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .frame(size: uiModel.searchIconSize)
+        if appearance.contentType.hasSearchIcon {
+            appearance.searchButtonIcon
+                .applyIf(appearance.isSearchIconResizable) { $0.resizable() }
+                .applyIfLet(appearance.searchIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                .applyIfLet(appearance.searchIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                .applyIfLet(appearance.searchIconOpacities) { $0.opacity($1.value(for: internalState)) }
+                .font(appearance.searchIconFont)
+                .applyIfLet(appearance.searchIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .frame(size: appearance.searchIconSize)
         }
     }
     
     @ViewBuilder
     private var clearButton: some View {
-        if uiModel.contentType.hasClearButton {
+        if appearance.contentType.hasClearButton {
             ZStack {
                 VRectangularButton(
-                    uiModel: uiModel.clearButtonSubUIModel,
+                    appearance: appearance.clearButtonAppearance,
                     action: didTapClearButton,
-                    icon: uiModel.clearButtonIcon
+                    icon: appearance.clearButtonIcon
                 )
                 .opacity(isClearButtonVisible ? 1 : 0)
             }
@@ -247,10 +247,10 @@ public struct VTextField: View {
     
     @ViewBuilder 
     private var visibilityButton: some View {
-        if uiModel.contentType.hasVisibilityButton {
+        if appearance.contentType.hasVisibilityButton {
             ZStack {
                 VPlainButton(
-                    uiModel: uiModel.visibilityButtonSubUIModel,
+                    appearance: appearance.visibilityButtonAppearance,
                     action: { isSecureTextFieldContentRevealed.toggle() },
                     icon: visibilityIcon
                 )
@@ -263,17 +263,17 @@ public struct VTextField: View {
 
     private var backgroundView: some View {
         Rectangle()
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
     @ViewBuilder
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
 
@@ -281,21 +281,21 @@ public struct VTextField: View {
     private var headerView: some View {
         if let headerTitle = headerTitle?.nonEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
-                .font(uiModel.headerTitleTextFont)
-                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.headerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
+                .font(appearance.headerTitleTextFont)
+                .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.headerTitleTextFrameAlignment,
+                        horizontal: appearance.headerTitleTextFrameAlignment,
                         vertical: .center
                     )
                 )
 
-                .padding(.horizontal, uiModel.headerMarginHorizontal)
+                .padding(.horizontal, appearance.headerMarginHorizontal)
         }
     }
 
@@ -303,21 +303,21 @@ public struct VTextField: View {
     private var footerView: some View {
         if let footerTitle = footerTitle?.nonEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
-                .font(uiModel.footerTitleTextFont)
-                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.footerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.footerTitleTextColors.value(for: internalState))
+                .font(appearance.footerTitleTextFont)
+                .applyIfLet(appearance.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.footerTitleTextFrameAlignment,
+                        horizontal: appearance.footerTitleTextFrameAlignment,
                         vertical: .center
                     )
                 )
 
-                .padding(.horizontal, uiModel.footerMarginHorizontal)
+                .padding(.horizontal, appearance.footerMarginHorizontal)
         }
     }
 
@@ -325,9 +325,9 @@ public struct VTextField: View {
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if isSecureTextFieldContentRevealed {
-            uiModel.visibilityOnButtonIcon
+            appearance.visibilityOnButtonIcon
         } else {
-            uiModel.visibilityOffButtonIcon
+            appearance.visibilityOffButtonIcon
         }
     }
 
@@ -337,7 +337,7 @@ public struct VTextField: View {
     }
 
     private func setClearButtonVisibility(_ text: String) {
-        withAnimation(uiModel.clearButtonAppearDisappearAnimation) {
+        withAnimation(appearance.clearButtonAppearDisappearAnimation) {
             _isClearButtonVisible = !text.isEmpty
         }
     }
@@ -367,17 +367,17 @@ public struct VTextField: View {
 
     PreviewContainer {
         ForEach(
-            VTextFieldUIModel.ContentType.allCases,
+            VTextFieldAppearance.ContentType.allCases,
             id: \.self
         ) { contentType in
             let title: String = .init(describing: contentType).capitalized
 
             PreviewRow(title) {
                 VTextField(
-                    uiModel: {
-                        var uiModel: VTextFieldUIModel = .init()
-                        uiModel.contentType = contentType
-                        return uiModel
+                    appearance: {
+                        var appearance: VTextFieldAppearance = .init()
+                        appearance.contentType = contentType
+                        return appearance
                     }(),
                     placeholder: "Lorem ipsum",
                     text: $text
@@ -394,34 +394,34 @@ public struct VTextField: View {
 
 #Preview("Success") {
     StatesContentView(
-        uiModel: .success,
+        appearance: .success,
         showsNative: false
     )
 }
 
 #Preview("Warning") {
     StatesContentView(
-        uiModel: .warning,
+        appearance: .warning,
         showsNative: false
     )
 }
 
 #Preview("Error") {
     StatesContentView(
-        uiModel: .error,
+        appearance: .error,
         showsNative: false
     )
 }
 
 private struct StatesContentView: View {
-    private let uiModel: VTextFieldUIModel
+    private let appearance: VTextFieldAppearance
     private let showsNative: Bool
 
     init(
-        uiModel: VTextFieldUIModel = .init(),
+        appearance: VTextFieldAppearance = .init(),
         showsNative: Bool = true
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.showsNative = showsNative
     }
 
@@ -429,7 +429,7 @@ private struct StatesContentView: View {
         PreviewContainer {
             PreviewRow("Enabled") {
                 VTextField(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",
@@ -440,14 +440,14 @@ private struct StatesContentView: View {
 
             PreviewRow("Focused") {
                 VTextField(
-                    uiModel: {
-                        var mappedUIModel: VTextFieldUIModel = uiModel
-                        mappedUIModel.backgroundColors.enabled = uiModel.backgroundColors.focused
-                        mappedUIModel.borderColors.enabled = uiModel.borderColors.focused
-                        mappedUIModel.textColors.enabled = uiModel.textColors.focused
-                        mappedUIModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
-                        mappedUIModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
-                        return mappedUIModel
+                    appearance: {
+                        var mappedAppearance: VTextFieldAppearance = appearance
+                        mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
+                        mappedAppearance.borderColors.enabled = appearance.borderColors.focused
+                        mappedAppearance.textColors.enabled = appearance.textColors.focused
+                        mappedAppearance.headerTitleTextColors.enabled = appearance.headerTitleTextColors.focused
+                        mappedAppearance.footerTitleTextColors.enabled = appearance.footerTitleTextColors.focused
+                        return mappedAppearance
                     }(),
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -459,12 +459,12 @@ private struct StatesContentView: View {
 
             PreviewRow("Pressed (Button) (*)") {
                 VTextField(
-                    uiModel: {
-                        var mappedUIModel: VTextFieldUIModel = uiModel
-                        mappedUIModel.clearButtonSubUIModel.backgroundColors.enabled = uiModel.clearButtonSubUIModel.backgroundColors.pressed
-                        mappedUIModel.clearButtonSubUIModel.iconColors!.enabled = uiModel.clearButtonSubUIModel.iconColors!.pressed // Force-unwrap
-                        mappedUIModel.visibilityButtonSubUIModel.iconColors!.enabled = uiModel.visibilityButtonSubUIModel.iconColors!.pressed // Force-unwrap
-                        return mappedUIModel
+                    appearance: {
+                        var mappedAppearance: VTextFieldAppearance = appearance
+                        mappedAppearance.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
+                        mappedAppearance.clearButtonAppearance.iconColors!.enabled = appearance.clearButtonAppearance.iconColors!.pressed // Force-unwrap
+                        mappedAppearance.visibilityButtonAppearance.iconColors!.enabled = appearance.visibilityButtonAppearance.iconColors!.pressed // Force-unwrap
+                        return mappedAppearance
                     }(),
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -476,7 +476,7 @@ private struct StatesContentView: View {
 
             PreviewRow("Disabled") {
                 VTextField(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",

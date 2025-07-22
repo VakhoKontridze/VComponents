@@ -9,11 +9,11 @@
 
 ## Intro
 
-Components are not meant to be customized with view modifiers, the same way you would customize a `SwiftUI` component. All components have a UI models that they take in initializers. All UI models have default values, and all properties within those UI models have default values as well.
+Components are not meant to be customized with view modifiers, the same way you would customize a `SwiftUI` component. All components have a Appearances that they take in initializers. All Appearance have default values, and all properties within those Appearances have default values as well.
 
 ## Example
 
-For instance, you can change the foreground color of a `VPlainButton` by modifying its UI model.
+For instance, you can change the foreground color of a `VPlainButton` by modifying its Appearance.
 
 Not Preferred:
 
@@ -30,21 +30,21 @@ var body: some View {
 Preferred:
 
 ```swift
-let uiModel: VPlainButtonUIModel = {
-    var uiModel: VPlainButtonUIModel = .init()
+let appearance: VPlainButtonAppearance = {
+    var appearance: VPlainButtonAppearance = .init()
     
-    uiModel.titleTextColors = VPlainButtonUIModel.StateColors(
+    appearance.titleTextColors = VPlainButtonAppearance.StateColors(
         enabled: Color.primary,
         pressed: Color.secondary,
         disabled: Color.secondary
     )
     
-    return uiModel
+    return appearance
 }()
 
 var body: some View {
     VPlainButton(
-        uiModel: uiModel,
+        appearance: appearance,
         action: doSomething,
         title: "Lorem Ipsum"
     )
@@ -53,26 +53,26 @@ var body: some View {
 
 ## Factory Instances
 
-Alternately, you can create `static` instances of UI models for reusability.
+Alternately, you can create `static` instances of Appearances for reusability.
 
 ```swift
-extension VPlainButtonUIModel {
-    static let someUIModel: Self = {
-        var uiModel: Self = .init()
+extension VPlainButtonAppearance {
+    static let someAppearance: Self = {
+        var appearance: Self = .init()
         
-        uiModel.titleTextColors = StateColors(
+        appearance.titleTextColors = StateColors(
             enabled: Color.primary,
             pressed: Color.secondary,
             disabled: Color.secondary
         )
         
-        return uiModel
+        return appearance
     }()
 }
 
 var body: some View {
     VPlainButton(
-        uiModel: .someUIModel,
+        appearance: .someAppearance,
         action: doSomething,
         title: "Lorem Ipsum"
     )
@@ -81,11 +81,11 @@ var body: some View {
 
 ## Pre-Existing Factory Instances
 
-Frequently, you will discover pre-existing static factory-initialized UI models associated with each component. It's recommended to check UI model files before creating them yourself.
+Frequently, you will discover pre-existing static factory-initialized Appearances associated with each component. It's recommended to check Appearance files before creating them yourself.
 
 ```swift
 var body: some View {
-    VWrappingMarquee(uiModel: .insettedGradientMask) {
+    VWrappingMarquee(appearance: .insettedGradientMask) {
         HStack {
             Image(systemName: "swift")
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")

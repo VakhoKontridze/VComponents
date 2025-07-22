@@ -8,7 +8,7 @@
 
 ## Intro
 
-`VComponents` associates animations directly with components and their UI models, rather than with an external state.
+`VComponents` associates animations directly with components and their Appearances, rather than with an external state.
 
 ```swift
 @State private var isOn: Bool = false
@@ -27,7 +27,7 @@ var body: some View {
 
 ## Configuring Animations
 
-By default, `VToggle` has an `easeIn` animation with a duration of `0.1`. This applies uniformly to both touch interactions, as well as any external modifications of the state. So, to modify state with a different animation, you'll need to provide a custom UI model.
+By default, `VToggle` has an `easeIn` animation with a duration of `0.1`. This applies uniformly to both touch interactions, as well as any external modifications of the state. So, to modify state with a different animation, you'll need to provide a custom Appearance.
 
 ```swift
 @State private var isOn: Bool = false
@@ -35,10 +35,10 @@ By default, `VToggle` has an `easeIn` animation with a duration of `0.1`. This a
 var body: some View {
     VStack {
         VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.stateChangeAnimation = .easeIn(duration: 1)
-                return uiModel
+            appearance: {
+                var appearance: VToggleAppearance = .init()
+                appearance.stateChangeAnimation = .easeIn(duration: 1)
+                return appearance
             }(),
             isOn: $isOn
         )
@@ -67,10 +67,10 @@ The first is to set `stateChangeAnimation` to `nil`. While this does not complet
 var body: some View {
     VStack {
         VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.stateChangeAnimation = nil
-                return uiModel
+            appearance: {
+                var appearance: VToggleAppearance = .init()
+                appearance.stateChangeAnimation = nil
+                return appearance
             }(),
             isOn: $isOn
         )
@@ -93,10 +93,10 @@ The second is to set `appliesStateChangeAnimation` to `false`. This option ensur
 var body: some View {
     VStack {
         VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.appliesStateChangeAnimation = false
-                return uiModel
+            appearance: {
+                var appearance: VToggleAppearance = .init()
+                appearance.appliesStateChangeAnimation = false
+                return appearance
             }(),
             isOn: $isOn
         )
@@ -119,10 +119,10 @@ In certain scenarios, the distinction between these two can be substantial. For 
 var body: some View {
     VStack {
         VToggle(
-            uiModel: {
-                var uiModel: VToggleUIModel = .init()
-                uiModel.appliesStateChangeAnimation = false
-                return uiModel
+            appearance: {
+                var appearance: VToggleAppearance = .init()
+                appearance.appliesStateChangeAnimation = false
+                return appearance
             }(),
             isOn: $isOn
         )

@@ -19,7 +19,7 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     /// Creates a `View` that represents the body of a button.
     @MainActor
     func makeBody(
-        uiModel: VAlertUIModel,
+        appearance: VAlertAppearance,
         animateOutHandler: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> Body
 }

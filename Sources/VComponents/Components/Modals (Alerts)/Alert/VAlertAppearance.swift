@@ -1,0 +1,405 @@
+//
+//  VAlertAppearance.swift
+//  VComponents
+//
+//  Created by Vakhtang Kontridze on 12/26/20.
+//
+
+import SwiftUI
+import VCore
+
+// MARK: - V Alert Appearance
+/// Model that describes appearance.
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public struct VAlertAppearance: Sendable {
+    // MARK: Properties - Global
+    var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
+        var appearance: ModalPresenterLinkAppearance = .init()
+        appearance.preferredDimmingViewColor = preferredDimmingViewColor
+        return appearance
+    }
+    
+    /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootAppearance`, when only this modal is presented.
+    public var preferredDimmingViewColor: Color?
+
+    /// Alert width group.
+    public var widthGroup: WidthGroup = {
+#if os(iOS)
+        WidthGroup(
+            portrait: .fixed(width: .fraction(0.75)),
+            landscape: .fixed(width: .fraction(0.5))
+        )
+#elseif os(macOS)
+        WidthGroup(
+            portrait: .fixed(width: .absolute(250)),
+            landscape: .zero
+        )
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Vertical margin.
+    ///
+    /// Margin isn't noticeable most of the time, but when alert reaches maximum height, it will pad it.
+    public var marginVertical: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        20
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    // MARK: Properties - Corners
+    /// Corner radii.
+    public var cornerRadii: RectangleCornerRadii = .init(20)
+
+    /// Indicates if horizontal corners should switch to support RTL languages.
+    public var reversesHorizontalCornersForRTLLanguages: Bool = true
+
+    // MARK: Properties - Background
+    /// Background color.
+    public var backgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#elseif os(macOS)
+        Color(nsColor: NSColor.windowBackgroundColor)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    var groupBoxAppearance: VGroupBoxAppearance {
+        var appearance: VGroupBoxAppearance = .init()
+
+        appearance.cornerRadii = cornerRadii
+        appearance.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
+
+        appearance.backgroundColor = backgroundColor
+
+        appearance.borderWidth = borderWidth
+        appearance.borderColor = borderColor
+
+        appearance.contentMargins = .zero
+
+        return appearance
+    }
+
+    // MARK: Properties - Border
+    /// Border width.
+    ///
+    /// To hide border, set to `0`.
+    public var borderWidth: PointPixelMeasurement = .points(0)
+
+    /// Border color.
+    public var borderColor: Color = .clear
+
+    // MARK: Properties - Alert Content
+    /// Additional margins applied to title text, message text, and content as a whole.
+    public var titleTextMessageTextAndContentMargins: Margins = .init(
+        leading: 15,
+        trailing: 15,
+        top: 15,
+        bottom: 10
+    )
+
+    // MARK: Properties - Alert Content - Title
+    /// Title text frame alignment.
+    public var titleTextFrameAlignment: HorizontalAlignment = .center
+
+    /// Title text line type...2` lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextLineType: TextLineType = .multiLine(
+        alignment: .center,
+        lineLimit: 1...2
+    )
+
+    /// Title text color.
+    public var titleTextColor: Color = .primary
+
+    /// Title text font.
+    public var titleTextFont: Font = .headline.weight(.bold)
+
+    /// Title text `DynamicTypeSize` type.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
+    /// Title text margins.
+    public var titleTextMargins: Margins = .init(
+        leading: 0,
+        trailing: 0,
+        top: 5,
+        bottom: 3
+    )
+
+    // MARK: Properties - Alert Content - Message
+    /// Message title text frame alignment.
+    public var messageTextFrameAlignment: HorizontalAlignment = .center
+
+    /// Message line type...5` lines.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var messageTextLineType: TextLineType = .multiLine(
+        alignment: .center,
+        lineLimit: 1...5
+    )
+
+    /// Message text color.
+    public var messageTextColor: Color = .primary
+
+    /// Message text font.
+    public var messageTextFont: Font = .subheadline
+
+    /// Message text `DynamicTypeSize` type.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+
+    /// Message text margins.
+    public var messageTextMargins: Margins = .init(
+        leading: 0,
+        trailing: 0,
+        top: 3,
+        bottom: 5
+    )
+
+    // MARK: Properties - Alert Content - Content
+    /// Content margins.
+    public var contentMargins: Margins = .init(
+        leading: 0,
+        trailing: 0,
+        top: 10,
+        bottom: 0
+    )
+
+    // MARK: Properties - Alert Content - Buttons
+    /// Button height.
+    public var buttonHeight: CGFloat = {
+#if os(iOS)
+        40
+#elseif os(macOS)
+        22
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Button corner radius.
+    public var buttonCornerRadius: CGFloat = {
+#if os(iOS)
+        10
+#elseif os(macOS)
+        4
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Button title text font.
+    public var buttonTitleTextFont: Font = {
+#if os(iOS)
+        Font.callout.weight(.semibold)
+#elseif os(macOS)
+        Font.system(size: 13) // No dynamic type on `macOS`
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Button margins.
+    public var buttonMargins: Margins = .init(
+        leading: 15,
+        trailing: 15,
+        top: 10,
+        bottom: 15
+    )
+
+    /// Spacing between horizontal buttons.
+    public var horizontalButtonSpacing: CGFloat = 10
+
+    /// Spacing between vertical buttons.
+    public var verticalButtonSpacing: CGFloat = {
+#if os(iOS)
+        5
+#elseif os(macOS)
+        10
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+#if os(iOS)
+    /// Button haptic feedback style.
+    public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
+#endif
+
+    // MARK: Properties - Alert Content - Button - Primary
+    /// Primary button background colors.
+    public var primaryButtonBackgroundColors: ButtonStateColors = .init(
+        enabled: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+        pressed: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+        disabled: Color(128, 176, 240)
+    )
+
+    /// Primary button title text colors.
+    public var primaryButtonTitleTextColors: ButtonStateColors = .init(Color.white)
+
+    var primaryButtonAppearance: VStretchedButtonAppearance {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = buttonHeight
+        appearance.cornerRadius = buttonCornerRadius
+
+        appearance.backgroundColors = primaryButtonBackgroundColors
+
+        appearance.titleTextColors = primaryButtonTitleTextColors
+        appearance.titleTextFont = buttonTitleTextFont
+        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+
+#if os(iOS)
+        appearance.haptic = buttonHaptic
+#endif
+
+        return appearance
+    }
+
+    // MARK: Properties - Alert Content - Button - Secondary
+    /// Secondary button background colors.
+    public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
+        enabled: Color.clear,
+        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
+        disabled: Color.clear
+    )
+
+    /// Secondary button title text colors.
+    public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
+        enabled: Color.blue,
+        pressed: Color.blue,
+        disabled: Color.dynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+    )
+
+    var secondaryButtonAppearance: VStretchedButtonAppearance {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = buttonHeight
+        appearance.cornerRadius = buttonCornerRadius
+
+        appearance.backgroundColors = secondaryButtonBackgroundColors
+
+        appearance.titleTextColors = secondaryButtonTitleTextColors
+        appearance.titleTextFont = buttonTitleTextFont
+        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+
+#if os(iOS)
+        appearance.haptic = buttonHaptic
+#endif
+
+        return appearance
+    }
+
+    // MARK: Properties - Alert Content - Button - Destructive
+    /// Destructive button background colors.
+    public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
+        enabled: Color.clear,
+        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
+        disabled: Color.clear
+    )
+
+    /// Destructive button title text colors.
+    public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
+        enabled: Color.red,
+        pressed: Color.red,
+        disabled: Color.dynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
+    )
+
+    var destructiveButtonAppearance: VStretchedButtonAppearance {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = buttonHeight
+        appearance.cornerRadius = buttonCornerRadius
+
+        appearance.backgroundColors = destructiveButtonBackgroundColors
+
+        appearance.titleTextColors = destructiveButtonTitleTextColors
+        appearance.titleTextFont = buttonTitleTextFont
+        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+
+#if os(iOS)
+        appearance.haptic = buttonHaptic
+#endif
+
+        return appearance
+    }
+
+    // MARK: Properties - Transition - Appear/Disappear
+    /// Scale effect during appear and disappear.
+    public var scaleEffect: CGFloat = 1.01
+
+    // MARK: Properties - Transition - Appear
+    /// Appear animation.
+    public var appearAnimation: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+
+    // MARK: Properties - Transition - Disappear
+    /// Disappear animation.
+    public var disappearAnimation: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+
+    // MARK: Properties - Keyboard Responsiveness
+    /// Indicates if keyboard is dismissed when interface orientation changes.
+    public var dismissesKeyboardWhenInterfaceOrientationChanges: Bool = true
+
+    // MARK: Properties - Shadow
+    /// Shadow color.
+    public var shadowColor: Color = .black.opacity(0.15)
+
+    /// Shadow radius.
+    public var shadowRadius: CGFloat = 10
+
+    /// Shadow offset.
+    public var shadowOffset: CGPoint = .zero
+
+    // MARK: Initializers
+    /// Initializes appearance with default values.
+    public init() {}
+
+    // MARK: Width Group
+    /// Alert width group.
+    public typealias WidthGroup = ModalComponentSizeGroup<Width>
+
+    // MARK: Width
+    /// Alert width.
+    public enum Width: Sendable {
+        // MARK: Cases
+        /// Fixed width.
+        case fixed(width: AbsoluteFractionMeasurement)
+
+        /// Stretched width.
+        case stretched(margin: AbsoluteFractionMeasurement)
+
+        // MARK: Properties
+        var margin: AbsoluteFractionMeasurement {
+            switch self {
+            case .fixed: .absolute(0)
+            case .stretched(let margin): margin
+            }
+        }
+
+        // MARK: Initializers
+        static var zero: Self {
+            .fixed(width: .absolute(0))
+        }
+    }
+
+    // MARK: Margins
+    /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
+    public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
+
+    // MARK: Button State Colors
+    /// Model that contains colors for button component states.
+    public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+}

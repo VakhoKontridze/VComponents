@@ -12,7 +12,7 @@ import VCore
 /// Container component that automatically scrolls and wraps it's content edge-to-edge.
 ///
 ///     var body: some View {
-///         VWrappingMarquee(uiModel: .insettedGradientMask) {
+///         VWrappingMarquee(appearance: .insettedGradientMask) {
 ///             HStack {
 ///                 Image(systemName: "swift")
 ///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
@@ -26,10 +26,10 @@ import VCore
 ///
 ///     var body: some View {
 ///         VWrappingMarquee(
-///             uiModel: {
-///                 var uiModel: VWrappingMarqueeUIModel = .init()
-///                 uiModel.wrappedContentSpacing = 16
-///                 return uiModel
+///             appearance: {
+///                 var appearance: VWrappingMarqueeAppearance = .init()
+///                 appearance.wrappedContentSpacing = 16
+///                 return appearance
 ///             }()
 ///         ) {
 ///             HStack(spacing: 16) {
@@ -43,8 +43,8 @@ import VCore
 ///     }
 ///
 public struct VWrappingMarquee<Content>: View where Content: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VWrappingMarqueeUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VWrappingMarqueeAppearance
 
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
@@ -53,7 +53,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Properties - State
-    private var isAnimatable: Bool { (contentSize.width + 2*uiModel.inset) > containerWidth }
+    private var isAnimatable: Bool { (contentSize.width + 2*appearance.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
@@ -61,10 +61,10 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     // MARK: Initializers
     /// Initializes `VWrappingMarquee` with content.
     public init(
-        uiModel: VWrappingMarqueeUIModel = .init(),
+        appearance: VWrappingMarqueeAppearance = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.content = content
     }
     
@@ -112,26 +112,26 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var gradientMask: some View {
         let isMasked: Bool =
             containerWidth > 0 && // Precondition for the layout
-            uiModel.gradientMaskWidth > 0 &&
+            appearance.gradientMaskWidth > 0 &&
             isAnimatable
 
         if isMasked {
             LinearGradient(
                 stops: [
                     Gradient.Stop(
-                        color: Color.black.opacity(uiModel.gradientMaskOpacityContainerEdge),
+                        color: Color.black.opacity(appearance.gradientMaskOpacityContainerEdge),
                         location: 0
                     ),
                     Gradient.Stop(
-                        color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
-                        location: uiModel.gradientMaskWidth/containerWidth
+                        color: Color.black.opacity(appearance.gradientMaskOpacityContentEdge),
+                        location: appearance.gradientMaskWidth/containerWidth
                     ),
                     Gradient.Stop(
-                        color: Color.black.opacity(uiModel.gradientMaskOpacityContentEdge),
-                        location: 1 - uiModel.gradientMaskWidth/containerWidth
+                        color: Color.black.opacity(appearance.gradientMaskOpacityContentEdge),
+                        location: 1 - appearance.gradientMaskWidth/containerWidth
                     ),
                     Gradient.Stop(
-                        color: Color.black.opacity(uiModel.gradientMaskOpacityContainerEdge),
+                        color: Color.black.opacity(appearance.gradientMaskOpacityContainerEdge),
                         location: 1
                     )
                 ],
@@ -146,9 +146,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 
     // MARK: Offsets
     private var offsetDynamic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + appearance.inset
         
-        switch uiModel.scrollDirection {
+        switch appearance.scrollDirection {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
         @unknown default: fatalError()
@@ -156,9 +156,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetDynamicFirst: CGFloat {
-        let offset: CGFloat = -(contentSize.width + uiModel.inset + uiModel.wrappedContentSpacing)
+        let offset: CGFloat = -(contentSize.width + appearance.inset + appearance.wrappedContentSpacing)
         
-        switch (uiModel.scrollDirection, isAnimating) {
+        switch (appearance.scrollDirection, isAnimating) {
         case (.leftToRight, false): return 0
         case (.leftToRight, true): return offset
         case (.rightToLeft, false): return offset
@@ -168,9 +168,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetDynamicSecond: CGFloat {
-        let offset: CGFloat = contentSize.width + uiModel.inset + uiModel.wrappedContentSpacing
+        let offset: CGFloat = contentSize.width + appearance.inset + appearance.wrappedContentSpacing
         
-        switch (uiModel.scrollDirection, isAnimating) {
+        switch (appearance.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
         case (.leftToRight, true): return 0
         case (.rightToLeft, false): return 0
@@ -180,9 +180,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     }
     
     private var offsetStatic: CGFloat {
-        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + appearance.inset
         
-        switch uiModel.alignmentStationary {
+        switch appearance.alignmentStationary {
         case .leading: return offset
         case .center: return 0
         case .trailing: return -offset
@@ -194,17 +194,17 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var animation: Animation {
         let width: CGFloat = // Not dependent on container width
             contentSize.width +
-            uiModel.inset +
-            uiModel.wrappedContentSpacing
+            appearance.inset +
+            appearance.wrappedContentSpacing
         
         return BasicAnimation(
-            curve: uiModel.animationCurve,
-            duration: uiModel.animationDurationType.toDuration(width: width),
-            delay: uiModel.animationDelay
+            curve: appearance.animationCurve,
+            duration: appearance.animationDurationType.toDuration(width: width),
+            delay: appearance.animationDelay
         )
         .toSwiftUIAnimation
         .repeatForever(autoreverses: false)
-        .delay(uiModel.animationInitialDelay)
+        .delay(appearance.animationInitialDelay)
     }
     
     private let resettingAnimation: Animation = .linear(duration: 0)
@@ -223,7 +223,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             marqueeContent
         }
 
-        VWrappingMarquee(uiModel: .insettedGradientMask) {
+        VWrappingMarquee(appearance: .insettedGradientMask) {
             marqueeContent
         }
     }
@@ -233,10 +233,10 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VWrappingMarquee(
-                uiModel: {
-                    var uiModel: VWrappingMarqueeUIModel = .init()
-                    uiModel.scrollDirection = .leftToRight
-                    return uiModel
+                appearance: {
+                    var appearance: VWrappingMarqueeAppearance = .init()
+                    appearance.scrollDirection = .leftToRight
+                    return appearance
                 }()
             ) {
                 marqueeContent
@@ -246,10 +246,10 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     
     PreviewRow("Right-to-Left") {
         VWrappingMarquee(
-            uiModel: {
-                var uiModel: VWrappingMarqueeUIModel = .init()
-                uiModel.scrollDirection = .rightToLeft
-                return uiModel
+            appearance: {
+                var appearance: VWrappingMarqueeAppearance = .init()
+                appearance.scrollDirection = .rightToLeft
+                return appearance
             }()
         ) {
             marqueeContent

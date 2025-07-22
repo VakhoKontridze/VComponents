@@ -22,11 +22,11 @@ import VCore
 ///         )
 ///     }
 ///
-/// Direction can be changed via `direction` in UI models, or passing `vertical` instance.
+/// Direction can be changed via `direction` in Appearance, or passing `vertical` instance.
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             uiModel: .vertical,
+///             appearance: .vertical,
 ///             total: total,
 ///             current: current
 ///         )
@@ -35,16 +35,16 @@ import VCore
 /// Dots can be fully customized. For instance, we can get a "bullet" shape.
 /// `frame()` modifier shouldn't be applied to the dot itself.
 ///
-///     private let pageIndicatorUIModel: VCompactPageIndicatorUIModel = {
-///         var uiModel: VCompactPageIndicatorUIModel = .init()
-///         uiModel.dotWidth *= 2
-///         uiModel.dotHeight *= 2
-///         return uiModel
+///     private let pageIndicatorAppearance: VCompactPageIndicatorAppearance = {
+///         var appearance: VCompactPageIndicatorAppearance = .init()
+///         appearance.dotWidth *= 2
+///         appearance.dotHeight *= 2
+///         return appearance
 ///     }()
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             uiModel: pageIndicatorUIModel,
+///             appearance: pageIndicatorAppearance,
 ///             total: total,
 ///             current: current
 ///         ) { (internalState, _) in
@@ -56,14 +56,14 @@ import VCore
 ///                 Circle()
 ///                     .padding(3)
 ///             }
-///             .foregroundStyle(pageIndicatorUIModel.dotColors.value(for: internalState))
+///             .foregroundStyle(pageIndicatorAppearance.dotColors.value(for: internalState))
 ///         }
 ///         .padding()
 ///     }
 ///
 public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotContent: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VCompactPageIndicatorUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VCompactPageIndicatorAppearance
 
     // MARK: Properties - State
     private func dotInternalState(
@@ -76,10 +76,10 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
 
     // MARK: Properties - Data
     private let total: Int
-    private var visible: Int { uiModel.visibleDots }
-    private var center: Int { uiModel.centerDots }
-    private var side: Int { uiModel.sideDots }
-    private var middle: Int { uiModel.middleDots }
+    private var visible: Int { appearance.visibleDots }
+    private var center: Int { appearance.centerDots }
+    private var side: Int { appearance.sideDots }
+    private var middle: Int { appearance.middleDots }
     private let current: Int
     
     private var region: Region {
@@ -96,15 +96,15 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     // MARK: Initializers
     /// Initializes `VCompactPageIndicator` with total and current index.
     public init(
-        uiModel: VCompactPageIndicatorUIModel = .init(),
+        appearance: VCompactPageIndicatorAppearance = .init(),
         total: Int,
         current: Int
     )
         where CustomDotContent == Never
     {
-        Self.validate(uiModel: uiModel)
+        Self.validate(appearance: appearance)
         
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.total = total
         self.current = current
         self.dotContent = .standard
@@ -112,14 +112,14 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     
     /// Initializes `VCompactPageIndicator` with total, current index, and custom dot content.
     public init(
-        uiModel: VCompactPageIndicatorUIModel = .init(),
+        appearance: VCompactPageIndicatorAppearance = .init(),
         total: Int,
         current: Int,
         @ViewBuilder dotContent customDotContent: @escaping (VCompactPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
-        Self.validate(uiModel: uiModel)
+        Self.validate(appearance: appearance)
 
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.total = total
         self.current = current
         self.dotContent = .custom(custom: customDotContent)
@@ -135,7 +135,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                 
             } else {
                 VPageIndicator<CustomDotContent>(
-                    uiModel: uiModel.standardPageIndicatorSubUIModel,
+                    appearance: appearance.standardPageIndicatorAppearance,
                     total: total,
                     current: current,
                     dotContent: {
@@ -152,26 +152,26 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     private var compactBody: some View {
         let size: CGSize = .init(
             width: visibleWidth,
-            height: uiModel.dotHeight
+            height: appearance.dotHeight
         )
-            .withReversedDimensions(uiModel.direction.isVertical)
+            .withReversedDimensions(appearance.direction.isVertical)
         
         let range: [Int] = (0..<total)
-            .reversedArray(uiModel.direction.isReversed)
+            .reversedArray(appearance.direction.isReversed)
         
-        let layout: AnyLayout = uiModel.direction
-            .stackLayout(spacing: uiModel.spacing)
+        let layout: AnyLayout = appearance.direction
+            .stackLayout(spacing: appearance.spacing)
 
         return layout {
             ForEach(range, id: \.self, content: dotContentView)
         }
         .frame(size: size)
         .offset(
-            x: uiModel.direction.isHorizontal ? offset : 0,
-            y: uiModel.direction.isHorizontal ? 0 : offset
+            x: appearance.direction.isHorizontal ? offset : 0,
+            y: appearance.direction.isHorizontal ? 0 : offset
         )
         .clipped() // Clips off-bound dots
-        .applyIf(uiModel.appliesTransitionAnimation) { $0.animation(uiModel.transitionAnimation, value: current) }
+        .applyIf(appearance.appliesTransitionAnimation) { $0.animation(appearance.transitionAnimation, value: current) }
     }
 
     private func dotContentView(
@@ -183,13 +183,13 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
             switch dotContent {
             case .standard:
                 ZStack {
-                    RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                        .foregroundStyle(uiModel.dotColors.value(for: internalState))
+                    RoundedRectangle(cornerRadius: appearance.dotCornerRadii.value(for: internalState))
+                        .foregroundStyle(appearance.dotColors.value(for: internalState))
 
-                    let borderWidth: CGFloat = uiModel.dotBorderWidths.value(for: internalState)
+                    let borderWidth: CGFloat = appearance.dotBorderWidths.value(for: internalState)
                     if borderWidth > 0 {
-                        RoundedRectangle(cornerRadius: uiModel.dotCornerRadii.value(for: internalState))
-                            .strokeBorder(uiModel.dotBorderColors.value(for: internalState), lineWidth: borderWidth)
+                        RoundedRectangle(cornerRadius: appearance.dotCornerRadii.value(for: internalState))
+                            .strokeBorder(appearance.dotBorderColors.value(for: internalState), lineWidth: borderWidth)
                     }
                 }
 
@@ -198,22 +198,22 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
             }
         }
         .frame(
-            width: uiModel.direction.isHorizontal ? uiModel.dotWidth : uiModel.dotHeight,
-            height: uiModel.direction.isHorizontal ? uiModel.dotHeight : uiModel.dotWidth
+            width: appearance.direction.isHorizontal ? appearance.dotWidth : appearance.dotHeight,
+            height: appearance.direction.isHorizontal ? appearance.dotHeight : appearance.dotWidth
         )
         .scaleEffect(scale(at: index))
     }
     
     // MARK: Widths
     private var visibleWidth: CGFloat {
-        let dots: CGFloat = CGFloat(visible) * uiModel.dotWidth
-        let spacings: CGFloat = CGFloat(visible - 1) * uiModel.spacing
+        let dots: CGFloat = CGFloat(visible) * appearance.dotWidth
+        let spacings: CGFloat = CGFloat(visible - 1) * appearance.spacing
         return dots + spacings
     }
     
     private var totalWidth: CGFloat {
-        let dots: CGFloat = CGFloat(total) * uiModel.dotWidth
-        let spacings: CGFloat = CGFloat(total - 1) * uiModel.spacing
+        let dots: CGFloat = CGFloat(total) * appearance.dotWidth
+        let spacings: CGFloat = CGFloat(total - 1) * appearance.spacing
         return dots + spacings
     }
     
@@ -227,7 +227,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                 return rawOffset
                 
             case .center:
-                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.dotWidth + uiModel.spacing)
+                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (appearance.dotWidth + appearance.spacing)
                 return rawOffset + incrementalOffset
                 
             case .end:
@@ -236,7 +236,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         }()
         
         return directionalOffset
-            .withOppositeSign(uiModel.direction.isReversed)
+            .withOppositeSign(appearance.direction.isReversed)
     }
     
     // MARK: Scale
@@ -286,7 +286,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
     
     private func startEdgeEndSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side)
+        let scaleStep: CGFloat = appearance.edgeDotScale / CGFloat(side)
         let incrementalScale: CGFloat = CGFloat(index + 1) * scaleStep
         return 1 - incrementalScale
     }
@@ -323,8 +323,8 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.edgeDotScale / CGFloat(side) // Division is safe
-        let incrementalScale: CGFloat = uiModel.edgeDotScale + CGFloat(index) * scaleStep
+        let scaleStep: CGFloat = appearance.edgeDotScale / CGFloat(side) // Division is safe
+        let incrementalScale: CGFloat = appearance.edgeDotScale + CGFloat(index) * scaleStep
         return incrementalScale
     }
     
@@ -347,19 +347,19 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     
     // MARK: Validation
     private static func validate(
-        uiModel: VCompactPageIndicatorUIModel
+        appearance: VCompactPageIndicatorAppearance
     ) {
-        guard uiModel.visibleDots.isOdd else {
+        guard appearance.visibleDots.isOdd else {
             Logger.compactPageIndicator.critical("'visible' count must be odd in 'VCompactPageIndicator'")
             fatalError()
         }
         
-        guard uiModel.centerDots.isOdd else {
+        guard appearance.centerDots.isOdd else {
             Logger.compactPageIndicator.critical("'center' count must be odd in 'VCompactPageIndicator'")
             fatalError()
         }
         
-        guard uiModel.visibleDots > uiModel.centerDots else {
+        guard appearance.visibleDots > appearance.centerDots else {
             Logger.compactPageIndicator.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
             fatalError()
         }
@@ -395,10 +395,10 @@ extension Int {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VCompactPageIndicator(
-                uiModel: {
-                    var uiModel: VCompactPageIndicatorUIModel = .init()
-                    uiModel.direction = .leftToRight
-                    return uiModel
+                appearance: {
+                    var appearance: VCompactPageIndicatorAppearance = .init()
+                    appearance.direction = .leftToRight
+                    return appearance
                 }(),
                 total: total,
                 current: current
@@ -407,10 +407,10 @@ extension Int {
 
         PreviewRow("Right-to-Left") {
             VCompactPageIndicator(
-                uiModel: {
-                    var uiModel: VCompactPageIndicatorUIModel = .init()
-                    uiModel.direction = .rightToLeft
-                    return uiModel
+                appearance: {
+                    var appearance: VCompactPageIndicatorAppearance = .init()
+                    appearance.direction = .rightToLeft
+                    return appearance
                 }(),
                 total: total,
                 current: current
@@ -420,10 +420,10 @@ extension Int {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VCompactPageIndicator(
-                    uiModel: {
-                        var uiModel: VCompactPageIndicatorUIModel = .init()
-                        uiModel.direction = .topToBottom
-                        return uiModel
+                    appearance: {
+                        var appearance: VCompactPageIndicatorAppearance = .init()
+                        appearance.direction = .topToBottom
+                        return appearance
                     }(),
                     total: total,
                     current: current
@@ -432,10 +432,10 @@ extension Int {
 
             PreviewRow("Bottom-to-Top") {
                 VCompactPageIndicator(
-                    uiModel: {
-                        var uiModel: VCompactPageIndicatorUIModel = .init()
-                        uiModel.direction = .bottomToTop
-                        return uiModel
+                    appearance: {
+                        var appearance: VCompactPageIndicatorAppearance = .init()
+                        appearance.direction = .bottomToTop
+                        return appearance
                     }(),
                     total: total,
                     current: current

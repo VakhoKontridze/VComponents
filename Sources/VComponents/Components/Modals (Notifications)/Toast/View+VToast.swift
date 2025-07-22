@@ -33,19 +33,19 @@ extension View {
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
     ///             root: .window(rootID: "notifications"),
-    ///             uiModel: {
-    ///                 var uiModel: ModalPresenterRootUIModel = .init()
-    ///                 uiModel.dimmingViewColor = Color.clear
-    ///                 uiModel.dimmingViewTapAction = .passTapsThrough
-    ///                 return uiModel
+    ///             appearance: {
+    ///                 var appearance: ModalPresenterRootAppearance = .init()
+    ///                 appearance.dimmingViewColor = Color.clear
+    ///                 appearance.dimmingViewTapAction = .passTapsThrough
+    ///                 return appearance
     ///             }()
     ///         )
     ///     }
     ///
-    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VToastUIModel`.
+    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VToastAppearance`.
     public func vToast(
         link: ModalPresenterLink,
-        uiModel: VToastUIModel = .init(),
+        appearance: VToastAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -54,13 +54,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VToast(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     text: text
                 )
@@ -79,7 +79,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<Item>(
         link: ModalPresenterLink,
-        uiModel: VToastUIModel = .init(),
+        appearance: VToastAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -95,13 +95,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VToast(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     text: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
@@ -126,7 +126,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<E>(
         link: ModalPresenterLink,
-        uiModel: VToastUIModel = .init(),
+        appearance: VToastAppearance = .init(),
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -145,13 +145,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VToast(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     text: {
                         if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {

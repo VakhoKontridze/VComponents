@@ -16,10 +16,10 @@ import VCore
 ///
 ///     var body: some View {
 ///         VCodeEntryView(
-///             uiModel: {
-///                 var uiModel: VCodeEntryViewUIModel = .init()
-///                 uiModel.keyboardType = .numberPad
-///                 return uiModel
+///             appearance: {
+///                 var appearance: VCodeEntryViewAppearance = .init()
+///                 appearance.keyboardType = .numberPad
+///                 return appearance
 ///             }(),
 ///             text: $text
 ///         )
@@ -34,7 +34,7 @@ import VCore
 ///         }
 ///     }
 ///
-/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewUIModel`.
+/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewAppearance`.
 ///
 /// When running in `SwiftUI` previews or simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
 @available(macOS, unavailable) // Doesn't follow HIG
@@ -42,8 +42,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCodeEntryView: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VCodeEntryViewUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VCodeEntryViewAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -55,7 +55,7 @@ public struct VCodeEntryView: View {
             isEnabled: isEnabled,
             isFocused: isFocused && {
                 if text.count == index { true }
-                else if text.count == uiModel.length && text.count == index + 1 { true }
+                else if text.count == appearance.length && text.count == index + 1 { true }
                 else { false }
             }()
         )
@@ -68,11 +68,11 @@ public struct VCodeEntryView: View {
     // MARK: Initializers
     /// Initializes `VCodeEntryView` with text.
     public init(
-        uiModel: VCodeEntryViewUIModel = .init(),
+        appearance: VCodeEntryViewAppearance = .init(),
         placeholder: Character? = nil,
         text: Binding<String>
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.placeholder = placeholder
         self._text = text
     }
@@ -104,7 +104,7 @@ public struct VCodeEntryView: View {
 
             // Positions `TextField` behind first character's center.
             // `1/4` for `y` helps maintain proper keyboard offset.
-            .offset(x: uiModel.characterBackgroundSize.width/2, y: -uiModel.characterBackgroundSize.height/4)
+            .offset(x: appearance.characterBackgroundSize.width/2, y: -appearance.characterBackgroundSize.height/4)
 
             // Makes text invisible
             .foregroundStyle(.clear)
@@ -119,33 +119,33 @@ public struct VCodeEntryView: View {
             .focused($isFocused)
 
 #if !(os(macOS) || os(watchOS))
-            .keyboardType(uiModel.keyboardType)
+            .keyboardType(appearance.keyboardType)
 #endif
 #if !(os(macOS) || os(watchOS))
-            .textContentType(uiModel.textContentType)
+            .textContentType(appearance.textContentType)
 #endif
-            .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
+            .disableAutocorrection(appearance.isAutocorrectionEnabled?.toggled())
 #if !(os(macOS) || os(watchOS))
-            .textInputAutocapitalization(uiModel.autocapitalization)
+            .textInputAutocapitalization(appearance.autocapitalization)
 #endif
-            .submitLabel(uiModel.submitButton)
+            .submitLabel(appearance.submitButton)
     }
 
     private var charactersView: some View {
         HStack(
             spacing: {
-                switch uiModel.spacingType {
+                switch appearance.spacingType {
                 case .fixed(let spacing): spacing
                 case .stretched: 0
                 }
             }()
         ) {
-            ForEach(0..<uiModel.length, id: \.self) { index in
+            ForEach(0..<appearance.length, id: \.self) { index in
                 characterView(index: index)
 
                 if
-                    uiModel.spacingType.hasFlexibleSpace,
-                    index != uiModel.length-1
+                    appearance.spacingType.hasFlexibleSpace,
+                    index != appearance.length-1
                 {
                     Spacer(minLength: 0)
                 }
@@ -162,44 +162,44 @@ public struct VCodeEntryView: View {
         return Text(character(at: index))
             .multilineTextAlignment(.center)
             .lineLimit(1)
-            .foregroundStyle(isPopulated ? uiModel.textColors.value(for: internalState) : uiModel.placeholderTextColors.value(for: internalState))
-            .font(isPopulated ? uiModel.textFont : uiModel.placeholderTextFont)
-            .applyIfLet(isPopulated ? uiModel.textDynamicTypeSizeType : uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .foregroundStyle(isPopulated ? appearance.textColors.value(for: internalState) : appearance.placeholderTextColors.value(for: internalState))
+            .font(isPopulated ? appearance.textFont : appearance.placeholderTextFont)
+            .applyIfLet(isPopulated ? appearance.textDynamicTypeSizeType : appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
-            .frame(size: uiModel.characterBackgroundSize)
+            .frame(size: appearance.characterBackgroundSize)
 
             .background { characterBackgroundBorderView(internalState) }
             .background { characterBackgroundView(internalState) }
-            .clipShape(.rect(cornerRadius: uiModel.characterBackgroundCornerRadius))
+            .clipShape(.rect(cornerRadius: appearance.characterBackgroundCornerRadius))
     }
 
     private func characterBackgroundView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
         Rectangle()
-            .foregroundStyle(uiModel.characterBackgroundColors.value(for: internalState))
+            .foregroundStyle(appearance.characterBackgroundColors.value(for: internalState))
     }
 
     @ViewBuilder 
     private func characterBackgroundBorderView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
-        let borderWidth: CGFloat = uiModel.characterBackgroundBorderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.characterBackgroundBorderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.characterBackgroundCornerRadius)
-                .strokeBorder(uiModel.characterBackgroundBorderColors.value(for: internalState), lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.characterBackgroundCornerRadius)
+                .strokeBorder(appearance.characterBackgroundBorderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
 
     // MARK: Text Processing
     private func processText(_ newValue: String) {
-        text = String(newValue.prefix(uiModel.length))
+        text = String(newValue.prefix(appearance.length))
 
         if
-            uiModel.submitsWhenLastCharacterIsEntered,
+            appearance.submitsWhenLastCharacterIsEntered,
             isFocused,
-            text.count == uiModel.length
+            text.count == appearance.length
         {
             isFocused = false
         }
@@ -240,10 +240,10 @@ public struct VCodeEntryView: View {
 
     PreviewContainer {
         VCodeEntryView(
-            uiModel: {
-                var uiModel: VCodeEntryViewUIModel = .init()
-                uiModel.spacingType = .stretched
-                return uiModel
+            appearance: {
+                var appearance: VCodeEntryViewAppearance = .init()
+                appearance.spacingType = .stretched
+                return appearance
             }(),
             text: $text
         )
@@ -252,31 +252,31 @@ public struct VCodeEntryView: View {
 }
 
 #Preview("Success") {
-    StatesContentView(uiModel: .success)
+    StatesContentView(appearance: .success)
 }
 
 #Preview("Warning") {
-    StatesContentView(uiModel: .warning)
+    StatesContentView(appearance: .warning)
 }
 
 #Preview("Error") {
-    StatesContentView(uiModel: .error)
+    StatesContentView(appearance: .error)
 }
 
 private struct StatesContentView: View {
-    private let uiModel: VCodeEntryViewUIModel
+    private let appearance: VCodeEntryViewAppearance
 
     init(
-        uiModel: VCodeEntryViewUIModel = .init()
+        appearance: VCodeEntryViewAppearance = .init()
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
         PreviewContainer {
             PreviewRow("Enabled") {
                 VCodeEntryView(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     text: .constant("123")
                 )
             }
@@ -284,12 +284,12 @@ private struct StatesContentView: View {
             // Color is also applied to other characters
             PreviewRow("Focused (*)") {
                 VCodeEntryView(
-                    uiModel: {
-                        var uiModelMapped: VCodeEntryViewUIModel = uiModel
-                        uiModelMapped.characterBackgroundColors.enabled = uiModel.characterBackgroundColors.focused
-                        uiModelMapped.characterBackgroundBorderColors.enabled = uiModel.characterBackgroundBorderColors.focused
-                        uiModelMapped.textColors.enabled = uiModel.textColors.focused
-                        return uiModelMapped
+                    appearance: {
+                        var appearanceMapped: VCodeEntryViewAppearance = appearance
+                        appearanceMapped.characterBackgroundColors.enabled = appearance.characterBackgroundColors.focused
+                        appearanceMapped.characterBackgroundBorderColors.enabled = appearance.characterBackgroundBorderColors.focused
+                        appearanceMapped.textColors.enabled = appearance.textColors.focused
+                        return appearanceMapped
                     }(),
                     text: .constant("123")
                 )
@@ -297,7 +297,7 @@ private struct StatesContentView: View {
 
             PreviewRow("Disabled") {
                 VCodeEntryView(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     text: .constant("123")
                 )
                 .disabled(true)

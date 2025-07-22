@@ -13,8 +13,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 struct VSideBar<Content>: View where Content: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VSideBarUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VSideBarAppearance
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -25,11 +25,11 @@ struct VSideBar<Content>: View where Content: View {
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
     
     private var currentWidth: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
+        appearance.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
     
     private var currentHeight: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(dimension: containerSize.height)
+        appearance.sizeGroup.current(orientation: interfaceOrientation).height.toAbsolute(dimension: containerSize.height)
     }
 
     // MARK: Properties - Presentation API
@@ -47,11 +47,11 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        uiModel: VSideBarUIModel,
+        appearance: VSideBarAppearance,
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.content = content
     }
@@ -61,7 +61,7 @@ struct VSideBar<Content>: View where Content: View {
         sideBarView
             .getPlatformInterfaceOrientation { newValue in
                 if
-                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
                 {
 #if canImport(UIKit) && !os(watchOS)
@@ -78,7 +78,7 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private var sideBarView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
+        VGroupBox(appearance: appearance.groupBoxAppearance) {
             contentView
                 .frame(
                     width: currentWidth,
@@ -86,9 +86,9 @@ struct VSideBar<Content>: View where Content: View {
                 )
         }
         .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
+            color: appearance.shadowColor,
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
         )
         
         .offset(isPresentedInternally ? .zero : initialOffset)
@@ -101,13 +101,13 @@ struct VSideBar<Content>: View where Content: View {
 
     private var contentView: some View {
         content()
-            .padding(uiModel.contentMargins)
-            .safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
+            .padding(appearance.contentMargins)
+            .safeAreaPaddings(edges: appearance.contentSafeAreaEdges, insets: safeAreaInsets)
     }
 
     // MARK: Actions
     private func didTapDimmingView() {
-        guard uiModel.dismissType.contains(.backTap) else { return }
+        guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
@@ -119,7 +119,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.dismissType.contains(.swipe),
+            appearance.dismissType.contains(.swipe),
             !isBeingDismissedFromSwipe,
             isDraggedInCorrectDirection(dragValue),
             didExceedSwipeDismissDistance(dragValue)
@@ -135,7 +135,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -145,9 +145,9 @@ struct VSideBar<Content>: View where Content: View {
     ) {
         let animation: BasicAnimation? = {
             if isBeingDismissedFromSwipe {
-                uiModel.swipeDismissAnimation
+                appearance.swipeDismissAnimation
             } else {
-                uiModel.disappearAnimation
+                appearance.disappearAnimation
             }
         }()
 
@@ -161,7 +161,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Presentation Edge Offsets
     private var initialOffset: CGSize {
         let x: CGFloat = {
-            switch uiModel.presentationEdge {
+            switch appearance.presentationEdge {
             case .leading: -(currentWidth + safeAreaInsets.leading)
             case .trailing: currentWidth + safeAreaInsets.trailing
             case .top: 0
@@ -170,7 +170,7 @@ struct VSideBar<Content>: View where Content: View {
         }()
         
         let y: CGFloat = {
-            switch uiModel.presentationEdge {
+            switch appearance.presentationEdge {
             case .leading: 0
             case .trailing: 0
             case .top: -(currentHeight + safeAreaInsets.top)
@@ -183,7 +183,7 @@ struct VSideBar<Content>: View where Content: View {
     
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.presentationEdge {
+        switch appearance.presentationEdge {
         case .leading:
             switch layoutDirection {
             case .leftToRight: return dragValue.translation.width <= 0
@@ -207,9 +207,9 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.presentationEdge {
-        case .leading, .trailing: abs(dragValue.translation.width) >= uiModel.swipeDismissDistance(in: currentWidth)
-        case .top, .bottom: abs(dragValue.translation.height) >= uiModel.swipeDismissDistance(in: currentHeight)
+        switch appearance.presentationEdge {
+        case .leading, .trailing: abs(dragValue.translation.width) >= appearance.swipeDismissDistance(in: currentWidth)
+        case .top, .bottom: abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: currentHeight)
         }
     }
 }
@@ -224,15 +224,15 @@ struct VSideBar<Content>: View where Content: View {
 }
 
 #Preview("Trailing") {
-    ContentView(uiModel: .trailing)
+    ContentView(appearance: .trailing)
 }
 
 #Preview("Top") {
-    ContentView(uiModel: .top)
+    ContentView(appearance: .top)
 }
 
 #Preview("Bottom") {
-    ContentView(uiModel: .bottom)
+    ContentView(appearance: .bottom)
 }
 
 #if !os(macOS) // No `UIEdgeInsets`
@@ -246,7 +246,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Trailing") {
-    SafeAreaContentView(uiModel: .trailing)
+    SafeAreaContentView(appearance: .trailing)
 }
 
 #endif
@@ -254,7 +254,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Top") {
-    SafeAreaContentView(uiModel: .top)
+    SafeAreaContentView(appearance: .top)
 }
 
 #endif
@@ -263,19 +263,19 @@ struct VSideBar<Content>: View where Content: View {
 
 
 #Preview("Safe Area Bottom") {
-    SafeAreaContentView(uiModel: .bottom)
+    SafeAreaContentView(appearance: .bottom)
 }
 
 #endif
 
 private struct ContentView: View {
-    private let uiModel: VSideBarUIModel
+    private let appearance: VSideBarAppearance
     @State private var isPresented: Bool = true
 
     init(
-        uiModel: VSideBarUIModel = .init()
+        appearance: VSideBarAppearance = .init()
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
@@ -283,7 +283,7 @@ private struct ContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -291,13 +291,13 @@ private struct ContentView: View {
         }
         .modalPresenterRoot(
             root: rootAndLink.root,
-            uiModel: {
-                var uiModel: ModalPresenterRootUIModel = .init()
+            appearance: {
+                var appearance: ModalPresenterRootAppearance = .init()
 #if os(macOS)
-                uiModel.dimmingViewColor = Color.clear
-                uiModel.dimmingViewTapAction = .passTapsThrough
+                appearance.dimmingViewColor = Color.clear
+                appearance.dimmingViewTapAction = .passTapsThrough
 #endif
-                return uiModel
+                return appearance
             }()
         )
     }
@@ -306,14 +306,14 @@ private struct ContentView: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 private struct SafeAreaContentView: View {
-    private let uiModel: VSideBarUIModel
+    private let appearance: VSideBarAppearance
     @State private var isPresented: Bool = true
     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
 
     init(
-        uiModel: VSideBarUIModel = .init()
+        appearance: VSideBarAppearance = .init()
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
@@ -322,10 +322,10 @@ private struct SafeAreaContentView: View {
                 .getInterfaceOrientation { interfaceOrientation = $0 }
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel = uiModel
-                        uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
-                        return uiModel
+                    appearance: {
+                        var appearance = appearance
+                        appearance.contentSafeAreaEdges = appearance.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -334,13 +334,13 @@ private struct SafeAreaContentView: View {
         }
         .modalPresenterRoot(
             root: rootAndLink.root,
-            uiModel: {
-                var uiModel: ModalPresenterRootUIModel = .init()
+            appearance: {
+                var appearance: ModalPresenterRootAppearance = .init()
 #if os(macOS)
-                uiModel.dimmingViewColor = Color.clear
-                uiModel.dimmingViewTapAction = .passTapsThrough
+                appearance.dimmingViewColor = Color.clear
+                appearance.dimmingViewTapAction = .passTapsThrough
 #endif
-                return uiModel
+                return appearance
             }()
         )
     }

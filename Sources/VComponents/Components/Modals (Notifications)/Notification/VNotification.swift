@@ -14,8 +14,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 struct VNotification<CustomContent>: View where CustomContent: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VNotificationUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VNotificationAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -25,8 +25,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
     
-    private var currentWidth: VNotificationUIModel.Width {
-        uiModel.widthGroup.current(orientation: interfaceOrientation)
+    private var currentWidth: VNotificationAppearance.Width {
+        appearance.widthGroup.current(orientation: interfaceOrientation)
     }
     
     @State private var height: CGFloat = 0
@@ -46,11 +46,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     // MARK: Initializers
     init(
-        uiModel: VNotificationUIModel,
+        appearance: VNotificationAppearance,
         isPresented: Binding<Bool>,
         content: VNotificationContent<CustomContent>
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.content = content
     }
@@ -68,7 +68,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private var notificationView: some View {
         ZStack {
             contentView
-                .applyModifier {
+                .apply {
                     switch currentWidth {
                     case .fixed(let width):
                         $0
@@ -83,7 +83,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 .background { backgroundView }
                 .overlay { borderView }
 
-                .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+                .clipShape(.rect(cornerRadius: appearance.cornerRadius))
 
                 .onGeometryChange(of: { $0.size.height }) { height = $0 }
 
@@ -94,9 +94,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         
         // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
         .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
+            color: appearance.shadowColor,
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
         )
 
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
@@ -111,7 +111,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         Group {
             switch content {
             case .iconTitleMessage(let icon, let title, let message):
-                HStack(spacing: uiModel.iconAndTitleTextMessageTextSpacing) {
+                HStack(spacing: appearance.iconAndTitleTextMessageTextSpacing) {
                     iconView(icon: icon)
                     textsView(title: title, message: message)
                 }
@@ -120,7 +120,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 custom()
             }
         }
-        .padding(uiModel.bodyMargins)
+        .padding(appearance.bodyMargins)
     }
 
     @ViewBuilder
@@ -129,18 +129,18 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let icon {
             ZStack {
-                RoundedRectangle(cornerRadius: uiModel.iconBackgroundCornerRadius)
-                    .frame(size: uiModel.iconBackgroundSize)
-                    .foregroundStyle(uiModel.iconBackgroundColor)
+                RoundedRectangle(cornerRadius: appearance.iconBackgroundCornerRadius)
+                    .frame(size: appearance.iconBackgroundSize)
+                    .foregroundStyle(appearance.iconBackgroundColor)
 
                 icon
-                    .applyIf(uiModel.isIconResizable) { $0.resizable() }
-                    .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                    .applyIfLet(uiModel.iconColor) { $0.foregroundStyle($1) }
-                    .applyIfLet(uiModel.iconOpacity) { $0.opacity($1) }
-                    .font(uiModel.iconFont)
-                    .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                    .frame(size: uiModel.iconSize)
+                    .applyIf(appearance.isIconResizable) { $0.resizable() }
+                    .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                    .applyIfLet(appearance.iconColor) { $0.foregroundStyle($1) }
+                    .applyIfLet(appearance.iconOpacity) { $0.opacity($1) }
+                    .font(appearance.iconFont)
+                    .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .frame(size: appearance.iconSize)
             }
         }
     }
@@ -169,7 +169,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.titleTextAndMessageTextSpacing
+            spacing: appearance.titleTextAndMessageTextSpacing
         ) {
             titleText(title: title)
             messageText(message: message)
@@ -182,17 +182,17 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let title {
             Text(title)
-                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                .foregroundStyle(uiModel.titleTextColor)
-                .font(uiModel.titleTextFont)
-                .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+                .foregroundStyle(appearance.titleTextColor)
+                .font(appearance.titleTextFont)
+                .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.titleTextFrameAlignment,
+                        horizontal: appearance.titleTextFrameAlignment,
                         vertical: .center
                     )
                 )
@@ -206,17 +206,17 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let message {
             Text(message)
-                .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
-                .minimumScaleFactor(uiModel.messageTextMinimumScaleFactor)
-                .foregroundStyle(uiModel.messageTextColor)
-                .font(uiModel.messageTextFont)
-                .applyIfLet(uiModel.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.messageTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.messageTextMinimumScaleFactor)
+                .foregroundStyle(appearance.messageTextColor)
+                .font(appearance.messageTextFont)
+                .applyIfLet(appearance.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.messageTextFrameAlignment,
+                        horizontal: appearance.messageTextFrameAlignment,
                         vertical: .center
                     )
                 )
@@ -226,26 +226,26 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     private var backgroundView: some View {
         Rectangle()
-            .foregroundStyle(uiModel.backgroundColor)
+            .foregroundStyle(appearance.backgroundColor)
     }
 
     @ViewBuilder
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
     }
 
     // MARK: Actions
     private func dismissFromTimeout() {
-        guard uiModel.dismissType.contains(.timeout) else { return }
+        guard appearance.dismissType.contains(.timeout) else { return }
 
         // No need to handle reentrancy and cancellation
         Task { @MainActor in
-            try await Task.sleep(for: .seconds(uiModel.timeoutDuration))
+            try await Task.sleep(for: .seconds(appearance.timeoutDuration))
             isPresented = false
         }
     }
@@ -257,7 +257,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.dismissType.contains(.swipe),
+            appearance.dismissType.contains(.swipe),
             !isBeingDismissedFromSwipe,
             isDraggedInCorrectDirection(dragValue),
             didExceedSwipeDismissDistance(dragValue)
@@ -275,7 +275,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         playHapticEffect()
 
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true },
             completion: dismissFromTimeout
         )
@@ -286,9 +286,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) {
         let animation: BasicAnimation? = {
             if isBeingDismissedFromSwipe {
-                uiModel.swipeDismissAnimation
+                appearance.swipeDismissAnimation
             } else {
-                uiModel.disappearAnimation
+                appearance.disappearAnimation
             }
         }()
 
@@ -301,35 +301,35 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     // MARK: Offsets
     private var initialOffset: CGFloat {
-        switch uiModel.presentationEdge {
+        switch appearance.presentationEdge {
         case .top: -height
         case .bottom: height
         }
     }
 
     private var presentedOffset: CGFloat {
-        switch uiModel.presentationEdge {
-        case .top: safeAreaInsets.top + uiModel.marginPresentedEdge
-        case .bottom: -(safeAreaInsets.bottom + uiModel.marginPresentedEdge)
+        switch appearance.presentationEdge {
+        case .top: safeAreaInsets.top + appearance.marginPresentedEdge
+        case .bottom: -(safeAreaInsets.bottom + appearance.marginPresentedEdge)
         }
     }
 
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.presentationEdge {
+        switch appearance.presentationEdge {
         case .top: dragValue.translation.height <= 0
         case .bottom: dragValue.translation.height >= 0
         }
     }
 
     private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
-        abs(dragValue.translation.height) >= uiModel.swipeDismissDistance(in: height)
+        abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: height)
     }
 
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playNotification(uiModel.haptic)
+        HapticManager.shared.playNotification(appearance.haptic)
 #endif
     }
 }
@@ -386,11 +386,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VNotificationUIModel = .init()
-                    uiModel.presentationEdge = .bottom
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance: VNotificationAppearance = .init()
+                    appearance.presentationEdge = .bottom
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 icon: Image(systemName: "swift"),
@@ -400,31 +400,31 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
 
 #Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
-    @Previewable @State var width: VNotificationUIModel.Width?
+    @Previewable @State var width: VNotificationAppearance.Width?
 
     PreviewContainer {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VNotificationUIModel = .init()
+                appearance: {
+                    var appearance: VNotificationAppearance = .init()
 
-                    width.map { uiModel.widthGroup = VNotificationUIModel.WidthGroup($0) }
+                    width.map { appearance.widthGroup = VNotificationAppearance.WidthGroup($0) }
                     
-                    uiModel.timeoutDuration = 60
+                    appearance.timeoutDuration = 60
 
-                    return uiModel
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 icon: Image(systemName: "swift"),
@@ -447,27 +447,27 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
 
 #Preview("Highlights") {
     @Previewable @State var isPresented: Bool = true
-    @Previewable @State var uiModel: VNotificationUIModel = .init()
+    @Previewable @State var appearance: VNotificationAppearance = .init()
     
     PreviewContainer {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VNotificationUIModel = uiModel
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance: VNotificationAppearance = appearance
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 icon: Image(systemName: "swift"),
@@ -479,16 +479,16 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     try await Task.sleep(for: .seconds(1))
                     
                     while true {
-                        uiModel = .info
+                        appearance = .info
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .success
+                        appearance = .success
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .warning
+                        appearance = .warning
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .error
+                        appearance = .error
                         try await Task.sleep(for: .seconds(1))
                     }
                 }
@@ -496,11 +496,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
@@ -527,10 +527,10 @@ private struct ContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vNotification(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VNotificationUIModel = .init()
-                        uiModel.timeoutDuration = 60
-                        return uiModel
+                    appearance: {
+                        var appearance: VNotificationAppearance = .init()
+                        appearance.timeoutDuration = 60
+                        return appearance
                     }(),
                     isPresented: $isPresented,
                     icon: icon,
@@ -540,11 +540,11 @@ private struct ContentView: View {
         }
         .modalPresenterRoot(
             root: rootAndLink.root,
-            uiModel: {
-                var uiModel: ModalPresenterRootUIModel = .init()
-                uiModel.dimmingViewColor = Color.clear
-                uiModel.dimmingViewTapAction = .passTapsThrough
-                return uiModel
+            appearance: {
+                var appearance: ModalPresenterRootAppearance = .init()
+                appearance.dimmingViewColor = Color.clear
+                appearance.dimmingViewTapAction = .passTapsThrough
+                return appearance
             }()
         )
     }

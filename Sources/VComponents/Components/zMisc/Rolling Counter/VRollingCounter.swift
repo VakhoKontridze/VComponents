@@ -37,10 +37,10 @@ import VCore
 ///     var body: some View {
 ///         ZStack {
 ///             VRollingCounter(
-///                 uiModel: {
-///                     var uiModel: VRollingCounterUIModel = .init()
-///                     uiModel.hasFractionDigits = false
-///                     return uiModel
+///                 appearance: {
+///                     var appearance: VRollingCounterAppearance = .init()
+///                     appearance.hasFractionDigits = false
+///                     return appearance
 ///                 }(),
 ///                 value: Double(value)
 ///             )
@@ -49,8 +49,8 @@ import VCore
 ///     }
 ///        
 public struct VRollingCounter: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VRollingCounterUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VRollingCounterAppearance
 
     // MARK: Properties - Value
     private let value: Double
@@ -62,19 +62,19 @@ public struct VRollingCounter: View {
     // MARK: Initializers
     /// Initializes `VRollingCounter` with value.
     public init<V>(
-        uiModel: VRollingCounterUIModel = .init(),
+        appearance: VRollingCounterAppearance = .init(),
         value: V
     )
         where V: BinaryFloatingPoint
     {
         let value: Double = .init(value)
 
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.value = value
         self._components = State(
             wrappedValue: VRollingCounterFactory.components(
                 value: value,
-                uiModel: uiModel
+                appearance: appearance
             )
         )
     }
@@ -82,8 +82,8 @@ public struct VRollingCounter: View {
     // MARK: Body
     public var body: some View {
         HStack(
-            alignment: uiModel.verticalAlignment,
-            spacing: uiModel.spacing
+            alignment: appearance.verticalAlignment,
+            spacing: appearance.spacing
         ) {
             ForEach(components, id: \.id, content: digitView)
         }
@@ -99,11 +99,11 @@ public struct VRollingCounter: View {
         switch component {
         case let digit as VRollingCounterDigitComponent:
             Text(digit.stringRepresentation)
-                .foregroundStyle(textColor(digit.isHighlighted, defaultValue: uiModel.digitTextColor))
-                .font(uiModel.digitTextFont)
-                .applyIfLet(uiModel.digitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .padding(uiModel.digitTextMargins)
-                .offset(y: uiModel.digitTextOffsetY)
+                .foregroundStyle(textColor(digit.isHighlighted, defaultValue: appearance.digitTextColor))
+                .font(appearance.digitTextFont)
+                .applyIfLet(appearance.digitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .padding(appearance.digitTextMargins)
+                .offset(y: appearance.digitTextOffsetY)
                 .transition({
                     guard let digitTextRollingEdge else { return .identity }
                     let edge: Edge = .init(verticalEdge: digitTextRollingEdge)
@@ -112,11 +112,11 @@ public struct VRollingCounter: View {
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
-                .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
-                .font(uiModel.fractionDigitTextFont)
-                .applyIfLet(uiModel.fractionDigitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .padding(uiModel.fractionDigitTextMargins)
-                .offset(y: uiModel.fractionDigitTextOffsetY)
+                .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
+                .font(appearance.fractionDigitTextFont)
+                .applyIfLet(appearance.fractionDigitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .padding(appearance.fractionDigitTextMargins)
+                .offset(y: appearance.fractionDigitTextOffsetY)
                 .transition({
                     guard let fractionDigitTextRollingEdge else { return .identity }
                     let edge: Edge = .init(verticalEdge: fractionDigitTextRollingEdge)
@@ -125,20 +125,20 @@ public struct VRollingCounter: View {
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
-                .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: uiModel.groupingSeparatorTextColor))
-                .font(uiModel.groupingSeparatorTextFont)
-                .applyIfLet(uiModel.groupingSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .padding(uiModel.groupingSeparatorTextMargins)
-                .offset(y: uiModel.groupingSeparatorTextOffsetY)
+                .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: appearance.groupingSeparatorTextColor))
+                .font(appearance.groupingSeparatorTextFont)
+                .applyIfLet(appearance.groupingSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .padding(appearance.groupingSeparatorTextMargins)
+                .offset(y: appearance.groupingSeparatorTextOffsetY)
                 .transition(.identity)
 
         case let decimalSeparator as VRollingCounterDecimalSeparatorComponent:
             Text(decimalSeparator.stringRepresentation)
-                .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: uiModel.fractionDigitTextColor))
-                .font(uiModel.decimalSeparatorTextFont)
-                .applyIfLet(uiModel.decimalSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .padding(uiModel.decimalSeparatorTextMargins)
-                .offset(y: uiModel.decimalSeparatorTextOffsetY)
+                .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
+                .font(appearance.decimalSeparatorTextFont)
+                .applyIfLet(appearance.decimalSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .padding(appearance.decimalSeparatorTextMargins)
+                .offset(y: appearance.decimalSeparatorTextOffsetY)
                 .transition(.identity)
 
         default:
@@ -156,18 +156,18 @@ public struct VRollingCounter: View {
             oldValue: oldValue,
             oldComponents: components,
             newValue: newValue,
-            uiModel: uiModel
+            appearance: appearance
         )
 
         withAnimation(
-            uiModel.highlightAnimation?.toSwiftUIAnimation,
+            appearance.highlightAnimation?.toSwiftUIAnimation,
             {
                 components = newComponents
                 operation = Operation(oldValue: oldValue, newValue: newValue)
             },
             completion: {
                 withAnimation(
-                    uiModel.dehighlightAnimation?.toSwiftUIAnimation,
+                    appearance.dehighlightAnimation?.toSwiftUIAnimation,
                     {
                         operation = .none
 
@@ -213,24 +213,24 @@ public struct VRollingCounter: View {
     private var highlightedColor: Color? {
         switch operation {
         case .none: Color.clear
-        case .decrement: uiModel.decrementHighlightColor
-        case .increment: uiModel.incrementHighlightColor
+        case .decrement: appearance.decrementHighlightColor
+        case .increment: appearance.incrementHighlightColor
         }
     }
 
     private var digitTextRollingEdge: VerticalEdge? {
         switch operation {
         case .none: nil
-        case .decrement: uiModel.digitTextDecrementRollingEdge
-        case .increment: uiModel.digitTextIncrementRollingEdge
+        case .decrement: appearance.digitTextDecrementRollingEdge
+        case .increment: appearance.digitTextIncrementRollingEdge
         }
     }
 
     private var fractionDigitTextRollingEdge: VerticalEdge? {
         switch operation {
         case .none: nil
-        case .decrement: uiModel.fractionDigitTextDecrementRollingEdge
-        case .increment: uiModel.fractionDigitTextIncrementRollingEdge
+        case .decrement: appearance.fractionDigitTextDecrementRollingEdge
+        case .increment: appearance.fractionDigitTextIncrementRollingEdge
         }
     }
 }
@@ -269,10 +269,10 @@ extension Edge {
 
         PreviewRow("No Fractions") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
-                    uiModel.hasFractionDigits = false
-                    return uiModel
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
+                    appearance.hasFractionDigits = false
+                    return appearance
                 }(),
                 value: value
             )
@@ -280,11 +280,11 @@ extension Edge {
 
         PreviewRow("No Grouping & No Fractions") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
-                    uiModel.hasGroupingSeparator = false
-                    uiModel.hasFractionDigits = false
-                    return uiModel
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
+                    appearance.hasGroupingSeparator = false
+                    appearance.hasFractionDigits = false
+                    return appearance
                 }(),
                 value: value
             )
@@ -292,11 +292,11 @@ extension Edge {
 
         PreviewRow("No Highlight") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
-                    uiModel.incrementHighlightColor = nil
-                    uiModel.decrementHighlightColor = nil
-                    return uiModel
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
+                    appearance.incrementHighlightColor = nil
+                    appearance.decrementHighlightColor = nil
+                    return appearance
                 }(),
                 value: value
             )
@@ -304,11 +304,11 @@ extension Edge {
 
         PreviewRow("Highlighted Symbols") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
-                    uiModel.groupingSeparatorTextIsHighlightable = true
-                    uiModel.decimalSeparatorTextIsHighlightable = true
-                    return uiModel
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
+                    appearance.groupingSeparatorTextIsHighlightable = true
+                    appearance.decimalSeparatorTextIsHighlightable = true
+                    return appearance
                 }(),
                 value: value
             )
@@ -316,12 +316,12 @@ extension Edge {
 
         PreviewRow("Full Highlight") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
-                    uiModel.highlightsOnlyTheAffectedCharacters = false
-                    uiModel.groupingSeparatorTextIsHighlightable = true
-                    uiModel.decimalSeparatorTextIsHighlightable = true
-                    return uiModel
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
+                    appearance.highlightsOnlyTheAffectedCharacters = false
+                    appearance.groupingSeparatorTextIsHighlightable = true
+                    appearance.decimalSeparatorTextIsHighlightable = true
+                    return appearance
                 }(),
                 value: value
             )
@@ -329,17 +329,17 @@ extension Edge {
 
         PreviewRow("Custom") {
             VRollingCounter(
-                uiModel: {
-                    var uiModel: VRollingCounterUIModel = .init()
+                appearance: {
+                    var appearance: VRollingCounterAppearance = .init()
 
-                    uiModel.decimalSeparatorTextColor = .secondary
-                    uiModel.decimalSeparatorTextOffsetY = -10
+                    appearance.decimalSeparatorTextColor = .secondary
+                    appearance.decimalSeparatorTextOffsetY = -10
 
-                    uiModel.fractionDigitTextColor = .secondary
-                    uiModel.fractionDigitTextFont = Font.footnote.bold()
-                    uiModel.fractionDigitTextOffsetY = -2
+                    appearance.fractionDigitTextColor = .secondary
+                    appearance.fractionDigitTextFont = Font.footnote.bold()
+                    appearance.fractionDigitTextOffsetY = -2
 
-                    return uiModel
+                    return appearance
                 }(),
                 value: value
             )

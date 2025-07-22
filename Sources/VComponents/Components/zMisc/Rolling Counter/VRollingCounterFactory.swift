@@ -17,10 +17,10 @@ struct VRollingCounterFactory {
     // MARK: Components
     static func components(
         value: Double,
-        uiModel: VRollingCounterUIModel
+        appearance: VRollingCounterAppearance
     ) -> [any VRollingCounterComponentProtocol] {
         let numberFormatter: NumberFormatter = numberFormatter(
-            uiModel: uiModel
+            appearance: appearance
         )
 
         guard
@@ -36,7 +36,7 @@ struct VRollingCounterFactory {
         for char in valueString {
             let charStr: String = .init(char)
 
-            if charStr == uiModel.groupingSeparator {
+            if charStr == appearance.groupingSeparator {
                 components.append(
                     VRollingCounterGroupingSeparatorComponent(
                         id: nil,
@@ -44,7 +44,7 @@ struct VRollingCounterFactory {
                     )
                 )
 
-            } else if charStr == uiModel.decimalSeparator {
+            } else if charStr == appearance.decimalSeparator {
                 guard !hasPassedDecimalSeparator else { fatalError() }
 
                 components.append(
@@ -87,10 +87,10 @@ struct VRollingCounterFactory {
         oldValue: Double,
         oldComponents: [any VRollingCounterComponentProtocol],
         newValue: Double,
-        uiModel: VRollingCounterUIModel
+        appearance: VRollingCounterAppearance
     ) -> [any VRollingCounterComponentProtocol] {
         let numberFormatter: NumberFormatter = numberFormatter(
-            uiModel: uiModel
+            appearance: appearance
         )
 
         guard
@@ -112,11 +112,11 @@ struct VRollingCounterFactory {
         for (i, char) in newString.enumerated() {
             let charStr: String = .init(char)
 
-            if charStr == uiModel.groupingSeparator {
+            if charStr == appearance.groupingSeparator {
                 let isHighlighted: Bool = {
-                    guard uiModel.groupingSeparatorTextIsHighlightable else { return false }
+                    guard appearance.groupingSeparatorTextIsHighlightable else { return false }
 
-                    if uiModel.highlightsOnlyTheAffectedCharacters {
+                    if appearance.highlightsOnlyTheAffectedCharacters {
                         return i+1 >= firstChangedIndex
                     } else {
                         return true
@@ -131,13 +131,13 @@ struct VRollingCounterFactory {
                     )
                 )
 
-            } else if charStr == uiModel.decimalSeparator {
+            } else if charStr == appearance.decimalSeparator {
                 guard !hasPassedDecimalSeparator else { fatalError() }
 
                 let isHighlighted: Bool = {
-                    guard uiModel.decimalSeparatorTextIsHighlightable else { return false }
+                    guard appearance.decimalSeparatorTextIsHighlightable else { return false }
 
-                    if uiModel.highlightsOnlyTheAffectedCharacters {
+                    if appearance.highlightsOnlyTheAffectedCharacters {
                         return i+1 >= firstChangedIndex
                     } else {
                         return true
@@ -159,7 +159,7 @@ struct VRollingCounterFactory {
                 let digit: Int = .init(charStr)
             {
                 let isHighlighted: Bool = {
-                    if uiModel.highlightsOnlyTheAffectedCharacters {
+                    if appearance.highlightsOnlyTheAffectedCharacters {
                         return i >= firstChangedIndex
                     } else {
                         return true
@@ -196,7 +196,7 @@ struct VRollingCounterFactory {
 
     // MARK: Number Formatter
     private static func numberFormatter(
-        uiModel: VRollingCounterUIModel
+        appearance: VRollingCounterAppearance
     ) -> NumberFormatter {
         let formatter: NumberFormatter = .init()
 
@@ -205,13 +205,13 @@ struct VRollingCounterFactory {
         formatter.numberStyle = .decimal
         formatter.generatesDecimalNumbers = true
 
-        formatter.minimumFractionDigits = uiModel.hasFractionDigits ? uiModel.minFractionDigits : 0
-        formatter.maximumFractionDigits = uiModel.hasFractionDigits ? uiModel.maxFractionDigits : 0
+        formatter.minimumFractionDigits = appearance.hasFractionDigits ? appearance.minFractionDigits : 0
+        formatter.maximumFractionDigits = appearance.hasFractionDigits ? appearance.maxFractionDigits : 0
 
-        formatter.usesGroupingSeparator = uiModel.hasGroupingSeparator
-        formatter.groupingSeparator = uiModel.hasGroupingSeparator ? uiModel.groupingSeparator : nil
+        formatter.usesGroupingSeparator = appearance.hasGroupingSeparator
+        formatter.groupingSeparator = appearance.hasGroupingSeparator ? appearance.groupingSeparator : nil
 
-        formatter.decimalSeparator = uiModel.hasFractionDigits ? uiModel.decimalSeparator : nil
+        formatter.decimalSeparator = appearance.hasFractionDigits ? appearance.decimalSeparator : nil
 
         return formatter
     }

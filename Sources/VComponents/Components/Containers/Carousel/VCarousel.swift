@@ -57,8 +57,8 @@ public struct VCarousel<Data, ID, Content>: View
         ID: Hashable,
         Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VCarouselUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VCarouselAppearance
 
     // MARK: Properties - State - Card
     private func cardInternalState(
@@ -92,13 +92,13 @@ public struct VCarousel<Data, ID, Content>: View
     // MARK: Initializers
     /// Initializes `VCarousel` with selection, data, id, and content.
     public init(
-        uiModel: VCarouselUIModel = .init(),
+        appearance: VCarouselAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = id
@@ -107,7 +107,7 @@ public struct VCarousel<Data, ID, Content>: View
 
     /// Initializes `VCarousel` with selection, data, and content.
     public init(
-        uiModel: VCarouselUIModel = .init(),
+        appearance: VCarouselAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -116,7 +116,7 @@ public struct VCarousel<Data, ID, Content>: View
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -129,8 +129,8 @@ public struct VCarousel<Data, ID, Content>: View
             ScrollViewReader { scrollViewProxy in
                 ScrollView(.horizontal) {
                     LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
-                        alignment: uiModel.cardsAlignment,
-                        spacing: uiModel.cardsSpacing
+                        alignment: appearance.cardsAlignment,
+                        spacing: appearance.cardsSpacing
                     ) {
                         ForEach(data, id: id) { element in
                             cardView(
@@ -145,16 +145,16 @@ public struct VCarousel<Data, ID, Content>: View
                 .scrollTargetBehavior(.viewAligned)
                 .scrollPosition(id: selectionIDBinding)
 
-                .contentMargins(.horizontal, uiModel.cardMarginHorizontal, for: .scrollContent)
-                .contentMargins(.top, uiModel.cardMarginTop, for: .scrollContent)
-                .contentMargins(.bottom, uiModel.cardMarginBottom, for: .scrollContent)
+                .contentMargins(.horizontal, appearance.cardMarginHorizontal, for: .scrollContent)
+                .contentMargins(.top, appearance.cardMarginTop, for: .scrollContent)
+                .contentMargins(.bottom, appearance.cardMarginBottom, for: .scrollContent)
                 
                 .scrollIndicators(.hidden)
                 
-                .scrollDisabled(!uiModel.isScrollingEnabled)
+                .scrollDisabled(!appearance.isScrollingEnabled)
 
-                .applyIf(uiModel.appliesSelectionAnimation) {
-                    $0.animation(uiModel.selectionAnimation, value: selection)
+                .applyIf(appearance.appliesSelectionAnimation) {
+                    $0.animation(appearance.selectionAnimation, value: selection)
                 }
 
                 .onFirstAppear {
@@ -174,15 +174,15 @@ public struct VCarousel<Data, ID, Content>: View
         // These properties cannot be extracted within `scrollTransition(transition:`,
         // as they are `MainActor`, while method is not.
         let cardState: VCarouselCardInternalState = cardInternalState(isSelected: selection == element)
-        let scaleEffect: CGFloat = uiModel.cardHeightScales.value(for: cardState)
-        let opacity: CGFloat = uiModel.cardOpacities.value(for: cardState)
+        let scaleEffect: CGFloat = appearance.cardHeightScales.value(for: cardState)
+        let opacity: CGFloat = appearance.cardOpacities.value(for: cardState)
         
         return ZStack {
             content(element)
         }
         .frame(
             width: {
-                let width: CGFloat = geometryProxy.size.width - uiModel.cardMarginHorizontal*2
+                let width: CGFloat = geometryProxy.size.width - appearance.cardMarginHorizontal*2
                 guard width > 0 else { return nil }
                 return width
             }()
@@ -196,9 +196,9 @@ public struct VCarousel<Data, ID, Content>: View
         }
 
         .shadow(
-            color: uiModel.cardShadowColor,
-            radius: uiModel.cardShadowRadius,
-            offset: uiModel.cardShadowOffset
+            color: appearance.cardShadowColor,
+            radius: appearance.cardShadowRadius,
+            offset: appearance.cardShadowOffset
         )
     }
 }

@@ -34,8 +34,8 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VToggle<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VToggleUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VToggleAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -56,36 +56,36 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     // MARK: Initializers
     /// Initializes `VToggle` with state.
     public init(
-        uiModel: VToggleUIModel = .init(),
+        appearance: VToggleAppearance = .init(),
         state: Binding<VToggleState>
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .empty
     }
     
     /// Initializes `VToggle` with state and title.
     public init(
-        uiModel: VToggleUIModel = .init(),
+        appearance: VToggleAppearance = .init(),
         state: Binding<VToggleState>,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes `VToggle` with state and custom label.
     public init(
-        uiModel: VToggleUIModel = .init(),
+        appearance: VToggleAppearance = .init(),
         state: Binding<VToggleState>,
         @ViewBuilder label customLabel: @escaping (VToggleInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .custom(custom: customLabel)
     }
@@ -101,20 +101,20 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 labeledToggleView {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-                            .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+                            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+                            .font(appearance.titleTextFont)
+                            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     }
-                    .blocksHitTesting(!uiModel.labelIsClickable)
+                    .blocksHitTesting(!appearance.labelIsClickable)
                 }
 
             case .custom(let custom):
                 labeledToggleView {
                     baseButtonView(label: custom)
-                        .blocksHitTesting(!uiModel.labelIsClickable)
+                        .blocksHitTesting(!appearance.labelIsClickable)
                 }
             }
         }
@@ -123,21 +123,21 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     private var toggleView: some View {
         baseButtonView { internalState in
             ZStack {
-                RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                    .foregroundStyle(uiModel.fillColors.value(for: internalState))
+                RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                    .foregroundStyle(appearance.fillColors.value(for: internalState))
 
-                let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+                let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
                 if borderWidth > 0 {
-                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+                    RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                        .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 }
 
-                RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-                    .frame(size: uiModel.thumbSize)
-                    .foregroundStyle(uiModel.thumbColors.value(for: internalState))
+                RoundedRectangle(cornerRadius: appearance.thumbCornerRadius)
+                    .frame(size: appearance.thumbSize)
+                    .foregroundStyle(appearance.thumbColors.value(for: internalState))
                     .offset(x: thumbOffset(internalState: internalState))
             }
-            .frame(size: uiModel.size)
+            .frame(size: appearance.size)
         }
     }
 
@@ -146,7 +146,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.toggleAndLabelSpacing) {
+        HStack(spacing: appearance.toggleAndLabelSpacing) {
             toggleView
             label()
         }
@@ -158,7 +158,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
         where Content: View
     {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 state.setNextState()
@@ -167,9 +167,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 let internalState: VToggleInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation) {
+                    .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
-                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(appearance.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
                     }
             }
@@ -179,9 +179,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
     
@@ -190,9 +190,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
         internalState: VToggleInternalState
     ) -> CGFloat {
         let offset: CGFloat = {
-            let thumbWidth: CGFloat = uiModel.thumbSize.width
-            let spacing: CGFloat = (uiModel.size.height - thumbWidth)/2
-            let thumbStartPoint: CGFloat = (uiModel.size.width - thumbWidth)/2
+            let thumbWidth: CGFloat = appearance.thumbSize.width
+            let spacing: CGFloat = (appearance.size.height - thumbWidth)/2
+            let thumbStartPoint: CGFloat = (appearance.size.width - thumbWidth)/2
             let offset: CGFloat = thumbStartPoint - spacing
             
             return offset
@@ -235,13 +235,13 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Off") {
             VToggle(
-                uiModel: {
-                    var uiModel: VToggleUIModel = .init()
-                    uiModel.fillColors.off = uiModel.fillColors.pressedOff
-                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                    uiModel.thumbColors.off = uiModel.thumbColors.pressedOff
-                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                    return uiModel
+                appearance: {
+                    var appearance: VToggleAppearance = .init()
+                    appearance.fillColors.off = appearance.fillColors.pressedOff
+                    appearance.borderColors.off = appearance.borderColors.pressedOff
+                    appearance.thumbColors.off = appearance.thumbColors.pressedOff
+                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    return appearance
                 }(),
                 state: .constant(.off),
                 title: "Lorem ipsum"
@@ -257,13 +257,13 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed On") {
             VToggle(
-                uiModel: {
-                    var uiModel: VToggleUIModel = .init()
-                    uiModel.fillColors.on = uiModel.fillColors.pressedOn
-                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                    uiModel.thumbColors.on = uiModel.thumbColors.pressedOn
-                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                    return uiModel
+                appearance: {
+                    var appearance: VToggleAppearance = .init()
+                    appearance.fillColors.on = appearance.fillColors.pressedOn
+                    appearance.borderColors.on = appearance.borderColors.pressedOn
+                    appearance.thumbColors.on = appearance.thumbColors.pressedOn
+                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    return appearance
                 }(),
                 state: .constant(.on),
                 title: "Lorem ipsum"

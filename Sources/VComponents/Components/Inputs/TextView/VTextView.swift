@@ -23,20 +23,20 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// Height can be changed via `textLineType` in UI model.
+/// Height can be changed via `textLineType` in Appearance.
 ///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextView(
-///             uiModel: {
-///                 var uiModel: VTextViewUIModel = .init()
-///                 uiModel.textLineType = .multiLine(
+///             appearance: {
+///                 var appearance: VTextViewAppearance = .init()
+///                 appearance.textLineType = .multiLine(
 ///                     alignment: .leading,
 ///                     lineLimit: 7,
 ///                     reservesSpace: true
 ///                 )
-///                 return uiModel
+///                 return appearance
 ///             }(),
 ///             headerTitle: "Lorem ipsum dolor sit amet",
 ///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -70,8 +70,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VTextView: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VTextViewUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VTextViewAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -96,13 +96,13 @@ public struct VTextView: View {
     // MARK: Initializers
     /// Initializes `VTextView` with text.
     public init(
-        uiModel: VTextViewUIModel = .init(),
+        appearance: VTextViewAppearance = .init(),
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         placeholder: String? = nil,
         text: Binding<String>
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.placeholder = placeholder
@@ -113,7 +113,7 @@ public struct VTextView: View {
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: uiModel.headerTextViewAndFooterSpacing
+            spacing: appearance.headerTextViewAndFooterSpacing
         ) {
             headerView
             inputView
@@ -123,14 +123,14 @@ public struct VTextView: View {
 
     private var inputView: some View {
         textField
-            .padding(uiModel.textViewContentMargins)
+            .padding(appearance.textViewContentMargins)
             .frame(
-                minHeight: uiModel.minimumHeight,
+                minHeight: appearance.minimumHeight,
                 alignment: .top
             )
             .background { borderView }
             .background { backgroundView }
-            .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+            .clipShape(.rect(cornerRadius: appearance.cornerRadius))
     }
 
     private var textField: some View {
@@ -138,9 +138,9 @@ public struct VTextView: View {
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    .foregroundStyle(uiModel.placeholderTextColors.value(for: internalState))
-                    .font(uiModel.placeholderTextFont)
-                    //.applyIfLet(uiModel.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
+                    .foregroundStyle(appearance.placeholderTextColors.value(for: internalState))
+                    .font(appearance.placeholderTextFont)
+                    //.applyIfLet(appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
             },
             axis: .vertical,
             label: EmptyView.init
@@ -149,37 +149,37 @@ public struct VTextView: View {
 
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
 
-        .multilineTextAlignment(uiModel.textLineType.textAlignment ?? .leading) // May glitch for previews
-        .lineLimit(type: uiModel.textLineType.textLineLimitType)
-        .foregroundStyle(uiModel.textColors.value(for: internalState))
-        .font(uiModel.textFont)
-        .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+        .multilineTextAlignment(appearance.textLineType.textAlignment ?? .leading) // May glitch for previews
+        .lineLimit(type: appearance.textLineType.textLineLimitType)
+        .foregroundStyle(appearance.textColors.value(for: internalState))
+        .font(appearance.textFont)
+        .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 #if !(os(macOS) || os(watchOS))
-        .keyboardType(uiModel.keyboardType)
+        .keyboardType(appearance.keyboardType)
 #endif
 #if !(os(macOS) || os(watchOS))
-        .textContentType(uiModel.textContentType)
+        .textContentType(appearance.textContentType)
 #endif
-        .disableAutocorrection(uiModel.isAutocorrectionEnabled?.toggled())
+        .disableAutocorrection(appearance.isAutocorrectionEnabled?.toggled())
 #if !(os(macOS) || os(watchOS))
-        .textInputAutocapitalization(uiModel.autocapitalization)
+        .textInputAutocapitalization(appearance.autocapitalization)
 #endif
-        .submitLabel(uiModel.submitButton)
+        .submitLabel(appearance.submitButton)
     }
 
     private var backgroundView: some View {
         Rectangle()
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
     @ViewBuilder 
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
 
@@ -187,21 +187,21 @@ public struct VTextView: View {
     private var headerView: some View {
         if let headerTitle = headerTitle?.nonEmpty {
             Text(headerTitle)
-                .multilineTextAlignment(uiModel.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.headerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
-                .font(uiModel.headerTitleTextFont)
-                .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.headerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.headerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
+                .font(appearance.headerTitleTextFont)
+                .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.headerTitleTextFrameAlignment,
+                        horizontal: appearance.headerTitleTextFrameAlignment,
                         vertical: .center
                     )
                 )
 
-                .padding(.horizontal, uiModel.headerMarginHorizontal)
+                .padding(.horizontal, appearance.headerMarginHorizontal)
         }
     }
 
@@ -209,21 +209,21 @@ public struct VTextView: View {
     private var footerView: some View {
         if let footerTitle = footerTitle?.nonEmpty {
             Text(footerTitle)
-                .multilineTextAlignment(uiModel.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.footerTitleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.footerTitleTextColors.value(for: internalState))
-                .font(uiModel.footerTitleTextFont)
-                .applyIfLet(uiModel.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.footerTitleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.footerTitleTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.footerTitleTextColors.value(for: internalState))
+                .font(appearance.footerTitleTextFont)
+                .applyIfLet(appearance.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.footerTitleTextFrameAlignment,
+                        horizontal: appearance.footerTitleTextFrameAlignment,
                         vertical: .center
                     )
                 )
 
-                .padding(.horizontal, uiModel.footerMarginHorizontal)
+                .padding(.horizontal, appearance.footerMarginHorizontal)
         }
     }
 }
@@ -252,31 +252,31 @@ public struct VTextView: View {
 }
 
 #Preview("Success") {
-    StatesContentView(uiModel: .success)
+    StatesContentView(appearance: .success)
 }
 
 #Preview("Warning") {
-    StatesContentView(uiModel: .warning)
+    StatesContentView(appearance: .warning)
 }
 
 #Preview("Error") {
-    StatesContentView(uiModel: .error)
+    StatesContentView(appearance: .error)
 }
 
 private struct StatesContentView: View {
-    private let uiModel: VTextViewUIModel
+    private let appearance: VTextViewAppearance
 
     init(
-        uiModel: VTextViewUIModel = .init()
+        appearance: VTextViewAppearance = .init()
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
         PreviewContainer {
             PreviewRow("Enabled") {
                 VTextView(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",
@@ -287,14 +287,14 @@ private struct StatesContentView: View {
 
             PreviewRow("Focused") {
                 VTextView(
-                    uiModel: {
-                        var mappedUIModel: VTextViewUIModel = uiModel
-                        mappedUIModel.backgroundColors.enabled = uiModel.backgroundColors.focused
-                        mappedUIModel.borderColors.enabled = uiModel.borderColors.focused
-                        mappedUIModel.textColors.enabled = uiModel.textColors.focused
-                        mappedUIModel.headerTitleTextColors.enabled = uiModel.headerTitleTextColors.focused
-                        mappedUIModel.footerTitleTextColors.enabled = uiModel.footerTitleTextColors.focused
-                        return mappedUIModel
+                    appearance: {
+                        var mappedAppearance: VTextViewAppearance = appearance
+                        mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
+                        mappedAppearance.borderColors.enabled = appearance.borderColors.focused
+                        mappedAppearance.textColors.enabled = appearance.textColors.focused
+                        mappedAppearance.headerTitleTextColors.enabled = appearance.headerTitleTextColors.focused
+                        mappedAppearance.footerTitleTextColors.enabled = appearance.footerTitleTextColors.focused
+                        return mappedAppearance
                     }(),
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -306,7 +306,7 @@ private struct StatesContentView: View {
 
             PreviewRow("Disabled") {
                 VTextView(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",

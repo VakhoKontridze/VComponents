@@ -45,7 +45,7 @@ extension View {
     ///
     public func vAlert(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -56,13 +56,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Never>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: title,
                     message: message,
@@ -77,7 +77,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Content>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -91,13 +91,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: title,
                     message: message,
@@ -118,7 +118,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -136,13 +136,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Never>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
@@ -175,7 +175,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item, Content>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -196,13 +196,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
@@ -247,7 +247,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -268,13 +268,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Never>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: {
                         if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
@@ -307,7 +307,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E, Content>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -331,13 +331,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VAlert<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     title: {
                         if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {

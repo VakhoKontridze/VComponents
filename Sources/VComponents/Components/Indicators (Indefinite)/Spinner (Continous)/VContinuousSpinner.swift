@@ -16,8 +16,8 @@ import VCore
 ///     }
 ///
 public struct VContinuousSpinner: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VContinuousSpinnerUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VContinuousSpinnerAppearance
     
     // MARK: Properties - State
     @State private var isAnimating: Bool = false
@@ -25,24 +25,24 @@ public struct VContinuousSpinner: View {
     // MARK: Initializers
     /// Initializes `VContinuousSpinner`.
     public init(
-        uiModel: VContinuousSpinnerUIModel = .init()
+        appearance: VContinuousSpinnerAppearance = .init()
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
     
     // MARK: Body
     public var body: some View {
         Circle()
-            .trim(from: 0, to: uiModel.length)
+            .trim(from: 0, to: appearance.length)
             .stroke(
-                uiModel.color,
-                style: StrokeStyle(lineWidth: uiModel.thickness, lineCap: .round)
+                appearance.color,
+                style: StrokeStyle(lineWidth: appearance.thickness, lineCap: .round)
             )
-            .frame(width: uiModel.dimension, height: uiModel.dimension)
+            .frame(width: appearance.dimension, height: appearance.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear {
                 withAnimation(
-                    uiModel.animation.repeatForever(autoreverses: false),
+                    appearance.animation.repeatForever(autoreverses: false),
                     { isAnimating.toggle() }
                 )
             }

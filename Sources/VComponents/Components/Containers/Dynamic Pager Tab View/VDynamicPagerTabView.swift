@@ -53,11 +53,11 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         CustomTabItemLabel: View,
         Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VDynamicPagerTabViewUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VDynamicPagerTabViewAppearance
     
     private var tabIndicatorContainerHeight: CGFloat {
-        max(uiModel.tabIndicatorTrackHeight, uiModel.selectedTabIndicatorHeight)
+        max(appearance.tabIndicatorTrackHeight, appearance.selectedTabIndicatorHeight)
     }
 
     // MARK: Properties - State - Global
@@ -105,7 +105,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     // MARK: Initializers - Standard
     /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item title, and content.
     public init(
-        uiModel: VDynamicPagerTabViewUIModel = .init(),
+        appearance: VDynamicPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -114,7 +114,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     )
         where CustomTabItemLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = id
@@ -124,14 +124,14 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     /// Initializes `VDynamicPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
-        uiModel: VDynamicPagerTabViewUIModel = .init(),
+        appearance: VDynamicPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = id
@@ -142,7 +142,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     // MARK: Initializers - Identifiable
     /// Initializes `VDynamicPagerTabView` with selection, data, id, tab item title, and content.
     public init(
-        uiModel: VDynamicPagerTabViewUIModel = .init(),
+        appearance: VDynamicPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         tabItemTitle: @escaping (Data.Element) -> String,
@@ -153,7 +153,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             ID == Data.Element.ID,
             CustomTabItemLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -163,7 +163,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     /// Initializes `VDynamicPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
-        uiModel: VDynamicPagerTabViewUIModel = .init(),
+        appearance: VDynamicPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VDynamicPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
@@ -173,7 +173,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -184,10 +184,10 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     // MARK: Body
     public var body: some View {
         if data.isEmpty {
-            uiModel.tabViewBackgroundColor
+            appearance.tabViewBackgroundColor
 
         } else {
-            VStack(spacing: uiModel.tabBarAndTabViewSpacing) {
+            VStack(spacing: appearance.tabBarAndTabViewSpacing) {
                 headerView
                 tabView
             }
@@ -196,7 +196,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     private var headerView: some View {
         tabBarAndTabIndicatorStripView
-            .background(uiModel.headerBackgroundColor)
+            .background(appearance.headerBackgroundColor)
     }
 
     private var tabBarAndTabIndicatorStripView: some View {
@@ -206,8 +206,8 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             ScrollViewReader { scrollViewProxy in
                 ScrollView(.horizontal) {
                     HStack(
-                        alignment: uiModel.tabBarAlignment,
-                        spacing: uiModel.tabItemSpacing
+                        alignment: appearance.tabBarAlignment,
+                        spacing: appearance.tabItemSpacing
                     ) {
                         ForEach(data, id: id) { element in
                             ZStack(alignment: .bottom) {
@@ -232,7 +232,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                 }
                 .scrollIndicators(.hidden)
                 
-                .scrollDisabled(!uiModel.isTabBarScrollingEnabled)
+                .scrollDisabled(!appearance.isTabBarScrollingEnabled)
                 
                 .onAppear { positionSelectedTabIndicatorInitially(scrollViewProxy: scrollViewProxy) }
                 .onChange(of: selection) { positionSelectedTabIndicator($1, scrollViewProxy: scrollViewProxy) }
@@ -249,33 +249,33 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             case .title(let title):
                 Text(title(element))
                     .lineLimit(1)
-                    .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
-                    .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
-                    .font(uiModel.tabItemTextFont)
-                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .minimumScaleFactor(appearance.tabItemTextMinimumScaleFactor)
+                    .foregroundStyle(appearance.tabItemTextColors.value(for: tabItemInternalState))
+                    .font(appearance.tabItemTextFont)
+                    .applyIfLet(appearance.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             case .custom(let custom):
                 custom(tabItemInternalState, element)
             }
         }
         .fixedSize(horizontal: true, vertical: false)
-        .padding(uiModel.tabItemMargins)
-        .padding(.leading, isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0)
-        .padding(.trailing, isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0)
+        .padding(appearance.tabItemMargins)
+        .padding(.leading, isFirstElement(element) ? appearance.tabBarMarginHorizontal : 0)
+        .padding(.trailing, isLastElement(element) ? appearance.tabBarMarginHorizontal : 0)
         .contentShape(.rect)
     }
 
     private var tabIndicatorTrackView: some View {
         ZStack {
             Rectangle()
-                .frame(height: uiModel.tabIndicatorTrackHeight)
-                .foregroundStyle(uiModel.tabIndicatorTrackColor)
+                .frame(height: appearance.tabIndicatorTrackHeight)
+                .foregroundStyle(appearance.tabIndicatorTrackColor)
         }
         .frame(
             height: tabIndicatorContainerHeight,
             alignment: Alignment(
                 horizontal: .center,
-                vertical: uiModel.tabIndicatorStripAlignment
+                vertical: appearance.tabIndicatorStripAlignment
             )
         )
     }
@@ -286,25 +286,25 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         ZStack {
             ZStack {
                 if selection == element {
-                    RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
+                    RoundedRectangle(cornerRadius: appearance.selectedTabIndicatorCornerRadius)
                         .matchedGeometryEffect(id: selectedTabIndicatorNamespaceName, in: selectedTabIndicatorNamespace)
                 }
             }
-            .frame(height: uiModel.selectedTabIndicatorHeight)
+            .frame(height: appearance.selectedTabIndicatorHeight)
             .padding(
                 .leading, 
-                uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
-                uiModel.tabItemMargins.leading + (isFirstElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+                appearance.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+                appearance.tabItemMargins.leading + (isFirstElement(element) ? appearance.tabBarMarginHorizontal : 0) :
                 0
             )
             .padding(
                 .trailing,
-                uiModel.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
-                uiModel.tabItemMargins.trailing + (isLastElement(element) ? uiModel.tabBarMarginHorizontal : 0) :
+                appearance.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
+                appearance.tabItemMargins.trailing + (isLastElement(element) ? appearance.tabBarMarginHorizontal : 0) :
                 0
             )
-            .foregroundStyle(uiModel.selectedTabIndicatorColor)
-            .animation(uiModel.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:completionCriteria:_:completion:)`
+            .foregroundStyle(appearance.selectedTabIndicatorColor)
+            .animation(appearance.selectedTabIndicatorAnimation, value: selection) // Needed alongside `withAnimation(_:completionCriteria:_:completion:)`
         }
         .frame(height: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
         .offset(y: tabIndicatorContainerHeight) // Needed for `VStack`-like layout in `ZStack`
@@ -326,11 +326,11 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             .scrollTargetBehavior(.paging)
             .scrollPosition(id: selectionIDBinding)
             
-            .background(uiModel.tabViewBackgroundColor)
+            .background(appearance.tabViewBackgroundColor)
             
             .scrollIndicators(.hidden)
             
-            .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
+            .scrollDisabled(!appearance.isTabViewScrollingEnabled)
         }
     }
 
@@ -349,7 +349,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         scrollViewProxy: ScrollViewProxy
     ) {
         withAnimation( // Needed alongside `animation(_:value:)` to maintain proper `ScrollView` offset
-            uiModel.selectedTabIndicatorAnimation,
+            appearance.selectedTabIndicatorAnimation,
             { _positionSelectedTabIndicator(newElement, scrollViewProxy: scrollViewProxy) }
         )
     }
@@ -360,7 +360,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     ) {
         scrollViewProxy.scrollTo(
             newElement,
-            anchor: uiModel.selectedTabIndicatorScrollAnchor
+            anchor: appearance.selectedTabIndicatorScrollAnchor
         )
     }
 
@@ -384,14 +384,14 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     PreviewContainer(layer: .secondary) {
         ForEach(
-            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            VDynamicPagerTabViewAppearance.TabSelectionIndicatorWidthType.allCases,
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                uiModel: {
-                    var uiModel: VDynamicPagerTabViewUIModel = .init()
-                    uiModel.tabSelectionIndicatorWidthType = widthType
-                    return uiModel
+                appearance: {
+                    var appearance: VDynamicPagerTabViewAppearance = .init()
+                    appearance.tabSelectionIndicatorWidthType = widthType
+                    return appearance
                 }(),
                 selection: $selection,
                 data: Weekday.allCases,
@@ -409,14 +409,14 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     PreviewContainer(layer: .secondary) {
         ForEach(
-            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            VDynamicPagerTabViewAppearance.TabSelectionIndicatorWidthType.allCases,
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                uiModel: {
-                    var uiModel: VDynamicPagerTabViewUIModel = .init()
-                    uiModel.tabSelectionIndicatorWidthType = widthType
-                    return uiModel
+                appearance: {
+                    var appearance: VDynamicPagerTabViewAppearance = .init()
+                    appearance.tabSelectionIndicatorWidthType = widthType
+                    return appearance
                 }(),
                 selection: $selection,
                 data: Weekday.allCases.prefix(3),
@@ -434,14 +434,14 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     PreviewContainer(layer: .secondary) {
         ForEach(
-            VDynamicPagerTabViewUIModel.TabSelectionIndicatorWidthType.allCases,
+            VDynamicPagerTabViewAppearance.TabSelectionIndicatorWidthType.allCases,
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                uiModel: {
-                    var uiModel: VDynamicPagerTabViewUIModel = .init()
-                    uiModel.tabSelectionIndicatorWidthType = widthType
-                    return uiModel
+                appearance: {
+                    var appearance: VDynamicPagerTabViewAppearance = .init()
+                    appearance.tabSelectionIndicatorWidthType = widthType
+                    return appearance
                 }(),
                 selection: $selection,
                 data: [],

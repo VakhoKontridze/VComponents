@@ -23,8 +23,8 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VRectangularCaptionButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VRectangularCaptionButtonAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -48,14 +48,14 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     // MARK: Initializers
     /// Initializes `VRectangularCaptionButton` with action, icon, and title caption.
     public init(
-        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image,
         titleCaption: String
     )
         where CustomCaption == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.icon = icon
         self.caption = .title(title: titleCaption)
@@ -63,14 +63,14 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
     /// Initializes `VRectangularCaptionButton` with action, icon, and icon caption.
     public init(
-        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image,
         iconCaption: Image
     )
         where CustomCaption == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.icon = icon
         self.caption = .icon(icon: iconCaption)
@@ -78,7 +78,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
     /// Initializes `VRectangularCaptionButton` with action, icon, icon caption, and title caption.
     public init(
-        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image,
         titleCaption: String,
@@ -86,7 +86,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     )
         where CustomCaption == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.icon = icon
         self.caption = .titleAndIcon(title: titleCaption, icon: iconCaption)
@@ -94,12 +94,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     
     /// Initializes `VRectangularCaptionButton` with action, icon, and custom caption.
     public init(
-        uiModel: VRectangularCaptionButtonUIModel = .init(),
+        appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image,
         @ViewBuilder caption customCaption: @escaping (VRectangularCaptionButtonInternalState) -> CustomCaption
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.icon = icon
         self.caption = .custom(custom: customCaption)
@@ -108,7 +108,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 action()
@@ -116,7 +116,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             label: { baseButtonState in
                 let internalState: VRectangularCaptionButtonInternalState = internalState(baseButtonState)
                 
-                VStack(spacing: uiModel.rectangleAndCaptionSpacing) {
+                VStack(spacing: appearance.rectangleAndCaptionSpacing) {
                     rectangleView(internalState: internalState)
                     captionView(internalState: internalState)
                 }
@@ -133,37 +133,37 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 internalState: internalState
             )
         }
-        .frame(size: uiModel.rectangleSize)
+        .frame(size: appearance.rectangleSize)
         .background { rectangleBackgroundView(internalState: internalState) }
         .overlay { rectangleBorderView(internalState: internalState) }
-        .clipShape(.rect(cornerRadius: uiModel.rectangleCornerRadius))
+        .clipShape(.rect(cornerRadius: appearance.rectangleCornerRadius))
     }
 
     private func rectangleIcon(
         internalState: VPlainButtonInternalState
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconSize)
-            .scaleEffect(internalState == .pressed ? uiModel.iconPressedScale : 1)
-            .padding(uiModel.iconMargins)
+            .applyIf(appearance.isIconResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconSize)
+            .scaleEffect(internalState == .pressed ? appearance.iconPressedScale : 1)
+            .padding(appearance.iconMargins)
     }
 
     private func rectangleBackgroundView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         Rectangle()
-            .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
-            .foregroundStyle(uiModel.rectangleColors.value(for: internalState))
+            .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
+            .foregroundStyle(appearance.rectangleColors.value(for: internalState))
             .shadow(
-                color: uiModel.shadowColors.value(for: internalState),
-                radius: uiModel.shadowRadius,
-                offset: uiModel.shadowOffset
+                color: appearance.shadowColors.value(for: internalState),
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
             )
     }
     
@@ -171,12 +171,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        let borderWidth: CGFloat = uiModel.rectangleBorderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.rectangleBorderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.rectangleCornerRadius)
-                .strokeBorder(uiModel.rectangleBorderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState == .pressed ? uiModel.rectanglePressedScale : 1)
+            RoundedRectangle(cornerRadius: appearance.rectangleCornerRadius)
+                .strokeBorder(appearance.rectangleBorderColors.value(for: internalState), lineWidth: borderWidth)
+                .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
         }
     }
     
@@ -192,15 +192,15 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 iconCaptionViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleCaptionTextAndIconCaptionPlacement {
+                switch appearance.titleCaptionTextAndIconCaptionPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing) {
+                    HStack(spacing: appearance.titleCaptionTextAndIconCaptionSpacing) {
                         titleCaptionViewComponent(internalState: internalState, title: title)
                         iconCaptionViewComponent(internalState: internalState, icon: icon)
                     }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleCaptionTextAndIconCaptionSpacing) {
+                    HStack(spacing: appearance.titleCaptionTextAndIconCaptionSpacing) {
                         iconCaptionViewComponent(internalState: internalState, icon: icon)
                         titleCaptionViewComponent(internalState: internalState, title: title)
                     }
@@ -211,13 +211,13 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             }
         }
         .frame(
-            maxWidth: uiModel.captionWidthMax,
+            maxWidth: appearance.captionWidthMax,
             alignment: Alignment(
-                horizontal: uiModel.captionFrameAlignment,
+                horizontal: appearance.captionFrameAlignment,
                 vertical: .center
             )
         )
-        .scaleEffect(internalState == .pressed ? uiModel.captionPressedScale : 1)
+        .scaleEffect(internalState == .pressed ? appearance.captionPressedScale : 1)
     }
     
     private func titleCaptionViewComponent(
@@ -225,12 +225,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         title: String
     ) -> some View {
         Text(title)
-            .multilineTextAlignment(uiModel.titleCaptionTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.titleCaptionTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.titleCaptionTextMinimumScaleFactor)
-            .foregroundStyle(uiModel.titleCaptionTextColors.value(for: internalState))
-            .font(uiModel.titleCaptionTextFont)
-            .applyIfLet(uiModel.titleCaptionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .multilineTextAlignment(appearance.titleCaptionTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: appearance.titleCaptionTextLineType.textLineLimitType)
+            .minimumScaleFactor(appearance.titleCaptionTextMinimumScaleFactor)
+            .foregroundStyle(appearance.titleCaptionTextColors.value(for: internalState))
+            .font(appearance.titleCaptionTextFont)
+            .applyIfLet(appearance.titleCaptionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconCaptionViewComponent(
@@ -238,21 +238,21 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconCaptionResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconCaptionContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconCaptionColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconCaptionOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconCaptionFont)
-            .applyIfLet(uiModel.iconCaptionDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconCaptionSize)
+            .applyIf(appearance.isIconCaptionResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconCaptionContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconCaptionColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconCaptionOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconCaptionFont)
+            .applyIfLet(appearance.iconCaptionDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconCaptionSize)
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -284,12 +284,12 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
         PreviewRow("Pressed") {
             VRectangularCaptionButton(
-                uiModel: {
-                    var uiModel: VRectangularCaptionButtonUIModel = .init()
-                    uiModel.rectangleColors.enabled = uiModel.rectangleColors.pressed
-                    uiModel.iconColors!.enabled = uiModel.iconColors!.pressed // Force-unwrap
-                    uiModel.titleCaptionTextColors.enabled = uiModel.titleCaptionTextColors.pressed
-                    return uiModel
+                appearance: {
+                    var appearance: VRectangularCaptionButtonAppearance = .init()
+                    appearance.rectangleColors.enabled = appearance.rectangleColors.pressed
+                    appearance.iconColors!.enabled = appearance.iconColors!.pressed // Force-unwrap
+                    appearance.titleCaptionTextColors.enabled = appearance.titleCaptionTextColors.pressed
+                    return appearance
                 }(),
                 action: {},
                 icon: Image(systemName: "swift"),

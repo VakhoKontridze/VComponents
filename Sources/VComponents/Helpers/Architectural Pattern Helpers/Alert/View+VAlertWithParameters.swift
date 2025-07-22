@@ -41,12 +41,12 @@ extension View {
     ///     
     public func vAlert(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         parameters: Binding<VAlertParameters?>
     ) -> some View {
         self.vAlert(
             link: link,
-            uiModel: uiModel,
+            appearance: appearance,
             item: parameters,
             title: { $0.title },
             message: { $0.message },
@@ -92,7 +92,7 @@ extension View {
     ///
     public func vAlert<Content>(
         link: ModalPresenterLink,
-        uiModel: VAlertUIModel = .init(),
+        appearance: VAlertAppearance = .init(),
         parameters: Binding<VAlertParameters?>,
         @ViewBuilder content: @escaping (VAlertParameters) -> Content
     ) -> some View
@@ -100,7 +100,7 @@ extension View {
     {
         self.vAlert(
             link: link,
-            uiModel: uiModel,
+            appearance: appearance,
             item: parameters,
             title: { $0.title },
             message: { $0.message },

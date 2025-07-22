@@ -16,8 +16,8 @@ import VCore
 struct VBottomSheet<Content>: View
     where Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VBottomSheetUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VBottomSheetAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -28,11 +28,11 @@ struct VBottomSheet<Content>: View
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
     private var currentWidth: CGFloat {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
+        appearance.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
     
-    private var currentHeightsObject: VBottomSheetUIModel.Heights {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).heights
+    private var currentHeightsObject: VBottomSheetAppearance.Heights {
+        appearance.sizeGroup.current(orientation: interfaceOrientation).heights
             .withFixedValues(in: containerSize.height)
     }
     
@@ -57,11 +57,11 @@ struct VBottomSheet<Content>: View
 
     // MARK: Initializers
     init(
-        uiModel: VBottomSheetUIModel,
+        appearance: VBottomSheetAppearance,
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.content = content
     }
@@ -71,7 +71,7 @@ struct VBottomSheet<Content>: View
         bottomSheetView
             .getPlatformInterfaceOrientation { newValue in
                 if
-                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
                 {
 #if canImport(UIKit) && !os(watchOS)
@@ -81,10 +81,10 @@ struct VBottomSheet<Content>: View
                 
                 interfaceOrientation = newValue
                 
-                resetHeightFromEnvironmentOrUIModelChange(from: currentHeightsObject)
+                resetHeightFromEnvironmentOrAppearanceChange(from: currentHeightsObject)
             }
-            .onChange(of: uiModel.sizeGroup) { (_, newValue) in
-                resetHeightFromEnvironmentOrUIModelChange(
+            .onChange(of: appearance.sizeGroup) { (_, newValue) in
+                resetHeightFromEnvironmentOrAppearanceChange(
                     from: newValue.current(orientation: interfaceOrientation).heights
                         .withFixedValues(in: containerSize.height)
                 )
@@ -97,8 +97,8 @@ struct VBottomSheet<Content>: View
 
     private var bottomSheetView: some View {
         ZStack {
-            VGroupBox(uiModel: uiModel.groupBoxSubUIModel)
-                .applyIf(!uiModel.contentIsDraggable) {
+            VGroupBox(appearance: appearance.groupBoxAppearance)
+                .applyIf(!appearance.contentIsDraggable) {
                     $0
                         .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
@@ -109,9 +109,9 @@ struct VBottomSheet<Content>: View
                         )
                 }
                 .shadow(
-                    color: uiModel.shadowColor,
-                    radius: uiModel.shadowRadius,
-                    offset: uiModel.shadowOffset
+                    color: appearance.shadowColor,
+                    radius: appearance.shadowRadius,
+                    offset: appearance.shadowOffset
                 )
 
             bottomSheetContentView
@@ -121,16 +121,16 @@ struct VBottomSheet<Content>: View
                 // No need to reverse corners for RTL.
                 // `compositingGroup` helps fix glitches within subviews.
                 .compositingGroup()
-                .clipShape(.rect(cornerRadii: uiModel.cornerRadii))
+                .clipShape(.rect(cornerRadii: appearance.cornerRadii))
 
-                .applyIf(!uiModel.contentIsDraggable) {
+                .applyIf(!appearance.contentIsDraggable) {
                     $0
                         .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                         .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
                 }
         }
         .frame(width: currentWidth)
-        .applyIf(uiModel.contentIsDraggable) {
+        .applyIf(appearance.contentIsDraggable) {
             $0
                 .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
                 .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
@@ -151,11 +151,11 @@ struct VBottomSheet<Content>: View
 
     private var dragIndicatorView: some View {
         ZStack {
-            if uiModel.dragIndicatorSize.height > 0 {
-                RoundedRectangle(cornerRadius: uiModel.dragIndicatorCornerRadius)
-                    .frame(size: uiModel.dragIndicatorSize)
-                    .padding(uiModel.dragIndicatorMargins)
-                    .foregroundStyle(uiModel.dragIndicatorColor)
+            if appearance.dragIndicatorSize.height > 0 {
+                RoundedRectangle(cornerRadius: appearance.dragIndicatorCornerRadius)
+                    .frame(size: appearance.dragIndicatorSize)
+                    .padding(appearance.dragIndicatorMargins)
+                    .foregroundStyle(appearance.dragIndicatorColor)
             }
         }
         .onGeometryChange(of: { $0.size.height }) { dragIndicatorHeight = $0 } // If it's not rendered, `0` will be returned
@@ -163,17 +163,17 @@ struct VBottomSheet<Content>: View
     
     private var contentView: some View {
         ZStack {
-            if !uiModel.contentIsDraggable {
+            if !appearance.contentIsDraggable {
                 Color.clear
                     .contentShape(.rect)
             }
             
             content()
-                .padding(uiModel.contentMargins)
+                .padding(appearance.contentMargins)
         }
-        .safeAreaPaddings(edges: uiModel.contentSafeAreaEdges, insets: safeAreaInsets)
+        .safeAreaPaddings(edges: appearance.contentSafeAreaEdges, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
-        .applyIf(uiModel.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height)) {
+        .applyIf(appearance.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height)) {
             $0
                 .frame(
                     height: max( // Autoresized content shouldn't get smaller that the `min` height
@@ -189,7 +189,7 @@ struct VBottomSheet<Content>: View
 
     // MARK: Actions
     private func didTapDimmingView() {
-        guard uiModel.dismissType.contains(.backTap) else { return }
+        guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
@@ -212,7 +212,7 @@ struct VBottomSheet<Content>: View
                     return currentHeightsObject.maxOffset(in: containerSize.height)
 
                 case currentHeightsObject.minOffset(in: containerSize.height)...:
-                    if uiModel.dismissType.contains(.swipe) {
+                    if appearance.dismissType.contains(.swipe) {
                         return newOffset
                     } else {
                         return currentHeightsObject.minOffset(in: containerSize.height)
@@ -230,7 +230,7 @@ struct VBottomSheet<Content>: View
 
         let velocityExceedsNextAreaSnapThreshold: Bool =
             abs(dragValue.velocity.height) >=
-            abs(uiModel.velocityToSnapToNextHeight)
+            abs(appearance.velocityToSnapToNextHeight)
 
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
@@ -240,8 +240,8 @@ struct VBottomSheet<Content>: View
                 .dragEndedSnapAction(
                     containerHeight: containerSize.height,
                     heights: currentHeightsObject,
-                    canSwipeToDismiss: uiModel.dismissType.contains(.swipe),
-                    swipeDismissDistance: uiModel.swipeDismissDistance(heights: currentHeightsObject, in: containerSize.height),
+                    canSwipeToDismiss: appearance.dismissType.contains(.swipe),
+                    swipeDismissDistance: appearance.swipeDismissDistance(heights: currentHeightsObject, in: containerSize.height),
                     offset: offset,
                     offsetBeforeDrag: offsetBeforeDrag,
                     translation: dragValue.translation.height
@@ -269,14 +269,14 @@ struct VBottomSheet<Content>: View
             dismissFromSwipe()
 
         case .snap(let newOffset):
-            withAnimation(uiModel.heightSnapAnimation) { _offset = newOffset }
+            withAnimation(appearance.heightSnapAnimation) { _offset = newOffset }
         }
     }
 
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -286,9 +286,9 @@ struct VBottomSheet<Content>: View
     ) {
         let animation: BasicAnimation? = {
             if isBeingDismissedFromSwipe {
-                uiModel.swipeDismissAnimation
+                appearance.swipeDismissAnimation
             } else {
-                uiModel.disappearAnimation
+                appearance.disappearAnimation
             }
         }()
 
@@ -300,14 +300,14 @@ struct VBottomSheet<Content>: View
     }
 
     // MARK: Orientation
-    private func resetHeightFromEnvironmentOrUIModelChange(
-        from heights: VBottomSheetUIModel.Heights
+    private func resetHeightFromEnvironmentOrAppearanceChange(
+        from heights: VBottomSheetAppearance.Heights
     ) {
         _offset = getResetedHeight(from: heights)
     }
 
     private func getResetedHeight(
-        from heights: VBottomSheetUIModel.Heights
+        from heights: VBottomSheetAppearance.Heights
     ) -> CGFloat {
         heights.idealOffset(in: containerSize.height)
     }
@@ -348,21 +348,21 @@ private struct ContentView_MinIdealMax: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
 
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             )
                         )
 
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -390,21 +390,21 @@ private struct ContentView_MinIdeal: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
 
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                             )
                         )
 
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -432,21 +432,21 @@ private struct ContentView_IdealMax: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
 
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
                             )
                         )
 
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -474,21 +474,21 @@ private struct ContentView_IdealSmall: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
 
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.2)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(0.2)
                             )
                         )
 
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -516,21 +516,21 @@ private struct ContentView_IdealLarge: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
 
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.9)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(0.9)
                             )
                         )
 
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -556,22 +556,22 @@ private struct ContentView_ContentAutoresizing: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
                         
-                        uiModel.sizeGroup = VBottomSheetUIModel.SizeGroup(
-                            portrait: VBottomSheetUIModel.Size(
+                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                            portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             ),
-                            landscape: VBottomSheetUIModel.Size(
+                            landscape: VBottomSheetAppearance.Size(
                                 width: .fraction(0.7),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             )
                         )
-                        uiModel.autoresizesContent = true
+                        appearance.autoresizesContent = true
                         
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -603,10 +603,10 @@ private struct ContentView_ContentAutoresizing: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
                         
-                        uiModel.contentMargins = VBottomSheetUIModel.Margins(
+                        appearance.contentMargins = VBottomSheetAppearance.Margins(
                             leading: 15,
                             trailing: 15,
                             top: 5,
@@ -614,16 +614,16 @@ private struct ContentView_ContentAutoresizing: View {
                         )
                         
                         if let contentHeight {
-                            let height: CGFloat = uiModel.contentWrappingHeight(
+                            let height: CGFloat = appearance.contentWrappingHeight(
                                 contentHeight: contentHeight,
                                 safeAreaInsets: safeAreaInsets
                             )
                             
-                            uiModel.sizeGroup.portrait.heights = .absolute(height)
-                            uiModel.sizeGroup.portrait.heights = .absolute(height)
+                            appearance.sizeGroup.portrait.heights = .absolute(height)
+                            appearance.sizeGroup.portrait.heights = .absolute(height)
                         }
                         
-                        return uiModel
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -666,10 +666,10 @@ private struct ContentView_ContentAutoresizing: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VBottomSheetUIModel = .init()
-                        uiModel.autoresizesContent = true
-                        return uiModel
+                    appearance: {
+                        var appearance: VBottomSheetAppearance = .init()
+                        appearance.autoresizesContent = true
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -697,7 +697,7 @@ private struct ContentView_ContentAutoresizing: View {
         ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: .insettedContent,
+                appearance: .insettedContent,
                 isPresented: $isPresented
             ) {
                 Color.blue
@@ -713,10 +713,10 @@ private struct ContentView_ContentAutoresizing: View {
         ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VBottomSheetUIModel = .noDragIndicator
-                    uiModel.contentIsDraggable = true
-                    return uiModel
+                appearance: {
+                    var appearance: VBottomSheetAppearance = .noDragIndicator
+                    appearance.contentIsDraggable = true
+                    return appearance
                 }(),
                 isPresented: $isPresented
             ) {

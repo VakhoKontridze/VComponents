@@ -13,8 +13,8 @@ import VCore
 struct VModal<Content>: View
     where Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VModalUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VModalAppearance
     
     @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
     
@@ -24,12 +24,12 @@ struct VModal<Content>: View
     
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     
-    private var currentWidth: VModalUIModel.Dimension {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).width
+    private var currentWidth: VModalAppearance.Dimension {
+        appearance.sizeGroup.current(orientation: interfaceOrientation).width
     }
     
-    private var currentHeight: VModalUIModel.Dimension {
-        uiModel.sizeGroup.current(orientation: interfaceOrientation).height
+    private var currentHeight: VModalAppearance.Dimension {
+        appearance.sizeGroup.current(orientation: interfaceOrientation).height
     }
 
     // MARK: Properties - Presentation API
@@ -43,11 +43,11 @@ struct VModal<Content>: View
 
     // MARK: Initializers
     init(
-        uiModel: VModalUIModel,
+        appearance: VModalAppearance,
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.content = content
     }
@@ -57,7 +57,7 @@ struct VModal<Content>: View
         modalView
             .getPlatformInterfaceOrientation { newValue in
                 if
-                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
                 {
 #if canImport(UIKit) && !os(watchOS)
@@ -74,9 +74,9 @@ struct VModal<Content>: View
     }
 
     private var modalView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
+        VGroupBox(appearance: appearance.groupBoxAppearance) {
             contentView
-                .applyModifier {
+                .apply {
                     switch currentWidth {
                     case .fixed(let dimension):
                         $0
@@ -90,7 +90,7 @@ struct VModal<Content>: View
                             .frame(maxWidth: .infinity)
                     }
                 }
-                .applyModifier {
+                .apply {
                     switch currentHeight {
                     case .fixed(let dimension):
                         $0
@@ -106,25 +106,25 @@ struct VModal<Content>: View
                 }
         }
         .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
+            color: appearance.shadowColor,
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
         )
         
         .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
         .padding(.vertical, currentHeight.margin.toAbsolute(dimension: containerSize.height))
 
-        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
+        .scaleEffect(isPresentedInternally ? 1 : appearance.scaleEffect)
     }
 
     private var contentView: some View {
         content()
-            .padding(uiModel.contentMargins)
+            .padding(appearance.contentMargins)
     }
 
     // MARK: Actions
     private func didTapDimmingView() {
-        guard uiModel.dismissType.contains(.backTap) else { return }
+        guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
@@ -132,7 +132,7 @@ struct VModal<Content>: View
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -141,7 +141,7 @@ struct VModal<Content>: View
         completion: @escaping () -> Void
     ) {
         withAnimation(
-            uiModel.disappearAnimation?.toSwiftUIAnimation,
+            appearance.disappearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = false },
             completion: completion
         )
@@ -176,17 +176,17 @@ struct VModal<Content>: View
 // Macros aren't allowed in Preview macro
 private struct ContentView_SizeTypes: View {
     @State private var isPresented: Bool = true
-    @State private var size: VModalUIModel.Size?
+    @State private var size: VModalAppearance.Size?
 
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
                 .vModal(
                     link: rootAndLink.link(linkID: "preview"),
-                    uiModel: {
-                        var uiModel: VModalUIModel = .init()
-                        size.map { uiModel.sizeGroup = VModalUIModel.SizeGroup($0) }
-                        return uiModel
+                    appearance: {
+                        var appearance: VModalAppearance = .init()
+                        size.map { appearance.sizeGroup = VModalAppearance.SizeGroup($0) }
+                        return appearance
                     }(),
                     isPresented: $isPresented
                 ) {
@@ -199,19 +199,19 @@ private struct ContentView_SizeTypes: View {
                         try await Task.sleep(for: .seconds(1))
                         
                         while true {
-                            size = VModalUIModel.Size(
+                            size = VModalAppearance.Size(
                                 width: .fixed(dimension: .fraction(0.75)),
                                 height: .fixed(dimension: .fraction(0.75))
                             )
                             try await Task.sleep(for: .seconds(1))
                             
-                            size = VModalUIModel.Size(
+                            size = VModalAppearance.Size(
                                 width: .wrapped(margin: .absolute(15)),
                                 height: .wrapped(margin: .absolute(15))
                             )
                             try await Task.sleep(for: .seconds(1))
                             
-                            size = VModalUIModel.Size(
+                            size = VModalAppearance.Size(
                                 width: .stretched(margin: .absolute(15)),
                                 height: .stretched(margin: .absolute(15))
                             )

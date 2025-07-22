@@ -48,8 +48,8 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VRectangularToggleButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VRectangularToggleButtonAppearance
 
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -70,37 +70,37 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     // MARK: Initializers
     /// Initializes `VRectangularToggleButton` with state and title.
     public init(
-        uiModel: VRectangularToggleButtonUIModel = .init(),
+        appearance: VRectangularToggleButtonAppearance = .init(),
         state: Binding<VRectangularToggleButtonState>,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .title(title: title)
     }
 
     /// Initializes `VRectangularToggleButton` with state and icon.
     public init(
-        uiModel: VRectangularToggleButtonUIModel = .init(),
+        appearance: VRectangularToggleButtonAppearance = .init(),
         state: Binding<VRectangularToggleButtonState>,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .icon(icon: icon)
     }
 
     /// Initializes `VRectangularToggleButton` with state and custom label.
     public init(
-        uiModel: VRectangularToggleButtonUIModel = .init(),
+        appearance: VRectangularToggleButtonAppearance = .init(),
         state: Binding<VRectangularToggleButtonState>,
         @ViewBuilder label customLabel: @escaping (VRectangularToggleButtonInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .custom(custom: customLabel)
     }
@@ -108,7 +108,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 state.setNextState()
@@ -118,14 +118,14 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
 
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
-                    .frame(size: uiModel.size)
+                    .frame(size: appearance.size)
                     .background { backgroundView(internalState: internalState) }
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
-                    .padding(uiModel.hitBox)
-                    .applyIf(uiModel.appliesStateChangeAnimation) {
+                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .padding(appearance.hitBox)
+                    .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
-                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(appearance.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed)
                     }
             }
@@ -147,8 +147,8 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                 custom(internalState)
             }
         }
-        .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)
-        .padding(uiModel.labelMargins)
+        .scaleEffect(internalState.isPressedOffPressedOn ? appearance.labelPressedScale : 1)
+        .padding(appearance.labelMargins)
     }
 
     private func titleLabelViewComponent(
@@ -157,10 +157,10 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-            .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+            .font(appearance.titleTextFont)
+            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
 
     private func iconLabelViewComponent(
@@ -168,25 +168,25 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconSize)
+            .applyIf(appearance.isIconResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconSize)
     }
 
     private func backgroundView(
         internalState: VRectangularToggleButtonInternalState
     ) -> some View {
         Rectangle()
-            .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
+            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
-                color: uiModel.shadowColors.value(for: internalState),
-                radius: uiModel.shadowRadius,
-                offset: uiModel.shadowOffset
+                color: appearance.shadowColors.value(for: internalState),
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
             )
     }
 
@@ -194,21 +194,21 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     private func borderView(
         internalState: VRectangularToggleButtonInternalState
     ) -> some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
+                .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
     }
 
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -260,11 +260,11 @@ extension VRectangularToggleButtonInternalState {
 
         PreviewRow("Pressed Off") {
             VRectangularToggleButton(
-                uiModel: {
-                    var uiModel: VRectangularToggleButtonUIModel = .init()
-                    uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
-                    uiModel.iconColors!.off = uiModel.iconColors!.pressedOff // Force-unwrap
-                    return uiModel
+                appearance: {
+                    var appearance: VRectangularToggleButtonAppearance = .init()
+                    appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
+                    appearance.iconColors!.off = appearance.iconColors!.pressedOff // Force-unwrap
+                    return appearance
                 }(),
                 state: .constant(.off),
                 icon: Image(systemName: "swift")
@@ -280,11 +280,11 @@ extension VRectangularToggleButtonInternalState {
 
         PreviewRow("Pressed On") {
             VRectangularToggleButton(
-                uiModel: {
-                    var uiModel: VRectangularToggleButtonUIModel = .init()
-                    uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
-                    uiModel.iconColors!.on = uiModel.iconColors!.pressedOn // Force-unwrap
-                    return uiModel
+                appearance: {
+                    var appearance: VRectangularToggleButtonAppearance = .init()
+                    appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
+                    appearance.iconColors!.on = appearance.iconColors!.pressedOn // Force-unwrap
+                    return appearance
                 }(),
                 state: .constant(.on),
                 icon: Image(systemName: "swift")

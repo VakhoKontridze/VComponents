@@ -21,8 +21,8 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VPlainButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VPlainButtonAppearance
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -42,51 +42,51 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Initializers
     /// Initializes `VPlainButton` with action and title.
     public init(
-        uiModel: VPlainButtonUIModel = .init(),
+        appearance: VPlainButtonAppearance = .init(),
         action: @escaping () -> Void,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .title(title: title)
     }
     
     /// Initializes `VPlainButton` with action and icon.
     public init(
-        uiModel: VPlainButtonUIModel = .init(),
+        appearance: VPlainButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .icon(icon: icon)
     }
     
     /// Initializes `VPlainButton` with action, icon, and title.
     public init(
-        uiModel: VPlainButtonUIModel = .init(),
+        appearance: VPlainButtonAppearance = .init(),
         action: @escaping () -> Void,
         title: String,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .titleAndIcon(title: title, icon: icon)
     }
     
     /// Initializes `VPlainButton` with action and custom label.
     public init(
-        uiModel: VPlainButtonUIModel = .init(),
+        appearance: VPlainButtonAppearance = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label customLabel: @escaping (VPlainButtonInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .custom(custom: customLabel)
     }
@@ -94,7 +94,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 action()
@@ -120,15 +120,15 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
                 iconLabelViewComponent(internalState: internalState, icon: icon)
                 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleTextAndIconPlacement {
+                switch appearance.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                     }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
                     }
@@ -138,8 +138,8 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
                 custom(internalState)
             }
         }
-        .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
-        .padding(uiModel.hitBox)
+        .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)
+        .padding(appearance.hitBox)
     }
     
     private func titleLabelViewComponent(
@@ -148,10 +148,10 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-            .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+            .font(appearance.titleTextFont)
+            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -159,21 +159,21 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconSize)
+            .applyIf(appearance.isIconResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconSize)
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -208,10 +208,10 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed") {
             VPlainButton(
-                uiModel: {
-                    var uiModel: VPlainButtonUIModel = .init()
-                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
-                    return uiModel
+                appearance: {
+                    var appearance: VPlainButtonAppearance = .init()
+                    appearance.titleTextColors.enabled = appearance.titleTextColors.pressed
+                    return appearance
                 }(),
                 action: {},
                 title: "Lorem Ipsum"

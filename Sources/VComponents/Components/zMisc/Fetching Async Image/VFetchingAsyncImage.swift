@@ -61,8 +61,8 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         CustomContent: View,
         CustomPlaceholderContent: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VFetchingAsyncImageUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VFetchingAsyncImageAppearance
 
     // MARK: Properties - Fetching
     private let parameter: Parameter?
@@ -80,7 +80,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     // MARK: Initializers
     /// Initializes `VFetchingAsyncImage` with parameter and fetch method.
     public init(
-        uiModel: VFetchingAsyncImageUIModel = .init(),
+        appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping (Parameter) async throws -> Image
     )
@@ -88,7 +88,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
             CustomContent == Never,
             CustomPlaceholderContent == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .auto
@@ -96,7 +96,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and content.
     public init(
-        uiModel: VFetchingAsyncImageUIModel = .init(),
+        appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent
@@ -104,7 +104,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         where
             CustomPlaceholderContent == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .content(
@@ -114,13 +114,13 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, content, and placeholder content.
     public init(
-        uiModel: VFetchingAsyncImageUIModel = .init(),
+        appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent,
         @ViewBuilder placeholder customPlaceholderContent: @escaping () -> CustomPlaceholderContent
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .contentAndPlaceholder(
@@ -131,14 +131,14 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     
     /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and phase-dependent content.
     public init(
-        uiModel: VFetchingAsyncImageUIModel = .init(),
+        appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
         fetch fetchHandler: @escaping (Parameter) async throws -> Image,
         @ViewBuilder contentWithPhase customContentWithPhase: @escaping (AsyncImagePhase) -> CustomContent
     )
         where CustomPlaceholderContent == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .contentWithPhase(
@@ -183,12 +183,12 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         }
         .onChange(of: parameter, initial: true) { fetch(from: $1) }
         .onDisappear {
-            if uiModel.removesImageOnDisappear { reset() }
+            if appearance.removesImageOnDisappear { reset() }
         }
     }
     
     private var defaultPlaceholderView: some View {
-        uiModel.placeholderColor
+        appearance.placeholderColor
     }
 
     // MARK: Fetch
@@ -203,7 +203,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         guard parameter != parameterFetched else { return }
         
         parameterFetched = parameter
-        if uiModel.removesImageOnParameterChange { result = nil }
+        if appearance.removesImageOnParameterChange { result = nil }
 
         task?.cancel()
         task = Task { @MainActor in

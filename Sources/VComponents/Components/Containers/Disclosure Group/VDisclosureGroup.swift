@@ -19,7 +19,7 @@ import VCore
 ///                 .ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
-///                 uiModel: .systemBackgroundColor,
+///                 appearance: .systemBackgroundColor,
 ///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum"
 ///             ) {
@@ -50,9 +50,9 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
         CustomHeaderLabel: View,
         Content: View
 {
-    // MARK: Properties - UI Model
+    // MARK: Properties - Appearance
     
-    private let uiModel: VDisclosureGroupUIModel
+    private let appearance: VDisclosureGroupAppearance
     @Environment(\.displayScale) private var displayScale: CGFloat
 
     // MARK: Properties - State
@@ -74,14 +74,14 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     // MARK: Initializers
     /// Initializes `VDisclosureGroup` with header title and content.
     public init(
-        uiModel: VDisclosureGroupUIModel = .init(),
+        appearance: VDisclosureGroupAppearance = .init(),
         state: Binding<VDisclosureGroupState>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
         where CustomHeaderLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.headerLabel = .title(title: headerTitle)
         self.content = content
@@ -89,12 +89,12 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     
     /// Initializes `VDisclosureGroup` with custom header label and content.
     public init(
-        uiModel: VDisclosureGroupUIModel = .init(),
+        appearance: VDisclosureGroupAppearance = .init(),
         state: Binding<VDisclosureGroupState>,
         @ViewBuilder headerLabel customHeaderLabel: @escaping (VDisclosureGroupInternalState) -> CustomHeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.headerLabel = .custom(custom: customHeaderLabel)
         self.content = content
@@ -103,12 +103,12 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     // MARK: Body
     public var body: some View {
         VGroupBox(
-            uiModel: uiModel.groupBoxSubUIModel(
+            appearance: appearance.groupBoxAppearance(
                 internalState: internalState
             )
         ) {
             PlainDisclosureGroup(
-                uiModel: uiModel.plainDisclosureGroupSubUIModel,
+                appearance: appearance.plainDisclosureGroupAppearance,
                 isExpanded: Binding(
                     get: { internalState == .expanded },
                     set: { expandCollapseFromHeaderTap($0) }
@@ -122,10 +122,10 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 }
             )
         }
-        .applyIf(uiModel.appliesExpandCollapseAnimation) {
+        .applyIf(appearance.appliesExpandCollapseAnimation) {
             $0
-                .animation(uiModel.expandCollapseAnimation, value: isEnabled)
-                .animation(uiModel.expandCollapseAnimation, value: state) // +withAnimation
+                .animation(appearance.expandCollapseAnimation, value: isEnabled)
+                .animation(appearance.expandCollapseAnimation, value: state) // +withAnimation
         }
     }
     
@@ -136,9 +136,9 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
-                        .foregroundStyle(uiModel.headerTitleTextColors.value(for: internalState))
-                        .font(uiModel.headerTitleTextFont)
-                        .applyIfLet(uiModel.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                        .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
+                        .font(appearance.headerTitleTextFont)
+                        .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 case .custom(let custom):
                     custom(internalState)
@@ -150,42 +150,42 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
             Spacer(minLength: 0)
             
             VRectangularButton(
-                uiModel: uiModel.disclosureButtonSubUIModel,
+                appearance: appearance.disclosureButtonAppearance,
                 action: expandCollapse,
-                icon: uiModel.disclosureButtonIcon
+                icon: appearance.disclosureButtonIcon
             )
-            .rotationEffect(Angle(radians: uiModel.disclosureButtonAngles.value(for: internalState)))
+            .rotationEffect(Angle(radians: appearance.disclosureButtonAngles.value(for: internalState)))
         }
-        .padding(uiModel.headerMargins)
+        .padding(appearance.headerMargins)
     }
     
     @ViewBuilder
     private var dividerView: some View {
-        if uiModel.dividerHeight.toPoints(scale: displayScale) > 0 {
+        if appearance.dividerHeight.toPoints(scale: displayScale) > 0 {
             Rectangle()
-                .frame(height: uiModel.dividerHeight.toPoints(scale: displayScale))
-                .padding(uiModel.dividerMargins)
-                .foregroundStyle(uiModel.dividerColor)
+                .frame(height: appearance.dividerHeight.toPoints(scale: displayScale))
+                .padding(appearance.dividerMargins)
+                .foregroundStyle(appearance.dividerColor)
         }
     }
     
     private var contentView: some View {
         content()
             .frame(maxWidth: .infinity)
-            .padding(uiModel.contentMargins)
+            .padding(appearance.contentMargins)
     }
     
     // MARK: Actions
     private func expandCollapse() {
         // Not affected by animation flag
-        withAnimation(uiModel.expandCollapseAnimation) {
+        withAnimation(appearance.expandCollapseAnimation) {
             state.setNextState()
         }
     }
     
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
-            uiModel.expandsAndCollapsesOnHeaderTap,
+            appearance.expandsAndCollapsesOnHeaderTap,
             exclusiveOr(isExpanded, internalState == .expanded)
         else {
             return
@@ -226,28 +226,28 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #if !os(macOS) // Redundant
 
 #Preview("States (System Background Color)") {
-    StatesContentView(layer: .secondary, uiModel: .systemBackgroundColor)
+    StatesContentView(layer: .secondary, appearance: .systemBackgroundColor)
 }
 
 #endif
 
 private struct StatesContentView: View {
     private let layer: PreviewContainerLayer
-    private let uiModel: VDisclosureGroupUIModel
+    private let appearance: VDisclosureGroupAppearance
 
     init(
         layer: PreviewContainerLayer = .primary,
-        uiModel: VDisclosureGroupUIModel = .init()
+        appearance: VDisclosureGroupAppearance = .init()
     ) {
         self.layer = layer
-        self.uiModel = uiModel
+        self.appearance = appearance
     }
 
     var body: some View {
         PreviewContainer(layer: layer) {
             PreviewRow("Collapsed") {
                 VDisclosureGroup(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     state: .constant(.collapsed),
                     headerTitle: "Lorem Ipsum"
                 ) {
@@ -258,7 +258,7 @@ private struct StatesContentView: View {
 
             PreviewRow("Expanded") {
                 VDisclosureGroup(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     state: .constant(.expanded),
                     headerTitle: "Lorem Ipsum"
                 ) {
@@ -269,11 +269,11 @@ private struct StatesContentView: View {
 
             PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
-                    uiModel: {
-                        var uiModel: VDisclosureGroupUIModel = uiModel
-                        uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.pressed
-                        uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.pressed // Force-unwrap
-                        return uiModel
+                    appearance: {
+                        var appearance: VDisclosureGroupAppearance = appearance
+                        appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.pressed
+                        appearance.disclosureButtonAppearance.iconColors!.enabled = appearance.disclosureButtonAppearance.iconColors!.pressed // Force-unwrap
+                        return appearance
                     }(),
                     state: .constant(.collapsed),
                     headerTitle: "Lorem Ipsum"
@@ -285,11 +285,11 @@ private struct StatesContentView: View {
 
             PreviewRow("Disabled") {
                 VDisclosureGroup(
-                    uiModel: {
-                        var uiModel: VDisclosureGroupUIModel = uiModel
-                        uiModel.disclosureButtonSubUIModel.backgroundColors.enabled = uiModel.disclosureButtonSubUIModel.backgroundColors.disabled
-                        uiModel.disclosureButtonSubUIModel.iconColors!.enabled = uiModel.disclosureButtonSubUIModel.iconColors!.disabled // Force-unwrap
-                        return uiModel
+                    appearance: {
+                        var appearance: VDisclosureGroupAppearance = appearance
+                        appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.disabled
+                        appearance.disclosureButtonAppearance.iconColors!.enabled = appearance.disclosureButtonAppearance.iconColors!.disabled // Force-unwrap
+                        return appearance
                     }(),
                     state: .constant(.expanded),
                     headerTitle: "Lorem Ipsum"

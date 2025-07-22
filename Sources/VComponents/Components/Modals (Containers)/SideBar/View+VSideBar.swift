@@ -37,7 +37,7 @@ extension View {
     ///     }
     ///
     /// Due to a Modal Presenter API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
-    /// UI model contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
+    /// Appearance contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
     /// However, these insets are presents even if side bar content doesn't need them.
     /// Therefore, a custom implementation is needed per use-case.
     /// By default, `defaultContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
@@ -54,12 +54,12 @@ extension View {
     ///             .getInterfaceOrientation { interfaceOrientation = $0 }
     ///             .vSideBar(
     ///                 link: .window(linkID: "some_side_bar"),
-    ///                 uiModel: {
-    ///                     var uiModel: VSideBarUIModel = .leading
+    ///                 appearance: {
+    ///                     var appearance: VSideBarAppearance = .leading
     ///
-    ///                     uiModel.contentSafeAreaEdges = uiModel.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+    ///                     appearance.contentSafeAreaEdges = appearance.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
     ///
-    ///                     return uiModel
+    ///                     return appearance
     ///                 }(),
     ///                 isPresented: $isPresented
     ///             ) {
@@ -72,7 +72,7 @@ extension View {
     ///
     public func vSideBar<Content>(
         link: ModalPresenterLink,
-        uiModel: VSideBarUIModel = .init(),
+        appearance: VSideBarAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -83,13 +83,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VSideBar<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: content
                 )
@@ -107,7 +107,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vSideBar<Item, Content>(
         link: ModalPresenterLink,
-        uiModel: VSideBarUIModel = .init(),
+        appearance: VSideBarAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -125,13 +125,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VSideBar<Content?>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {

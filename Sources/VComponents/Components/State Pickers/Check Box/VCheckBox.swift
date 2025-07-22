@@ -35,8 +35,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VCheckBoxUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VCheckBoxAppearance
 
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -57,36 +57,36 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     // MARK: Initializers
     /// Initializes `VCheckBox` with state.
     public init(
-        uiModel: VCheckBoxUIModel = .init(),
+        appearance: VCheckBoxAppearance = .init(),
         state: Binding<VCheckBoxState>
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .empty
     }
     
     /// Initializes `VCheckBox` with state and title.
     public init(
-        uiModel: VCheckBoxUIModel = .init(),
+        appearance: VCheckBoxAppearance = .init(),
         state: Binding<VCheckBoxState>,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes `VCheckBox` with state and custom label.
     public init(
-        uiModel: VCheckBoxUIModel = .init(),
+        appearance: VCheckBoxAppearance = .init(),
         state: Binding<VCheckBoxState>,
         @ViewBuilder label customLabel: @escaping (VCheckBoxInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .custom(custom: customLabel)
     }
@@ -102,52 +102,52 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 labeledCheckBoxView {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-                            .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+                            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+                            .font(appearance.titleTextFont)
+                            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     }
-                    .blocksHitTesting(!uiModel.labelIsClickable)
+                    .blocksHitTesting(!appearance.labelIsClickable)
                 }
 
             case .custom(let custom):
                 labeledCheckBoxView {
                     baseButtonView(label: custom)
-                        .blocksHitTesting(!uiModel.labelIsClickable)
+                        .blocksHitTesting(!appearance.labelIsClickable)
                 }
             }
         }
     }
     
     private var checkBoxView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         return baseButtonView { internalState in
             ZStack {
-                RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                    .foregroundStyle(uiModel.fillColors.value(for: internalState))
+                RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                    .foregroundStyle(appearance.fillColors.value(for: internalState))
 
                 if borderWidth > 0 {
-                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+                    RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                        .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 }
 
                 if let checkmarkIcon: Image = checkmarkIcon(internalState: internalState) {
                     checkmarkIcon
-                        .applyIf(uiModel.isCheckmarkIconResizable) { $0.resizable() }
-                        .applyIfLet(uiModel.checkmarkIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                        .applyIfLet(uiModel.checkmarkIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-                        .applyIfLet(uiModel.checkmarkIconOpacities) { $0.opacity($1.value(for: internalState)) }
-                        .font(uiModel.checkmarkIconFont)
-                        .applyIfLet(uiModel.checkmarkIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                        .frame(size: uiModel.checkmarkIconSize)
+                        .applyIf(appearance.isCheckmarkIconResizable) { $0.resizable() }
+                        .applyIfLet(appearance.checkmarkIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                        .applyIfLet(appearance.checkmarkIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                        .applyIfLet(appearance.checkmarkIconOpacities) { $0.opacity($1.value(for: internalState)) }
+                        .font(appearance.checkmarkIconFont)
+                        .applyIfLet(appearance.checkmarkIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                        .frame(size: appearance.checkmarkIconSize)
                 }
             }
-            .frame(size: uiModel.size)
-            .clipShape(.rect(cornerRadius: uiModel.cornerRadius)) // Prevents large content from overflowing
-            .padding(uiModel.checkboxHitBox)
+            .frame(size: appearance.size)
+            .clipShape(.rect(cornerRadius: appearance.cornerRadius)) // Prevents large content from overflowing
+            .padding(appearance.checkboxHitBox)
         }
     }
 
@@ -156,7 +156,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.checkBoxAndLabelSpacing) {
+        HStack(spacing: appearance.checkBoxAndLabelSpacing) {
             checkBoxView
             label()
         }
@@ -168,7 +168,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         where Content: View
     {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 state.setNextState()
@@ -177,9 +177,9 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 let internalState: VCheckBoxInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation) {
+                    .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
-                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(appearance.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
                     }
             }
@@ -192,8 +192,8 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     ) -> Image? {
         switch internalState {
         case .off, .pressedOff: nil
-        case .on, .pressedOn: uiModel.checkmarkIconOn
-        case .indeterminate, .pressedIndeterminate: uiModel.checkmarkIconIndeterminate
+        case .on, .pressedOn: appearance.checkmarkIconOn
+        case .indeterminate, .pressedIndeterminate: appearance.checkmarkIconIndeterminate
         case .disabled: nil
         }
     }
@@ -201,7 +201,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -233,13 +233,13 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Off") {
             VCheckBox(
-                uiModel: {
-                    var uiModel: VCheckBoxUIModel = .init()
-                    uiModel.fillColors.off = uiModel.fillColors.pressedOff
-                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                    uiModel.checkmarkIconColors!.off = uiModel.checkmarkIconColors!.pressedOff // Force-unwrap
-                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                    return uiModel
+                appearance: {
+                    var appearance: VCheckBoxAppearance = .init()
+                    appearance.fillColors.off = appearance.fillColors.pressedOff
+                    appearance.borderColors.off = appearance.borderColors.pressedOff
+                    appearance.checkmarkIconColors!.off = appearance.checkmarkIconColors!.pressedOff // Force-unwrap
+                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    return appearance
                 }(),
                 state: .constant(.off),
                 title: "Lorem ipsum"
@@ -255,13 +255,13 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed On") {
             VCheckBox(
-                uiModel: {
-                    var uiModel: VCheckBoxUIModel = .init()
-                    uiModel.fillColors.on = uiModel.fillColors.pressedOn
-                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                    uiModel.checkmarkIconColors!.on = uiModel.checkmarkIconColors!.pressedOn // Force-unwrap
-                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                    return uiModel
+                appearance: {
+                    var appearance: VCheckBoxAppearance = .init()
+                    appearance.fillColors.on = appearance.fillColors.pressedOn
+                    appearance.borderColors.on = appearance.borderColors.pressedOn
+                    appearance.checkmarkIconColors!.on = appearance.checkmarkIconColors!.pressedOn // Force-unwrap
+                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    return appearance
                 }(),
                 state: .constant(.on),
                 title: "Lorem ipsum"
@@ -277,13 +277,13 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Indeterminate") {
             VCheckBox(
-                uiModel: {
-                    var uiModel: VCheckBoxUIModel = .init()
-                    uiModel.fillColors.indeterminate = uiModel.fillColors.pressedIndeterminate
-                    uiModel.borderColors.indeterminate = uiModel.borderColors.pressedIndeterminate
-                    uiModel.checkmarkIconColors!.indeterminate = uiModel.checkmarkIconColors!.pressedIndeterminate // Force-unwrap
-                    uiModel.titleTextColors.indeterminate = uiModel.titleTextColors.pressedIndeterminate
-                    return uiModel
+                appearance: {
+                    var appearance: VCheckBoxAppearance = .init()
+                    appearance.fillColors.indeterminate = appearance.fillColors.pressedIndeterminate
+                    appearance.borderColors.indeterminate = appearance.borderColors.pressedIndeterminate
+                    appearance.checkmarkIconColors!.indeterminate = appearance.checkmarkIconColors!.pressedIndeterminate // Force-unwrap
+                    appearance.titleTextColors.indeterminate = appearance.titleTextColors.pressedIndeterminate
+                    return appearance
                 }(),
                 state: .constant(.indeterminate),
                 title: "Lorem ipsum"

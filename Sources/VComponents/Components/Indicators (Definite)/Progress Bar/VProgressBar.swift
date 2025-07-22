@@ -19,8 +19,8 @@ import VCore
 ///     }
 ///
 public struct VProgressBar: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VProgressBarUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VProgressBarAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
     
@@ -33,13 +33,13 @@ public struct VProgressBar: View {
     // MARK: Initializers
     /// Initializes `VProgressBar` with value.
     public init<V>(
-        uiModel: VProgressBarUIModel = .init(),
+        appearance: VProgressBarAppearance = .init(),
         total: V = 1,
         value: V
     )
         where V: BinaryFloatingPoint
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.range = 0...Double(total)
         self.value = {
             let value: Double = .init(value)
@@ -52,52 +52,52 @@ public struct VProgressBar: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.toAlignment) {
+        ZStack(alignment: appearance.direction.toAlignment) {
             trackView
             progressView
             borderView
         }
-        .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+        .clipShape(.rect(cornerRadius: appearance.cornerRadius))
         .frame(
-            width: uiModel.direction.isHorizontal ? nil : uiModel.height,
-            height: uiModel.direction.isHorizontal ? uiModel.height : nil
+            width: appearance.direction.isHorizontal ? nil : appearance.height,
+            height: appearance.direction.isHorizontal ? appearance.height : nil
         )
         .onGeometryChange(of: { $0.size }) { progressBarSize = $0 }
-        .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
+        .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: value) }
     }
     
     private var trackView: some View {
         Rectangle()
-            .foregroundStyle(uiModel.trackColor)
+            .foregroundStyle(appearance.trackColor)
     }
     
     private var progressView: some View {
         UnevenRoundedRectangle(
             cornerRadii: RectangleCornerRadii(
-                trailingCorners: uiModel.roundsProgressViewTrailingCorners ? uiModel.cornerRadius : 0
+                trailingCorners: appearance.roundsProgressViewTrailingCorners ? appearance.cornerRadius : 0
             )
-            .cornersAdjustedForDirection(uiModel.direction)
+            .cornersAdjustedForDirection(appearance.direction)
         )
         .frame(
-            width: uiModel.direction.isHorizontal ? progressWidth : nil,
-            height: uiModel.direction.isHorizontal ? nil : progressWidth
+            width: appearance.direction.isHorizontal ? progressWidth : nil,
+            height: appearance.direction.isHorizontal ? nil : progressWidth
         )
-        .foregroundStyle(uiModel.progressColor)
+        .foregroundStyle(appearance.progressColor)
     }
     
     @ViewBuilder 
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
     }
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let width: CGFloat = progressBarSize.dimension(isWidth: uiModel.direction.isHorizontal)
+        let width: CGFloat = progressBarSize.dimension(isWidth: appearance.direction.isHorizontal)
         
         return value * width
     }
@@ -156,10 +156,10 @@ public struct VProgressBar: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VProgressBar(
-                uiModel: {
-                    var uiModel: VProgressBarUIModel = .init()
-                    uiModel.direction = .leftToRight
-                    return uiModel
+                appearance: {
+                    var appearance: VProgressBarAppearance = .init()
+                    appearance.direction = .leftToRight
+                    return appearance
                 }(),
                 value: value
             )
@@ -169,10 +169,10 @@ public struct VProgressBar: View {
 
         PreviewRow("Right-to-Left") {
             VProgressBar(
-                uiModel: {
-                    var uiModel: VProgressBarUIModel = .init()
-                    uiModel.direction = .rightToLeft
-                    return uiModel
+                appearance: {
+                    var appearance: VProgressBarAppearance = .init()
+                    appearance.direction = .rightToLeft
+                    return appearance
                 }(),
                 value: value
             )
@@ -183,10 +183,10 @@ public struct VProgressBar: View {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VProgressBar(
-                    uiModel: {
-                        var uiModel: VProgressBarUIModel = .init()
-                        uiModel.direction = .topToBottom
-                        return uiModel
+                    appearance: {
+                        var appearance: VProgressBarAppearance = .init()
+                        appearance.direction = .topToBottom
+                        return appearance
                     }(),
                     value: value
                 )
@@ -196,10 +196,10 @@ public struct VProgressBar: View {
 
             PreviewRow("Bottom-to-Top") {
                 VProgressBar(
-                    uiModel: {
-                        var uiModel: VProgressBarUIModel = .init()
-                        uiModel.direction = .bottomToTop
-                        return uiModel
+                    appearance: {
+                        var appearance: VProgressBarAppearance = .init()
+                        appearance.direction = .bottomToTop
+                        return appearance
                     }(),
                     value: value
                 )

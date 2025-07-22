@@ -15,8 +15,8 @@ import VCore
 struct VAlert<Content>: View
     where Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VAlertUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VAlertAppearance
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
@@ -25,8 +25,8 @@ struct VAlert<Content>: View
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    private var currentWidth: VAlertUIModel.Width {
-        uiModel.widthGroup.current(orientation: interfaceOrientation)
+    private var currentWidth: VAlertAppearance.Width {
+        appearance.widthGroup.current(orientation: interfaceOrientation)
     }
 
     @State private var alertHeight: CGFloat = 0
@@ -47,14 +47,14 @@ struct VAlert<Content>: View
     
     // MARK: Initializers
     init(
-        uiModel: VAlertUIModel,
+        appearance: VAlertAppearance,
         isPresented: Binding<Bool>,
         title: String?,
         message: String?,
         content: VAlertContent<Content>,
         buttons: [any VAlertButtonProtocol]
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.title = title
         self.message = message
@@ -67,7 +67,7 @@ struct VAlert<Content>: View
         alertView
             .getPlatformInterfaceOrientation { newValue in
                 if
-                    uiModel.dismissesKeyboardWhenInterfaceOrientationChanges,
+                    appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
                 {
 #if canImport(UIKit) && !os(watchOS)
@@ -84,11 +84,11 @@ struct VAlert<Content>: View
     }
     
     private var alertView: some View {
-        VGroupBox(uiModel: uiModel.groupBoxSubUIModel) {
+        VGroupBox(appearance: appearance.groupBoxAppearance) {
             ZStack {
                 alertContentView
             }
-            .applyModifier {
+            .apply {
                 switch currentWidth {
                 case .fixed(let width):
                     $0
@@ -103,16 +103,16 @@ struct VAlert<Content>: View
         .frame(maxHeight: .infinity)
         
         .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
+            color: appearance.shadowColor,
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
         )
 
         .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: containerSize.width))
-        .padding(.vertical, uiModel.marginVertical)
+        .padding(.vertical, appearance.marginVertical)
         .safeAreaPaddings(edges: .vertical, insets: safeAreaInsets) // Since alert doesn't have an explicit height, prevents clipping into safe areas
 
-        .scaleEffect(isPresentedInternally ? 1 : uiModel.scaleEffect)
+        .scaleEffect(isPresentedInternally ? 1 : appearance.scaleEffect)
     }
 
     private var alertContentView: some View {
@@ -122,7 +122,7 @@ struct VAlert<Content>: View
                 messageView
                 contentView
             }
-            .padding(uiModel.titleTextMessageTextAndContentMargins)
+            .padding(appearance.titleTextMessageTextAndContentMargins)
             .onGeometryChange(of: { $0.size.height }) { titleMessageContentHeight = $0 }
 
             buttonsScrollView
@@ -134,22 +134,22 @@ struct VAlert<Content>: View
     private var titleView: some View {
         if let title = title?.nonEmpty {
             Text(title)
-                .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.titleTextColor)
-                .font(uiModel.titleTextFont)
-                .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.titleTextColor)
+                .font(appearance.titleTextFont)
+                .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.titleTextFrameAlignment,
+                        horizontal: appearance.titleTextFrameAlignment,
                         vertical: .center
                     )
                 )
                 .fixedSize(horizontal: false, vertical: true)
 
-                .padding(uiModel.titleTextMargins)
+                .padding(appearance.titleTextMargins)
         }
     }
     
@@ -157,22 +157,22 @@ struct VAlert<Content>: View
     private var messageView: some View {
         if let message = message?.nonEmpty {
             Text(message)
-                .multilineTextAlignment(uiModel.messageTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: uiModel.messageTextLineType.textLineLimitType)
-                .foregroundStyle(uiModel.messageTextColor)
-                .font(uiModel.messageTextFont)
-                .applyIfLet(uiModel.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
+                .lineLimit(type: appearance.messageTextLineType.textLineLimitType)
+                .foregroundStyle(appearance.messageTextColor)
+                .font(appearance.messageTextFont)
+                .applyIfLet(appearance.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 .frame(
                     maxWidth: .infinity,
                     alignment: Alignment(
-                        horizontal: uiModel.messageTextFrameAlignment,
+                        horizontal: appearance.messageTextFrameAlignment,
                         vertical: .center
                     )
                 )
                 .fixedSize(horizontal: false, vertical: true)
 
-                .padding(uiModel.messageTextMargins)
+                .padding(appearance.messageTextMargins)
         }
     }
     
@@ -184,7 +184,7 @@ struct VAlert<Content>: View
                 
             case .content(let content):
                 content()
-                    .padding(uiModel.contentMargins)
+                    .padding(appearance.contentMargins)
             }
         }
     }
@@ -207,12 +207,12 @@ struct VAlert<Content>: View
                 buttonContentView()
                 
             case 2:
-                HStack(spacing: uiModel.horizontalButtonSpacing) {
+                HStack(spacing: appearance.horizontalButtonSpacing) {
                     buttonContentView(reversesOrder: true) // Cancel button is last
                 }
                 
             case 3...:
-                VStack(spacing: uiModel.verticalButtonSpacing) {
+                VStack(spacing: appearance.verticalButtonSpacing) {
                     buttonContentView()
                 }
                 
@@ -220,7 +220,7 @@ struct VAlert<Content>: View
                 fatalError()
             }
         }
-        .padding(uiModel.buttonMargins)
+        .padding(appearance.buttonMargins)
         .onGeometryChange(of: { $0.size.height }) { buttonsStackHeight = $0 }
     }
     
@@ -232,7 +232,7 @@ struct VAlert<Content>: View
         // Native `View.alert(...)` doesn't react to changes, so using `offset` as ID is okay
         return ForEach(buttons.enumeratedArray(), id: \.offset) { (i, button) in
             button.makeBody(
-                uiModel: uiModel,
+                appearance: appearance,
                 animateOutHandler: { completion in
                     isPresented = false
                     completion?()
@@ -244,7 +244,7 @@ struct VAlert<Content>: View
     // MARK: Lifecycle Animations
     private func animateIn() {
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true }
         )
     }
@@ -253,7 +253,7 @@ struct VAlert<Content>: View
         completion: @escaping () -> Void
     ) {
         withAnimation(
-            uiModel.disappearAnimation?.toSwiftUIAnimation,
+            appearance.disappearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = false },
             completion: completion
         )
@@ -473,16 +473,16 @@ struct VAlert<Content>: View
 
 #Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
-    @Previewable @State var width: VAlertUIModel.Width?
+    @Previewable @State var width: VAlertAppearance.Width?
 
     PreviewContainer {
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VAlertUIModel = .init()
-                    width.map { uiModel.widthGroup = VAlertUIModel.WidthGroup($0) }
-                    return uiModel
+                appearance: {
+                    var appearance: VAlertAppearance = .init()
+                    width.map { appearance.widthGroup = VAlertAppearance.WidthGroup($0) }
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
@@ -538,19 +538,19 @@ struct VAlert<Content>: View
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VAlertUIModel = .init()
+                appearance: {
+                    var appearance: VAlertAppearance = .init()
 
-                    uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.pressed
-                    uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.pressed
+                    appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.pressed
+                    appearance.primaryButtonTitleTextColors.enabled = appearance.primaryButtonTitleTextColors.pressed
 
-                    uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.pressed
-                    uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.pressed
+                    appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.pressed
+                    appearance.secondaryButtonTitleTextColors.enabled = appearance.secondaryButtonTitleTextColors.pressed
 
-                    uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.pressed
-                    uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.pressed
+                    appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.pressed
+                    appearance.destructiveButtonTitleTextColors.enabled = appearance.destructiveButtonTitleTextColors.pressed
 
-                    return uiModel
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
@@ -572,19 +572,19 @@ struct VAlert<Content>: View
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VAlertUIModel = .init()
+                appearance: {
+                    var appearance: VAlertAppearance = .init()
 
-                    uiModel.primaryButtonBackgroundColors.enabled = uiModel.primaryButtonBackgroundColors.disabled
-                    uiModel.primaryButtonTitleTextColors.enabled = uiModel.primaryButtonTitleTextColors.disabled
+                    appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.disabled
+                    appearance.primaryButtonTitleTextColors.enabled = appearance.primaryButtonTitleTextColors.disabled
 
-                    uiModel.secondaryButtonBackgroundColors.enabled = uiModel.secondaryButtonBackgroundColors.disabled
-                    uiModel.secondaryButtonTitleTextColors.enabled = uiModel.secondaryButtonTitleTextColors.disabled
+                    appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.disabled
+                    appearance.secondaryButtonTitleTextColors.enabled = appearance.secondaryButtonTitleTextColors.disabled
 
-                    uiModel.destructiveButtonBackgroundColors.enabled = uiModel.destructiveButtonBackgroundColors.disabled
-                    uiModel.destructiveButtonTitleTextColors.enabled = uiModel.destructiveButtonTitleTextColors.disabled
+                    appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.disabled
+                    appearance.destructiveButtonTitleTextColors.enabled = appearance.destructiveButtonTitleTextColors.disabled
 
-                    return uiModel
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",

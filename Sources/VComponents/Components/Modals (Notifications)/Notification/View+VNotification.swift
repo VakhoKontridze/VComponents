@@ -35,19 +35,19 @@ extension View {
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
     ///         .modalPresenterRoot( // Or declare in `App` on a `WindowScene`-level
     ///             root: .window(rootID: "notifications"),
-    ///             uiModel: {
-    ///                 var uiModel: ModalPresenterRootUIModel = .init()
-    ///                 uiModel.dimmingViewColor = Color.clear
-    ///                 uiModel.dimmingViewTapAction = .passTapsThrough
-    ///                 return uiModel
+    ///             appearance: {
+    ///                 var appearance: ModalPresenterRootAppearance = .init()
+    ///                 appearance.dimmingViewColor = Color.clear
+    ///                 appearance.dimmingViewTapAction = .passTapsThrough
+    ///                 return appearance
     ///             }()
     ///         )
     ///     }
     ///
-    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VNotificationUIModel`.
+    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VNotificationAppearance`.
     public func vNotification(
         link: ModalPresenterLink,
-        uiModel: VNotificationUIModel = .init(),
+        appearance: VNotificationAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -58,13 +58,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VNotification<Never>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: .iconTitleMessage(
                         icon: icon,
@@ -80,7 +80,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<CustomContent>(
         link: ModalPresenterLink,
-        uiModel: VNotificationUIModel = .init(),
+        appearance: VNotificationAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -91,13 +91,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VNotification(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: .custom(
                         custom: customContent
@@ -118,7 +118,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item>(
         link: ModalPresenterLink,
-        uiModel: VNotificationUIModel = .init(),
+        appearance: VNotificationAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -136,13 +136,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VNotification<Never>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: .iconTitleMessage(
                         icon: {
@@ -176,7 +176,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item, CustomContent>(
         link: ModalPresenterLink,
-        uiModel: VNotificationUIModel = .init(),
+        appearance: VNotificationAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -194,13 +194,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VNotification(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: .custom(
                         custom: {

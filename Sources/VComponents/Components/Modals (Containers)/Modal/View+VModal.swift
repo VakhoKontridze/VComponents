@@ -111,7 +111,7 @@ extension View {
     ///     
     public func vModal<Content>(
         link: ModalPresenterLink,
-        uiModel: VModalUIModel = .init(),
+        appearance: VModalAppearance = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -122,13 +122,13 @@ extension View {
         self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VModal<Content>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: content
                 )
@@ -144,7 +144,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vModal<Item, Content>(
         link: ModalPresenterLink,
-        uiModel: VModalUIModel = .init(),
+        appearance: VModalAppearance = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -162,13 +162,13 @@ extension View {
         return self
             .modalPresenterLink(
                 link: link,
-                uiModel: uiModel.modalPresenterLinkUIModel,
+                appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
                 onPresent: presentHandler,
                 onDismiss: dismissHandler
             ) {
                 VModal<Content?>(
-                    uiModel: uiModel,
+                    appearance: appearance,
                     isPresented: isPresented,
                     content: {
                         if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {

@@ -14,8 +14,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 struct VToast: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VToastUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VToastAppearance
 
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -25,8 +25,8 @@ struct VToast: View {
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
-    private var currentWidth: VToastUIModel.Width {
-        uiModel.widthGroup.current(orientation: interfaceOrientation)
+    private var currentWidth: VToastAppearance.Width {
+        appearance.widthGroup.current(orientation: interfaceOrientation)
     }
     
     @State private var height: CGFloat = 0
@@ -46,11 +46,11 @@ struct VToast: View {
 
     // MARK: Initializers
     init(
-        uiModel: VToastUIModel,
+        appearance: VToastAppearance,
         isPresented: Binding<Bool>,
         text: String
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._isPresented = isPresented
         self.text = text
     }
@@ -68,14 +68,14 @@ struct VToast: View {
     private var toastView: some View {
         ZStack {
             contentView
-                .applyModifier {
+                .apply {
                     switch currentWidth.storage {
                     case .fixed(let width):
                         $0
                             .frame(
                                 width: width.toAbsolute(dimension: containerSize.width),
                                 alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
+                                    horizontal: appearance.bodyHorizontalAlignment,
                                     vertical: .center
                                 )
                             )
@@ -91,7 +91,7 @@ struct VToast: View {
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: Alignment(
-                                    horizontal: uiModel.bodyHorizontalAlignment,
+                                    horizontal: appearance.bodyHorizontalAlignment,
                                     vertical: .center
                                 )
                             )
@@ -103,7 +103,7 @@ struct VToast: View {
 
                 .clipShape(.rect(cornerRadius: cornerRadius))
 
-                .applyModifier {
+                .apply {
                     switch currentWidth.storage {
                     case .fixed:
                         $0
@@ -129,9 +129,9 @@ struct VToast: View {
         
         // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
         .shadow(
-            color: uiModel.shadowColor,
-            radius: uiModel.shadowRadius,
-            offset: uiModel.shadowOffset
+            color: appearance.shadowColor,
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
         )
 
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
@@ -144,38 +144,38 @@ struct VToast: View {
 
     private var contentView: some View {
         Text(text)
-            .multilineTextAlignment(uiModel.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: uiModel.textLineType.toVCoreTextLineType.textLineLimitType)
-            .minimumScaleFactor(uiModel.textMinimumScaleFactor)
-            .foregroundStyle(uiModel.textColor)
-            .font(uiModel.textFont)
-            .applyIfLet(uiModel.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .multilineTextAlignment(appearance.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: appearance.textLineType.toVCoreTextLineType.textLineLimitType)
+            .minimumScaleFactor(appearance.textMinimumScaleFactor)
+            .foregroundStyle(appearance.textColor)
+            .font(appearance.textFont)
+            .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
-            .padding(uiModel.bodyMargins)
+            .padding(appearance.bodyMargins)
     }
 
     private var backgroundView: some View {
         Rectangle()
-            .foregroundStyle(uiModel.backgroundColor)
+            .foregroundStyle(appearance.backgroundColor)
     }
 
     @ViewBuilder
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .strokeBorder(uiModel.borderColor, lineWidth: borderWidth)
+                .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
     }
 
     // MARK: Actions
     private func dismissFromTimeout() {
-        guard uiModel.dismissType.contains(.timeout) else { return }
+        guard appearance.dismissType.contains(.timeout) else { return }
 
         // No need to handle reentrancy and cancellation
         Task { @MainActor in
-            try await Task.sleep(for: .seconds(uiModel.timeoutDuration))
+            try await Task.sleep(for: .seconds(appearance.timeoutDuration))
             isPresented = false
         }
     }
@@ -187,7 +187,7 @@ struct VToast: View {
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
-            uiModel.dismissType.contains(.swipe),
+            appearance.dismissType.contains(.swipe),
             !isBeingDismissedFromSwipe,
             isDraggedInCorrectDirection(dragValue),
             didExceedSwipeDismissDistance(dragValue)
@@ -205,7 +205,7 @@ struct VToast: View {
         playHapticEffect()
 
         withAnimation(
-            uiModel.appearAnimation?.toSwiftUIAnimation,
+            appearance.appearAnimation?.toSwiftUIAnimation,
             { isPresentedInternally = true },
             completion: dismissFromTimeout
         )
@@ -216,9 +216,9 @@ struct VToast: View {
     ) {
         let animation: BasicAnimation? = {
             if isBeingDismissedFromSwipe {
-                uiModel.swipeDismissAnimation
+                appearance.swipeDismissAnimation
             } else {
-                uiModel.disappearAnimation
+                appearance.disappearAnimation
             }
         }()
 
@@ -231,22 +231,22 @@ struct VToast: View {
 
     // MARK: Offsets
     private var initialOffset: CGFloat {
-        switch uiModel.presentationEdge {
+        switch appearance.presentationEdge {
         case .top: -height
         case .bottom: height
         }
     }
 
     private var presentedOffset: CGFloat {
-        switch uiModel.presentationEdge {
-        case .top: safeAreaInsets.top + uiModel.marginPresentedEdge
-        case .bottom: -(safeAreaInsets.bottom + uiModel.marginPresentedEdge)
+        switch appearance.presentationEdge {
+        case .top: safeAreaInsets.top + appearance.marginPresentedEdge
+        case .bottom: -(safeAreaInsets.bottom + appearance.marginPresentedEdge)
         }
     }
 
     // MARK: Corner Radius
     private var cornerRadius: CGFloat {
-        switch uiModel.cornerRadiusType {
+        switch appearance.cornerRadiusType {
         case .capsule: height / 2
         case .rounded(let cornerRadius): cornerRadius
         }
@@ -254,20 +254,20 @@ struct VToast: View {
 
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
-        switch uiModel.presentationEdge {
+        switch appearance.presentationEdge {
         case .top: dragValue.translation.height <= 0
         case .bottom: dragValue.translation.height >= 0
         }
     }
 
     private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
-        abs(dragValue.translation.height) >= uiModel.swipeDismissDistance(in: height)
+        abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: height)
     }
 
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playNotification(uiModel.haptic)
+        HapticManager.shared.playNotification(appearance.haptic)
 #endif
     }
 }
@@ -284,10 +284,10 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VToastUIModel = .init()
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance: VToastAppearance = .init()
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
@@ -295,11 +295,11 @@ struct VToast: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
@@ -311,11 +311,11 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VToastUIModel = .init()
-                    uiModel.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance: VToastAppearance = .init()
+                    appearance.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
@@ -323,11 +323,11 @@ struct VToast: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
@@ -339,11 +339,11 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VToastUIModel = .init()
-                    uiModel.presentationEdge = .top
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance: VToastAppearance = .init()
+                    appearance.presentationEdge = .top
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
@@ -351,11 +351,11 @@ struct VToast: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
@@ -363,23 +363,23 @@ struct VToast: View {
 #Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
     
-    @Previewable @State var width: VToastUIModel.Width?
+    @Previewable @State var width: VToastAppearance.Width?
     @Previewable @State var alignment: HorizontalAlignment?
 
     PreviewContainer {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel: VToastUIModel = .init()
+                appearance: {
+                    var appearance: VToastAppearance = .init()
 
-                    width.map { uiModel.widthGroup = VToastUIModel.WidthGroup($0) }
+                    width.map { appearance.widthGroup = VToastAppearance.WidthGroup($0) }
 
-                    alignment.map { uiModel.bodyHorizontalAlignment = $0 }
+                    alignment.map { appearance.bodyHorizontalAlignment = $0 }
 
-                    uiModel.timeoutDuration = 60
+                    appearance.timeoutDuration = 60
 
-                    return uiModel
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
@@ -426,27 +426,27 @@ struct VToast: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }
 
 #Preview("Highlights") {
     @Previewable @State var isPresented: Bool = true
-    @Previewable @State var uiModel: VToastUIModel = .init()
+    @Previewable @State var appearance: VToastAppearance = .init()
 
     PreviewContainer {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: rootAndLink.link(linkID: "preview"),
-                uiModel: {
-                    var uiModel = uiModel
-                    uiModel.timeoutDuration = 60
-                    return uiModel
+                appearance: {
+                    var appearance = appearance
+                    appearance.timeoutDuration = 60
+                    return appearance
                 }(),
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
@@ -456,16 +456,16 @@ struct VToast: View {
                     try await Task.sleep(for: .seconds(1))
                     
                     while true {
-                        uiModel = .info
+                        appearance = .info
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .success
+                        appearance = .success
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .warning
+                        appearance = .warning
                         try await Task.sleep(for: .seconds(1))
                         
-                        uiModel = .error
+                        appearance = .error
                         try await Task.sleep(for: .seconds(1))
                     }
                 }
@@ -473,11 +473,11 @@ struct VToast: View {
     }
     .modalPresenterRoot(
         root: rootAndLink.root,
-        uiModel: {
-            var uiModel: ModalPresenterRootUIModel = .init()
-            uiModel.dimmingViewColor = Color.clear
-            uiModel.dimmingViewTapAction = .passTapsThrough
-            return uiModel
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
         }()
     )
 }

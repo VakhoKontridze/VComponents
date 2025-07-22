@@ -35,8 +35,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VRadioButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VRadioButtonAppearance
 
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -57,36 +57,36 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Initializers
     /// Initializes `VRadioButton` with state.
     public init(
-        uiModel: VRadioButtonUIModel = .init(),
+        appearance: VRadioButtonAppearance = .init(),
         state: Binding<VRadioButtonState>
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .empty
     }
     
     /// Initializes `VRadioButton` with state and title.
     public init(
-        uiModel: VRadioButtonUIModel = .init(),
+        appearance: VRadioButtonAppearance = .init(),
         state: Binding<VRadioButtonState>,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes `VRadioButton` with state and custom label.
     public init(
-        uiModel: VRadioButtonUIModel = .init(),
+        appearance: VRadioButtonAppearance = .init(),
         state: Binding<VRadioButtonState>,
         @ViewBuilder label customLabel: @escaping (VRadioButtonInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .custom(custom: customLabel)
     }
@@ -102,46 +102,46 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 labeledRadioButton {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(uiModel.titleTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: uiModel.titleTextLineType.textLineLimitType)
-                            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-                            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-                            .font(uiModel.titleTextFont)
-                            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+                            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+                            .font(appearance.titleTextFont)
+                            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     }
-                    .blocksHitTesting(!uiModel.labelIsClickable)
+                    .blocksHitTesting(!appearance.labelIsClickable)
                 }
 
             case .custom(let custom):
                 labeledRadioButton {
                     baseButtonView(label: custom)
-                        .blocksHitTesting(!uiModel.labelIsClickable)
+                        .blocksHitTesting(!appearance.labelIsClickable)
                 }
             }
         }
     }
 
     private var radioButton: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         return baseButtonView { internalState in
             ZStack {
-                RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                    .frame(size: uiModel.size)
-                    .foregroundStyle(uiModel.fillColors.value(for: internalState))
+                RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                    .frame(size: appearance.size)
+                    .foregroundStyle(appearance.fillColors.value(for: internalState))
 
                 if borderWidth > 0 {
-                    RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                        .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
-                        .frame(size: uiModel.size)
+                    RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                        .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
+                        .frame(size: appearance.size)
                 }
 
-                RoundedRectangle(cornerRadius: uiModel.bulletCornerRadius)
-                    .frame(size: uiModel.bulletSize)
-                    .foregroundStyle(uiModel.bulletColors.value(for: internalState))
+                RoundedRectangle(cornerRadius: appearance.bulletCornerRadius)
+                    .frame(size: appearance.bulletSize)
+                    .foregroundStyle(appearance.bulletColors.value(for: internalState))
             }
-            .frame(size: uiModel.size)
-            .padding(uiModel.radioButtonHitBox)
+            .frame(size: appearance.size)
+            .padding(appearance.radioButtonHitBox)
         }
     }
 
@@ -150,7 +150,7 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     ) -> some View
         where Content: View
     {
-        HStack(spacing: uiModel.radioButtonAndLabelSpacing) {
+        HStack(spacing: appearance.radioButtonAndLabelSpacing) {
             radioButton
             label()
         }
@@ -162,7 +162,7 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
         where Content: View
     {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 state.setNextStateRadio()
@@ -171,9 +171,9 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 let internalState: VRadioButtonInternalState = internalState(baseButtonState)
 
                 label(internalState)
-                    .applyIf(uiModel.appliesStateChangeAnimation) {
+                    .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
-                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(appearance.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed) // Pressed state isn't shared between children
                     }
             }
@@ -183,7 +183,7 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -233,13 +233,13 @@ extension VRadioButtonState {
 
         PreviewRow("Pressed Off") {
             VRadioButton(
-                uiModel: {
-                    var uiModel: VRadioButtonUIModel = .init()
-                    uiModel.fillColors.off = uiModel.fillColors.pressedOff
-                    uiModel.borderColors.off = uiModel.borderColors.pressedOff
-                    uiModel.bulletColors.off = uiModel.bulletColors.pressedOff
-                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                    return uiModel
+                appearance: {
+                    var appearance: VRadioButtonAppearance = .init()
+                    appearance.fillColors.off = appearance.fillColors.pressedOff
+                    appearance.borderColors.off = appearance.borderColors.pressedOff
+                    appearance.bulletColors.off = appearance.bulletColors.pressedOff
+                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    return appearance
                 }(),
                 state: .constant(.off),
                 title: "Lorem ipsum"
@@ -255,13 +255,13 @@ extension VRadioButtonState {
 
         PreviewRow("Pressed On") {
             VRadioButton(
-                uiModel: {
-                    var uiModel: VRadioButtonUIModel = .init()
-                    uiModel.fillColors.on = uiModel.fillColors.pressedOn
-                    uiModel.borderColors.on = uiModel.borderColors.pressedOn
-                    uiModel.bulletColors.on = uiModel.bulletColors.pressedOn
-                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                    return uiModel
+                appearance: {
+                    var appearance: VRadioButtonAppearance = .init()
+                    appearance.fillColors.on = appearance.fillColors.pressedOn
+                    appearance.borderColors.on = appearance.borderColors.pressedOn
+                    appearance.bulletColors.on = appearance.bulletColors.pressedOn
+                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    return appearance
                 }(),
                 state: .constant(.on),
                 title: "Lorem ipsum"

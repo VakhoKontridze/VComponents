@@ -52,8 +52,8 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         CustomTabItemLabel: View,
         Content: View
 {
-    // MARK: Properties - UI Model
-    private let uiModel: VStretchedIndicatorStaticPagerTabViewUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VStretchedIndicatorStaticPagerTabViewAppearance
     
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     
@@ -109,7 +109,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Initializers - Standard
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.
     public init(
-        uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
+        appearance: VStretchedIndicatorStaticPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -118,7 +118,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     )
         where CustomTabItemLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = id
@@ -128,14 +128,14 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
-        uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
+        appearance: VStretchedIndicatorStaticPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = id
@@ -146,7 +146,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Initializers - Identifiable
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, tab item title, and content.
     public init(
-        uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
+        appearance: VStretchedIndicatorStaticPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         tabItemTitle: @escaping (Data.Element) -> String,
@@ -157,7 +157,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             ID == Data.Element.ID,
             CustomTabItemLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -167,7 +167,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     /// Initializes `VStretchedIndicatorStaticPagerTabView` with selection, data, id, custom tab item label, and content.
     public init(
-        uiModel: VStretchedIndicatorStaticPagerTabViewUIModel = .init(),
+        appearance: VStretchedIndicatorStaticPagerTabViewAppearance = .init(),
         selection: Binding<Data.Element>,
         data: Data,
         @ViewBuilder tabItemLabel customTabItemLabel: @escaping (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Data.Element) -> CustomTabItemLabel,
@@ -177,7 +177,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._selection = selection
         self.data = data
         self.id = \.id
@@ -188,10 +188,10 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     // MARK: Body
     public var body: some View {
         if data.isEmpty {
-            uiModel.tabViewBackgroundColor
+            appearance.tabViewBackgroundColor
 
         } else {
-            VStack(spacing: uiModel.tabBarAndTabViewSpacing) {
+            VStack(spacing: appearance.tabBarAndTabViewSpacing) {
                 headerView
                 tabView
             }
@@ -203,7 +203,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             tabBarView
             tabIndicatorStripView
         }
-        .background(uiModel.headerBackgroundColor)
+        .background(appearance.headerBackgroundColor)
 
         .clipped() // Prevents bouncing tab indicator from overflowing
         .drawingGroup() // Prevents clipped tab indicator from disappearing
@@ -211,7 +211,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     private var tabBarView: some View {
         HStack(
-            alignment: uiModel.tabBarAlignment,
+            alignment: appearance.tabBarAlignment,
             spacing: 0
         ) {
             ForEach(data, id: id) { element in
@@ -239,16 +239,16 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             case .title(let title):
                 Text(title(element))
                     .lineLimit(1)
-                    .minimumScaleFactor(uiModel.tabItemTextMinimumScaleFactor)
-                    .foregroundStyle(uiModel.tabItemTextColors.value(for: tabItemInternalState))
-                    .font(uiModel.tabItemTextFont)
-                    .applyIfLet(uiModel.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .minimumScaleFactor(appearance.tabItemTextMinimumScaleFactor)
+                    .foregroundStyle(appearance.tabItemTextColors.value(for: tabItemInternalState))
+                    .font(appearance.tabItemTextFont)
+                    .applyIfLet(appearance.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
             case .custom(let custom):
                 custom(tabItemInternalState, element)
             }
         }
-        .padding(uiModel.tabItemMargins)
+        .padding(appearance.tabItemMargins)
         .frame(maxWidth: .infinity)
         .contentShape(.rect)
     }
@@ -257,7 +257,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         ZStack(
             alignment: Alignment(
                 horizontal: .leading,
-                vertical: uiModel.tabIndicatorStripAlignment
+                vertical: appearance.tabIndicatorStripAlignment
             )
         ) {
             tabIndicatorTrackView
@@ -267,21 +267,21 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
     private var tabIndicatorTrackView: some View {
         Rectangle()
-            .frame(height: uiModel.tabIndicatorTrackHeight)
-            .foregroundStyle(uiModel.tabIndicatorTrackColor)
+            .frame(height: appearance.tabIndicatorTrackHeight)
+            .foregroundStyle(appearance.tabIndicatorTrackColor)
     }
 
     private var selectedTabIndicatorView: some View {
-        RoundedRectangle(cornerRadius: uiModel.selectedTabIndicatorCornerRadius)
+        RoundedRectangle(cornerRadius: appearance.selectedTabIndicatorCornerRadius)
             .frame(width: selectedTabIndicatorWidth)
-            .frame(height: uiModel.selectedTabIndicatorHeight)
+            .frame(height: appearance.selectedTabIndicatorHeight)
 
             .offset(x: selectedTabIndicatorOffset)
 
-            .foregroundStyle(uiModel.selectedTabIndicatorColor)
+            .foregroundStyle(appearance.selectedTabIndicatorColor)
 
-            .animation(tabIndicatorAnimationIsEnabled ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorWidth)
-            .animation(tabIndicatorAnimationIsEnabled ? uiModel.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorOffset)
+            .animation(tabIndicatorAnimationIsEnabled ? appearance.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorWidth)
+            .animation(tabIndicatorAnimationIsEnabled ? appearance.selectedTabIndicatorAnimation : nil, value: selectedTabIndicatorOffset)
     }
 
     private var tabView: some View {
@@ -310,7 +310,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             }
             .scrollTargetBehavior(.paging)
             .scrollPosition(id: selectionIDBinding)
-            .applyModifier {
+            .apply {
                 if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
                     $0
                         .onScrollPhaseChange { (_, newValue) in
@@ -321,11 +321,11 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                 }
             }
             
-            .background(uiModel.tabViewBackgroundColor)
+            .background(appearance.tabViewBackgroundColor)
             
             .scrollIndicators(.hidden)
             
-            .scrollDisabled(!uiModel.isTabViewScrollingEnabled)
+            .scrollDisabled(!appearance.isTabViewScrollingEnabled)
             
             .onChange(of: selectedIndexInt) { (_, newValue) in
                 guard !isBeingScrolled else { return }
@@ -352,7 +352,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         
         selectedTabIndicatorWidth =
             tabViewWidth / CGFloat(data.count) - // Division is safe, as non-emptiness is checked in `body`
-            2 * uiModel.selectedTabIndicatorMarginHorizontal
+            2 * appearance.selectedTabIndicatorMarginHorizontal
 
         selectedTabIndicatorOffset = {
             guard let selectedIndexInt else { return 0 }
@@ -367,7 +367,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                 }
             }()
 
-            if !uiModel.selectedTabIndicatorBounces {
+            if !appearance.selectedTabIndicatorBounces {
                 contentOffset.clamp(
                     min: 0,
                     max: tabViewWidth * CGFloat(data.count-1)
@@ -376,7 +376,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
 
             return
                 contentOffset / CGFloat(data.count) + // Division is safe, as non-emptiness is checked in `body`
-                uiModel.selectedTabIndicatorMarginHorizontal
+                appearance.selectedTabIndicatorMarginHorizontal
         }()
 
         if !tabIndicatorAnimationIsEnabled {

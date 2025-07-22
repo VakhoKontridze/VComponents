@@ -50,16 +50,16 @@ public struct VAlertButton: VAlertButtonProtocol {
 
     // MARK: Button Protocol
     public func makeBody(
-        uiModel: VAlertUIModel,
+        appearance: VAlertAppearance,
         animateOutHandler: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         VStretchedButton(
-            uiModel: {
+            appearance: {
                 switch role {
-                case .primary: uiModel.primaryButtonSubUIModel
-                case .secondary: uiModel.secondaryButtonSubUIModel
-                case .destructive: uiModel.destructiveButtonSubUIModel
-                case .cancel: uiModel.secondaryButtonSubUIModel
+                case .primary: appearance.primaryButtonAppearance
+                case .secondary: appearance.secondaryButtonAppearance
+                case .destructive: appearance.destructiveButtonAppearance
+                case .cancel: appearance.secondaryButtonAppearance
                 }
             }(),
             action: { animateOutHandler(/*completion: */action) },

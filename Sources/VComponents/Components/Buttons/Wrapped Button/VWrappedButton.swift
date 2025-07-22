@@ -21,8 +21,8 @@ import VCore
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VWrappedButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VWrappedButtonAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -44,51 +44,51 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Initializers
     /// Initializes `VWrappedButton` with action and title.
     public init(
-        uiModel: VWrappedButtonUIModel = .init(),
+        appearance: VWrappedButtonAppearance = .init(),
         action: @escaping () -> Void,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .title(title: title)
     }
 
     /// Initializes `VWrappedButton` with action and icon.
     public init(
-        uiModel: VWrappedButtonUIModel = .init(),
+        appearance: VWrappedButtonAppearance = .init(),
         action: @escaping () -> Void,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .icon(icon: icon)
     }
 
     /// Initializes `VWrappedButton` with action, icon, and title.
     public init(
-        uiModel: VWrappedButtonUIModel = .init(),
+        appearance: VWrappedButtonAppearance = .init(),
         action: @escaping () -> Void,
         title: String,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .titleAndIcon(title: title, icon: icon)
     }
     
     /// Initializes `VWrappedButton` with action and custom label.
     public init(
-        uiModel: VWrappedButtonUIModel = .init(),
+        appearance: VWrappedButtonAppearance = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label customLabel: @escaping (VWrappedButtonInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self.action = action
         self.label = .custom(custom: customLabel)
     }
@@ -96,7 +96,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 action()
@@ -106,11 +106,11 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
-                    .frame(height: uiModel.height)
+                    .frame(height: appearance.height)
                     .background { backgroundView(internalState: internalState) }
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
-                    .padding(uiModel.hitBox)
+                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .padding(appearance.hitBox)
             }
         )
     }
@@ -127,15 +127,15 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 iconLabelViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleTextAndIconPlacement {
+                switch appearance.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                     }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
                     }
@@ -145,8 +145,8 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 custom(internalState)
             }
         }
-        .scaleEffect(internalState == .pressed ? uiModel.labelPressedScale : 1)
-        .padding(uiModel.labelMargins)
+        .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)
+        .padding(appearance.labelMargins)
     }
     
     private func titleLabelViewComponent(
@@ -155,10 +155,10 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-            .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+            .font(appearance.titleTextFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
     private func iconLabelViewComponent(
@@ -166,25 +166,25 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconSize)
+            .applyIf(appearance.isIconResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconSize)
     }
     
     private func backgroundView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
         Rectangle()
-            .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
+            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
-                color: uiModel.shadowColors.value(for: internalState),
-                radius: uiModel.shadowRadius,
-                offset: uiModel.shadowOffset
+                color: appearance.shadowColors.value(for: internalState),
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
             )
     }
     
@@ -192,21 +192,21 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     private func borderView(
         internalState: VWrappedButtonInternalState
     ) -> some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState == .pressed ? uiModel.backgroundPressedScale : 1)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
+                .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
         }
     }
     
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #elseif os(watchOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -236,11 +236,11 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed") {
             VWrappedButton(
-                uiModel: {
-                    var uiModel: VWrappedButtonUIModel = .init()
-                    uiModel.backgroundColors.enabled = uiModel.backgroundColors.pressed
-                    uiModel.titleTextColors.enabled = uiModel.titleTextColors.pressed
-                    return uiModel
+                appearance: {
+                    var appearance: VWrappedButtonAppearance = .init()
+                    appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
+                    appearance.titleTextColors.enabled = appearance.titleTextColors.pressed
+                    return appearance
                 }(),
                 action: {},
                 title: "Lorem Ipsum"

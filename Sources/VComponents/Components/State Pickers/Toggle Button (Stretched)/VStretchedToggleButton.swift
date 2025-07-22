@@ -51,8 +51,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VStretchedToggleButtonUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VStretchedToggleButtonAppearance
 
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -72,51 +72,51 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     // MARK: Initializers
     /// Initializes `VStretchedToggleButton` with state and title.
     public init(
-        uiModel: VStretchedToggleButtonUIModel = .init(),
+        appearance: VStretchedToggleButtonAppearance = .init(),
         state: Binding<VStretchedToggleButtonState>,
         title: String
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .title(title: title)
     }
 
     /// Initializes `VStretchedToggleButton` with state and icon.
     public init(
-        uiModel: VStretchedToggleButtonUIModel = .init(),
+        appearance: VStretchedToggleButtonAppearance = .init(),
         state: Binding<VStretchedToggleButtonState>,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .icon(icon: icon)
     }
 
     /// Initializes `VStretchedToggleButton` with state, icon, and title.
     public init(
-        uiModel: VStretchedToggleButtonUIModel = .init(),
+        appearance: VStretchedToggleButtonAppearance = .init(),
         state: Binding<VStretchedToggleButtonState>,
         title: String,
         icon: Image
     )
         where CustomLabel == Never
     {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .titleAndIcon(title: title, icon: icon)
     }
 
     /// Initializes `VStretchedToggleButton` with state and custom label.
     public init(
-        uiModel: VStretchedToggleButtonUIModel = .init(),
+        appearance: VStretchedToggleButtonAppearance = .init(),
         state: Binding<VStretchedToggleButtonState>,
         @ViewBuilder label customLabel: @escaping (VStretchedToggleButtonInternalState) -> CustomLabel
     ) {
-        self.uiModel = uiModel
+        self.appearance = appearance
         self._state = state
         self.label = .custom(custom: customLabel)
     }
@@ -124,7 +124,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
-            uiModel: uiModel.baseButtonSubUIModel,
+            appearance: appearance.baseButtonAppearance,
             action: {
                 playHapticEffect()
                 state.setNextState()
@@ -134,13 +134,13 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
 
                 labelView(internalState: internalState)
                     .contentShape(.rect) // Registers gestures even when clear
-                    .frame(height: uiModel.height)
+                    .frame(height: appearance.height)
                     .background { backgroundView(internalState: internalState) }
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
-                    .applyIf(uiModel.appliesStateChangeAnimation) {
+                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
-                            .animation(uiModel.stateChangeAnimation, value: state)
+                            .animation(appearance.stateChangeAnimation, value: state)
                             .animation(nil, value: baseButtonState == .pressed)
                     }
             }
@@ -159,15 +159,15 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                 iconLabelViewComponent(internalState: internalState, icon: icon)
 
             case .titleAndIcon(let title, let icon):
-                switch uiModel.titleTextAndIconPlacement {
+                switch appearance.titleTextAndIconPlacement {
                 case .titleAndIcon:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         titleLabelViewComponent(internalState: internalState, title: title)
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                     }
 
                 case .iconAndTitle:
-                    HStack(spacing: uiModel.titleTextAndIconSpacing) {
+                    HStack(spacing: appearance.titleTextAndIconSpacing) {
                         iconLabelViewComponent(internalState: internalState, icon: icon)
                         titleLabelViewComponent(internalState: internalState, title: title)
                     }
@@ -178,8 +178,8 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
             }
         }
         .frame(maxWidth: .infinity)
-        .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.labelPressedScale : 1)
-        .padding(uiModel.labelMargins)
+        .scaleEffect(internalState.isPressedOffPressedOn ? appearance.labelPressedScale : 1)
+        .padding(appearance.labelMargins)
     }
 
     private func titleLabelViewComponent(
@@ -188,10 +188,10 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(uiModel.titleTextMinimumScaleFactor)
-            .foregroundStyle(uiModel.titleTextColors.value(for: internalState))
-            .font(uiModel.titleTextFont)
-            .applyIfLet(uiModel.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
+            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
+            .font(appearance.titleTextFont)
+            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
 
     private func iconLabelViewComponent(
@@ -199,25 +199,25 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
         icon: Image
     ) -> some View {
         icon
-            .applyIf(uiModel.isIconResizable) { $0.resizable() }
-            .applyIfLet(uiModel.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(uiModel.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(uiModel.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(uiModel.iconFont)
-            .applyIfLet(uiModel.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: uiModel.iconSize)
+            .applyIf(appearance.isIconResizable) { $0.resizable() }
+            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.iconFont)
+            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.iconSize)
     }
 
     private func backgroundView(
         internalState: VStretchedToggleButtonInternalState
     ) -> some View {
         Rectangle()
-            .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
-            .foregroundStyle(uiModel.backgroundColors.value(for: internalState))
+            .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
+            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
-                color: uiModel.shadowColors.value(for: internalState),
-                radius: uiModel.shadowRadius,
-                offset: uiModel.shadowOffset
+                color: appearance.shadowColors.value(for: internalState),
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
             )
     }
 
@@ -225,19 +225,19 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     private func borderView(
         internalState: VStretchedToggleButtonInternalState
     ) -> some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState.isPressedOffPressedOn ? uiModel.backgroundPressedScale : 1)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
+                .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
     }
 
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
-        HapticManager.shared.playImpact(uiModel.haptic)
+        HapticManager.shared.playImpact(appearance.haptic)
 #endif
     }
 }
@@ -287,11 +287,11 @@ extension VStretchedToggleButtonInternalState {
 
         PreviewRow("Pressed Off") {
             VStretchedToggleButton(
-                uiModel: {
-                    var uiModel: VStretchedToggleButtonUIModel = .init()
-                    uiModel.backgroundColors.off = uiModel.backgroundColors.pressedOff
-                    uiModel.titleTextColors.off = uiModel.titleTextColors.pressedOff
-                    return uiModel
+                appearance: {
+                    var appearance: VStretchedToggleButtonAppearance = .init()
+                    appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
+                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    return appearance
                 }(),
                 state: .constant(.off),
                 title: "Lorem Ipsum"
@@ -309,11 +309,11 @@ extension VStretchedToggleButtonInternalState {
 
         PreviewRow("Pressed On") {
             VStretchedToggleButton(
-                uiModel: {
-                    var uiModel: VStretchedToggleButtonUIModel = .init()
-                    uiModel.backgroundColors.on = uiModel.backgroundColors.pressedOn
-                    uiModel.titleTextColors.on = uiModel.titleTextColors.pressedOn
-                    return uiModel
+                appearance: {
+                    var appearance: VStretchedToggleButtonAppearance = .init()
+                    appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
+                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    return appearance
                 }(),
                 state: .constant(.on),
                 title: "Lorem Ipsum"

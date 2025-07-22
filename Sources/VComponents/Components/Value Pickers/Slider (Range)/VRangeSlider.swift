@@ -25,8 +25,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
 public struct VRangeSlider: View {
-    // MARK: Properties - UI Model
-    private let uiModel: VRangeSliderUIModel
+    // MARK: Properties - Appearance
+    private let appearance: VRangeSliderAppearance
     
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
@@ -55,7 +55,7 @@ public struct VRangeSlider: View {
     // MARK: Initializers
     /// Initializes `VRangeSlider` with difference, and low and high values.
     public init<V>(
-        uiModel: VRangeSliderUIModel = .init(),
+        appearance: VRangeSliderAppearance = .init(),
         range: ClosedRange<V> = 0...1,
         difference: V,
         step: V? = nil,
@@ -72,7 +72,7 @@ public struct VRangeSlider: View {
             step: step
         )
         
-        self.uiModel = uiModel
+        self.appearance = appearance
 
         self.range = Double(range.lowerBound)...Double(range.upperBound)
         self.difference = Double(difference)
@@ -95,44 +95,44 @@ public struct VRangeSlider: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: uiModel.direction.toAlignment) {
-            ZStack(alignment: uiModel.direction.toAlignment) {
+        ZStack(alignment: appearance.direction.toAlignment) {
+            ZStack(alignment: appearance.direction.toAlignment) {
                 trackView
                 progressView
                 borderView
             }
-            .clipShape(.rect(cornerRadius: uiModel.cornerRadius))
+            .clipShape(.rect(cornerRadius: appearance.cornerRadius))
             .frame(
-                width: uiModel.direction.isHorizontal ? nil : uiModel.height,
-                height: uiModel.direction.isHorizontal ? uiModel.height : nil
+                width: appearance.direction.isHorizontal ? nil : appearance.height,
+                height: appearance.direction.isHorizontal ? appearance.height : nil
             )
             
             thumbView(.low)
             thumbView(.high)
         }
         .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
-        .applyIf(uiModel.appliesProgressAnimation) { $0.animation(uiModel.progressAnimation, value: value) }
+        .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: value) }
     }
     
     private var trackView: some View {
         Rectangle()
-            .foregroundStyle( uiModel.trackColors.value(for: internalState))
+            .foregroundStyle( appearance.trackColors.value(for: internalState))
     }
     
     private var progressView: some View {
         Rectangle()
-            .padding(uiModel.direction.toEdgeSet, progressWidth(.low))
-            .padding(uiModel.direction.reversed().toEdgeSet, progressWidth(.high))
-            .foregroundStyle(uiModel.progressColors.value(for: internalState))
+            .padding(appearance.direction.toEdgeSet, progressWidth(.low))
+            .padding(appearance.direction.reversed().toEdgeSet, progressWidth(.high))
+            .foregroundStyle(appearance.progressColors.value(for: internalState))
     }
     
     @ViewBuilder
     private var borderView: some View {
-        let borderWidth: CGFloat = uiModel.borderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.cornerRadius)
-                .strokeBorder(uiModel.borderColors.value(for: internalState), lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
     
@@ -141,24 +141,24 @@ public struct VRangeSlider: View {
         _ thumb: VRangeSliderThumb
     ) -> some View {
         if
-            uiModel.thumbSize.width > 0 && 
-            uiModel.thumbSize.height > 0
+            appearance.thumbSize.width > 0 && 
+            appearance.thumbSize.height > 0
         {
             Group { // `Group` is used for giving multiple frames
                 ZStack {
                     thumbBackgroundView
                     thumbBorderView
                 }
-                .frame(size: uiModel.thumbSize)
+                .frame(size: appearance.thumbSize)
                 .offset(
-                    x: uiModel.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed) : 0,
-                    y: uiModel.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(uiModel.direction.isReversed)
+                    x: appearance.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(appearance.direction.isReversed) : 0,
+                    y: appearance.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(appearance.direction.isReversed)
                 )
             }
             .frame( // Must be put into group, as content already has frame
-                maxWidth: uiModel.direction.isHorizontal ? .infinity : nil,
-                maxHeight: uiModel.direction.isHorizontal ? nil : .infinity,
-                alignment: uiModel.direction.toAlignment
+                maxWidth: appearance.direction.isHorizontal ? .infinity : nil,
+                maxHeight: appearance.direction.isHorizontal ? nil : .infinity,
+                alignment: appearance.direction.toAlignment
             )
             .gesture(
                 DragGesture(minimumDistance: 0)
@@ -169,35 +169,35 @@ public struct VRangeSlider: View {
     }
 
     private var thumbBackgroundView: some View {
-        RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-            .foregroundStyle(uiModel.thumbColors.value(for: internalState))
+        RoundedRectangle(cornerRadius: appearance.thumbCornerRadius)
+            .foregroundStyle(appearance.thumbColors.value(for: internalState))
             .shadow(
-                color: uiModel.thumbShadowColors.value(for: internalState),
-                radius: uiModel.thumbShadowRadius,
-                offset: uiModel.thumbShadowOffset // No need to reverse coordinates on shadow
+                color: appearance.thumbShadowColors.value(for: internalState),
+                radius: appearance.thumbShadowRadius,
+                offset: appearance.thumbShadowOffset // No need to reverse coordinates on shadow
             )
     }
 
     @ViewBuilder
     private var thumbBorderView: some View {
-        let borderWidth: CGFloat = uiModel.thumbBorderWidth.toPoints(scale: displayScale)
+        let borderWidth: CGFloat = appearance.thumbBorderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: uiModel.thumbCornerRadius)
-                .strokeBorder(uiModel.thumbBorderColors.value(for: internalState), lineWidth: borderWidth)
+            RoundedRectangle(cornerRadius: appearance.thumbCornerRadius)
+                .strokeBorder(appearance.thumbBorderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
     
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: VRangeSliderThumb) {
-        let dragValue: Double = dragValue.location.coordinate(isX: uiModel.direction.isHorizontal)
+        let dragValue: Double = dragValue.location.coordinate(isX: appearance.direction.isHorizontal)
         let boundRange: Double = range.boundRange
-        guard let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal).nonZero else { return }
+        guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
 
         let rawValue: Double = (range.lowerBound + (dragValue / width) * boundRange)
             .invertedFromMax(
                 range.upperBound,
-                if: layoutDirection.isRightToLeft || uiModel.direction.isReversed
+                if: layoutDirection.isRightToLeft || appearance.direction.isReversed
             )
 
         let valueFixed: Double = {
@@ -248,7 +248,7 @@ public struct VRangeSlider: View {
             }
         }()
         guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
-        let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
+        let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
         
         switch thumb {
         case .low: return (value / boundRange) * width
@@ -259,8 +259,8 @@ public struct VRangeSlider: View {
     // MARK: Thumb Offset
     private func thumbOffset(_ thumb: VRangeSliderThumb) -> CGFloat {
         let progressWidth: CGFloat = progressWidth(thumb)
-        guard let thumbWidth: CGFloat = uiModel.thumbSize.dimension(isWidth: uiModel.direction.isHorizontal).nonZero else { return 0 }
-        let width: CGFloat = sliderSize.dimension(isWidth: uiModel.direction.isHorizontal)
+        guard let thumbWidth: CGFloat = appearance.thumbSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return 0 }
+        let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
         
         switch thumb {
         case .low: return progressWidth - thumbWidth / 2
@@ -363,10 +363,10 @@ extension Double {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VRangeSlider(
-                uiModel: {
-                    var uiModel: VRangeSliderUIModel = .init()
-                    uiModel.direction = .leftToRight
-                    return uiModel
+                appearance: {
+                    var appearance: VRangeSliderAppearance = .init()
+                    appearance.direction = .leftToRight
+                    return appearance
                 }(),
                 difference: difference,
                 value: $value
@@ -376,10 +376,10 @@ extension Double {
         
         PreviewRow("Right-to-Left") {
             VRangeSlider(
-                uiModel: {
-                    var uiModel: VRangeSliderUIModel = .init()
-                    uiModel.direction = .rightToLeft
-                    return uiModel
+                appearance: {
+                    var appearance: VRangeSliderAppearance = .init()
+                    appearance.direction = .rightToLeft
+                    return appearance
                 }(),
                 difference: difference,
                 value: $value
@@ -390,10 +390,10 @@ extension Double {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VRangeSlider(
-                    uiModel: {
-                        var uiModel: VRangeSliderUIModel = .init()
-                        uiModel.direction = .topToBottom
-                        return uiModel
+                    appearance: {
+                        var appearance: VRangeSliderAppearance = .init()
+                        appearance.direction = .topToBottom
+                        return appearance
                     }(),
                     difference: difference,
                     value: $value
@@ -403,10 +403,10 @@ extension Double {
             
             PreviewRow("Bottom-to-Top") {
                 VRangeSlider(
-                    uiModel: {
-                        var uiModel: VRangeSliderUIModel = .init()
-                        uiModel.direction = .bottomToTop
-                        return uiModel
+                    appearance: {
+                        var appearance: VRangeSliderAppearance = .init()
+                        appearance.direction = .bottomToTop
+                        return appearance
                     }(),
                     difference: difference,
                     value: $value
