@@ -34,8 +34,8 @@ public struct VProgressBar: View {
     /// Initializes `VProgressBar` with value.
     public init<V>(
         appearance: VProgressBarAppearance = .init(),
-        total: V = 1,
-        value: V
+        value: V,
+        total: V = 1
     )
         where V: BinaryFloatingPoint
     {

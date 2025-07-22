@@ -52,8 +52,8 @@ import Foundation
 ///             .frame(height: 200)
 ///
 ///             VCompactPageIndicator(
-///                 total: dataSourceManager.countInflated,
-///                 current: dataSourceManager.selectedIndexInflated
+///                 current: dataSourceManager.selectedIndexInflated,
+///                 total: dataSourceManager.countInflated
 ///             )
 ///         }
 ///     }

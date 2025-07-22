@@ -11,13 +11,13 @@ import VCore
 // MARK: - V Page Indicator
 /// Indicator component that represents selection in page control.
 ///
-///     private let total: Int = 10
 ///     @State private var current: Int = 4
+///     private let total: Int = 10
 ///
 ///     var body: some View {
 ///         VPageIndicator(
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         )
 ///     }
 ///
@@ -26,8 +26,8 @@ import VCore
 ///     var body: some View {
 ///         VPageIndicator(
 ///             appearance: .vertical,
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         )
 ///     }
 ///
@@ -36,13 +36,13 @@ import VCore
 ///     var body: some View {
 ///         ViewThatFits(in: .horizontal) {
 ///             VPageIndicator(
-///                 total: total,
-///                 current: current
+///                 current: current,
+///                 total: total
 ///             )
 ///
 ///             VCompactPageIndicator(
-///                 total: total,
-///                 current: current
+///                 current: current,
+///                 total: total
 ///             )
 ///         }
 ///     }
@@ -60,8 +60,8 @@ import VCore
 ///     var body: some View {
 ///         VPageIndicator(
 ///             appearance: pageIndicatorAppearance,
-///             total: total,
-///             current: current)
+///             current: current),
+///             total: total
 ///          ) { (internalState, _) in
 ///             ZStack {
 ///                 Circle()
@@ -88,8 +88,8 @@ import VCore
 ///     var body: some View {
 ///         VPageIndicator(
 ///             appearance: pageIndicatorAppearance,
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         ) { (internalState, _) in
 ///             RoundedRectangle(cornerRadius: 2)
 ///                 .foregroundStyle(pageIndicatorAppearance.dotColors.value(for: internalState))
@@ -111,8 +111,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     }
 
     // MARK: Properties - Data
-    private let total: Int
     private let current: Int
+    private let total: Int
 
     // MARK: Properties - Dot Content
     private let dotContent: VPageIndicatorDotContent<CustomDotContent>
@@ -120,13 +120,13 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     // MARK: Initializers - Internal
     init(
         appearance: VPageIndicatorAppearance,
-        total: Int,
         current: Int,
+        total: Int,
         dotContent: VPageIndicatorDotContent<CustomDotContent>
     ) {
         self.appearance = appearance
-        self.total = total
         self.current = current
+        self.total = total
         self.dotContent = dotContent
     }
 
@@ -134,27 +134,27 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     /// Initializes `VPageIndicator` with total and current index.
     public init(
         appearance: VPageIndicatorAppearance = .init(),
-        total: Int,
-        current: Int
+        current: Int,
+        total: Int
     )
         where CustomDotContent == Never
     {
         self.appearance = appearance
-        self.total = total
         self.current = current
+        self.total = total
         self.dotContent = .standard
     }
     
     /// Initializes `VPageIndicator` with total, current index, and custom dot content.
     public init(
         appearance: VPageIndicatorAppearance = .init(),
-        total: Int,
         current: Int,
+        total: Int,
         @ViewBuilder dotContent customDotContent: @escaping (VPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
         self.appearance = appearance
-        self.total = total
         self.current = current
+        self.total = total
         self.dotContent = .custom(builder: customDotContent)
     }
     
@@ -217,8 +217,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 
     PreviewContainer {
         VPageIndicator(
-            total: total,
-            current: current
+            current: current,
+            total: total
         )
     }
     .onReceiveOfTimerIncrement($current, to: total-1)
@@ -236,8 +236,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                     appearance.direction = .leftToRight
                     return appearance
                 }(),
-                total: total,
-                current: current
+                current: current,
+                total: total
             )
         }
 
@@ -248,8 +248,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                     appearance.direction = .rightToLeft
                     return appearance
                 }(),
-                total: total,
-                current: current
+                current: current,
+                total: total
             )
         }
 
@@ -261,8 +261,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                         appearance.direction = .topToBottom
                         return appearance
                     }(),
-                    total: total,
-                    current: current
+                    current: current,
+                    total: total
                 )
             }
 
@@ -273,8 +273,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                         appearance.direction = .bottomToTop
                         return appearance
                     }(),
-                    total: total,
-                    current: current
+                    current: current,
+                    total: total
                 )
             }
         }
@@ -293,8 +293,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                 appearance.dotWidths.selected? *= 3
                 return appearance
             }(),
-            total: total,
-            current: current
+            current: current,
+            total: total
         )
     }
     .onReceiveOfTimerIncrement($current, to: total-1)
@@ -315,8 +315,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     PreviewContainer {
         VPageIndicator(
             appearance: appearance,
-            total: total,
-            current: current
+            current: current,
+            total: total
         ) { (internalState, _) in
             RoundedRectangle(cornerRadius: 2)
                 .foregroundStyle(appearance.dotColors.value(for: internalState))
@@ -329,8 +329,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 #Preview("Zero") {
     PreviewContainer {
         VPageIndicator(
-            total: 0,
-            current: 0
+            current: 0,
+            total: 0
         )
     }
 }

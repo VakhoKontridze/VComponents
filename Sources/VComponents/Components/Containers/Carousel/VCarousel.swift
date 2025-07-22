@@ -42,8 +42,8 @@ import VCore
 ///             .frame(height: 200)
 ///
 ///             VPageIndicator(
-///                 total: 7,
 ///                 current: selectedIndex ?? 0
+///                 total: 7
 ///             )
 ///         }
 ///     }
@@ -225,8 +225,8 @@ public struct VCarousel<Data, ID, Content>: View
             .frame(height: _height)
 
             VPageIndicator(
-                total: 7,
-                current: selectedIndex ?? 0
+                current: selectedIndex ?? 0,
+                total: 7
             )
         }
     }
@@ -270,8 +270,8 @@ public struct VCarousel<Data, ID, Content>: View
             .frame(height: _height)
 
             VCompactPageIndicator(
-                total: dataSourceManager.countInflated,
-                current: dataSourceManager.selectedIndexInflated
+                current: dataSourceManager.selectedIndexInflated,
+                total: dataSourceManager.countInflated
             )
         }
     }

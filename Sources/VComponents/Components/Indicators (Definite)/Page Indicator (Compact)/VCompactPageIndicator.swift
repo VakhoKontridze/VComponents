@@ -12,13 +12,13 @@ import VCore
 // MARK: - V Compact Page Indicator
 /// Indicator component that represents selection in page control in compact fashion.
 ///
-///     private let total: Int = 10
 ///     @State private var current: Int = 4
+///     private let total: Int = 10
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         )
 ///     }
 ///
@@ -27,8 +27,8 @@ import VCore
 ///     var body: some View {
 ///         VCompactPageIndicator(
 ///             appearance: .vertical,
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         )
 ///     }
 ///
@@ -45,8 +45,8 @@ import VCore
 ///     var body: some View {
 ///         VCompactPageIndicator(
 ///             appearance: pageIndicatorAppearance,
-///             total: total,
-///             current: current
+///             current: current,
+///             total: total
 ///         ) { (internalState, _) in
 ///             ZStack {
 ///                 Circle()
@@ -75,12 +75,13 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
 
     // MARK: Properties - Data
+    private let current: Int
     private let total: Int
+    
     private var visible: Int { appearance.visibleDots }
     private var center: Int { appearance.centerDots }
     private var side: Int { appearance.sideDots }
     private var middle: Int { appearance.middleDots }
-    private let current: Int
     
     private var region: Region {
         .init(
@@ -97,31 +98,31 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     /// Initializes `VCompactPageIndicator` with total and current index.
     public init(
         appearance: VCompactPageIndicatorAppearance = .init(),
-        total: Int,
-        current: Int
+        current: Int,
+        total: Int
     )
         where CustomDotContent == Never
     {
         Self.validate(appearance: appearance)
         
         self.appearance = appearance
-        self.total = total
         self.current = current
+        self.total = total
         self.dotContent = .standard
     }
     
     /// Initializes `VCompactPageIndicator` with total, current index, and custom dot content.
     public init(
         appearance: VCompactPageIndicatorAppearance = .init(),
-        total: Int,
         current: Int,
+        total: Int,
         @ViewBuilder dotContent customDotContent: @escaping (VCompactPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
         Self.validate(appearance: appearance)
 
         self.appearance = appearance
-        self.total = total
         self.current = current
+        self.total = total
         self.dotContent = .custom(builder: customDotContent)
     }
     
@@ -136,8 +137,8 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
             } else {
                 VPageIndicator<CustomDotContent>(
                     appearance: appearance.standardPageIndicatorAppearance,
-                    total: total,
                     current: current,
+                    total: total,
                     dotContent: {
                         switch dotContent {
                         case .standard: VPageIndicatorDotContent.standard
@@ -381,8 +382,8 @@ extension Int {
 
     PreviewContainer {
         VCompactPageIndicator(
-            total: total,
-            current: current
+            current: current,
+            total: total
         )
     }
     .onReceiveOfTimerIncrement($current, to: total-1)
@@ -400,8 +401,8 @@ extension Int {
                     appearance.direction = .leftToRight
                     return appearance
                 }(),
-                total: total,
-                current: current
+                current: current,
+                total: total
             )
         }
 
@@ -412,8 +413,8 @@ extension Int {
                     appearance.direction = .rightToLeft
                     return appearance
                 }(),
-                total: total,
-                current: current
+                current: current,
+                total: total
             )
         }
 
@@ -425,8 +426,8 @@ extension Int {
                         appearance.direction = .topToBottom
                         return appearance
                     }(),
-                    total: total,
-                    current: current
+                    current: current,
+                    total: total
                 )
             }
 
@@ -437,8 +438,8 @@ extension Int {
                         appearance.direction = .bottomToTop
                         return appearance
                     }(),
-                    total: total,
-                    current: current
+                    current: current,
+                    total: total
                 )
             }
         }
@@ -449,8 +450,8 @@ extension Int {
 #Preview("Zero") {
     PreviewContainer {
         VCompactPageIndicator(
-            total: 0,
-            current: 0
+            current: 0,
+            total: 0
         )
     }
 }
