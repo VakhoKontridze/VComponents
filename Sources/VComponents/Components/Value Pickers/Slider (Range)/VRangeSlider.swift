@@ -144,7 +144,7 @@ public struct VRangeSlider: View {
             appearance.thumbSize.width > 0 && 
             appearance.thumbSize.height > 0
         {
-            Group { // `Group` is used for giving multiple frames
+            ZStack { // Used for additional frame
                 ZStack {
                     thumbBackgroundView
                     thumbBorderView

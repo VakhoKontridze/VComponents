@@ -81,7 +81,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     @ViewBuilder 
     private var marqueeContentView: some View {
         if isAnimatable {
-            Group { // `Group` is used for non-stacked layout
+            ZStack { // Used for additional frame
                 contentView
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)

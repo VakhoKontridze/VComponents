@@ -128,7 +128,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private func rectangleView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        Group { // `Group` is used for adding multiple frames
+        ZStack { // Used for additional frame
             rectangleIcon(
                 internalState: internalState
             )
