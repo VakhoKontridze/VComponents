@@ -31,7 +31,7 @@ public struct VPlainButtonAppearance: Sendable {
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
 
-    /// Ratio to which label scales down on press.
+    /// Label pressed scale.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1

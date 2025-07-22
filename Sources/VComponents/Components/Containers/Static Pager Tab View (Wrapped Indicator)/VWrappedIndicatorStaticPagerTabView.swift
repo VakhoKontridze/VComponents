@@ -147,7 +147,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         self._selection = selection
         self.data = data
         self.id = id
-        self.tabItemLabel = .custom(custom: customTabItemLabel)
+        self.tabItemLabel = .custom(builder: customTabItemLabel)
         self.content = content
     }
 
@@ -189,7 +189,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.tabItemLabel = .custom(custom: customTabItemLabel)
+        self.tabItemLabel = .custom(builder: customTabItemLabel)
         self.content = content
     }
 
@@ -200,15 +200,15 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
 
         } else {
             VStack(spacing: appearance.tabBarAndTabViewSpacing) {
-                headerView
+                tabBar
                 tabView
             }
         }
     }
 
-    private var headerView: some View {
+    private var tabBar: some View {
         VStack(spacing: 0) {
-            tabBarView
+            _tabBar
             tabIndicatorStripView
         }
         .background(appearance.headerBackgroundColor)
@@ -217,7 +217,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         .drawingGroup() // Prevents clipped tab indicator from disappearing
     }
 
-    private var tabBarView: some View {
+    private var _tabBar: some View {
         HStack(
             alignment: appearance.tabBarAlignment,
             spacing: 0
@@ -255,8 +255,8 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                         .font(appearance.tabItemTextFont)
                         .applyIfLet(appearance.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
-                case .custom(let custom):
-                    custom(tabItemInternalState, element)
+                case .custom(let builder):
+                    builder(tabItemInternalState, element)
                 }
             }
             .onGeometryChange(of: { $0.frame(in: .named(tabBarCoordinateSpaceName)) }) { [layoutDirection, tabBarWidth] frame in

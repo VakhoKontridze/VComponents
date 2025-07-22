@@ -18,5 +18,5 @@ enum VWrappedIndicatorStaticPagerTabViewTabItemLabel<Element, CustomTabItemLabel
         CustomTabItemLabel: View
 {
     case title(title: (Element) -> String)
-    case custom(custom: (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
+    case custom(builder: (VWrappedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
 }

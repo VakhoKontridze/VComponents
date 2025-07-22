@@ -38,13 +38,12 @@ public struct VContinuousSpinner: View {
                 appearance.color,
                 style: StrokeStyle(lineWidth: appearance.thickness, lineCap: .round)
             )
-            .frame(width: appearance.dimension, height: appearance.dimension)
+            .frame(dimension: appearance.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear {
-                withAnimation(
-                    appearance.animation.repeatForever(autoreverses: false),
-                    { isAnimating.toggle() }
-                )
+                withAnimation(appearance.animation.repeatForever(autoreverses: false)) {
+                    isAnimating.toggle()
+                }
             }
             .environment(\.layoutDirection, .leftToRight) // Like native `ProgressView`, forces LTR
     }

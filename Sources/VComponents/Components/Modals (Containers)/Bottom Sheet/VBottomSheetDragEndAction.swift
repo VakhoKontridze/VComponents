@@ -1,5 +1,5 @@
 //
-//  VBottomSheetSnapAction.swift
+//  VBottomSheetDragEndAction.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 4/19/22.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-// MARK: - V Bottom Sheet Snap Action
+// MARK: - V Bottom Sheet Drag End Action
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-enum VBottomSheetSnapAction {
+enum VBottomSheetDragEndAction {
     // MARK: Cases
     case dismiss
     case snap(CGFloat)
     
     // MARK: Initializers
     // Velocity is always non-zero, and exceeds the threshold.
-    static func dragEndedHighVelocitySnapAction(
+    static func dragEndedHighVelocityDragEndAction(
         containerHeight: CGFloat,
 
         heights: VBottomSheetAppearance.Heights,
@@ -26,7 +26,7 @@ enum VBottomSheetSnapAction {
         offset: CGFloat,
 
         velocity: CGFloat
-    ) -> VBottomSheetSnapAction {
+    ) -> VBottomSheetDragEndAction {
         let region: VBottomSheetRegion = .init(containerHeight: containerHeight, heights: heights, offset: offset)
         let isGoingDown: Bool = velocity > 0
         
@@ -40,7 +40,7 @@ enum VBottomSheetSnapAction {
         }
     }
     
-    static func dragEndedSnapAction(
+    static func dragEndedDragEndAction(
         containerHeight: CGFloat,
 
         heights: VBottomSheetAppearance.Heights,
@@ -50,7 +50,7 @@ enum VBottomSheetSnapAction {
         offset: CGFloat,
         offsetBeforeDrag: CGFloat,
         translation: CGFloat
-    ) -> VBottomSheetSnapAction {
+    ) -> VBottomSheetDragEndAction {
         let shouldDismiss: Bool = {
             guard canSwipeToDismiss else { return false }
             
@@ -63,8 +63,10 @@ enum VBottomSheetSnapAction {
             return true
         }()
         
-        switch shouldDismiss {
-        case false:
+        if shouldDismiss {
+            return .dismiss
+            
+        } else {
             switch VBottomSheetRegion(containerHeight: containerHeight, heights: heights, offset: offset) {
             case .idealToMax:
                 let idealDiff: CGFloat = abs(heights.idealOffset(in: containerHeight) - offset)
@@ -83,9 +85,6 @@ enum VBottomSheetSnapAction {
                 
                 return .snap(newOffset)
             }
-            
-        case true:
-            return .dismiss
         }
     }
 }

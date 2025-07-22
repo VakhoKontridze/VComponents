@@ -14,5 +14,5 @@ enum VWrappedToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case custom(custom: (VWrappedToggleButtonInternalState) -> CustomLabel)
+    case custom(builder: (VWrappedToggleButtonInternalState) -> CustomLabel)
 }

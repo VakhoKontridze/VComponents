@@ -13,5 +13,5 @@ import SwiftUI
 enum VToggleLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case custom(custom: (VToggleInternalState) -> CustomLabel)
+    case custom(builder: (VToggleInternalState) -> CustomLabel)
 }

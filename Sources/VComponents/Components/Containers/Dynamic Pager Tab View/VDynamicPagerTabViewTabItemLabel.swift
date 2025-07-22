@@ -18,5 +18,5 @@ enum VDynamicPagerTabViewTabItemLabel<Element, CustomTabItemLabel>
         CustomTabItemLabel: View
 {
     case title(title: (Element) -> String)
-    case custom(custom: (VDynamicPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
+    case custom(builder: (VDynamicPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
 }

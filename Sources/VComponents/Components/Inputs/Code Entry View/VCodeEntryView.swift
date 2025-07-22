@@ -51,13 +51,13 @@ public struct VCodeEntryView: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
     private func internalState(_ index: Int) -> VCodeEntryViewInternalState {
-        .init(
+        let isEditingCurrentCharacter: Bool =
+            text.count == index ||
+            (text.count == appearance.length && text.count == index + 1)
+        
+        return VCodeEntryViewInternalState(
             isEnabled: isEnabled,
-            isFocused: isFocused && {
-                if text.count == index { true }
-                else if text.count == appearance.length && text.count == index + 1 { true }
-                else { false }
-            }()
+            isFocused: isFocused && isEditingCurrentCharacter
         )
     }
 
@@ -162,6 +162,7 @@ public struct VCodeEntryView: View {
         return Text(character(at: index))
             .multilineTextAlignment(.center)
             .lineLimit(1)
+            //.minimumScaleFactor(1)
             .foregroundStyle(isPopulated ? appearance.textColors.value(for: internalState) : appearance.placeholderTextColors.value(for: internalState))
             .font(isPopulated ? appearance.textFont : appearance.placeholderTextFont)
             .applyIfLet(isPopulated ? appearance.textDynamicTypeSizeType : appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }

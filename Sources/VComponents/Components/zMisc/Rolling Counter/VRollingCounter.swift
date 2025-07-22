@@ -99,6 +99,8 @@ public struct VRollingCounter: View {
         switch component {
         case let digit as VRollingCounterDigitComponent:
             Text(digit.stringRepresentation)
+                .lineLimit(1)
+                //.minimumScaleFactor(1)
                 .foregroundStyle(textColor(digit.isHighlighted, defaultValue: appearance.digitTextColor))
                 .font(appearance.digitTextFont)
                 .applyIfLet(appearance.digitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -112,6 +114,8 @@ public struct VRollingCounter: View {
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
+                .lineLimit(1)
+                //.minimumScaleFactor(1)
                 .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
                 .font(appearance.fractionDigitTextFont)
                 .applyIfLet(appearance.fractionDigitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -125,6 +129,8 @@ public struct VRollingCounter: View {
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
+                .lineLimit(1)
+                //.minimumScaleFactor(1)
                 .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: appearance.groupingSeparatorTextColor))
                 .font(appearance.groupingSeparatorTextFont)
                 .applyIfLet(appearance.groupingSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -134,6 +140,8 @@ public struct VRollingCounter: View {
 
         case let decimalSeparator as VRollingCounterDecimalSeparatorComponent:
             Text(decimalSeparator.stringRepresentation)
+                .lineLimit(1)
+                //.minimumScaleFactor(1)
                 .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
                 .font(appearance.decimalSeparatorTextFont)
                 .applyIfLet(appearance.decimalSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }

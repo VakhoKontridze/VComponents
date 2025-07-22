@@ -57,7 +57,7 @@ public struct VStretchedButtonAppearance: Sendable {
         disabled: Color(128, 176, 240)
     )
 
-    /// Ratio to which background scales down on press.
+    /// Background pressed scale.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -91,7 +91,7 @@ public struct VStretchedButtonAppearance: Sendable {
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
 
-    /// Ratio to which label scales down on press.
+    /// Label pressed scale.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1

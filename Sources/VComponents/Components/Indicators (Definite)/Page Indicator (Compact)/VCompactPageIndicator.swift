@@ -122,7 +122,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         self.appearance = appearance
         self.total = total
         self.current = current
-        self.dotContent = .custom(custom: customDotContent)
+        self.dotContent = .custom(builder: customDotContent)
     }
     
     // MARK: Body
@@ -141,7 +141,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                     dotContent: {
                         switch dotContent {
                         case .standard: VPageIndicatorDotContent.standard
-                        case .custom(let custom): VPageIndicatorDotContent.custom(custom: custom)
+                        case .custom(let builder): VPageIndicatorDotContent.custom(builder: builder)
                         }
                     }()
                 )
@@ -193,8 +193,8 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
                     }
                 }
 
-            case .custom(let custom):
-                custom(internalState, index)
+            case .custom(let builder):
+                builder(internalState, index)
             }
         }
         .frame(

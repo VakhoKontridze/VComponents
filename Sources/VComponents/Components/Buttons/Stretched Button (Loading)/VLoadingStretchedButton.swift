@@ -104,7 +104,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         self.appearance = appearance
         self.isLoading = isLoading
         self.action = action
-        self.label = .custom(custom: customLabel)
+        self.label = .custom(builder: customLabel)
     }
     
     // MARK: Body
@@ -158,8 +158,8 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                         }
                     }
 
-                case .custom(let custom):
-                    custom(internalState)
+                case .custom(let builder):
+                    builder(internalState)
                 }
             }
             .frame(maxWidth: .infinity)

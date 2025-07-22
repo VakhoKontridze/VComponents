@@ -100,7 +100,7 @@ public struct VAlertAppearance: Sendable {
 
     // MARK: Properties - Alert Content
     /// Additional margins applied to title text, message text, and content as a whole.
-    public var titleTextMessageTextAndContentMargins: Margins = .init(
+    public var titleTextAndMessageTextAndContentMargins: Margins = .init(
         leading: 15,
         trailing: 15,
         top: 15,
@@ -118,6 +118,9 @@ public struct VAlertAppearance: Sendable {
         alignment: .center,
         lineLimit: 1...2
     )
+    
+    /// Title text minimum scale factor.
+    public var titleTextMinimumScaleFactor: CGFloat = 1
 
     /// Title text color.
     public var titleTextColor: Color = .primary
@@ -149,6 +152,9 @@ public struct VAlertAppearance: Sendable {
         alignment: .center,
         lineLimit: 1...5
     )
+    
+    /// Message text minimum scale factor.
+    public var messageTextMinimumScaleFactor: CGFloat = 1
 
     /// Message text color.
     public var messageTextColor: Color = .primary

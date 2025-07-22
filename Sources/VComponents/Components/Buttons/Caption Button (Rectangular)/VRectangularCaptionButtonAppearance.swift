@@ -34,7 +34,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
 
-    // MARK: Properties - Rectangle Background
+    // MARK: Properties - Rectangle
     /// Rectangle size.
     public var rectangleSize: CGSize = {
 #if os(iOS)
@@ -56,7 +56,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
         disabled: Color(128, 176, 240, 0.35)
     )
 
-    /// Ratio to which rectangle scales down on press.
+    /// Rectangle pressed scale.
     public var rectanglePressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -67,7 +67,6 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
 
-    // MARK: Properties - Rectangle Border
     /// Rectangle border width.
     ///
     /// To hide border, set to `0`.
@@ -123,7 +122,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
-    /// Ratio to which icon scales down on press.
+    /// Icon pressed scale.
     public var iconPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -152,7 +151,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     /// Applicable only if `init` with icon and title is used.
     public var titleCaptionTextAndIconCaptionSpacing: CGFloat = 8
 
-    /// Ratio to which caption scales down on press.
+    /// Caption pressed scale.
     public var captionPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -226,6 +225,9 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
         fatalError() // Not supported
 #endif
     }()
+    
+    /// Title caption text minimum scale factor.
+    public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title caption text colors.
     public var titleCaptionTextColors: StateColors = .init(
@@ -233,9 +235,6 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
         pressed: Color.primary.opacity(0.3),
         disabled: Color.primary.opacity(0.3)
     )
-
-    /// Title caption text minimum scale factor.
-    public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Title caption text font.
     public var titleCaptionTextFont: Font = {
@@ -285,7 +284,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Label Margins
+    // MARK: Icon Margins
     /// Model that contains `horizontal` and `vertical` margins.
     public typealias IconMargins = EdgeInsets_HorizontalVertical
 

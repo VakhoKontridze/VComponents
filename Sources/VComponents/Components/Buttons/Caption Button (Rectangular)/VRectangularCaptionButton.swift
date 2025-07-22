@@ -102,7 +102,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         self.appearance = appearance
         self.action = action
         self.icon = icon
-        self.caption = .custom(custom: customCaption)
+        self.caption = .custom(builder: customCaption)
     }
     
     // MARK: Body
@@ -206,8 +206,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                     }
                 }
 
-            case .custom(let custom):
-                custom(internalState)
+            case .custom(let builder):
+                builder(internalState)
             }
         }
         .frame(

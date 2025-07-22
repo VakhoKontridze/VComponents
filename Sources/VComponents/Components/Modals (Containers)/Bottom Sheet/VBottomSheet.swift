@@ -231,13 +231,22 @@ struct VBottomSheet<Content>: View
         let velocityExceedsNextAreaSnapThreshold: Bool =
             abs(dragValue.velocity.height) >=
             abs(appearance.velocityToSnapToNextHeight)
-
-        switch velocityExceedsNextAreaSnapThreshold {
-        case false:
+        
+        if velocityExceedsNextAreaSnapThreshold {
+            animateOffsetOrPullDismissFromDragEndAction(
+                .dragEndedHighVelocityDragEndAction(
+                    containerHeight: containerSize.height,
+                    heights: currentHeightsObject,
+                    offset: offset,
+                    velocity: dragValue.velocity.height
+                )
+            )
+            
+        } else {
             guard let offsetBeforeDrag else { return }
 
-            animateOffsetOrPullDismissFromSnapAction(
-                .dragEndedSnapAction(
+            animateOffsetOrPullDismissFromDragEndAction(
+                .dragEndedDragEndAction(
                     containerHeight: containerSize.height,
                     heights: currentHeightsObject,
                     canSwipeToDismiss: appearance.dismissType.contains(.swipe),
@@ -247,23 +256,13 @@ struct VBottomSheet<Content>: View
                     translation: dragValue.translation.height
                 )
             )
-
-        case true:
-            animateOffsetOrPullDismissFromSnapAction(
-                .dragEndedHighVelocitySnapAction(
-                    containerHeight: containerSize.height,
-                    heights: currentHeightsObject,
-                    offset: offset,
-                    velocity: dragValue.velocity.height
-                )
-            )
         }
     }
 
-    private func animateOffsetOrPullDismissFromSnapAction(
-        _ snapAction: VBottomSheetSnapAction
+    private func animateOffsetOrPullDismissFromDragEndAction(
+        _ dragEndAction: VBottomSheetDragEndAction
     ) {
-        switch snapAction {
+        switch dragEndAction {
         case .dismiss:
             isBeingDismissedFromSwipe = true
             dismissFromSwipe()

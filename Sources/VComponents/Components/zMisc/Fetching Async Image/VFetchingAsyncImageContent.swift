@@ -16,15 +16,15 @@ enum VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
     case auto
     
     case content(
-        customContent: (Image) -> CustomContent
+        contentBuilder: (Image) -> CustomContent
     )
     
     case contentAndPlaceholder(
-        customContent: (Image) -> CustomContent,
-        customPlaceholderContent: () -> CustomPlaceholderContent
+        contentBuilder: (Image) -> CustomContent,
+        placeholderBuilder: () -> CustomPlaceholderContent
     )
     
     case contentWithPhase(
-        customContentWithPhase: (AsyncImagePhase) -> CustomContent
+        contentBuilder: (AsyncImagePhase) -> CustomContent
     )
 }

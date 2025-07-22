@@ -185,6 +185,8 @@ public struct VTextField: View {
             isSecure: isTextFieldSecure,
             placeholder: placeholder.map {
                 Text($0)
+                    //.lineLimit(1)
+                    //.minimumScaleFactor(1)
                     .foregroundStyle(appearance.placeholderTextColors.value(for: internalState))
                     .font(appearance.placeholderTextFont)
                     //.applyIfLet(appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
@@ -196,6 +198,7 @@ public struct VTextField: View {
         .textFieldStyle(.plain)
         .multilineTextAlignment(appearance.textAlignment)
         .lineLimit(1)
+        //.minimumScaleFactor(1)
         .foregroundStyle(appearance.textColors.value(for: internalState))
         .font(appearance.textFont)
         .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -283,6 +286,7 @@ public struct VTextField: View {
             Text(headerTitle)
                 .multilineTextAlignment(appearance.headerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: appearance.headerTitleTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.headerTitleTextMinimumScaleFactor)
                 .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
                 .font(appearance.headerTitleTextFont)
                 .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -305,6 +309,7 @@ public struct VTextField: View {
             Text(footerTitle)
                 .multilineTextAlignment(appearance.footerTitleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: appearance.footerTitleTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.footerTitleTextMinimumScaleFactor)
                 .foregroundStyle(appearance.footerTitleTextColors.value(for: internalState))
                 .font(appearance.footerTitleTextFont)
                 .applyIfLet(appearance.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }

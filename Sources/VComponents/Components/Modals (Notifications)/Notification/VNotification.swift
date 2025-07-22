@@ -116,8 +116,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     textsView(title: title, message: message)
                 }
 
-            case .custom(let custom):
-                custom()
+            case .custom(let builder):
+                builder()
             }
         }
         .padding(appearance.bodyMargins)

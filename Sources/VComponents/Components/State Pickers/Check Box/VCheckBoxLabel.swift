@@ -14,5 +14,5 @@ import SwiftUI
 enum VCheckBoxLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case custom(custom: (VCheckBoxInternalState) -> CustomLabel)
+    case custom(builder: (VCheckBoxInternalState) -> CustomLabel)
 }

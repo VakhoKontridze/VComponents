@@ -155,7 +155,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         self.appearance = appearance
         self.total = total
         self.current = current
-        self.dotContent = .custom(custom: customDotContent)
+        self.dotContent = .custom(builder: customDotContent)
     }
     
     // MARK: Body
@@ -191,8 +191,8 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
                     }
                 }
                 
-            case .custom(let custom):
-                custom(internalState, index)
+            case .custom(let builder):
+                builder(internalState, index)
             }
         }
         .frame(

@@ -72,7 +72,7 @@ public struct VStretchedToggleButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Ratio to which background scales down on press. Se to `1`.
+    /// Background pressed scale. Se to `1`.
     public var backgroundPressedScale: CGFloat = 1
 
     // MARK: Properties - Border
@@ -96,7 +96,7 @@ public struct VStretchedToggleButtonAppearance: Sendable {
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
 
-    /// Ratio to which label scales down on press. Se to `1`.
+    /// Label pressed scale. Se to `1`.
     public var labelPressedScale: CGFloat = 1
 
     // MARK: Properties - Label - Text

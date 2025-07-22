@@ -88,7 +88,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     ) {
         self.appearance = appearance
         self._state = state
-        self.label = .custom(custom: customLabel)
+        self.label = .custom(builder: customLabel)
     }
     
     // MARK: Body
@@ -112,9 +112,9 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     .blocksHitTesting(!appearance.labelIsClickable)
                 }
 
-            case .custom(let custom):
+            case .custom(let builder):
                 labeledCheckBoxView {
-                    baseButtonView(label: custom)
+                    baseButtonView(label: builder)
                         .blocksHitTesting(!appearance.labelIsClickable)
                 }
             }

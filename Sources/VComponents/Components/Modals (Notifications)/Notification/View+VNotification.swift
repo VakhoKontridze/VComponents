@@ -100,7 +100,7 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     content: .custom(
-                        custom: customContent
+                        builder: customContent
                     )
                 )
             }
@@ -203,7 +203,7 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     content: .custom(
-                        custom: {
+                        builder: {
                             Group {
                                 if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                     customContent(item)

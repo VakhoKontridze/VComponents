@@ -48,15 +48,15 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    
-    // MARK: Properties - Content
-    private let content: () -> Content
 
     // MARK: Properties - State
     private var isAnimatable: Bool { (contentSize.width + 2*appearance.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
+    
+    // MARK: Properties - Content
+    private let content: () -> Content
     
     // MARK: Initializers
     /// Initializes `VWrappingMarquee` with content.

@@ -96,7 +96,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     ) {
         self.appearance = appearance
         self._state = state
-        self.headerLabel = .custom(custom: customHeaderLabel)
+        self.headerLabel = .custom(builder: customHeaderLabel)
         self.content = content
     }
     
@@ -136,12 +136,13 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
+                        .minimumScaleFactor(appearance.headerTitleTextMinimumScaleFactor)
                         .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
                         .font(appearance.headerTitleTextFont)
                         .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
-                case .custom(let custom):
-                    custom(internalState)
+                case .custom(let builder):
+                    builder(internalState)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

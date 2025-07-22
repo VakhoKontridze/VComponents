@@ -90,7 +90,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     ) {
         self.appearance = appearance
         self.action = action
-        self.label = .custom(custom: customLabel)
+        self.label = .custom(builder: customLabel)
     }
     
     // MARK: Body
@@ -141,8 +141,8 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                     }
                 }
 
-            case .custom(let custom):
-                custom(internalState)
+            case .custom(let builder):
+                builder(internalState)
             }
         }
         .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)

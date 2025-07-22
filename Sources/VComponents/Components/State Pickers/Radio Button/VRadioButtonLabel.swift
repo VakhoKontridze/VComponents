@@ -14,5 +14,5 @@ import SwiftUI
 enum VRadioButtonLabel<CustomLabel> where CustomLabel: View {
     case empty
     case title(title: String)
-    case custom(custom: (VRadioButtonInternalState) -> CustomLabel)
+    case custom(builder: (VRadioButtonInternalState) -> CustomLabel)
 }

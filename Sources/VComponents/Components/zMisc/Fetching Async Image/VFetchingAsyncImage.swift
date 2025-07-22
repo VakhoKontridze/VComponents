@@ -108,7 +108,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .content(
-            customContent: customContent
+            contentBuilder: customContent
         )
     }
     
@@ -124,8 +124,8 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .contentAndPlaceholder(
-            customContent: customContent,
-            customPlaceholderContent: customPlaceholderContent
+            contentBuilder: customContent,
+            placeholderBuilder: customPlaceholderContent
         )
     }
     
@@ -142,7 +142,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         self.parameter = parameter
         self.fetchHandler = fetchHandler
         self.content = .contentWithPhase(
-            customContentWithPhase: customContentWithPhase
+            contentBuilder: customContentWithPhase
         )
     }
     
@@ -157,22 +157,22 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                     defaultPlaceholderView
                 }
                 
-            case .content(let content):
+            case .content(let contentBuilder):
                 if case .success(let image) = result {
-                    content(image)
+                    contentBuilder(image)
                 } else {
                     defaultPlaceholderView
                 }
                 
-            case .contentAndPlaceholder(let customContent, let customPlaceholderContent):
+            case .contentAndPlaceholder(let contentBuilder, let placeholderBuilder):
                 if case .success(let image) = result {
-                    customContent(image)
+                    contentBuilder(image)
                 } else {
-                    customPlaceholderContent()
+                    placeholderBuilder()
                 }
                 
-            case .contentWithPhase(let customContentWithPhase):
-                customContentWithPhase({
+            case .contentWithPhase(let contentBuilder):
+                contentBuilder({
                     switch result {
                     case nil: AsyncImagePhase.empty
                     case .success(let image): AsyncImagePhase.success(image)

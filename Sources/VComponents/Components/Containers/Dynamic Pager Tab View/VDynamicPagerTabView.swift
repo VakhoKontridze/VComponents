@@ -135,7 +135,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         self._selection = selection
         self.data = data
         self.id = id
-        self.tabItemLabel = .custom(custom: customTabItemLabel)
+        self.tabItemLabel = .custom(builder: customTabItemLabel)
         self.content = content
     }
 
@@ -177,7 +177,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.tabItemLabel = .custom(custom: customTabItemLabel)
+        self.tabItemLabel = .custom(builder: customTabItemLabel)
         self.content = content
     }
 
@@ -188,18 +188,18 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
         } else {
             VStack(spacing: appearance.tabBarAndTabViewSpacing) {
-                headerView
+                tabBar
                 tabView
             }
         }
     }
 
-    private var headerView: some View {
-        tabBarAndTabIndicatorStripView
+    private var tabBar: some View {
+        _tabBarAndTabIndicatorStripView
             .background(appearance.headerBackgroundColor)
     }
 
-    private var tabBarAndTabIndicatorStripView: some View {
+    private var _tabBarAndTabIndicatorStripView: some View {
         ZStack(alignment: .bottom) {
             tabIndicatorTrackView
 
@@ -254,8 +254,8 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
                     .font(appearance.tabItemTextFont)
                     .applyIfLet(appearance.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
-            case .custom(let custom):
-                custom(tabItemInternalState, element)
+            case .custom(let builder):
+                builder(tabItemInternalState, element)
             }
         }
         .fixedSize(horizontal: true, vertical: false)

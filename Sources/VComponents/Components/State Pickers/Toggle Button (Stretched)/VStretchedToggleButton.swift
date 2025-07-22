@@ -118,7 +118,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     ) {
         self.appearance = appearance
         self._state = state
-        self.label = .custom(custom: customLabel)
+        self.label = .custom(builder: customLabel)
     }
 
     // MARK: Body
@@ -173,8 +173,8 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                     }
                 }
 
-            case .custom(let custom):
-                custom(internalState)
+            case .custom(let builder):
+                builder(internalState)
             }
         }
         .frame(maxWidth: .infinity)

@@ -12,9 +12,7 @@ import VCore
 /// Model that describes appearance.
 @MemberwiseInitializable(
     accessLevelModifier: .internal,
-    parameterDefaultValues: [
-        "*": .omit
-    ]
+    parameterDefaultValues: ["*": .omit]
 )
 public struct VPageIndicatorAppearance: Sendable {
     // MARK: Properties - Global
@@ -71,7 +69,7 @@ public struct VPageIndicatorAppearance: Sendable {
 
     /// Dot corner radii.
     ///
-    /// Applicable on when `init` without dot content is used.
+    /// applicable only when `init` without dot content is used.
     public var dotCornerRadii: DotStateDimensions = {
 #if os(iOS)
         DotStateDimensions(4)
@@ -121,12 +119,12 @@ public struct VPageIndicatorAppearance: Sendable {
     ///
     /// To hide border, set to `zero`.
     ///
-    /// Applicable on when `init` without dot content is used.
+    /// applicable only when `init` without dot content is used.
     public var dotBorderWidths: DotStateDimensions = .zero
 
     /// Dot border colors.
     ///
-    /// Applicable on when `init` without dot content is used.
+    /// applicable only when `init` without dot content is used.
     public var dotBorderColors: DotStateColors = .clearColors
 
     // MARK: Properties - Transition

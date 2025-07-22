@@ -84,7 +84,7 @@ public struct VWrappedToggleButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Ratio to which background scales down on press.
+    /// Background pressed scale.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -118,7 +118,7 @@ public struct VWrappedToggleButtonAppearance: Sendable {
     /// Applicable only if `init` with icon and title is used.
     public var titleTextAndIconSpacing: CGFloat = 8
 
-    /// Ratio to which label scales down on press.
+    /// Label pressed scale.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1

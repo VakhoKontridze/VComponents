@@ -122,7 +122,7 @@ struct VAlert<Content>: View
                 messageView
                 contentView
             }
-            .padding(appearance.titleTextMessageTextAndContentMargins)
+            .padding(appearance.titleTextAndMessageTextAndContentMargins)
             .onGeometryChange(of: { $0.size.height }) { titleMessageContentHeight = $0 }
 
             buttonsScrollView
@@ -136,6 +136,7 @@ struct VAlert<Content>: View
             Text(title)
                 .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
                 .foregroundStyle(appearance.titleTextColor)
                 .font(appearance.titleTextFont)
                 .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
@@ -159,6 +160,7 @@ struct VAlert<Content>: View
             Text(message)
                 .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
                 .lineLimit(type: appearance.messageTextLineType.textLineLimitType)
+                .minimumScaleFactor(appearance.messageTextMinimumScaleFactor)
                 .foregroundStyle(appearance.messageTextColor)
                 .font(appearance.messageTextFont)
                 .applyIfLet(appearance.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }

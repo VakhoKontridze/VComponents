@@ -72,6 +72,9 @@ public struct VTextFieldAppearance: Sendable {
         alignment: .leading,
         lineLimit: 1...2
     )
+    
+    /// Header title text minimum scale factor.
+    public var headerTitleTextMinimumScaleFactor: CGFloat = 1
 
     /// Header title text colors.
     public var headerTitleTextColors: StateColors = .init(
@@ -102,6 +105,9 @@ public struct VTextFieldAppearance: Sendable {
         alignment: .leading,
         lineLimit: 1...5
     )
+    
+    /// Footer title text minimum scale factor.
+    public var footerTitleTextMinimumScaleFactor: CGFloat = 1
 
     /// Footer title text colors.
     public var footerTitleTextColors: StateColors = .init(

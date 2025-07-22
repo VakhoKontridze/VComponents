@@ -13,5 +13,5 @@ import SwiftUI
 @available(visionOS, unavailable)
 enum VDisclosureGroupHeaderLabel<CustomHeaderLabel> where CustomHeaderLabel: View {
     case title(title: String)
-    case custom(custom: (VDisclosureGroupInternalState) -> CustomHeaderLabel)
+    case custom(builder: (VDisclosureGroupInternalState) -> CustomHeaderLabel)
 }

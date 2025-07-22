@@ -76,7 +76,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
     ) {
         self.appearance = appearance
         self.action = action
-        self.label = .custom(custom: customLabel)
+        self.label = .custom(builder: customLabel)
     }
     
     // MARK: Body
@@ -112,8 +112,8 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             case .icon(let icon):
                 iconLabelViewComponent(internalState: internalState, icon: icon)
                 
-            case .custom(let custom):
-                custom(internalState)
+            case .custom(let builder):
+                builder(internalState)
             }
         }
         .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)

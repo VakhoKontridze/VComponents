@@ -18,5 +18,5 @@ enum VStretchedIndicatorStaticPagerTabViewTabItemLabel<Element, CustomTabItemLab
         CustomTabItemLabel: View
 {
     case title(title: (Element) -> String)
-    case custom(custom: (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
+    case custom(builder: (VStretchedIndicatorStaticPagerTabViewTabItemInternalState, Element) -> CustomTabItemLabel)
 }

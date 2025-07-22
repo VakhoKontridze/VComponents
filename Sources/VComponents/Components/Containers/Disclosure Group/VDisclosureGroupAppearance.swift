@@ -102,6 +102,9 @@ public struct VDisclosureGroupAppearance: Sendable {
     public var expandsAndCollapsesOnHeaderTap: Bool = true
 
     // MARK: Properties - Header - Text
+    /// Header title text minimum scale factor.
+    public var headerTitleTextMinimumScaleFactor: CGFloat = 1
+    
     /// Header title text colors.
     public var headerTitleTextColors: StateColors = .init(
         collapsed: Color.primary,

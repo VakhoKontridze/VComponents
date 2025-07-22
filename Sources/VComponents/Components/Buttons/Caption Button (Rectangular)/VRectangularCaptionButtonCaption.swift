@@ -15,5 +15,5 @@ enum VRectangularCaptionButtonCaption<CustomCaption> where CustomCaption: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case custom(custom: (VRectangularCaptionButtonInternalState) -> CustomCaption)
+    case custom(builder: (VRectangularCaptionButtonInternalState) -> CustomCaption)
 }

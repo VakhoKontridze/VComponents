@@ -15,5 +15,5 @@ enum VStretchedToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case titleAndIcon(title: String, icon: Image)
-    case custom(custom: (VStretchedToggleButtonInternalState) -> CustomLabel)
+    case custom(builder: (VStretchedToggleButtonInternalState) -> CustomLabel)
 }

@@ -11,11 +11,19 @@ General
 
 VTextField
 
+- `headerTitleTextMinimumScaleFactor` is added
+- `footerTitleTextMinimumScaleFactor` is added
 - `headerTextFieldAndFooterSpacing` is renamed to `headerAndTextFieldAndFooterSpacing`
 
 VTextView
 
+- `headerTitleTextMinimumScaleFactor` is added
+- `footerTitleTextMinimumScaleFactor` is added
 - `headerTextViewAndFooterSpacing` is renamed to `headerAndTextViewAndFooterSpacing`
+
+VDisclosureGroup
+
+- `headerTitleTextMinimumScaleFactor` is added
 
 VModal
 
@@ -32,6 +40,9 @@ VSideBar
 VAlert
 
 - Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+- `titleTextMinimumScaleFactor` is added
+- `messageTextMinimumScaleFactor` is added
+- `titleTextMessageTextAndContentMargins` is renamed to `titleTextAndMessageTextAndContentMargins`
 
 VNotification
 

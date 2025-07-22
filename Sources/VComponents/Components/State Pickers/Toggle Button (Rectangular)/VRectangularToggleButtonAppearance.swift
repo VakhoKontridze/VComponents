@@ -84,7 +84,7 @@ public struct VRectangularToggleButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Ratio to which background scales down on press.
+    /// Background pressed scale.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -110,7 +110,7 @@ public struct VRectangularToggleButtonAppearance: Sendable {
     /// Label margins.
     public var labelMargins: LabelMargins = .init(3)
 
-    /// Ratio to which label scales down on press.
+    /// Label pressed scale.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
