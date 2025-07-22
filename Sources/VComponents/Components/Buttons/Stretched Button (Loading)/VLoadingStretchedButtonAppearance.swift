@@ -170,6 +170,9 @@ public struct VLoadingStretchedButtonAppearance: Sendable {
     public var iconDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Spinner
+    /// Spinner placement.
+    public var spinnerPlacement: SpinnerPlacement = .default
+    
     /// Spinner appearance.
     public var spinnerAppearance: VContinuousSpinnerAppearance = {
         var appearance: VContinuousSpinnerAppearance = .init()
@@ -218,4 +221,24 @@ public struct VLoadingStretchedButtonAppearance: Sendable {
     // MARK: State Opacities
     /// Model that contains opacities for component states.
     public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
+    
+    // MARK: Spinner Placement
+    /// Spinner placement.
+    public enum SpinnerPlacement: Int, Sendable, CaseIterable {
+        // MARK: Cases
+        /// Leading.
+        case leading
+        
+        /// Center.
+        ///
+        /// Center placement will hide label.
+        case center
+        
+        /// Trailing
+        case trailing
+        
+        // MARK: Initializers
+        /// Default value.
+        public static var `default`: Self { .trailing }
+    }
 }

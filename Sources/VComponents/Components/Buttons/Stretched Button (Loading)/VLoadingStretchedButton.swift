@@ -133,38 +133,61 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
         HStack(spacing: appearance.labelAndSpinnerSpacing) {
-            spinnerCompensatorView(internalState: internalState)
-
-            Group {
-                switch label {
-                case .title(let title):
-                    titleLabelViewComponent(internalState: internalState, title: title)
-
-                case .icon(let icon):
-                    iconLabelViewComponent(internalState: internalState, icon: icon)
-
-                case .titleAndIcon(let title, let icon):
-                    switch appearance.titleTextAndIconPlacement {
-                    case .titleAndIcon:
-                        HStack(spacing: appearance.titleTextAndIconSpacing) {
-                            titleLabelViewComponent(internalState: internalState, title: title)
-                            iconLabelViewComponent(internalState: internalState, icon: icon)
-                        }
-
-                    case .iconAndTitle:
-                        HStack(spacing: appearance.titleTextAndIconSpacing) {
-                            iconLabelViewComponent(internalState: internalState, icon: icon)
-                            titleLabelViewComponent(internalState: internalState, title: title)
-                        }
-                    }
-
-                case .custom(let builder):
-                    builder(internalState)
+            if internalState == .loading {
+                switch appearance.spinnerPlacement {
+                case .leading: spinnerView(internalState: internalState)
+                case .center: EmptyView()
+                case .trailing: spinnerCompensatorView(internalState: internalState)
                 }
             }
-            .frame(maxWidth: .infinity)
+
+            if
+                internalState == .loading,
+                appearance.spinnerPlacement == .center
+            {
+                ZStack {
+                    spinnerView(internalState: internalState)
+                }
+                .frame(maxWidth: .infinity)
+                
+            } else {
+                Group {
+                    switch label {
+                    case .title(let title):
+                        titleLabelViewComponent(internalState: internalState, title: title)
+
+                    case .icon(let icon):
+                        iconLabelViewComponent(internalState: internalState, icon: icon)
+
+                    case .titleAndIcon(let title, let icon):
+                        switch appearance.titleTextAndIconPlacement {
+                        case .titleAndIcon:
+                            HStack(spacing: appearance.titleTextAndIconSpacing) {
+                                titleLabelViewComponent(internalState: internalState, title: title)
+                                iconLabelViewComponent(internalState: internalState, icon: icon)
+                            }
+
+                        case .iconAndTitle:
+                            HStack(spacing: appearance.titleTextAndIconSpacing) {
+                                iconLabelViewComponent(internalState: internalState, icon: icon)
+                                titleLabelViewComponent(internalState: internalState, title: title)
+                            }
+                        }
+
+                    case .custom(let builder):
+                        builder(internalState)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
             
-            spinnerView(internalState: internalState)
+            if internalState == .loading {
+                switch appearance.spinnerPlacement {
+                case .leading: spinnerCompensatorView(internalState: internalState)
+                case .center: EmptyView()
+                case .trailing: spinnerView(internalState: internalState)
+                }
+            }
         }
         .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)
         .padding(appearance.labelMargins)
@@ -196,23 +219,17 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .frame(size: appearance.iconSize)
     }
     
-    @ViewBuilder 
-    private func spinnerCompensatorView(
-        internalState: VLoadingStretchedButtonInternalState
-    ) -> some View {
-        if internalState == .loading {
-            Spacer()
-                .frame(width: appearance.spinnerAppearance.dimension)
-        }
-    }
-    
-    @ViewBuilder 
     private func spinnerView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
-        if internalState == .loading {
-            VContinuousSpinner(appearance: appearance.spinnerAppearance)
-        }
+        VContinuousSpinner(appearance: appearance.spinnerAppearance)
+    }
+    
+    private func spinnerCompensatorView(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
+        Spacer()
+            .frame(width: appearance.spinnerAppearance.dimension)
     }
     
     private func backgroundView(
@@ -308,6 +325,40 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             )
             .modifier(StretchedButtonFrameModifier())
             .disabled(true)
+        }
+    }
+}
+
+#Preview("Spinner Placements") {
+    @Previewable @State var placement: VLoadingStretchedButtonAppearance.SpinnerPlacement = .leading
+
+    PreviewContainer {
+        VLoadingStretchedButton(
+            appearance: {
+                var appearance: VLoadingStretchedButtonAppearance = .init()
+                appearance.spinnerPlacement = placement
+                return appearance
+            }(),
+            isLoading: true,
+            action: {},
+            title: "Lorem Ipsum"
+        )
+        .modifier(StretchedButtonFrameModifier())
+        .onFirstAppear {
+            Task { @MainActor in
+                try await Task.sleep(for: .seconds(1))
+                
+                while true {
+                    placement = .leading
+                    try await Task.sleep(for: .seconds(1))
+                    
+                    placement = .center
+                    try await Task.sleep(for: .seconds(1))
+                    
+                    placement = .trailing
+                    try await Task.sleep(for: .seconds(1))
+                }
+            }
         }
     }
 }

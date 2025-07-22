@@ -10,6 +10,10 @@ General
 - UI Models are renamed to Appearances
 - `BasicAnimation` is replaced with `Animation` is most components
 
+VLoadingStretchedButton
+
+- `spinnerPlacement` is added, allowing spinner position to be changed
+
 VTextField
 
 - `headerTitleTextMinimumScaleFactor` is added
