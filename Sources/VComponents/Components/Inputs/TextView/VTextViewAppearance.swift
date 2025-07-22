@@ -17,7 +17,7 @@ import VCore
 public struct VTextViewAppearance: Sendable {
     // MARK: Properties - Global
     /// Spacing between header, textview, and footer.
-    public var headerTextViewAndFooterSpacing: CGFloat = 3
+    public var headerAndTextViewAndFooterSpacing: CGFloat = 3
 
     /// Minimum textview height.
     public var minimumHeight: CGFloat = 50

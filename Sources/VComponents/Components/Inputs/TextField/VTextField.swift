@@ -152,7 +152,7 @@ public struct VTextField: View {
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: appearance.headerTextFieldAndFooterSpacing,
+            spacing: appearance.headerAndTextFieldAndFooterSpacing,
         ) {
             headerView
             textField

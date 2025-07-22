@@ -111,7 +111,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         Group {
             switch content {
             case .iconTitleMessage(let icon, let title, let message):
-                HStack(spacing: appearance.iconAndTitleTextMessageTextSpacing) {
+                HStack(spacing: appearance.iconAndTextsSpacing) {
                     iconView(icon: icon)
                     textsView(title: title, message: message)
                 }

@@ -113,7 +113,7 @@ public struct VTextView: View {
     public var body: some View {
         VStack(
             alignment: .leading,
-            spacing: appearance.headerTextViewAndFooterSpacing
+            spacing: appearance.headerAndTextViewAndFooterSpacing
         ) {
             headerView
             inputView

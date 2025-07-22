@@ -9,6 +9,14 @@ General
 - Previously deprecated symbols are removed
 - UI Models are renamed to Appearances
 
+VTextField
+
+- `headerTextFieldAndFooterSpacing` is renamed to `headerAndTextFieldAndFooterSpacing`
+
+VTextView
+
+- `headerTextViewAndFooterSpacing` is renamed to `headerAndTextViewAndFooterSpacing`
+
 VModal
 
 - Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
@@ -28,6 +36,7 @@ VAlert
 VNotification
 
 - Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
+- `iconAndTitleTextMessageTextSpacing` is renamed to `iconAndTextsSpacing`
 
 VToast
 

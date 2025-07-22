@@ -66,7 +66,7 @@ public struct VNotificationAppearance: Sendable {
     public var bodyMargins: Margins = .init(15)
 
     /// Spacing between icon and title/messages texts.
-    public var iconAndTitleTextMessageTextSpacing: CGFloat = 12
+    public var iconAndTextsSpacing: CGFloat = 12
 
     /// Spacing between tile text and message text.
     public var titleTextAndMessageTextSpacing: CGFloat = 2

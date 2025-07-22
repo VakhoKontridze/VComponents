@@ -17,7 +17,7 @@ import VCore
 public struct VTextFieldAppearance: Sendable {
     // MARK: Properties - Global
     /// Spacing between header, textfield, and footer.
-    public var headerTextFieldAndFooterSpacing: CGFloat = 3
+    public var headerAndTextFieldAndFooterSpacing: CGFloat = 3
 
     /// Textfield height.
     public var height: CGFloat = 50
