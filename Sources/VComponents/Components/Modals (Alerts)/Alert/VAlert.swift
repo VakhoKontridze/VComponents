@@ -20,8 +20,7 @@ struct VAlert<Content>: View
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-    
+    @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
@@ -65,7 +64,7 @@ struct VAlert<Content>: View
     // MARK: Body
     var body: some View {
         alertView
-            .getPlatformInterfaceOrientation { newValue in
+            .onChange(of: interfaceOrientation) { (_, newValue) in
                 if
                     appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -74,8 +73,6 @@ struct VAlert<Content>: View
                     UIApplication.shared.sendResignFirstResponderAction()
 #endif
                 }
-
-                interfaceOrientation = newValue
             }
 
             .onReceive(presentationMode.presentPublisher, perform: animateIn)

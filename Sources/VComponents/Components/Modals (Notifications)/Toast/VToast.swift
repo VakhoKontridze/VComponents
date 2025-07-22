@@ -19,9 +19,8 @@ struct VToast: View {
 
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
 
+    @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
@@ -58,8 +57,6 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         toastView
-            .getPlatformInterfaceOrientation { interfaceOrientation = $0 }
-
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
             //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view

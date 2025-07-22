@@ -16,12 +16,11 @@ struct VModal<Content>: View
     // MARK: Properties - Appearance
     private let appearance: VModalAppearance
     
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-    
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
+    @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     
     private var currentWidth: VModalAppearance.Dimension {
@@ -55,7 +54,7 @@ struct VModal<Content>: View
     // MARK: Body
     var body: some View {
         modalView
-            .getPlatformInterfaceOrientation { newValue in
+            .onChange(of: interfaceOrientation) { (_, newValue) in
                 if
                     appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -64,8 +63,6 @@ struct VModal<Content>: View
                     UIApplication.shared.sendResignFirstResponderAction()
 #endif
                 }
-                
-                interfaceOrientation = newValue
             }
         
             .onReceive(presentationMode.presentPublisher, perform: animateIn)

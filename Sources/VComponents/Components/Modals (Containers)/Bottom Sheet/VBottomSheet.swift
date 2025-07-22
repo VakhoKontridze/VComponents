@@ -22,8 +22,7 @@ struct VBottomSheet<Content>: View
     @Environment(\.displayScale) private var displayScale: CGFloat
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
-    @State private var interfaceOrientation: PlatformInterfaceOrientation = .initFromDeviceOrientation()
-    
+    @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets
 
@@ -69,7 +68,7 @@ struct VBottomSheet<Content>: View
     // MARK: Body
     var body: some View {
         bottomSheetView
-            .getPlatformInterfaceOrientation { newValue in
+            .onChange(of: interfaceOrientation) { (_, newValue) in
                 if
                     appearance.dismissesKeyboardWhenInterfaceOrientationChanges,
                     newValue != interfaceOrientation
@@ -78,8 +77,6 @@ struct VBottomSheet<Content>: View
                     UIApplication.shared.sendResignFirstResponderAction()
 #endif
                 }
-                
-                interfaceOrientation = newValue
                 
                 resetHeightFromEnvironmentOrAppearanceChange(from: currentHeightsObject)
             }
