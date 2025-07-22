@@ -25,7 +25,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vNotification(
-    ///                 link: .window(rootID: "notifications", linkID: "some_notification"),
+    ///                 link: .window(rootID: "notifications", linkID: "notification"),
     ///                 isPresented: $isPresented,
     ///                 icon: Image(systemName: "swift"),
     ///                 title: "Lorem Ipsum Dolor Sit Amet",

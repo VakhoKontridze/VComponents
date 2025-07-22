@@ -26,7 +26,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vSideBar(
-    ///                 link: .window(linkID: "some_side_bar"),
+    ///                 link: .window(linkID: "side_bar"),
     ///                 isPresented: $isPresented
     ///             ) {
     ///                 Color.blue
@@ -53,7 +53,7 @@ extension View {
     ///             )
     ///             .getInterfaceOrientation { interfaceOrientation = $0 }
     ///             .vSideBar(
-    ///                 link: .window(linkID: "some_side_bar"),
+    ///                 link: .window(linkID: "side_bar"),
     ///                 appearance: {
     ///                     var appearance: VSideBarAppearance = .leading
     ///

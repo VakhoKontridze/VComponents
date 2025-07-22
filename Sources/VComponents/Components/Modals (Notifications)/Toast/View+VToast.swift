@@ -25,7 +25,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vToast(
-    ///                 link: .window(rootID: "notifications", linkID: "some_toast"),
+    ///                 link: .window(rootID: "notifications", linkID: "toast"),
     ///                 isPresented: $isPresented,
     ///                 text: "Lorem ipsum dolor sit amet"
     ///             )

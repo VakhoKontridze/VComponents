@@ -22,7 +22,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vModal(
-    ///                 link: .window(linkID: "some_modal"),
+    ///                 link: .window(linkID: "modal"),
     ///                 isPresented: $isPresented
     ///             ) {
     ///                 Color.blue
@@ -44,7 +44,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vModal(
-    ///                 link: .window(linkID: "some_modal"),
+    ///                 link: .window(linkID: "modal"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
     ///                 onDismiss: { modalDidAppear = false }

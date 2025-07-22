@@ -24,7 +24,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "some_bottom_sheet"),
+    ///                 link: .window(linkID: "bottom_sheet"),
     ///                 appearance: {
     ///                     var appearance: VBottomSheetAppearance = .init()
     ///                     appearance.autoresizesContent = true // For wrapping content
@@ -65,7 +65,7 @@ extension View {
     ///             )
     ///             .getSafeAreaInsets { safeAreaInsets = $0 }
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "some_bottom_sheet"),
+    ///                 link: .window(linkID: "bottom_sheet"),
     ///                 appearance: {
     ///                     var appearance: VBottomSheetAppearance = .init()
     ///
@@ -115,7 +115,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "some_bottom_sheet"),
+    ///                 link: .window(linkID: "bottom_sheet"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
     ///                 onDismiss: { modalDidAppear = false }

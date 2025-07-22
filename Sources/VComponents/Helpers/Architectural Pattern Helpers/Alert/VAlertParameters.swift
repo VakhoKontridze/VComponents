@@ -27,7 +27,7 @@ import SwiftUI
 ///                 },
 ///                 title: "Present"
 ///             )
-///             .vAlert(link: .window(linkID: "some_alert"), parameters: $parameters)
+///             .vAlert(link: .window(linkID: "alert"), parameters: $parameters)
 ///         }
 ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
 ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level

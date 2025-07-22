@@ -57,7 +57,7 @@ Alternately, you can create `static` instances of Appearances for reusability.
 
 ```swift
 extension VPlainButtonAppearance {
-    static let someAppearance: Self = {
+    static let standard: Self = {
         var appearance: Self = .init()
         
         appearance.titleTextColors = StateColors(
@@ -72,7 +72,7 @@ extension VPlainButtonAppearance {
 
 var body: some View {
     VPlainButton(
-        appearance: .someAppearance,
+        appearance: .standard,
         action: doSomething,
         title: "Lorem Ipsum"
     )

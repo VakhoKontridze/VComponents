@@ -29,7 +29,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vAlert(
-    ///                 link: .window(linkID: "some_alert"),
+    ///                 link: .window(linkID: "alert"),
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
