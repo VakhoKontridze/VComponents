@@ -15,8 +15,6 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextView(
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
@@ -38,8 +36,6 @@ import VCore
 ///                 )
 ///                 return appearance
 ///             }(),
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
@@ -85,10 +81,6 @@ public struct VTextView: View {
         )
     }
 
-    // MARK: Properties - Header & Footer
-    private let headerTitle: String?
-    private let footerTitle: String?
-
     // MARK: Properties - Texts
     private let placeholder: String?
     @Binding private var text: String
@@ -97,32 +89,17 @@ public struct VTextView: View {
     /// Initializes `VTextView` with text.
     public init(
         appearance: VTextViewAppearance = .init(),
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
         placeholder: String? = nil,
         text: Binding<String>
     ) {
         self.appearance = appearance
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
         self.placeholder = placeholder
         self._text = text
     }
 
     // MARK: Body
     public var body: some View {
-        VStack(
-            alignment: .leading,
-            spacing: appearance.headerAndTextViewAndFooterSpacing
-        ) {
-            headerView
-            inputView
-            footerView
-        }
-    }
-
-    private var inputView: some View {
-        textField
+        _textField
             .padding(appearance.textViewContentMargins)
             .frame(
                 minHeight: appearance.minimumHeight,
@@ -133,7 +110,7 @@ public struct VTextView: View {
             .clipShape(.rect(cornerRadius: appearance.cornerRadius))
     }
 
-    private var textField: some View {
+    private var _textField: some View {
         TextField(
             text: $text,
             prompt: placeholder.map {
@@ -185,52 +162,6 @@ public struct VTextView: View {
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
         }
     }
-
-    @ViewBuilder
-    private var headerView: some View {
-        if let headerTitle = headerTitle?.nonEmpty {
-            Text(headerTitle)
-                .multilineTextAlignment(appearance.headerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.headerTitleTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.headerTitleTextMinimumScaleFactor)
-                .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
-                .font(appearance.headerTitleTextFont)
-                .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-
-                .frame(
-                    maxWidth: .infinity,
-                    alignment: Alignment(
-                        horizontal: appearance.headerTitleTextFrameAlignment,
-                        vertical: .center
-                    )
-                )
-
-                .padding(.horizontal, appearance.headerMarginHorizontal)
-        }
-    }
-
-    @ViewBuilder 
-    private var footerView: some View {
-        if let footerTitle = footerTitle?.nonEmpty {
-            Text(footerTitle)
-                .multilineTextAlignment(appearance.footerTitleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.footerTitleTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.footerTitleTextMinimumScaleFactor)
-                .foregroundStyle(appearance.footerTitleTextColors.value(for: internalState))
-                .font(appearance.footerTitleTextFont)
-                .applyIfLet(appearance.footerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-
-                .frame(
-                    maxWidth: .infinity,
-                    alignment: Alignment(
-                        horizontal: appearance.footerTitleTextFrameAlignment,
-                        vertical: .center
-                    )
-                )
-
-                .padding(.horizontal, appearance.footerMarginHorizontal)
-        }
-    }
 }
 
 // MARK: - Preview
@@ -243,8 +174,6 @@ public struct VTextView: View {
 
     PreviewContainer {
         VTextView(
-            headerTitle: "Lorem ipsum dolor sit amet",
-            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             placeholder: "Lorem ipsum",
             text: $text
         )
@@ -282,8 +211,6 @@ private struct StatesContentView: View {
             PreviewRow("Enabled") {
                 VTextView(
                     appearance: appearance,
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )
@@ -297,12 +224,8 @@ private struct StatesContentView: View {
                         mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
                         mappedAppearance.borderColors.enabled = appearance.borderColors.focused
                         mappedAppearance.textColors.enabled = appearance.textColors.focused
-                        mappedAppearance.headerTitleTextColors.enabled = appearance.headerTitleTextColors.focused
-                        mappedAppearance.footerTitleTextColors.enabled = appearance.footerTitleTextColors.focused
                         return mappedAppearance
                     }(),
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )
@@ -312,8 +235,6 @@ private struct StatesContentView: View {
             PreviewRow("Disabled") {
                 VTextView(
                     appearance: appearance,
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )

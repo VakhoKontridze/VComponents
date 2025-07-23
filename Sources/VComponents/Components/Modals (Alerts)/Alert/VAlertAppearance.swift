@@ -248,8 +248,8 @@ public struct VAlertAppearance: Sendable {
     // MARK: Properties - Alert Content - Button - Primary
     /// Primary button background colors.
     public var primaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
-        pressed: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
         disabled: Color(128, 176, 240)
     )
 
@@ -279,7 +279,7 @@ public struct VAlertAppearance: Sendable {
     /// Secondary button background colors.
     public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
+        pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
         disabled: Color.clear
     )
 
@@ -287,7 +287,7 @@ public struct VAlertAppearance: Sendable {
     public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
         enabled: Color.blue,
         pressed: Color.blue,
-        disabled: Color.dynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
     )
 
     var secondaryButtonAppearance: VStretchedButtonAppearance {
@@ -313,7 +313,7 @@ public struct VAlertAppearance: Sendable {
     /// Destructive button background colors.
     public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
         enabled: Color.clear,
-        pressed: Color.dynamic(Color(240, 240, 240), Color(70, 70, 70)),
+        pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
         disabled: Color.clear
     )
 
@@ -321,7 +321,7 @@ public struct VAlertAppearance: Sendable {
     public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
         enabled: Color.red,
         pressed: Color.red,
-        disabled: Color.dynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
+        disabled: Color.platformDynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
     )
 
     var destructiveButtonAppearance: VStretchedButtonAppearance {

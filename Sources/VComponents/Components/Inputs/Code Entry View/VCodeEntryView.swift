@@ -81,7 +81,7 @@ public struct VCodeEntryView: View {
     public var body: some View {
         // `bottomLeading` is required for hiding hidden `TextField` behind first character
         ZStack(alignment: .bottomLeading) {
-            hiddenTextField
+            _textField
             charactersView
         }
         // Detects all gestures on frame and focuses hidden `TextField`
@@ -94,7 +94,7 @@ public struct VCodeEntryView: View {
         .onChange(of: text, initial: true) { processText($1) }
     }
 
-    private var hiddenTextField: some View {
+    private var _textField: some View {
         TextField("", text: $text)
             // Removes all decoration
             .textFieldStyle(.plain)

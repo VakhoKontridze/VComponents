@@ -16,15 +16,11 @@ VLoadingStretchedButton
 
 VTextField
 
-- `headerTitleTextMinimumScaleFactor` is added
-- `footerTitleTextMinimumScaleFactor` is added
-- `headerTextFieldAndFooterSpacing` is renamed to `headerAndTextFieldAndFooterSpacing`
+- Header and footer are removed
 
 VTextView
 
-- `headerTitleTextMinimumScaleFactor` is added
-- `footerTitleTextMinimumScaleFactor` is added
-- `headerTextViewAndFooterSpacing` is renamed to `headerAndTextViewAndFooterSpacing`
+- Header and footer are removed
 
 VDisclosureGroup
 

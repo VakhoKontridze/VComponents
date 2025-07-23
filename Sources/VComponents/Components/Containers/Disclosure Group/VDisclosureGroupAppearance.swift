@@ -250,9 +250,9 @@ extension VDisclosureGroupAppearance {
 #endif
 
         appearance.disclosureButtonAppearance.backgroundColors = VRectangularButtonAppearance.StateColors(
-            enabled: Color.dynamic(Color(230, 230, 230), Color(60, 60, 60)),
-            pressed: Color.dynamic(Color(210, 210, 210), Color(40, 40, 40)),
-            disabled: Color.dynamic(Color(240, 240, 240), Color(40, 40, 40))
+            enabled: Color.platformDynamic(Color(230, 230, 230), Color(60, 60, 60)),
+            pressed: Color.platformDynamic(Color(210, 210, 210), Color(40, 40, 40)),
+            disabled: Color.platformDynamic(Color(240, 240, 240), Color(40, 40, 40))
         )
 
         return appearance

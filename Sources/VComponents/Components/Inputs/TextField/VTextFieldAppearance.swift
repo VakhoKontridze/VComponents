@@ -16,9 +16,6 @@ import VCore
 @available(visionOS, unavailable)
 public struct VTextFieldAppearance: Sendable {
     // MARK: Properties - Global
-    /// Spacing between header, textfield, and footer.
-    public var headerAndTextFieldAndFooterSpacing: CGFloat = 3
-
     /// Textfield height.
     public var height: CGFloat = 50
 
@@ -47,9 +44,9 @@ public struct VTextFieldAppearance: Sendable {
     // MARK: Properties - Background
     /// Background colors.
     public var backgroundColors: StateColors = .init(
-        enabled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
-        focused: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
-        disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
+        enabled: Color.platformDynamic(Color(235, 235, 235), Color(60, 60, 60)),
+        focused: Color.platformDynamic(Color(220, 220, 220), Color(80, 80, 80)),
+        disabled: Color.platformDynamic(Color(245, 245, 245), Color(50, 50, 50))
     )
 
     // MARK: Properties - Border
@@ -60,72 +57,6 @@ public struct VTextFieldAppearance: Sendable {
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors
-
-    // MARK: Properties - Header
-    /// Header title text frame alignment.
-    public var headerTitleTextFrameAlignment: HorizontalAlignment = .leading
-
-    /// Header title text line type...2` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var headerTitleTextLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: 1...2
-    )
-    
-    /// Header title text minimum scale factor.
-    public var headerTitleTextMinimumScaleFactor: CGFloat = 1
-
-    /// Header title text colors.
-    public var headerTitleTextColors: StateColors = .init(
-        enabled: Color.secondary,
-        focused: Color.secondary,
-        disabled: Color.secondary.opacity(0.75)
-    )
-
-    /// Header title text font.
-    public var headerTitleTextFont: Font = .footnote
-
-    /// Header title text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
-
-    /// Header footer horizontal margin.
-    public var headerMarginHorizontal: CGFloat = 10
-
-    // MARK: Properties - Footer
-    /// Footer title text frame alignment.
-    public var footerTitleTextFrameAlignment: HorizontalAlignment = .leading
-
-    /// Footer title text line type...5` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var footerTitleTextLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: 1...5
-    )
-    
-    /// Footer title text minimum scale factor.
-    public var footerTitleTextMinimumScaleFactor: CGFloat = 1
-
-    /// Footer title text colors.
-    public var footerTitleTextColors: StateColors = .init(
-        enabled: Color.secondary,
-        focused: Color.secondary,
-        disabled: Color.secondary.opacity(0.75)
-    )
-
-    /// Footer title text font.
-    public var footerTitleTextFont: Font = .footnote
-
-    /// Footer title text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var footerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
-
-    /// Footer horizontal margin.
-    public var footerMarginHorizontal: CGFloat = 10
 
     // MARK: Properties - TextField
     /// Content type.
@@ -177,14 +108,14 @@ public struct VTextFieldAppearance: Sendable {
         appearance.size = CGSize(dimension: 22)
 
         appearance.backgroundColors = VRectangularButtonAppearance.StateColors(
-            enabled: Color.dynamic(Color(170, 170, 170), Color(40, 40, 40)),
-            pressed: Color.dynamic(Color(150, 150, 150), Color(20, 20, 20)),
-            disabled: Color.dynamic(Color(220, 220, 220), Color(40, 40, 40))
+            enabled: Color.platformDynamic(Color(170, 170, 170), Color(40, 40, 40)),
+            pressed: Color.platformDynamic(Color(150, 150, 150), Color(20, 20, 20)),
+            disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
         )
 
         appearance.iconSize = CGSize(dimension: 8)
         appearance.iconColors = VRectangularButtonAppearance.StateColors(
-            Color.dynamic(Color(255, 255, 255), Color(230, 230, 230))
+            Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
         )
 
         appearance.hitBox = EdgeInsets()
@@ -212,7 +143,7 @@ public struct VTextFieldAppearance: Sendable {
 
         appearance.iconSize = CGSize(dimension: 20)
         appearance.iconColors = VPlainButtonAppearance.StateColors(
-            enabled: Color.dynamic(Color(70, 70, 70), Color(240, 240, 240)),
+            enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
             pressed: Color.primary.opacity(0.3),
             disabled: Color.primary.opacity(0.3)
         )
@@ -247,8 +178,8 @@ public struct VTextFieldAppearance: Sendable {
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var searchIconColors: StateColors? = .init(
-        enabled: Color.dynamic(Color(70, 70, 70), Color(240, 240, 240)),
-        focused: Color.dynamic(Color(70, 70, 70), Color(240, 240, 240)),
+        enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
+        focused: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
         disabled: Color.primary.opacity(0.3)
     )
 
@@ -401,39 +332,19 @@ extension VTextFieldAppearance {
 extension VTextFieldAppearance {
     /// Applies green color scheme to `VTextFieldAppearance`.
     mutating public func applySuccessColorScheme() {
-        applyHighlightedColors(
-            border: Color.dynamic(Color(85, 195, 135), Color(45, 150, 75)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(85, 175, 135), Color(85, 195, 135))
-        )
+        borderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
+        borderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
     }
 
     /// Applies yellow color scheme to `VTextFieldAppearance`.
     mutating public func applyWarningColorScheme() {
-        applyHighlightedColors(
-            border: Color.dynamic(Color(255, 190, 35), Color(240, 150, 20)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(235, 170, 35), Color(255, 190, 35))
-        )
+        borderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
+        borderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
     }
 
     /// Applies red color scheme to `VTextFieldAppearance`.
     mutating public func applyErrorColorScheme() {
-        applyHighlightedColors(
-            border: Color.dynamic(Color(235, 110, 105), Color(215, 60, 55)),
-            headerTitleTextAndFooterTitleText: Color.dynamic(Color(215, 110, 105), Color(235, 110, 105))
-        )
-    }
-    
-    private mutating func applyHighlightedColors(
-        border: Color,
-        headerTitleTextAndFooterTitleText: Color
-    ) {
-        borderColors.enabled = border
-        borderColors.focused = border
-        
-        headerTitleTextColors.enabled = headerTitleTextAndFooterTitleText
-        headerTitleTextColors.focused = headerTitleTextAndFooterTitleText
-        
-        footerTitleTextColors.enabled = headerTitleTextAndFooterTitleText
-        footerTitleTextColors.focused = headerTitleTextAndFooterTitleText
+        borderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+        borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
     }
 }

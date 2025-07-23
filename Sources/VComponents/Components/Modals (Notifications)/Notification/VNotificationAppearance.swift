@@ -339,43 +339,30 @@ extension VNotificationAppearance {
 extension VNotificationAppearance {
     /// Applies blue color scheme to `VNotificationAppearance`.
     mutating public func applyInfoColorScheme() {
-        applyHighlightedColors(
-            background: Color.dynamic(Color(0, 150, 230), Color(0, 100, 190)),
-            iconBackground: Color.dynamic(Color(0, 120, 200), Color(0, 75, 15))
-        )
+        backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
+
+        iconBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
     }
 
     /// Applies green color scheme to `VNotificationAppearance`.
     mutating public func applySuccessColorScheme() {
-        applyHighlightedColors(
-            background: Color.dynamic(Color(70, 190, 125), Color(40, 135, 75)),
-            iconBackground: Color.dynamic(Color(40, 160, 95), Color(10, 105, 45))
-        )
+        backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
+
+        iconBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
     }
 
     /// Applies yellow color scheme to `VNotificationAppearance`.
     mutating public func applyWarningColorScheme() {
-        applyHighlightedColors(
-            background: Color.dynamic(Color(255, 205, 95), Color(230, 160, 40)),
-            iconBackground: Color.dynamic(Color(225, 175, 65), Color(200, 130, 10))
-        )
+        backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
+
+        iconBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
     }
 
     /// Applies red color scheme to `VNotificationAppearance`.
     mutating public func applyErrorColorScheme() {
-        applyHighlightedColors(
-            background: Color.dynamic(Color(235, 95, 90), Color(205, 50, 45)),
-            iconBackground:Color.dynamic(Color(205, 65, 60), Color(175, 20, 15))
-        )
-    }
+        backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
 
-    private mutating func applyHighlightedColors(
-        background: Color,
-        iconBackground: Color
-    ) {
-        backgroundColor = background
-
-        iconBackgroundColor = iconBackground
+        iconBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))
     }
 }
 
