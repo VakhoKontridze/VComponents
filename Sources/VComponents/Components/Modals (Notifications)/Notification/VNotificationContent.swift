@@ -13,6 +13,6 @@ import SwiftUI
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 enum VNotificationContent<CustomContent> where CustomContent: View {
-    case imageTitleMessage(image: Image?, title: String?, message: String?)
+    case imageAndTitleAndMessage(image: Image?, title: String?, message: String?)
     case custom(builder: () -> CustomContent)
 }

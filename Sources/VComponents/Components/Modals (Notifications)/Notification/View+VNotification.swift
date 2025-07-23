@@ -66,7 +66,7 @@ extension View {
                 VNotification<Never>(
                     appearance: appearance,
                     isPresented: isPresented,
-                    content: .imageTitleMessage(
+                    content: .imageAndTitleAndMessage(
                         image: image,
                         title: title,
                         message: message
@@ -144,7 +144,7 @@ extension View {
                 VNotification<Never>(
                     appearance: appearance,
                     isPresented: isPresented,
-                    content: .imageTitleMessage(
+                    content: .imageAndTitleAndMessage(
                         image: {
                             if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
                                 image(item)

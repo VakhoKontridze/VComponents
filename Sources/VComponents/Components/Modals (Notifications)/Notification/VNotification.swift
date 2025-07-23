@@ -107,7 +107,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private var contentView: some View {
         Group {
             switch content {
-            case .imageTitleMessage(let image, let title, let message):
+            case .imageAndTitleAndMessage(let image, let title, let message):
                 HStack(spacing: appearance.imageAndTextsSpacing) {
                     imageView(image: image)
                     titleAndMessageView(title: title, message: message)

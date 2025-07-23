@@ -118,7 +118,7 @@ public struct VWrappedToggleButtonAppearance: Sendable {
 
     /// Label spacing.
     ///
-    /// Applicable only if `init` with image and title is used.
+    /// Applicable only if `init` with title and image is used.
     public var labelSpacing: CGFloat = 8
 
     /// Label pressed scale.
