@@ -201,11 +201,11 @@ public struct VTextField: View {
             appearance.searchImage
                 .applyIf(appearance.isSearchImageResizable) { $0.resizable() }
                 .applyIfLet(appearance.searchImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                .frame(size: appearance.searchImageSize)
                 .applyIfLet(appearance.searchImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
                 .applyIfLet(appearance.searchImageOpacities) { $0.opacity($1.value(for: internalState)) }
                 .font(appearance.searchImageFont)
                 .applyIfLet(appearance.searchImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .frame(size: appearance.searchImageSize)
         }
     }
     

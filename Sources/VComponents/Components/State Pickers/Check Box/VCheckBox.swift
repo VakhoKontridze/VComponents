@@ -138,11 +138,11 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     checkmarkImage
                         .applyIf(appearance.isCheckmarkImageResizable) { $0.resizable() }
                         .applyIfLet(appearance.checkmarkImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                        .frame(size: appearance.checkmarkImageSize)
                         .applyIfLet(appearance.checkmarkImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
                         .applyIfLet(appearance.checkmarkImageOpacities) { $0.opacity($1.value(for: internalState)) }
                         .font(appearance.checkmarkImageFont)
                         .applyIfLet(appearance.checkmarkImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                        .frame(size: appearance.checkmarkImageSize)
                 }
             }
             .frame(size: appearance.size)

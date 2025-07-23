@@ -133,11 +133,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                 image
                     .applyIf(appearance.isImageResizable) { $0.resizable() }
                     .applyIfLet(appearance.imageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                    .frame(size: appearance.imageSize)
                     .applyIfLet(appearance.imageColor) { $0.foregroundStyle($1) }
                     .applyIfLet(appearance.imageOpacity) { $0.opacity($1) }
                     .font(appearance.imageFont)
                     .applyIfLet(appearance.imageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                    .frame(size: appearance.imageSize)
             }
         }
     }

@@ -145,11 +145,11 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         labelImage
             .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
             .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .frame(size: appearance.labelImageSize)
             .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
             .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(appearance.labelImageFont)
             .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.labelImageSize)
             .scaleEffect(internalState == .pressed ? appearance.labelImagePressedScale : 1)
             .padding(appearance.labelImageMargins)
     }
@@ -240,11 +240,11 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         image
             .applyIf(appearance.isCaptionImageResizable) { $0.resizable() }
             .applyIfLet(appearance.captionImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .frame(size: appearance.captionImageSize)
             .applyIfLet(appearance.captionImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
             .applyIfLet(appearance.captionImageOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(appearance.captionImageFont)
             .applyIfLet(appearance.captionImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.captionImageSize)
     }
     
     // MARK: Haptics

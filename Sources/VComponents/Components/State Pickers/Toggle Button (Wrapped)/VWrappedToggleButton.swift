@@ -199,11 +199,11 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
         image
             .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
             .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .frame(size: appearance.labelImageSize)
             .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
             .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(appearance.labelImageFont)
             .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.labelImageSize)
     }
 
     private func backgroundView(
