@@ -283,7 +283,7 @@ public struct VToastAppearance: Sendable {
     }
 }
 
-// MARK: - Factory (Highlights)
+// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

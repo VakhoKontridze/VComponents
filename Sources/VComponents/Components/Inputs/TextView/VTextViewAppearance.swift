@@ -106,7 +106,7 @@ public struct VTextViewAppearance: Sendable {
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 }
 
-// MARK: - Factory (Highlights)
+// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

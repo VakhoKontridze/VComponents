@@ -263,7 +263,7 @@ public struct VTextFieldAppearance: Sendable {
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
 }
 
-// MARK: - Factory (Content Types)
+// MARK: - Factory - Content Types
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -288,7 +288,7 @@ extension VTextFieldAppearance {
     }
 }
 
-// MARK: - Factory (Highlights)
+// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -233,7 +233,7 @@ extension VSideBarAppearance {
 
 #endif
 
-// MARK: - Factory (Presentation Edge)
+// MARK: - Factory - Presentation Edge
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -365,7 +365,7 @@ extension VSideBarAppearance {
     }
 }
 
-// MARK: - Factory (Misc)
+// MARK: - Factory - Misc
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

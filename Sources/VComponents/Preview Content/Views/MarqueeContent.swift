@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-// MARK: - Marquee Content (Small)
+// MARK: - Marquee Content
 var marqueeContentSmall: some View {
     HStack {
         Image(systemName: "swift")
@@ -18,7 +18,6 @@ var marqueeContentSmall: some View {
     .drawingGroup()
 }
 
-// MARK: - Marquee Content
 var marqueeContent: some View {
     HStack {
         Image(systemName: "swift")
