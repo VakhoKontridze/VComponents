@@ -136,10 +136,10 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 case .title(let title):
                     Text(title)
                         .lineLimit(1)
-                        .minimumScaleFactor(appearance.headerTitleTextMinimumScaleFactor)
-                        .foregroundStyle(appearance.headerTitleTextColors.value(for: internalState))
-                        .font(appearance.headerTitleTextFont)
-                        .applyIfLet(appearance.headerTitleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                        .minimumScaleFactor(appearance.headerTextMinimumScaleFactor)
+                        .foregroundStyle(appearance.headerTextColors.value(for: internalState))
+                        .font(appearance.headerTextFont)
+                        .applyIfLet(appearance.headerTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
 
                 case .custom(let builder):
                     builder(internalState)
@@ -153,7 +153,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
             VRectangularButton(
                 appearance: appearance.disclosureButtonAppearance,
                 action: expandCollapse,
-                icon: appearance.disclosureButtonIcon
+                image: appearance.disclosureButtonImage
             )
             .rotationEffect(Angle(radians: appearance.disclosureButtonAngles.value(for: internalState)))
         }
@@ -273,7 +273,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.pressed
-                        appearance.disclosureButtonAppearance.iconColors!.enabled = appearance.disclosureButtonAppearance.iconColors!.pressed // Force-unwrap
+                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.pressed // Force-unwrap
                         return appearance
                     }(),
                     state: .constant(.collapsed),
@@ -289,7 +289,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.disabled
-                        appearance.disclosureButtonAppearance.iconColors!.enabled = appearance.disclosureButtonAppearance.iconColors!.disabled // Force-unwrap
+                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.disabled // Force-unwrap
                         return appearance
                     }(),
                     state: .constant(.expanded),

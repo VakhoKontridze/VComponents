@@ -138,19 +138,19 @@ public struct VRadioButtonAppearance: Sendable {
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
-    /// Title text line type...2` lines.
+    /// Label text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextLineType: TextLineType = .multiLine(
+    public var labelTextLineType: TextLineType = .multiLine(
         alignment: .leading,
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor.
-    public var titleTextMinimumScaleFactor: CGFloat = 1
+    /// Label text minimum scale factor.
+    public var labelTextMinimumScaleFactor: CGFloat = 1
 
-    /// Title text colors.
-    public var titleTextColors: StateColors = {
+    /// Label text colors.
+    public var labelTextColors: StateColors = {
 #if os(iOS)
         StateColors(
             off: Color.primary,
@@ -172,8 +172,8 @@ public struct VRadioButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Title text font.
-    public var titleTextFont: Font = {
+    /// Label text font.
+    public var labelTextFont: Font = {
 #if os(iOS)
         Font.subheadline
 #elseif os(macOS)
@@ -183,10 +183,10 @@ public struct VRadioButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type.
+    /// Label text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Hit Box
     /// Radio button hit box.

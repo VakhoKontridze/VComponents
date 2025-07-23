@@ -1,5 +1,5 @@
 //
-//  TitleAndIconPlacement.swift
+//  TextAndImagePlacement.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 13.11.23.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-// MARK: - Title and Icon Placement
-/// Title and icon placement.
-public enum TitleAndIconPlacement: Int, Sendable, CaseIterable {
-    /// Title and icon.
-    case titleAndIcon
+// MARK: - Text and Image Placement
+/// Text and image placement.
+public enum TextAndImagePlacement: Int, Sendable, CaseIterable {
+    /// text and image.
+    case textAndImage
 
-    /// Icon and titile.
-    case iconAndTitle
+    /// Image and text.
+    case imageAndText
 }

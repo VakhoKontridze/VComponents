@@ -19,22 +19,21 @@ public struct VDynamicPagerTabViewAppearance: Sendable {
     /// Spacing between tab bar and tab view.
     public var tabBarAndTabViewSpacing: CGFloat = 0
 
-    // MARK: Properties - Header
-    /// Header background color.
-    public var headerBackgroundColor: Color = {
-#if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
-#else
-        fatalError() // Not supported
-#endif
-    }()
-
     // MARK: Properties - Tab Bar
     /// Tab bar alignment for tab items.
     public var tabBarAlignment: VerticalAlignment = .top
 
     /// Tab bar horizontal margin.
     public var tabBarMarginHorizontal: CGFloat = 5
+    
+    /// Tab bar background color.
+    public var tabBarBackgroundColor: Color = {
+#if os(iOS)
+        Color(uiColor: UIColor.systemBackground)
+#else
+        fatalError() // Not supported
+#endif
+    }()
     
     /// Indicates if tab bar scrolling is enabled.
     public var isTabBarScrollingEnabled: Bool = true

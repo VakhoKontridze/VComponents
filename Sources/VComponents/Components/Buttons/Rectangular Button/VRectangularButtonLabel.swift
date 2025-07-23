@@ -12,6 +12,6 @@ import SwiftUI
 @available(visionOS, unavailable)
 enum VRectangularButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
-    case icon(icon: Image)
+    case image(image: Image)
     case custom(builder: (VRectangularButtonInternalState) -> CustomLabel)
 }

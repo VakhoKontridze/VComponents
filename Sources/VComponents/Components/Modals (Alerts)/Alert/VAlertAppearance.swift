@@ -142,10 +142,10 @@ public struct VAlertAppearance: Sendable {
     )
 
     // MARK: Properties - Alert Content - Message
-    /// Message title text frame alignment.
+    /// Message text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .center
 
-    /// Message line type...5` lines.
+    /// Message text line type...5` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var messageTextLineType: TextLineType = .multiLine(
@@ -207,8 +207,8 @@ public struct VAlertAppearance: Sendable {
 #endif
     }()
 
-    /// Button title text font.
-    public var buttonTitleTextFont: Font = {
+    /// Button text font.
+    public var buttonTextFont: Font = {
 #if os(iOS)
         Font.callout.weight(.semibold)
 #elseif os(macOS)
@@ -253,8 +253,8 @@ public struct VAlertAppearance: Sendable {
         disabled: Color(128, 176, 240)
     )
 
-    /// Primary button title text colors.
-    public var primaryButtonTitleTextColors: ButtonStateColors = .init(Color.white)
+    /// Primary button text colors.
+    public var primaryButtonTextColors: ButtonStateColors = .init(Color.white)
 
     var primaryButtonAppearance: VStretchedButtonAppearance {
         var appearance: VStretchedButtonAppearance = .init()
@@ -264,9 +264,9 @@ public struct VAlertAppearance: Sendable {
 
         appearance.backgroundColors = primaryButtonBackgroundColors
 
-        appearance.titleTextColors = primaryButtonTitleTextColors
-        appearance.titleTextFont = buttonTitleTextFont
-        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+        appearance.labelTextColors = primaryButtonTextColors
+        appearance.labelTextFont = buttonTextFont
+        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         appearance.haptic = buttonHaptic
@@ -283,8 +283,8 @@ public struct VAlertAppearance: Sendable {
         disabled: Color.clear
     )
 
-    /// Secondary button title text colors.
-    public var secondaryButtonTitleTextColors: ButtonStateColors = .init(
+    /// Secondary button text colors.
+    public var secondaryButtonTextColors: ButtonStateColors = .init(
         enabled: Color.blue,
         pressed: Color.blue,
         disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
@@ -298,9 +298,9 @@ public struct VAlertAppearance: Sendable {
 
         appearance.backgroundColors = secondaryButtonBackgroundColors
 
-        appearance.titleTextColors = secondaryButtonTitleTextColors
-        appearance.titleTextFont = buttonTitleTextFont
-        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+        appearance.labelTextColors = secondaryButtonTextColors
+        appearance.labelTextFont = buttonTextFont
+        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         appearance.haptic = buttonHaptic
@@ -317,8 +317,8 @@ public struct VAlertAppearance: Sendable {
         disabled: Color.clear
     )
 
-    /// Destructive button title text colors.
-    public var destructiveButtonTitleTextColors: ButtonStateColors = .init(
+    /// Destructive button text colors.
+    public var destructiveButtonTextColors: ButtonStateColors = .init(
         enabled: Color.red,
         pressed: Color.red,
         disabled: Color.platformDynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
@@ -332,9 +332,9 @@ public struct VAlertAppearance: Sendable {
 
         appearance.backgroundColors = destructiveButtonBackgroundColors
 
-        appearance.titleTextColors = destructiveButtonTitleTextColors
-        appearance.titleTextFont = buttonTitleTextFont
-        appearance.titleTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
+        appearance.labelTextColors = destructiveButtonTextColors
+        appearance.labelTextFont = buttonTextFont
+        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
         appearance.haptic = buttonHaptic

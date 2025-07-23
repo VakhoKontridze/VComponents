@@ -115,8 +115,8 @@ struct VAlert<Content>: View
     private var alertContentView: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
-                titleView
-                messageView
+                titleText
+                messageText
                 contentView
             }
             .padding(appearance.titleTextAndMessageTextAndContentMargins)
@@ -128,7 +128,7 @@ struct VAlert<Content>: View
     }
 
     @ViewBuilder
-    private var titleView: some View {
+    private var titleText: some View {
         if let title = title?.nonEmpty {
             Text(title)
                 .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
@@ -152,7 +152,7 @@ struct VAlert<Content>: View
     }
     
     @ViewBuilder
-    private var messageView: some View {
+    private var messageText: some View {
         if let message = message?.nonEmpty {
             Text(message)
                 .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
@@ -541,13 +541,13 @@ struct VAlert<Content>: View
                     var appearance: VAlertAppearance = .init()
 
                     appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.pressed
-                    appearance.primaryButtonTitleTextColors.enabled = appearance.primaryButtonTitleTextColors.pressed
+                    appearance.primaryButtonTextColors.enabled = appearance.primaryButtonTextColors.pressed
 
                     appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.pressed
-                    appearance.secondaryButtonTitleTextColors.enabled = appearance.secondaryButtonTitleTextColors.pressed
+                    appearance.secondaryButtonTextColors.enabled = appearance.secondaryButtonTextColors.pressed
 
                     appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.pressed
-                    appearance.destructiveButtonTitleTextColors.enabled = appearance.destructiveButtonTitleTextColors.pressed
+                    appearance.destructiveButtonTextColors.enabled = appearance.destructiveButtonTextColors.pressed
 
                     return appearance
                 }(),
@@ -575,13 +575,13 @@ struct VAlert<Content>: View
                     var appearance: VAlertAppearance = .init()
 
                     appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.disabled
-                    appearance.primaryButtonTitleTextColors.enabled = appearance.primaryButtonTitleTextColors.disabled
+                    appearance.primaryButtonTextColors.enabled = appearance.primaryButtonTextColors.disabled
 
                     appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.disabled
-                    appearance.secondaryButtonTitleTextColors.enabled = appearance.secondaryButtonTitleTextColors.disabled
+                    appearance.secondaryButtonTextColors.enabled = appearance.secondaryButtonTextColors.disabled
 
                     appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.disabled
-                    appearance.destructiveButtonTitleTextColors.enabled = appearance.destructiveButtonTitleTextColors.disabled
+                    appearance.destructiveButtonTextColors.enabled = appearance.destructiveButtonTextColors.disabled
 
                     return appearance
                 }(),

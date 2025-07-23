@@ -196,7 +196,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     private var tabBar: some View {
         _tabBarAndTabIndicatorStripView
-            .background(appearance.headerBackgroundColor)
+            .background(appearance.tabBarBackgroundColor)
     }
 
     private var _tabBarAndTabIndicatorStripView: some View {

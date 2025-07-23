@@ -102,12 +102,12 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 labeledCheckBoxView {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
-                            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-                            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
-                            .font(appearance.titleTextFont)
-                            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .multilineTextAlignment(appearance.labelTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: appearance.labelTextLineType.textLineLimitType)
+                            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
+                            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
+                            .font(appearance.labelTextFont)
+                            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     }
                     .blocksHitTesting(!appearance.labelIsClickable)
                 }
@@ -134,15 +134,15 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                         .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 }
 
-                if let checkmarkIcon: Image = checkmarkIcon(internalState: internalState) {
-                    checkmarkIcon
-                        .applyIf(appearance.isCheckmarkIconResizable) { $0.resizable() }
-                        .applyIfLet(appearance.checkmarkIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                        .applyIfLet(appearance.checkmarkIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-                        .applyIfLet(appearance.checkmarkIconOpacities) { $0.opacity($1.value(for: internalState)) }
-                        .font(appearance.checkmarkIconFont)
-                        .applyIfLet(appearance.checkmarkIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                        .frame(size: appearance.checkmarkIconSize)
+                if let checkmarkImage: Image = checkmarkImage(internalState: internalState) {
+                    checkmarkImage
+                        .applyIf(appearance.isCheckmarkImageResizable) { $0.resizable() }
+                        .applyIfLet(appearance.checkmarkImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                        .applyIfLet(appearance.checkmarkImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                        .applyIfLet(appearance.checkmarkImageOpacities) { $0.opacity($1.value(for: internalState)) }
+                        .font(appearance.checkmarkImageFont)
+                        .applyIfLet(appearance.checkmarkImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                        .frame(size: appearance.checkmarkImageSize)
                 }
             }
             .frame(size: appearance.size)
@@ -186,14 +186,14 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         )
     }
 
-    // MARK: Checkmark Icon
-    private func checkmarkIcon(
+    // MARK: Checkmark Image
+    private func checkmarkImage(
         internalState: VCheckBoxInternalState
     ) -> Image? {
         switch internalState {
         case .off, .pressedOff: nil
-        case .on, .pressedOn: appearance.checkmarkIconOn
-        case .indeterminate, .pressedIndeterminate: appearance.checkmarkIconIndeterminate
+        case .on, .pressedOn: appearance.checkmarkImageOn
+        case .indeterminate, .pressedIndeterminate: appearance.checkmarkImageIndeterminate
         case .disabled: nil
         }
     }
@@ -237,8 +237,8 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.off = appearance.fillColors.pressedOff
                     appearance.borderColors.off = appearance.borderColors.pressedOff
-                    appearance.checkmarkIconColors!.off = appearance.checkmarkIconColors!.pressedOff // Force-unwrap
-                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    appearance.checkmarkImageColors!.off = appearance.checkmarkImageColors!.pressedOff // Force-unwrap
+                    appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -259,8 +259,8 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.on = appearance.fillColors.pressedOn
                     appearance.borderColors.on = appearance.borderColors.pressedOn
-                    appearance.checkmarkIconColors!.on = appearance.checkmarkIconColors!.pressedOn // Force-unwrap
-                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    appearance.checkmarkImageColors!.on = appearance.checkmarkImageColors!.pressedOn // Force-unwrap
+                    appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
                     return appearance
                 }(),
                 state: .constant(.on),
@@ -281,8 +281,8 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.indeterminate = appearance.fillColors.pressedIndeterminate
                     appearance.borderColors.indeterminate = appearance.borderColors.pressedIndeterminate
-                    appearance.checkmarkIconColors!.indeterminate = appearance.checkmarkIconColors!.pressedIndeterminate // Force-unwrap
-                    appearance.titleTextColors.indeterminate = appearance.titleTextColors.pressedIndeterminate
+                    appearance.checkmarkImageColors!.indeterminate = appearance.checkmarkImageColors!.pressedIndeterminate // Force-unwrap
+                    appearance.labelTextColors.indeterminate = appearance.labelTextColors.pressedIndeterminate
                     return appearance
                 }(),
                 state: .constant(.indeterminate),

@@ -25,7 +25,7 @@ import VCore
 ///         Task { @MainActor in
 ///             value += .random(in: -10...10)
 ///             try await Task.sleep(for: .seconds(1))
-///             
+///
 ///             changeValue()
 ///         }
 ///     }
@@ -47,7 +47,7 @@ import VCore
 ///         }
 ///         .onFirstAppear(perform: changeValue)
 ///     }
-///        
+///
 public struct VRollingCounter: View {
     // MARK: Properties - Appearance
     private let appearance: VRollingCounterAppearance

@@ -75,19 +75,19 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     /// Rectangle border colors.
     public var rectangleBorderColors: StateColors = .clearColors
 
-    // MARK: Properties - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon.
+    // MARK: Properties - Label - Image
+    /// Indicates if label image is resizable.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var isIconResizable: Bool = true
+    public var isLabelImageResizable: Bool = true
 
-    /// Icon content mode.
+    /// Label image content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconContentMode: ContentMode? = .fit
+    public var labelImageContentMode: ContentMode? = .fit
 
-    /// Icon size.
-    public var iconSize: CGSize? = {
+    /// Label image size.
+    public var labelImageSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 24)
 #elseif os(watchOS)
@@ -97,33 +97,33 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Icon colors.
+    /// Label image colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconColors: StateColors? = .init(
+    public var labelImageColors: StateColors? = .init(
         enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
         pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
         disabled: Color(128, 176, 240, 0.5)
     )
 
-    /// Icon opacities.
+    /// Label image opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconOpacities: StateOpacities?
+    public var labelImageOpacities: StateOpacities?
 
-    /// Icon font.`
+    /// Label image font.
     ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
-    public var iconFont: Font?
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isLabelImageResizable` should be set to `false`, and `labelImageSize` should be set to `nil`.
+    public var labelImageFont: Font?
 
-    /// Icon `DynamicTypeSize` type.
+    /// Label image `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
+    public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
 
-    /// Icon pressed scale.
-    public var iconPressedScale: CGFloat = {
+    /// Label image pressed scale.
+    public var labelImagePressedScale: CGFloat = {
 #if os(iOS)
         1
 #elseif os(watchOS)
@@ -133,23 +133,23 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Icon margins.
-    public var iconMargins: EdgeInsets = .init(3)
+    /// Label image margins.
+    public var labelImageMargins: EdgeInsets = .init(3)
 
     // MARK: Properties - Caption
     /// Maximum caption width.
     public var captionWidthMax: CGFloat = 100
 
-    /// Caption text frame alignment.
+    /// Caption frame alignment.
     public var captionFrameAlignment: HorizontalAlignment = .center
 
-    /// Title caption text and icon caption placement.
-    public var titleCaptionTextAndIconCaptionPlacement: TitleAndIconPlacement = .iconAndTitle
+    /// Caption text and caption image placement.
+    public var captionTextAndCaptionImagePlacement: TextAndImagePlacement = .imageAndText
 
-    /// Spacing between title caption text and icon caption.
+    /// Caption spacing.
     ///
-    /// Applicable only if `init` with icon and title is used.
-    public var titleCaptionTextAndIconCaptionSpacing: CGFloat = 8
+    /// Applicable only if `init` with image and title is used.
+    public var captionSpacing: CGFloat = 8
 
     /// Caption pressed scale.
     public var captionPressedScale: CGFloat = {
@@ -161,59 +161,12 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
         fatalError() // Not supported
 #endif
     }()
-
-    // MARK: Properties - Caption - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon caption.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isIconCaptionResizable: Bool = true
-
-    /// Icon caption content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var iconCaptionContentMode: ContentMode? = .fit
-
-    /// Icon caption size.
-    public var iconCaptionSize: CGSize? = {
-#if os(iOS)
-        CGSize(dimension: 16)
-#elseif os(watchOS)
-        CGSize(dimension: 18)
-#else
-        fatalError() // Not supported
-#endif
-    }()
-
-    /// Icon caption colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var iconCaptionColors: StateColors? = .init(
-        enabled: Color.primary,
-        pressed: Color.primary.opacity(0.3),
-        disabled: Color.primary.opacity(0.3)
-    )
-
-    /// Icon caption opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var iconCaptionOpacities: StateOpacities?
-
-    /// Icon caption font.`
-    ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isIconCaptionResizable` should be set to `false`, and `iconCaptionSize` should be set to `nil`.
-    public var iconCaptionFont: Font?
-
-    /// Icon caption `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var iconCaptionDynamicTypeSizeType: DynamicTypeSizeType?
-
+    
     // MARK: Properties - Caption - Text
-    /// Title caption text line type.
+    /// Caption text line type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleCaptionTextLineType: TextLineType = {
+    public var captionTextLineType: TextLineType = {
 #if os(iOS)
         .multiLine(
             alignment: .center,
@@ -226,18 +179,18 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
     
-    /// Title caption text minimum scale factor.
-    public var titleCaptionTextMinimumScaleFactor: CGFloat = 0.75
+    /// Caption text minimum scale factor.
+    public var captionTextMinimumScaleFactor: CGFloat = 0.75
 
-    /// Title caption text colors.
-    public var titleCaptionTextColors: StateColors = .init(
+    /// Caption text colors.
+    public var captionTextColors: StateColors = .init(
         enabled: Color.primary,
         pressed: Color.primary.opacity(0.3),
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Title caption text font.
-    public var titleCaptionTextFont: Font = {
+    /// Caption text font.
+    public var captionTextFont: Font = {
 #if os(iOS)
         Font.subheadline
 #elseif os(watchOS)
@@ -247,10 +200,57 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Title caption text `DynamicTypeSize` type.
+    /// Caption text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleCaptionTextDynamicTypeSizeType: DynamicTypeSizeType?
+    public var captionTextDynamicTypeSizeType: DynamicTypeSizeType?
+
+    // MARK: Properties - Caption - Image
+    /// Indicates if caption image is resizable.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var isCaptionImageResizable: Bool = true
+
+    /// Caption image content mode.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var captionImageContentMode: ContentMode? = .fit
+
+    /// Caption image size.
+    public var captionImageSize: CGSize? = {
+#if os(iOS)
+        CGSize(dimension: 16)
+#elseif os(watchOS)
+        CGSize(dimension: 18)
+#else
+        fatalError() // Not supported
+#endif
+    }()
+
+    /// Caption image colors.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var captionImageColors: StateColors? = .init(
+        enabled: Color.primary,
+        pressed: Color.primary.opacity(0.3),
+        disabled: Color.primary.opacity(0.3)
+    )
+
+    /// Caption image opacities.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var captionImageOpacities: StateOpacities?
+
+    /// Caption image font.
+    ///
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isCaptionImageResizable` should be set to `false`, and `captionImageSize` should be set to `nil`.
+    public var captionImageFont: Font?
+
+    /// Caption image `DynamicTypeSize` type.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var captionImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.

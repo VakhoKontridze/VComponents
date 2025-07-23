@@ -13,7 +13,7 @@ import SwiftUI
 @available(visionOS, unavailable)
 enum VStretchedToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
-    case icon(icon: Image)
-    case titleAndIcon(title: String, icon: Image)
+    case image(image: Image)
+    case titleAndImage(title: String, image: Image)
     case custom(builder: (VStretchedToggleButtonInternalState) -> CustomLabel)
 }

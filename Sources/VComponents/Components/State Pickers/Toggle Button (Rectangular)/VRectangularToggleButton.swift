@@ -16,7 +16,7 @@ import VCore
 ///     var body: some View {
 ///         VRectangularToggleButton(
 ///             state: $state,
-///             icon: Image(systemName: "swift")
+///             image: Image(systemName: "swift")
 ///         )
 ///     }
 ///
@@ -27,7 +27,7 @@ import VCore
 ///     var body: some View {
 ///         VRectangularToggleButton(
 ///             state: Binding(isOn: $isOn),
-///             icon: Image(systemName: "swift")
+///             image: Image(systemName: "swift")
 ///         )
 ///     }
 ///
@@ -41,7 +41,7 @@ import VCore
 ///                 get: { state },
 ///                 set: { if $0 == .on { state = $0 } }
 ///             ),
-///             icon: Image(systemName: "swift")
+///             image: Image(systemName: "swift")
 ///         )
 ///     }
 ///
@@ -81,17 +81,17 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         self.label = .title(title: title)
     }
 
-    /// Initializes `VRectangularToggleButton` with state and icon.
+    /// Initializes `VRectangularToggleButton` with state and image.
     public init(
         appearance: VRectangularToggleButtonAppearance = .init(),
         state: Binding<VRectangularToggleButtonState>,
-        icon: Image
+        image: Image
     )
         where CustomLabel == Never
     {
         self.appearance = appearance
         self._state = state
-        self.label = .icon(icon: icon)
+        self.label = .image(image: image)
     }
 
     /// Initializes `VRectangularToggleButton` with state and custom label.
@@ -138,10 +138,10 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         Group {
             switch label {
             case .title(let title):
-                titleLabelViewComponent(internalState: internalState, title: title)
+                labelTextElement(internalState: internalState, title: title)
 
-            case .icon(let icon):
-                iconLabelViewComponent(internalState: internalState, icon: icon)
+            case .image(let image):
+                labelImageElement(internalState: internalState, image: image)
 
             case .custom(let builder):
                 builder(internalState)
@@ -151,30 +151,30 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         .padding(appearance.labelMargins)
     }
 
-    private func titleLabelViewComponent(
+    private func labelTextElement(
         internalState: VRectangularToggleButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
-            .font(appearance.titleTextFont)
-            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
+            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
+            .font(appearance.labelTextFont)
+            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
 
-    private func iconLabelViewComponent(
+    private func labelImageElement(
         internalState: VRectangularToggleButtonInternalState,
-        icon: Image
+        image: Image
     ) -> some View {
-        icon
-            .applyIf(appearance.isIconResizable) { $0.resizable() }
-            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.iconFont)
-            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.iconSize)
+        image
+            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
+            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.labelImageFont)
+            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.labelImageSize)
     }
 
     private func backgroundView(
@@ -244,7 +244,7 @@ extension VRectangularToggleButtonInternalState {
 
         VRectangularToggleButton(
             state: $state,
-            icon: Image(systemName: "swift")
+            image: Image(systemName: "swift")
         )
     }
 }
@@ -254,7 +254,7 @@ extension VRectangularToggleButtonInternalState {
         PreviewRow("Off") {
             VRectangularToggleButton(
                 state: .constant(.off),
-                icon: Image(systemName: "swift")
+                image: Image(systemName: "swift")
             )
         }
 
@@ -263,18 +263,18 @@ extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.iconColors!.off = appearance.iconColors!.pressedOff // Force-unwrap
+                    appearance.labelImageColors!.off = appearance.labelImageColors!.pressedOff // Force-unwrap
                     return appearance
                 }(),
                 state: .constant(.off),
-                icon: Image(systemName: "swift")
+                image: Image(systemName: "swift")
             )
         }
 
         PreviewRow("On") {
             VRectangularToggleButton(
                 state: .constant(.on),
-                icon: Image(systemName: "swift")
+                image: Image(systemName: "swift")
             )
         }
 
@@ -283,18 +283,18 @@ extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.iconColors!.on = appearance.iconColors!.pressedOn // Force-unwrap
+                    appearance.labelImageColors!.on = appearance.labelImageColors!.pressedOn // Force-unwrap
                     return appearance
                 }(),
                 state: .constant(.on),
-                icon: Image(systemName: "swift")
+                image: Image(systemName: "swift")
             )
         }
 
         PreviewRow("Disabled") {
             VRectangularToggleButton(
                 state: .constant(.off),
-                icon: Image(systemName: "swift")
+                image: Image(systemName: "swift")
             )
             .disabled(true)
         }

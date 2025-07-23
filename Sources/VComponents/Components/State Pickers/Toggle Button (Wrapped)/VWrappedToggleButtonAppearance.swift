@@ -108,15 +108,18 @@ public struct VWrappedToggleButtonAppearance: Sendable {
 
     // MARK: Properties - Label
     /// Label margins.
-    public var labelMargins: EdgeInsets = .init(horizontal: 15, vertical: 3)
+    public var labelMargins: EdgeInsets = .init(
+        horizontal: 15,
+        vertical: 3
+    )
 
-    /// Title text and icon placement.
-    public var titleTextAndIconPlacement: TitleAndIconPlacement = .iconAndTitle
+    /// Label text and label image placement.
+    public var labelTextAndLabelImagePlacement: TextAndImagePlacement = .imageAndText
 
-    /// Spacing between title text and icon.
+    /// Label spacing.
     ///
-    /// Applicable only if `init` with icon and title is used.
-    public var titleTextAndIconSpacing: CGFloat = 8
+    /// Applicable only if `init` with image and title is used.
+    public var labelSpacing: CGFloat = 8
 
     /// Label pressed scale.
     public var labelPressedScale: CGFloat = {
@@ -132,11 +135,11 @@ public struct VWrappedToggleButtonAppearance: Sendable {
     }()
 
     // MARK: Properties - Label - Text
-    /// Title text minimum scale factor.
-    public var titleTextMinimumScaleFactor: CGFloat = 0.75
+    /// Label text minimum scale factor.
+    public var labelTextMinimumScaleFactor: CGFloat = 0.75
 
-    /// Title text colors.
-    public var titleTextColors: StateColors = .init(
+    /// Label text colors.
+    public var labelTextColors: StateColors = .init(
         off: Color.primary,
         on: Color.white,
         pressedOff: Color.primary,
@@ -144,8 +147,8 @@ public struct VWrappedToggleButtonAppearance: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Title text font.
-    public var titleTextFont: Font = {
+    /// Label text font.
+    public var labelTextFont: Font = {
 #if os(iOS)
         Font.subheadline.weight(.semibold)
 #elseif os(macOS)
@@ -157,24 +160,24 @@ public struct VWrappedToggleButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type.
+    /// Label text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    // MARK: Properties - Label - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon.
+    // MARK: Properties - Label - Image
+    /// Indicates if label image is resizable.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var isIconResizable: Bool = true
+    public var isLabelImageResizable: Bool = true
 
-    /// Icon content mode.
+    /// Label image content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconContentMode: ContentMode? = .fit
+    public var labelImageContentMode: ContentMode? = .fit
 
-    /// Icon size.
-    public var iconSize: CGSize? = {
+    /// Label image size.
+    public var labelImageSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 16)
 #elseif os(macOS)
@@ -186,10 +189,10 @@ public struct VWrappedToggleButtonAppearance: Sendable {
 #endif
     }()
 
-    /// Icon colors.
+    /// Label image colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconColors: StateColors? = .init(
+    public var labelImageColors: StateColors? = .init(
         off: Color.primary,
         on: Color.white,
         pressedOff: Color.primary,
@@ -197,21 +200,21 @@ public struct VWrappedToggleButtonAppearance: Sendable {
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Icon opacities.
+    /// Label image opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconOpacities: StateOpacities?
+    public var labelImageOpacities: StateOpacities?
 
-    /// Icon font.`
+    /// Label image font.
     ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
-    public var iconFont: Font?
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isLabelImageResizable` should be set to `false`, and `labelImageSize` should be set to `nil`.
+    public var labelImageFont: Font?
 
-    /// Icon `DynamicTypeSize` type.
+    /// Label image `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
+    public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Hit Box
     /// Hit box.

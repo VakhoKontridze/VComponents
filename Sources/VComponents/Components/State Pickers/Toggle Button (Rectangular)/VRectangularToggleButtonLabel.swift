@@ -12,6 +12,6 @@ import SwiftUI
 @available(visionOS, unavailable)
 enum VRectangularToggleButtonLabel<CustomLabel> where CustomLabel: View {
     case title(title: String)
-    case icon(icon: Image)
+    case image(image: Image)
     case custom(builder: (VRectangularToggleButtonInternalState) -> CustomLabel)
 }

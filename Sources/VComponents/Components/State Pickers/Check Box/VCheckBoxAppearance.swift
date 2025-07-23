@@ -114,24 +114,24 @@ public struct VCheckBoxAppearance: Sendable {
     )
 
     // MARK: Properties - Checkmark
-    /// Checkmark icon (on).
-    public var checkmarkIconOn: Image = ImageBook.checkmarkOn.renderingMode(.template)
+    /// Checkmark image (on).
+    public var checkmarkImageOn: Image = ImageBook.checkmarkOn.renderingMode(.template)
 
-    /// Checkmark icon (indeterminate).
-    public var checkmarkIconIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
+    /// Checkmark image (indeterminate).
+    public var checkmarkImageIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
 
-    /// Indicates if `resizable(...)` modifier is applied to checkmark icon.
+    /// Indicates if checkmark image is resizable.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var isCheckmarkIconResizable: Bool = true
+    public var isCheckmarkImageResizable: Bool = true
 
-    /// Checkmark icon content mode.
+    /// Checkmark image content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var checkmarkIconContentMode: ContentMode? = .fit
+    public var checkmarkImageContentMode: ContentMode? = .fit
 
-    /// Checkmark icon size.
-    public var checkmarkIconSize: CGSize? = {
+    /// Checkmark image size.
+    public var checkmarkImageSize: CGSize? = {
 #if os(iOS)
         CGSize(dimension: 11)
 #elseif os(macOS)
@@ -141,10 +141,10 @@ public struct VCheckBoxAppearance: Sendable {
 #endif
     }()
 
-    /// Checkmark icon colors.
+    /// Checkmark image colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var checkmarkIconColors: StateColors? = .init(
+    public var checkmarkImageColors: StateColors? = .init(
         off: Color.clear,
         on: Color.white,
         indeterminate: Color.white,
@@ -154,40 +154,40 @@ public struct VCheckBoxAppearance: Sendable {
         disabled: Color.clear
     )
 
-    /// Checkmark icon opacities.
+    /// Checkmark image opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var checkmarkIconOpacities: StateOpacities?
+    public var checkmarkImageOpacities: StateOpacities?
 
-    /// Checkmark icon font.`
+    /// Checkmark image font.
     ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isCheckmarkIconResizable` should be set to `false`, and `checkmarkIconSize` should be set to `nil`.
-    public var checkmarkIconFont: Font?
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isCheckmarkImageResizable` should be set to `false`, and `checkmarkImageSize` should be set to `nil`.
+    public var checkmarkImageFont: Font?
 
-    /// Checkmark icon `DynamicTypeSize` type.
+    /// Checkmark image `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var checkmarkIconDynamicTypeSizeType: DynamicTypeSizeType?
+    public var checkmarkImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label
     /// Indicates if label is clickable.
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
-    /// Title text line type...2` lines.
+    /// Label text line type...2` lines.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextLineType: TextLineType = .multiLine(
-        alignment: .leading, 
+    public var labelTextLineType: TextLineType = .multiLine(
+        alignment: .leading,
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor.
-    public var titleTextMinimumScaleFactor: CGFloat = 1
+    /// Label text minimum scale factor.
+    public var labelTextMinimumScaleFactor: CGFloat = 1
 
-    /// Title text colors.
-    public var titleTextColors: StateColors = {
+    /// Label text colors.
+    public var labelTextColors: StateColors = {
 #if os(iOS)
         StateColors(
             off: Color.primary,
@@ -213,8 +213,8 @@ public struct VCheckBoxAppearance: Sendable {
 #endif
     }()
 
-    /// Title text font.
-    public var titleTextFont: Font = {
+    /// Label text font.
+    public var labelTextFont: Font = {
 #if os(iOS)
         Font.subheadline
 #elseif os(macOS)
@@ -224,10 +224,10 @@ public struct VCheckBoxAppearance: Sendable {
 #endif
     }()
 
-    /// Title text `DynamicTypeSize` type.
+    /// Label text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Hit Box
     /// Checkbox hit box.

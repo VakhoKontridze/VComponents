@@ -19,9 +19,10 @@ public struct VCodeEntryViewAppearance: Sendable {
     /// Code length.
     public var length: Int = 6
 
-    /// Spacing type.`
+    /// Spacing type.
     public var spacingType: SpacingType = .default
-
+    
+    // MARK: Properties - Code Entry
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
@@ -39,6 +40,12 @@ public struct VCodeEntryViewAppearance: Sendable {
     /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization? = .never
 #endif
+    
+    /// Submit button type.
+    public var submitButton: SubmitLabel = .return
+
+    /// Indicates if first responder is resigned when the last character is entered.
+    public var submitsWhenLastCharacterIsEntered: Bool = true
 
     // MARK: Properties - Background
     /// Character background rectangle size.
@@ -91,13 +98,6 @@ public struct VCodeEntryViewAppearance: Sendable {
     ///
     /// Changing this property conditionally will cause view state to be reset.
     public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
-
-    // MARK: Properties - Submit Button
-    /// Submit button type.
-    public var submitButton: SubmitLabel = .return
-
-    /// Indicates if first responder is resigned when the last character is entered.
-    public var submitsWhenLastCharacterIsEntered: Bool = true
 
     // MARK: Initializers
     /// Initializes appearance with default values.

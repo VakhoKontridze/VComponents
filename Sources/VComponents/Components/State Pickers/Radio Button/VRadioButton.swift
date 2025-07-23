@@ -102,12 +102,12 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 labeledRadioButton {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
-                            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-                            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
-                            .font(appearance.titleTextFont)
-                            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .multilineTextAlignment(appearance.labelTextLineType.textAlignment ?? .leading)
+                            .lineLimit(type: appearance.labelTextLineType.textLineLimitType)
+                            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
+                            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
+                            .font(appearance.labelTextFont)
+                            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
                     }
                     .blocksHitTesting(!appearance.labelIsClickable)
                 }
@@ -238,7 +238,7 @@ extension VRadioButtonState {
                     appearance.fillColors.off = appearance.fillColors.pressedOff
                     appearance.borderColors.off = appearance.borderColors.pressedOff
                     appearance.bulletColors.off = appearance.bulletColors.pressedOff
-                    appearance.titleTextColors.off = appearance.titleTextColors.pressedOff
+                    appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -260,7 +260,7 @@ extension VRadioButtonState {
                     appearance.fillColors.on = appearance.fillColors.pressedOn
                     appearance.borderColors.on = appearance.borderColors.pressedOn
                     appearance.bulletColors.on = appearance.bulletColors.pressedOn
-                    appearance.titleTextColors.on = appearance.titleTextColors.pressedOn
+                    appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
                     return appearance
                 }(),
                 state: .constant(.on),

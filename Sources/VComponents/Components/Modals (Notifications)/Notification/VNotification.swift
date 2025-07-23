@@ -107,10 +107,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private var contentView: some View {
         Group {
             switch content {
-            case .iconTitleMessage(let icon, let title, let message):
-                HStack(spacing: appearance.iconAndTextsSpacing) {
-                    iconView(icon: icon)
-                    textsView(title: title, message: message)
+            case .imageTitleMessage(let image, let title, let message):
+                HStack(spacing: appearance.imageAndTextsSpacing) {
+                    imageView(image: image)
+                    titleAndMessageView(title: title, message: message)
                 }
 
             case .custom(let builder):
@@ -121,46 +121,46 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     @ViewBuilder
-    private func iconView(
-        icon: Image?
+    private func imageView(
+        image: Image?
     ) -> some View {
-        if let icon {
+        if let image {
             ZStack {
-                RoundedRectangle(cornerRadius: appearance.iconBackgroundCornerRadius)
-                    .frame(size: appearance.iconBackgroundSize)
-                    .foregroundStyle(appearance.iconBackgroundColor)
+                RoundedRectangle(cornerRadius: appearance.imageBackgroundCornerRadius)
+                    .frame(size: appearance.imageBackgroundSize)
+                    .foregroundStyle(appearance.imageBackgroundColor)
 
-                icon
-                    .applyIf(appearance.isIconResizable) { $0.resizable() }
-                    .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                    .applyIfLet(appearance.iconColor) { $0.foregroundStyle($1) }
-                    .applyIfLet(appearance.iconOpacity) { $0.opacity($1) }
-                    .font(appearance.iconFont)
-                    .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                    .frame(size: appearance.iconSize)
+                image
+                    .applyIf(appearance.isImageResizable) { $0.resizable() }
+                    .applyIfLet(appearance.imageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                    .applyIfLet(appearance.imageColor) { $0.foregroundStyle($1) }
+                    .applyIfLet(appearance.imageOpacity) { $0.opacity($1) }
+                    .font(appearance.imageFont)
+                    .applyIfLet(appearance.imageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .frame(size: appearance.imageSize)
             }
         }
     }
 
-    private func textsView(
+    private func titleAndMessageView(
         title: String?,
         message: String?
     ) -> some View {
         // Space should still be reserved for both title and message, even if they are `nil`
-        _textsView(
+        _titleAndMessageView(
             title: title ?? "A",
             message: message ?? "A"
         )
         .opacity(0)
         .overlay {
-            _textsView(
+            _titleAndMessageView(
                 title: title,
                 message: message
             )
         }
     }
 
-    private func _textsView(
+    private func _titleAndMessageView(
         title: String?,
         message: String?
     ) -> some View {
@@ -336,9 +336,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("Icon & Title & Message") {
+#Preview("Image & Title & Message") {
     ContentView(
-        icon: Image(systemName: "swift"),
+        image: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
     )
@@ -346,23 +346,23 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
 #Preview("Title & Message") {
     ContentView(
-        icon: nil,
+        image: nil,
         title: "Lorem Ipsum Dolor Sit Amet",
         message: "Lorem ipsum dolor sit amet"
     )
 }
 
-#Preview("Icon & Title") {
+#Preview("Image & Title") {
     ContentView(
-        icon: Image(systemName: "swift"),
+        image: Image(systemName: "swift"),
         title: "Lorem Ipsum Dolor Sit Amet",
         message: nil
     )
 }
 
-#Preview("Icon & Message") {
+#Preview("Image & Message") {
     ContentView(
-        icon: Image(systemName: "swift"),
+        image: Image(systemName: "swift"),
         title: nil,
         message: "Lorem ipsum dolor sit amet"
     )
@@ -370,7 +370,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
 #Preview("No Content") {
     ContentView(
-        icon: nil,
+        image: nil,
         title: nil,
         message: nil
     )
@@ -390,7 +390,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     return appearance
                 }(),
                 isPresented: $isPresented,
-                icon: Image(systemName: "swift"),
+                image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
@@ -424,7 +424,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     return appearance
                 }(),
                 isPresented: $isPresented,
-                icon: Image(systemName: "swift"),
+                image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
@@ -467,7 +467,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     return appearance
                 }(),
                 isPresented: $isPresented,
-                icon: Image(systemName: "swift"),
+                image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet"
             )
@@ -505,16 +505,16 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 private struct ContentView: View {
     @State private var isPresented: Bool = true
 
-    private let icon: Image?
+    private let image: Image?
     private let title: String?
     private let message: String?
 
     init(
-        icon: Image?,
+        image: Image?,
         title: String?,
         message: String?
     ) {
-        self.icon = icon
+        self.image = image
         self.title = title
         self.message = message
     }
@@ -530,7 +530,7 @@ private struct ContentView: View {
                         return appearance
                     }(),
                     isPresented: $isPresented,
-                    icon: icon,
+                    image: image,
                     title: title,
                     message: message
                 )

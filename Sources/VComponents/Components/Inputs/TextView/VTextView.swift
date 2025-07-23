@@ -100,7 +100,7 @@ public struct VTextView: View {
     // MARK: Body
     public var body: some View {
         _textField
-            .padding(appearance.textViewContentMargins)
+            .padding(appearance.contentMargins)
             .frame(
                 minHeight: appearance.minimumHeight,
                 alignment: .top

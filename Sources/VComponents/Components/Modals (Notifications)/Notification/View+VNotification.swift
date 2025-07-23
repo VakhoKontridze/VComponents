@@ -27,7 +27,7 @@ extension View {
     ///             .vNotification(
     ///                 link: .window(rootID: "notifications", linkID: "notification"),
     ///                 isPresented: $isPresented,
-    ///                 icon: Image(systemName: "swift"),
+    ///                 image: Image(systemName: "swift"),
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet"
     ///             )
@@ -51,7 +51,7 @@ extension View {
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        icon: Image?,
+        image: Image?,
         title: String?,
         message: String?
     ) -> some View {
@@ -66,8 +66,8 @@ extension View {
                 VNotification<Never>(
                     appearance: appearance,
                     isPresented: isPresented,
-                    content: .iconTitleMessage(
-                        icon: icon,
+                    content: .imageTitleMessage(
+                        image: image,
                         title: title,
                         message: message
                     )
@@ -122,7 +122,7 @@ extension View {
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        icon: @escaping (Item) -> Image?,
+        image: @escaping (Item) -> Image?,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
     ) -> some View {
@@ -144,10 +144,10 @@ extension View {
                 VNotification<Never>(
                     appearance: appearance,
                     isPresented: isPresented,
-                    content: .iconTitleMessage(
-                        icon: {
+                    content: .imageTitleMessage(
+                        image: {
                             if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
-                                icon(item)
+                                image(item)
                             } else {
                                  nil
                             }

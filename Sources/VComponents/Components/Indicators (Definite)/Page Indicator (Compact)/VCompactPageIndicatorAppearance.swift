@@ -34,12 +34,12 @@ public struct VCompactPageIndicatorAppearance: Sendable {
 
     /// Number of visible dots.
     ///
-    /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
+    /// Must be odd and greater than `centerDots`.
     public var visibleDots: Int = 7
 
     /// Number of center dots.
     ///
-    /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
+    /// Must be odd and less than `visibleDots`.
     public var centerDots: Int = 3
 
     /// Number of side dots.

@@ -33,7 +33,7 @@ Preferred:
 let appearance: VPlainButtonAppearance = {
     var appearance: VPlainButtonAppearance = .init()
     
-    appearance.titleTextColors = VPlainButtonAppearance.StateColors(
+    appearance.labelTextColors = VPlainButtonAppearance.StateColors(
         enabled: Color.primary,
         pressed: Color.secondary,
         disabled: Color.secondary
@@ -60,7 +60,7 @@ extension VPlainButtonAppearance {
     static let standard: Self = {
         var appearance: Self = .init()
         
-        appearance.titleTextColors = StateColors(
+        appearance.labelTextColors = StateColors(
             enabled: Color.primary,
             pressed: Color.secondary,
             disabled: Color.secondary

@@ -16,9 +16,19 @@ import VCore
 @available(visionOS, unavailable)
 public struct VTextFieldAppearance: Sendable {
     // MARK: Properties - Global
-    /// Textfield height.
+    /// Height.
     public var height: CGFloat = 50
+    
+    /// Style.
+    public var style: Style = .default
 
+    /// Content horizontal margin.
+    public var contentMarginHorizontal: CGFloat = 15
+
+    /// Content horizontal spacing.
+    public var contentSpacingHorizontal: CGFloat = 10
+    
+    // MARK: Properties - TextField
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
@@ -36,9 +46,12 @@ public struct VTextFieldAppearance: Sendable {
     /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization?
 #endif
+    
+    /// Submit button type.
+    public var submitButton: SubmitLabel = .return
 
     // MARK: Properties - Corners
-    /// Textfield corner radius.
+    /// Corner radius.
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
@@ -57,17 +70,7 @@ public struct VTextFieldAppearance: Sendable {
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors
-
-    // MARK: Properties - TextField
-    /// Content type.
-    public var contentType: ContentType = .default
-
-    /// Textfield content horizontal margin.
-    public var textFieldContentMarginHorizontal: CGFloat = 15
-
-    /// Spacing content horizontal spacing.
-    public var textFieldContentSpacingHorizontal: CGFloat = 10
-
+    
     // MARK: Properties - Text
     /// Text alignment.
     public var textAlignment: TextAlignment = .leading
@@ -98,8 +101,8 @@ public struct VTextFieldAppearance: Sendable {
     /// Indicates if textfield has clear button.
     public var hasClearButton: Bool = true
 
-    /// Clear button icon.
-    public var clearButtonIcon: Image = ImageBook.xMark.renderingMode(.template)
+    /// Clear button image.
+    public var clearButtonImage: Image = ImageBook.xMark.renderingMode(.template)
 
     /// Clear button appearance.
     public var clearButtonAppearance: VRectangularButtonAppearance = {
@@ -113,8 +116,8 @@ public struct VTextFieldAppearance: Sendable {
             disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
         )
 
-        appearance.iconSize = CGSize(dimension: 8)
-        appearance.iconColors = VRectangularButtonAppearance.StateColors(
+        appearance.labelImageSize = CGSize(dimension: 8)
+        appearance.labelImageColors = VRectangularButtonAppearance.StateColors(
             Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
         )
 
@@ -131,18 +134,18 @@ public struct VTextFieldAppearance: Sendable {
     public var clearButtonAppearDisappearAnimation: Animation?
 
     // MARK: Properties - Secure
-    /// Visibility button icon (off).
-    public var visibilityOffButtonIcon: Image = ImageBook.visibilityOff.renderingMode(.template)
+    /// Visibility button image (off).
+    public var visibilityOffButtonImage: Image = ImageBook.visibilityOff.renderingMode(.template)
 
-    /// Visibility button icon (on).
-    public var visibilityOnButtonIcon: Image = ImageBook.visibilityOn.renderingMode(.template)
+    /// Visibility button image (on).
+    public var visibilityOnButtonImage: Image = ImageBook.visibilityOn.renderingMode(.template)
 
     /// Visibility button appearance.
     public var visibilityButtonAppearance: VPlainButtonAppearance = {
         var appearance: VPlainButtonAppearance = .init()
 
-        appearance.iconSize = CGSize(dimension: 20)
-        appearance.iconColors = VPlainButtonAppearance.StateColors(
+        appearance.labelImageSize = CGSize(dimension: 20)
+        appearance.labelImageColors = VPlainButtonAppearance.StateColors(
             enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
             pressed: Color.primary.opacity(0.3),
             disabled: Color.primary.opacity(0.3)
@@ -158,74 +161,70 @@ public struct VTextFieldAppearance: Sendable {
     }()
 
     // MARK: Properties - Search
-    /// Search button icon.
-    public var searchButtonIcon: Image = ImageBook.magnifyGlass.renderingMode(.template)
+    /// Search image.
+    public var searchImage: Image = ImageBook.magnifyGlass.renderingMode(.template)
 
-    /// Indicates if `resizable(...)` modifier is applied to search icon.
+    /// Indicates if search image is resizable.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var isSearchIconResizable: Bool = true
+    public var isSearchImageResizable: Bool = true
 
-    /// Search icon content mode.
+    /// Search image content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var searchIconContentMode: ContentMode? = .fit
+    public var searchImageContentMode: ContentMode? = .fit
 
-    /// Search icon size.
-    public var searchIconSize: CGSize? = .init(dimension: 15)
+    /// Search image size.
+    public var searchImageSize: CGSize? = .init(dimension: 15)
 
-    /// Search icon colors.
+    /// Search image colors.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var searchIconColors: StateColors? = .init(
+    public var searchImageColors: StateColors? = .init(
         enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
         focused: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Search icon opacities.
+    /// Search image opacities.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var searchIconOpacities: StateOpacities?
+    public var searchImageOpacities: StateOpacities?
 
-    /// Search icon font.`
+    /// Search image font.
     ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isSearchIconResizable` should be set to `false`, and `searchIconSize` should be set to `nil`.
-    public var searchIconFont: Font?
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isSearchImageResizable` should be set to `false`, and `searchImageSize` should be set to `nil`.
+    public var searchImageFont: Font?
 
-    /// Search icon `DynamicTypeSize` type.
+    /// Search image `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var searchIconDynamicTypeSizeType: DynamicTypeSizeType?
-
-    // MARK: Properties - Submit Button
-    /// Submit button type.
-    public var submitButton: SubmitLabel = .return
+    public var searchImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Content Type
-    /// Content type.
-    public enum ContentType: Int, Sendable, CaseIterable {
+    // MARK: Style
+    /// Style.
+    public enum Style: Int, Sendable, CaseIterable {
         // MARK: Cases
         /// Standard.
         case standard
 
         /// Secure.
         ///
-        /// Visibility icon is present, and securities, such as copying is enabled.
+        /// Visibility image is present, and securities, such as copying is enabled.
         case secure
 
         /// Search.
         ///
-        /// Magnification icon is present.
+        /// Magnification image is present.
         case search
 
         // MARK: Properties
-        var hasSearchIcon: Bool {
+        var hasSearchImage: Bool {
             switch self {
             case .standard: false
             case .secure: false
@@ -263,26 +262,26 @@ public struct VTextFieldAppearance: Sendable {
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
 }
 
-// MARK: - Factory - Content Types
+// MARK: - Factory - Style
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VTextFieldAppearance {
-    /// `VTextFieldAppearance` with secure content type.
+    /// `VTextFieldAppearance` with secure style.
     public static var secure: Self {
         var appearance: Self = .init()
         
-        appearance.contentType = .secure
+        appearance.style = .secure
         
         return appearance
     }
     
-    /// `VTextFieldAppearance` with search content type.
+    /// `VTextFieldAppearance` with search style.
     public static var search: Self {
         var appearance: Self = .init()
         
-        appearance.contentType = .search
+        appearance.style = .search
         
         return appearance
     }

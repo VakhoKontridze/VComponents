@@ -63,35 +63,35 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         self.label = .title(title: title)
     }
 
-    /// Initializes `VLoadingStretchedButton` with loading state, action, and icon.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, and image.
     public init(
         appearance: VLoadingStretchedButtonAppearance = .init(),
         isLoading: Bool,
         action: @escaping () -> Void,
-        icon: Image
+        image: Image
     )
         where CustomLabel == Never
     {
         self.appearance = appearance
         self.isLoading = isLoading
         self.action = action
-        self.label = .icon(icon: icon)
+        self.label = .image(image: image)
     }
 
-    /// Initializes `VLoadingStretchedButton` with loading state, action, icon, and title.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, title, and image.
     public init(
         appearance: VLoadingStretchedButtonAppearance = .init(),
         isLoading: Bool,
         action: @escaping () -> Void,
         title: String,
-        icon: Image
+        image: Image
     )
         where CustomLabel == Never
     {
         self.appearance = appearance
         self.isLoading = isLoading
         self.action = action
-        self.label = .titleAndIcon(title: title, icon: icon)
+        self.label = .titleAndImage(title: title, image: image)
     }
     
     /// Initializes `VLoadingStretchedButton` with loading state, action, and custom label.
@@ -154,23 +154,23 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 Group {
                     switch label {
                     case .title(let title):
-                        titleLabelViewComponent(internalState: internalState, title: title)
+                        labelTextElement(internalState: internalState, title: title)
 
-                    case .icon(let icon):
-                        iconLabelViewComponent(internalState: internalState, icon: icon)
+                    case .image(let image):
+                        labelImageElement(internalState: internalState, image: image)
 
-                    case .titleAndIcon(let title, let icon):
-                        switch appearance.titleTextAndIconPlacement {
-                        case .titleAndIcon:
-                            HStack(spacing: appearance.titleTextAndIconSpacing) {
-                                titleLabelViewComponent(internalState: internalState, title: title)
-                                iconLabelViewComponent(internalState: internalState, icon: icon)
+                    case .titleAndImage(let title, let image):
+                        switch appearance.labelTextAndLabelImagePlacement {
+                        case .textAndImage:
+                            HStack(spacing: appearance.labelSpacing) {
+                                labelTextElement(internalState: internalState, title: title)
+                                labelImageElement(internalState: internalState, image: image)
                             }
 
-                        case .iconAndTitle:
-                            HStack(spacing: appearance.titleTextAndIconSpacing) {
-                                iconLabelViewComponent(internalState: internalState, icon: icon)
-                                titleLabelViewComponent(internalState: internalState, title: title)
+                        case .imageAndText:
+                            HStack(spacing: appearance.labelSpacing) {
+                                labelImageElement(internalState: internalState, image: image)
+                                labelTextElement(internalState: internalState, title: title)
                             }
                         }
 
@@ -193,30 +193,30 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         .padding(appearance.labelMargins)
     }
     
-    private func titleLabelViewComponent(
+    private func labelTextElement(
         internalState: VLoadingStretchedButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
             .lineLimit(1)
-            .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-            .foregroundStyle(appearance.titleTextColors.value(for: internalState))
-            .font(appearance.titleTextFont)
-            .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
+            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
+            .font(appearance.labelTextFont)
+            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
-    private func iconLabelViewComponent(
+    private func labelImageElement(
         internalState: VLoadingStretchedButtonInternalState,
-        icon: Image
+        image: Image
     ) -> some View {
-        icon
-            .applyIf(appearance.isIconResizable) { $0.resizable() }
-            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.iconFont)
-            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.iconSize)
+        image
+            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
+            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.labelImageFont)
+            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.labelImageSize)
     }
     
     private func spinnerView(
@@ -298,7 +298,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 appearance: {
                     var appearance: VLoadingStretchedButtonAppearance = .init()
                     appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.titleTextColors.enabled = appearance.titleTextColors.pressed
+                    appearance.labelTextColors.enabled = appearance.labelTextColors.pressed
                     return appearance
                 }(),
                 isLoading: false,

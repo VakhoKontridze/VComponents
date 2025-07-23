@@ -211,7 +211,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             _tabBar
             tabIndicatorStripView
         }
-        .background(appearance.headerBackgroundColor)
+        .background(appearance.tabBarBackgroundColor)
 
         .clipped() // Prevents bouncing tab indicator from overflowing
         .drawingGroup() // Prevents clipped tab indicator from disappearing

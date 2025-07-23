@@ -65,56 +65,56 @@ public struct VNotificationAppearance: Sendable {
     /// Body margins.
     public var bodyMargins: EdgeInsets = .init(15)
 
-    /// Spacing between icon and title/messages texts.
-    public var iconAndTextsSpacing: CGFloat = 12
+    /// Spacing between image, and title and messages texts.
+    public var imageAndTextsSpacing: CGFloat = 12
 
-    /// Spacing between tile text and message text.
+    /// Spacing between tile and message.
     public var titleTextAndMessageTextSpacing: CGFloat = 2
 
-    // MARK: Properties - Notification Content - Icon
-    /// Indicates if `resizable(...)` modifier is applied to icon.
+    // MARK: Properties - Notification Content - Image
+    /// Indicates if image is resizable.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var isIconResizable: Bool = true
+    public var isImageResizable: Bool = true
 
-    /// Icon content mode.
+    /// Image content mode.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconContentMode: ContentMode? = .fit
+    public var imageContentMode: ContentMode? = .fit
 
-    /// Icon size.
-    public var iconSize: CGSize? = .init(dimension: 22)
+    /// Image size.
+    public var imageSize: CGSize? = .init(dimension: 22)
 
-    /// Icon color.
+    /// Image color.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconColor: Color? = .primary
+    public var imageColor: Color? = .primary
 
-    /// Icon opacity.
+    /// Image opacity.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconOpacity: CGFloat?
+    public var imageOpacity: CGFloat?
 
-    /// Icon font.`
+    /// Image font.
     ///
-    /// Can be used for setting different weight to SF symbol icons.
-    /// To achieve this, `isIconResizable` should be set to `false`, and `iconSize` should be set to `nil`.
-    public var iconFont: Font?
+    /// Can be used for setting different weight to SF symbol images.
+    /// To achieve this, `isImageResizable` should be set to `false`, and `imageSize` should be set to `nil`.
+    public var imageFont: Font?
 
-    /// Icon `DynamicTypeSize` type.
+    /// Image `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var iconDynamicTypeSizeType: DynamicTypeSizeType?
+    public var imageDynamicTypeSizeType: DynamicTypeSizeType?
 
-    // MARK: Properties - Notification Content - Icon Background
-    /// Icon background size.
-    public var iconBackgroundSize: CGSize = .init(dimension: 44)
+    // MARK: Properties - Notification Content - Image Background
+    /// Image background size.
+    public var imageBackgroundSize: CGSize = .init(dimension: 44)
 
-    /// Icon background corner radius.
-    public var iconBackgroundCornerRadius: CGFloat = 10
+    /// Image background corner radius.
+    public var imageBackgroundCornerRadius: CGFloat = 10
 
-    /// Icon background color.
-    public var iconBackgroundColor: Color = {
+    /// Image background color.
+    public var imageBackgroundColor: Color = {
 #if os(iOS)
         Color.dynamic(
             Color(uiColor: UIColor.secondarySystemBackground).darken(by: 0.05),
@@ -125,7 +125,7 @@ public struct VNotificationAppearance: Sendable {
 #endif
     }()
 
-    // MARK: Properties - Notification Content - Title
+    // MARK: Properties - Notification Content - Text
     /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .leading
 
@@ -163,7 +163,7 @@ public struct VNotificationAppearance: Sendable {
         lineLimit: 1...2
     )
 
-    /// Title text minimum scale factor.
+    /// Message text minimum scale factor.
     public var messageTextMinimumScaleFactor: CGFloat = 0.75
 
     /// Message text color.
@@ -341,28 +341,28 @@ extension VNotificationAppearance {
     mutating public func applyInfoColorScheme() {
         backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
 
-        iconBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
+        imageBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
     }
 
     /// Applies green color scheme to `VNotificationAppearance`.
     mutating public func applySuccessColorScheme() {
         backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
 
-        iconBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
+        imageBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
     }
 
     /// Applies yellow color scheme to `VNotificationAppearance`.
     mutating public func applyWarningColorScheme() {
         backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
 
-        iconBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
+        imageBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
     }
 
     /// Applies red color scheme to `VNotificationAppearance`.
     mutating public func applyErrorColorScheme() {
         backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
 
-        iconBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))
+        imageBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))
     }
 }
 

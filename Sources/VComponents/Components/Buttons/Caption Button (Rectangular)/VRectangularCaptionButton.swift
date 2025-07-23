@@ -14,8 +14,8 @@ import VCore
 ///     var body: some View {
 ///         VRectangularCaptionButton(
 ///             action: { print("Clicked") },
-///             icon: Image(systemName: "swift"),
-///             titleCaption: "Lorem Ipsum"
+///             labelImage: Image(systemName: "swift"),
+///             captionTitle: "Lorem Ipsum"
 ///         )
 ///     }
 ///
@@ -41,67 +41,67 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private let action: () -> Void
     
     // MARK: Properties - Label & Caption
-    private let icon: Image
+    private let labelImage: Image
 
     private let caption: VRectangularCaptionButtonCaption<CustomCaption>
 
     // MARK: Initializers
-    /// Initializes `VRectangularCaptionButton` with action, icon, and title caption.
+    /// Initializes `VRectangularCaptionButton` with action, label image, and caption title.
     public init(
         appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
-        icon: Image,
-        titleCaption: String
+        labelImage: Image,
+        captionTitle: String
     )
         where CustomCaption == Never
     {
         self.appearance = appearance
         self.action = action
-        self.icon = icon
-        self.caption = .title(title: titleCaption)
+        self.labelImage = labelImage
+        self.caption = .title(title: captionTitle)
     }
 
-    /// Initializes `VRectangularCaptionButton` with action, icon, and icon caption.
+    /// Initializes `VRectangularCaptionButton` with action, label image, and caption image.
     public init(
         appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
-        icon: Image,
-        iconCaption: Image
+        labelImage: Image,
+        captionImage: Image
     )
         where CustomCaption == Never
     {
         self.appearance = appearance
         self.action = action
-        self.icon = icon
-        self.caption = .icon(icon: iconCaption)
+        self.labelImage = labelImage
+        self.caption = .image(image: captionImage)
     }
 
-    /// Initializes `VRectangularCaptionButton` with action, icon, icon caption, and title caption.
+    /// Initializes `VRectangularCaptionButton` with action, label image, caption image, and caption title.
     public init(
         appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
-        icon: Image,
-        titleCaption: String,
-        iconCaption: Image
+        labelImage: Image,
+        captionTitle: String,
+        captionImage: Image
     )
         where CustomCaption == Never
     {
         self.appearance = appearance
         self.action = action
-        self.icon = icon
-        self.caption = .titleAndIcon(title: titleCaption, icon: iconCaption)
+        self.labelImage = labelImage
+        self.caption = .titleAndImage(title: captionTitle, image: captionImage)
     }
     
-    /// Initializes `VRectangularCaptionButton` with action, icon, and custom caption.
+    /// Initializes `VRectangularCaptionButton` with action, label image, and custom caption.
     public init(
         appearance: VRectangularCaptionButtonAppearance = .init(),
         action: @escaping () -> Void,
-        icon: Image,
+        labelImage: Image,
         @ViewBuilder caption customCaption: @escaping (VRectangularCaptionButtonInternalState) -> CustomCaption
     ) {
         self.appearance = appearance
         self.action = action
-        self.icon = icon
+        self.labelImage = labelImage
         self.caption = .custom(builder: customCaption)
     }
     
@@ -129,7 +129,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
         ZStack { // Used for additional frame
-            rectangleIcon(
+            labelImageView(
                 internalState: internalState
             )
         }
@@ -139,19 +139,19 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         .clipShape(.rect(cornerRadius: appearance.rectangleCornerRadius))
     }
 
-    private func rectangleIcon(
+    private func labelImageView(
         internalState: VPlainButtonInternalState
     ) -> some View {
-        icon
-            .applyIf(appearance.isIconResizable) { $0.resizable() }
-            .applyIfLet(appearance.iconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(appearance.iconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.iconOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.iconFont)
-            .applyIfLet(appearance.iconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.iconSize)
-            .scaleEffect(internalState == .pressed ? appearance.iconPressedScale : 1)
-            .padding(appearance.iconMargins)
+        labelImage
+            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
+            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.labelImageFont)
+            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.labelImageSize)
+            .scaleEffect(internalState == .pressed ? appearance.labelImagePressedScale : 1)
+            .padding(appearance.labelImageMargins)
     }
 
     private func rectangleBackgroundView(
@@ -186,23 +186,23 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         Group {
             switch caption {
             case .title(let title):
-                titleCaptionViewComponent(internalState: internalState, title: title)
+                captionTextElement(internalState: internalState, title: title)
 
-            case .icon(let icon):
-                iconCaptionViewComponent(internalState: internalState, icon: icon)
+            case .image(let image):
+                captionImageElement(internalState: internalState, image: image)
 
-            case .titleAndIcon(let title, let icon):
-                switch appearance.titleCaptionTextAndIconCaptionPlacement {
-                case .titleAndIcon:
-                    HStack(spacing: appearance.titleCaptionTextAndIconCaptionSpacing) {
-                        titleCaptionViewComponent(internalState: internalState, title: title)
-                        iconCaptionViewComponent(internalState: internalState, icon: icon)
+            case .titleAndImage(let title, let image):
+                switch appearance.captionTextAndCaptionImagePlacement {
+                case .textAndImage:
+                    HStack(spacing: appearance.captionSpacing) {
+                        captionTextElement(internalState: internalState, title: title)
+                        captionImageElement(internalState: internalState, image: image)
                     }
 
-                case .iconAndTitle:
-                    HStack(spacing: appearance.titleCaptionTextAndIconCaptionSpacing) {
-                        iconCaptionViewComponent(internalState: internalState, icon: icon)
-                        titleCaptionViewComponent(internalState: internalState, title: title)
+                case .imageAndText:
+                    HStack(spacing: appearance.captionSpacing) {
+                        captionImageElement(internalState: internalState, image: image)
+                        captionTextElement(internalState: internalState, title: title)
                     }
                 }
 
@@ -220,31 +220,31 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         .scaleEffect(internalState == .pressed ? appearance.captionPressedScale : 1)
     }
     
-    private func titleCaptionViewComponent(
+    private func captionTextElement(
         internalState: VRectangularCaptionButtonInternalState,
         title: String
     ) -> some View {
         Text(title)
-            .multilineTextAlignment(appearance.titleCaptionTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: appearance.titleCaptionTextLineType.textLineLimitType)
-            .minimumScaleFactor(appearance.titleCaptionTextMinimumScaleFactor)
-            .foregroundStyle(appearance.titleCaptionTextColors.value(for: internalState))
-            .font(appearance.titleCaptionTextFont)
-            .applyIfLet(appearance.titleCaptionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .multilineTextAlignment(appearance.captionTextLineType.textAlignment ?? .leading)
+            .lineLimit(type: appearance.captionTextLineType.textLineLimitType)
+            .minimumScaleFactor(appearance.captionTextMinimumScaleFactor)
+            .foregroundStyle(appearance.captionTextColors.value(for: internalState))
+            .font(appearance.captionTextFont)
+            .applyIfLet(appearance.captionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
     }
     
-    private func iconCaptionViewComponent(
+    private func captionImageElement(
         internalState: VRectangularCaptionButtonInternalState,
-        icon: Image
+        image: Image
     ) -> some View {
-        icon
-            .applyIf(appearance.isIconCaptionResizable) { $0.resizable() }
-            .applyIfLet(appearance.iconCaptionContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .applyIfLet(appearance.iconCaptionColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.iconCaptionOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.iconCaptionFont)
-            .applyIfLet(appearance.iconCaptionDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-            .frame(size: appearance.iconCaptionSize)
+        image
+            .applyIf(appearance.isCaptionImageResizable) { $0.resizable() }
+            .applyIfLet(appearance.captionImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+            .applyIfLet(appearance.captionImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+            .applyIfLet(appearance.captionImageOpacities) { $0.opacity($1.value(for: internalState)) }
+            .font(appearance.captionImageFont)
+            .applyIfLet(appearance.captionImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .frame(size: appearance.captionImageSize)
     }
     
     // MARK: Haptics
@@ -266,8 +266,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     PreviewContainer {
         VRectangularCaptionButton(
             action: {},
-            icon: Image(systemName: "swift"),
-            titleCaption: "Lorem Ipsum"
+            labelImage: Image(systemName: "swift"),
+            captionTitle: "Lorem Ipsum"
         )
     }
 }
@@ -277,8 +277,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         PreviewRow("Enabled") {
             VRectangularCaptionButton(
                 action: {},
-                icon: Image(systemName: "swift"),
-                titleCaption: "Lorem Ipsum"
+                labelImage: Image(systemName: "swift"),
+                captionTitle: "Lorem Ipsum"
             )
         }
 
@@ -287,21 +287,21 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 appearance: {
                     var appearance: VRectangularCaptionButtonAppearance = .init()
                     appearance.rectangleColors.enabled = appearance.rectangleColors.pressed
-                    appearance.iconColors!.enabled = appearance.iconColors!.pressed // Force-unwrap
-                    appearance.titleCaptionTextColors.enabled = appearance.titleCaptionTextColors.pressed
+                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Force-unwrap
+                    appearance.captionTextColors.enabled = appearance.captionTextColors.pressed
                     return appearance
                 }(),
                 action: {},
-                icon: Image(systemName: "swift"),
-                titleCaption: "Lorem Ipsum"
+                labelImage: Image(systemName: "swift"),
+                captionTitle: "Lorem Ipsum"
             )
         }
 
         PreviewRow("Disabled") {
             VRectangularCaptionButton(
                 action: {},
-                icon: Image(systemName: "swift"),
-                titleCaption: "Lorem Ipsum"
+                labelImage: Image(systemName: "swift"),
+                captionTitle: "Lorem Ipsum"
             )
             .disabled(true)
         }

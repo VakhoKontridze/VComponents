@@ -9,6 +9,7 @@ General
 - Previously deprecated symbols are removed
 - UI Models are renamed to Appearances
 - `BasicAnimation` is replaced with `Animation` is most components
+- Names of parameters and properties are standardized. For example, "icon" becomes "image". It also reflects on Appearances, for example, button label's `titleTextColors` becomes `labelTextColors`.
 
 VLoadingStretchedButton
 
@@ -17,6 +18,8 @@ VLoadingStretchedButton
 VTextField
 
 - Header and footer are removed
+- `ContentType` is renamed to `Style`
+- `searchButtonIcon` is renamed to `searchImage`
 
 VTextView
 
@@ -25,6 +28,18 @@ VTextView
 VDisclosureGroup
 
 - `headerTitleTextMinimumScaleFactor` is added
+
+VStretchedIndicatorStaticPagerTabView
+
+- `headerBackgroundColor` is renamed to `tabBarBackgroundColor`
+
+VWrappedIndicatorStaticPagerTabView
+
+- `headerBackgroundColor` is renamed to `tabBarBackgroundColor`
+
+VDynamicPagerTabView
+
+- `headerBackgroundColor` is renamed to `tabBarBackgroundColor`
 
 VModal
 

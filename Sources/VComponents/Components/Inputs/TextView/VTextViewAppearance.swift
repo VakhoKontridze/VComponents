@@ -16,9 +16,13 @@ import VCore
 @available(visionOS, unavailable)
 public struct VTextViewAppearance: Sendable {
     // MARK: Properties - Global
-    /// Minimum textview height.
+    /// Minimum height.
     public var minimumHeight: CGFloat = 50
-
+    
+    /// Content margins.
+    public var contentMargins: EdgeInsets = .init(15)
+    
+    // MARK: Properties - TextView
 #if !(os(macOS) || os(watchOS))
     /// Keyboard type.
     public var keyboardType: UIKeyboardType = .default
@@ -36,6 +40,9 @@ public struct VTextViewAppearance: Sendable {
     /// Auto capitalization type.
     public var autocapitalization: TextInputAutocapitalization?
 #endif
+    
+    /// Submit button type.
+    public var submitButton: SubmitLabel = .return
 
     // MARK: Properties - Corners
     /// Textview orner radius.
@@ -57,10 +64,6 @@ public struct VTextViewAppearance: Sendable {
 
     /// Border colors.
     public var borderColors: StateColors = .clearColors
-
-    // MARK: Properties - TextView
-    /// Textview content margins.
-    public var textViewContentMargins: EdgeInsets = .init(15)
 
     // MARK: Properties - Text
     /// Text line type.
@@ -92,10 +95,6 @@ public struct VTextViewAppearance: Sendable {
 
     /// Placeholder text font.
     public var placeholderTextFont: Font = .body
-
-    // MARK: Properties - Submit Button
-    /// Submit button type.
-    public var submitButton: SubmitLabel = .return
 
     // MARK: Initializers
     /// Initializes appearance with default values.

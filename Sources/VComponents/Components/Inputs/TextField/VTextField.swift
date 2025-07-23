@@ -122,7 +122,7 @@ public struct VTextField: View {
     @State private var isSecureTextFieldContentRevealed: Bool = false
     
     private var isTextFieldSecure: Bool {
-        appearance.contentType == .secure &&
+        appearance.style == .secure &&
         !isSecureTextFieldContentRevealed
     }
 
@@ -140,19 +140,19 @@ public struct VTextField: View {
     
     // MARK: Body
     public var body: some View {
-        HStack(spacing: appearance.textFieldContentSpacingHorizontal) {
-            searchIcon
+        HStack(spacing: appearance.contentSpacingHorizontal) {
+            searchImage
             _textField
             clearButton
             visibilityButton
         }
         .frame(height: appearance.height)
-        .padding(.horizontal, appearance.textFieldContentMarginHorizontal)
+        .padding(.horizontal, appearance.contentMarginHorizontal)
         .background { borderView }
         .background { backgroundView }
         .clipShape(.rect(cornerRadius: appearance.cornerRadius))
         
-        .onChange(of: appearance.contentType) { (_, newValue) in // No need for initial checks, as secure field is always hidden by default
+        .onChange(of: appearance.style) { (_, newValue) in // No need for initial checks, as secure field is always hidden by default
             if newValue != .secure {
                 isSecureTextFieldContentRevealed = false
             }
@@ -196,27 +196,27 @@ public struct VTextField: View {
     }
 
     @ViewBuilder
-    private var searchIcon: some View {
-        if appearance.contentType.hasSearchIcon {
-            appearance.searchButtonIcon
-                .applyIf(appearance.isSearchIconResizable) { $0.resizable() }
-                .applyIfLet(appearance.searchIconContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                .applyIfLet(appearance.searchIconColors) { $0.foregroundStyle($1.value(for: internalState)) }
-                .applyIfLet(appearance.searchIconOpacities) { $0.opacity($1.value(for: internalState)) }
-                .font(appearance.searchIconFont)
-                .applyIfLet(appearance.searchIconDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-                .frame(size: appearance.searchIconSize)
+    private var searchImage: some View {
+        if appearance.style.hasSearchImage {
+            appearance.searchImage
+                .applyIf(appearance.isSearchImageResizable) { $0.resizable() }
+                .applyIfLet(appearance.searchImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
+                .applyIfLet(appearance.searchImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
+                .applyIfLet(appearance.searchImageOpacities) { $0.opacity($1.value(for: internalState)) }
+                .font(appearance.searchImageFont)
+                .applyIfLet(appearance.searchImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .frame(size: appearance.searchImageSize)
         }
     }
     
     @ViewBuilder
     private var clearButton: some View {
-        if appearance.contentType.hasClearButton {
+        if appearance.style.hasClearButton {
             ZStack {
                 VRectangularButton(
                     appearance: appearance.clearButtonAppearance,
                     action: didTapClearButton,
-                    icon: appearance.clearButtonIcon
+                    image: appearance.clearButtonImage
                 )
                 .opacity(isClearButtonVisible ? 1 : 0)
             }
@@ -228,12 +228,12 @@ public struct VTextField: View {
     
     @ViewBuilder 
     private var visibilityButton: some View {
-        if appearance.contentType.hasVisibilityButton {
+        if appearance.style.hasVisibilityButton {
             ZStack {
                 VPlainButton(
                     appearance: appearance.visibilityButtonAppearance,
                     action: { isSecureTextFieldContentRevealed.toggle() },
-                    icon: visibilityIcon
+                    image: visibilityImage
                 )
             }
             // Occupies full height to prevent touches from accidentally focusing the TextField
@@ -258,12 +258,12 @@ public struct VTextField: View {
         }
     }
 
-    // MARK: Visibility Icon
-    private var visibilityIcon: Image {
+    // MARK: Visibility Image
+    private var visibilityImage: Image {
         if isSecureTextFieldContentRevealed {
-            appearance.visibilityOnButtonIcon
+            appearance.visibilityOnButtonImage
         } else {
-            appearance.visibilityOffButtonIcon
+            appearance.visibilityOffButtonImage
         }
     }
 
@@ -296,21 +296,21 @@ public struct VTextField: View {
     }
 }
 
-#Preview("Content Types") {
+#Preview("Styles") {
     @Previewable @State var text: String = "Lorem ipsum"
 
     PreviewContainer {
         ForEach(
-            VTextFieldAppearance.ContentType.allCases,
+            VTextFieldAppearance.Style.allCases,
             id: \.self
-        ) { contentType in
-            let title: String = .init(describing: contentType).capitalized
+        ) { style in
+            let title: String = .init(describing: style).capitalized
 
             PreviewRow(title) {
                 VTextField(
                     appearance: {
                         var appearance: VTextFieldAppearance = .init()
-                        appearance.contentType = contentType
+                        appearance.style = style
                         return appearance
                     }(),
                     placeholder: "Lorem ipsum",
@@ -390,8 +390,8 @@ private struct StatesContentView: View {
                     appearance: {
                         var mappedAppearance: VTextFieldAppearance = appearance
                         mappedAppearance.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
-                        mappedAppearance.clearButtonAppearance.iconColors!.enabled = appearance.clearButtonAppearance.iconColors!.pressed // Force-unwrap
-                        mappedAppearance.visibilityButtonAppearance.iconColors!.enabled = appearance.visibilityButtonAppearance.iconColors!.pressed // Force-unwrap
+                        mappedAppearance.clearButtonAppearance.labelImageColors!.enabled = appearance.clearButtonAppearance.labelImageColors!.pressed // Force-unwrap
+                        mappedAppearance.visibilityButtonAppearance.labelImageColors!.enabled = appearance.visibilityButtonAppearance.labelImageColors!.pressed // Force-unwrap
                         return mappedAppearance
                     }(),
                     placeholder: "Lorem ipsum",

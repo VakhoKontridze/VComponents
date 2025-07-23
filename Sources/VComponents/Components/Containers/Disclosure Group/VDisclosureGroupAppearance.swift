@@ -93,33 +93,36 @@ public struct VDisclosureGroupAppearance: Sendable {
 
     // MARK: Properties - Header
     /// Header margins.
-    public var headerMargins: EdgeInsets = .init(horizontal: 15, vertical: 10)
+    public var headerMargins: EdgeInsets = .init(
+        horizontal: 15,
+        vertical: 10
+    )
 
     /// Indicates if disclosure group expands and collapses from header tap.
     public var expandsAndCollapsesOnHeaderTap: Bool = true
 
     // MARK: Properties - Header - Text
-    /// Header title text minimum scale factor.
-    public var headerTitleTextMinimumScaleFactor: CGFloat = 1
+    /// Header text minimum scale factor.
+    public var headerTextMinimumScaleFactor: CGFloat = 1
     
-    /// Header title text colors.
-    public var headerTitleTextColors: StateColors = .init(
+    /// Header text colors.
+    public var headerTextColors: StateColors = .init(
         collapsed: Color.primary,
         expanded: Color.primary,
         disabled: Color.primary.opacity(0.3)
     )
 
-    /// Header title tex font.
-    public var headerTitleTextFont: Font = .headline.weight(.bold)
+    /// Header text font.
+    public var headerTextFont: Font = .headline.weight(.bold)
 
-    /// Header title text `DynamicTypeSize` type.
+    /// Header text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var headerTitleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var headerTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
     // MARK: Properties - Disclosure Button
-    /// Disclosure button icon.
-    public var disclosureButtonIcon: Image = ImageBook.chevronUp.renderingMode(.template)
+    /// Disclosure button image.
+    public var disclosureButtonImage: Image = ImageBook.chevronUp.renderingMode(.template)
 
     /// Disclosure button appearance.
     public var disclosureButtonAppearance: VRectangularButtonAppearance = {
@@ -146,8 +149,8 @@ public struct VDisclosureGroupAppearance: Sendable {
 #endif
         }()
 
-        appearance.iconSize = CGSize(dimension: 12)
-        appearance.iconColors = VRectangularButtonAppearance.StateColors(
+        appearance.labelImageSize = CGSize(dimension: 12)
+        appearance.labelImageColors = VRectangularButtonAppearance.StateColors(
             enabled: Color.primary,
             pressed: Color.primary,
             disabled: Color.primary.opacity(0.3)
