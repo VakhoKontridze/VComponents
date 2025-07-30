@@ -92,7 +92,7 @@ public struct VLoadingStretchedButtonAppearance: Sendable {
 
     /// Label spacing.
     ///
-    /// Applicable only if `init` with title and image is used.
+    /// Applicable only if `init` with multiple components is used.
     public var labelSpacing: CGFloat = 8
 
     /// Label pressed scale.

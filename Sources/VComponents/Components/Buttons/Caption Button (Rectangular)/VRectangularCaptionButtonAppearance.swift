@@ -148,7 +148,7 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
 
     /// Caption spacing.
     ///
-    /// Applicable only if `init` with title and image is used.
+    /// Applicable only if `init` with multiple components is used.
     public var captionSpacing: CGFloat = 8
 
     /// Caption pressed scale.
