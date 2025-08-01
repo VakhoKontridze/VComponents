@@ -30,7 +30,8 @@ public struct ModalComponentSizeGroup<Size> {
     }
 
     // MARK: Current
-    func current(
+    /// Size in current interface orientation.
+    public func current(
         orientation: PlatformInterfaceOrientation
     ) -> Size {
         switch orientation {
