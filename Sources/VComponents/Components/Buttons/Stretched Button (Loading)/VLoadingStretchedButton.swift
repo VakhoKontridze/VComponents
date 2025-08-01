@@ -31,8 +31,12 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     private let isLoading: Bool
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VLoadingStretchedButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VLoadingStretchedButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isPressed: baseButtonState == .pressed,

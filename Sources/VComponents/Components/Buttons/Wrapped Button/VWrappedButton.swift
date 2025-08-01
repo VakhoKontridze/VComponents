@@ -27,7 +27,10 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VWrappedButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VWrappedButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isPressed: baseButtonState == .pressed

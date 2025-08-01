@@ -40,8 +40,12 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @Binding private var state: VToggleState
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VToggleInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VToggleInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,

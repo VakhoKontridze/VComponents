@@ -41,8 +41,12 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @Binding private var state: VRadioButtonState
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRadioButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VRadioButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,

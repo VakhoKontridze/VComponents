@@ -54,8 +54,12 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @Binding private var state: VRectangularToggleButtonState
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularToggleButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VRectangularToggleButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isOn: state == .on,

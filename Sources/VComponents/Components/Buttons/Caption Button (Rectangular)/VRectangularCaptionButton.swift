@@ -29,7 +29,10 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRectangularCaptionButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VRectangularCaptionButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isPressed: baseButtonState == .pressed

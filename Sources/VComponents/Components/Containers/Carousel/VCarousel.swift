@@ -61,7 +61,7 @@ public struct VCarousel<Data, ID, Content>: View
 
     // MARK: Properties - State - Card
     private func cardInternalState(
-        isSelected: Bool
+        _ isSelected: Bool
     ) -> VCarouselCardInternalState {
         .init(
             isSelected: isSelected
@@ -170,9 +170,9 @@ public struct VCarousel<Data, ID, Content>: View
         geometryProxy: GeometryProxy,
         element: Data.Element
     ) -> some View {
-        // These properties cannot be extracted within `scrollTransition(transition:`,
+        // These properties cannot be extracted within `scrollTransition(transition:)`,
         // as they are `MainActor`, while method is not.
-        let cardState: VCarouselCardInternalState = cardInternalState(isSelected: selection == element)
+        let cardState: VCarouselCardInternalState = cardInternalState(selection == element)
         let scaleEffect: CGFloat = appearance.cardHeightScales.value(for: cardState)
         let opacity: CGFloat = appearance.cardOpacities.value(for: cardState)
         

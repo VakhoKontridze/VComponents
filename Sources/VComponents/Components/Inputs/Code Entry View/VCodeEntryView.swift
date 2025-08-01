@@ -48,8 +48,12 @@ public struct VCodeEntryView: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @FocusState private var isFocused: Bool
-    private func internalState(_ index: Int) -> VCodeEntryViewInternalState {
+    
+    private func internalState(
+        _ index: Int
+    ) -> VCodeEntryViewInternalState {
         let isEditingCurrentCharacter: Bool =
             text.count == index ||
             (text.count == appearance.length && text.count == index + 1)

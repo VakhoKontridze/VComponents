@@ -25,7 +25,10 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VPlainButtonInternalState {
         .init(
             isEnabled: isEnabled,
             isPressed: baseButtonState == .pressed

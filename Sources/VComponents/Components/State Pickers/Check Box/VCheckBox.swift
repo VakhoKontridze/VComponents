@@ -41,8 +41,12 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @Binding private var state: VCheckBoxState
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCheckBoxInternalState {
+    
+    private func internalState(
+        _ baseButtonState: SwiftUIBaseButtonState
+    ) -> VCheckBoxInternalState {
         .init(
             isEnabled: isEnabled,
             state: state,
