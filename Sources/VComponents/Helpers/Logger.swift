@@ -1,5 +1,5 @@
 //
-//  Logging.swift
+//  Logger.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12.02.24.
