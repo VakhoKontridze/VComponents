@@ -314,10 +314,12 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 0) { // `scrollPosition(id:)` doesn't work with `HStack`
                     ForEach(data, id: id) { element in
-                        content(element)
-                            .tag(element)
-                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                            .frame(maxHeight: .infinity)
+                        ZStack {
+                            content(element)
+                        }
+                        .tag(element)
+                        .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                        .frame(maxHeight: .infinity)
                     }
                 }
                 .scrollTargetLayout()

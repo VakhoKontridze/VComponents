@@ -313,21 +313,23 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 0) { // `scrollPosition(id:)` doesn't work with `HStack`
                     ForEach(data, id: id) { element in
-                        content(element)
-                            .tag(element)
-                            .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
-                            .frame(maxHeight: .infinity)
-                            .onGeometryChange(of: { $0.frame(in: .global) }) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
-                                guard element == selection else { return }
-                                
-                                Task { @MainActor in
-                                    calculateIndicatorFrame(
-                                        selectedIndexInt: selectedIndexInt,
-                                        geometryProxy: geometryProxy,
-                                        interstitialOffset: frame.minX
-                                    )
-                                }
+                        ZStack {
+                            content(element)
+                        }
+                        .tag(element)
+                        .frame(width: geometryProxy.size.width) // Ensures that small content doesn't break page indicator calculation
+                        .frame(maxHeight: .infinity)
+                        .onGeometryChange(of: { $0.frame(in: .global) }) { [selection, selectedIndexInt] frame in // `selectedIndexInt` needs to be captured as well
+                            guard element == selection else { return }
+                            
+                            Task { @MainActor in
+                                calculateIndicatorFrame(
+                                    selectedIndexInt: selectedIndexInt,
+                                    geometryProxy: geometryProxy,
+                                    interstitialOffset: frame.minX
+                                )
                             }
+                        }
                     }
                 }
                 .scrollTargetLayout()
