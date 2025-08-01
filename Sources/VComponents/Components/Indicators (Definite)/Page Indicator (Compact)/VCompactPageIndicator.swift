@@ -9,7 +9,6 @@ import SwiftUI
 import OSLog
 import VCore
 
-// MARK: - V Compact Page Indicator
 /// Indicator component that represents selection in page control in compact fashion.
 ///
 ///     @State private var current: Int = 4
@@ -367,13 +366,11 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
 }
 
-// MARK: - Helpers
 extension Int {
     fileprivate var isEven: Bool { self % 2 == 0 }
     fileprivate var isOdd: Bool { !isEven }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {

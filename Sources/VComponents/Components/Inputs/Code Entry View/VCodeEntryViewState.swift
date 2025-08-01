@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Code Entry View Internal State
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

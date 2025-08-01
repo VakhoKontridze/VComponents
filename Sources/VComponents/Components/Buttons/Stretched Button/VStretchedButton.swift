@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Stretched Button
 /// Stretched button component that performs action when triggered.
 ///
 ///     var body: some View {
@@ -213,7 +212,6 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapping Marquee
 /// Container component that automatically scrolls and wraps it's content edge-to-edge.
 ///
 ///     var body: some View {
@@ -210,7 +209,6 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private let resettingAnimation: Animation = .linear(duration: 0)
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {

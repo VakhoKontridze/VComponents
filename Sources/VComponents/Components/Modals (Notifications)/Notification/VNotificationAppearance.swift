@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Notification Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -273,7 +272,6 @@ public struct VNotificationAppearance: Sendable {
     }
 }
 
-// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -366,7 +364,6 @@ extension VNotificationAppearance {
     }
 }
 
-// MARK: - Helpers
 extension VerticalEdge {
     fileprivate var toAlignment: Alignment {
         switch self {

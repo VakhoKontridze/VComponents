@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Fetching Async Image Content
 enum VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
     where
         CustomContent: View,

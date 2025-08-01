@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toggle Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)

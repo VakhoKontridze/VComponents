@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped-Indicator Static Pager Tab View Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Group Box
 /// Container component that hosts content.
 ///
 /// If content is passed during `init`, `VGroupBox` would resize according to the size of the content.
@@ -107,7 +106,6 @@ public struct VGroupBox<Content>: View where Content: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {
@@ -117,23 +115,26 @@ public struct VGroupBox<Content>: View where Content: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color") {
-    ContentView(layer: .secondary, appearance: .systemBackgroundColor)
+    ContentView(appearance: .systemBackgroundColor, layer: .secondary)
 }
 
 #endif
 
 private struct ContentView: View {
-    private let layer: PreviewContainerLayer
+    // MARK: Properties
     private let appearance: VGroupBoxAppearance
+    private let layer: PreviewContainerLayer
 
+    // MARK: Initializers
     init(
-        layer: PreviewContainerLayer = .primary,
-        appearance: VGroupBoxAppearance = .init()
+        appearance: VGroupBoxAppearance = .init(),
+        layer: PreviewContainerLayer = .primary
     ) {
-        self.layer = layer
         self.appearance = appearance
+        self.layer = layer
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer(layer: layer) {
             VGroupBox(appearance: appearance) {

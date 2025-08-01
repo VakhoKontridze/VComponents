@@ -9,7 +9,6 @@ import SwiftUI
 import OSLog
 import VCore
 
-// MARK: - V Bottom Sheet
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
@@ -309,7 +308,6 @@ struct VBottomSheet<Content>: View
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -337,8 +335,10 @@ struct VBottomSheet<Content>: View
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_MinIdealMax: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -379,8 +379,10 @@ private struct ContentView_MinIdealMax: View {
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_MinIdeal: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -421,8 +423,10 @@ private struct ContentView_MinIdeal: View {
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_IdealMax: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -463,8 +467,10 @@ private struct ContentView_IdealMax: View {
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_IdealSmall: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -505,8 +511,10 @@ private struct ContentView_IdealSmall: View {
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_IdealLarge: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -545,8 +553,10 @@ private struct ContentView_IdealLarge: View {
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_ContentAutoresizing: View {
+    // MARK: Properties
     @State var isPresented: Bool = true
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)

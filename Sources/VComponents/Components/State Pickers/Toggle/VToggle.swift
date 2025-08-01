@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toggle
 /// State picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VToggleState = .on
@@ -208,7 +207,6 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

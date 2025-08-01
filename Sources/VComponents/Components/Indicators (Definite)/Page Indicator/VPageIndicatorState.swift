@@ -8,6 +8,5 @@
 import Foundation
 import VCore
 
-// MARK: - V Page Indicator Dot Internal State
 /// Enumeration that represents state.
 public typealias VPageIndicatorDotInternalState = GenericState_DeselectedSelected

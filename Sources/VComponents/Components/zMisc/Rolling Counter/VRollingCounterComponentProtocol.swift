@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - V Rolling Counter Component Protocol
 protocol VRollingCounterComponentProtocol {
     var id: String { get }
     var stringRepresentation: String { get }

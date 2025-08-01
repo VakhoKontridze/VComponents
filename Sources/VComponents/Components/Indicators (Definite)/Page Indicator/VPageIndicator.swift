@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator
 /// Indicator component that represents selection in page control.
 ///
 ///     @State private var current: Int = 4
@@ -208,7 +207,6 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {

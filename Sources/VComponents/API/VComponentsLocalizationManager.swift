@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - VComponents Localization Manager
 /// Object that manages localization in the package.
 ///
 /// `localizationProvider` in `shared` instance can be set to override the localized values.
@@ -40,7 +39,6 @@ public final class VComponentsLocalizationManager: @unchecked Sendable {
     private init() {}
 }
 
-// MARK: - VComponents Localization Provider
 /// Localization provider in package.
 public protocol VComponentsLocalizationProvider {
     /// Localized value for error title in alert.
@@ -53,7 +51,6 @@ public protocol VComponentsLocalizationProvider {
     var vAlertCancelButtonTitle: String { get }
 }
 
-// MARK: - Default VComponents Localization Provider
 /// Defaults VComponents localization provider.
 public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider, Sendable {
     // MARK: Initializers

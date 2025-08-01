@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Continuous Spinner
 /// Indicator component that represents indefinite activity.
 ///
 ///     var body: some View {
@@ -49,7 +48,6 @@ public struct VContinuousSpinner: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview {

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Notification Content
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

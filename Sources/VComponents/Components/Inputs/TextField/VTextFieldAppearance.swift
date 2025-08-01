@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Text Field Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -262,7 +261,6 @@ public struct VTextFieldAppearance: Sendable {
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
 }
 
-// MARK: - Factory - Style
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -287,7 +285,6 @@ extension VTextFieldAppearance {
     }
 }
 
-// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Parameters
 /// Parameters for presenting an `VSpinner`.
 ///
 ///     @State private var parameters: VSpinnerParameters = .init()

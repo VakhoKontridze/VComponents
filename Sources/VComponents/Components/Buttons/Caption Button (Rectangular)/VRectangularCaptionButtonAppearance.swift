@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rectangular Caption Button Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - View + V Modal - Bool
 @available(watchOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.
@@ -136,7 +135,6 @@ extension View {
     }
 }
 
-// MARK: - View + V Modal - Item
 @available(watchOS, unavailable)
 extension View {
     /// Modal component that hosts slide-able content on the edge of the container.

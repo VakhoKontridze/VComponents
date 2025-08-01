@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toast
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
@@ -269,7 +268,6 @@ struct VToast: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

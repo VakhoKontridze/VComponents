@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rectangular Toggle Button
 /// Rectangular state picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VRectangularToggleButtonState = .on
@@ -213,7 +212,6 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     }
 }
 
-// MARK: - Helpers
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VRectangularToggleButtonInternalState {
@@ -228,7 +226,6 @@ extension VRectangularToggleButtonInternalState {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

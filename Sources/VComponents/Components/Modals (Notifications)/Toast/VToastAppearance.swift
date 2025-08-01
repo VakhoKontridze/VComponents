@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toast Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -286,7 +285,6 @@ public struct VToastAppearance: Sendable {
     }
 }
 
-// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -371,7 +369,6 @@ extension VToastAppearance {
     }
 }
 
-// MARK: - Helpers
 extension VerticalEdge {
     fileprivate var toAlignment: Alignment {
         switch self {

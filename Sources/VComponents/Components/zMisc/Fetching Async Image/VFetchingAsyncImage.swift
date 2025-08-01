@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Fetching Async Image
 /// `View` that asynchronously loads and displays an `Image` with a fetch handler.
 ///
 /// Request can be customized with access token and headers, implement custom caching, and more.
@@ -234,7 +233,6 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview {

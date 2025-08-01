@@ -10,7 +10,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - Preview Header
 struct PreviewHeader: View {
     // MARK: Properties
     private let title: String
@@ -36,7 +35,6 @@ struct PreviewHeader: View {
     }
 }
 
-// MARK: - Preview
 #Preview {
     PreviewContainer {
         PreviewRow("Lorem Ipsum") {

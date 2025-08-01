@@ -8,14 +8,12 @@
 import Foundation
 import VCore
 
-// MARK: - V Disclosure Group State
 /// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 public typealias VDisclosureGroupState = GenericState_CollapsedExpanded
 
-// MARK: - V Disclosure Group Internal State
 /// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

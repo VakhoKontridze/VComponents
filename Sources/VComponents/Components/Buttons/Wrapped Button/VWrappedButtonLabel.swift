@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Wrapped Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 enum VWrappedButtonLabel<CustomLabel> where CustomLabel: View {

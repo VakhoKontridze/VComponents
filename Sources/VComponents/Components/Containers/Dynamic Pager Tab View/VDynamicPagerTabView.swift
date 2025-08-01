@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Dynamic Pager Tab View
 /// Container component that switches between child views and is attributed with dynamic pager with rectangular indicator.
 ///
 /// Best suited for `5`+ items.
@@ -374,7 +373,6 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Text View
 /// Input component that displays an editable multiline text interface.
 ///
 ///     @State private var text: String = ""
@@ -164,7 +163,6 @@ public struct VTextView: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -198,14 +196,17 @@ public struct VTextView: View {
 }
 
 private struct StatesContentView: View {
+    // MARK: Properties
     private let appearance: VTextViewAppearance
 
+    // MARK: Initializers
     init(
         appearance: VTextViewAppearance = .init()
     ) {
         self.appearance = appearance
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             PreviewRow("Enabled") {

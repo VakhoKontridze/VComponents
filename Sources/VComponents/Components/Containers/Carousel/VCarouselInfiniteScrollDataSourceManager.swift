@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - V Carousel Infinite Scroll Data Source Manager
 /// Object that inflates data source to create an illusion of infinite scroll when using `VCarousel`.
 ///
 /// If `data` is represented as `[1, 2, 3]` and `numberOfDuplicateGroups` equals `3`,

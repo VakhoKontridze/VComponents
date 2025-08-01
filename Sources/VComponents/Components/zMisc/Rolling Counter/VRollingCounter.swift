@@ -9,7 +9,6 @@ import SwiftUI
 import OSLog
 import VCore
 
-// MARK: - V Rolling Counter
 /// Text component that highlights change in a floating-absolute number.
 ///
 ///     @State private var value: Double = 10_000
@@ -243,7 +242,6 @@ public struct VRollingCounter: View {
     }
 }
 
-// MARK: - Helpers
 extension Edge {
     fileprivate init(verticalEdge: VerticalEdge) {
         switch verticalEdge {
@@ -253,7 +251,6 @@ extension Edge {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview {

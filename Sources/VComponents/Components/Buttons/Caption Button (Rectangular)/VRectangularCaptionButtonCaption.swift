@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Rectangular Caption Button Caption
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)

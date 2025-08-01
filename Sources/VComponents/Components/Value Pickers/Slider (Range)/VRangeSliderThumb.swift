@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: Thumb
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

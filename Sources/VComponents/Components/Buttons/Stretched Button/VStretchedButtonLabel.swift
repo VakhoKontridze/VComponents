@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Stretched Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 enum VStretchedButtonLabel<CustomLabel> where CustomLabel: View {

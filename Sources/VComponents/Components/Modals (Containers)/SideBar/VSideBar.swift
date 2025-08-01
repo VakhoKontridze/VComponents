@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Side Bar
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
@@ -211,7 +210,6 @@ struct VSideBar<Content>: View where Content: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -266,15 +264,18 @@ struct VSideBar<Content>: View where Content: View {
 #endif
 
 private struct ContentView: View {
+    // MARK: Properties
     private let appearance: VSideBarAppearance
     @State private var isPresented: Bool = true
 
+    // MARK: Initializers
     init(
         appearance: VSideBarAppearance = .init()
     ) {
         self.appearance = appearance
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -303,16 +304,19 @@ private struct ContentView: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 private struct SafeAreaContentView: View {
+    // MARK: Properties
     private let appearance: VSideBarAppearance
     @State private var isPresented: Bool = true
     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
 
+    // MARK: Initializers
     init(
         appearance: VSideBarAppearance = .init()
     ) {
         self.appearance = appearance
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)

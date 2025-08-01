@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Loading Stretched Button Internal State
 /// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

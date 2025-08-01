@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Text and Image Placement
 /// Text and image placement.
 public enum TextAndImagePlacement: Int, Sendable, CaseIterable {
     /// text and image.

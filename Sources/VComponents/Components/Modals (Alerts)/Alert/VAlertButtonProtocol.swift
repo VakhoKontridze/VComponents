@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Alert Button Protocol
 /// `VAlert` button protocol.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

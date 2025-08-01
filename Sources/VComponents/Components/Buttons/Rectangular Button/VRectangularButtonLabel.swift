@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Rectangular Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 enum VRectangularButtonLabel<CustomLabel> where CustomLabel: View {

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Appearance
 /// Model that describes appearance.
 @MemberwiseInitializable(
     accessLevelModifier: .internal,
@@ -158,7 +157,6 @@ public struct VPageIndicatorAppearance: Sendable {
     public typealias DotStateColors = GenericStateModel_DeselectedSelected<Color>
 }
 
-// MARK: - Factory
 extension VPageIndicatorAppearance {
     /// `VPageIndicatorAppearance` with vertical layout.
     public static var vertical: Self {

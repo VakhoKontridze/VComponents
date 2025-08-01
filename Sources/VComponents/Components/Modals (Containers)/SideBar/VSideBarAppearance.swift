@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Side Bar Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -190,7 +189,6 @@ public struct VSideBarAppearance: Sendable {
     }
 }
 
-// MARK: - V Side Bar Appearance + Default Content Safe Area Edges
 #if canImport(UIKit) && !(os(tvOS) || os(watchOS))
 
 @available(visionOS, unavailable)
@@ -233,7 +231,6 @@ extension VSideBarAppearance {
 
 #endif
 
-// MARK: - Factory - Presentation Edge
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -365,7 +362,6 @@ extension VSideBarAppearance {
     }
 }
 
-// MARK: - Factory - Misc
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -380,7 +376,6 @@ extension VSideBarAppearance {
     }
 }
 
-// MARK: - Helpers
 extension Edge {
     fileprivate var toAlignment: Alignment {
         switch self {

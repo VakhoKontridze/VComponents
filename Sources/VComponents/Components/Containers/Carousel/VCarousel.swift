@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Carousel
 /// Container component that paginates between child views horizontally.
 ///
 ///     private enum WeekDay: Int, Hashable, Identifiable, CaseIterable {
@@ -203,7 +202,6 @@ public struct VCarousel<Data, ID, Content>: View
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !os(tvOS) // Redundant

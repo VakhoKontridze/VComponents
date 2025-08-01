@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Toggle Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 enum VToggleLabel<CustomLabel> where CustomLabel: View {

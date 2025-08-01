@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Haptic Manager
 @MainActor
 final class HapticManager {
     // MARK: Properties

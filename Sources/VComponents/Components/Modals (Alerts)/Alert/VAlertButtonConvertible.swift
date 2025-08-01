@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Alert Button Convertible
 /// Type that allows for conversion to `VAlertButtonProtocol`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

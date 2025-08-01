@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - Modal Component Size Group
 /// Modal component sizes.
 @MemberwiseInitializable(
     comment: "/// Initializes `ModalComponentSizeGroup` with sizes."
@@ -45,7 +44,6 @@ extension ModalComponentSizeGroup: Equatable where Size: Equatable {}
 
 extension ModalComponentSizeGroup: Sendable where Size: Sendable {}
 
-// MARK: - Modal Component Size
 /// Modal component size.
 @MemberwiseInitializable(
     comment: "/// Initializes `ModalComponentSize` with width and height."
@@ -61,10 +59,3 @@ public struct ModalComponentSize<Width, Height> {
 extension ModalComponentSize: Equatable where Width: Equatable, Height: Equatable {}
 
 extension ModalComponentSize: Sendable where Width: Sendable, Height: Sendable {}
-
-// MARK: - Helpers
-extension AbsoluteFractionMeasurement {
-    static var zero: Self {
-        .absolute(0)
-    }
-}

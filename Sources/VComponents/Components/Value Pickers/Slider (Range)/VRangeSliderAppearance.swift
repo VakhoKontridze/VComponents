@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Range Slider Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

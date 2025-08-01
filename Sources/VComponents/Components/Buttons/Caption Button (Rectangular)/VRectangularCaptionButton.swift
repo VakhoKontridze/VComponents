@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rectangular Caption Button
 /// Rectangular captioned button component that performs action when triggered.
 ///
 ///     var body: some View {
@@ -257,7 +256,6 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(visionOS)) // Redundant

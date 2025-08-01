@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Disclosure Group
 /// Expandable container component that hosts content.
 ///
 ///     @State private var state: VDisclosureGroupState = .expanded
@@ -196,12 +195,10 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     }
 }
 
-// MARK: - Helpers
 fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
     lhs != rhs
 }
 
-// MARK: - Previews
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -233,9 +230,11 @@ fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #endif
 
 private struct StatesContentView: View {
+    // MARK: Properties
     private let layer: PreviewContainerLayer
     private let appearance: VDisclosureGroupAppearance
 
+    // MARK: Initializers
     init(
         layer: PreviewContainerLayer = .primary,
         appearance: VDisclosureGroupAppearance = .init()
@@ -244,6 +243,7 @@ private struct StatesContentView: View {
         self.appearance = appearance
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer(layer: layer) {
             PreviewRow("Collapsed") {

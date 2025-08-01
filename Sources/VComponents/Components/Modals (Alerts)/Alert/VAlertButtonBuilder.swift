@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

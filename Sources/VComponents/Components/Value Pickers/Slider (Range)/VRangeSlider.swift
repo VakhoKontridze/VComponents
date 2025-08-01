@@ -9,7 +9,6 @@ import SwiftUI
 import OSLog
 import VCore
 
-// MARK: - V Range Slider
 /// Value picker component that selects values from a bounded linear range of values to represent a range.
 ///
 ///     @State private var value: ClosedRange<Double> = 0.3...0.8
@@ -290,7 +289,6 @@ public struct VRangeSlider: View {
     }
 }
 
-// MARK: - Helpers
 extension Double {
     fileprivate func roundedUpWithStep(
         _ step: Double?
@@ -307,7 +305,6 @@ extension Double {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

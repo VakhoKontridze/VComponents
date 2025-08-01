@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Fetching Async Image Appearance
 /// Model that describes appearance.
 public struct VFetchingAsyncImageAppearance: Sendable {
     // MARK: Properties

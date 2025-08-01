@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Bouncing Marquee Appearance
 /// Model that describes appearance.
 public struct VBouncingMarqueeAppearance: Sendable {
     // MARK: Properties - Global
@@ -60,7 +59,6 @@ public struct VBouncingMarqueeAppearance: Sendable {
     public init() {}
 }
 
-// MARK: - Factory
 extension VBouncingMarqueeAppearance {
     /// `VBouncingMarqueeAppearance` that insets content and applies fading gradient.
     public static var insettedGradientMask: Self {

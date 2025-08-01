@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Stretched-Indicator Static Pager Tab View
 /// Container component that switches between child views and is attributed with static pager with stretched rectangular indicator.
 ///
 /// Best suited for `2` – `5` items.
@@ -388,7 +387,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

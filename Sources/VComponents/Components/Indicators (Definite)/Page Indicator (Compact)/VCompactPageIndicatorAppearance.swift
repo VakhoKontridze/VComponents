@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Compact Page Indicator Appearance
 /// Model that describes appearance.
 public struct VCompactPageIndicatorAppearance: Sendable {
     // MARK: Properties - Global
@@ -185,7 +184,6 @@ public struct VCompactPageIndicatorAppearance: Sendable {
     public typealias DotStateColors = GenericStateModel_DeselectedSelected<Color>
 }
 
-// MARK: - Factory
 extension VCompactPageIndicatorAppearance {
     /// `VCompactPageIndicatorAppearance` with vertical layout.
     public static var vertical: Self {

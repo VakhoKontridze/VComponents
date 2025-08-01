@@ -8,11 +8,16 @@
 import Foundation
 import OSLog
 
-// MARK: - Logger + Instances
 extension Logger {
     // MARK: Properties - Views
-    static let compactPageIndicator: Self = .init(subsystem: "VComponents", category: "VCompactPageIndicator")
-    static let rangeSlider: Self = .init(subsystem: "VComponents", category: "VRangeSlider")
-    static let rollingCounter: Self = .init(subsystem: "VComponents", category: "VRollingCounter")
-    static let wrappedIndicatorStaticPagerTabView: Self = .init(subsystem: "VComponents", category: "VWrappedIndicatorStaticPagerTabView")
+    static let compactPageIndicator: Self = .init("VCompactPageIndicator")
+    static let rangeSlider: Self = .init("VRangeSlider")
+    static let rollingCounter: Self = .init("VRollingCounter")
+    static let wrappedIndicatorStaticPagerTabView: Self = .init("VWrappedIndicatorStaticPagerTabView")
+}
+
+extension Logger {
+    fileprivate init(_ category: String) {
+        self.init(subsystem: "VComponents", category: category)
+    }
 }

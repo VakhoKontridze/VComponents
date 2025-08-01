@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - View + On Receive of Timer Increment
 extension View {
     func onReceiveOfTimerIncrement(
         _ value: Binding<Int>,

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Layout Directions Helpers
 extension CGSize {
     func dimension(
         isWidth: Bool

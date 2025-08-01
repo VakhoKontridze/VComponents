@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped Button Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - Image Book
 @Uninitializable
 struct ImageBook {
     static let checkmarkOn: Image = .init(.checkmarkOn) // Mirrored for RTL languages

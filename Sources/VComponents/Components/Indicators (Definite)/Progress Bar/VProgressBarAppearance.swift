@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Progress Bar Appearance
 /// Model that describes appearance.
 public struct VProgressBarAppearance: Sendable {
     // MARK: Properties - Global

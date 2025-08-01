@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Modal
 @available(watchOS, unavailable) // Doesn't follow HIG
 struct VModal<Content>: View
     where Content: View
@@ -145,7 +144,6 @@ struct VModal<Content>: View
     }
 }
 
-// MARK: - Previews
 #if DEBUG
 
 #if !os(watchOS) // Redundant
@@ -172,9 +170,11 @@ struct VModal<Content>: View
 
 // Macros aren't allowed in Preview macro
 private struct ContentView_SizeTypes: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
     @State private var size: VModalAppearance.Size?
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)

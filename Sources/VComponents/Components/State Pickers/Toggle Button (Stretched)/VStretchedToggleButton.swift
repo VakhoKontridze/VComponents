@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Stretched Toggle Button
 /// Stretched state picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VStretchedToggleButtonState = .on
@@ -242,7 +241,6 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     }
 }
 
-// MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -258,7 +256,6 @@ extension VStretchedToggleButtonInternalState {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

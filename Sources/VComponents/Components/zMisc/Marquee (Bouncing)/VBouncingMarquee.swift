@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Bouncing Marquee
 /// Container component that automatically scrolls and bounces it's content edge-to-edge.
 ///
 ///     var body: some View {
@@ -158,7 +157,6 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {

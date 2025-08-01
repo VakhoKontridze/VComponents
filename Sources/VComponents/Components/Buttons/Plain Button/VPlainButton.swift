@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Plain Button
 /// Plain button component that performs action when triggered.
 ///
 ///     var body: some View {
@@ -178,7 +177,6 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

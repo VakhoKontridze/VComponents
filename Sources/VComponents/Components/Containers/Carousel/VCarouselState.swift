@@ -8,6 +8,5 @@
 import Foundation
 import VCore
 
-// MARK: - V Carousel Page Internal State
 @available(tvOS, unavailable)
 typealias VCarouselCardInternalState = GenericState_DeselectedSelected

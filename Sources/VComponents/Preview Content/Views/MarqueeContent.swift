@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - Marquee Content
 var marqueeContentSmall: some View {
     HStack {
         Image(systemName: "swift")

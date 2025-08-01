@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Wrapped Toggle Button Label
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 enum VWrappedToggleButtonLabel<CustomLabel> where CustomLabel: View {

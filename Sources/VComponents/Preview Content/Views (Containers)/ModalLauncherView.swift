@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - Modal Launcher View
 struct ModalLauncherView: View {
     // MARK: Properties
     @Binding private var isPresented: Bool

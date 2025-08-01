@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Text View Appearance
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -105,7 +104,6 @@ public struct VTextViewAppearance: Sendable {
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 }
 
-// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Progress Bar
 /// Indicator component that represents progress towards the completion of a task.
 ///
 ///     @State private var progress: Double = 0.5
@@ -103,7 +102,6 @@ public struct VProgressBar: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #Preview("*") {

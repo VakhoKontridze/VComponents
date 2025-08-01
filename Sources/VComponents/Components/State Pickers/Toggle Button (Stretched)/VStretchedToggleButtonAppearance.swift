@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Stretched Toggle Button Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

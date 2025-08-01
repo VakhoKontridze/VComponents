@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Code Entry View
 /// Model that describes appearance.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
@@ -131,7 +130,6 @@ public struct VCodeEntryViewAppearance: Sendable {
     }
 }
 
-// MARK: - Factory - Highlights
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

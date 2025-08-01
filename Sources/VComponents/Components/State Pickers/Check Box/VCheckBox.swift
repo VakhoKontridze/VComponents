@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Check Box
 /// State picker component that toggles between `off`, `on`, and `indeterminate` states, and displays label.
 ///
 ///     @State private var state: VCheckBoxState = .on
@@ -206,7 +205,6 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

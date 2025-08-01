@@ -10,7 +10,6 @@
 import Foundation
 import VCore
 
-// MARK: - Modal Presenter Root and Link
 enum ModalPresenterRootAndLink {
     // MARK: Cases
     case overlay

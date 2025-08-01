@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Alert Button
 /// `VAlert` button.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

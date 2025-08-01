@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Rectangle Corner Radii + With Horizontal Corners Reversed
 extension RectangleCornerRadii {
     func horizontalCornersReversed(
         if condition: Bool = true

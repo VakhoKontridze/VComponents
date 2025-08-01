@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - V Rolling Counter Component (Digit)
 struct VRollingCounterDigitComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -29,7 +28,6 @@ struct VRollingCounterDigitComponent: VRollingCounterComponentProtocol {
     }
 }
 
-// MARK: - V Rolling Counter Component (Fraction Digit)
 struct VRollingCounterFractionDigitComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -51,7 +49,6 @@ struct VRollingCounterFractionDigitComponent: VRollingCounterComponentProtocol {
     }
 }
 
-// MARK: - V Rolling Counter Component (Grouping Separator)
 struct VRollingCounterGroupingSeparatorComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String
@@ -73,7 +70,6 @@ struct VRollingCounterGroupingSeparatorComponent: VRollingCounterComponentProtoc
     }
 }
 
-// MARK: - V Rolling Counter Component (Decimal Separator)
 struct VRollingCounterDecimalSeparatorComponent: VRollingCounterComponentProtocol {
     // MARK: Properties
     let id: String

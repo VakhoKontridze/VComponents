@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Alert Parameters
 /// Parameters for presenting a `VAlert`.
 ///
 ///     @State private var parameters: VAlertParameters?

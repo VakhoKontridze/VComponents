@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - Rectangle Corner Radii + Corners Adjusted for Direction
 extension RectangleCornerRadii {
     func cornersAdjustedForDirection(
         _ direction: LayoutDirectionOmni

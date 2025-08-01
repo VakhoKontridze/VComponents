@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Group Box Appearance
 /// Model that describes appearance.
 public struct VGroupBoxAppearance: Sendable {
     // MARK: Properties - Corners
@@ -100,7 +99,6 @@ public struct VGroupBoxAppearance: Sendable {
     public init() {}
 }
 
-// MARK: - Factory
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

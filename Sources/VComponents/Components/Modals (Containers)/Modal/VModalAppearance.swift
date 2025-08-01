@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Modal Appearance
 /// Model that describes appearance.
 @available(watchOS, unavailable)
 public struct VModalAppearance: Sendable {
@@ -210,7 +209,6 @@ public struct VModalAppearance: Sendable {
     }
 }
 
-// MARK: - V Modal Appearance + Content Wrapping Height
 @available(watchOS, unavailable)
 extension VModalAppearance {
     /// Calculates modal height that wraps content.
@@ -225,7 +223,6 @@ extension VModalAppearance {
     }
 }
 
-// MARK: - Factory
 @available(watchOS, unavailable)
 extension VModalAppearance {
     /// `VModalAppearance` that insets content.

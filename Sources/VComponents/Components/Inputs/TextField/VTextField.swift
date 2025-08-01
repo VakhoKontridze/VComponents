@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Text Field
 /// Input component that displays an editable text interface.
 ///
 ///     @State private var text: String = ""
@@ -279,7 +278,6 @@ public struct VTextField: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -348,9 +346,11 @@ public struct VTextField: View {
 }
 
 private struct StatesContentView: View {
+    // MARK: Properties
     private let appearance: VTextFieldAppearance
     private let showsNative: Bool
 
+    // MARK: Initializers
     init(
         appearance: VTextFieldAppearance = .init(),
         showsNative: Bool = true
@@ -359,6 +359,7 @@ private struct StatesContentView: View {
         self.showsNative = showsNative
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             PreviewRow("Enabled") {

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values.
 ///
 ///     @State private var value: Double = 0.5
@@ -235,7 +234,6 @@ public struct VSlider: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

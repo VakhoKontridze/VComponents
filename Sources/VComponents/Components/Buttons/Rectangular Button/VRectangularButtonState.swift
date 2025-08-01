@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Rectangular Button Internal State
 /// Enumeration that represents state.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)

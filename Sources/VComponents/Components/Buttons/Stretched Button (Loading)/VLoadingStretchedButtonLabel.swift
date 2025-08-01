@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Loading Stretched Button Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

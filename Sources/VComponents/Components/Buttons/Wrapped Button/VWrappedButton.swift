@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped Button
 /// Wrapped button component that performs action when triggered.
 ///
 ///     var body: some View {
@@ -211,7 +210,6 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

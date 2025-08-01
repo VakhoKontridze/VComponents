@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - RGB Color
 enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
     // MARK: Cases
     case red, green, blue

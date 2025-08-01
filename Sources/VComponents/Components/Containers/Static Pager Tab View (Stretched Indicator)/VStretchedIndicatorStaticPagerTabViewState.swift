@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Stretched-Indicator Static Pager Tab View Tab Item Internal State
 /// Enumeration that represents state.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

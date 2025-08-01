@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Layout Direction + Flags
 extension LayoutDirection {
     var isLeftToRight: Bool {
         switch self {

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rolling Counter Appearance
 /// Model that describes appearance.
 public struct VRollingCounterAppearance: Sendable {
     // MARK: Properties - Global

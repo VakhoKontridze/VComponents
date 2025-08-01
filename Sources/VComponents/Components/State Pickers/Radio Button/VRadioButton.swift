@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Radio Button
 /// State picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VRadioButtonState = .on
@@ -188,7 +187,6 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Helpers
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -201,7 +199,6 @@ extension VRadioButtonState {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

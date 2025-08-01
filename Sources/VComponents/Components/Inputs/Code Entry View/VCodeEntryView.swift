@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Code Entry View
 /// Input component that displays an editable text interface for entering code, such as PIN.
 ///
 ///     @FocusState private var isFocused: Bool
@@ -219,7 +218,6 @@ public struct VCodeEntryView: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -265,14 +263,17 @@ public struct VCodeEntryView: View {
 }
 
 private struct StatesContentView: View {
+    // MARK: Properties
     private let appearance: VCodeEntryViewAppearance
 
+    // MARK: Initializers
     init(
         appearance: VCodeEntryViewAppearance = .init()
     ) {
         self.appearance = appearance
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             PreviewRow("Enabled") {

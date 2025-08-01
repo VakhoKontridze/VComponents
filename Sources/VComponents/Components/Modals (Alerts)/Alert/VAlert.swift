@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Alert
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
 @available(visionOS, unavailable) // Doesn't follow HIG
@@ -273,7 +272,6 @@ struct VAlert<Content>: View
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

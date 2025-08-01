@@ -9,7 +9,6 @@ import Foundation
 import OSLog
 import VCore
 
-// MARK: - V Rolling Counter Factory
 struct VRollingCounterFactory {
     // MARK: Initializers
     private init() {}
@@ -217,7 +216,6 @@ struct VRollingCounterFactory {
     }
 }
 
-// MARK: - Helpers
 extension NumberFormatter {
     fileprivate func string(fromDouble double: Double) -> String? {
         string(

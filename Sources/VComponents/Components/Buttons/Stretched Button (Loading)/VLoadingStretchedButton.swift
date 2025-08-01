@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Loading Stretched Button
 /// Stretched button component that indicates loading activity, and performs action when triggered.
 ///
 ///     var body: some View {
@@ -266,7 +265,6 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

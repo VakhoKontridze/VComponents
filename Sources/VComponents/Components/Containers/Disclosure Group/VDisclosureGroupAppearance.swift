@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Disclosure Group Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -224,7 +223,6 @@ public struct VDisclosureGroupAppearance: Sendable {
     public typealias StateAngles = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
 }
 
-// MARK: - Factory
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

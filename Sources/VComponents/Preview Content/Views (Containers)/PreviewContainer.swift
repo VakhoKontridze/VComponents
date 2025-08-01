@@ -10,7 +10,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - Preview Container
 struct PreviewContainer<Content>: View where Content: View {
     // MARK: Properties
     private let layer: PreviewContainerLayer
@@ -63,13 +62,11 @@ struct PreviewContainer<Content>: View where Content: View {
     }
 }
 
-// MARK: - Preview Container Layer
 enum PreviewContainerLayer {
     case primary
     case secondary
 }
 
-// MARK: - Preview
 #Preview {
     PreviewContainer {
         Text("Lorem ipsum")

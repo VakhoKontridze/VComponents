@@ -9,7 +9,6 @@ import SwiftUI
 import OSLog
 import VCore
 
-// MARK: - V Wrapped-Indicator Static Pager Tab View
 /// Container component that switches between child views and is attributed with static pager with wrapped rectangular indicator.
 ///
 /// Best suited for `2` – `5` items.
@@ -445,7 +444,6 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
     }
 }
 
-// MARK: - Helpers
 extension FloatingPoint {
     fileprivate func linearInterpolation(
         x1: Self, y1: Self,
@@ -458,7 +456,6 @@ extension FloatingPoint {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant

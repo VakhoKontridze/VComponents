@@ -8,7 +8,6 @@
 import Foundation
 import VCore
 
-// MARK: - V Dynamic Pager Tab View Tab Item Internal State
 /// Enumeration that represents state.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

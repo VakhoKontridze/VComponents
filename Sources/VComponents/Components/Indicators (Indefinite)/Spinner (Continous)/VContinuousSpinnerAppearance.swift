@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Continuous Spinner Appearance
 /// Model that describes appearance.
 public struct VContinuousSpinnerAppearance: Sendable {
     // MARK: Properties

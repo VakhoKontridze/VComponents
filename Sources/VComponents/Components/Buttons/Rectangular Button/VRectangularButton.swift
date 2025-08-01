@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rectangular Button
 /// Rectangular button component that performs action when triggered.
 ///
 ///     var body: some View {
@@ -182,7 +181,6 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

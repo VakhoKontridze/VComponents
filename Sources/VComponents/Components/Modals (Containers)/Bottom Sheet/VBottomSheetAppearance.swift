@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Bottom Sheet Appearance
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -373,7 +372,6 @@ public struct VBottomSheetAppearance: Sendable {
     }
 }
 
-// MARK: - V Bottom Sheet Appearance + Content Wrapping Height
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
@@ -406,7 +404,6 @@ extension VBottomSheetAppearance {
     }
 }
 
-// MARK: - Factory
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

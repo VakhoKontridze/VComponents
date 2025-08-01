@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - Preview Row
 struct PreviewRow<Content>: View where Content: View {
     // MARK: Properties
     private let title: String?
@@ -40,7 +39,6 @@ struct PreviewRow<Content>: View where Content: View {
     }
 }
 
-// MARK: - Preview
 #Preview {
     PreviewRow("Lorem Ipsum") {
         Text("Lorem ipsum")

@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - View + V Spinner
 extension View {
     /// Presents `VContinuousSpinner` when `parameters` is non-`nil`.
     ///

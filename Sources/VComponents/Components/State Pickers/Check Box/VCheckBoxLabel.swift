@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - V Check Box Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)

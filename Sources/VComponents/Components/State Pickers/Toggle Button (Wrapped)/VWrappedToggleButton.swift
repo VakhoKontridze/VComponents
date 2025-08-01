@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapped Toggle Button
 /// Wrapped state picker component that toggles between `off` and `on` states, and displays label.
 ///
 ///     @State private var state: VWrappedToggleButtonState = .on
@@ -242,7 +241,6 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
     }
 }
 
-// MARK: - Helpers
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VWrappedToggleButtonInternalState {
@@ -257,7 +255,6 @@ extension VWrappedToggleButtonInternalState {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(tvOS) || os(visionOS)) // Redundant

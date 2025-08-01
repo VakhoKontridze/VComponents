@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Notification
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG
@@ -331,7 +330,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 }
 
-// MARK: - Preview
 #if DEBUG
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
@@ -503,12 +501,14 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 }
 
 private struct ContentView: View {
+    // MARK: Properties
     @State private var isPresented: Bool = true
 
     private let image: Image?
     private let title: String?
     private let message: String?
 
+    // MARK: Initializers
     init(
         image: Image?,
         title: String?,
@@ -519,6 +519,7 @@ private struct ContentView: View {
         self.message = message
     }
 
+    // MARK: Body
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)

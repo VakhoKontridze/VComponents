@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-// MARK: - Stretched Button Frame Modifier
 struct StretchedButtonFrameModifier: ViewModifier {
     func body(content: Content) -> some View {
         content

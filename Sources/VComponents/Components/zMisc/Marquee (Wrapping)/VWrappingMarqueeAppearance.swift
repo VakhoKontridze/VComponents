@@ -8,7 +8,6 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Wrapping Marquee Appearance
 /// Model that describes appearance.
 public struct VWrappingMarqueeAppearance: Sendable {
     // MARK: Properties - Global
@@ -67,7 +66,6 @@ public struct VWrappingMarqueeAppearance: Sendable {
     public init() {}
 }
 
-// MARK: - Factory
 extension VWrappingMarqueeAppearance {
     /// `VWrappingMarqueeAppearance` that insets content and applies fading gradient.
     public static var insettedGradientMask: Self {
