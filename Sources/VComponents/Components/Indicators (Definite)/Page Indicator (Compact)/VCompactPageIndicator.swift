@@ -128,7 +128,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     // MARK: Body
     public var body: some View {
         // `VPageIndicator` is needed, because if total number of dots are not more that visible,
-        // `0`-sizes dots would offset the page indicator.
+        // `0`-sized dots would offset the page indicator.
         Group {
             if total > visible {
                 compactBody

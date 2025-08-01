@@ -86,6 +86,8 @@ public struct VCarousel<Data, ID, Content>: View
     // MARK: Properties - Data
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
+    
+    // MARK: Properties - Content
     private let content: (Data.Element) -> Content
 
     // MARK: Initializers
