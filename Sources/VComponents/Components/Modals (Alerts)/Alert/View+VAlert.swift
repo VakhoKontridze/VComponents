@@ -124,7 +124,7 @@ extension View {
         message: @escaping (Item) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -143,14 +143,14 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     title: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             title(item)
                         } else {
                             ""
                         }
                     }(),
                     message: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             message(item)
                         } else {
                             ""
@@ -158,7 +158,7 @@ extension View {
                     }(),
                     content: VAlertContent.empty,
                     buttons: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             buttons(item)
                         } else {
                             []
@@ -184,7 +184,7 @@ extension View {
     ) -> some View
         where Content: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -203,28 +203,28 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     title: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             title(item)
                         } else {
                             ""
                         }
                     }(),
                     message: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             message(item)
                         } else {
                             ""
                         }
                     }(),
                     content: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             VAlertContent.content(content: { content(item) })
                         } else {
                             VAlertContent.empty
                         }
                     }(),
                     buttons: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             buttons(item)
                         } else {
                             []
@@ -255,7 +255,7 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -274,14 +274,14 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     title: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             title(error)
                         } else {
                             ""
                         }
                     }(),
                     message: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             message(error)
                         } else {
                             ""
@@ -289,7 +289,7 @@ extension View {
                     }(),
                     content: VAlertContent.empty,
                     buttons: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             buttons(error)
                         } else {
                             []
@@ -318,7 +318,7 @@ extension View {
             E: Error,
             Content: View
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -337,28 +337,28 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     title: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             title(error)
                         } else {
                             ""
                         }
                     }(),
                     message: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             message(error)
                         } else {
                             ""
                         }
                     }(),
                     content: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             VAlertContent.content(content: { content(error) })
                         } else {
                             VAlertContent.empty
                         }
                     }(),
                     buttons: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             buttons(error)
                         } else {
                             []

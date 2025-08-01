@@ -83,7 +83,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (Item) -> String
     ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -102,7 +102,7 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     text: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             text(item)
                         } else {
                             ""
@@ -132,7 +132,7 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
@@ -151,7 +151,7 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     text: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? E {
+                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
                             text(error)
                         } else {
                             ""

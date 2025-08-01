@@ -124,7 +124,7 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
     ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -144,21 +144,21 @@ extension View {
                     isPresented: isPresented,
                     content: .imageAndTitleAndMessage(
                         image: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                                 image(item)
                             } else {
                                  nil
                             }
                         }(),
                         title: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                                 title(item)
                             } else {
                                 nil
                             }
                         }(),
                         message: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                                 message(item)
                             } else {
                                 nil
@@ -182,7 +182,7 @@ extension View {
     ) -> some View
         where CustomContent: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -203,7 +203,7 @@ extension View {
                     content: .custom(
                         builder: {
                             Group {
-                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                                     customContent(item)
                                 }
                             }

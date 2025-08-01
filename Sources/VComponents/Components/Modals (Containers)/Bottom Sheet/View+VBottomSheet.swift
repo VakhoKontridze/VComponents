@@ -223,7 +223,7 @@ extension View {
     ) -> some View
         where Content: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(key: link.linkID, value: $0) }
+        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
 
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
@@ -242,7 +242,7 @@ extension View {
                     appearance: appearance,
                     isPresented: isPresented,
                     content: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(key: link.linkID) as? Item {
+                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
                             content(item)
                         }
                     }
