@@ -111,7 +111,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         self.dotContent = .standard
     }
     
-    /// Initializes `VCompactPageIndicator` with total, current index, and custom dot content.
+    /// Initializes `VCompactPageIndicator` with current index, total number, and custom dot content.
     public init(
         appearance: VCompactPageIndicatorAppearance = .init(),
         current: Int,

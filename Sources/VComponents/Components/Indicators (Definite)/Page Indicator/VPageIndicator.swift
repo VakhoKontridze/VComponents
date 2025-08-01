@@ -145,7 +145,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         self.dotContent = .standard
     }
     
-    /// Initializes `VPageIndicator` with total, current index, and custom dot content.
+    /// Initializes `VPageIndicator` with current index, total number, and custom dot content.
     public init(
         appearance: VPageIndicatorAppearance = .init(),
         current: Int,
