@@ -8,30 +8,6 @@
 import SwiftUI
 
 /// Parameters for presenting a `VAlert`.
-///
-///     @State private var parameters: VAlertParameters?
-///
-///     var body: some View {
-///         ZStack {
-///             VPlainButton(
-///                 action: {
-///                     parameters = VAlertParameters(
-///                         title: "Lorem Ipsum",
-///                         message: "Lorem ipsum dolor sit amet",
-///                         actions: {
-///                             VAlertButton(action: { print("Confirmed") }, title: "Confirm", role: .primary)
-///                             VAlertButton(action: { print("Cancelled") }, title: "Cancel", role: .cancel)
-///                         }
-///                     )
-///                 },
-///                 title: "Present"
-///             )
-///             .vAlert(link: .window(linkID: "alert"), parameters: $parameters)
-///         }
-///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
-///     }
-///
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
