@@ -18,9 +18,6 @@ struct VBottomSheet<Content>: View
     // MARK: Properties - Appearance
     private let appearance: VBottomSheetAppearance
     
-    @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    
     @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     @Environment(\.modalPresenterSafeAreaInsets) private var safeAreaInsets: EdgeInsets

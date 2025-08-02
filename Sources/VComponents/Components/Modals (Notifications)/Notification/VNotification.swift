@@ -17,7 +17,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     private let appearance: VNotificationAppearance
     
     @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
     @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize

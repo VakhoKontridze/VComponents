@@ -15,9 +15,8 @@ import VCore
 struct VToast: View {
     // MARK: Properties - Appearance
     private let appearance: VToastAppearance
-
+    
     @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize

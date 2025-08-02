@@ -16,7 +16,6 @@ struct VSideBar<Content>: View where Content: View {
     private let appearance: VSideBarAppearance
 
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
     @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize

@@ -15,10 +15,6 @@ struct VModal<Content>: View
     // MARK: Properties - Appearance
     private let appearance: VModalAppearance
     
-    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
-    @Environment(\.displayScale) private var displayScale: CGFloat
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    
     @Environment(\.modalPresenterInterfaceOrientation) private var interfaceOrientation: PlatformInterfaceOrientation
     @Environment(\.modalPresenterContainerSize) private var containerSize: CGSize
     
