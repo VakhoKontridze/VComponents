@@ -131,11 +131,11 @@ public struct VToastAppearance: Sendable {
     /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - Haptic
-#if os(iOS)
-    /// Haptic feedback type.
-    public var haptic: UINotificationFeedbackGenerator.FeedbackType?
-#endif
+    // MARK: Properties - Sensory Feedback
+    /// Sensory feedback.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var sensoryFeedback: SensoryFeedback?
 
     // MARK: Initializers
     /// Initializes appearance with default values.
@@ -295,10 +295,7 @@ extension VToastAppearance {
         var appearance: Self = .init()
         
         appearance.applyInfoColorScheme()
-        
-#if os(iOS)
-        appearance.haptic = .success
-#endif
+        appearance.sensoryFeedback = .success
         
         return appearance
     }
@@ -308,10 +305,7 @@ extension VToastAppearance {
         var appearance: Self = .init()
         
         appearance.applySuccessColorScheme()
-        
-#if os(iOS)
-        appearance.haptic = .success
-#endif
+        appearance.sensoryFeedback = .success
         
         return appearance
     }
@@ -321,10 +315,7 @@ extension VToastAppearance {
         var appearance: Self = .init()
         
         appearance.applyWarningColorScheme()
-        
-#if os(iOS)
-        appearance.haptic = .warning
-#endif
+        appearance.sensoryFeedback = .warning
         
         return appearance
     }
@@ -334,10 +325,7 @@ extension VToastAppearance {
         var appearance: Self = .init()
         
         appearance.applyErrorColorScheme()
-        
-#if os(iOS)
-        appearance.haptic = .error
-#endif
+        appearance.sensoryFeedback = .error
         
         return appearance
     }

@@ -71,6 +71,9 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     }
     // MARK: Properties - Label
     private let label: VStretchedToggleButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VStretchedToggleButton` with state and title.
@@ -129,8 +132,8 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 state.setNextState()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VStretchedToggleButtonInternalState = internalState(baseButtonState)
@@ -148,6 +151,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                     }
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
 
     private func labelView(
@@ -235,13 +239,6 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

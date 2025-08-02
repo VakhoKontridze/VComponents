@@ -40,6 +40,9 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VPlainButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VPlainButton` with action and title.
@@ -98,8 +101,8 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 action()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
@@ -108,6 +111,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
                     .contentShape(.rect) // Registers gestures even when clear
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private func labelView(
@@ -168,15 +172,6 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(appearance.labelImageFont)
             .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-    }
-    
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

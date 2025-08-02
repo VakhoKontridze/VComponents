@@ -69,6 +69,9 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
 
     // MARK: Properties - Label
     private let label: VRectangularToggleButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VRectangularToggleButton` with state and title.
@@ -113,8 +116,8 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 state.setNextState()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VRectangularToggleButtonInternalState = internalState(baseButtonState)
@@ -133,6 +136,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                     }
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
 
     private func labelView(
@@ -204,15 +208,6 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

@@ -56,6 +56,9 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VCheckBoxLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VCheckBox` with state.
@@ -122,6 +125,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                 }
             }
         }
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private var checkBoxView: some View {
@@ -173,8 +177,8 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 state.setNextState()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VCheckBoxInternalState = internalState(baseButtonState)
@@ -199,13 +203,6 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
         case .indeterminate, .pressedIndeterminate: appearance.checkmarkImageIndeterminate
         case .disabled: nil
         }
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

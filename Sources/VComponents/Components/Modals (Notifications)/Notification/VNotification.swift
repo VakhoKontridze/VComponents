@@ -40,6 +40,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Properties - Swipe
     // Prevents `dismissFromSwipe` being called multiples times during active drag, which can break the animation.
     @State private var isBeingDismissedFromSwipe: Bool = false
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     init(
@@ -58,6 +61,8 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             .onReceive(presentationMode.presentPublisher, perform: animateIn)
             .onReceive(presentationMode.dismissPublisher, perform: animateOut)
             //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
+        
+            .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
 
     private var notificationView: some View {
@@ -267,13 +272,15 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     // MARK: Lifecycle Animations
     private func animateIn() {
-        playHapticEffect()
-
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true },
             completion: dismissFromTimeout
         )
+        
+        Task { @MainActor in
+            sensoryFeedbackTrigger()
+        }
     }
 
     private func animateOut(
@@ -319,13 +326,6 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
     private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: height)
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playNotification(appearance.haptic)
-#endif
     }
 }
 

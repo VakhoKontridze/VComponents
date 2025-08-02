@@ -122,9 +122,7 @@ public struct VTextFieldAppearance: Sendable {
 
         appearance.hitBox = EdgeInsets()
 
-#if os(iOS) || os(watchOS)
-        appearance.haptic = nil
-#endif
+        appearance.sensoryFeedback = nil
 
         return appearance
     }()
@@ -152,9 +150,7 @@ public struct VTextFieldAppearance: Sendable {
 
         appearance.hitBox = EdgeInsets()
 
-#if os(iOS) || os(watchOS)
-        appearance.haptic = nil
-#endif
+        appearance.sensoryFeedback = nil
 
         return appearance
     }()

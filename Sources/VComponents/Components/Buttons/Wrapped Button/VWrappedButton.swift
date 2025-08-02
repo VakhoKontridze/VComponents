@@ -42,6 +42,9 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VWrappedButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VWrappedButton` with action and title.
@@ -100,8 +103,8 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 action()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VWrappedButtonInternalState = internalState(baseButtonState)
@@ -115,6 +118,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                     .padding(appearance.hitBox)
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private func labelView(
@@ -201,15 +205,6 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
         }
-    }
-    
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

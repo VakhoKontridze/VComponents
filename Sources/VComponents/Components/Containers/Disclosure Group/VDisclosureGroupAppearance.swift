@@ -157,9 +157,7 @@ public struct VDisclosureGroupAppearance: Sendable {
 
         appearance.hitBox = EdgeInsets()
 
-#if os(iOS)
-        appearance.haptic = nil
-#endif
+        appearance.sensoryFeedback = nil
 
         return appearance
     }()

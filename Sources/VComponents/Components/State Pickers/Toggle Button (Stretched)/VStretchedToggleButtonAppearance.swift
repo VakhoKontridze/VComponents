@@ -203,11 +203,19 @@ public struct VStretchedToggleButtonAppearance: Sendable {
     /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - Haptic
+    // MARK: Properties - Sensory Feedback
+    /// Sensory feedback.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var sensoryFeedback: SensoryFeedback? = {
 #if os(iOS)
-    /// Haptic feedback style.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+        SensoryFeedback.impact(weight: .light)
+#elseif os(macOS)
+        nil
+#else
+        fatalError() // Not supported
 #endif
+    }()
 
     // MARK: Initializers
     /// Initializes appearance with default values.

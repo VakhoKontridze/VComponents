@@ -46,6 +46,9 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private let labelImage: Image
 
     private let caption: VRectangularCaptionButtonCaption<CustomCaption>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VRectangularCaptionButton` with action, label image, and caption title.
@@ -112,8 +115,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 action()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VRectangularCaptionButtonInternalState = internalState(baseButtonState)
@@ -125,6 +128,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 .contentShape(.rect) // Registers gestures even when clear
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private func rectangleView(
@@ -247,15 +251,6 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             .applyIfLet(appearance.captionImageOpacities) { $0.opacity($1.value(for: internalState)) }
             .font(appearance.captionImageFont)
             .applyIfLet(appearance.captionImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-    }
-    
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

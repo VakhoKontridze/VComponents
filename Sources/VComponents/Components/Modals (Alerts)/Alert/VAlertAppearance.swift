@@ -239,10 +239,8 @@ public struct VAlertAppearance: Sendable {
 #endif
     }()
 
-#if os(iOS)
-    /// Button haptic feedback style.
-    public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle?
-#endif
+    /// Button sensory feedback.
+    public var buttonSensoryFeedback: SensoryFeedback?
 
     // MARK: Properties - Alert Content - Button - Primary
     /// Primary button background colors.
@@ -267,9 +265,7 @@ public struct VAlertAppearance: Sendable {
         appearance.labelTextFont = buttonTextFont
         appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
-#if os(iOS)
-        appearance.haptic = buttonHaptic
-#endif
+        appearance.sensoryFeedback = buttonSensoryFeedback
 
         return appearance
     }
@@ -301,9 +297,7 @@ public struct VAlertAppearance: Sendable {
         appearance.labelTextFont = buttonTextFont
         appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
-#if os(iOS)
-        appearance.haptic = buttonHaptic
-#endif
+        appearance.sensoryFeedback = buttonSensoryFeedback
 
         return appearance
     }
@@ -336,7 +330,7 @@ public struct VAlertAppearance: Sendable {
         appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
 
 #if os(iOS)
-        appearance.haptic = buttonHaptic
+        appearance.sensoryFeedback = buttonSensoryFeedback
 #endif
 
         return appearance

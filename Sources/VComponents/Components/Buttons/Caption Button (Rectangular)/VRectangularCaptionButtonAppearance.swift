@@ -270,14 +270,11 @@ public struct VRectangularCaptionButtonAppearance: Sendable {
     /// Shadow offset.
     public var shadowOffset: CGPoint = .zero
 
-    // MARK: Properties - Haptic
-#if os(iOS)
-    /// Haptic feedback style.
-    public var haptic: UIImpactFeedbackGenerator.FeedbackStyle?
-#elseif os(watchOS)
-    /// Haptic feedback type.
-    public var haptic: WKHapticType?
-#endif
+    // MARK: Properties - Sensory Feedback
+    /// Sensory feedback.
+    ///
+    /// Changing this property conditionally will cause view state to be reset.
+    public var sensoryFeedback: SensoryFeedback?
     
     // MARK: Initializers
     /// Initializes appearance with default values.

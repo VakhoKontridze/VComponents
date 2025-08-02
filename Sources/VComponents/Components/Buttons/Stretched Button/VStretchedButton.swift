@@ -44,6 +44,9 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VStretchedButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VStretchedButton` with action and title.
@@ -102,8 +105,8 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 action()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VStretchedButtonInternalState = internalState(baseButtonState)
@@ -116,6 +119,7 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
                     .clipShape(.rect(cornerRadius: appearance.cornerRadius))
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private func labelView(
@@ -203,15 +207,6 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
         }
-    }
-    
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

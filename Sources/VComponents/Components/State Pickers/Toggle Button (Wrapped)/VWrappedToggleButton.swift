@@ -69,6 +69,9 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VWrappedToggleButtonLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VWrappedToggleButton` with state and title.
@@ -127,8 +130,8 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 state.setNextState()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VWrappedToggleButtonInternalState = internalState(baseButtonState)
@@ -147,6 +150,7 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                     }
             }
         )
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
 
     private func labelView(
@@ -233,15 +237,6 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
                 .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
 }
 

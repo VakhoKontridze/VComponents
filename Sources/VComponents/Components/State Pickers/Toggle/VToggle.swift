@@ -55,6 +55,9 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
     // MARK: Properties - Label
     private let label: VToggleLabel<CustomLabel>
+    
+    // MARK: Properties - Sensory Feedback
+    @State private var sensoryFeedbackTrigger: SensoryFeedbackTrigger = .init()
 
     // MARK: Initializers
     /// Initializes `VToggle` with state.
@@ -121,6 +124,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 }
             }
         }
+        .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
     
     private var toggleView: some View {
@@ -163,8 +167,8 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
         SwiftUIBaseButton(
             appearance: appearance.baseButtonAppearance,
             action: {
-                playHapticEffect()
                 state.setNextState()
+                sensoryFeedbackTrigger()
             },
             label: { baseButtonState in
                 let internalState: VToggleInternalState = internalState(baseButtonState)
@@ -177,15 +181,6 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                     }
             }
         )
-    }
-
-    // MARK: Haptics
-    private func playHapticEffect() {
-#if os(iOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#elseif os(watchOS)
-        HapticManager.shared.playImpact(appearance.haptic)
-#endif
     }
     
     // MARK: Thumb Position
