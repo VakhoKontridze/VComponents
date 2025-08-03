@@ -40,17 +40,17 @@ extension View {
     ///     
     public func vAlert(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
         parameters: Binding<VAlertParameters?>
     ) -> some View {
-        self.vAlert(
-            link: link,
-            appearance: appearance,
-            item: parameters,
-            title: { $0.title },
-            message: { $0.message },
-            actions: { $0.buttons() }
-        )
+        self
+            .vAlert(
+                link: link,
+                appearance: { $0.appearance },
+                item: parameters,
+                title: { $0.title },
+                message: { $0.message },
+                actions: { $0.buttons() }
+            )
     }
 
     /// Presents `VAlert` when `parameters` is non-`nil`.
@@ -91,20 +91,20 @@ extension View {
     ///
     public func vAlert<Content>(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
         parameters: Binding<VAlertParameters?>,
         @ViewBuilder content: @escaping (VAlertParameters) -> Content
     ) -> some View
         where Content: View
     {
-        self.vAlert(
-            link: link,
-            appearance: appearance,
-            item: parameters,
-            title: { $0.title },
-            message: { $0.message },
-            content: content,
-            actions: { $0.buttons() }
-        )
+        self
+            .vAlert(
+                link: link,
+                appearance: { $0.appearance },
+                item: parameters,
+                title: { $0.title },
+                message: { $0.message },
+                content: content,
+                actions: { $0.buttons() }
+            )
     }
 }

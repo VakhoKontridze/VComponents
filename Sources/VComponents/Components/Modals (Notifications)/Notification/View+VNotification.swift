@@ -116,56 +116,46 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item>(
         link: ModalPresenterLink,
-        appearance: VNotificationAppearance = .init(),
+        appearance: @escaping (Item) -> VNotificationAppearance = { _ in VNotificationAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         image: @escaping (Item) -> Image?,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
-    ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
+    ) -> some View
+        where Item: Equatable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VNotification<Never>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    content: .imageAndTitleAndMessage(
-                        image: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                                image(item)
-                            } else {
-                                 nil
-                            }
-                        }(),
-                        title: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                                title(item)
-                            } else {
-                                nil
-                            }
-                        }(),
-                        message: {
-                            if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                                message(item)
-                            } else {
-                                nil
-                            }
-                        }()
-                    )
-                )
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VNotificationAppearance = item.map(appearance) ?? VNotificationAppearance()
+                let image: Image? = item.flatMap(image)
+                let title: String? = item.flatMap(title)
+                let message: String? = item.flatMap(message)
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VNotification<Never>(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            content: .imageAndTitleAndMessage(
+                                image: image,
+                                title: title,
+                                message: message
+                            )
+                        )
+                    }
             }
     }
 
@@ -174,42 +164,40 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vNotification<Item, CustomContent>(
         link: ModalPresenterLink,
-        appearance: VNotificationAppearance = .init(),
+        appearance: @escaping (Item) -> VNotificationAppearance = { _ in VNotificationAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         @ViewBuilder content customContent: @escaping (Item) -> CustomContent
     ) -> some View
-        where CustomContent: View
+        where
+            Item: Equatable,
+            CustomContent: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VNotification(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    content: .custom(
-                        builder: {
-                            Group {
-                                if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                                    customContent(item)
-                                }
-                            }
-                        }
-                    )
-                )
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VNotificationAppearance = item.map(appearance) ?? VNotificationAppearance()
+                let content: VNotificationContent = .custom(builder: { Group { item.map { customContent($0) } } })
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VNotification(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            content: content
+                        )
+                    }
             }
     }
 }

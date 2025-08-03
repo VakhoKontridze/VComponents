@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VNotificationAppearance: Sendable {
+public struct VNotificationAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
         var appearance: ModalPresenterLinkAppearance = .init()
@@ -234,7 +234,7 @@ public struct VNotificationAppearance: Sendable {
     public init() {}
 
     // MARK: Widths
-    /// Notification width group.
+    /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
@@ -259,7 +259,7 @@ public struct VNotificationAppearance: Sendable {
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
-    public struct DismissType: OptionSet, Sendable {
+    public struct DismissType: OptionSet, Equatable, Sendable {
         // MARK: Options
         private enum Options: Int {
             case timeout

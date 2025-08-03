@@ -21,7 +21,7 @@ public struct VModalAppearance: Sendable {
     /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootAppearance`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
     
-    /// Modal size group.
+    /// Size group.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -159,15 +159,15 @@ public struct VModalAppearance: Sendable {
     public init() {}
 
     // MARK: Size Group
-    /// Modal size group.
+    /// Size group.
     public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
-    /// Modal size.
+    /// Size.
     public typealias Size = ModalComponentSize<Dimension, Dimension>
 
     // MARK: Dimension
-    /// Modal dimension.
+    /// Dimension.
     public enum Dimension: Sendable {
         // MARK: Cases
         /// Fixed dimension.

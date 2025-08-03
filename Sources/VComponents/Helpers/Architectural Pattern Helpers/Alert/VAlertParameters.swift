@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import VCore
 
 /// Parameters for presenting a `VAlert`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertParameters {
+public struct VAlertParameters: Equatable {
     // MARK: Properties
+    /// Appearance.
+    public var appearance: VAlertAppearance
+    
     /// Title.
     public var title: String
     
@@ -29,25 +33,29 @@ public struct VAlertParameters {
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
     public init(
+        appearance: VAlertAppearance = .init(),
         title: String,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol],
         attributes: [String: Any?] = [:]
     ) {
+        self.appearance = appearance
         self.title = title
         self.message = message
         self.buttons = buttons
         self.attributes = attributes
     }
     
-    /// Initializes `VAlertParameters` with "ok" action.
+    /// Initializes `VAlertParameters` with action.
     public init(
+        appearance: VAlertAppearance = .init(),
         title: String,
         message: String?,
         completion: (@MainActor () -> Void)?,
         attributes: [String: Any?] = [:]
     ) {
         self.init(
+            appearance: appearance,
             title: title,
             message: message,
             actions: {
@@ -61,13 +69,15 @@ public struct VAlertParameters {
         )
     }
     
-    /// Initializes `VAlertParameters` with error and "ok" action.
+    /// Initializes `VAlertParameters` with error and action.
     public init(
+        appearance: VAlertAppearance = .init(),
         error: any Error,
         completion: (@MainActor () -> Void)?,
         attributes: [String: Any?] = [:]
     ) {
         self.init(
+            appearance: appearance,
             title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,
             message: error.localizedDescription,
             actions: {
@@ -79,5 +89,10 @@ public struct VAlertParameters {
             },
             attributes: attributes
         )
+    }
+    
+    // MARK: Equatable
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        isEqual(lhs, to: rhs, by: \.appearance, \.title, \.message)
     }
 }

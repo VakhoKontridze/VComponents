@@ -24,7 +24,7 @@ public struct VBottomSheetAppearance: Sendable {
     /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootAppearance`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
 
-    /// Bottom sheet size group.
+    /// Size group.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -185,11 +185,11 @@ public struct VBottomSheetAppearance: Sendable {
     public init() {}
 
     // MARK: Size Group
-    /// Bottom sheet size group..
+    /// Size group.
     public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
-    /// Bottom sheet size.
+    /// Size.
     @MemberwiseInitializable(
         comment: "/// Initializes `Size`."
     )
@@ -202,7 +202,7 @@ public struct VBottomSheetAppearance: Sendable {
     }
 
     // MARK: Heights
-    /// Bottom sheet heights.
+    /// Heights.
     ///
     /// Values used here may not represent actual values used in Bottom Sheet.
     /// If `ideal` is greater than `max`, it will be clamped to `max`.

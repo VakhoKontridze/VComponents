@@ -77,38 +77,38 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<Item>(
         link: ModalPresenterLink,
-        appearance: VToastAppearance = .init(),
+        appearance: @escaping (Item) -> VToastAppearance = { _ in VToastAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (Item) -> String
-    ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
+    ) -> some View
+        where Item: Equatable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VToast(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    text: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            text(item)
-                        } else {
-                            ""
-                        }
-                    }()
-                )
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VToastAppearance = item.map(appearance) ?? VToastAppearance()
+                let text: String = item.flatMap(text) ?? ""
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VToast(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            text: text
+                        )
+                    }
             }
     }
 }
@@ -123,41 +123,39 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vToast<E>(
         link: ModalPresenterLink,
-        appearance: VToastAppearance = .init(),
+        appearance: @escaping (E) -> VToastAppearance = { _ in VToastAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (E) -> String
     ) -> some View
-        where E: Error
+        where E: Error & Equatable
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
             set: { if !$0 { isPresented.wrappedValue = false } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VToast(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    text: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            text(error)
-                        } else {
-                            ""
-                        }
-                    }()
-                )
+            .withLastNonNil(error) { (view, error) in
+                let appearance: VToastAppearance = error.map(appearance) ?? VToastAppearance()
+                let text: String = error.flatMap(text) ?? ""
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VToast(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            text: text
+                        )
+                    }
             }
     }
 }

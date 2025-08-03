@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VToastAppearance: Sendable {
+public struct VToastAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
         var appearance: ModalPresenterLinkAppearance = .init()
@@ -142,11 +142,11 @@ public struct VToastAppearance: Sendable {
     public init() {}
 
     // MARK: Width Group
-    /// Toast width group.
+    /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
-    /// Toast width.
+    /// Width.
     public struct Width: Equatable, Sendable {
         // MARK: Properties
         let storage: Storage
@@ -228,7 +228,7 @@ public struct VToastAppearance: Sendable {
 
     // MARK: Corner Radius Type
     /// Corner radius.
-    public enum CornerRadiusType: Sendable {
+    public enum CornerRadiusType: Equatable, Sendable {
         // MARK: Cases
         /// Capsule.
         ///
@@ -245,7 +245,7 @@ public struct VToastAppearance: Sendable {
 
     // MARK: Text Line Type
     /// Text line type.
-    public enum TextLineType: Sendable {
+    public enum TextLineType: Equatable, Sendable {
         // MARK: Cases
         /// Single-line.
         case singleLine
@@ -272,7 +272,7 @@ public struct VToastAppearance: Sendable {
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
-    public struct DismissType: OptionSet, Sendable {
+    public struct DismissType: OptionSet, Equatable, Sendable {
         // MARK: Options
         private enum Options: Int {
             case timeout

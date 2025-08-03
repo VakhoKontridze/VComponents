@@ -105,38 +105,40 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vSideBar<Item, Content>(
         link: ModalPresenterLink,
-        appearance: VSideBarAppearance = .init(),
+        appearance: @escaping (Item) -> VSideBarAppearance = { _ in VSideBarAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Content: View
+        where
+            Item: Equatable,
+            Content: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VSideBar<Content?>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    content: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            content(item)
-                        }
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VSideBarAppearance = item.map(appearance) ?? VSideBarAppearance()
+                let content: () -> Content? = { item.map(content) }
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VSideBar(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            content: content
+                        )
                     }
-                )
             }
     }
 }

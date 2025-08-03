@@ -18,6 +18,9 @@ import SwiftUI
 ///
 public struct VSpinnerParameters {
     // MARK: Properties
+    /// Appearance.
+    public var appearance: VContinuousSpinnerAppearance
+    
     /// Indicates if interaction is enabled.
     public var isInteractionEnabled: Bool
 
@@ -27,9 +30,11 @@ public struct VSpinnerParameters {
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
     public init(
+        appearance: VContinuousSpinnerAppearance = .init(),
         isInteractionEnabled: Bool = true,
         attributes: [String: Any?] = [:]
     ) {
+        self.appearance = appearance
         self.isInteractionEnabled = isInteractionEnabled
         self.attributes = attributes
     }

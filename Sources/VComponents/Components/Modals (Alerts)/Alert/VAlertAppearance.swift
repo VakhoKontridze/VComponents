@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertAppearance: Sendable {
+public struct VAlertAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
         var appearance: ModalPresenterLinkAppearance = .init()
@@ -23,7 +23,7 @@ public struct VAlertAppearance: Sendable {
     /// Preferred dimming color, that overrides a shared color from `ModalPresenterRootAppearance`, when only this modal is presented.
     public var preferredDimmingViewColor: Color?
 
-    /// Alert width group.
+    /// Width group.
     public var widthGroup: WidthGroup = {
 #if os(iOS)
         WidthGroup(
@@ -367,12 +367,12 @@ public struct VAlertAppearance: Sendable {
     public init() {}
 
     // MARK: Width Group
-    /// Alert width group.
+    /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
     // MARK: Width
-    /// Alert width.
-    public enum Width: Sendable {
+    /// Width.
+    public enum Width: Equatable, Sendable {
         // MARK: Cases
         /// Fixed width.
         case fixed(width: AbsoluteFractionMeasurement)

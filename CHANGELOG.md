@@ -70,6 +70,13 @@ VToast
 
 - Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
 
+Helpers - Architectural Pattern Helpers
+
+- `VAlertAppearance` has been moved into `VAlertAppearance`
+- `VNotification` can now be presented with parameters
+- `VToast` can now be presented with parameters
+- `VSpinnerAppearance` has been moved into `VSpinnerParameters`
+
 ### [7.2.5(76)](https://github.com/VakhoKontridze/VComponents/releases/tag/7.2.5) — 2025 05 25
 
 General

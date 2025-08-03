@@ -30,7 +30,7 @@ public struct VSideBarAppearance: Sendable {
     /// Use `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarAppearance` instead.
     public var presentationEdge: Edge = .leading
 
-    /// Side bar size group.
+    /// Size group.
     public var sizeGroup: SizeGroup = {
 #if os(iOS)
         SizeGroup(
@@ -158,11 +158,11 @@ public struct VSideBarAppearance: Sendable {
     public init() {}
 
     // MARK: Size Group
-    /// Side bar size group.
+    /// Size group.
     public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
     // MARK: Size
-    /// Side bar size.
+    /// Size.
     public typealias Size = ModalComponentSize<AbsoluteFractionMeasurement, AbsoluteFractionMeasurement>
 
     // MARK: Dismiss Type

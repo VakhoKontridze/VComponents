@@ -142,38 +142,40 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vModal<Item, Content>(
         link: ModalPresenterLink,
-        appearance: VModalAppearance = .init(),
+        appearance: @escaping (Item) -> VModalAppearance = { _ in VModalAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Content: View
+        where
+            Item: Equatable,
+            Content: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VModal<Content?>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    content: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            content(item)
-                        }
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VModalAppearance = item.map(appearance) ?? VModalAppearance()
+                let content: () -> Content? = { item.map(content) }
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VModal(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            content: content
+                        )
                     }
-                )
             }
     }
 }

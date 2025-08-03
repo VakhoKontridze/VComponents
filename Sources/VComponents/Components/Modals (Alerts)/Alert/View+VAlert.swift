@@ -116,55 +116,45 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item>(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
+        appearance: @escaping (Item) -> VAlertAppearance = { _ in VAlertAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
-    ) -> some View {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
+    ) -> some View
+        where Item: Equatable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VAlert<Never>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    title: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            title(item)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    message: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            message(item)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    content: VAlertContent.empty,
-                    buttons: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            buttons(item)
-                        } else {
-                            []
-                        }
-                    }()
-                )
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VAlertAppearance = item.map(appearance) ?? VAlertAppearance()
+                let title: String = item.flatMap(title) ?? ""
+                let message: String = item.flatMap(message) ?? ""
+                let buttons: [any VAlertButtonProtocol] = item.map(buttons) ?? []
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VAlert<Never>(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            title: title,
+                            message: message,
+                            content: VAlertContent.empty,
+                            buttons: buttons
+                        )
+                    }
             }
     }
     
@@ -173,7 +163,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<Item, Content>(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
+        appearance: @escaping (Item) -> VAlertAppearance = { _ in VAlertAppearance() },
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -182,55 +172,40 @@ extension View {
         @ViewBuilder content: @escaping (Item) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
-        where Content: View
+        where
+            Item: Equatable,
+            Content: View
     {
-        item.wrappedValue.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VAlert<Content>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    title: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            title(item)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    message: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            message(item)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    content: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            VAlertContent.content(content: { content(item) })
-                        } else {
-                            VAlertContent.empty
-                        }
-                    }(),
-                    buttons: {
-                        if let item = item.wrappedValue ?? ModalPresenterDataSourceCache.shared.get(link: link) as? Item {
-                            buttons(item)
-                        } else {
-                            []
-                        }
-                    }()
-                )
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VAlertAppearance = item.map(appearance) ?? VAlertAppearance()
+                let title: String = item.flatMap(title) ?? ""
+                let message: String = item.flatMap(message) ?? ""
+                let content: VAlertContent = item.map { item in .content(content: { content(item) }) } ?? .empty
+                let buttons: [any VAlertButtonProtocol] = item.map(buttons) ?? []
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VAlert(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            title: title,
+                            message: message,
+                            content: content,
+                            buttons: buttons
+                        )
+                    }
             }
     }
 }
@@ -244,7 +219,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E>(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
+        appearance: @escaping (E) -> VAlertAppearance = { _ in VAlertAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -253,49 +228,37 @@ extension View {
         message: @escaping (E) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButtonProtocol]
     ) -> some View
-        where E: Error
+        where E: Error & Equatable
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
             set: { if !$0 { isPresented.wrappedValue = false } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VAlert<Never>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    title: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            title(error)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    message: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            message(error)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    content: VAlertContent.empty,
-                    buttons: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            buttons(error)
-                        } else {
-                            []
-                        }
-                    }()
-                )
+            .withLastNonNil(error) { (view, error) in
+                let appearance: VAlertAppearance = error.map(appearance) ?? VAlertAppearance()
+                let title: String = error.flatMap(title) ?? ""
+                let message: String = error.flatMap(message) ?? ""
+                let buttons: [any VAlertButtonProtocol] = error.map(buttons) ?? []
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VAlert<Never>(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            title: title,
+                            message: message,
+                            content: VAlertContent.empty,
+                            buttons: buttons
+                        )
+                    }
             }
     }
     
@@ -304,7 +267,7 @@ extension View {
     /// For additional info, refer to method with `Bool` presentation flag.
     public func vAlert<E, Content>(
         link: ModalPresenterLink,
-        appearance: VAlertAppearance = .init(),
+        appearance: @escaping (E) -> VAlertAppearance = { _ in VAlertAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -315,56 +278,39 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping (E) -> [VAlertButton]
     ) -> some View
         where
-            E: Error,
+            E: Error & Equatable,
             Content: View
     {
-        error.map { ModalPresenterDataSourceCache.shared.set(link: link, value: $0) }
-
         let isPresented: Binding<Bool> = .init(
             get: { isPresented.wrappedValue && error != nil },
             set: { if !$0 { isPresented.wrappedValue = false } }
         )
 
         return self
-            .modalPresenterLink(
-                link: link,
-                appearance: appearance.modalPresenterLinkAppearance,
-                isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
-            ) {
-                VAlert<Content>(
-                    appearance: appearance,
-                    isPresented: isPresented,
-                    title: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            title(error)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    message: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            message(error)
-                        } else {
-                            ""
-                        }
-                    }(),
-                    content: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            VAlertContent.content(content: { content(error) })
-                        } else {
-                            VAlertContent.empty
-                        }
-                    }(),
-                    buttons: {
-                        if let error = error ?? ModalPresenterDataSourceCache.shared.get(link: link) as? E {
-                            buttons(error)
-                        } else {
-                            []
-                        }
-                    }()
-                )
+            .withLastNonNil(error) { (view, error) in
+                let appearance: VAlertAppearance = error.map(appearance) ?? VAlertAppearance()
+                let title: String = error.flatMap(title) ?? ""
+                let message: String = error.flatMap(message) ?? ""
+                let content: VAlertContent = error.map { error in .content(content: { content(error) }) } ?? .empty
+                let buttons: [any VAlertButtonProtocol] = error.map(buttons) ?? []
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler
+                    ) {
+                        VAlert(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            title: title,
+                            message: message,
+                            content: content,
+                            buttons: buttons
+                        )
+                    }
             }
     }
 }

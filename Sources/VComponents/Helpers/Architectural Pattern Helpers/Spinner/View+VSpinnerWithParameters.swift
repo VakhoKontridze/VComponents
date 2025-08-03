@@ -19,14 +19,13 @@ extension View {
     ///     }
     ///
     public func vContinuousSpinner(
-        appearance: VContinuousSpinnerAppearance = .init(),
         parameters: VSpinnerParameters?
     ) -> some View {
         self
             .blocksHitTesting(parameters?.isInteractionEnabled == false)
             .overlay {
-                if parameters != nil {
-                    VContinuousSpinner(appearance: appearance)
+                if let parameters {
+                    VContinuousSpinner(appearance: parameters.appearance)
                 }
             }
     }
