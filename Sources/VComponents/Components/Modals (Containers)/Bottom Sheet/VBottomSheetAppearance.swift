@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VBottomSheetAppearance: Sendable {
+public struct VBottomSheetAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
         var appearance: ModalPresenterLinkAppearance = .init()

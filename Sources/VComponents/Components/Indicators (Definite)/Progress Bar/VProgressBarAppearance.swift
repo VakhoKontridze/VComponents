@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 /// Model that describes appearance.
-public struct VProgressBarAppearance: Sendable {
+public struct VProgressBarAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight

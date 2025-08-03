@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 /// Model that describes appearance.
-public struct VWrappingMarqueeAppearance: Sendable {
+public struct VWrappingMarqueeAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Scroll direction.
     public var scrollDirection: LayoutDirection = .leftToRight

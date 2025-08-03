@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VCheckBoxAppearance: Sendable {
+public struct VCheckBoxAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var baseButtonAppearance: SwiftUIBaseButtonAppearance {
         var appearance: SwiftUIBaseButtonAppearance = .init()

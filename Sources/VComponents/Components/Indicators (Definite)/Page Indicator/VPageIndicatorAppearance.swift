@@ -13,7 +13,7 @@ import VCore
     accessLevelModifier: .internal,
     parameterDefaultValues: ["*": .omit]
 )
-public struct VPageIndicatorAppearance: Sendable {
+public struct VPageIndicatorAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight

@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VRadioButtonAppearance: Sendable {
+public struct VRadioButtonAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var baseButtonAppearance: SwiftUIBaseButtonAppearance {
         var appearance: SwiftUIBaseButtonAppearance = .init()

@@ -12,7 +12,7 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct VRectangularCaptionButtonAppearance: Sendable {
+public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var baseButtonAppearance: SwiftUIBaseButtonAppearance {
         var appearance: SwiftUIBaseButtonAppearance = .init()

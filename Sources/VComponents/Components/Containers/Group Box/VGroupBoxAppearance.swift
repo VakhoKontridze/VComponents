@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 /// Model that describes appearance.
-public struct VGroupBoxAppearance: Sendable {
+public struct VGroupBoxAppearance: Equatable, Sendable {
     // MARK: Properties - Corners
     /// Corner radii.
     public var cornerRadii: RectangleCornerRadii = {

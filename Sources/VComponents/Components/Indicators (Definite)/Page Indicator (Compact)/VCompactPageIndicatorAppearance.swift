@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 /// Model that describes appearance.
-public struct VCompactPageIndicatorAppearance: Sendable {
+public struct VCompactPageIndicatorAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Direction.
     ///

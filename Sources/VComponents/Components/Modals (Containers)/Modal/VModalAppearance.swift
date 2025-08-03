@@ -10,7 +10,7 @@ import VCore
 
 /// Model that describes appearance.
 @available(watchOS, unavailable)
-public struct VModalAppearance: Sendable {
+public struct VModalAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var modalPresenterLinkAppearance: ModalPresenterLinkAppearance {
         var appearance: ModalPresenterLinkAppearance = .init()
@@ -168,7 +168,7 @@ public struct VModalAppearance: Sendable {
 
     // MARK: Dimension
     /// Dimension.
-    public enum Dimension: Sendable {
+    public enum Dimension: Equatable, Sendable {
         // MARK: Cases
         /// Fixed dimension.
         case fixed(dimension: AbsoluteFractionMeasurement)
@@ -197,7 +197,7 @@ public struct VModalAppearance: Sendable {
     // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
-    public struct DismissType: OptionSet, Sendable {
+    public struct DismissType: OptionSet, Equatable, Sendable {
         // MARK: Options
         private enum Options: Int {
             case backTap

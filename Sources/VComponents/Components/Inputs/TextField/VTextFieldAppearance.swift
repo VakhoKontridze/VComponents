@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VTextFieldAppearance: Sendable {
+public struct VTextFieldAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Height.
     public var height: CGFloat = 50
@@ -203,7 +203,7 @@ public struct VTextFieldAppearance: Sendable {
 
     // MARK: Style
     /// Style.
-    public enum Style: Int, Sendable, CaseIterable {
+    public enum Style: Int, Equatable, Sendable, CaseIterable {
         // MARK: Cases
         /// Standard.
         case standard

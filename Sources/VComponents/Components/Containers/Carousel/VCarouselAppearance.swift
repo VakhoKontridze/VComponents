@@ -10,7 +10,7 @@ import VCore
 
 /// Model that describes appearance.
 @available(tvOS, unavailable)
-public struct VCarouselAppearance: Sendable {
+public struct VCarouselAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Indicates if scrolling is enabled.
     public var isScrollingEnabled: Bool = true

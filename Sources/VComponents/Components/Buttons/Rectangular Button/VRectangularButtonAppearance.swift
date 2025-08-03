@@ -11,7 +11,7 @@ import VCore
 /// Model that describes appearance.
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
-public struct VRectangularButtonAppearance: Sendable {
+public struct VRectangularButtonAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var baseButtonAppearance: SwiftUIBaseButtonAppearance {
         var appearance: SwiftUIBaseButtonAppearance = .init()

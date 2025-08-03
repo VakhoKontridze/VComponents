@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VStretchedIndicatorStaticPagerTabViewAppearance: Sendable {
+public struct VStretchedIndicatorStaticPagerTabViewAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Spacing between tab bar and tab view.
     public var tabBarAndTabViewSpacing: CGFloat = 0

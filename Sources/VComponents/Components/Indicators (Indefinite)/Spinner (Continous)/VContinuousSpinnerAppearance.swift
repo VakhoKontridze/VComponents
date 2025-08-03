@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Model that describes appearance.
-public struct VContinuousSpinnerAppearance: Sendable {
+public struct VContinuousSpinnerAppearance: Equatable, Sendable {
     // MARK: Properties
     /// Dimension.
     public var dimension: CGFloat = {

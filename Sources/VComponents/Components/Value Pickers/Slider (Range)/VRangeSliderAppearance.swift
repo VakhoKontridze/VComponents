@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VRangeSliderAppearance: Sendable {
+public struct VRangeSliderAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Direction.
     public var direction: LayoutDirectionOmni = .leftToRight

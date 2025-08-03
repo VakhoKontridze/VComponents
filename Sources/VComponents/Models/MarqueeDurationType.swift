@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Marquee duration type.
-public enum MarqueeDurationType: Sendable {
+public enum MarqueeDurationType: Equatable, Sendable {
     // MARK: Cases
     /// Duration.
     case duration(Double)

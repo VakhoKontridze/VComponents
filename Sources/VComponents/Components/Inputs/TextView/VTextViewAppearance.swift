@@ -13,7 +13,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VTextViewAppearance: Sendable {
+public struct VTextViewAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Minimum height.
     public var minimumHeight: CGFloat = 50

@@ -12,7 +12,7 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VDisclosureGroupAppearance: Sendable {
+public struct VDisclosureGroupAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     var plainDisclosureGroupAppearance: PlainDisclosureGroupAppearance {
         var appearance: PlainDisclosureGroupAppearance = .init()

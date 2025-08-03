@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Model that describes appearance.
-public struct VFetchingAsyncImageAppearance: Sendable {
+public struct VFetchingAsyncImageAppearance: Equatable, Sendable {
     // MARK: Properties
     /// Placeholder color.
     public var placeholderColor: Color = .gray.opacity(0.3)

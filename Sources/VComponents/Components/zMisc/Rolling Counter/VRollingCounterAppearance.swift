@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 /// Model that describes appearance.
-public struct VRollingCounterAppearance: Sendable {
+public struct VRollingCounterAppearance: Equatable, Sendable {
     // MARK: Properties - Global
     /// Spacing between the components.
     public var spacing: CGFloat = 0
