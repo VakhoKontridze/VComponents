@@ -42,8 +42,6 @@ public struct VSliderAppearance: Equatable, Sendable {
 
     // MARK: Properties - Body
     /// Indicates if body is draggable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
     public var bodyIsDraggable: Bool = {
 #if os(iOS)
         false

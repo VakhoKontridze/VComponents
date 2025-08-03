@@ -112,15 +112,11 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
 
     /// Indicates if sheet resizes content based on its visible frame.
     ///
-    /// Changing this property conditionally will cause view state to be reset.
-    ///
     /// Can be used for scrollable content.
     /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
     public var autoresizesContent: Bool = false
 
     /// Indicates if bottom sheet can be resized by dragging outside the header.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
     ///
     /// Setting to `true` may cause issues with scrollable views.
     ///

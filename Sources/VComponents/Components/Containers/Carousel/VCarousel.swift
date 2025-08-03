@@ -154,9 +154,7 @@ public struct VCarousel<Data, ID, Content>: View
                 
                 .scrollDisabled(!appearance.isScrollingEnabled)
 
-                .applyIf(appearance.appliesSelectionAnimation) {
-                    $0.animation(appearance.selectionAnimation, value: selection)
-                }
+                .applyIf(appearance.appliesSelectionAnimation) { $0.animation(appearance.selectionAnimation, value: selection) }
 
                 .onFirstAppear {
                     Task { @MainActor in

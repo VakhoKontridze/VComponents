@@ -28,6 +28,12 @@ public struct VSlider: View {
     @Environment(\.displayScale) private var displayScale: CGFloat
     
     @State private var sliderSize: CGSize = .zero
+    
+    private var dragGesture: some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged(dragChanged)
+            .onEnded(dragEnded)
+    }
 
     // MARK: Properties - State
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -93,14 +99,7 @@ public struct VSlider: View {
             thumbView
         }
         .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
-        .applyIf(appearance.bodyIsDraggable) {
-            $0
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged(dragChanged)
-                        .onEnded(dragEnded)
-                )
-        }
+        .gesture(dragGesture, isEnabled: appearance.bodyIsDraggable)
         .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: value) }
     }
     
@@ -155,16 +154,8 @@ public struct VSlider: View {
                 maxHeight: appearance.direction.isHorizontal ? nil : CGFloat.infinity,
                 alignment: appearance.direction.toAlignment
             )
-            .applyIf(appearance.bodyIsDraggable) {
-                $0.allowsHitTesting(false)
-            } else: {
-                $0
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged(dragChanged)
-                            .onEnded(dragEnded)
-                    )
-            }
+            .allowsHitTesting(appearance.bodyIsDraggable ? false : true) // `true` is default value
+            .gesture(dragGesture, isEnabled: !appearance.bodyIsDraggable)
         }
     }
 

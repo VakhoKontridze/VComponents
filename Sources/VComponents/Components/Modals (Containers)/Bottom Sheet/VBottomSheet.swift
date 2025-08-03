@@ -26,15 +26,17 @@ struct VBottomSheet<Content>: View
         appearance.sizeGroup.current(orientation: interfaceOrientation).width.toAbsolute(dimension: containerSize.width)
     }
     
-    private var currentHeightsObject: VBottomSheetAppearance.Heights {
+    private var currentHeights: VBottomSheetAppearance.Heights {
         appearance.sizeGroup.current(orientation: interfaceOrientation).heights
             .withFixedValues(in: containerSize.height)
     }
     
     @State private var dragIndicatorHeight: CGFloat = 0
+    
+    private var hasUnifiedDragGesture: Bool { appearance.contentIsDraggable }
 
     @State private var _offset: CGFloat? // If `nil`, will be set from body render.
-    private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeightsObject) }
+    private var offset: CGFloat { _offset ?? getResetedHeight(from: currentHeights) }
 
     @State private var offsetBeforeDrag: CGFloat?
 
@@ -74,7 +76,7 @@ struct VBottomSheet<Content>: View
 #endif
                 }
                 
-                resetHeightFromEnvironmentOrAppearanceChange(from: currentHeightsObject)
+                resetHeightFromEnvironmentOrAppearanceChange(from: currentHeights)
             }
             .onChange(of: appearance.sizeGroup) { (_, newValue) in
                 resetHeightFromEnvironmentOrAppearanceChange(
@@ -89,18 +91,18 @@ struct VBottomSheet<Content>: View
     }
 
     private var bottomSheetView: some View {
-        ZStack {
+        let height: CGFloat = currentHeights.max.toAbsolute(dimension: containerSize.height)
+        let offset: CGFloat = isPresentedInternally ? offset : currentHeights.hiddenOffset(in: containerSize.height)
+        
+        let dragGesture: some Gesture = DragGesture(minimumDistance: 0)
+            .onChanged(dragChanged)
+            .onEnded(dragEnded)
+        
+        return ZStack {
             VGroupBox(appearance: appearance.groupBoxAppearance)
-                .applyIf(!appearance.contentIsDraggable) {
-                    $0
-                        .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
-                        .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged(dragChanged)
-                                .onEnded(dragEnded)
-                        )
-                }
+                .frame(height: hasUnifiedDragGesture ? nil : height)
+                .offset(y: hasUnifiedDragGesture ? 0 : offset)
+                .gesture(dragGesture, isEnabled: !hasUnifiedDragGesture)
                 .shadow(
                     color: appearance.shadowColor,
                     radius: appearance.shadowRadius,
@@ -111,28 +113,20 @@ struct VBottomSheet<Content>: View
                 .frame(maxHeight: .infinity, alignment: .top)
 
                 // Fixes issue of content-clipping, as it's not in `VGroupBox`.
+                //
                 // No need to reverse corners for RTL.
+                //
                 // `compositingGroup` helps fix glitches within subviews.
                 .compositingGroup()
                 .clipShape(.rect(cornerRadii: appearance.cornerRadii))
-
-                .applyIf(!appearance.contentIsDraggable) {
-                    $0
-                        .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
-                        .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
-                }
+            
+                .frame(height: hasUnifiedDragGesture ? nil : height)
+                .offset(y: hasUnifiedDragGesture ? 0 : offset)
         }
         .frame(width: currentWidth)
-        .applyIf(appearance.contentIsDraggable) {
-            $0
-                .frame(height: currentHeightsObject.max.toAbsolute(dimension: containerSize.height))
-                .offset(y: isPresentedInternally ? offset : currentHeightsObject.hiddenOffset(in: containerSize.height))
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged(dragChanged)
-                        .onEnded(dragEnded)
-                )
-        }
+        .frame(height: hasUnifiedDragGesture ? height : nil)
+        .offset(y: hasUnifiedDragGesture ? offset : 0)
+        .gesture(dragGesture, isEnabled: hasUnifiedDragGesture)
     }
 
     private var bottomSheetContentView: some View {
@@ -155,8 +149,12 @@ struct VBottomSheet<Content>: View
     }
     
     private var contentView: some View {
-        ZStack {
-            if !appearance.contentIsDraggable {
+        let autoresizesContent: Bool =
+            appearance.autoresizesContent &&
+            currentHeights.isResizable(in: containerSize.height)
+        
+        return ZStack {
+            if !hasUnifiedDragGesture {
                 Color.clear
                     .contentShape(.rect)
             }
@@ -166,17 +164,17 @@ struct VBottomSheet<Content>: View
         }
         .safeAreaPaddings(edges: appearance.contentSafeAreaEdges, insets: safeAreaInsets)
         .frame(maxWidth: .infinity)
-        .applyIf(appearance.autoresizesContent && currentHeightsObject.isResizable(in: containerSize.height)) {
-            $0
-                .frame(
-                    height: max( // Autoresized content shouldn't get smaller that the `min` height
-                        containerSize.height - offset - dragIndicatorHeight,
-                        currentHeightsObject.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
-                    )
+        .frame(maxHeight: autoresizesContent ? nil : .infinity)
+        .frame(
+            height: {
+                guard autoresizesContent else { return nil }
+                
+                return max( // Autoresized content shouldn't get smaller that the `min` height
+                    containerSize.height - offset - dragIndicatorHeight,
+                    currentHeights.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
                 )
-        } else: {
-            $0.frame(maxHeight: .infinity)
-        }
+            }()
+        )
         .clipped() // Clips off-bound content that might clip into header
     }
 
@@ -201,14 +199,14 @@ struct VBottomSheet<Content>: View
         withAnimation(.linear(duration: 0.1)) { // Gets rid of stuttering
             _offset = {
                 switch newOffset {
-                case ...currentHeightsObject.maxOffset(in: containerSize.height):
-                    return currentHeightsObject.maxOffset(in: containerSize.height)
+                case ...currentHeights.maxOffset(in: containerSize.height):
+                    return currentHeights.maxOffset(in: containerSize.height)
 
-                case currentHeightsObject.minOffset(in: containerSize.height)...:
+                case currentHeights.minOffset(in: containerSize.height)...:
                     if appearance.dismissType.contains(.swipe) {
                         return newOffset
                     } else {
-                        return currentHeightsObject.minOffset(in: containerSize.height)
+                        return currentHeights.minOffset(in: containerSize.height)
                     }
 
                 default:
@@ -229,7 +227,7 @@ struct VBottomSheet<Content>: View
             animateOffsetOrPullDismissFromDragEndAction(
                 .dragEndedHighVelocityDragEndAction(
                     containerHeight: containerSize.height,
-                    heights: currentHeightsObject,
+                    heights: currentHeights,
                     offset: offset,
                     velocity: dragValue.velocity.height
                 )
@@ -241,9 +239,9 @@ struct VBottomSheet<Content>: View
             animateOffsetOrPullDismissFromDragEndAction(
                 .dragEndedDragEndAction(
                     containerHeight: containerSize.height,
-                    heights: currentHeightsObject,
+                    heights: currentHeights,
                     canSwipeToDismiss: appearance.dismissType.contains(.swipe),
-                    swipeDismissDistance: appearance.swipeDismissDistance(heights: currentHeightsObject, in: containerSize.height),
+                    swipeDismissDistance: appearance.swipeDismissDistance(heights: currentHeights, in: containerSize.height),
                     offset: offset,
                     offsetBeforeDrag: offsetBeforeDrag,
                     translation: dragValue.translation.height
