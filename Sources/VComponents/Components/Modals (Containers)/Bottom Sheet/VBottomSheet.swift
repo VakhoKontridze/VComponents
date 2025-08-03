@@ -109,19 +109,19 @@ struct VBottomSheet<Content>: View
                     offset: appearance.shadowOffset
                 )
 
-            bottomSheetContentView
-                .frame(maxHeight: .infinity, alignment: .top)
-
-                // Fixes issue of content-clipping, as it's not in `VGroupBox`.
-                //
-                // No need to reverse corners for RTL.
-                //
-                // `compositingGroup` helps fix glitches within subviews.
-                .compositingGroup()
-                .clipShape(.rect(cornerRadii: appearance.cornerRadii))
-            
-                .frame(height: hasUnifiedDragGesture ? nil : height)
-                .offset(y: hasUnifiedDragGesture ? 0 : offset)
+            ZStack {
+                bottomSheetContentView
+                    // Fixes issue of content-clipping, as it's not in `VGroupBox`.
+                    //
+                    // No need to reverse corners for RTL.
+                    //
+                    // `compositingGroup` helps fix glitches within subviews.
+                    .compositingGroup()
+                
+                    .clipShape(.rect(cornerRadii: appearance.cornerRadii))
+            }
+            .frame(height: hasUnifiedDragGesture ? nil : height)
+            .offset(y: hasUnifiedDragGesture ? 0 : offset)
         }
         .frame(width: currentWidth)
         .frame(height: hasUnifiedDragGesture ? height : nil)
@@ -154,28 +154,32 @@ struct VBottomSheet<Content>: View
             currentHeights.isResizable(in: containerSize.height)
         
         return ZStack {
-            if !hasUnifiedDragGesture {
-                Color.clear
-                    .contentShape(.rect)
+            ZStack {
+                ZStack {
+                    if !hasUnifiedDragGesture {
+                        Color.clear
+                            .contentShape(.rect)
+                    }
+                    
+                    content()
+                        .padding(appearance.contentMargins)
+                }
+                .safeAreaPaddings(edges: appearance.contentSafeAreaEdges, insets: safeAreaInsets)
+                .frame(maxWidth: .infinity, maxHeight: .infinity) // Height 1 - Gives max frame to content, if needed
             }
-            
-            content()
-                .padding(appearance.contentMargins)
+            .frame(
+                height: { // Height 2 - Limits height to visible frame, if autoresizing is enabled
+                    guard autoresizesContent else { return nil }
+                    
+                    return max( // Autoresized content shouldn't get smaller that the `min` height
+                        containerSize.height - offset - dragIndicatorHeight,
+                        currentHeights.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
+                    )
+                }()
+            )
+            .clipped() // Clips off-bound content that might clip into header
         }
-        .safeAreaPaddings(edges: appearance.contentSafeAreaEdges, insets: safeAreaInsets)
-        .frame(maxWidth: .infinity)
-        .frame(maxHeight: autoresizesContent ? nil : .infinity)
-        .frame(
-            height: {
-                guard autoresizesContent else { return nil }
-                
-                return max( // Autoresized content shouldn't get smaller that the `min` height
-                    containerSize.height - offset - dragIndicatorHeight,
-                    currentHeights.min.toAbsolute(dimension: containerSize.height) - dragIndicatorHeight
-                )
-            }()
-        )
-        .clipped() // Clips off-bound content that might clip into header
+        .frame(maxHeight: .infinity, alignment: .top) // Height 3 - positions content in top position, just in case autoresizing is used
     }
 
     // MARK: Actions
