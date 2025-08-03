@@ -598,7 +598,7 @@ private struct ContentView_ContentAutoresizing: View {
     @Previewable @State var count: Int = 1
 
     ZStack {
-        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        // `PreviewContainer` ignores safe areas, so insets must be read differently
         Color.clear
             .getSafeAreaInsets { safeAreaInsets = $0 }
 
@@ -657,7 +657,7 @@ private struct ContentView_ContentAutoresizing: View {
     @Previewable @State var isPresented: Bool = true
 
     ZStack {
-        // `PreviewContainer` ignores safe areas, so insets must be read elsewhere
+        // `PreviewContainer` ignores safe areas, so insets must be read differently
         Color.clear
             .getSafeAreaInsets { newValue in
                 Task { @MainActor in
