@@ -125,7 +125,7 @@ public struct VTextView: View {
         )
         .textFieldStyle(.plain)
 
-        .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
+        .focused($isFocused)
 
         .multilineTextAlignment(appearance.textLineType.textAlignment ?? .leading) // May glitch for previews
         .lineLimit(type: appearance.textLineType.textLineLimitType)

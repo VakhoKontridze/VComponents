@@ -172,7 +172,7 @@ public struct VTextField: View {
             },
             text: $text
         )
-        .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
+        .focused($isFocused)
         
         .textFieldStyle(.plain)
         .multilineTextAlignment(appearance.textAlignment)
