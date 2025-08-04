@@ -141,11 +141,10 @@ public struct VToastAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Width Group
+    // MARK: Types
     /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
-    // MARK: Width
     /// Width.
     public struct Width: Equatable, Sendable {
         // MARK: Properties
@@ -226,7 +225,6 @@ public struct VToastAppearance: Equatable, Sendable {
         }
     }
 
-    // MARK: Corner Radius Type
     /// Corner radius.
     public enum CornerRadiusType: Equatable, Sendable {
         // MARK: Cases
@@ -243,7 +241,6 @@ public struct VToastAppearance: Equatable, Sendable {
         public static var `default`: Self { .capsule }
     }
 
-    // MARK: Text Line Type
     /// Text line type.
     public enum TextLineType: Equatable, Sendable {
         // MARK: Cases
@@ -269,7 +266,6 @@ public struct VToastAppearance: Equatable, Sendable {
         public static var `default`: Self { .singleLine }
     }
 
-    // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet, Equatable, Sendable {

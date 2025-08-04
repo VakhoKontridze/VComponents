@@ -233,11 +233,10 @@ public struct VNotificationAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Widths
+    // MARK: Types
     /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
-    // MARK: Width
     /// Notification width.
     public enum Width: Equatable, Sendable {
         // MARK: Cases
@@ -256,7 +255,6 @@ public struct VNotificationAppearance: Equatable, Sendable {
         }
     }
 
-    // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet, Equatable, Sendable {

@@ -115,7 +115,7 @@ public struct VDynamicPagerTabViewAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Tab Selection Indicator Width Type
+    // MARK: Types
     /// Tab selection indicator width type.
     public enum TabSelectionIndicatorWidthType: Int, Sendable, CaseIterable {
         // MARK: Cases
@@ -138,7 +138,6 @@ public struct VDynamicPagerTabViewAppearance: Equatable, Sendable {
         public static var `default`: Self { .wrapped }
     }
 
-    // MARK: Tab Item State Colors
-    /// Model that contains colors for component states.
+    /// State-bound colors.
     public typealias TabItemStateColors = GenericStateModel_DeselectedSelectedPressedDisabled<Color>
 }

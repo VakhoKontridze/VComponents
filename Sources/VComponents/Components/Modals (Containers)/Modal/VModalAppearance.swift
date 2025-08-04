@@ -158,15 +158,13 @@ public struct VModalAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Size Group
+    // MARK: Types
     /// Size group.
     public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
-    // MARK: Size
     /// Size.
     public typealias Size = ModalComponentSize<Dimension, Dimension>
 
-    // MARK: Dimension
     /// Dimension.
     public enum Dimension: Equatable, Sendable {
         // MARK: Cases
@@ -194,7 +192,6 @@ public struct VModalAppearance: Equatable, Sendable {
         }
     }
 
-    // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet, Equatable, Sendable {

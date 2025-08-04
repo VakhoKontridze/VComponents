@@ -201,7 +201,7 @@ public struct VTextFieldAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Style
+    // MARK: Types
     /// Style.
     public enum Style: Int, Equatable, Sendable, CaseIterable {
         // MARK: Cases
@@ -248,12 +248,10 @@ public struct VTextFieldAppearance: Equatable, Sendable {
         public static var `default`: Self { .standard }
     }
 
-    // MARK: State Colors
-    /// Model that contains colors for component states.
+    /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 
-    // MARK: State Opacities
-    /// Model that contains colors for component opacities.
+    /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
 }
 

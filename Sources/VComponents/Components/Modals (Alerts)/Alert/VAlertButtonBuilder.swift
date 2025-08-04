@@ -14,10 +14,6 @@ import VCore
 @available(visionOS, unavailable)
 @resultBuilder
 public struct VAlertButtonBuilder {
-    // MARK: Properties
-    public typealias Component = any VAlertButtonConvertible
-    public typealias Result = [any VAlertButtonProtocol]
-    
     // MARK: Build Blocks
     public static func buildBlock() -> Result {
         []
@@ -80,4 +76,8 @@ public struct VAlertButtonBuilder {
 
         return result
     }
+    
+    // MARK: Types
+    public typealias Component = any VAlertButtonConvertible
+    public typealias Result = [any VAlertButtonProtocol]
 }

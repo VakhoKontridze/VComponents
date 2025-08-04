@@ -92,11 +92,10 @@ public struct VCarouselAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Card State Dimension
-    /// Model that contains dimensions for component states.
+    // MARK: Types
+    /// State-bound dimensions.
     public typealias CardStateDimensions = GenericStateModel_DeselectedSelected<CGFloat>
 
-    // MARK: Card State Opacities
-    /// Model that contains opacities for component states.
+    /// State-bound opacities.
     public typealias CardStateOpacities = GenericStateModel_DeselectedSelected<CGFloat>
 }

@@ -175,12 +175,11 @@ public struct VCompactPageIndicatorAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Dot State Dimensions
-    /// Model that contains dimensions  for component states.
+    // MARK: Types
+    /// State-bound dimensions .
     public typealias DotStateDimensions = GenericStateModel_DeselectedSelected<CGFloat>
 
-    // MARK: Dot State Colors
-    /// Model that contains colors for component states.
+    /// State-bound colors.
     public typealias DotStateColors = GenericStateModel_DeselectedSelected<Color>
 }
 

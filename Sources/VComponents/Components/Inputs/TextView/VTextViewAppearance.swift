@@ -99,8 +99,8 @@ public struct VTextViewAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: State Colors
-    /// Model that contains colors for component states.
+    // MARK: Types
+    /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
 }
 

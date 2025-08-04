@@ -180,11 +180,10 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Size Group
+    // MARK: Types
     /// Size group.
     public typealias SizeGroup = ModalComponentSizeGroup<Size>
 
-    // MARK: Size
     /// Size.
     @MemberwiseInitializable(
         comment: "/// Initializes `Size`."
@@ -197,7 +196,6 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
         public var heights: Heights
     }
 
-    // MARK: Heights
     /// Heights.
     ///
     /// Values used here may not represent actual values used in Bottom Sheet.
@@ -348,11 +346,9 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
         }
     }
 
-    // MARK: State Colors
-    /// Model that contains colors for component states.
+    /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
 
-    // MARK: Dismiss Type
     /// Dismiss type.
     @OptionSetRepresentation<Int>
     public struct DismissType: OptionSet, Sendable {

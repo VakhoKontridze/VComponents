@@ -328,23 +328,6 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         return incrementalScale
     }
     
-    // MARK: Region
-    private enum Region {
-        // MARK: Cases
-        case start
-        case center
-        case end
-        
-        // MARK: Initializers
-        init(current: Int, total: Int, middle: Int) {
-            switch current {
-            case 0..<middle+1: self = .start
-            case total-middle-1..<total: self = .end
-            default: self = .center
-            }
-        }
-    }
-    
     // MARK: Validation
     private static func validate(
         appearance: VCompactPageIndicatorAppearance
@@ -362,6 +345,23 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         guard appearance.visibleDots > appearance.centerDots else {
             Logger.compactPageIndicator.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
             fatalError()
+        }
+    }
+    
+    // MARK: Types
+    private enum Region {
+        // MARK: Cases
+        case start
+        case center
+        case end
+        
+        // MARK: Initializers
+        init(current: Int, total: Int, middle: Int) {
+            switch current {
+            case 0..<middle+1: self = .start
+            case total-middle-1..<total: self = .end
+            default: self = .center
+            }
         }
     }
 }

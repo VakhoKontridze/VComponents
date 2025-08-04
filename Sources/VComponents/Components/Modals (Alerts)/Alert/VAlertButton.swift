@@ -31,22 +31,6 @@ public struct VAlertButton: VAlertButtonProtocol {
         self.role = role
     }
 
-    // MARK: Role
-    /// Model that describes the purpose of a button.
-    public enum Role: Int, Sendable, CaseIterable {
-        /// Primary.
-        case primary
-
-        /// Secondary.
-        case secondary
-
-        /// Destructive.
-        case destructive
-
-        /// Cancel.
-        case cancel
-    }
-
     // MARK: Button Protocol
     public func makeBody(
         appearance: VAlertAppearance,
@@ -74,5 +58,21 @@ public struct VAlertButton: VAlertButtonProtocol {
         var button = self
         button.isEnabled = !disabled
         return button
+    }
+    
+    // MARK: Types
+    /// Model that describes the purpose of a button.
+    public enum Role: Int, Sendable, CaseIterable {
+        /// Primary.
+        case primary
+
+        /// Secondary.
+        case secondary
+
+        /// Destructive.
+        case destructive
+
+        /// Cancel.
+        case cancel
     }
 }

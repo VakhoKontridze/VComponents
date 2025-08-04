@@ -103,7 +103,7 @@ public struct VStretchedIndicatorStaticPagerTabViewAppearance: Equatable, Sendab
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Tab Item State Colors
-    /// Model that contains colors for component states.
+    // MARK: Types
+    /// State-bound colors.
     public typealias TabItemStateColors = GenericStateModel_DeselectedSelectedPressedDisabled<Color>
 }

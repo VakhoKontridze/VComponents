@@ -187,27 +187,6 @@ public struct VRollingCounter: View {
         )
     }
 
-    // MARK: Operation
-    private enum Operation {
-        // MARK: Cases
-        case none
-        case decrement
-        case increment
-
-        // MARK: Initializers
-        init(oldValue: CGFloat, newValue: CGFloat) {
-            self = {
-                if newValue > oldValue {
-                    .increment
-                } else if newValue < oldValue {
-                    .decrement
-                } else {
-                    .none
-                }
-            }()
-        }
-    }
-
     // MARK: Helpers
     private func textColor(
         _ isHighlighted: Bool,
@@ -238,6 +217,27 @@ public struct VRollingCounter: View {
         case .none: nil
         case .decrement: appearance.fractionDigitTextDecrementRollingEdge
         case .increment: appearance.fractionDigitTextIncrementRollingEdge
+        }
+    }
+    
+    // MARK: Types
+    private enum Operation {
+        // MARK: Cases
+        case none
+        case decrement
+        case increment
+
+        // MARK: Initializers
+        init(oldValue: CGFloat, newValue: CGFloat) {
+            self = {
+                if newValue > oldValue {
+                    .increment
+                } else if newValue < oldValue {
+                    .decrement
+                } else {
+                    .none
+                }
+            }()
         }
     }
 }

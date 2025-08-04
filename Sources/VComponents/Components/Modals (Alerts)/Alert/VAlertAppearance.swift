@@ -366,11 +366,10 @@ public struct VAlertAppearance: Equatable, Sendable {
     /// Initializes appearance with default values.
     public init() {}
 
-    // MARK: Width Group
+    // MARK: Types
     /// Width group.
     public typealias WidthGroup = ModalComponentSizeGroup<Width>
 
-    // MARK: Width
     /// Width.
     public enum Width: Equatable, Sendable {
         // MARK: Cases
@@ -394,7 +393,6 @@ public struct VAlertAppearance: Equatable, Sendable {
         }
     }
 
-    // MARK: Button State Colors
-    /// Model that contains colors for button component states.
+    /// State-bound colors.
     public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
 }
