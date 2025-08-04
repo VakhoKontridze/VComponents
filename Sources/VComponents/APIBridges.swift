@@ -13,8 +13,12 @@ extension SubmitLabel: @retroactive Equatable {
     }
 }
 
+#if !(os(macOS) || os(watchOS))
+
 extension TextInputAutocapitalization: @retroactive Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         false
     }
 }
+
+#endif
