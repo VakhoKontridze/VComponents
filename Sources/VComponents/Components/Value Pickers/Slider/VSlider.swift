@@ -275,7 +275,7 @@ public struct VSlider: View {
 #elseif os(macOS)
         200
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

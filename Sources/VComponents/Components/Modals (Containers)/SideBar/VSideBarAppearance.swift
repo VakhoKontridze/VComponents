@@ -55,7 +55,7 @@ public struct VSideBarAppearance: Equatable, Sendable {
             )
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -69,7 +69,7 @@ public struct VSideBarAppearance: Equatable, Sendable {
 #elseif os(macOS)
         RectangleCornerRadii()
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -84,7 +84,7 @@ public struct VSideBarAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Color(nsColor: NSColor.windowBackgroundColor)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -181,7 +181,7 @@ public struct VSideBarAppearance: Equatable, Sendable {
 #elseif os(macOS)
             .swipe
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }
     }
@@ -254,7 +254,7 @@ extension VSideBarAppearance {
 #elseif os(macOS)
             RectangleCornerRadii()
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }()
 
@@ -291,7 +291,7 @@ extension VSideBarAppearance {
                 )
             )
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }()
 
@@ -303,7 +303,7 @@ extension VSideBarAppearance {
 #elseif os(macOS)
             RectangleCornerRadii()
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }()
 
@@ -340,7 +340,7 @@ extension VSideBarAppearance {
                 )
             )
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }()
 
@@ -352,7 +352,7 @@ extension VSideBarAppearance {
 #elseif os(macOS)
             RectangleCornerRadii()
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }()
 

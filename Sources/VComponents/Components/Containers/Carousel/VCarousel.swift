@@ -285,7 +285,7 @@ private var _height: CGFloat {
 #elseif os(visionOS)
     300
 #else
-    fatalError() // Not supported
+    fatalError()
 #endif
 }
 
@@ -299,7 +299,7 @@ private var _cornerRadius: CGFloat {
 #elseif os(visionOS)
     15
 #else
-    fatalError() // Not supported
+    fatalError()
 #endif
 }
 

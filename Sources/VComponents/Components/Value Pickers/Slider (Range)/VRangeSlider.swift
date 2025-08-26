@@ -277,14 +277,14 @@ public struct VRangeSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
-        guard value.boundRange >= difference - .ulpOfOne else {
+        guard value.boundRange >= difference - V.ulpOfOne else {
             Logger.rangeSlider.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference' in 'VRangeSlider'")
-            fatalError()
+            fatalError() // Unsafe
         }
 
         guard step != 0 else {
-            Logger.rangeSlider.critical("'step' cannot be '0'")
-            fatalError()
+            Logger.rangeSlider.critical("'step' cannot be '0' in 'VRangeSlider'")
+            fatalError() // Unsafe
         }
     }
 }
@@ -353,7 +353,7 @@ extension Double {
 #elseif os(macOS)
         200
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

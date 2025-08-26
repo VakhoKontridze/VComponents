@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 @available(tvOS, unavailable) // Doesn't follow HIG
@@ -30,7 +31,7 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Properties - Presentation API
-    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode! // Unsafe
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -181,16 +182,28 @@ struct VSideBar<Content>: View where Content: View {
         switch appearance.presentationEdge {
         case .leading:
             switch layoutDirection {
-            case .leftToRight: return dragValue.translation.width <= 0
-            case .rightToLeft: return dragValue.translation.width >= 0
-            @unknown default: fatalError()
+            case .leftToRight:
+                return dragValue.translation.width <= 0
+            
+            case .rightToLeft:
+                return dragValue.translation.width >= 0
+            
+            @unknown default:
+                Logger.sideBar.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
+                return false
             }
             
         case .trailing:
             switch layoutDirection {
-            case .leftToRight: return dragValue.translation.width >= 0
-            case .rightToLeft: return dragValue.translation.width <= 0
-            @unknown default: fatalError()
+            case .leftToRight:
+                return dragValue.translation.width >= 0
+            
+            case .rightToLeft:
+                return dragValue.translation.width <= 0
+            
+            @unknown default:
+                Logger.sideBar.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
+                return false
             }
             
         case .top:
@@ -203,8 +216,11 @@ struct VSideBar<Content>: View where Content: View {
     
     private func didExceedSwipeDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch appearance.presentationEdge {
-        case .leading, .trailing: abs(dragValue.translation.width) >= appearance.swipeDismissDistance(in: currentWidth)
-        case .top, .bottom: abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: currentHeight)
+        case .leading, .trailing:
+            abs(dragValue.translation.width) >= appearance.swipeDismissDistance(in: currentWidth)
+            
+        case .top, .bottom:
+            abs(dragValue.translation.height) >= appearance.swipeDismissDistance(in: currentHeight)
         }
     }
 }

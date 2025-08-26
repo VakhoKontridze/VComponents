@@ -17,7 +17,7 @@ struct VRollingCounterFactory {
     static func components(
         value: Double,
         appearance: VRollingCounterAppearance
-    ) -> [any VRollingCounterComponentProtocol] {
+    ) -> [any VRollingCounterComponentProtocol]? {
         let numberFormatter: NumberFormatter = numberFormatter(
             appearance: appearance
         )
@@ -26,7 +26,7 @@ struct VRollingCounterFactory {
             let valueString: String = numberFormatter.string(fromDouble: value)
         else {
             Logger.rollingCounter.critical("Failed to convert '\(String(describing: type(of: value)))' to 'String' in 'VRollingCounter'")
-            fatalError()
+            return nil
         }
 
         var components: [any VRollingCounterComponentProtocol] = []
@@ -44,7 +44,10 @@ struct VRollingCounterFactory {
                 )
 
             } else if charStr == appearance.decimalSeparator {
-                guard !hasPassedDecimalSeparator else { fatalError() }
+                guard !hasPassedDecimalSeparator else {
+                    Logger.rollingCounter.critical("Multiple decimal separators used in 'VRollingCounter'")
+                    return nil
+                }
 
                 components.append(
                     VRollingCounterDecimalSeparatorComponent(
@@ -75,7 +78,8 @@ struct VRollingCounterFactory {
                 }
 
             } else {
-                fatalError()
+                Logger.rollingCounter.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
+                return nil
             }
         }
 
@@ -87,7 +91,7 @@ struct VRollingCounterFactory {
         oldComponents: [any VRollingCounterComponentProtocol],
         newValue: Double,
         appearance: VRollingCounterAppearance
-    ) -> [any VRollingCounterComponentProtocol] {
+    ) -> [any VRollingCounterComponentProtocol]? {
         let numberFormatter: NumberFormatter = numberFormatter(
             appearance: appearance
         )
@@ -131,7 +135,10 @@ struct VRollingCounterFactory {
                 )
 
             } else if charStr == appearance.decimalSeparator {
-                guard !hasPassedDecimalSeparator else { fatalError() }
+                guard !hasPassedDecimalSeparator else {
+                    Logger.rollingCounter.critical("Multiple decimal separators used in 'VRollingCounter'")
+                    return nil
+                }
 
                 let isHighlighted: Bool = {
                     guard appearance.decimalSeparatorTextIsHighlightable else { return false }
@@ -186,7 +193,8 @@ struct VRollingCounterFactory {
                 }
 
             } else {
-                fatalError()
+                Logger.rollingCounter.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
+                return nil
             }
         }
 

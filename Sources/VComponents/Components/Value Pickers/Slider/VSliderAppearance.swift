@@ -24,7 +24,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         10
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -36,7 +36,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         5
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -48,7 +48,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         true
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -66,7 +66,7 @@ public struct VSliderAppearance: Equatable, Sendable {
             disabled: Color.dynamic(Color.black.opacity(0.03), Color.white.opacity(0.075))
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -90,7 +90,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         PointPixelMeasurement.pixels(1)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -104,7 +104,7 @@ public struct VSliderAppearance: Equatable, Sendable {
             disabled: Color.dynamic(Color.black.opacity(0.05), Color.clear)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -130,7 +130,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         PointPixelMeasurement.pixels(1)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -144,7 +144,7 @@ public struct VSliderAppearance: Equatable, Sendable {
             disabled: Color.dynamic(Color(230, 230, 230), Color(70, 70, 70))
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -162,7 +162,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         1
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -173,7 +173,7 @@ public struct VSliderAppearance: Equatable, Sendable {
 #elseif os(macOS)
         CGPoint(x: 0, y: 1)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

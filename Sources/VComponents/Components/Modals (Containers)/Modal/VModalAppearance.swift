@@ -68,7 +68,7 @@ public struct VModalAppearance: Equatable, Sendable {
             )
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -91,7 +91,7 @@ public struct VModalAppearance: Equatable, Sendable {
 #elseif os(visionOS)
         Color.black
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

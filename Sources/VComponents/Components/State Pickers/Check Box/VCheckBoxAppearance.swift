@@ -32,7 +32,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         CGSize(dimension: 16)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -43,7 +43,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         5
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -55,7 +55,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         4
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -83,7 +83,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
             disabled: Color.dynamic(Color(250, 250, 250), Color.black.opacity(0.05))
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -97,7 +97,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         PointPixelMeasurement.points(1)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -136,7 +136,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         CGSize(dimension: 9)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -208,7 +208,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
             disabled: Color.primary.opacity(0.85 * 0.3)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -219,7 +219,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Font.body
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -256,7 +256,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
 #elseif os(macOS)
         nil
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

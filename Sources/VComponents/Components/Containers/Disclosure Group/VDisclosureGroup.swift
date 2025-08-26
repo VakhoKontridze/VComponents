@@ -273,7 +273,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.pressed
-                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.pressed // Force-unwrap
+                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
                         return appearance
                     }(),
                     state: .constant(.collapsed),
@@ -289,7 +289,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.disabled
-                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.disabled // Force-unwrap
+                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.disabled // Unsafe (DEBUG)
                         return appearance
                     }(),
                     state: .constant(.expanded),

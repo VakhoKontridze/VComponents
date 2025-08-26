@@ -29,7 +29,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         3
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -41,7 +41,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(width: 64, height: 56)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -62,7 +62,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -92,7 +92,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 26)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -128,7 +128,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -157,7 +157,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
     
@@ -174,7 +174,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         .singleLine
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
     
@@ -195,7 +195,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         Font.body
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -222,7 +222,7 @@ public struct VRectangularCaptionButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 18)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

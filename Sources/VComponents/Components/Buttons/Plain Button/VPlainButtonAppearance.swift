@@ -39,7 +39,7 @@ public struct VPlainButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -82,7 +82,7 @@ public struct VPlainButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 26)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

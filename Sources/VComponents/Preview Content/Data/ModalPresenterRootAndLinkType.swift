@@ -25,7 +25,7 @@ enum ModalPresenterRootAndLink {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
             return .window()
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }
     }
@@ -41,7 +41,7 @@ enum ModalPresenterRootAndLink {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS))
             return .window(linkID: linkID)
 #else
-            fatalError() // Not supported
+            fatalError()
 #endif
         }
     }

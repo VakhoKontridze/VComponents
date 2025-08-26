@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 /// Container component that automatically scrolls and wraps it's content edge-to-edge.
@@ -150,7 +151,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         switch appearance.scrollDirection {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
-        @unknown default: fatalError()
+        @unknown default:
+            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            return 0
         }
     }
     
@@ -162,7 +165,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return offset
         case (.rightToLeft, false): return offset
         case (.rightToLeft, true): return 0
-        @unknown default: fatalError()
+        @unknown default:
+            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            return 0
         }
     }
     
@@ -174,7 +179,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return 0
         case (.rightToLeft, false): return 0
         case (.rightToLeft, true): return offset
-        @unknown default: fatalError()
+        @unknown default:
+            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            return 0
         }
     }
     
@@ -185,7 +192,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case .leading: return offset
         case .center: return 0
         case .trailing: return -offset
-        default: fatalError()
+        default:
+            Logger.wrappingMarquee.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VWrappingMarquee'")
+            return 0
         }
     }
     

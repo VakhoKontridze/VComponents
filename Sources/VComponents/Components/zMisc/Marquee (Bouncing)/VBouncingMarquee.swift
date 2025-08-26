@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 /// Container component that automatically scrolls and bounces it's content edge-to-edge.
@@ -125,7 +126,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         case (.leftToRight, true): return -offset
         case (.rightToLeft, false): return -offset
         case (.rightToLeft, true): return offset
-        @unknown default: fatalError()
+        @unknown default:
+            Logger.bouncingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VBouncingMarquee'")
+            return 0
         }
     }
     
@@ -136,7 +139,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         case .leading: return offset
         case .center: return 0
         case .trailing: return -offset
-        default: fatalError()
+        default:
+            Logger.bouncingMarquee.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VBouncingMarquee'")
+            return 0
         }
     }
     

@@ -49,7 +49,7 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
             )
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -71,7 +71,7 @@ public struct VBottomSheetAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Color(nsColor: NSColor.windowBackgroundColor)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

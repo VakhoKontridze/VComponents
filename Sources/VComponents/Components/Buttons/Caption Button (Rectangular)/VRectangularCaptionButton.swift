@@ -283,7 +283,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 appearance: {
                     var appearance: VRectangularCaptionButtonAppearance = .init()
                     appearance.rectangleColors.enabled = appearance.rectangleColors.pressed
-                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Force-unwrap
+                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Unsafe (DEBUG)
                     appearance.captionTextColors.enabled = appearance.captionTextColors.pressed
                     return appearance
                 }(),

@@ -30,7 +30,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         48
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -44,7 +44,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         24
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -65,7 +65,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -102,7 +102,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -122,7 +122,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         Font.body.weight(.semibold)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -151,7 +151,7 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 18)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

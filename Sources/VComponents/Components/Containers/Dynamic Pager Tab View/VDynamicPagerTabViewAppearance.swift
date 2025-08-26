@@ -30,7 +30,7 @@ public struct VDynamicPagerTabViewAppearance: Equatable, Sendable {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
     
@@ -104,7 +104,7 @@ public struct VDynamicPagerTabViewAppearance: Equatable, Sendable {
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
     

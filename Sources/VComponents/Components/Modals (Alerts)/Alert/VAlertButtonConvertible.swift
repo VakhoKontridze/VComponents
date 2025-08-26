@@ -30,7 +30,7 @@ extension Array: VAlertButtonConvertible where Element == any VAlertButtonProtoc
 @available(visionOS, unavailable)
 extension Never: VAlertButtonConvertible {
     public func toButtons() -> [any VAlertButtonProtocol] {
-        fatalError()
+        fatalError() // Unsafe (intentional)
     }
 }
 

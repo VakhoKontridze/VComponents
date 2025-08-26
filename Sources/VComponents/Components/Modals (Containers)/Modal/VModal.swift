@@ -27,7 +27,7 @@ struct VModal<Content>: View
     }
 
     // MARK: Properties - Presentation API
-    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode! // Unsafe
 
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false

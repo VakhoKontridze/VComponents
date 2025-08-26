@@ -53,7 +53,7 @@ public struct VRollingCounter: View {
 
     // MARK: Properties - Value
     private let value: Double
-    @State private var components: [any VRollingCounterComponentProtocol]
+    @State private var components: [any VRollingCounterComponentProtocol]?
     
     // MARK: Properties - Operation
     @State private var operation: Operation = .none
@@ -80,14 +80,17 @@ public struct VRollingCounter: View {
 
     // MARK: Body
     public var body: some View {
-        HStack(
-            alignment: appearance.verticalAlignment,
-            spacing: appearance.spacing
-        ) {
-            ForEach(components, id: \.id, content: digitView)
+        ZStack {
+            if let components {
+                HStack(
+                    alignment: appearance.verticalAlignment,
+                    spacing: appearance.spacing
+                ) {
+                    ForEach(components, id: \.id, content: digitView)
+                }
+                .clipped() // Prevents clipping from animations
+            }
         }
-        .clipped() // Prevents clipping from animations
-
         .onChange(of: value, didChangeValue)
     }
 
@@ -149,8 +152,10 @@ public struct VRollingCounter: View {
                 .transition(.identity)
 
         default:
-            let _ = Logger.rollingCounter.critical("Unsupported 'VRollingCounterComponentProtocol' '\(String(describing: type(of: component)))' in 'VRollingCounter'")
-            fatalError()
+            EmptyView()
+                .onFirstAppear {
+                    Logger.rollingCounter.critical("Unsupported 'VRollingCounterComponentProtocol' '\(String(describing: type(of: component)))' in 'VRollingCounter'")
+                }
         }
     }
 
@@ -159,17 +164,36 @@ public struct VRollingCounter: View {
         from oldValue: Double,
         to newValue: Double
     ) {
-        let newComponents: [any VRollingCounterComponentProtocol] = VRollingCounterFactory.components(
-            oldValue: oldValue,
-            oldComponents: components,
-            newValue: newValue,
-            appearance: appearance
-        )
+        let newComponents: [any VRollingCounterComponentProtocol]? = {
+            if
+                let components,
+                let newComponents: [any VRollingCounterComponentProtocol] = VRollingCounterFactory.components(
+                    oldValue: oldValue,
+                    oldComponents: components,
+                    newValue: newValue,
+                    appearance: appearance
+                )
+            {
+                return newComponents
+            }
+                
+            if
+                let newComponents: [any VRollingCounterComponentProtocol] = VRollingCounterFactory.components(
+                    value: newValue,
+                    appearance: appearance
+                )
+            {
+                return newComponents
+            }
+                
+            return nil
+        }()
 
         withAnimation(
             appearance.highlightAnimation,
             {
                 components = newComponents
+                
                 operation = Operation(oldValue: oldValue, newValue: newValue)
             },
             completion: {
@@ -178,8 +202,10 @@ public struct VRollingCounter: View {
                     {
                         operation = .none
 
-                        for i in components.indices {
-                            components[i].isHighlighted = false
+                        if let components {
+                            for i in components.indices {
+                                self.components?[i].isHighlighted = false
+                            }
                         }
                     }
                 )

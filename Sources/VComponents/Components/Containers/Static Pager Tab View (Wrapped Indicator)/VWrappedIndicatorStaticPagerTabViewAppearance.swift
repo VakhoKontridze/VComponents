@@ -27,7 +27,7 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance: Equatable, Sendable
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -89,7 +89,7 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance: Equatable, Sendable
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

@@ -33,7 +33,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(width: 34, height: 22)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -46,7 +46,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         5
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -81,7 +81,7 @@ public struct VToggleAppearance: Equatable, Sendable {
             disabled: Color(50, 50, 50)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -97,7 +97,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         PointPixelMeasurement.points(0)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -116,7 +116,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         StateColors.clearColors
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -130,7 +130,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 20)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -143,7 +143,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         10
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -199,7 +199,7 @@ public struct VToggleAppearance: Equatable, Sendable {
             disabled: Color.white.opacity(0.3)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -212,7 +212,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         Font.body
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -247,7 +247,7 @@ public struct VToggleAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         SensoryFeedback.impact(weight: .light)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import OSLog
 import VCore
 
 @available(tvOS, unavailable) // Doesn't follow HIG
@@ -41,7 +40,7 @@ struct VBottomSheet<Content>: View
     @State private var offsetBeforeDrag: CGFloat?
 
     // MARK: Properties - Presentation API
-    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode! // Unsafe
     
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -195,8 +194,16 @@ struct VBottomSheet<Content>: View
 
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
-        if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
-        guard let offsetBeforeDrag else { fatalError() }
+        let offsetBeforeDrag: CGFloat = {
+            if let offsetBeforeDrag: CGFloat = self.offsetBeforeDrag {
+                return offsetBeforeDrag
+                
+            } else {
+                let newValue: CGFloat = offset
+                self.offsetBeforeDrag = newValue
+                return newValue
+            }
+        }()
 
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
 
@@ -255,8 +262,10 @@ struct VBottomSheet<Content>: View
     }
 
     private func animateOffsetOrPullDismissFromDragEndAction(
-        _ dragEndAction: VBottomSheetDragEndAction
+        _ dragEndAction: VBottomSheetDragEndAction?
     ) {
+        guard let dragEndAction else { return }
+        
         switch dragEndAction {
         case .dismiss:
             isBeingDismissedFromSwipe = true

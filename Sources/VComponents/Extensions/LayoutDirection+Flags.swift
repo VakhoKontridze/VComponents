@@ -6,21 +6,26 @@
 //
 
 import SwiftUI
+import OSLog
 
 extension LayoutDirection {
     var isLeftToRight: Bool {
         switch self {
-        case .leftToRight: true
-        case .rightToLeft: false
-        @unknown default: fatalError()
+        case .leftToRight: return true
+        case .rightToLeft: return false
+        @unknown default:
+            Logger.misc.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isLeftToRight'")
+            return true
         }
     }
 
     var isRightToLeft: Bool {
         switch self {
-        case .leftToRight: false
-        case .rightToLeft: true
-        @unknown default: fatalError()
+        case .leftToRight: return false
+        case .rightToLeft: return true
+        @unknown default:
+            Logger.misc.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isRightToLeft'")
+            return false
         }
     }
 }

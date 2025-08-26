@@ -31,7 +31,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
 #elseif os(macOS)
         40
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -43,7 +43,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
 #elseif os(macOS)
         12
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -67,7 +67,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
             disabled: Color.dynamic(Color.black.opacity(0.05), Color.black.opacity(0.1))
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -121,7 +121,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS`
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -148,7 +148,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
 #elseif os(macOS)
         CGSize(dimension: 16)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -213,7 +213,7 @@ public struct VStretchedToggleButtonAppearance: Equatable, Sendable {
 #elseif os(macOS)
         nil
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

@@ -259,7 +259,7 @@ extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.labelImageColors!.off = appearance.labelImageColors!.pressedOff // Force-unwrap
+                    appearance.labelImageColors!.off = appearance.labelImageColors!.pressedOff // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -279,7 +279,7 @@ extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.labelImageColors!.on = appearance.labelImageColors!.pressedOn // Force-unwrap
+                    appearance.labelImageColors!.on = appearance.labelImageColors!.pressedOn // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.on),

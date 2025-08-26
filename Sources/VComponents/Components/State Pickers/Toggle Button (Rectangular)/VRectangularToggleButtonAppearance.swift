@@ -33,7 +33,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(width: 64, height: 56)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -47,7 +47,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         16
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -79,7 +79,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
             disabled: Color(50, 50, 50)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -92,7 +92,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -118,7 +118,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -144,7 +144,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         Font.body.weight(.semibold)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -173,7 +173,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 26)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -244,7 +244,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         SensoryFeedback.impact(weight: .light)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

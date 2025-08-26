@@ -391,8 +391,8 @@ private struct StatesContentView: View {
                     appearance: {
                         var mappedAppearance: VTextFieldAppearance = appearance
                         mappedAppearance.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
-                        mappedAppearance.clearButtonAppearance.labelImageColors!.enabled = appearance.clearButtonAppearance.labelImageColors!.pressed // Force-unwrap
-                        mappedAppearance.visibilityButtonAppearance.labelImageColors!.enabled = appearance.visibilityButtonAppearance.labelImageColors!.pressed // Force-unwrap
+                        mappedAppearance.clearButtonAppearance.labelImageColors!.enabled = appearance.clearButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
+                        mappedAppearance.visibilityButtonAppearance.labelImageColors!.enabled = appearance.visibilityButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
                         return mappedAppearance
                     }(),
                     placeholder: "Lorem ipsum",

@@ -47,7 +47,7 @@ public struct VNotificationAppearance: Equatable, Sendable {
 #if os(iOS)
         Color(uiColor: UIColor.secondarySystemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -120,7 +120,7 @@ public struct VNotificationAppearance: Equatable, Sendable {
             Color(22, 22, 22)
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

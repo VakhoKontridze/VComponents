@@ -79,5 +79,6 @@ public struct VAlertButtonBuilder {
     
     // MARK: Types
     public typealias Component = any VAlertButtonConvertible
+    
     public typealias Result = [any VAlertButtonProtocol]
 }

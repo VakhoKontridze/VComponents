@@ -27,7 +27,7 @@ public struct VStretchedIndicatorStaticPagerTabViewAppearance: Equatable, Sendab
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -92,7 +92,7 @@ public struct VStretchedIndicatorStaticPagerTabViewAppearance: Equatable, Sendab
 #if os(iOS)
         Color(uiColor: UIColor.systemBackground)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
     

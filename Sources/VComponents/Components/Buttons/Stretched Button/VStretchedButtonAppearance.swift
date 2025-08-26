@@ -30,7 +30,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         64
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -44,7 +44,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         32
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -65,7 +65,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -102,7 +102,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         0.98
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -122,7 +122,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         Font.title3.weight(.semibold)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -151,7 +151,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         CGSize(dimension: 22)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -204,7 +204,7 @@ public struct VStretchedButtonAppearance: Equatable, Sendable {
 #elseif os(watchOS)
         SensoryFeedback.impact(weight: .light)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

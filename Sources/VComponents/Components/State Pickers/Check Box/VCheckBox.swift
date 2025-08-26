@@ -236,7 +236,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.off = appearance.fillColors.pressedOff
                     appearance.borderColors.off = appearance.borderColors.pressedOff
-                    appearance.checkmarkImageColors!.off = appearance.checkmarkImageColors!.pressedOff // Force-unwrap
+                    appearance.checkmarkImageColors!.off = appearance.checkmarkImageColors!.pressedOff // Unsafe (DEBUG)
                     appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
                     return appearance
                 }(),
@@ -258,7 +258,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.on = appearance.fillColors.pressedOn
                     appearance.borderColors.on = appearance.borderColors.pressedOn
-                    appearance.checkmarkImageColors!.on = appearance.checkmarkImageColors!.pressedOn // Force-unwrap
+                    appearance.checkmarkImageColors!.on = appearance.checkmarkImageColors!.pressedOn // Unsafe (DEBUG)
                     appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
                     return appearance
                 }(),
@@ -280,7 +280,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
                     var appearance: VCheckBoxAppearance = .init()
                     appearance.fillColors.indeterminate = appearance.fillColors.pressedIndeterminate
                     appearance.borderColors.indeterminate = appearance.borderColors.pressedIndeterminate
-                    appearance.checkmarkImageColors!.indeterminate = appearance.checkmarkImageColors!.pressedIndeterminate // Force-unwrap
+                    appearance.checkmarkImageColors!.indeterminate = appearance.checkmarkImageColors!.pressedIndeterminate // Unsafe (DEBUG)
                     appearance.labelTextColors.indeterminate = appearance.labelTextColors.pressedIndeterminate
                     return appearance
                 }(),

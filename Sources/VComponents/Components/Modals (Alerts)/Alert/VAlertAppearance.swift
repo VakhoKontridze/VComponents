@@ -36,7 +36,7 @@ public struct VAlertAppearance: Equatable, Sendable {
             landscape: .zero
         )
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -49,7 +49,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         20
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -68,7 +68,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Color(nsColor: NSColor.windowBackgroundColor)
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -191,7 +191,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         22
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -202,7 +202,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         4
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -213,7 +213,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         Font.system(size: 13) // No dynamic type on `macOS`
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -235,7 +235,7 @@ public struct VAlertAppearance: Equatable, Sendable {
 #elseif os(macOS)
         10
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

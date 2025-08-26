@@ -211,7 +211,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
                 appearance: {
                     var appearance: VRectangularButtonAppearance = .init()
                     appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Force-unwrap
+                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Unsafe (DEBUG)
                     return appearance
                 }(),
                 action: {},

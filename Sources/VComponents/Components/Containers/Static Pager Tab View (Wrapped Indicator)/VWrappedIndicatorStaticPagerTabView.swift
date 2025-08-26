@@ -425,7 +425,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         tabContentOffsets: [CGFloat]
     ) -> CGFloat? {
         guard dataSource.count == tabContentOffsets.count else {
-            Logger.wrappedIndicatorStaticPagerTabView.warning("Invalid layout in 'VWrappedIndicatorStaticPagerTabView'")
+            Logger.wrappedIndicatorStaticPagerTabView.fault("Invalid state in 'VWrappedIndicatorStaticPagerTabView'")
             return nil
         }
 

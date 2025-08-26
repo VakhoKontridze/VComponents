@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -25,8 +26,8 @@ enum VBottomSheetDragEndAction {
         offset: CGFloat,
 
         velocity: CGFloat
-    ) -> VBottomSheetDragEndAction {
-        let region: VBottomSheetRegion = .init(containerHeight: containerHeight, heights: heights, offset: offset)
+    ) -> VBottomSheetDragEndAction? {
+        guard let region: VBottomSheetRegion = .init(containerHeight: containerHeight, heights: heights, offset: offset) else { return nil }
         let isGoingDown: Bool = velocity > 0
         
         switch (region, isGoingDown) {
@@ -49,7 +50,7 @@ enum VBottomSheetDragEndAction {
         offset: CGFloat,
         offsetBeforeDrag: CGFloat,
         translation: CGFloat
-    ) -> VBottomSheetDragEndAction {
+    ) -> VBottomSheetDragEndAction? {
         let shouldDismiss: Bool = {
             guard canSwipeToDismiss else { return false }
             
@@ -66,7 +67,9 @@ enum VBottomSheetDragEndAction {
             return .dismiss
             
         } else {
-            switch VBottomSheetRegion(containerHeight: containerHeight, heights: heights, offset: offset) {
+            guard let region: VBottomSheetRegion = .init(containerHeight: containerHeight, heights: heights, offset: offset) else { return nil }
+            
+            switch region {
             case .idealToMax:
                 let idealDiff: CGFloat = abs(heights.idealOffset(in: containerHeight) - offset)
                 let maxDiff: CGFloat = abs(heights.maxOffset(in: containerHeight) - offset)
@@ -98,21 +101,20 @@ private enum VBottomSheetRegion {
     case swipeToMin
     
     // MARK: Initializers
-    init(
+    init?(
         containerHeight: CGFloat,
         heights: VBottomSheetAppearance.Heights,
         offset: CGFloat
     ) {
-        self = {
-            if offset >= heights.maxOffset(in: containerHeight) && offset <= heights.idealOffset(in: containerHeight) {
-                .idealToMax
-            } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
-                .minToIdeal
-            } else if offset > heights.minOffset(in: containerHeight) {
-                .swipeToMin
-            } else {
-                fatalError()
-            }
-        }()
+        if offset >= heights.maxOffset(in: containerHeight) && offset <= heights.idealOffset(in: containerHeight) {
+            self = .idealToMax
+        } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
+            self = .minToIdeal
+        } else if offset > heights.minOffset(in: containerHeight) {
+            self = .swipeToMin
+        } else {
+            Logger.bottomSheet.error("Invalid height configuration in 'VBottomSheet'")
+            return nil
+        }
     }
 }

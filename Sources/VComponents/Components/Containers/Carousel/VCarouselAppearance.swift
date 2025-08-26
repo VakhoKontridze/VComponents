@@ -30,7 +30,7 @@ public struct VCarouselAppearance: Equatable, Sendable {
 #elseif os(visionOS)
         15
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 
@@ -48,7 +48,7 @@ public struct VCarouselAppearance: Equatable, Sendable {
 #elseif os(visionOS)
         30
 #else
-        fatalError() // Not supported
+        fatalError()
 #endif
     }()
 

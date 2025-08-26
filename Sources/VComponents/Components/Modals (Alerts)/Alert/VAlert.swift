@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 import VCore
 
 @available(tvOS, unavailable) // Doesn't follow HIG
@@ -30,7 +31,7 @@ struct VAlert<Content>: View
     @State private var buttonsStackHeight: CGFloat = 0
 
     // MARK: Properties - Presentation API
-    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode!
+    @Environment(\.modalPresenterPresentationMode) private var presentationMode: ModalPresenterPresentationMode! // Unsafe
     
     @Binding private var isPresented: Bool
     @State private var isPresentedInternally: Bool = false
@@ -213,7 +214,10 @@ struct VAlert<Content>: View
                 }
                 
             default:
-                fatalError()
+                EmptyView()
+                    .onFirstAppear {
+                        Logger.alert.critical("Invalid number of buttons '(\(buttons.count))' in 'VAlert'")
+                    }
             }
         }
         .padding(appearance.buttonMargins)

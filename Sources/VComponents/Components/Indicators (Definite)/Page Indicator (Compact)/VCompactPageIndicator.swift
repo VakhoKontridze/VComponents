@@ -102,8 +102,6 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     )
         where CustomDotContent == Never
     {
-        Self.validate(appearance: appearance)
-        
         self.appearance = appearance
         self.current = current
         self.total = total
@@ -117,8 +115,6 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
         total: Int,
         @ViewBuilder dotContent customDotContent: @escaping (VCompactPageIndicatorDotInternalState, Int) -> CustomDotContent
     ) {
-        Self.validate(appearance: appearance)
-
         self.appearance = appearance
         self.current = current
         self.total = total
@@ -127,9 +123,9 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     
     // MARK: Body
     public var body: some View {
-        // `VPageIndicator` is needed, because if total number of dots are not more that visible,
-        // `0`-sized dots would offset the page indicator.
-        Group {
+        if isValid {
+            // `VPageIndicator` is needed, because if total number of dots are not more that visible,
+            // `0`-sized dots would offset the page indicator.
             if total > visible {
                 compactBody
                 
@@ -329,23 +325,23 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
     
     // MARK: Validation
-    private static func validate(
-        appearance: VCompactPageIndicatorAppearance
-    ) {
+    private var isValid: Bool {
         guard appearance.visibleDots.isOdd else {
             Logger.compactPageIndicator.critical("'visible' count must be odd in 'VCompactPageIndicator'")
-            fatalError()
+            return false
         }
         
         guard appearance.centerDots.isOdd else {
             Logger.compactPageIndicator.critical("'center' count must be odd in 'VCompactPageIndicator'")
-            fatalError()
+            return false
         }
         
         guard appearance.visibleDots > appearance.centerDots else {
             Logger.compactPageIndicator.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
-            fatalError()
+            return false
         }
+        
+        return true
     }
     
     // MARK: Types
