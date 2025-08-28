@@ -28,7 +28,7 @@ public struct VAlertParameters: Equatable {
     public var buttons: () -> [any VAlertButtonProtocol]
 
     /// Attributes.
-    public var attributes: [String: Any?]
+    public var attributes: [String: Any]
     
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
@@ -37,7 +37,7 @@ public struct VAlertParameters: Equatable {
         title: String,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol],
-        attributes: [String: Any?] = [:]
+        attributes: [String: Any] = [:]
     ) {
         self.appearance = appearance
         self.title = title
@@ -52,7 +52,7 @@ public struct VAlertParameters: Equatable {
         title: String,
         message: String?,
         completion: (@MainActor () -> Void)?,
-        attributes: [String: Any?] = [:]
+        attributes: [String: Any] = [:]
     ) {
         self.init(
             appearance: appearance,
@@ -74,7 +74,7 @@ public struct VAlertParameters: Equatable {
         appearance: VAlertAppearance = .init(),
         error: any Error,
         completion: (@MainActor () -> Void)?,
-        attributes: [String: Any?] = [:]
+        attributes: [String: Any] = [:]
     ) {
         self.init(
             appearance: appearance,

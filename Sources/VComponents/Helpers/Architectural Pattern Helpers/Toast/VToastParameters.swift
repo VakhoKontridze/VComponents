@@ -22,14 +22,14 @@ public struct VToastParameters: Equatable {
     public var text: String
 
     /// Attributes.
-    public var attributes: [String: Any?]
+    public var attributes: [String: Any]
     
     // MARK: Parameters
     /// Initializes `VToastParameters`.
     public init(
         appearance: VToastAppearance = .init(),
         text: String,
-        attributes: [String: Any?] = [:]
+        attributes: [String: Any] = [:]
     ) {
         self.appearance = appearance
         self.text = text

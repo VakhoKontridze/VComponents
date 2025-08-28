@@ -28,7 +28,7 @@ public struct VNotificationParameters: Equatable {
     public var message: String?
 
     /// Attributes.
-    public var attributes: [String: Any?]
+    public var attributes: [String: Any]
     
     // MARK: Parameters
     /// Initializes `VNotificationParameters`.
@@ -37,7 +37,7 @@ public struct VNotificationParameters: Equatable {
         image: Image? = nil,
         title: String? = nil,
         message: String? = nil,
-        attributes: [String: Any?] = [:]
+        attributes: [String: Any] = [:]
     ) {
         self.appearance = appearance
         self.image = image
