@@ -1,5 +1,5 @@
-// swift-tools-version: 6.1
-// FIXME: Replace with 6.2
+// swift-tools-version: 6.2
+
 import PackageDescription
 
 let package: Package = .init(
