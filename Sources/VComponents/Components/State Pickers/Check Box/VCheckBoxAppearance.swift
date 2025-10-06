@@ -226,7 +226,7 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
     /// Label text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
     /// Indicates if `stateChangeAnimation` is applied.

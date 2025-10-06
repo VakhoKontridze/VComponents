@@ -84,7 +84,7 @@ public struct VCodeEntryViewAppearance: Equatable, Sendable {
     /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var textDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Placeholder Text
     /// Placeholder text colors.
@@ -96,7 +96,7 @@ public struct VCodeEntryViewAppearance: Equatable, Sendable {
     /// Placeholder text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Initializers
     /// Initializes appearance with default values.

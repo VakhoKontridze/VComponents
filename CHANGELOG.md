@@ -10,6 +10,7 @@ General
 - UI Models are renamed to Appearances
 - `BasicAnimation` is replaced with `Animation` is most components
 - `UIImpactFeedbackGenerator.FeedbackStyle` and `WKHapticStyle` are replaced with `FeedbackStyle`
+- Default values for `DynamicTypeSizeType` have been removed
 - Names of parameters and properties are standardized. For example, "icon" becomes "image". It also reflects on Appearances, for example, button label's `titleTextColors` becomes `labelTextColors`.
 
 VLoadingStretchedButton

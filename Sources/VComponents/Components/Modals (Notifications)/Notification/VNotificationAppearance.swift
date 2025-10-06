@@ -148,7 +148,7 @@ public struct VNotificationAppearance: Equatable, Sendable {
     /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Notification Content - Message
     /// Message text frame alignment.
@@ -174,7 +174,7 @@ public struct VNotificationAppearance: Equatable, Sendable {
     /// Message text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing side bar.

@@ -66,7 +66,7 @@ public struct VDynamicPagerTabViewAppearance: Equatable, Sendable {
     /// Tab item text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Tab Indicator Strip
     /// Tab indicator strip alignment.

@@ -130,7 +130,7 @@ public struct VAlertAppearance: Equatable, Sendable {
     /// Title text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Title text margins.
     public var titleTextMargins: EdgeInsets = .init(
@@ -164,7 +164,7 @@ public struct VAlertAppearance: Equatable, Sendable {
     /// Message text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Message text margins.
     public var messageTextMargins: EdgeInsets = .init(

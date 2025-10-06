@@ -82,7 +82,7 @@ public struct VToastAppearance: Equatable, Sendable {
     /// Text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var textDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing side bar.

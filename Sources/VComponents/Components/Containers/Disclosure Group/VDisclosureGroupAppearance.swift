@@ -117,7 +117,7 @@ public struct VDisclosureGroupAppearance: Equatable, Sendable {
     /// Header text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var headerTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var headerTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Disclosure Button
     /// Disclosure button image.

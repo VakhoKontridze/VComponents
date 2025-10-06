@@ -151,7 +151,7 @@ public struct VRectangularToggleButtonAppearance: Equatable, Sendable {
     /// Label text `DynamicTypeSize` type.
     ///
     /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
+    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label - Image
     /// Indicates if label image is resizable.
