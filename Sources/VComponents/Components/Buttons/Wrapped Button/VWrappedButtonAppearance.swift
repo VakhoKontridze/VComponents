@@ -176,10 +176,6 @@ public struct VWrappedButtonAppearance: Equatable, Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
 
-    // MARK: Properties - Hit Box
-    /// Hit box.
-    public var hitBox: EdgeInsets = .init()
-
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.
     ///

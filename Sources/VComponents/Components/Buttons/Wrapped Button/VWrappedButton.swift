@@ -115,7 +115,6 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                     .background { backgroundView(internalState: internalState) }
                     .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: appearance.cornerRadius))
-                    .padding(appearance.hitBox)
             }
         )
         .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }

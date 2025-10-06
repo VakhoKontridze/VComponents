@@ -228,10 +228,6 @@ public struct VCheckBoxAppearance: Equatable, Sendable {
     /// Changing this property conditionally will cause view state to be reset.
     public var labelTextDynamicTypeSizeType: DynamicTypeSizeType? = .partialRangeThrough(...(.accessibility2))
 
-    // MARK: Properties - Hit Box
-    /// Checkbox hit box.
-    public var checkboxHitBox: EdgeInsets = .init()
-
     // MARK: Properties - Transition - State Change
     /// Indicates if `stateChangeAnimation` is applied.
     ///

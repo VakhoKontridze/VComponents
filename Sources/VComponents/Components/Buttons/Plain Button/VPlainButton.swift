@@ -145,7 +145,6 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
             }
         }
         .scaleEffect(internalState == .pressed ? appearance.labelPressedScale : 1)
-        .padding(appearance.hitBox)
     }
     
     private func labelTextElement(

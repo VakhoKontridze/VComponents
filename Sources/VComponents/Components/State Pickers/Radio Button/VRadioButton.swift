@@ -148,7 +148,6 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                     .foregroundStyle(appearance.bulletColors.value(for: internalState))
             }
             .frame(size: appearance.size)
-            .padding(appearance.radioButtonHitBox)
         }
     }
 

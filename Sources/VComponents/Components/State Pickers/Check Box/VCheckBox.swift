@@ -154,7 +154,6 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
             }
             .frame(size: appearance.size)
             .clipShape(.rect(cornerRadius: appearance.cornerRadius)) // Prevents large content from overflowing
-            .padding(appearance.checkboxHitBox)
         }
     }
 

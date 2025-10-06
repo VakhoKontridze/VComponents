@@ -155,8 +155,6 @@ public struct VDisclosureGroupAppearance: Equatable, Sendable {
             disabled: Color.primary.opacity(0.3)
         )
 
-        appearance.hitBox = EdgeInsets()
-
         appearance.sensoryFeedback = nil
 
         return appearance

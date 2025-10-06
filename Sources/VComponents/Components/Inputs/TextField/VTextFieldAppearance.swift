@@ -120,8 +120,6 @@ public struct VTextFieldAppearance: Equatable, Sendable {
             Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
         )
 
-        appearance.hitBox = EdgeInsets()
-
         appearance.sensoryFeedback = nil
 
         return appearance
@@ -147,8 +145,6 @@ public struct VTextFieldAppearance: Equatable, Sendable {
             pressed: Color.primary.opacity(0.3),
             disabled: Color.primary.opacity(0.3)
         )
-
-        appearance.hitBox = EdgeInsets()
 
         appearance.sensoryFeedback = nil
 

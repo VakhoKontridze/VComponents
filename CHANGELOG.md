@@ -16,6 +16,26 @@ VLoadingStretchedButton
 
 - `spinnerPlacement` is added, allowing spinner position to be changed
 
+VWrappedButton
+
+- `hitBox` is removed
+
+VRetangularButton
+
+- `hitBox` is removed
+
+VPlainButton
+
+- `hitBox` is removed
+
+VWrappedToggleButton
+
+- `hitBox` is removed
+
+VRetangularToggleButton
+
+- `hitBox` is removed
+
 VTextField
 
 - Header and footer are removed

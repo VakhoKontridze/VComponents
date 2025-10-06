@@ -142,7 +142,6 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                     .background { backgroundView(internalState: internalState) }
                     .overlay { borderView(internalState: internalState) }
                     .clipShape(.rect(cornerRadius: appearance.cornerRadius))
-                    .padding(appearance.hitBox)
                     .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
                             .animation(appearance.stateChangeAnimation, value: state)
