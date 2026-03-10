@@ -16,7 +16,7 @@ import SwiftUI
 ///             from: #URL("https://website.com/content/image.jpg"),
 ///             fetch: fetchImage,
 ///             contentWithPhase: { phase in
-///                 if let image = phase.image {
+///                 if let image: Image = phase.image {
 ///                     image
 ///                         .resizable()
 ///                         .scaledToFit()
