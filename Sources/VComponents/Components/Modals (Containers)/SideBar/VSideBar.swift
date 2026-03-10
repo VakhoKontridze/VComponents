@@ -70,7 +70,7 @@ struct VSideBar<Content>: View where Content: View {
 
             .onReceive(presentationMode.presentPublisher, perform: onPresent)
             .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onTapDimmingView)
     }
     
     private var sideBarView: some View {
@@ -102,7 +102,7 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Actions
-    private func onDimmingViewTap() {
+    private func onTapDimmingView() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false

@@ -86,7 +86,7 @@ struct VBottomSheet<Content>: View
 
             .onReceive(presentationMode.presentPublisher, perform: onPresent)
             .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onTapDimmingView)
     }
 
     private var bottomSheetView: some View {
@@ -182,7 +182,7 @@ struct VBottomSheet<Content>: View
     }
 
     // MARK: Actions
-    private func onDimmingViewTap() {
+    private func onTapDimmingView() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false

@@ -62,7 +62,7 @@ struct VModal<Content>: View
         
             .onReceive(presentationMode.presentPublisher, perform: onPresent)
             .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onTapDimmingView)
     }
 
     private var modalView: some View {
@@ -115,7 +115,7 @@ struct VModal<Content>: View
     }
 
     // MARK: Actions
-    private func onDimmingViewTap() {
+    private func onTapDimmingView() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false

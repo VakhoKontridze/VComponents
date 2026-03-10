@@ -60,7 +60,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         notificationView
             .onReceive(presentationMode.presentPublisher, perform: onPresent)
             .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
-            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap) // Not dismissible from dimming view
+            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onTapDimmingView) // Not dismissible from dimming view
         
             .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
