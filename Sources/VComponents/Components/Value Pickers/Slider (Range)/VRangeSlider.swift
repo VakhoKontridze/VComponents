@@ -48,8 +48,8 @@ public struct VRangeSlider: View {
     // MARK: Properties - Values
     @Binding private var value: ClosedRange<Double>
 
-    // MARK: Properties - Handlers
-    private let changeHandler: ((Bool) -> Void)?
+    // MARK: Properties - Actions
+    private let onChange: ((Bool) -> Void)?
     
     // MARK: Initializers
     /// Initializes `VRangeSlider` with difference, and low and high values.
@@ -59,7 +59,7 @@ public struct VRangeSlider: View {
         difference: V,
         step: V? = nil,
         value: Binding<ClosedRange<V>>,
-        onChange changeHandler: ((Bool) -> Void)? = nil
+        onChange: ((Bool) -> Void)? = nil
     )
         where
             V: BinaryFloatingPoint,
@@ -89,7 +89,7 @@ public struct VRangeSlider: View {
             }
         )
 
-        self.changeHandler = changeHandler
+        self.onChange = onChange
     }
     
     // MARK: Body
@@ -222,11 +222,11 @@ public struct VRangeSlider: View {
         case .high: setValueHigh(to: valueFixed)
         }
         
-        changeHandler?(true)
+        onChange?(true)
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
-        changeHandler?(false)
+        onChange?(false)
     }
     
     // MARK: Actions

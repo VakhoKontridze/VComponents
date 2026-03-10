@@ -91,7 +91,7 @@ public struct VRollingCounter: View {
                 .clipped() // Prevents clipping from animations
             }
         }
-        .onChange(of: value, didChangeValue)
+        .onChange(of: value, onValueChange)
     }
 
     @ViewBuilder
@@ -160,7 +160,7 @@ public struct VRollingCounter: View {
     }
 
     // MARK: Actions
-    private func didChangeValue(
+    private func onValueChange(
         from oldValue: Double,
         to newValue: Double
     ) {

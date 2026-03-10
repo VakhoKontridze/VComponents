@@ -58,9 +58,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     // MARK: Body
     var body: some View {
         notificationView
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap) // Not dismissible from dimming view
         
             .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
@@ -271,7 +271,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true },
@@ -283,7 +283,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         }
     }
 
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         let animation: Animation? = {

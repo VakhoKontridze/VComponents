@@ -68,9 +68,9 @@ struct VSideBar<Content>: View where Content: View {
                 }
             }
 
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
     }
     
     private var sideBarView: some View {
@@ -102,7 +102,7 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Actions
-    private func didTapDimmingView() {
+    private func onDimmingViewTap() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
@@ -129,14 +129,14 @@ struct VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
     
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         let animation: Animation? = {
@@ -335,7 +335,7 @@ private struct SafeAreaContentView: View {
     var body: some View {
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
-                .getInterfaceOrientation { interfaceOrientation = $0 }
+                .onInterfaceOrientationChange { interfaceOrientation = $0 }
                 .vSideBar(
                     link: rootAndLink.link(linkID: "preview"),
                     appearance: {

@@ -46,8 +46,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VToastAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         text: String
     ) -> some View {
         self
@@ -55,8 +55,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VToast(
                     appearance: appearance,
@@ -79,8 +79,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VToastAppearance = { _ in VToastAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         text: @escaping (Item) -> String
     ) -> some View
         where Item: Equatable
@@ -100,8 +100,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VToast(
                             appearance: appearance,
@@ -126,8 +126,8 @@ extension View {
         appearance: @escaping (E) -> VToastAppearance = { _ in VToastAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         text: @escaping (E) -> String
     ) -> some View
         where E: Error & Equatable
@@ -147,8 +147,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VToast(
                             appearance: appearance,

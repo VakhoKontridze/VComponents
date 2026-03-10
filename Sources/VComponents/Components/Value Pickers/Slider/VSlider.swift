@@ -50,8 +50,8 @@ public struct VSlider: View {
     // MARK: Properties - Value
     @Binding private var value: Double
 
-    // MARK: Properties - Handlers
-    private let changeHandler: ((Bool) -> Void)?
+    // MARK: Properties - Actions
+    private let onChange: ((Bool) -> Void)?
     
     // MARK: Initializers
     /// Initializes `VSlider` with value.
@@ -60,7 +60,7 @@ public struct VSlider: View {
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
         value: Binding<V>,
-        onChange changeHandler: ((Bool) -> Void)? = nil
+        onChange: ((Bool) -> Void)? = nil
     )
         where
             V: BinaryFloatingPoint,
@@ -79,7 +79,7 @@ public struct VSlider: View {
             set: { value.wrappedValue = V($0) }
         )
 
-        self.changeHandler = changeHandler
+        self.onChange = onChange
     }
     
     // MARK: Body
@@ -196,11 +196,11 @@ public struct VSlider: View {
         
         setValue(to: valueFixed)
         
-        changeHandler?(true)
+        onChange?(true)
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
-        changeHandler?(false)
+        onChange?(false)
     }
     
     // MARK: Actions

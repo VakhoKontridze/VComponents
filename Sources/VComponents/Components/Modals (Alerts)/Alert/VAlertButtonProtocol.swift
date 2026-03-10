@@ -19,7 +19,7 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     @MainActor
     func makeBody(
         appearance: VAlertAppearance,
-        animateOutHandler: @escaping (/*completion*/ (() -> Void)?) -> Void
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> Body
 }
 

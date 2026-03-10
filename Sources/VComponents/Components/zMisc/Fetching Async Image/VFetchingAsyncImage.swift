@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// `View` that asynchronously loads and displays an `Image` with a fetch handler.
+/// `View` that asynchronously loads and displays an `Image` with a fetch action.
 ///
 /// Request can be customized with access token and headers, implement custom caching, and more.
 ///
@@ -65,7 +65,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
 
     // MARK: Properties - Fetching
     private let parameter: Parameter?
-    private let fetchHandler: (Parameter) async throws -> Image
+    private let fetch: (Parameter) async throws -> Image
     
     @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image
     @State private var result: Result<Image, any Error>?
@@ -81,7 +81,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping (Parameter) async throws -> Image
+        fetch: @escaping (Parameter) async throws -> Image
     )
         where
             CustomContent == Never,
@@ -89,7 +89,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     {
         self.appearance = appearance
         self.parameter = parameter
-        self.fetchHandler = fetchHandler
+        self.fetch = fetch
         self.content = .auto
     }
     
@@ -97,7 +97,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
+        fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent
     )
         where
@@ -105,7 +105,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     {
         self.appearance = appearance
         self.parameter = parameter
-        self.fetchHandler = fetchHandler
+        self.fetch = fetch
         self.content = .content(
             contentBuilder: customContent
         )
@@ -115,13 +115,13 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
+        fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent,
         @ViewBuilder placeholder customPlaceholderContent: @escaping () -> CustomPlaceholderContent
     ) {
         self.appearance = appearance
         self.parameter = parameter
-        self.fetchHandler = fetchHandler
+        self.fetch = fetch
         self.content = .contentAndPlaceholder(
             contentBuilder: customContent,
             placeholderBuilder: customPlaceholderContent
@@ -132,14 +132,14 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
-        fetch fetchHandler: @escaping (Parameter) async throws -> Image,
+        fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder contentWithPhase customContentWithPhase: @escaping (AsyncImagePhase) -> CustomContent
     )
         where CustomPlaceholderContent == Never
     {
         self.appearance = appearance
         self.parameter = parameter
-        self.fetchHandler = fetchHandler
+        self.fetch = fetch
         self.content = .contentWithPhase(
             contentBuilder: customContentWithPhase
         )
@@ -207,7 +207,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         task?.cancel()
         task = Task { @MainActor in
             do {
-                let image: Image = try await fetchHandler(parameter)
+                let image: Image = try await fetch(parameter)
                 guard !Task.isCancelled else { return }
                 
                 result = .success(image)

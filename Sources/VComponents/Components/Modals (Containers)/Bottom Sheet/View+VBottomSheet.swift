@@ -183,8 +183,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VBottomSheetAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View
         where Content: View
@@ -194,8 +194,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VBottomSheet<Content>(
                     appearance: appearance,
@@ -217,8 +217,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VBottomSheetAppearance = { _ in VBottomSheetAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
         where
@@ -240,8 +240,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VBottomSheet(
                             appearance: appearance,

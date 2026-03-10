@@ -48,8 +48,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VNotificationAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         image: Image?,
         title: String?,
         message: String?
@@ -59,8 +59,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VNotification<Never>(
                     appearance: appearance,
@@ -81,8 +81,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VNotificationAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content customContent: @escaping () -> CustomContent
     ) -> some View
         where CustomContent: View
@@ -92,8 +92,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VNotification(
                     appearance: appearance,
@@ -118,8 +118,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VNotificationAppearance = { _ in VNotificationAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         image: @escaping (Item) -> Image?,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
@@ -143,8 +143,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VNotification<Never>(
                             appearance: appearance,
@@ -166,8 +166,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VNotificationAppearance = { _ in VNotificationAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content customContent: @escaping (Item) -> CustomContent
     ) -> some View
         where
@@ -189,8 +189,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VNotification(
                             appearance: appearance,

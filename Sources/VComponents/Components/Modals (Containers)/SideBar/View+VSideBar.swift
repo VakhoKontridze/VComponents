@@ -73,8 +73,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VSideBarAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View
         where Content: View
@@ -84,8 +84,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VSideBar<Content>(
                     appearance: appearance,
@@ -107,8 +107,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VSideBarAppearance = { _ in VSideBarAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
         where
@@ -130,8 +130,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VSideBar(
                             appearance: appearance,

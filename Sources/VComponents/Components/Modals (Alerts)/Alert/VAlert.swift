@@ -73,9 +73,9 @@ struct VAlert<Content>: View
                 }
             }
 
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap) // Not dismissible from dimming view
     }
     
     private var alertView: some View {
@@ -233,7 +233,7 @@ struct VAlert<Content>: View
         return ForEach(buttons.enumeratedArray(), id: \.offset) { (i, button) in
             button.makeBody(
                 appearance: appearance,
-                animateOutHandler: { completion in
+                animateOut: { completion in
                     isPresented = false
                     completion?()
                 }
@@ -242,14 +242,14 @@ struct VAlert<Content>: View
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
 
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         withAnimation(

@@ -214,7 +214,7 @@ public struct VTextField: View {
             ZStack {
                 VRectangularButton(
                     appearance: appearance.clearButtonAppearance,
-                    action: didTapClearButton,
+                    action: onClear,
                     image: appearance.clearButtonImage
                 )
                 .opacity(isClearButtonVisible ? 1 : 0)
@@ -267,7 +267,7 @@ public struct VTextField: View {
     }
 
     // MARK: Actions
-    private func didTapClearButton() {
+    private func onClear() {
         text = ""
     }
 

@@ -46,8 +46,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: String?,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
@@ -57,8 +57,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VAlert<Never>(
                     appearance: appearance,
@@ -78,8 +78,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: VAlertAppearance = .init(),
         isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: String?,
         message: String?,
         @ViewBuilder content: @escaping () -> Content,
@@ -92,8 +92,8 @@ extension View {
                 link: link,
                 appearance: appearance.modalPresenterLinkAppearance,
                 isPresented: isPresented,
-                onPresent: presentHandler,
-                onDismiss: dismissHandler
+                onPresent: onPresent,
+                onDismiss: onDismiss
             ) {
                 VAlert<Content>(
                     appearance: appearance,
@@ -118,8 +118,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VAlertAppearance = { _ in VAlertAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
@@ -143,8 +143,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VAlert<Never>(
                             appearance: appearance,
@@ -165,8 +165,8 @@ extension View {
         link: ModalPresenterLink,
         appearance: @escaping (Item) -> VAlertAppearance = { _ in VAlertAppearance() },
         item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @ViewBuilder content: @escaping (Item) -> Content,
@@ -194,8 +194,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VAlert(
                             appearance: appearance,
@@ -222,8 +222,8 @@ extension View {
         appearance: @escaping (E) -> VAlertAppearance = { _ in VAlertAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButtonProtocol]
@@ -247,8 +247,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VAlert<Never>(
                             appearance: appearance,
@@ -270,8 +270,8 @@ extension View {
         appearance: @escaping (E) -> VAlertAppearance = { _ in VAlertAppearance() },
         isPresented: Binding<Bool>,
         error: E?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
         @ViewBuilder content: @escaping (E) -> Content,
@@ -299,8 +299,8 @@ extension View {
                         link: link,
                         appearance: appearance.modalPresenterLinkAppearance,
                         isPresented: isPresented,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
                     ) {
                         VAlert(
                             appearance: appearance,

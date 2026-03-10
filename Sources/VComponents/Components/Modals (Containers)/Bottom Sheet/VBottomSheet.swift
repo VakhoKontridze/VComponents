@@ -84,9 +84,9 @@ struct VBottomSheet<Content>: View
                 )
             }
 
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
     }
 
     private var bottomSheetView: some View {
@@ -182,7 +182,7 @@ struct VBottomSheet<Content>: View
     }
 
     // MARK: Actions
-    private func didTapDimmingView() {
+    private func onDimmingViewTap() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
@@ -277,14 +277,14 @@ struct VBottomSheet<Content>: View
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
 
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         let animation: Animation? = {
@@ -611,7 +611,7 @@ private struct ContentView_ContentAutoresizing: View {
     ZStack {
         // `PreviewContainer` ignores safe areas, so insets must be read differently
         Color.clear
-            .getSafeAreaInsets { safeAreaInsets = $0 }
+            .onGeometryChange(of: { $0.safeAreaInsets }) { safeAreaInsets = $0 }
 
         PreviewContainer {
             ModalLauncherView(isPresented: $isPresented)
@@ -670,7 +670,7 @@ private struct ContentView_ContentAutoresizing: View {
     ZStack {
         // `PreviewContainer` ignores safe areas, so insets must be read differently
         Color.clear
-            .getSafeAreaInsets { newValue in
+            .onGeometryChange(of: { $0.safeAreaInsets }) { newValue in
                 Task { @MainActor in
                     safeAreaInsets = newValue
                 }

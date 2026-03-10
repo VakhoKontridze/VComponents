@@ -60,9 +60,9 @@ struct VModal<Content>: View
                 }
             }
         
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView)
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            .onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap)
     }
 
     private var modalView: some View {
@@ -115,21 +115,21 @@ struct VModal<Content>: View
     }
 
     // MARK: Actions
-    private func didTapDimmingView() {
+    private func onDimmingViewTap() {
         guard appearance.dismissType.contains(.backTap) else { return }
 
         isPresented = false
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true }
         )
     }
 
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         withAnimation(

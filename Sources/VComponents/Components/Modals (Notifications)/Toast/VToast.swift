@@ -58,9 +58,9 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         toastView
-            .onReceive(presentationMode.presentPublisher, perform: animateIn)
-            .onReceive(presentationMode.dismissPublisher, perform: animateOut)
-            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: didTapDimmingView) // Not dismissible from dimming view
+            .onReceive(presentationMode.presentPublisher, perform: onPresent)
+            .onReceive(presentationMode.dismissPublisher, perform: onDismiss)
+            //.onReceive(presentationMode.dimmingViewTapActionPublisher, perform: onDimmingViewTap) // Not dismissible from dimming view
         
             .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
     }
@@ -201,7 +201,7 @@ struct VToast: View {
     }
 
     // MARK: Lifecycle Animations
-    private func animateIn() {
+    private func onPresent() {
         withAnimation(
             appearance.appearAnimation,
             { isPresentedInternally = true },
@@ -213,7 +213,7 @@ struct VToast: View {
         }
     }
 
-    private func animateOut(
+    private func onDismiss(
         completion: @escaping () -> Void
     ) {
         let animation: Animation? = {
