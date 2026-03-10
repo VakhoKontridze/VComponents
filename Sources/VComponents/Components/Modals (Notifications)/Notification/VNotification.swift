@@ -245,7 +245,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
 
         // No need to handle reentrancy and cancellation
         Task { @MainActor in
-            try await Task.sleep(for: .seconds(appearance.timeoutDuration))
+            try? await Task.sleep(for: .seconds(appearance.timeoutDuration))
             isPresented = false
         }
     }
@@ -427,14 +427,14 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             )
             .onFirstAppear {
                 Task { @MainActor in
-                    try await Task.sleep(for: .seconds(1))
+                    try? await Task.sleep(for: .seconds(1))
                     
                     while true {
                         width = .fixed(width: .fraction(0.75))
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                         
                         width = .stretched(margin: .absolute(15))
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                     }
                 }
             }
@@ -470,20 +470,20 @@ struct VNotification<CustomContent>: View where CustomContent: View {
             )
             .onFirstAppear {
                 Task { @MainActor in
-                    try await Task.sleep(for: .seconds(1))
+                    try? await Task.sleep(for: .seconds(1))
                     
                     while true {
                         appearance = .info
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                         
                         appearance = .success
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                         
                         appearance = .warning
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                         
                         appearance = .error
-                        try await Task.sleep(for: .seconds(1))
+                        try? await Task.sleep(for: .seconds(1))
                     }
                 }
             }
