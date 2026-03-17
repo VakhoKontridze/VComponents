@@ -194,12 +194,12 @@ struct VBottomSheet<Content>: View
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         let offsetBeforeDrag: CGFloat = {
-            if let offsetBeforeDrag: CGFloat = self.offsetBeforeDrag {
+            if let offsetBeforeDrag: CGFloat = self.offsetBeforeDrag { // swiftlint:disable:this redundant_self
                 return offsetBeforeDrag
                 
             } else {
                 let newValue: CGFloat = offset
-                self.offsetBeforeDrag = newValue
+                self.offsetBeforeDrag = newValue // swiftlint:disable:this redundant_self
                 return newValue
             }
         }()

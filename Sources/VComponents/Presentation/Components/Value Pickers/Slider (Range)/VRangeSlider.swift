@@ -241,10 +241,12 @@ public struct VRangeSlider: View {
     // MARK: Progress Width
     private func progressWidth(_ thumb: VRangeSliderThumb) -> CGFloat {
         let value: CGFloat = {
+            // swiftlint:disable redundant_self
             switch thumb {
             case .low: self.value.lowerBound - self.range.lowerBound
             case .high: self.value.upperBound - self.range.lowerBound
             }
+            // swiftlint:enable redundant_self
         }()
         guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
