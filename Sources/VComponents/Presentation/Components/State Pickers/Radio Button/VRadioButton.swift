@@ -191,7 +191,7 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 nonisolated extension VRadioButtonState {
-    mutating fileprivate func setNextStateRadio() {
+    fileprivate mutating func setNextStateRadio() {
         switch self {
         case .off: self = .on
         case .on: break

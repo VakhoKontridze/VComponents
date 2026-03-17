@@ -26,7 +26,7 @@ enum VBottomSheetDragEndAction {
         offset: CGFloat,
 
         velocity: CGFloat
-    ) -> VBottomSheetDragEndAction? {
+    ) -> Self? {
         guard let region: VBottomSheetRegion = .init(containerHeight: containerHeight, heights: heights, offset: offset) else { return nil }
         let isGoingDown: Bool = velocity > 0
         
@@ -50,7 +50,7 @@ enum VBottomSheetDragEndAction {
         offset: CGFloat,
         offsetBeforeDrag: CGFloat,
         translation: CGFloat
-    ) -> VBottomSheetDragEndAction? {
+    ) -> Self? {
         let shouldDismiss: Bool = {
             guard canSwipeToDismiss else { return false }
             
@@ -106,9 +106,9 @@ private enum VBottomSheetRegion {
         heights: VBottomSheetAppearance.Heights,
         offset: CGFloat
     ) {
-        if offset >= heights.maxOffset(in: containerHeight) && offset <= heights.idealOffset(in: containerHeight) {
+        if offset >= heights.maxOffset(in: containerHeight), offset <= heights.idealOffset(in: containerHeight) {
             self = .idealToMax
-        } else if offset > heights.idealOffset(in: containerHeight) && offset <= heights.minOffset(in: containerHeight) {
+        } else if offset > heights.idealOffset(in: containerHeight), offset <= heights.minOffset(in: containerHeight) {
             self = .minToIdeal
         } else if offset > heights.minOffset(in: containerHeight) {
             self = .swipeToMin

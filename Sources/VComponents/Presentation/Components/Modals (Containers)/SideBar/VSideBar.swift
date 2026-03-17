@@ -271,7 +271,6 @@ struct VSideBar<Content>: View where Content: View {
 
 #if !os(macOS) // No `UIEdgeInsets`
 
-
 #Preview("Safe Area Bottom") {
     SafeAreaContentView(appearance: .bottom)
 }

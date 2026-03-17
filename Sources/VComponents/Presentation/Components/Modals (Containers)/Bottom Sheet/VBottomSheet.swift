@@ -561,7 +561,7 @@ private struct ContentView_IdealLarge: View {
 // Macros aren't allowed in Preview macro
 private struct ContentView_ContentAutoresizing: View {
     // MARK: Properties
-    @State var isPresented: Bool = true
+    @State private var isPresented: Bool = true
 
     // MARK: Body
     var body: some View {

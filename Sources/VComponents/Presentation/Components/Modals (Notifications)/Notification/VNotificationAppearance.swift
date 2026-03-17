@@ -266,7 +266,7 @@ public struct VNotificationAppearance {
 
         // MARK: Options Initializers
         /// Default value.
-        public static var `default`: DismissType { .all }
+        public static var `default`: Self { .all }
     }
 }
 
@@ -322,28 +322,28 @@ extension VNotificationAppearance {
 @available(visionOS, unavailable)
 extension VNotificationAppearance {
     /// Applies blue color scheme to `VNotificationAppearance`.
-    mutating public func applyInfoColorScheme() {
+    public mutating func applyInfoColorScheme() {
         backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
 
         imageBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
     }
 
     /// Applies green color scheme to `VNotificationAppearance`.
-    mutating public func applySuccessColorScheme() {
+    public mutating func applySuccessColorScheme() {
         backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
 
         imageBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
     }
 
     /// Applies yellow color scheme to `VNotificationAppearance`.
-    mutating public func applyWarningColorScheme() {
+    public mutating func applyWarningColorScheme() {
         backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
 
         imageBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
     }
 
     /// Applies red color scheme to `VNotificationAppearance`.
-    mutating public func applyErrorColorScheme() {
+    public mutating func applyErrorColorScheme() {
         backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
 
         imageBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))

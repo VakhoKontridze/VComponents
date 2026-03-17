@@ -171,19 +171,19 @@ extension VCodeEntryViewAppearance {
 @available(visionOS, unavailable)
 extension VCodeEntryViewAppearance {
     /// Applies green color scheme to `VCodeEntryViewAppearance`.
-    mutating public func applySuccessColorScheme() {
+    public mutating func applySuccessColorScheme() {
         characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         characterBackgroundBorderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
     }
 
     /// Applies yellow color scheme to `VCodeEntryViewAppearance`.
-    mutating public func applyWarningColorScheme() {
+    public mutating func applyWarningColorScheme() {
         characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         characterBackgroundBorderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
     }
 
     /// Applies red color scheme to `VCodeEntryViewAppearance`.
-    mutating public func applyErrorColorScheme() {
+    public mutating func applyErrorColorScheme() {
         characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         characterBackgroundBorderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
     }

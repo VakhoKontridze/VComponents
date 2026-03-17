@@ -175,7 +175,7 @@ public struct VSideBarAppearance {
 
         // MARK: Options Initializers
         /// Default value.
-        public static var `default`: DismissType {
+        public static var `default`: Self {
 #if os(iOS)
             .all
 #elseif os(macOS)

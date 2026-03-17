@@ -317,19 +317,19 @@ extension VTextFieldAppearance {
 @available(visionOS, unavailable)
 extension VTextFieldAppearance {
     /// Applies green color scheme to `VTextFieldAppearance`.
-    mutating public func applySuccessColorScheme() {
+    public mutating func applySuccessColorScheme() {
         borderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         borderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
     }
 
     /// Applies yellow color scheme to `VTextFieldAppearance`.
-    mutating public func applyWarningColorScheme() {
+    public mutating func applyWarningColorScheme() {
         borderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         borderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
     }
 
     /// Applies red color scheme to `VTextFieldAppearance`.
-    mutating public func applyErrorColorScheme() {
+    public mutating func applyErrorColorScheme() {
         borderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
     }

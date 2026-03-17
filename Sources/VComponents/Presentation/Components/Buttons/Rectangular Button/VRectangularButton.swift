@@ -218,7 +218,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             )
         }
 
-    PreviewRow("Disabled") {
+        PreviewRow("Disabled") {
             VRectangularButton(
                 action: {},
                 image: Image(systemName: "swift")

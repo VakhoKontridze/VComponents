@@ -195,7 +195,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     }
 }
 
-fileprivate func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
+private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
     lhs != rhs
 }
 

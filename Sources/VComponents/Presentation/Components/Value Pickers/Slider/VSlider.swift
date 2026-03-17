@@ -135,8 +135,8 @@ public struct VSlider: View {
     @ViewBuilder 
     private var thumbView: some View {
         if 
-            appearance.thumbSize.width > 0 &&
-            appearance.thumbSize.height > 0
+            appearance.thumbSize.width > 0,
+            appearance.thumbSize.height > 0 
         {
             ZStack { // Used for additional frame
                 ZStack {

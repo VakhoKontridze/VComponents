@@ -277,7 +277,7 @@ public struct VToastAppearance {
 
         // MARK: Options Initializers
         /// Default value.
-        public static var `default`: DismissType { .all }
+        public static var `default`: Self { .all }
     }
 }
 
@@ -333,22 +333,22 @@ extension VToastAppearance {
 @available(visionOS, unavailable)
 extension VToastAppearance {
     /// Applies blue color scheme to `VToastAppearance`.
-    mutating public func applyInfoColorScheme() {
+    public mutating func applyInfoColorScheme() {
         backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
     }
 
     /// Applies green color scheme to `VToastAppearance`.
-    mutating public func applySuccessColorScheme() {
+    public mutating func applySuccessColorScheme() {
         backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
     }
     
     /// Applies yellow color scheme to `VToastAppearance`.
-    mutating public func applyWarningColorScheme() {
+    public mutating func applyWarningColorScheme() {
         backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
     }
     
     /// Applies red color scheme to `VToastAppearance`.
-    mutating public func applyErrorColorScheme() {
+    public mutating func applyErrorColorScheme() {
         backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
     }
 }

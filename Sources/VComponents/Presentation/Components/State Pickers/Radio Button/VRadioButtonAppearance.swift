@@ -76,7 +76,6 @@ public struct VRadioButtonAppearance {
 #endif
     }()
 
-
     // MARK: Properties - Border
     /// Border width.
     ///
