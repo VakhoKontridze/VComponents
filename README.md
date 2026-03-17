@@ -151,7 +151,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>8.0</td>
-    <td>2025 XX XX</td>
+    <td>2026 XX XX</td>
     <td>6.2</td>
     <td>
         iOS 17.0<br>
@@ -160,7 +160,7 @@ Versions with different majors are not directly compatible. When a new major is 
         watchOS 10.0<br>
         visionOS 1.0
     </td>
-    <td>8.0.0 - 9.x.x</td>
+    <td>8.0.0 - 8.x.x</td>
     <td>
         New SDK.<br>
         API changes.
