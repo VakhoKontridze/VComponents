@@ -38,6 +38,11 @@ let package: Package = .init(
             ],
             resources: [
                 .process("Resources")
+            ],
+            swiftSettings: [
+                .defaultIsolation(MainActor.self),
+                .enableUpcomingFeature("ApproachableConcurrency"),
+                .enableUpcomingFeature("NonIsolatedNonSendingByDefault")
             ]
         )
     ]

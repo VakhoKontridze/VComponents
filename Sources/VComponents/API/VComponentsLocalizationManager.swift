@@ -11,11 +11,11 @@ import Foundation
 ///
 /// `localizationProvider` in `shared` instance can be set to override the localized values.
 ///
-///     struct VComponentsLocalizationProviderImplementation: VComponentsLocalizationProvider { ... }
+///     nonisolated struct VComponentsLocalizationProviderImplementation: VComponentsLocalizationProvider { ... }
 ///
 ///     VComponentsLocalizationManager.shared.localizationProvider = VComponentsLocalizationProviderImplementation()
 ///
-public final class VComponentsLocalizationManager: @unchecked Sendable {
+nonisolated public final class VComponentsLocalizationManager: @unchecked Sendable {
     // MARK: Properties - Singleton
     /// Shared instance of `VComponentsLocalizationManager`.
     public static let shared: VComponentsLocalizationManager = .init()
@@ -40,7 +40,7 @@ public final class VComponentsLocalizationManager: @unchecked Sendable {
 }
 
 /// Localization provider in package.
-public protocol VComponentsLocalizationProvider {
+nonisolated public protocol VComponentsLocalizationProvider {
     /// Localized value for error title in alert.
     var vAlertErrorTitle: String { get }
     
@@ -52,13 +52,13 @@ public protocol VComponentsLocalizationProvider {
 }
 
 /// Defaults VComponents localization provider.
-public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider, Sendable {
+nonisolated public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider, Sendable {
     // MARK: Initializers
     /// Initializes `VComponentsLocalizationProvider`.
     public init() {}
     
     // MARK: VComponents Localization Provider
     public var vAlertErrorTitle: String { "Something Went Wrong" }
-    public var vAlertOKButtonTitle: String { "Ok" }
+    public var vAlertOKButtonTitle: String { "OK" }
     public var vAlertCancelButtonTitle: String { "Cancel" }
 }

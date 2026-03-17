@@ -1,0 +1,142 @@
+//
+//  View+VSideBar.swift
+//  VComponents
+//
+//  Created by Vakhtang Kontridze on 12/24/20.
+//
+
+import SwiftUI
+import VCore
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension View {
+    /// Presents side bar when boolean is `true`.
+    ///
+    /// Side bar component that draws from an edge with background, and hosts content.
+    ///
+    ///     @State private var isPresented: Bool = false
+    ///
+    ///     var body: some View {
+    ///         ZStack {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .vSideBar(
+    ///                 link: .window(linkID: "side_bar"),
+    ///                 isPresented: $isPresented
+    ///             ) {
+    ///                 Color.blue
+    ///             }
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///     }
+    ///
+    /// Due to a Modal Presenter API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
+    /// Appearance contains `contentSafeAreaEdges`, that inserts `Spacer` with the dimension of safe area on specified edges.
+    /// However, these insets are presents even if side bar content doesn't need them.
+    /// Therefore, a custom implementation is needed per use-case.
+    /// By default, `defaultContentSafeAreaEdges(interfaceOrientation:)` method is provided that serves that purpose.
+    ///
+    ///     @State private var isPresented: Bool = false
+    ///     @State private var interfaceOrientation: UIInterfaceOrientation = .unknown
+    ///
+    ///     var body: some View {
+    ///         ZStack {
+    ///             VPlainButton(
+    ///                 action: { isPresented = true },
+    ///                 title: "Present"
+    ///             )
+    ///             .getInterfaceOrientation { interfaceOrientation = $0 }
+    ///             .vSideBar(
+    ///                 link: .window(linkID: "side_bar"),
+    ///                 appearance: {
+    ///                     var appearance: VSideBarAppearance = .leading
+    ///
+    ///                     appearance.contentSafeAreaEdges = appearance.defaultContentSafeAreaEdges(interfaceOrientation: interfaceOrientation)
+    ///
+    ///                     return appearance
+    ///                 }(),
+    ///                 isPresented: $isPresented
+    ///             ) {
+    ///                 Color.blue
+    ///             }
+    ///         }
+    ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
+    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///     }
+    ///
+    public func vSideBar<Content>(
+        link: ModalPresenterLink,
+        appearance: VSideBarAppearance = .init(),
+        isPresented: Binding<Bool>,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
+        @ViewBuilder content: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
+        self
+            .modalPresenterLink(
+                link: link,
+                appearance: appearance.modalPresenterLinkAppearance,
+                isPresented: isPresented,
+                onPresent: onPresent,
+                onDismiss: onDismiss
+            ) {
+                VSideBar<Content>(
+                    appearance: appearance,
+                    isPresented: isPresented,
+                    content: content
+                )
+            }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension View {
+    /// Presents side bar using the item as data source for content.
+    ///
+    /// For additional info, refer to method with `Bool` presentation flag.
+    public func vSideBar<Item, Content>(
+        link: ModalPresenterLink,
+        appearance: @escaping (Item) -> VSideBarAppearance = { _ in VSideBarAppearance() },
+        item: Binding<Item?>,
+        onPresent: (() -> Void)? = nil,
+        onDismiss: (() -> Void)? = nil,
+        @ViewBuilder content: @escaping (Item) -> Content
+    ) -> some View
+        where Content: View
+    {
+        let isPresented: Binding<Bool> = .init(
+            get: { item.wrappedValue != nil },
+            set: { if !$0 { item.wrappedValue = nil } }
+        )
+
+        return self
+            .withLastNonNil(item.wrappedValue) { (view, item) in
+                let appearance: VSideBarAppearance = item.map(appearance) ?? VSideBarAppearance()
+                let content: () -> Content? = { item.map(content) }
+                
+                view
+                    .modalPresenterLink(
+                        link: link,
+                        appearance: appearance.modalPresenterLinkAppearance,
+                        isPresented: isPresented,
+                        onPresent: onPresent,
+                        onDismiss: onDismiss
+                    ) {
+                        VSideBar(
+                            appearance: appearance,
+                            isPresented: isPresented,
+                            content: content
+                        )
+                    }
+            }
+    }
+}

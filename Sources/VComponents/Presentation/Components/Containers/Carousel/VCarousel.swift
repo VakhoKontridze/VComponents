@@ -1,0 +1,310 @@
+//
+//  VCarousel.swift
+//  VComponents
+//
+//  Created by Vakhtang Kontridze on 26.07.24.
+//
+
+import SwiftUI
+import VCore
+
+/// Container component that paginates between child views horizontally.
+///
+///     nonisolated private enum WeekDay: Int, Hashable, Identifiable, CaseIterable {
+///         case monday, tuesday, wednesday, thursday, friday, saturday, sunday
+///
+///         var id: Int { rawValue }
+///
+///         var color: Color {
+///             switch rawValue.quotientAndRemainder(dividingBy: 3).remainder {
+///             case 0: Color.red
+///             case 1: Color.green
+///             case 2: Color.blue
+///             default: fatalError()
+///             }
+///         }
+///     }
+///
+///     @State private var selection: WeekDay = .monday
+///     private var selectedIndex: Int? { WeekDay.allCases.firstIndex(of: selection) }
+///
+///     var body: some View {
+///         VStack(spacing: 15) {
+///             VCarousel(
+///                 selection: $selection,
+///                 data: WeekDay.allCases,
+///             ) {
+///                 $0
+///                     .color
+///                     .clipShape(.rect(cornerRadius: 15))
+///             }
+///             .frame(height: 200)
+///
+///             VPageIndicator(
+///                 current: selectedIndex ?? 0
+///                 total: 7
+///             )
+///         }
+///     }
+///
+/// `VCarousel` also supports infinite scroll. Fore more info, refer to `VCarouselInfiniteScrollDataSourceManager`.
+@available(tvOS, unavailable) // `scrollPosition(id:)` API doesn't work
+public struct VCarousel<Data, ID, Content>: View
+    where
+        Data: RandomAccessCollection,
+        Data.Element: Hashable,
+        ID: Hashable,
+        Content: View
+{
+    // MARK: Properties - Appearance
+    private let appearance: VCarouselAppearance
+
+    // MARK: Properties - State - Card
+    private func cardInternalState(
+        _ isSelected: Bool
+    ) -> VCarouselCardInternalState {
+        .init(
+            isSelected: isSelected
+        )
+    }
+
+    // MARK: Properties - Selection
+    @Binding private var selection: Data.Element
+
+    private var selectionIDBinding: Binding<ID?> {
+        .init(
+            get: {
+                selection[keyPath: id]
+            },
+            set: { newValue in
+                guard let element: Data.Element = data.first(where: { $0[keyPath: id] == newValue }) else { return }
+                selection = element
+            }
+        )
+    }
+
+    // MARK: Properties - Parameters
+    private let data: Data
+    private let id: KeyPath<Data.Element, ID>
+    
+    // MARK: Properties - Content
+    private let content: (Data.Element) -> Content
+
+    // MARK: Initializers
+    /// Initializes `VCarousel` with selection, data, id, and content.
+    public init(
+        appearance: VCarouselAppearance = .init(),
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    ) {
+        self.appearance = appearance
+        self._selection = selection
+        self.data = data
+        self.id = id
+        self.content = content
+    }
+
+    /// Initializes `VCarousel` with selection, data, and content.
+    public init(
+        appearance: VCarouselAppearance = .init(),
+        selection: Binding<Data.Element>,
+        data: Data,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        self.appearance = appearance
+        self._selection = selection
+        self.data = data
+        self.id = \.id
+        self.content = content
+    }
+
+    // MARK: Body
+    public var body: some View {
+        GeometryReader { geometryProxy in
+            ScrollViewReader { scrollViewProxy in
+                ScrollView(.horizontal) {
+                    LazyHStack( // `scrollPosition(id:)` doesn't work with `HStack`
+                        alignment: appearance.cardsAlignment,
+                        spacing: appearance.cardsSpacing
+                    ) {
+                        ForEach(data, id: id) { element in
+                            cardView(
+                                geometryProxy: geometryProxy,
+                                element: element
+                            )
+                            .id(element[keyPath: id])
+                        }
+                    }
+                    .scrollTargetLayout()
+                }
+                .scrollTargetBehavior(.viewAligned)
+                .scrollPosition(id: selectionIDBinding)
+
+                .contentMargins(.horizontal, appearance.cardMarginHorizontal, for: .scrollContent)
+                .contentMargins(.top, appearance.cardMarginTop, for: .scrollContent)
+                .contentMargins(.bottom, appearance.cardMarginBottom, for: .scrollContent)
+                
+                .scrollIndicators(.hidden)
+                
+                .scrollDisabled(!appearance.isScrollingEnabled)
+
+                .applyIf(appearance.appliesSelectionAnimation) { $0.animation(appearance.selectionAnimation, value: selection) }
+
+                .onAppear { isFirst in
+                    if isFirst {
+                        Task {
+                            scrollViewProxy.scrollTo(selection[keyPath: id])
+                        }
+                    }
+                }
+            }
+        }
+        .clipped() // Clips off-bound content that appears on some platforms. Also clips shadows.
+    }
+
+    private func cardView(
+        geometryProxy: GeometryProxy,
+        element: Data.Element
+    ) -> some View {
+        // These properties cannot be extracted within `scrollTransition(transition:)`,
+        // as they are `MainActor`, while method is not.
+        let cardState: VCarouselCardInternalState = cardInternalState(selection == element)
+        let scaleEffect: CGFloat = appearance.cardHeightScales.value(for: cardState)
+        let opacity: CGFloat = appearance.cardOpacities.value(for: cardState)
+        
+        return ZStack {
+            content(element)
+        }
+        .frame(
+            width: {
+                let width: CGFloat = geometryProxy.size.width - appearance.cardMarginHorizontal*2
+                guard width > 0 else { return nil }
+                return width
+            }()
+        )
+
+        .containerRelativeFrame(.horizontal)
+        .scrollTransition { (view, _) in
+            view
+                .scaleEffect(y: scaleEffect)
+                .opacity(opacity)
+        }
+
+        .shadow(
+            color: appearance.cardShadowColor,
+            radius: appearance.cardShadowRadius,
+            offset: appearance.cardShadowOffset
+        )
+    }
+}
+
+#if DEBUG
+
+#if !os(tvOS) // Redundant
+
+#Preview("*") {
+    @Previewable @State var selection: Weekday = .monday
+    var selectedIndex: Int? { Weekday.allCases.firstIndex(of: selection) }
+
+    PreviewContainer {
+        VStack(spacing: 15) {
+            VCarousel(
+                selection: $selection,
+                data: Weekday.allCases,
+            ) {
+                $0
+                    .color
+                    .clipShape(.rect(cornerRadius: _cornerRadius))
+            }
+            .frame(height: _height)
+
+            VPageIndicator(
+                current: selectedIndex ?? 0,
+                total: 7
+            )
+        }
+    }
+}
+
+#Preview("No Items") {
+    @Previewable @State var selection: Weekday = .monday
+
+    PreviewContainer {
+        VCarousel(
+            selection: $selection,
+            data: []
+        ) {
+            $0
+                .color
+                .clipShape(.rect(cornerRadius: _cornerRadius))
+        }
+        .frame(height: _height)
+    }
+}
+
+#Preview("Infinite Items") {
+    @Previewable @State var dataSourceManager: VCarouselInfiniteScrollDataSourceManager = .init(
+        data: RGBColor.allCases,
+        numberOfDuplicateGroups: 9,
+        initialGroupIndex: 4,
+        initialSelection: RGBColor.red
+    )
+
+    PreviewContainer {
+        VStack(spacing: 15) {
+            VCarousel(
+                selection: $dataSourceManager.selectedIndexInflated,
+                data: 0..<dataSourceManager.countInflated,
+                id: \.self
+            ) {
+                dataSourceManager.element(atInflatedIndex: $0)
+                    .color
+                    .clipShape(.rect(cornerRadius: _cornerRadius))
+            }
+            .frame(height: _height)
+
+            VCompactPageIndicator(
+                current: dataSourceManager.selectedIndexInflated,
+                total: dataSourceManager.countInflated
+            )
+        }
+    }
+}
+
+private var _height: CGFloat {
+#if os(iOS)
+    200
+#elseif os(macOS)
+    200
+#elseif os(watchOS)
+    70
+#elseif os(visionOS)
+    300
+#else
+    fatalError()
+#endif
+}
+
+private var _cornerRadius: CGFloat {
+#if os(iOS)
+    15
+#elseif os(macOS)
+    15
+#elseif os(watchOS)
+    10
+#elseif os(visionOS)
+    15
+#else
+    fatalError()
+#endif
+}
+
+#endif
+
+#endif
