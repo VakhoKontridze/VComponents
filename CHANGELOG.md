@@ -91,6 +91,10 @@ VToast
 
 - Presentation API is updated. For additional info on modal components, refer to "Modal Presenter" documentation from [VCore](https://github.com/VakhoKontridze/VCore).
 
+VProgressBar
+
+- `skipsProgressAnimationAtZero` is added, that allows animation to be skipped when `value` is `0`
+
 Helpers - Architectural Pattern Helpers
 
 - `VAlertAppearance` has been moved into `VAlertAppearance`

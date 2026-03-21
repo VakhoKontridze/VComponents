@@ -62,7 +62,21 @@ public struct VProgressBar: View {
             height: appearance.direction.isHorizontal ? appearance.height : nil
         )
         .onGeometryChange(of: { $0.size }) { progressBarSize = $0 }
-        .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: value) }
+        .applyIf(appearance.appliesProgressAnimation) {
+            $0.animation(
+                {
+                    if
+                        value == 0,
+                        appearance.skipsProgressAnimationAtZero
+                    {
+                        nil
+                    } else {
+                        appearance.progressAnimation
+                    }
+                }(),
+                value: value
+            )
+        }
     }
     
     private var trackView: some View {

@@ -127,6 +127,9 @@ public struct VProgressBarAppearance {
     /// Progress animation.
     public var progressAnimation: Animation? = .default
     
+    /// Indicates if progress animation at `0` is skipped.
+    public var skipsProgressAnimationAtZero: Bool = true
+    
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
