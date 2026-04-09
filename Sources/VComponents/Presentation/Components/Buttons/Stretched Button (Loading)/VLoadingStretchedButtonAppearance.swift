@@ -36,7 +36,7 @@ public struct VLoadingStretchedButtonAppearance {
     /// Spacing between label and spinner.
     ///
     /// Only visible when state is set to `loading`.
-    public var labelAndSpinnerSpacing: CGFloat = 20
+    public var labelAndSpinnerSpacingType: LabelAndSpinnerSpacingType = .default
 
     // MARK: Properties - Corners
     /// Corner radius.
@@ -201,6 +201,35 @@ public struct VLoadingStretchedButtonAppearance {
     
     /// State-bound image configuration.
     public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
+    
+    /// Label and spinner spacing type.
+    nonisolated public enum LabelAndSpinnerSpacingType: Sendable {
+        // MARK: Cases
+        /// Fixed spacing.
+        case fixed(spacing: CGFloat)
+
+        /// Stretched spacing.
+        case stretched(spacing: CGFloat)
+        
+        // MARK: Properties
+        var spacing: CGFloat {
+            switch self {
+            case .fixed(let spacing): spacing
+            case .stretched(let spacing): spacing
+            }
+        }
+        
+        var hasFlexibleSpacing: Bool {
+            switch self {
+            case .fixed: false
+            case .stretched: true
+            }
+        }
+        
+        // MARK: Initializers
+        /// Default value.
+        public static var `default`: Self { .stretched(spacing: 20) }
+    }
     
     /// Spinner placement.
     nonisolated public enum SpinnerPlacement: Int, Sendable, CaseIterable {

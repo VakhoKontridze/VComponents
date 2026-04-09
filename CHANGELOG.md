@@ -16,6 +16,7 @@ General
 
 VLoadingStretchedButton
 
+- `labelAndSpinnerSpacing` is replaced with `labelAndSpinnerSpacingType`, allowing spacing to be changed to either `fixed` or `flexible`
 - `spinnerPlacement` is added, allowing spinner position to be changed
 
 VWrappedButton
