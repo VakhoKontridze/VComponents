@@ -198,7 +198,7 @@ public struct VAlertAppearance {
 #else
             fatalError()
 #endif
-    }()
+        }()
 
         appearance.sensoryFeedback = nil
 
@@ -247,7 +247,7 @@ public struct VAlertAppearance {
 #else
             fatalError()
 #endif
-    }()
+        }()
 
         appearance.sensoryFeedback = nil
 
@@ -296,7 +296,7 @@ public struct VAlertAppearance {
 #else
             fatalError()
 #endif
-    }()
+        }()
 
         appearance.sensoryFeedback = nil
 
