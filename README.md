@@ -55,7 +55,7 @@ For additional info on modal components, refer to "Modal Presenter" documentatio
 
 <p>
     <img tag="VTextField" width="350" align="top" src="https://github.com/user-attachments/assets/6b9ead92-3cd4-4224-8f5c-b5c03ba4e5d5">
-    <img tag="VTextView" width="350" align="top" src="https://github.com/user-attachments/assets/69a87067-72fd-4a42-b408-a83a2850fe17">
+    <img tag="VTextView" width="350" align="top" src="https://github.com/user-attachments/assets/9a7a2b22-29e0-42a7-9715-32d6eb0e918a">
     <img tag="VCodeEntryView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c79e5896-42ee-4bc5-9941-bca0acbc2111">
 <p/>
 
