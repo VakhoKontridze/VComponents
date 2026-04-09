@@ -596,8 +596,6 @@ struct VAlert<Content>: View
     .modalPresenterRoot()
 }
 
-#endif
-
 @ViewBuilder
 private var content: some View {
     TextField( // `VTextField` causes preview crash
@@ -606,5 +604,7 @@ private var content: some View {
     )
     .textFieldStyle(.roundedBorder)
 }
+
+#endif
 
 #endif
