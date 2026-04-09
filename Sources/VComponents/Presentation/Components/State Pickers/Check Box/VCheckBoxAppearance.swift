@@ -180,8 +180,7 @@ public struct VCheckBoxAppearance {
 #else
             fatalError()
 #endif
-        }()
-        ,
+        }(),
         font: {
 #if os(iOS)
             Font.subheadline
