@@ -4,7 +4,7 @@
 
 General
 
-- Minimum `Swift` language version is increased to `6.2`
+- Minimum `Swift` language version is increased to `6.3`
 - Minimum SDK version is increased to `iOS` `17.0`, `macOS` `14.0`, `tvOS` `17.0`, and `watchOS` `10.0`
 - Previously deprecated symbols are removed
 - UI Models are renamed to Appearances
