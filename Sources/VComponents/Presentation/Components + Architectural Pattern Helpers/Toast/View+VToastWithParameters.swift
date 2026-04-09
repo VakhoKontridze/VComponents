@@ -27,10 +27,10 @@ extension View {
     ///                 },
     ///                 title: "Present"
     ///             )
-    ///             .vToast(link: .window(linkID: "toast"), parameters: $parameters)
+    ///             .vToast(link: ModalPresenterLink(linkID: "toast"), parameters: $parameters)
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vToast(

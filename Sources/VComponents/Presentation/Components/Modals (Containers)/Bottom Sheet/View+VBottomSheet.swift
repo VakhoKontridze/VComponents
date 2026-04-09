@@ -23,7 +23,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "bottom_sheet"),
+    ///                 link: ModalPresenterLink(linkID: "bottom_sheet"),
     ///                 appearance: {
     ///                     var appearance: VBottomSheetAppearance = .init()
     ///                     appearance.autoresizesContent = true // For wrapping content
@@ -45,7 +45,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap it's content by reading geometry size.
@@ -64,7 +64,7 @@ extension View {
     ///             )
     ///             .getSafeAreaInsets { safeAreaInsets = $0 }
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "bottom_sheet"),
+    ///                 link: ModalPresenterLink(linkID: "bottom_sheet"),
     ///                 appearance: {
     ///                     var appearance: VBottomSheetAppearance = .init()
     ///
@@ -99,7 +99,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Bottom sheet can also wrap navigation system.
@@ -114,7 +114,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vBottomSheet(
-    ///                 link: .window(linkID: "bottom_sheet"),
+    ///                 link: ModalPresenterLink(linkID: "bottom_sheet"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
     ///                 onDismiss: { modalDidAppear = false }
@@ -131,7 +131,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     ///     struct HomeView: View {

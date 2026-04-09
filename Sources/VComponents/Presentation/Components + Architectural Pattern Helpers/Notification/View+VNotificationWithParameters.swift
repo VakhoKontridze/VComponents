@@ -29,10 +29,10 @@ extension View {
     ///                 },
     ///                 title: "Present"
     ///             )
-    ///             .vNotification(link: .window(linkID: "notification"), parameters: $parameters)
+    ///             .vNotification(link: ModalPresenterLink(linkID: "notification"), parameters: $parameters)
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vNotification(

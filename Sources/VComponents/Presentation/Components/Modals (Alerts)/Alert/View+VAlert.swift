@@ -28,7 +28,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vAlert(
-    ///                 link: .window(linkID: "alert"),
+    ///                 link: ModalPresenterLink(linkID: "alert"),
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
@@ -39,7 +39,7 @@ extension View {
     ///             )
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vAlert(

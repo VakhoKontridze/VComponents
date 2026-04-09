@@ -21,14 +21,14 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vModal(
-    ///                 link: .window(linkID: "modal"),
+    ///                 link: ModalPresenterLink(linkID: "modal"),
     ///                 isPresented: $isPresented
     ///             ) {
     ///                 Color.blue
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Modal can also wrap navigation system.
@@ -43,7 +43,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vModal(
-    ///                 link: .window(linkID: "modal"),
+    ///                 link: ModalPresenterLink(linkID: "modal"),
     ///                 isPresented: $isPresented,
     ///                 onPresent: { modalDidAppear = true },
     ///                 onDismiss: { modalDidAppear = false }
@@ -59,7 +59,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     ///     struct HomeView: View {

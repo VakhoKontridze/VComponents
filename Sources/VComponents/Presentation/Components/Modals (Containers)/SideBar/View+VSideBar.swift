@@ -25,14 +25,14 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vSideBar(
-    ///                 link: .window(linkID: "side_bar"),
+    ///                 link: ModalPresenterLink(linkID: "side_bar"),
     ///                 isPresented: $isPresented
     ///             ) {
     ///                 Color.blue
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     /// Due to a Modal Presenter API, side bar loses its intrinsic safe area properties, and requires custom handling and implementation.
@@ -52,7 +52,7 @@ extension View {
     ///             )
     ///             .getInterfaceOrientation { interfaceOrientation = $0 }
     ///             .vSideBar(
-    ///                 link: .window(linkID: "side_bar"),
+    ///                 link: ModalPresenterLink(linkID: "side_bar"),
     ///                 appearance: {
     ///                     var appearance: VSideBarAppearance = .leading
     ///
@@ -66,7 +66,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///
     public func vSideBar<Content>(

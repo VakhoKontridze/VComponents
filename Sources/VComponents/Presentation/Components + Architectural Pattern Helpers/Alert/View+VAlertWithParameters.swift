@@ -32,10 +32,10 @@ extension View {
     ///                 },
     ///                 title: "Present"
     ///             )
-    ///             .vAlert(link: .window(linkID: "alert"), parameters: $parameters)
+    ///             .vAlert(link: ModalPresenterLink(linkID: "alert"), parameters: $parameters)
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///     }
     ///     
     public func vAlert(
@@ -77,7 +77,7 @@ extension View {
     ///                 title: "Present"
     ///             )
     ///             .vAlert(
-    ///                 link: .window(linkID: "alert"),
+    ///                 link: ModalPresenterLink(linkID: "alert"),
     ///                 parameters: $parameters
     ///             ) { parameters in
     ///                 if let inputTextBinding = parameters.attributes["input_text_binding"] as? Binding<String> {
@@ -87,7 +87,7 @@ extension View {
     ///             }
     ///         }
     ///         .frame(maxWidth: .infinity, maxHeight: .infinity) // For `overlay` configuration
-    ///         .modalPresenterRoot(root: .window()) // Or declare in `App` on a `WindowScene`-level
+    ///         .modalPresenterRoot() // Or declare in `App` on a `WindowScene`-level
     ///
     public func vAlert<Content>(
         link: ModalPresenterLink,
