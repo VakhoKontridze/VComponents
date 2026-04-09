@@ -12,7 +12,7 @@
 
 VComponents is a `SwiftUI` collection that contains reusable UI components.
 
-<img src="https://github.com/user-attachments/assets/cc5360d0-c67b-4322-9d67-8ff789a310f3">
+<img src="https://github.com/user-attachments/assets/babef70a-f878-4f14-8742-7f982140367a">
 
 For additional info on component customization, refer to "Customization" documentation.
 
@@ -54,8 +54,8 @@ For additional info on modal components, refer to "Modal Presenter" documentatio
 #### Inputs
 
 <p>
-    <img tag="VTextField" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/be4fba23-a13d-45c7-856b-ec0ccd8208e6">
-    <img tag="VTextView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/da506937-2e22-4fb3-b63a-3ef50a6012bb">
+    <img tag="VTextField" width="350" align="top" src="https://github.com/user-attachments/assets/6b9ead92-3cd4-4224-8f5c-b5c03ba4e5d5">
+    <img tag="VTextView" width="350" align="top" src="https://github.com/user-attachments/assets/69a87067-72fd-4a42-b408-a83a2850fe17">
     <img tag="VCodeEntryView" width="350" align="top" src="https://github.com/VakhoKontridze/VComponents/assets/57289621/c79e5896-42ee-4bc5-9941-bca0acbc2111">
 <p/>
 
