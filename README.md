@@ -151,7 +151,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>8.0</td>
-    <td>2026 XX XX</td>
+    <td>2026 04 09</td>
     <td>6.3</td>
     <td>
         iOS 17.0<br>

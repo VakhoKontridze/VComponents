@@ -1,6 +1,6 @@
 # Change Log
 
-### 8.0.0(77)
+### [8.0.0(77)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.0) — 2026 04 09
 
 General
 
