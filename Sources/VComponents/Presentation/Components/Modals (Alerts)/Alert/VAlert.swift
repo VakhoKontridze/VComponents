@@ -125,12 +125,7 @@ struct VAlert<Content>: View
     private var titleText: some View {
         if let title = title?.nonEmpty {
             Text(title)
-                .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-                .foregroundStyle(appearance.titleTextColor)
-                .font(appearance.titleTextFont)
-                .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration(appearance.titleTextConfiguration)
 
                 .frame(
                     maxWidth: .infinity,
@@ -149,12 +144,7 @@ struct VAlert<Content>: View
     private var messageText: some View {
         if let message = message?.nonEmpty {
             Text(message)
-                .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.messageTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.messageTextMinimumScaleFactor)
-                .foregroundStyle(appearance.messageTextColor)
-                .font(appearance.messageTextFont)
-                .applyIfLet(appearance.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration(appearance.messageTextConfiguration)
 
                 .frame(
                     maxWidth: .infinity,
@@ -548,14 +538,14 @@ struct VAlert<Content>: View
                 appearance: {
                     var appearance: VAlertAppearance = .init()
 
-                    appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.pressed
-                    appearance.primaryButtonTextColors.enabled = appearance.primaryButtonTextColors.pressed
+                    appearance.primaryButtonAppearance.backgroundColors.enabled = appearance.primaryButtonAppearance.backgroundColors.pressed
+                    appearance.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.primaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.pressed
-                    appearance.secondaryButtonTextColors.enabled = appearance.secondaryButtonTextColors.pressed
+                    appearance.secondaryButtonAppearance.backgroundColors.enabled = appearance.secondaryButtonAppearance.backgroundColors.pressed
+                    appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.pressed
-                    appearance.destructiveButtonTextColors.enabled = appearance.destructiveButtonTextColors.pressed
+                    appearance.destructiveButtonAppearance.backgroundColors.enabled = appearance.destructiveButtonAppearance.backgroundColors.pressed
+                    appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
                     return appearance
                 }(),
@@ -582,14 +572,14 @@ struct VAlert<Content>: View
                 appearance: {
                     var appearance: VAlertAppearance = .init()
 
-                    appearance.primaryButtonBackgroundColors.enabled = appearance.primaryButtonBackgroundColors.disabled
-                    appearance.primaryButtonTextColors.enabled = appearance.primaryButtonTextColors.disabled
+                    appearance.primaryButtonAppearance.backgroundColors.enabled = appearance.primaryButtonAppearance.backgroundColors.disabled
+                    appearance.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.primaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    appearance.secondaryButtonBackgroundColors.enabled = appearance.secondaryButtonBackgroundColors.disabled
-                    appearance.secondaryButtonTextColors.enabled = appearance.secondaryButtonTextColors.disabled
+                    appearance.secondaryButtonAppearance.backgroundColors.enabled = appearance.secondaryButtonAppearance.backgroundColors.disabled
+                    appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    appearance.destructiveButtonBackgroundColors.enabled = appearance.destructiveButtonBackgroundColors.disabled
-                    appearance.destructiveButtonTextColors.enabled = appearance.destructiveButtonTextColors.disabled
+                    appearance.destructiveButtonAppearance.backgroundColors.enabled = appearance.destructiveButtonAppearance.backgroundColors.disabled
+                    appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
                     return appearance
                 }(),

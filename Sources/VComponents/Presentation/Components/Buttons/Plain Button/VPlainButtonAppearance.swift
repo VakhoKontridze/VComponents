@@ -44,72 +44,41 @@ public struct VPlainButtonAppearance {
     }()
 
     // MARK: Properties - Label - Text
-    /// Label text minimum scale factor.
-    public var labelTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Label text colors.
-    public var labelTextColors: StateColors = .init(
-        enabled: Color.blue,
-        pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
-        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+    /// Label text configuration.
+    public var labelTextConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.blue,
+            pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
+            disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+        ),
+        font: Font.body,
+        minimumScaleFactor: 0.75
     )
-
-    /// Label text font.
-    public var labelTextFont: Font = .body
-
-    /// Label text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Label - Image
-    /// Indicates if label image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isLabelImageResizable: Bool = true
-
-    /// Label image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageContentMode: ContentMode? = .fit
-
-    /// Label image size.
-    public var labelImageSize: CGSize? = {
+    /// Label image configuration.
+    public var labelImageConfiguration: StateImageConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.blue,
+            pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
+            disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+        ),
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: {
 #if os(iOS)
-        CGSize(dimension: 24)
+            CGSize(dimension: 24)
 #elseif os(macOS)
-        CGSize(dimension: 14)
+            CGSize(dimension: 14)
 #elseif os(watchOS)
-        CGSize(dimension: 26)
+            CGSize(dimension: 26)
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-
-    /// Label image colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageColors: StateColors? = .init(
-        enabled: Color.blue,
-        pressed: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5)),
-        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+        }()
     )
-
-    /// Label image opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageOpacities: StateOpacities?
-
-    /// Label image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isLabelImageResizable` should be set to `false`, and `labelImageSize` should be set to `nil`.
-    public var labelImageFont: Font?
-
-    /// Label image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.
@@ -133,4 +102,10 @@ public struct VPlainButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
+    
+    /// State-bound image configuration.
+    public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
 }

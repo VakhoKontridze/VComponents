@@ -163,12 +163,10 @@ public struct VCodeEntryView: View {
         let isPopulated: Bool = isPopulated(at: index)
 
         return Text(character(at: index))
-            .multilineTextAlignment(.center)
-            .lineLimit(1)
-            //.minimumScaleFactor(1)
-            .foregroundStyle(isPopulated ? appearance.textColors.value(for: internalState) : appearance.placeholderTextColors.value(for: internalState))
-            .font(isPopulated ? appearance.textFont : appearance.placeholderTextFont)
-            .applyIfLet(isPopulated ? appearance.textDynamicTypeSizeType : appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .textConfiguration(
+                isPopulated ? appearance.textConfiguration : appearance.placeholderTextConfiguration,
+                state: internalState
+            )
 
             .frame(size: appearance.characterBackgroundSize)
 
@@ -294,7 +292,7 @@ private struct StatesContentView: View {
                         var appearanceMapped: VCodeEntryViewAppearance = appearance
                         appearanceMapped.characterBackgroundColors.enabled = appearance.characterBackgroundColors.focused
                         appearanceMapped.characterBackgroundBorderColors.enabled = appearance.characterBackgroundBorderColors.focused
-                        appearanceMapped.textColors.enabled = appearance.textColors.focused
+                        appearanceMapped.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
                         return appearanceMapped
                     }(),
                     text: .constant("123")

@@ -136,55 +136,43 @@ public struct VRadioButtonAppearance {
     public var labelIsClickable: Bool = true
 
     // MARK: Properties - Label - Text
-    /// Label text line type...2` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: 1...2
+    /// Label text configuration.
+    public var labelTextConfiguration: StateTextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .leading,
+            lineLimit: 1...2
+        ),
+        colors: {
+#if os(iOS)
+            StateColors(
+                off: Color.primary,
+                on: Color.primary,
+                pressedOff: Color.primary,
+                pressedOn: Color.primary,
+                disabled: Color.primary.opacity(0.3)
+            )
+#elseif os(macOS)
+            StateColors(
+                off: Color.primary.opacity(0.85),
+                on: Color.primary.opacity(0.85),
+                pressedOff: Color.primary.opacity(0.85),
+                pressedOn: Color.primary.opacity(0.85),
+                disabled: Color.primary.opacity(0.85 * 0.3)
+            )
+#else
+            fatalError()
+#endif
+        }(),
+        font: {
+#if os(iOS)
+            Font.subheadline
+#elseif os(macOS)
+            Font.body
+#else
+            fatalError()
+#endif
+        }()
     )
-
-    /// Label text minimum scale factor.
-    public var labelTextMinimumScaleFactor: CGFloat = 1
-
-    /// Label text colors.
-    public var labelTextColors: StateColors = {
-#if os(iOS)
-        StateColors(
-            off: Color.primary,
-            on: Color.primary,
-            pressedOff: Color.primary,
-            pressedOn: Color.primary,
-            disabled: Color.primary.opacity(0.3)
-        )
-#elseif os(macOS)
-        StateColors(
-            off: Color.primary.opacity(0.85),
-            on: Color.primary.opacity(0.85),
-            pressedOff: Color.primary.opacity(0.85),
-            pressedOn: Color.primary.opacity(0.85),
-            disabled: Color.primary.opacity(0.85 * 0.3)
-        )
-#else
-        fatalError()
-#endif
-    }()
-
-    /// Label text font.
-    public var labelTextFont: Font = {
-#if os(iOS)
-        Font.subheadline
-#elseif os(macOS)
-        Font.body
-#else
-        fatalError()
-#endif
-    }()
-
-    /// Label text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
     /// Indicates if `stateChangeAnimation` is applied.
@@ -221,4 +209,7 @@ public struct VRadioButtonAppearance {
     // MARK: Types
     /// State-bound colors.
     public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
 }

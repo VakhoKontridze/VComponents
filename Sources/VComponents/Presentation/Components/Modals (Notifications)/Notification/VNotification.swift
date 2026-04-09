@@ -133,13 +133,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     .foregroundStyle(appearance.imageBackgroundColor)
 
                 image
-                    .applyIf(appearance.isImageResizable) { $0.resizable() }
-                    .applyIfLet(appearance.imageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                    .frame(size: appearance.imageSize)
-                    .applyIfLet(appearance.imageColor) { $0.foregroundStyle($1) }
-                    .applyIfLet(appearance.imageOpacity) { $0.opacity($1) }
-                    .font(appearance.imageFont)
-                    .applyIfLet(appearance.imageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .imageConfiguration(appearance.imageConfiguration)
             }
         }
     }
@@ -181,12 +175,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let title {
             Text(title)
-                .multilineTextAlignment(appearance.titleTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.titleTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.titleTextMinimumScaleFactor)
-                .foregroundStyle(appearance.titleTextColor)
-                .font(appearance.titleTextFont)
-                .applyIfLet(appearance.titleTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration(appearance.titleTextConfiguration)
 
                 .frame(
                     maxWidth: .infinity,
@@ -205,12 +194,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let message {
             Text(message)
-                .multilineTextAlignment(appearance.messageTextLineType.textAlignment ?? .leading)
-                .lineLimit(type: appearance.messageTextLineType.textLineLimitType)
-                .minimumScaleFactor(appearance.messageTextMinimumScaleFactor)
-                .foregroundStyle(appearance.messageTextColor)
-                .font(appearance.messageTextFont)
-                .applyIfLet(appearance.messageTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration(appearance.messageTextConfiguration)
 
                 .frame(
                     maxWidth: .infinity,

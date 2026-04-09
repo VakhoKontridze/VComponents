@@ -71,39 +71,15 @@ public struct VNotificationAppearance {
     public var titleTextAndMessageTextSpacing: CGFloat = 2
 
     // MARK: Properties - Notification Content - Image
-    /// Indicates if image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isImageResizable: Bool = true
-
-    /// Image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var imageContentMode: ContentMode? = .fit
-
-    /// Image size.
-    public var imageSize: CGSize? = .init(dimension: 22)
-
-    /// Image color.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var imageColor: Color? = .primary
-
-    /// Image opacity.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var imageOpacity: CGFloat?
-
-    /// Image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isImageResizable` should be set to `false`, and `imageSize` should be set to `nil`.
-    public var imageFont: Font?
-
-    /// Image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var imageDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Image configuration.
+    public var imageConfiguration: ImageConfiguration = .init(
+        color: Color.primary,
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: CGSize(dimension: 22)
+    )
 
     // MARK: Properties - Notification Content - Image Background
     /// Image background size.
@@ -125,56 +101,34 @@ public struct VNotificationAppearance {
     }()
 
     // MARK: Properties - Notification Content - Text
+    /// Title text configuration.
+    public var titleTextConfiguration: TextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .leading,
+            lineLimit: 1...2
+        ),
+        color: Color.primary,
+        font: Font.callout.weight(.semibold),
+        minimumScaleFactor: 0.75
+    )
+    
     /// Title text frame alignment.
     public var titleTextFrameAlignment: HorizontalAlignment = .leading
 
-    /// Title text line type...2` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: 1...2
-    )
-
-    /// Title text minimum scale factor.
-    public var titleTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Title text color.
-    public var titleTextColor: Color = .primary
-
-    /// Title text font.
-    public var titleTextFont: Font = .callout.weight(.semibold)
-
-    /// Title text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
-
     // MARK: Properties - Notification Content - Message
+    /// Message text configuration.
+    public var messageTextConfiguration: TextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .leading,
+            lineLimit: 1...2
+        ),
+        color: Color.primary,
+        font: Font.callout,
+        minimumScaleFactor: 0.75
+    )
+    
     /// Message text frame alignment.
     public var messageTextFrameAlignment: HorizontalAlignment = .leading
-
-    /// Message line type...2` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: 1...2
-    )
-
-    /// Message text minimum scale factor.
-    public var messageTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Message text color.
-    public var messageTextColor: Color = .primary
-
-    /// Message text font.
-    public var messageTextFont: Font = .callout
-
-    /// Message text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing side bar.

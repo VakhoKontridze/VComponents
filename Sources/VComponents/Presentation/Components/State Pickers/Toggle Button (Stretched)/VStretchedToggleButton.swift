@@ -194,11 +194,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
         title: String
     ) -> some View {
         Text(title)
-            .lineLimit(1)
-            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
-            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
-            .font(appearance.labelTextFont)
-            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .textConfiguration(appearance.labelTextConfiguration, state: internalState)
     }
 
     private func labelImageElement(
@@ -206,13 +202,7 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
         image: Image
     ) -> some View {
         image
-            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
-            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .frame(size: appearance.labelImageSize)
-            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.labelImageFont)
-            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
 
     private func backgroundView(
@@ -288,7 +278,7 @@ nonisolated extension VStretchedToggleButtonInternalState {
                 appearance: {
                     var appearance: VStretchedToggleButtonAppearance = .init()
                     appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
+                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -310,7 +300,7 @@ nonisolated extension VStretchedToggleButtonInternalState {
                 appearance: {
                     var appearance: VStretchedToggleButtonAppearance = .init()
                     appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
+                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.on),

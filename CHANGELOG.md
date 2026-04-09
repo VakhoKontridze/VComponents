@@ -8,6 +8,7 @@ General
 - Minimum SDK version is increased to `iOS` `17.0`, `macOS` `14.0`, `tvOS` `17.0`, and `watchOS` `10.0`
 - Previously deprecated symbols are removed
 - UI Models are renamed to Appearances
+- `Text` and `Image` configurations are overhauled in Appearances, and are now handled via dedicated Configuration objects
 - `BasicAnimation` is replaced with `Animation` is most components
 - `UIImpactFeedbackGenerator.FeedbackStyle` and `WKHapticStyle` are replaced with `FeedbackStyle`
 - Default values for `DynamicTypeSizeType` have been removed

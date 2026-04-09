@@ -65,35 +65,26 @@ public struct VTextViewAppearance {
     public var borderColors: StateColors = .clearColors
 
     // MARK: Properties - Text
-    /// Text line type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textLineType: TextLineType = .multiLine(
-        alignment: .leading,
-        lineLimit: nil
+    /// Text configuration.
+    public var textConfiguration: StateTextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .leading,
+            lineLimit: nil
+        ),
+        colors: StateColors(
+            enabled: Color.primary,
+            focused: Color.primary,
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: Font.body
     )
-
-    /// Text colors.
-    public var textColors: StateColors = .init(
-        enabled: Color.primary,
-        focused: Color.primary,
-        disabled: Color.primary.opacity(0.3)
-    )
-
-    /// Text font.
-    public var textFont: Font = .body
-
-    /// Text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Placeholder Text
-    /// Placeholder text colors.
-    public var placeholderTextColors: StateColors = .init(Color.secondary)
-
-    /// Placeholder text font.
-    public var placeholderTextFont: Font = .body
+    /// Placeholder text configuration.
+    public var placeholderTextConfiguration: PlaceholderStateTextConfiguration = .init(
+        colors: StateColors(Color.secondary),
+        font: Font.body
+    )
 
     // MARK: Initializers
     /// Initializes appearance with default values.
@@ -102,6 +93,12 @@ public struct VTextViewAppearance {
     // MARK: Types
     /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
+    
+    /// State-bound text configuration.
+    public typealias PlaceholderStateTextConfiguration = GenericStateBasicTextConfiguration<StateColors>
 }
 
 @available(macOS, unavailable)

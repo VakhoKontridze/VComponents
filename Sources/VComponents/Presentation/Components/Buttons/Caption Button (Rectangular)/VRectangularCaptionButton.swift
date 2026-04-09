@@ -149,13 +149,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         internalState: VPlainButtonInternalState
     ) -> some View {
         labelImage
-            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
-            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .frame(size: appearance.labelImageSize)
-            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.labelImageFont)
-            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
             .scaleEffect(internalState == .pressed ? appearance.labelImagePressedScale : 1)
             .padding(appearance.labelImageMargins)
     }
@@ -231,12 +225,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         title: String
     ) -> some View {
         Text(title)
-            .multilineTextAlignment(appearance.captionTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: appearance.captionTextLineType.textLineLimitType)
-            .minimumScaleFactor(appearance.captionTextMinimumScaleFactor)
-            .foregroundStyle(appearance.captionTextColors.value(for: internalState))
-            .font(appearance.captionTextFont)
-            .applyIfLet(appearance.captionTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .textConfiguration(appearance.captionTextConfiguration, state: internalState)
     }
     
     private func captionImageElement(
@@ -244,13 +233,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         image: Image
     ) -> some View {
         image
-            .applyIf(appearance.isCaptionImageResizable) { $0.resizable() }
-            .applyIfLet(appearance.captionImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .frame(size: appearance.captionImageSize)
-            .applyIfLet(appearance.captionImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.captionImageOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.captionImageFont)
-            .applyIfLet(appearance.captionImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .imageConfiguration(appearance.captionImageConfiguration, state: internalState)
     }
 }
 
@@ -283,8 +266,8 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
                 appearance: {
                     var appearance: VRectangularCaptionButtonAppearance = .init()
                     appearance.rectangleColors.enabled = appearance.rectangleColors.pressed
-                    appearance.labelImageColors!.enabled = appearance.labelImageColors!.pressed // Unsafe (DEBUG)
-                    appearance.captionTextColors.enabled = appearance.captionTextColors.pressed
+                    appearance.labelImageConfiguration.colors!.enabled = appearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                    appearance.captionTextConfiguration.colors!.enabled = appearance.captionTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                     return appearance
                 }(),
                 action: {},

@@ -65,24 +65,12 @@ public struct VToastAppearance {
     )
 
     // MARK: Properties - Toast Content - Text
-    /// Text line type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textLineType: TextLineType = .singleLine
-
-    /// Text minimum scale factor.
-    public var textMinimumScaleFactor: CGFloat = 0.75
-
-    /// Text color.
-    public var textColor: Color = .primary
-
-    /// Text font.
-    public var textFont: Font = .headline
-
-    /// Text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Text configuration.
+    public var textConfiguration: TextConfiguration = .init(
+        color: Color.primary,
+        font: Font.headline,
+        minimumScaleFactor: 0.75
+    )
 
     // MARK: Properties - Dismiss Type
     /// Method of dismissing side bar.

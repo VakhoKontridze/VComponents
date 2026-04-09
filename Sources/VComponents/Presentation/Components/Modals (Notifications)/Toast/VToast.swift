@@ -143,13 +143,7 @@ struct VToast: View {
 
     private var contentView: some View {
         Text(text)
-            .multilineTextAlignment(appearance.textLineType.toVCoreTextLineType.textAlignment ?? .leading)
-            .lineLimit(type: appearance.textLineType.toVCoreTextLineType.textLineLimitType)
-            .minimumScaleFactor(appearance.textMinimumScaleFactor)
-            .foregroundStyle(appearance.textColor)
-            .font(appearance.textFont)
-            .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
-
+            .textConfiguration(appearance.textConfiguration)
             .padding(appearance.bodyMargins)
     }
 
@@ -312,7 +306,7 @@ struct VToast: View {
                 link: ModalPresenterLink(linkID: "preview"),
                 appearance: {
                     var appearance: VToastAppearance = .init()
-                    appearance.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                    appearance.textConfiguration.lineType = .multiLine(alignment: .leading, lineLimit: 10)
                     appearance.timeoutDuration = 60
                     return appearance
                 }(),

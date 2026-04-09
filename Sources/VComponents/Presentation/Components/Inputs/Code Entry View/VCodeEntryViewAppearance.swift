@@ -71,32 +71,22 @@ public struct VCodeEntryViewAppearance {
     public var characterBackgroundBorderColors: StateColors = .clearColors
 
     // MARK: Properties - Text
-    /// Text colors.
-    public var textColors: StateColors = .init(
-        enabled: Color.primary,
-        focused: Color.primary,
-        disabled: Color.primary.opacity(0.3)
+    /// Text configuration.
+    public var textConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.primary,
+            focused: Color.primary,
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: Font.body
     )
 
-    /// Text font.
-    public var textFont: Font = .body
-
-    /// Text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType?
-
     // MARK: Properties - Placeholder Text
-    /// Placeholder text colors.
-    public var placeholderTextColors: StateColors = .init(Color.secondary)
-
-    /// Placeholder text font.
-    public var placeholderTextFont: Font = .body
-
-    /// Placeholder text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var placeholderTextDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Placeholder text configuration.
+    public var placeholderTextConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(Color.secondary),
+        font: Font.body
+    )
 
     // MARK: Initializers
     /// Initializes appearance with default values.
@@ -105,6 +95,9 @@ public struct VCodeEntryViewAppearance {
     // MARK: Types
     /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
 
     /// Spacing type.
     nonisolated public enum SpacingType: Equatable, Sendable {

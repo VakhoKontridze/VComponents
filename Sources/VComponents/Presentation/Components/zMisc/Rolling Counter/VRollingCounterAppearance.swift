@@ -20,16 +20,11 @@ public struct VRollingCounterAppearance {
     public var verticalAlignment: VerticalAlignment = .center
 
     // MARK: Properties - Digit Text
-    /// Digit text color.
-    public var digitTextColor: Color = .primary
-
-    /// Digit text font.
-    public var digitTextFont: Font = .body.bold()
-
-    /// Digit text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var digitTextDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Digit text configuration.
+    public var digitTextConfiguration: TextConfiguration = .init(
+        color: Color.primary,
+        font: Font.body.bold()
+    )
 
     /// Digit text margins.
     public var digitTextMargins: EdgeInsets = .init()
@@ -56,17 +51,12 @@ public struct VRollingCounterAppearance {
     ///
     /// To hide fractions, set `hasFractionDigits` to `false`.
     public var maxFractionDigits: Int = 2
-
-    /// Fraction digit text color.
-    public var fractionDigitTextColor: Color = .primary
-
-    /// Digit text font.
-    public var fractionDigitTextFont: Font = .body.bold()
-
-    /// Fraction digit text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var fractionDigitTextDynamicTypeSizeType: DynamicTypeSizeType?
+    
+    /// Fraction digit text configuration.
+    public var fractionDigitTextConfiguration: TextConfiguration = .init(
+        color: Color.primary,
+        font: Font.body.bold()
+    )
 
     /// Fraction digit text margins.
     public var fractionDigitTextMargins: EdgeInsets = .init()
@@ -88,18 +78,13 @@ public struct VRollingCounterAppearance {
     ///
     /// To hide grouping separator, set `hasGroupingSeparator` to `false`.
     public var groupingSeparator: String = ","
-
-    /// Grouping separator text color.
-    public var groupingSeparatorTextColor: Color = .primary
-
-    /// Grouping separator text font.
-    public var groupingSeparatorTextFont: Font = .body.bold()
-
-    /// Grouping separator text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var groupingSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
-
+    
+    /// Grouping separator text configuration.
+    public var groupingSeparatorTextConfiguration: TextConfiguration = .init(
+        color: Color.primary,
+        font: Font.body.bold()
+    )
+    
     /// Grouping separator text margins.
     public var groupingSeparatorTextMargins: EdgeInsets = .init()
 
@@ -110,17 +95,11 @@ public struct VRollingCounterAppearance {
     /// Decimal separator.
     public var decimalSeparator: String = "."
 
-    /// Decimal separator text color.
-    public var decimalSeparatorTextColor: Color = .primary
-
-    /// Decimal separator text font.
-    public var decimalSeparatorTextFont: Font = .body.bold()
-
-    /// Decimal separator text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var decimalSeparatorTextDynamicTypeSizeType: DynamicTypeSizeType?
-
+    /// Decimal separator text configuration.
+    public var decimalSeparatorTextConfiguration: TextConfiguration = .init(
+        color: Color.primary,
+        font: Font.body.bold()
+    )
     /// Decimal separator text margins.
     public var decimalSeparatorTextMargins: EdgeInsets = .init()
 

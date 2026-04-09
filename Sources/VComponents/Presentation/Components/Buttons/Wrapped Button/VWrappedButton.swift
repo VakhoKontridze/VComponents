@@ -159,11 +159,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
         title: String
     ) -> some View {
         Text(title)
-            .lineLimit(1)
-            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
-            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
-            .font(appearance.labelTextFont)
-            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .textConfiguration(appearance.labelTextConfiguration, state: internalState)
     }
     
     private func labelImageElement(
@@ -171,13 +167,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
         image: Image
     ) -> some View {
         image
-            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
-            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .frame(size: appearance.labelImageSize)
-            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.labelImageFont)
-            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
     
     private func backgroundView(
@@ -234,7 +224,7 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
                 appearance: {
                     var appearance: VWrappedButtonAppearance = .init()
                     appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.labelTextColors.enabled = appearance.labelTextColors.pressed
+                    appearance.labelTextConfiguration.colors!.enabled = appearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                     return appearance
                 }(),
                 action: {},

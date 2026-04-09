@@ -108,12 +108,7 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
                 labeledRadioButton {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(appearance.labelTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: appearance.labelTextLineType.textLineLimitType)
-                            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
-                            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
-                            .font(appearance.labelTextFont)
-                            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .textConfiguration(appearance.labelTextConfiguration, state: internalState)
                     }
                     .blocksHitTesting(!appearance.labelIsClickable)
                 }
@@ -235,7 +230,7 @@ nonisolated extension VRadioButtonState {
                     appearance.fillColors.off = appearance.fillColors.pressedOff
                     appearance.borderColors.off = appearance.borderColors.pressedOff
                     appearance.bulletColors.off = appearance.bulletColors.pressedOff
-                    appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
+                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -257,7 +252,7 @@ nonisolated extension VRadioButtonState {
                     appearance.fillColors.on = appearance.fillColors.pressedOn
                     appearance.borderColors.on = appearance.borderColors.pressedOn
                     appearance.bulletColors.on = appearance.bulletColors.pressedOn
-                    appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
+                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.on),

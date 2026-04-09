@@ -107,30 +107,18 @@ public struct VAlertAppearance {
     )
 
     // MARK: Properties - Alert Content - Title
-    /// Title text frame alignment.
-    public var titleTextFrameAlignment: HorizontalAlignment = .center
-
-    /// Title text line type...2` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextLineType: TextLineType = .multiLine(
-        alignment: .center,
-        lineLimit: 1...2
+    /// Title text configuration.
+    public var titleTextConfiguration: TextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .center,
+            lineLimit: 1...2
+        ),
+        color: Color.primary,
+        font: Font.headline.weight(.bold)
     )
     
-    /// Title text minimum scale factor.
-    public var titleTextMinimumScaleFactor: CGFloat = 1
-
-    /// Title text color.
-    public var titleTextColor: Color = .primary
-
-    /// Title text font.
-    public var titleTextFont: Font = .headline.weight(.bold)
-
-    /// Title text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var titleTextDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Title text frame alignment.
+    public var titleTextFrameAlignment: HorizontalAlignment = .center
 
     /// Title text margins.
     public var titleTextMargins: EdgeInsets = .init(
@@ -141,30 +129,18 @@ public struct VAlertAppearance {
     )
 
     // MARK: Properties - Alert Content - Message
-    /// Message text frame alignment.
-    public var messageTextFrameAlignment: HorizontalAlignment = .center
-
-    /// Message text line type...5` lines.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextLineType: TextLineType = .multiLine(
-        alignment: .center,
-        lineLimit: 1...5
+    /// Message text configuration.
+    public var messageTextConfiguration: TextConfiguration = .init(
+        lineType: .multiLine(
+            alignment: .center,
+            lineLimit: 1...5
+        ),
+        color: Color.primary,
+        font: Font.subheadline
     )
     
-    /// Message text minimum scale factor.
-    public var messageTextMinimumScaleFactor: CGFloat = 1
-
-    /// Message text color.
-    public var messageTextColor: Color = .primary
-
-    /// Message text font.
-    public var messageTextFont: Font = .subheadline
-
-    /// Message text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var messageTextDynamicTypeSizeType: DynamicTypeSizeType?
+    /// Message text frame alignment.
+    public var messageTextFrameAlignment: HorizontalAlignment = .center
 
     /// Message text margins.
     public var messageTextMargins: EdgeInsets = .init(
@@ -184,37 +160,147 @@ public struct VAlertAppearance {
     )
 
     // MARK: Properties - Alert Content - Buttons
-    /// Button height.
-    public var buttonHeight: CGFloat = {
+    /// Primary button appearance.
+    public var primaryButtonAppearance: VStretchedButtonAppearance = {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = {
 #if os(iOS)
-        40
+            40
 #elseif os(macOS)
-        22
+            22
 #else
-        fatalError()
+            fatalError()
+#endif
+        }()
+        appearance.cornerRadius = {
+#if os(iOS)
+            10
+#elseif os(macOS)
+            4
+#else
+            fatalError()
+#endif
+        }()
+
+        appearance.backgroundColors = ButtonStateColors(
+            enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            disabled: Color(128, 176, 240)
+        )
+
+        appearance.labelTextConfiguration.colors = ButtonStateColors(Color.white)
+        appearance.labelTextConfiguration.font = {
+#if os(iOS)
+            Font.callout.weight(.semibold)
+#elseif os(macOS)
+            Font.system(size: 13) // No dynamic type on `macOS`
+#else
+            fatalError()
 #endif
     }()
 
-    /// Button corner radius.
-    public var buttonCornerRadius: CGFloat = {
+        appearance.sensoryFeedback = nil
+
+        return appearance
+    }()
+    
+    /// Secondary button appearance.
+    public var secondaryButtonAppearance: VStretchedButtonAppearance = {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = {
 #if os(iOS)
-        10
+            40
 #elseif os(macOS)
-        4
+            22
 #else
-        fatalError()
+            fatalError()
+#endif
+        }()
+        appearance.cornerRadius = {
+#if os(iOS)
+            10
+#elseif os(macOS)
+            4
+#else
+            fatalError()
+#endif
+        }()
+
+        appearance.backgroundColors = ButtonStateColors(
+            enabled: Color.clear,
+            pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
+            disabled: Color.clear
+        )
+
+        appearance.labelTextConfiguration.colors = ButtonStateColors(
+            enabled: Color.blue,
+            pressed: Color.blue,
+            disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
+        )
+        appearance.labelTextConfiguration.font = {
+#if os(iOS)
+            Font.callout.weight(.semibold)
+#elseif os(macOS)
+            Font.system(size: 13) // No dynamic type on `macOS`
+#else
+            fatalError()
 #endif
     }()
 
-    /// Button text font.
-    public var buttonTextFont: Font = {
+        appearance.sensoryFeedback = nil
+
+        return appearance
+    }()
+    
+    /// Destructive button appearance.
+    public var destructiveButtonAppearance: VStretchedButtonAppearance = {
+        var appearance: VStretchedButtonAppearance = .init()
+
+        appearance.height = {
 #if os(iOS)
-        Font.callout.weight(.semibold)
+            40
 #elseif os(macOS)
-        Font.system(size: 13) // No dynamic type on `macOS`
+            22
 #else
-        fatalError()
+            fatalError()
 #endif
+        }()
+        appearance.cornerRadius = {
+#if os(iOS)
+            10
+#elseif os(macOS)
+            4
+#else
+            fatalError()
+#endif
+        }()
+
+        appearance.backgroundColors = ButtonStateColors(
+            enabled: Color.clear,
+            pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
+            disabled: Color.clear
+        )
+
+        appearance.labelTextConfiguration.colors = ButtonStateColors(
+            enabled: Color.red,
+            pressed: Color.red,
+            disabled: Color.platformDynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
+        )
+        appearance.labelTextConfiguration.font = {
+#if os(iOS)
+            Font.callout.weight(.semibold)
+#elseif os(macOS)
+            Font.system(size: 13) // No dynamic type on `macOS`
+#else
+            fatalError()
+#endif
+    }()
+
+        appearance.sensoryFeedback = nil
+
+        return appearance
     }()
 
     /// Button margins.
@@ -238,103 +324,6 @@ public struct VAlertAppearance {
         fatalError()
 #endif
     }()
-
-    /// Button sensory feedback.
-    public var buttonSensoryFeedback: SensoryFeedback?
-
-    // MARK: Properties - Alert Content - Button - Primary
-    /// Primary button background colors.
-    public var primaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
-        disabled: Color(128, 176, 240)
-    )
-
-    /// Primary button text colors.
-    public var primaryButtonTextColors: ButtonStateColors = .init(Color.white)
-
-    var primaryButtonAppearance: VStretchedButtonAppearance {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = buttonHeight
-        appearance.cornerRadius = buttonCornerRadius
-
-        appearance.backgroundColors = primaryButtonBackgroundColors
-
-        appearance.labelTextColors = primaryButtonTextColors
-        appearance.labelTextFont = buttonTextFont
-        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
-
-        appearance.sensoryFeedback = buttonSensoryFeedback
-
-        return appearance
-    }
-
-    // MARK: Properties - Alert Content - Button - Secondary
-    /// Secondary button background colors.
-    public var secondaryButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.clear,
-        pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
-        disabled: Color.clear
-    )
-
-    /// Secondary button text colors.
-    public var secondaryButtonTextColors: ButtonStateColors = .init(
-        enabled: Color.blue,
-        pressed: Color.blue,
-        disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
-    )
-
-    var secondaryButtonAppearance: VStretchedButtonAppearance {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = buttonHeight
-        appearance.cornerRadius = buttonCornerRadius
-
-        appearance.backgroundColors = secondaryButtonBackgroundColors
-
-        appearance.labelTextColors = secondaryButtonTextColors
-        appearance.labelTextFont = buttonTextFont
-        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
-
-        appearance.sensoryFeedback = buttonSensoryFeedback
-
-        return appearance
-    }
-
-    // MARK: Properties - Alert Content - Button - Destructive
-    /// Destructive button background colors.
-    public var destructiveButtonBackgroundColors: ButtonStateColors = .init(
-        enabled: Color.clear,
-        pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
-        disabled: Color.clear
-    )
-
-    /// Destructive button text colors.
-    public var destructiveButtonTextColors: ButtonStateColors = .init(
-        enabled: Color.red,
-        pressed: Color.red,
-        disabled: Color.platformDynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
-    )
-
-    var destructiveButtonAppearance: VStretchedButtonAppearance {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = buttonHeight
-        appearance.cornerRadius = buttonCornerRadius
-
-        appearance.backgroundColors = destructiveButtonBackgroundColors
-
-        appearance.labelTextColors = destructiveButtonTextColors
-        appearance.labelTextFont = buttonTextFont
-        appearance.labelTextDynamicTypeSizeType = .partialRangeThrough(...(.accessibility2))
-
-#if os(iOS)
-        appearance.sensoryFeedback = buttonSensoryFeedback
-#endif
-
-        return appearance
-    }
 
     // MARK: Properties - Transition - Appear/Disappear
     /// Scale effect during appear and disappear.

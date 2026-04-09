@@ -134,11 +134,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
                 switch headerLabel {
                 case .title(let title):
                     Text(title)
-                        .lineLimit(1)
-                        .minimumScaleFactor(appearance.headerTextMinimumScaleFactor)
-                        .foregroundStyle(appearance.headerTextColors.value(for: internalState))
-                        .font(appearance.headerTextFont)
-                        .applyIfLet(appearance.headerTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                        .textConfiguration(appearance.headerTextConfiguration, state: internalState)
 
                 case .custom(let builder):
                     builder(internalState)
@@ -273,7 +269,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.pressed
-                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
+                        appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
                         return appearance
                     }(),
                     state: .constant(.collapsed),
@@ -289,7 +285,7 @@ private struct StatesContentView: View {
                     appearance: {
                         var appearance: VDisclosureGroupAppearance = appearance
                         appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.disabled
-                        appearance.disclosureButtonAppearance.labelImageColors!.enabled = appearance.disclosureButtonAppearance.labelImageColors!.disabled // Unsafe (DEBUG)
+                        appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.disabled // Unsafe (DEBUG)
                         return appearance
                     }(),
                     state: .constant(.expanded),

@@ -101,23 +101,15 @@ public struct VDisclosureGroupAppearance {
     public var expandsAndCollapsesOnHeaderTap: Bool = true
 
     // MARK: Properties - Header - Text
-    /// Header text minimum scale factor.
-    public var headerTextMinimumScaleFactor: CGFloat = 1
-    
-    /// Header text colors.
-    public var headerTextColors: StateColors = .init(
-        collapsed: Color.primary,
-        expanded: Color.primary,
-        disabled: Color.primary.opacity(0.3)
+    /// Header text configuration.
+    public var headerTextConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(
+            collapsed: Color.primary,
+            expanded: Color.primary,
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: Font.headline.weight(.bold)
     )
-
-    /// Header text font.
-    public var headerTextFont: Font = .headline.weight(.bold)
-
-    /// Header text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var headerTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Disclosure Button
     /// Disclosure button image.
@@ -147,12 +139,18 @@ public struct VDisclosureGroupAppearance {
             fatalError()
 #endif
         }()
-
-        appearance.labelImageSize = CGSize(dimension: 12)
-        appearance.labelImageColors = VRectangularButtonAppearance.StateColors(
-            enabled: Color.primary,
-            pressed: Color.primary,
-            disabled: Color.primary.opacity(0.3)
+        
+        appearance.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
+            colors: VRectangularButtonAppearance.StateColors(
+                enabled: Color.primary,
+                pressed: Color.primary,
+                disabled: Color.primary.opacity(0.3)
+            ),
+            aspectRatio: ImageConfiguration.AspectRatio(
+                contentMode: .fit
+            ),
+            resizable: ImageConfiguration.Resizable(),
+            size: CGSize(dimension: 12)
         )
 
         appearance.sensoryFeedback = nil
@@ -215,6 +213,9 @@ public struct VDisclosureGroupAppearance {
 
     /// State-bound angles.
     public typealias StateAngles = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
 }
 
 @available(tvOS, unavailable)

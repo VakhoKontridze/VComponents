@@ -114,11 +114,11 @@ public struct VRollingCounter: View {
         switch component {
         case let digit as VRollingCounterDigitComponent:
             Text(digit.stringRepresentation)
-                .lineLimit(1)
-                //.minimumScaleFactor(1)
-                .foregroundStyle(textColor(digit.isHighlighted, defaultValue: appearance.digitTextColor))
-                .font(appearance.digitTextFont)
-                .applyIfLet(appearance.digitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration({
+                    var configuration: TextConfiguration = appearance.digitTextConfiguration
+                    if digit.isHighlighted, let highlightedColor { configuration.color = highlightedColor }
+                    return configuration
+                }())
                 .padding(appearance.digitTextMargins)
                 .offset(y: appearance.digitTextOffsetY)
                 .transition({
@@ -129,11 +129,11 @@ public struct VRollingCounter: View {
 
         case let fractionDigit as VRollingCounterFractionDigitComponent:
             Text(fractionDigit.stringRepresentation)
-                .lineLimit(1)
-                //.minimumScaleFactor(1)
-                .foregroundStyle(textColor(fractionDigit.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
-                .font(appearance.fractionDigitTextFont)
-                .applyIfLet(appearance.fractionDigitTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration({
+                    var configuration: TextConfiguration = appearance.fractionDigitTextConfiguration
+                    if fractionDigit.isHighlighted, let highlightedColor { configuration.color = highlightedColor }
+                    return configuration
+                }())
                 .padding(appearance.fractionDigitTextMargins)
                 .offset(y: appearance.fractionDigitTextOffsetY)
                 .transition({
@@ -144,22 +144,22 @@ public struct VRollingCounter: View {
 
         case let groupingSeparator as VRollingCounterGroupingSeparatorComponent:
             Text(groupingSeparator.stringRepresentation)
-                .lineLimit(1)
-                //.minimumScaleFactor(1)
-                .foregroundStyle(textColor(groupingSeparator.isHighlighted, defaultValue: appearance.groupingSeparatorTextColor))
-                .font(appearance.groupingSeparatorTextFont)
-                .applyIfLet(appearance.groupingSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration({
+                    var configuration: TextConfiguration = appearance.groupingSeparatorTextConfiguration
+                    if groupingSeparator.isHighlighted, let highlightedColor { configuration.color = highlightedColor }
+                    return configuration
+                }())
                 .padding(appearance.groupingSeparatorTextMargins)
                 .offset(y: appearance.groupingSeparatorTextOffsetY)
                 .transition(.identity)
 
         case let decimalSeparator as VRollingCounterDecimalSeparatorComponent:
             Text(decimalSeparator.stringRepresentation)
-                .lineLimit(1)
-                //.minimumScaleFactor(1)
-                .foregroundStyle(textColor(decimalSeparator.isHighlighted, defaultValue: appearance.fractionDigitTextColor))
-                .font(appearance.decimalSeparatorTextFont)
-                .applyIfLet(appearance.decimalSeparatorTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .textConfiguration({
+                    var configuration: TextConfiguration = appearance.decimalSeparatorTextConfiguration
+                    if decimalSeparator.isHighlighted, let highlightedColor { configuration.color = highlightedColor }
+                    return configuration
+                }())
                 .padding(appearance.decimalSeparatorTextMargins)
                 .offset(y: appearance.decimalSeparatorTextOffsetY)
                 .transition(.identity)
@@ -229,14 +229,6 @@ public struct VRollingCounter: View {
     }
 
     // MARK: Helpers
-    private func textColor(
-        _ isHighlighted: Bool,
-        defaultValue: Color
-    ) -> Color {
-        guard isHighlighted, let highlightedColor else { return defaultValue }
-        return highlightedColor
-    }
-
     private var highlightedColor: Color? {
         switch operation {
         case .none: Color.clear
@@ -288,6 +280,19 @@ nonisolated extension Edge {
         switch verticalEdge {
         case .top: self = .top
         case .bottom: self = .bottom
+        }
+    }
+}
+
+nonisolated extension TextConfiguration {
+    fileprivate func withColor(_ color: Color?) -> Self {
+        if let color {
+            var copy: Self = self
+            copy.color = color
+            return copy
+            
+        } else {
+            return self
         }
     }
 }
@@ -378,11 +383,11 @@ nonisolated extension Edge {
                 appearance: {
                     var appearance: VRollingCounterAppearance = .init()
 
-                    appearance.decimalSeparatorTextColor = .secondary
+                    appearance.decimalSeparatorTextConfiguration.color = .secondary
                     appearance.decimalSeparatorTextOffsetY = -10
 
-                    appearance.fractionDigitTextColor = .secondary
-                    appearance.fractionDigitTextFont = Font.footnote.bold()
+                    appearance.fractionDigitTextConfiguration.color = .secondary
+                    appearance.fractionDigitTextConfiguration.font = Font.footnote.bold()
                     appearance.fractionDigitTextOffsetY = -2
 
                     return appearance

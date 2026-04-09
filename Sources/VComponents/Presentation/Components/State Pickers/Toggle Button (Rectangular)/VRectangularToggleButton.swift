@@ -162,11 +162,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         title: String
     ) -> some View {
         Text(title)
-            .lineLimit(1)
-            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
-            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
-            .font(appearance.labelTextFont)
-            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .textConfiguration(appearance.labelTextConfiguration, state: internalState)
     }
 
     private func labelImageElement(
@@ -174,13 +170,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         image: Image
     ) -> some View {
         image
-            .applyIf(appearance.isLabelImageResizable) { $0.resizable() }
-            .applyIfLet(appearance.labelImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-            .frame(size: appearance.labelImageSize)
-            .applyIfLet(appearance.labelImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-            .applyIfLet(appearance.labelImageOpacities) { $0.opacity($1.value(for: internalState)) }
-            .font(appearance.labelImageFont)
-            .applyIfLet(appearance.labelImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+            .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
 
     private func backgroundView(
@@ -258,7 +248,7 @@ nonisolated extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.labelImageColors!.off = appearance.labelImageColors!.pressedOff // Unsafe (DEBUG)
+                    appearance.labelImageConfiguration.colors!.off = appearance.labelImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -278,7 +268,7 @@ nonisolated extension VRectangularToggleButtonInternalState {
                 appearance: {
                     var appearance: VRectangularToggleButtonAppearance = .init()
                     appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.labelImageColors!.on = appearance.labelImageColors!.pressedOn // Unsafe (DEBUG)
+                    appearance.labelImageConfiguration.colors!.on = appearance.labelImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.on),

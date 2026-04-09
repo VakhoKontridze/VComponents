@@ -106,70 +106,39 @@ public struct VLoadingStretchedButtonAppearance {
     }()
 
     // MARK: Properties - Label - Text
-    /// Label text minimum scale factor.
-    public var labelTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Label text colors.
-    public var labelTextColors: StateColors = .init(Color.white)
-
-    /// Label text font.
-    public var labelTextFont: Font = {
+    /// Label text configuration.
+    public var labelTextConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(Color.white),
+        font: {
 #if os(iOS)
-        Font.callout.weight(.semibold)
+            Font.callout.weight(.semibold)
 #elseif os(macOS)
-        Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS`
+            Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS`
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-
-    /// Label text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelTextDynamicTypeSizeType: DynamicTypeSizeType?
+        }(),
+        minimumScaleFactor: 0.75
+    )
 
     // MARK: Properties - Label - Image
-    /// Indicates if label image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isLabelImageResizable: Bool = true
-
-    /// Label image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageContentMode: ContentMode? = .fit
-
-    /// Label image size.
-    public var labelImageSize: CGSize? = {
+    /// Label image configuration.
+    public var labelImageConfiguration: StateImageConfiguration = .init(
+        colors: StateColors(Color.white),
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: {
 #if os(iOS)
-        CGSize(dimension: 18)
+            CGSize(dimension: 18)
 #elseif os(macOS)
-        CGSize(dimension: 16)
+            CGSize(dimension: 16)
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-
-    /// Label image colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageColors: StateColors? = .init(Color.white)
-
-    /// Label image opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageOpacities: StateOpacities?
-
-    /// Label image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isLabelImageResizable` should be set to `false`, and `labelImageSize` should be set to `nil`.
-    public var labelImageFont: Font?
-
-    /// Label image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
+        }()
+    )
 
     // MARK: Properties - Spinner
     /// Spinner placement.
@@ -226,6 +195,12 @@ public struct VLoadingStretchedButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
+    
+    /// State-bound image configuration.
+    public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
     
     /// Spinner placement.
     nonisolated public enum SpinnerPlacement: Int, Sendable, CaseIterable {

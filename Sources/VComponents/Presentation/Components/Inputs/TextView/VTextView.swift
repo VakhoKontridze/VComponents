@@ -121,25 +121,15 @@ public struct VTextView: View {
             text: $text,
             prompt: placeholder.map {
                 Text($0)
-                    //.lineLimit(1)
-                    //.minimumScaleFactor(1)
-                    .foregroundStyle(appearance.placeholderTextColors.value(for: internalState))
-                    .font(appearance.placeholderTextFont)
-                    //.applyIfLet(appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
+                    .textConfiguration(appearance.placeholderTextConfiguration, state: internalState)
             },
             axis: .vertical,
             label: EmptyView.init
         )
-        .textFieldStyle(.plain)
-
         .focused($isFocused)
-
-        .multilineTextAlignment(appearance.textLineType.textAlignment ?? .leading) // May glitch for previews
-        .lineLimit(type: appearance.textLineType.textLineLimitType)
-        //.minimumScaleFactor(1)
-        .foregroundStyle(appearance.textColors.value(for: internalState))
-        .font(appearance.textFont)
-        .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+        
+        .textFieldStyle(.plain)
+        .textConfiguration(appearance.textConfiguration, state: internalState)
 #if !(os(macOS) || os(watchOS))
         .keyboardType(appearance.keyboardType)
 #endif
@@ -231,7 +221,7 @@ private struct StatesContentView: View {
                         var mappedAppearance: VTextViewAppearance = appearance
                         mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
                         mappedAppearance.borderColors.enabled = appearance.borderColors.focused
-                        mappedAppearance.textColors.enabled = appearance.textColors.focused
+                        mappedAppearance.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
                         return mappedAppearance
                     }(),
                     placeholder: "Lorem ipsum",

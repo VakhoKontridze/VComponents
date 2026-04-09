@@ -251,11 +251,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             switch tabItemLabel {
             case .title(let title):
                 Text(title(element))
-                    .lineLimit(1)
-                    .minimumScaleFactor(appearance.tabItemTextMinimumScaleFactor)
-                    .foregroundStyle(appearance.tabItemTextColors.value(for: tabItemInternalState))
-                    .font(appearance.tabItemTextFont)
-                    .applyIfLet(appearance.tabItemTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                    .textConfiguration(appearance.tabItemTextConfiguration, state: tabItemInternalState)
 
             case .custom(let builder):
                 builder(tabItemInternalState, element)

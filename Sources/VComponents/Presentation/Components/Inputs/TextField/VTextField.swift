@@ -171,23 +171,14 @@ public struct VTextField: View {
             isSecure: isTextFieldSecure,
             placeholder: placeholder.map {
                 Text($0)
-                    //.lineLimit(1)
-                    //.minimumScaleFactor(1)
-                    .foregroundStyle(appearance.placeholderTextColors.value(for: internalState))
-                    .font(appearance.placeholderTextFont)
-                    //.applyIfLet(appearance.placeholderTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) } // Cannot be applied to placeholder only
+                    .textConfiguration(appearance.placeholderTextConfiguration, state: internalState)
             },
             text: $text
         )
         .focused($isFocused)
         
         .textFieldStyle(.plain)
-        .multilineTextAlignment(appearance.textAlignment)
-        .lineLimit(1)
-        //.minimumScaleFactor(1)
-        .foregroundStyle(appearance.textColors.value(for: internalState))
-        .font(appearance.textFont)
-        .applyIfLet(appearance.textDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+        .textConfiguration(appearance.textConfiguration, state: internalState)
 #if !(os(macOS) || os(watchOS))
         .keyboardType(appearance.keyboardType)
 #endif
@@ -205,13 +196,7 @@ public struct VTextField: View {
     private var searchImage: some View {
         if appearance.style.hasSearchImage {
             appearance.searchImage
-                .applyIf(appearance.isSearchImageResizable) { $0.resizable() }
-                .applyIfLet(appearance.searchImageContentMode) { $0.aspectRatio(nil, contentMode: $1) }
-                .frame(size: appearance.searchImageSize)
-                .applyIfLet(appearance.searchImageColors) { $0.foregroundStyle($1.value(for: internalState)) }
-                .applyIfLet(appearance.searchImageOpacities) { $0.opacity($1.value(for: internalState)) }
-                .font(appearance.searchImageFont)
-                .applyIfLet(appearance.searchImageDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                .imageConfiguration(appearance.searchImageConfiguration, state: internalState)
         }
     }
     
@@ -384,7 +369,7 @@ private struct StatesContentView: View {
                         var mappedAppearance: VTextFieldAppearance = appearance
                         mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
                         mappedAppearance.borderColors.enabled = appearance.borderColors.focused
-                        mappedAppearance.textColors.enabled = appearance.textColors.focused
+                        mappedAppearance.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
                         return mappedAppearance
                     }(),
                     placeholder: "Lorem ipsum",
@@ -398,8 +383,8 @@ private struct StatesContentView: View {
                     appearance: {
                         var mappedAppearance: VTextFieldAppearance = appearance
                         mappedAppearance.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
-                        mappedAppearance.clearButtonAppearance.labelImageColors!.enabled = appearance.clearButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
-                        mappedAppearance.visibilityButtonAppearance.labelImageColors!.enabled = appearance.visibilityButtonAppearance.labelImageColors!.pressed // Unsafe (DEBUG)
+                        mappedAppearance.clearButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.clearButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                        mappedAppearance.visibilityButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.visibilityButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                         return mappedAppearance
                     }(),
                     placeholder: "Lorem ipsum",

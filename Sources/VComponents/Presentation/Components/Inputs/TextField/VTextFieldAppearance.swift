@@ -71,30 +71,22 @@ public struct VTextFieldAppearance {
     public var borderColors: StateColors = .clearColors
     
     // MARK: Properties - Text
-    /// Text alignment.
-    public var textAlignment: TextAlignment = .leading
-
-    /// Text colors.
-    public var textColors: StateColors = .init(
-        enabled: Color.primary,
-        focused: Color.primary,
-        disabled: Color.primary.opacity(0.3)
+    /// Text configuration.
+    public var textConfiguration: StateTextConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.primary,
+            focused: Color.primary,
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: Font.body
     )
 
-    /// Text font.
-    public var textFont: Font = .body
-
-    /// Text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var textDynamicTypeSizeType: DynamicTypeSizeType?
-
     // MARK: Properties - Placeholder Text
-    /// Placeholder text colors.
-    public var placeholderTextColors: StateColors = .init(Color.secondary)
-
-    /// Placeholder text font.
-    public var placeholderTextFont: Font = .body
+    /// Placeholder text configuration.
+    public var placeholderTextConfiguration: PlaceholderStateTextConfiguration = .init(
+        colors: StateColors(Color.secondary),
+        font: Font.body
+    )
 
     // MARK: Properties - Clear Button
     /// Indicates if textfield has clear button.
@@ -114,10 +106,16 @@ public struct VTextFieldAppearance {
             pressed: Color.platformDynamic(Color(150, 150, 150), Color(20, 20, 20)),
             disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
         )
-
-        appearance.labelImageSize = CGSize(dimension: 8)
-        appearance.labelImageColors = VRectangularButtonAppearance.StateColors(
-            Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
+        
+        appearance.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
+            colors: VRectangularButtonAppearance.StateColors(
+                Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
+            ),
+            aspectRatio: ImageConfiguration.AspectRatio(
+                contentMode: .fit
+            ),
+            resizable: ImageConfiguration.Resizable(),
+            size: CGSize(dimension: 8)
         )
 
         appearance.sensoryFeedback = nil
@@ -138,12 +136,18 @@ public struct VTextFieldAppearance {
     /// Visibility button appearance.
     public var visibilityButtonAppearance: VPlainButtonAppearance = {
         var appearance: VPlainButtonAppearance = .init()
-
-        appearance.labelImageSize = CGSize(dimension: 20)
-        appearance.labelImageColors = VPlainButtonAppearance.StateColors(
-            enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
-            pressed: Color.primary.opacity(0.3),
-            disabled: Color.primary.opacity(0.3)
+        
+        appearance.labelImageConfiguration = VPlainButtonAppearance.StateImageConfiguration(
+            colors: VPlainButtonAppearance.StateColors(
+                enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
+                pressed: Color.primary.opacity(0.3),
+                disabled: Color.primary.opacity(0.3)
+            ),
+            aspectRatio: ImageConfiguration.AspectRatio(
+                contentMode: .fit
+            ),
+            resizable: ImageConfiguration.Resizable(),
+            size: CGSize(dimension: 20)
         )
 
         appearance.sensoryFeedback = nil
@@ -152,46 +156,22 @@ public struct VTextFieldAppearance {
     }()
 
     // MARK: Properties - Search
+    /// Search image configuration.
+    public var searchImageConfiguration: StateImageConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
+            focused: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
+            disabled: Color.primary.opacity(0.3)
+        ),
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: CGSize(dimension: 15)
+    )
+    
     /// Search image.
     public var searchImage: Image = ImageBook.magnifyGlass.renderingMode(.template)
-
-    /// Indicates if search image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isSearchImageResizable: Bool = true
-
-    /// Search image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var searchImageContentMode: ContentMode? = .fit
-
-    /// Search image size.
-    public var searchImageSize: CGSize? = .init(dimension: 15)
-
-    /// Search image colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var searchImageColors: StateColors? = .init(
-        enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
-        focused: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
-        disabled: Color.primary.opacity(0.3)
-    )
-
-    /// Search image opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var searchImageOpacities: StateOpacities?
-
-    /// Search image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isSearchImageResizable` should be set to `false`, and `searchImageSize` should be set to `nil`.
-    public var searchImageFont: Font?
-
-    /// Search image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var searchImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Initializers
     /// Initializes appearance with default values.
@@ -249,6 +229,15 @@ public struct VTextFieldAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
+    
+    /// State-bound text configuration.
+    public typealias PlaceholderStateTextConfiguration = GenericStateBasicTextConfiguration<StateColors>
+    
+    /// State-bound image configuration.
+    public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
 }
 
 @available(macOS, unavailable)

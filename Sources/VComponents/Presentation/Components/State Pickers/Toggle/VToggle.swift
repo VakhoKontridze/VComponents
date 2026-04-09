@@ -107,12 +107,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                 labeledToggleView {
                     baseButtonView { internalState in
                         Text(title)
-                            .multilineTextAlignment(appearance.labelTextLineType.textAlignment ?? .leading)
-                            .lineLimit(type: appearance.labelTextLineType.textLineLimitType)
-                            .minimumScaleFactor(appearance.labelTextMinimumScaleFactor)
-                            .foregroundStyle(appearance.labelTextColors.value(for: internalState))
-                            .font(appearance.labelTextFont)
-                            .applyIfLet(appearance.labelTextDynamicTypeSizeType) { $0.dynamicTypeSize(type: $1) }
+                            .textConfiguration(appearance.labelTextConfiguration, state: internalState)
                     }
                     .blocksHitTesting(!appearance.labelIsClickable)
                 }
@@ -237,7 +232,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                     appearance.fillColors.off = appearance.fillColors.pressedOff
                     appearance.borderColors.off = appearance.borderColors.pressedOff
                     appearance.thumbColors.off = appearance.thumbColors.pressedOff
-                    appearance.labelTextColors.off = appearance.labelTextColors.pressedOff
+                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.off),
@@ -259,7 +254,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
                     appearance.fillColors.on = appearance.fillColors.pressedOn
                     appearance.borderColors.on = appearance.borderColors.pressedOn
                     appearance.thumbColors.on = appearance.thumbColors.pressedOn
-                    appearance.labelTextColors.on = appearance.labelTextColors.pressedOn
+                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
                     return appearance
                 }(),
                 state: .constant(.on),

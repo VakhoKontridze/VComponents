@@ -75,51 +75,27 @@ public struct VRectangularCaptionButtonAppearance {
     public var rectangleBorderColors: StateColors = .clearColors
 
     // MARK: Properties - Label - Image
-    /// Indicates if label image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isLabelImageResizable: Bool = true
-
-    /// Label image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageContentMode: ContentMode? = .fit
-
-    /// Label image size.
-    public var labelImageSize: CGSize? = {
+    /// Label image configuration.
+    public var labelImageConfiguration: StateImageConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            disabled: Color(128, 176, 240, 0.5)
+        ),
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: {
 #if os(iOS)
-        CGSize(dimension: 24)
+            CGSize(dimension: 24)
 #elseif os(watchOS)
-        CGSize(dimension: 26)
+            CGSize(dimension: 26)
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-
-    /// Label image colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageColors: StateColors? = .init(
-        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
-        disabled: Color(128, 176, 240, 0.5)
+        }()
     )
-
-    /// Label image opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageOpacities: StateOpacities?
-
-    /// Label image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isLabelImageResizable` should be set to `false`, and `labelImageSize` should be set to `nil`.
-    public var labelImageFont: Font?
-
-    /// Label image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var labelImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     /// Label image pressed scale.
     public var labelImagePressedScale: CGFloat = {
@@ -162,94 +138,59 @@ public struct VRectangularCaptionButtonAppearance {
     }()
     
     // MARK: Properties - Caption - Text
-    /// Caption text line type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionTextLineType: TextLineType = {
+    /// Caption text configuration.
+    public var captionTextConfiguration: StateTextConfiguration = .init(
+        lineType: {
 #if os(iOS)
-        .multiLine(
-            alignment: .center,
-            lineLimit: 1...2
-        )
+            .multiLine(
+                alignment: .center,
+                lineLimit: 1...2
+            )
 #elseif os(watchOS)
-        .singleLine
+            .singleLine
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-    
-    /// Caption text minimum scale factor.
-    public var captionTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Caption text colors.
-    public var captionTextColors: StateColors = .init(
-        enabled: Color.primary,
-        pressed: Color.primary.opacity(0.3),
-        disabled: Color.primary.opacity(0.3)
+        }(),
+        colors: StateColors(
+            enabled: Color.primary,
+            pressed: Color.primary.opacity(0.3),
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: {
+#if os(iOS)
+            Font.subheadline
+#elseif os(watchOS)
+            Font.body
+#else
+            fatalError()
+#endif
+        }(),
+        minimumScaleFactor: 0.75
     )
-
-    /// Caption text font.
-    public var captionTextFont: Font = {
-#if os(iOS)
-        Font.subheadline
-#elseif os(watchOS)
-        Font.body
-#else
-        fatalError()
-#endif
-    }()
-
-    /// Caption text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Caption - Image
-    /// Indicates if caption image is resizable.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var isCaptionImageResizable: Bool = true
-
-    /// Caption image content mode.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionImageContentMode: ContentMode? = .fit
-
-    /// Caption image size.
-    public var captionImageSize: CGSize? = {
+    /// Caption image configuration.
+    public var captionImageConfiguration: StateImageConfiguration = .init(
+        colors: StateColors(
+            enabled: Color.primary,
+            pressed: Color.primary.opacity(0.3),
+            disabled: Color.primary.opacity(0.3)
+        ),
+        aspectRatio: ImageConfiguration.AspectRatio(
+            contentMode: .fit
+        ),
+        resizable: ImageConfiguration.Resizable(),
+        size: {
 #if os(iOS)
-        CGSize(dimension: 16)
+            CGSize(dimension: 16)
 #elseif os(watchOS)
-        CGSize(dimension: 18)
+            CGSize(dimension: 18)
 #else
-        fatalError()
+            fatalError()
 #endif
-    }()
-
-    /// Caption image colors.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionImageColors: StateColors? = .init(
-        enabled: Color.primary,
-        pressed: Color.primary.opacity(0.3),
-        disabled: Color.primary.opacity(0.3)
+        }()
     )
-
-    /// Caption image opacities.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionImageOpacities: StateOpacities?
-
-    /// Caption image font.
-    ///
-    /// Can be used for setting different weight to SF symbol images.
-    /// To achieve this, `isCaptionImageResizable` should be set to `false`, and `captionImageSize` should be set to `nil`.
-    public var captionImageFont: Font?
-
-    /// Caption image `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var captionImageDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.
@@ -286,4 +227,10 @@ public struct VRectangularCaptionButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
+    
+    /// State-bound text configuration.
+    public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
+    
+    /// State-bound image configuration.
+    public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
 }

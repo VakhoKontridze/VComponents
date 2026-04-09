@@ -36,25 +36,18 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance {
     public var tabItemMargins: EdgeInsetsVertical = .init(10)
 
     // MARK: Properties - Tab Bar - Tab Item - Text
-    /// Tab item text minimum scale factor.
-    public var tabItemTextMinimumScaleFactor: CGFloat = 0.75
-
-    /// Tab item text colors.
-    public var tabItemTextColors: TabItemStateColors = .init(
-        deselected: Color.primary,
-        selected: Color.blue,
-        pressedDeselected: Color.primary.opacity(0.3),
-        pressedSelected: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
-        disabled: Color.primary.opacity(0.3)
+    /// Tab item text configuration.
+    public var tabItemTextConfiguration: TabItemStateTextConfiguration = .init(
+        colors: TabItemStateColors(
+            deselected: Color.primary,
+            selected: Color.blue,
+            pressedDeselected: Color.primary.opacity(0.3),
+            pressedSelected: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            disabled: Color.primary.opacity(0.3)
+        ),
+        font: Font.body,
+        minimumScaleFactor: 0.75
     )
-
-    /// Tab item text font.
-    public var tabItemTextFont: Font = .body
-
-    /// Tab item text `DynamicTypeSize` type.
-    ///
-    /// Changing this property conditionally will cause view state to be reset.
-    public var tabItemTextDynamicTypeSizeType: DynamicTypeSizeType?
 
     // MARK: Properties - Tab Indicator Strip
     /// Tab indicator strip alignment.
@@ -100,4 +93,7 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance {
     // MARK: Types
     /// State-bound colors.
     public typealias TabItemStateColors = GenericStateModel_DeselectedSelectedPressedDisabled<Color>
+    
+    /// State-bound text configuration.
+    public typealias TabItemStateTextConfiguration = GenericStateTextConfiguration<TabItemStateColors>
 }
