@@ -121,6 +121,10 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
             index: data.firstIndex(of: initialSelection) ?? 0
         )
     }
+    
+    // Fixes compiler crash in `Swift` `6.3`
+    @_optimize(none)
+    deinit {}
 
     // MARK: Subscript
     /// Retrieves element at an inflated index.
