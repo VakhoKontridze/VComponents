@@ -1,5 +1,11 @@
 # Change Log
 
+### [8.0.1(78)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.1) — 2026 04 24
+
+General
+
+- Compiler crash caused by `Swift` `6.3` is fixed
+
 ### [8.0.0(77)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.0) — 2026 04 09
 
 General
