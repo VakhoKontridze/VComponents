@@ -93,10 +93,10 @@ public struct VStretchedToggleButtonAppearance {
     /// Label text and label image placement.
     public var labelTextAndLabelImagePlacement: TextAndImagePlacement = .imageAndText
 
-    /// Label spacing.
+    /// Label spacing type.
     ///
     /// Applicable only if `init` with multiple components is used.
-    public var labelSpacing: CGFloat = 8
+    public var labelSpacingType: TextAndImageSpacingType = .fixed(spacing: 8)
 
     /// Label pressed scale. Se to `1`.
     public var labelPressedScale: CGFloat = 1

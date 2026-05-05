@@ -1,5 +1,19 @@
 # Change Log
 
+### 8.1.0(79)
+
+VStretchedButton
+
+- `labelSpacingType` is added, allowing spacing to be changed to either `fixed` or `flexible`
+
+VLoadingStretchedButton
+
+- `labelSpacingType` is added, allowing spacing to be changed to either `fixed` or `flexible`
+
+VStretchedToggleButton
+
+- `labelSpacingType` is added, allowing spacing to be changed to either `fixed` or `flexible`
+
 ### [8.0.1(78)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.1) — 2026 04 24
 
 General

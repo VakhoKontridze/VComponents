@@ -166,19 +166,12 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                 labelImageElement(internalState: internalState, image: image)
 
             case .titleAndImage(let title, let image):
-                switch appearance.labelTextAndLabelImagePlacement {
-                case .textAndImage:
-                    HStack(spacing: appearance.labelSpacing) {
-                        labelTextElement(internalState: internalState, title: title)
-                        labelImageElement(internalState: internalState, image: image)
-                    }
-
-                case .imageAndText:
-                    HStack(spacing: appearance.labelSpacing) {
-                        labelImageElement(internalState: internalState, image: image)
-                        labelTextElement(internalState: internalState, title: title)
-                    }
-                }
+                StretchedComponentTextAndImageContent(
+                    textAndImagePlacement: appearance.labelTextAndLabelImagePlacement,
+                    spacingType: appearance.labelSpacingType,
+                    text: { labelTextElement(internalState: internalState, title: title) },
+                    image: { labelImageElement(internalState: internalState, image: image) }
+                )
 
             case .custom(let builder):
                 builder(internalState)
@@ -316,6 +309,69 @@ nonisolated extension VStretchedToggleButtonInternalState {
             )
             .disabled(true)
             .modifier(StretchedButtonFrameModifier())
+        }
+    }
+}
+
+#Preview("Label Configurations") {
+    @Previewable @State var labelSpacingType: TextAndImageSpacingType = .stretched(spacing: 20)
+    @Previewable @State var placement: TextAndImagePlacement = .imageAndText
+
+    PreviewContainer {
+        VStretchedToggleButton(
+            appearance: {
+                var appearance: VStretchedToggleButtonAppearance = .init()
+                appearance.labelSpacingType = labelSpacingType
+                appearance.labelTextAndLabelImagePlacement = placement
+                return appearance
+            }(),
+            state: .constant(.on),
+            title: "Lorem Ipsum",
+            image: Image(systemName: "swift")
+        )
+        .modifier(StretchedButtonFrameModifier())
+        .onAppear { isFirst in
+            if isFirst {
+                Task {
+                    while true {
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+                        
+                        labelSpacingType = .stretched(spacing: 20)
+                        placement = .imageAndText
+                        
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+                        
+                        labelSpacingType = .fixed(spacing: 20)
+                        placement = .imageAndText
+
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+                        
+                        labelSpacingType = .fixed(spacing: 20)
+                        placement = .textAndImage
+                        
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+                        
+                        labelSpacingType = .stretched(spacing: 20)
+                        placement = .textAndImage
+                    }
+                }
+            }
         }
     }
 }
