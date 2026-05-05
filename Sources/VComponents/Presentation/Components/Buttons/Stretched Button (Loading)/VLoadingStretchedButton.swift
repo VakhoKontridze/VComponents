@@ -146,13 +146,18 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             
             if internalState == .loading {
                 switch appearance.spinnerPlacement {
-                case .leading: spinnerView(internalState: internalState)
-                case .center: EmptyView()
-                case .trailing: spinnerCompensatorView
+                case .leading:
+                    spinnerView(internalState: internalState)
+                    Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
+                
+                case .center:
+                    EmptyView()
+                
+                case .trailing:
+                    spinnerCompensatorView
+                    Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
                 }
             }
-            
-            Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
 
             ZStack {
                 if
@@ -185,13 +190,18 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             }
             .frame(maxWidth: appearance.labelAndSpinnerSpacingType.centeredElementMaxWidth)
             
-            Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
-            
             if internalState == .loading {
                 switch appearance.spinnerPlacement {
-                case .leading: spinnerCompensatorView
-                case .center: EmptyView()
-                case .trailing: spinnerView(internalState: internalState)
+                case .leading:
+                    Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
+                    spinnerCompensatorView
+                
+                case .center:
+                    EmptyView()
+                
+                case .trailing:
+                    Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
+                    spinnerView(internalState: internalState)
                 }
             }
             
