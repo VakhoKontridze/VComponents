@@ -55,7 +55,7 @@ public struct VCodeEntryView: View {
         _ index: Int
     ) -> VCodeEntryViewInternalState {
         let isFilled: Bool =
-            index <= text.count
+            index < text.count
         
         let isEditingCurrentCharacter: Bool =
             index == text.count ||
@@ -238,6 +238,24 @@ public struct VCodeEntryView: View {
 
 #Preview("States") {
     StatesContentView()
+}
+
+#Preview("Expanded State") {
+    @Previewable @State var text: String = "123"
+
+    PreviewContainer {
+        VCodeEntryView(
+            appearance: {
+                var appearance: VCodeEntryViewAppearance = .init()
+                appearance.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.enabledFilled.darkened(by: 0.1)
+                appearance.characterBackgroundColors.focusedFilled = appearance.characterBackgroundColors.focusedFilled.darkened(by: 0.1)
+                appearance.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.enabledFilled.darkened(by: 0.1)
+                appearance.characterBackgroundBorderColors.focusedFilled = appearance.characterBackgroundBorderColors.focusedFilled.darkened(by: 0.1)
+                return appearance
+            }(),
+            text: $text
+        )
+    }
 }
 
 #Preview("Stretched") {
