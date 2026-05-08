@@ -304,3 +304,28 @@ extension View {
             )
     }
 }
+
+extension View {
+    /// Applies `GenericStateTextConfiguration`.
+    ///
+    ///     let configuration: GenericStateTextConfiguration<...> = ...
+    ///
+    ///     var body: some View {
+    ///         Text(...)
+    ///             .textConfiguration(configuration)
+    ///     }
+    ///
+    public func textConfiguration(
+        _ configuration: GenericStateTextConfiguration<
+            GenericStateModel_EnabledFocusedDisabled_EmptyFilled<Color>
+        >,
+        state: GenericState_EnabledFocusedDisabled_EmptyFilled
+    ) -> some View {
+        self
+            .textConfiguration(
+                configuration.toTextConfiguration(
+                    color: configuration.colors?.value(for: state)
+                )
+            )
+    }
+}

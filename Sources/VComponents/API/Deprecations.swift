@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+extension GenericStateModel_EnabledFocusedDisabled_EmptyFilled {
+    @available(*, deprecated, message: "Use 'init' with expanded parameters instead")
+    public init(
+        enabled: Value,
+        focused: Value,
+        disabled: Value
+    ) {
+        self.init(
+            enabledEmpty: enabled,
+            enabledFilled: enabled,
+            focusedEmpty: focused,
+            focusedFilled: focused,
+            disabled: disabled
+        )
+    }
+}
+
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VStretchedButtonAppearance {

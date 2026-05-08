@@ -52,8 +52,10 @@ public struct VCodeEntryViewAppearance {
 
     /// Character background colors.
     public var characterBackgroundColors: StateColors = .init(
-        enabled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
-        focused: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
+        enabledEmpty: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+        enabledFilled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+        focusedEmpty: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
+        focusedFilled: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
         disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
     )
 
@@ -74,8 +76,10 @@ public struct VCodeEntryViewAppearance {
     /// Text configuration.
     public var textConfiguration: StateTextConfiguration = .init(
         colors: StateColors(
-            enabled: Color.primary,
-            focused: Color.primary,
+            enabledEmpty: Color.primary,
+            enabledFilled: Color.primary,
+            focusedEmpty: Color.primary,
+            focusedFilled: Color.primary,
             disabled: Color.primary.opacity(0.3)
         ),
         font: Font.body
@@ -94,7 +98,7 @@ public struct VCodeEntryViewAppearance {
 
     // MARK: Types
     /// State-bound colors.
-    public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
+    public typealias StateColors = GenericStateModel_EnabledFocusedDisabled_EmptyFilled<Color>
     
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
@@ -165,19 +169,25 @@ extension VCodeEntryViewAppearance {
 extension VCodeEntryViewAppearance {
     /// Applies green color scheme to `VCodeEntryViewAppearance`.
     public mutating func applySuccessColorScheme() {
-        characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
-        characterBackgroundBorderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
+        characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
+        characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
+        characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
+        characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
 
     /// Applies yellow color scheme to `VCodeEntryViewAppearance`.
     public mutating func applyWarningColorScheme() {
-        characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
-        characterBackgroundBorderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
+        characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
+        characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
+        characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
+        characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
 
     /// Applies red color scheme to `VCodeEntryViewAppearance`.
     public mutating func applyErrorColorScheme() {
-        characterBackgroundBorderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
-        characterBackgroundBorderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+        characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+        characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
+        characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+        characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
 }

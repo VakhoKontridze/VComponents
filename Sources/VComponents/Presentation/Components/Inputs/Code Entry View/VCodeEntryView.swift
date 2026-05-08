@@ -54,13 +54,17 @@ public struct VCodeEntryView: View {
     private func internalState(
         _ index: Int
     ) -> VCodeEntryViewInternalState {
+        let isFilled: Bool =
+            text.count <= index
+        
         let isEditingCurrentCharacter: Bool =
             text.count == index ||
             (text.count == appearance.length && text.count == index + 1)
         
         return VCodeEntryViewInternalState(
             isEnabled: isEnabled,
-            isFocused: isFocused && isEditingCurrentCharacter
+            isFocused: isFocused && isEditingCurrentCharacter,
+            isFilled: isFilled
         )
     }
 
@@ -290,9 +294,12 @@ private struct StatesContentView: View {
                 VCodeEntryView(
                     appearance: {
                         var appearanceMapped: VCodeEntryViewAppearance = appearance
-                        appearanceMapped.characterBackgroundColors.enabled = appearance.characterBackgroundColors.focused
-                        appearanceMapped.characterBackgroundBorderColors.enabled = appearance.characterBackgroundBorderColors.focused
-                        appearanceMapped.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
+                        appearanceMapped.characterBackgroundColors.enabledEmpty = appearance.characterBackgroundColors.focusedEmpty
+                        appearanceMapped.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.focusedFilled
+                        appearanceMapped.characterBackgroundBorderColors.enabledEmpty = appearance.characterBackgroundBorderColors.focusedEmpty
+                        appearanceMapped.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.focusedFilled
+                        appearanceMapped.textConfiguration.colors!.enabledEmpty = appearance.textConfiguration.colors!.focusedEmpty // Unsafe (DEBUG)
+                        appearanceMapped.textConfiguration.colors!.enabledFilled = appearance.textConfiguration.colors!.focusedFilled // Unsafe (DEBUG)
                         return appearanceMapped
                     }(),
                     text: .constant("123")

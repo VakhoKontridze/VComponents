@@ -14,6 +14,10 @@ VStretchedToggleButton
 
 - `labelSpacingType` is added, allowing spacing to be changed to either `fixed` or `flexible`
 
+VCodeEntryView
+
+- State now support `empty` and `filled` cases
+
 ### [8.0.1(78)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.1) — 2026 04 24
 
 General
