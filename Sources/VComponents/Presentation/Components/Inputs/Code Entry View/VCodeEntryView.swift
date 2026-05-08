@@ -105,6 +105,9 @@ public struct VCodeEntryView: View {
         TextField("", text: $text)
             // Removes all decoration
             .textFieldStyle(.plain)
+        
+            // Hides `TextField`
+            .opacity(0)
 
             // Makes `TextField` as small as possible
             .frame(dimension: 1)
@@ -136,8 +139,6 @@ public struct VCodeEntryView: View {
             .textInputAutocapitalization(appearance.autocapitalization)
 #endif
             .submitLabel(appearance.submitButton)
-        
-            .opacity(0)
     }
 
     private var charactersView: some View {
