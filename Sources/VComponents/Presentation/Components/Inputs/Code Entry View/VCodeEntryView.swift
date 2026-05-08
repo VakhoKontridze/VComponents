@@ -136,6 +136,8 @@ public struct VCodeEntryView: View {
             .textInputAutocapitalization(appearance.autocapitalization)
 #endif
             .submitLabel(appearance.submitButton)
+        
+            .opacity(0)
     }
 
     private var charactersView: some View {

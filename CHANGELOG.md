@@ -17,6 +17,7 @@ VStretchedToggleButton
 VCodeEntryView
 
 - State now support `empty` and `filled` cases
+- Fixed and issue where underlying `TextField` became visible with semi-transparent character background color
 
 ### [8.0.1(78)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.0.1) — 2026 04 24
 
