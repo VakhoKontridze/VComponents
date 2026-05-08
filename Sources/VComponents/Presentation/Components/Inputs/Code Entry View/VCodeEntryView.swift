@@ -55,11 +55,11 @@ public struct VCodeEntryView: View {
         _ index: Int
     ) -> VCodeEntryViewInternalState {
         let isFilled: Bool =
-            text.count <= index
+            index <= text.count
         
         let isEditingCurrentCharacter: Bool =
-            text.count == index ||
-            (text.count == appearance.length && text.count == index + 1)
+            index == text.count ||
+            (index + 1 == text.count && text.count == appearance.length)
         
         return VCodeEntryViewInternalState(
             isEnabled: isEnabled,
