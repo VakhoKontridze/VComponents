@@ -55,3 +55,6 @@ extension VStretchedToggleButtonAppearance {
         set { fatalError() }
     }
 }
+
+@available(*, unavailable, renamed: "VContinuousSpinnerParameters")
+public typealias VSpinnerParameters = VContinuousSpinnerParameters

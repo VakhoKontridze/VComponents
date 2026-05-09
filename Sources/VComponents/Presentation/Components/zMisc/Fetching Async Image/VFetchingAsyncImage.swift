@@ -73,7 +73,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     // MARK: Properties - Content
     private let content: VFetchingAsyncImageContent<CustomContent, CustomPlaceholderContent>
 
-    // MARK: Properties - Cancellables
+    // MARK: Properties - Subscriptions
     @State private var task: Task<Void, Never>?
 
     // MARK: Initializers
