@@ -50,7 +50,6 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
         Content: View
 {
     // MARK: Properties - Appearance
-    
     private let appearance: VDisclosureGroupAppearance
     @Environment(\.displayScale) private var displayScale: CGFloat
 
@@ -191,7 +190,7 @@ public struct VDisclosureGroup<CustomHeaderLabel, Content>: View
     }
 }
 
-private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
+nonisolated private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
     lhs != rhs
 }
 

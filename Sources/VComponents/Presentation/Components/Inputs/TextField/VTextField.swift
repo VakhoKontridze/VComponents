@@ -148,7 +148,7 @@ public struct VTextField: View {
     public var body: some View {
         HStack(spacing: appearance.contentSpacingHorizontal) {
             searchImage
-            _textField
+            textField
             clearButton
             visibilityButton
         }
@@ -166,7 +166,7 @@ public struct VTextField: View {
         .onChange(of: text, initial: true) { setClearButtonVisibility($1) }
     }
 
-    private var _textField: some View {
+    private var textField: some View {
         SecurableTextField(
             isSecure: isTextFieldSecure,
             placeholder: placeholder.map {

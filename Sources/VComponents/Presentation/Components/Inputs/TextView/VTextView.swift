@@ -105,7 +105,7 @@ public struct VTextView: View {
 
     // MARK: Body
     public var body: some View {
-        _textField
+        textField
             .padding(appearance.contentMargins)
             .frame(
                 minHeight: appearance.minimumHeight,
@@ -116,7 +116,7 @@ public struct VTextView: View {
             .clipShape(.rect(cornerRadius: appearance.cornerRadius))
     }
 
-    private var _textField: some View {
+    private var textField: some View {
         TextField(
             text: $text,
             prompt: placeholder.map {
