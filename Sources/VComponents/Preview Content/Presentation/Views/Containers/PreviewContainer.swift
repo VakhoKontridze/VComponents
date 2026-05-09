@@ -41,24 +41,24 @@ struct PreviewContainer<Content>: View where Content: View {
             backgroundColor
                 .ignoresSafeArea()
 
-            ViewThatFits(in: .vertical) {
-                vStackedContent
-                
-                ScrollView(.vertical) {
-                    vStackedContent
-                }
-                .clipped()
+            ScrollView(.vertical) {
+                VStack(
+                    spacing: 20,
+                    content: content
+                )
+                .padding(.vertical, 20)
+                .frame(maxWidth: .infinity)
             }
+            .clipped()
+            .apply {
+                if #available(iOS 18.0, *) {
+                    $0.defaultScrollAnchor(.center, for: .alignment)
+                } else {
+                    $0
+                }
+            }
+            .scrollBounceBehavior(.basedOnSize)
         }
-    }
-
-    private var vStackedContent: some View {
-        VStack(
-            spacing: 20,
-            content: content
-        )
-        .padding(.vertical, 20)
-        .frame(maxWidth: .infinity)
     }
 }
 
