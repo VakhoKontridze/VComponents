@@ -21,13 +21,12 @@ nonisolated public final class VComponentsLocalizationManager: @unchecked Sendab
     public static let shared: VComponentsLocalizationManager = .init()
     
     // MARK: Properties - Localization
-    private var _localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
-    
     /// Localization provider.
     public var localizationProvider: any VComponentsLocalizationProvider {
         get { queue.sync { _localizationProvider } }
         set { queue.sync(flags: .barrier) { _localizationProvider = newValue } }
     }
+    private var _localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
     
     // MARK: Properties - Queue
     private let queue: DispatchQueue = .init(
