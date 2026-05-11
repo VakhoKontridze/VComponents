@@ -92,7 +92,7 @@ public struct VNotificationAppearance {
     public var imageBackgroundColor: Color = {
 #if os(iOS)
         Color.dynamic(
-            Color(uiColor: UIColor.secondarySystemBackground).darken(by: 0.05),
+            Color(uiColor: UIColor.secondarySystemBackground).darkened(by: 0.05),
             Color(22, 22, 22)
         )
 #else
