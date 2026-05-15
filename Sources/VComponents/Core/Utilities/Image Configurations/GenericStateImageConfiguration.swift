@@ -79,7 +79,8 @@ public struct GenericStateImageConfiguration<Colors, Opacities> {
     }
     
     // MARK: Mapping
-    fileprivate func toImageConfiguration(
+    /// Maps `GenericImageConfiguration` to `ImageConfiguration`.
+    public func toImageConfiguration(
         color: Color?,
         opacity: CGFloat?
     ) -> ImageConfiguration {

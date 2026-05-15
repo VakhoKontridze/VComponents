@@ -100,7 +100,8 @@ public struct GenericStateTextConfiguration<Colors> {
     }
     
     // MARK: Mapping
-    fileprivate func toTextConfiguration(
+    /// Maps `GenericStateTextConfiguration` to `TextConfiguration`.
+    public func toTextConfiguration(
         color: Color?
     ) -> TextConfiguration {
         .init(
