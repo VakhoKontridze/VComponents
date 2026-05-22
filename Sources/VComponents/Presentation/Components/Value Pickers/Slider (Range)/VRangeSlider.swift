@@ -281,12 +281,12 @@ public struct VRangeSlider: View {
     {
         guard value.boundRange >= difference - V.ulpOfOne else {
             Logger.rangeSlider.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference' in 'VRangeSlider'")
-            fatalError() // Unsafe
+            fatalError()
         }
 
         guard step != 0 else {
             Logger.rangeSlider.critical("'step' cannot be '0' in 'VRangeSlider'")
-            fatalError() // Unsafe
+            fatalError()
         }
     }
 }
