@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 /// `View` that asynchronously loads and displays an `Image` with a fetch action.
 ///

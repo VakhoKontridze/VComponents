@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 /// Text and image spacing type.
 nonisolated public enum TextAndImageSpacingType: Sendable {

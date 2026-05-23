@@ -8,6 +8,7 @@
 #if DEBUG
 
 import SwiftUI
+import Combine
 
 nonisolated extension View {
     func onReceiveOfTimerIncrement(

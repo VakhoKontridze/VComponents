@@ -350,7 +350,7 @@ public struct VBottomSheetAppearance {
     public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
 
     /// Dismiss type.
-    @OptionSetRepresentation<Int>
+    @OptionSetRepresentation
     nonisolated public struct DismissType: Sendable {
         // MARK: Options
         nonisolated private enum Options: Int {

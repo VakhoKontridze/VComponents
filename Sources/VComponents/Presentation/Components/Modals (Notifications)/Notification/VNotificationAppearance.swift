@@ -210,7 +210,7 @@ public struct VNotificationAppearance {
     }
 
     /// Dismiss type.
-    @OptionSetRepresentation<Int>
+    @OptionSetRepresentation
     nonisolated public struct DismissType: Equatable, Sendable {
         // MARK: Options
         nonisolated private enum Options: Int {

@@ -165,7 +165,7 @@ public struct VSideBarAppearance {
     public typealias Size = ModalComponentSize<AbsoluteFractionMeasurement, AbsoluteFractionMeasurement>
 
     /// Dismiss type.
-    @OptionSetRepresentation<Int>
+    @OptionSetRepresentation
     nonisolated public struct DismissType: Sendable {
         // MARK: Options
         nonisolated private enum Options: Int {
