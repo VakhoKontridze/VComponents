@@ -42,7 +42,7 @@ let package: Package = .init(
             swiftSettings: [
                 .defaultIsolation(MainActor.self),
                 .enableUpcomingFeature("ApproachableConcurrency"),
-                .enableUpcomingFeature("NonIsolatedNonSendingByDefault"),
+                .enableUpcomingFeature("ExistentialAny"),
                 .enableUpcomingFeature("MemberImportVisibility")
             ]
         )
