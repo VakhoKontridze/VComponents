@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 17.02.24.
 //
 
-import SwiftUI
+public import SwiftUI
 
 /// Marquee duration type.
 nonisolated public enum MarqueeDurationType: Equatable, Sendable {

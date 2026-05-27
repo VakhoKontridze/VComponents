@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 18.12.20.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Indicator component that represents indefinite activity.

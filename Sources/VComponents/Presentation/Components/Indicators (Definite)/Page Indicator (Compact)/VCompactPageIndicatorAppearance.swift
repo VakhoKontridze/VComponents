@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 25.02.23.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Model that describes appearance.
 public struct VCompactPageIndicatorAppearance {

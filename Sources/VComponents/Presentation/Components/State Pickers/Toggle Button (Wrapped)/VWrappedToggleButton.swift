@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 25.08.23.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Wrapped state picker component that toggles between `off` and `on` states, and displays label.
 ///

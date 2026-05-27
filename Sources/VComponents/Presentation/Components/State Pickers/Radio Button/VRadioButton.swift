@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// State picker component that toggles between `off` and `on` states, and displays label.
 ///

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import VCore
+public import VCore
 
 /// Modal component sizes.
 @MemberwiseInitializable(

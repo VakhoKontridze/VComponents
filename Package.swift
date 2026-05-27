@@ -43,8 +43,11 @@ let package: Package = .init(
                 .defaultIsolation(MainActor.self),
                 .enableUpcomingFeature("ApproachableConcurrency"),
                 .enableUpcomingFeature("ExistentialAny"),
+                .enableUpcomingFeature("InternalImportsByDefault"),
                 .enableUpcomingFeature("MemberImportVisibility")
             ]
         )
-    ]
+    ],
+    
+    swiftLanguageModes: [.v6]
 )

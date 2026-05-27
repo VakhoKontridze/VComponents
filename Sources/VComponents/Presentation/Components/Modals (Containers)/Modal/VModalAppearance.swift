@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 1/13/21.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Model that describes appearance.
 @available(watchOS, unavailable)

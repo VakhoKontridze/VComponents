@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 12/21/20.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Model that describes appearance.
 @available(tvOS, unavailable)

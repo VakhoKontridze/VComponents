@@ -5,9 +5,9 @@
 //  Created by Vakhtang Kontridze on 01.09.23.
 //
 
-import SwiftUI
+public import SwiftUI
 import OSLog
-import VCore
+public import VCore
 
 /// Container component that switches between child views and is attributed with static pager with wrapped rectangular indicator.
 ///

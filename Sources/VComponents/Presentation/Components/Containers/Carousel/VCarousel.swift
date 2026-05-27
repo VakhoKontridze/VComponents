@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 26.07.24.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Container component that paginates between child views horizontally.

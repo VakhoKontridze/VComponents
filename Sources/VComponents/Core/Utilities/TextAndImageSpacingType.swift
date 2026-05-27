@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 5/5/26.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Text and image spacing type.

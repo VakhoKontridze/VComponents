@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Stretched button component that indicates loading activity, and performs action when triggered.
 ///

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 25.08.23.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Model that describes appearance.

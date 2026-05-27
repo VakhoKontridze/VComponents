@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import VCore
+public import VCore
 
 /// Enumeration that represents state.
 public typealias VPageIndicatorDotInternalState = GenericState_DeselectedSelected

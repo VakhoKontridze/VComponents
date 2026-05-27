@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 03.08.25.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Parameters for presenting a `VNotification`.

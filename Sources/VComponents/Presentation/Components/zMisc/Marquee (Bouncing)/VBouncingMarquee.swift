@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 24.02.23.
 //
 
-import SwiftUI
+public import SwiftUI
 import OSLog
 import VCore
 

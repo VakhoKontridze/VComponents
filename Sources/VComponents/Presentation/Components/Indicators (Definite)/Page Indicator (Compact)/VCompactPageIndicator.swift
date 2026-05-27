@@ -5,9 +5,9 @@
 //  Created by Vakhtang Kontridze on 2/6/21.
 //
 
-import SwiftUI
+public import SwiftUI
 import OSLog
-import VCore
+public import VCore
 
 /// Indicator component that represents selection in page control in compact fashion.
 ///

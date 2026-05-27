@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Value picker component that selects value from a bounded linear range of values.

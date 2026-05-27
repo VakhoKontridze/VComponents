@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 10.03.23.
 //
 
-import SwiftUI
+public import SwiftUI
 
 /// Model that describes appearance.
 public struct VFetchingAsyncImageAppearance {

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 26.07.24.
 //
 
-import Foundation
+public import Foundation
 
 /// Object that inflates data source to create an illusion of infinite scroll when using `VCarousel`.
 ///

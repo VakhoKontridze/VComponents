@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 2/7/21.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 @available(macOS, unavailable)
 @available(tvOS, unavailable)

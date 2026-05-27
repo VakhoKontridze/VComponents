@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 2/12/21.
 //
 
-import SwiftUI
+public import SwiftUI
 
 extension GenericStateModel_EnabledFocusedDisabled_EmptyFilled {
     @available(*, deprecated, message: "Use 'init' with expanded parameters instead")

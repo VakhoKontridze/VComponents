@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 22/3/26.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Model that describes text configuration.
 ///

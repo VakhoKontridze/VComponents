@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 12/21/20.
 //
 
-import SwiftUI
+public import SwiftUI
 
 /// Model that describes appearance.
 public struct VContinuousSpinnerAppearance {

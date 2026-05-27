@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 8/4/26.
 //
 
-import SwiftUI
+public import SwiftUI
 
 /// Model that describes text configuration.
 ///

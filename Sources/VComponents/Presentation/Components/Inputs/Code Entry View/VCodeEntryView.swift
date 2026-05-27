@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 02.09.23.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Input component that displays an editable text interface for entering code, such as PIN.

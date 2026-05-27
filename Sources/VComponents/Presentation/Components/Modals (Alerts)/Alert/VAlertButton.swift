@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 12/26/20.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// `VAlert` button.

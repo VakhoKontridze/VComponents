@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 12/22/20.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Model that describes appearance.
 public struct VGroupBoxAppearance {

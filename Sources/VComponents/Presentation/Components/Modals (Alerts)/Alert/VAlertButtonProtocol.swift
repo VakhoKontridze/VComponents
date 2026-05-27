@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 01.05.23.
 //
 
-import SwiftUI
+public import SwiftUI
 
 /// `VAlert` button protocol.
 @available(tvOS, unavailable)

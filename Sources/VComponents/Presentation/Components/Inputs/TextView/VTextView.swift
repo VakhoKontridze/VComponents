@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.09.22.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Input component that displays an editable multiline text interface.

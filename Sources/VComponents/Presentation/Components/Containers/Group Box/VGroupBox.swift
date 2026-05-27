@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 12/22/20.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Container component that hosts content.

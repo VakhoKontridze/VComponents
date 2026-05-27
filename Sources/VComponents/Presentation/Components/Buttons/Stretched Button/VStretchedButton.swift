@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 03.04.23.
 //
 
-import SwiftUI
-import VCore
+public import SwiftUI
+public import VCore
 
 /// Stretched button component that performs action when triggered.
 ///
