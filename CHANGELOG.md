@@ -19,6 +19,10 @@ VCodeEntryView
 - State now support `empty` and `filled` cases
 - Fixed and issue where underlying `TextField` became visible with semi-transparent character background color
 
+VContinuousSpinner
+
+- Spinner will now have it's stroke within the frame, rather than staying on the line
+
 Presentation
 
 - `appearanceDelay` is added to `VContinuousSpinnerParameters`
