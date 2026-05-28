@@ -32,13 +32,14 @@ public struct VContinuousSpinner: View {
     // MARK: Body
     public var body: some View {
         Circle()
+            .inset(by: appearance.thickness / 2)
             .trim(from: 0, to: appearance.length)
             .stroke(
                 appearance.color,
                 style: StrokeStyle(lineWidth: appearance.thickness, lineCap: .round)
             )
-            .frame(dimension: appearance.dimension)
             .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
+            .frame(dimension: appearance.dimension)
             .onAppear {
                 withAnimation(appearance.animation.repeatForever(autoreverses: false)) {
                     isAnimating.toggle()
