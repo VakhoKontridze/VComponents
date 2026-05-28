@@ -82,7 +82,9 @@ public struct VRollingCounter: View {
         let value: Double = .init(value)
 
         self.appearance = appearance
+        
         self.value = value
+        
         self._components = State(
             wrappedValue: VRollingCounterFactory.components(
                 value: value,

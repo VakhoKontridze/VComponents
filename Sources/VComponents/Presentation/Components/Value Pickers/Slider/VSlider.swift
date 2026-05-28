@@ -43,12 +43,10 @@ public struct VSlider: View {
         )
     }
 
-    // MARK: Properties - Value Range
+    // MARK: Properties - Values
     private let range: ClosedRange<Double>
     private let step: Double?
-    
-    // MARK: Properties - Value
-    @Binding private var value: Double
+    @Binding private var progress: Double
 
     // MARK: Properties - Actions
     private let onChange: ((Bool) -> Void)?
@@ -73,10 +71,22 @@ public struct VSlider: View {
             upper: Double(range.upperBound)
         )
         self.step = step.map { Double($0) }
+        
+        let ratio: Double = {
+            guard
+                range.lowerBound.isFinite,
+                range.upperBound.isFinite,
+                range.upperBound > range.lowerBound,
+                value.wrappedValue.isFinite
+            else {
+                return 0
+            }
+            return Double(value.wrappedValue - range.lowerBound) / Double(range.boundRange)
+        }()
 
-        self._value = Binding( // Like native `Slider`, clamps initial value, but not subsequent ones
-            get: { Double(value.wrappedValue.clamped(to: range, step: step)) },
-            set: { value.wrappedValue = V($0) }
+        self._progress = Binding(
+            get: { ratio.clamped(to: 0...1, step: step.map { Double($0) }) },
+            set: { value.wrappedValue = V($0) } // Like native `Slider`, clamps initial value, but not subsequent ones
         )
 
         self.onChange = onChange
@@ -100,7 +110,7 @@ public struct VSlider: View {
         }
         .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
         .gesture(dragGesture, isEnabled: appearance.bodyIsDraggable)
-        .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: value) }
+        .applyIf(appearance.appliesProgressAnimation) { $0.animation(appearance.progressAnimation, value: progress) }
     }
     
     private var trackView: some View {
@@ -186,15 +196,14 @@ public struct VSlider: View {
         let boundRange: Double = range.boundRange
         guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
 
-        let rawValue: Double = ((value / width) * boundRange + range.lowerBound)
+        let progress: Double = ((value / width) * boundRange + range.lowerBound)
             .invertedFromMax(
                 range.upperBound,
                 if: layoutDirection.isRightToLeft || appearance.direction.isReversed
             )
-
-        let valueFixed: Double = rawValue.clamped(to: range, step: step)
+            .clamped(to: range, step: step)
         
-        setValue(to: valueFixed)
+        setProgress(to: progress)
         
         onChange?(true)
     }
@@ -204,17 +213,17 @@ public struct VSlider: View {
     }
     
     // MARK: Actions
-    private func setValue(to value: Double) {
-        self.value = value
+    private func setProgress(to progress: Double) {
+        self.progress = progress
     }
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let value: CGFloat = value - range.lowerBound
+        let progress: CGFloat = progress - range.lowerBound
         guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
         
-        return (value / boundRange) * width
+        return (progress / boundRange) * width
     }
     
     // MARK: Thumb Offset

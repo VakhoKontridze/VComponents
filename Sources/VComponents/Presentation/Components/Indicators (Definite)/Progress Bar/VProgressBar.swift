@@ -26,8 +26,7 @@ public struct VProgressBar: View {
     @State private var progressBarSize: CGSize = .zero
 
     // MARK: Properties - Parameters
-    private let range: ClosedRange<Double>
-    private let value: Double
+    private let progress: Double
     
     // MARK: Initializers
     /// Initializes `VProgressBar` with value.
@@ -39,14 +38,20 @@ public struct VProgressBar: View {
         where V: BinaryFloatingPoint
     {
         self.appearance = appearance
-        self.range = 0...Double(total)
-        self.value = {
-            let value: Double = .init(value)
-            let min: Double = 0
-            let max: Double = .init(total)
+        
+        let ratio: Double = {
+            guard
+                total > 0,
+                total.isFinite,
+                value.isFinite
+            else {
+                return 0
+            }
             
-            return value.clamped(min: min, max: max)
+            return Double(value) / Double(total)
         }()
+        
+        self.progress = ratio.clamped(to: 0...1)
     }
     
     // MARK: Body
@@ -66,7 +71,7 @@ public struct VProgressBar: View {
             $0.animation(
                 {
                     if
-                        value == 0,
+                        progress == 0,
                         appearance.skipsProgressAnimationAtZero
                     {
                         nil
@@ -74,7 +79,7 @@ public struct VProgressBar: View {
                         appearance.progressAnimation
                     }
                 }(),
-                value: value
+                value: progress
             )
         }
     }
@@ -112,7 +117,7 @@ public struct VProgressBar: View {
     private var progressWidth: CGFloat {
         let width: CGFloat = progressBarSize.dimension(isWidth: appearance.direction.isHorizontal)
         
-        return value * width
+        return progress * width
     }
 }
 
