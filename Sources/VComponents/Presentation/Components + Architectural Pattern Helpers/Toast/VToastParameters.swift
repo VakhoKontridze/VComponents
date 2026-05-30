@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 03.08.25.
 //
 
-import Foundation
+public import Foundation
 import VCore
 
 /// Parameters for presenting a `VToast`.
@@ -13,8 +13,11 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VToastParameters {
+public struct VToastParameters: Identifiable {
     // MARK: Properties
+    /// ID.
+    public var id: UUID
+    
     /// Appearance.
     public var appearance: VToastAppearance
     
@@ -27,10 +30,12 @@ public struct VToastParameters {
     // MARK: Parameters
     /// Initializes `VToastParameters`.
     public init(
+        id: UUID = .init(),
         appearance: VToastAppearance = .init(),
         text: String,
         attributes: [String: Any] = [:]
     ) {
+        self.id = id
         self.appearance = appearance
         self.text = text
         self.attributes = attributes

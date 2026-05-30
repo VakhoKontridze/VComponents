@@ -123,7 +123,9 @@ extension View {
         image: @escaping (Item) -> Image?,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?
-    ) -> some View {
+    ) -> some View
+        where Item: Identifiable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
@@ -168,7 +170,9 @@ extension View {
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content customContent: @escaping (Item) -> CustomContent
     ) -> some View
-        where CustomContent: View
+        where
+            Item: Identifiable,
+            CustomContent: View
     {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },

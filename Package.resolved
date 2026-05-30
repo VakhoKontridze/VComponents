@@ -1,5 +1,5 @@
 {
-  "originHash" : "846bb33af78e30f952fb1ce0cb98e0a1de5d311abd3745ddcb307dfc0fb47b0b",
+  "originHash" : "aa8ab4edec1be89c10ef244acf50dbb8ec9ac12d2fd9c206f2fc3c5d0bf178da",
   "pins" : [
     {
       "identity" : "swift-syntax",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
         "branch" : "dev",
-        "revision" : "3b9b9b04868e3592b71fec6dca5405f6740b7bfe"
+        "revision" : "95bda4d6b9744fd9ba27c1dab0f7b569ceeb4898"
       }
     }
   ],

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 02.10.22.
 //
 
-import SwiftUI
+public import SwiftUI
 import VCore
 
 /// Parameters for presenting a `VAlert`.
@@ -13,8 +13,11 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VAlertParameters {
+public struct VAlertParameters: Identifiable {
     // MARK: Properties
+    /// ID.
+    public var id: UUID
+    
     /// Appearance.
     public var appearance: VAlertAppearance
     
@@ -33,12 +36,14 @@ public struct VAlertParameters {
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
     public init(
+        id: UUID = .init(),
         appearance: VAlertAppearance = .init(),
         title: String,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol],
         attributes: [String: Any] = [:]
     ) {
+        self.id = id
         self.appearance = appearance
         self.title = title
         self.message = message
@@ -48,6 +53,7 @@ public struct VAlertParameters {
     
     /// Initializes `VAlertParameters` with action.
     public init(
+        id: UUID = .init(),
         appearance: VAlertAppearance = .init(),
         title: String,
         message: String?,
@@ -55,6 +61,7 @@ public struct VAlertParameters {
         attributes: [String: Any] = [:]
     ) {
         self.init(
+            id: id,
             appearance: appearance,
             title: title,
             message: message,
@@ -71,12 +78,14 @@ public struct VAlertParameters {
     
     /// Initializes `VAlertParameters` with error and action.
     public init(
+        id: UUID = .init(),
         appearance: VAlertAppearance = .init(),
         error: any Error,
         completion: (() -> Void)? = nil,
         attributes: [String: Any] = [:]
     ) {
         self.init(
+            id: id,
             appearance: appearance,
             title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,
             message: error.localizedDescription,

@@ -82,7 +82,9 @@ extension View {
         onPresent: (() -> Void)? = nil,
         onDismiss: (() -> Void)? = nil,
         text: @escaping (Item) -> String
-    ) -> some View {
+    ) -> some View
+        where Item: Identifiable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }

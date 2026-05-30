@@ -123,7 +123,9 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
-    ) -> some View {
+    ) -> some View
+        where Item: Identifiable
+    {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
             set: { if !$0 { item.wrappedValue = nil } }
@@ -170,7 +172,9 @@ extension View {
         @ViewBuilder content: @escaping (Item) -> Content,
         @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
-        where Content: View
+        where
+            Item: Identifiable,
+            Content: View
     {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },

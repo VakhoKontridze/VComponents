@@ -13,8 +13,11 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct VNotificationParameters {
+public struct VNotificationParameters: Identifiable {
     // MARK: Properties
+    /// ID.
+    public var id: UUID
+    
     /// Appearance.
     public var appearance: VNotificationAppearance
     
@@ -33,12 +36,14 @@ public struct VNotificationParameters {
     // MARK: Parameters
     /// Initializes `VNotificationParameters`.
     public init(
+        id: UUID = .init(),
         appearance: VNotificationAppearance = .init(),
         image: Image? = nil,
         title: String? = nil,
         message: String? = nil,
         attributes: [String: Any] = [:]
     ) {
+        self.id = id
         self.appearance = appearance
         self.image = image
         self.title = title

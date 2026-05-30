@@ -221,7 +221,9 @@ extension View {
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
-        where Content: View
+        where
+            Item: Identifiable,
+            Content: View
     {
         let isPresented: Binding<Bool> = .init(
             get: { item.wrappedValue != nil },
