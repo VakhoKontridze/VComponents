@@ -1,6 +1,6 @@
 # Change Log
 
-### 8.1.0(79)
+### [8.1.0(79)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.1.0) — 2026 06 03
 
 VStretchedButton
 
