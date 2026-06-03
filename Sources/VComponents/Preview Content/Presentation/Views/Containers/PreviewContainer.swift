@@ -51,7 +51,7 @@ struct PreviewContainer<Content>: View where Content: View {
             }
             .clipped()
             .apply {
-                if #available(iOS 18.0, *) {
+                if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
                     $0.defaultScrollAnchor(.center, for: .alignment)
                 } else {
                     $0
