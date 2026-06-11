@@ -140,10 +140,10 @@ public struct VCheckBoxAppearance {
     )
     
     /// Checkmark image (on).
-    public var checkmarkImageOn: Image = ImageBook.checkmarkOn.renderingMode(.template)
+    public var checkmarkImageOn: Image = ImageBook.Symbols.checkmarkOn.renderingMode(.template)
 
     /// Checkmark image (indeterminate).
-    public var checkmarkImageIndeterminate: Image = ImageBook.checkmarkIndeterminate.renderingMode(.template)
+    public var checkmarkImageIndeterminate: Image = ImageBook.Symbols.checkmarkIndeterminate.renderingMode(.template)
 
     // MARK: Properties - Label
     /// Indicates if label is clickable.

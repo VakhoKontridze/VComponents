@@ -113,7 +113,7 @@ public struct VDisclosureGroupAppearance {
 
     // MARK: Properties - Disclosure Button
     /// Disclosure button image.
-    public var disclosureButtonImage: Image = ImageBook.chevronUp.renderingMode(.template)
+    public var disclosureButtonImage: Image = ImageBook.Symbols.chevronUp.renderingMode(.template)
 
     /// Disclosure button appearance.
     public var disclosureButtonAppearance: VRectangularButtonAppearance = {
