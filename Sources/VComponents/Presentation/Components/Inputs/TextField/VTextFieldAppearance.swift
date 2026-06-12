@@ -93,7 +93,7 @@ public struct VTextFieldAppearance {
     public var hasClearButton: Bool = true
 
     /// Clear button image.
-    public var clearButtonImage: Image = ImageBook.Symbols.xmark.renderingMode(.template)
+    public var clearButtonImage: Image = ImageBook.Symbols.xmark
 
     /// Clear button appearance.
     public var clearButtonAppearance: VRectangularButtonAppearance = {
@@ -128,10 +128,10 @@ public struct VTextFieldAppearance {
 
     // MARK: Properties - Secure
     /// Visibility button image (off).
-    public var visibilityOffButtonImage: Image = ImageBook.Symbols.eye.renderingMode(.template)
+    public var visibilityOffButtonImage: Image = ImageBook.Symbols.eye
 
     /// Visibility button image (on).
-    public var visibilityOnButtonImage: Image = ImageBook.Symbols.eyeCrossed.renderingMode(.template)
+    public var visibilityOnButtonImage: Image = ImageBook.Symbols.eyeCrossed
 
     /// Visibility button appearance.
     public var visibilityButtonAppearance: VPlainButtonAppearance = {
@@ -171,7 +171,7 @@ public struct VTextFieldAppearance {
     )
     
     /// Search image.
-    public var searchImage: Image = ImageBook.Symbols.magnifyGlass.renderingMode(.template)
+    public var searchImage: Image = ImageBook.Symbols.magnifyGlass
 
     // MARK: Initializers
     /// Initializes appearance with default values.
