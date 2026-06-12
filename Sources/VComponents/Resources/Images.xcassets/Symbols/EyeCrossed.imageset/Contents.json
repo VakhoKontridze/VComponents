@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Checkmark.On.svg",
-      "idiom" : "universal",
-      "language-direction" : "left-to-right"
+      "filename" : "EyeCrossed.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

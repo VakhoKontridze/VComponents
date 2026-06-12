@@ -12,16 +12,12 @@ import VCore
 struct ImageBook {
     @Uninitializable
     struct Symbols {
-        static let checkmarkOn: Image = .init(.checkmarkOn) // Mirrored for RTL languages
-        static let checkmarkIndeterminate: Image = .init(.checkmarkIndeterminate)
-
-        static let magnifyGlass: Image = .init(.magnifyGlass) // Doesn't mirror, like `UISearchBar.searchable(text:)`
-
-        static let visibilityOff: Image = .init(.visibilityOff) // Mirrored for RTL languages
-        static let visibilityOn: Image = .init(.visibilityOn)
-
-        static let xMark: Image = .init(.xMark)
-
+        static let checkmark: Image = .init(.checkmark) // Mirrored for RTL languages
         static let chevronUp: Image = .init(.chevronUp)
+        static let eye: Image = .init(.eye)
+        static let eyeCrossed: Image = .init(.eyeCrossed)
+        static let line: Image = .init(.line)
+        static let magnifyGlass: Image = .init(.magnifyGlass) // Doesn't mirror, like `UISearchBar.searchable(text:)`
+        static let xmark: Image = .init(.xmark)
     }
 }
