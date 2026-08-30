@@ -302,12 +302,12 @@ public struct VRangeSlider: View {
             V.Stride: BinaryFloatingPoint
     {
         guard value.boundRange >= difference - V.ulpOfOne else {
-            Logger.rangeSlider.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference' in 'VRangeSlider'")
+            Logger.default.critical("Difference between 'value.upperBound' and 'value.lowerBound' must be greater than or equal to 'difference' in 'VRangeSlider'")
             fatalError()
         }
 
         guard step != 0 else {
-            Logger.rangeSlider.critical("'step' cannot be '0' in 'VRangeSlider'")
+            Logger.default.critical("'step' cannot be '0' in 'VRangeSlider'")
             fatalError()
         }
     }

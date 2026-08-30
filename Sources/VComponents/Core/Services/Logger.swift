@@ -9,23 +9,5 @@ import Foundation
 import OSLog
 
 nonisolated extension Logger {
-    // MARK: Properties - Presentation - Views
-    static let alert: Self = .init("VAlert")
-    static let bottomSheet: Self = .init("VBottomSheet")
-    static let bouncingMarquee: Self = .init("VBouncingMarquee")
-    static let compactPageIndicator: Self = .init("VCompactPageIndicator")
-    static let rangeSlider: Self = .init("VRangeSlider")
-    static let rollingCounter: Self = .init("VRollingCounter")
-    static let sideBar: Self = .init("VSideBar")
-    static let wrappingMarquee: Self = .init("VWrappingMarquee")
-    static let wrappedIndicatorStaticPagerTabView: Self = .init("VWrappedIndicatorStaticPagerTabView")
-    
-    // MARK: Properties - Misc
-    static let misc: Self = .init("Misc")
-}
-
-nonisolated extension Logger {
-    fileprivate init(_ category: String) {
-        self.init(subsystem: "VComponents", category: category)
-    }
+    static let `default`: Self = .init(subsystem: "VComponents", category: "VComponents")
 }

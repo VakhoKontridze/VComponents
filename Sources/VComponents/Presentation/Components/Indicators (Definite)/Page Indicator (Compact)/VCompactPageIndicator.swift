@@ -327,17 +327,17 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     // MARK: Validation
     private var isValid: Bool {
         guard appearance.visibleDots.isOdd else {
-            Logger.compactPageIndicator.critical("'visible' count must be odd in 'VCompactPageIndicator'")
+            Logger.default.critical("'visible' count must be odd in 'VCompactPageIndicator'")
             return false
         }
         
         guard appearance.centerDots.isOdd else {
-            Logger.compactPageIndicator.critical("'center' count must be odd in 'VCompactPageIndicator'")
+            Logger.default.critical("'center' count must be odd in 'VCompactPageIndicator'")
             return false
         }
         
         guard appearance.visibleDots > appearance.centerDots else {
-            Logger.compactPageIndicator.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
+            Logger.default.critical("'visible' must be greater than 'center' in 'VCompactPageIndicator'")
             return false
         }
         

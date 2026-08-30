@@ -127,7 +127,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         case (.rightToLeft, false): return -offset
         case (.rightToLeft, true): return offset
         @unknown default:
-            Logger.bouncingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VBouncingMarquee'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VBouncingMarquee'")
             return 0
         }
     }
@@ -140,7 +140,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         case .center: return 0
         case .trailing: return -offset
         default:
-            Logger.bouncingMarquee.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VBouncingMarquee'")
+            Logger.default.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VBouncingMarquee'")
             return 0
         }
     }

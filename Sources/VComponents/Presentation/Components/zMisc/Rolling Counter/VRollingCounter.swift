@@ -170,7 +170,7 @@ public struct VRollingCounter: View {
             EmptyView()
                 .onAppear { isFirst in
                     if isFirst {
-                        Logger.rollingCounter.critical("Unsupported 'VRollingCounterComponentProtocol' '\(String(describing: type(of: component)))' in 'VRollingCounter'")
+                        Logger.default.critical("Unsupported 'VRollingCounterComponentProtocol' '\(String(describing: type(of: component)))' in 'VRollingCounter'")
                     }
                 }
         }

@@ -152,7 +152,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
         @unknown default:
-            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
             return 0
         }
     }
@@ -166,7 +166,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.rightToLeft, false): return offset
         case (.rightToLeft, true): return 0
         @unknown default:
-            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
             return 0
         }
     }
@@ -180,7 +180,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case (.rightToLeft, false): return 0
         case (.rightToLeft, true): return offset
         @unknown default:
-            Logger.wrappingMarquee.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: appearance.scrollDirection))' in 'VWrappingMarquee'")
             return 0
         }
     }
@@ -193,7 +193,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         case .center: return 0
         case .trailing: return -offset
         default:
-            Logger.wrappingMarquee.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VWrappingMarquee'")
+            Logger.default.fault("Unhandled 'HorizontalAlignment' '\(String(describing: appearance.alignmentStationary))' in 'VWrappingMarquee'")
             return 0
         }
     }

@@ -24,7 +24,7 @@ import VCore
 ///         )
 ///         .focused($isFocused)
 ///         .toolbar {
-///             ToolbarItemGroup(placement: .keyboard) {
+///             ToolbarItem(placement: .keyboard) {
 ///                 Spacer()
 ///                 Button("Done") {
 ///                     isFocused = false

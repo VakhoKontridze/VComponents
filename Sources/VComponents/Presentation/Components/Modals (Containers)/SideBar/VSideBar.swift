@@ -189,7 +189,7 @@ struct VSideBar<Content>: View where Content: View {
                 return dragValue.translation.width >= 0
             
             @unknown default:
-                Logger.sideBar.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
+                Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
                 return false
             }
             
@@ -202,7 +202,7 @@ struct VSideBar<Content>: View where Content: View {
                 return dragValue.translation.width <= 0
             
             @unknown default:
-                Logger.sideBar.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
+                Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: layoutDirection))' in 'VSideBar'")
                 return false
             }
             

@@ -25,7 +25,7 @@ struct VRollingCounterFactory {
         guard
             let valueString: String = numberFormatter.string(fromDouble: value)
         else {
-            Logger.rollingCounter.critical("Failed to convert '\(String(describing: type(of: value)))' to 'String' in 'VRollingCounter'")
+            Logger.default.critical("Failed to convert '\(String(describing: type(of: value)))' to 'String' in 'VRollingCounter'")
             return nil
         }
 
@@ -45,7 +45,7 @@ struct VRollingCounterFactory {
 
             } else if charStr == appearance.decimalSeparator {
                 guard !hasPassedDecimalSeparator else {
-                    Logger.rollingCounter.critical("Multiple decimal separators used in 'VRollingCounter'")
+                    Logger.default.critical("Multiple decimal separators used in 'VRollingCounter'")
                     return nil
                 }
 
@@ -78,7 +78,7 @@ struct VRollingCounterFactory {
                 }
 
             } else {
-                Logger.rollingCounter.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
+                Logger.default.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
                 return nil
             }
         }
@@ -136,7 +136,7 @@ struct VRollingCounterFactory {
 
             } else if charStr == appearance.decimalSeparator {
                 guard !hasPassedDecimalSeparator else {
-                    Logger.rollingCounter.critical("Multiple decimal separators used in 'VRollingCounter'")
+                    Logger.default.critical("Multiple decimal separators used in 'VRollingCounter'")
                     return nil
                 }
 
@@ -193,7 +193,7 @@ struct VRollingCounterFactory {
                 }
 
             } else {
-                Logger.rollingCounter.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
+                Logger.default.critical("Invalid 'Character' '\(char)' used in 'VRollingCounter'")
                 return nil
             }
         }

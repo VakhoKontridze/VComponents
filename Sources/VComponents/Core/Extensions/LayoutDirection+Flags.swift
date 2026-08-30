@@ -14,7 +14,7 @@ nonisolated extension LayoutDirection {
         case .leftToRight: return true
         case .rightToLeft: return false
         @unknown default:
-            Logger.misc.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isLeftToRight'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isLeftToRight'")
             return true
         }
     }
@@ -24,7 +24,7 @@ nonisolated extension LayoutDirection {
         case .leftToRight: return false
         case .rightToLeft: return true
         @unknown default:
-            Logger.misc.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isRightToLeft'")
+            Logger.default.fault("Unhandled 'LayoutDirection' '\(String(describing: self))' in 'LayoutDirection.isRightToLeft'")
             return false
         }
     }

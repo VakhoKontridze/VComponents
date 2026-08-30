@@ -203,7 +203,7 @@ struct VAlert<Content>: View
                 EmptyView()
                     .onAppear { isFirst in
                         if isFirst {
-                            Logger.alert.critical("Invalid number of buttons '(\(buttons.count))' in 'VAlert'")
+                            Logger.default.critical("Invalid number of buttons '(\(buttons.count))' in 'VAlert'")
                         }
                     }
             }
