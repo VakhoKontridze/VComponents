@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 12/26/20.
 //
 
-import SwiftUI
 import OSLog
+import SwiftUI
 import VCore
 
 @available(tvOS, unavailable) // Doesn't follow HIG

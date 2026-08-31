@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 25.08.23.
 //
 
-public import SwiftUI
 import OSLog
+public import SwiftUI
 import VCore
 
 /// Text component that highlights change in a floating-absolute number.

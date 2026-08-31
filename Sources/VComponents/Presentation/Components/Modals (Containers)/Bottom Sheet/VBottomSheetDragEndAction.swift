@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 4/19/22.
 //
 
-import SwiftUI
 import OSLog
+import SwiftUI
 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)

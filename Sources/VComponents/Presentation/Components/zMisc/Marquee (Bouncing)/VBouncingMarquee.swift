@@ -5,8 +5,8 @@
 //  Created by Vakhtang Kontridze on 24.02.23.
 //
 
-public import SwiftUI
 import OSLog
+public import SwiftUI
 import VCore
 
 /// Container component that automatically scrolls and bounces it's content edge-to-edge.
