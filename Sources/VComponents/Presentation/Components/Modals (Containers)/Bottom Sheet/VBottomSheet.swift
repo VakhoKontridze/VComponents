@@ -337,11 +337,11 @@ struct VBottomSheet<Content>: View
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Min & Ideal & Max") {
-    ContentView_MinIdealMax()
+    MinIdealMaxContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_MinIdealMax: View {
+private struct MinIdealMaxContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 
@@ -381,11 +381,11 @@ private struct ContentView_MinIdealMax: View {
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Min & Ideal") {
-    ContentView_MinIdeal()
+    MinIdealContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_MinIdeal: View {
+private struct MinIdealContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 
@@ -425,11 +425,11 @@ private struct ContentView_MinIdeal: View {
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Ideal & Max") {
-    ContentView_IdealMax()
+    IdealMaxContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_IdealMax: View {
+private struct IdealMaxContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 
@@ -469,11 +469,11 @@ private struct ContentView_IdealMax: View {
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Ideal (Small)") {
-    ContentView_IdealSmall()
+    IdealSmallContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_IdealSmall: View {
+private struct IdealSmallContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 
@@ -513,11 +513,11 @@ private struct ContentView_IdealSmall: View {
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Ideal (Large)") {
-    ContentView_IdealLarge()
+    IdealLargeContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_IdealLarge: View {
+private struct IdealLargeContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 
@@ -555,11 +555,11 @@ private struct ContentView_IdealLarge: View {
 #endif
 
 #Preview("Content Autoresizing") {
-    ContentView_ContentAutoresizing()
+    ContentAutoresizingContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_ContentAutoresizing: View {
+private struct ContentAutoresizingContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
 

@@ -160,11 +160,11 @@ struct VModal<Content>: View
 }
 
 #Preview("Size Types") {
-    ContentView_SizeTypes()
+    ContentView()
 }
 
 // Macros aren't allowed in Preview macro
-private struct ContentView_SizeTypes: View {
+private struct ContentView: View {
     // MARK: Properties
     @State private var isPresented: Bool = true
     @State private var size: VModalAppearance.Size?
