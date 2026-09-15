@@ -1,5 +1,12 @@
 # Change Log
 
+### [9.0.0(80)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.0.0) — 2026 09 15
+
+General
+
+- Minimum SDK version is increased to `iOS` `18.0`, `macOS` `15.0`, `tvOS` `18.0`, `watchOS` `11.0`, and `visionOS` `2.0`
+- Previously deprecated symbols are removed
+
 ### [8.1.0(79)](https://github.com/VakhoKontridze/VComponents/releases/tag/8.1.0) — 2026 06 03
 
 VStretchedButton
