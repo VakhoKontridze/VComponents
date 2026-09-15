@@ -370,7 +370,7 @@ nonisolated extension Int {
 #if DEBUG
 
 #Preview("*") {
-    @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
+    @Previewable @State var current: Int = 0
     let total: Int = 10
 
     PreviewContainer {
@@ -383,7 +383,7 @@ nonisolated extension Int {
 }
 
 #Preview("Layout Directions") {
-    @Previewable @State var current: Int = 0 // '@Previewable' items must be at the beginning of the preview block
+    @Previewable @State var current: Int = 0
     let total: Int = 10
     
     PreviewContainer {

@@ -367,7 +367,7 @@ nonisolated extension Double {
 }
 
 #Preview("Layout Directions") {
-    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8 // '@Previewable' items must be at the beginning of the preview block
+    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
     
     let difference: Double = 0.1
     

@@ -154,7 +154,7 @@ public struct VProgressBar: View {
 }
 
 #Preview("Layout Directions") {
-    @Previewable @State var value: Double = 0 // '@Previewable' items must be at the beginning of the preview block
+    @Previewable @State var value: Double = 0
     
     let length: CGFloat = {
 #if os(iOS)

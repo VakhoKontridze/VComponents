@@ -276,7 +276,7 @@ public struct VSlider: View {
 }
 
 #Preview("Layout Directions") {
-    @Previewable @State var value: Double = 0.5 // '@Previewable' items must be at the beginning of the preview block
+    @Previewable @State var value: Double = 0.5
     
     let length: CGFloat = {
 #if os(iOS)
