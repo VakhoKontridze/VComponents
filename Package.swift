@@ -1,4 +1,4 @@
-// swift-tools-version: 6.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
@@ -6,11 +6,11 @@ let package: Package = .init(
     name: "VComponents",
     
     platforms: [
-        .iOS(.v17),
-        .macOS(.v14),
-        .tvOS(.v17),
-        .watchOS(.v10),
-        .visionOS(.v1)
+        .iOS(.v18),
+        .macOS(.v15),
+        .tvOS(.v18),
+        .watchOS(.v11),
+        .visionOS(.v2)
     ],
     
     products: [
@@ -23,7 +23,8 @@ let package: Package = .init(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/VakhoKontridze/VCore", "8.2.0"..<"9.0.0")
+        //.package(url: "https://github.com/VakhoKontridze/VCore", "8.2.0"..<"9.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "dev")
     ],
     
     targets: [

@@ -1,5 +1,5 @@
 {
-  "originHash" : "e31f18f976c291eb9c343e99a496eabf6cfbc79a6039b28ac78df8d005be52d0",
+  "originHash" : "488fa9d6a4aca5fe8688ceeb0473298738d475dcca5f34d77e2bb10cd1bc15b1",
   "pins" : [
     {
       "identity" : "swift-syntax",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
-        "revision" : "c40dcda2cd4f58c560b709b8c3474c0facf1ee6b",
-        "version" : "8.2.0"
+        "branch" : "dev",
+        "revision" : "65961603326fdcfa35f8f0dc2d5ff5441963d22e"
       }
     }
   ],
