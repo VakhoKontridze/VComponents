@@ -124,6 +124,7 @@ public struct VRangeSlider: View {
                 progressView
                 borderView
             }
+            .compositingGroup() // Prevents `iOS` `27.0` from resolving `progressView`'s corner mask as the final clip
             .clipShape(.rect(cornerRadius: appearance.cornerRadius))
             .frame(
                 width: appearance.direction.isHorizontal ? nil : appearance.height,
