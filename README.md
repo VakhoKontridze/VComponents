@@ -152,7 +152,7 @@ Versions with different majors are not directly compatible. When a new major is 
   <tr>
     <td>9.0</td>
     <td>2026 09 15</td>
-    <td>6.3</td>
+    <td>6.4</td>
     <td>
         iOS 18.0<br>
         macOS 15.0<br>
