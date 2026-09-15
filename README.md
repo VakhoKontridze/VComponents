@@ -150,6 +150,24 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
+    <td>9.0</td>
+    <td>2026 09 15</td>
+    <td>6.3</td>
+    <td>
+        iOS 18.0<br>
+        macOS 15.0<br>
+        tvOS 18.0<br>
+        watchOS 11.0<br>
+        visionOS 2.0
+    </td>
+    <td>9.0.0 - 9.x.x</td>
+    <td>
+        New SDK.<br>
+        API changes.
+    </td>
+  </tr>
+  
+  <tr>
     <td>8.0</td>
     <td>2026 04 09</td>
     <td>6.3</td>
