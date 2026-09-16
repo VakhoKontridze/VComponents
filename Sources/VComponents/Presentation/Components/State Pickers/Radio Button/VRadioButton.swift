@@ -77,13 +77,19 @@ public struct VRadioButton<CustomLabel>: View where CustomLabel: View {
     public init(
         appearance: VRadioButtonAppearance = .init(),
         state: Binding<VRadioButtonState>,
-        title: String
+        title: String?
     )
         where CustomLabel == Never
     {
         self.appearance = appearance
         self._state = state
-        self.label = .title(title: title)
+        self.label = {
+            if let title {
+                .title(title: title)
+            } else {
+                .empty
+            }
+        }()
     }
     
     /// Initializes `VRadioButton` with state and custom label.

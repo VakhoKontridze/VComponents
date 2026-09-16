@@ -77,13 +77,19 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
     public init(
         appearance: VCheckBoxAppearance = .init(),
         state: Binding<VCheckBoxState>,
-        title: String
+        title: String?
     )
         where CustomLabel == Never
     {
         self.appearance = appearance
         self._state = state
-        self.label = .title(title: title)
+        self.label = {
+            if let title {
+                .title(title: title)
+            } else {
+                .empty
+            }
+        }()
     }
     
     /// Initializes `VCheckBox` with state and custom label.
