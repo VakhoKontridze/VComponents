@@ -320,27 +320,21 @@ public struct VTextField: View {
 
 #Preview("Success") {
     StatesContentView(
-        appearance: VTextFieldAppearance {
-            $0.applySuccessStyle()
-        },
+        appearance: VTextFieldAppearance { $0.applySuccessStyle() },
         showsNative: false
     )
 }
 
 #Preview("Warning") {
     StatesContentView(
-        appearance: VTextFieldAppearance {
-            $0.applyWarningStyle()
-        },
+        appearance: VTextFieldAppearance { $0.applyWarningStyle() },
         showsNative: false
     )
 }
 
 #Preview("Error") {
     StatesContentView(
-        appearance: VTextFieldAppearance {
-            $0.applyErrorStyle()
-        },
+        appearance: VTextFieldAppearance { $0.applyErrorStyle() },
         showsNative: false
     )
 }

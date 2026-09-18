@@ -179,9 +179,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
         }
         
         VBouncingMarquee(
-            appearance: VBouncingMarqueeAppearance {
-                $0.applyInsettedGradientMask()
-            }
+            appearance: VBouncingMarqueeAppearance { $0.applyInsettedGradientMask() }
         ) {
             marqueeContent
         }

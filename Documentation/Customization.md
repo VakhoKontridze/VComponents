@@ -74,16 +74,14 @@ extension VPlainButtonAppearance {
 
 var body: some View {
     VPlainButton(
-        appearance: VPlainButtonAppearance {
-            $0.applySomeStyle()
-        },
+        appearance: VPlainButtonAppearance { $0.applySomeStyle() },
         action: doSomething,
         title: "Lorem Ipsum"
     )
 }
 ```
 
-Unlike `static` instances, methods stack. Several of them can be applied to the same Appearance, alongside individual property assignments:
+Several of them can be applied to the same Appearance, alongside individual property assignments:
 
 ```swift
 var body: some View {
@@ -120,9 +118,7 @@ Frequently, you will discover pre-existing mutating methods associated with each
 ```swift
 var body: some View {
     VWrappingMarquee(
-        appearance: VWrappingMarqueeAppearance {
-            $0.applyInsettedGradientMask()
-        }
+        appearance: VWrappingMarqueeAppearance { $0.applyInsettedGradientMask() }
     ) {
         HStack {
             Image(systemName: "swift")

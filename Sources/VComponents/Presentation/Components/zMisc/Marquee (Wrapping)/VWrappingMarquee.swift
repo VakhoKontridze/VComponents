@@ -235,9 +235,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         }
 
         VWrappingMarquee(
-            appearance: VWrappingMarqueeAppearance {
-                $0.applyInsettedGradientMask()
-            }
+            appearance: VWrappingMarqueeAppearance { $0.applyInsettedGradientMask() }
         ) {
             marqueeContent
         }
