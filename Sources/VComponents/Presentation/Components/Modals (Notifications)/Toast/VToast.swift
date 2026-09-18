@@ -278,11 +278,9 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VToastAppearance = .init()
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VToastAppearance {
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
@@ -304,12 +302,10 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VToastAppearance = .init()
-                    appearance.textConfiguration.lineType = .multiLine(alignment: .leading, lineLimit: 10)
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VToastAppearance {
+                    $0.textConfiguration.lineType = .multiLine(alignment: .leading, lineLimit: 10)
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             )
@@ -331,12 +327,10 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VToastAppearance = .init()
-                    appearance.presentationEdge = .top
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VToastAppearance {
+                    $0.presentationEdge = .top
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
@@ -361,17 +355,13 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VToastAppearance = .init()
-
+                appearance: VToastAppearance { appearance in
                     width.map { appearance.widthGroup = VToastAppearance.WidthGroup($0) }
 
                     alignment.map { appearance.bodyHorizontalAlignment = $0 }
 
                     appearance.timeoutDuration = 60
-
-                    return appearance
-                }(),
+                },
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
@@ -491,7 +481,7 @@ struct VToast: View {
                                 return
                             }
                             
-                            appearance = .info
+                            appearance = VToastAppearance { $0.applyInfoStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -499,7 +489,7 @@ struct VToast: View {
                                 return
                             }
                             
-                            appearance = .success
+                            appearance = VToastAppearance { $0.applySuccessStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -507,7 +497,7 @@ struct VToast: View {
                                 return
                             }
                             
-                            appearance = .warning
+                            appearance = VToastAppearance { $0.applyWarningStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -515,7 +505,7 @@ struct VToast: View {
                                 return
                             }
                             
-                            appearance = .error
+                            appearance = VToastAppearance { $0.applyErrorStyle() }
                         }
                     }
                 }

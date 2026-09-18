@@ -96,18 +96,16 @@ public struct VTextFieldAppearance {
     public var clearButtonImage: Image = ImageBook.Symbols.xmark
 
     /// Clear button appearance.
-    public var clearButtonAppearance: VRectangularButtonAppearance = {
-        var appearance: VRectangularButtonAppearance = .init()
+    public var clearButtonAppearance: VRectangularButtonAppearance = .init {
+        $0.size = CGSize(dimension: 22)
 
-        appearance.size = CGSize(dimension: 22)
-
-        appearance.backgroundColors = VRectangularButtonAppearance.StateColors(
+        $0.backgroundColors = VRectangularButtonAppearance.StateColors(
             enabled: Color.platformDynamic(Color(170, 170, 170), Color(40, 40, 40)),
             pressed: Color.platformDynamic(Color(150, 150, 150), Color(20, 20, 20)),
             disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
         )
         
-        appearance.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
+        $0.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
             colors: VRectangularButtonAppearance.StateColors(
                 Color.platformDynamic(Color(255, 255, 255), Color(230, 230, 230))
             ),
@@ -118,10 +116,8 @@ public struct VTextFieldAppearance {
             size: CGSize(dimension: 8)
         )
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
 
     /// Clear button appear and disappear animation.
     public var clearButtonAppearDisappearAnimation: Animation?
@@ -134,10 +130,8 @@ public struct VTextFieldAppearance {
     public var visibilityOnButtonImage: Image = ImageBook.Symbols.eyeCrossed
 
     /// Visibility button appearance.
-    public var visibilityButtonAppearance: VPlainButtonAppearance = {
-        var appearance: VPlainButtonAppearance = .init()
-        
-        appearance.labelImageConfiguration = VPlainButtonAppearance.StateImageConfiguration(
+    public var visibilityButtonAppearance: VPlainButtonAppearance = .init {
+        $0.labelImageConfiguration = VPlainButtonAppearance.StateImageConfiguration(
             colors: VPlainButtonAppearance.StateColors(
                 enabled: Color.platformDynamic(Color(70, 70, 70), Color(240, 240, 240)),
                 pressed: Color.primary.opacity(0.3),
@@ -150,10 +144,8 @@ public struct VTextFieldAppearance {
             size: CGSize(dimension: 20)
         )
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
 
     // MARK: Properties - Search
     /// Search image configuration.
@@ -176,6 +168,15 @@ public struct VTextFieldAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Style.
@@ -245,81 +246,38 @@ public struct VTextFieldAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VTextFieldAppearance {
-    /// `VTextFieldAppearance` with secure style.
-    public static var secure: Self {
-        var appearance: Self = .init()
-        
-        appearance.style = .secure
-        
-        return appearance
+    /// Applies secure style.
+    public mutating func applySecureStyle() {
+        style = .secure
     }
     
-    /// `VTextFieldAppearance` with search style.
-    public static var search: Self {
-        var appearance: Self = .init()
-        
-        appearance.style = .search
-        
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VTextFieldAppearance {
-    /// `VTextFieldAppearance` that applies green color scheme.
-    public static var success: Self {
-        var appearance: Self = .init()
-        
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applySuccessColorScheme()
-        
-        return appearance
+    /// Applies search style.
+    public mutating func applySearchStyle() {
+        style = .search
     }
     
-    /// `VTextFieldAppearance` that applies yellow color scheme.
-    public static var warning: Self {
-        var appearance: Self = .init()
-        
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyWarningColorScheme()
-        
-        return appearance
-    }
-    
-    /// `VTextFieldAppearance` that applies error color scheme.
-    public static var error: Self {
-        var appearance: Self = .init()
-        
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyErrorColorScheme()
-        
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VTextFieldAppearance {
-    /// Applies green color scheme to `VTextFieldAppearance`.
-    public mutating func applySuccessColorScheme() {
+    /// Applies success style.
+    public mutating func applySuccessStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         borderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
     }
-
-    /// Applies yellow color scheme to `VTextFieldAppearance`.
-    public mutating func applyWarningColorScheme() {
+    
+    /// Applies warning style.
+    public mutating func applyWarningStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         borderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
     }
-
-    /// Applies red color scheme to `VTextFieldAppearance`.
-    public mutating func applyErrorColorScheme() {
+    
+    /// Applies error style.
+    public mutating func applyErrorStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+    }
+    
+    private mutating func applyBorder() {
+        borderWidth = PointPixelMeasurement.points(1.5)
     }
 }

@@ -269,12 +269,10 @@ nonisolated extension VWrappedToggleButtonInternalState {
 
         PreviewRow("Pressed Off") {
             VWrappedToggleButton(
-                appearance: {
-                    var appearance: VWrappedToggleButtonAppearance = .init()
-                    appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VWrappedToggleButtonAppearance {
+                    $0.backgroundColors.off = $0.backgroundColors.pressedOff
+                    $0.labelTextConfiguration.colors!.off = $0.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
+                },
                 state: .constant(.off),
                 title: "Lorem Ipsum"
             )
@@ -289,12 +287,10 @@ nonisolated extension VWrappedToggleButtonInternalState {
 
         PreviewRow("Pressed On") {
             VWrappedToggleButton(
-                appearance: {
-                    var appearance: VWrappedToggleButtonAppearance = .init()
-                    appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VWrappedToggleButtonAppearance {
+                    $0.backgroundColors.on = $0.backgroundColors.pressedOn
+                    $0.labelTextConfiguration.colors!.on = $0.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
+                },
                 state: .constant(.on),
                 title: "Lorem Ipsum"
             )

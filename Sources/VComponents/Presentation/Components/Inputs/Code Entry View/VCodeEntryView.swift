@@ -248,14 +248,12 @@ public struct VCodeEntryView: View {
 
     PreviewContainer {
         VCodeEntryView(
-            appearance: {
-                var appearance: VCodeEntryViewAppearance = .init()
-                appearance.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.enabledFilled.darkened(by: 0.1)
-                appearance.characterBackgroundColors.focusedFilled = appearance.characterBackgroundColors.focusedFilled.darkened(by: 0.1)
-                appearance.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.enabledFilled.darkened(by: 0.1)
-                appearance.characterBackgroundBorderColors.focusedFilled = appearance.characterBackgroundBorderColors.focusedFilled.darkened(by: 0.1)
-                return appearance
-            }(),
+            appearance: VCodeEntryViewAppearance {
+                $0.characterBackgroundColors.enabledFilled = $0.characterBackgroundColors.enabledFilled.darkened(by: 0.1)
+                $0.characterBackgroundColors.focusedFilled = $0.characterBackgroundColors.focusedFilled.darkened(by: 0.1)
+                $0.characterBackgroundBorderColors.enabledFilled = $0.characterBackgroundBorderColors.enabledFilled.darkened(by: 0.1)
+                $0.characterBackgroundBorderColors.focusedFilled = $0.characterBackgroundBorderColors.focusedFilled.darkened(by: 0.1)
+            },
             text: $text
         )
     }
@@ -266,11 +264,9 @@ public struct VCodeEntryView: View {
 
     PreviewContainer {
         VCodeEntryView(
-            appearance: {
-                var appearance: VCodeEntryViewAppearance = .init()
-                appearance.spacingType = .stretched
-                return appearance
-            }(),
+            appearance: VCodeEntryViewAppearance {
+                $0.spacingType = .stretched
+            },
             text: $text
         )
         .padding(.horizontal)
@@ -278,15 +274,15 @@ public struct VCodeEntryView: View {
 }
 
 #Preview("Success") {
-    StatesContentView(appearance: .success)
+    StatesContentView(appearance: VCodeEntryViewAppearance { $0.applySuccessStyle() })
 }
 
 #Preview("Warning") {
-    StatesContentView(appearance: .warning)
+    StatesContentView(appearance: VCodeEntryViewAppearance { $0.applyWarningStyle() })
 }
 
 #Preview("Error") {
-    StatesContentView(appearance: .error)
+    StatesContentView(appearance: VCodeEntryViewAppearance { $0.applyErrorStyle() })
 }
 
 private struct StatesContentView: View {
@@ -313,16 +309,14 @@ private struct StatesContentView: View {
             // Color is also applied to other characters
             PreviewRow("Focused (*)") {
                 VCodeEntryView(
-                    appearance: {
-                        var appearanceMapped: VCodeEntryViewAppearance = appearance
-                        appearanceMapped.characterBackgroundColors.enabledEmpty = appearance.characterBackgroundColors.focusedEmpty
-                        appearanceMapped.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.focusedFilled
-                        appearanceMapped.characterBackgroundBorderColors.enabledEmpty = appearance.characterBackgroundBorderColors.focusedEmpty
-                        appearanceMapped.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.focusedFilled
-                        appearanceMapped.textConfiguration.colors!.enabledEmpty = appearance.textConfiguration.colors!.focusedEmpty // Unsafe (DEBUG)
-                        appearanceMapped.textConfiguration.colors!.enabledFilled = appearance.textConfiguration.colors!.focusedFilled // Unsafe (DEBUG)
-                        return appearanceMapped
-                    }(),
+                    appearance: VCodeEntryViewAppearance(appearance) {
+                        $0.characterBackgroundColors.enabledEmpty = appearance.characterBackgroundColors.focusedEmpty
+                        $0.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.focusedFilled
+                        $0.characterBackgroundBorderColors.enabledEmpty = appearance.characterBackgroundBorderColors.focusedEmpty
+                        $0.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.focusedFilled
+                        $0.textConfiguration.colors!.enabledEmpty = appearance.textConfiguration.colors!.focusedEmpty // Unsafe (DEBUG)
+                        $0.textConfiguration.colors!.enabledFilled = appearance.textConfiguration.colors!.focusedFilled // Unsafe (DEBUG)
+                    },
                     text: .constant("123")
                 )
             }

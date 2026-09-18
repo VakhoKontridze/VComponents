@@ -221,12 +221,10 @@ public struct VWrappedButton<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed") {
             VWrappedButton(
-                appearance: {
-                    var appearance: VWrappedButtonAppearance = .init()
-                    appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.labelTextConfiguration.colors!.enabled = appearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VWrappedButtonAppearance {
+                    $0.backgroundColors.enabled = $0.backgroundColors.pressed
+                    $0.labelTextConfiguration.colors!.enabled = $0.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 action: {},
                 title: "Lorem Ipsum"
             )

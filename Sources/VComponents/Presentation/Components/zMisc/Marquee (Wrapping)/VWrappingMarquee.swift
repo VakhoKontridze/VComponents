@@ -12,7 +12,11 @@ import VCore
 /// Container component that automatically scrolls and wraps it's content edge-to-edge.
 ///
 ///     var body: some View {
-///         VWrappingMarquee(appearance: .insettedGradientMask) {
+///         VWrappingMarquee(
+///             appearance: VWrappingMarqueeAppearance {
+///                 $0.applyInsettedGradientMask()
+///             }
+///         ) {
 ///             HStack {
 ///                 Image(systemName: "swift")
 ///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
@@ -230,7 +234,11 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             marqueeContent
         }
 
-        VWrappingMarquee(appearance: .insettedGradientMask) {
+        VWrappingMarquee(
+            appearance: VWrappingMarqueeAppearance {
+                $0.applyInsettedGradientMask()
+            }
+        ) {
             marqueeContent
         }
     }
@@ -240,11 +248,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VWrappingMarquee(
-                appearance: {
-                    var appearance: VWrappingMarqueeAppearance = .init()
-                    appearance.scrollDirection = .leftToRight
-                    return appearance
-                }()
+                appearance: VWrappingMarqueeAppearance {
+                    $0.scrollDirection = .leftToRight
+                }
             ) {
                 marqueeContent
             }
@@ -253,11 +259,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     
     PreviewRow("Right-to-Left") {
         VWrappingMarquee(
-            appearance: {
-                var appearance: VWrappingMarqueeAppearance = .init()
-                appearance.scrollDirection = .rightToLeft
-                return appearance
-            }()
+            appearance: VWrappingMarqueeAppearance {
+                $0.scrollDirection = .rightToLeft
+            }
         ) {
             marqueeContent
         }

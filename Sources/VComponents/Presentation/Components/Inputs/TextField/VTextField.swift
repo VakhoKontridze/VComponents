@@ -72,7 +72,9 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             appearance: .secure,
+///             appearance: VTextFieldAppearance {
+///                 $0.applySecureStyle()
+///             },
 ///             text: $text
 ///         )
 ///         .padding()
@@ -84,7 +86,9 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             appearance: .search,
+///             appearance: VTextFieldAppearance {
+///                 $0.applySearchStyle()
+///             },
 ///             text: $text
 ///         )
 ///         .padding()
@@ -298,11 +302,9 @@ public struct VTextField: View {
 
             PreviewRow(title) {
                 VTextField(
-                    appearance: {
-                        var appearance: VTextFieldAppearance = .init()
-                        appearance.style = style
-                        return appearance
-                    }(),
+                    appearance: VTextFieldAppearance {
+                        $0.style = style
+                    },
                     placeholder: "Lorem ipsum",
                     text: $text
                 )
@@ -318,21 +320,27 @@ public struct VTextField: View {
 
 #Preview("Success") {
     StatesContentView(
-        appearance: .success,
+        appearance: VTextFieldAppearance {
+            $0.applySuccessStyle()
+        },
         showsNative: false
     )
 }
 
 #Preview("Warning") {
     StatesContentView(
-        appearance: .warning,
+        appearance: VTextFieldAppearance {
+            $0.applyWarningStyle()
+        },
         showsNative: false
     )
 }
 
 #Preview("Error") {
     StatesContentView(
-        appearance: .error,
+        appearance: VTextFieldAppearance {
+            $0.applyErrorStyle()
+        },
         showsNative: false
     )
 }
@@ -365,13 +373,11 @@ private struct StatesContentView: View {
 
             PreviewRow("Focused") {
                 VTextField(
-                    appearance: {
-                        var mappedAppearance: VTextFieldAppearance = appearance
-                        mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
-                        mappedAppearance.borderColors.enabled = appearance.borderColors.focused
-                        mappedAppearance.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
-                        return mappedAppearance
-                    }(),
+                    appearance: VTextFieldAppearance(appearance) {
+                        $0.backgroundColors.enabled = appearance.backgroundColors.focused
+                        $0.borderColors.enabled = appearance.borderColors.focused
+                        $0.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
+                    },
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )
@@ -380,13 +386,11 @@ private struct StatesContentView: View {
 
             PreviewRow("Pressed (Button) (*)") {
                 VTextField(
-                    appearance: {
-                        var mappedAppearance: VTextFieldAppearance = appearance
-                        mappedAppearance.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
-                        mappedAppearance.clearButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.clearButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
-                        mappedAppearance.visibilityButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.visibilityButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-                        return mappedAppearance
-                    }(),
+                    appearance: VTextFieldAppearance(appearance) {
+                        $0.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
+                        $0.clearButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.clearButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                        $0.visibilityButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.visibilityButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                    },
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )

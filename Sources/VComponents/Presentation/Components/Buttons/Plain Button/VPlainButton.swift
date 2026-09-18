@@ -193,11 +193,9 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed") {
             VPlainButton(
-                appearance: {
-                    var appearance: VPlainButtonAppearance = .init()
-                    appearance.labelTextConfiguration.colors!.enabled = appearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VPlainButtonAppearance {
+                    $0.labelTextConfiguration.colors!.enabled = $0.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 action: {},
                 title: "Lorem Ipsum"
             )

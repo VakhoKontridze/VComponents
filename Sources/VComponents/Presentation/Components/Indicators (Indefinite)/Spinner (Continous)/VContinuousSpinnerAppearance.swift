@@ -64,4 +64,13 @@ public struct VContinuousSpinnerAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 }

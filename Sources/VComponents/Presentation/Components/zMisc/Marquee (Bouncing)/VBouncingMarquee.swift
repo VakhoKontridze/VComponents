@@ -12,7 +12,11 @@ import VCore
 /// Container component that automatically scrolls and bounces it's content edge-to-edge.
 ///
 ///     var body: some View {
-///         VBouncingMarquee(appearance: .insettedGradientMask) {
+///         VBouncingMarquee(
+///             appearance: VBouncingMarqueeAppearance {
+///                 $0.applyInsettedGradientMask()
+///             }
+///         ) {
 ///             HStack {
 ///                 Image(systemName: "swift")
 ///                 Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
@@ -174,7 +178,11 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             marqueeContent
         }
         
-        VBouncingMarquee(appearance: .insettedGradientMask) {
+        VBouncingMarquee(
+            appearance: VBouncingMarqueeAppearance {
+                $0.applyInsettedGradientMask()
+            }
+        ) {
             marqueeContent
         }
     }
@@ -184,11 +192,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VBouncingMarquee(
-                appearance: {
-                    var appearance: VBouncingMarqueeAppearance = .init()
-                    appearance.scrollDirection = .leftToRight
-                    return appearance
-                }()
+                appearance: VBouncingMarqueeAppearance {
+                    $0.scrollDirection = .leftToRight
+                }
             ) {
                 marqueeContent
             }
@@ -196,11 +202,9 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 
         PreviewRow("Right-to-Left") {
             VBouncingMarquee(
-                appearance: {
-                    var appearance: VBouncingMarqueeAppearance = .init()
-                    appearance.scrollDirection = .rightToLeft
-                    return appearance
-                }()
+                appearance: VBouncingMarqueeAppearance {
+                    $0.scrollDirection = .rightToLeft
+                }
             ) {
                 marqueeContent
             }

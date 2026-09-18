@@ -231,14 +231,12 @@ nonisolated extension VRadioButtonState {
 
         PreviewRow("Pressed Off") {
             VRadioButton(
-                appearance: {
-                    var appearance: VRadioButtonAppearance = .init()
-                    appearance.fillColors.off = appearance.fillColors.pressedOff
-                    appearance.borderColors.off = appearance.borderColors.pressedOff
-                    appearance.bulletColors.off = appearance.bulletColors.pressedOff
-                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRadioButtonAppearance {
+                    $0.fillColors.off = $0.fillColors.pressedOff
+                    $0.borderColors.off = $0.borderColors.pressedOff
+                    $0.bulletColors.off = $0.bulletColors.pressedOff
+                    $0.labelTextConfiguration.colors!.off = $0.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
+                },
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
@@ -253,14 +251,12 @@ nonisolated extension VRadioButtonState {
 
         PreviewRow("Pressed On") {
             VRadioButton(
-                appearance: {
-                    var appearance: VRadioButtonAppearance = .init()
-                    appearance.fillColors.on = appearance.fillColors.pressedOn
-                    appearance.borderColors.on = appearance.borderColors.pressedOn
-                    appearance.bulletColors.on = appearance.bulletColors.pressedOn
-                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRadioButtonAppearance {
+                    $0.fillColors.on = $0.fillColors.pressedOn
+                    $0.borderColors.on = $0.borderColors.pressedOn
+                    $0.bulletColors.on = $0.bulletColors.pressedOn
+                    $0.labelTextConfiguration.colors!.on = $0.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
+                },
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )

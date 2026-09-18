@@ -1,5 +1,11 @@
 # Change Log
 
+### 9.1.0(81)
+
+General
+
+- Appearances can now be initialized via a mutation closure
+
 ### [9.0.0(80)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.0.0) — 2026 09 15
 
 General

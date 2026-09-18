@@ -295,12 +295,10 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
         PreviewRow("Pressed") {
             VLoadingStretchedButton(
-                appearance: {
-                    var appearance: VLoadingStretchedButtonAppearance = .init()
-                    appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.labelTextConfiguration.colors!.enabled = appearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VLoadingStretchedButtonAppearance {
+                    $0.backgroundColors.enabled = $0.backgroundColors.pressed
+                    $0.labelTextConfiguration.colors!.enabled = $0.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 isLoading: false,
                 action: {},
                 title: "Lorem Ipsum"
@@ -335,12 +333,10 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
     PreviewContainer {
         VLoadingStretchedButton(
-            appearance: {
-                var appearance: VLoadingStretchedButtonAppearance = .init()
-                appearance.labelSpacingType = labelSpacingType
-                appearance.labelTextAndLabelImagePlacement = placement
-                return appearance
-            }(),
+            appearance: VLoadingStretchedButtonAppearance {
+                $0.labelSpacingType = labelSpacingType
+                $0.labelTextAndLabelImagePlacement = placement
+            },
             isLoading: false,
             action: {},
             title: "Lorem Ipsum",
@@ -399,12 +395,10 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
     PreviewContainer {
         VLoadingStretchedButton(
-            appearance: {
-                var appearance: VLoadingStretchedButtonAppearance = .init()
-                appearance.labelAndSpinnerSpacingType = labelAndSpinnerSpacingType
-                appearance.spinnerPlacement = placement
-                return appearance
-            }(),
+            appearance: VLoadingStretchedButtonAppearance {
+                $0.labelAndSpinnerSpacingType = labelAndSpinnerSpacingType
+                $0.spinnerPlacement = placement
+            },
             isLoading: true,
             action: {},
             title: "Lorem Ipsum"

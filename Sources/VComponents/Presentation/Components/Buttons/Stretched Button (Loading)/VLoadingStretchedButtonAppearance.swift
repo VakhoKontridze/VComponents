@@ -145,15 +145,11 @@ public struct VLoadingStretchedButtonAppearance {
     public var spinnerPlacement: SpinnerPlacement = .default
     
     /// Spinner appearance.
-    public var spinnerAppearance: VContinuousSpinnerAppearance = {
-        var appearance: VContinuousSpinnerAppearance = .init()
-
-        appearance.dimension = 16
-        appearance.thickness = 2
-        appearance.color = Color.white
-
-        return appearance
-    }()
+    public var spinnerAppearance: VContinuousSpinnerAppearance = .init {
+        $0.dimension = 16
+        $0.thickness = 2
+        $0.color = Color.white
+    }
 
     // MARK: Properties - Transition - State Change
     /// Indicates if button animates state change.
@@ -188,6 +184,15 @@ public struct VLoadingStretchedButtonAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// State-bound colors.

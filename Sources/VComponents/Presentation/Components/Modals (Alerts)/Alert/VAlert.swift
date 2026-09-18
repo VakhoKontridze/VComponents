@@ -466,11 +466,9 @@ struct VAlert<Content>: View
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VAlertAppearance = .init()
+                appearance: VAlertAppearance { appearance in
                     width.map { appearance.widthGroup = VAlertAppearance.WidthGroup($0) }
-                    return appearance
-                }(),
+                },
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -535,20 +533,16 @@ struct VAlert<Content>: View
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VAlertAppearance = .init()
+                appearance: VAlertAppearance {
+                    $0.primaryButtonAppearance.backgroundColors.enabled = $0.primaryButtonAppearance.backgroundColors.pressed
+                    $0.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.primaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    appearance.primaryButtonAppearance.backgroundColors.enabled = appearance.primaryButtonAppearance.backgroundColors.pressed
-                    appearance.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.primaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                    $0.secondaryButtonAppearance.backgroundColors.enabled = $0.secondaryButtonAppearance.backgroundColors.pressed
+                    $0.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.secondaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    appearance.secondaryButtonAppearance.backgroundColors.enabled = appearance.secondaryButtonAppearance.backgroundColors.pressed
-                    appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-
-                    appearance.destructiveButtonAppearance.backgroundColors.enabled = appearance.destructiveButtonAppearance.backgroundColors.pressed
-                    appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-
-                    return appearance
-                }(),
+                    $0.destructiveButtonAppearance.backgroundColors.enabled = $0.destructiveButtonAppearance.backgroundColors.pressed
+                    $0.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = $0.destructiveButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
@@ -569,20 +563,16 @@ struct VAlert<Content>: View
         ModalLauncherView(isPresented: $isPresented)
             .vAlert(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VAlertAppearance = .init()
+                appearance: VAlertAppearance {
+                    $0.primaryButtonAppearance.backgroundColors.enabled = $0.primaryButtonAppearance.backgroundColors.disabled
+                    $0.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.primaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    appearance.primaryButtonAppearance.backgroundColors.enabled = appearance.primaryButtonAppearance.backgroundColors.disabled
-                    appearance.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.primaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
+                    $0.secondaryButtonAppearance.backgroundColors.enabled = $0.secondaryButtonAppearance.backgroundColors.disabled
+                    $0.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.secondaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    appearance.secondaryButtonAppearance.backgroundColors.enabled = appearance.secondaryButtonAppearance.backgroundColors.disabled
-                    appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.secondaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
-
-                    appearance.destructiveButtonAppearance.backgroundColors.enabled = appearance.destructiveButtonAppearance.backgroundColors.disabled
-                    appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.destructiveButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
-
-                    return appearance
-                }(),
+                    $0.destructiveButtonAppearance.backgroundColors.enabled = $0.destructiveButtonAppearance.backgroundColors.disabled
+                    $0.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = $0.destructiveButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
+                },
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",

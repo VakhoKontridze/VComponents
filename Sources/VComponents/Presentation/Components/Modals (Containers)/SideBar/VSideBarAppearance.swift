@@ -27,7 +27,7 @@ public struct VSideBarAppearance {
     /// Edge from which side bar appears, and to which it disappears.
     ///
     /// Changing this property alone doesn't guarantee a proper behavior.
-    /// Use `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarAppearance` instead.
+    /// Use `applyPresentationEdge(_:)` method instead.
     public var presentationEdge: Edge = .leading
 
     /// Size group.
@@ -89,16 +89,14 @@ public struct VSideBarAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        var appearance: VGroupBoxAppearance = .init()
+        VGroupBoxAppearance {
+            $0.cornerRadii = cornerRadii
+            $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-        appearance.cornerRadii = cornerRadii
-        appearance.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
+            $0.backgroundColor = backgroundColor
 
-        appearance.backgroundColor = backgroundColor
-
-        appearance.contentMargins = EdgeInsets()
-
-        return appearance
+            $0.contentMargins = EdgeInsets()
+        }
     }
 
     // MARK: Properties - Content
@@ -156,6 +154,15 @@ public struct VSideBarAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Size group.
@@ -233,41 +240,63 @@ extension VSideBarAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VSideBarAppearance {
-    /// `VSideBarAppearance` that presents side bar from leading edge.
+    /// Applies presentation edge, alongside size group and corner radii that support it.
     ///
-    /// Default configuration.
-    public static var leading: Self {
-        .init()
-    }
-    
-    /// `VSideBarAppearance` that presents side bar from trailing edge.
-    public static var trailing: Self {
-        var appearance: Self = .init()
+    /// Default value is `leading`.
+    public mutating func applyPresentationEdge(_ edge: Edge) {
+        presentationEdge = edge
 
-        appearance.presentationEdge = .trailing
-        
-        appearance.cornerRadii = {
+        switch edge {
+        case .top:
+            applyVerticalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(bottomCorners: 15))
+
+        case .leading:
+            applyHorizontalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(trailingCorners: 15))
+
+        case .bottom:
+            applyVerticalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(topCorners: 15))
+
+        case .trailing:
+            applyHorizontalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(leadingCorners: 15))
+        }
+    }
+
+    private mutating func applyHorizontalSizeGroup() {
+        sizeGroup = {
 #if os(iOS)
-            RectangleCornerRadii(
-                leadingCorners: 15
+            SizeGroup(
+                portrait: Size(
+                    width: .fraction(0.75),
+                    height: .fraction(1)
+                ),
+                landscape: Size(
+                    width: .fraction(0.5),
+                    height: .fraction(1)
+                )
             )
 #elseif os(macOS)
-            RectangleCornerRadii()
+            SizeGroup(
+                portrait: Size(
+                    width: .fraction(0.33),
+                    height: .fraction(1)
+                ),
+                landscape: Size(
+                    width: .zero,
+                    height: .zero
+                )
+            )
 #else
             fatalError()
 #endif
         }()
-
-        return appearance
     }
     
-    /// `VSideBarAppearance` that presents side bar from top edge.
-    public static var top: Self {
-        var appearance: Self = .init()
-        
-        appearance.presentationEdge = .top
-
-        appearance.sizeGroup = {
+    private mutating func applyVerticalSizeGroup() {
+        sizeGroup = {
 #if os(iOS)
             SizeGroup(
                 portrait: Size(
@@ -294,83 +323,18 @@ extension VSideBarAppearance {
             fatalError()
 #endif
         }()
-
-        appearance.cornerRadii = {
-#if os(iOS)
-            RectangleCornerRadii(
-                bottomCorners: 15
-            )
-#elseif os(macOS)
-            RectangleCornerRadii()
-#else
-            fatalError()
-#endif
-        }()
-
-        return appearance
     }
     
-    /// `VSideBarAppearance` that presents side bar from bottom edge.
-    public static var bottom: Self {
-        var appearance: Self = .init()
-        
-        appearance.presentationEdge = .bottom
-
-        appearance.sizeGroup = {
+    private mutating func applyCornerRadii(
+        _ radii: RectangleCornerRadii
+    ) {
 #if os(iOS)
-            SizeGroup(
-                portrait: Size(
-                    width: .fraction(1),
-                    height: .fraction(0.5)
-                ),
-                landscape: Size(
-                    width: .fraction(1),
-                    height: .fraction(0.75)
-                )
-            )
+        cornerRadii = radii
 #elseif os(macOS)
-            SizeGroup(
-                portrait: Size(
-                    width: .fraction(1),
-                    height: .fraction(0.5)
-                ),
-                landscape: Size(
-                    width: .absolute(0),
-                    height: .absolute(0)
-                )
-            )
+        cornerRadii = RectangleCornerRadii()
 #else
-            fatalError()
+        fatalError()
 #endif
-        }()
-
-        appearance.cornerRadii = {
-#if os(iOS)
-            RectangleCornerRadii(
-                topCorners: 15
-            )
-#elseif os(macOS)
-            RectangleCornerRadii()
-#else
-            fatalError()
-#endif
-        }()
-
-        return appearance
-    }
-}
-
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VSideBarAppearance {
-    /// `VSideBarAppearance` that insets content.
-    public static var insettedContent: Self {
-        var appearance: Self = .init()
-
-        appearance.contentMargins = EdgeInsets(15)
-
-        return appearance
     }
 }
 

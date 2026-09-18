@@ -388,11 +388,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                appearance: {
-                    var appearance: VDynamicPagerTabViewAppearance = .init()
-                    appearance.tabSelectionIndicatorWidthType = widthType
-                    return appearance
-                }(),
+                appearance: VDynamicPagerTabViewAppearance {
+                    $0.tabSelectionIndicatorWidthType = widthType
+                },
                 selection: $selection,
                 data: Weekday.allCases,
                 tabItemTitle: { $0.title },
@@ -413,11 +411,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                appearance: {
-                    var appearance: VDynamicPagerTabViewAppearance = .init()
-                    appearance.tabSelectionIndicatorWidthType = widthType
-                    return appearance
-                }(),
+                appearance: VDynamicPagerTabViewAppearance {
+                    $0.tabSelectionIndicatorWidthType = widthType
+                },
                 selection: $selection,
                 data: Weekday.allCases.prefix(3),
                 tabItemTitle: { $0.title },
@@ -438,11 +434,9 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             id: \.self
         ) { widthType in
             VDynamicPagerTabView(
-                appearance: {
-                    var appearance: VDynamicPagerTabViewAppearance = .init()
-                    appearance.tabSelectionIndicatorWidthType = widthType
-                    return appearance
-                }(),
+                appearance: VDynamicPagerTabViewAppearance {
+                    $0.tabSelectionIndicatorWidthType = widthType
+                },
                 selection: $selection,
                 data: [],
                 tabItemTitle: { $0.title },

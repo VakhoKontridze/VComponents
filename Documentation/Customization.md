@@ -4,8 +4,8 @@
 
 - [Intro](#intro)
 - [Example](#example)
-- [Factory Instances](#factory-instances)
-- [Pre-Existing Factory Instances](#pre-existing-factory-instances)
+- [Mutating Methods](#mutating-methods)
+- [Pre-Existing Mutating Methods](#pre-existing-mutating-methods)
 
 ## Intro
 
@@ -30,62 +30,100 @@ var body: some View {
 Preferred:
 
 ```swift
-let appearance: VPlainButtonAppearance = {
-    var appearance: VPlainButtonAppearance = .init()
-    
-    appearance.labelTextColors = VPlainButtonAppearance.StateColors(
+var body: some View {
+    VPlainButton(
+        appearance: VPlainButtonAppearance {
+            $0.labelTextColors = VPlainButtonAppearance.StateColors(
+                enabled: Color.primary,
+                pressed: Color.secondary,
+                disabled: Color.secondary
+            )
+        },
+        action: doSomething,
+        title: "Lorem Ipsum"
+    )
+}
+```
+
+Every Appearance has an initializer that takes a transform closure, so customization can be written inline. To reuse an Appearance across call sites, assign it to a property:
+
+```swift
+let appearance: VPlainButtonAppearance = .init {
+    $0.labelTextColors = VPlainButtonAppearance.StateColors(
         enabled: Color.primary,
         pressed: Color.secondary,
         disabled: Color.secondary
     )
-    
-    return appearance
-}()
-
-var body: some View {
-    VPlainButton(
-        appearance: appearance,
-        action: doSomething,
-        title: "Lorem Ipsum"
-    )
 }
 ```
 
-## Factory Instances
+## Mutating Methods
 
-Alternately, you can create `static` instances of Appearances for reusability.
+Alternately, you can declare `mutating` methods on Appearances for reusability.
 
 ```swift
 extension VPlainButtonAppearance {
-    static let standard: Self = {
-        var appearance: Self = .init()
-        
-        appearance.labelTextColors = StateColors(
+    mutating func applySomeStyle() {
+        labelTextColors = StateColors(
             enabled: Color.primary,
             pressed: Color.secondary,
             disabled: Color.secondary
         )
-        
-        return appearance
-    }()
+    }
 }
 
 var body: some View {
     VPlainButton(
-        appearance: .standard,
+        appearance: VPlainButtonAppearance {
+            $0.applySomeStyle()
+        },
         action: doSomething,
         title: "Lorem Ipsum"
     )
 }
 ```
 
-## Pre-Existing Factory Instances
-
-Frequently, you will discover pre-existing static factory-initialized Appearances associated with each component. It's recommended to check Appearance files before creating them yourself.
+Unlike `static` instances, methods stack. Several of them can be applied to the same Appearance, alongside individual property assignments:
 
 ```swift
 var body: some View {
-    VWrappingMarquee(appearance: .insettedGradientMask) {
+    VPlainButton(
+        appearance: VPlainButtonAppearance {
+            $0.applyStandardStyle()
+            $0.applyCompactLayout()
+            $0.sensoryFeedback = nil
+        },
+        action: doSomething,
+        title: "Lorem Ipsum"
+    )
+}
+```
+
+The same initializer also takes a base Appearance, which the transform is applied on top of:
+
+```swift
+var body: some View {
+    VPlainButton(
+        appearance: VPlainButtonAppearance(sharedAppearance) {
+            $0.sensoryFeedback = nil
+        },
+        action: doSomething,
+        title: "Lorem Ipsum"
+    )
+}
+```
+
+## Pre-Existing Mutating Methods
+
+Frequently, you will discover pre-existing mutating methods associated with each component. It's recommended to check Appearance files before writing them yourself.
+
+```swift
+var body: some View {
+    VWrappingMarquee(
+        appearance: VWrappingMarqueeAppearance {
+            $0.applyInsettedGradientMask()
+        }
+    ) {
         HStack {
             Image(systemName: "swift")
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")

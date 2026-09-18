@@ -385,11 +385,9 @@ nonisolated extension Double {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VRangeSlider(
-                appearance: {
-                    var appearance: VRangeSliderAppearance = .init()
-                    appearance.direction = .leftToRight
-                    return appearance
-                }(),
+                appearance: VRangeSliderAppearance {
+                    $0.direction = .leftToRight
+                },
                 difference: difference,
                 value: $value
             )
@@ -398,11 +396,9 @@ nonisolated extension Double {
         
         PreviewRow("Right-to-Left") {
             VRangeSlider(
-                appearance: {
-                    var appearance: VRangeSliderAppearance = .init()
-                    appearance.direction = .rightToLeft
-                    return appearance
-                }(),
+                appearance: VRangeSliderAppearance {
+                    $0.direction = .rightToLeft
+                },
                 difference: difference,
                 value: $value
             )
@@ -412,11 +408,9 @@ nonisolated extension Double {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VRangeSlider(
-                    appearance: {
-                        var appearance: VRangeSliderAppearance = .init()
-                        appearance.direction = .topToBottom
-                        return appearance
-                    }(),
+                    appearance: VRangeSliderAppearance {
+                        $0.direction = .topToBottom
+                    },
                     difference: difference,
                     value: $value
                 )
@@ -425,11 +419,9 @@ nonisolated extension Double {
             
             PreviewRow("Bottom-to-Top") {
                 VRangeSlider(
-                    appearance: {
-                        var appearance: VRangeSliderAppearance = .init()
-                        appearance.direction = .bottomToTop
-                        return appearance
-                    }(),
+                    appearance: VRangeSliderAppearance {
+                        $0.direction = .bottomToTop
+                    },
                     difference: difference,
                     value: $value
                 )

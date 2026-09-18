@@ -95,6 +95,15 @@ public struct VCodeEntryViewAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// State-bound colors.
@@ -131,63 +140,34 @@ public struct VCodeEntryViewAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VCodeEntryViewAppearance {
-    /// `VCodeEntryViewAppearance` that applies green color scheme.
-    public static var success: Self {
-        var appearance: Self = .init()
-
-        appearance.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applySuccessColorScheme()
-
-        return appearance
-    }
-
-    /// `VCodeEntryViewAppearance` that applies yellow color scheme.
-    public static var warning: Self {
-        var appearance: Self = .init()
-
-        appearance.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyWarningColorScheme()
-
-        return appearance
-    }
-
-    /// `VCodeEntryViewAppearance` that applies error color scheme.
-    public static var error: Self {
-        var appearance: Self = .init()
-
-        appearance.characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyErrorColorScheme()
-
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VCodeEntryViewAppearance {
-    /// Applies green color scheme to `VCodeEntryViewAppearance`.
-    public mutating func applySuccessColorScheme() {
+    /// Applies success style.
+    public mutating func applySuccessStyle() {
+        applyCharacterBackgroundBorder()
         characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
         characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
-
-    /// Applies yellow color scheme to `VCodeEntryViewAppearance`.
-    public mutating func applyWarningColorScheme() {
+    
+    /// Applies warning style.
+    public mutating func applyWarningStyle() {
+        applyCharacterBackgroundBorder()
         characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
         characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
-
-    /// Applies red color scheme to `VCodeEntryViewAppearance`.
-    public mutating func applyErrorColorScheme() {
+    
+    /// Applies error style.
+    public mutating func applyErrorStyle() {
+        applyCharacterBackgroundBorder()
         characterBackgroundBorderColors.enabledEmpty = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         characterBackgroundBorderColors.enabledFilled = characterBackgroundBorderColors.enabledEmpty
         characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
+    }
+    
+    private mutating func applyCharacterBackgroundBorder() {
+        characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
     }
 }
