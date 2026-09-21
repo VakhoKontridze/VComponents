@@ -71,44 +71,38 @@ public struct VRangeSlider: View {
         
         self.appearance = appearance
 
-        self.range = Double(range.lowerBound)...Double(range.upperBound)
-        
+        let range: ClosedRange = .init(
+            lower: Double(range.lowerBound),
+            upper: Double(range.upperBound)
+        )
+        self.range = range
+
         self.difference = Double(difference)
-        
-        self.step = step.map { Double($0) }
 
-        let valueLowerRatio: Double = {
-            guard
-                range.lowerBound.isFinite,
-                range.upperBound.isFinite,
-                range.upperBound > range.lowerBound,
-                value.wrappedValue.lowerBound.isFinite
-            else {
-                return 0
-            }
-            return Double(value.wrappedValue.lowerBound - range.lowerBound) / Double(range.boundRange)
-        }()
-
-        let valueUpperRatio: Double = {
-            guard
-                range.lowerBound.isFinite,
-                range.upperBound.isFinite,
-                range.upperBound > range.lowerBound,
-                value.wrappedValue.upperBound.isFinite
-            else {
-                return 1
-            }
-            return Double(value.wrappedValue.upperBound - range.lowerBound) / Double(range.boundRange)
-        }()
+        let step: Double? = step.map { Double($0) }
+        self.step = step
 
         self._progress = Binding(
             get: {
-                ClosedRange(
-                    lower: valueLowerRatio.clamped(to: 0...1, step: step.map { Double($0) }),
-                    upper: valueUpperRatio.clamped(to: 0...1, step: step.map { Double($0) })
+                let valueLower: Double = Double(value.wrappedValue.lowerBound)
+                let valueUpper: Double = Double(value.wrappedValue.upperBound)
+
+                guard
+                    valueLower.isFinite,
+                    valueUpper.isFinite,
+                    range.lowerBound.isFinite,
+                    range.upperBound.isFinite,
+                    range.upperBound > range.lowerBound
+                else {
+                    return range
+                }
+
+                return ClosedRange(
+                    lower: valueLower.clamped(to: range, step: step),
+                    upper: valueUpper.clamped(to: range, step: step)
                 )
             },
-            set: { // Like native `Slider`, clamps initial value, but not subsequent ones
+            set: {
                 value.wrappedValue = V($0.lowerBound)...V($0.upperBound)
             }
         )
@@ -226,15 +220,25 @@ public struct VRangeSlider: View {
 
         switch thumb {
         case .low:
+            let maxProgress: Double = Swift::min(
+                (self.progress.upperBound - difference).roundedDownWithStep(step, from: range.lowerBound),
+                range.upperBound
+            )
+
             progress.clamp(
                 min: range.lowerBound,
-                max: Swift.min((self.progress.upperBound - difference).roundedDownWithStep(step), range.upperBound),
+                max: Swift::max(maxProgress, range.lowerBound), // Guards against an inverted clamping range
                 step: step
             )
-            
+
         case .high:
+            let minProgress: Double = Swift::max(
+                (self.progress.lowerBound + difference).roundedUpWithStep(step, from: range.lowerBound),
+                range.lowerBound
+            )
+
             progress.clamp(
-                min: Swift.max((self.progress.lowerBound + difference).roundedUpWithStep(step), range.lowerBound),
+                min: Swift::min(minProgress, range.upperBound), // Guards against an inverted clamping range
                 max: range.upperBound,
                 step: step
             )
@@ -273,11 +277,16 @@ public struct VRangeSlider: View {
         }()
         guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
-        
-        switch thumb {
-        case .low: return (value / boundRange) * width
-        case .high: return ((boundRange - value) / boundRange) * width
-        }
+
+        let progressWidth: CGFloat = {
+            switch thumb {
+            case .low: (value / boundRange) * width
+            case .high: ((boundRange - value) / boundRange) * width
+            }
+        }()
+        guard progressWidth.isFinite else { return 0 } // Guards against a non-finite `range`
+
+        return progressWidth
     }
     
     // MARK: Thumb Offset
@@ -315,18 +324,21 @@ public struct VRangeSlider: View {
 }
 
 nonisolated extension Double {
+    // `base` anchors the step grid to `range.lowerBound`, matching `clamped(to:step:)`
     fileprivate func roundedUpWithStep(
-        _ step: Double?
+        _ step: Double?,
+        from base: Double
     ) -> Double {
         guard let step else { return self }
-        return ceil(self / step) * step
+        return base + ceil((self - base) / step) * step
     }
-    
+
     fileprivate func roundedDownWithStep(
-        _ step: Double?
+        _ step: Double?,
+        from base: Double
     ) -> Double {
         guard let step else { return self }
-        return floor(self / step) * step
+        return base + floor((self - base) / step) * step
     }
 }
 
