@@ -72,21 +72,10 @@ public struct VSlider: View {
         )
         self.step = step.map { Double($0) }
         
-        let ratio: Double = {
-            guard
-                range.lowerBound.isFinite,
-                range.upperBound.isFinite,
-                range.upperBound > range.lowerBound,
-                value.wrappedValue.isFinite
-            else {
-                return 0
-            }
-            return Double(value.wrappedValue - range.lowerBound) / Double(range.boundRange)
-        }()
-
-        self._progress = Binding(
-            get: { ratio.clamped(to: 0...1, step: step.map { Double($0) }) },
-            set: { value.wrappedValue = V($0) } // Like native `Slider`, clamps initial value, but not subsequent ones
+        self._progress = VSliderValueBinding.make(
+            range: range,
+            step: step,
+            value: value
         )
 
         self.onChange = onChange
@@ -351,6 +340,22 @@ public struct VSlider: View {
             value: $value
         )
         .padding(.horizontal)
+    }
+}
+
+#Preview("Custom Range") {
+    @Previewable @State var value: Double = 15
+
+    PreviewContainer {
+        PreviewRow("VSlider") {
+            VSlider(range: 10...20, value: $value)
+                .padding(.horizontal)
+        }
+
+        PreviewRow("Native") {
+            Slider(value: $value, in: 10...20)
+                .padding(.horizontal)
+        }
     }
 }
 
