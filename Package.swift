@@ -45,6 +45,13 @@ let package: Package = .init(
                 .enableUpcomingFeature("InternalImportsByDefault"),
                 .enableUpcomingFeature("MemberImportVisibility")
             ]
+        ),
+        .testTarget(
+            name: "VComponentsTests",
+            dependencies: ["VComponents"],
+            swiftSettings: [
+                .defaultIsolation(MainActor.self)
+            ]
         )
     ],
     
