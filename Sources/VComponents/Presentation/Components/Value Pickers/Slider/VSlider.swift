@@ -182,16 +182,14 @@ public struct VSlider: View {
     
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
-        let value: Double = dragValue.location.coordinate(isX: appearance.direction.isHorizontal)
-        let boundRange: Double = range.boundRange
-        guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
-
-        let progress: Double = ((value / width) * boundRange + range.lowerBound)
-            .invertedFromMax(
-                range.upperBound,
-                if: layoutDirection.isRightToLeft || appearance.direction.isReversed
-            )
-            .clamped(to: range, step: step)
+        guard let progress: Double = VSliderGeometry.value(
+            location: dragValue.location,
+            size: sliderSize,
+            range: range,
+            step: step,
+            direction: appearance.direction,
+            layoutDirection: layoutDirection
+        ) else { return }
         
         setProgress(to: progress)
         

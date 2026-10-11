@@ -48,7 +48,7 @@ let package: Package = .init(
         ),
         .testTarget(
             name: "VComponentsTests",
-            dependencies: ["VComponents"],
+            dependencies: ["VComponents", "VCore"],
             swiftSettings: [
                 .defaultIsolation(MainActor.self)
             ]
