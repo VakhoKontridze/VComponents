@@ -213,11 +213,7 @@ public struct VRangeSlider: View {
 
         let isReversed: Bool = appearance.direction.isReversed != (appearance.direction.isHorizontal && layoutDirection.isRightToLeft) // Drag coordinates are physical, and only horizontal directions mirror in RTL
 
-        let ratio: Double = (dragValue / width)
-            .invertedFromMax(
-                1,
-                if: isReversed
-            ) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
+        let ratio: Double = (dragValue / width).invertedFromMax(1, if: isReversed) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
 
         var progress: Double = range.lowerBound + ratio * range.boundRange
 
@@ -446,6 +442,19 @@ nonisolated extension Double {
     }
 }
 
+#Preview("Step") {
+    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
+
+    PreviewContainer {
+        VRangeSlider(
+            difference: 0.1,
+            step: 0.1,
+            value: $value
+        )
+        .padding(.horizontal)
+    }
+}
+
 #Preview("Custom Range") {
     @Previewable @State var value: ClosedRange<Double> = 12...18
 
@@ -470,19 +479,6 @@ nonisolated extension Double {
             )
             .padding(.horizontal)
         }
-    }
-}
-
-#Preview("Step") {
-    @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
-
-    PreviewContainer {
-        VRangeSlider(
-            difference: 0.1,
-            step: 0.1,
-            value: $value
-        )
-        .padding(.horizontal)
     }
 }
 

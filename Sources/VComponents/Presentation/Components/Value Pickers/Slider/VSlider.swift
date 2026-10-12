@@ -204,11 +204,7 @@ public struct VSlider: View {
 
         let isReversed: Bool = appearance.direction.isReversed != (appearance.direction.isHorizontal && layoutDirection.isRightToLeft) // Drag coordinates are physical, and only horizontal directions mirror in RTL
 
-        let ratio: Double = (value / width)
-            .invertedFromMax(
-                1,
-                if: isReversed
-            ) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
+        let ratio: Double = (value / width).invertedFromMax(1, if: isReversed) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
 
         let progress: Double = (ratio * range.boundRange + range.lowerBound)
             .clamped(to: range, step: step)
