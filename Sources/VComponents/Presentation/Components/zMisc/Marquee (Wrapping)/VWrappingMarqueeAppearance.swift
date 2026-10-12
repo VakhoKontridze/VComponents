@@ -64,18 +64,23 @@ public struct VWrappingMarqueeAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 }
 
 extension VWrappingMarqueeAppearance {
-    /// `VWrappingMarqueeAppearance` that insets content and applies fading gradient.
-    public static var insettedGradientMask: Self {
-        var appearance: Self = .init()
-        
-        appearance.wrappedContentSpacing = 0
-        appearance.inset = 20
-        
-        appearance.gradientMaskWidth = 20
-        
-        return appearance
+    /// Insets content and applies fading gradient.
+    public mutating func applyInsettedGradientMask() {
+        wrappedContentSpacing = 0
+        inset = 20
+
+        gradientMaskWidth = 20
     }
 }

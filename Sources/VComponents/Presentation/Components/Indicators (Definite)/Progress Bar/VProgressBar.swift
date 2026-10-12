@@ -174,11 +174,9 @@ public struct VProgressBar: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VProgressBar(
-                appearance: {
-                    var appearance: VProgressBarAppearance = .init()
-                    appearance.direction = .leftToRight
-                    return appearance
-                }(),
+                appearance: VProgressBarAppearance {
+                    $0.direction = .leftToRight
+                },
                 value: value
             )
             .frame(width: length)
@@ -187,11 +185,9 @@ public struct VProgressBar: View {
 
         PreviewRow("Right-to-Left") {
             VProgressBar(
-                appearance: {
-                    var appearance: VProgressBarAppearance = .init()
-                    appearance.direction = .rightToLeft
-                    return appearance
-                }(),
+                appearance: VProgressBarAppearance {
+                    $0.direction = .rightToLeft
+                },
                 value: value
             )
             .frame(width: length)
@@ -201,11 +197,9 @@ public struct VProgressBar: View {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VProgressBar(
-                    appearance: {
-                        var appearance: VProgressBarAppearance = .init()
-                        appearance.direction = .topToBottom
-                        return appearance
-                    }(),
+                    appearance: VProgressBarAppearance {
+                        $0.direction = .topToBottom
+                    },
                     value: value
                 )
                 .frame(height: length)
@@ -214,11 +208,9 @@ public struct VProgressBar: View {
 
             PreviewRow("Bottom-to-Top") {
                 VProgressBar(
-                    appearance: {
-                        var appearance: VProgressBarAppearance = .init()
-                        appearance.direction = .bottomToTop
-                        return appearance
-                    }(),
+                    appearance: VProgressBarAppearance {
+                        $0.direction = .bottomToTop
+                    },
                     value: value
                 )
                 .frame(height: length)

@@ -233,14 +233,12 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Off") {
             VToggle(
-                appearance: {
-                    var appearance: VToggleAppearance = .init()
-                    appearance.fillColors.off = appearance.fillColors.pressedOff
-                    appearance.borderColors.off = appearance.borderColors.pressedOff
-                    appearance.thumbColors.off = appearance.thumbColors.pressedOff
-                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VToggleAppearance {
+                    $0.fillColors.off = $0.fillColors.pressedOff
+                    $0.borderColors.off = $0.borderColors.pressedOff
+                    $0.thumbColors.off = $0.thumbColors.pressedOff
+                    $0.labelTextConfiguration.colors!.off = $0.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
+                },
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
@@ -255,14 +253,12 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed On") {
             VToggle(
-                appearance: {
-                    var appearance: VToggleAppearance = .init()
-                    appearance.fillColors.on = appearance.fillColors.pressedOn
-                    appearance.borderColors.on = appearance.borderColors.pressedOn
-                    appearance.thumbColors.on = appearance.thumbColors.pressedOn
-                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VToggleAppearance {
+                    $0.fillColors.on = $0.fillColors.pressedOn
+                    $0.borderColors.on = $0.borderColors.pressedOn
+                    $0.thumbColors.on = $0.thumbColors.pressedOn
+                    $0.labelTextConfiguration.colors!.on = $0.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
+                },
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )

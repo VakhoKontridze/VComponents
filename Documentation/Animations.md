@@ -35,11 +35,9 @@ By default, `VToggle` has an `easeIn` animation with a duration of `0.1`. This a
 var body: some View {
     VStack {
         VToggle(
-            appearance: {
-                var appearance: VToggleAppearance = .init()
-                appearance.stateChangeAnimation = .easeIn(duration: 1)
-                return appearance
-            }(),
+            appearance: VToggleAppearance {
+                $0.stateChangeAnimation = .easeIn(duration: 1)
+            },
             isOn: $isOn
         )
         
@@ -67,11 +65,9 @@ The first is to set `stateChangeAnimation` to `nil`. While this does not complet
 var body: some View {
     VStack {
         VToggle(
-            appearance: {
-                var appearance: VToggleAppearance = .init()
-                appearance.stateChangeAnimation = nil
-                return appearance
-            }(),
+            appearance: VToggleAppearance {
+                $0.stateChangeAnimation = nil
+            },
             isOn: $isOn
         )
         
@@ -93,11 +89,9 @@ The second is to set `appliesStateChangeAnimation` to `false`. This option ensur
 var body: some View {
     VStack {
         VToggle(
-            appearance: {
-                var appearance: VToggleAppearance = .init()
-                appearance.appliesStateChangeAnimation = false
-                return appearance
-            }(),
+            appearance: VToggleAppearance {
+                $0.appliesStateChangeAnimation = false
+            },
             isOn: $isOn
         )
         
@@ -119,11 +113,9 @@ In certain scenarios, the distinction between these two can be substantial. For 
 var body: some View {
     VStack {
         VToggle(
-            appearance: {
-                var appearance: VToggleAppearance = .init()
-                appearance.appliesStateChangeAnimation = false
-                return appearance
-            }(),
+            appearance: VToggleAppearance {
+                $0.appliesStateChangeAnimation = false
+            },
             isOn: $isOn
         )
         

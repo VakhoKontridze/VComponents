@@ -66,16 +66,33 @@ public struct VSlider: View {
     {
         self.appearance = appearance
 
-        self.range = ClosedRange(
+        let range: ClosedRange = .init(
             lower: Double(range.lowerBound),
             upper: Double(range.upperBound)
         )
-        self.step = step.map { Double($0) }
-        
-        self._progress = VSliderValueBinding.make(
-            range: range,
-            step: step,
-            value: value
+        self.range = range
+
+        let step: Double? = step.map { Double($0) }
+        self.step = step
+
+        self._progress = Binding(
+            get: {
+                let value: Double = Double(value.wrappedValue)
+
+                guard
+                    value.isFinite,
+                    range.lowerBound.isFinite,
+                    range.upperBound.isFinite,
+                    range.upperBound > range.lowerBound
+                else {
+                    return range.lowerBound
+                }
+
+                return value.clamped(to: range, step: step)
+            },
+            set: {
+                value.wrappedValue = V($0)
+            }
         )
 
         self.onChange = onChange
@@ -210,8 +227,11 @@ public struct VSlider: View {
         let progress: CGFloat = progress - range.lowerBound
         guard let boundRange: Double = range.boundRange.nonZero else { return 0 }
         let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal)
-        
-        return (progress / boundRange) * width
+
+        let value: CGFloat = (progress / boundRange) * width
+        guard value.isFinite else { return 0 } // Guards against a non-finite `range`
+
+        return value
     }
     
     // MARK: Thumb Offset
@@ -279,11 +299,9 @@ public struct VSlider: View {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VSlider(
-                appearance: {
-                    var appearance: VSliderAppearance = .init()
-                    appearance.direction = .leftToRight
-                    return appearance
-                }(),
+                appearance: VSliderAppearance {
+                    $0.direction = .leftToRight
+                },
                 value: $value
             )
             .frame(width: length)
@@ -291,11 +309,9 @@ public struct VSlider: View {
         
         PreviewRow("Right-to-Left") {
             VSlider(
-                appearance: {
-                    var appearance: VSliderAppearance = .init()
-                    appearance.direction = .rightToLeft
-                    return appearance
-                }(),
+                appearance: VSliderAppearance {
+                    $0.direction = .rightToLeft
+                },
                 value: $value
             )
             .frame(width: length)
@@ -304,11 +320,9 @@ public struct VSlider: View {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VSlider(
-                    appearance: {
-                        var appearance: VSliderAppearance = .init()
-                        appearance.direction = .topToBottom
-                        return appearance
-                    }(),
+                    appearance: VSliderAppearance {
+                        $0.direction = .topToBottom
+                    },
                     value: $value
                 )
                 .frame(height: length)
@@ -316,11 +330,9 @@ public struct VSlider: View {
             
             PreviewRow("Bottom-to-Top") {
                 VSlider(
-                    appearance: {
-                        var appearance: VSliderAppearance = .init()
-                        appearance.direction = .bottomToTop
-                        return appearance
-                    }(),
+                    appearance: VSliderAppearance {
+                        $0.direction = .bottomToTop
+                    },
                     value: $value
                 )
                 .frame(height: length)
@@ -362,11 +374,9 @@ public struct VSlider: View {
 
     PreviewContainer {
         VSlider(
-            appearance: {
-                var appearance: VSliderAppearance = .init()
-                appearance.bodyIsDraggable = true
-                return appearance
-            }(),
+            appearance: VSliderAppearance {
+                $0.bodyIsDraggable = true
+            },
             value: $value
         )
         .padding(.horizontal)

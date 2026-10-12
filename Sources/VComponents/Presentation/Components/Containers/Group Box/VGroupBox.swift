@@ -18,7 +18,11 @@ import VCore
 ///             Color(uiColor: UIColor.secondarySystemBackground)
 ///                 .ignoresSafeArea()
 ///
-///             VGroupBox(appearance: .systemBackgroundColor) {
+///             VGroupBox(
+///                 appearance: VGroupBoxAppearance {
+///                     $0.applySystemBackgroundColor()
+///                 }
+///             ) {
 ///                 Text("...")
 ///                     .multilineTextAlignment(.center)
 ///             }
@@ -115,7 +119,7 @@ public struct VGroupBox<Content>: View where Content: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color") {
-    ContentView(appearance: .systemBackgroundColor, layer: .secondary)
+    ContentView(appearance: VGroupBoxAppearance { $0.applySystemBackgroundColor() }, layer: .secondary)
 }
 
 #endif

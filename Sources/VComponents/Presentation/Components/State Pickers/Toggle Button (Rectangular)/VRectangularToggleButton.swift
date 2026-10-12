@@ -245,12 +245,10 @@ nonisolated extension VRectangularToggleButtonInternalState {
 
         PreviewRow("Pressed Off") {
             VRectangularToggleButton(
-                appearance: {
-                    var appearance: VRectangularToggleButtonAppearance = .init()
-                    appearance.backgroundColors.off = appearance.backgroundColors.pressedOff
-                    appearance.labelImageConfiguration.colors!.off = appearance.labelImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRectangularToggleButtonAppearance {
+                    $0.backgroundColors.off = $0.backgroundColors.pressedOff
+                    $0.labelImageConfiguration.colors!.off = $0.labelImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
+                },
                 state: .constant(.off),
                 image: Image(systemName: "swift")
             )
@@ -265,12 +263,10 @@ nonisolated extension VRectangularToggleButtonInternalState {
 
         PreviewRow("Pressed On") {
             VRectangularToggleButton(
-                appearance: {
-                    var appearance: VRectangularToggleButtonAppearance = .init()
-                    appearance.backgroundColors.on = appearance.backgroundColors.pressedOn
-                    appearance.labelImageConfiguration.colors!.on = appearance.labelImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRectangularToggleButtonAppearance {
+                    $0.backgroundColors.on = $0.backgroundColors.pressedOn
+                    $0.labelImageConfiguration.colors!.on = $0.labelImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
+                },
                 state: .constant(.on),
                 image: Image(systemName: "swift")
             )

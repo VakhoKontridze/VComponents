@@ -197,12 +197,10 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed") {
             VRectangularButton(
-                appearance: {
-                    var appearance: VRectangularButtonAppearance = .init()
-                    appearance.backgroundColors.enabled = appearance.backgroundColors.pressed
-                    appearance.labelImageConfiguration.colors!.enabled = appearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRectangularButtonAppearance {
+                    $0.backgroundColors.enabled = $0.backgroundColors.pressed
+                    $0.labelImageConfiguration.colors!.enabled = $0.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 action: {},
                 image: Image(systemName: "swift")
             )

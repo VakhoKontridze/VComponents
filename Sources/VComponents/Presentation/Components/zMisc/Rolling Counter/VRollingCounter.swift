@@ -322,78 +322,64 @@ nonisolated extension TextConfiguration {
 
         PreviewRow("No Fractions") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
-                    appearance.hasFractionDigits = false
-                    return appearance
-                }(),
+                appearance: VRollingCounterAppearance {
+                    $0.hasFractionDigits = false
+                },
                 value: value
             )
         }
 
         PreviewRow("No Grouping & No Fractions") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
-                    appearance.hasGroupingSeparator = false
-                    appearance.hasFractionDigits = false
-                    return appearance
-                }(),
+                appearance: VRollingCounterAppearance {
+                    $0.hasGroupingSeparator = false
+                    $0.hasFractionDigits = false
+                },
                 value: value
             )
         }
 
         PreviewRow("No Highlight") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
-                    appearance.incrementHighlightColor = nil
-                    appearance.decrementHighlightColor = nil
-                    return appearance
-                }(),
+                appearance: VRollingCounterAppearance {
+                    $0.incrementHighlightColor = nil
+                    $0.decrementHighlightColor = nil
+                },
                 value: value
             )
         }
 
         PreviewRow("Highlighted Symbols") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
-                    appearance.groupingSeparatorTextIsHighlightable = true
-                    appearance.decimalSeparatorTextIsHighlightable = true
-                    return appearance
-                }(),
+                appearance: VRollingCounterAppearance {
+                    $0.groupingSeparatorTextIsHighlightable = true
+                    $0.decimalSeparatorTextIsHighlightable = true
+                },
                 value: value
             )
         }
 
         PreviewRow("Full Highlight") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
-                    appearance.highlightsOnlyTheAffectedCharacters = false
-                    appearance.groupingSeparatorTextIsHighlightable = true
-                    appearance.decimalSeparatorTextIsHighlightable = true
-                    return appearance
-                }(),
+                appearance: VRollingCounterAppearance {
+                    $0.highlightsOnlyTheAffectedCharacters = false
+                    $0.groupingSeparatorTextIsHighlightable = true
+                    $0.decimalSeparatorTextIsHighlightable = true
+                },
                 value: value
             )
         }
 
         PreviewRow("Custom") {
             VRollingCounter(
-                appearance: {
-                    var appearance: VRollingCounterAppearance = .init()
+                appearance: VRollingCounterAppearance {
+                    $0.decimalSeparatorTextConfiguration.color = .secondary
+                    $0.decimalSeparatorTextOffsetY = -10
 
-                    appearance.decimalSeparatorTextConfiguration.color = .secondary
-                    appearance.decimalSeparatorTextOffsetY = -10
-
-                    appearance.fractionDigitTextConfiguration.color = .secondary
-                    appearance.fractionDigitTextConfiguration.font = Font.footnote.bold()
-                    appearance.fractionDigitTextOffsetY = -2
-
-                    return appearance
-                }(),
+                    $0.fractionDigitTextConfiguration.color = .secondary
+                    $0.fractionDigitTextConfiguration.font = Font.footnote.bold()
+                    $0.fractionDigitTextOffsetY = -2
+                },
                 value: value
             )
         }

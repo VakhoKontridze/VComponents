@@ -128,6 +128,15 @@ public struct VToastAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Width group.
@@ -274,70 +283,32 @@ public struct VToastAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VToastAppearance {
-    /// `VToastAppearance` that applies blue color scheme.
-    public static var info: Self {
-        var appearance: Self = .init()
-        
-        appearance.applyInfoColorScheme()
-        appearance.sensoryFeedback = .success
-        
-        return appearance
-    }
-
-    /// `VToastAppearance` that applies green color scheme.
-    public static var success: Self {
-        var appearance: Self = .init()
-        
-        appearance.applySuccessColorScheme()
-        appearance.sensoryFeedback = .success
-        
-        return appearance
-    }
-    
-    /// `VToastAppearance` that applies yellow color scheme.
-    public static var warning: Self {
-        var appearance: Self = .init()
-        
-        appearance.applyWarningColorScheme()
-        appearance.sensoryFeedback = .warning
-        
-        return appearance
-    }
-    
-    /// `VToastAppearance` that applies error color scheme.
-    public static var error: Self {
-        var appearance: Self = .init()
-        
-        appearance.applyErrorColorScheme()
-        appearance.sensoryFeedback = .error
-        
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VToastAppearance {
-    /// Applies blue color scheme to `VToastAppearance`.
-    public mutating func applyInfoColorScheme() {
+    /// Applies info style.
+    public mutating func applyInfoStyle() {
         backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
-    }
 
-    /// Applies green color scheme to `VToastAppearance`.
-    public mutating func applySuccessColorScheme() {
+        sensoryFeedback = .success
+    }
+    
+    /// Applies success style.
+    public mutating func applySuccessStyle() {
         backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
+
+        sensoryFeedback = .success
     }
     
-    /// Applies yellow color scheme to `VToastAppearance`.
-    public mutating func applyWarningColorScheme() {
+    /// Applies warning style.
+    public mutating func applyWarningStyle() {
         backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
+
+        sensoryFeedback = .warning
     }
     
-    /// Applies red color scheme to `VToastAppearance`.
-    public mutating func applyErrorColorScheme() {
+    /// Applies error style.
+    public mutating func applyErrorStyle() {
         backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
+
+        sensoryFeedback = .error
     }
 }
 

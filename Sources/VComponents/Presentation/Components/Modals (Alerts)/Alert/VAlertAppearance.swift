@@ -73,19 +73,17 @@ public struct VAlertAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        var appearance: VGroupBoxAppearance = .init()
+        VGroupBoxAppearance {
+            $0.cornerRadii = cornerRadii
+            $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-        appearance.cornerRadii = cornerRadii
-        appearance.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
+            $0.backgroundColor = backgroundColor
 
-        appearance.backgroundColor = backgroundColor
+            $0.borderWidth = borderWidth
+            $0.borderColor = borderColor
 
-        appearance.borderWidth = borderWidth
-        appearance.borderColor = borderColor
-
-        appearance.contentMargins = EdgeInsets()
-
-        return appearance
+            $0.contentMargins = EdgeInsets()
+        }
     }
 
     // MARK: Properties - Border
@@ -161,10 +159,8 @@ public struct VAlertAppearance {
 
     // MARK: Properties - Alert Content - Buttons
     /// Primary button appearance.
-    public var primaryButtonAppearance: VStretchedButtonAppearance = {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = {
+    public var primaryButtonAppearance: VStretchedButtonAppearance = .init {
+        $0.height = {
 #if os(iOS)
             40
 #elseif os(macOS)
@@ -173,7 +169,7 @@ public struct VAlertAppearance {
             fatalError()
 #endif
         }()
-        appearance.cornerRadius = {
+        $0.cornerRadius = {
 #if os(iOS)
             10
 #elseif os(macOS)
@@ -183,14 +179,14 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.backgroundColors = ButtonStateColors(
+        $0.backgroundColors = ButtonStateColors(
             enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
             pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
             disabled: Color(128, 176, 240)
         )
 
-        appearance.labelTextConfiguration.colors = ButtonStateColors(Color.white)
-        appearance.labelTextConfiguration.font = {
+        $0.labelTextConfiguration.colors = ButtonStateColors(Color.white)
+        $0.labelTextConfiguration.font = {
 #if os(iOS)
             Font.callout.weight(.semibold)
 #elseif os(macOS)
@@ -200,16 +196,12 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
     
     /// Secondary button appearance.
-    public var secondaryButtonAppearance: VStretchedButtonAppearance = {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = {
+    public var secondaryButtonAppearance: VStretchedButtonAppearance = .init {
+        $0.height = {
 #if os(iOS)
             40
 #elseif os(macOS)
@@ -218,7 +210,7 @@ public struct VAlertAppearance {
             fatalError()
 #endif
         }()
-        appearance.cornerRadius = {
+        $0.cornerRadius = {
 #if os(iOS)
             10
 #elseif os(macOS)
@@ -228,18 +220,18 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.backgroundColors = ButtonStateColors(
+        $0.backgroundColors = ButtonStateColors(
             enabled: Color.clear,
             pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
             disabled: Color.clear
         )
 
-        appearance.labelTextConfiguration.colors = ButtonStateColors(
+        $0.labelTextConfiguration.colors = ButtonStateColors(
             enabled: Color.blue,
             pressed: Color.blue,
             disabled: Color.platformDynamic(Color.blue.opacity(0.3), Color.blue.opacity(0.5))
         )
-        appearance.labelTextConfiguration.font = {
+        $0.labelTextConfiguration.font = {
 #if os(iOS)
             Font.callout.weight(.semibold)
 #elseif os(macOS)
@@ -249,16 +241,12 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
     
     /// Destructive button appearance.
-    public var destructiveButtonAppearance: VStretchedButtonAppearance = {
-        var appearance: VStretchedButtonAppearance = .init()
-
-        appearance.height = {
+    public var destructiveButtonAppearance: VStretchedButtonAppearance = .init {
+        $0.height = {
 #if os(iOS)
             40
 #elseif os(macOS)
@@ -267,7 +255,7 @@ public struct VAlertAppearance {
             fatalError()
 #endif
         }()
-        appearance.cornerRadius = {
+        $0.cornerRadius = {
 #if os(iOS)
             10
 #elseif os(macOS)
@@ -277,18 +265,18 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.backgroundColors = ButtonStateColors(
+        $0.backgroundColors = ButtonStateColors(
             enabled: Color.clear,
             pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
             disabled: Color.clear
         )
 
-        appearance.labelTextConfiguration.colors = ButtonStateColors(
+        $0.labelTextConfiguration.colors = ButtonStateColors(
             enabled: Color.red,
             pressed: Color.red,
             disabled: Color.platformDynamic(Color.red.opacity(0.3), Color.red.opacity(0.5))
         )
-        appearance.labelTextConfiguration.font = {
+        $0.labelTextConfiguration.font = {
 #if os(iOS)
             Font.callout.weight(.semibold)
 #elseif os(macOS)
@@ -298,10 +286,8 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
 
     /// Button margins.
     public var buttonMargins: EdgeInsets = .init(
@@ -354,6 +340,15 @@ public struct VAlertAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Width group.

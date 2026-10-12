@@ -186,6 +186,15 @@ public struct VNotificationAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Width group.
@@ -229,78 +238,40 @@ public struct VNotificationAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VNotificationAppearance {
-    /// `VNotificationAppearance` that applies blue color scheme.
-    public static var info: Self {
-        var appearance: Self = .init()
-
-        appearance.applyInfoColorScheme()
-        appearance.sensoryFeedback = .success
-
-        return appearance
-    }
-
-    /// `VNotificationAppearance` that applies green color scheme.
-    public static var success: Self {
-        var appearance: Self = .init()
-
-        appearance.applySuccessColorScheme()
-        appearance.sensoryFeedback = .success
-
-        return appearance
-    }
-
-    /// `VNotificationAppearance` that applies yellow color scheme.
-    public static var warning: Self {
-        var appearance: Self = .init()
-
-        appearance.applyWarningColorScheme()
-        appearance.sensoryFeedback = .warning
-
-        return appearance
-    }
-
-    /// `VNotificationAppearance` that applies error color scheme.
-    public static var error: Self {
-        var appearance: Self = .init()
-
-        appearance.applyErrorColorScheme()
-        appearance.sensoryFeedback = .error
-
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VNotificationAppearance {
-    /// Applies blue color scheme to `VNotificationAppearance`.
-    public mutating func applyInfoColorScheme() {
+    /// Applies info style.
+    public mutating func applyInfoStyle() {
         backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
 
         imageBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
-    }
 
-    /// Applies green color scheme to `VNotificationAppearance`.
-    public mutating func applySuccessColorScheme() {
+        sensoryFeedback = .success
+    }
+    
+    /// Applies success style.
+    public mutating func applySuccessStyle() {
         backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
 
         imageBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
-    }
 
-    /// Applies yellow color scheme to `VNotificationAppearance`.
-    public mutating func applyWarningColorScheme() {
+        sensoryFeedback = .success
+    }
+    
+    /// Applies warning style.
+    public mutating func applyWarningStyle() {
         backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
 
         imageBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
-    }
 
-    /// Applies red color scheme to `VNotificationAppearance`.
-    public mutating func applyErrorColorScheme() {
+        sensoryFeedback = .warning
+    }
+    
+    /// Applies error style.
+    public mutating func applyErrorStyle() {
         backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
 
         imageBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))
+
+        sensoryFeedback = .error
     }
 }
 

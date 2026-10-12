@@ -234,15 +234,15 @@ struct VSideBar<Content>: View where Content: View {
 }
 
 #Preview("Trailing") {
-    ContentView(appearance: .trailing)
+    ContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.trailing) })
 }
 
 #Preview("Top") {
-    ContentView(appearance: .top)
+    ContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.top) })
 }
 
 #Preview("Bottom") {
-    ContentView(appearance: .bottom)
+    ContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.bottom) })
 }
 
 #if !os(macOS) // No `UIEdgeInsets`
@@ -256,7 +256,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Trailing") {
-    SafeAreaContentView(appearance: .trailing)
+    SafeAreaContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.trailing) })
 }
 
 #endif
@@ -264,7 +264,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Top") {
-    SafeAreaContentView(appearance: .top)
+    SafeAreaContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.top) })
 }
 
 #endif
@@ -272,7 +272,7 @@ struct VSideBar<Content>: View where Content: View {
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Bottom") {
-    SafeAreaContentView(appearance: .bottom)
+    SafeAreaContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.bottom) })
 }
 
 #endif

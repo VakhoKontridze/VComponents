@@ -181,15 +181,15 @@ public struct VTextView: View {
 }
 
 #Preview("Success") {
-    StatesContentView(appearance: .success)
+    StatesContentView(appearance: VTextViewAppearance { $0.applySuccessStyle() })
 }
 
 #Preview("Warning") {
-    StatesContentView(appearance: .warning)
+    StatesContentView(appearance: VTextViewAppearance { $0.applyWarningStyle() })
 }
 
 #Preview("Error") {
-    StatesContentView(appearance: .error)
+    StatesContentView(appearance: VTextViewAppearance { $0.applyErrorStyle() })
 }
 
 private struct StatesContentView: View {
@@ -217,13 +217,11 @@ private struct StatesContentView: View {
 
             PreviewRow("Focused") {
                 VTextView(
-                    appearance: {
-                        var mappedAppearance: VTextViewAppearance = appearance
-                        mappedAppearance.backgroundColors.enabled = appearance.backgroundColors.focused
-                        mappedAppearance.borderColors.enabled = appearance.borderColors.focused
-                        mappedAppearance.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
-                        return mappedAppearance
-                    }(),
+                    appearance: VTextViewAppearance(appearance) {
+                        $0.backgroundColors.enabled = appearance.backgroundColors.focused
+                        $0.borderColors.enabled = appearance.borderColors.focused
+                        $0.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
+                    },
                     placeholder: "Lorem ipsum",
                     text: .constant("Lorem ipsum")
                 )

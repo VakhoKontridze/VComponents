@@ -175,11 +175,9 @@ private struct ContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vModal(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VModalAppearance = .init()
+                    appearance: VModalAppearance { appearance in
                         size.map { appearance.sizeGroup = VModalAppearance.SizeGroup($0) }
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Text("Lorem ipsum dolor sit amet")

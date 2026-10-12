@@ -21,11 +21,13 @@ public import VCore
 ///         )
 ///     }
 ///
-/// Direction can be changed via `direction` in Appearance, or passing `vertical` instance.
+/// Direction can be changed via `direction` in Appearance.
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             appearance: .vertical,
+///             appearance: VCompactPageIndicatorAppearance {
+///                 $0.direction = .topToBottom
+///             },
 ///             current: current,
 ///             total: total
 ///         )
@@ -389,11 +391,9 @@ nonisolated extension Int {
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VCompactPageIndicator(
-                appearance: {
-                    var appearance: VCompactPageIndicatorAppearance = .init()
-                    appearance.direction = .leftToRight
-                    return appearance
-                }(),
+                appearance: VCompactPageIndicatorAppearance {
+                    $0.direction = .leftToRight
+                },
                 current: current,
                 total: total
             )
@@ -401,11 +401,9 @@ nonisolated extension Int {
 
         PreviewRow("Right-to-Left") {
             VCompactPageIndicator(
-                appearance: {
-                    var appearance: VCompactPageIndicatorAppearance = .init()
-                    appearance.direction = .rightToLeft
-                    return appearance
-                }(),
+                appearance: VCompactPageIndicatorAppearance {
+                    $0.direction = .rightToLeft
+                },
                 current: current,
                 total: total
             )
@@ -414,11 +412,9 @@ nonisolated extension Int {
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VCompactPageIndicator(
-                    appearance: {
-                        var appearance: VCompactPageIndicatorAppearance = .init()
-                        appearance.direction = .topToBottom
-                        return appearance
-                    }(),
+                    appearance: VCompactPageIndicatorAppearance {
+                        $0.direction = .topToBottom
+                    },
                     current: current,
                     total: total
                 )
@@ -426,11 +422,9 @@ nonisolated extension Int {
 
             PreviewRow("Bottom-to-Top") {
                 VCompactPageIndicator(
-                    appearance: {
-                        var appearance: VCompactPageIndicatorAppearance = .init()
-                        appearance.direction = .bottomToTop
-                        return appearance
-                    }(),
+                    appearance: VCompactPageIndicatorAppearance {
+                        $0.direction = .bottomToTop
+                    },
                     current: current,
                     total: total
                 )

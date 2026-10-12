@@ -20,11 +20,13 @@ public import VCore
 ///         )
 ///     }
 ///
-/// Direction can be changed via `direction` in Appearance, or passing `vertical` instance.
+/// Direction can be changed via `direction` in Appearance.
 ///
 ///     var body: some View {
 ///         VPageIndicator(
-///             appearance: .vertical,
+///             appearance: VPageIndicatorAppearance {
+///                 $0.direction = .topToBottom
+///             },
 ///             current: current,
 ///             total: total
 ///         )
@@ -229,11 +231,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     PreviewContainer {
         PreviewRow("Left-to-Right") {
             VPageIndicator(
-                appearance: {
-                    var appearance: VPageIndicatorAppearance = .init()
-                    appearance.direction = .leftToRight
-                    return appearance
-                }(),
+                appearance: VPageIndicatorAppearance {
+                    $0.direction = .leftToRight
+                },
                 current: current,
                 total: total
             )
@@ -241,11 +241,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 
         PreviewRow("Right-to-Left") {
             VPageIndicator(
-                appearance: {
-                    var appearance: VPageIndicatorAppearance = .init()
-                    appearance.direction = .rightToLeft
-                    return appearance
-                }(),
+                appearance: VPageIndicatorAppearance {
+                    $0.direction = .rightToLeft
+                },
                 current: current,
                 total: total
             )
@@ -254,11 +252,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
         HStack(spacing: 20) {
             PreviewRow("Top-to-Bottom") {
                 VPageIndicator(
-                    appearance: {
-                        var appearance: VPageIndicatorAppearance = .init()
-                        appearance.direction = .topToBottom
-                        return appearance
-                    }(),
+                    appearance: VPageIndicatorAppearance {
+                        $0.direction = .topToBottom
+                    },
                     current: current,
                     total: total
                 )
@@ -266,11 +262,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 
             PreviewRow("Bottom-to-Top") {
                 VPageIndicator(
-                    appearance: {
-                        var appearance: VPageIndicatorAppearance = .init()
-                        appearance.direction = .bottomToTop
-                        return appearance
-                    }(),
+                    appearance: VPageIndicatorAppearance {
+                        $0.direction = .bottomToTop
+                    },
                     current: current,
                     total: total
                 )
@@ -286,11 +280,9 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 
     PreviewContainer {
         VPageIndicator(
-            appearance: {
-                var appearance: VPageIndicatorAppearance = .init()
-                appearance.dotWidths.selected? *= 3
-                return appearance
-            }(),
+            appearance: VPageIndicatorAppearance {
+                $0.dotWidths.selected? *= 3
+            },
             current: current,
             total: total
         )
@@ -302,13 +294,11 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     @Previewable @State var current: Int = 0
     let total: Int = 10
 
-    let appearance: VPageIndicatorAppearance = {
-        var appearance: VPageIndicatorAppearance = .init()
-        appearance.direction = .leftToRight
-        appearance.dotWidths = VPageIndicatorAppearance.DotStateOptionalDimensions(nil)
-        appearance.dotHeights = VPageIndicatorAppearance.DotStateDimensions(4)
-        return appearance
-    }()
+    let appearance: VPageIndicatorAppearance = VPageIndicatorAppearance {
+        $0.direction = .leftToRight
+        $0.dotWidths = VPageIndicatorAppearance.DotStateOptionalDimensions(nil)
+        $0.dotHeights = VPageIndicatorAppearance.DotStateDimensions(4)
+    }
 
     PreviewContainer {
         VPageIndicator(

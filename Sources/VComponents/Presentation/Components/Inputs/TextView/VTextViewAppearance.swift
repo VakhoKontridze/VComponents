@@ -89,6 +89,15 @@ public struct VTextViewAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// State-bound colors.
@@ -106,57 +115,28 @@ public struct VTextViewAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VTextViewAppearance {
-    /// `VTextViewAppearance` that applies green color scheme.
-    public static var success: Self {
-        var appearance: Self = .init()
-
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applySuccessColorScheme()
-
-        return appearance
-    }
-
-    /// `VTextViewAppearance` that applies yellow color scheme.
-    public static var warning: Self {
-        var appearance: Self = .init()
-
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyWarningColorScheme()
-
-        return appearance
-    }
-
-    /// `VTextViewAppearance` that applies error color scheme.
-    public static var error: Self {
-        var appearance: Self = .init()
-
-        appearance.borderWidth = PointPixelMeasurement.points(1.5)
-        appearance.applyErrorColorScheme()
-
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VTextViewAppearance {
-    /// Applies green color scheme to `VTextViewAppearance`.
-    public mutating func applySuccessColorScheme() {
+    /// Applies success style.
+    public mutating func applySuccessStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
         borderColors.focused = Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75))
     }
-
-    /// Applies yellow color scheme to `VTextViewAppearance`.
-    public mutating func applyWarningColorScheme() {
+    
+    /// Applies warning style.
+    public mutating func applyWarningStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
         borderColors.focused = Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20))
     }
-
-    /// Applies red color scheme to `VTextViewAppearance`.
-    public mutating func applyErrorColorScheme() {
+    
+    /// Applies error style.
+    public mutating func applyErrorStyle() {
+        applyBorder()
         borderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
+    }
+    
+    private mutating func applyBorder() {
+        borderWidth = PointPixelMeasurement.points(1.5)
     }
 }

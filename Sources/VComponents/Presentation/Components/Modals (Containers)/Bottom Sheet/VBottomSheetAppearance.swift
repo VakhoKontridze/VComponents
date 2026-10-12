@@ -76,16 +76,14 @@ public struct VBottomSheetAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        var appearance: VGroupBoxAppearance = .init()
+        VGroupBoxAppearance {
+            $0.cornerRadii = cornerRadii
+            $0.reversesHorizontalCornersForRTLLanguages = false // No need
 
-        appearance.cornerRadii = cornerRadii
-        appearance.reversesHorizontalCornersForRTLLanguages = false // No need
+            $0.backgroundColor = backgroundColor
 
-        appearance.backgroundColor = backgroundColor
-
-        appearance.contentMargins = EdgeInsets()
-
-        return appearance
+            $0.contentMargins = EdgeInsets()
+        }
     }
 
     // MARK: Properties - Drag Indicator
@@ -179,6 +177,15 @@ public struct VBottomSheetAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Size group.
@@ -400,23 +407,10 @@ extension VBottomSheetAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VBottomSheetAppearance {
-    /// `VBottomSheetAppearance` that insets content.
-    public static var insettedContent: Self {
-        var appearance: Self = .init()
-        
-        appearance.contentMargins = EdgeInsets(15)
-        
-        return appearance
-    }
-
-    /// `VBottomSheetAppearance` that hides drag indicator.
+    /// Hides drag indicator.
     ///
     /// It's worth considering setting `contentIsDraggable` to `true`.
-    public static var noDragIndicator: Self {
-        var appearance: Self = .init()
-
-        appearance.dragIndicatorSize.height = 0
-
-        return appearance
+    public mutating func hideDragIndicator() {
+        dragIndicatorSize.height = 0
     }
 }

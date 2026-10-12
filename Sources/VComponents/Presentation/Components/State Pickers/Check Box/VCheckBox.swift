@@ -226,14 +226,12 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Off") {
             VCheckBox(
-                appearance: {
-                    var appearance: VCheckBoxAppearance = .init()
-                    appearance.fillColors.off = appearance.fillColors.pressedOff
-                    appearance.borderColors.off = appearance.borderColors.pressedOff
-                    appearance.checkmarkImageConfiguration.colors!.off = appearance.checkmarkImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
-                    appearance.labelTextConfiguration.colors!.off = appearance.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VCheckBoxAppearance {
+                    $0.fillColors.off = $0.fillColors.pressedOff
+                    $0.borderColors.off = $0.borderColors.pressedOff
+                    $0.checkmarkImageConfiguration.colors!.off = $0.checkmarkImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
+                    $0.labelTextConfiguration.colors!.off = $0.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
+                },
                 state: .constant(.off),
                 title: "Lorem ipsum"
             )
@@ -248,14 +246,12 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed On") {
             VCheckBox(
-                appearance: {
-                    var appearance: VCheckBoxAppearance = .init()
-                    appearance.fillColors.on = appearance.fillColors.pressedOn
-                    appearance.borderColors.on = appearance.borderColors.pressedOn
-                    appearance.checkmarkImageConfiguration.colors!.on = appearance.checkmarkImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
-                    appearance.labelTextConfiguration.colors!.on = appearance.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VCheckBoxAppearance {
+                    $0.fillColors.on = $0.fillColors.pressedOn
+                    $0.borderColors.on = $0.borderColors.pressedOn
+                    $0.checkmarkImageConfiguration.colors!.on = $0.checkmarkImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
+                    $0.labelTextConfiguration.colors!.on = $0.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
+                },
                 state: .constant(.on),
                 title: "Lorem ipsum"
             )
@@ -270,14 +266,12 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
         PreviewRow("Pressed Indeterminate") {
             VCheckBox(
-                appearance: {
-                    var appearance: VCheckBoxAppearance = .init()
-                    appearance.fillColors.indeterminate = appearance.fillColors.pressedIndeterminate
-                    appearance.borderColors.indeterminate = appearance.borderColors.pressedIndeterminate
-                    appearance.checkmarkImageConfiguration.colors!.indeterminate = appearance.checkmarkImageConfiguration.colors!.pressedIndeterminate // Unsafe (DEBUG)
-                    appearance.labelTextConfiguration.colors!.indeterminate = appearance.labelTextConfiguration.colors!.pressedIndeterminate  // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VCheckBoxAppearance {
+                    $0.fillColors.indeterminate = $0.fillColors.pressedIndeterminate
+                    $0.borderColors.indeterminate = $0.borderColors.pressedIndeterminate
+                    $0.checkmarkImageConfiguration.colors!.indeterminate = $0.checkmarkImageConfiguration.colors!.pressedIndeterminate // Unsafe (DEBUG)
+                    $0.labelTextConfiguration.colors!.indeterminate = $0.labelTextConfiguration.colors!.pressedIndeterminate  // Unsafe (DEBUG)
+                },
                 state: .constant(.indeterminate),
                 title: "Lorem ipsum"
             )

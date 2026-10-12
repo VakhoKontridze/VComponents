@@ -263,13 +263,11 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
         PreviewRow("Pressed") {
             VRectangularCaptionButton(
-                appearance: {
-                    var appearance: VRectangularCaptionButtonAppearance = .init()
-                    appearance.rectangleColors.enabled = appearance.rectangleColors.pressed
-                    appearance.labelImageConfiguration.colors!.enabled = appearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    appearance.captionTextConfiguration.colors!.enabled = appearance.captionTextConfiguration.colors!.pressed // Unsafe (DEBUG)
-                    return appearance
-                }(),
+                appearance: VRectangularCaptionButtonAppearance {
+                    $0.rectangleColors.enabled = $0.rectangleColors.pressed
+                    $0.labelImageConfiguration.colors!.enabled = $0.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                    $0.captionTextConfiguration.colors!.enabled = $0.captionTextConfiguration.colors!.pressed // Unsafe (DEBUG)
+                },
                 action: {},
                 labelImage: Image(systemName: "swift"),
                 captionTitle: "Lorem Ipsum"

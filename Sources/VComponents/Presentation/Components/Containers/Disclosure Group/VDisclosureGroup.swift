@@ -18,7 +18,9 @@ public import VCore
 ///                 .ignoresSafeArea()
 ///
 ///             VDisclosureGroup(
-///                 appearance: .systemBackgroundColor,
+///                 appearance: VDisclosureGroupAppearance {
+///                     $0.applySystemBackgroundColor()
+///                 },
 ///                 state: $state,
 ///                 headerTitle: "Lorem Ipsum"
 ///             ) {
@@ -219,7 +221,7 @@ nonisolated private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 #if !os(macOS) // Redundant
 
 #Preview("States (System Background Color)") {
-    StatesContentView(layer: .secondary, appearance: .systemBackgroundColor)
+    StatesContentView(layer: .secondary, appearance: VDisclosureGroupAppearance { $0.applySystemBackgroundColor() })
 }
 
 #endif
@@ -265,12 +267,10 @@ private struct StatesContentView: View {
 
             PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
-                    appearance: {
-                        var appearance: VDisclosureGroupAppearance = appearance
-                        appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.pressed
-                        appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
-                        return appearance
-                    }(),
+                    appearance: VDisclosureGroupAppearance(appearance) {
+                        $0.disclosureButtonAppearance.backgroundColors.enabled = $0.disclosureButtonAppearance.backgroundColors.pressed
+                        $0.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = $0.disclosureButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
+                    },
                     state: .constant(.collapsed),
                     headerTitle: "Lorem Ipsum"
                 ) {
@@ -281,12 +281,10 @@ private struct StatesContentView: View {
 
             PreviewRow("Disabled") {
                 VDisclosureGroup(
-                    appearance: {
-                        var appearance: VDisclosureGroupAppearance = appearance
-                        appearance.disclosureButtonAppearance.backgroundColors.enabled = appearance.disclosureButtonAppearance.backgroundColors.disabled
-                        appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.disclosureButtonAppearance.labelImageConfiguration.colors!.disabled // Unsafe (DEBUG)
-                        return appearance
-                    }(),
+                    appearance: VDisclosureGroupAppearance(appearance) {
+                        $0.disclosureButtonAppearance.backgroundColors.enabled = $0.disclosureButtonAppearance.backgroundColors.disabled
+                        $0.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = $0.disclosureButtonAppearance.labelImageConfiguration.colors!.disabled // Unsafe (DEBUG)
+                    },
                     state: .constant(.expanded),
                     headerTitle: "Lorem Ipsum"
                 ) {

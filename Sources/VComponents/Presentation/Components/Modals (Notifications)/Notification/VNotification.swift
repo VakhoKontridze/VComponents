@@ -370,12 +370,10 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VNotificationAppearance = .init()
-                    appearance.presentationEdge = .bottom
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VNotificationAppearance {
+                    $0.presentationEdge = .bottom
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
@@ -400,15 +398,11 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VNotificationAppearance = .init()
-
+                appearance: VNotificationAppearance { appearance in
                     width.map { appearance.widthGroup = VNotificationAppearance.WidthGroup($0) }
                     
                     appearance.timeoutDuration = 60
-
-                    return appearance
-                }(),
+                },
                 isPresented: $isPresented,
                 image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
@@ -456,11 +450,9 @@ struct VNotification<CustomContent>: View where CustomContent: View {
         ModalLauncherView(isPresented: $isPresented)
             .vNotification(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VNotificationAppearance = appearance
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VNotificationAppearance(appearance) {
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 image: Image(systemName: "swift"),
                 title: "Lorem Ipsum Dolor Sit Amet",
@@ -476,7 +468,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                                 return
                             }
 
-                            appearance = .info
+                            appearance = VNotificationAppearance { $0.applyInfoStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -484,7 +476,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                                 return
                             }
                             
-                            appearance = .success
+                            appearance = VNotificationAppearance { $0.applySuccessStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -492,7 +484,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                                 return
                             }
                             
-                            appearance = .warning
+                            appearance = VNotificationAppearance { $0.applyWarningStyle() }
                             
                             do {
                                 try await Task.sleep(for: .seconds(1))
@@ -500,7 +492,7 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                                 return
                             }
                             
-                            appearance = .error
+                            appearance = VNotificationAppearance { $0.applyErrorStyle() }
                         }
                     }
                 }
@@ -541,11 +533,9 @@ private struct ContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vNotification(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VNotificationAppearance = .init()
-                        appearance.timeoutDuration = 60
-                        return appearance
-                    }(),
+                    appearance: VNotificationAppearance {
+                        $0.timeoutDuration = 60
+                    },
                     isPresented: $isPresented,
                     image: image,
                     title: title,

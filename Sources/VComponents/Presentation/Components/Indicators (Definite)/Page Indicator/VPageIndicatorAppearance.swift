@@ -143,6 +143,15 @@ public struct VPageIndicatorAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// State-bound dimensions .
@@ -153,15 +162,4 @@ public struct VPageIndicatorAppearance {
 
     /// State-bound colors.
     public typealias DotStateColors = GenericStateModel_DeselectedSelected<Color>
-}
-
-extension VPageIndicatorAppearance {
-    /// `VPageIndicatorAppearance` with vertical layout.
-    public static var vertical: Self {
-        var appearance: Self = .init()
-        
-        appearance.direction = .topToBottom
-        
-        return appearance
-    }
 }

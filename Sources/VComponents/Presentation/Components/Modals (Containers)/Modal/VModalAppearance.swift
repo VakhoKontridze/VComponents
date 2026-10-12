@@ -96,19 +96,17 @@ public struct VModalAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        var appearance: VGroupBoxAppearance = .init()
+        VGroupBoxAppearance {
+            $0.cornerRadii = cornerRadii
+            $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-        appearance.cornerRadii = cornerRadii
-        appearance.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
+            $0.backgroundColor = backgroundColor
 
-        appearance.backgroundColor = backgroundColor
+            $0.borderWidth = borderWidth
+            $0.borderColor = borderColor
 
-        appearance.borderWidth = borderWidth
-        appearance.borderColor = borderColor
-
-        appearance.contentMargins = EdgeInsets()
-
-        return appearance
+            $0.contentMargins = EdgeInsets()
+        }
     }
 
     // MARK: Properties - Border
@@ -157,6 +155,15 @@ public struct VModalAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// Size group.
@@ -217,17 +224,5 @@ extension VModalAppearance {
     ) -> CGFloat {
         contentMargins.verticalSum +
         contentHeight
-    }
-}
-
-@available(watchOS, unavailable)
-extension VModalAppearance {
-    /// `VModalAppearance` that insets content.
-    public static var insettedContent: Self {
-        var appearance: Self = .init()
-        
-        appearance.contentMargins = EdgeInsets(15)
-
-        return appearance
     }
 }

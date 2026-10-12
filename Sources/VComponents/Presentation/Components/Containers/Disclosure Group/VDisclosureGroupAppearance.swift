@@ -46,19 +46,17 @@ public struct VDisclosureGroupAppearance {
     func groupBoxAppearance(
         internalState: VDisclosureGroupInternalState
     ) -> VGroupBoxAppearance {
-        var appearance: VGroupBoxAppearance = .init()
+        VGroupBoxAppearance {
+            $0.cornerRadii = cornerRadii
+            $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-        appearance.cornerRadii = cornerRadii
-        appearance.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
+            $0.backgroundColor = backgroundColor
 
-        appearance.backgroundColor = backgroundColor
+            $0.borderWidth = borderWidth
+            $0.borderColor = borderColors.value(for: internalState)
 
-        appearance.borderWidth = borderWidth
-        appearance.borderColor = borderColors.value(for: internalState)
-
-        appearance.contentMargins = EdgeInsets()
-
-        return appearance
+            $0.contentMargins = EdgeInsets()
+        }
     }
 
     // MARK: Properties - Border
@@ -116,13 +114,11 @@ public struct VDisclosureGroupAppearance {
     public var disclosureButtonImage: Image = ImageBook.Symbols.chevronUp
 
     /// Disclosure button appearance.
-    public var disclosureButtonAppearance: VRectangularButtonAppearance = {
-        var appearance: VRectangularButtonAppearance = .init()
+    public var disclosureButtonAppearance: VRectangularButtonAppearance = .init {
+        $0.size = CGSize(dimension: 30)
+        $0.cornerRadius = 16
 
-        appearance.size = CGSize(dimension: 30)
-        appearance.cornerRadius = 16
-
-        appearance.backgroundColors = {
+        $0.backgroundColors = {
 #if os(iOS)
             VRectangularButtonAppearance.StateColors(
                 enabled: Color.dynamic(Color(220, 220, 220), Color(60, 60, 60)),
@@ -140,7 +136,7 @@ public struct VDisclosureGroupAppearance {
 #endif
         }()
         
-        appearance.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
+        $0.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(
             colors: VRectangularButtonAppearance.StateColors(
                 enabled: Color.primary,
                 pressed: Color.primary,
@@ -153,10 +149,8 @@ public struct VDisclosureGroupAppearance {
             size: CGSize(dimension: 12)
         )
 
-        appearance.sensoryFeedback = nil
-
-        return appearance
-    }()
+        $0.sensoryFeedback = nil
+    }
 
     /// Disclosure button angles in radians.
     public var disclosureButtonAngles: StateAngles = .init(
@@ -203,6 +197,15 @@ public struct VDisclosureGroupAppearance {
     // MARK: Initializers
     /// Initializes appearance with default values.
     public init() {}
+    
+    /// Initializes appearance from the given base instance and applies the given configuration.
+    public init(
+        _ base: Self = .init(),
+        _ configure: (inout Self) -> Void
+    ) {
+        self = base
+        configure(&self)
+    }
 
     // MARK: Types
     /// State-bound colors.
@@ -222,35 +225,16 @@ public struct VDisclosureGroupAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VDisclosureGroupAppearance {
-    /// `VDisclosureGroupAppearance` that insets content.
-    public static var insettedContent: Self {
-        var appearance: Self = .init()
-        
-        appearance.contentMargins = EdgeInsets(15)
-
-        return appearance
-    }
-}
-
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-extension VDisclosureGroupAppearance {
-    /// `VDisclosureGroupAppearance` with `UIColor.systemBackground` to be used on `UIColor.secondarySystemBackground`.
-    public static var systemBackgroundColor: Self {
-        var appearance: Self = .init()
-
+    /// Applies `UIColor.systemBackground`, to be used on `UIColor.secondarySystemBackground`.
+    public mutating func applySystemBackgroundColor() {
 #if os(iOS)
-        appearance.backgroundColor = Color(uiColor: UIColor.systemBackground)
+        backgroundColor = Color(uiColor: UIColor.systemBackground)
 #endif
 
-        appearance.disclosureButtonAppearance.backgroundColors = VRectangularButtonAppearance.StateColors(
+        disclosureButtonAppearance.backgroundColors = VRectangularButtonAppearance.StateColors(
             enabled: Color.platformDynamic(Color(230, 230, 230), Color(60, 60, 60)),
             pressed: Color.platformDynamic(Color(210, 210, 210), Color(40, 40, 40)),
             disabled: Color.platformDynamic(Color(240, 240, 240), Color(40, 40, 40))
         )
-
-        return appearance
     }
 }

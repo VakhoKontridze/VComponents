@@ -351,10 +351,8 @@ private struct MinIdealMaxContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
@@ -364,9 +362,7 @@ private struct MinIdealMaxContentView: View {
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             )
                         )
-
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -395,10 +391,8 @@ private struct MinIdealContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
@@ -408,9 +402,7 @@ private struct MinIdealContentView: View {
                                 heights: .fraction(min: 0.6, ideal: 0.9, max: 0.9)
                             )
                         )
-
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -439,10 +431,8 @@ private struct IdealMaxContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
@@ -452,9 +442,7 @@ private struct IdealMaxContentView: View {
                                 heights: .fraction(min: 0.6, ideal: 0.6, max: 0.9)
                             )
                         )
-
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -483,10 +471,8 @@ private struct IdealSmallContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.2)
@@ -496,9 +482,7 @@ private struct IdealSmallContentView: View {
                                 heights: .fraction(0.2)
                             )
                         )
-
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -527,10 +511,8 @@ private struct IdealLargeContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(0.9)
@@ -540,9 +522,7 @@ private struct IdealLargeContentView: View {
                                 heights: .fraction(0.9)
                             )
                         )
-
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     Color.blue
@@ -569,10 +549,8 @@ private struct ContentAutoresizingContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-                        
-                        appearance.sizeGroup = VBottomSheetAppearance.SizeGroup(
+                    appearance: VBottomSheetAppearance {
+                        $0.sizeGroup = VBottomSheetAppearance.SizeGroup(
                             portrait: VBottomSheetAppearance.Size(
                                 width: .fraction(1),
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
@@ -582,10 +560,8 @@ private struct ContentAutoresizingContentView: View {
                                 heights: .fraction(min: 0.3, ideal: 0.6, max: 0.9)
                             )
                         )
-                        appearance.autoresizesContent = true
-                        
-                        return appearance
-                    }(),
+                        $0.autoresizesContent = true
+                    },
                     isPresented: $isPresented
                 ) {
                     VStack(spacing: 0) {
@@ -616,10 +592,8 @@ private struct ContentAutoresizingContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-                        
-                        appearance.contentMargins = EdgeInsets(
+                    appearance: VBottomSheetAppearance {
+                        $0.contentMargins = EdgeInsets(
                             leading: 15,
                             trailing: 15,
                             top: 5,
@@ -627,17 +601,15 @@ private struct ContentAutoresizingContentView: View {
                         )
                         
                         if let contentHeight {
-                            let height: CGFloat = appearance.contentWrappingHeight(
+                            let height: CGFloat = $0.contentWrappingHeight(
                                 contentHeight: contentHeight,
                                 safeAreaInsets: safeAreaInsets
                             )
                             
-                            appearance.sizeGroup.portrait.heights = .absolute(height)
-                            appearance.sizeGroup.portrait.heights = .absolute(height)
+                            $0.sizeGroup.portrait.heights = .absolute(height)
+                            $0.sizeGroup.portrait.heights = .absolute(height)
                         }
-                        
-                        return appearance
-                    }(),
+                    },
                     isPresented: $isPresented
                 ) {
                     VStack(spacing: 20) {
@@ -679,11 +651,9 @@ private struct ContentAutoresizingContentView: View {
             ModalLauncherView(isPresented: $isPresented)
                 .vBottomSheet(
                     link: ModalPresenterLink(linkID: "preview"),
-                    appearance: {
-                        var appearance: VBottomSheetAppearance = .init()
-                        appearance.autoresizesContent = true
-                        return appearance
-                    }(),
+                    appearance: VBottomSheetAppearance {
+                        $0.autoresizesContent = true
+                    },
                     isPresented: $isPresented
                 ) {
                     ScrollView {
@@ -710,7 +680,9 @@ private struct ContentAutoresizingContentView: View {
         ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: .insettedContent,
+                appearance: VBottomSheetAppearance {
+                    $0.contentMargins = EdgeInsets(15)
+                },
                 isPresented: $isPresented
             ) {
                 Color.blue
@@ -726,11 +698,10 @@ private struct ContentAutoresizingContentView: View {
         ModalLauncherView(isPresented: $isPresented)
             .vBottomSheet(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance: VBottomSheetAppearance = .noDragIndicator
-                    appearance.contentIsDraggable = true
-                    return appearance
-                }(),
+                appearance: VBottomSheetAppearance {
+                    $0.hideDragIndicator()
+                    $0.contentIsDraggable = true
+                },
                 isPresented: $isPresented
             ) {
                 Color.blue
