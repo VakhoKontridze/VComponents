@@ -6,6 +6,18 @@ General
 
 - Appearances can now be initialized via a mutation closure
 
+VSlider
+
+- Issue with dragging when `range` doesn't start at `0` is fixed
+- Issue with dragging in reversed directions under RTL layout is fixed
+- Issue with dragging in vertical directions under RTL layout is fixed
+
+VRangeSlider
+
+- Issue with dragging when `range` doesn't start at `0` is fixed
+- Issue with dragging in reversed directions under RTL layout is fixed
+- Issue with dragging in vertical directions under RTL layout is fixed
+
 ### [9.0.0(80)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.0.0) — 2026 09 15
 
 General
