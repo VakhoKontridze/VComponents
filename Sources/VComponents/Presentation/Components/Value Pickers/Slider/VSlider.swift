@@ -200,14 +200,13 @@ public struct VSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
         let value: Double = dragValue.location.coordinate(isX: appearance.direction.isHorizontal)
-        let boundRange: Double = range.boundRange
         guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
 
-        let progress: Double = ((value / width) * boundRange + range.lowerBound)
-            .invertedFromMax(
-                range.upperBound,
-                if: layoutDirection.isRightToLeft || appearance.direction.isReversed
-            )
+        let isReversed: Bool = appearance.direction.isReversed != (appearance.direction.isHorizontal && layoutDirection.isRightToLeft) // Drag coordinates are physical, and only horizontal directions mirror in RTL
+
+        let ratio: Double = (value / width).invertedFromMax(1, if: isReversed) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
+
+        let progress: Double = (ratio * range.boundRange + range.lowerBound)
             .clamped(to: range, step: step)
         
         setProgress(to: progress)
@@ -352,6 +351,22 @@ public struct VSlider: View {
             value: $value
         )
         .padding(.horizontal)
+    }
+}
+
+#Preview("Custom Range") {
+    @Previewable @State var value: Double = 15
+
+    PreviewContainer {
+        PreviewRow("VSlider") {
+            VSlider(range: 10...20, value: $value)
+                .padding(.horizontal)
+        }
+
+        PreviewRow("Native") {
+            Slider(value: $value, in: 10...20)
+                .padding(.horizontal)
+        }
     }
 }
 
