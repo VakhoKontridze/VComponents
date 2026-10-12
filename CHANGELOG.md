@@ -1,6 +1,6 @@
 # Change Log
 
-### 9.1.0(81)
+### [9.1.0(81)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.0) — 2026 10 12
 
 General
 
