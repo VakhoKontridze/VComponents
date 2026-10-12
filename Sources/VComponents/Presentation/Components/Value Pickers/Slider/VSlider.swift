@@ -199,14 +199,19 @@ public struct VSlider: View {
     
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
-        guard let progress: Double = VSliderGeometry.value(
-            location: dragValue.location,
-            size: sliderSize,
-            range: range,
-            step: step,
-            direction: appearance.direction,
-            layoutDirection: layoutDirection
-        ) else { return }
+        let value: Double = dragValue.location.coordinate(isX: appearance.direction.isHorizontal)
+        guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
+
+        let isReversed: Bool = appearance.direction.isReversed != (appearance.direction.isHorizontal && layoutDirection.isRightToLeft) // Drag coordinates are physical, and only horizontal directions mirror in RTL
+
+        let ratio: Double = (value / width)
+            .invertedFromMax(
+                1,
+                if: isReversed
+            ) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
+
+        let progress: Double = (ratio * range.boundRange + range.lowerBound)
+            .clamped(to: range, step: step)
         
         setProgress(to: progress)
         
