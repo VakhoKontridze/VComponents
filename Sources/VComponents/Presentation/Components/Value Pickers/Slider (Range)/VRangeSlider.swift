@@ -209,14 +209,17 @@ public struct VRangeSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: VRangeSliderThumb) {
         let dragValue: Double = dragValue.location.coordinate(isX: appearance.direction.isHorizontal)
-        let boundRange: Double = range.boundRange
         guard let width: CGFloat = sliderSize.dimension(isWidth: appearance.direction.isHorizontal).nonZero else { return }
 
-        var progress: Double = (range.lowerBound + (dragValue / width) * boundRange)
+        let isReversed: Bool = appearance.direction.isReversed != (appearance.direction.isHorizontal && layoutDirection.isRightToLeft) // Drag coordinates are physical, and only horizontal directions mirror in RTL
+
+        let ratio: Double = (dragValue / width)
             .invertedFromMax(
-                range.upperBound,
-                if: layoutDirection.isRightToLeft || appearance.direction.isReversed
-            )
+                1,
+                if: isReversed
+            ) // Ratio is inverted, as inverting value breaks a non-zero `range.lowerBound`
+
+        var progress: Double = range.lowerBound + ratio * range.boundRange
 
         switch thumb {
         case .low:
@@ -439,6 +442,33 @@ nonisolated extension Double {
                 )
                 .frame(height: length)
             }
+        }
+    }
+}
+
+#Preview("Custom Range") {
+    @Previewable @State var value: ClosedRange<Double> = 12...18
+
+    PreviewContainer {
+        PreviewRow("Left-to-Right") {
+            VRangeSlider(
+                range: 10...20,
+                difference: 1,
+                value: $value
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Right-to-Left") {
+            VRangeSlider(
+                appearance: VRangeSliderAppearance {
+                    $0.direction = .rightToLeft
+                },
+                range: 10...20,
+                difference: 1,
+                value: $value
+            )
+            .padding(.horizontal)
         }
     }
 }
