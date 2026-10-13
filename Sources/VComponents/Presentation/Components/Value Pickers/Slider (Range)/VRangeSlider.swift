@@ -97,13 +97,21 @@ public struct VRangeSlider: View {
                     return range
                 }
 
+                // Step rounding belongs to dragging; rounding both bounds here can reduce their difference.
                 return ClosedRange(
-                    lower: valueLower.clamped(to: range, step: step),
-                    upper: valueUpper.clamped(to: range, step: step)
+                    lower: valueLower.clamped(to: range),
+                    upper: valueUpper.clamped(to: range)
                 )
             },
             set: {
-                value.wrappedValue = V($0.lowerBound)...V($0.upperBound)
+                // Round outward so conversion to a narrower type cannot reduce the difference.
+                var lower: V = V($0.lowerBound)
+                if Double(lower) > $0.lowerBound { lower = lower.nextDown }
+
+                var upper: V = V($0.upperBound)
+                if Double(upper) < $0.upperBound { upper = upper.nextUp }
+
+                value.wrappedValue = lower...upper
             }
         )
 
