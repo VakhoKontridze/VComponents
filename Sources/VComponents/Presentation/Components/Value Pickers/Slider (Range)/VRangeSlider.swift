@@ -97,13 +97,19 @@ public struct VRangeSlider: View {
                     return range
                 }
 
-                return ClosedRange(
-                    lower: valueLower.clamped(to: range, step: step),
-                    upper: valueUpper.clamped(to: range, step: step)
+                return ClosedRange( // Step rounding is left to dragging, as rounding both bounds here can collapse their difference
+                    lower: valueLower.clamped(to: range),
+                    upper: valueUpper.clamped(to: range)
                 )
             },
             set: {
-                value.wrappedValue = V($0.lowerBound)...V($0.upperBound)
+                var lower: V = .init($0.lowerBound)
+                if Double(lower) > $0.lowerBound { lower = lower.nextDown } // Rounds outward, as conversion to a narrower type can reduce the difference
+
+                var upper: V = .init($0.upperBound)
+                if Double(upper) < $0.upperBound { upper = upper.nextUp }
+
+                value.wrappedValue = lower...upper
             }
         )
 
