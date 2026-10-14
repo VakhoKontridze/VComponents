@@ -1,5 +1,11 @@
 # Change Log
 
+### [9.1.1(82)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.1) — 2026 10 14
+
+VRangeSlider
+
+- Crash that occurs when dragging with a `step` that rounds `value` below the minimum `difference` is fixed
+
 ### [9.1.0(81)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.0) — 2026 10 12
 
 General
