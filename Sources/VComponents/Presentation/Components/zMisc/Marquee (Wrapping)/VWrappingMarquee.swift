@@ -54,10 +54,22 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     @State private var contentSize: CGSize = .zero
 
     // MARK: Properties - State
-    private var isAnimatable: Bool { (contentSize.width + 2*appearance.inset) > containerWidth }
-    
-    @State private var isAnimating: Bool = Self.isAnimatingDefault
-    private static var isAnimatingDefault: Bool { false }
+    private var isAnimatable: Bool {
+        containerWidth > 0 && // Before measurement, a non-zero `inset` alone would pass the check below
+        contentSize.width > 0 &&
+        (contentSize.width + 2*appearance.inset) > containerWidth
+    }
+
+    // A `repeatForever(autoreverses:)` animation keeps its original bounds after a re-measure, leaving the copies overlapping.
+    // Tying the animation to the distance it was started for restarts it whenever the distance changes.
+    @State private var animatingDistance: CGFloat?
+    private var isAnimating: Bool { animatingDistance == animationDistance }
+
+    private var animationDistance: CGFloat { // Not dependent on container width
+        contentSize.width +
+        appearance.inset +
+        appearance.wrappedContentSpacing
+    }
     
     // MARK: Properties - Content
     private let content: () -> Content
@@ -95,14 +107,15 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
             }
             .offset(x: offsetDynamic)
+            .id(animationDistance) // Discards the in-flight animation
             .task { // `onAppear(perform:)` causes UI glitches
-                isAnimating = isAnimatable
+                animatingDistance = animationDistance
             }
             
         } else {
             contentView
                 .offset(x: offsetStatic)
-                .onAppear { isAnimating = Self.isAnimatingDefault }
+                .onAppear { animatingDistance = nil }
         }
     }
     
@@ -204,14 +217,9 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     
     // MARK: Animations
     private var animation: Animation {
-        let width: CGFloat = // Not dependent on container width
-            contentSize.width +
-            appearance.inset +
-            appearance.wrappedContentSpacing
-        
-        return BasicAnimation(
+        BasicAnimation(
             curve: appearance.animationCurve,
-            duration: appearance.animationDurationType.toDuration(width: width),
+            duration: appearance.animationDurationType.toDuration(width: animationDistance),
             delay: appearance.animationDelay
         )
         .toSwiftUIAnimation
