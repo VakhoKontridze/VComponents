@@ -1,5 +1,15 @@
 # Change Log
 
+### [9.1.2(83)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.2) — 2026 10 19
+
+VWrappingMarquee
+
+- Issue where wrapped content copies overlap when content is measured after the animation starts is fixed
+
+VBouncingMarquee
+
+- Issue where content bounces with incorrect bounds when content or container is measured after the animation starts is fixed
+
 ### [9.1.1(82)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.1) — 2026 10 14
 
 VRangeSlider
