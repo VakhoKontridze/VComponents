@@ -12,9 +12,13 @@ import VCore
 ///
 /// Request can be customized with access token and headers, implement custom caching, and more.
 ///
+/// When `cachedImage` returns an `Image`, it's displayed immediately, and `fetch` isn't called.
+/// This avoids a placeholder flash when the component is recreated, or when parameter changes to an already-cached value.
+///
 ///     var body: some View {
 ///         VFetchingAsyncImage(
 ///             from: #URL("https://website.com/content/image.jpg"),
+///             cachedImage: cachedImage,
 ///             fetch: fetchImage,
 ///             contentWithPhase: { phase in
 ///                 if let image: Image = phase.image {
@@ -38,21 +42,17 @@ import VCore
 ///
 ///     private let cache: NSCache<NSString, UIImage> = .init()
 ///
+///     private func cachedImage(url: URL) -> Image? {
+///         cache.object(forKey: NSString(string: url.absoluteString)).map { Image(uiImage: $0) }
+///     }
+///
 ///     private func fetchImage(url: URL) async throws -> Image {
-///         let key: NSString = .init(string: url.absoluteString)
+///         let data: Data = try await URLSession.shared.data(from: url).0
+///         guard let uiImage: UIImage = .init(data: data) else { throw URLError(.cannotDecodeContentData) }
 ///
-///         switch cache.object(forKey: key) {
-///         case nil:
-///             let data: Data = try await URLSession.shared.data(from: url).0
-///             guard let uiImage: UIImage = .init(data: data) else { throw URLError(.cannotDecodeContentData) }
+///         cache.setObject(uiImage, forKey: NSString(string: url.absoluteString))
 ///
-///             cache.setObject(uiImage, forKey: key)
-///
-///             return Image(uiImage: uiImage)
-///
-///         case let uiImage?:
-///             return Image(uiImage: uiImage)
-///         }
+///         return Image(uiImage: uiImage)
 ///     }
 ///
 public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderContent>: View
@@ -66,9 +66,10 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
 
     // MARK: Properties - Fetching
     private let parameter: Parameter?
+    private let cachedImage: ((Parameter) -> Image?)?
     private let fetch: (Parameter) async throws -> Image
     
-    @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image
+    @State private var parameterFetched: Parameter? // Needed for avoiding fetching an-already fetched image. Cleared on failure, so that the next appearance retries.
     @State private var result: Result<Image, any Error>?
     
     // MARK: Properties - Content
@@ -78,10 +79,11 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     @State private var task: Task<Void, Never>?
 
     // MARK: Initializers
-    /// Initializes `VFetchingAsyncImage` with parameter and fetch method.
+    /// Initializes `VFetchingAsyncImage` with parameter, cached image, and fetch method.
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
+        cachedImage: ((Parameter) -> Image?)? = nil,
         fetch: @escaping (Parameter) async throws -> Image
     )
         where
@@ -90,14 +92,16 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     {
         self.appearance = appearance
         self.parameter = parameter
+        self.cachedImage = cachedImage
         self.fetch = fetch
         self.content = .auto
     }
     
-    /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and content.
+    /// Initializes `VFetchingAsyncImage` with parameter, cached image, fetch method, and content.
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
+        cachedImage: ((Parameter) -> Image?)? = nil,
         fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent
     )
@@ -106,6 +110,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     {
         self.appearance = appearance
         self.parameter = parameter
+        self.cachedImage = cachedImage
         self.fetch = fetch
         self.content = .content(
             contentBuilder: customContent
@@ -116,12 +121,14 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
+        cachedImage: ((Parameter) -> Image?)? = nil,
         fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder content customContent: @escaping (Image) -> CustomContent,
         @ViewBuilder placeholder customPlaceholderContent: @escaping () -> CustomPlaceholderContent
     ) {
         self.appearance = appearance
         self.parameter = parameter
+        self.cachedImage = cachedImage
         self.fetch = fetch
         self.content = .contentAndPlaceholder(
             contentBuilder: customContent,
@@ -129,10 +136,11 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         )
     }
     
-    /// Initializes `VFetchingAsyncImage` with parameter, fetch method, and phase-dependent content.
+    /// Initializes `VFetchingAsyncImage` with parameter, cached image, fetch method, and phase-dependent content.
     public init(
         appearance: VFetchingAsyncImageAppearance = .init(),
         from parameter: Parameter?,
+        cachedImage: ((Parameter) -> Image?)? = nil,
         fetch: @escaping (Parameter) async throws -> Image,
         @ViewBuilder contentWithPhase customContentWithPhase: @escaping (AsyncImagePhase) -> CustomContent
     )
@@ -140,6 +148,7 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
     {
         self.appearance = appearance
         self.parameter = parameter
+        self.cachedImage = cachedImage
         self.fetch = fetch
         self.content = .contentWithPhase(
             contentBuilder: customContentWithPhase
@@ -181,7 +190,8 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                 }())
             }
         }
-        .onChange(of: parameter, initial: true) { fetch(from: $1) }
+        .onAppear { fetch(from: parameter) } // `onChange(of:initial:)` doesn't re-fire on re-appearance, which would leave the image empty after `removesImageOnDisappear`
+        .onChange(of: parameter) { fetch(from: $1) }
         .onDisappear {
             if appearance.removesImageOnDisappear { reset() }
         }
@@ -196,40 +206,47 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
         from parameter: Parameter?
     ) {
         guard let parameter else {
-            zeroData()
+            reset()
             return
         }
 
         guard parameter != parameterFetched else { return }
         
         parameterFetched = parameter
-        if appearance.removesImageOnParameterChange { result = nil }
 
         task?.cancel()
+        task = nil
+
+        // Assigned synchronously, so the placeholder isn't rendered for a frame while a `Task` is scheduled
+        if let image: Image = cachedImage?(parameter) {
+            result = .success(image)
+            return
+        }
+
+        if appearance.removesImageOnParameterChange { result = nil }
+
         task = Task {
             let image: Image
             do {
                 image = try await fetch(parameter)
-                
+                try Task.checkCancellation() // `fetch` may ignore cancellation, and return an image for a stale parameter
+
             } catch is CancellationError {
                 return
                 
             } catch {
                 result = .failure(error)
+                parameterFetched = nil
                 return
             }
             
             result = .success(image)
         }
     }
-    
-    private func zeroData() {
-        parameterFetched = nil
-        result = nil
-    }
 
     private func reset() {
-        zeroData()
+        parameterFetched = nil
+        result = nil
 
         task?.cancel()
         task = nil

@@ -1,5 +1,15 @@
 # Change Log
 
+### [9.2.0(84)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.2.0) — 2026 10 20
+
+VFetchingAsyncImage
+
+- `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash
+- Issue where in-flight fetch isn't cancelled when parameter becomes `nil` is fixed
+- Issue where `Image` isn't re-fetched on re-appearance when `removesImageOnDisappear` is set to `true` is fixed
+- Issue where `fetch` that ignores cancellation overrides `Image` of a newer parameter is fixed
+- Issue where failed fetch isn't retried on re-appearance is fixed
+
 ### [9.1.2(83)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.1.2) — 2026 10 19
 
 VWrappingMarquee
