@@ -15,11 +15,27 @@ import VCore
 /// When `cachedImage` returns an `Image`, it's displayed immediately, and `fetch` isn't called.
 /// This avoids a placeholder flash when the component is recreated, or when parameter changes to an already-cached value.
 ///
+///     private let imageDimension: CGFloat = 200
+///
+///     @Environment(\.displayScale) private var displayScale: CGFloat
+///
+///     private let imageStore: ImageStore = DIContainer.shared.imageStore.resolve()
+///
 ///     var body: some View {
 ///         VFetchingAsyncImage(
 ///             from: #URL("https://website.com/content/image.jpg"),
-///             cachedImage: cachedImage,
-///             fetch: fetchImage,
+///             cachedImage: {
+///                 imageStore.resizedImageFromMemoryCache(
+///                     parameter: .remote(url: $0),
+///                     size: CGSize(dimension: imageDimension * displayScale)
+///                 )
+///             },
+///             fetch: {
+///                 try await imageStore.fetchResizedImage(
+///                     parameter: .remote(url: $0),
+///                     size: CGSize(dimension: imageDimension * displayScale)
+///                 )
+///             },
 ///             contentWithPhase: { phase in
 ///                 if let image: Image = phase.image {
 ///                     image
@@ -35,24 +51,7 @@ import VCore
 ///                 }
 ///             }
 ///         )
-///         .frame(dimension: 200)
-///     }
-///
-///     ...
-///
-///     private let cache: NSCache<NSString, UIImage> = .init()
-///
-///     private func cachedImage(url: URL) -> Image? {
-///         cache.object(forKey: NSString(string: url.absoluteString)).map { Image(uiImage: $0) }
-///     }
-///
-///     private func fetchImage(url: URL) async throws -> Image {
-///         let data: Data = try await URLSession.shared.data(from: url).0
-///         guard let uiImage: UIImage = .init(data: data) else { throw URLError(.cannotDecodeContentData) }
-///
-///         cache.setObject(uiImage, forKey: NSString(string: url.absoluteString))
-///
-///         return Image(uiImage: uiImage)
+///         .frame(dimension: imageDimension)
 ///     }
 ///
 public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderContent>: View
