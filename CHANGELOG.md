@@ -1,6 +1,6 @@
 # Change Log
 
-### [9.2.0(84)](https://github.com/VakhoKontridze/VComponents/releases/tag/9.2.0) — 2026 10 20
+### 9.2.0(84)
 
 VFetchingAsyncImage
 
