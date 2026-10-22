@@ -9,15 +9,15 @@ import SwiftUI
 import VCore
 
 @Uninitializable
-struct ImageBook {
+nonisolated struct ImageBook {
     @Uninitializable
-    struct Symbols {
-        static let checkmark: Image = .init(.checkmark).renderingMode(.template)
-        static let chevronUp: Image = .init(.chevronUp).renderingMode(.template)
-        static let eye: Image = .init(.eye).renderingMode(.template)
-        static let eyeCrossed: Image = .init(.eyeCrossed).renderingMode(.template)
-        static let line: Image = .init(.line).renderingMode(.template)
-        static let magnifyGlass: Image = .init(.magnifyGlass).renderingMode(.template)
-        static let xmark: Image = .init(.xmark).renderingMode(.template)
+    nonisolated struct Symbols { // Asset symbols are main-actor-isolated
+        @MainActor static let checkmark: Image = .init(.checkmark).renderingMode(.template)
+        @MainActor static let chevronUp: Image = .init(.chevronUp).renderingMode(.template)
+        @MainActor static let eye: Image = .init(.eye).renderingMode(.template)
+        @MainActor static let eyeCrossed: Image = .init(.eyeCrossed).renderingMode(.template)
+        @MainActor static let line: Image = .init(.line).renderingMode(.template)
+        @MainActor static let magnifyGlass: Image = .init(.magnifyGlass).renderingMode(.template)
+        @MainActor static let xmark: Image = .init(.xmark).renderingMode(.template)
     }
 }
