@@ -11,7 +11,7 @@ import VCore
 @Uninitializable
 nonisolated struct ImageBook {
     @Uninitializable
-    nonisolated struct Symbols { // Asset symbols are main-actor-isolated
+    nonisolated struct Symbols {
         @MainActor static let checkmark: Image = .init(.checkmark).renderingMode(.template)
         @MainActor static let chevronUp: Image = .init(.chevronUp).renderingMode(.template)
         @MainActor static let eye: Image = .init(.eye).renderingMode(.template)
