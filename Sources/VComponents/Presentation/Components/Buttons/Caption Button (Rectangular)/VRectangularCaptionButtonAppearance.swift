@@ -48,11 +48,15 @@ public struct VRectangularCaptionButtonAppearance {
     /// Rectangle corner radius.
     public var rectangleCornerRadius: CGFloat = 24
 
-    /// Rectangle colors.
-    public var rectangleColors: StateColors = .init(
-        enabled: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)),
-        pressed: Color.platformDynamic(Color(31, 104, 182, 0.25), Color(36, 106, 186, 0.35)),
-        disabled: Color(128, 176, 240, 0.35)
+    /// Rectangle surface style.
+    ///
+    /// To draw rectangle with Liquid Glass, call `applyGlassRectangleStyle()`.
+    public var rectangleSurfaceStyle: StateSurfaceStyle = .color(
+        StateColors(
+            enabled: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)),
+            pressed: Color.platformDynamic(Color(31, 104, 182, 0.25), Color(36, 106, 186, 0.35)),
+            disabled: Color(128, 176, 240, 0.35)
+        )
     )
 
     /// Rectangle pressed scale.
@@ -236,10 +240,28 @@ public struct VRectangularCaptionButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
-    
+
+    /// State-bound surface style.
+    public typealias StateSurfaceStyle = GenericStateSurfaceStyle<StateColors>
+
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
-    
+
     /// State-bound image configuration.
     public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension VRectangularCaptionButtonAppearance {
+    /// Draws rectangle with Liquid Glass, tinted with current rectangle colors.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassRectangleStyle() {
+        rectangleSurfaceStyle = .glass(
+            .regular
+                .tint(rectangleSurfaceStyle.colors)
+                .interactive()
+        )
+    }
 }

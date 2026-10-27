@@ -268,7 +268,11 @@ private struct StatesContentView: View {
             PreviewRow("Pressed (Button)") {
                 VDisclosureGroup(
                     appearance: VDisclosureGroupAppearance(appearance) {
-                        $0.disclosureButtonAppearance.backgroundColors.enabled = $0.disclosureButtonAppearance.backgroundColors.pressed
+                        $0.disclosureButtonAppearance.backgroundSurfaceStyle = .color(
+                            VRectangularButtonAppearance.StateColors(
+                                $0.disclosureButtonAppearance.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                            )
+                        )
                         $0.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = $0.disclosureButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
                     },
                     state: .constant(.collapsed),
@@ -282,7 +286,11 @@ private struct StatesContentView: View {
             PreviewRow("Disabled") {
                 VDisclosureGroup(
                     appearance: VDisclosureGroupAppearance(appearance) {
-                        $0.disclosureButtonAppearance.backgroundColors.enabled = $0.disclosureButtonAppearance.backgroundColors.disabled
+                        $0.disclosureButtonAppearance.backgroundSurfaceStyle = .color(
+                            VRectangularButtonAppearance.StateColors(
+                                $0.disclosureButtonAppearance.backgroundSurfaceStyle.colors!.disabled // Unsafe (DEBUG)
+                            )
+                        )
                         $0.disclosureButtonAppearance.labelImageConfiguration.colors!.enabled = $0.disclosureButtonAppearance.labelImageConfiguration.colors!.disabled // Unsafe (DEBUG)
                     },
                     state: .constant(.expanded),

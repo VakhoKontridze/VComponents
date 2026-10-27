@@ -7,6 +7,26 @@ VStretchedButton
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
 
+VLoadingStretchedButton
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+
+VWrappedButton
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+
+VRectangularButton
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+
+VRectangularCaptionButton
+
+- `rectangleColors` is replaced with `rectangleSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassRectangleStyle()` method is added, that draws rectangle with Liquid Glass tinted with current rectangle colors
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

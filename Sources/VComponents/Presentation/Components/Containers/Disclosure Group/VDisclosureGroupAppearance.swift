@@ -118,18 +118,22 @@ public struct VDisclosureGroupAppearance {
         $0.size = CGSize(dimension: 30)
         $0.cornerRadius = 16
 
-        $0.backgroundColors = {
+        $0.backgroundSurfaceStyle = {
 #if os(iOS)
-            VRectangularButtonAppearance.StateColors(
-                enabled: Color.dynamic(Color(220, 220, 220), Color(60, 60, 60)),
-                pressed: Color.dynamic(Color(200, 200, 200), Color(40, 40, 40)),
-                disabled: Color.dynamic(Color(230, 230, 230), Color(40, 40, 40))
+            .color(
+                VRectangularButtonAppearance.StateColors(
+                    enabled: Color.dynamic(Color(220, 220, 220), Color(60, 60, 60)),
+                    pressed: Color.dynamic(Color(200, 200, 200), Color(40, 40, 40)),
+                    disabled: Color.dynamic(Color(230, 230, 230), Color(40, 40, 40))
+                )
             )
 #elseif os(macOS)
-            VRectangularButtonAppearance.StateColors(
-                enabled: Color.dynamic(Color.black.opacity(0.1), Color(60, 60, 60)),
-                pressed: Color.dynamic(Color.black.opacity(0.15), Color(40, 40, 40)),
-                disabled: Color.dynamic(Color.black.opacity(0.05), Color(40, 40, 40))
+            .color(
+                VRectangularButtonAppearance.StateColors(
+                    enabled: Color.dynamic(Color.black.opacity(0.1), Color(60, 60, 60)),
+                    pressed: Color.dynamic(Color.black.opacity(0.15), Color(40, 40, 40)),
+                    disabled: Color.dynamic(Color.black.opacity(0.05), Color(40, 40, 40))
+                )
             )
 #else
             fatalError()
@@ -231,10 +235,12 @@ extension VDisclosureGroupAppearance {
         backgroundColor = Color(uiColor: UIColor.systemBackground)
 #endif
 
-        disclosureButtonAppearance.backgroundColors = VRectangularButtonAppearance.StateColors(
-            enabled: Color.platformDynamic(Color(230, 230, 230), Color(60, 60, 60)),
-            pressed: Color.platformDynamic(Color(210, 210, 210), Color(40, 40, 40)),
-            disabled: Color.platformDynamic(Color(240, 240, 240), Color(40, 40, 40))
+        disclosureButtonAppearance.backgroundSurfaceStyle = .color(
+            VRectangularButtonAppearance.StateColors(
+                enabled: Color.platformDynamic(Color(230, 230, 230), Color(60, 60, 60)),
+                pressed: Color.platformDynamic(Color(210, 210, 210), Color(40, 40, 40)),
+                disabled: Color.platformDynamic(Color(240, 240, 240), Color(40, 40, 40))
+            )
         )
     }
 }

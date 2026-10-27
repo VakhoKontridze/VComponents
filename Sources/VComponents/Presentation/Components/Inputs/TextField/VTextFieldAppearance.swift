@@ -99,10 +99,12 @@ public struct VTextFieldAppearance {
     public var clearButtonAppearance: VRectangularButtonAppearance = .init {
         $0.size = CGSize(dimension: 22)
 
-        $0.backgroundColors = VRectangularButtonAppearance.StateColors(
-            enabled: Color.platformDynamic(Color(170, 170, 170), Color(40, 40, 40)),
-            pressed: Color.platformDynamic(Color(150, 150, 150), Color(20, 20, 20)),
-            disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
+        $0.backgroundSurfaceStyle = .color(
+            VRectangularButtonAppearance.StateColors(
+                enabled: Color.platformDynamic(Color(170, 170, 170), Color(40, 40, 40)),
+                pressed: Color.platformDynamic(Color(150, 150, 150), Color(20, 20, 20)),
+                disabled: Color.platformDynamic(Color(220, 220, 220), Color(40, 40, 40))
+            )
         )
         
         $0.labelImageConfiguration = VRectangularButtonAppearance.StateImageConfiguration(

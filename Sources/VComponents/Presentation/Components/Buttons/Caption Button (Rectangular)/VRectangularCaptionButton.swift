@@ -157,9 +157,13 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     private func rectangleBackgroundView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {
-        Rectangle()
+        Color.clear
+            .surfaceStyle(
+                appearance.rectangleSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.rectangleCornerRadius)
+            )
             .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
-            .foregroundStyle(appearance.rectangleColors.value(for: internalState))
             .shadow(
                 color: appearance.shadowColors.value(for: internalState),
                 radius: appearance.shadowRadius,
@@ -264,7 +268,11 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         PreviewRow("Pressed") {
             VRectangularCaptionButton(
                 appearance: VRectangularCaptionButtonAppearance {
-                    $0.rectangleColors.enabled = $0.rectangleColors.pressed
+                    $0.rectangleSurfaceStyle = .color(
+                        VRectangularCaptionButtonAppearance.StateColors(
+                            $0.rectangleSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelImageConfiguration.colors!.enabled = $0.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
                     $0.captionTextConfiguration.colors!.enabled = $0.captionTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                 },
@@ -282,6 +290,18 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             )
             .disabled(true)
         }
+    }
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        VRectangularCaptionButton(
+            appearance: VRectangularCaptionButtonAppearance { $0.applyGlassRectangleStyle() },
+            action: {},
+            labelImage: Image(systemName: "swift"),
+            captionTitle: "Lorem Ipsum"
+        )
     }
 }
 

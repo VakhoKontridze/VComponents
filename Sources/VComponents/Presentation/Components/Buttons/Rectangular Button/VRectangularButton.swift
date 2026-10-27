@@ -144,9 +144,13 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
     private func backgroundView(
         internalState: VRectangularButtonInternalState
     ) -> some View {
-        Rectangle()
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.cornerRadius)
+            )
             .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
-            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
                 color: appearance.shadowColors.value(for: internalState),
                 radius: appearance.shadowRadius,
@@ -198,7 +202,11 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
         PreviewRow("Pressed") {
             VRectangularButton(
                 appearance: VRectangularButtonAppearance {
-                    $0.backgroundColors.enabled = $0.backgroundColors.pressed
+                    $0.backgroundSurfaceStyle = .color(
+                        VRectangularButtonAppearance.StateColors(
+                            $0.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelImageConfiguration.colors!.enabled = $0.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
                 },
                 action: {},
@@ -213,6 +221,17 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             )
             .disabled(true)
         }
+    }
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        VRectangularButton(
+            appearance: VRectangularButtonAppearance { $0.applyGlassBackgroundStyle() },
+            action: {},
+            image: Image(systemName: "swift")
+        )
     }
 }
 

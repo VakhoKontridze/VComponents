@@ -381,7 +381,11 @@ private struct StatesContentView: View {
             PreviewRow("Pressed (Button) (*)") {
                 VTextField(
                     appearance: VTextFieldAppearance(appearance) {
-                        $0.clearButtonAppearance.backgroundColors.enabled = appearance.clearButtonAppearance.backgroundColors.pressed
+                        $0.clearButtonAppearance.backgroundSurfaceStyle = .color(
+                            VRectangularButtonAppearance.StateColors(
+                                appearance.clearButtonAppearance.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                            )
+                        )
                         $0.clearButtonAppearance.labelImageConfiguration.colors!.enabled = appearance.clearButtonAppearance.labelImageConfiguration.colors!.pressed // Unsafe (DEBUG)
                         $0.visibilityButtonAppearance.labelTextConfiguration.colors!.enabled = appearance.visibilityButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                     },

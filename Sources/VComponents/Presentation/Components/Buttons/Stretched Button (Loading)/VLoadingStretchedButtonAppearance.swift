@@ -51,12 +51,16 @@ public struct VLoadingStretchedButtonAppearance {
     }()
 
     // MARK: Properties - Background
-    /// Background colors.
-    public var backgroundColors: StateColors = .init(
-        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
-        loading: Color(128, 176, 240),
-        disabled: Color(128, 176, 240)
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: StateSurfaceStyle = .color(
+        StateColors(
+            enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+            pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+            loading: Color(128, 176, 240),
+            disabled: Color(128, 176, 240)
+        )
     )
 
     /// Background pressed scale.
@@ -200,10 +204,13 @@ public struct VLoadingStretchedButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
-    
+
+    /// State-bound surface style.
+    public typealias StateSurfaceStyle = GenericStateSurfaceStyle<StateColors>
+
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
-    
+
     /// State-bound image configuration.
     public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
     
@@ -261,5 +268,20 @@ public struct VLoadingStretchedButtonAppearance {
         // MARK: Initializers
         /// Default value.
         public static var `default`: Self { .trailing }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VLoadingStretchedButtonAppearance {
+    /// Draws background with Liquid Glass, tinted with current background colors.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(
+            .regular
+                .tint(backgroundSurfaceStyle.colors)
+                .interactive()
+        )
     }
 }
