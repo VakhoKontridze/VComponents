@@ -5,42 +5,42 @@
 VStretchedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 
 VLoadingStretchedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 
 VWrappedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 
 VRectangularButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 
 VRectangularCaptionButton
 
 - `rectangleColors` is replaced with `rectangleSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassRectangleStyle()` method is added, that draws rectangle with Liquid Glass tinted with current rectangle colors
+- `applyGlassRectangleStyle()` method is added, that draws rectangle with Liquid Glass tinted with accent color
 
 VStretchedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
 
 VWrappedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
 
 VRectangularToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
 
 VTextField
 

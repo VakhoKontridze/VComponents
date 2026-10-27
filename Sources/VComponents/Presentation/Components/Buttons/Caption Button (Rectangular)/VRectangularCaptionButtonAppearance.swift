@@ -255,12 +255,18 @@ public struct VRectangularCaptionButtonAppearance {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VRectangularCaptionButtonAppearance {
-    /// Draws rectangle with Liquid Glass, tinted with current rectangle colors.
+    /// Draws rectangle with Liquid Glass, tinted with accent color.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassRectangleStyle() {
         rectangleSurfaceStyle = .glass(
             .regular
-                .tint(rectangleSurfaceStyle.colors)
+                .tint(
+                    StateColors(
+                        enabled: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)),
+                        pressed: Color.platformDynamic(Color(31, 104, 182, 0.25), Color(36, 106, 186, 0.35)),
+                        disabled: Color(128, 176, 240, 0.35)
+                    )
+                )
                 .interactive()
         )
     }

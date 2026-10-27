@@ -226,17 +226,20 @@ public struct VStretchedToggleButtonAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VStretchedToggleButtonAppearance {
-    /// Draws background with Liquid Glass, untinted when off and tinted with current background colors when on.
+    /// Draws background with Liquid Glass, untinted when off and tinted with accent color when on.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
-        var tintColors: StateColors = backgroundSurfaceStyle.colors ?? .clearColors
-        tintColors.off = Color.clear // Untinted, as opaque off color would turn glass into a solid slab
-        tintColors.pressedOff = Color.primary.opacity(0.15)
-        tintColors.disabled = Color.clear
-
         backgroundSurfaceStyle = .glass(
             .regular
-                .tint(tintColors)
+                .tint(
+                    StateColors(
+                        off: Color.clear, // Untinted, as opaque tint would turn glass into a solid slab
+                        on: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+                        pressedOff: Color.primary.opacity(0.15),
+                        pressedOn: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                        disabled: Color.clear
+                    )
+                )
                 .interactive()
         )
     }

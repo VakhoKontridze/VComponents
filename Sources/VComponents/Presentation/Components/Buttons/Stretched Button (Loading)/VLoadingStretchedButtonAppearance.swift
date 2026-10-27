@@ -275,12 +275,19 @@ public struct VLoadingStretchedButtonAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VLoadingStretchedButtonAppearance {
-    /// Draws background with Liquid Glass, tinted with current background colors.
+    /// Draws background with Liquid Glass, tinted with accent color.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(
             .regular
-                .tint(backgroundSurfaceStyle.colors)
+                .tint(
+                    StateColors(
+                        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+                        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                        loading: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5),
+                        disabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5)
+                    )
+                )
                 .interactive()
         )
     }
