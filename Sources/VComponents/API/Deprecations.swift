@@ -96,6 +96,30 @@ extension VRectangularToggleButtonAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VTextFieldAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VTextViewAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VTextFieldAppearance {
     @available(*, deprecated, message: "Use new mutating API")
     public static var secure: Self {
         var appearance: Self = .init()

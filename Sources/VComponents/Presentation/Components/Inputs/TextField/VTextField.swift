@@ -238,8 +238,13 @@ public struct VTextField: View {
     }
 
     private var backgroundView: some View {
-        Rectangle()
-            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.cornerRadius)
+            )
+            .contentShape(.rect)
             .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
@@ -339,6 +344,45 @@ public struct VTextField: View {
     )
 }
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        PreviewRow("Enabled") {
+            VTextField(
+                appearance: VTextFieldAppearance { $0.applyGlassBackgroundStyle() },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Focused") {
+            VTextField(
+                appearance: VTextFieldAppearance {
+                    $0.applyGlassBackgroundStyle()
+                    $0.borderColors.enabled = $0.borderColors.focused
+                    $0.textConfiguration.colors!.enabled = $0.textConfiguration.colors!.focused // Unsafe (DEBUG)
+                },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Success") {
+            VTextField(
+                appearance: VTextFieldAppearance {
+                    $0.applyGlassBackgroundStyle()
+                    $0.applySuccessStyle()
+                },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+    }
+}
+
 private struct StatesContentView: View {
     // MARK: Properties
     private let appearance: VTextFieldAppearance
@@ -368,7 +412,11 @@ private struct StatesContentView: View {
             PreviewRow("Focused") {
                 VTextField(
                     appearance: VTextFieldAppearance(appearance) {
-                        $0.backgroundColors.enabled = appearance.backgroundColors.focused
+                        $0.backgroundSurfaceStyle = .color(
+                            VTextFieldAppearance.StateColors(
+                                appearance.backgroundSurfaceStyle.colors!.focused // Unsafe (DEBUG)
+                            )
+                        )
                         $0.borderColors.enabled = appearance.borderColors.focused
                         $0.textConfiguration.colors!.enabled = appearance.textConfiguration.colors!.focused // Unsafe (DEBUG)
                     },

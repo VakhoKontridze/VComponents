@@ -54,11 +54,15 @@ public struct VTextFieldAppearance {
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
-    /// Background colors.
-    public var backgroundColors: StateColors = .init(
-        enabled: Color.platformDynamic(Color(235, 235, 235), Color(60, 60, 60)),
-        focused: Color.platformDynamic(Color(220, 220, 220), Color(80, 80, 80)),
-        disabled: Color.platformDynamic(Color(245, 245, 245), Color(50, 50, 50))
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: StateSurfaceStyle = .color(
+        StateColors(
+            enabled: Color.platformDynamic(Color(235, 235, 235), Color(60, 60, 60)),
+            focused: Color.platformDynamic(Color(220, 220, 220), Color(80, 80, 80)),
+            disabled: Color.platformDynamic(Color(245, 245, 245), Color(50, 50, 50))
+        )
     )
 
     // MARK: Properties - Border
@@ -232,7 +236,10 @@ public struct VTextFieldAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_EnabledFocusedDisabled<CGFloat>
-    
+
+    /// State-bound surface style.
+    public typealias StateSurfaceStyle = GenericStateSurfaceStyle<StateColors>
+
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
     
@@ -278,7 +285,17 @@ extension VTextFieldAppearance {
         borderColors.enabled = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
     }
-    
+
+    /// Draws background and clear button with Liquid Glass.
+    ///
+    /// Focus is carried by border, which can be set with `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()`.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background colors would turn glass into a solid slab
+
+        clearButtonAppearance.applyGlassBackgroundStyle()
+    }
+
     private mutating func applyBorder() {
         borderWidth = PointPixelMeasurement.points(1.5)
     }

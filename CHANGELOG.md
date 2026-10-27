@@ -42,6 +42,16 @@ VRectangularToggleButton
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
 
+VTextField
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background and clear button with untinted Liquid Glass
+
+VTextView
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash
