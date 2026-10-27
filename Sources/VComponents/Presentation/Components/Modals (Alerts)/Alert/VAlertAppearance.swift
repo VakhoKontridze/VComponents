@@ -393,13 +393,20 @@ public struct VAlertAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VAlertAppearance {
-    /// Draws background with untinted Liquid Glass, secondary and destructive buttons with Liquid Glass tinted with current colors, and removes shadow.
+    /// Draws background with untinted Liquid Glass, gives secondary and destructive buttons a translucent pressed color, and removes shadow.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
 
-        secondaryButtonAppearance.applyGlassBackgroundStyle()
-        destructiveButtonAppearance.applyGlassBackgroundStyle()
+        // Not glass, as nested glass is avoided on purpose
+        secondaryButtonAppearance.backgroundSurfaceStyle = .color(
+            ButtonStateColors(
+                enabled: Color.clear,
+                pressed: Color.primary.opacity(0.1),
+                disabled: Color.clear
+            )
+        )
+        destructiveButtonAppearance.backgroundSurfaceStyle = secondaryButtonAppearance.backgroundSurfaceStyle
 
         shadowColor = Color.clear
     }

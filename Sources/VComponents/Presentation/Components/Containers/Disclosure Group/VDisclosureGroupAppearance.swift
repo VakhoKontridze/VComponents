@@ -246,12 +246,19 @@ extension VDisclosureGroupAppearance {
         )
     }
 
-    /// Draws background and disclosure button with untinted Liquid Glass, and makes divider translucent.
+    /// Draws background with untinted Liquid Glass, and makes disclosure button and divider translucent.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
 
-        disclosureButtonAppearance.backgroundSurfaceStyle = .glass(.regular.interactive())
+        // Not glass, as nested glass is avoided on purpose
+        disclosureButtonAppearance.backgroundSurfaceStyle = .color(
+            VRectangularButtonAppearance.StateColors(
+                enabled: Color.primary.opacity(0.1),
+                pressed: Color.primary.opacity(0.2),
+                disabled: Color.primary.opacity(0.05)
+            )
+        )
 
         dividerColor = Color.primary.opacity(0.1)
     }

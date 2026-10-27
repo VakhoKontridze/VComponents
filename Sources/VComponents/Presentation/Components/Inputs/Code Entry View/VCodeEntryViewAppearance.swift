@@ -174,10 +174,21 @@ extension VCodeEntryViewAppearance {
         characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
 
-    /// Draws character background with Liquid Glass, tinted with current character background colors.
+    /// Draws character background with Liquid Glass, tinted with translucent `Color.primary` when filled or focused.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassCharacterBackgroundStyle() {
-        characterBackgroundSurfaceStyle = .glass(.regular.tint(characterBackgroundSurfaceStyle.colors))
+        characterBackgroundSurfaceStyle = .glass(
+            .regular
+                .tint(
+                    StateColors(
+                        enabledEmpty: Color.clear, // Untinted, as opaque colors would turn glass into a solid slab
+                        enabledFilled: Color.primary.opacity(0.1),
+                        focusedEmpty: Color.primary.opacity(0.2),
+                        focusedFilled: Color.primary.opacity(0.3),
+                        disabled: Color.clear
+                    )
+                )
+        )
     }
 
     private mutating func applyCharacterBackgroundBorder() {

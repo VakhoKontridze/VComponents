@@ -30,22 +30,22 @@ VRectangularCaptionButton
 VStretchedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
 
 VWrappedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
 
 VRectangularToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with current background colors when on
 
 VTextField
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background and clear button with untinted Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, and makes clear button translucent
 
 VTextView
 
@@ -55,7 +55,7 @@ VTextView
 VCodeEntryView
 
 - `characterBackgroundColors` is replaced with `characterBackgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassCharacterBackgroundStyle()` method is added, that draws character background with Liquid Glass tinted with current character background colors
+- `applyGlassCharacterBackgroundStyle()` method is added, that draws character background with Liquid Glass, tinted with translucent `Color.primary` when filled or focused
 
 VGroupBox
 
@@ -65,7 +65,7 @@ VGroupBox
 VDisclosureGroup
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background and disclosure button with untinted Liquid Glass, and makes divider translucent
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, and makes disclosure button and divider translucent
 
 VModal
 
@@ -85,7 +85,7 @@ VSideBar
 VAlert
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, alongside secondary and destructive buttons, and removes shadow
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, gives secondary and destructive buttons a translucent pressed color, and removes shadow
 
 VToast
 

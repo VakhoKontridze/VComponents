@@ -286,14 +286,21 @@ extension VTextFieldAppearance {
         borderColors.focused = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
     }
 
-    /// Draws background and clear button with untinted Liquid Glass.
+    /// Draws background with untinted Liquid Glass, and makes clear button translucent.
     ///
     /// Untinted glass carries no focus state. To indicate focus, set `borderWidth` and `borderColors`.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background colors would turn glass into a solid slab
 
-        clearButtonAppearance.backgroundSurfaceStyle = .glass(.regular.interactive())
+        // Not glass, as nested glass is avoided on purpose
+        clearButtonAppearance.backgroundSurfaceStyle = .color(
+            VRectangularButtonAppearance.StateColors(
+                enabled: Color.primary.opacity(0.1),
+                pressed: Color.primary.opacity(0.2),
+                disabled: Color.primary.opacity(0.05)
+            )
+        )
     }
 
     private mutating func applyBorder() {
