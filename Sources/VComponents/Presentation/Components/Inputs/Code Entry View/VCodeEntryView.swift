@@ -313,6 +313,8 @@ public struct VCodeEntryView: View {
         PreviewRow("Focused (*)") {
             VCodeEntryView(
                 appearance: VCodeEntryViewAppearance {
+                    $0.applyGlassCharacterBackgroundStyle()
+
                     var characterBackgroundColors: VCodeEntryViewAppearance.StateColors = $0.characterBackgroundSurfaceStyle.colors! // Unsafe (DEBUG)
                     characterBackgroundColors.enabledEmpty = characterBackgroundColors.focusedEmpty
                     characterBackgroundColors.enabledFilled = characterBackgroundColors.focusedFilled

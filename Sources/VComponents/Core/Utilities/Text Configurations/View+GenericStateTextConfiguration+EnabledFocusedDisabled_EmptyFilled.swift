@@ -6,7 +6,6 @@
 //
 
 public import SwiftUI
-public import VCore
 
 extension View {
     /// Applies `GenericStateTextConfiguration`.

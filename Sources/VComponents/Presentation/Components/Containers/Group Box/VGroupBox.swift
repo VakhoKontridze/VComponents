@@ -118,7 +118,10 @@ public struct VGroupBox<Content>: View where Content: View {
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
 #Preview("System Background Color") {
-    ContentView(appearance: VGroupBoxAppearance { $0.applySystemBackgroundColor() }, layer: .secondary)
+    ContentView(
+        appearance: VGroupBoxAppearance { $0.applySystemBackgroundColor() },
+        layer: .secondary
+    )
 }
 
 #endif
@@ -127,7 +130,10 @@ public struct VGroupBox<Content>: View where Content: View {
 
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
-    ContentView(appearance: VGroupBoxAppearance { $0.applyGlassBackgroundStyle() }, layer: .checkered)
+    ContentView(
+        appearance: VGroupBoxAppearance { $0.applyGlassBackgroundStyle() },
+        layer: .checkered
+    )
 }
 
 #endif
