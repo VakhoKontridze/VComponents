@@ -89,30 +89,3 @@ public struct GenericStateBasicTextConfiguration<Colors> {
     /// Model that describes underline.
     public typealias Underline = TextConfiguration.Underline
 }
-
-// Needs to be extended on `Text` and to return `Text` to keep identity for `TextField`
-
-extension Text {
-    /// Applies `GenericStateTextConfiguration`.
-    ///
-    ///     let configuration: GenericStateBasicTextConfiguration<...> = ...
-    ///
-    ///     var body: some View {
-    ///         Text(...)
-    ///             .textConfiguration(configuration)
-    ///     }
-    ///
-    public func textConfiguration(
-        _ configuration: GenericStateBasicTextConfiguration<
-            GenericStateModel_EnabledFocusedDisabled<Color>
-        >,
-        state: GenericState_EnabledFocusedDisabled
-    ) -> Text {
-        self
-            .textConfiguration(
-                configuration.toBasicTextConfiguration(
-                    color: configuration.colors?.value(for: state)
-                )
-            )
-    }
-}
