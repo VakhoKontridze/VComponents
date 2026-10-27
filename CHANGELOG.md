@@ -6,41 +6,49 @@ VStretchedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button, and `labelPressedScale` defaults to `1` on `watchOS`
 
 VLoadingStretchedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button
 
 VWrappedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button, and `labelPressedScale` defaults to `1` on `watchOS`
 
 VRectangularButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button, and `labelPressedScale` defaults to `1` on `watchOS`
 
 VRectangularCaptionButton
 
 - `rectangleColors` is replaced with `rectangleSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassRectangleStyle()` method is added, that draws rectangle with Liquid Glass tinted with accent color
+- Rectangle is now drawn in the same layer as label image, so `rectanglePressedScale` and shadow apply to the whole rectangle, and `labelImagePressedScale` defaults to `1` on `watchOS`
 
 VStretchedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button
 
 VWrappedToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button, and `labelPressedScale` defaults to `1` on `watchOS`
 
 VRectangularToggleButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
+- Background is now drawn in the same layer as label, so `backgroundPressedScale` and shadow apply to the whole button, and `labelPressedScale` defaults to `1` on `watchOS`
 
 VTextField
 

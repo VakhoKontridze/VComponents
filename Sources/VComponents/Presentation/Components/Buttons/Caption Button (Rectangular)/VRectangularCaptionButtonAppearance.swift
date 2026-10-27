@@ -60,6 +60,8 @@ public struct VRectangularCaptionButtonAppearance {
     )
 
     /// Rectangle pressed scale.
+    ///
+    /// Rectangle is drawn in the same layer as label image, so label image is scaled as well.
     public var rectanglePressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -101,12 +103,12 @@ public struct VRectangularCaptionButtonAppearance {
         }()
     )
 
-    /// Label image pressed scale.
+    /// Label image pressed scale, applied on top of `rectanglePressedScale`.
     public var labelImagePressedScale: CGFloat = {
 #if os(iOS)
         1
 #elseif os(watchOS)
-        0.98
+        1
 #else
         fatalError()
 #endif
@@ -255,7 +257,7 @@ public struct VRectangularCaptionButtonAppearance {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VRectangularCaptionButtonAppearance {
-    /// Draws rectangle with Liquid Glass, tinted with accent color.
+    /// Draws rectangle with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassRectangleStyle() {
         rectangleSurfaceStyle = .glass(
@@ -263,7 +265,7 @@ extension VRectangularCaptionButtonAppearance {
                 .tint(
                     StateColors(
                         enabled: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)),
-                        pressed: Color.platformDynamic(Color(31, 104, 182, 0.25), Color(36, 106, 186, 0.35)),
+                        pressed: Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)), // Same as enabled, as changing tint mid-press resets interactive glass
                         disabled: Color(128, 176, 240, 0.35)
                     )
                 )

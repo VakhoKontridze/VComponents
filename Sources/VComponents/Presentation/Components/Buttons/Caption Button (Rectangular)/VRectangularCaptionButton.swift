@@ -140,9 +140,18 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             )
         }
         .frame(size: appearance.rectangleSize)
-        .background { rectangleBackgroundView(internalState: internalState) }
+        .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+            appearance.rectangleSurfaceStyle,
+            state: internalState,
+            in: .rect(cornerRadius: appearance.rectangleCornerRadius)
+        )
         .overlay { rectangleBorderView(internalState: internalState) }
-        .clipShape(.rect(cornerRadius: appearance.rectangleCornerRadius))
+        .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
+        .shadow(
+            color: appearance.shadowColors.value(for: internalState),
+            radius: appearance.shadowRadius,
+            offset: appearance.shadowOffset
+        )
     }
 
     private func labelImageView(
@@ -154,23 +163,6 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             .padding(appearance.labelImageMargins)
     }
 
-    private func rectangleBackgroundView(
-        internalState: VRectangularCaptionButtonInternalState
-    ) -> some View {
-        Color.clear
-            .surfaceStyle(
-                appearance.rectangleSurfaceStyle,
-                state: internalState,
-                in: .rect(cornerRadius: appearance.rectangleCornerRadius)
-            )
-            .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
-            .shadow(
-                color: appearance.shadowColors.value(for: internalState),
-                radius: appearance.shadowRadius,
-                offset: appearance.shadowOffset
-            )
-    }
-    
     @ViewBuilder 
     private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
@@ -180,7 +172,6 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         if borderWidth > 0 {
             RoundedRectangle(cornerRadius: appearance.rectangleCornerRadius)
                 .strokeBorder(appearance.rectangleBorderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
         }
     }
     

@@ -61,6 +61,8 @@ public struct VStretchedButtonAppearance {
     )
 
     /// Background pressed scale.
+    ///
+    /// Background is drawn in the same layer as label, so label is scaled as well.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -97,14 +99,14 @@ public struct VStretchedButtonAppearance {
     /// Applicable only if `init` with multiple components is used.
     public var labelSpacingType: TextAndImageSpacingType = .fixed(spacing: 8)
 
-    /// Label pressed scale.
+    /// Label pressed scale, applied on top of `backgroundPressedScale`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
 #elseif os(macOS)
         1
 #elseif os(watchOS)
-        0.98
+        1
 #else
         fatalError()
 #endif
@@ -214,7 +216,7 @@ public struct VStretchedButtonAppearance {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VStretchedButtonAppearance {
-    /// Draws background with Liquid Glass, tinted with accent color.
+    /// Draws background with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(
@@ -222,7 +224,7 @@ extension VStretchedButtonAppearance {
                 .tint(
                     StateColors(
                         enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-                        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                        pressed: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)), // Same as enabled, as changing tint mid-press resets interactive glass
                         disabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5)
                     )
                 )

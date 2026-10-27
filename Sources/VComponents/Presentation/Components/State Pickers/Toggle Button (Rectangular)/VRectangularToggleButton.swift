@@ -123,11 +123,20 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                 let internalState: VRectangularToggleButtonInternalState = internalState(baseButtonState)
 
                 labelView(internalState: internalState)
-                    .contentShape(.rect) // Registers gestures even when clear
                     .frame(size: appearance.size)
-                    .background { backgroundView(internalState: internalState) }
+                    .contentShape(.rect) // Registers gestures even when clear
+                    .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+                        appearance.backgroundSurfaceStyle,
+                        state: internalState,
+                        in: .rect(cornerRadius: appearance.cornerRadius)
+                    )
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
+                    .shadow(
+                        color: appearance.shadowColors.value(for: internalState),
+                        radius: appearance.shadowRadius,
+                        offset: appearance.shadowOffset
+                    )
                     .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
                             .animation(appearance.stateChangeAnimation, value: state)
@@ -173,23 +182,6 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
 
-    private func backgroundView(
-        internalState: VRectangularToggleButtonInternalState
-    ) -> some View {
-        Color.clear
-            .surfaceStyle(
-                appearance.backgroundSurfaceStyle,
-                state: internalState,
-                in: .rect(cornerRadius: appearance.cornerRadius)
-            )
-            .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
-            .shadow(
-                color: appearance.shadowColors.value(for: internalState),
-                radius: appearance.shadowRadius,
-                offset: appearance.shadowOffset
-            )
-    }
-
     @ViewBuilder 
     private func borderView(
         internalState: VRectangularToggleButtonInternalState
@@ -199,7 +191,6 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
         if borderWidth > 0 {
             RoundedRectangle(cornerRadius: appearance.cornerRadius)
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
     }
 }

@@ -139,11 +139,20 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
                 let internalState: VStretchedToggleButtonInternalState = internalState(baseButtonState)
 
                 labelView(internalState: internalState)
-                    .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: appearance.height)
-                    .background { backgroundView(internalState: internalState) }
+                    .contentShape(.rect) // Registers gestures even when clear
+                    .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+                        appearance.backgroundSurfaceStyle,
+                        state: internalState,
+                        in: .rect(cornerRadius: appearance.cornerRadius)
+                    )
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
+                    .shadow(
+                        color: appearance.shadowColors.value(for: internalState),
+                        radius: appearance.shadowRadius,
+                        offset: appearance.shadowOffset
+                    )
                     .applyIf(appearance.appliesStateChangeAnimation) {
                         $0
                             .animation(appearance.stateChangeAnimation, value: state)
@@ -198,23 +207,6 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
 
-    private func backgroundView(
-        internalState: VStretchedToggleButtonInternalState
-    ) -> some View {
-        Color.clear
-            .surfaceStyle(
-                appearance.backgroundSurfaceStyle,
-                state: internalState,
-                in: .rect(cornerRadius: appearance.cornerRadius)
-            )
-            .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
-            .shadow(
-                color: appearance.shadowColors.value(for: internalState),
-                radius: appearance.shadowRadius,
-                offset: appearance.shadowOffset
-            )
-    }
-
     @ViewBuilder 
     private func borderView(
         internalState: VStretchedToggleButtonInternalState
@@ -224,7 +216,6 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
         if borderWidth > 0 {
             RoundedRectangle(cornerRadius: appearance.cornerRadius)
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
         }
     }
 }

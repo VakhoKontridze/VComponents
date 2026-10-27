@@ -92,6 +92,8 @@ public struct VWrappedToggleButtonAppearance {
     }()
 
     /// Background pressed scale.
+    ///
+    /// Background is drawn in the same layer as label, so label is scaled as well.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -128,14 +130,14 @@ public struct VWrappedToggleButtonAppearance {
     /// Applicable only if `init` with multiple components is used.
     public var labelSpacing: CGFloat = 8
 
-    /// Label pressed scale.
+    /// Label pressed scale, applied on top of `backgroundPressedScale`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
 #elseif os(macOS)
         1
 #elseif os(watchOS)
-        0.98
+        1
 #else
         fatalError()
 #endif
@@ -265,7 +267,7 @@ public struct VWrappedToggleButtonAppearance {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 extension VWrappedToggleButtonAppearance {
-    /// Draws background with Liquid Glass, untinted when off and tinted with accent color when on.
+    /// Draws background with Liquid Glass, untinted when off and tinted with accent color when on, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(
@@ -274,8 +276,8 @@ extension VWrappedToggleButtonAppearance {
                     StateColors(
                         off: Color.clear, // Untinted, as opaque tint would turn glass into a solid slab
                         on: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-                        pressedOff: Color.primary.opacity(0.15),
-                        pressedOn: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                        pressedOff: Color.clear, // Same as off, as changing tint mid-press resets interactive glass
+                        pressedOn: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)), // Same as on
                         disabled: Color.clear
                     )
                 )

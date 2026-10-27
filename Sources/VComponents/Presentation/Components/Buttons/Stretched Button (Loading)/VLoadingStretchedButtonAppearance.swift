@@ -64,6 +64,8 @@ public struct VLoadingStretchedButtonAppearance {
     )
 
     /// Background pressed scale.
+    ///
+    /// Background is drawn in the same layer as label, so label is scaled as well.
     public var backgroundPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -98,7 +100,7 @@ public struct VLoadingStretchedButtonAppearance {
     /// Applicable only if `init` with multiple components is used.
     public var labelSpacingType: TextAndImageSpacingType = .fixed(spacing: 8)
 
-    /// Label pressed scale.
+    /// Label pressed scale, applied on top of `backgroundPressedScale`.
     public var labelPressedScale: CGFloat = {
 #if os(iOS)
         1
@@ -275,7 +277,7 @@ public struct VLoadingStretchedButtonAppearance {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension VLoadingStretchedButtonAppearance {
-    /// Draws background with Liquid Glass, tinted with accent color.
+    /// Draws background with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
         backgroundSurfaceStyle = .glass(
@@ -283,7 +285,7 @@ extension VLoadingStretchedButtonAppearance {
                 .tint(
                     StateColors(
                         enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-                        pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                        pressed: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)), // Same as enabled, as changing tint mid-press resets interactive glass
                         loading: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5),
                         disabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5)
                     )

@@ -125,11 +125,20 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 let internalState: VLoadingStretchedButtonInternalState = internalState(baseButtonState)
                 
                 labelView(internalState: internalState)
-                    .contentShape(.rect) // Registers gestures even when clear
                     .frame(height: appearance.height)
-                    .background { backgroundView(internalState: internalState) }
+                    .contentShape(.rect) // Registers gestures even when clear
+                    .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+                        appearance.backgroundSurfaceStyle,
+                        state: internalState,
+                        in: .rect(cornerRadius: appearance.cornerRadius)
+                    )
                     .overlay { borderView(internalState: internalState) }
-                    .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                    .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
+                    .shadow(
+                        color: appearance.shadowColors.value(for: internalState),
+                        radius: appearance.shadowRadius,
+                        offset: appearance.shadowOffset
+                    )
             }
         )
         .applyIfLet(appearance.sensoryFeedback) { $0.sensoryFeedback($1, trigger: sensoryFeedbackTrigger) }
@@ -240,23 +249,6 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .frame(width: appearance.spinnerAppearance.dimension)
     }
     
-    private func backgroundView(
-        internalState: VLoadingStretchedButtonInternalState
-    ) -> some View {
-        Color.clear
-            .surfaceStyle(
-                appearance.backgroundSurfaceStyle,
-                state: internalState,
-                in: .rect(cornerRadius: appearance.cornerRadius)
-            )
-            .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
-            .shadow(
-                color: appearance.shadowColors.value(for: internalState),
-                radius: appearance.shadowRadius,
-                offset: appearance.shadowOffset
-            )
-    }
-    
     @ViewBuilder 
     private func borderView(
         internalState: VLoadingStretchedButtonInternalState
@@ -266,7 +258,6 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
         if borderWidth > 0 {
             RoundedRectangle(cornerRadius: appearance.cornerRadius)
                 .strokeBorder(appearance.borderColors.value(for: internalState), lineWidth: borderWidth)
-                .scaleEffect(internalState == .pressed ? appearance.backgroundPressedScale : 1)
         }
     }
 }
