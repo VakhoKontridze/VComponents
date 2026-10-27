@@ -42,10 +42,12 @@ public struct VNotificationAppearance {
     public var cornerRadius: CGFloat = 12
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.secondarySystemBackground)
+        .color(Color(uiColor: UIColor.secondarySystemBackground))
 #else
         fatalError()
 #endif
@@ -88,12 +90,14 @@ public struct VNotificationAppearance {
     /// Image background corner radius.
     public var imageBackgroundCornerRadius: CGFloat = 10
 
-    /// Image background color.
-    public var imageBackgroundColor: Color = {
+    /// Image background surface style.
+    public var imageBackgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color.dynamic(
-            Color(uiColor: UIColor.secondarySystemBackground).darkened(by: 0.05),
-            Color(22, 22, 22)
+        .color(
+            Color.dynamic(
+                Color(uiColor: UIColor.secondarySystemBackground).darkened(by: 0.05),
+                Color(22, 22, 22)
+            )
         )
 #else
         fatalError()
@@ -240,38 +244,83 @@ public struct VNotificationAppearance {
 extension VNotificationAppearance {
     /// Applies info style.
     public mutating func applyInfoStyle() {
-        backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190)))
 
-        imageBackgroundColor = Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15))
+        imageBackgroundSurfaceStyle = .color(Color.platformDynamic(Color(0, 120, 200), Color(0, 75, 15)))
 
         sensoryFeedback = .success
     }
     
     /// Applies success style.
     public mutating func applySuccessStyle() {
-        backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75)))
 
-        imageBackgroundColor = Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45))
+        imageBackgroundSurfaceStyle = .color(Color.platformDynamic(Color(40, 160, 95), Color(10, 105, 45)))
 
         sensoryFeedback = .success
     }
     
     /// Applies warning style.
     public mutating func applyWarningStyle() {
-        backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40)))
 
-        imageBackgroundColor = Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10))
+        imageBackgroundSurfaceStyle = .color(Color.platformDynamic(Color(225, 175, 65), Color(200, 130, 10)))
 
         sensoryFeedback = .warning
     }
     
     /// Applies error style.
     public mutating func applyErrorStyle() {
-        backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45)))
 
-        imageBackgroundColor = Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15))
+        imageBackgroundSurfaceStyle = .color(Color.platformDynamic(Color(205, 65, 60), Color(175, 20, 15)))
 
         sensoryFeedback = .error
+    }
+
+    /// Draws background with untinted Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular)
+
+        imageBackgroundSurfaceStyle = .color(Color.primary.opacity(0.1)) // Not glass, as nested glass is avoided on purpose
+    }
+
+    /// Applies info style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyInfoGlassStyle() {
+        applyInfoStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies success style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applySuccessGlassStyle() {
+        applySuccessStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies warning style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyWarningGlassStyle() {
+        applyWarningStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies error style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyErrorGlassStyle() {
+        applyErrorStyle()
+        applyTintedGlassBackground()
+    }
+
+    @available(anyAppleOS 26.0, *)
+    private mutating func applyTintedGlassBackground() {
+        backgroundSurfaceStyle = .glass(.regular.tint(backgroundSurfaceStyle.color))
+
+        if let imageBackgroundColor: Color = imageBackgroundSurfaceStyle.color {
+            imageBackgroundSurfaceStyle = .color(imageBackgroundColor.opacity(0.35)) // Not glass, as nested glass is avoided on purpose
+        }
     }
 }
 

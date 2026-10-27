@@ -192,6 +192,24 @@ extension VToastAppearance {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
+extension VNotificationAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+
+    @available(*, deprecated, message: "Use 'imageBackgroundSurfaceStyle' with '.color(_:)'")
+    public var imageBackgroundColor: Color {
+        get { imageBackgroundSurfaceStyle.color ?? .clear }
+        set { imageBackgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VTextFieldAppearance {
     @available(*, deprecated, message: "Use new mutating API")
     public static var secure: Self {

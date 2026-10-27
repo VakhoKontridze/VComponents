@@ -88,6 +88,12 @@ VToast
 - `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass
 - Shadow is now applied to background only
 
+VNotification
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, and `imageBackgroundColor` is replaced with `imageBackgroundSurfaceStyle`, both `SurfaceStyle`s that draw a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass and image background with a translucent color
+- Shadow is now applied to background only
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

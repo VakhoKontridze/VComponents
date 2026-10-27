@@ -79,24 +79,14 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                     }
                 }
 
-                .background { backgroundView }
                 .overlay { borderView }
-
                 .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                .background { backgroundView } // Outside of clip, so that shadow isn't clipped
 
                 .onGeometryChange(of: { $0.size.height }) { height = $0 }
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: modalPresenterContext.containerSize.width))
         }
-        // Prevents UI from breaking in some scenarios, such as previews
-        .drawingGroup()
-        
-        // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
-        .shadow(
-            color: appearance.shadowColor,
-            radius: appearance.shadowRadius,
-            offset: appearance.shadowOffset
-        )
 
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
@@ -128,9 +118,12 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     ) -> some View {
         if let image {
             ZStack {
-                RoundedRectangle(cornerRadius: appearance.imageBackgroundCornerRadius)
+                Color.clear
                     .frame(size: appearance.imageBackgroundSize)
-                    .foregroundStyle(appearance.imageBackgroundColor)
+                    .surfaceStyle(
+                        appearance.imageBackgroundSurfaceStyle,
+                        in: .rect(cornerRadius: appearance.imageBackgroundCornerRadius)
+                    )
 
                 image
                     .imageConfiguration(appearance.imageConfiguration)
@@ -208,8 +201,16 @@ struct VNotification<CustomContent>: View where CustomContent: View {
     }
 
     private var backgroundView: some View {
-        Rectangle()
-            .foregroundStyle(appearance.backgroundColor)
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                in: .rect(cornerRadius: appearance.cornerRadius)
+            )
+            .shadow(
+                color: appearance.shadowColor,
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
+            )
     }
 
     @ViewBuilder
@@ -493,6 +494,81 @@ struct VNotification<CustomContent>: View where CustomContent: View {
                             }
                             
                             appearance = VNotificationAppearance { $0.applyErrorStyle() }
+                        }
+                    }
+                }
+            }
+    }
+    .modalPresenterRoot(
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
+        }()
+    )
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var appearance: VNotificationAppearance = .init { $0.applyGlassBackgroundStyle() }
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vNotification(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: VNotificationAppearance(appearance) {
+                    $0.timeoutDuration = 60
+                },
+                isPresented: $isPresented,
+                image: Image(systemName: "swift"),
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet"
+            )
+            .onAppear { isFirst in
+                if isFirst {
+                    Task {
+                        while true {
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VNotificationAppearance { $0.applyInfoGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VNotificationAppearance { $0.applySuccessGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VNotificationAppearance { $0.applyWarningGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VNotificationAppearance { $0.applyErrorGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VNotificationAppearance { $0.applyGlassBackgroundStyle() }
                         }
                     }
                 }
