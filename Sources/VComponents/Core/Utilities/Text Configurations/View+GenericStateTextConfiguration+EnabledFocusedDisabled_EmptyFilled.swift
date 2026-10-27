@@ -11,10 +11,11 @@ extension View {
     /// Applies `GenericStateTextConfiguration`.
     ///
     ///     let configuration: GenericStateTextConfiguration<...> = ...
+    ///     let state: GenericState_EnabledFocusedDisabled_EmptyFilled = ...
     ///
     ///     var body: some View {
     ///         Text(...)
-    ///             .textConfiguration(configuration)
+    ///             .textConfiguration(configuration, state: state)
     ///     }
     ///
     public func textConfiguration(

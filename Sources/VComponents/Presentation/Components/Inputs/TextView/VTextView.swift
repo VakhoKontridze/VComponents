@@ -66,7 +66,7 @@ import VCore
 ///             }
 ///     }
 ///
-/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextViewAppearance`.
+/// Highlights can be applied with `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()` on `VTextViewAppearance`, or their Liquid Glass counterparts.
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG

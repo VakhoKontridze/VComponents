@@ -33,7 +33,7 @@ import VCore
 ///         }
 ///     }
 ///
-/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VCodeEntryViewAppearance`.
+/// Highlights can be applied with `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()` on `VCodeEntryViewAppearance`.
 ///
 /// When running in `SwiftUI` previews or simulators, `mac` keyboard may cause the hidden `TextField` decoration to appear.
 @available(macOS, unavailable) // Doesn't follow HIG

@@ -6,7 +6,6 @@
 //
 
 public import SwiftUI
-public import VCore
 
 /// Model that describes text configuration.
 ///

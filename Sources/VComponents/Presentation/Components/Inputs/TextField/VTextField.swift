@@ -94,7 +94,7 @@ import VCore
 ///         .padding()
 ///     }
 ///
-/// Highlights can be applied using `success`, `warning`, and `secure` instances of `VTextFieldAppearance`.
+/// Highlights can be applied with `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()` on `VTextFieldAppearance`, or their Liquid Glass counterparts.
 @available(macOS, unavailable) // Doesn't follow HIG
 @available(tvOS, unavailable) // Doesn't follow HIG
 @available(watchOS, unavailable) // Doesn't follow HIG

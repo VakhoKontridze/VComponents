@@ -43,7 +43,7 @@ extension View {
     ///         )
     ///     }
     ///
-    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VNotificationAppearance`.
+    /// Highlights can be applied with `applyInfoStyle()`, `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()` on `VNotificationAppearance`, or their Liquid Glass counterparts.
     public func vNotification(
         link: ModalPresenterLink,
         appearance: VNotificationAppearance = .init(),

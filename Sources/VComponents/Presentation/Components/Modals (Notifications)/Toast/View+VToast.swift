@@ -41,7 +41,7 @@ extension View {
     ///         )
     ///     }
     ///
-    /// Highlights can be applied using `info`, `success`, `warning`, and `error` instances of `VToastAppearance`.
+    /// Highlights can be applied with `applyInfoStyle()`, `applySuccessStyle()`, `applyWarningStyle()`, and `applyErrorStyle()` on `VToastAppearance`, or their Liquid Glass counterparts.
     public func vToast(
         link: ModalPresenterLink,
         appearance: VToastAppearance = .init(),

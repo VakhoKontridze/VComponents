@@ -11,13 +11,14 @@ public import VCore
 // Needs to be extended on `Text` and to return `Text` to keep identity for `TextField`
 
 extension Text {
-    /// Applies `GenericStateTextConfiguration`.
+    /// Applies `GenericStateBasicTextConfiguration`.
     ///
     ///     let configuration: GenericStateBasicTextConfiguration<...> = ...
+    ///     let state: GenericState_EnabledFocusedDisabled = ...
     ///
     ///     var body: some View {
     ///         Text(...)
-    ///             .textConfiguration(configuration)
+    ///             .textConfiguration(configuration, state: state)
     ///     }
     ///
     public func textConfiguration(

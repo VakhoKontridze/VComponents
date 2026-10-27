@@ -14,10 +14,11 @@ extension Image {
     /// Applies `GenericStateImageConfiguration`.
     ///
     ///     let configuration: GenericStateImageConfiguration<...> = ...
+    ///     let state: GenericState_EnabledPressedDisabled = ...
     ///
     ///     var body: some View {
     ///         Image(...)
-    ///             .imageConfiguration(configuration)
+    ///             .imageConfiguration(configuration, state: state)
     ///     }
     ///
     public func imageConfiguration(
