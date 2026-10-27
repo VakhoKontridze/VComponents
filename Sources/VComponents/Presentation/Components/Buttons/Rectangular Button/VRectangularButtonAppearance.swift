@@ -198,13 +198,15 @@ extension VRectangularButtonAppearance {
     /// Draws background with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
+        let accent: Color = Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)) // Shared instance, as separate `platformDynamic` instances compare unequal, and tint change mid-press resets interactive glass
+
         backgroundSurfaceStyle = .glass(
             .regular
                 .tint(
                     StateColors(
-                        enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-                        pressed: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)), // Same as enabled, as changing tint mid-press resets interactive glass
-                        disabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)).opacity(0.5)
+                        enabled: accent,
+                        pressed: accent,
+                        disabled: accent.opacity(0.5)
                     )
                 )
                 .interactive()
