@@ -124,10 +124,10 @@ extension VGroupBoxAppearance {
 }
 
 extension VGroupBoxAppearance {
-    /// Draws background with Liquid Glass, tinted with current background color.
+    /// Draws background with untinted Liquid Glass.
     @available(anyAppleOS 26.0, *)
     @available(visionOS, unavailable)
     public mutating func applyGlassBackgroundStyle() {
-        backgroundSurfaceStyle = .glass(.regular.tint(backgroundSurfaceStyle.color))
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
     }
 }

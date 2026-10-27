@@ -211,19 +211,6 @@ public struct VTextView: View {
             .padding(.horizontal)
         }
 
-        PreviewRow("Focused") {
-            VTextView(
-                appearance: VTextViewAppearance {
-                    $0.applyGlassBackgroundStyle()
-                    $0.borderColors.enabled = $0.borderColors.focused
-                    $0.textConfiguration.colors!.enabled = $0.textConfiguration.colors!.focused // Unsafe (DEBUG)
-                },
-                placeholder: "Lorem ipsum",
-                text: .constant("Lorem ipsum")
-            )
-            .padding(.horizontal)
-        }
-
         PreviewRow("Success") {
             VTextView(
                 appearance: VTextViewAppearance {

@@ -60,12 +60,12 @@ VCodeEntryView
 VGroupBox
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background color
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
 
 VDisclosureGroup
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
-- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background color, alongside disclosure button and a translucent divider
+- `applyGlassBackgroundStyle()` method is added, that draws background and disclosure button with untinted Liquid Glass, and makes divider translucent
 
 VModal
 

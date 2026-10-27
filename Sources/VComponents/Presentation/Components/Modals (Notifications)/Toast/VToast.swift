@@ -540,11 +540,9 @@ struct VToast: View {
         ModalLauncherView(isPresented: $isPresented)
             .vToast(
                 link: ModalPresenterLink(linkID: "preview"),
-                appearance: {
-                    var appearance = appearance
-                    appearance.timeoutDuration = 60
-                    return appearance
-                }(),
+                appearance: VToastAppearance(appearance) {
+                    $0.timeoutDuration = 60
+                },
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )

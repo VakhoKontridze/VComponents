@@ -356,19 +356,6 @@ public struct VTextField: View {
             .padding(.horizontal)
         }
 
-        PreviewRow("Focused") {
-            VTextField(
-                appearance: VTextFieldAppearance {
-                    $0.applyGlassBackgroundStyle()
-                    $0.borderColors.enabled = $0.borderColors.focused
-                    $0.textConfiguration.colors!.enabled = $0.textConfiguration.colors!.focused // Unsafe (DEBUG)
-                },
-                placeholder: "Lorem ipsum",
-                text: .constant("Lorem ipsum")
-            )
-            .padding(.horizontal)
-        }
-
         PreviewRow("Success") {
             VTextField(
                 appearance: VTextFieldAppearance {
