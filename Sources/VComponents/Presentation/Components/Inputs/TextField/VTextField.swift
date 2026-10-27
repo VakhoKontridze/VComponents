@@ -358,10 +358,25 @@ public struct VTextField: View {
 
         PreviewRow("Success") {
             VTextField(
-                appearance: VTextFieldAppearance {
-                    $0.applyGlassBackgroundStyle()
-                    $0.applySuccessStyle()
-                },
+                appearance: VTextFieldAppearance { $0.applySuccessGlassStyle() },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Warning") {
+            VTextField(
+                appearance: VTextFieldAppearance { $0.applyWarningGlassStyle() },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Error") {
+            VTextField(
+                appearance: VTextFieldAppearance { $0.applyErrorGlassStyle() },
                 placeholder: "Lorem ipsum",
                 text: .constant("Lorem ipsum")
             )

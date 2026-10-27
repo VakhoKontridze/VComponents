@@ -213,10 +213,25 @@ public struct VTextView: View {
 
         PreviewRow("Success") {
             VTextView(
-                appearance: VTextViewAppearance {
-                    $0.applyGlassBackgroundStyle()
-                    $0.applySuccessStyle()
-                },
+                appearance: VTextViewAppearance { $0.applySuccessGlassStyle() },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Warning") {
+            VTextView(
+                appearance: VTextViewAppearance { $0.applyWarningGlassStyle() },
+                placeholder: "Lorem ipsum",
+                text: .constant("Lorem ipsum")
+            )
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Error") {
+            VTextView(
+                appearance: VTextViewAppearance { $0.applyErrorGlassStyle() },
                 placeholder: "Lorem ipsum",
                 text: .constant("Lorem ipsum")
             )

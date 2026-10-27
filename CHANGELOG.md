@@ -46,11 +46,13 @@ VTextField
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, and makes clear button translucent
+- `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass tinted with a translucent status color
 
 VTextView
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+- `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass tinted with a translucent status color
 
 VCodeEntryView
 

@@ -303,6 +303,43 @@ extension VTextFieldAppearance {
         )
     }
 
+    /// Applies success style, with background drawn with Liquid Glass tinted with translucent success color.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applySuccessGlassStyle() {
+        applyGlassBackgroundStyle()
+        applyTintedGlassBackground(tintColor: Color.platformDynamic(Color(85, 195, 135), Color(45, 150, 75)))
+    }
+
+    /// Applies warning style, with background drawn with Liquid Glass tinted with translucent warning color.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyWarningGlassStyle() {
+        applyGlassBackgroundStyle()
+        applyTintedGlassBackground(tintColor: Color.platformDynamic(Color(255, 190, 35), Color(240, 150, 20)))
+    }
+
+    /// Applies error style, with background drawn with Liquid Glass tinted with translucent error color.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyErrorGlassStyle() {
+        applyGlassBackgroundStyle()
+        applyTintedGlassBackground(tintColor: Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55)))
+    }
+
+    @available(anyAppleOS 26.0, *)
+    private mutating func applyTintedGlassBackground(
+        tintColor: Color
+    ) {
+        backgroundSurfaceStyle = .glass(
+            .regular
+                .tint(
+                    StateColors(
+                        enabled: tintColor.opacity(0.25),
+                        focused: tintColor.opacity(0.25),
+                        disabled: tintColor.opacity(0.1)
+                    )
+                )
+        )
+    }
+
     private mutating func applyBorder() {
         borderWidth = PointPixelMeasurement.points(1.5)
     }
