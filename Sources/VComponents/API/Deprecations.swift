@@ -210,6 +210,42 @@ extension VNotificationAppearance {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
+extension VDynamicPagerTabViewAppearance {
+    @available(*, deprecated, message: "Use 'tabBarBackgroundSurfaceStyle' with '.color(_:)'")
+    public var tabBarBackgroundColor: Color {
+        get { tabBarBackgroundSurfaceStyle.color ?? .clear }
+        set { tabBarBackgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VStretchedIndicatorStaticPagerTabViewAppearance {
+    @available(*, deprecated, message: "Use 'tabBarBackgroundSurfaceStyle' with '.color(_:)'")
+    public var tabBarBackgroundColor: Color {
+        get { tabBarBackgroundSurfaceStyle.color ?? .clear }
+        set { tabBarBackgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VWrappedIndicatorStaticPagerTabViewAppearance {
+    @available(*, deprecated, message: "Use 'tabBarBackgroundSurfaceStyle' with '.color(_:)'")
+    public var tabBarBackgroundColor: Color {
+        get { tabBarBackgroundSurfaceStyle.color ?? .clear }
+        set { tabBarBackgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VTextFieldAppearance {
     @available(*, deprecated, message: "Use new mutating API")
     public static var secure: Self {

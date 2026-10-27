@@ -199,7 +199,15 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
 
     private var tabBar: some View {
         _tabBarAndTabIndicatorStripView
-            .background(appearance.tabBarBackgroundColor)
+            .background { tabBarBackgroundView }
+    }
+
+    private var tabBarBackgroundView: some View {
+        Color.clear
+            .surfaceStyle(
+                appearance.tabBarBackgroundSurfaceStyle,
+                in: .rect
+            )
     }
 
     private var _tabBarAndTabIndicatorStripView: some View {
@@ -445,6 +453,24 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             .padding(.horizontal)
             .frame(height: 150)
         }
+    }
+}
+
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var selection: Weekday = .thursday
+
+    PreviewContainer(layer: .checkered) {
+        VDynamicPagerTabView(
+            appearance: VDynamicPagerTabViewAppearance { $0.applyGlassTabBarBackgroundStyle() },
+            selection: $selection,
+            data: Weekday.allCases,
+            tabItemTitle: { $0.title },
+            content: { $0.color }
+        )
+        .padding(.horizontal)
+        .frame(height: 150)
     }
 }
 

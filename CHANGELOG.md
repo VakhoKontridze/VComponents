@@ -94,6 +94,21 @@ VNotification
 - `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass and image background with a translucent color
 - Shadow is now applied to background only
 
+VDynamicPagerTabView
+
+- `tabBarBackgroundColor` is replaced with `tabBarBackgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassTabBarBackgroundStyle()` method is added, that draws tab bar background with untinted Liquid Glass
+
+VStretchedIndicatorStaticPagerTabView
+
+- `tabBarBackgroundColor` is replaced with `tabBarBackgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassTabBarBackgroundStyle()` method is added, that draws tab bar background with untinted Liquid Glass
+
+VWrappedIndicatorStaticPagerTabView
+
+- `tabBarBackgroundColor` is replaced with `tabBarBackgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassTabBarBackgroundStyle()` method is added, that draws tab bar background with untinted Liquid Glass
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

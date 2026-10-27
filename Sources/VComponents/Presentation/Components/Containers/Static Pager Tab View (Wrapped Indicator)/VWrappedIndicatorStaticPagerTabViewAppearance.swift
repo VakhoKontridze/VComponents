@@ -22,10 +22,12 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance {
     /// Tab bar alignment for tab items.
     public var tabBarAlignment: VerticalAlignment = .top
     
-    /// Tab bar background color.
-    public var tabBarBackgroundColor: Color = {
+    /// Tab bar background surface style.
+    ///
+    /// To draw tab bar background with Liquid Glass, call `applyGlassTabBarBackgroundStyle()`.
+    public var tabBarBackgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
+        .color(Color(uiColor: UIColor.systemBackground))
 #else
         fatalError()
 #endif
@@ -105,4 +107,16 @@ public struct VWrappedIndicatorStaticPagerTabViewAppearance {
     
     /// State-bound text configuration.
     public typealias TabItemStateTextConfiguration = GenericStateTextConfiguration<TabItemStateColors>
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VWrappedIndicatorStaticPagerTabViewAppearance {
+    /// Draws tab bar background with untinted Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassTabBarBackgroundStyle() {
+        tabBarBackgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
+    }
 }

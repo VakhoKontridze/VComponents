@@ -206,10 +206,18 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
             _tabBar
             tabIndicatorStripView
         }
-        .background(appearance.tabBarBackgroundColor)
-
         .clipped() // Prevents bouncing tab indicator from overflowing
         .drawingGroup() // Prevents clipped tab indicator from disappearing
+
+        .background { tabBarBackgroundView } // Outside of `drawingGroup`, as Liquid Glass isn't rendered inside it
+    }
+
+    private var tabBarBackgroundView: some View {
+        Color.clear
+            .surfaceStyle(
+                appearance.tabBarBackgroundSurfaceStyle,
+                in: .rect
+            )
     }
 
     private var _tabBar: some View {
@@ -415,6 +423,24 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
         VStretchedIndicatorStaticPagerTabView(
             selection: $selection,
             data: [],
+            tabItemTitle: { $0.title },
+            content: { $0.color }
+        )
+        .padding(.horizontal)
+        .frame(height: 150)
+    }
+}
+
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var selection: RGBColor = .red
+
+    PreviewContainer(layer: .checkered) {
+        VStretchedIndicatorStaticPagerTabView(
+            appearance: VStretchedIndicatorStaticPagerTabViewAppearance { $0.applyGlassTabBarBackgroundStyle() },
+            selection: $selection,
+            data: RGBColor.allCases,
             tabItemTitle: { $0.title },
             content: { $0.color }
         )
