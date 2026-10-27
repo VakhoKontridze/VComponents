@@ -226,6 +226,33 @@ nonisolated private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 
 #endif
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        PreviewRow("Collapsed") {
+            VDisclosureGroup(
+                appearance: VDisclosureGroupAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.collapsed),
+                headerTitle: "Lorem Ipsum"
+            ) {
+                Color.blue.frame(height: 100)
+            }
+            .padding(.horizontal)
+        }
+
+        PreviewRow("Expanded") {
+            VDisclosureGroup(
+                appearance: VDisclosureGroupAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.expanded),
+                headerTitle: "Lorem Ipsum"
+            ) {
+                Color.blue.frame(height: 100)
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+
 private struct StatesContentView: View {
     // MARK: Properties
     private let layer: PreviewContainerLayer

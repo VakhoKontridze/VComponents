@@ -52,6 +52,36 @@ VTextView
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
 
+VGroupBox
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background color
+
+VDisclosureGroup
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background color, alongside disclosure button and a translucent divider
+
+VModal
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, and removes shadow
+
+VBottomSheet
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+
+VSideBar
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+
+VAlert
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, alongside secondary and destructive buttons, and removes shadow
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

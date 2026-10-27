@@ -245,6 +245,23 @@ struct VSideBar<Content>: View where Content: View {
     ContentView(appearance: VSideBarAppearance { $0.applyPresentationEdge(.bottom) })
 }
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vSideBar(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: VSideBarAppearance { $0.applyGlassBackgroundStyle() },
+                isPresented: $isPresented
+            ) {
+                Text("Lorem ipsum dolor sit amet")
+            }
+    }
+    .modalPresenterRoot()
+}
+
 #if !os(macOS) // No `UIEdgeInsets`
 
 #Preview("Safe Area Leading") {

@@ -334,6 +334,23 @@ struct VBottomSheet<Content>: View
     .modalPresenterRoot()
 }
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vBottomSheet(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: VBottomSheetAppearance { $0.applyGlassBackgroundStyle() },
+                isPresented: $isPresented
+            ) {
+                Text("Lorem ipsum dolor sit amet")
+            }
+    }
+    .modalPresenterRoot()
+}
+
 #if !os(macOS) // Doesn't follow HIG
 
 #Preview("Min & Ideal & Max") {

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 2/12/21.
 //
 
-import SwiftUI
+public import SwiftUI
 public import VCore
 
 @available(tvOS, unavailable)
@@ -111,6 +111,67 @@ extension VTextViewAppearance {
     @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
     public var backgroundColors: StateColors {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+extension VGroupBoxAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VDisclosureGroupAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(watchOS, unavailable)
+extension VModalAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VBottomSheetAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VSideBarAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VAlertAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
 }

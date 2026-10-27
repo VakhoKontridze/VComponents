@@ -159,6 +159,29 @@ struct VModal<Content>: View
     .modalPresenterRoot()
 }
 
+#if !os(visionOS)
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vModal(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: VModalAppearance { $0.applyGlassBackgroundStyle() },
+                isPresented: $isPresented
+            ) {
+                Text("Lorem ipsum dolor sit amet")
+                    .contentShape(.rect)
+                    .onTapGesture { isPresented = false }
+            }
+    }
+    .modalPresenterRoot()
+}
+
+#endif
+
 #Preview("Size Types") {
     ContentView()
 }

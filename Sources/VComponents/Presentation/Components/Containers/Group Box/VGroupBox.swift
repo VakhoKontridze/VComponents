@@ -65,15 +65,7 @@ public struct VGroupBox<Content>: View where Content: View {
         contentView
             .background { backgroundView }
             .overlay { borderView }
-            .clipShape(
-                .rect(
-                    cornerRadii: appearance.cornerRadii
-                        .horizontalCornersReversed(if:
-                            appearance.reversesHorizontalCornersForRTLLanguages &&
-                            layoutDirection.isRightToLeft
-                        )
-                )
-            )
+            .clipShape(.rect(cornerRadii: cornerRadii))
     }
 
     private var contentView: some View {
@@ -90,7 +82,11 @@ public struct VGroupBox<Content>: View where Content: View {
     }
 
     private var backgroundView: some View {
-        appearance.backgroundColor
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                in: .rect(cornerRadii: cornerRadii)
+            )
     }
 
     @ViewBuilder
@@ -98,15 +94,18 @@ public struct VGroupBox<Content>: View where Content: View {
         let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            UnevenRoundedRectangle(
-                cornerRadii: appearance.cornerRadii
-                    .horizontalCornersReversed(if:
-                        appearance.reversesHorizontalCornersForRTLLanguages &&
-                        layoutDirection.isRightToLeft
-                    )
-            )
-            .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
+            UnevenRoundedRectangle(cornerRadii: cornerRadii)
+                .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
+    }
+
+    // MARK: Helpers
+    private var cornerRadii: RectangleCornerRadii {
+        appearance.cornerRadii
+            .horizontalCornersReversed(if:
+                appearance.reversesHorizontalCornersForRTLLanguages &&
+                layoutDirection.isRightToLeft
+            )
     }
 }
 
@@ -120,6 +119,15 @@ public struct VGroupBox<Content>: View where Content: View {
 
 #Preview("System Background Color") {
     ContentView(appearance: VGroupBoxAppearance { $0.applySystemBackgroundColor() }, layer: .secondary)
+}
+
+#endif
+
+#if !os(visionOS)
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    ContentView(appearance: VGroupBoxAppearance { $0.applyGlassBackgroundStyle() }, layer: .checkered)
 }
 
 #endif

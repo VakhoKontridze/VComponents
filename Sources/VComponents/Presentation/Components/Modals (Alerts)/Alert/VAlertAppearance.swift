@@ -61,12 +61,14 @@ public struct VAlertAppearance {
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
+        .color(Color(uiColor: UIColor.systemBackground))
 #elseif os(macOS)
-        Color(nsColor: NSColor.windowBackgroundColor)
+        .color(Color(nsColor: NSColor.windowBackgroundColor))
 #else
         fatalError()
 #endif
@@ -77,7 +79,7 @@ public struct VAlertAppearance {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-            $0.backgroundColor = backgroundColor
+            $0.backgroundSurfaceStyle = backgroundSurfaceStyle
 
             $0.borderWidth = borderWidth
             $0.borderColor = borderColor
@@ -385,4 +387,20 @@ public struct VAlertAppearance {
 
     /// State-bound colors.
     public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+}
+
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VAlertAppearance {
+    /// Draws background with untinted Liquid Glass, secondary and destructive buttons with Liquid Glass tinted with current colors, and removes shadow.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
+
+        secondaryButtonAppearance.applyGlassBackgroundStyle()
+        destructiveButtonAppearance.applyGlassBackgroundStyle()
+
+        shadowColor = Color.clear
+    }
 }

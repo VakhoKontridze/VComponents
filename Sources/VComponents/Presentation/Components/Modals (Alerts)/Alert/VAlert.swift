@@ -458,6 +458,29 @@ struct VAlert<Content>: View
     .modalPresenterRoot()
 }
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vAlert(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: VAlertAppearance { $0.applyGlassBackgroundStyle() },
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                actions: {
+                    VAlertButton(action: nil, title: "Option A", role: .primary)
+                    VAlertButton(action: nil, title: "Option B", role: .secondary)
+                    VAlertButton(action: nil, title: "Delete", role: .destructive)
+                    VAlertButton(action: nil, title: "Cancel", role: .cancel)
+                }
+            )
+    }
+    .modalPresenterRoot()
+}
+
 #Preview("Width Types") {
     @Previewable @State var isPresented: Bool = true
     @Previewable @State var width: VAlertAppearance.Width?

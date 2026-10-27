@@ -80,16 +80,18 @@ public struct VModalAppearance {
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
+        .color(Color(uiColor: UIColor.systemBackground))
 #elseif os(macOS)
-        Color(nsColor: NSColor.windowBackgroundColor)
+        .color(Color(nsColor: NSColor.windowBackgroundColor))
 #elseif os(tvOS)
-        Color.dynamic(Color.white, Color.black)
+        .color(Color.dynamic(Color.white, Color.black))
 #elseif os(visionOS)
-        Color.black
+        .color(Color.black)
 #else
         fatalError()
 #endif
@@ -100,7 +102,7 @@ public struct VModalAppearance {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-            $0.backgroundColor = backgroundColor
+            $0.backgroundSurfaceStyle = backgroundSurfaceStyle
 
             $0.borderWidth = borderWidth
             $0.borderColor = borderColor
@@ -224,5 +226,17 @@ extension VModalAppearance {
     ) -> CGFloat {
         contentMargins.verticalSum +
         contentHeight
+    }
+}
+
+@available(watchOS, unavailable)
+extension VModalAppearance {
+    /// Draws background with untinted Liquid Glass, and removes shadow.
+    @available(anyAppleOS 26.0, *)
+    @available(visionOS, unavailable)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
+
+        shadowColor = Color.clear
     }
 }

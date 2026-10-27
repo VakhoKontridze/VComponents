@@ -64,12 +64,14 @@ public struct VBottomSheetAppearance {
     }
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
+        .color(Color(uiColor: UIColor.systemBackground))
 #elseif os(macOS)
-        Color(nsColor: NSColor.windowBackgroundColor)
+        .color(Color(nsColor: NSColor.windowBackgroundColor))
 #else
         fatalError()
 #endif
@@ -80,7 +82,7 @@ public struct VBottomSheetAppearance {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = false // No need
 
-            $0.backgroundColor = backgroundColor
+            $0.backgroundSurfaceStyle = backgroundSurfaceStyle
 
             $0.contentMargins = EdgeInsets()
         }
@@ -412,5 +414,11 @@ extension VBottomSheetAppearance {
     /// It's worth considering setting `contentIsDraggable` to `true`.
     public mutating func hideDragIndicator() {
         dragIndicatorSize.height = 0
+    }
+
+    /// Draws background with untinted Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
     }
 }

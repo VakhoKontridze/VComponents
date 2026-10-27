@@ -77,12 +77,14 @@ public struct VSideBarAppearance {
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.systemBackground)
+        .color(Color(uiColor: UIColor.systemBackground))
 #elseif os(macOS)
-        Color(nsColor: NSColor.windowBackgroundColor)
+        .color(Color(nsColor: NSColor.windowBackgroundColor))
 #else
         fatalError()
 #endif
@@ -93,7 +95,7 @@ public struct VSideBarAppearance {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-            $0.backgroundColor = backgroundColor
+            $0.backgroundSurfaceStyle = backgroundSurfaceStyle
 
             $0.contentMargins = EdgeInsets()
         }
@@ -325,6 +327,12 @@ extension VSideBarAppearance {
         }()
     }
     
+    /// Draws background with untinted Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular) // Untinted, as opaque background color would turn glass into a solid slab
+    }
+
     private mutating func applyCornerRadii(
         _ radii: RectangleCornerRadii
     ) {

@@ -32,12 +32,14 @@ public struct VDisclosureGroupAppearance {
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.secondarySystemBackground)
+        .color(Color(uiColor: UIColor.secondarySystemBackground))
 #elseif os(macOS)
-        Color.dynamic(Color.black.opacity(0.03), Color.black.opacity(0.15))
+        .color(Color.dynamic(Color.black.opacity(0.03), Color.black.opacity(0.15)))
 #else
         fatalError()
 #endif
@@ -50,7 +52,7 @@ public struct VDisclosureGroupAppearance {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
-            $0.backgroundColor = backgroundColor
+            $0.backgroundSurfaceStyle = backgroundSurfaceStyle
 
             $0.borderWidth = borderWidth
             $0.borderColor = borderColors.value(for: internalState)
@@ -232,7 +234,7 @@ extension VDisclosureGroupAppearance {
     /// Applies `UIColor.systemBackground`, to be used on `UIColor.secondarySystemBackground`.
     public mutating func applySystemBackgroundColor() {
 #if os(iOS)
-        backgroundColor = Color(uiColor: UIColor.systemBackground)
+        backgroundSurfaceStyle = .color(Color(uiColor: UIColor.systemBackground))
 #endif
 
         disclosureButtonAppearance.backgroundSurfaceStyle = .color(
@@ -242,5 +244,15 @@ extension VDisclosureGroupAppearance {
                 disabled: Color.platformDynamic(Color(240, 240, 240), Color(40, 40, 40))
             )
         )
+    }
+
+    /// Draws background and disclosure button with Liquid Glass, tinted with current background colors.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular.tint(backgroundSurfaceStyle.color))
+
+        disclosureButtonAppearance.applyGlassBackgroundStyle()
+
+        dividerColor = Color.primary.opacity(0.1)
     }
 }

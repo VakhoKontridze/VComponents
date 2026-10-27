@@ -30,18 +30,20 @@ public struct VGroupBoxAppearance {
     public var reversesHorizontalCornersForRTLLanguages: Bool = true
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = {
 #if os(iOS)
-        Color(uiColor: UIColor.secondarySystemBackground)
+        .color(Color(uiColor: UIColor.secondarySystemBackground))
 #elseif os(macOS)
-        Color.dynamic(Color.black.opacity(0.03), Color.black.opacity(0.15))
+        .color(Color.dynamic(Color.black.opacity(0.03), Color.black.opacity(0.15)))
 #elseif os(tvOS)
-        Color.dynamic(Color.black.opacity(0.05), Color.white.opacity(0.1))
+        .color(Color.dynamic(Color.black.opacity(0.05), Color.white.opacity(0.1)))
 #elseif os(watchOS)
-        Color.white.opacity(0.1)
+        .color(Color.white.opacity(0.1))
 #elseif os(visionOS)
-        Color.white.opacity(0.2)
+        .color(Color.white.opacity(0.2))
 #endif
     }()
 
@@ -116,7 +118,16 @@ extension VGroupBoxAppearance {
     /// Applies `UIColor.systemBackground`, to be used on `UIColor.secondarySystemBackground`.
     public mutating func applySystemBackgroundColor() {
 #if os(iOS)
-        backgroundColor = Color(uiColor: UIColor.systemBackground)
+        backgroundSurfaceStyle = .color(Color(uiColor: UIColor.systemBackground))
 #endif
+    }
+}
+
+extension VGroupBoxAppearance {
+    /// Draws background with Liquid Glass, tinted with current background color.
+    @available(anyAppleOS 26.0, *)
+    @available(visionOS, unavailable)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular.tint(backgroundSurfaceStyle.color))
     }
 }
