@@ -13,7 +13,7 @@
 
 VComponents is a `SwiftUI` collection that contains reusable UI components.
 
-<img src="https://github.com/user-attachments/assets/babef70a-f878-4f14-8742-7f982140367a">
+<img src="https://github.com/user-attachments/assets/83e0799e-f48e-4a5a-bccb-c7d841ea5c47">
 
 For additional info on component customization, refer to "Customization" documentation.
 
