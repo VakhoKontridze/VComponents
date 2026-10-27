@@ -367,7 +367,25 @@ nonisolated extension VStretchedToggleButtonInternalState {
                         } catch {
                             return
                         }
-                        
+
+                        labelSpacingType = .grouped(spacing: 20)
+                        placement = .imageAndText
+
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+
+                        labelSpacingType = .grouped(spacing: 20)
+                        placement = .textAndImage
+
+                        do {
+                            try await Task.sleep(for: .seconds(1))
+                        } catch {
+                            return
+                        }
+
                         labelSpacingType = .fixed(spacing: 20)
                         placement = .textAndImage
                         

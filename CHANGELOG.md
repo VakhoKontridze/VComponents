@@ -7,12 +7,14 @@ VStretchedButton
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 - `backgroundPressedScale` and `labelPressedScale` are replaced with `pressedScale`, as background is now drawn in the same layer as label, and shadow applies to the whole button
+- `TextAndImageSpacingType.grouped` is added to `labelSpacingType`, which centers label text and label image as a group
 
 VLoadingStretchedButton
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with accent color
 - `backgroundPressedScale` and `labelPressedScale` are replaced with `pressedScale`, as background is now drawn in the same layer as label, and shadow applies to the whole button
+- `TextAndImageSpacingType.grouped` is added to `labelSpacingType`, which centers label text and label image as a group
 
 VWrappedButton
 
@@ -37,6 +39,7 @@ VStretchedToggleButton
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
 - `backgroundPressedScale` and `labelPressedScale` are replaced with `pressedScale`, as background is now drawn in the same layer as label, and shadow applies to the whole button
+- `TextAndImageSpacingType.grouped` is added to `labelSpacingType`, which centers label text and label image as a group
 
 VWrappedToggleButton
 

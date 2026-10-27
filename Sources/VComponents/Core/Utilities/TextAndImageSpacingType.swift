@@ -11,23 +11,36 @@ import VCore
 /// Text and image spacing type.
 nonisolated public enum TextAndImageSpacingType: Sendable {
     // MARK: Cases
-    /// Fixed spacing.
+    /// Fixed spacing, with text centered and image placed next to it.
     case fixed(spacing: CGFloat)
 
-    /// Stretched spacing.
+    /// Fixed spacing, with text and image centered as a group.
+    case grouped(spacing: CGFloat)
+
+    /// Stretched spacing, with text centered and image pushed to the edge.
     case stretched(spacing: CGFloat)
-    
+
     // MARK: Properties
     fileprivate var spacing: CGFloat {
         switch self {
         case .fixed(let spacing): spacing
+        case .grouped(let spacing): spacing
         case .stretched(let spacing): spacing
         }
     }
-    
+
     fileprivate var hasFlexibleSpacing: Bool {
         switch self {
         case .fixed: false
+        case .grouped: false
+        case .stretched: true
+        }
+    }
+
+    fileprivate var centersText: Bool {
+        switch self {
+        case .fixed: true
+        case .grouped: false
         case .stretched: true
         }
     }
@@ -77,22 +90,26 @@ struct StretchedComponentTextAndImageContent<TextElement, ImageElement>: View
             }
             
             switch textAndImagePlacement {
-            case .textAndImage: imageCompensatorView
-            case .imageAndText: _image
+            case .textAndImage:
+                imageCompensatorView
+
+            case .imageAndText:
+                _image
+                spacingView
             }
-            
-            Spacer().frame(width: spacingType.spacing)
-            
+
             ZStack {
                 text()
             }
             .frame(maxWidth: spacingType.centeredElementMaxWidth)
-            
-            Spacer().frame(width: spacingType.spacing)
-            
+
             switch textAndImagePlacement {
-            case .textAndImage: _image
-            case .imageAndText: imageCompensatorView
+            case .textAndImage:
+                spacingView
+                _image
+
+            case .imageAndText:
+                imageCompensatorView
             }
             
             if !spacingType.hasFlexibleSpacing {
@@ -108,8 +125,17 @@ struct StretchedComponentTextAndImageContent<TextElement, ImageElement>: View
         .onGeometryChange(of: { $0.size.width }) { imageWidth = $0 }
     }
     
-    private var imageCompensatorView: some View {
+    private var spacingView: some View {
         Spacer()
-            .frame(width: imageWidth)
+            .frame(width: spacingType.spacing)
+    }
+
+    // Mirrors the image and its spacing on the opposite side, so that text stays centered
+    @ViewBuilder
+    private var imageCompensatorView: some View {
+        if spacingType.centersText {
+            Spacer()
+                .frame(width: imageWidth.map { $0 + spacingType.spacing })
+        }
     }
 }
