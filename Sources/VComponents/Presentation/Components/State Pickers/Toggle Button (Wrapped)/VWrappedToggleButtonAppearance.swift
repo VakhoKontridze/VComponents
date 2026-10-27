@@ -91,21 +91,6 @@ public struct VWrappedToggleButtonAppearance {
 #endif
     }()
 
-    /// Background pressed scale.
-    ///
-    /// Background is drawn in the same layer as label, so label is scaled as well.
-    public var backgroundPressedScale: CGFloat = {
-#if os(iOS)
-        1
-#elseif os(macOS)
-        1
-#elseif os(watchOS)
-        0.98
-#else
-        fatalError()
-#endif
-    }()
-
     // MARK: Properties - Border
     /// Border width.
     ///
@@ -129,19 +114,6 @@ public struct VWrappedToggleButtonAppearance {
     ///
     /// Applicable only if `init` with multiple components is used.
     public var labelSpacing: CGFloat = 8
-
-    /// Label pressed scale, applied on top of `backgroundPressedScale`.
-    public var labelPressedScale: CGFloat = {
-#if os(iOS)
-        1
-#elseif os(macOS)
-        1
-#elseif os(watchOS)
-        1
-#else
-        fatalError()
-#endif
-    }()
 
     // MARK: Properties - Label - Text
     /// Label text configuration.
@@ -195,6 +167,19 @@ public struct VWrappedToggleButtonAppearance {
     )
 
     // MARK: Properties - Transition - State Change
+    /// Pressed scale.
+    public var pressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError()
+#endif
+    }()
+
     /// Indicates if `stateChangeAnimation` is applied.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -270,16 +255,16 @@ extension VWrappedToggleButtonAppearance {
     /// Draws background with Liquid Glass, untinted when off and tinted with accent color when on, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
-        let accent: Color = Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)) // Shared instance, as separate `platformDynamic` instances compare unequal, and tint change mid-press resets interactive glass
+        let color: Color = .platformDynamic(Color(24, 126, 240), Color(25, 131, 255))
 
         backgroundSurfaceStyle = .glass(
             .regular
                 .tint(
                     StateColors(
                         off: Color.clear, // Untinted, as opaque tint would turn glass into a solid slab
-                        on: accent,
+                        on: color,
                         pressedOff: Color.clear,
-                        pressedOn: accent,
+                        pressedOn: color,
                         disabled: Color.clear
                     )
                 )

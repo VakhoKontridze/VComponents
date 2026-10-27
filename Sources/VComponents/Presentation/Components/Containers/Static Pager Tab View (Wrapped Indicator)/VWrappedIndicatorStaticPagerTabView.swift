@@ -500,7 +500,6 @@ nonisolated extension FloatingPoint {
     }
 }
 
-
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
     @Previewable @State var selection: RGBColor = .red

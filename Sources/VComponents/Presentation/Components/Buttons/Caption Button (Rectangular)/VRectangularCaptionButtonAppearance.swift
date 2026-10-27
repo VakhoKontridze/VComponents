@@ -103,17 +103,6 @@ public struct VRectangularCaptionButtonAppearance {
         }()
     )
 
-    /// Label image pressed scale, applied on top of `rectanglePressedScale`.
-    public var labelImagePressedScale: CGFloat = {
-#if os(iOS)
-        1
-#elseif os(watchOS)
-        1
-#else
-        fatalError()
-#endif
-    }()
-
     /// Label image margins.
     public var labelImageMargins: EdgeInsets = .init(3)
 
@@ -260,14 +249,14 @@ extension VRectangularCaptionButtonAppearance {
     /// Draws rectangle with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassRectangleStyle() {
-        let accent: Color = Color.platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35)) // Shared instance, as separate `platformDynamic` instances compare unequal, and tint change mid-press resets interactive glass
+        let color: Color = .platformDynamic(Color(24, 126, 240, 0.25), Color(25, 131, 255, 0.35))
 
         rectangleSurfaceStyle = .glass(
             .regular
                 .tint(
                     StateColors(
-                        enabled: accent,
-                        pressed: accent,
+                        enabled: color,
+                        pressed: color,
                         disabled: Color(128, 176, 240, 0.35)
                     )
                 )

@@ -139,13 +139,13 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                 labelView(internalState: internalState)
                     .frame(height: appearance.height)
                     .contentShape(.rect) // Registers gestures even when clear
-                    .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+                    .surfaceStyle( // Applied to content and not to a background sibling, so that the whole button scales and casts shadow as one layer, and interactive Liquid Glass reacts to touches
                         appearance.backgroundSurfaceStyle,
                         state: internalState,
                         in: .rect(cornerRadius: appearance.cornerRadius)
                     )
                     .overlay { borderView(internalState: internalState) }
-                    .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
+                    .scaleEffect(internalState.isPressedOffPressedOn ? appearance.pressedScale : 1)
                     .shadow(
                         color: appearance.shadowColors.value(for: internalState),
                         radius: appearance.shadowRadius,
@@ -191,7 +191,6 @@ public struct VWrappedToggleButton<CustomLabel>: View where CustomLabel: View {
                 builder(internalState)
             }
         }
-        .scaleEffect(internalState.isPressedOffPressedOn ? appearance.labelPressedScale : 1)
         .padding(appearance.labelMargins)
     }
 

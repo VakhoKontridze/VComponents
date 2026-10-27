@@ -16,6 +16,18 @@ extension VStretchedButtonAppearance {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -27,6 +39,18 @@ extension VLoadingStretchedButtonAppearance {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -37,6 +61,18 @@ extension VWrappedButtonAppearance {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -46,6 +82,18 @@ extension VRectangularButtonAppearance {
     public var backgroundColors: StateColors {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
     }
 }
 
@@ -58,6 +106,12 @@ extension VRectangularCaptionButtonAppearance {
         get { rectangleSurfaceStyle.colors ?? .clearColors }
         set { rectangleSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'rectanglePressedScale'")
+    public var labelImagePressedScale: CGFloat {
+        get { rectanglePressedScale }
+        set { rectanglePressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -69,6 +123,18 @@ extension VStretchedToggleButtonAppearance {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -79,6 +145,18 @@ extension VWrappedToggleButtonAppearance {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
     }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
 }
 
 @available(tvOS, unavailable)
@@ -88,6 +166,18 @@ extension VRectangularToggleButtonAppearance {
     public var backgroundColors: StateColors {
         get { backgroundSurfaceStyle.colors ?? .clearColors }
         set { backgroundSurfaceStyle = .color(newValue) }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var backgroundPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
+    }
+
+    @available(*, deprecated, message: "Use 'pressedScale'")
+    public var labelPressedScale: CGFloat {
+        get { pressedScale }
+        set { pressedScale = newValue }
     }
 }
 

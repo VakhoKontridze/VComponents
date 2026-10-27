@@ -140,7 +140,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             )
         }
         .frame(size: appearance.rectangleSize)
-        .surfaceStyle( // Applied to content and not to background, so that interactive Liquid Glass reacts to touches
+        .surfaceStyle( // Applied to content and not to a background sibling, so that the whole rectangle scales and casts shadow as one layer, and interactive Liquid Glass reacts to touches
             appearance.rectangleSurfaceStyle,
             state: internalState,
             in: .rect(cornerRadius: appearance.rectangleCornerRadius)
@@ -159,7 +159,6 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
     ) -> some View {
         labelImage
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
-            .scaleEffect(internalState == .pressed ? appearance.labelImagePressedScale : 1)
             .padding(appearance.labelImageMargins)
     }
 

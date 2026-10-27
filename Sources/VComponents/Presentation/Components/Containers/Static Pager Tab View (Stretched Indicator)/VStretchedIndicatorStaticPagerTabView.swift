@@ -431,7 +431,6 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
     }
 }
 
-
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
     @Previewable @State var selection: RGBColor = .red

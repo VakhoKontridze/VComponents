@@ -60,21 +60,6 @@ public struct VWrappedButtonAppearance {
         )
     )
 
-    /// Background pressed scale.
-    ///
-    /// Background is drawn in the same layer as label, so label is scaled as well.
-    public var backgroundPressedScale: CGFloat = {
-#if os(iOS)
-        1
-#elseif os(macOS)
-        1
-#elseif os(watchOS)
-        0.98
-#else
-        fatalError()
-#endif
-    }()
-
     // MARK: Properties - Border
     /// Border width.
     ///
@@ -98,19 +83,6 @@ public struct VWrappedButtonAppearance {
     ///
     /// Applicable only if `init` with multiple components is used.
     public var labelSpacing: CGFloat = 8
-
-    /// Label pressed scale, applied on top of `backgroundPressedScale`.
-    public var labelPressedScale: CGFloat = {
-#if os(iOS)
-        1
-#elseif os(macOS)
-        1
-#elseif os(watchOS)
-        1
-#else
-        fatalError()
-#endif
-    }()
 
     // MARK: Properties - Label - Text
     /// Label text configuration.
@@ -152,6 +124,19 @@ public struct VWrappedButtonAppearance {
     )
 
     // MARK: Properties - Transition - State Change
+    /// Pressed scale.
+    public var pressedScale: CGFloat = {
+#if os(iOS)
+        1
+#elseif os(macOS)
+        1
+#elseif os(watchOS)
+        0.98
+#else
+        fatalError()
+#endif
+    }()
+
     /// Indicates if button animates state change.
     ///
     /// Changing this property conditionally will cause view state to be reset.
@@ -209,15 +194,15 @@ extension VWrappedButtonAppearance {
     /// Draws background with Liquid Glass tinted with accent color, with pressed feedback from interactive glass.
     @available(anyAppleOS 26.0, *)
     public mutating func applyGlassBackgroundStyle() {
-        let accent: Color = Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)) // Shared instance, as separate `platformDynamic` instances compare unequal, and tint change mid-press resets interactive glass
+        let color: Color = .platformDynamic(Color(24, 126, 240), Color(25, 131, 255))
 
         backgroundSurfaceStyle = .glass(
             .regular
                 .tint(
                     StateColors(
-                        enabled: accent,
-                        pressed: accent,
-                        disabled: accent.opacity(0.5)
+                        enabled: color,
+                        pressed: color,
+                        disabled: color.opacity(0.5)
                     )
                 )
                 .interactive()

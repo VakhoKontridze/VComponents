@@ -456,7 +456,6 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
     }
 }
 
-
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
     @Previewable @State var selection: Weekday = .thursday
