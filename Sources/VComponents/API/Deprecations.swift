@@ -115,6 +115,18 @@ extension VTextViewAppearance {
     }
 }
 
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VCodeEntryViewAppearance {
+    @available(*, deprecated, message: "Use 'characterBackgroundSurfaceStyle' with '.color(_:)'")
+    public var characterBackgroundColors: StateColors {
+        get { characterBackgroundSurfaceStyle.colors ?? .clearColors }
+        set { characterBackgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
 extension VGroupBoxAppearance {
     @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
     public var backgroundColor: Color {

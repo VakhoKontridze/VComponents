@@ -50,13 +50,17 @@ public struct VCodeEntryViewAppearance {
     /// Character background rectangle size.
     public var characterBackgroundSize: CGSize = .init(dimension: 40)
 
-    /// Character background colors.
-    public var characterBackgroundColors: StateColors = .init(
-        enabledEmpty: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
-        enabledFilled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
-        focusedEmpty: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
-        focusedFilled: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
-        disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
+    /// Character background surface style.
+    ///
+    /// To draw character background with Liquid Glass, call `applyGlassCharacterBackgroundStyle()`.
+    public var characterBackgroundSurfaceStyle: StateSurfaceStyle = .color(
+        StateColors(
+            enabledEmpty: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+            enabledFilled: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+            focusedEmpty: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
+            focusedFilled: Color.dynamic(Color(220, 220, 220), Color(80, 80, 80)),
+            disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
+        )
     )
 
     // MARK: Properties - Corners
@@ -108,7 +112,10 @@ public struct VCodeEntryViewAppearance {
     // MARK: Types
     /// State-bound colors.
     public typealias StateColors = GenericStateModel_EnabledFocusedDisabled_EmptyFilled<Color>
-    
+
+    /// State-bound surface style.
+    public typealias StateSurfaceStyle = GenericStateSurfaceStyle<StateColors>
+
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
 
@@ -166,7 +173,13 @@ extension VCodeEntryViewAppearance {
         characterBackgroundBorderColors.focusedEmpty = Color.platformDynamic(Color(235, 110, 105), Color(215, 60, 55))
         characterBackgroundBorderColors.focusedFilled = characterBackgroundBorderColors.focusedEmpty
     }
-    
+
+    /// Draws character background with Liquid Glass, tinted with current character background colors.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassCharacterBackgroundStyle() {
+        characterBackgroundSurfaceStyle = .glass(.regular.tint(characterBackgroundSurfaceStyle.colors))
+    }
+
     private mutating func applyCharacterBackgroundBorder() {
         characterBackgroundBorderWidth = PointPixelMeasurement.points(1.5)
     }

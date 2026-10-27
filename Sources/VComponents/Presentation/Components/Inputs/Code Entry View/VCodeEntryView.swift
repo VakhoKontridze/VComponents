@@ -185,8 +185,12 @@ public struct VCodeEntryView: View {
     private func characterBackgroundView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {
-        Rectangle()
-            .foregroundStyle(appearance.characterBackgroundColors.value(for: internalState))
+        Color.clear
+            .surfaceStyle(
+                appearance.characterBackgroundSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.characterBackgroundCornerRadius)
+            )
     }
 
     @ViewBuilder 
@@ -249,8 +253,11 @@ public struct VCodeEntryView: View {
     PreviewContainer {
         VCodeEntryView(
             appearance: VCodeEntryViewAppearance {
-                $0.characterBackgroundColors.enabledFilled = $0.characterBackgroundColors.enabledFilled.darkened(by: 0.1)
-                $0.characterBackgroundColors.focusedFilled = $0.characterBackgroundColors.focusedFilled.darkened(by: 0.1)
+                var characterBackgroundColors: VCodeEntryViewAppearance.StateColors = $0.characterBackgroundSurfaceStyle.colors! // Unsafe (DEBUG)
+                characterBackgroundColors.enabledFilled = characterBackgroundColors.enabledFilled.darkened(by: 0.1)
+                characterBackgroundColors.focusedFilled = characterBackgroundColors.focusedFilled.darkened(by: 0.1)
+                $0.characterBackgroundSurfaceStyle = .color(characterBackgroundColors)
+
                 $0.characterBackgroundBorderColors.enabledFilled = $0.characterBackgroundBorderColors.enabledFilled.darkened(by: 0.1)
                 $0.characterBackgroundBorderColors.focusedFilled = $0.characterBackgroundBorderColors.focusedFilled.darkened(by: 0.1)
             },
@@ -285,6 +292,38 @@ public struct VCodeEntryView: View {
     StatesContentView(appearance: VCodeEntryViewAppearance { $0.applyErrorStyle() })
 }
 
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        PreviewRow("Empty") {
+            VCodeEntryView(
+                appearance: VCodeEntryViewAppearance { $0.applyGlassCharacterBackgroundStyle() },
+                text: .constant("")
+            )
+        }
+
+        PreviewRow("Partially Filled") {
+            VCodeEntryView(
+                appearance: VCodeEntryViewAppearance { $0.applyGlassCharacterBackgroundStyle() },
+                text: .constant("123")
+            )
+        }
+
+        // Color is also applied to other characters
+        PreviewRow("Focused (*)") {
+            VCodeEntryView(
+                appearance: VCodeEntryViewAppearance {
+                    var characterBackgroundColors: VCodeEntryViewAppearance.StateColors = $0.characterBackgroundSurfaceStyle.colors! // Unsafe (DEBUG)
+                    characterBackgroundColors.enabledEmpty = characterBackgroundColors.focusedEmpty
+                    characterBackgroundColors.enabledFilled = characterBackgroundColors.focusedFilled
+                    $0.characterBackgroundSurfaceStyle = .glass(.regular.tint(characterBackgroundColors))
+                },
+                text: .constant("123")
+            )
+        }
+    }
+}
+
 private struct StatesContentView: View {
     // MARK: Properties
     private let appearance: VCodeEntryViewAppearance
@@ -310,8 +349,11 @@ private struct StatesContentView: View {
             PreviewRow("Focused (*)") {
                 VCodeEntryView(
                     appearance: VCodeEntryViewAppearance(appearance) {
-                        $0.characterBackgroundColors.enabledEmpty = appearance.characterBackgroundColors.focusedEmpty
-                        $0.characterBackgroundColors.enabledFilled = appearance.characterBackgroundColors.focusedFilled
+                        var characterBackgroundColors: VCodeEntryViewAppearance.StateColors = appearance.characterBackgroundSurfaceStyle.colors! // Unsafe (DEBUG)
+                        characterBackgroundColors.enabledEmpty = characterBackgroundColors.focusedEmpty
+                        characterBackgroundColors.enabledFilled = characterBackgroundColors.focusedFilled
+                        $0.characterBackgroundSurfaceStyle = .color(characterBackgroundColors)
+
                         $0.characterBackgroundBorderColors.enabledEmpty = appearance.characterBackgroundBorderColors.focusedEmpty
                         $0.characterBackgroundBorderColors.enabledFilled = appearance.characterBackgroundBorderColors.focusedFilled
                         $0.textConfiguration.colors!.enabledEmpty = appearance.textConfiguration.colors!.focusedEmpty // Unsafe (DEBUG)

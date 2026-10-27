@@ -52,6 +52,11 @@ VTextView
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
 
+VCodeEntryView
+
+- `characterBackgroundColors` is replaced with `characterBackgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassCharacterBackgroundStyle()` method is added, that draws character background with Liquid Glass tinted with current character background colors
+
 VGroupBox
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
