@@ -176,9 +176,13 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
     private func backgroundView(
         internalState: VRectangularToggleButtonInternalState
     ) -> some View {
-        Rectangle()
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.cornerRadius)
+            )
             .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
-            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
                 color: appearance.shadowColors.value(for: internalState),
                 radius: appearance.shadowRadius,
@@ -246,7 +250,11 @@ nonisolated extension VRectangularToggleButtonInternalState {
         PreviewRow("Pressed Off") {
             VRectangularToggleButton(
                 appearance: VRectangularToggleButtonAppearance {
-                    $0.backgroundColors.off = $0.backgroundColors.pressedOff
+                    $0.backgroundSurfaceStyle = .color(
+                        VRectangularToggleButtonAppearance.StateColors(
+                            $0.backgroundSurfaceStyle.colors!.pressedOff // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelImageConfiguration.colors!.off = $0.labelImageConfiguration.colors!.pressedOff // Unsafe (DEBUG)
                 },
                 state: .constant(.off),
@@ -264,7 +272,11 @@ nonisolated extension VRectangularToggleButtonInternalState {
         PreviewRow("Pressed On") {
             VRectangularToggleButton(
                 appearance: VRectangularToggleButtonAppearance {
-                    $0.backgroundColors.on = $0.backgroundColors.pressedOn
+                    $0.backgroundSurfaceStyle = .color(
+                        VRectangularToggleButtonAppearance.StateColors(
+                            $0.backgroundSurfaceStyle.colors!.pressedOn // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelImageConfiguration.colors!.on = $0.labelImageConfiguration.colors!.pressedOn // Unsafe (DEBUG)
                 },
                 state: .constant(.on),
@@ -278,6 +290,27 @@ nonisolated extension VRectangularToggleButtonInternalState {
                 image: Image(systemName: "swift")
             )
             .disabled(true)
+        }
+    }
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        PreviewRow("Off") {
+            VRectangularToggleButton(
+                appearance: VRectangularToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.off),
+                image: Image(systemName: "swift")
+            )
+        }
+
+        PreviewRow("On") {
+            VRectangularToggleButton(
+                appearance: VRectangularToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.on),
+                image: Image(systemName: "swift")
+            )
         }
     }
 }

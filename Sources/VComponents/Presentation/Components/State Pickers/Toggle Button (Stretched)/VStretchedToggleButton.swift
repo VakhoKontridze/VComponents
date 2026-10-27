@@ -201,9 +201,13 @@ public struct VStretchedToggleButton<CustomLabel>: View where CustomLabel: View 
     private func backgroundView(
         internalState: VStretchedToggleButtonInternalState
     ) -> some View {
-        Rectangle()
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                state: internalState,
+                in: .rect(cornerRadius: appearance.cornerRadius)
+            )
             .scaleEffect(internalState.isPressedOffPressedOn ? appearance.backgroundPressedScale : 1)
-            .foregroundStyle(appearance.backgroundColors.value(for: internalState))
             .shadow(
                 color: appearance.shadowColors.value(for: internalState),
                 radius: appearance.shadowRadius,
@@ -269,7 +273,11 @@ nonisolated extension VStretchedToggleButtonInternalState {
         PreviewRow("Pressed Off") {
             VStretchedToggleButton(
                 appearance: VStretchedToggleButtonAppearance {
-                    $0.backgroundColors.off = $0.backgroundColors.pressedOff
+                    $0.backgroundSurfaceStyle = .color(
+                        VStretchedToggleButtonAppearance.StateColors(
+                            $0.backgroundSurfaceStyle.colors!.pressedOff // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelTextConfiguration.colors!.off = $0.labelTextConfiguration.colors!.pressedOff  // Unsafe (DEBUG)
                 },
                 state: .constant(.off),
@@ -289,7 +297,11 @@ nonisolated extension VStretchedToggleButtonInternalState {
         PreviewRow("Pressed On") {
             VStretchedToggleButton(
                 appearance: VStretchedToggleButtonAppearance {
-                    $0.backgroundColors.on = $0.backgroundColors.pressedOn
+                    $0.backgroundSurfaceStyle = .color(
+                        VStretchedToggleButtonAppearance.StateColors(
+                            $0.backgroundSurfaceStyle.colors!.pressedOn // Unsafe (DEBUG)
+                        )
+                    )
                     $0.labelTextConfiguration.colors!.on = $0.labelTextConfiguration.colors!.pressedOn  // Unsafe (DEBUG)
                 },
                 state: .constant(.on),
@@ -304,6 +316,29 @@ nonisolated extension VStretchedToggleButtonInternalState {
                 title: "Lorem Ipsum"
             )
             .disabled(true)
+            .modifier(StretchedButtonFrameModifier())
+        }
+    }
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    PreviewContainer(layer: .checkered) {
+        PreviewRow("Off") {
+            VStretchedToggleButton(
+                appearance: VStretchedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.off),
+                title: "Lorem Ipsum"
+            )
+            .modifier(StretchedButtonFrameModifier())
+        }
+
+        PreviewRow("On") {
+            VStretchedToggleButton(
+                appearance: VStretchedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+                state: .constant(.on),
+                title: "Lorem Ipsum"
+            )
             .modifier(StretchedButtonFrameModifier())
         }
     }

@@ -52,31 +52,39 @@ public struct VRectangularToggleButtonAppearance {
     }()
 
     // MARK: Properties - Background
-    /// Background colors.
-    public var backgroundColors: StateColors = {
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: StateSurfaceStyle = {
 #if os(iOS)
-        StateColors(
-            off: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
-            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
-            pressedOff: Color.dynamic(Color(220, 220, 220), Color(90, 90, 90)),
-            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
-            disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
+        .color(
+            StateColors(
+                off: Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)),
+                on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+                pressedOff: Color.dynamic(Color(220, 220, 220), Color(90, 90, 90)),
+                pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                disabled: Color.dynamic(Color(245, 245, 245), Color(50, 50, 50))
+            )
         )
 #elseif os(macOS)
-        StateColors(
-            off: Color.dynamic(Color.black.opacity(0.1), Color.black.opacity(0.15)),
-            on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
-            pressedOff: Color.dynamic(Color.black.opacity(0.16), Color.black.opacity(0.3)),
-            pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
-            disabled: Color.dynamic(Color.black.opacity(0.05), Color.black.opacity(0.1))
+        .color(
+            StateColors(
+                off: Color.dynamic(Color.black.opacity(0.1), Color.black.opacity(0.15)),
+                on: Color.dynamic(Color(24, 126, 240), Color(25, 131, 255)),
+                pressedOff: Color.dynamic(Color.black.opacity(0.16), Color.black.opacity(0.3)),
+                pressedOn: Color.dynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                disabled: Color.dynamic(Color.black.opacity(0.05), Color.black.opacity(0.1))
+            )
         )
 #elseif os(watchOS)
-        StateColors(
-            off: Color(60, 60, 60),
-            on: Color(25, 131, 255),
-            pressedOff: Color(90, 90, 90),
-            pressedOn: Color(36, 106, 186),
-            disabled: Color(50, 50, 50)
+        .color(
+            StateColors(
+                off: Color(60, 60, 60),
+                on: Color(25, 131, 255),
+                pressedOff: Color(90, 90, 90),
+                pressedOn: Color(36, 106, 186),
+                disabled: Color(50, 50, 50)
+            )
         )
 #else
         fatalError()
@@ -232,10 +240,27 @@ public struct VRectangularToggleButtonAppearance {
 
     /// State-bound opacities.
     public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
-    
+
+    /// State-bound surface style.
+    public typealias StateSurfaceStyle = GenericStateSurfaceStyle<StateColors>
+
     /// State-bound text configuration.
     public typealias StateTextConfiguration = GenericStateTextConfiguration<StateColors>
-    
+
     /// State-bound image configuration.
     public typealias StateImageConfiguration = GenericStateImageConfiguration<StateColors, StateOpacities>
+}
+
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension VRectangularToggleButtonAppearance {
+    /// Draws background with Liquid Glass, tinted with current background colors.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(
+            .regular
+                .tint(backgroundSurfaceStyle.colors)
+                .interactive()
+        )
+    }
 }

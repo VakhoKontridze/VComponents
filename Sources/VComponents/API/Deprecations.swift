@@ -60,6 +60,37 @@ extension VRectangularCaptionButtonAppearance {
     }
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension VStretchedToggleButtonAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension VWrappedToggleButtonAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension VRectangularToggleButtonAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
