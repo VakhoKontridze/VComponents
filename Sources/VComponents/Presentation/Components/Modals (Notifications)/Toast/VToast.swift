@@ -97,10 +97,15 @@ struct VToast: View {
                     }
                 }
 
-                .background { backgroundView }
-                .overlay { borderView }
+                .apply {
+                    switch appearance.cornerRadiusType {
+                    case .capsule:
+                        shapedView(content: $0, shape: Capsule())
 
-                .clipShape(.rect(cornerRadius: cornerRadius))
+                    case .rounded(let cornerRadius):
+                        shapedView(content: $0, shape: RoundedRectangle(cornerRadius: cornerRadius))
+                    }
+                }
 
                 .apply {
                     switch currentWidth.storage {
@@ -123,15 +128,6 @@ struct VToast: View {
 
                 .padding(.horizontal, currentWidth.margin.toAbsolute(dimension: modalPresenterContext.containerSize.width))
         }
-        // Prevents UI from breaking in some scenarios, such as previews
-        .drawingGroup()
-        
-        // Shadow cannot be applied in `backgroundView` because of `drawingGroup` modifier written above
-        .shadow(
-            color: appearance.shadowColor,
-            radius: appearance.shadowRadius,
-            offset: appearance.shadowOffset
-        )
 
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
 
@@ -147,17 +143,39 @@ struct VToast: View {
             .padding(appearance.bodyMargins)
     }
 
-    private var backgroundView: some View {
-        Rectangle()
-            .foregroundStyle(appearance.backgroundColor)
+    private func shapedView(
+        content: some View,
+        shape: some InsettableShape
+    ) -> some View {
+        content
+            .overlay { borderView(shape: shape) }
+            .clipShape(shape)
+            .background { backgroundView(shape: shape) } // Outside of clip, so that shadow isn't clipped
+    }
+
+    private func backgroundView(
+        shape: some Shape
+    ) -> some View {
+        Color.clear
+            .surfaceStyle(
+                appearance.backgroundSurfaceStyle,
+                in: shape
+            )
+            .shadow(
+                color: appearance.shadowColor,
+                radius: appearance.shadowRadius,
+                offset: appearance.shadowOffset
+            )
     }
 
     @ViewBuilder
-    private var borderView: some View {
+    private func borderView(
+        shape: some InsettableShape
+    ) -> some View {
         let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
         if borderWidth > 0 {
-            RoundedRectangle(cornerRadius: cornerRadius)
+            shape
                 .strokeBorder(appearance.borderColor, lineWidth: borderWidth)
         }
     }
@@ -243,14 +261,6 @@ struct VToast: View {
         switch appearance.presentationEdge {
         case .top: modalPresenterContext.safeAreaInsets.top + appearance.marginPresentedEdge
         case .bottom: -(modalPresenterContext.safeAreaInsets.bottom + appearance.marginPresentedEdge)
-        }
-    }
-
-    // MARK: Corner Radius
-    private var cornerRadius: CGFloat {
-        switch appearance.cornerRadiusType {
-        case .capsule: height / 2
-        case .rounded(let cornerRadius): cornerRadius
         }
     }
 
@@ -506,6 +516,81 @@ struct VToast: View {
                             }
                             
                             appearance = VToastAppearance { $0.applyErrorStyle() }
+                        }
+                    }
+                }
+            }
+    }
+    .modalPresenterRoot(
+        appearance: {
+            var appearance: ModalPresenterRootAppearance = .init()
+            appearance.dimmingViewColor = Color.clear
+            appearance.dimmingViewTapAction = .passTapsThrough
+            return appearance
+        }()
+    )
+}
+
+@available(anyAppleOS 26.0, *)
+#Preview("Glass") {
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var appearance: VToastAppearance = .init { $0.applyGlassBackgroundStyle() }
+
+    PreviewContainer(layer: .checkered) {
+        ModalLauncherView(isPresented: $isPresented)
+            .vToast(
+                link: ModalPresenterLink(linkID: "preview"),
+                appearance: {
+                    var appearance = appearance
+                    appearance.timeoutDuration = 60
+                    return appearance
+                }(),
+                isPresented: $isPresented,
+                text: "Lorem ipsum dolor sit amet"
+            )
+            .onAppear { isFirst in
+                if isFirst {
+                    Task {
+                        while true {
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VToastAppearance { $0.applyInfoGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VToastAppearance { $0.applySuccessGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VToastAppearance { $0.applyWarningGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VToastAppearance { $0.applyErrorGlassStyle() }
+
+                            do {
+                                try await Task.sleep(for: .seconds(1))
+                            } catch {
+                                return
+                            }
+
+                            appearance = VToastAppearance { $0.applyGlassBackgroundStyle() }
                         }
                     }
                 }

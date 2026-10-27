@@ -82,6 +82,12 @@ VAlert
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, alongside secondary and destructive buttons, and removes shadow
 
+VToast
+
+- `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass
+- Shadow is now applied to background only
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

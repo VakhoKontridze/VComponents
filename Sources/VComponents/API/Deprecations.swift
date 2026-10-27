@@ -180,6 +180,18 @@ extension VAlertAppearance {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
+extension VToastAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColor: Color {
+        get { backgroundSurfaceStyle.color ?? .clear }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
+
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
 extension VTextFieldAppearance {
     @available(*, deprecated, message: "Use new mutating API")
     public static var secure: Self {

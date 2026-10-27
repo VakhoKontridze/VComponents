@@ -42,8 +42,10 @@ public struct VToastAppearance {
     public var cornerRadiusType: CornerRadiusType = .default
 
     // MARK: Properties - Background
-    /// Background color.
-    public var backgroundColor: Color = .dynamic(Color(235, 235, 235), Color(60, 60, 60))
+    /// Background surface style.
+    ///
+    /// To draw background with Liquid Glass, call `applyGlassBackgroundStyle()`.
+    public var backgroundSurfaceStyle: SurfaceStyle = .color(Color.dynamic(Color(235, 235, 235), Color(60, 60, 60)))
 
     // MARK: Properties - Border
     /// Border width.
@@ -285,30 +287,69 @@ public struct VToastAppearance {
 extension VToastAppearance {
     /// Applies info style.
     public mutating func applyInfoStyle() {
-        backgroundColor = Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(0, 150, 230), Color(0, 100, 190)))
 
         sensoryFeedback = .success
     }
     
     /// Applies success style.
     public mutating func applySuccessStyle() {
-        backgroundColor = Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(70, 190, 125), Color(40, 135, 75)))
 
         sensoryFeedback = .success
     }
     
     /// Applies warning style.
     public mutating func applyWarningStyle() {
-        backgroundColor = Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(255, 205, 95), Color(230, 160, 40)))
 
         sensoryFeedback = .warning
     }
     
     /// Applies error style.
     public mutating func applyErrorStyle() {
-        backgroundColor = Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45))
+        backgroundSurfaceStyle = .color(Color.platformDynamic(Color(235, 95, 90), Color(205, 50, 45)))
 
         sensoryFeedback = .error
+    }
+
+    /// Draws background with untinted Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyGlassBackgroundStyle() {
+        backgroundSurfaceStyle = .glass(.regular)
+    }
+
+    /// Applies info style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyInfoGlassStyle() {
+        applyInfoStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies success style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applySuccessGlassStyle() {
+        applySuccessStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies warning style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyWarningGlassStyle() {
+        applyWarningStyle()
+        applyTintedGlassBackground()
+    }
+
+    /// Applies error style, with background drawn with Liquid Glass.
+    @available(anyAppleOS 26.0, *)
+    public mutating func applyErrorGlassStyle() {
+        applyErrorStyle()
+        applyTintedGlassBackground()
+    }
+
+    @available(anyAppleOS 26.0, *)
+    private mutating func applyTintedGlassBackground() {
+        backgroundSurfaceStyle = .glass(.regular.tint(backgroundSurfaceStyle.color))
     }
 }
 
