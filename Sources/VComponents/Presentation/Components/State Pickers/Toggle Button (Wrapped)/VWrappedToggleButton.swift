@@ -310,22 +310,14 @@ nonisolated extension VWrappedToggleButtonInternalState {
 
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
-    PreviewContainer(layer: .checkered) {
-        PreviewRow("Off") {
-            VWrappedToggleButton(
-                appearance: VWrappedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.off),
-                title: "Lorem Ipsum"
-            )
-        }
+    @Previewable @State var state: VWrappedToggleButtonState = .off
 
-        PreviewRow("On") {
-            VWrappedToggleButton(
-                appearance: VWrappedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.on),
-                title: "Lorem Ipsum"
-            )
-        }
+    PreviewContainer(layer: .checkered) {
+        VWrappedToggleButton(
+            appearance: VWrappedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+            state: $state,
+            title: "Lorem Ipsum"
+        )
     }
 }
 

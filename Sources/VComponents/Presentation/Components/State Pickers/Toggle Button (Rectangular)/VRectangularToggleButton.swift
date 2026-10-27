@@ -286,22 +286,14 @@ nonisolated extension VRectangularToggleButtonInternalState {
 
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
-    PreviewContainer(layer: .checkered) {
-        PreviewRow("Off") {
-            VRectangularToggleButton(
-                appearance: VRectangularToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.off),
-                image: Image(systemName: "swift")
-            )
-        }
+    @Previewable @State var state: VRectangularToggleButtonState = .off
 
-        PreviewRow("On") {
-            VRectangularToggleButton(
-                appearance: VRectangularToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.on),
-                image: Image(systemName: "swift")
-            )
-        }
+    PreviewContainer(layer: .checkered) {
+        VRectangularToggleButton(
+            appearance: VRectangularToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+            state: $state,
+            image: Image(systemName: "swift")
+        )
     }
 }
 

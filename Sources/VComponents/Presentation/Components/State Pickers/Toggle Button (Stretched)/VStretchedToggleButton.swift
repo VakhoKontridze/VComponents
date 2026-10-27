@@ -313,24 +313,15 @@ nonisolated extension VStretchedToggleButtonInternalState {
 
 @available(anyAppleOS 26.0, *)
 #Preview("Glass") {
-    PreviewContainer(layer: .checkered) {
-        PreviewRow("Off") {
-            VStretchedToggleButton(
-                appearance: VStretchedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.off),
-                title: "Lorem Ipsum"
-            )
-            .modifier(StretchedButtonFrameModifier())
-        }
+    @Previewable @State var state: VStretchedToggleButtonState = .off
 
-        PreviewRow("On") {
-            VStretchedToggleButton(
-                appearance: VStretchedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
-                state: .constant(.on),
-                title: "Lorem Ipsum"
-            )
-            .modifier(StretchedButtonFrameModifier())
-        }
+    PreviewContainer(layer: .checkered) {
+        VStretchedToggleButton(
+            appearance: VStretchedToggleButtonAppearance { $0.applyGlassBackgroundStyle() },
+            state: $state,
+            title: "Lorem Ipsum"
+        )
+        .modifier(StretchedButtonFrameModifier())
     }
 }
 
