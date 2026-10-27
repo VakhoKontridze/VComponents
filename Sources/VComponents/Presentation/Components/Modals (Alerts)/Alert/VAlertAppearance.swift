@@ -179,10 +179,12 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        $0.backgroundColors = ButtonStateColors(
-            enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
-            pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
-            disabled: Color(128, 176, 240)
+        $0.backgroundSurfaceStyle = .color(
+            ButtonStateColors(
+                enabled: Color.platformDynamic(Color(24, 126, 240), Color(25, 131, 255)),
+                pressed: Color.platformDynamic(Color(31, 104, 182), Color(36, 106, 186)),
+                disabled: Color(128, 176, 240)
+            )
         )
 
         $0.labelTextConfiguration.colors = ButtonStateColors(Color.white)
@@ -220,10 +222,12 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        $0.backgroundColors = ButtonStateColors(
-            enabled: Color.clear,
-            pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
-            disabled: Color.clear
+        $0.backgroundSurfaceStyle = .color(
+            ButtonStateColors(
+                enabled: Color.clear,
+                pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
+                disabled: Color.clear
+            )
         )
 
         $0.labelTextConfiguration.colors = ButtonStateColors(
@@ -265,10 +269,12 @@ public struct VAlertAppearance {
 #endif
         }()
 
-        $0.backgroundColors = ButtonStateColors(
-            enabled: Color.clear,
-            pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
-            disabled: Color.clear
+        $0.backgroundSurfaceStyle = .color(
+            ButtonStateColors(
+                enabled: Color.clear,
+                pressed: Color.platformDynamic(Color(240, 240, 240), Color(70, 70, 70)),
+                disabled: Color.clear
+            )
         )
 
         $0.labelTextConfiguration.colors = ButtonStateColors(

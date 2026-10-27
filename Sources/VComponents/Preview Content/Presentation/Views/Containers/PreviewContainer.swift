@@ -26,19 +26,8 @@ struct PreviewContainer<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        let backgroundColor: Color = {
-#if os(iOS)
-            switch layer {
-            case .primary: Color(uiColor: UIColor.systemBackground)
-            case .secondary: Color(uiColor: UIColor.secondarySystemBackground)
-            }
-#else
-            Color.clear
-#endif
-        }()
-        
-        return ZStack {
-            backgroundColor
+        ZStack {
+            backgroundView
                 .ignoresSafeArea()
 
             ScrollView(.vertical) {
@@ -60,11 +49,34 @@ struct PreviewContainer<Content>: View where Content: View {
             .scrollBounceBehavior(.basedOnSize)
         }
     }
+
+    @ViewBuilder
+    private var backgroundView: some View {
+        switch layer {
+        case .primary:
+#if os(iOS)
+            Color(uiColor: UIColor.systemBackground)
+#else
+            Color.clear
+#endif
+
+        case .secondary:
+#if os(iOS)
+            Color(uiColor: UIColor.secondarySystemBackground)
+#else
+            Color.clear
+#endif
+
+        case .checkered:
+            PreviewCheckeredBackgroundView()
+        }
+    }
 }
 
 nonisolated enum PreviewContainerLayer {
     case primary
     case secondary
+    case checkered
 }
 
 #Preview {

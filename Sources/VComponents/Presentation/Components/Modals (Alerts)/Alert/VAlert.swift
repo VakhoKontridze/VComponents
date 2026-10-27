@@ -534,13 +534,25 @@ struct VAlert<Content>: View
             .vAlert(
                 link: ModalPresenterLink(linkID: "preview"),
                 appearance: VAlertAppearance {
-                    $0.primaryButtonAppearance.backgroundColors.enabled = $0.primaryButtonAppearance.backgroundColors.pressed
+                    $0.primaryButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.primaryButtonAppearance.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                        )
+                    )
                     $0.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.primaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    $0.secondaryButtonAppearance.backgroundColors.enabled = $0.secondaryButtonAppearance.backgroundColors.pressed
+                    $0.secondaryButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.secondaryButtonAppearance.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                        )
+                    )
                     $0.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.secondaryButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
 
-                    $0.destructiveButtonAppearance.backgroundColors.enabled = $0.destructiveButtonAppearance.backgroundColors.pressed
+                    $0.destructiveButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.destructiveButtonAppearance.backgroundSurfaceStyle.colors!.pressed // Unsafe (DEBUG)
+                        )
+                    )
                     $0.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = $0.destructiveButtonAppearance.labelTextConfiguration.colors!.pressed // Unsafe (DEBUG)
                 },
                 isPresented: $isPresented,
@@ -564,13 +576,25 @@ struct VAlert<Content>: View
             .vAlert(
                 link: ModalPresenterLink(linkID: "preview"),
                 appearance: VAlertAppearance {
-                    $0.primaryButtonAppearance.backgroundColors.enabled = $0.primaryButtonAppearance.backgroundColors.disabled
+                    $0.primaryButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.primaryButtonAppearance.backgroundSurfaceStyle.colors!.disabled // Unsafe (DEBUG)
+                        )
+                    )
                     $0.primaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.primaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    $0.secondaryButtonAppearance.backgroundColors.enabled = $0.secondaryButtonAppearance.backgroundColors.disabled
+                    $0.secondaryButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.secondaryButtonAppearance.backgroundSurfaceStyle.colors!.disabled // Unsafe (DEBUG)
+                        )
+                    )
                     $0.secondaryButtonAppearance.labelTextConfiguration.colors!.enabled = $0.secondaryButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
 
-                    $0.destructiveButtonAppearance.backgroundColors.enabled = $0.destructiveButtonAppearance.backgroundColors.disabled
+                    $0.destructiveButtonAppearance.backgroundSurfaceStyle = .color(
+                        VAlertAppearance.ButtonStateColors(
+                            $0.destructiveButtonAppearance.backgroundSurfaceStyle.colors!.disabled // Unsafe (DEBUG)
+                        )
+                    )
                     $0.destructiveButtonAppearance.labelTextConfiguration.colors!.enabled = $0.destructiveButtonAppearance.labelTextConfiguration.colors!.disabled // Unsafe (DEBUG)
                 },
                 isPresented: $isPresented,

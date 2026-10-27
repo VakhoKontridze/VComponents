@@ -2,6 +2,11 @@
 
 ### 9.2.0(84)
 
+VStretchedButton
+
+- `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
+- `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass tinted with current background colors
+
 VFetchingAsyncImage
 
 - `cachedImage` is added, allowing an `Image` to be returned synchronously and displayed without a placeholder flash

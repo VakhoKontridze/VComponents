@@ -6,7 +6,17 @@
 //
 
 import SwiftUI
-import VCore
+public import VCore
+
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension VStretchedButtonAppearance {
+    @available(*, deprecated, message: "Use 'backgroundSurfaceStyle' with '.color(_:)'")
+    public var backgroundColors: StateColors {
+        get { backgroundSurfaceStyle.colors ?? .clearColors }
+        set { backgroundSurfaceStyle = .color(newValue) }
+    }
+}
 
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
