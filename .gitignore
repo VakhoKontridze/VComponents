@@ -61,3 +61,6 @@ playground.xcworkspace
 /*.xcodeproj
 xcuserdata/
 DerivedData/
+
+### Claude
+CLAUDE.local.md
