@@ -318,3 +318,19 @@ Match the style of the surrounding code. Package doesn't include tests, so PRs s
 ## Contact
 
 e-mail: vakhtang.kontridze@gmail.com
+
+## Maintainer Resources
+
+Links and local paths for the maintainer's own tooling. You don't need any of this to use or contribute to the library.
+
+Paths are written as `${KEY}`. Each key is defined in `README.local.md`, not committed, one per machine, as `KEY = "path"` lines sorted alphabetically. If a key isn't defined, the resource isn't available locally, so use the link instead.
+
+#### Library (This repo)
+
+- Link: https://github.com/VakhoKontridze/VComponents
+- Path: `${VCOMPONENTS}`
+
+#### Claude Skills
+
+- Link: https://github.com/VakhoKontridze/CLAUDE-Skills
+- Path: `${CLAUDE_SKILLS}`
