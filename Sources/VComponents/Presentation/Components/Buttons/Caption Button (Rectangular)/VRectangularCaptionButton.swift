@@ -147,6 +147,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
         )
         .overlay { rectangleBorderView(internalState: internalState) }
         .scaleEffect(internalState == .pressed ? appearance.rectanglePressedScale : 1)
+        .applyIf(!appearance.rectangleSurfaceStyle.isGlass) { $0.compositingGroup() } // Casts one shadow rather than one per label child, and skips Liquid Glass, which renders the content behind it
         .shadow(
             color: appearance.shadowColors.value(for: internalState),
             radius: appearance.shadowRadius,

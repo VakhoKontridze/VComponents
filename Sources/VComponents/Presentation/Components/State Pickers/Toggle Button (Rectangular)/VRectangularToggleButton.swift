@@ -132,6 +132,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
                     )
                     .overlay { borderView(internalState: internalState) }
                     .scaleEffect(internalState.isPressedOffPressedOn ? appearance.pressedScale : 1)
+                    .applyIf(!appearance.backgroundSurfaceStyle.isGlass) { $0.compositingGroup() } // Casts one shadow rather than one per label child, and skips Liquid Glass, which renders the content behind it
                     .shadow(
                         color: appearance.shadowColors.value(for: internalState),
                         radius: appearance.shadowRadius,
