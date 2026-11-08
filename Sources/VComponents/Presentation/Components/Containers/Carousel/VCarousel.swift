@@ -208,7 +208,7 @@ public struct VCarousel<Data, ID, Content>: View
 
 #if !os(tvOS) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var selection: Weekday = .monday
     var selectedIndex: Int? { Weekday.allCases.firstIndex(of: selection) }
 

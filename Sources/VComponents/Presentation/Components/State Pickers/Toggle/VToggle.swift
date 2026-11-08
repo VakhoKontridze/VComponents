@@ -211,7 +211,7 @@ public struct VToggle<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VToggleState = .on
 
     PreviewContainer {

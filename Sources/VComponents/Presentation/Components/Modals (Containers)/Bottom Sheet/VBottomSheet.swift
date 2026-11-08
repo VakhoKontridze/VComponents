@@ -319,7 +319,7 @@ struct VBottomSheet<Content>: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var isPresented: Bool = true
 
     PreviewContainer {

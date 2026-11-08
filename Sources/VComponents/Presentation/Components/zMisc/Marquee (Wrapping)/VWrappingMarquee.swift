@@ -232,7 +232,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 
 #if DEBUG
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VWrappingMarquee {
             marqueeContentSmall

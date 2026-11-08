@@ -204,7 +204,7 @@ public struct VCheckBox<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VCheckBoxState = .on
 
     PreviewContainer {

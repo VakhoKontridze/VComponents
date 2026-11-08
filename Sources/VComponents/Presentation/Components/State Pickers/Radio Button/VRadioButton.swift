@@ -204,7 +204,7 @@ nonisolated extension VRadioButtonState {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VRadioButtonState = .on
 
     PreviewContainer {

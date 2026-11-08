@@ -167,7 +167,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VRectangularButton(
             action: {},

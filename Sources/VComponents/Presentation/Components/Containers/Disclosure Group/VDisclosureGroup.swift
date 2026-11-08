@@ -200,7 +200,7 @@ nonisolated private func exclusiveOr(_ lhs: Bool, _ rhs: Bool) -> Bool {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VDisclosureGroupState = .expanded
     
     PreviewContainer {

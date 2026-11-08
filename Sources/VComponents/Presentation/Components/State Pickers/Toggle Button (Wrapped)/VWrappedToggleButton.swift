@@ -242,7 +242,7 @@ nonisolated extension VWrappedToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VWrappedToggleButtonState = .on
 
     PreviewContainer {

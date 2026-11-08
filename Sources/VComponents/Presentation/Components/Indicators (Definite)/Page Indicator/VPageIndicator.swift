@@ -211,7 +211,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
 
 #if DEBUG
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var current: Int = 0
     let total: Int = 10
 

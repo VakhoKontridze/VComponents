@@ -239,7 +239,7 @@ nonisolated extension VStretchedToggleButtonInternalState {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VStretchedToggleButtonState = .on
 
     PreviewContainer {

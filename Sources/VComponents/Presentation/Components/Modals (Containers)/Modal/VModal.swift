@@ -143,7 +143,7 @@ struct VModal<Content>: View
 
 #if !os(watchOS) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var isPresented: Bool = true
 
     PreviewContainer {

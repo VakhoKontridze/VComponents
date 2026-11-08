@@ -351,7 +351,7 @@ nonisolated extension Double {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var value: ClosedRange<Double> = 0.1...0.8
 
     PreviewContainer {

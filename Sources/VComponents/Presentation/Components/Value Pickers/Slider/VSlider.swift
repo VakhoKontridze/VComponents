@@ -247,7 +247,7 @@ public struct VSlider: View {
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var value: Double = 0.5
 
     PreviewContainer {

@@ -266,7 +266,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
 
 #if !(os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VLoadingStretchedButton(
             isLoading: false,

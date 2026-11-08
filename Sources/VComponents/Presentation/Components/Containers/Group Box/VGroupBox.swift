@@ -111,7 +111,7 @@ public struct VGroupBox<Content>: View where Content: View {
 
 #if DEBUG
 
-#Preview("*") {
+#Preview("Default") {
     ContentView()
 }
 

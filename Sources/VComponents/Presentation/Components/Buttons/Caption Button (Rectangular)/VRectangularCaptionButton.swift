@@ -236,7 +236,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
 
 #if !(os(macOS) || os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VRectangularCaptionButton(
             action: {},

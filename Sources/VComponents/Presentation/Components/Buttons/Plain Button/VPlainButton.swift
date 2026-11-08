@@ -168,7 +168,7 @@ public struct VPlainButton<CustomLabel>: View where CustomLabel: View {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VPlainButton(
             action: {},

@@ -124,7 +124,7 @@ public struct VProgressBar: View {
 
 #if DEBUG
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var value: Double = 0
 
     PreviewContainer {

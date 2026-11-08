@@ -169,7 +169,7 @@ public struct VTextView: View {
 
 #if !(os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var text: String = "Lorem ipsum"
 
     PreviewContainer {

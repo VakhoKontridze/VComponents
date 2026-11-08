@@ -176,7 +176,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 
 #if DEBUG
 
-#Preview("*") {
+#Preview("Default") {
     PreviewContainer {
         VBouncingMarquee {
             marqueeContentSmall

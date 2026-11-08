@@ -213,7 +213,7 @@ nonisolated extension VRectangularToggleButtonInternalState {
 
 #if !(os(tvOS) || os(visionOS)) // Redundant
 
-#Preview("*") {
+#Preview("Default") {
     @Previewable @State var state: VRectangularToggleButtonState = .on
 
     PreviewContainer {
