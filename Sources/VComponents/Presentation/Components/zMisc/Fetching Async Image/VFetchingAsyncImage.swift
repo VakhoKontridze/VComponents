@@ -235,7 +235,6 @@ public struct VFetchingAsyncImage<Parameter, CustomContent, CustomPlaceholderCon
                 
             } catch {
                 do { try Task.checkCancellation() } catch { return } // `fetch` may throw another error once cancelled, which shouldn't override state of a newer parameter
-                guard (error as? URLError)?.code != .cancelled else { return } // `fetch` may call `URLSession` directly, which reports cancellation as `URLError`
 
                 result = .failure(error)
                 parameterFetched = nil
