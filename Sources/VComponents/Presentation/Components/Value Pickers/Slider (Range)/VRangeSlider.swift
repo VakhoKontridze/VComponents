@@ -132,6 +132,7 @@ public struct VRangeSlider: View {
             )
             
             thumbView(.low)
+
             thumbView(.high)
         }
         .onGeometryChange(of: { $0.size }) { sliderSize = $0 }
