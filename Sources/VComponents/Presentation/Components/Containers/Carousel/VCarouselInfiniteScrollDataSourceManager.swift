@@ -130,7 +130,7 @@ public final class VCarouselInfiniteScrollDataSourceManager<Element> where Eleme
             indexInflated: indexInflated
         )
 
-        return data[index]
+        return data[index] // Unsafe
     }
 
     // MARK: Helpers

@@ -105,7 +105,7 @@ struct VRollingCounterFactory {
 
         let firstChangedIndex: Int = oldString
             .enumerated()
-            .first { (i, char) in char != newString[i] }?
+            .first { (i, char) in char != newString[i] }? // Unsafe
             .offset ??
             newString.count - 1
 
@@ -128,7 +128,7 @@ struct VRollingCounterFactory {
 
                 components.append(
                     VRollingCounterGroupingSeparatorComponent(
-                        id: isHighlighted ? nil : oldComponents[i].id,
+                        id: isHighlighted ? nil : oldComponents[i].id, // Unsafe
                         value: charStr,
                         isHighlighted: isHighlighted
                     )
@@ -152,7 +152,7 @@ struct VRollingCounterFactory {
 
                 components.append(
                     VRollingCounterDecimalSeparatorComponent(
-                        id: isHighlighted ? nil : oldComponents[i].id,
+                        id: isHighlighted ? nil : oldComponents[i].id, // Unsafe
                         value: charStr,
                         isHighlighted: isHighlighted
                     )
@@ -172,7 +172,7 @@ struct VRollingCounterFactory {
                     }
                 }()
 
-                let id: String? = isHighlighted ? nil : oldComponents[i].id
+                let id: String? = isHighlighted ? nil : oldComponents[i].id // Unsafe
 
                 if hasPassedDecimalSeparator {
                     components.append(
