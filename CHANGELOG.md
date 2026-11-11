@@ -53,6 +53,14 @@ VRectangularToggleButton
 - `applyGlassBackgroundStyle()` method is added, that draws background with Liquid Glass, untinted when off and tinted with accent color when on
 - `backgroundPressedScale` and `labelPressedScale` are replaced with `pressedScale`, as background is now drawn in the same layer as label, and shadow applies to the whole button
 
+VSlider
+
+- Issue where component doesn't shrink after its available length decreases, as progress is sized from the previously measured length, is fixed
+
+VRangeSlider
+
+- Issue where component doesn't shrink after its available length decreases, as progress is sized from the previously measured length, is fixed
+
 VTextField
 
 - `backgroundColors` is replaced with `backgroundSurfaceStyle`, a `GenericStateSurfaceStyle` that draws a solid `Color` or Liquid Glass
@@ -126,6 +134,10 @@ VWrappedIndicatorStaticPagerTabView
 
 - `tabBarBackgroundColor` is replaced with `tabBarBackgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassTabBarBackgroundStyle()` method is added, that draws tab bar background with untinted Liquid Glass
+
+VProgressBar
+
+- Issue where component doesn't shrink after its available length decreases, as progress is sized from the previously measured length, is fixed
 
 VFetchingAsyncImage
 
