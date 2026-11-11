@@ -227,7 +227,7 @@ public struct VCodeEntryView: View {
             return placeholder.map { String($0) } ?? ""
         }
 
-        return String(text[index])
+        return String(text[index]) // Unsafe (checked above)
     }
 }
 

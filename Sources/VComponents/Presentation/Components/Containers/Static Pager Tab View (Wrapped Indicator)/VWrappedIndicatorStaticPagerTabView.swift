@@ -433,9 +433,9 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
             return nil
         }
 
-        if contentOffset <= tabContentOffsets[0] { // Index is safe, as non-emptiness is checked in `body`
+        if contentOffset <= tabContentOffsets[0] { // Unsafe (checked above), as `body` checks non-emptiness
             // Clamping to min
-            return dataSource[0]
+            return dataSource[0] // Unsafe (checked above)
 
         } else if
             let index: Int = (1..<dataSource.count)
@@ -443,13 +443,13 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
         {
             return contentOffset
                 .linearInterpolation(
-                    x1: tabContentOffsets[index-1], y1: dataSource[index-1],
-                    x2: tabContentOffsets[index], y2: dataSource[index]
+                    x1: tabContentOffsets[index-1], y1: dataSource[index-1], // Unsafe (checked above)
+                    x2: tabContentOffsets[index], y2: dataSource[index] // Unsafe (checked above)
                 )
 
         } else {
             // Clamping to max
-            return dataSource[dataSource.count-1]
+            return dataSource[dataSource.count-1] // Unsafe (checked above)
         }
     }
 }
