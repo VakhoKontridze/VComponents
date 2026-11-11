@@ -56,33 +56,31 @@ public struct VProgressBar: View {
     
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: appearance.direction.toAlignment) {
-            trackView
-            progressView
-            borderView
-        }
-        .compositingGroup() // Prevents `iOS` `27.0` from resolving `progressView`'s corner mask as the final clip
-        .clipShape(.rect(cornerRadius: appearance.cornerRadius))
-        .frame(
-            width: appearance.direction.isHorizontal ? nil : appearance.height,
-            height: appearance.direction.isHorizontal ? appearance.height : nil
-        )
-        .onGeometryChange(of: { $0.size }) { progressBarSize = $0 }
-        .applyIf(appearance.appliesProgressAnimation) {
-            $0.animation(
-                {
-                    if
-                        progress == 0,
-                        appearance.skipsProgressAnimationAtZero
-                    {
-                        nil
-                    } else {
-                        appearance.progressAnimation
-                    }
-                }(),
-                value: progress
+        trackView
+            .overlay(alignment: appearance.direction.toAlignment) { progressView }
+            .overlay { borderView }
+            .compositingGroup() // Prevents `iOS` `27.0` from resolving `progressView`'s corner mask as the final clip
+            .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+            .frame(
+                width: appearance.direction.isHorizontal ? nil : appearance.height,
+                height: appearance.direction.isHorizontal ? appearance.height : nil
             )
-        }
+            .onGeometryChange(of: { $0.size }) { progressBarSize = $0 }
+            .applyIf(appearance.appliesProgressAnimation) {
+                $0.animation(
+                    {
+                        if
+                            progress == 0,
+                            appearance.skipsProgressAnimationAtZero
+                        {
+                            nil
+                        } else {
+                            appearance.progressAnimation
+                        }
+                    }(),
+                    value: progress
+                )
+            }
     }
     
     private var trackView: some View {

@@ -101,17 +101,15 @@ public struct VSlider: View {
     // MARK: Body
     public var body: some View {
         ZStack(alignment: appearance.direction.toAlignment) {
-            ZStack(alignment: appearance.direction.toAlignment) {
-                trackView
-                progressView
-                borderView
-            }
-            .compositingGroup() // Prevents `iOS` `27.0` from resolving `progressView`'s corner mask as the final clip
-            .clipShape(.rect(cornerRadius: appearance.cornerRadius))
-            .frame(
-                width: appearance.direction.isHorizontal ? nil : appearance.height,
-                height: appearance.direction.isHorizontal ? appearance.height : nil
-            )
+            trackView
+                .overlay(alignment: appearance.direction.toAlignment) { progressView }
+                .overlay { borderView }
+                .compositingGroup() // Prevents `iOS` `27.0` from resolving `progressView`'s corner mask as the final clip
+                .clipShape(.rect(cornerRadius: appearance.cornerRadius))
+                .frame(
+                    width: appearance.direction.isHorizontal ? nil : appearance.height,
+                    height: appearance.direction.isHorizontal ? appearance.height : nil
+                )
             
             thumbView
         }
