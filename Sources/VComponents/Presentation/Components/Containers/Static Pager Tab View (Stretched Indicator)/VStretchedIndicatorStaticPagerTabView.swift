@@ -325,6 +325,7 @@ public struct VStretchedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel
                         .onScrollPhaseChange { (_, newValue) in
                             isBeingScrolled = newValue == .interacting
                         }
+
                 } else {
                     $0
                 }

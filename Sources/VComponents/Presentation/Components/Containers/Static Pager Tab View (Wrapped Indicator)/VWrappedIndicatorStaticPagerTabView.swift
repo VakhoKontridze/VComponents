@@ -274,6 +274,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                         // `min` and `max` start from left side of the screen, regardless of layout direction.
                         // So, mapping is required.
                         tabBarWidth - frame.maxX
+
                     } else {
                         frame.minX
                     }
@@ -350,6 +351,7 @@ public struct VWrappedIndicatorStaticPagerTabView<Data, ID, CustomTabItemLabel, 
                         .onScrollPhaseChange { (_, newValue) in
                             isBeingScrolled = newValue == .interacting
                         }
+
                 } else {
                     $0
                 }

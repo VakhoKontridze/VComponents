@@ -68,6 +68,7 @@ struct VRollingCounterFactory {
                             digit: digit
                         )
                     )
+
                 } else {
                     components.append(
                         VRollingCounterDigitComponent(
@@ -182,6 +183,7 @@ struct VRollingCounterFactory {
                             isHighlighted: isHighlighted
                         )
                     )
+
                 } else {
                     components.append(
                         VRollingCounterDigitComponent(

@@ -108,10 +108,13 @@ private enum VBottomSheetRegion {
     ) {
         if offset >= heights.maxOffset(in: containerHeight), offset <= heights.idealOffset(in: containerHeight) {
             self = .idealToMax
+
         } else if offset > heights.idealOffset(in: containerHeight), offset <= heights.minOffset(in: containerHeight) {
             self = .minToIdeal
+
         } else if offset > heights.minOffset(in: containerHeight) {
             self = .swipeToMin
+
         } else {
             Logger.default.error("Invalid height configuration in 'VBottomSheet'")
             return nil
