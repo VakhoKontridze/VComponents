@@ -280,7 +280,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     
     private func startEdgeEndSideIndex(at index: Int) -> Int? {
         guard (visible-side..<visible).contains(index) else { return nil }
-        return side + index - visible // (5 6) -> (0 1)
+        return side + index - visible // Maps (5 6) to (0 1)
     }
     
     private func startEdgeEndSideScale(at index: Int) -> CGFloat {
@@ -297,7 +297,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     }
     
     private func centerIndexAbsolute(at index: Int) -> Int? {
-        // (0 1 2 3 4 5 6) -> (0 1 _ _ _ 1 0)
+        // Maps (0 1 2 3 4 5 6) to (0 1 _ _ _ 1 0)
         switch index {
         case 0..<side: index
         case visible-side..<visible: visible - index - 1
@@ -317,7 +317,7 @@ public struct VCompactPageIndicator<CustomDotContent>: View where CustomDotConte
     
     private func endEdgeStartSideIndex(at index: Int) -> Int? {
         guard (0..<side).contains(index) else { return nil }
-        return index // (0 1) -> (0 1)
+        return index // Maps (0 1) to (0 1)
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {

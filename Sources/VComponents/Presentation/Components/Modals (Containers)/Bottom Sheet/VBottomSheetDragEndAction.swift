@@ -77,7 +77,7 @@ enum VBottomSheetDragEndAction {
                 
                 return .snap(newOffset)
                 
-            case .swipeToMin, .minToIdeal:
+            case .minToIdeal, .swipeToMin:
                 // If `swipe` is disabled, code won't get here.
                 // So, modal should snap to min heights.
                 

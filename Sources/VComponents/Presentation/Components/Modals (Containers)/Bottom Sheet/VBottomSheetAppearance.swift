@@ -78,7 +78,7 @@ public struct VBottomSheetAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        VGroupBoxAppearance {
+        .init {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = false // No need
 

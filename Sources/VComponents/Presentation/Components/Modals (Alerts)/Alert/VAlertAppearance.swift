@@ -75,7 +75,7 @@ public struct VAlertAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        VGroupBoxAppearance {
+        .init {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 

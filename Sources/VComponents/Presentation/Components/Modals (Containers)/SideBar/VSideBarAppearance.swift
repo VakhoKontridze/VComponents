@@ -91,7 +91,7 @@ public struct VSideBarAppearance {
     }()
 
     var groupBoxAppearance: VGroupBoxAppearance {
-        VGroupBoxAppearance {
+        .init {
             $0.cornerRadii = cornerRadii
             $0.reversesHorizontalCornersForRTLLanguages = reversesHorizontalCornersForRTLLanguages
 
@@ -249,21 +249,21 @@ extension VSideBarAppearance {
         presentationEdge = edge
 
         switch edge {
-        case .top:
-            applyVerticalSizeGroup()
-            applyCornerRadii(RectangleCornerRadii(bottomCorners: 15))
-
         case .leading:
             applyHorizontalSizeGroup()
             applyCornerRadii(RectangleCornerRadii(trailingCorners: 15))
 
-        case .bottom:
-            applyVerticalSizeGroup()
-            applyCornerRadii(RectangleCornerRadii(topCorners: 15))
-
         case .trailing:
             applyHorizontalSizeGroup()
             applyCornerRadii(RectangleCornerRadii(leadingCorners: 15))
+
+        case .top:
+            applyVerticalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(bottomCorners: 15))
+
+        case .bottom:
+            applyVerticalSizeGroup()
+            applyCornerRadii(RectangleCornerRadii(topCorners: 15))
         }
     }
 
@@ -349,10 +349,10 @@ extension VSideBarAppearance {
 nonisolated extension Edge {
     fileprivate var toAlignment: Alignment {
         switch self {
-        case .top: .top
         case .leading: .leading
-        case .bottom: .bottom
         case .trailing: .trailing
+        case .top: .top
+        case .bottom: .bottom
         }
     }
 }
