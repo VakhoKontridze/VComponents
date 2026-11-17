@@ -49,6 +49,7 @@ import VCore
 public struct VWrappingMarquee<Content>: View where Content: View {
     // MARK: Properties - Appearance
     private let appearance: VWrappingMarqueeAppearance
+    private let resettingAnimation: Animation = .linear(duration: 0)
 
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
@@ -226,8 +227,6 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         .repeatForever(autoreverses: false)
         .delay(appearance.animationInitialDelay)
     }
-    
-    private let resettingAnimation: Animation = .linear(duration: 0)
 }
 
 #if DEBUG
