@@ -29,12 +29,19 @@ Temporary Items
 ## iCloud generated files
 *.icloud
 
-
-### XCode
+### Xcode
 ## Project
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
+!*.xcodeproj/project.xcproj
 !*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+*.xcodeproj/project.xcworkspace/*
+!*.xcodeproj/project.xcworkspace/xcshareddata/
+*.xcodeproj/project.xcworkspace/xcshareddata/*
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/*
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
@@ -54,12 +61,9 @@ xcuserdata/
 timeline.xctimeline
 playground.xcworkspace
 
-
 ### Swift Package Manager
-/.build
+.build/
 /Packages
-/*.xcodeproj
-xcuserdata/
 DerivedData/
 
 ### Local
