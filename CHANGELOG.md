@@ -97,28 +97,35 @@ VBottomSheet
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+- Content no longer pads its bottom edge in `contentSafeAreaEdges` by keyboard height while it's shown, following the change to `ModalPresenterContext.safeAreaInsets` in `VCore`
 
 VSideBar
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass
+- Content no longer pads its bottom edge in `contentSafeAreaEdges` by keyboard height while it's shown, following the change to `ModalPresenterContext.safeAreaInsets` in `VCore`
 
 VAlert
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()` method is added, that draws background with untinted Liquid Glass, gives secondary and destructive buttons a translucent pressed color, and removes shadow
+- Alert no longer pads its vertical edges by keyboard height while it's shown, which also lifted an alert with a focused text field twice, following the change to `ModalPresenterContext.safeAreaInsets` in `VCore`
 
 VToast
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, a `SurfaceStyle` that draws a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass
 - Shadow is now applied to background only
+- `avoidsKeyboard` property is added, that keeps toast presented from bottom edge above keyboard, and animates with it
+- Toast presented from bottom edge no longer jumps by keyboard height on top of its margin, following the change to `ModalPresenterContext.safeAreaInsets` in `VCore`
 
 VNotification
 
 - `backgroundColor` is replaced with `backgroundSurfaceStyle`, and `imageBackgroundColor` is replaced with `imageBackgroundSurfaceStyle`, both `SurfaceStyle`s that draw a solid `Color` or Liquid Glass
 - `applyGlassBackgroundStyle()`, `applyInfoGlassStyle()`, `applySuccessGlassStyle()`, `applyWarningGlassStyle()`, and `applyErrorGlassStyle()` methods are added, that draw background with Liquid Glass and image background with a translucent color
 - Shadow is now applied to background only
+- `avoidsKeyboard` property is added, that keeps notification presented from bottom edge above keyboard, and animates with it
+- Notification presented from bottom edge no longer jumps by keyboard height on top of its margin, following the change to `ModalPresenterContext.safeAreaInsets` in `VCore`
 
 VDynamicPagerTabView
 

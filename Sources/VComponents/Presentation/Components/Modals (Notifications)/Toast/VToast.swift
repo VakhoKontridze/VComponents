@@ -130,6 +130,7 @@ struct VToast: View {
         }
 
         .offset(y: isPresentedInternally ? presentedOffset : initialOffset)
+        .animation(modalPresenterContext.keyboardAnimation, value: keyboardInset) // Follows keyboard
 
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -260,7 +261,14 @@ struct VToast: View {
     private var presentedOffset: CGFloat {
         switch appearance.presentationEdge {
         case .top: modalPresenterContext.safeAreaInsets.top + appearance.marginPresentedEdge
-        case .bottom: -(modalPresenterContext.safeAreaInsets.bottom + appearance.marginPresentedEdge)
+        case .bottom: -(modalPresenterContext.safeAreaInsets.bottom + keyboardInset + appearance.marginPresentedEdge)
+        }
+    }
+
+    private var keyboardInset: CGFloat {
+        switch appearance.presentationEdge {
+        case .top: 0
+        case .bottom: appearance.avoidsKeyboard ? modalPresenterContext.keyboardInset : 0
         }
     }
 

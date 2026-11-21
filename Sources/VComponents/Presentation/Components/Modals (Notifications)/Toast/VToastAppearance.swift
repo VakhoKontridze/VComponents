@@ -37,6 +37,11 @@ public struct VToastAppearance {
     /// Edge from which toast appears, and to which it disappears.
     public var presentationEdge: VerticalEdge = .bottom
 
+    /// Indicates if toast stays above keyboard, by `ModalPresenterContext.keyboardInset`.
+    ///
+    /// Has no effect, unless `presentationEdge` is `bottom`.
+    public var avoidsKeyboard: Bool = true
+
     // MARK: Properties - Corners
     /// Corner radius type.
     public var cornerRadiusType: CornerRadiusType = .default

@@ -37,6 +37,11 @@ public struct VNotificationAppearance {
     /// Margin from presented edge.
     public var marginPresentedEdge: CGFloat = 5
 
+    /// Indicates if notification stays above keyboard, by `ModalPresenterContext.keyboardInset`.
+    ///
+    /// Has no effect, unless `presentationEdge` is `bottom`.
+    public var avoidsKeyboard: Bool = true
+
     // MARK: Properties - Corners
     /// Corner radius.
     public var cornerRadius: CGFloat = 12
