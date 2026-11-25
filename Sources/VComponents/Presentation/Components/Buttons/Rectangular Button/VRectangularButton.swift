@@ -150,7 +150,7 @@ public struct VRectangularButton<CustomLabel>: View where CustomLabel: View {
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private func borderView(
         internalState: VRectangularButtonInternalState
     ) -> some View {

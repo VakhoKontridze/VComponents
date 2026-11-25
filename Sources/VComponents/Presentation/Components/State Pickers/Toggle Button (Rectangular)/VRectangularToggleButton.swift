@@ -182,7 +182,7 @@ public struct VRectangularToggleButton<CustomLabel>: View where CustomLabel: Vie
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
 
-    @ViewBuilder 
+    @ViewBuilder
     private func borderView(
         internalState: VRectangularToggleButtonInternalState
     ) -> some View {

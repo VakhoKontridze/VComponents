@@ -193,7 +193,7 @@ public struct VCodeEntryView: View {
             )
     }
 
-    @ViewBuilder 
+    @ViewBuilder
     private func characterBackgroundBorderView(
         _ internalState: VCodeEntryViewInternalState
     ) -> some View {

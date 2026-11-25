@@ -102,7 +102,7 @@ public struct VProgressBar: View {
         .foregroundStyle(appearance.progressColor)
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private var borderView: some View {
         let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 

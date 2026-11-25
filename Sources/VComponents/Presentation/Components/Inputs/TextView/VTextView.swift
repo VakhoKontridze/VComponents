@@ -154,7 +154,7 @@ public struct VTextView: View {
             .onTapGesture { isFocused = true } // Detects gestures even on background
     }
 
-    @ViewBuilder 
+    @ViewBuilder
     private var borderView: some View {
         let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 

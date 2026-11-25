@@ -163,7 +163,7 @@ public struct VRectangularCaptionButton<CustomCaption>: View where CustomCaption
             .padding(appearance.labelImageMargins)
     }
 
-    @ViewBuilder 
+    @ViewBuilder
     private func rectangleBorderView(
         internalState: VRectangularCaptionButtonInternalState
     ) -> some View {

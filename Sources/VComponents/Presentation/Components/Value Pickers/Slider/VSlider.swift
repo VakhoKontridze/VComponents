@@ -137,7 +137,7 @@ public struct VSlider: View {
         .foregroundStyle(appearance.progressColors.value(for: internalState))
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private var borderView: some View {
         let borderWidth: CGFloat = appearance.borderWidth.toPoints(scale: displayScale)
 
@@ -147,11 +147,11 @@ public struct VSlider: View {
         }
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private var thumbView: some View {
-        if 
+        if
             appearance.thumbSize.width > 0,
-            appearance.thumbSize.height > 0 
+            appearance.thumbSize.height > 0
         {
             ZStack { // Used for additional frame
                 ZStack {
@@ -182,7 +182,6 @@ public struct VSlider: View {
                 radius: appearance.thumbShadowRadius,
                 offset: appearance.thumbShadowOffset // No need to reverse coordinates on shadow
             )
-
     }
 
     @ViewBuilder

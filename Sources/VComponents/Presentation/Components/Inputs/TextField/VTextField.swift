@@ -221,7 +221,7 @@ public struct VTextField: View {
         }
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private var visibilityButton: some View {
         if appearance.style.hasVisibilityButton {
             ZStack {

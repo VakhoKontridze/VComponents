@@ -68,7 +68,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
         _ element: Data.Element
     ) -> VDynamicPagerTabViewTabItemInternalState {
         .init(
-            isEnabled: isEnabled, 
+            isEnabled: isEnabled,
             isSelected: element == selection,
             isPressed: baseButtonState == .pressed
         )
@@ -299,7 +299,7 @@ public struct VDynamicPagerTabView<Data, ID, CustomTabItemLabel, Content>: View
             }
             .frame(height: appearance.selectedTabIndicatorHeight)
             .padding(
-                .leading, 
+                .leading,
                 appearance.tabSelectionIndicatorWidthType.padsSelectionIndicator ?
                 appearance.tabItemMargins.leading + (isFirstElement(element) ? appearance.tabBarMarginHorizontal : 0) :
                 0

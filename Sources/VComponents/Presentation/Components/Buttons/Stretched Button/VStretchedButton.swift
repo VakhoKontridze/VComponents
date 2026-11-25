@@ -175,7 +175,7 @@ public struct VStretchedButton<CustomLabel>: View where CustomLabel: View {
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private func borderView(
         internalState: VStretchedButtonInternalState
     ) -> some View {

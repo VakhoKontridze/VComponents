@@ -95,7 +95,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .clipped() // Clips off-bound content. Also clips shadows. But, even without this, `mask(_:)` would clip shadows.
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private var marqueeContentView: some View {
         if isAnimatable {
             ZStack { // Used for additional frame

@@ -174,7 +174,6 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                     internalState == .loading,
                     appearance.spinnerPlacement == .center
                 {
-                    
                     spinnerView(internalState: internalState)
                     
                 } else {
@@ -249,7 +248,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .frame(width: appearance.spinnerAppearance.dimension)
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     private func borderView(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
