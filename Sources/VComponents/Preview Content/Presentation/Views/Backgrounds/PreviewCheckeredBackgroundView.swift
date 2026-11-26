@@ -17,7 +17,7 @@ struct PreviewCheckeredBackgroundView: View {
     var body: some View {
         GeometryReader { geometryProxy in
             let dimension: CGFloat = geometryProxy.size.width / CGFloat(columns)
-            let rows: Int = Int((geometryProxy.size.height / dimension).rounded(.up))
+            let rows: Int = .init((geometryProxy.size.height / dimension).rounded(.up))
 
             VStack(spacing: 0) {
                 ForEach(0..<rows, id: \.self) { row in

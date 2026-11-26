@@ -32,7 +32,7 @@ public struct VSlider: View {
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged(dragChanged)
-            .onEnded(dragEnded)
+            .onEnded { _ in dragEnded() }
     }
 
     // MARK: Properties - State
@@ -77,7 +77,7 @@ public struct VSlider: View {
 
         self._progress = Binding(
             get: {
-                let value: Double = Double(value.wrappedValue)
+                let value: Double = .init(value.wrappedValue)
 
                 guard
                     value.isFinite,
@@ -211,7 +211,7 @@ public struct VSlider: View {
         onChange?(true)
     }
     
-    private func dragEnded(dragValue: DragGesture.Value) {
+    private func dragEnded() {
         onChange?(false)
     }
     

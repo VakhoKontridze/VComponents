@@ -84,8 +84,8 @@ public struct VRangeSlider: View {
 
         self._progress = Binding(
             get: {
-                let valueLower: Double = Double(value.wrappedValue.lowerBound)
-                let valueUpper: Double = Double(value.wrappedValue.upperBound)
+                let valueLower: Double = .init(value.wrappedValue.lowerBound)
+                let valueUpper: Double = .init(value.wrappedValue.upperBound)
 
                 guard
                     valueLower.isFinite,
@@ -186,7 +186,7 @@ public struct VRangeSlider: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { dragChanged(dragValue: $0, thumb: thumb) }
-                    .onEnded { dragEnded(dragValue: $0) }
+                    .onEnded { _ in dragEnded() }
             )
         }
     }
@@ -256,7 +256,7 @@ public struct VRangeSlider: View {
         onChange?(true)
     }
     
-    private func dragEnded(dragValue: DragGesture.Value) {
+    private func dragEnded() {
         onChange?(false)
     }
     

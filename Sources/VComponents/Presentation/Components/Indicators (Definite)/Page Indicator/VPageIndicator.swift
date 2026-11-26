@@ -294,7 +294,7 @@ public struct VPageIndicator<CustomDotContent>: View where CustomDotContent: Vie
     @Previewable @State var current: Int = 0
     let total: Int = 10
 
-    let appearance: VPageIndicatorAppearance = VPageIndicatorAppearance {
+    let appearance: VPageIndicatorAppearance = .init {
         $0.direction = .leftToRight
         $0.dotWidths = VPageIndicatorAppearance.DotStateOptionalDimensions(nil)
         $0.dotHeights = VPageIndicatorAppearance.DotStateDimensions(4)

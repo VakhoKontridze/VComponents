@@ -157,7 +157,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             if internalState == .loading {
                 switch appearance.spinnerPlacement {
                 case .leading:
-                    spinnerView(internalState: internalState)
+                    spinnerView
                     Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
                 
                 case .center:
@@ -174,7 +174,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                     internalState == .loading,
                     appearance.spinnerPlacement == .center
                 {
-                    spinnerView(internalState: internalState)
+                    spinnerView
                     
                 } else {
                     switch label {
@@ -210,7 +210,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
                 
                 case .trailing:
                     Spacer().frame(width: appearance.labelAndSpinnerSpacingType.spacing)
-                    spinnerView(internalState: internalState)
+                    spinnerView
                 }
             }
             
@@ -237,9 +237,7 @@ public struct VLoadingStretchedButton<CustomLabel>: View where CustomLabel: View
             .imageConfiguration(appearance.labelImageConfiguration, state: internalState)
     }
     
-    private func spinnerView(
-        internalState: VLoadingStretchedButtonInternalState
-    ) -> some View {
+    private var spinnerView: some View {
         VContinuousSpinner(appearance: appearance.spinnerAppearance)
     }
     
